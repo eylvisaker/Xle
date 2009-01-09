@@ -1,0 +1,65 @@
+<Root type="XleMapEditor.MappingInfo">
+  <Keys array="true" encoding="Base64">LQAAACoAAAABAAAAdwAAAHgAAAB2AAAAdAAAAHUAAAAHAAAANAAAACwAAAAyAAAA</Keys>
+  <Data array="true" type="ERY.Xle.MapData">
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">mQAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">kQAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">UAAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">DQAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">DgAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">HQAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">HgAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">HwAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">EAAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">wwAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">ogAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">kgAAAA==</Data>
+    </Item>
+  </Data>
+</Root>

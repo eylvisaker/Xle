@@ -1,0 +1,5327 @@
+/*	This file was automatically created by
+ *	Reverse Engineering Compiler 1.6a (C) Giampiero Caprino (Dec  8 2002)
+ *	Input file: '..\menu.exe'
+ */
+
+/*	Procedure: 0x000031D3 - 0x000031E4
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L000031D3()
+{
+
+
+
+    ax = 0x3d02;
+    asm("int 0x21");
+    dx = bx;
+    bx = ax;
+    ah = 0x3f;
+    asm("int 0x21");
+    ah = 0x3e;
+    asm("int 0x21");
+}
+
+/*	Procedure: 0x000031E5 - 0x00003218
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L000031E5()
+{
+
+
+
+    eax = bh & 0xff;
+    dx = 0x140;
+    asm("mul dx");
+    dx = bx;
+    ax = ax + (0 << 1 & 65535);
+    di = ax;
+    bx = dx;
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+    di = di + 0x4e;
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+    di = di + 0x4e;
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+    di = di + 0x4e;
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+    di = di + 0x1f0e;
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+    di = di + 0x4e;
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+    di = di + 0x4e;
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+    di = di + 0x4e;
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+}
+
+/*	Procedure: 0x00003219 - 0x00003258
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003219()
+{
+
+
+
+    (save)es;
+    (save)si;
+    (save)di;
+    es = 47104;
+    cx = 0x14;
+    bx = *L00006198;
+    si = *(( *L00006196 & 65535) + 25024) + *L00006194;
+    (save)0;
+    L000031E5();
+    (restore)dx;
+    dx = dx + 2;
+    asm("loop 0x3227");
+    ax = *L00006196 + 0x28;
+    if(ax == 0xa0) {
+        ax = 0;
+    }
+    *L00006196 = ax;
+    (restore)di;
+    (restore)si;
+    (restore)es;
+    asm("retf");
+}
+
+stack space not deallocated on return
+/*	Procedure: 0x00003259 - 0x000033D9
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003259()
+{
+
+
+
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    ch = ch + cl;
+    asm("aas");
+    asm("in al,dx");
+    asm("int 0x3f");
+    asm("in ax,dx");
+    asm("int 0x3f");
+    *L00003fcd();
+    *(si - 0x33)();
+    asm("aas");
+    *(di - 0x66)();
+    asm("sbb [bx+di],al");
+    (save)ss;
+    cx = cx + bx;
+    asm("int 0x3f");
+    *(bp - 0x33)();
+    asm("aas");
+    ax = *(bx - 0x66)() & 0x1601;
+    cx = cx + bp;
+    asm("aas");
+    *(bx + si - 0x66)();
+    *%cs:0xcd03] = *%cs:0xcd03] + dx;
+    asm("aas");
+    *(bx + di - 0x66)();
+    asm("aaa");
+    *L0000CD03 = *L0000CD03 + dx;
+    asm("aas");
+    *(bp + si - 0x33)();
+    asm("aas");
+    *(bp + di - 0x33)();
+    asm("aas");
+    *(si - 0x33)();
+    asm("aas");
+    *(di - 0x66)();
+    sp = sp - 1;
+    *L0000CD03 = *L0000CD03 + dx;
+    asm("aas");
+    *(bp - 0x66)();
+    (save)si;
+    *L0000CB03 = *L0000CB03 + dx;
+    asm("int 0x3f");
+    ax = *(bx - 0x66)();
+    (restore)di;
+    *L0000CD03 = *L0000CD03 + dx;
+    asm("aas");
+    goto ( *(bx + si - 0x66));
+    (save)0x1601;
+    cx = cx + bp;
+    asm("aas");
+    goto ( *(bx + di));
+    *(bx + si) = *(bx + si) + al;
+    ch = ch + cl;
+    asm("aas");
+    ch = ch + cl;
+    asm("aas");
+    (save)es;
+    asm("int 0x3f");
+    (restore)es;
+    asm("int 0x3f");
+    bp = bp | cx;
+    asm("aas");
+    asm("Unknown opcode 0x0f");
+    asm("int 0x3f");
+    asm("adc cx,bp");
+    asm("aas");
+    asm("adc al,0xcd");
+    asm("aas");
+    (save)ss;
+    asm("int 0x3f");
+    (restore)ss;
+    asm("int 0x3f");
+    cl = cl ^ ch;
+    asm("aas");
+    cx = cx ^ bp;
+    asm("aas");
+    al = al ^ 0xcd;
+    asm("aas");
+    ax = ax ^ 0x3fcd;
+    asm("%s int 0x3f");
+    asm("aaa");
+    asm("int 0x3f");
+    ch :: cl;
+    asm("aas");
+    bp :: cx;
+    asm("aas");
+    ax = ax + 1;
+    asm("int 0x3f");
+    cx = cx + 1;
+    asm("int 0x3f");
+    dx = dx + 1;
+    asm("int 0x3f");
+    bp = bp + 1;
+    asm("int 0x3f");
+    si = si + 1;
+    asm("int 0x3f");
+    di = di + 1;
+    asm("int 0x3f");
+    ax = ax - 1;
+    asm("int 0x3f");
+    cx = cx - 1;
+    asm("int 0x3f");
+    dx = dx - 1;
+    asm("int 0x3f");
+    bx = bx - 1;
+    asm("int 0x3f");
+    si = si - 1;
+    asm("int 0x3f");
+    (save)ax;
+    asm("int 0x3f");
+    (save)cx;
+    asm("int 0x3f");
+    (save)dx;
+    asm("int 0x3f");
+    (save)bx;
+    asm("int 0x3f");
+    (save)si;
+    asm("int 0x3f");
+    do {
+        (save)di;
+        asm("int 0x3f");
+        (restore)ax;
+        asm("int 0x3f");
+        (restore)cx;
+        asm("int 0x3f");
+        (restore)dx;
+        asm("int 0x3f");
+        (restore)bx;
+        asm("int 0x3f");
+        asm("Unknown opcode 0x62");
+        asm("int 0x3f");
+        asm("arpl bp,cx");
+        asm("aas");
+        asm("%f int 0x3f");
+        asm("%g int 0x3f");
+        asm("o32 int 0x3f");
+        (save)0x3fcd;
+        27199 = bp * cx;
+        asm("int 0x3f");
+        asm("insb");
+        asm("int 0x3f");
+        asm("outsb");
+        asm("int 0x3f");
+    } while(0x3f = bp * cx);
+    asm("aas");
+    >= ? 0x3337 : ;
+    asm("aas");
+    < ? L0000333a : ;
+    asm("aas");
+    >= ? L0000333d : ;
+    asm("aas");
+    == ? L00003340 : ;
+    asm("aas");
+    != ? 0x3343 : ;
+    asm("aas");
+    <= ? L00003346 : ;
+    asm("aas");
+    > ? L00003349 : ;
+    asm("aas");
+    >= ? 0x334c : ;
+    asm("aas");
+    asm("xchg cl,ch");
+    asm("aas");
+    asm("xchg cx,bp");
+    asm("aas");
+    bp = cs;
+    asm("aas");
+    asm("Unknown opcode 0x8d");
+    asm("int 0x3f");
+    asm("Unknown opcode 0x8f");
+    asm("int 0x3f");
+    asm("int 0x3f");
+    asm("xchg ax,cx");
+    asm("int 0x3f");
+    asm("xchg ax,bx");
+    asm("int 0x3f");
+    asm("xchg ax,sp");
+    asm("int 0x3f");
+    asm("xchg ax,bp");
+    asm("int 0x3f");
+    asm("xchg ax,si");
+    asm("int 0x3f");
+    asm("xchg ax,di");
+    asm("int 0x3f");
+    asm("cbw");
+    asm("int 0x3f");
+    *L00003FCD = ax;
+    *di = *si;
+    di = di + 1;
+    si = si + 1;
+    asm("int 0x3f");
+    *di = *si;
+    di = di + 4;
+    si = si + 4;
+    asm("int 0x3f");
+    asm("cmpsb");
+    asm("int 0x3f");
+    asm("cmpsw");
+    asm("int 0x3f");
+    eax = *esi;
+    esi = esi + 4;
+    asm("int 0x3f");
+    asm("scasb");
+    asm("int 0x3f");
+    cl = 0xcd;
+    asm("aas");
+    dl = 0xcd;
+    asm("aas");
+    bl = 0xcd;
+    asm("aas");
+    ah = 0xcd;
+    asm("aas");
+    ch = 0xcd;
+    asm("aas");
+    dh = 0xcd;
+    asm("aas");
+    bx = 0x3fcd;
+    sp = 0x3fcd;
+    asm("ror bp,0x3f");
+}
+
+/*	Procedure: 0x000033DA - 0x000033DA
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L000033DA()
+{
+
+
+
+}
+
+/*	Procedure: 0x000033DB - 0x000033E6
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L000033DB()
+{
+
+
+
+    asm("int 0x3f");
+    asm("Unknown opcode 0xc4");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xc5");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xc6");
+    asm("int 0x3f");
+    asm("retf");
+}
+
+/*	Procedure: 0x000033E7 - 0x000036E1
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L000033E7()
+{
+
+
+
+    asm("int 0x3f");
+    asm("int3");
+    asm("int 0x3f");
+    asm("int 0xcd");
+    asm("aas");
+    asm("into");
+    asm("int 0x3f");
+    asm("ror bp,1");
+    asm("aas");
+    asm("ror ch,cl");
+    asm("aas");
+    asm("ror bp,cl");
+    asm("aas");
+    asm("salc");
+    asm("int 0x3f");
+    asm("xlatb");
+    asm("int 0x3f");
+    asm("aas");
+    asm("fxch st5");
+    asm("aas");
+    asm("fcmove st5");
+    asm("aas");
+    asm("fcmovne st5");
+    asm("aas");
+    (fsave)((frestore)) * st5 * st5;
+    asm("aas");
+    asm("Unknown opcode 0xdd");
+    asm("int 0x3f");
+    asm("fmulp st5");
+    asm("aas");
+    asm("Unknown opcode 0xdf");
+    asm("int 0x3f");
+    asm("loopne 0x33e8");
+    asm("aas");
+    asm("loope 0x33eb");
+    asm("aas");
+    asm("loop 0x33ee");
+    asm("aas");
+    asm("out 0xcd,al");
+    asm("aas");
+    asm("out 0xcd,ax");
+    asm("aas");
+    goto L0000cdeb;
+    asm("aas");
+    asm("out dx,al");
+    asm("int 0x3f");
+    asm("out dx,ax");
+    asm("int 0x3f");
+    asm("lock int 0x3f");
+    asm("int1");
+    asm("int 0x3f");
+    asm("repne int 0x3f");
+    asm("rep int 0x3f");
+    asm("hlt");
+    asm("int 0x3f");
+    asm("cmc");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xf6");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xf7");
+    asm("int 0x3f");
+    asm("clc");
+    asm("int 0x3f");
+    asm("stc");
+    asm("int 0x3f");
+    asm("cli");
+    asm("int 0x3f");
+    asm("sti");
+    asm("int 0x3f");
+    asm("cld");
+    asm("int 0x3f");
+    asm("std");
+    asm("int 0x3f");
+    *si = *si + 1;
+    asm("int 0x3f");
+    *di = *di + 1;
+    asm("int 0x3f");
+    *L00003FCD = *L00003FCD + 1;
+    *(bx + si) = *(bx + si) - 1;
+    asm("int 0x3f");
+    *(bx + di) = *(bx + di) - 1;
+    asm("int 0x3f");
+    *(bp + si) = *(bp + si) - 1;
+    asm("int 0x3f");
+    *(bp + di) = *(bp + di) - 1;
+    asm("int 0x3f");
+    *di = *di - 1;
+    asm("int 0x3f");
+    *L00003FCD = *L00003FCD - 1;
+    *bx = *bx - 1;
+    asm("int 0x3f");
+    *bx();
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    asm("int 0x3f");
+    *(bx + di)();
+    asm("int 0x3f");
+    *(bp + si)();
+    asm("int 0x3f");
+    *(bp + di)();
+    asm("int 0x3f");
+    *si();
+    asm("int 0x3f");
+    *di();
+    asm("int 0x3f");
+    ax = *L00003fcd();
+    goto ( *(bx + si));
+    asm("int 0x3f");
+    goto ( *(bx + di));
+    asm("int 0x3f");
+    goto ( *(bp + si));
+    asm("int 0x3f");
+    goto ( *(bp + di));
+    asm("int 0x3f");
+    goto ( *si);
+    asm("int 0x3f");
+    goto ( *di);
+    asm("int 0x3f");
+    goto ( *L00003fcd);
+    goto ( *bx);
+    asm("int 0x3f");
+    goto ( *(bx + si));
+    asm("int 0x3f");
+    goto ( *(bx + di));
+    asm("int 0x3f");
+    goto ( *(bp + si));
+    asm("int 0x3f");
+    goto ( *(bp + di));
+    asm("int 0x3f");
+    goto ( *si);
+    asm("int 0x3f");
+    goto ( *di);
+    asm("int 0x3f");
+    goto ( *L00003fcd);
+    goto ( *bx);
+    asm("int 0x3f");
+    (save) *(bx + si);
+    asm("int 0x3f");
+    (save) *(bx + di);
+    asm("int 0x3f");
+    (save) *(bp + si);
+    asm("int 0x3f");
+    (save) *(bp + di);
+    asm("int 0x3f");
+    (save) *si;
+    asm("int 0x3f");
+    (save) *di;
+    asm("int 0x3f");
+    (save) *L00003FCD;
+    (save) *bx;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xff");
+    ch :: cl;
+    asm("aas");
+    asm("Unknown opcode 0xff");
+    bp :: cx;
+    asm("aas");
+    asm("Unknown opcode 0xff");
+    cl :: ch;
+    asm("aas");
+    asm("Unknown opcode 0xff");
+    cx :: bp;
+    asm("aas");
+    asm("Unknown opcode 0xff");
+    al :: 0xcd;
+    asm("aas");
+    asm("Unknown opcode 0xff");
+    ax :: 0x3fcd;
+    asm("Unknown opcode 0xff");
+    asm("%d int 0x3f");
+    asm("Unknown opcode 0xff");
+    asm("aas");
+    asm("int 0x3f");
+    *(bx + si - 0x33) = *(bx + si - 0x33) + 1;
+    asm("aas");
+    *(bx + di - 0x33) = *(bx + di - 0x33) + 1;
+    asm("aas");
+    *(bp + si - 0x33) = *(bp + si - 0x33) + 1;
+    asm("aas");
+    *(bp + di - 0x33) = *(bp + di - 0x33) + 1;
+    asm("aas");
+    *(si - 0x33) = *(si - 0x33) + 1;
+    asm("aas");
+    *(di - 0x33) = *(di - 0x33) + 1;
+    asm("aas");
+    *(bp - 0x33) = *(bp - 0x33) + 1;
+    asm("aas");
+    *(bx - 0x33) = *(bx - 0x33) + 1;
+    asm("aas");
+    *(bx + si - 0x33) = *(bx + si - 0x33) - 1;
+    asm("aas");
+    *(bx + di - 0x33) = *(bx + di - 0x33) - 1;
+    asm("aas");
+    *(bp + si - 0x33) = *(bp + si - 0x33) - 1;
+    asm("aas");
+    *(bp + di - 0x33) = *(bp + di - 0x33) - 1;
+    asm("aas");
+    *(si - 0x33) = *(si - 0x33) - 1;
+    asm("aas");
+    *(di - 0x33) = *(di - 0x33) - 1;
+    asm("aas");
+    *(bp - 0x33) = *(bp - 0x33) - 1;
+    asm("aas");
+    *(bx - 0x33) = *(bx - 0x33) - 1;
+    asm("aas");
+    *(bx + si - 0x33)();
+    asm("aas");
+    *(bx + di - 0x33)();
+    asm("aas");
+    *(bp + si - 0x33)();
+L00003575:
+    asm("aas");
+    *(bp + di)();
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    ch = ch + cl;
+    asm("aas");
+    al = al + 0xcd;
+    asm("aas");
+    ch = ch | cl;
+    asm("aas");
+    cl = cl | ch;
+    asm("aas");
+    cx = cx | bp;
+    asm("aas");
+    (save)cs;
+    asm("int 0x3f");
+    asm("adc ch,cl");
+    asm("aas");
+    asm("pusha");
+    asm("int 0x3f");
+    asm("popa");
+    asm("int 0x3f");
+    asm("insw");
+    asm("int 0x3f");
+    asm("jpe 0x356f");
+    asm("aas");
+    asm("jpo 0x3572");
+    asm("aas");
+    if(ax = ax | 0x3fcd) {
+        goto L00003575;
+    }
+    asm("aas");
+    >= ? L00003578 : ;
+    asm("aas");
+    ch = cl;
+L000035ae:
+    asm("aas");
+    bp = cx;
+    asm("aas");
+    cl = ch;
+    asm("aas");
+    cx = bp;
+    asm("aas");
+    asm("Unknown opcode 0x8e");
+    asm("int 0x3f");
+    asm("wait");
+    asm("int 0x3f");
+    asm("pushf");
+    asm("int 0x3f");
+    asm("popf");
+    asm("int 0x3f");
+    asm("sahf");
+    asm("int 0x3f");
+    asm("lahf");
+    asm("int 0x3f");
+    ax = *L00003FCD;
+    *L00003FCD = al;
+    asm("aas");
+    bp = 0x3fcd;
+    si = 0x3fcd;
+    di = 0x3fcd;
+    asm("ror ch,0x3f");
+    if(al & 0xcd) {
+        goto L000035ae;
+    }
+    asm("aas");
+    asm("in al,0xcd");
+    asm("aas");
+    asm("in ax,0xcd");
+    asm("aas");
+    ax = L000075b8();
+    *(bx + si) = *(bx + si) + al;
+    asm("int 0x3f");
+    bp = bp + cx;
+    asm("aas");
+    cl = cl + ch;
+    asm("aas");
+    cx = cx + bp;
+    asm("aas");
+    al = ax + 0x3fcd | 0xcd;
+    asm("aas");
+    asm("adc bp,cx");
+    asm("aas");
+    asm("adc cl,ch");
+    asm("aas");
+    asm("adc ax,0x3fcd");
+    asm("sbb ch,cl");
+    asm("aas");
+    asm("sbb bp,cx");
+    asm("aas");
+    asm("sbb cl,ch");
+    asm("aas");
+    asm("sbb cx,bp");
+    asm("aas");
+    asm("sbb al,0xcd");
+    asm("aas");
+    asm("sbb ax,0x3fcd");
+    (save)ds;
+    asm("int 0x3f");
+    (restore)ds;
+    asm("int 0x3f");
+    ch = ch & cl;
+    asm("aas");
+    bp = bp & cx;
+    asm("aas");
+    cl = cl & ch;
+    asm("aas");
+    cx = cx & bp;
+    asm("aas");
+    al = al & 0xcd;
+    asm("aas");
+    ax = ax & 0x3fcd;
+    asm("%e int 0x3f");
+    asm("daa");
+    asm("int 0x3f");
+    ch = ch - cl;
+    asm("aas");
+    bp = bp - cx;
+    asm("aas");
+    cl = cl - ch;
+    asm("aas");
+    cx = cx - bp;
+    asm("aas");
+    al = al - 0xcd;
+    asm("aas");
+    ax = ax - 0x3fcd;
+    asm("%c int 0x3f");
+    asm("das");
+    asm("int 0x3f");
+    ch = ch ^ cl;
+    asm("aas");
+    bp = bp ^ cx;
+    asm("aas");
+    cl :: ch;
+    asm("aas");
+    cx :: bp;
+    asm("aas");
+    al :: 0xcd;
+L00003660:
+    asm("aas");
+    ax :: 0x3fcd;
+    asm("%d int 0x3f");
+    asm("aas");
+    asm("int 0x3f");
+    bx = bx + 1;
+    asm("int 0x3f");
+    sp = sp + 1;
+    asm("int 0x3f");
+    sp = sp - 1;
+    asm("int 0x3f");
+    bp = bp - 1;
+    asm("int 0x3f");
+    asm("int 0x3f");
+    (save)sp;
+    asm("int 0x3f");
+    (save)bp;
+    asm("int 0x3f");
+    (restore)sp;
+    asm("int 0x3f");
+    (restore)bp;
+    asm("int 0x3f");
+    (restore)si;
+    asm("int 0x3f");
+    (restore)di;
+    asm("int 0x3f");
+    asm("a32 int 0x3f");
+    asm("outsw");
+    asm("int 0x3f");
+    if(di = di - 1) {
+        goto L00003660;
+    }
+    asm("aas");
+    <= ? L00003663 : ;
+    asm("aas");
+    > ? L00003666 : ;
+    asm("aas");
+    ch = ch | 0x3f;
+    bp = bp | 33343;
+    asm("int 0x3f");
+    bp = bp | 0x3f;
+    ch & cl;
+    asm("aas");
+    bp & cx;
+    asm("aas");
+    asm("xchg ax,dx");
+    asm("int 0x3f");
+    asm("cwd");
+    asm("int 0x3f");
+    ax = L0000cda0();
+    asm("aas");
+    ax & 0x3fcd;
+    *di = al;
+    di = di + 1;
+    asm("int 0x3f");
+    *di = eax;
+    di = di + 4;
+    asm("int 0x3f");
+    al = *esi;
+    esi = esi + 1;
+    asm("int 0x3f");
+    asm("scasw");
+    asm("int 0x3f");
+    al = 0xcd;
+    asm("aas");
+    bh = 0xcd;
+    asm("aas");
+    ax = 0x3fcd;
+    cx = 0x3fcd;
+    dx = 0x3fcd;
+    asm("Unknown opcode 0xc7");
+    asm("int 0x3f");
+    asm("enter 0x3fcd,0xc9");
+    asm("int 0x3f");
+    asm("retf 0x3fcd");
+}
+
+/*	Procedure: 0x000036E2 - 0x000036E2
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L000036E2()
+{
+
+
+
+    asm("iret");
+}
+
+/*	Procedure: 0x000036E3 - 0x00003A04
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L000036E3()
+{
+
+
+
+    asm("int 0x3f");
+    asm("ror ch,1");
+    asm("aas");
+    asm("aam 0xcd");
+    asm("aas");
+    asm("aad 0xcd");
+    asm("aas");
+    *(bx + si) = *(bx + si) + 1;
+    asm("int 0x3f");
+    *(bx + di) = *(bx + di) + 1;
+    asm("int 0x3f");
+    *(bp + si) = *(bp + si) + 1;
+    asm("int 0x3f");
+    *(bp + di) = *(bp + di) + 1;
+    asm("int 0x3f");
+    *bx = *bx + 1;
+    asm("int 0x3f");
+    *(bx + si)();
+    asm("int 0x3f");
+    *(bx + di)();
+    asm("int 0x3f");
+    *(bp + si)();
+    asm("int 0x3f");
+    *(bp + di)();
+    asm("int 0x3f");
+    *si();
+    asm("int 0x3f");
+    *di();
+    asm("int 0x3f");
+    *bx();
+    asm("int 0x3f");
+    ax = *(bx + si)();
+    asm("int 0x3f");
+    goto ( *(bp + si - 0x33));
+    asm("aas");
+    goto ( *(bp + di - 0x33));
+    asm("aas");
+    goto ( *(si - 0x33));
+    asm("aas");
+    goto ( *(di - 0x33));
+    asm("aas");
+    goto ( *(bp - 0x33));
+    asm("aas");
+    goto ( *(bx - 0x33));
+    asm("aas");
+    *(bx + si) = *(bx + si) + 1;
+    asm("int 0x3f");
+    *(bx + di) = *(bx + di) + 1;
+    asm("int 0x3f");
+    *(bp + si) = *(bp + si) + 1;
+    asm("int 0x3f");
+    *(bp + di) = *(bp + di) + 1;
+    asm("int 0x3f");
+    *si = *si + 1;
+    asm("int 0x3f");
+    *di = *di + 1;
+    asm("int 0x3f");
+    *L00003FCD = *L00003FCD + 1;
+    *bx = *bx + 1;
+    asm("int 0x3f");
+    *(bx + si) = *(bx + si) - 1;
+    asm("int 0x3f");
+    *(bx + di) = *(bx + di) - 1;
+    asm("int 0x3f");
+    *(bp + si) = *(bp + si) - 1;
+    asm("int 0x3f");
+    *(bp + di) = *(bp + di) - 1;
+    asm("int 0x3f");
+    *si = *si - 1;
+    asm("int 0x3f");
+    *di = *di - 1;
+    asm("int 0x3f");
+    *L00003FCD = *L00003FCD - 1;
+    *bx = *bx - 1;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("adc ch,cl");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("adc bp,cx");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("adc cl,ch");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("adc cx,bp");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("adc al,0xcd");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("adc ax,0x3fcd");
+    asm("Unknown opcode 0xfe");
+    (save)ss;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)ss;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("sbb ch,cl");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("sbb bp,cx");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("sbb cl,ch");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("sbb cx,bp");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("sbb al,0xcd");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("sbb ax,0x3fcd");
+    asm("Unknown opcode 0xfe");
+    (save)ds;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)ds;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    ch = ch & cl;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    bp = bp & cx;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    cl = cl & ch;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    cx = cx & bp;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    al = al & 0xcd;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    ax = ax & 0x3fcd;
+    asm("Unknown opcode 0xfe");
+    asm("%e int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("daa");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    ch = ch - cl;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    bp = bp - cx;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    cl = cl - ch;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    cx = cx - bp;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    al = al - 0xcd;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    ax = ax - 0x3fcd;
+    asm("Unknown opcode 0xfe");
+    asm("%c int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("das");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    ch = ch ^ cl;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    bp = bp ^ cx;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    cl = cl ^ ch;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    cx = cx ^ bp;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    al = al ^ 0xcd;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    ax = ax ^ 0x3fcd;
+    asm("Unknown opcode 0xfe");
+    asm("%s int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("aaa");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    ch :: cl;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    bp :: cx;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    cl :: ch;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    cx :: bp;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    al :: 0xcd;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    ax :: 0x3fcd;
+    asm("Unknown opcode 0xfe");
+    asm("%d int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("aas");
+    asm("int 0x3f");
+    *(bx + si - 0x33) = *(bx + si - 0x33) + 1;
+    asm("aas");
+    *(bx + di - 0x33) = *(bx + di - 0x33) + 1;
+    asm("aas");
+    *(bp + si - 0x33) = *(bp + si - 0x33) + 1;
+    asm("aas");
+    *(bp + di - 0x33) = *(bp + di - 0x33) + 1;
+    asm("aas");
+    *(si - 0x33) = *(si - 0x33) + 1;
+    asm("aas");
+    *(di - 0x33) = *(di - 0x33) + 1;
+    asm("aas");
+    *(bp - 0x33) = *(bp - 0x33) + 1;
+    asm("aas");
+    *(bx - 0x33) = *(bx - 0x33) + 1;
+    asm("aas");
+    *(bx + si - 0x33) = *(bx + si - 0x33) - 1;
+    asm("aas");
+    *(bx + di - 0x33) = *(bx + di - 0x33) - 1;
+    asm("aas");
+    *(bp + si - 0x33) = *(bp + si - 0x33) - 1;
+    asm("aas");
+    *(bp + di - 0x33) = *(bp + di - 0x33) - 1;
+    asm("aas");
+    *(si - 0x33) = *(si - 0x33) - 1;
+    asm("aas");
+    *(di - 0x33) = *(di - 0x33) - 1;
+    asm("aas");
+    *(bp - 0x33) = *(bp - 0x33) - 1;
+    asm("aas");
+    *(bx - 0x33) = *(bx - 0x33) - 1;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    (save)ax;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (save)cx;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (save)dx;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (save)bx;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (save)sp;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (save)bp;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (save)si;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (save)di;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)ax;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)cx;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)dx;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)bx;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)sp;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)bp;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)si;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (restore)di;
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("pusha");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("popa");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("Unknown opcode 0x62");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("arpl bp,cx");
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("%f int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("%g int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("o32 int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("a32 int 0x3f");
+    asm("Unknown opcode 0xfe");
+    (save)0x3fcd;
+    asm("Unknown opcode 0xfe");
+    65087 = bp * cx;
+    (save)-51;
+    asm("aas");
+    asm("Unknown opcode 0xfe");
+    asm("Unknown opcode 0xfe");
+    asm("insb");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("insw");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("outsb");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    asm("outsw");
+    asm("int 0x3f");
+    asm("Unknown opcode 0xfe");
+    if(!(0x3f = bp * cx)) {
+        bp = bp + 1;
+        di = di + 1;
+        sp = sp - 1;
+        cx = cx - 1;
+        dx = dx + 1;
+        asm("%c inc bp");
+        (restore)ax;
+        bp = bp + 1;
+        *di = *di & ch;
+        *si = *si & ah;
+        *di = *di + bh;
+        *(bx + di + 0x4150) = *(bx + di + 0x4150) + dh;
+        (save)sp;
+        ax = ax - 1;
+        ax :: 0x674;
+        *(bp + si + 33280) = *(bp + si + 33280) + dh;
+        *(bx + si + 62399) = *(bx + si + 62399) + dh;
+        sp = sp + *(bx + di + 2);
+        *%cs:0x48] = ax;
+        ax = ax - di;
+        if(ax >= 0x1000) {
+            ax = 0x1000;
+        }
+        asm("cli");
+        ss = di;
+        sp = sp + 25214;
+        asm("sti");
+        asm("xchg ax,si");
+        asm("lahf");
+        *%cs:0x4a] = ah;
+        asm("xchg ax,si");
+        sp = sp & -2;
+        ax = ax + di;
+        *L00000002 = ax;
+        bx = es;
+    }
+    bx = ~(bx - ax);
+    ah = 0x4a;
+    asm("int 0x21");
+    *%ss:0x81] = ds;
+    *%ss:0xb0] = *L0000002C;
+    *%ss:0xae] = ds;
+    *%ss:0xac] = 0x81;
+    bp = 0;
+    asm("cld");
+    ax = ds;
+    *%cs:0x4b] = ax;
+    cx = *L00000012;
+    es = cs;
+    if(!(ds = *%cs:0x4b] + 0x10)) {
+        (save)cx;
+        asm("lds si,[0x14]");
+        di = 0x36;
+        cx = 8;
+        asm("rep movsw");
+        (restore)cx;
+        (save) *%es:0x3c];
+        (save) *%es:0x44];
+        asm("retf");
+    }
+    L0000038f();
+    ax = *%ss:0x81];
+    ds = ax;
+    es = ax;
+    *L00000002 = *%cs:0x48];
+    dh = *%cs:0x4a];
+    L00000316();
+    *%cs:0x46] = ss;
+    ds = cs;
+    L00003AE3();
+    asm("xchg ax,bx");
+    L00003B64();
+    L00003BA6();
+    *L0000004F = L00003BDC();
+    *L00000051 = dx;
+    bp = 65535;
+    L00003CC2();
+    *L0000004D = bp;
+    L00003C05();
+    si = 0;
+    L00003C19();
+    L00003D97();
+    *%ss:0x10b] = *L0000004D;
+    *%ss:0x10d] = *L0000004F;
+    *%ss:0x10f] = *L00000051;
+    (save) *L0000003C;
+    (save) *L00000042;
+    asm("retf");
+}
+
+/*	Procedure: 0x00003A05 - 0x00003A44
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003A05()
+{
+
+
+
+    bx = 0x595;
+    goto L00003a26;
+    bx = 0x57d;
+    goto L00003a26;
+    bx = 0x5cc;
+    goto L00003a26;
+    bx = 0x5da;
+    goto L00003a26;
+    bx = 0x5bd;
+    goto L00003a26;
+    bx = 0x5ae;
+    goto L00003a26;
+    bx = 0x5f1;
+L00003a26:
+    ds = 0x38f;
+    ah = 9;
+    dx = 0x566;
+    asm("int 0x21");
+    dx = 0xc;
+    asm("int 0x21");
+    dx = bx;
+    asm("int 0x21");
+    dx = 0x617;
+    asm("int 0x21");
+    ax = 0x4c01;
+    asm("int 0x21");
+}
+
+/*	Procedure: 0x00003A45 - 0x00003A47
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003A45()
+{
+
+
+
+    0x49 :: 0x4ab4;
+}
+
+/*	Procedure: 0x00003A48 - 0x00003A4A
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003A48()
+{
+
+
+
+    0x4a :: 0x48b4;
+}
+
+/* DEST BLOCK NOT FOUND: 00003a5d -> 00003a14 */
+/* DEST BLOCK NOT FOUND: 00003a5f -> 00003a0a */
+/* DEST BLOCK NOT FOUND: 00003ae0 -> 00003a19 */
+/*	Procedure: 0x00003A4B - 0x00003AE2
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003A4B()
+{
+
+
+
+    ah = 0x48;
+    asm("int 0x21");
+    >= ? L00003a57 : ;
+    if(ax == 8) {
+        asm("stc");
+        return;
+    }
+    if(ax == 7) {
+        goto L00003a14;
+    }
+    goto L00003a0a;
+    (save)ax;
+    (save)dx;
+    (save)es;
+    (save)bx;
+    *%cs:0x4f] = *%es:0x10d];
+    *%cs:0x51] = *%es:0x10f];
+    (restore)bx;
+    *%cs:0x4d] = *%es:0x10b];
+    L00003A45();
+    (restore)es;
+    (restore)dx;
+    (restore)ax;
+    *%cs:0x53] = ss;
+    *%cs:0x55] = sp;
+    asm("int 0x21");
+    asm("cli");
+    ss = *%cs:0x53];
+    sp = *%cs:0x55];
+    asm("sti");
+    asm("pushf");
+    (save)ax;
+    ds = cs;
+    es = cs;
+    bx = L00003AE3();
+    L00003B64();
+    ax = L00003BDC();
+    if(*L0000004F == ax && *L00000051 == dx) {
+        bp = *L0000004D;
+        ax = L00003CC2();
+        if(*L0000004D == bp) {
+            L00003C05();
+            si = 65535;
+            L00003C19();
+            L00003D97();
+            ds = 0x3f3;
+            (restore)ax;
+            asm("popf");
+            asm("retf");
+        }
+    }
+    goto L00003a19;
+}
+
+/* DEST BLOCK NOT FOUND: 00003ae9 -> 00003b36 */
+/* DEST BLOCK NOT FOUND: 00003afb -> 00003b36 */
+/* DEST BLOCK NOT FOUND: 00003aff -> 00003a05 */
+/*	Procedure: 0x00003AE3 - 0x00003B36
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003AE3()
+{
+
+
+
+    di = 0x5e;
+    L00003D66();
+    >= ? L00003b36 : ;
+    L00003B37();
+    < ? L00003b02 : ;
+L00003af0:
+    di = 0x5e;
+    L00003D46();
+    < ? L00003b02 : ;
+    L00003D66();
+    >= ? L00003b36 : ;
+    goto L00003af0;
+L00003b02:
+    bx = 1;
+L00003b05:
+    ax = 0x4400;
+    asm("int 0x21");
+    if(dl & 0x80) {
+        goto L00003A05;
+    }
+    if(bx = bx - 1) {
+        goto L00003b05;
+    }
+    dx = 0x61b;
+    ah = 9;
+    asm("int 0x21");
+    dx = 0x5c;
+    ax = 0xc0a;
+    asm("int 0x21");
+    dl = 0xa;
+    ah = 2;
+    asm("int 0x21");
+    ax = L00003D66();
+    if(di = ( *L0000005D & 0xff) + 0x5e) {
+        goto L00003b02;
+    }
+}
+
+/*	Procedure: 0x00003B37 - 0x00003B63
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 4
+ */
+
+L00003B37()
+{
+	/* unknown */ void  es;
+
+
+
+    es = *L0000004B;
+    es = *%es:0x2c];
+    ax = 0;
+    di = 0;
+    do {
+        si = 0x57;
+        cx = 5;
+        asm("repe cmpsb");
+        == ? L00003b5a : ;
+        cx = 65535;
+        asm("repne scasb");
+    } while(*%es:di] != al);
+    asm("stc");
+    *L00000055 = es;
+    *L00000053 = di;
+}
+
+/* DEST BLOCK NOT FOUND: 00003ba3 -> 00003a19 */
+/*	Procedure: 0x00003B64 - 0x00003BA5
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003B64()
+{
+
+
+
+    ax = 0;
+    asm("cwd");
+    bp = ds;
+    cx = 0x1a;
+    si = dx;
+    di = 0x1c;
+    L00003C78();
+    if(*L0000001A == 23117) {
+        dx = *L00000022 + *L00000030;
+        ax = *L0000002E;
+        bp = ds;
+        cx = 0x36;
+        si = 0;
+        di = 0x10;
+        ax = L00003C78();
+        if(*L00000038 == 6 && *L0000003A == 0) {
+            return;
+        }
+    }
+    goto L00003a19;
+}
+
+/* DEST BLOCK NOT FOUND: 00003bc1 -> 00003a23 */
+/*	Procedure: 0x00003BA6 - 0x00003BDB
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003BA6()
+{
+
+
+
+    dx = 0x1ac0;
+    if(0x1ac0 == *L00000040) {
+        if(0x5c4 <= 6) {
+            goto L00003bc4;
+        }
+        ax = 0x5c4;
+        if(0x5c4 == 0x5c4) {
+            goto L00003bc4;
+        }
+    }
+    goto L00003a23;
+L00003bc4:
+    dx = *L00000022;
+    ax = *L0000003E;
+    bp = 0x3f3;
+    cx = ax;
+    si = 0;
+    di = *L00000040 - ax;
+    return(L00003C78());
+}
+
+/* DEST BLOCK NOT FOUND: 00003bfb -> 00003c04 */
+/*	Procedure: 0x00003BDC - 0x00003C04
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003BDC()
+{
+
+
+
+    dx = ( *L0000001E << 5) - *L00000022 - *L0000003C;
+    ax = dx;
+    dx = dx >> 0xc;
+    ax = ax << 4;
+    if(*L0000001C != 0) {
+        ax = ax - 0x200 + *L0000001C;
+    }
+}
+
+/*	Procedure: 0x00003C05 - 0x00003C18
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003C05()
+{
+
+
+
+    si = dx;
+    di = ax;
+    dx = *L00000022 + *L0000003C;
+    ax = 0;
+    return(L00003C78());
+}
+
+/* DEST BLOCK NOT FOUND: 00003c75 -> 00003a1e */
+/*	Procedure: 0x00003C19 - 0x00003C77
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003C19()
+{
+
+
+
+    dx = *L00000032;
+    cx = 0;
+    ax = 0x4200;
+    asm("int 0x21");
+    di = *L0000003C;
+    cx = 4;
+    dx = 0x53;
+L00003c30:
+    ah = 0x3f;
+    asm("int 0x21");
+    if(!(bp = bp - di) && ax == cx) {
+        (save)bx;
+        bx = *L00000055;
+        if(bx < di) {
+            if(si != 0) {
+                goto L00003c65;
+            }
+            bx = bx + 0x3f3 - bp;
+        }
+        es = bx + bp;
+        bx = *L00000053;
+        if(*%es:bx] < di) {
+            *%es:bx] = *%es:bx] + 0x3f3;
+            *%es:bx] = *%es:bx] - bp;
+        }
+        *%es:bx] = *%es:bx] + bp;
+L00003c65:
+        (restore)bx;
+        if(*L00000020 = *L00000020 - 1) {
+            goto L00003c30;
+        }
+        *L00000030 = *L00000030 + bp;
+        *L0000003C = *L0000003C + bp;
+        return;
+    }
+    goto L00003a1e;
+}
+
+/* DEST BLOCK NOT FOUND: 00003cbf -> 00003a1e */
+/*	Procedure: 0x00003C78 - 0x00003CC1
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 8
+ */
+
+L00003C78()
+{
+	/* unknown */ void  bp;
+	/* unknown */ void  ds;
+
+
+
+    (save)cx;
+    cx = 0;
+    dx = dx << 1;
+    asm("rcl cx,1");
+    dx = dx << 1;
+    asm("rcl cx,1");
+    dx = dx << 1;
+    asm("rcl cx,1");
+    dx = dx << 1;
+    asm("rcl cx,1");
+    dx = dx + ax;
+    asm("adc cx,+0x0");
+    ax = 0x4200;
+    asm("int 0x21");
+    (restore)dx;
+L00003c98:
+    ds = bp;
+    cx = 65520;
+    if(si == 0) {
+        cx = di;
+    }
+    ah = 0x3f;
+    asm("int 0x21");
+    < ? L00003cbf : ;
+    if(ax == cx) {
+        bp = bp + 0xfff;
+        asm("sbb si,+0x0");
+        if((di = di - ax) || di != 0) {
+            goto L00003c98;
+        }
+        return;
+    }
+    goto L00003a1e;
+}
+
+/* DEST BLOCK NOT FOUND: 00003d40 -> 00003a0a */
+/* DEST BLOCK NOT FOUND: 00003d43 -> 00003a0f */
+stack space not deallocated on return
+/*	Procedure: 0x00003CC2 - 0x00003D45
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 16
+ */
+
+L00003CC2()
+{
+	/* unknown */ void  ax;
+	/* unknown */ void  dx;
+	/* unknown */ void  bx;
+	/* unknown */ void  es;
+
+
+
+    ax = ax + 0xf;
+    asm("adc dx,+0x0");
+    ax = ax >> 4;
+    si = 0;
+L00003cda:
+    bx = 65535;
+    L00003A4B();
+    if(!(dx = (dx << 0xc) + ax)) {
+        if(bx >= dx) {
+            ax = L00003A4B();
+            < ? L00003d40 : ;
+            if(ax <= bp && ax >= si) {
+                si = ax;
+                di = bx;
+            }
+            (save)ax;
+            goto L00003cda;
+        }
+        if(cx = cx + 1) {
+            goto L00003a0f;
+        }
+        bx = si + di - dx;
+        if(bx >= bp) {
+            bx = bp;
+        }
+        ax = si;
+        if(bx = bx - si) {
+            goto L00003d24;
+        }
+        es = si;
+        L00003A48();
+        if(!(bx = bx - 1)) {
+            bx = 65535;
+            L00003A4B();
+            >= ? L00003d40 : ;
+            ax = L00003A4B();
+            < ? L00003d40 : ;
+L00003d24:
+            es = ax;
+            bx = dx;
+            ax = L00003A48();
+            < ? L00003d40 : ;
+            bp = ax;
+            (restore)ax;
+            if(ax != bp) {
+                es = ax;
+                ax = L00003A45();
+            }
+            asm("loop 0x3d2f");
+            return;
+        }
+    }
+    goto L00003a0a;
+}
+
+/*	Procedure: 0x00003D46 - 0x00003D65
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003D46()
+{
+
+
+
+    (save)ds;
+    asm("lds si,[0x53]");
+    cx = 0x74;
+    al = *esi;
+    esi = esi + 1;
+    if(al != 0x3b) {
+        if(al != 0) {
+            *di = al;
+            di = di + 1;
+            asm("loop 0x3d4e");
+            cx = cx - 1;
+        }
+        si = si - 1;
+        cx :: 0x74;
+        asm("cmc");
+    }
+    (restore)ds;
+    *L00000053 = si;
+}
+
+/*	Procedure: 0x00003D66 - 0x00003D96
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003D66()
+{
+
+
+
+    (save)ds;
+    ds = es;
+    if(di != 0x5e) {
+        al = *(di - 1);
+        if(al != 0x3a && al != 0x5c && al != 0x2f) {
+            *di = 0x5c;
+            di = di + 1;
+        }
+    }
+    cx = 0xa;
+    asm("rep movsb");
+    *di = cl;
+    (restore)ds;
+    dx = 0x5e;
+    ax = 0x3d00;
+    asm("int 0x21");
+}
+
+/* DEST BLOCK NOT FOUND: 00003d9e -> 00003a1e */
+stack space not deallocated on return
+/*	Procedure: 0x00003D97 - 0x0000584E
+ *	Argument size: 0
+ *	Local size: 0
+ *	Save regs size: 0
+ */
+
+L00003D97()
+{
+
+
+
+    ah = 0x3e;
+    asm("int 0x21");
+    < ? L00003d9e : ;
+    return;
+    goto L00003a1e;
+    if(!( *(di + 0x72) = *(di + 0x72) + al)) {
+        < ? L00003dc8 : ;
+        28524 = *(bp + 0x20) * bp;
+        asm("popa");
+        0x5220 = *%fs:bp+0x67] * bp;
+        (save)sp;
+        bp = bp - 1;
+        ah :: *(bx + si);
+        asm("%g insw");
+        asm("outsw");
+        if(al = al & 0x4d) {
+            goto L00003e38;
+        }
+        *(bx + di + 0x6c) = *(bx + di + 0x6c) & ah;
+        asm("insb");
+        asm("outsw");
+        asm("arpl [bx+di+0x74],sp");
+        if(25888 = *(bx + 0x6e) * bp) {
+            goto L00003e40;
+        }
+        asm("outsw");
+        < ? L00003df5 : ;
+        asm("popa");
+        asm("outsb");
+        asm("outsb");
+        asm("outsw");
+        if(!(bx = bx + 1)) {
+            1818846752 = *(bp + 0x64) * ebp;
+            *%gs:bx+di+0x6e] = *%gs:bx+di+0x6e] & ch;
+            *(bx + si + 0x41) = *(bx + si + 0x41) & dl;
+            (save)sp;
+            al = ax - 1 & 0x44;
+            0x4920 = *(bp + di + 0x6b) * si;
+            asm("das");
+            di = di - 1;
+            if(*(di + 0x72) = *(di + 0x72) & ah) {
+                goto L00003e66;
+            }
+            < ? L00003e1d : ;
+        }
+        asm("outsb");
+        if(cx = cx - 1) {
+            goto L00003e5e;
+        }
+        asm("insb");
+        if(28518 = *(si + 0x20) * sp) {
+            goto L00003e72;
+        }
+        asm("popa");
+        == ? L00003e2c : ;
+        if(di = di - 1) {
+            goto L00003e7f;
+        }
+        *(bx + 0x66) = *(bx + 0x66) & ch;
+        asm("insw");
+        asm("outsw");
+        if(*(di + 0x65) = *(di + 0x65) & ch) {
+            goto L00003e8e;
+        }
+    }
+    al = al & 0x44;
+    di = di - 1;
+    (save)bx;
+    asm("insw");
+    asm("outsw");
+    if(!( *(di + 0x65) = *(di + 0x65) & ch)) {
+        ax = ax - 29281;
+        asm("%g outsb");
+        asm("popa");
+        if(*(di + 0x72) = *(di + 0x72) & ah) {
+            goto L00003e9a;
+        }
+        < ? L00003e51 : ;
+        asm("outsb");
+        asm("arpl [bx+0x6d],bp");
+        if(!(cx = cx - 1)) {
+            == ? L00003e9f : ;
+            asm("bound bp,[si+0x65]");
+L00003e38:
+            if(*(di + 0x78) = *(di + 0x78) & ah) {
+                goto L00003ea3;
+            }
+            asm("outsb");
+            *%fs:bp+si+0x75] = *%fs:bp+si+0x75] & dh;
+L00003e40:
+            asm("outsb");
+            ax = ax - 26996;
+            asm("insw");
+            *%gs:di+0x6f] = *%gs:di+0x6f] & ch;
+            asm("%f jnz 0x3ebd");
+            asm("%g and al,0x2e");
+            ax = ax | 0x240a;
+            asm("outsb");
+            if(cx = cx - 1) {
+                goto L00003ed0;
+            }
+            == ? L00003e7d : ;
+            < ? L00003ed4 : ;
+L00003e5e:
+            asm("outsb");
+            ax = ax - 26996;
+            asm("insw");
+            *%gs:di+0x6f] = *%gs:di+0x6f] & ch;
+L00003e66:
+            asm("%f jnz 0x3ed7");
+            if(*%gs:bx+si+0x61] = *%gs:bx+si+0x61] & dh) {
+                goto L00003ed9;
+            }
+            ah :: *(bx + si);
+L00003e72:
+            ax = (al & 0x59) + 0xb2;
+            *(bx + si) = *(bx + si) | al;
+            al = 0x80;
+            asm("arpl di,di");
+            asm("Unknown opcode 0xff");
+L00003e7f:
+            asm("Unknown opcode 0xff");
+            *L0000B200 = *L0000B200 + 1;
+            *si = *si + cl;
+            *(bx + si + 0x3f3) = *(bx + si + 0x3f3) + dh;
+            al = al + *(bx + si);
+            dl = 0;
+L00003e8e:
+            sp = sp - 1;
+            *(bx + si + 0x10) = *(bx + si + 0x10) + dh;
+            ax :: *(bp + di + 0x5f);
+        }
+        si = si + 1;
+        cx = cx - 1;
+        sp = sp - 1;
+    }
+    bp = bp + 1;
+L00003e9a:
+    (restore)di;
+    cx = cx - 1;
+    si = si - 1 + 1;
+    di = di - 1;
+    (save)cs;
+    *(bp + si + 0x1a00) = *(bp + si + 0x1a00) + dh;
+L00003ea3:
+    *(bx + si + 0x14) = *(bx + si + 0x14) + dh;
+    *(bx + di + 0x181) = *(bx + di + 0x181) + 0x701;
+    *(bp + si + 0x1700) = *(bp + si + 0x1700) + dh;
+    *(bx + si + 0xaa) = *(bx + si + 0xaa) + dh;
+    asm("rep add ax,[bp+di+0x5]");
+    *(bp + si + 0xd00) = *(bp + si + 0xd00) + dh;
+    *(bx + si + 25216) = *(bx + si + 25216) + dh;
+    *(bp + di + 0x74) = *(bp + di + 0x74) + sp;
+    ax = ax ^ si;
+    (restore)ds;
+    *bx = ~( *bx);
+    *(bp + si + 0x25) = *(bp + si + 0x25) & 2;
+    (restore) *(bp + di);
+L00003ed0:
+    asm("pusha");
+    asm("bound sp,[bx+si+0x62]");
+    asm("pusha");
+    asm("bound sp,[bx+si+0x62]");
+    *(bp + si - 0x80) = *(bp + si - 0x80) & 0x62;
+L00003ed9:
+    asm("pusha");
+    asm("bound sp,[bx+si+0x62]");
+    asm("pusha");
+    asm("bound sp,[si+0x62]");
+    asm("bound sp,[%fs:si+0x62]");
+    asm("pusha");
+    asm("bound si,[si+0x62]");
+    dl = 0;
+    asm("sbb [bx+si],al");
+    ax = 0xc6;
+    dl = 0;
+    (save)0;
+    *(bx + si + 0xb) = 0;
+    (save)sp;
+    *(di + 0x6e) = *(di + 0x6e) & bp;
+    asm("insw");
+    asm("bound si,[si+0x31]");
+    *(bx + si) :: dh;
+    al :: 0x3c;
+    al :: 0xc1;
+    si = si + 1;
+    *(si + 0x21) = *(si + 0x21) + ah;
+    asm("insb");
+    al = al ^ 0x63;
+    asm("insb");
+    *(bx + 0x3e) :: ah;
+    asm("insw");
+    asm("insb");
+    asm("insb");
+    al = al ^ 0x63;
+    asm("%c insw");
+    asm("outsb");
+    asm("arpl [si+0x38],bp");
+    asm("arpl [si],di");
+    asm("bound sp,[bx+di+0x62]");
+    asm("%d insb");
+    ah = ah ^ *(bp + di + 0x2e);
+    al :: 0x67;
+    asm("%c insb");
+    al = al ^ 0x63;
+    asm("insb");
+    *(bx + 0x3e) :: ah;
+    asm("insw");
+    asm("insb");
+    asm("insb");
+    al = al ^ 0x63;
+    asm("%c insw");
+    asm("outsb");
+    asm("insb");
+    *(bp + di + 0x64) :: ah;
+    asm("arpl [si],di");
+    asm("bound di,[0x6364]");
+    al :: 0x6c;
+    ah = ah ^ *(bx + di + 0x2e);
+    asm("insw");
+    asm("insb");
+    asm("insd");
+    asm("outsb");
+    asm("insb");
+    *(bp + 0x64) :: ah;
+    *(bx + si) = *(bx + si) + al;
+    asm("loopne 0x3f9a");
+    ax = ax + *(bx + si);
+    dl = 0x21;
+    (restore)cx;
+    bp = bp + 1;
+    (save)bx;
+    ax = ax & 2;
+    dx = 0x4e21;
+    di = di - 1;
+    (save)cs;
+    al = al + al;
+    if(!( *(di + 0x6d) = *(di + 0x6d) & sp)) {
+        >= ? 0x3fe7 : ;
+        *(bp + si + 0x920) = *(bp + si + 0x920) + 0x4e21;
+        *(bx + si + 0xa) = *(bx + si + 0xa) + 0x4e21;
+        *(bx + di) = *(bx + di) << cl;
+        sp = sp - 1;
+        bp = bp + 1;
+        di = di + 1;
+        cx = cx + 1;
+        bx = bx + 1;
+        (restore)cx;
+        asm("%c inc sp");
+        cx = cx + 1;
+        (save)sp;
+        *(bx + si) = *(bx + si) + al;
+        asm("loopne 0x3fab");
+        (save)ss;
+        ah = ah + ah;
+        *(si + 0x45) = *(si + 0x45) & cx;
+        di = di + 1;
+        cx = cx + 1;
+        bx = bx + 1;
+        (restore)cx;
+        *(bx + 0x46) = *(bx + 0x46) & cl;
+        *(si + 0x48) = *(si + 0x48) & dl;
+        bp = bp + 1;
+        *(bx + di + 0x4e) = *(bx + di + 0x4e) & al;
+        bx = bx + 1;
+        cx = cx - 1;
+        bp = bp + 1;
+        si = si - 1;
+        (save)sp;
+        (save)bx;
+        asm("sbb [bx+si],ax");
+        asm("Unknown opcode 0xfe");
+        if(*(bp + di + 0x6f) = *(bp + di + 0x6f) & ax) {
+            goto L00004025;
+        }
+        < ? L00004017 : ;
+        asm("a32 push word 0x2074");
+        *(bp + di + 0x29) = *(bp + di + 0x29) - ah;
+        *(bx + di) = *(bx + di) & dh;
+        *(bx + si) :: di;
+        asm("aaa");
+        *di = *di & ch;
+        *(bx + di) = *(bx + di) & dh;
+        *(bx + si) :: di;
+        asm("adc al,0x0");
+        asm("sbb al,0x22");
+        (save)cx;
+        if(sp != si) {
+            goto L0000402e;
+        }
+        >= ? L0000403f : ;
+        asm("o32 jz 0x4048");
+        asm("popa");
+        if(*(bp + di + 0x6f) = *(bp + di + 0x6f) & dl) {
+            goto L00004039;
+        }
+        al = al - 0x20;
+        cx = cx - 1;
+        asm("outsb");
+        asm("arpl [0x1c],bp");
+        al = al ^ 0x22;
+        *(bx + si + 0x49) = *(bx + si + 0x49) - dl;
+        bx = bx + 1 - 1;
+        *(bx + 0x50) = *(bx + 0x50) & cl;
+    }
+    (save)sp;
+    cx = cx - 1;
+    di = di - 1;
+    si = si - 1;
+    *(di + 0x53) = *(di + 0x53) & dl;
+    cx = cx - 1;
+    si = si - 1;
+    di = di + 1;
+    *(bp + di + 0x45) = *(bp + di + 0x45) & cl;
+    (restore)cx;
+    dx = dx + 1;
+    di = di - 1;
+    cx = cx + 1;
+    (save)dx;
+    sp = sp + 1;
+    *L00005400 = *L00005400 - cx;
+    ah = ah & *(bx + si);
+    di = di + 1;
+    cx = cx + 1;
+    bp = bp - 1 + 1;
+    *(bp + di + 0x52) = *(bp + di + 0x52) & al;
+    bp = bp + 1;
+    sp = sp + 1;
+    cx = cx - 1;
+    (save)sp;
+    (save)bx;
+    *(bp + si) = *(bp + si) & ah;
+    *(bp + 0x22) = *(bp + 0x22) + ah;
+    if(!(ax = ax & 0x2525 & 25924)) {
+        asm("a32 outsb");
+        *%fs:bp+si+0x79] = *%fs:bp+si+0x79] & ah;
+        ah :: *(bx + si);
+        *(bx + si) = *(bx + si) & ah;
+        *(bp + si + 0x6f) = *(bp + si + 0x6f) & cl;
+L00004025:
+        (save)0x206e;
+        asm("outsw");
+        if(sp = sp + 1) {
+            goto L00004094;
+        }
+        (save)29285;
+L0000402e:
+        == ? L000040ab : ;
+        *(bx + si) = *(bx + si) & ax;
+        *(bp + si) = fs;
+        si = 45568;
+L00004039:
+        *(bx + si) = *(bx + si) & dl;
+        asm("popa");
+        if(*(bx + si + 26691) = *(bx + si + 26691) + dh) {
+            goto L000040b0;
+        }
+        asm("%g jnc 0x4065");
+        asm("outsw");
+        if(sp = sp + 1) {
+            goto L000040b0;
+        }
+        (save)29285;
+        == ? L000040c7 : ;
+        asm("hlt");
+        asm("sbb al,0x0");
+        ax = ax & 0x4925;
+        dx = 0x23;
+        bp = bp - 1;
+        if(*(bp + 0x65) = *(bp + 0x65) & 0x23) {
+            goto L000040d0;
+        }
+        if(25120 = *(bx + 0x6e) * bp) {
+            goto L0000409e;
+        }
+        *(bx + di + 0x6c) = *(bx + di + 0x6c) & al;
+        (restore)cx;
+        asm("outsw");
+        if(*(si + 0x65) = *(si + 0x65) & al) {
+            goto L000040dc;
+        }
+        asm("a32 push ds");
+        dl = dl + dl;
+        if(ax = ah & *di & 29249) {
+            goto L000040f0;
+        }
+        asm("outsw");
+        < ? L000040e7 : ;
+        *(bp + si + 0x79) = *(bp + si + 0x79) & ah;
+        ah :: *(bx + si);
+    }
+    *(bx + si) = *(bx + si) & ah;
+    *(bx + si) = *(bx + si) & ah;
+    (save)dx;
+    if(!(0x5420 = *(bp + di + 0x6b) * sp)) {
+        asm("popa");
+        asm("outsb");
+        62464 = *(bp + di + 0x1b) * si;
+L00004094:
+        bl = bl & *(bx + si);
+        dl = 0x20;
+        asm("adc [bx+si],al");
+        al = 0x44;
+L0000409c:
+        asm("popa");
+L0000409e:
+        asm("outsb");
+        asm("arpl [%gs:bx+si+0x6f],bp");
+        if(*(bp + di + 0x74) = *(bp + di + 0x74) & dl) {
+            goto L0000409c;
+        }
+        (save)ds;
+        *si = *si + dl;
+        dx = dx & *(bx + si);
+        *(bp + si + 0x1020) = *(bp + si + 0x1020) + dh;
+L000040b0:
+        if(*(bx + si + 28498) = *(bx + si + 28498) + dh) {
+            goto L0000411c;
+        }
+        asm("popa");
+        asm("outsb");
+        asm("outsb");
+        *(di + 0x69) = *(di + 0x69) & cl;
+        asm("insb");
+        asm("insb");
+        asm("%g jc 0x40e2");
+        *L00002523 = *L00002523 + dh;
+        ax = ax & 25665;
+        28271 = *%fs:si+0x69] * si;
+        asm("popa");
+L000040d0:
+        asm("insb");
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) & ah;
+        if(di = di + 1) {
+            goto L0000413f;
+        }
+        *(ebx + 0x65) = *(ebx + 0x65) & dl;
+L000040dc:
+        asm("%g insb");
+        (save)26223;
+        asm("o32 pop ds");
+        if(*(bp + si + 0x23) = *(bp + si + 0x23) + bl) {
+            goto L0000415d;
+        }
+        asm("outsw");
+        asm("a32 jc 0x4150");
+        asm("insw");
+L000040f0:
+        asm("insw");
+        0x203a = *(bp + 0x67) * bp;
+        *(bx + si) = *(bx + si) & ah;
+    }
+    (save)28270;
+    if(!( *(bp + si + 0x6f) = *(bp + si + 0x6f) & cl)) {
+        asm("insb");
+        asm("outsw");
+        asm("outsb");
+        asm("popa");
+        if(bx = bx - 1) {
+            goto L00004170;
+        }
+        >= ? L000040fd : ;
+        asm("sbb al,0x0");
+        <= ? L00004130 : ;
+        (restore)dx;
+        *(bp + si + 0x1020) = *(bp + si + 0x1020) + dh;
+        *(bx + si + 28482) = *(bx + si + 28482) + dh;
+        asm("bound sp,[bx+si]");
+        if(sp = sp - 1) {
+            goto L00004195;
+        }
+        asm("%g outsb");
+L0000411c:
+        >= ? L0000418a : ;
+        40448 = *bx * dx;
+    }
+    sp = sp & *(bx + si);
+    (save)ax;
+    (save)dx;
+    bp = bp + 1;
+    (save)bx;
+    (save)bx;
+    *(bp + di + 0x45) = *(bp + di + 0x45) & cl;
+    (restore)cx;
+    *(si + 0x4f) = *(si + 0x4f) & dl;
+    *(bp + di + 0x4f) = *(bp + di + 0x4f) & al;
+    si = si - 1;
+    (save)sp;
+    cx = cx - 1;
+    si = si - 1;
+    (save)bp;
+    bp = bp + 1;
+    ah = ah & dh;
+    *(bx + si) = *(bx + si) | al;
+    dx = 0x4323;
+L0000413f:
+    ax = ax - 1;
+    cx = cx + 1;
+    (save)dx;
+    asm("%c inc sp");
+    cx = cx + 1;
+    (save)sp;
+    asm("adc ax,[bx+si]");
+    asm("Unknown opcode 0xc6");
+    sp = sp & *(bx + si);
+    bp = bp + 1;
+    (save)dx;
+    cx = cx + 1;
+    (save)bx;
+    bp = bp + 1;
+    *(bx + di + 0x20) = *(bx + di + 0x20) & al;
+    bx = bx + 1;
+    ax = ax - 1;
+    (save)dx;
+    cx = cx + 1 + 1;
+    bx = bx + 1;
+    (save)sp;
+    bp = bp + 1;
+L0000415d:
+    (save)dx;
+    (fsave)((frestore)) - *(bp + di);
+    ax = ah & dh & *(bx + si) & 0x2025;
+    *(bx + si) = *(bx + si) & ah;
+    *(bp + si) = *(bp + si) & ch;
+    ah = ah - *(bx + si);
+    si = si - 1;
+    di = di - 1;
+    *(bp + di + 0x48) = *(bp + di + 0x48) & al;
+L00004170:
+    (save)dx;
+    cx = cx + 1 + 1;
+    bx = bx + 1;
+    (save)sp;
+    bp = bp + 1;
+    (save)dx;
+    (save)bx;
+    *(si + 0x4f) = *(si + 0x4f) & dl;
+    *(di + 0x52) = *(di + 0x52) & al;
+    cx = cx + 1;
+    (save)bx;
+    bp = bp + 1;
+    *(bp + si) = *(bp + si) & ch;
+    dl = dl - *di;
+    *si = *si + al;
+    al = al & 0x50;
+    (save)dx;
+    bp = bp + 1;
+    (save)bx;
+    (save)bx;
+    *(bp + di + 0x45) = *(bp + di + 0x45) & cl;
+    (restore)cx;
+    *(si + 0x4f) = *(si + 0x4f) & dl;
+L00004195:
+    *(bp + di + 0x4f) = *(bp + di + 0x4f) & al;
+    si = si - 1;
+    (save)sp;
+    cx = cx - 1;
+    si = si - 1;
+    (save)bp;
+    bp = bp + 1;
+    asm("hlt");
+    asm("sbb [bx+si],ax");
+    (save)ds;
+    al = al & 0x25;
+    *(bx + si) = *(bx + si) & ah;
+    bp = bp + 1;
+    (save)dx;
+    cx = cx + 1;
+    (save)bx;
+    bp = bp + 1;
+    *(bx + 0x48) = *(bx + 0x48) & dl;
+    cx = cx - 1;
+    bx = bx + 1;
+    ax = ax - 1;
+    *(bp + di + 0x48) = *(bp + di + 0x48) & al;
+    (save)dx;
+    cx = cx + 1 + 1;
+    bx = bx + 1;
+    (save)sp;
+    bp = bp + 1;
+    (save)dx;
+    asm("aas");
+    asm("hlt");
+    (save)ss;
+    *si = *si + bh;
+    al = al & 0x28;
+    (save)bx;
+    bp = bp + 1;
+    sp = sp - 1;
+    bp = bp + 1;
+    bx = bx + 1;
+    (save)sp;
+    *(bp + si + 0x59) = *(bp + si + 0x59) & al;
+    *(bp + 0x55) = *(bp + 0x55) & cl;
+    bp = bp - 1;
+    dx = dx + 1;
+    bp = bp + 1;
+    (save)dx;
+    *(bp + di + 0x45) = *(bp + di + 0x45) & cl;
+    (restore)cx;
+    *(bx + di) = *(bx + di) - cx;
+    *(bp + 0x24) = *(bp + 0x24) + dl;
+    ax = ax & 0x2020;
+    bp = bp + 1;
+    (save)dx;
+    cx = cx + 1;
+    (save)bx;
+    bp = bp + 1;
+    *(bp + 1) = *(bp + 1) & cl;
+    *(si + 0x24) = *(si + 0x24) + ah;
+    asm("aas");
+    asm("hlt");
+    al = al | *(bx + si);
+    (save)0x24;
+    al :: 0x2d;
+    *(di + 0x52) = *(di + 0x52) & al;
+    (save)bx;
+    cx = cx + 1 - 1;
+    si = si - 1;
+    di = di + 1;
+    *%es:bx+si+0x24] = *%es:bx+si+0x24] + bh;
+    ax = ax & 0x2525;
+    if(!( *(si + 0x79) = *(si + 0x79) & dl)) {
+        *(bx + di + 0x6e) = *(bx + di + 0x6e) & ch;
+        if(*(bx + di + 0x6f) = *(bx + di + 0x6f) & bh) {
+            goto L00004280;
+        }
+        if(!( *(bp + 0x65) = *(bp + 0x65) & ch)) {
+            asm("arpl [bx+si+0x61],bp");
+            < ? L00004279 : ;
+            asm("arpl [si+0x65],si");
+            < ? L00004244 : ;
+            >= ? L0000423f : ;
+            asm("outsb");
+            asm("popa");
+            asm("insw");
+            al = al & *%cs:bx+si];
+            *L00002524 = al;
+            *(bx + di + 0x74) = *(bx + di + 0x74) & cl;
+            if(*(di + 0x61) = *(di + 0x61) & ch) {
+                goto L00004251;
+            }
+            asm("bound sp,[di+0x20]");
+        }
+        != ? 0x42a6 : ;
+        *(si + 0x6f) = *(si + 0x6f) & dh;
+        *(bx + di) = *(bx + di) & dh;
+        al = al ^ 0x20;
+        asm("insb");
+        asm("%g jz 0x42b5");
+        asm("%g jc 0x42b7");
+        *(si + 0x6f) = *(si + 0x6f) & ch;
+        asm("outsb");
+        *%cs:eax] = *%cs:eax] & ax;
+        asm("enter 0x2a24,0x20");
+        (save)ax;
+L00004251:
+        (save)dx;
+        (save)bx;
+        (save)bx;
+        *(di + 0x4e) = *(di + 0x4e) & al;
+        (save)sp;
+        bp = bp + 1 + 1;
+        (save)dx;
+        *(bp + di + 0x45) = *(bp + di + 0x45) & cl;
+        (restore)cx;
+        *(bx + 0x48) = *(bx + 0x48) & dl;
+        bp = bp + 1;
+        *(bp + 0x49) = *(bp + 0x49) & al;
+        si = si - 1 - 1;
+        cx = cx - 1;
+        (save)bx;
+        ax = ax - 1;
+    }
+    bp = bp + 1;
+    sp = sp + 1;
+    *(bp + si) = *(bp + si) & ch;
+    asm("hlt");
+    asm("sbb [bx+si],ax");
+    asm("out dx,al");
+    al = al & 0x2a;
+    *(bx + si + 0x52) = *(bx + si + 0x52) & dl;
+    bp = bp + 1;
+    (save)bx;
+    (save)bx;
+    *bx = *bx & ah;
+    bp = bp + 1;
+    (save)bx;
+    bx = bx + 1;
+L00004280:
+    asm("daa");
+    *(si + 0x4f) = *(si + 0x4f) & dl;
+    *(bp + di + 0x41) = *(bp + di + 0x41) & al;
+    si = si - 1;
+    bx = bx + 1;
+    bp = bp + 1;
+    sp = sp - 1;
+    *(bp + si) = *(bp + si) & ch;
+    asm("hlt");
+    (save)cs;
+    *si = *si + cl;
+    ax = ax & 0x4920;
+    si = si - 1;
+    (save)bx;
+    (save)sp;
+    (save)dx;
+    (save)bp;
+    bx = bx + 1;
+    (save)sp;
+    cx = cx - 1;
+    di = di - 1;
+    si = si - 1;
+    (save)bx;
+    *L00001E00 = *L00001E00 & bl;
+    ax = ax & 0x2525;
+    *(si + 0x45) = *(si + 0x45) & cl;
+    di = di + 1;
+    cx = cx + 1;
+    bx = bx + 1;
+    (restore)cx;
+    *(bx + 0x46) = *(bx + 0x46) & cl;
+    *(si + 0x48) = *(si + 0x48) & dl;
+    bp = bp + 1;
+    *(bx + di + 0x4e) = *(bx + di + 0x4e) & al;
+    bx = bx + 1;
+    cx = cx - 1;
+    bp = bp + 1;
+    si = si - 1;
+    (save)sp;
+    (save)bx;
+    *(bx + di + 0x73) = *(bx + di + 0x73) & ch;
+    *(bx + di + 0x1f) = *(bx + di + 0x1f) & ah;
+    *(bx + si + 0x25) = *(bx + si + 0x25) + al;
+    asm("insw");
+    asm("%g outsb");
+    if(!( *bx = *bx & ah)) {
+        asm("%f jc 0x4339");
+        <= ? L00004337 : ;
+        asm("outsb");
+        asm("daa");
+        *(bx + 0x61) = *(bx + 0x61) & ah;
+        asm("insw");
+        *%cs:bx+si] = *%cs:bx+si] & ah;
+        (save)sp;
+        (save)29557;
+        if(al = al - 0x20) {
+            goto L0000434c;
+        }
+        asm("%g hlt");
+        asm("%f and ax,0x6f20");
+        if(al = al & *(bx + si)) {
+            goto L00004362;
+        }
+    }
+    0x2073 = *(bx + 0x6e) * bp;
+    asm("o32 jc 0x4365");
+    asm("insw");
+    *(bx + 0x68) = *(bx + 0x68) & dh;
+    asm("outsw");
+    if(!(31008 = *(bp + di + 0x68) * sp)) {
+        asm("insw");
+        asm("popa");
+        >= ? 0x4326 : ;
+        asm("arpl [bx+si+0x6f],bp");
+        asm("outsw");
+        >= ? L00004371 : ;
+        eax = *di & 0xff;
+        *(bx + di + 0x72) = *(bx + di + 0x72) & ah;
+        if(*%gs:bx+di+0x6c] = *%gs:bx+di+0x6c] & ah) {
+            goto L0000437a;
+        }
+        >= ? 0x438e : ;
+        if(*(si + 0x69) = *(si + 0x69) & ah) {
+            goto L00004390;
+        }
+        asm("insb");
+        asm("popa");
+    }
+    >= ? 0x4389 : ;
+    *%fs:bx+0x6e] = *%fs:bx+0x6e] & ch;
+    *(si + 0x68) = *(si + 0x68) & dh;
+    if(!( *%gs:bp+di+0x63] = *%gs:bp+di+0x63] & dh)) {
+        asm("%g outsb");
+        ax = ax & *%cs:bx+si];
+        dl = 0x25;
+        ax = (ax & 0x2025) - 1;
+        asm("%g jc 0x43a4");
+        *(bx + di + 0x72) = *(bx + di + 0x72) & ah;
+        *%gs:bp+di+0x6f] = *%gs:bp+di+0x6f] & dh;
+        asm("insw");
+        asm("insw");
+L0000434c:
+        if(*%gs:bp+di+0x69] = *%gs:bp+di+0x69] & dh) {
+            goto L000043ba;
+        }
+        *%gs:bx+0x75] = *%gs:bx+0x75] & ah;
+        26988 = *(si + 0x65) * sp;
+        asm("outsb");
+        asm("%g jnc 0x4395");
+        asm("hlt");
+        asm("sbb al,0x0");
+        (fsave)((frestore)) - *di;
+        ax = ax & 0x2020;
+L00004362:
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) & ah;
+        asm("o32 and [di+0x65],ch");
+        asm("outsb");
+        if(!(ax = ax - 0x4920)) {
+            asm("arpl [bx+si+0x6f],bp");
+            asm("popa");
+L0000437a:
+            if(0x2073 = *(bp + di + 0x65) * sp) {
+                goto L000043e1;
+            }
+            *(bx + si) = *(bx + si) & al;
+            asm("cli");
+            ax = ax & 0x26c;
+            dl = 0x20;
+            al = 0x6e;
+            if(*(bx + si) = *(bx + si) | al) {
+                goto L000043f7;
+            }
+            asm("bound sp,[di+0x72]");
+            asm("%f sub al,0x20");
+L00004390:
+        }
+        == ? L000043fb : ;
+        asm("%g outsb");
+        *(di + 0x61) = *(di + 0x61) & ch;
+    }
+    asm("outsw");
+    if(!(0x79 = *(di + 0x20) * sp)) {
+        asm("sbb al,0x0");
+        (save)ds;
+        asm("%e sbb al,0x0");
+        dl = 0x20;
+        *(bx + si) = *(bx + si) | al;
+        al = 0x73;
+        asm("%g insb");
+        asm("arpl [%gs:si+0x69],si");
+        asm("outsw");
+        asm("outsb");
+        *(bp + si + 0x79) = *(bp + si + 0x79) & ah;
+        *(bp + 0x75) = *(bp + 0x75) & ch;
+        asm("insw");
+L000043ba:
+        asm("bound sp,[di+0x72]");
+        asm("%c and al,0x0");
+        asm("%e and ax,0x2020");
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) & ah;
+        ax = ax - 0x4920;
+        asm("o32 and [bp+di+0x68],ah");
+        asm("outsw");
+        asm("popa");
+        if(0x2073 = *(bp + di + 0x65) * sp) {
+            goto L0000443e;
+        }
+        asm("outsb");
+        asm("daa");
+        == ? L000043fd : ;
+        asm("outsb");
+        != ? 0x444d : ;
+        asm("bound sp,[di+0x72]");
+L000043e1:
+        asm("%f sub al,0x22");
+        *(bp + 0x26) = *(bp + 0x26) + ah;
+        ax = ax + 1;
+        *(bp + si + 0x820) = *(bp + si + 0x820) + dh;
+        *(bx + si + 26740) = *(bx + si + 26740) + dh;
+        asm("%g outsb");
+        *(bx + si + 0x72) = *(bx + si + 0x72) & dh;
+L000043f7:
+        asm("%g jnc 0x446e");
+        *(si + 0x68) = *(si + 0x68) & dh;
+        if(*%gs:bp+di+0x65] = *%gs:bp+di+0x65] & ch) {
+            goto L00004424;
+        }
+        asm("outsd");
+        < ? L00004428 : ;
+        == ? L00004472 : ;
+        asm("%g and al,0x0");
+        *L0000001E = fs;
+    }
+    dl = 0x20;
+    *(bx + si) = *(bx + si) | al;
+    al = 0x66;
+    asm("insb");
+    asm("%g jz 0x4494");
+    asm("%g jc 0x4443");
+    asm("outsw");
+L00004424:
+    asm("o32 and [bx+di+0x6f],bh");
+    if(!(0x2074 = *(bp + si + 0x73) * si)) {
+        *(bp + di + 0x68) = *(bp + di + 0x68) & ah;
+        asm("outsw");
+        0x222e = *(bp + di + 0x65) * sp;
+        *(si + 0x2026) = *(si + 0x2026) + dh;
+        *(bp + si + 0x820) = *(bp + si + 0x820) + dh;
+L0000443e:
+        if(*(bx + si + 0x4528) = *(bx + si + 0x4528) + dh) {
+            goto L000044a4;
+        }
+        asm("insw");
+        >= ? 0x44b0 : ;
+        ah :: *%gs:bx+si];
+        asm("daa");
+        cx = cx + 1;
+        asm("daa");
+        if(!( *(bp + 0x6f) = *(bp + 0x6f) & ah)) {
+            asm("daa");
+            if(cx = cx + 1) {
+                goto L000044c0;
+            }
+            asm("outsw");
+            < ? L0000447d : ;
+            *(bx + si) = *(bx + si) - cx;
+            dl = dl + bl;
+            asm("%e inc bx");
+            di = di - 1;
+            bp = bp - 1 - 1;
+            cx = cx + 1;
+            si = si - 1;
+            sp = sp + 1;
+            (save)bx;
+            al = 0;
+            asm("out 0x26,al");
+            (save)sp;
+            (save)0x2065;
+            asm("insb");
+        }
+        asm("popa");
+        if(ax = ax & 0x2025) {
+            goto L000044e6;
+        }
+        *(bp + di + 0x6f) = *(bp + di + 0x6f) & ah;
+        asm("insw");
+        asm("insw");
+        asm("popa");
+        asm("outsb");
+        asm("popa");
+        if(!( *%fs:si+0x68] = *%fs:si+0x68] & dh)) {
+            >= ? 0x44f1 : ;
+            != ? 0x44a4 : ;
+            != ? 0x44f9 : ;
+            *%fs:bx+di+0x73] = *%fs:bx+di+0x73] & ch;
+            al = 0;
+            (save)cs;
+            asm("daa");
+            if(*(bx + di + 0x6c) = *(bx + di + 0x6c) & ah) {
+                goto L000044f5;
+            }
+            >= ? 0x4509 : ;
+            if(*(di + 0x61) = *(di + 0x61) & ch) {
+                goto L00004506;
+            }
+            *%fs:bx+0x6e] = *%fs:bx+0x6e] & ch;
+        }
+    }
+    *(si + 0x68) = *(si + 0x68) & dh;
+L000044a4:
+    if(!( *%gs:bp+di+0x63] = *%gs:bp+di+0x63] & dh)) {
+        asm("%g outsb");
+        sp :: *(bx + si);
+        *(bx + si + 0x72) = *(bx + si + 0x72) & dh;
+        asm("%g jnc 0x4526");
+        (restore)ss;
+        *L00002027 = *L00002027 + dh;
+        al :: 0x52;
+        bp = bp + 1;
+        (save)sp;
+        (save)bp;
+        (save)dx;
+        si = si - 1;
+        *%ds:si+0x6f] = *%ds:si+0x6f] & dh;
+L000044c0:
+        if(*(bp + si + 0x65) = *(bp + si + 0x65) & dh) {
+            goto L0000452d;
+        }
+        asm("popa");
+        == ? L000044eb : ;
+        0x26f4 = *(si + 0x2e) * si;
+        *(bp + si + 0x27) = *(bp + si + 0x27) + dl;
+        ax = ax & 0x2025;
+        (save)sp;
+        asm("outsw");
+        if(*(bx + si + 0x65) = *(bx + si + 0x65) & dh) {
+            goto L00004543;
+        }
+        asm("outsw");
+        < ? L0000454d : ;
+        *(bx + di + 0x20) = *(bx + di + 0x20) & ah;
+L000044e6:
+        asm("%g outsb");
+        if(!(29285 = *%fs:bp+0x66] * sp)) {
+            asm("arpl [bx+0x6d],bp");
+            asm("insw");
+            asm("popa");
+            asm("outsb");
+            asm("%f sub al,0x20");
+L000044f5:
+            >= ? 0x4567 : ;
+            != ? 0x4506 : ;
+            *(si + 0x27) = *(si + 0x27) + bh;
+            *(bp + di + 0x61) = *(bp + di + 0x61) & ah;
+            asm("outsb");
+            if(*(di + 0x69) = *(di + 0x69) & ah) {
+                goto L0000456e;
+            }
+L00004506:
+            asm("%g jc 0x4543");
+            al = al & *(bx + si);
+            *bx = fs;
+        }
+        ax = ax & 0x2020;
+    }
+    *(bx + si) = *(bx + si) & ah;
+    *(bx + si) = *(bx + si) & ah;
+    ax = ax - 0x4820;
+    asm("a32 push word 0x2074");
+    if(!(26988 = *(bx + 0x68) * sp)) {
+        if(!( *%gs:bp+0x65] = *%gs:bp+0x65] & ch)) {
+            asm("arpl [bx+0x6d],bp");
+            asm("insw");
+            asm("popa");
+L0000452d:
+            asm("outsb");
+            *%fs:bx+si] = *%fs:bx+si] & ax;
+            dl = 0x27;
+            *(bx + si) & 0xb2;
+            *(bx + si) = *(bx + si) & cl;
+            *(bx + si + 29557) = *(bx + si + 29557) + 0x27;
+            (save)0x2065;
+L00004543:
+            asm("popa");
+            if(29728 = *(bp + 0x67) * bp) {
+                goto L000045b9;
+            }
+            asm("outsw");
+        }
+        > ? L000045bd : ;
+        if(*(bp + di + 0x65) = *(bp + di + 0x65) & ch) {
+            goto L000045c2;
+        }
+        *(bx + di + 0x6e) = *(bx + di + 0x6e) & ah;
+        asm("%f hlt");
+        (restore)ss;
+        al = al + bl;
+        asm("daa");
+        (save)ds;
+        *(bp + si + 0x820) = *(bp + si + 0x820) + dh;
+        *(bx + si + 29296) = *(bx + si + 29296) + dh;
+        asm("%g jnc 0x45d7");
+        *si = *si & bh;
+        (save)dx;
+        bp = bp + 1;
+        (save)sp;
+        (save)bp;
+        (save)dx;
+        si = si - 1;
+        asm("%c hlt");
+L0000456e:
+        al = al & *(bx + si);
+        asm("hlt");
+        asm("daa");
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) & ah;
+        asm("%g insb");
+        asm("arpl [%gs:si+0x20],si");
+        if(ax = (ax & 0x2020) - 0x5320) {
+            goto L000045ed;
+        }
+        *%gs:bp+di+0x6f] = *%gs:bp+di+0x6f] & ah;
+        asm("insw");
+    }
+    asm("insw");
+    asm("popa");
+    asm("outsb");
+    if(!( *%fs:bx+0x69] = *%fs:bx+0x69] & dh)) {
+        *(bx + di + 0x13) = *(bx + di + 0x13) & ah;
+        *(bp + si) = *(bp + si) + bl;
+        *(bp + si) = *(bp + si) - bh;
+        *(bp + si + 0x820) = *(bp + si + 0x820) + dh;
+        if(*(bx + si + 25964) = *(bx + si + 25964) + dh) {
+            goto L00004618;
+        }
+        asm("%g jc 0x45c7");
+        0x2e = *(di + 0x79) * sp;
+        asm("hlt");
+        asm("adc al,[bx+si]");
+        ch = ch ^ *(bx + si);
+        bx = bx + 1;
+        ax = ax - 1;
+        (save)dx;
+        cx = cx + 1 + 1;
+        bx = bx + 1;
+        (save)sp;
+        bp = bp + 1;
+        (save)dx;
+L000045b9:
+        *(di + 0x4f) = *(di + 0x4f) & cl;
+        (save)si;
+        bp = bp + 1 - 1 + 1;
+        si = si - 1;
+        (save)sp;
+L000045c2:
+        asm("sbb [bx+si],al");
+        *di = *di - ah;
+        ax = ax - 1 & 29525;
+        *%gs:si+0x68] = *%gs:si+0x68] & dh;
+        *%gs:bx+di+0x52] = *%gs:bx+di+0x52] & al;
+        (save)dx;
+        di = di - 1;
+        (save)di;
+        *(bp + di + 0x45) = *(bp + di + 0x45) & cl;
+        (restore)cx;
+        (save)bx;
+        *(si + 0x6f) = *(si + 0x6f) & dh;
+        dl :: *si;
+        *(si + 0x28) = *(si + 0x28) + ah;
+        ax = ax & 0x2020;
+        *(bx + si) = *(bx + si) & ah;
+        *di = *di & ch;
+        *(bx + 0x61) = *(bx + 0x61) & dl;
+        asm("insb");
+L000045ed:
+        asm("outsw");
+        if(0x66 = *(bx + si) * sp) {
+            goto L0000466a;
+        }
+        asm("popa");
+        < ? L0000465a : ;
+        (restore)ss;
+        *(si + 0x28) = *(si + 0x28) + bh;
+        ax = ax & 0x2020;
+    }
+    *(bx + si) = *(bx + si) & ah;
+    *di = *di & ch;
+    if(!( *(si + 0x75) = *(si + 0x75) & dl)) {
+        asm("o32 jz 0x463b");
+        if(*(si + 0x65) = *(si + 0x65) & ch) {
+            goto L00004677;
+        }
+        asm("a32 push word 0xf474");
+        asm("adc ax,0x9800");
+        *di = *di - ah;
+        *(bx + si) = *(bx + si) & ah;
+L00004618:
+        *(bx + si) = *(bx + si) & ah;
+        *di = *di & ch;
+        *(bx + 0x61) = *(bx + 0x61) & dl;
+        asm("insb");
+        asm("popa");
+        asm("arpl [bp+di+0x77],bp");
+        asm("popa");
+        if(0x62 = *(bx + si) * sp) {
+            goto L0000468f;
+        }
+        asm("hlt");
+        *%es:bp+si+0x2528] = *%es:bp+si+0x2528] + dh;
+        if(ax = ax & 30031) {
+            goto L000046a9;
+        }
+        0x203a = *(si + 0x65) * sp;
+        *(di + 0x73) = *(di + 0x73) & dl;
+        *%gs:si+0x68] = *%gs:si+0x68] & dh;
+        if(*%gs:bx+di+0x72] = *%gs:bx+di+0x72] & ah) {
+            goto L000046b7;
+        }
+        > ? L0000466a : ;
+        0x73 = *(di + 0x79) * sp;
+        *(si + 0x6f) = *(si + 0x6f) & dh;
+        if(*(di + 0x6f) = *(di + 0x6f) & ch) {
+            goto L000046bb;
+        }
+        (restore)ds;
+        ah = ah + bl;
+        *(bx + si) = *(bx + si) - ah;
+        asm("outsb");
+        asm("outsw");
+        if(*(bx + si) = *(bx + si) & ah) {
+            goto L000046d5;
+        }
+        (save)0x202c;
+        >= ? L000046d5 : ;
+        != ? 0x46dc : ;
+        (save)0x202c;
+L0000466a:
+        asm("%g popa");
+        >= ? L000046e3 : ;
+        asm("outsw");
+        if(al = al - 0x20) {
+            goto L00004694;
+        }
+    }
+    > ? L000046db : ;
+    >= ? L000046ec : ;
+L00004677:
+    asm("%c hlt");
+    *%es:bx+si] = *%es:bx+si] + al;
+    *di = *di - sp;
+    if(!(ax = ax & 28494)) {
+        ah :: *(bx + si);
+        *(di + 0x73) = *(di + 0x73) & dl;
+        *%gs:si+0x68] = *%gs:si+0x68] & dh;
+        asm("%g jnc 0x46f5");
+L0000468f:
+        if(*(bp + di + 0x65) = *(bp + di + 0x65) & ch) {
+            goto L00004709;
+        }
+L00004694:
+        if(*(bx + di + 0x6e) = *(bx + di + 0x6e) & ah) {
+            goto L0000470e;
+        }
+        asm("outsw");
+        if(!(31008 = *(di + 0x65) * bp)) {
+            < ? L00004709 : ;
+            asm("sbb ax,0x2a00");
+            *(bx + si) = *(bx + si) - sp;
+L000046a9:
+            asm("popa");
+            if(*(bx + si) = *(bx + si) & ah) {
+                goto L00004719;
+            }
+            *%fs:si+0x6f] = *%fs:si+0x6f] & dh;
+            asm("outsw");
+L000046b7:
+            if(*(bp + di + 0x68) = *(bp + di + 0x68) & dh) {
+                goto L000046d9;
+            }
+            asm("popa");
+L000046bb:
+            if(*(si + 0x69) = *(si + 0x69) & ah) {
+                goto L00004724;
+            }
+            asm("arpl [si+0x69],si");
+            asm("outsw");
+            asm("outsb");
+            asm("%c hlt");
+            dl = dl | bh;
+            *L0000023D = ax;
+        }
+        *(bx + si + 0x29) = *(bx + si + 0x29) + dl;
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) + ax;
+        (save)si;
+        *L000003F4 = *L000003F4 - di;
+L000046d5:
+        *(si + 0x29) = *(si + 0x29) + bl;
+L000046d9:
+        *%cs:bx+si] = *%cs:bx+si] & ah;
+        asm("hlt");
+        asm("adc al,[bx+si]");
+        *%fs:bx+si] = *%fs:bx+si] - sp;
+        (save)bx;
+        (save)sp;
+        cx = cx + 1;
+        (save)dx;
+        (save)sp;
+        *(bx + di + 0x20) = *(bx + di + 0x20) & al;
+    }
+    si = si - 1;
+    (save)di;
+    *(bx + 0x41) = *(bx + 0x41) & al;
+    bp = bp + 1 - 1 + 1;
+    *si = *si & cl;
+    *(bp + si + 0x29) = *(bp + si + 0x29) + bh;
+    ax = ax & 0x2525;
+    sp = sp + 1;
+    cx = cx - 1;
+    (save)bx;
+    bx = bx - 1;
+    *(bp + 0x55) = *(bp + 0x55) & al;
+    sp = sp - 1;
+    sp = sp - 1;
+    (save)ss;
+    *(bp + si + 0x2529) = *(bp + si + 0x2529) + cl;
+L00004709:
+    ax = ax & 0x4f59;
+    (save)bp;
+    *(di + 0x55) = *(di + 0x55) & cl;
+L0000470e:
+    (save)bx;
+    (save)sp;
+    *(bp + 0x49) = *(bp + 0x49) & al;
+    (save)dx;
+    (save)bx;
+    (save)sp;
+    *(di + 0x52) = *(di + 0x52) & al;
+L00004719:
+    cx = cx + 1;
+    (save)bx;
+    bp = bp + 1;
+    asm("sbb [bx+si],al");
+    *di = *si;
+    di = di + 1;
+    si = si + 1;
+    *di = *di - sp;
+    cx = cx + 1;
+L00004724:
+    si = si - 1;
+    *(bx + 0x4c) = *(bx + 0x4c) & cl;
+    sp = sp + 1;
+    *(bp + di + 0x48) = *(bp + di + 0x48) & al;
+    (save)dx;
+    cx = cx + 1 + 1;
+    bx = bx + 1;
+    (save)sp;
+    bp = bp + 1;
+    (save)dx;
+    *(bp + si + 0x45) = *(bp + si + 0x45) & al;
+    si = si + 1;
+    di = di - 1;
+    (save)dx;
+L00004739:
+    bp = bp + 1;
+    asm("adc ax,[bx+si]");
+    *(bx + di) = *(bx + di) >> 0x25;
+    (save)bx;
+    (save)sp;
+    (save)dx;
+    (save)sp;
+    cx = cx + 1 - 1;
+    si = si - 1;
+    di = di + 1;
+    *(bx + di + 0x20) = *(bx + di + 0x20) & al;
+    si = si - 1;
+    (save)di;
+    *(bx + 0x4e) = *(bx + 0x4e) & cl;
+    bp = bp + 1 + 1;
+    asm("hlt");
+    (save)es;
+    *di = *di - sp;
+    ax = al + bl & 0x2025;
+    *(bx + si) = *(bx + si) & ah;
+    asm("adc [bx+si],al");
+    asm("loop 0x4789");
+    *(bx + di + 0x4c) = *(bx + di + 0x4c) & al;
+    (save)dx;
+    bp = bp + 1;
+    cx = cx + 1;
+    sp = sp + 1;
+    (restore)cx;
+    *(di + 0x58) = *(di + 0x58) & al;
+    cx = cx - 1;
+    (save)bx;
+    (save)sp;
+    (save)bx;
+    asm("sbb [%cs:bx+si],ax");
+    asm("imul byte [bx+di]");
+    *(bx + si) = *(bx + si) & ah;
+    *(bx + si + 0x49) = *(bx + si + 0x49) & dl;
+    bx = bx + 1 - 1;
+    *(bx + di + 0x20) = *(bx + di + 0x20) & al;
+    sp = sp + 1;
+    cx = cx - 1;
+    si = si + 1 + 1;
+    (save)dx;
+    bp = bp + 1 + 1;
+    si = si - 1;
+    (save)sp;
+    *(bp + 0x41) = *(bp + 0x41) & cl;
+    bp = bp - 1 + 1;
+    asm("%c hlt");
+    asm("adc al,0x2a");
+    *(bp + di) = *(bp + di) & dl;
+    *si = *si + bl;
+    ah = (ax & 0x2525) - *bx;
+    (save)bx;
+    *(bx + di + 0x44) = *(bx + di + 0x44) & al;
+    (save)si;
+    bp = bp + 1;
+    si = si - 1;
+    (save)sp;
+    (save)bp;
+    (save)dx;
+    bp = bp + 1;
+    (save)bx;
+    *(bp + si + 0x45) = *(bp + si + 0x45) & al;
+    di = di + 1;
+    cx = cx - 1;
+    si = si - 1;
+    asm("hlt");
+    asm("adc [bx+si],al");
+    al = al ^ 0x2a;
+    *(bp + si + 0x45) = *(bp + si + 0x45) & dl;
+    (save)bx;
+    (save)sp;
+    cx = cx + 1;
+    (save)dx;
+    (save)sp;
+    *(bx + di + 0x20) = *(bx + di + 0x20) & al;
+    di = di + 1;
+    cx = cx + 1;
+    bp = bp - 1 + 1;
+    *(bp + di) = *(bp + di) & ah;
+    *(bx + si + 0x2a) = *(bx + si + 0x2a) + cl;
+    ax = ax & 0x2025;
+    *(bx + si) = *(bx + si) & ah;
+    *(bp + 0x4f) = *(bp + 0x4f) & cl;
+    *(bp + di + 0x48) = *(bp + di + 0x48) & al;
+    (save)dx;
+    cx = ch - *(bp + si) + 1 + 1;
+    bx = bx + 1;
+    (save)sp;
+    bp = bp + 1;
+    (save)dx;
+    (save)bx;
+    *(si + 0x4f) = *(si + 0x4f) & dl;
+    *(bp + si + 0x45) = *(bp + si + 0x45) & dl;
+    (save)bx;
+    (save)sp;
+    cx = cx + 1;
+    (save)dx;
+    (save)sp;
+    *(bp + si) = *(bp + si) & ch;
+    asm("sbb ax,[bx+si]");
+    if(!(dh = dh - ah)) {
+        ax = ax & 0x2020;
+        (save)dx;
+        bp = bp + 1;
+        (save)bx;
+        (save)sp;
+        (save)dx;
+        (save)sp;
+        *(bx + 0x48) = *(bx + 0x48) & dl;
+        cx = cx + 1 - 1;
+        bx = bx + 1;
+        ax = ax - 1;
+        *(bp + di + 0x48) = *(bp + di + 0x48) & al;
+        (save)dx;
+        cx = cx + 1 + 1;
+        bx = bx + 1;
+        (save)sp;
+        bp = bp + 1;
+        (save)dx;
+        asm("aas");
+        asm("hlt");
+        asm("adc [bx+si],ax");
+        ax = ah - *di & 0x2025;
+        *(bx + si) = *(bx + si) & ah;
+        (save)dx;
+        bp = bp + 1;
+        (save)bx;
+        (save)sp;
+    }
+    (save)dx;
+    (save)sp;
+    cx = cx + 1 - 1;
+    si = si - 1;
+    di = di + 1;
+    ah = ah & dh;
+    (save)ss;
+    *(bp + 0x4c2a) = *(bp + 0x4c2a) + ah;
+    asm("%g a32 popa");
+    asm("arpl [bx+di+0x20],di");
+    asm("outsw");
+    asm("o32 and [si+0x68],dh");
+    asm("arpl [bx+di+0x65],bp");
+    asm("outsb");
+    if(!( *%gs:bx+di+0x6e] = *%gs:bx+di+0x6e] & al)) {
+        *(bp + si) = *(bp + si) >> 0x47;
+        asm("popa");
+        asm("insw");
+        *%gs:bx+si+0x72] = *%gs:bx+si+0x72] & dl;
+        asm("outsw");
+        asm("a32 jc 0x48aa");
+        asm("insw");
+        asm("adc al,0x0");
+        *(bp + si) = *(bp + si) >> 1;
+        asm("outsb");
+        if(cx = cx - 1) {
+            goto L000048c6;
+        }
+        asm("popa");
+        asm("insb");
+        asm("insb");
+        asm("popa");
+        == ? L000048c1 : ;
+        asm("outsw");
+        asm("outsb");
+        asm("outsw");
+        asm("a32 jc 0x48c2");
+        asm("insw");
+        asm("adc al,[bx+si]");
+        ax = L00008b91();
+        asm("outsw");
+        if(*(bx + si + 0x72) = *(bx + si + 0x72) & dl) {
+            goto L000048e3;
+        }
+        < ? L000048d5 : ;
+        asm("a32 push word 0x2074");
+        *(bp + di + 0x29) = *(bp + di + 0x29) - ah;
+        *(bx + di) = *(bx + di) & dh;
+        *(bx + si) :: di;
+        *bx :: cx;
+        dh = dh + bh;
+        al = al - *(di + 0x6c);
+        asm("arpl [%gs:si+0x72],si");
+        asm("outsw");
+        asm("outsb");
+        if(29249 = *(bp + di + 0x20) * sp) {
+            goto L000048fe;
+        }
+        asm("out dx,ax");
+        asm("adc [bx+si],al");
+        asm("adc ch,[bp+di]");
+        (save)ax;
+        < ? L00004902 : ;
+        asm("a32 jc 0x48f7");
+        asm("insw");
+        asm("insw");
+        if(*(bp + di + 0x6f) = *(bp + di + 0x6f) & al) {
+            goto L00004906;
+        }
+        asm("insb");
+        asm("%g jc 0x48ba");
+        asm("outsw");
+        if(*L0000432B = *L0000432B + ah) {
+            goto L00004921;
+        }
+        < ? L00004913 : ;
+        asm("a32 push word 0x2074");
+    }
+    *(bp + di + 0x29) = *(bp + di + 0x29) - ah;
+    *(bx + di) = *(bx + di) & dh;
+    *(bx + si) :: di;
+    ax = (ah ^ *(bx + si)) - 0x3120;
+    *(bx + si) :: di;
+    *L0000000F :: bl;
+    sp = sp + 1;
+    asm("arpl [bp+si+0x6f],si");
+L000048c6:
+    if(!(cx = cx - *(di + 0x69))) {
+        asm("o32 jz 0x48ec");
+        asm("outsw");
+        if(bx = bx + 1) {
+            goto L00004940;
+        }
+        *%cs:bp+si] = *%cs:bp+si] + cl;
+        *(bx + si + 0x2b) = *(bx + si + 0x2b) + bl;
+        sp = sp - 1;
+        asm("outsw");
+        asm("popa");
+        asm("verr [%cs:bp+0x2b]");
+L000048e3:
+        *L00002020 = *L00002020 ^ bp;
+        if(0x2e2e = *%fs:bp+0x67] * bp) {
+            goto L00004956;
+        }
+        asm("popa");
+        >= ? 0x490d : ;
+        asm("popa");
+        *(bx + 0x61) = *(bx + 0x61) & ah;
+        asm("insw");
+        asm("%g hlt");
+        (restore)ss;
+        ch = ch ^ *L00002020;
+        if(*(bp + si + 0x2b) = *(bp + si + 0x2b) + bh) {
+            goto L00004967;
+        }
+L000048fe:
+        asm("insw");
+        >= ? 0x496d : ;
+        if(*%gs:bx+di+0x6e] = *%gs:bx+di+0x6e] & ch) {
+            goto L0000497b;
+        }
+L00004906:
+        < ? L0000497e : ;
+        asm("arpl [si+0x69],si");
+        asm("outsw");
+        asm("outsb");
+        >= ? L00004904 : ;
+        asm("adc [bx+si],al");
+        asm("xchg ax,si");
+        si = si - *(bp + di);
+        *%cs:bx+si] = *%cs:bx+si] & ah;
+        asm("a32 popa");
+        asm("insw");
+        *%gs:bp+di+0x72] = *%gs:bp+di+0x72] & ah;
+        3 = *%fs:si+0x73] * si;
+L00004921:
+        *di = al;
+        di = di + 1;
+        bp = bp - *(bx + 0x6e);
+        *(bx + si) = *(bx + si) & al;
+        ax = ax + *(bx + si);
+        dl = 0x2b;
+        asm("outsw");
+        asm("o32 add [bx],dl");
+        *(bp + si + 0x342b) = *(bp + si + 0x342b) + bh;
+    }
+    if(!( *%cs:bx+si] = *%cs:bx+si] & ah)) {
+        != ? 0x49ae : ;
+L00004940:
+        *%fs:bx+di+0x73] = *%fs:bx+di+0x73] & ch;
+        if(*(bp + di + 0x75) = *(bp + di + 0x75) & ah) {
+            goto L000049bb;
+        }
+        asm("%g outsb");
+        == ? L000049b9 : ;
+        >= ? 0x496f : ;
+        asm("hlt");
+        asm("sbb [bx+si],al");
+        asm("salc");
+        si = si - *(bx + di);
+L00004956:
+        if(*%cs:bx+si] = *%cs:bx+si] & ah) {
+            goto L000049bf;
+        }
+        == ? L000049d1 : ;
+        < ? L000049cc : ;
+        *(si + 0x6f) = *(si + 0x6f) & dh;
+        if(*(bp + 0x69) = *(bp + 0x69) & ah) {
+            goto L000049d9;
+        }
+        == ? L00004988 : ;
+L00004967:
+        asm("insw");
+        asm("%g outsb");
+        != ? 0x4981 : ;
+        dl = dl + dh;
+        si = si - *(bp + si);
+        if(*%cs:bx+si] = *%cs:bx+si] & ah) {
+            goto L000049ea;
+        }
+        asm("popa");
+        < ? L000049ed : ;
+        *(bx + di + 0x20) = *(bx + di + 0x20) & ah;
+L0000497b:
+        asm("outsb");
+        asm("%g ja 0x49a0");
+        asm("a32 popa");
+        asm("insw");
+        asm("adc al,[%gs:bx+si]");
+        bp = bp ^ *L00002020;
+        if(ch = ch | *si) {
+            goto L000049f3;
+        }
+        >= ? L00004a04 : ;
+        asm("popa");
+        < ? L00004a07 : ;
+        *(bx + di + 0x20) = *(bx + di + 0x20) & ah;
+        asm("a32 popa");
+        asm("insw");
+        asm("%g adc ax,0x2000");
+        al = al - 0x34;
+        asm("%g jc 0x4a06");
+        if(*%cs:bx+si] = *%cs:bx+si] & ah) {
+            goto L00004a0c;
+        }
+        asm("arpl [bx+si+0x61],bp");
+    }
+    if(!( *(bx + di + 0x20) = *(bx + di + 0x20) & ah)) {
+        asm("arpl [si+0x65],si");
+        < ? L000049a8 : ;
+        (save)es;
+        *(bp + si) = *(bp + si) + bh;
+        al = al - 0x43;
+        cx = cx + 1;
+        si = si - 1;
+L000049bb:
+        bx = bx + 1;
+        bp = bp + 1;
+        sp = sp - 1;
+        *(bx + si) = *(bx + si) | al;
+L000049bf:
+        sp = sp + 1;
+        al = al - 0x25;
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) & ah;
+        *(bx + si) = *(bx + si) & al;
+        *(bx + si) = *(bx + si) + al;
+        *di = *di + ah;
+        *(si + 0x2c) = *(si + 0x2c) + dl;
+        (restore)cx;
+        asm("outsw");
+        if(!(ax = ax & 0x2525)) {
+L000049d9:
+            asm("popa");
+            < ? L00004a41 : ;
+            asm("insb");
+            if(*(bx + 0x6e) = *(bx + 0x6e) & ch) {
+                goto L00004a04;
+            }
+            asm("popa");
+            asm("outsw");
+            if(*(bx + si + 0x6f) = *(bx + si + 0x6f) & dh) {
+                goto L00004a09;
+            }
+            >= ? 0x4a50 : ;
+L000049ea:
+            asm("popa");
+            >= ? L00004a4f : ;
+            asm("outsb");
+            == ? L00004a11 : ;
+            asm("outsw");
+            asm("outsb");
+L000049f3:
+            *(si + 0x68) = *(si + 0x68) & dh;
+            asm("%g hlt");
+        }
+        if(*(bx + si) = *(bx + si) & ax) {
+            goto L00004a28;
+        }
+        > ? L00004a6d : ;
+        < ? L00004a6c : ;
+        *%fs:bx+0x66] = *%fs:bx+0x66] & ch;
+L00004a04:
+        if(*(si + 0x61) = *(si + 0x61) & dl) {
+            goto L00004a76;
+        }
+L00004a09:
+        asm("popa");
+        asm("insb");
+        asm("outsw");
+L00004a0c:
+        asm("outsb");
+        if(al = al - 0x20) {
+            goto L00004a80;
+        }
+    }
+    asm("daa");
+    if(!( *(bx + di + 0x74) = *(bx + di + 0x74) & ch)) {
+        (save)29281;
+        asm("%f insb");
+        >= ? 0x4a12 : ;
+        *(bx + si) = *(bx + si) & ax;
+        *di = *si;
+        di = di + 1;
+        si = si + 1;
+        if(al = al - 0x73) {
+            goto L00004a97;
+        }
+        >= ? 0x4a99 : ;
+        26478 = *(bp + di + 0x69) * si;
+L00004a28:
+        asm("popa");
+        if(*(si + 0x68) = *(si + 0x68) & dh) {
+            goto L00004a52;
+        }
+        >= ? 0x4aa3 : ;
+        != ? 0x4a5d : ;
+        <= ? L00004a9d : ;
+    }
+    if(!( *(bp + 0x65) = *(bp + 0x65) & ch)) {
+        < ? L00004a5f : ;
+        >= ? L00004aa6 : ;
+        asm("%g outsb");
+        asm("hlt");
+        *(bx + si) = *(bx + si) & al;
+        asm("retf 0x612c");
+        *(si + 0x65) = *(si + 0x65) & ah;
+        asm("popa");
+        *%fs:di+0x61] = *%fs:di+0x61] & ch;
+        asm("outsb");
+L00004a52:
+        asm("outsd");
+        if(*(bp + si + 0x65) = *(bp + si + 0x65) & ah) {
+            goto L00004abe;
+        }
+        *%cs:bx+si] = *%cs:bx+si] & ah;
+        ax = ax - 1;
+        if(29283 = *(bp + di + 0x20) * si) {
+            goto L00004ad2;
+        }
+        >= ? 0x4ad2 : ;
+        *%fs:bx+si] = *%fs:bx+si] & ax;
+        asm("out dx,al");
+        al = al - 0x66;
+        25970 = *(bx + 0x75) * sp;
+        asm("%g jnc 0x4a98");
+L00004a76:
+        asm("outsd");
+        if(*(si + 0x69) = *(si + 0x69) & ch) {
+            goto L00004ae8;
+        }
+        asm("outsw");
+        < ? L00004aed : ;
+        asm("insb");
+L00004a80:
+        >= ? 0x4aa2 : ;
+        asm("bound di,[bx+di+0x20]");
+        == ? L00004aef : ;
+        *%gs:bp+di+0x69] = *%gs:bp+di+0x69] & dh;
+        asm("%g hlt");
+        asm("adc al,0x2d");
+        asm("outsw");
+        asm("o32 and [si+0x68],dh");
+L00004a97:
+        *%gs:bp+si+0x6f] = *%gs:bp+si+0x6f] & dh;
+        asm("popa");
+        al = al & *%cs:bx+si];
+        al = al & 0x2d;
+    }
+    ax = ax & 0x4625;
+    26996 = *(bx + 0x68) * sp;
+    asm("outsb");
+    if(!( *(ecx + 0x6f) = *(ecx + 0x6f) & bh)) {
+        asm("popa");
+        if(!( *(bp + 0x65) = *(bp + 0x65) & ah)) {
+            if(!( *(bx + di + 0x6f) = *(bx + di + 0x6f) & bh)) {
+                0x65 = *(bp + 0x65) * bp;
+L00004abe:
+                asm("insb");
+                *(bp + si + 0x79) = *(bp + si + 0x79) & ah;
+                *(bx + si) = *(bx + si) & ax;
+                dx = dx - 1;
+                ax = ax - 26740;
+                *%gs:bp+di+0x74] = *%gs:bp+di+0x74] & dh;
+L00004ad2:
+                asm("popa");
+                if(30509 = *(si + 0x6c) * bp) {
+                    goto L00004b44;
+                }
+                if(*(bp + di + 0x6f) = *(bp + di + 0x6f) & ah) {
+                    goto L00004b4b;
+                }
+                >= ? L00004b42 : ;
+            }
+            (restore)cx;
+            asm("outsw");
+            if(*%cs:bx+si] = *%cs:bx+si] & ah) {
+                goto L00004b04;
+            }
+        }
+        >= ? L00004b4b : ;
+        *%gs:bx+di-0xc] = *%gs:bx+di-0xc] & ah;
+L00004ae8:
+        if(*(bx + si) = *(bx + si) & ax) {
+            goto L00004b1b;
+        }
+        asm("insb");
+        asm("outsw");
+        asm("outsw");
+        0x6f = *(bx + si) * sp;
+        asm("o32 and [bx+si+0x61],dh");
+        asm("outsb");
+        28271 = *(bp + di + 0x20) * sp;
+        if(!( *(bx + si + 0x69) = *(bx + si + 0x69) & ch)) {
+            asm("popad");
+L00004b04:
+            asm("arpl [di+0x2c],sp");
+            *(bx + di + 0x20) = *(bx + di + 0x20) & ah;
+            asm("a32 outsw");
+            asm("insb");
+            asm("%f hlt");
+            al = al & *(bx + si);
+            asm("xchg ax,si");
+            ax = ax - 24930;
+            asm("outsb");
+L00004b1b:
+            asm("outsw");
+            if(*%fs:bx+di+0x72] = *%fs:bx+di+0x72] & ah) {
+                goto L00004b8c;
+            }
+            if(*%fs:bx+si+0x69] = *%fs:bx+si+0x69] & ch) {
+                goto L00004b44;
+            }
+        }
+    }
+    > ? L00004b98 : ;
+    0x202c = *(bp + di + 0x74) * si;
+    asm("popa");
+    asm("outsb");
+    asm("insb");
+    asm("popa");
+    if(!( *%fs:bx+di+0x20] = *%fs:bx+di+0x20] & ah)) {
+        sp = 27693;
+        asm("%g popa");
+        if(al = al & *%gs:bx+si]) {
+            goto L00004ba7;
+        }
+        asm("%g jc 0x4b62");
+        >= ? L00004ba7 : ;
+L00004b44:
+        < ? L00004bb5 : ;
+        asm("insb");
+        asm("insb");
+L00004b4b:
+        if(*(bp + di + 0x6c) = *(bp + di + 0x6c) & ah) {
+            goto L00004bc1;
+        }
+        asm("arpl [bx+si+0x65],bp");
+        asm("a32 push word 0x6c74");
+        if(!( *%fs:si+0x69] = *%fs:si+0x69] & dh)) {
+            == ? L00004bcb : ;
+            al = al | *(bx + si);
+            asm("loop 0x4b8d");
+            (save)29545;
+            *(bp + di + 0x68) = *(bp + di + 0x68) & ah;
+            asm("%g jnc 0x4bdd");
+            asm("%c pop ds");
+            asm("outsw");
+            if(ax = al + dh - 22821) {
+                goto L00004b9a;
+            }
+            <= ? L00004bda : ;
+            if(*(bp + 0x65) = *(bp + 0x65) & ch) {
+                goto L00004bdf;
+            }
+        }
+        < ? L00004b9c : ;
+        asm("bound sp,[di+0x65]");
+        asm("outsb");
+        if(( *(bx + di + 0x20) = *(bx + di + 0x20) & ah) || (0x202c = *(di + 0x66) * sp)) {
+            goto L00004bf1;
+        }
+L00004b8c:
+        == ? L00004b82 : ;
+        asm("adc al,0x2e");
+        if(al = al & *(bx + si)) {
+            goto L00004c03;
+        }
+        asm("insw");
+        asm("%g jz 0x4c00");
+L00004b9a:
+    }
+    asm("outsw");
+    asm("insw");
+    if(!(25376 = *(bp + 0x67) * bp)) {
+        asm("insb");
+        >= ? L00004bc4 : ;
+        >= ? 0x4c15 : ;
+        != ? 0x4bc8 : ;
+L00004ba7:
+        == ? L00004c19 : ;
+        asm("popa");
+        asm("arpl [bx+si+0x20],bp");
+        asm("outsd");
+        if(!( *(bp + si + 0x65) = *(bp + si + 0x65) & dh)) {
+            *(bp + si) = *(bp + si) + bh;
+            asm("%c jz 0x4c22");
+            asm("popa");
+            if(*%gs:si+0x65] = *%gs:si+0x65] & ch) {
+                goto L00004c2f;
+            }
+L00004bc1:
+            asm("%g jc 0x4be4");
+            >= ? L00004c29 : ;
+            < ? L00004c37 : ;
+            asm("insb");
+            asm("insb");
+            *%cs:bx+si] = *%cs:bx+si] & ah;
+            di = di + 1;
+            asm("%g jz 0x4c45");
+            29728 = *(bp + 0x67) * bp;
+        }
+        (save)0x2065;
+        asm("popa");
+        if(*(bp + 0x2e) = *(bp + 0x2e) + bl) {
+            goto L00004c4c;
+        }
+L00004bdf:
+        asm("bound sp,[bx+di+0x6e]");
+        *%fs:bx+0x66] = *%fs:bx+0x66] & ch;
+        asm("o32 and [bx+di+0x73],ch");
+        *(si + 0x72) = *(si + 0x72) & dh;
+L00004bf1:
+        if(25961 = *(bp + di + 0x6b) * sp) {
+            goto L00004c20;
+        }
+        if(*(bp + si + 0x75) = *(bp + si + 0x75) & ah) {
+            goto L00004c19;
+        }
+        >= ? 0x4c6a : ;
+        != ? 0x4c1e : ;
+        *(bp + si + 27950) = *(bp + si + 27950) + al;
+        asm("popa");
+        asm("outsb");
+L00004c03:
+        asm("popa");
+    }
+    if(!( *%gs:edi+ebp*2+0x20] = *%gs:edi+ebp*2+0x20] & dh)) {
+        asm("popa");
+        >= ? 0x4c2f : ;
+        asm("outsw");
+        if(29281 = *(si + 0x20) * si) {
+            goto L00004c85;
+        }
+L00004c19:
+        if(*%fs:bx+di+0x6f] = *%fs:bx+di+0x6f] & bh) {
+            goto L00004c8f;
+        }
+L00004c20:
+        asm("outsb");
+        asm("hlt");
+        al = 0;
+        0;
+        if(*(bx + 0x77) = *(bx + 0x77) & ch) {
+            goto L00004c9a;
+        }
+        0x202e = *(bp + di + 0x74) * si;
+L00004c2f:
+        if(!( *(bx + di + 0x6f) = *(bx + di + 0x6f) & bl)) {
+            >= ? L00004c97 : ;
+            asm("outsw");
+            asm("outsw");
+            >= ? 0x4c58 : ;
+            != ? 0x4caa : ;
+            *(si + 0x77) = *(si + 0x77) & dh;
+            asm("outsw");
+            *(bx + 0x72) = *(bx + 0x72) & ah;
+            asm("%g outsb");
+            *(bp + di + 0x6f) = *(bp + di + 0x6f) & ah;
+            0x24 = *(bp + 0x73) * bp;
+L00004c4c:
+            *L0000796C = *L0000796C >> 1;
+        }
+        asm("%g popa");
+        if(28192 = *(bp + 0x67) * bp) {
+            goto L00004cbb;
+        }
+        >= ? 0x4c7b : ;
+        asm("popa");
+        asm("outsb");
+        if(*%fs:bx+si+0x61] = *%fs:bx+si+0x61] & ch) {
+            goto L00004cd7;
+        }
+        asm("%g outsb");
+        *(bx + 0x6e) = *(bx + 0x6e) & ch;
+        if(*(bx + di + 0x6f) = *(bx + di + 0x6f) & bh) {
+            goto L00004cdf;
+        }
+        if(*(bx + 0x61) = *(bx + 0x61) & dh) {
+            goto L00004ca0;
+        }
+        al = 0;
+        asm("clc");
+        asm("%c and ax,0x4225");
+        asm("%g outsd");
+    }
+    < ? L00004ce3 : ;
+    if(!( *(bx + di + 0x6f) = *(bx + di + 0x6f) & bh)) {
+        <= ? L00004cea : ;
+L00004c85:
+        *(bx + 0x6f) = *(bx + 0x6f) & ah;
+        asm("outsb");
+        if(*%gs:di+0x6f] = *%gs:di+0x6f] & ch) {
+            goto L00004cf4;
+        }
+L00004c8f:
+        *(si + 0x68) = *(si + 0x68) & dh;
+        asm("popa");
+        asm("outsb");
+        *(bx + di + 0x20) = *(bx + di + 0x20) & ah;
+        asm("%g o32 ja 0x4cbe");
+L00004c9a:
+        asm("das");
+        if(*(bx + si) = *(bx + si) + ah) {
+            goto L00004d14;
+        }
+L00004ca0:
+        asm("%g jo 0x4d16");
+        if(al = al - 0x20) {
+            goto L00004d17;
+        }
+        != ? 0x4d1b : ;
+    }
+    asm("outsb");
+    if(!( *(bp + di + 0x65) = *(bp + di + 0x65) & dh)) {
+        >= ? L00004cd1 : ;
+        > ? L00004d14 : ;
+        <= ? L00004d1a : ;
+        < ? L00004cd7 : ;
+        asm("popa");
+        asm("outsb");
+        *%fs:bp+di+0x68] = *%fs:bp+di+0x68] & dh;
+L00004cbb:
+        62510 = *(bp + 0x74) * sp;
+        *(bx + si) = *(bx + si) & al;
+        ax = ax - 1;
+        asm("das");
+        (save)dx;
+        26478 = *(bp + di + 0x69) * si;
+        *(bp + 0x72) = *(bp + 0x72) & ah;
+        asm("outsw");
+        asm("insw");
+        *(si + 0x68) = *(si + 0x68) & dh;
+L00004cd7:
+        if(*%gs:di+0x69] = *%gs:di+0x69] & ch) {
+            goto L00004d55;
+        }
+        >= ? L00004d08 : ;
+        *(bx + di + 0x73) = *(bx + di + 0x73) & ah;
+L00004cdf:
+        asm("outsw");
+        if(*(si + 0x68) = *(si + 0x68) & dh) {
+            goto L00004d55;
+        }
+        (save)0x22;
+        asm("insb");
+        asm("das");
+        >= ? 0x4d5b : ;
+        != ? 0x4d15 : ;
+        <= ? L00004d55 : ;
+        if(*(bp + 0x65) = *(bp + 0x65) & ch) {
+            goto L00004d5a;
+        }
+L00004cf4:
+        < ? L00004d17 : ;
+        asm("bound sp,[di+0x65]");
+        asm("outsb");
+        *(si + 0x68) = *(si + 0x68) & dh;
+        if(24951 = *(bp + di + 0x20) * si) {
+            goto L00004d25;
+        }
+        asm("bound sp,[di+0x66]");
+        asm("outsw");
+        < ? L00004d70 : ;
+        al = al - 0x1e;
+        if(*(bp + si + 26927) = *(bp + si + 26927) + dl) {
+            goto L00004d33;
+        }
+        asm("popa");
+    }
+L00004d14:
+    *(di + 0x61) = *(di + 0x61) & ch;
+L00004d17:
+    asm("a32 outsb");
+    asm("%g outsb");
+    if(!(26979 = *(bp + 0x69) * sp)) {
+        >= ? L00004d98 : ;
+        < ? L00004d9b : ;
+L00004d25:
+        asm("arpl [si+0x75],si");
+        < ? L00004d90 : ;
+        *(bx + 0x66) = *(bx + 0x66) & ch;
+        asm("Unknown opcode 0x0f");
+        *(si + 28719) = *(si + 28719) + dh;
+L00004d33:
+        asm("outsw");
+        asm("insb");
+        25701 = *(bp + di + 0x68) * si;
+        *(bp + di + 0x74) = *(bp + di + 0x74) & dh;
+        asm("outsw");
+        asm("outsb");
+        asm("%c hlt");
+    }
+    (save)ds;
+    al = al + cl;
+    asm("das");
+    if(!(ax = ax & 0x2041)) {
+        29285 = *(di + 0x6d) * bp;
+L00004d55:
+        if(24864 = *(bp + 0x67) * bp) {
+            goto L00004dba;
+        }
+        (save)24951;
+L00004d5a:
+        >= ? 0x4d7c : ;
+        asm("bound sp,[di+0x63]");
+        0x73 = *(bx + 0x6e) * bp;
+        asm("%c add ax,0xea00");
+        asm("das");
+        *(di + 0x61) = *(di + 0x61) & cl;
+        3 = *(si + 0x32) * bp;
+        asm("hlt");
+        asm("das");
+        *(di + 0x4c) = *(di + 0x4c) & cl;
+        asm("%g pop es");
+        ah = ah + bh;
+        asm("das");
+        bp = bp - 1;
+        (save)bp;
+        (save)bx;
+        asm("%c inc bp");
+        (restore)ax;
+        bp = bp + 1;
+        asm("hlt");
+        ax = ax + *(bx + si);
+        *(bx + si) = *(bx + si) | dh;
+        bp = bp - 1;
+        (save)bp;
+        (save)bx;
+        *bx = *bx + al;
+        *(bx + si) = *(bx + si) + dl;
+        *(bx + 0x55) = *(bx + 0x55) ^ cl;
+        (save)sp;
+        asm("%c inc bp");
+        (restore)ax;
+        bp = bp + 1;
+        asm("hlt");
+        ax = ax + *(bx + si);
+        asm("sbb al,0x30");
+        di = di - 1;
+        (save)bp;
+        (save)sp;
+        *bx = *bx + al;
+        *si = *si + ah;
+        *(si + 0x55) = *(si + 0x55) ^ al;
+        si = si - 1;
+        asm("%c inc bp");
+        (restore)ax;
+        bp = bp + 1;
+        asm("hlt");
+        ax = ax + *(bx + si);
+        *(bx + si) = *(bx + si) ^ dh;
+        sp = sp + 1;
+        (save)bp;
+        si = si - 1;
+        *(bp + di) = *(bp + di) + al;
+    }
+    *(bx + si) :: dh;
+    asm("insb");
+    al = al ^ 0x63;
+    asm("insb");
+L00004dba:
+    *(bx + 0x3e) :: ah;
+    asm("insw");
+    asm("insb");
+    asm("insb");
+    al = al ^ 0x63;
+    asm("%c insw");
+    asm("outsb");
+    asm("arpl [si+0x38],bp");
+    asm("arpl [si],di");
+    asm("bound sp,[bx+di+0x62]");
+    asm("%d insb");
+    ah = ah ^ *(bp + di + 0x2e);
+    al :: 0x6c;
+    al = al ^ 0x67;
+    asm("%c popa");
+    asm("insb");
+    *(bp + si + 0x3e) :: ah;
+    asm("insb");
+    al = al ^ 0x63;
+    al :: 0x6c;
+    *(bx + 0x6d) :: ah;
+    asm("insb");
+    asm("insb");
+    al = al ^ 0x65;
+    asm("%c insw");
+    asm("outsb");
+    asm("%g insb");
+    *(si + 0x6c) :: ah;
+    al = al ^ 0x65;
+    asm("insb");
+    *(bp + 0x6c) :: ah;
+    *(bp + di + 0x2e) = *(bp + di + 0x2e) ^ sp;
+    return;
+    *(bx + si) = *(bx + si) ^ 0x3e;
+    asm("insb");
+    al = al ^ 0x63;
+    al :: 0x6c;
+    *(bx + di + 0x6d) :: ah;
+    asm("insb");
+    asm("insb");
+    al = al ^ 0x67;
+    asm("%c insw");
+    asm("outsb");
+    asm("a32 insb");
+    *(bp + 0x6c) :: ah;
+    al = al ^ 0x67;
+    asm("insb");
+    *(bx + di + 0x6d) :: ah;
+    asm("insb");
+    asm("insb");
+    ah = ah ^ *(di + 0x6d);
+    asm("outsb");
+    asm("insb");
+    *(di + 0x64) :: ah;
+    asm("insb");
+    ah = ah ^ *(bp + di + 0x2e);
+    asm("insb");
+    al = al ^ 0x63;
+    asm("%g insb");
+    *(bp + 0x6c) :: ah;
+    al = al ^ 0x67;
+    asm("%c o32 insb");
+    *(bx + di + 0x6c) :: ah;
+    *(bx + 0x2e) = *(bx + 0x2e) ^ sp;
+    return;
+    return;
+    asm("insb");
+    al = al ^ 0x63;
+    al :: 0x6c;
+    *(bx + di + 0x6d) :: ah;
+    asm("insb");
+    asm("insb");
+    al = al ^ 0x67;
+    asm("%c insw");
+    asm("outsb");
+    asm("a32 insb");
+    *(bp + 0x6c) :: ah;
+    al = al ^ 0x67;
+    asm("insb");
+    *(bx + di + 0x6c) :: ah;
+    ch = ch ^ *(di + 0x6c);
+    asm("%g insw");
+    asm("outsb");
+    asm("insb");
+    *(di + 0x64) :: ah;
+    asm("insb");
+    ah = ah ^ *(bp + di + 0x2e);
+    asm("insb");
+    al = al ^ 0x63;
+    asm("%c a32 insb");
+    *(bp + 0x6c) :: ah;
+    al = al ^ 0x65;
+    asm("insb");
+    *(si + 0x6c) :: ah;
+    al = al ^ 0x65;
+    asm("insb");
+    *(bp + 0x6c) :: ah;
+    *(bp + di + 0x2e) = *(bp + di + 0x2e) ^ sp;
+    return;
+    if(!( *(bx + di) = *(bx + di) | dh)) {
+        dh = dh ^ *(bx + si);
+        asm("insb");
+        al = al ^ 0x63;
+        asm("insb");
+        *(di + 0x66) :: ah;
+        asm("insb");
+        al = al ^ 0x67;
+        asm("insb");
+        *(di + 0x66) :: ah;
+        asm("insb");
+        al = al ^ 0x64;
+        asm("arpl [eax+edi+0x65],bp");
+        asm("o32 insb");
+        al = al ^ 0x61;
+        asm("insb");
+        *(di + 0x66) :: ah;
+        asm("insb");
+        al = al ^ 0x67;
+        asm("insb");
+        *(di + 0x66) :: ah;
+        asm("insb");
+        *(si + 0x2c) = *(si + 0x2c) ^ sp;
+        *(bx + si) = *(bx + si) + bh;
+        *(si + 0x34) = *(si + 0x34) ^ bp;
+        asm("arpl [si+0x38],bp");
+    }
+    asm("%g o32 insb");
+    al = al ^ 0x67;
+    asm("insb");
+    *(di + 0x66) :: ah;
+    asm("insb");
+    al = al ^ 0x64;
+    asm("arpl [eax+edi+0x65],bp");
+    asm("o32 insb");
+    al = al ^ 0x61;
+    asm("insb");
+    *(bx + 0x65) :: ah;
+    asm("insb");
+    al = al ^ 0x66;
+    asm("insb");
+    *(di + 0x64) :: ah;
+    asm("insb");
+    *(bp + di + 0x74) = *(bp + di + 0x74) ^ sp;
+    *(bx + si) = *(bx + si) ^ di;
+    *(bp + si + 9) = *(bp + si + 9) ^ al;
+    *(bx + di) = *(bx + di) + 1;
+    ax = 0xff + *(bx + si);
+    edx = 0 & 0xff;
+    *(bx + si) = *(bx + si) | ax;
+    al = 0x54;
+    cx = cx - 1;
+    (save)sp;
+    sp = sp - 1;
+    bp = bp + 1;
+    asm("%c inc di");
+    sp = sp - 1;
+    *(si + 0x49) = *(si + 0x49) + dx + 1;
+    (save)sp;
+    sp = sp - 1;
+    bp = bp + 1;
+    asm("%c inc di");
+    bp = bp - 1;
+    (save)ax;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) & al;
+    asm("adc [bx+si],bl");
+    *(bp + si + 0x400) = *(bp + si + 0x400) + dh;
+    *(bx + si + 0x903) = *(bx + si + 0x903) ^ dh;
+    ax = al + 0xa + 9 + 0x50a;
+    *(bx + si) = *(bx + si) | cx;
+    *(bx + di) = *(bx + di) | cx;
+    *(bp + si) = *(bp + si) | cl | *(bx + di);
+    cl = cl | *(bx + di) | *(bp + si);
+    *L00001F09 = *L00001F09 | bx;
+    *((bl | *bx) + si) = *((bl | *bx) + si) | sp;
+    *(bp + di) = *(bp + di) | sp;
+    *si = *si | sp;
+    *di = *di | sp;
+    *(bx + si) = *(bx + si) | ah | *(bx + si) | *si | *di;
+    asm("sbb [bx+si],dl");
+    asm("sbb [bx+si],ah");
+    asm("sbb [bx+si],dh");
+    asm("sbb [bx+si+0x18],al");
+    asm("sbb byte [bp+si],0x90");
+    asm("sbb ah,[bx+si+0xb01a]");
+    asm("sbb al,al");
+    asm("sbb al,[bx+si+0x9019]");
+    asm("sbb [bx+si+0xb019],sp");
+    asm("sbb ax,ax");
+    asm("sbb [bx+si],ax");
+    asm("sbb dx,[bx+si]");
+    asm("sbb sp,[bx+si]");
+    asm("sbb si,[bx+si]");
+    asm("sbb ax,[bx+si+0x1b]");
+    *(bx + di) = *(bx + di) + bl;
+    asm("adc [bx+di],bl");
+    *(bx + di) = *(bx + di) & bl;
+    *(bx + di) = *(bx + di) ^ bl;
+    ax = ax + 1;
+    asm("sbb [bx+si+0x901b],ax");
+    asm("sbb sp,[bx+si+0xb01b]");
+    asm("sbb ax,ax");
+    asm("sbb ax,[bx+si+0x901a]");
+    asm("sbb ah,[bx+si+0xb01a]");
+    asm("sbb al,al");
+    asm("sbb al,[bx+si]");
+    asm("sbb [bx+si],dl");
+    asm("sbb [bx+si],ah");
+    asm("sbb [bx+si],dh");
+    asm("sbb [bx+si+0x18],al");
+    *(bp + si) = *(bp + si) + bl;
+    asm("adc [bp+si],bl");
+    *(bp + si) = *(bp + si) & bl;
+    *(bp + si) = *(bp + si) ^ bl;
+    ax = ax + 1;
+    asm("sbb al,[bx+si+0x9018]");
+    asm("sbb [bx+si+0xb018],ah");
+    asm("sbb al,al");
+    asm("sbb [bx+si+0x901b],al");
+    asm("sbb sp,[bx+si+0xb01b]");
+    asm("sbb ax,ax");
+    asm("sbb ax,[bx+si]");
+    asm("sbb [bx+si],dx");
+    asm("sbb [bx+si],sp");
+    asm("sbb [bx+si],si");
+    asm("sbb [bx+si+0x19],ax");
+    *(bp + di) = *(bp + di) + bl;
+    asm("adc [bp+di],bl");
+    *(bp + di) = *(bp + di) & bl;
+    *(bp + di) = *(bp + di) ^ bl;
+    ax = ax + 1;
+    asm("sbb ax,[bx+si+0x9019]");
+    asm("sbb [bx+si+0xb019],sp");
+    asm("sbb ax,ax");
+    asm("sbb [bx+si+0x9018],ax");
+    asm("sbb [bx+si+0xb018],ah");
+    asm("sbb al,al");
+    asm("sbb [bx+si],al");
+    asm("sbb dl,[bx+si]");
+    asm("sbb ah,[bx+si]");
+    asm("sbb dh,[bx+si]");
+    asm("sbb al,[bx+si+0x1a]");
+    *L0000CC03 = *L0000CC03 + dx;
+    *(bp + si + 0x1c00) = *(bp + si + 0x1c00) + dh;
+    *(bx + 1 + si + 65535) = *(bx + 1 + si + 65535) + dh;
+    asm("Unknown opcode 0xff");
+    asm("Unknown opcode 0xff");
+    asm("Unknown opcode 0xff");
+    asm("Unknown opcode 0xff");
+    asm("Unknown opcode 0xff");
+    asm("Unknown opcode 0xff");
+    asm("Unknown opcode 0xff");
+    asm("Unknown opcode 0xff");
+    asm("Unknown opcode 0xff");
+    (fsave) *(bx + si);
+    (restore) *(bp + di);
+    *(bx + si) = *(bx + si) + al;
+    (restore)di;
+    *(bx + si) = *(bx + si) | al;
+    *(bp + di) = *(bp + di) | bl;
+    bl = bl | *(bp + di);
+    dl = dl | *(bp + si + 0x42);
+    ds = cs;
+    *L00000004 = es + 0x10;
+    es = *L00000004 + *L0000000C;
+    si = *L00000006 - 1;
+    asm("std");
+    asm("rep movsb");
+    (save)ax;
+    (save)0x32;
+    asm("retf");
+    bx = es;
+    ax = ds - 1;
+    ds = ax;
+    es = ax;
+    di = 0xf;
+    cx = 0x10;
+    al = 0xff;
+    asm("repe scasb");
+    si = di + 1;
+    di = 0xf;
+L00005040:
+    cl = 4;
+    ax = !si >> 4;
+    if(!(es = bx - 1)) {
+        ds = ds - ax;
+    }
+    ax = !di >> cl;
+    if(!(si = si | -16)) {
+        es = es - ax;
+        di = di | -16;
+    }
+    al = *esi;
+    esi = esi + 1;
+    dl = al;
+    si = si - 1;
+    eax = *esi;
+    esi = esi + 4;
+    cx = ax;
+    si = si + 1;
+    al = dl & 0xfe;
+    if(al == 0xb0) {
+        al = *esi;
+        esi = esi + 1;
+        asm("rep stosb");
+        goto L00005080;
+    }
+    if(al == 0xb2) {
+        asm("rep movsb");
+L00005080:
+        al = dl;
+        if(al & 1) {
+            goto L00005040;
+        }
+        si = 0x125;
+        ds = cs;
+        bx = *L00000004;
+        asm("cld");
+        dx = 0;
+L00005092:
+        eax = *esi;
+        cx = ax;
+        if(!(esi = esi + 4)) {
+            ax = dx + bx;
+            es = ax;
+            eax = *esi;
+            esi = esi + 4;
+            di = ax;
+            if(di == -1) {
+                goto L000050b6;
+            }
+            *%es:di] = *%es:di] + bx;
+L000050a8:
+            asm("loop 0x509d");
+        }
+        if(dx != 61440) {
+            dx = dx + 0x1000;
+            goto L00005092;
+L000050b6:
+            ax = es + 1;
+            es = ax;
+            di = di - 0x10;
+            *%es:di] = *%es:di] + bx;
+            ax = ax - 1;
+            es = ax;
+            goto L000050a8;
+        }
+        ax = bx;
+        di = *L00000008;
+        si = *L0000000A + ax;
+        *L00000002 = *L00000002 + ax;
+        ax = ax - 0x10;
+        ds = ax;
+        es = ax;
+        bx = 0;
+        asm("cli");
+        ss = si;
+        sp = di;
+        asm("sti");
+        goto ( *bx);
+    }
+    ah = 0x40;
+    bx = 2;
+    cx = 0x16;
+    ds = cs;
+    dx = 0x10f;
+    asm("int 0x21");
+    ax = 0x4cff;
+    asm("int 0x21");
+    (save)ax;
+    asm("popa");
+    asm("arpl [bp+di+0x65],bp");
+    *%fs:bp+0x69] = *%fs:bp+0x69] & ah;
+    asm("insb");
+    *%gs:bx+di+0x73] = *%gs:bx+di+0x73] & ch;
+    if(!( *(bp + di + 0x6f) = *(bp + di + 0x6f) & ah)) {
+        != ? 0x5184 : ;
+        == ? L000050a3 : ;
+        sp = sp + *(bp + 0x3770);
+        *bp = *bp + dl;
+        asm("outsb");
+        *(bp + 40448) = *(bp + 40448) + al;
+        *(bp + 52736) = *(bp + 52736) + dh;
+        dh = dh + ah + bh;
+        *L00002B01 = *L00002B01 + dl;
+        *(bp + di + 1) = *(bp + di + 1) + ax;
+        (restore)bx;
+        *(bp + di + 1) = *(bp + di + 1) + si;
+        ax = *(bx + di);
+        *L0000BB01 = ax;
+        dx = dx + bx + si;
+        *(bp + si) = *(bp + si) + cx;
+        ah = *L0000BB01 + *(bp + si);
+        bh = bh + *(bp + si);
+        dl = dl + *(bp + si + 2);
+        (save)2;
+        asm("Unknown opcode 0x82");
+        bl = bl + *(bp + si + 45570);
+        cl = cl + dl;
+        bl = bl + bh;
+        dh = dh + ah;
+        cl = cl + *si;
+        dx = dx + *(bx + di);
+        bx = bx + *(bp + di);
+        sp = sp + *di;
+        bp = bp + *(bp + si) + *bx;
+        si = si + *si;
+        di = di + *(bx + di);
+        ax = ax + *(di + 3);
+        (save)dx;
+        bx = bx + *(bx + 3);
+        (save)28931;
+        dx = dx + *(bp + di + 40195);
+        sp = sp + *(di + 44291);
+        si = si + *(bp + si + 50179);
+        dx = dx + sp;
+        sp = sp + di;
+        di = di + sp;
+        dx = dx + *(bx + si);
+        al = al + 0x24;
+    }
+    ax = al + 0x38 + 0x47 + 0x7a + 0x96 + 0xc9 + 0x13 + 0x534;
+    ax :: 0x4605;
+    ax = ax + 0x54f;
+    (restore)ax;
+    (save)5;
+    if(!(ax = ax + 0x561)) {
+        >= ? L000051a8 : ;
+        asm("xchg al,[di]");
+        ax = *di;
+    }
+    asm("xchg ax,bp");
+    asm("lds ax,[di]");
+    (fsave)((frestore)) + *di;
+    if(!(ax = ax + 0x59a)) {
+        asm("cld");
+        ax = ax + 0x60f & *L00000640;
+    }
+    *L0000069E = es;
+    goto L000051c5;
+    asm("std");
+    (save)es;
+    asm("loadall");
+    al = al - *bx;
+L000051c5:
+    ax = ax ^ *bx;
+    asm("%d pop es");
+    (restore)es;
+    es = si;
+    asm("arpl [bx],ax");
+    if(!(sp = sp - 1)) {
+        asm("Unknown opcode 0x82");
+        (restore)es;
+        (restore) *bx;
+        asm("pushf");
+        (restore)es;
+        asm("cmpsw");
+    }
+    (restore)es;
+    asm("in ax,dx");
+    (restore)es;
+    cl = cl + *(bx + si);
+    if(!( *(bx + si) = *(bx + si) | cl)) {
+        >= ? L000051eb : ;
+        asm("Unknown opcode 0x82");
+        *(bx + di + 50440) = *(bx + di + 50440) | ch;
+        dh = dh | cl;
+    }
+    bh = bh | dl;
+    ch :: 0;
+    *(bh | bl) = *(bh | bl) | ah;
+    *(si + 9) = *(si + 9) | bx;
+    (save)37129;
+    *(bx + si + 46345) = *(bx + si + 46345) | bp;
+    *(bp + 50953) = *(bp + 50953) | di;
+    si = si | bx;
+    bx = bx | bp;
+    sp = sp | si;
+    bp = bp | di;
+    *si = *si | dx;
+    ah = ah | *(bx + di);
+    ch = ch | *(bp + si);
+    dh = dh | *(bp + di);
+    cl = cl | *(bp + si + 0xa);
+    (save)di;
+    ah = ah | *(bx + si + 0xa);
+    if(!(0xa6e = *(bp + si) * cx)) {
+        *di = *si;
+        di = di + 4;
+        si = si + 4;
+        cl = cl | dh;
+        ah = ah | ch;
+        dh = dh | dl;
+        bh = bh | bl;
+        al = al | *si;
+    }
+    dx = dx | *(bx + di);
+    bx = bx | *(bp + si);
+    sp = sp | *(bp + di);
+    si = si | *(bx + si);
+    di = di | *(bx + di);
+    ax = ax | *(bp + si + 0xb);
+    di = di - 1;
+    bx = bx | *(bx + si + 0xb);
+    asm("popa");
+    if(!(bp = bp | *(bp + 0xb))) {
+        *(bp + di) = *(bp + di) | 0x8d;
+        dx = dx | *(bp + 40715);
+        bp = bp | *(si + 46347);
+    }
+    di = di | *(bp + 51979);
+    dx = dx | sp;
+    bx = bx | bp;
+    bp = bp | dx;
+    si = si | bx;
+    di = di | sp;
+    cx = cx | *(bx + di);
+    ax = al | 0x12 | 0x1b | 0x32 | 0x3f | 0x48 | 0x51 | 0x56 | 0x64 | 0x69 | 0x77 | 0x84 | 0x8d | 0x96 | 0xab | 0xba | 0xc3 | 0xcd | 0xde | 0xf1 | 0xd | 0xd2a;
+    cx = cx + 1;
+    (save)bx;
+    asm("%g or ax,0xd6e");
+    if(!(ax = ax | 0xd4a | 0xd5c)) {
+        *di = *di | 0xd8a;
+        asm("Unknown opcode 0x8f");
+        ax = ax | 0xd9d;
+        asm("Unknown opcode 0xc6");
+        ax = ax | 0xdef;
+        (save)es;
+    }
+    (save)cs;
+    asm("adc cx,[0xe1c]");
+    ax = ax & 0x2a0e;
+    (save)cs;
+    asm("das");
+    (save)cs;
+    asm("%d push cs");
+    (save)cs;
+    (save)sp;
+    bp = cs;
+    (save)cs;
+    if(!(bx = bx - 1)) {
+        *L00000E8A = *L00000E8A | 0xe93;
+        asm("cbw");
+        (save)cs;
+        asm("cmpsb");
+        (save)cs;
+        asm("scasb");
+        (save)cs;
+        bx = 50190;
+    }
+    (save)cs;
+    asm("int 0xe");
+    asm("in al,0xe");
+    asm("int1");
+    (save)cs;
+    asm("cli");
+    (save)cs;
+    (save)si;
+    asm("pcmpgtb mm1,[bx]");
+    if(*bx < (cx + *bx & *bx)) {
+        > ? L000052ea : ;
+        *bx = cx;
+        asm("xchg ax,bx");
+        asm("Unknown opcode 0x0f");
+        asm("pushf");
+        asm("shld [bx],cx,cl");
+        asm("into");
+        asm("psubsw mm1,[bx]");
+        asm("out dx,ax");
+    }
+    asm("Unknown opcode 0x0f");
+    dx = dx | *(bx + si);
+    asm("sbb [bx+si],dl");
+    *(bx + si) = *(bx + si) & dx;
+    dl = dl - *(bx + si);
+    cx = cx + 1;
+    asm("adc [bp+0x10],dl");
+    (restore)bx;
+    asm("adc [bp+si+0x8e10],al");
+    asm("adc [bp+di+0xa610],dl");
+    asm("adc [bp+di+0xc010],bh");
+    asm("adc ch,al");
+    asm("adc bl,dl");
+    asm("adc al,bl");
+    asm("adc ch,ah");
+    asm("adc dh,ch");
+    asm("adc bh,dh");
+    asm("adc [si],al");
+    asm("adc [di],cx");
+    asm("adc [0x2d11],dx");
+    asm("adc [bp+si],di");
+    asm("adc [bp+di+0x11],ax");
+    asm("adc [bp+di+0x11],sp");
+    if(!(sp = sp - 1)) {
+        >= ? 0x5334 : ;
+        asm("Unknown opcode 0x82");
+        asm("adc [si+0x9911],cx");
+        asm("adc [bp+0xb311],sp");
+        asm("adc ax,ax");
+        asm("adc bp,cx");
+        asm("adc dx,bx");
+    }
+    asm("adc sp,sp");
+    asm("adc cx,si");
+    asm("adc si,di");
+    asm("adc [bp+di],ax");
+    asm("adc cl,[di]");
+    asm("adc ch,[di]");
+    asm("adc bh,[bp+si]");
+    asm("adc al,[bx+si+0x12]");
+    dx = dx - 1;
+    asm("adc dl,[bx+si+0x12]");
+    (save)bp;
+    asm("adc bl,[bx+0x12]");
+    asm("insb");
+    asm("adc dh,[bx+0x12]");
+    *(bp + si) = ss;
+    al = *esi;
+    esi = esi + 1;
+    asm("adc dh,[bp+si+0xbc12]");
+    asm("adc al,ch");
+    asm("adc bl,dl");
+    asm("adc ah,dh");
+    asm("adc bh,bh");
+    asm("adc bl,[si]");
+    asm("adc sp,[bp+di]");
+    asm("adc bp,[di]");
+    asm("adc si,[0x4b13]");
+    asm("adc dx,[bx+di+0x13]");
+    (restore)bx;
+    asm("adc sp,[di+0x13]");
+    asm("outsb");
+    asm("adc si,[bx+0x13]");
+    asm("adc byte [bp+di],0x85");
+    asm("adc dx,[bp+di+0xbc13]");
+    asm("adc sp,bp");
+    asm("adc di,sp");
+    asm("adc cx,[bx+di]");
+    asm("adc al,0x12");
+    asm("adc al,0x1b");
+    asm("adc al,0x28");
+    asm("adc al,0x31");
+    asm("adc al,0x3a");
+    asm("adc al,0x47");
+    asm("adc al,0x50");
+    asm("adc al,0x59");
+    asm("adc al,0x66");
+    asm("adc al,0x6f");
+    asm("adc al,0x78");
+    asm("adc al,0x85");
+    asm("adc al,0x8e");
+    asm("adc al,0x97");
+    asm("adc al,0xa4");
+    asm("adc al,0xad");
+    asm("adc al,0xb6");
+    asm("adc al,0xc3");
+    asm("adc al,0xcc");
+    asm("adc al,0xd5");
+    asm("adc al,0xe2");
+    asm("adc al,0xeb");
+    asm("adc al,0xf4");
+    asm("adc al,0x1");
+    asm("adc ax,0x150a");
+    asm("adc dx,[di]");
+    *di = *di & dl;
+    dl = dl ^ *di;
+    asm("aas");
+    asm("adc ax,0x1548");
+    (save)cx;
+    asm("adc ax,0x155e");
+    asm("a32 adc ax,0x1570");
+    if(!( *di = *di - dx)) {
+        asm("xchg dl,[di]");
+        asm("Unknown opcode 0x8f");
+        asm("adc ax,0x15a6");
+        bl = 0x15;
+        sp = 50453;
+        asm("adc ax,0x15ca");
+        asm("fcom qword [di]");
+        asm("in al,0x15");
+        asm("sti");
+        asm("adc ax,0x1608");
+    }
+    asm("adc [0x161a],dx");
+    asm("daa");
+    (save)ss;
+    *L00001639 = *L00001639 ^ dl;
+    si = si + 1;
+    (save)ss;
+    ax = ss;
+    (save)ss;
+    asm("%g push ss");
+    asm("outsb");
+    (save)ss;
+    if(!(di = di - 1)) {
+        *L0000168D & dl;
+        asm("xchg ax,si");
+        (save)ss;
+        *L0000AC16 = ax;
+        (save)ss;
+        ch = 0x16;
+        return;
+        (save)ss;
+        asm("aam 0x16");
+        asm("loope 0x541f");
+        goto L00000116;
+    }
+    (restore)ss;
+    dx = dx | *bx;
+    asm("adc ax,0x2317");
+    (restore)ss;
+    ax = ax - 0x3717;
+    (restore)ss;
+    bp = bp + 1;
+    (restore)ss;
+    (restore)ss;
+    (restore)cx;
+    (restore)ss;
+    if(!(di = di - 1)) {
+        asm("Unknown opcode 0x82");
+        (restore)ss;
+        *bx = ss;
+        asm("xchg ax,si");
+        (restore)ss;
+        asm("wait");
+        (restore)ss;
+        asm("scasw");
+        (restore)ss;
+        bh = 0x17;
+        asm("rcl byte [bx],cl");
+        asm("loopne 0x5448");
+        goto L00000217;
+        asm("sbb [si],cl");
+    }
+    asm("sbb [0x2418],dl");
+    asm("sbb [0x3818],ch");
+    asm("sbb [bp+0x18],al");
+    (save)ax;
+    asm("sbb [bp+si+0x18],bl");
+    (save)29208;
+    asm("sbb [si+0x18],bh");
+    bl = *(bx + si);
+    asm("xchg ax,sp");
+    asm("sbb [bp+0xac18],bl");
+    asm("sbb [bp+0xc018],dh");
+    asm("sbb dh,cl");
+    asm("sbb al,bl");
+    asm("sbb dl,ah");
+    asm("sbb al,dh");
+    asm("sbb dl,bh");
+    asm("sbb [si],al");
+    asm("sbb [bx],bx");
+    asm("sbb [di],bp");
+    asm("sbb [bx],si");
+    asm("sbb [bx+di+0x19],ax");
+    si = si + 1;
+    asm("sbb [bx+0x19],dx");
+    (restore)di;
+    asm("sbb [di+0x19],bp");
+    asm("sbb byte [bx+di],0x8a");
+    asm("sbb [bx+0xa919],dx");
+    asm("sbb [bp+di+0xbb19],si");
+    asm("sbb bx,ax");
+    asm("sbb sp,cx");
+    asm("sbb cx,dx");
+    asm("sbb bx,bx");
+    asm("sbb ax,sp");
+    asm("sbb bp,bp");
+    asm("sbb bp,si");
+    asm("sbb [di],ax");
+    asm("sbb cl,[di]");
+    asm("sbb bl,[bp+di]");
+    asm("sbb ch,[bp+si]");
+    asm("sbb dh,[si]");
+    asm("sbb al,[bx+di+0x1a]");
+    (save)si;
+    asm("sbb ah,[bx+si+0x1a]");
+    asm("insw");
+    asm("sbb al,[bp+si+0x8c1a]");
+    asm("sbb bl,[bx+di+0xa21a]");
+    asm("sbb al,al");
+    asm("sbb cl,cl");
+    asm("sbb dl,dl");
+    asm("sbb bl,bl");
+    asm("sbb ah,bl");
+    asm("sbb dh,cl");
+    asm("sbb bh,dh");
+    asm("sbb al,[bx]");
+    asm("sbb dx,[bx+si]");
+    asm("sbb sp,[di]");
+    asm("sbb si,[si]");
+    asm("sbb cx,[bx+si+0x1b]");
+    (restore)sp;
+    asm("sbb sp,[di+0x1b]");
+    asm("outsw");
+    asm("sbb cx,[bx+si+0xb41b]");
+    asm("sbb ax,dx");
+    asm("sbb bx,cx");
+    asm("sbb sp,dx");
+    asm("sbb bp,bx");
+    asm("sbb si,sp");
+    asm("sbb di,bp");
+    asm("sbb ax,[0xf1c]");
+    asm("sbb al,0x19");
+    asm("sbb al,0x22");
+    asm("sbb al,0x27");
+    asm("sbb al,0x35");
+    asm("sbb al,0x4c");
+    asm("sbb al,0x64");
+    asm("sbb al,0x77");
+    asm("sbb al,0x84");
+    asm("sbb al,0x8d");
+    asm("sbb al,0x96");
+    asm("sbb al,0xb1");
+    asm("sbb al,0xbe");
+    asm("sbb al,0xc7");
+    asm("sbb al,0xd0");
+    asm("sbb al,0xde");
+    asm("sbb al,0xe6");
+    asm("sbb al,0xf0");
+    asm("sbb al,0x2");
+    asm("sbb ax,0x1d0c");
+    asm("adc ax,0x1e1d");
+    asm("sbb ax,0x1d32");
+    ax = ax + 1;
+    asm("sbb ax,0x1d69");
+    asm("xchg ax,dx");
+    asm("sbb ax,0x1da9");
+    dh = 0x1d;
+    di = 51229;
+    asm("sbb ax,0x1dcd");
+    asm("rcr byte [di],cl");
+    goto L00004739;
+    asm("sbb ax,0x1dfb");
+    *L00001E11 = *L00001E11 | bl;
+    asm("sbb bl,[0x1e27]");
+    *L00001E39 = *L00001E39 ^ bl;
+    si = si + 1;
+    (save)ds;
+    ax = ds;
+    (save)ds;
+    asm("outsw");
+    (save)ds;
+    if(!(di = di - 1)) {
+        *L00001E8E & bx;
+        asm("xchg ax,bx");
+        (save)ds;
+        ax = *L0000A91E;
+        (save)ds;
+        bl = 0x1e;
+        asm("rcr byte [0x1ec5],0xd2");
+        (save)ds;
+        asm("lock push ds");
+        bl = bl + *bx;
+        *bx = *bx | bl;
+        asm("adc bl,[bx]");
+        asm("sbb al,0x1f");
+        ax = ax & 0x2e1f;
+    }
+    (restore)ds;
+    bx :: *bx;
+    sp = sp + 1;
+    (restore)ds;
+    (restore)ds;
+    asm("%f pop ds");
+    if(!(bp = bp - 1)) {
+        asm("jpe 0x5580");
+        asm("sbb word [bx],-0x78");
+        (restore)ds;
+        asm("xchg ax,si");
+        (restore)ds;
+        ch = 0x1f;
+        bx = 50463;
+        (restore)ds;
+        asm("iret");
+        (restore)ds;
+        asm("fcomp dword [bx]");
+        asm("loope 0x5592");
+        asm("cli");
+        (restore)ds;
+        al = *bx() + 0x20;
+        asm("sbb [bx+si],sp");
+        al = al - 0x20;
+        *(bx + si) = *(bx + si) ^ sp;
+    }
+    *%ss:bx] = *%ss:bx] & bh;
+    *(bx + si + 0x20) = *(bx + si + 0x20) & cl;
+    *(bp - 1 + di + 0x20) = *(bp - 1 + di + 0x20) & bl;
+    (save)28960;
+    *(bp + si + 0x20) = *(bp + si + 0x20) & bh;
+    asm("Unknown opcode 0x8f");
+    *(bp + di + 46880) = *(bp + di + 46880) & ah;
+    bl = bl & cl;
+    ah = ah & dl;
+    dh = dh & bl;
+    ah = ah & bl & ch;
+    *(bp + di) = *(bp + di) & cl;
+    *di = *di & sp;
+    *(bx + di) = *(bx + di) & di;
+    *(bx + si + 0x21) = *(bx + si + 0x21) & sp;
+    asm("outsb");
+    *(di + 36385) = *(di + 36385) & ax;
+    *(bx + 40993) = *(bx + 40993) & dx;
+    *(bx + di + 45601) = *(bx + di + 45601) & bp;
+    *(bp + di + 50465) = *(bp + di + 50465) & di;
+    si = si & cx;
+    di = di & dx;
+    sp = sp & bx;
+    *(bp + di) = *(bp + di) & dx & bp;
+    bh = bh & *si;
+    dl = dl & *(bp + di + 0x22);
+    asm("pusha");
+    if(!(ch = ch & *(bx + di + 0x22))) {
+        > ? L000055f1 : ;
+        < ? L000055f3 : ;
+        sp = *(bp + si);
+        asm("cbw");
+        al = ah & *(bx + di + 43554) & cl;
+        cl = cl & dh;
+        dl = dl & bh;
+        ah = ah & al & ch;
+        dh = dh & bl;
+        bh = bh & bl;
+        cl = cl & *(bx + si);
+        dx = dx & *(bx + di);
+        si = si & *((bx & *(bp + si)) + di);
+        di = di & *L00004723;
+    }
+    if(!(dx = dx & *(bx + si + 0x23))) {
+        asm("xchg ah,[bp+di]");
+        dx = dx & 0x23;
+        sp = sp & bp;
+        bp = bp & dx;
+        di = di & bp;
+        al = 0x23 & *(bp + 50979) & 7 & 0xc & 0x1a & 0x23 & 0x3c & 0x45 & 0x5e & 0x67 & 0x80;
+    }
+    ah = (al & 0x89 & 0xa2 & 0xab & 0xc4 & 0xcd & 0xe6 & 0xef & 8 & 0x2511) - *di;
+    sp = sp ^ *di;
+    sp = sp - 1;
+    ax = ax & 0x2555;
+    asm("outsb");
+    if(!(ax = ax & 0x2577)) {
+        asm("xchg ax,bp");
+        ax = ax & 0x259e;
+        *L0000B125 = ax;
+        ax = *L0000B125 & 0x25c8;
+        goto L0000566c;
+        asm("clc");
+        ax = ax & 0x2601;
+        asm("adc sp,[0x2620]");
+        *L0000263B = *L0000263B - sp;
+        *(bx + si) = *(bx + si) + al;
+        *(bx + si) = *(bx + si) + al;
+        *(bx + si) = *(bx + si) + al;
+        *(bx + si) = *(bx + si) + al;
+        *(bx + si) = *(bx + si) + al;
+        *(bx + si) = *(bx + si) + al;
+        *(bx + si) = *(bx + si) + al;
+    }
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+L0000566c:
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+    *(bx + si) = *(bx + si) + al;
+}
+
+/* address  size  */
+#if 0 /* auxiliary information */
+# Current option values:
+option: +asmflush
+option: -compactcalls
+option: +compactexprs
+option: +compactifs
+option: +compset
+option: -dfoproc
+option: -disasmonly
+option: -displaylabels
+option: +doblocks
+option: +docase
+option: +dofor
+option: +doifs
+option: +dointrinsics
+option: +doloops
+option: +donullgotos
+option: +dopackloops
+option: +dopackstmt
+option: +doremlabs
+option: +dosimplify
+option: -dosort
+option: +dostmts
+option: +doswitch
+option: +dowhile
+option: -dumpaddrs
+option: -dumpcall
+option: -dumpcomments
+option: -dumpdfo
+option: +dumpdoms
+option: -dumpsblocks
+option: -dumpsets
+option: -dumpsizes
+option: -dumpstmtid
+option: +fatcase
+option: +flag16
+option: +fullscreen
+option: -genpattern
+option: -help
+option: -hexconst
+option: +insertlabels
+option: -int16
+option: +int32
+option: -interactive
+option: -isvb5
+option: +locals
+option: -nostackoffs
+option: -objdump
+option: -okclone
+option: -outprocs
+option: -outrefs
+option: -overrule
+option: +rdonly
+option: -showblocks
+option: -showjump
+option: -showlabel
+option: -showprotosym
+option: -showreg
+option: -showstring
+option: -silent
+option: +simplifyexprs
+option: -stackalign16
+option: -stackalign4
+option: -stackalign8
+option: -strallregions
+option: -traceall
+option: -tracesets
+option: +types
+option: +usesymtab
+option: -validatebr
+option: -validatereg
+option: +validatestr
+#endif

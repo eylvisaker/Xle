@@ -1,0 +1,138 @@
+
+Summary of changes from 3.10 beta 2 to 3.10 beta 3
+--------------------------------------------------
+
+* Changes to the Convert routine:
+  - Added create-only ARK support into the Convert routine. You can create
+    them (and copy out of them), but you can't add to or delete from them.
+  - Added full REL file support. You can copy them out of D64, ARK, LNX,
+    ARC/SDA and R00 (PC64) files, and copy into D64/X64, LNX, R00 and ARK.
+    They can be copied into T64's and DOS binaries, but they cease to be
+    REL files.
+  - If converting a ZipCode to a D64 failed, a partially created D64 file
+    would be left.
+  - The filetype would get mangled (set to FRZ) when copying T64 files into
+    other T64 files.
+
+
+* Changes to Config/Screen Saver window:
+  - Re-designed the config window, moving the "Test Savers" button and
+    adding a "Config" button.
+  - Arranged the list of savers into a user-selectable list. Now you select
+    the specific saver you want to work with and either press Test or
+    Config.
+  - The checkboxes beside the saver names still exist, to enable/disable
+    their execution.
+  - Added extra configuration options to all the screen savers (under the
+    config button).
+  - When the SNAKE GAME ran out of snakes, they would not always
+    regenerate.
+
+
+* Changes to the MACRO control center (CTRL-F9):
+  - Added new buttons for Play, Record and Delete.
+  - Any Fkeys that are not available in a particular mode are not shown.
+  - Added two of the Config option switches "Auto-chain recording" and
+    "Auto-repeat playback".
+
+
+* Changes to the Text Editor:
+  - The tagging (F7/F8) in the Text Editor has been improved/fixed.
+  - Added "delete word right" (CTRL-T), "delete word left" (CTRL-BACKSPACE)
+    and "delete to end of line" (CTRL-K)
+  - Added in a Norton Editor mode switch "Use Norton Editor keys". It
+    emulates *most* of the operations of Norton Edit (like live tagging on
+    F3), but the screen colors are not the same, and there are some subtle
+    differences.
+
+
+* Added a new switch to the Config/Emulator page called "Use long C64 dest.
+  names" which allows you to create long DOS names from long C64 names.
+  i.e. If you have a filename "forb. forest ii", the converting to a DOS
+  binary with this switch on, the resulting filename will be
+  "forb._forest_ii.ext". Notice the '.' characters of C64 names will be
+  retained. When not running an LFN os, make sure you don't enable this
+  switch.
+
+  This switch is also under program control, but only when the program is
+  first executed. Once the program is running, you can change the switch
+  manually. If 64COPY detects you are running under a long filename OS
+  (Win95), then this will be turned on. If you're running under DOS only,
+  this will be turned off. You can still change the switch during normal
+  program operations, but be aware that the program *might* change it for
+  you.
+
+
+* Removed a long-time (annoying!) bug in the screen saver. If you hit an
+  "extended" key (like an Fkey or an ALT-key) to bring back the panel
+  display when any screen saver is running, the keystroke would not be
+  fully taken out of the keyboard buffer, making the mouse buttons
+  inoperative and causing *lots* of other problems.
+
+
+* Turning the panels on/off (using ESC) enough times with the titlebar
+  visible would eventually cause an "Internal error: no more windows
+  available".
+
+
+* You can now cancel the changes made in the FILTER menu item, PANEL SETUP
+  menu item, Color Configuration and Program Configuration windows by
+  clicking the CANCEL button, or hitting ESC on the keyboard. Clicking on
+  the OK button will go ahead with the changes.
+
+
+* Increased the user-settable options to 200, to make room for individual
+  screen saver configuration (and more).
+
+
+* When the clock changed from 12:59 to 1:00, the leading "1" from the "12"
+  would remain, making the time appear to say "11:xx" instead of "1:xx".
+
+
+* The cursor was accidentally being left activated when calling some
+  functions from the menus, but only when the menus were brought up using
+  the mouse, not F9.
+
+
+* The "Button Controller" can now handle confirmation buttons "OK/CANCEL"
+  with an active key other than the first key of the button name (i.e.
+  instead of a "Configure" button using the 'C' key, I can send it in as
+  "conFigure", with the 'F' being the active key). Up until now I could not
+  use buttons starting with the 'C' key, since that key is always reserved
+  for "Cancel", whether its a visible button or not.
+
+
+* Greatly improved the randomness of the random number generator.
+
+
+* Added an extra line to the info header line of the File Viewer, to allow
+  for very long filenames.
+
+
+* Changes to many entries in the FORMATS.TXT doc (esp. dealing with REL
+  file support in various file types)
+
+
+* ARK files would not display file sizes over 256 blocks properly, and
+  under some circumstances you could not extract from them properly.
+
+
+* Fixed some cursor movement and highlighting bugs in the D64 HEX Editor.
+
+
+* Formatting a D64 image would cause the BAM for track 18 to be incorrect
+  (18/0 and 18/1 would not be allocated for the BAM and directory)
+
+
+* The HEX Editor now displays the ASCII code (hex and decimal) of the
+  character you are on.
+
+
+* ZipCode's being displayed in the left panel no longer claim to have error
+  bytes attached (35/E)
+
+
+* Compare can now compare two files in the same panel.
+
+
+

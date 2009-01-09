@@ -1,0 +1,365 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+LOTA_CHARACTER          BITMAP                  "images\\character.bmp"
+LOTA_FONT               BITMAP                  "images\\font.bmp"
+LOTA_TILES              BITMAP                  "images\\tiles.bmp"
+DUNGEON_WALL            BITMAP                  "textures\\dungeon wall texture.bmp"
+DUNGEON_FLOOR           BITMAP                  "textures\\dungeon floor texture.bmp"
+DUNGEON_CEILING         BITMAP                  "textures\\dungeon ceiling texture.bmp"
+DUNGEON_FLOORHOLE       BITMAP                  "textures\\floor hole texture.bmp"
+LOTA_TOWNTILES          BITMAP                  "images\\towntiles.bmp"
+LOTA_CASTLETILES        BITMAP                  "images\\CastleTiles.bmp"
+LOTA_OVERLANDMONSTERS   BITMAP                  "images\\Overworld Monsters.bmp"
+LOTA_TITLE              BITMAP                  "images\\opengame.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// MAP
+//
+
+map_OUTSIDE1            MAP                     "Included Maps\\tarmalon.map"
+Dng_Pirates             MAP                     "Included Maps\\pirates.dng"
+map_Thornberry          MAP                     "Included Maps\\thornberry.twn"
+map_Castle              MAP                     "Included Maps\\castle.twn"
+map_ThompsonCrossing    MAP                     "Included Maps\\thomson crossing.twn"
+map_Alanville           MAP                     "Included Maps\\alanville.twn"
+map_BigRapids           MAP                     "Included Maps\\bigrapids.twn"
+map_Cobbleton           MAP                     "Included Maps\\cobbleton.twn"
+map_IsleCity            MAP                     "Included Maps\\isle city.twn"
+map_GrandLedge          MAP                     "Included Maps\\grand ledge.twn"
+map_Castle2             MAP                     "Included Maps\\castle2.twn"
+map_Mazelton            MAP                     "Included Maps\\mazelton.twn"
+map_OUTSIDE2            MAP                     "Included Maps\\Three Sisters.map"
+map_EagleHollow         MAP                     "Included Maps\\Eagle Hollow.twn"
+map_HolyPoint           MAP                     "Included Maps\\Holy Point.twn"
+map_Laingsburg          MAP                     "Included Maps\\Laingsburg.twn"
+map_MerchantSquare      MAP                     "Included Maps\\Merchant Square.twn"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+LOTA_MENU MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New Game",                   ID_FILE_NEWGAME
+        MENUITEM "&Load Game",                  ID_FILE_RESTARTGAME
+        MENUITEM "&Save Game",                  ID_FILE_SAVEGAME
+        MENUITEM SEPARATOR
+        MENUITEM "&Quit",                       ID_FILE_QUIT
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "Toggle Full Screen",          ID_OPTIONS_TOGGLEFULLSCREEN
+        MENUITEM SEPARATOR
+        MENUITEM "&Preferences...",             ID_OPTIONS_PREFERENCES
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   ID_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+LOTA_ACCEL ACCELERATORS 
+BEGIN
+    VK_RETURN,      D_OPTIONS_TOGGLEFULLSCREEN, VIRTKEY, ALT, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// WAVE
+//
+
+snd_WalkOutside         WAVE                    "sounds\\walk outside.wav"
+snd_Bump                WAVE                    "sounds\\bump.wav"
+snd_Swamp               WAVE                    "sounds\\swamp.wav"
+snd_Desert              WAVE                    "sounds\\desert.wav"
+snd_Question            WAVE                    "sounds\\question.wav"
+snd_Invalid             WAVE                    "sounds\\invalid.WAV"
+snd_VeryBad             WAVE                    "sounds\\VeryBad.wav"
+snd_Raft1               WAVE                    "sounds\\raft1.wav"
+snd_Ocean1              WAVE                    "sounds\\shore1.wav"
+snd_Ocean2              WAVE                    "sounds\\shore2.wav"
+snd_VeryGood            WAVE                    "sounds\\VeryGood.wav"
+snd_Mountains           WAVE                    "sounds\\mountains.wav"
+snd_BoardRaft           WAVE                    "sounds\\board raft.wav"
+snd_EnemyDie            WAVE                    "sounds\\Enemy Die.wav"
+snd_EnemyHit            WAVE                    "sounds\\enemy hit.wav"
+snd_EnemyMiss           WAVE                    "sounds\\enemy miss.wav"
+snd_PlayerHit           WAVE                    "sounds\\player hit.wav"
+snd_PlayerMiss          WAVE                    "images\\wave1.bin"
+snd_Medium              WAVE                    "sounds\\Medium.wav"
+snd_TownWalk            WAVE                    "sounds\\townwalk.wav"
+snd_Sale                WAVE                    "sounds\\sale.wav"
+snd_BuildingClose       WAVE                    "sounds\\building close.wav"
+snd_BuildingOpen        WAVE                    "sounds\\building open.wav"
+snd_Good                WAVE                    "sounds\\good.wav"
+snd_OpenChest           WAVE                    "sounds\\Open Chest.wav"
+snd_UnlockDoor          WAVE                    "sounds\\Unlock Door.wav"
+snd_Encounter           WAVE                    "sounds\\encounter.wav"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+dlgOptions DIALOGEX 0, 0, 258, 231
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,147,210,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,201,210,50,14
+    CONTROL         "3D Acceleration",chk3DAccel,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,7,125,10
+    CONTROL         "Enable Z Buffer",chkZBuffer,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,22,23,80,10
+    CONTROL         "New Graphics",chkNewGraphics,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,49,140,11
+    CONTROL         "Disable Overworld Encounters",chkDisableEncounter,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,68,128,11
+END
+
+dlgAboutBox DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Legacy of the Ancients"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDABOUTOK,129,74,50,14
+    CTEXT           "Legacy of the Ancients",IDC_STATIC,7,7,172,21,
+                    SS_CENTERIMAGE | WS_BORDER,WS_EX_DLGMODALFRAME | 
+                    WS_EX_CLIENTEDGE
+    CTEXT           "Windows 98 Version by:",IDC_STATIC,51,33,82,8
+    CTEXT           "Erik Ylvisaker",IDC_STATIC,51,42,82,11
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    dlgOptions, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 251
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 224
+    END
+
+    dlgAboutBox, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+ICON_LOTA               ICON                    "images\\icon1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "Windows 98 Version written by Erik Ylvisaker"
+            VALUE "CompanyName", " "
+            VALUE "FileDescription", "Lota"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "Lota"
+            VALUE "LegalCopyright", "Copyright © 2000"
+            VALUE "OriginalFilename", "Lota.exe"
+            VALUE "ProductName", "Legacy of the Ancients"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// MONST
+//
+
+dat_Monst1              MONST                   "Overland Monsters.txt"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_STRING1             "Knife"
+    IDS_STRING2             "Leaded Club"
+    IDS_STRING3             "Bladed Staff"
+    IDS_STRING4             "Flail"
+    IDS_STRING5             "War Hammer"
+    IDS_STRING6             "Bow & Arrow"
+    IDS_STRING7             "Broadaxe"
+    IDS_STRING8             "Compound Bow"
+    IDS_STRING9             "Studded Hide"
+    IDS_STRING10            "Ring Mail"
+    IDS_STRING11            "Double Mail"
+    IDS_STRING12            "Plated Mail"
+    IDS_STRING13            "Mythan Plate"
+    IDS_STRING14            "Shoddy"
+    IDS_STRING15            "Fair"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STRING16            "Good"
+    IDS_STRING17            "Great"
+    IDS_STRING18            "Superb"
+    IDS_STRING19            "-"
+    IDS_STRING20            "Gold Armband"
+    IDS_STRING21            "Climbing Gear"
+    IDS_STRING22            "Healing Herbs"
+    IDS_STRING23            "Iron Key"
+    IDS_STRING24            "Copper Key"
+    IDS_STRING25            "Brass Key"
+    IDS_STRING26            "Stone Key"
+    IDS_STRING27            "Magic Seeds"
+    IDS_STRING28            "Mail"
+    IDS_STRING29            "Tulip"
+    IDS_STRING30            "Compass"
+    IDS_STRING31            "Magic Ice"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STRING32            "Scepter"
+    IDS_STRING33            "Guard Jewel"
+    IDS_STRING34            "Compendium"
+    IDS_STRING35            "Crown"
+    IDS_STRING36            "Jade Coin"
+    IDS_STRING37            "Topaz Coin"
+    IDS_STRING38            "Amethyst Coin"
+    IDS_STRING39            "Sapphire coin"
+    IDS_STRING40            "Turquoise coin"
+    IDS_STRING41            "Ruby coin"
+    IDS_STRING42            "Diamond coin"
+    IDS_STRING43            "Magic Flame"
+    IDS_STRING44            "Firebolt"
+    IDS_STRING45            "Befuddle"
+    IDS_STRING46            "Psyco Strength"
+    IDS_STRING47            "Kill Flash"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STRING48            "Seek Spell"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

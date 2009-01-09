@@ -1,0 +1,3 @@
+hd:
+	gcc -g -o hd.x hd.c
+	./rec -interactive hd.x

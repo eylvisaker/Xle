@@ -1,0 +1,47 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Map Editor - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/res.res" /d "_DEBUG" "C:\My Documents\Programming\c++\LotA\map editor\res.rc"" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP193.TMP" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Map Editor.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\MY DOCUMENTS\PROGRAMMING\C++\LOTA\MAP EDITOR\main.cpp"
+"C:\My Documents\Programming\c++\LotA\map editor\global.cpp"
+"C:\My Documents\Programming\c++\LotA\map editor\map.cpp"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP193.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP0194.TMP" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Map Editor.pdb" /debug /machine:I386 /out:"Debug/Map Editor.exe" /pdbtype:sept 
+".\Debug\dd.obj"
+".\Debug\ddutil.obj"
+".\Debug\main.obj"
+".\Debug\global.obj"
+".\Debug\map.obj"
+".\Debug\res.res"
+]
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSP0194.TMP"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+main.cpp
+global.cpp
+c:\my documents\programming\c++\lota\map editor\global.cpp(108) : error C2065: 'LOTA_FONT' : undeclared identifier
+c:\my documents\programming\c++\lota\map editor\global.cpp(116) : error C2065: 'LOTA_TILES' : undeclared identifier
+c:\my documents\programming\c++\lota\map editor\global.cpp(123) : error C2065: 'LOTA_CHARACTER' : undeclared identifier
+map.cpp
+C:\My Documents\Programming\c++\LotA\map editor\map.cpp(63) : error C2065: 'OUTSIDE1' : undeclared identifier
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+Map Editor.exe - 4 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

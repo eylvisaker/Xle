@@ -1,0 +1,72 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Lota - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "E:\DOCUME~1\erik\LOCALS~1\Temp\RSP219.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fp"Debug/Lota.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"E:\My Documents\Programming\c++\LotA\global.cpp"
+]
+Creating command line "cl.exe @E:\DOCUME~1\erik\LOCALS~1\Temp\RSP219.tmp" 
+Creating temporary file "E:\DOCUME~1\erik\LOCALS~1\Temp\RSP21A.tmp" with contents
+[
+erikutils.lib winmm.lib ddraw.lib dxguid.lib dsound.lib dinput.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Lota.pdb" /debug /machine:I386 /nodefaultlib:"libcmt" /out:"Debug/Lota.exe" /pdbtype:sept 
+".\Debug\commands.obj"
+".\Debug\d3dutil.obj"
+".\Debug\dd.obj"
+".\Debug\ddutil.obj"
+".\Debug\dsutil3d.obj"
+".\Debug\ErikString.obj"
+".\Debug\global.obj"
+".\Debug\joystick.obj"
+".\Debug\LotA.obj"
+".\Debug\lotasound.obj"
+".\Debug\map.obj"
+".\Debug\menulist.obj"
+".\Debug\player.obj"
+".\Debug\render.obj"
+".\Debug\specialevent.obj"
+".\Debug\texture.obj"
+".\Debug\town.obj"
+".\Debug\res.res"
+]
+Creating command line "link.exe @E:\DOCUME~1\erik\LOCALS~1\Temp\RSP21A.tmp"
+<h3>Output Window</h3>
+Compiling...
+global.cpp
+Linking...
+Creating temporary file "E:\DOCUME~1\erik\LOCALS~1\Temp\RSP21B.tmp" with contents
+[
+/nologo /o"Debug/Lota.bsc" 
+".\Debug\commands.sbr"
+".\Debug\d3dutil.sbr"
+".\Debug\dd.sbr"
+".\Debug\ddutil.sbr"
+".\Debug\dsutil3d.sbr"
+".\Debug\ErikString.sbr"
+".\Debug\global.sbr"
+".\Debug\joystick.sbr"
+".\Debug\LotA.sbr"
+".\Debug\lotasound.sbr"
+".\Debug\map.sbr"
+".\Debug\menulist.sbr"
+".\Debug\player.sbr"
+".\Debug\render.sbr"
+".\Debug\specialevent.sbr"
+".\Debug\texture.sbr"
+".\Debug\town.sbr"]
+Creating command line "bscmake.exe @E:\DOCUME~1\erik\LOCALS~1\Temp\RSP21B.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+Lota.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

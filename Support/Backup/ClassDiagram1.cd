@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="LotaSharp.LotaMap">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LotaMap.cs</FileName>
+      <HashCode>IAEOBAKiQiA+AnULMEJVEc8iQggTAomIAOgCWQICHDU=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Class Name="LotaSharp.LotaMap.Roof" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>LotaMap.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="LotaSharp.LotaMap.Guard" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>LotaMap.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+  </Class>
+  <Enum Name="LotaSharp.MapTypes" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LotaMap.cs</FileName>
+      <HashCode>AAAAAgAAAgAAgAAAAAAAAAAAAARAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

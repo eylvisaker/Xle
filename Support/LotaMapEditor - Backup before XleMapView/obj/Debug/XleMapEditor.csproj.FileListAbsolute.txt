@@ -1,0 +1,12 @@
+C:\devel\Xle\LotaMapEditor\obj\Debug\ResolveAssemblyReference.cache
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.frmMEdit.resources
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.frmProperties.resources
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.frmRoof.resources
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.frmSpecial.resources
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.csproj.GenerateResource.Cache
+C:\devel\Xle\out\XleMapEditor.exe
+C:\devel\Xle\out\XleMapEditor.pdb
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.exe
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.pdb
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.Properties.Resources.resources
+C:\devel\Xle\LotaMapEditor\obj\Debug\XleMapEditor.frmImport.resources

@@ -1,0 +1,17 @@
+
+64COPY 3.10, by Peter Schepers (c) 94-97
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+A C64 archive  file  converter (based on
+Norton Commander 3.0) that  handles  all
+the common emulator formats  (T64,  D64,
+LNX, PC64, X64, ARK, Zipcode,  LBR, ARC,
+SDA and DOS Binary) and converts between
+them. It also  has  a  Text/HEX  Editor,
+File  Viewer,  D64  HEX   Editor,   6502
+Disassembler, BASIC Unlister,  CheckT64,
+D64 and D64 Directory  Customizer.  Many
+DOS functions are also included, as well
+as other goodies.
+
