@@ -1,5 +1,0 @@
-Error Log started 1/8/2009 6:11:16 PM
-
-WARNING: An error occured while loading assembly C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\out\SDL.dll.
-BadImageFormatException: Could not load file or assembly 'file:///C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\out\SDL.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
-

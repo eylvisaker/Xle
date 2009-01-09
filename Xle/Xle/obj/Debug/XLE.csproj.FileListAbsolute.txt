@@ -1,9 +1,0 @@
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\Xle\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\out\OpenTK.dll.config
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\out\Tao.Sdl.dll
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\out\SDL.dll
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\out\Readme-SDL.txt
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\out\Xle.exe
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\out\Xle.pdb
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\Xle\obj\Debug\Xle.exe
-C:\Users\Erik\Documents\devel\Games\Xle\trunk\Xle\Xle\obj\Debug\Xle.pdb
