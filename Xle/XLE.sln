@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLE", "Xle\XLE.csproj", "{FDE0A61F-558B-4964-8292-B7A212A3AB45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XleMapEditor", "XleMapEditor\XleMapEditor.csproj", "{E6A48D1C-D8E3-4FE4-A65A-6D550580938B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib", "..\..\..\Agate\trunk\AgateLib\AgateLib.csproj", "{E7CDB2B3-D2EB-49F2-BAF2-A3F1EDE7B19C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateOTK", "..\..\..\Agate\trunk\Drivers\AgateOTK\AgateOTK.csproj", "{23D925E1-7176-4332-BD41-49C7C39CE151}"
