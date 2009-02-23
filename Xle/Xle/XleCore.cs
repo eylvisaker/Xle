@@ -97,8 +97,8 @@ namespace ERY.Xle
         {
             ParseArgs(args);
 
-            AgateLib.Utility.AgateFileProvider.ImageProvider.AddPath("Images");
-            AgateLib.Utility.AgateFileProvider.SoundProvider.AddPath("Audio");
+            AgateLib.AgateFileProvider.Images.AddPath("Images");
+            AgateLib.AgateFileProvider.Sounds.AddPath("Audio");
             AgateLib.Core.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
             LoadGameFile();
@@ -110,7 +110,7 @@ namespace ERY.Xle
                     return;
 
 
-                DisplayWindow wind = new DisplayWindow("Legacy of the Ancients", 640, 400);
+                DisplayWindow wind = DisplayWindow.CreateWindowed("Legacy of the Ancients", 640, 400);
 
                 SoundMan.Load();
 
