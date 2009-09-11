@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ERY.Xle.Serialization
 {
-    public interface IXleSerializable
-    {
-        void WriteData(XleSerializationInfo info);
-        void ReadData(XleSerializationInfo info);
-    }
+	public interface IXleSerializable
+	{
+		void WriteData(XleSerializationInfo info);
+		void ReadData(XleSerializationInfo info);
+	}
 }

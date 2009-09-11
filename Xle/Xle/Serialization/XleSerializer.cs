@@ -7,47 +7,47 @@ using System.Reflection;
 
 namespace ERY.Xle.Serialization
 {
-    public class XleSerializer 
-    {
-        Type objectType;
+	public class XleSerializer
+	{
+		Type objectType;
 
-        public ITypeBinder Binder { get; set; }
+		public ITypeBinder Binder { get; set; }
 
-        public XleSerializer(Type objectType)
-        {
-            if (objectType.GetInterface("IXleSerializable", true) == null)
-                throw new ArgumentException("Object type is not IXleSerializable.");
+		public XleSerializer(Type objectType)
+		{
+			if (objectType.GetInterface("IXleSerializable", true) == null)
+				throw new ArgumentException("Object type is not IXleSerializable.");
 
-            Binder = new TypeBinder();
-            (Binder as TypeBinder).SearchAssemblies.Add(Assembly.GetCallingAssembly());
-            (Binder as TypeBinder).SearchAssemblies.Add(Assembly.GetEntryAssembly());
-            (Binder as TypeBinder).SearchAssemblies.Add(Assembly.GetExecutingAssembly());
+			Binder = new TypeBinder();
+			(Binder as TypeBinder).SearchAssemblies.Add(Assembly.GetCallingAssembly());
+			(Binder as TypeBinder).SearchAssemblies.Add(Assembly.GetEntryAssembly());
+			(Binder as TypeBinder).SearchAssemblies.Add(Assembly.GetExecutingAssembly());
 
-            this.objectType = objectType;
-        }
+			this.objectType = objectType;
+		}
 
-        public void Serialize(Stream outStream, IXleSerializable objectGraph)
-        {
-            if (objectType.IsAssignableFrom(objectGraph.GetType()) == false)
-                throw new ArgumentException("Object is not of type " + objectType.GetType());
+		public void Serialize(Stream outStream, IXleSerializable objectGraph)
+		{
+			if (objectType.IsAssignableFrom(objectGraph.GetType()) == false)
+				throw new ArgumentException("Object is not of type " + objectType.GetType());
 
-            XleSerializationInfo info = new XleSerializationInfo();
+			XleSerializationInfo info = new XleSerializationInfo();
 
-            info.Binder = Binder;
-            info.BeginSerialize(objectGraph);
+			info.Binder = Binder;
+			info.BeginSerialize(objectGraph);
 
-            info.XmlDoc.Save(outStream);
+			info.XmlDoc.Save(outStream);
 
-        }
+		}
 
-        public object Deserialize(Stream file)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(file);
-            XleSerializationInfo info = new XleSerializationInfo(doc);
+		public object Deserialize(Stream file)
+		{
+			XmlDocument doc = new XmlDocument();
+			doc.Load(file);
+			XleSerializationInfo info = new XleSerializationInfo(doc);
 
-            info.Binder = Binder;
-            return info.BeginDeserialize();
-        }
-    }
+			info.Binder = Binder;
+			return info.BeginDeserialize();
+		}
+	}
 }
