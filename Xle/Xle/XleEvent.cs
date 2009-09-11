@@ -6,7 +6,7 @@ using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
-using ERY.Xle.Serialization;
+using AgateLib.Serialization.Xle;
 using System.ComponentModel;
 
 namespace ERY.Xle
@@ -55,6 +55,24 @@ namespace ERY.Xle
 			return true;
 		}
 
+		/// <summary>
+		/// Gets whether or not this type of event allows the player
+		/// to rob it when the town isn't angry at him.
+		/// </summary>
+		[Browsable(false)]
+		public virtual bool AllowRobWhenNotAngry { get { return false; } }
+
+		/// <summary>
+		/// Method called when the player attempts to rob and should get the 
+		/// message "the merchant won't let you rob."
+		/// </summary>
+		public virtual void RobFail()
+		{
+			g.AddBottom();
+			g.AddBottom("The merchant won't let you rob.");
+
+			XleCore.wait(1000);
+		}
 		public XleEvent()
 		{
 			/*
@@ -558,7 +576,6 @@ namespace ERY.Xle.XleEventTypes
 			get { return mShopName; }
 			set { mShopName = value; }
 		}
-
 		protected override void WriteData(XleSerializationInfo info)
 		{
 			info.Write("ShopName", mShopName);
@@ -829,11 +846,47 @@ namespace ERY.Xle.XleEventTypes
 
 			return true;
 		}
+		public override bool Rob(Player player)
+		{
+			if (Robbed)
+			{
+				g.AddBottom();
+				g.AddBottom("No items within reach here.");
+				XleCore.wait(1000);
+				return true;
+			}
+
+			int value = RobValue();
+
+			if (value == 0)
+			{
+				g.AddBottom();
+				g.AddBottom("There's nothing to really carry here.");
+				XleCore.wait(1000);
+				return true;
+			}
+
+			player.Gold += value;
+			g.AddBottom();
+			g.AddBottom("You get " + value.ToString() + " gold.", XleColor.Yellow);
+			XleCore.wait(1000);
+			Robbed = true;
+			return true;
+		}
+
+		public virtual int RobValue()
+		{
+			return 0;
+		}
 	}
 
 	[Serializable]
 	public class StoreLending : Store
 	{
+		public override int RobValue()
+		{
+			return XleCore.random.Next(180, 231);
+		}
 		protected override void GetColors(out Color backColor, out Color borderColor,
 			out Color lineColor, out Color fontColor, out Color titleColor)
 		{
@@ -970,6 +1023,17 @@ namespace ERY.Xle.XleEventTypes
 	[Serializable]
 	public class StoreBank : Store
 	{
+		public override int RobValue()
+		{
+			return XleCore.random.Next(180, 231);
+		}
+		public override bool AllowRobWhenNotAngry
+		{
+			get
+			{
+				return true;
+			}
+		}
 		protected override void GetColors(out Color backColor, out Color borderColor,
 			out Color lineColor, out Color fontColor, out Color titleColor)
 		{
@@ -1431,12 +1495,11 @@ namespace ERY.Xle.XleEventTypes
 				return true;
 
 			string tempString;
-			int i = 0;
 			double cost = 15 / player.Attribute[Attributes.charm];
 			int choice;
 			int max = (int)(player.Gold / cost);
 
-			theWindow[i++] = " " + ShopName + " ";
+			SetTitle();
 
 			this.player = player;
 			this.robbing = false;
@@ -1446,47 +1509,11 @@ namespace ERY.Xle.XleEventTypes
 
 			if (player.mailTown == XleCore.Map.MapID)
 			{
-				int gold = XleCore.random.Next(1, 4);
-
-				switch (gold)
-				{
-					case 1: gold = 95; break;
-					case 2: gold = 110; break;
-					case 3: gold = 125; break;
-				}
-
-				g.AddBottom("");
-				g.AddBottom("Thanks for the delivery. ");
-				g.AddBottom("Here's " + gold.ToString() + " gold.");
-				g.AddBottom("");
-				g.AddBottom("");
-
-				StoreSound(LotaSound.Good);
-				g.UpdateBottom("        Press Key to Continue");
-				WaitForKey();
-
-				player.GainGold(gold);
-				player.ItemCount(9, -1);
-				player.mailTown = 0;
-
+				PayForMail(player);
 			}
 			else
 			{
-				theWindow[i++] = "";
-				theWindow[i++] = "";
-				theWindow[i++] = "";
-				theWindow[i++] = "Food & water";
-				theWindow[i++] = "";
-				theWindow[i++] = "";
-				theWindow[i++] = "We sell food for travel.";
-				theWindow[i++] = "Each 'day' of food will ";
-				theWindow[i++] = "keep you fed for one day";
-				theWindow[i++] = "of travel (on foot).    ";
-				theWindow[i++] = "";
-				theWindow[i++] = "";
-				theWindow[i] = "Cost is ";
-				theWindow[i] += cost;
-				theWindow[i++] += " gold per 'day'";
+				SetWindow(cost);
 
 				tempString = "Maximum purchase ";
 				tempString += max;
@@ -1500,70 +1527,14 @@ namespace ERY.Xle.XleEventTypes
 				if (choice > 0)
 				{
 					player.Spend((int)(choice * cost));
-
 					player.Food += choice;
-
 
 					g.AddBottom(choice + " days of food bought.");
 
 					StoreSound(LotaSound.Sale);
 
-					XleMapTypes.Town twn = XleCore.Map as XleMapTypes.Town;
-
-					if (player.Item(9) == 0 && twn != null && twn.Mail.Count > 0)
-					{
-						int mMap = XleCore.random.Next(twn.Mail.Count);
-						int target;
-						int count = 0;
-
-						do
-						{
-							target = twn.Mail[mMap];
-
-							if (XleCore.GetMapName(target) != "")
-							{
-								break;
-							}
-							else
-							{
-								mMap++;
-
-								if (mMap == 4)
-									mMap = 0;
-							}
-
-							count++;
-
-						} while (count < 6);
-
-						if (count == 6)
-						{
-							return true;
-						}
-
-						SoundMan.PlaySound(LotaSound.Question);
-
-						g.AddBottom("");
-						g.AddBottom("Would you like to earn some gold?");
-
-						MenuItemList menu = new MenuItemList("Yes", "No");
-
-						choice = QuickMenu(menu, 2);
-
-						if (choice == 0)
-						{
-							player.ItemCount(9, 1);
-							player.mailTown = target;
-
-							g.AddBottom("");
-							g.AddBottom("Here's some mail to");
-							g.AddBottom("deliver to " + XleCore.GetMapName(target) + ".");
-							g.AddBottom("");
-							g.AddBottom("        Press Key to Continue");
-
-							WaitForKey();
-						}
-					}
+					OfferMail(player);
+					return true;
 				}
 				else
 				{
@@ -1578,37 +1549,160 @@ namespace ERY.Xle.XleEventTypes
 
 		}
 
+		private void OfferMail(Player player)
+		{
+			XleMapTypes.Town twn = XleCore.Map as XleMapTypes.Town;
+
+			if (player.Item(9) > 0) return;
+			if (twn == null) return;
+			if (twn.Mail.Count == 0) return;
+
+			int mMap = XleCore.random.Next(twn.Mail.Count);
+			int target;
+			int count = 0;
+			bool valid = false;
+
+			// search for a valid map
+			do
+			{
+				target = twn.Mail[mMap];
+
+				if (XleCore.GetMapName(target) != "")
+					valid = true;
+				else
+				{
+					mMap++;
+					if (mMap == twn.Mail.Count) mMap = 0;
+				}
+
+				count++;
+
+			} while (count < 6 && valid == false);
+
+			if (valid == false)
+				return;
+
+			SoundMan.PlaySound(LotaSound.Question);
+
+			g.AddBottom("");
+			g.AddBottom("Would you like to earn some gold?");
+
+			MenuItemList menu = new MenuItemList("Yes", "No");
+
+			int choice = QuickMenu(menu, 2);
+
+			if (choice == 0)
+			{
+				player.ItemCount(9, 1);
+				player.mailTown = target;
+
+				g.AddBottom("");
+				g.AddBottom("Here's some mail to");
+				g.AddBottom("deliver to " + XleCore.GetMapName(target) + ".");
+				g.AddBottom("");
+				g.AddBottom("        Press Key to Continue");
+
+				WaitForKey();
+			}
+		}
+		private void SetWindow(double cost)
+		{
+			int i = 1;
+			theWindow[i++] = "";
+			theWindow[i++] = "";
+			theWindow[i++] = "";
+			theWindow[i++] = "Food & water";
+			theWindow[i++] = "";
+			theWindow[i++] = "";
+			theWindow[i++] = "We sell food for travel.";
+			theWindow[i++] = "Each 'day' of food will ";
+			theWindow[i++] = "keep you fed for one day";
+			theWindow[i++] = "of travel (on foot).    ";
+			theWindow[i++] = "";
+			theWindow[i++] = "";
+
+			if (robbing == false)
+			{
+				theWindow[i] = "Cost is ";
+				theWindow[i] += cost;
+				theWindow[i++] += " gold per 'day'";
+			}
+			else
+				theWindow[i] = "Robbery in progress";
+		}
+		private int SetTitle()
+		{
+			int i = 0;
+			theWindow[i++] = " " + ShopName + " ";
+			return i;
+		}
+		private void PayForMail(Player player)
+		{
+			int gold = XleCore.random.Next(1, 4);
+
+			switch (gold)
+			{
+				case 1: gold = 95; break;
+				case 2: gold = 110; break;
+				case 3: gold = 125; break;
+			}
+
+			g.AddBottom("");
+			g.AddBottom("Thanks for the delivery. ");
+			g.AddBottom("Here's " + gold.ToString() + " gold.");
+			g.AddBottom("");
+			g.AddBottom("");
+
+			StoreSound(LotaSound.Good);
+			g.UpdateBottom("        Press Key to Continue");
+			WaitForKey();
+
+			player.GainGold(gold);
+			player.ItemCount(9, -1);
+			player.mailTown = 0;
+		}
+
+		int robCount;
 
 		public override bool Rob(Player player)
 		{
-			/*	if (g.map.SetRobbed(shop.dave.id) < 4)
-				{
-					g.map.SetRobbed(shop.dave.id, 1);
+			this.player = player;
 
-					choice = rnd(1, 15) + rnd(20, 35);
+			SetTitle();
+			Wait(1);
+			SetWindow(0);
+			
+			g.ClearBottom();
 
-					g.AddBottom("");
-					g.AddBottom("Stole " + String(choice) + " days of food.");
+			if (robCount < 4)
+			{
+				robCount++;
+				robbing = true;
+				
+				int choice = XleCore.random.Next(1, 16) + XleCore.random.Next(20, 36);
 
-					player.Food(choice);
+				g.AddBottom("");
+				g.AddBottom("Stole " + choice.ToString() + " days of food.", XleColor.Yellow);
 
-					StoreSound(snd_Sale);
+				player.Food += choice;
+				SoundMan.PlaySound(LotaSound.Sale);
 
-					if (rnd(0, 99) < 25)
-						g.map.SetRobbed(shop.dave.id, 4);
-
-				}
-				else
-				{
-					g.AddBottom("");
-					g.AddBottom("No items within reach now.");
-
-					StoreSound(snd_Medium);
-				}
+				if (XleCore.random.NextDouble() < 0.25)
+					robCount = 4;
 
 			}
-						*/
-			return false;
+			else
+			{
+				g.AddBottom("");
+				g.AddBottom("No items within reach now.", XleColor.Yellow);
+
+				SoundMan.PlaySound(LotaSound.Medium);
+			}
+
+			g.AddBottom();
+			Wait(2000);
+
+			return true;
 		}
 	}
 

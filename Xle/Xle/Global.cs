@@ -208,7 +208,7 @@ namespace ERY.Xle
 
 		static public void AddBottom()
 		{
-			AddBottom();
+			AddBottom("");
 		}
 		static public void AddBottom(string line)
 		{

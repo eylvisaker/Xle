@@ -7,7 +7,7 @@ using System.Text;
 using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
-using ERY.Xle.Serialization;
+using AgateLib.Serialization.Xle;
 using System.ComponentModel;
 
 namespace ERY.Xle
@@ -82,17 +82,17 @@ namespace ERY.Xle
 			mMapID = info.ReadInt32("MapID");
 			mTileSet = info.ReadString("Tileset");
 			mDefaultTile = info.ReadInt32("DefaultTile");
-			mEvents.AddRange((XleEvent[])info.ReadArray("Events"));
+			mEvents.AddRange(info.ReadArray<XleEvent>("Events"));
 
 			if (this is IHasRoofs)
 			{
-				((IHasRoofs)this).Roofs.AddRange((Roof[])info.ReadArray("Roofs"));
+				((IHasRoofs)this).Roofs.AddRange(info.ReadArray<Roof>("Roofs"));
 			}
 			if (this is IHasGuards)
 			{
 				IHasGuards guard = (IHasGuards)this;
 
-				guard.Guards.AddRange((Guard[])info.ReadArray("Guards"));
+				guard.Guards.AddRange(info.ReadArray<Guard>("Guards"));
 				guard.DefaultAttack = info.ReadInt32("GuardDefaultAttack");
 				guard.DefaultColor = Color.FromArgb(info.ReadInt32("GuardDefaultColor"));
 				guard.DefaultDefense = info.ReadInt32("GuardDefaultDefense");
@@ -143,7 +143,7 @@ namespace ERY.Xle
 			}
 			else if (System.IO.Path.GetExtension(filename).ToLower() == ".xmf")
 			{
-				Serialization.XleSerializer ser = new ERY.Xle.Serialization.XleSerializer(typeof(XleMap));
+				XleSerializer ser = new XleSerializer(typeof(XleMap));
 
 				XleMap retval;
 
@@ -165,7 +165,7 @@ namespace ERY.Xle
 		{
 			if (System.IO.Path.GetExtension(filename).ToLower() == ".xmf")
 			{
-				Serialization.XleSerializer ser = new ERY.Xle.Serialization.XleSerializer(typeof(XleMap));
+				XleSerializer ser = new XleSerializer(typeof(XleMap));
 
 				using (System.IO.Stream file = System.IO.File.Open(filename,
 				   System.IO.FileMode.Create, System.IO.FileAccess.Write))
@@ -1110,7 +1110,18 @@ namespace ERY.Xle
 
 			return PlayerSpeakImpl(player);
 		}
+
+		public virtual bool PlayerRob(Player player)
+		{
+			return PlayerRobImpl(player);
+		}
+			
+
 		protected virtual bool PlayerSpeakImpl(Player player)
+		{
+			return false;
+		}
+		protected virtual bool PlayerRobImpl(Player player)
 		{
 			return false;
 		}
@@ -1168,6 +1179,7 @@ namespace ERY.Xle
 		public virtual void CheckSounds(Player player)
 		{
 		}
+
 
 	}
 
@@ -2779,7 +2791,7 @@ namespace ERY.Xle
 
 		}
 		[Serializable]
-		public class Town : XleMap, ERY.Xle.IHasGuards, ERY.Xle.IHasRoofs, ISerializable
+		public class Town : XleMap, ERY.Xle.IHasGuards, ERY.Xle.IHasRoofs
 		{
 			int mWidth;
 			int mHeight;
@@ -2789,7 +2801,7 @@ namespace ERY.Xle
 			List<Roof> mRoofs = new List<Roof>();
 			List<Guard> mGuards = new List<Guard>();
 
-			List<int> mail = new List<int>();				// towns to carry mail to
+			List<int> mMail = new List<int>();				// towns to carry mail to
 
 
 
@@ -2826,17 +2838,13 @@ namespace ERY.Xle
 
 			}
 
-			void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-			{
-				throw new NotImplementedException();
-			}
-
 			protected override void WriteData(XleSerializationInfo info)
 			{
 				info.Write("Width", mWidth);
 				info.Write("Height", mHeight);
 				info.Write("OutsideTile", mOutsideTile);
 				info.Write("MapData", mData);
+				info.Write("Mail", mMail.ToArray());
 			}
 			protected override void ReadData(XleSerializationInfo info)
 			{
@@ -2844,6 +2852,14 @@ namespace ERY.Xle
 				mHeight = info.ReadInt32("Height");
 				mOutsideTile = info.ReadInt32("OutsideTile");
 				mData = info.ReadInt32Array("MapData");
+
+				try
+				{
+					mMail.AddRange(info.ReadInt32Array("Mail"));
+				}
+				catch (XleSerializationException)
+				{ }
+				
 			}
 
 			#endregion
@@ -3363,8 +3379,8 @@ namespace ERY.Xle
 
 			public List<int> Mail
 			{
-				get { return mail; }
-				set { mail = value; }
+				get { return mMail; }
+				set { mMail = value; }
 			}
 
 
@@ -3698,6 +3714,36 @@ namespace ERY.Xle
 				}
 
 				return false;
+			}
+			public override bool PlayerRob(Player player)
+			{
+				XleEvent evt = GetEvent(player, 1);
+				bool handled = false;
+
+				if (evt != null)
+				{
+					if (evt.AllowRobWhenNotAngry == false && this.IsAngry == false)
+					{
+						evt.RobFail();
+						return true;
+					}
+
+					handled = evt.Rob(player);
+					IsAngry = true;
+
+					if (handled)
+						return handled;
+				}
+
+				return PlayerRobImpl(player);
+			}
+			protected override bool PlayerRobImpl(Player player)
+			{
+				g.AddBottom();
+				g.AddBottom("Nothing to rob");
+				XleCore.wait(500);
+
+				return true;
 			}
 
 			protected override void PlayerStepImpl(Player player)

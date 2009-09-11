@@ -6,7 +6,7 @@ using System.Text;
 
 using AgateLib;
 using AgateLib.Geometry;
-using ERY.Xle.Serialization;
+using AgateLib.Serialization.Xle;
 
 namespace ERY.Xle
 {
@@ -361,7 +361,7 @@ namespace ERY.Xle
 
 			chests = info.ReadInt32Array("Chests");
 
-			rafts.AddRange((RaftData[])info.ReadArray("Rafts"));
+			rafts.AddRange(info.ReadArray<RaftData>("Rafts"));
 
 
 			loan = info.ReadInt32("Loan");					// loan amount

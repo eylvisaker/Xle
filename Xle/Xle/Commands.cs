@@ -699,6 +699,7 @@ namespace ERY.Xle
 				}
 			}
 			*/
+			XleCore.Map.PlayerRob(player);
 		}
 
 		public void Speak()

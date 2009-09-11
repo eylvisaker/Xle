@@ -1,11 +1,11 @@
-<Root type="ERY.Xle.Player">
+<XleRoot type="ERY.Xle.Player">
   <Attributes type="ERY.Xle.AttributeContainer">
     <Attributes array="true" encoding="Base64">DwAAAA8AAAAPAAAADwAAAA8AAAA=</Attributes>
   </Attributes>
-  <Food>999</Food>
-  <Gold>702</Gold>
+  <Food>797</Food>
+  <Gold>584</Gold>
   <GoldInBank>0</GoldInBank>
-  <TimeDays>124.25</TimeDays>
+  <TimeDays>366.5</TimeDays>
   <OnRaft>0</OnRaft>
   <GameSpeed>3</GameSpeed>
   <Map>1</Map>
@@ -16,18 +16,18 @@
   <OutX>102</OutX>
   <OutY>120</OutY>
   <OutMap>1</OutMap>
-  <X>106</X>
-  <Y>114</Y>
+  <X>102</X>
+  <Y>124</Y>
   <DungeonLevel>0</DungeonLevel>
-  <Facing>2</Facing>
+  <Facing>4</Facing>
   <CurrentArmor>3</CurrentArmor>
   <CurrentWeapon>0</CurrentWeapon>
   <Weapon array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Weapon>
   <Armor array="true" encoding="Base64">AAAAAAAAAAAAAAAAAQAAAA==</Armor>
   <WeaponQuality array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</WeaponQuality>
   <ArmorQuality array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAA==</ArmorQuality>
-  <Item array="true" encoding="Base64">AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Item>
-  <Hold>0</Hold>
+  <Item array="true" encoding="Base64">AAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Item>
+  <Hold>15</Hold>
   <LastAttacked>0</LastAttacked>
   <VaultGold>17</VaultGold>
   <Chests array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</Chests>
@@ -43,8 +43,23 @@
       <MapID>0</MapID>
     </Item>
     <Item>
-      <X>106</X>
-      <Y>116</Y>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
+    <Item>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
+    <Item>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
+    <Item>
+      <X>110</X>
+      <Y>119</Y>
       <MapID>1</MapID>
     </Item>
   </Rafts>
@@ -58,4 +73,4 @@
   <Caretaker>0</Caretaker>
   <MailTown>0</MailTown>
   <Name>davey</Name>
-</Root>
+</XleRoot>
