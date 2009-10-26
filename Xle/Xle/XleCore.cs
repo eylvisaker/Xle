@@ -104,7 +104,7 @@ namespace ERY.Xle
 
 			AgateLib.AgateFileProvider.Images.AddPath("Images");
 			AgateLib.AgateFileProvider.Sounds.AddPath("Audio");
-			AgateLib.Core.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
+			AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
 			LoadGameFile();
 
