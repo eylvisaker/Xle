@@ -449,7 +449,6 @@ namespace ERY.Xle.XleMapTypes
 					SoundMan.PlaySound(LotaSound.Invalid);
 
 					g.UpdateBottom("Enter command: Move nowhere");
-					g.waitCommand = 75;
 				}
 			}
 			else
@@ -694,7 +693,7 @@ namespace ERY.Xle.XleMapTypes
 						item = XleCore.random.Next(4) + 1;
 						cost = (int)(g.ArmorCost(item, qual) * XleCore.random.NextDouble() * 0.6 + 0.6);
 
-						builder.AddText(g.ArmorName(item), XleColor.White);
+						builder.AddText(XleCore.ArmorList[item].Name, XleColor.White);
 						builder.AddText(" for ", XleColor.Cyan);
 						builder.AddText(cost.ToString(), XleColor.White);
 						builder.AddText(" Gold?", XleColor.Cyan);
@@ -704,7 +703,7 @@ namespace ERY.Xle.XleMapTypes
 						item = XleCore.random.Next(7) + 1;
 						cost = (int)(g.WeaponCost(item, qual) * XleCore.random.NextDouble() * 0.6 + 0.6);
 
-						builder.AddText(g.WeaponName(item), XleColor.White);
+						builder.AddText(XleCore.WeaponList[item].Name, XleColor.White);
 						builder.AddText(" for ", XleColor.Cyan);
 						builder.AddText(cost.ToString(), XleColor.White);
 						builder.AddText(" Gold?", XleColor.Cyan);
@@ -1229,7 +1228,6 @@ namespace ERY.Xle.XleMapTypes
 				}
 
 				waitAtEnd = 250;
-				g.waitCommand = 1;
 
 				if (!firstTime)
 					keyBreak = true;

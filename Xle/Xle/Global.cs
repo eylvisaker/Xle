@@ -47,7 +47,6 @@ namespace ERY.Xle
 	public static class g
 	{
 		static int animFrame;
-		static bool animating;
 
 		static FontSurface myFont;		// stores the handle to the font
 		static Surface myTiles;			// stores the handle to the tiles
@@ -58,9 +57,6 @@ namespace ERY.Xle
 
 		static string[] bottom = new string[5];			// keeps the bottom portion of the screen
 		static Color[][] bottomColor = new Color[5][];	// keeps the bottom colors on the screen
-		static string[] weaponName = new string[20];		// stores weapon names
-		static string[] armorName = new string[20];		// stores armor names
-		static string[] qualityName = new string[6];		// stores quality names
 
 
 		// constructors and destructor:
@@ -78,17 +74,10 @@ namespace ERY.Xle
 
 			}
 
-			stdDisplay = 0;
-
-			newGraphics = false;
-
 			raftFacing = Direction.East;
 			charAnimCount = 0;
-			d3dViewport = false;
-			ZBufferEnable = true;
 			LeftMenuActive = false;
 			HPColor = XleColor.White;
-			allowEnter = true;
 
 			disableEncounters = false;
 
@@ -99,7 +88,7 @@ namespace ERY.Xle
 
 		}
 
-		// DirectX functions and data members
+		// Surfaces
 		static public FontSurface Font { get { return myFont; } }					// returns the handle to the font resource
 		static public Surface Tiles { get { return myTiles; } }				// returns the handle to the tiles resource
 		static public Surface Character { get { return myCharacter; } }		// returns the handle to the character resource
@@ -162,7 +151,7 @@ namespace ERY.Xle
 		{
 			get
 			{
-				if (animating == false)
+				if (animWatch.IsPaused == true)
 				{
 					animFrame = 0;
 				}
@@ -416,39 +405,25 @@ namespace ERY.Xle
 		}
 
 
-		static public string WeaponName(int a) { return weaponName[a - 1]; }
+		[Obsolete]
 		static public int WeaponCost(int w, int q)
 		{
 			return (int)(9.639302862 + 12.709725901 * w + 7.448174718 * Math.Pow(w, 2) +
 				5.552075007 * q + 0.731199405 * Math.Pow(q, 2) + 4.290595417 * w * q);
 
 		}
-		static public string ArmorName(int a)
-		{
-			return armorName[a - 1];
-		}
+		[Obsolete]
 		static public int ArmorCost(int a, int q)
 		{
 			return 120 * a + 12 * q + 8 * q * a;
 		}
-		static public string QualityName(int a)
-		{
-			return qualityName[a];
-		}
 
 
-		// map:
-		//static public LotaMap map;							// the map class
 
 		// other commonly used variables that don't need accessors
-		static public char currentCommand;			// the first letter of the current command being executed
-		static public int waitCommand;			// holds the time in msec to wait to give Enter Command
 		static public int walkTime;				// time to wait between steps
 
-		static public int screenLeft;				// these two values store the original position
-		static public int screenTop;				//		of the window so we can restore it upon exiting 
 		//		full screen mode
-		static public int stdDisplay;				// heartbeat has control of the display when = 0
 		static private bool done;
 
 		public static bool Done
@@ -463,18 +438,11 @@ namespace ERY.Xle
 			set { g.done = value; }
 		}
 
-		static public bool waterReset;				// reset the water dots
 		static public int vertLine;				// Vertical line dividing menu and map
-		static public bool newGraphics;			// are we displaying the new graphics?
 		static public int raftAnim;				// raft animation frame
 		static public Direction raftFacing;		// direction the raft is facing (lotaEast or lotaWest)
 		static public int charAnimCount;			// animation count for the player
-		static public bool ZBufferEnable;			// enables or disables the ZBuffer
 
-		static public bool d3dViewport;			// stores whether or not the d3d viewport has been set
-		//ErikCollection<D3DFloor*> d3dFloor;		// first wall of the d3d area
-		//static public D3DFloor* d3dFloor;
-		static public bool allowEnter;				// used when a player exits a town or dungeon
 		static public bool invisible;				// is the player invisible?
 		static public bool guard;					// is the player in guard colors?
 

@@ -735,14 +735,12 @@ namespace ERY.Xle
 			Rectangle tileRect;
 			Rectangle destRect;
 
-			tx = tile % 16 * 16 + 256 * (g.newGraphics ? 1 : 0);
+			tx = tile % 16 * 16;
 			ty = (int)(tile / 16) * 16;
 
 			tileRect = new Rectangle(tx, ty, 16, 16);
 			destRect = new Rectangle(px, py, 16, 16);
 
-			//pDDS->Blt(&destRect, g.Tiles(), &tileRect,  DDBLT_WAIT, NULL);
-			//pDDS->BltFast(destRect.left, destRect.top, g.Tiles(), &tileRect, DDBLTFAST_WAIT);
 			g.Tiles.Draw(tileRect, destRect);
 
 		}
@@ -828,7 +826,7 @@ namespace ERY.Xle
 			Rectangle charRect;
 			Rectangle destRect;
 
-			tx = g.raftAnim * 32;// +g.newGraphics * 96;
+			tx = g.raftAnim * 32;
 			ty = 256;
 
 			charRect = new Rectangle(tx, ty, 32, 32);

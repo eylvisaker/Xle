@@ -1227,9 +1227,9 @@ namespace ERY.Xle.XleEventTypes
 					// spend the cash, if they have it
 					if (player.AddWeapon(itemList[choice], qualList[choice]))
 					{
-						tempString = g.QualityName(qualList[choice]);
+						tempString = XleCore.QualityList[qualList[choice]];
 						tempString += " ";
-						tempString += g.WeaponName(itemList[choice]);
+						tempString += XleCore.WeaponList[itemList[choice]].Name;
 						tempString += " purchased.";
 						g.AddBottom(tempString);
 						g.AddBottom("");

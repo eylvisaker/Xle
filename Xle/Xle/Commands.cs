@@ -255,8 +255,8 @@ namespace ERY.Xle
 			{
 				if (player.ArmorType(i) > 0)
 				{
-					tempstring = g.QualityName(player.ArmorQuality(i)) + " " +
-								 g.ArmorName(player.ArmorType(i));
+					tempstring = XleCore.QualityList[player.ArmorQuality(i)] + " " +
+								 XleCore.ArmorList[player.ArmorType(i)].Name;
 
 					theList.Add(tempstring);
 					j++;
@@ -950,8 +950,8 @@ namespace ERY.Xle
 			{
 				if (player.WeaponType(i) > 0)
 				{
-					tempstring = g.QualityName(player.WeaponQuality(i)) + " " +
-								 g.WeaponName(player.WeaponType(i));
+					tempstring = XleCore.QualityList[player.WeaponQuality(i)] + " " +
+								 XleCore.ArmorList[player.WeaponType(i)].Name;
 
 					theList.Add(tempstring);
 					j++;

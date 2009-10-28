@@ -550,8 +550,6 @@ namespace ERY.Xle
 				xx = initialxx;
 			}
 
-			g.waterReset = false;
-
 
 			if (setLastTime)
 			{

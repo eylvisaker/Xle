@@ -969,8 +969,6 @@ namespace ERY.Xle.XleMapTypes
 					player.LastAttacked = this.MapID;
 				}
 
-				g.allowEnter = false;
-
 				g.AddBottom("");
 				g.AddBottom("Leave " + XleCore.Map.MapName);
 
@@ -1086,7 +1084,7 @@ namespace ERY.Xle.XleMapTypes
 
 				if (PointInRoof(guard.X, guard.Y) == -1)
 				{
-					int tx = guardAnim * 32 + (g.newGraphics ? 1 : 0) * 96;
+					int tx = guardAnim * 32;
 					int ty;
 
 					if (IsAngry)
