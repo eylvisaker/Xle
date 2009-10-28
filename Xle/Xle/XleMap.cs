@@ -908,7 +908,7 @@ namespace ERY.Xle
 			}
 
 		}
-		protected static void _MoveDungeon(Player player, Direction dir, out string command, out Point stepDirection)
+		protected static void _MoveDungeon(Player player, Direction dir, bool haveCompass, out string command, out Point stepDirection)
 		{
 			Direction newDirection;
 			command = "";
@@ -927,20 +927,18 @@ namespace ERY.Xle
 
 					player.FaceDirection = (Direction)newDirection;
 
+					if (haveCompass)
+						command = "Turn " + player.FaceDirection.ToString();
+
 					break;
 
 				case Direction.North:
 					command = "Move Forward";
 
+					stepDirection = StepDirection(player.FaceDirection);
 
-					if (player.FaceDirection == Direction.East)
-						stepDirection = new Point(1, 0);
-					if (player.FaceDirection == Direction.North)
-						stepDirection = new Point(0, -1);
-					if (player.FaceDirection == Direction.West)
-						stepDirection = new Point(-1, 0);
-					if (player.FaceDirection == Direction.South)
-						stepDirection = new Point(0, 1);
+					if (haveCompass)
+						command = "Walk " + player.FaceDirection.ToString();
 
 					break;
 
@@ -954,6 +952,9 @@ namespace ERY.Xle
 						newDirection = Direction.East;
 
 					player.FaceDirection = (Direction)newDirection;
+
+					if (haveCompass)
+						command = "Turn " + player.FaceDirection.ToString();
 
 					break;
 
@@ -969,7 +970,33 @@ namespace ERY.Xle
 					if (player.FaceDirection == Direction.South)
 						stepDirection = new Point(0, -1);
 
+					if (haveCompass)
+					{
+						// we're walking backwards here, so make the text work right!
+						command = "Walk ";
+						switch (player.FaceDirection)
+						{
+							case Direction.East: command += "West"; break;
+							case Direction.West: command += "East"; break;
+							case Direction.North: command += "South"; break;
+							case Direction.South: command += "North"; break;
+						}
+					}
+
 					break;
+			}
+		}
+
+		protected static Point StepDirection(Direction dir)
+		{
+			switch (dir)
+			{
+				case Direction.East: return new Point(1, 0);
+				case Direction.North: return new Point(0, -1);
+				case Direction.West: return new Point(-1, 0);
+				case Direction.South: return new Point(0, 1);
+
+				default: throw new ArgumentException("Invalid direction!");
 			}
 		}
 

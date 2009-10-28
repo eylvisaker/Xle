@@ -138,7 +138,7 @@ namespace ERY.Xle.XleMapTypes
 			string command;
 			Point stepDirection;
 
-			_MoveDungeon(player, dir, out command, out stepDirection);
+			_MoveDungeon(player, dir, player.Item(11) > 0,  out command, out stepDirection);
 
 			Commands.UpdateCommand(command);
 

@@ -20,6 +20,27 @@ namespace ERY.Xle.XleMapTypes
 		int[] mData;
 		int mHeight;
 		int mWidth;
+		Dictionary<int, MuseumDisplays.Exhibit> mExhibits = new Dictionary<int, MuseumDisplays.Exhibit>();
+
+		public Museum()
+		{
+			mExhibits.Add(0x50, new MuseumDisplays.Information());
+			mExhibits.Add(0x51, new MuseumDisplays.Welcome());
+			mExhibits.Add(0x52, new MuseumDisplays.Weaponry());
+			mExhibits.Add(0x53, new MuseumDisplays.Thornberry());
+			mExhibits.Add(0x54, new MuseumDisplays.Fountain());
+			mExhibits.Add(0x55, new MuseumDisplays.PirateTreasure());
+			mExhibits.Add(0x56, new MuseumDisplays.HerbOfLife());
+			mExhibits.Add(0x57, new MuseumDisplays.NativeCurrency());
+			mExhibits.Add(0x58, new MuseumDisplays.StonesWisdom());
+			mExhibits.Add(0x59, new MuseumDisplays.Tapestry());
+			mExhibits.Add(0x5A, new MuseumDisplays.LostDisplays());
+			mExhibits.Add(0x5B, new MuseumDisplays.KnightsTest());
+			mExhibits.Add(0x5C, new MuseumDisplays.FourJewels());
+			mExhibits.Add(0x5D, new MuseumDisplays.Guardian());
+			mExhibits.Add(0x5E, new MuseumDisplays.Pegasus());
+			mExhibits.Add(0x5F, new MuseumDisplays.AncientArtifact());
+		}
 
 		protected override void ReadData(XleSerializationInfo info)
 		{
@@ -78,7 +99,7 @@ namespace ERY.Xle.XleMapTypes
 				for (int x = 0; x < Width; x++)
 				{
 					// museum tiles
-					if (0x40 <= this[x, y] && this[x, y] <= 0x4F)
+					if (0x40 <= this[x, y] && this[x, y] <= 0x5F)
 						AddWalls(vertices, indices, x - 0.5f, y - 0.5f);
 				}
 			}
@@ -241,8 +262,18 @@ namespace ERY.Xle.XleMapTypes
 			string command;
 			Point stepDirection;
 
-			_MoveDungeon(player, dir, out command, out stepDirection);
+			_MoveDungeon(player, dir, true, out command, out stepDirection);
 
+			if (stepDirection.IsEmpty == false)
+			{
+				if (CanPlayerStepInto(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
+				{
+					command = "Bump into wall";
+					SoundMan.PlaySound(LotaSound.Bump);
+				}
+				//else
+				//    SoundMan.PlaySound(LotaSound.MuseumWalk);
+			}
 			Commands.UpdateCommand(command);
 
 			if (stepDirection.IsEmpty == false)
@@ -280,10 +311,55 @@ namespace ERY.Xle.XleMapTypes
 		public override bool PlayerXamine(Player player)
 		{
 			g.AddBottom();
+
+			if (InteractWithDisplay(player))
+				return true;
+
 			g.AddBottom("You are in an ancient museum.");
 
 			return true;
 		}
+
+		#region --- Museum Exhibits ---
+
+		private bool InteractWithDisplay(Player player)
+		{
+			Point stepDir = StepDirection(player.FaceDirection);
+
+			int tileAt = this[player.X + stepDir.X, player.Y + stepDir.Y];
+
+			if (mExhibits.ContainsKey(tileAt) == false)
+				return false;
+
+			MuseumDisplays.Exhibit ex = mExhibits[tileAt];
+
+			g.AddBottom("You see a plaque.  It Reads...");
+			g.AddBottom();
+			g.AddBottomCentered(ex.LongName, ex.ExhibitColor);
+
+			if (ex.IsClosed(player))
+			{
+				g.AddBottomCentered("- Exhibit closed -", ex.ExhibitColor);
+			}
+			else
+			{
+				g.AddBottomCentered(ex.CoinString, ex.ExhibitColor);
+			}
+
+			g.AddBottom();
+			XleCore.WaitForKey();
+			
+
+			return true;
+		}
+
+		private void Information(Player player)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
+
 		public override bool PlayerFight(Player player)
 		{
 			g.AddBottom();

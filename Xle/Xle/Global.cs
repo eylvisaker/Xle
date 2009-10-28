@@ -217,6 +217,33 @@ namespace ERY.Xle
 			AddBottom(line, colors);
 		}
 
+
+		public static void AddBottomCentered(string p)
+		{
+			BottomCenterString(ref p);
+			AddBottom(p);
+		}
+
+		public static void AddBottomCentered(string p, Color color)
+		{
+			BottomCenterString(ref p);
+			AddBottom(p, color);
+		}
+		public static void AddBottomCentered(string p, Color[] colors)
+		{
+			BottomCenterString(ref p);
+			AddBottom(p, colors);
+		}
+
+		private static void BottomCenterString(ref string p)
+		{
+			int spaces = 36 - p.Length;
+			spaces /= 2;
+			if (spaces < 0) spaces = 0;
+
+			p = new string(' ', spaces) + p;
+		}
+
 		static public Color bottomTextColor = XleColor.White;
 
 		// adds a line to the bottom of the action window
@@ -453,5 +480,6 @@ namespace ERY.Xle
 		{
 			return true;
 		}
+
 	}
 }

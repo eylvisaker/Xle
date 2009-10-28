@@ -68,6 +68,7 @@
     <Compile Include="Sounds.cs" />
     <Compile Include="XleEvent.cs" />
     <Compile Include="SubMenu.cs" />
+    <Compile Include="XleMapTypes\MuseumDisplays\Exhibit.cs" />
     <Compile Include="XleMapTypes\Outside.cs" />
     <Compile Include="XleMapTypes\Town.cs" />
     <Compile Include="XleTitleScreen.cs" />
