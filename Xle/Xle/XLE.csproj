@@ -54,6 +54,9 @@
     <Compile Include="IHasRoofs.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="MapData.cs" />
+    <Compile Include="XleMapTypes\Castle.cs" />
+    <Compile Include="XleMapTypes\Dungeon.cs" />
+    <Compile Include="XleMapTypes\Museum.cs" />
     <Compile Include="XleColor.cs" />
     <Compile Include="XleCore.cs" />
     <Compile Include="XleFactory.cs" />
@@ -65,6 +68,8 @@
     <Compile Include="Sounds.cs" />
     <Compile Include="XleEvent.cs" />
     <Compile Include="SubMenu.cs" />
+    <Compile Include="XleMapTypes\Outside.cs" />
+    <Compile Include="XleMapTypes\Town.cs" />
     <Compile Include="XleTitleScreen.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,13 +85,13 @@
       <Project>{E7CDB2B3-D2EB-49F2-BAF2-A3F1EDE7B19C}</Project>
       <Name>AgateLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Agate\trunk\Drivers\AgateOTK\AgateOTK.csproj">
-      <Project>{23D925E1-7176-4332-BD41-49C7C39CE151}</Project>
-      <Name>AgateOTK</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Agate\trunk\Drivers\AgateSDL\AgateSDL.csproj">
       <Project>{80D960FB-7F07-49CB-BCB3-FF64D4AE1A7B}</Project>
       <Name>AgateSDL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Agate\trunk\Drivers\AgateSDX\AgateSDX.csproj">
+      <Project>{489A4486-7435-4949-BECB-136E6288C35D}</Project>
+      <Name>AgateSDX</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

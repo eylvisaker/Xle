@@ -118,7 +118,7 @@ namespace ERY.Xle
 
 				SoundMan.Load();
 
-				g.LoadFont();
+				g.LoadSurfaces();
 
 				XleTitleScreen titleScreen;
 
@@ -312,9 +312,6 @@ namespace ERY.Xle
 			while (Display.CurrentWindow.IsClosed == false && returnToTitle == false)
 			{
 				Redraw();
-
-				updating = false;
-
 			}
 
 			Keyboard.KeyDown -= Keyboard_KeyDown;
@@ -431,6 +428,10 @@ namespace ERY.Xle
 			DrawInnerLine(vertLine, 0, 0, horizLine + 12, innerColor);
 			DrawInnerLine(0, horizLine, 1, myWindowWidth, innerColor);
 
+			Rectangle mapRect = Rectangle.FromLTRB
+				(vertLine + 16, 16, XleCore.myWindowWidth - 16, horizLine);
+
+			map.Draw(player.X, player.Y, player.FaceDirection, mapRect);
 
 
 #if ShowCoordinates
@@ -449,7 +450,7 @@ namespace ERY.Xle
 
 #endif
 
-			for (i = 0; i < 13; i++)
+			for (i = 0; i < menuArray.Length; i++)
 			{
 				WriteText(48, 16 * (i + 1), menuArray[i], menuColor);
 			}
@@ -464,16 +465,14 @@ namespace ERY.Xle
 			DrawBottomText();
 
 
-			Rectangle mapRect = Rectangle.FromLTRB
-				(vertLine + 16, 16, XleCore.myWindowWidth - 16, horizLine - 16);
 
-			map.Draw(player.X, player.Y, mapRect);
-
-			DrawRafts(mapRect);
-
-			if (player.OnRaft == 0)
-				DrawCharacter(g.AnimFrame, vertLine);
-
+			if (map.AutoDrawPlayer)
+			{
+				DrawRafts(mapRect);
+				
+				if (player.OnRaft == 0)
+					DrawCharacter(g.AnimFrame, vertLine);
+			}
 
 
 			/////////////////////////////////////////////////////////////////////////
@@ -570,8 +569,6 @@ namespace ERY.Xle
 			if (direction == 1)
 			{
 				boxWidth -= 2;
-				//DDPutBox(g_pDDSBack, left, top, length,
-				//                  boxWidth, boxColor);
 
 				Display.FillRect(left, top, length, boxWidth, boxColor);
 
@@ -580,8 +577,6 @@ namespace ERY.Xle
 			{
 				length -= 4;
 
-				//DDPutBox(g_pDDSBack, left, top, boxWidth, length,
-				//                  boxColor);
 				Display.FillRect(left, top, boxWidth, length, boxColor);
 			}
 

@@ -46,8 +46,6 @@ namespace ERY.Xle
 
 	public static class g
 	{
-		static int userControl;
-		static int mode;
 		static int animFrame;
 		static bool animating;
 
@@ -55,6 +53,8 @@ namespace ERY.Xle
 		static Surface myTiles;			// stores the handle to the tiles
 		static Surface myCharacter;		// stores the handle to the character sprites
 		static Surface pOverlandMonsters;	// stores the handle to the overland monster sprites
+		static Surface mMuseumWall;
+		static AgateLib.DisplayLib.Shaders.Effect mMuseumEffect;
 
 		static string[] bottom = new string[5];			// keeps the bottom portion of the screen
 		static Color[][] bottomColor = new Color[5][];	// keeps the bottom colors on the screen
@@ -104,11 +104,13 @@ namespace ERY.Xle
 		static public Surface Tiles { get { return myTiles; } }				// returns the handle to the tiles resource
 		static public Surface Character { get { return myCharacter; } }		// returns the handle to the character resource
 		static public Surface Monsters { get { return pOverlandMonsters; } }				// returns the handle to the monsters resource
-		static public Surface wallTexture;			// stores the pointer to the wall texture
+
+		static public Surface MuseumWall { get { return mMuseumWall; } }			// stores the pointer to the wall texture
 		static public Surface floorTexture;			// stores the pointer to the floor texture
 		static public Surface ceilingTexture;			// stores the pointer to the ceiling texture
 		static public Surface floorHoleTexture;		// stores the pointer to the floorhole texture
 
+		static public AgateLib.DisplayLib.Shaders.Effect MuseumEffect { get { return mMuseumEffect; } }
 
 		// character functions
 
@@ -390,15 +392,18 @@ namespace ERY.Xle
 
 
 		// others:
-		static public bool LoadFont()
+		static public bool LoadSurfaces()
 		{
-
 			myFont = FontSurface.BitmapMonospace("font.png", new Size(16, 16));
 			myFont.StringTransformer = StringTransformer.ToUpper;
 
 			myCharacter = new Surface("character.png");
 			pOverlandMonsters = new Surface("OverworldMonsters.png");
 
+			mMuseumWall = new Surface("MuseumWall.png");
+			mMuseumEffect = AgateLib.DisplayLib.Shaders.ShaderCompiler.CompileEffect(
+				AgateLib.DisplayLib.Shaders.ShaderLanguage.Hlsl,
+				System.IO.File.ReadAllText("shader.txt"));
 
 			return true;
 
@@ -409,111 +414,6 @@ namespace ERY.Xle
 
 			return true;
 		}
-		[Obsolete("Not needed, but loads strings and shit too.")]
-		static public void SetHInstance()
-		{
-
-			/****************************************************************************
-			 *  void Global::SetHInstance(HINSTANCE instance)							*
-			 *																			*
-			 *  Here the hInstance value is stored for hInstance to return it when		*
-			 *	called.																	*
-			 ****************************************************************************/
-			//void Global::SetHInstance(HINSTANCE instance, HWND window)
-			//{
-			//    if (locked == false)
-			//    {
-			//        char	tempSpace[40];
-			//        int		i;
-
-			//        myApp = instance;
-			//        hWnd = window;
-
-			//        for (i = 0; i < 8; i++)
-			//        {
-			//            LoadString (hInstance(), i + 1, tempSpace, 39);
-			//            weaponName[i] = tempSpace;
-			//        }
-
-			//        for (i = 0; i < 5; i++)
-			//        {
-			//            LoadString (hInstance(), i + 9, tempSpace, 39);
-			//            armorName[i] = tempSpace;
-
-			//        }
-
-			//        for (i = 0; i < 5; i++)
-			//        {
-			//            LoadString (hInstance(), i + 14, tempSpace, 39);
-			//            qualityName[i] = tempSpace;
-
-			//        }
-			//    }
-			//}
-		}
-
-		[Obsolete("This releases everything.")]
-		static public void ReleaseFont()
-		{
-
-			/*
-			LPDIRECTDRAWSURFACE7		myFont;				// stores the handle to the font
-			LPDIRECTDRAWSURFACE7		myTiles;			// stores the handle to the tiles
-			LPDIRECTDRAWSURFACE7		myCharacter;		// stores the handle to the character sprites
-			LPDIRECTDRAWSURFACE7		pOverlandMonsters;	// stores the handle to the overland monster sprites
-
-			LPDIRECTDRAWSURFACE7	wallTexture;			// stores the pointer to the wall texture
-			LPDIRECTDRAWSURFACE7	floorTexture;			// stores the pointer to the floor texture
-			LPDIRECTDRAWSURFACE7	ceilingTexture;			// stores the pointer to the ceiling texture
-			LPDIRECTDRAWSURFACE7	floorHoleTexture;		// stores the pointer to the floorhole texture
-
-			LPDIRECTINPUTDEVICE2	pJoystick;				// Joystick
-
-			*/
-
-			if (myFont != null)
-			{
-				myFont.Dispose();
-				myFont = null;
-			}
-			if (myTiles != null)
-			{
-				myTiles.Dispose();
-				myTiles = null;
-			}
-			if (myCharacter != null)
-			{
-				myCharacter.Dispose();
-				myCharacter = null;
-			}
-			if (pOverlandMonsters != null)
-			{
-				pOverlandMonsters.Dispose();
-				pOverlandMonsters = null;
-			}
-			if (wallTexture != null)
-			{
-				wallTexture.Dispose();
-				wallTexture = null;
-			}
-			if (floorTexture != null)
-			{
-				floorTexture.Dispose();
-				floorTexture = null;
-			}
-			if (ceilingTexture != null)
-			{
-				ceilingTexture.Dispose();
-				ceilingTexture = null;
-			}
-			if (floorHoleTexture != null)
-			{
-				floorHoleTexture.Dispose();
-				floorHoleTexture = null;
-			}
-
-		}
-
 
 
 		static public string WeaponName(int a) { return weaponName[a - 1]; }

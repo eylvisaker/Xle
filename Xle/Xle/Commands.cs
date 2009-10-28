@@ -86,7 +86,7 @@ namespace ERY.Xle
 					g.AnimFrame = 0;
 				}
 
-				waitTime = g.walkTime;
+				waitTime = g.walkTime + XleCore.Map.TerrainWaitTime(player);
 
 				g.charAnimCount = 0;
 

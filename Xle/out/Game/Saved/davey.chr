@@ -2,24 +2,24 @@
   <Attributes type="ERY.Xle.AttributeContainer">
     <Attributes array="true" encoding="Base64">DwAAAA8AAAAPAAAADwAAAA8AAAA=</Attributes>
   </Attributes>
-  <Food>797</Food>
-  <Gold>584</Gold>
+  <Food>625</Food>
+  <Gold>689</Gold>
   <GoldInBank>0</GoldInBank>
-  <TimeDays>366.5</TimeDays>
+  <TimeDays>558.75</TimeDays>
   <OnRaft>0</OnRaft>
   <GameSpeed>3</GameSpeed>
   <Map>1</Map>
-  <LastMap>12</LastMap>
+  <LastMap>15</LastMap>
   <Dungeon>0</Dungeon>
   <HP>200</HP>
   <Level>1</Level>
-  <OutX>102</OutX>
-  <OutY>120</OutY>
+  <OutX>78</OutX>
+  <OutY>162</OutY>
   <OutMap>1</OutMap>
-  <X>102</X>
-  <Y>124</Y>
+  <X>170</X>
+  <Y>67</Y>
   <DungeonLevel>0</DungeonLevel>
-  <Facing>4</Facing>
+  <Facing>3</Facing>
   <CurrentArmor>3</CurrentArmor>
   <CurrentWeapon>0</CurrentWeapon>
   <Weapon array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Weapon>
@@ -28,10 +28,40 @@
   <ArmorQuality array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAA==</ArmorQuality>
   <Item array="true" encoding="Base64">AAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Item>
   <Hold>15</Hold>
-  <LastAttacked>0</LastAttacked>
+  <LastAttacked>15</LastAttacked>
   <VaultGold>17</VaultGold>
   <Chests array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</Chests>
   <Rafts array="true" type="ERY.Xle.RaftData">
+    <Item>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
+    <Item>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
+    <Item>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
+    <Item>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
+    <Item>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
+    <Item>
+      <X>0</X>
+      <Y>0</Y>
+      <MapID>0</MapID>
+    </Item>
     <Item>
       <X>0</X>
       <Y>0</Y>

@@ -121,8 +121,8 @@
       <Height>1</Height>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
-      <TargetX>0</TargetX>
-      <TargetY>0</TargetY>
+      <TargetX>8</TargetX>
+      <TargetY>1</TargetY>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
       <X>168</X>
