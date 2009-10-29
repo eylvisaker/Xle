@@ -69,4 +69,5 @@
     <Item ID="22" Name="Ruby coin" />
     <Item ID="23" Name="Diamond coin" />
   </Items>
+  <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
 </LotaGame>

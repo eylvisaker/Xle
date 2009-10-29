@@ -409,9 +409,9 @@ namespace ERY.Xle
 			pOverlandMonsters = new Surface("OverworldMonsters.png");
 
 			mMuseumWall = new Surface("MuseumWall.png");
-			mMuseumEffect = AgateLib.DisplayLib.Shaders.ShaderCompiler.CompileEffect(
-				AgateLib.DisplayLib.Shaders.ShaderLanguage.Hlsl,
-				System.IO.File.ReadAllText("shader.txt"));
+			//mMuseumEffect = AgateLib.DisplayLib.Shaders.ShaderCompiler.CompileEffect(
+			//    AgateLib.DisplayLib.Shaders.ShaderLanguage.Hlsl,
+			//    System.IO.File.ReadAllText("shader.txt"));
 
 			return true;
 

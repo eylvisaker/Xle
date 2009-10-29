@@ -190,7 +190,7 @@ namespace ERY.Xle.XleMapTypes
 			//lightColor *= XleCore.random.Next(7, 9) / 10.0f;
 
 			Matrix4x4 proj = Matrix4x4.Projection(70f, aspect, 0.1f, 5);
-			Matrix4x4 view = Matrix4x4.LookAt(pos, target, up);
+			Matrix4x4 view = Matrix4x4.ViewLookAt(pos, target, up);
 			Matrix4x4 world = Matrix4x4.Identity;// Matrix4x4.RotateZ((float)Math.PI);
 
 			g.MuseumEffect.SetTexture(AgateLib.DisplayLib.Shaders.EffectTexture.Texture0, "texture0");
@@ -205,7 +205,6 @@ namespace ERY.Xle.XleMapTypes
 
 			g.MuseumEffect.Render<object>(Render, null);
 
-			Display.Effect = null;
 			Display.PopClipRect();
 		}
 

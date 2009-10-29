@@ -978,12 +978,16 @@ namespace ERY.Xle.XleMapTypes
 			}
 
 		}
-
-		public void TestEncounter(Player player, KeyCode cursorKeys)
+		protected override void PlayerStepImpl(Player player)
+		{
+			TestEncounter(player);
+		}
+		public void TestEncounter(Player player)
 		{
 			int waitAtEnd = 0;
 			bool keyBreak = false;
 			bool firstTime = false;
+			Direction dir = player.FaceDirection;
 
 			string dirName;
 
@@ -998,9 +1002,9 @@ namespace ERY.Xle.XleMapTypes
 				stepCount = XleCore.random.Next(1, 16);
 				int type = XleCore.random.Next(0, 21);
 
-				if (cursorKeys != KeyCode.Left && cursorKeys != KeyCode.Up &&
-					cursorKeys != KeyCode.Right && cursorKeys != KeyCode.Down)
-					type = 99;
+				//if (cursorKeys != KeyCode.Left && cursorKeys != KeyCode.Up &&
+				//    cursorKeys != KeyCode.Right && cursorKeys != KeyCode.Down)
+				//    type = 99;
 
 				friendly = false;
 				monstDir = (Direction)XleCore.random.Next((int)Direction.East, (int)Direction.South + 1);
@@ -1040,7 +1044,7 @@ namespace ERY.Xle.XleMapTypes
 				}
 
 			}
-			else if (EncounterState == 0 && stepCount > 0 && cursorKeys > 0)
+			else if (EncounterState == 0 && stepCount > 0)
 			{
 				stepCount--;
 			}
