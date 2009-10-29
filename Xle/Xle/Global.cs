@@ -20,14 +20,6 @@ namespace ERY.Xle
 		South
 	}
 
-	// Animation definitions
-	[Obsolete]
-	public enum AnimType
-	{
-		Invalid = -1,
-		animInc = -2,
-		animDec = -3,
-	}
 	// Terrain Definitions
 	public enum TerrainType
 	{

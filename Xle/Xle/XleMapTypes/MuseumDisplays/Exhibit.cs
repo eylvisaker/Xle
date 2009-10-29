@@ -53,17 +53,26 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			}
 		}
 
-		public abstract void PlayerXamine(Player player);
+		public virtual void PlayerXamine(Player player)
+		{
+
+		}
 		public virtual bool IsClosed(Player player)
 		{
 			return false;
+		}
+
+		public abstract int ExhibitID { get; }
+		public virtual bool ViewedBefore(Player player)
+		{
+			return player.museum[ExhibitID] != 0;
 		}
 	}
 
 	class Information : Exhibit
 	{
 		public Information() : base("Information", Coin.None) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 0; } }
 		public override string CoinString
 		{
 			get { return string.Empty; }
@@ -72,7 +81,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Welcome : Exhibit
 	{
 		public Welcome() : base("Welcome", Coin.None) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 1; } }
 		public override string LongName
 		{
 			get { return "Welcome to the famed"; }
@@ -81,12 +90,18 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			get { return "Tarmalon Museum!"; }
 		}
+
+		public override void PlayerXamine(Player player)
+		{
+
+		}
+		
 	}
 
 	class Weaponry : Exhibit
 	{
 		public Weaponry() : base("Weaponry", Coin.Jade) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 2; } }
 		public override string LongName
 		{
 			get
@@ -98,7 +113,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Thornberry : Exhibit
 	{
 		public Thornberry() : base("Thornberry", Coin.Jade) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 3; } }
 		public override string LongName
 		{
 			get { return "A typical town of Tarmalon"; }
@@ -107,7 +122,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Fountain : Exhibit
 	{
 		public Fountain() : base("A Fountain", Coin.Jade) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 4; } }
 		public override string LongName
 		{
 			get
@@ -119,12 +134,12 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class PirateTreasure : Exhibit
 	{
 		public PirateTreasure() : base("Pirate Treasure", Coin.Topaz) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 5; } }
 	}
 	class HerbOfLife : Exhibit
 	{
 		public HerbOfLife() : base("Herb of life", Coin.Topaz) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 6; } }
 		public override string LongName
 		{
 			get
@@ -136,22 +151,22 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class NativeCurrency : Exhibit
 	{
 		public NativeCurrency() : base("Native Currency", Coin.Topaz) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 7; } }
 	}
 	class StonesWisdom : Exhibit
 	{
 		public StonesWisdom() : base("Stones of Wisdom", Coin.Amethyst) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 8; } }
 	}
 	class Tapestry : Exhibit
 	{
 		public Tapestry() : base("A Tapestry", Coin.Amethyst) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 9; } }
 	}
 	class LostDisplays : Exhibit
 	{
 		public LostDisplays() : base("Lost Displays", Coin.Sapphire) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 10; } }
 		public override string LongName
 		{
 			get
@@ -163,27 +178,27 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class KnightsTest : Exhibit
 	{
 		public KnightsTest() : base("KnightsTest", Coin.Sapphire) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 11; } }
 	}
 	class FourJewels : Exhibit
 	{
 		public FourJewels() : base("FourJewels", Coin.Ruby) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 12; } }
 	}
 	class Guardian : Exhibit
 	{
 		public Guardian() : base("Guardian", Coin.Turquoise) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 13; } }
 	}
 	class Pegasus : Exhibit
 	{
 		public Pegasus() : base("Pegasus", Coin.Diamond) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 14; } }
 	}
 	class AncientArtifact : Exhibit
 	{
 		public AncientArtifact() : base("Ancient Artifact", Coin.None) { }
-		public override void PlayerXamine(Player player) { }
+		public override int ExhibitID { get { return 15; } }
 		public override string LongName
 		{
 			get

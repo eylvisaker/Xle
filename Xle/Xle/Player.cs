@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 using AgateLib;
@@ -19,7 +17,6 @@ namespace ERY.Xle
 		intelligence
 	};
 
-	[Serializable]
 	public class AttributeContainer : IXleSerializable
 	{
 		int[] atr = new int[5];
@@ -56,7 +53,6 @@ namespace ERY.Xle
 		#endregion
 	}
 
-	[Serializable]
 	public class RaftData : IXleSerializable
 	{
 		public Point Location;
@@ -99,7 +95,6 @@ namespace ERY.Xle
 		#endregion
 	}
 
-	[Serializable]
 	public class Player : IXleSerializable
 	{
 		AttributeContainer mAttributes = new AttributeContainer();
@@ -145,7 +140,7 @@ namespace ERY.Xle
 		public int wizardOfPotions;
 		public int casandra;
 
-		public int[] museum = new int[15];
+		public int[] museum = new int[16];
 		public int caretaker;
 
 		public int mailTown;
@@ -242,7 +237,7 @@ namespace ERY.Xle
 			item[15] = 1;			// compendium
 			item[17] = 2;			// jade coins
 
-			for (i = 0; i < 15; i++)
+			for (i = 0; i < museum.Length; i++)
 			{
 				museum[i] = 0;
 			}
@@ -378,12 +373,15 @@ namespace ERY.Xle
 			mailTown = info.ReadInt32("MailTown");
 
 			name = info.ReadString("Name");
+
+			if (museum.Length < 16)
+				museum = new int[16];
 		}
 
 		#endregion
 
 		/// <summary>
-		/// 					// the player has died
+		/// The player has died
 		/// </summary>
 		public void Dead()
 		{
@@ -462,13 +460,6 @@ namespace ERY.Xle
 		}
 		private void SavePlayer(string filename)
 		{
-			//IFormatter formatter = new BinaryFormatter();
-
-			//using (System.IO.Stream ff = System.IO.File.OpenWrite(filename))
-			//{
-			//    formatter.Serialize(ff, this);
-			//}
-
 			XleSerializer ser = new XleSerializer(typeof(Player));
 
 			using (System.IO.Stream ff = System.IO.File.Open
@@ -479,13 +470,6 @@ namespace ERY.Xle
 		}
 		public static Player LoadPlayer(string filename)
 		{
-			//IFormatter formatter = new BinaryFormatter();
-
-			//using (System.IO.Stream ff = System.IO.File.OpenRead(filename))
-			//{
-			//    return (Player)formatter.Deserialize(ff);
-			//}
-
 			XleSerializer ser = new XleSerializer(typeof(Player));
 
 			using (System.IO.Stream ff = System.IO.File.OpenRead(filename))
@@ -493,286 +477,6 @@ namespace ERY.Xle
 				return (Player)ser.Deserialize(ff);
 			}
 		}
-		/*
-		public bool SaveGame()
-		{
-			if (g.commandMode != CmdMode.Prompt && g.commandMode != CmdMode.EnterCommand)
-				return false;
-
-			if (g.Menu('e') == "End")
-			{
-				//        const int ver = 2;
-				//        char buffer[256];
-				//        int count = 0;
-				////		HRESULT hr;
-				//        DWORD bytes;
-				//        DWORD err = GetLastError();
-
-				//        HANDLE hFile = CreateFileA(name + ".chr", GENERIC_WRITE, 0, NULL,
-				//            CREATE_ALWAYS, FILE_FLAG_SEQUENTIAL_SCAN | FILE_FLAG_WRITE_THROUGH, NULL);
-
-				//        err = GetLastError();
-
-				//        if (hFile == INVALID_HANDLE_VALUE)
-				//        {
-
-				//            hFile = NULL;
-
-				//            hFile = CreateFileA(name + ".chr", GENERIC_WRITE, 0, NULL,
-				//                OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN | FILE_FLAG_WRITE_THROUGH, NULL);
-
-
-				//            err = GetLastError();
-
-				//        }
-
-				//        if (hFile == INVALID_HANDLE_VALUE)
-				//        {
-
-				//            g.AddBottom("");
-				//            g.AddBottom("Failed to save file.", XleColor.Yellow);
-				//            g.AddBottom("Error code: " + string((signed)err), XleColor.Yellow);
-				//            g.AddBottom("");
-
-				//            switch(err)
-				//            {
-				//                case 183:
-				//                    g.AddBottom("Cannot create a file when ");
-				//                    g.AddBottom("that file already exists. ");
-				//                    break;
-
-				//            }
-
-				//            SoundMan.PlaySound(LotaSound.Invalid);
-
-				//            CmdMode cmd = g.commandMode;
-
-				//            g.commandMode = cmdBad;
-				//            wait(3000);
-				//            g.commandMode = cmd;
-
-				//            g.AddBottom("");
-				//            g.AddBottom("Enter Command: ");
-
-				//            CloseHandle(hFile);
-				//            return false;
-
-				//        }
-
-				//        WriteFile(hFile, &ver, 4, &bytes, NULL);		// write the version to the file
-				//        count += bytes;									// 4
-
-				//        err = GetLastError();
-
-				//        memset(buffer, 0, 255);
-				//        memcpy(buffer, (char*) Name(), len(Name()));
-
-				//        WriteFile(hFile, buffer, 60, &bytes, NULL);
-				//        count += bytes;									// 64
-
-				//        memset(buffer, 0, 255);
-				//        WriteFile(hFile, buffer, 192, &bytes, NULL);
-				//        count += bytes;									// 256
-
-				//        WriteFile(hFile, this, sizeof(*this) - sizeof(name), &bytes, NULL);
-				//        count += bytes;									// 1260
-
-				//        err = GetLastError();
-
-				//if (err)
-				//{
-
-				//	g.AddBottom("");
-				//	g.AddBottom("Failed to save file.", XleColor.Yellow);
-				//	g.AddBottom("Error code: " + string((signed)err), XleColor.Yellow);
-				//		g.AddBottom("");
-
-				//	switch(err)
-				//	{
-				//		case 183:
-				//			g.AddBottom("Cannot create a file when ");
-				//			g.AddBottom("that file already exists. ");
-				//			break;
-
-				//	}
-
-				//	SoundMan.PlaySound(LotaSound.Invalid);
-
-				//	CmdMode cmd = g.commandMode;
-
-				//	g.commandMode = cmdBad;
-				//	wait(3000);
-				//	g.commandMode = cmd;
-
-				//	g.AddBottom("");
-				//	g.AddBottom("Enter Command: ");
-
-				//	CloseHandle(hFile);
-				//	return false;
-
-				//}
-
-				////SetEndOfFile(hFile);
-				////CloseHandle(hFile);
-
-
-				//g.AddBottom("");
-				//g.AddBottom("Game saved successfully.", XleColor.Green);
-
-				g.AddBottom("");
-				g.AddBottom("Save game not implemented.", XleColor.Green);
-
-				g.commandMode = CmdMode.Bad;
-				Lota.wait(2000);
-				g.commandMode = CmdMode.Prompt;
-
-
-				return true;
-
-			}
-			else
-			{
-				g.AddBottom("");
-				g.AddBottom("Cannot save now.");
-				g.AddBottom("");
-
-				SoundMan.PlaySound(LotaSound.Invalid);
-
-				CmdMode cmd = g.commandMode;
-
-				g.commandMode = CmdMode.Bad;
-				Lota.wait(750);
-				g.commandMode = cmd;
-
-				g.AddBottom("Enter Command: ");
-
-				return false;
-
-			}
-		}
-		public bool LoadGame(string game)
-		{
-			return false;
-			//if (nName == "")
-			//    return false;
-
-			//HANDLE hFile = CreateFile(nName, GENERIC_READ, 0, NULL,
-			//    OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL);
-
-			//int ver;
-			//char buffer[256];
-			//int count = 0;
-			//bool failed = false;
-			//DWORD bytes;
-			//DWORD err = GetLastError();
-
-			//if (err)
-			//    failed = true;
-
-			//ReadFile(hFile, &ver, 4, &bytes, NULL);		// write the version to the file
-			//count += bytes;									// 4
-
-			//if (count != 4)
-			//{
-			//    failed = true;
-			//}
-			//else
-			//{
-			//    switch (ver)
-			//    {
-			//        case 1:
-
-			//            failed = true;
-
-			//            break;
-
-			//        case 2:
-
-			//            memset(buffer, 0, 255);
-			//            ReadFile(hFile, buffer, 60, &bytes, NULL);
-			//            count += bytes;
-
-			//            if (count != 64)
-			//            {
-			//                failed = true;
-			//                break;
-			//            }
-
-			//            name = buffer;
-
-
-			//            ReadFile(hFile, buffer, 192, &bytes, NULL);
-			//            count += bytes;									// 256
-
-			//            if (count != 256)
-			//            {
-			//                failed = true;
-			//                break;
-			//            }
-
-			//            ReadFile(hFile, this, sizeof(*this) - sizeof(name), &bytes, NULL);
-			//            count += bytes;									// 1252
-
-			//            if (count != 1252)
-			//            {
-			//                failed = true;
-			//                break;
-			//            }
-
-			//            break;
-
-			//        default:
-			//            failed = true;
-
-			//            break;
-
-			//    }
-			//}
-
-
-			//CloseHandle(hFile);
-
-			//if (failed)
-			//{
-			//    g.AddBottom("");
-			//    g.AddBottom("Could not read file.");
-			//    g.AddBottom("");
-
-			//    SoundMan.PlaySound(LotaSound.Invalid);
-
-			//    CmdMode cmd = g.commandMode;
-
-			//    g.commandMode = cmdBad;
-			//    wait(750);
-			//    g.commandMode = cmd;
-			//}
-			//else
-			//{
-
-			//    Lota.Map.LoadMap(Map());
-
-			//    g.invisible = false;
-			//    g.guard = false;
-
-			//    g.ClearBottom();
-
-			//    g.AddBottom("");
-			//    g.AddBottom("Game loaded successfully.", XleColor.Green);
-
-			//    g.commandMode = cmdBad;
-
-			//    wait(2000);
-
-			//    g.commandMode = cmdPrompt;
-
-			//    return true;
-			//}
-
-
-			//return false;
-
-		}
-		*/
 
 		/// <summary>
 		/// gets or sets the character leve.
@@ -788,7 +492,7 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
-		/// 	// returns or changes the specified attribute
+		/// Returns or changes the specified attribute
 		/// </summary>
 		/// <param name="atr"></param>
 		/// <param name="change"></param>
@@ -815,7 +519,7 @@ namespace ERY.Xle
 
 
 		/// <summary>
-		/// 		// returns or adjusts current HP
+		/// Returns or adjusts current HP
 		/// </summary>
 		/// <param name="change"></param>
 		/// <returns></returns>
