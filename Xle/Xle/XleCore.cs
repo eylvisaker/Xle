@@ -17,7 +17,7 @@ using AgateLib.InputLib;
 
 namespace ERY.Xle
 {
-	class XleCore
+	public class XleCore
 	{
 		#region --- Static Members ---
 
