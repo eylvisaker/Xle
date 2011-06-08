@@ -1,10 +1,140 @@
 <XleRoot type="ERY.Xle.XleMapTypes.Outside">
-  <MapName>
-  </MapName>
+  <MapName>Tarmalon</MapName>
   <MapID>0</MapID>
-  <Tileset>tiles.png</Tileset>
+  <Tileset>Tiles.png</Tileset>
   <DefaultTile>0</DefaultTile>
-  <Events array="true" type="ERY.Xle.XleEvent" />
+  <Events array="true" type="ERY.Xle.XleEvent">
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>18</X>
+      <Y>56</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>11</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>76</TargetX>
+      <TargetY>16</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>68</X>
+      <Y>78</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>12</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>2</TargetX>
+      <TargetY>20</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>42</X>
+      <Y>8</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>10</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>77</TargetX>
+      <TargetY>18</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>10</X>
+      <Y>32</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>17</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>1</TargetX>
+      <TargetY>30</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>6</X>
+      <Y>108</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>16</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>49</TargetX>
+      <TargetY>35</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>52</X>
+      <Y>106</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>15</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>1</TargetX>
+      <TargetY>17</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>72</X>
+      <Y>72</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>51</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>39</TargetX>
+      <TargetY>87</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>104</X>
+      <Y>110</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>14</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>75</TargetX>
+      <TargetY>2</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>116</X>
+      <Y>58</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>13</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>64</TargetX>
+      <TargetY>17</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>64</X>
+      <Y>42</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>18</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>2</TargetX>
+      <TargetY>7</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>74</X>
+      <Y>22</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>19</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>31</TargetX>
+      <TargetY>37</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>114</X>
+      <Y>42</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>8</TargetX>
+      <TargetY>1</TargetY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>114</X>
+      <Y>6</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>20</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>1</TargetX>
+      <TargetY>17</TargetY>
+    </Item>
+  </Events>
   <Width>128</Width>
   <Height>128</Height>
   <MapData array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
