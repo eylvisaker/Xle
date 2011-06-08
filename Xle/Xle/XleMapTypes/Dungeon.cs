@@ -12,7 +12,7 @@ using AgateLib.Serialization.Xle;
 
 namespace ERY.Xle.XleMapTypes
 {
-	public class Dungeon : XleMap
+	public class Dungeon : Map3D
 	{
 		/// <summary>
 		/// Dungeon data.  Index order is mData[level, y, x].
@@ -173,9 +173,17 @@ namespace ERY.Xle.XleMapTypes
 			return retval.ToArray();
 		}
 
-		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
+		protected override AgateLib.DisplayLib.Surface Backdrop
 		{
-			throw new Exception("The method or operation is not implemented.");
+			get { throw new NotImplementedException(); }
+		}
+		protected override AgateLib.DisplayLib.Surface Wall
+		{
+			get { throw new NotImplementedException(); }
+		}
+		protected override AgateLib.DisplayLib.Surface SidePassages
+		{
+			get { throw new NotImplementedException(); }
 		}
 
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)

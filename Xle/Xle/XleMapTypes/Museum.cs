@@ -15,7 +15,7 @@ using Vertex = AgateLib.Geometry.VertexTypes.PositionTextureNormalTangent;
 
 namespace ERY.Xle.XleMapTypes
 {
-	public class Museum : XleMap
+	public class Museum : Map3D
 	{
 		int[] mData;
 		int mHeight;
@@ -86,6 +86,19 @@ namespace ERY.Xle.XleMapTypes
 
 		#region --- Drawing ---
 
+		protected override Surface Backdrop
+		{
+			get { return g.MuseumBackdrop; }
+		}
+		protected override Surface Wall
+		{
+			get { return g.MuseumWall; }
+		}
+		protected override Surface SidePassages
+		{
+			get { return g.MuseumSidePassage; }
+		}
+
 		VertexBuffer wall_vb;
 		IndexBuffer wall_ib;
 
@@ -153,59 +166,6 @@ namespace ERY.Xle.XleMapTypes
 			indices.Add(index + 2);
 			indices.Add(index + 3);
 
-		}
-
-		protected override void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect)
-		{
-			Vector3 faceVec;
-
-			switch (faceDirection)
-			{
-				case Direction.East: faceVec = new Vector3(1, 0, 0); break;
-				case Direction.West: faceVec = new Vector3(-1, 0, 0); break;
-				case Direction.North: faceVec = new Vector3(0, -1, 0); break;
-				case Direction.South: faceVec = new Vector3(0, 1, 0); break;
-				default:
-					throw new Exception("Invalid face direction.");
-			}
-
-			Vector3 up = new Vector3(0, 0, -1);
-			Vector3 pos = new Vector3(x, y, 0.5);
-			Vector3 target = pos + faceVec;
-			float aspect = inRect.Width / (float)inRect.Height;
-			// real aspect is 1.35294116 but we "fix" it to this value:
-			aspect = 1;
-
-			pos = pos - faceVec * 0.4;
-
-			Display.PushClipRect(inRect);
-			Color fog = Color.FromArgb(20, 20 ,20);
-			Display.Clear(fog, inRect);
-
-			Vector3 lightPos = new Vector3(7, 2.4, 0.8);
-			lightPos.X += XleCore.random.Next(-1, 1) * 0.05f;
-			lightPos.Y += XleCore.random.Next(-1, 1) * 0.05f;
-
-			Vector4 lightColor = new Vector4(1, 0.7, 0, 1);
-			//lightColor *= XleCore.random.Next(7, 9) / 10.0f;
-
-			Matrix4x4 proj = Matrix4x4.Projection(70f, aspect, 0.1f, 5);
-			Matrix4x4 view = Matrix4x4.ViewLookAt(pos, target, up);
-			Matrix4x4 world = Matrix4x4.Identity;// Matrix4x4.RotateZ((float)Math.PI);
-
-			g.MuseumEffect.SetTexture(AgateLib.DisplayLib.Shaders.EffectTexture.Texture0, "texture0");
-			g.MuseumEffect.SetVariable("worldViewProj", proj * world * view);
-			g.MuseumEffect.SetVariable("ambientLightColor", Color.FromArgb(64,64,64));
-			g.MuseumEffect.SetVariable("lightPos", lightPos);
-			g.MuseumEffect.SetVariable("lightColor", lightColor);
-			g.MuseumEffect.SetVariable("attenuation", new Vector3(0.3, 0, 0.7));
-			g.MuseumEffect.SetVariable("fogColor", fog);
-
-			wall_vb.Textures[0] = g.MuseumWall;
-
-			g.MuseumEffect.Render<object>(Render, null);
-
-			Display.PopClipRect();
 		}
 
 		void Render(object obj)
@@ -302,6 +262,8 @@ namespace ERY.Xle.XleMapTypes
 		public override bool CanPlayerStepInto(Player player, int xx, int yy)
 		{
 			if (this[xx, yy] >= 0x40)
+				return false;
+			else if ((this[xx, yy] & 0xf0) == 0x00)
 				return false;
 			else
 				return true;

@@ -999,6 +999,30 @@ namespace ERY.Xle
 				default: throw new ArgumentException("Invalid direction!");
 			}
 		}
+		protected static Point LeftDirection(Direction dir)
+		{
+			switch (dir)
+			{
+				case Direction.East: return StepDirection(Direction.North);
+				case Direction.North: return StepDirection(Direction.West);
+				case Direction.West: return StepDirection(Direction.South);
+				case Direction.South: return StepDirection(Direction.East);
+
+				default: throw new ArgumentException("Invalid direction!");
+			}
+		}
+		protected static Point RightDirection(Direction dir)
+		{
+			switch (dir)
+			{
+				case Direction.East: return StepDirection(Direction.South);
+				case Direction.North: return StepDirection(Direction.East);
+				case Direction.West: return StepDirection(Direction.North);
+				case Direction.South: return StepDirection(Direction.West);
+
+				default: throw new ArgumentException("Invalid direction!");
+			}
+		}
 
 		#endregion
 		#region --- Player commands ---

@@ -44,8 +44,9 @@ namespace ERY.Xle
 		static Surface myTiles;			// stores the handle to the tiles
 		static Surface myCharacter;		// stores the handle to the character sprites
 		static Surface pOverlandMonsters;	// stores the handle to the overland monster sprites
+		static Surface mMuseumBackdrop; 
 		static Surface mMuseumWall;
-		static AgateLib.DisplayLib.Shaders.Effect mMuseumEffect;
+		static Surface mMuseumSidePassage;
 
 		static string[] bottom = new string[5];			// keeps the bottom portion of the screen
 		static Color[][] bottomColor = new Color[5][];	// keeps the bottom colors on the screen
@@ -86,12 +87,13 @@ namespace ERY.Xle
 		static public Surface Character { get { return myCharacter; } }		// returns the handle to the character resource
 		static public Surface Monsters { get { return pOverlandMonsters; } }				// returns the handle to the monsters resource
 
+		static public Surface MuseumBackdrop { get { return mMuseumBackdrop; } }
 		static public Surface MuseumWall { get { return mMuseumWall; } }			// stores the pointer to the wall texture
+		static public Surface MuseumSidePassage { get { return mMuseumSidePassage; } }
+
 		static public Surface floorTexture;			// stores the pointer to the floor texture
 		static public Surface ceilingTexture;			// stores the pointer to the ceiling texture
 		static public Surface floorHoleTexture;		// stores the pointer to the floorhole texture
-
-		static public AgateLib.DisplayLib.Shaders.Effect MuseumEffect { get { return mMuseumEffect; } }
 
 		// character functions
 
@@ -408,10 +410,9 @@ namespace ERY.Xle
 			myCharacter = new Surface("character.png");
 			pOverlandMonsters = new Surface("OverworldMonsters.png");
 
+			mMuseumBackdrop = new Surface("MuseumBackdrop.png");
 			mMuseumWall = new Surface("MuseumWall.png");
-			//mMuseumEffect = AgateLib.DisplayLib.Shaders.ShaderCompiler.CompileEffect(
-			//    AgateLib.DisplayLib.Shaders.ShaderLanguage.Hlsl,
-			//    System.IO.File.ReadAllText("shader.txt"));
+			mMuseumSidePassage = new Surface("MuseumSidePassage.png");
 
 			return true;
 

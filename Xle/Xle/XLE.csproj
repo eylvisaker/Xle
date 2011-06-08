@@ -120,6 +120,7 @@
     <Compile Include="MapData.cs" />
     <Compile Include="XleMapTypes\Castle.cs" />
     <Compile Include="XleMapTypes\Dungeon.cs" />
+    <Compile Include="XleMapTypes\Map3D.cs" />
     <Compile Include="XleMapTypes\Museum.cs" />
     <Compile Include="XleColor.cs" />
     <Compile Include="XleCore.cs" />
