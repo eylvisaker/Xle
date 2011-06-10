@@ -4,6 +4,7 @@
     <Map ID="0" Name="The Museum" File="Museum.xmf" />
     <Map ID="1" Name="Outside" File="Tarmalon.xmf" />
     <Map ID="2" Name="Three Sisters" File="ThreeSisters.xmf" />
+    <Map ID="3" Name="Flight" File="Warlord.xmf" />
     <Map ID="10" Name="Thompson Crossing" File="ThompsonCrossing.xmf" />
     <Map ID="11" Name="Thornberry" File="Thornberry.xmf" />
     <Map ID="12" Name="Alanville" File="Alanville.xmf" />
@@ -15,6 +16,7 @@
     <Map ID="18" Name="Merchant Square" File="MerchantSquare.xmf" />
     <Map ID="19" Name="Laingsburg" File="Laingsburg.xmf" />
     <Map ID="20" Name="Holy Point" File="HolyPoint.xmf" />
+    <Map ID="21" Name="Eagle Hollow" File="EagleHollow.xmf" />
     <Map ID="51" Name="The Castle" File="Castle.xmf" />
   </Maps>
   <Qualities>
