@@ -1,5 +1,0 @@
-unistd.o
-string.o
-stdio.o
-stdlib.o
-fcntl.o
