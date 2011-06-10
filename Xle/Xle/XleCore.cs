@@ -668,15 +668,13 @@ namespace ERY.Xle
 
 		}
 
-		/****************************************************************************
-		 *  void WriteText ( LPDIRECTDRAWSURFACE7 pDDS, int px, int py,				*
-		 *					 const char *theText, const unsigned int* coloring)		*
-		 *																			*
-		 *  This function is the message driver that writes to our direct draw surface	*
-		 *	the message we want at the x,y point given in our font.					*
-		 *	The color is is overloaded so an array of coloring can be passed, or	*
-		 *	just a single color.													*
-		 ****************************************************************************/
+		/// <summary>
+		/// Writes out the specified text to the back buffer.
+		/// </summary>
+		/// <param name="px"></param>
+		/// <param name="py"></param>
+		/// <param name="theText"></param>
+		/// <param name="coloring"></param>
 		public static void WriteText(int px, int py, string theText, Color[] coloring)
 		{
 			if (string.IsNullOrEmpty(theText))

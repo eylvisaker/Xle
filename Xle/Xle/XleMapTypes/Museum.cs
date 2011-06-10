@@ -98,6 +98,10 @@ namespace ERY.Xle.XleMapTypes
 		{
 			get { return g.MuseumSidePassage; }
 		}
+		protected override Surface Door
+		{
+			get { return g.MuseumDoor; }
+		}
 
 		VertexBuffer wall_vb;
 		IndexBuffer wall_ib;
@@ -243,7 +247,7 @@ namespace ERY.Xle.XleMapTypes
 			Commands.UpdateCommand(command);
 		}
 
-		
+
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)
 		{
 			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
@@ -281,6 +285,54 @@ namespace ERY.Xle.XleMapTypes
 			return true;
 		}
 
+		public override bool PlayerUse(Player player, int item)
+		{
+			// twist gold armband
+			if (item == 1)
+			{
+				Point faceDir = StepDirection(player.FaceDirection);
+				Point test = new Point(player.X + faceDir.X, player.Y + faceDir.Y);
+
+				// door value
+				if (this[test.X, test.Y] == 0x02)
+				{
+					player.SetMap(1, 114, 42);
+
+					g.ClearBottom();
+				}
+				else
+				{
+					g.AddBottom("The gold armband hums softly.");
+				}
+
+				return true;
+			}
+
+			return false;
+		}
+
+		public override void OnLoad(Player player)
+		{
+			Point faceDir = new Point();
+
+			// face the player in a direction with an open passage
+			for (int i = -1; i <= 1; i++)
+			{
+				for (int j = -1; j <= 1; j++)
+				{
+					if (Math.Abs(i) + Math.Abs(j) == 2) continue;
+					if (i == 0 && j == 0) continue;
+
+					Point loc = new Point(player.X + i, player.Y + j);
+
+					if (IsPassable(this[loc.X, loc.Y]))
+					{
+						player.FaceDirection = DirectionFromPoint(new Point(i, j));
+					}
+				}
+			}
+		}
+
 		#region --- Museum Exhibits ---
 
 		private bool InteractWithDisplay(Player player)
@@ -309,7 +361,7 @@ namespace ERY.Xle.XleMapTypes
 
 			g.AddBottom();
 			XleCore.WaitForKey();
-			
+
 
 			return true;
 		}
@@ -351,6 +403,54 @@ namespace ERY.Xle.XleMapTypes
 			g.AddBottom("There is nothing to take.");
 
 			return true;
+		}
+
+		protected override void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
+		{
+			var exhibit = mExhibits[val];
+			Color clr = exhibit.ExhibitColor;
+
+			DrawExhibitStatic(destRect, clr, distance);
+
+			if (distance == 1)
+			{
+				int px = 176;
+				int py = 208;
+
+				int textLength = exhibit.Name.Length;
+
+				px -= (textLength / 2) * 16;
+
+				px += destRect.X;
+				py += destRect.Y;
+
+				AgateLib.DisplayLib.Display.FillRect(px, py, textLength * 16, 16, Color.Black);
+
+				XleCore.WriteText(px, py, exhibit.Name, clr);
+			}
+		}
+
+		private void DrawExhibitStatic(Rectangle destRect, Color clr, int distance)
+		{
+			Rectangle destOffset = new Rectangle(96, 96, 160, 96);
+
+			if (distance == 2)
+			{
+				destOffset.X = 128;
+				destOffset.Y = 112;
+				destOffset.Width = 112;
+				destOffset.Height = 64;
+			}
+
+			Rectangle srcRect = new Rectangle(0, 0, destOffset.Width, destOffset.Height);
+
+			destRect.X += destOffset.X;
+			destRect.Y += destOffset.Y;
+			destRect.Width = srcRect.Width;
+			destRect.Height = srcRect.Height;
+
+			MuseumExhibitStatic.Color = clr;
+			MuseumExhibitStatic.Draw(srcRect, destRect);
 		}
 	}
 }

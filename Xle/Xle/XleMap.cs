@@ -1122,6 +1122,37 @@ namespace ERY.Xle
 		{
 			return 0;
 		}
+
+		/// <summary>
+		/// Returns true if there was an effect of using the item.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="item"></param>
+		/// <returns></returns>
+		public virtual bool PlayerUse(Player player, int item)
+		{
+			return false;
+		}
+
+		/// <summary>
+		/// Called after a map is loaded.
+		/// </summary>
+		/// <param name="player"></param>
+		public virtual void OnLoad(Player player)
+		{
+		}
+
+
+
+		protected Direction DirectionFromPoint(Point point)
+		{
+			if (point.X < 0 && point.Y == 0) return Direction.West;
+			if (point.X > 0 && point.Y == 0) return Direction.East;
+			if (point.X == 0 && point.Y < 0) return Direction.North;
+			if (point.X == 0 && point.Y > 0) return Direction.South;
+
+			throw new ArgumentException();
+		}
 	}
 
 

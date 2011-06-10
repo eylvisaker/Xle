@@ -62,6 +62,143 @@ namespace ERY.Xle.XleMapTypes
 			 * */
 		}
 
+		public override bool PlayerUse(Player player, int item)
+		{
+			bool found = false;
+
+			//switch (item)
+			//{
+			//    case 4:			// Iron Key
+			//    case 5:			// Copper Key
+			//    case 6:			// Brass Key
+			//    case 7:			// Stone Key
+
+					//for (j = -1; j < 3; j++)
+					//{
+					//    for (i = -1; i < 3; i++)
+					//    {
+					//        if (Lota.Map.CheckSpecial(player.X + i, player.Y + j) == 24 && found == false)
+					//        {
+					//            SpecialEvent dave = Lota.Map.GetSpecial(player.X + i, player.Y + j);
+
+					//            if (dave.data[0] == player.Hold())
+					//            {
+					//                found = true;
+
+					//                g.AddBottom(commandstring);
+					//                SoundMan.PlaySound(LotaSound.UnlockDoor);
+					//                wait(250);
+
+					//                g.AddBottom("Unlock door");
+
+					//                for (j = dave.sy; j < dave.sy + dave.sheight; j++)
+					//                {
+					//                    for (i = dave.sx; i < dave.sx + dave.swidth; i++)
+					//                    {
+					//                        int m = Lota.Map.M(j, i);
+
+					//                        if ((m % 16 < 4 && m / 16 == 13) || (m % 16 >= 2 && m % 16 < 4 && m / 16 == 14))
+					//                        {
+					//                            Lota.Map.SetM(j, i, 0);
+					//                        }
+
+					//                    }
+					//                }
+
+					//                wait(750);
+
+					//                break;
+					//            }
+
+					//        }
+					//    }
+
+					//    if (found) break;
+					//}
+
+			//        if (found)
+			//        {
+			//            noEffect = false;
+			//        }
+
+			//        if (noEffect)
+			//        {
+			//            g.AddBottom(commandstring);
+			//            g.AddBottom("");
+
+			//            Lota.wait(300 + 200 * player.Gamespeed);
+			//            g.UpdateBottom("This key does nothing here.");
+
+			//            noEffect = false;
+
+			//        }
+			//        break;
+			//    case 8:				// magic seeds
+			//        commandstring = "Eat Magic Seeds";
+
+			//        g.AddBottom(commandstring);
+			//        Lota.wait(150);
+
+			//        g.invisible = true;
+			//        g.AddBottom("You're invisible.");
+
+			//        Lota.Map.IsAngry = false;
+
+			//        Lota.wait(500);
+
+			//        player.ItemCount(8, -1);
+			//        noEffect = false;
+
+			//        break;
+
+			//    case 12:				// magic ice
+
+			//        commandstring = "Throw magic ice";
+
+			//        for (j = -1; j < 3; j++)
+			//        {
+			//            for (i = -1; i < 3; i++)
+			//            {
+
+			//                //if (Lota.Map.CheckSpecial(player.X + i, player.Y + j) == 22 && found == false)
+			//                //{
+			//                //    SpecialEvent dave = Lota.Map.GetSpecial(player.X + i, player.Y + j);
+			//                //    found = true;
+
+			//                //    g.AddBottom(commandstring);
+			//                //    Lota.wait(500);
+
+			//                //    for (j = dave.sy; j < dave.sy + dave.sheight; j++)
+			//                //    {
+			//                //        for (i = dave.sx; i < dave.sx + dave.swidth; i++)
+			//                //        {
+			//                //            int m = Lota.Map.M(j, i);
+
+			//                //            if (m % 16 >= 13 && m / 16 <= 2)
+			//                //            {
+			//                //                Lota.Map.SetM(j, i, m - 8);
+			//                //            }
+
+			//                //        }
+			//                //    }
+
+			//                //    break;
+			//                //}
+			//            }
+
+			//            if (found) break;
+			//        }
+
+			//        if (found)
+			//        {
+			//            return true;
+			//        }
+
+			//        break;
+			//}
+
+			return false;
+		}
 		public override bool PlayerOpen(Player player)
 		{
 			XleEvent evt = this.GetEvent(player, 1);

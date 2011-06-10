@@ -1075,8 +1075,8 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected void DrawGuards(Point centerPoint, Rectangle inRect)
 		{
-			int px = inRect.Left + (inRect.Width / 16) / 2 * 16;
-			int py = inRect.Top + inRect.Height / 2;
+			int px = inRect.Left + ((inRect.Width / 16) / 2) * 16;
+			int py = inRect.Top + ((inRect.Height / 16) / 2) * 16;
 
 			for (int i = 0; i < Guards.Count; i++)
 			{
@@ -1097,7 +1097,7 @@ namespace ERY.Xle.XleMapTypes
 					int rx = px - (centerPoint.X - guard.X) * 16;
 					int ry = py - (centerPoint.Y - guard.Y) * 16;
 
-					if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry < inRect.Bottom)
+					if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
 					{
 						Rectangle destRect = new Rectangle(rx, ry, 32, 32);
 						g.Character.Draw(charRect, destRect);

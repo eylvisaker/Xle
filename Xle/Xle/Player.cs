@@ -406,7 +406,7 @@ namespace ERY.Xle
 
 			g.HPColor = XleColor.White;
 
-			Map = 1;
+			SetMap(1, 80, 80);
 
 			TerrainType t;
 
@@ -858,40 +858,45 @@ namespace ERY.Xle
 			{
 				return map;
 			}
-			set
+		}
+
+		public void SetMap(int newMap, int newX, int newY)
+		{
+			if (XleCore.Map == null)
 			{
-				if (XleCore.Map == null)
+				map = newMap;
+				return;
+			}
+
+			if (XleCore.Map.GetType().Equals(typeof(XleMapTypes.Outside)))
+			{
+				outmap = map;
+				outx = x;
+				outy = y;
+			}
+
+			lastMap = map;
+
+			map = newMap;
+
+
+			if (MapChangedStorage != null)
+			{
+				try
 				{
-					map = value;
-					return;
+					MapChangedStorage(this, EventArgs.Empty);
+
+					x = newX;
+					y = newY;
+
+					XleCore.Map.OnLoad(this);
+
+					g.ClearBottom();
 				}
-
-				if (XleCore.Map.GetType().Equals(typeof(XleMapTypes.Outside)))
+				catch (Exception e)
 				{
-					outmap = map;
-					outx = x;
-					outy = y;
-				}
-
-				lastMap = map;
-
-				map = value;
-
-
-				if (MapChangedStorage != null)
-				{
-					try
-					{
-						MapChangedStorage(this, EventArgs.Empty);
-
-						x = 0;
-						y = 0;
-					}
-					catch (Exception e)
-					{
-						map = lastMap;
-						throw e;
-					}
+					map = lastMap;
+					throw e;
 				}
 			}
 		}
@@ -1460,10 +1465,7 @@ namespace ERY.Xle
 
 		public void ReturnToOutside()
 		{
-			Map = outmap;
-			x = outx;
-			y = outy;
-
+			SetMap(outmap, outx, outy);
 		}
 
 

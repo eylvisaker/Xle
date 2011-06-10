@@ -44,9 +44,6 @@ namespace ERY.Xle
 		static Surface myTiles;			// stores the handle to the tiles
 		static Surface myCharacter;		// stores the handle to the character sprites
 		static Surface pOverlandMonsters;	// stores the handle to the overland monster sprites
-		static Surface mMuseumBackdrop; 
-		static Surface mMuseumWall;
-		static Surface mMuseumSidePassage;
 
 		static string[] bottom = new string[5];			// keeps the bottom portion of the screen
 		static Color[][] bottomColor = new Color[5][];	// keeps the bottom colors on the screen
@@ -87,9 +84,12 @@ namespace ERY.Xle
 		static public Surface Character { get { return myCharacter; } }		// returns the handle to the character resource
 		static public Surface Monsters { get { return pOverlandMonsters; } }				// returns the handle to the monsters resource
 
-		static public Surface MuseumBackdrop { get { return mMuseumBackdrop; } }
-		static public Surface MuseumWall { get { return mMuseumWall; } }			// stores the pointer to the wall texture
-		static public Surface MuseumSidePassage { get { return mMuseumSidePassage; } }
+		static public Surface MuseumBackdrop { get; private set; }
+		static public Surface MuseumWall { get ; private set; }			// stores the pointer to the wall texture
+		static public Surface MuseumSidePassage { get ; private set; }
+		static public Surface MuseumDoor { get ; private set; }
+		static public Surface MuseumExhibitFrame { get; private set; }
+		static public Surface MuseumExhibitStatic { get; private set; }
 
 		static public Surface floorTexture;			// stores the pointer to the floor texture
 		static public Surface ceilingTexture;			// stores the pointer to the ceiling texture
@@ -410,9 +410,12 @@ namespace ERY.Xle
 			myCharacter = new Surface("character.png");
 			pOverlandMonsters = new Surface("OverworldMonsters.png");
 
-			mMuseumBackdrop = new Surface("MuseumBackdrop.png");
-			mMuseumWall = new Surface("MuseumWall.png");
-			mMuseumSidePassage = new Surface("MuseumSidePassage.png");
+			MuseumBackdrop = new Surface("MuseumBackdrop.png");
+			MuseumWall = new Surface("MuseumWall.png");
+			MuseumDoor = new Surface("MuseumDoor.png");
+			MuseumSidePassage = new Surface("MuseumSidePassage.png");
+			MuseumExhibitFrame = new Surface("ExhibitFrame.png");
+			MuseumExhibitStatic = new Surface("ExhibitStatic.png");
 
 			return true;
 

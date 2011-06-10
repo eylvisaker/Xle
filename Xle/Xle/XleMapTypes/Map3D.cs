@@ -12,6 +12,15 @@ namespace ERY.Xle.XleMapTypes
 		protected abstract Surface Backdrop { get; }
 		protected abstract Surface Wall { get; }
 		protected abstract Surface SidePassages { get; }
+		protected virtual Surface Door { get { return null; } }
+		protected virtual Surface MuseumExhibitFrame
+		{
+			get { return g.MuseumExhibitFrame; }
+		}
+		protected virtual Surface MuseumExhibitStatic
+		{
+			get { return g.MuseumExhibitStatic; }
+		}
 
 		readonly Size imageSize = new Size(368, 272);
 
@@ -25,7 +34,7 @@ namespace ERY.Xle.XleMapTypes
 
 			Point loc = new Point(x, y);
 
-			// draw terminal wall
+			// draw up to terminal wall
 			for (int distance = 0; distance < 6; distance++)
 			{
 				loc.X = x + distance * stepDir.X;
@@ -35,13 +44,16 @@ namespace ERY.Xle.XleMapTypes
 
 				DrawSidePassages(loc, leftDir, rightDir, distance, inRect);
 
-				if (val == 0)
+				if (IsPassable(val) == false)
 				{
 					DrawWall(distance, inRect);
+					DrawWallOverlay(distance, inRect, val);
+
 					break;
 				}
 			}
 		}
+
 
 		private void DrawSidePassages(Point loc, Point leftDir, Point rightDir, int distance, Rectangle destRect)
 		{
@@ -73,7 +85,7 @@ namespace ERY.Xle.XleMapTypes
 			SidePassages.Draw(srcRect, destRect);
 		}
 
-		private bool IsPassable(int value)
+		protected bool IsPassable(int value)
 		{
 			if (value >= 0x10 && value <= 0x3f) 
 				return true;
@@ -89,5 +101,38 @@ namespace ERY.Xle.XleMapTypes
 			Wall.Draw(srcRect, destRect);
 		}
 
+
+		private void DrawWallOverlay(int distance, Rectangle destRect, int val)
+		{
+			Surface source = null;
+			
+			if (val == 0x01)
+			{
+				// torch
+			}
+			else if (val == 0x02)
+			{
+				// door
+				source = Door;
+			}
+			else if (val >= 0x50 && val <= 0x5f)
+			{
+				source = MuseumExhibitFrame;
+
+				DrawMuseumExhibit(distance, destRect, val);
+			}
+
+			if (source == null)
+				return;
+			
+			Rectangle srcRect = new Rectangle(0, (distance - 1) * imageSize.Height, imageSize.Width, imageSize.Height);
+
+			source.Draw(srcRect, destRect);
+		}
+
+		protected virtual void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
+		{
+		}
+		
 	}
 }

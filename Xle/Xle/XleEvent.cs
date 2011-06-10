@@ -369,10 +369,7 @@ namespace ERY.Xle.XleEventTypes
 
 				try
 				{
-					player.Map = mMapID;
-					player.SetPos(mLocation.X, this.mLocation.Y);
-
-					g.ClearBottom();
+					player.SetMap(mMapID, mLocation.X, this.mLocation.Y);
 
 					CheckLoan(player);
 				}

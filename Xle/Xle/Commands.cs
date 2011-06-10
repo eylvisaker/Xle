@@ -720,194 +720,30 @@ namespace ERY.Xle
 
 		public void Use()
 		{
-			string commandstring;
-			Color firstColor = g.HPColor;
-
+			string commandstring = string.Empty;
+			string failureString = "No effect";
+			
 			bool noEffect = true;
 
 			g.AddBottom("");
 
+			string action = XleCore.ItemList[player.Hold].Action;
+			commandstring = action + " " + XleCore.ItemList[player.Hold].Name;
+
+			g.AddBottom(commandstring);
+
 			switch (player.Hold)
 			{
-				case 0:
-					commandstring = "Use Nothing";
-					noEffect = true;
+				case 3:
+					commandstring = "Eat Healing Herbs";
+					noEffect = false;
+					EatHealingHerbs();
 					break;
 
-				case 1:
-					commandstring = "Twist gold armband";
-					noEffect = true;
-					break;
-
-				case 2:
-
-					commandstring = "Ready climbing gear";
-					noEffect = true;
-					break;
-				/*
-			case 3:
-
-				commandstring = "Eat Healing Herbs";
-				g.AddBottom(commandstring);
-
-				player.HP += player.MaxHP / 2;
-				player.ItemCount(3, -1);
-				SoundMan.PlaySound(LotaSound.Good);
-
-				lastColor = XleColor.White;
-
-				do
-				{
-					if (lastColor == XleColor.White)
-						lastColor = XleColor.Cyan;
-					else
-						lastColor = XleColor.White;
-
-					g.HPColor = lastColor;
-
-					Lota.wait(25);
-
-				} while (SoundMan.IsPlaying(LotaSound.Good));
-
-				g.HPColor = firstColor;
-
-				noEffect = false;
-				break;
-
-			case 4:			// Iron Key
-			case 5:			// Copper Key
-			case 6:			// Brass Key
-			case 7:			// Stone Key
-
-				commandstring = "Use ";
-				//TODO: Loadstring (g.hInstance(), player.Hold() + 19, tempChars, 40);
-				commandstring += "";
-                    
-			//for (j = -1; j < 3; j++)
-			//{
-			//    for (i = -1; i < 3; i++)
-			//    {
-			//        if (Lota.Map.CheckSpecial(player.X + i, player.Y + j) == 24 && found == false)
-			//        {
-			//            SpecialEvent dave = Lota.Map.GetSpecial(player.X + i, player.Y + j);
-					
-			//            if (dave.data[0] == player.Hold())
-			//            {
-			//                found = true;
-
-			//                g.AddBottom(commandstring);
-			//                SoundMan.PlaySound(LotaSound.UnlockDoor);
-			//                wait(250);
-
-			//                g.AddBottom("Unlock door");
-
-			//                for (j = dave.sy; j < dave.sy + dave.sheight; j++)
-			//                {
-			//                    for (i = dave.sx; i < dave.sx + dave.swidth; i++)
-			//                    {
-			//                        int m = Lota.Map.M(j, i);
-								
-			//                        if ((m % 16 < 4 && m / 16 == 13) || (m % 16 >= 2 && m % 16 < 4 && m / 16 == 14))
-			//                        {
-			//                            Lota.Map.SetM(j, i, 0);
-			//                        }
-
-			//                    }
-			//                }
-
-			//                wait(750);
-
-			//                break;
-			//            }
-					
-			//        }
-			//    }
-            
-			//    if (found) break;
-			//}
-                    
-				if (found)
-				{
-					noEffect = false;
-				}
-
-				if (noEffect)
-				{
-					g.AddBottom(commandstring);
-					g.AddBottom("");
-
-					Lota.wait(300 + 200 * player.Gamespeed);
-					g.UpdateBottom("This key does nothing here.");
-
-					noEffect = false;
-
-				}
-				break;
-
-			case 8:				// magic seeds
-				commandstring = "Eat Magic Seeds";
-
-				g.AddBottom(commandstring);
-				Lota.wait(150);
-
-				g.invisible = true;
-				g.AddBottom("You're invisible.");
-
-				Lota.Map.IsAngry = false;
-
-				Lota.wait(500);
-
-				player.ItemCount(8, -1);
-				noEffect = false;
-
-				break;
-
-			case 12:				// magic ice
-
-				commandstring = "Throw magic ice";
-
-				for (j = -1; j < 3; j++)
-				{
-					for (i = -1; i < 3; i++)
-					{
-                            
-						//if (Lota.Map.CheckSpecial(player.X + i, player.Y + j) == 22 && found == false)
-						//{
-						//    SpecialEvent dave = Lota.Map.GetSpecial(player.X + i, player.Y + j);
-						//    found = true;
-
-						//    g.AddBottom(commandstring);
-						//    Lota.wait(500);
-
-						//    for (j = dave.sy; j < dave.sy + dave.sheight; j++)
-						//    {
-						//        for (i = dave.sx; i < dave.sx + dave.swidth; i++)
-						//        {
-						//            int m = Lota.Map.M(j, i);
-
-						//            if (m % 16 >= 13 && m / 16 <= 2)
-						//            {
-						//                Lota.Map.SetM(j, i, m - 8);
-						//            }
-
-						//        }
-						//    }
-
-						//    break;
-						//}
-					}
-
-					if (found) break;
-				}
-
-				if (found)
-				{
-					noEffect = false;
-				}
-
-				break;
-				*/
-
+				case 4:			// Iron Key
+				case 5:			// Copper Key
+				case 6:			// Brass Key
+				case 7:			// Stone Key
 				case 9:				// mail
 				case 10:			// tulip
 				case 11:			// compass
@@ -917,25 +753,43 @@ namespace ERY.Xle
 				case 16:			// crown
 
 				default:
-					commandstring = "Use ";
-					//TODO: Loadstring (g.hInstance(), player.Hold() + 19, tempChars, 40);
-					commandstring += "";
-
-					noEffect = true;
+					noEffect = !XleCore.Map.PlayerUse(player, player.Hold);
 
 					break;
 			}
 
 			if (noEffect == true)
 			{
-				g.AddBottom(commandstring);
 				g.AddBottom("");
 				XleCore.wait(400 + 100 * player.Gamespeed);
 				g.UpdateBottom("No effect");
-
-
 			}
 
+		}
+
+		private void EatHealingHerbs()
+		{
+			player.HP += player.MaxHP / 2;
+			player.ItemCount(3, -1);
+			SoundMan.PlaySound(LotaSound.Good);
+
+			Color firstColor = g.HPColor;
+			Color lastColor = XleColor.White;
+
+			do
+			{
+				if (lastColor == XleColor.White)
+					lastColor = XleColor.Cyan;
+				else
+					lastColor = XleColor.White;
+
+				g.HPColor = lastColor;
+
+				XleCore.wait(25);
+
+			} while (SoundMan.IsPlaying(LotaSound.Good));
+
+			g.HPColor = firstColor;
 		}
 
 		public void Weapon()
