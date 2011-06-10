@@ -4,65 +4,6 @@
   <Tileset>TownTiles.png</Tileset>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Bertha's Buns</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreRaft">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Floyd's Floataway</ShopName>
-      <CostFactor>1</CostFactor>
-      <BuyRaftMap>0</BuyRaftMap>
-      <BuyRaftX>0</BuyRaftX>
-      <BuyRaftY>0</BuyRaftY>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreHealer">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Soothing Touch</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Anthony's Armor</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Al's Arms</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFortune">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Felicia's Fortunes</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreMagic">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Hubert's House Of Hex</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreArmor">
       <X>33</X>
       <Y>29</Y>

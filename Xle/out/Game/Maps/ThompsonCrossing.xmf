@@ -1,81 +1,9 @@
 <XleRoot type="ERY.Xle.XleMapTypes.Town">
-  <MapName>Thomson Crossing</MapName>
+  <MapName>Thompson Crossing</MapName>
   <MapID>0</MapID>
   <Tileset>TownTiles.png</Tileset>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreBank">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Bank</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBlackjack">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Tal</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFlipFlop">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Johnny's Jubilee</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreLending">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Lending Lenders</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Tasty Treat</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBuyback">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Humble Chuck's</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Heavy Metal</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Hit Me Hurt Me</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmorTraining">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>COMBATORIUM</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreBank">
       <X>55</X>
       <Y>30</Y>

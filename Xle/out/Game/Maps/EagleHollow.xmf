@@ -4,62 +4,6 @@
   <Tileset>TownTiles.png</Tileset>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreBank">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>banj</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Captain's Shop</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreRaft">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Treasure Cove</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Pirate's Treasure</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Last Chance</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreMagic">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>Deadly's</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreHealer">
-      <X>0</X>
-      <Y>0</Y>
-      <Width>0</Width>
-      <Height>0</Height>
-      <ShopName>The Surgery</ShopName>
-      <CostFactor>1</CostFactor>
-    </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreHealer">
       <X>13</X>
       <Y>30</Y>
