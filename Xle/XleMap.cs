@@ -1297,7 +1297,7 @@ namespace ERY.Xle
 		{
 			get
 			{
-				return new Rectangle(Location, new Size(Width - 1, Height - 1));
+				return new Rectangle(Location, new Size(Width, Height));
 			}
 		}
 
