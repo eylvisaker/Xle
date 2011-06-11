@@ -958,12 +958,9 @@ namespace ERY.Xle.XleMapTypes
 				}
 			}
 
-
-
 			if (player.X < 0 || player.X + 1 >= XleCore.Map.Width ||
 				player.Y < 0 || player.Y + 1 >= XleCore.Map.Height)
 			{
-
 				if (IsAngry && this.GetType().Equals(typeof(Town)))
 				{
 					player.LastAttacked = this.MapID;
@@ -979,22 +976,18 @@ namespace ERY.Xle.XleMapTypes
 				player.ReturnToOutside();
 
 				g.AddBottom("");
-
 			}
-
 		}
 
 		protected virtual void CloseRoof(Roof roof)
 		{
 			SoundMan.PlaySound(LotaSound.BuildingClose);
 			XleCore.wait(50);
-
 		}
 		protected virtual void OpenRoof(Roof roof)
 		{
 			SoundMan.PlaySound(LotaSound.BuildingOpen);
 			XleCore.wait(50);
-
 		}
 
 		protected virtual void SpeakToGuard(Player player)
@@ -1006,33 +999,24 @@ namespace ERY.Xle.XleMapTypes
 		public override bool CanPlayerStepInto(Player player, int xx, int yy)
 		{
 			int test = 0;
-			int t = 0;
 
 			if (GuardInSpot(xx, yy))
-				t = 3;
-
+				return false;
 
 			for (int j = 0; j < 2; j++)
 			{
 				for (int i = 0; i < 2; i++)
 				{
-
-					int xLimit = 8;
+					const int xLimit = 8;
 					const int yLimit = 8;
 
-					//test = (int)(Lota.Map.M(yy + j, xx + i) / 16) * 16;
 					test = XleCore.Map[xx + i, yy + j];
 
 					if (test >= 16 * yLimit || test % 16 >= xLimit)
 					{
-						t = 3;
+						return false;
 					}
 				}
-			}
-
-			if (t > 0)
-			{
-				return false;
 			}
 
 			return true;
@@ -1041,7 +1025,6 @@ namespace ERY.Xle.XleMapTypes
 		public override int DrawTile(int xx, int yy)
 		{
 			int tile = this[xx, yy];
-
 
 			int roof = RoofTile(xx, yy);
 
@@ -1055,7 +1038,6 @@ namespace ERY.Xle.XleMapTypes
 			Draw2D(x, y, facingDirection,  inRect);
 
 			DrawGuards(new Point(x, y), inRect);
-
 		}
 		public void AnimateGuards()
 		{
@@ -1139,7 +1121,6 @@ namespace ERY.Xle.XleMapTypes
 		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
 		{
 			fontColor = XleColor.White;
-
 
 			boxColor = XleColor.Orange;
 			innerColor = XleColor.Yellow;

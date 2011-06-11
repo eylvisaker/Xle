@@ -75,7 +75,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		public override IEnumerable<string> AvailableTilesets
 		{
-			get { yield return "tiles3d.png"; }
+			get { yield return "DungeonTiles.png"; }
 		}
 		public override void InitializeMap(int width, int height)
 		{
@@ -313,8 +313,6 @@ namespace ERY.Xle.XleMapTypes
 
 		public override void OnLoad(Player player)
 		{
-			Point faceDir = new Point();
-
 			// face the player in a direction with an open passage
 			for (int i = -1; i <= 1; i++)
 			{
@@ -353,16 +351,68 @@ namespace ERY.Xle.XleMapTypes
 			if (ex.IsClosed(player))
 			{
 				g.AddBottomCentered("- Exhibit closed -", ex.ExhibitColor);
-			}
-			else
-			{
-				g.AddBottomCentered(ex.CoinString, ex.ExhibitColor);
-			}
+				g.AddBottom();
+				XleCore.WaitForKey();
 
+				return true;
+			}
+			
+			g.AddBottomCentered(ex.CoinString, ex.ExhibitColor);
 			g.AddBottom();
 			XleCore.WaitForKey();
 
 
+
+			if (ex.RequiresCoin == false)
+				RunExhibit(player, ex);
+			else 
+			{
+				if (player.museum[ex.ExhibitID] == 0)
+					g.AddBottom("You haven't used this exhibit.");
+				else
+					g.AddBottom();
+
+				if (PlayerHasCoin(player, ex.Coin) == false)
+				{
+					g.AddBottom("You'll need a " + ex.Coin.ToString() + " coin.");
+					XleCore.wait(500);
+
+					return true;
+				}
+				else
+				{
+					g.AddBottom("insert your " + ex.Coin.ToString() + " coin?");
+					g.AddBottom();
+
+					int choice = XleCore.QuickMenu(new MenuItemList("Yes", "no"), 3);
+
+					if (choice == 1)
+						return true;
+
+					UseCoin(player, ex.Coin);
+
+					RunExhibit(player, ex);
+				}
+			}
+
+			return true;
+		}
+
+		private void RunExhibit(Player player, MuseumDisplays.Exhibit ex)
+		{
+			if (player.museum[ex.ExhibitID] == 0)
+				player.museum[ex.ExhibitID] = 1;
+
+			
+		}
+
+		private void UseCoin(Player player, MuseumDisplays.Coin coin)
+		{
+			
+		}
+
+		private bool PlayerHasCoin(Player player, MuseumDisplays.Coin coin)
+		{
 			return true;
 		}
 

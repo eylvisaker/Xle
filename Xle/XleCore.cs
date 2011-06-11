@@ -1241,20 +1241,25 @@ namespace ERY.Xle
 		/****************************************************************************
 		 *	int QuickMenu(MenuItemList items, int spaces, int value)				*
 		 *																			*
-		 *  This function creates a quick menu at the bottow of the screen,			*
-		 *	allowing the player to pick from a few choices.							*
+		 *  						*
 		 *																			*
 		 *	Parameters:	The MenuItemList, the amount of spaces between the items	*
 		 *		in the list, and the default value, and the initial and changed		*
 		 *		colors.																*
 		 *  Returns:	the player's choice.										*
 		 ****************************************************************************/
-
+		/// <summary>
+		/// This function creates a quick menu at the bottow of the screen,
+		/// allowing the player to pick from a few choices.	
+		/// </summary>
+		/// <param name="items">The items in the list.</param>
+		/// <param name="spaces"></param>
+		/// <returns></returns>
 		public static int QuickMenu(MenuItemList items, int spaces)
 		{
 			return QuickMenu(items, spaces, 0, XleColor.White, XleColor.White);
 		}
-		public static int QuickMenu(MenuItemList items, int spaces, int value)
+		public static int QuickMenu(MenuItemList items, int spaces, int value = 0)
 		{
 			return QuickMenu(items, spaces, value, XleColor.White, XleColor.White);
 		}
@@ -1339,7 +1344,8 @@ namespace ERY.Xle
 					{
 						tempItem = items[i];
 
-						if (key - KeyCode.A == tempItem[0] - 'A')
+						if (key - KeyCode.A == 
+							char.ToUpperInvariant(tempItem[0]) - 'A')
 						{
 							value = i;
 							key = KeyCode.Return;

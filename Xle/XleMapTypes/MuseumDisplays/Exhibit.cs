@@ -27,6 +27,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		public string Name { get; private set; }
 		public Coin Coin { get; private set; }
+		public bool RequiresCoin { get { return Coin != Coin.None; } }
 		public virtual string LongName { get { return Name; } }
 		public virtual string CoinString
 		{
