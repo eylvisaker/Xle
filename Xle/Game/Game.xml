@@ -80,7 +80,7 @@
       <Text ID="1">`white`"You must do more before I can help
 you again.  You may use the museum
 exhibits or explore the lands
-outside.</Text>
+outside.`pause`</Text>
       <Text ID="2">`white`"Welcome to our museum!  I am the
 museum caretaker.  Although my
 influence outside this museum is
@@ -99,7 +99,7 @@ black market."`pause`</Text>
 a great day for the tarmalon museum.
 I want you to have this `cyan`magic ice`white`.  It
 may help you someday.  It works best 
-inside."</Text>
+inside."`pause`</Text>
     </Exhibit>
     <Exhibit ID="1">
       <Text ID="1">Welcome, noble traveler, to this
@@ -200,19 +200,19 @@ makes it exceedingly valuable.`pause`
 `clear`Here you see the museum currency room.
 It contains a small (but noteworthy)
 portion of the planet's wealth.  You
-are welcome to a sample.`pause`
-      </Text>
+are welcome to a sample.`pause``clear`</Text>
     </Exhibit>
     <Exhibit ID="8">
       <Text ID="1">`white`Stones of wisdom`cyan` is probably the most
 popular bar-room game on tarmalon.
 It is not only fun, but said to help
-develop a player's intelligence.</Text>
+develop a player's intelligence.`pause`</Text>
     </Exhibit>
     <Exhibit ID="9">
       <Text ID="1">This giant tapestry is actually a map
 of the planet Tarmalon.  It's the only
-remaining world map made by tarmalon natives.`pause`
+remaining world map made by tarmalon
+natives.`pause`
 `clear`This museum is located in the north-
 east portion of the main continent.
 Baron Kelfor's castle is on an island
@@ -237,12 +237,22 @@ were skyrocketing!`pause`
 others have failed, this part of
 the museum will be open to you from
 now on.  Perhaps you have a chance.
-Probably, you don't.`pause`
-      </Text>
+Probably, you don't.`pause`</Text>
     </Exhibit>
+    <Exhibit ID="13">Legends say that 13 great wizards
+once ruled Tarmalon, but that little
+of their power remains.  Those who
+escaped death and treachery ultimately
+succumbed to the ravages of time.`pause`
+`clear`The wax figure before you is the
+wizard of arovyn.  His power largely
+gone, he is said to be imprisoned deep
+within Kelfor castle.  Only the pass-
+word `yellow`"Guardians"`cyan` will open his door.`pause`</Exhibit>
     <Exhibit ID="14">
       <Text ID="1">This magnificent beast was found
-frozen to a high cliff near the museum.`pause`
+frozen to a high cliff near the
+museum.`pause`
 `clear`Locals say that `white`pegasus`cyan` stood alert
 for over a lifespan - poised as if
 ready to fly.  Finally, the magical

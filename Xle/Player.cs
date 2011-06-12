@@ -152,22 +152,7 @@ namespace ERY.Xle
 
 		public Player()
 		{
-			NewPlayer("Kanato");
-
-			gamespeed = 1;
-
-			outx = 102;
-			outy = 122;
-
-			lastMap = 1;
-			map = 1;
-
-			x = 27;
-			y = 94;
-
-			food = 100;
-			gold = 200;
-
+			NewPlayer("New Player");
 		}
 		public Player(string newName)
 		{
@@ -184,7 +169,6 @@ namespace ERY.Xle
 
 			name = newName;
 
-
 			goldBank = 0;
 			gamespeed = 3;
 			loan = 0;
@@ -197,9 +181,9 @@ namespace ERY.Xle
 			hp = 200;
 			level = 1;
 
-			map = 1;
-			x = 27;
-			y = 94;
+			map = 0;
+			x = 3;
+			y = 1;
 
 			//  temporary, until the museum gets implemented.
 			food = 100;
@@ -474,7 +458,9 @@ namespace ERY.Xle
 
 			using (System.IO.Stream ff = System.IO.File.OpenRead(filename))
 			{
-				return (Player)ser.Deserialize(ff);
+				Player p = (Player)ser.Deserialize(ff);
+				
+				return p;
 			}
 		}
 

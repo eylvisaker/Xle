@@ -313,7 +313,10 @@ namespace ERY.Xle.XleMapTypes
 
 		public override void OnLoad(Player player)
 		{
+			CheckExhibitStatus(player);
+
 			// face the player in a direction with an open passage
+			// or to the nearest exhibit.
 			for (int i = -1; i <= 1; i++)
 			{
 				for (int j = -1; j <= 1; j++)
@@ -327,8 +330,21 @@ namespace ERY.Xle.XleMapTypes
 					{
 						player.FaceDirection = DirectionFromPoint(new Point(i, j));
 					}
+					else if (IsExhibit(this[loc.X, loc.Y]))
+					{
+						player.FaceDirection = DirectionFromPoint(new Point(i, j));
+						return;
+					}
 				}
 			}
+		}
+
+		private bool IsExhibit(int value)
+		{
+			if ((value & 0xf0) == 0x50)
+				return true;
+			else
+				return false;
 		}
 
 		#region --- Museum Exhibits ---
@@ -406,6 +422,36 @@ namespace ERY.Xle.XleMapTypes
 
 			if (player.museum[ex.ExhibitID] == 0)
 				player.museum[ex.ExhibitID] = 1;
+
+			CheckExhibitStatus(player);
+		}
+
+		private void CheckExhibitStatus(Player player)
+		{
+			// lost displays
+			if (player.museum[0xa] > 0)
+			{
+				for (int i = 0; i < Width; i++)
+				{
+					for (int j = 0; j < Height; j++)
+					{
+						if (this[i, j] == 0x5a)
+							this[i, j] = 0x10;
+					}
+				}
+			}
+
+			// welcome exhibit
+			if (player.museum[1] == 0)
+			{
+				this[4, 1] = 0;
+				this[3, 10] = 0;
+			}
+			else
+			{
+				this[4, 1] = 16;
+				this[3, 10] = 16;
+			}
 		}
 
 		private void UseCoin(Player player, MuseumDisplays.Coin coin)
@@ -418,10 +464,6 @@ namespace ERY.Xle.XleMapTypes
 			return true;
 		}
 
-		private void Information(Player player)
-		{
-			throw new NotImplementedException();
-		}
 
 		#endregion
 

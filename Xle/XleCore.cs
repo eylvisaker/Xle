@@ -340,6 +340,7 @@ namespace ERY.Xle
 			commands = new Commands(player);
 
 			Map = LoadMap(player.Map);
+			Map.OnLoad(player);
 
 			Keyboard.KeyDown += new InputEventHandler(Keyboard_KeyDown);
 
