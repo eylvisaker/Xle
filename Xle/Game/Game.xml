@@ -72,4 +72,55 @@
     <Item ID="23" Name="Diamond coin" />
   </Items>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
+  <Exhibits>
+    <Exhibit ID="1">
+      <Text ID="1">Welcome, noble traveler, to this
+galactic museum on the planet of 
+tarmalon.  The museum provides `white`views
+`cyan`and `yellow`gateways`cyan` to the many fascinating
+aspects of planetary life.`pause`
+`clear`Use standard coins to view exhibits.
+Please do not give away coins, or
+feed the tarmalon natives.  Have a
+nice day!`pause`</Text>
+    </Exhibit>
+    <Exhibit ID="3">
+      <Text ID="1">This exhibit shows a typical tarmalon
+town called thornberry.  The town was 
+established over 100 lifespans ago by
+a group of wealthy merchants.`pause`
+`clear`Thornberry has changed little since
+its founding.  The rich and the poor
+still live on opposite sides of town
+separated by a massive stone wall.`pause`
+`clear`Despite its inequity, thornberry is
+a bustling community, containing
+shops, craftsmen, banks, and places
+of amusement.`pause`
+</Text>
+      <Text ID="2">Here's some `yellow`gold`cyan` to spend on
+your trip.
+
+             `wait:off``sound:VeryGood``yellow`gold:  + 300</Text>
+    </Exhibit>
+    <Exhibit ID="4">
+      <Text ID="1">Here you see a replica of the famous
+`purple`enchanted flower fountain`cyan`.  Legend
+says that its waters once flowed in
+splendor.`pause`
+`clear`One day a tulip was taken from the
+fountain gardens and the fountain
+waters stopped.  The stories say that
+only when that flower is returned 
+will the fountain flow again.`pause`
+`clear``white`Myth or fact?  `cyan`Judge for yourself.
+In either case, the museum has agreed
+to help search for the tulip.</Text>
+      <Text ID="2">Bring the tulip back here for a nice
+reward.  Meanwhile, here's some native
+`yellow`gold`cyan` to aid you in your search.
+
+                   `wait:off``sound:VeryGood``yellow`GOLD:  + 300</Text>
+    </Exhibit>
+  </Exhibits>
 </LotaGame>

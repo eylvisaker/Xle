@@ -519,17 +519,14 @@ namespace ERY.Xle.XleEventTypes
 	[Serializable]
 	public class TakeEvent : ItemAvailableEvent
 	{
-
 		public override bool Take(Player player)
 		{
 			return OpenImpl(player, true);
 		}
-
 	}
 	[Serializable]
 	public class TreasureChestEvent : ItemAvailableEvent
 	{
-
 		public override bool Open(Player player)
 		{
 			return OpenImpl(player, false);

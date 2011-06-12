@@ -64,6 +64,16 @@ namespace ERY.Xle
 			mSounds[sound].Stop();
 		}
 
+		public static bool IsAnyPlaying()
+		{
+			foreach (var snd in mSounds.Values)
+			{
+				if (snd.IsPlaying)
+					return true;
+			}
+
+			return false;
+		}
 		public static bool IsPlaying(LotaSound sound)
 		{
 			return mSounds[sound].IsPlaying;

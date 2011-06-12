@@ -11,8 +11,8 @@
       <Height>1</Height>
       <MapID>11</MapID>
       <AskUser>True</AskUser>
-      <TargetX>76</TargetX>
-      <TargetY>16</TargetY>
+      <TargetX>75</TargetX>
+      <TargetY>17</TargetY>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
       <X>68</X>

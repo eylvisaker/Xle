@@ -645,7 +645,6 @@ namespace ERY.Xle.XleMapTypes
 
 		void SpeakToMonster(Player player)
 		{
-
 			if (!friendly)
 			{
 				g.AddBottom("");
@@ -759,7 +758,7 @@ namespace ERY.Xle.XleMapTypes
 
 					break;
 				case 5:			// buy museum coin
-					//StoreMuseumCoin();
+					XleEventTypes.Store.OfferMuseumCoin(player);
 
 					break;
 
@@ -781,7 +780,6 @@ namespace ERY.Xle.XleMapTypes
 						g.AddBottom("Purchase Completed.");
 
 						bool flash = false;
-						Color clr1 = XleColor.White;
 						Color clr2 = XleColor.White;
 
 						switch (type)
@@ -808,20 +806,7 @@ namespace ERY.Xle.XleMapTypes
 								break;
 						}
 
-						Color lastColor = clr1;
-						while (SoundMan.IsPlaying(LotaSound.Sale))
-						{
-							if (lastColor == clr2)
-								lastColor = clr1;
-							else
-								lastColor = clr2;
-
-							g.HPColor = lastColor;
-
-							XleCore.wait(40);
-						}
-
-						g.HPColor = XleColor.White;
+						XleCore.FlashHPWhileSound(clr2);
 					}
 					else
 					{
@@ -850,6 +835,7 @@ namespace ERY.Xle.XleMapTypes
 			EncounterState = 0;
 			displayMonst = -1;
 		}
+
 
 
 		/// <summary>

@@ -581,7 +581,7 @@ namespace ERY.Xle
 			}
 		}
 		/// <summary>
-		/// 		// adjusts current gold if there's enough available and returns true if there is
+		/// Adjusts current gold if there's enough available and returns true if there is
 		/// </summary>
 		/// <param name="amount"></param>
 		/// <returns></returns>
@@ -597,7 +597,7 @@ namespace ERY.Xle
 			return false;
 		}
 		/// <summary>
-		/// 		// increases or decreases gold in bank or returns current value
+		/// Increases or decreases gold in bank or returns current value
 		/// </summary>
 		/// <param name="a"></param>
 		/// <returns></returns>
@@ -629,7 +629,7 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
-		/// returns the time in days or increments them
+		/// Returns the time in days or increments them.
 		/// </summary>
 		/// <param name="time"></param>
 		/// <returns></returns>
@@ -647,7 +647,6 @@ namespace ERY.Xle
 				}
 
 				timedays = value;
-
 			}
 		}
 
@@ -1468,7 +1467,12 @@ namespace ERY.Xle
 			SetMap(outmap, outx, outy);
 		}
 
-
+		public void SetOutsideLocation(int outmap, int outx, int outy)
+		{
+			this.outmap = outmap;
+			this.outx = outx;
+			this.outy = outy;
+		}
 	}
 
 

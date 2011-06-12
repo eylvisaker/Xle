@@ -53,11 +53,142 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				}
 			}
 		}
+		protected virtual string RawText
+		{
+			get
+			{
+				if (XleCore.ExhibitInfo.ContainsKey(ExhibitID))
+				{
+					var exinfo = XleCore.ExhibitInfo[ExhibitID];
+
+					if (exinfo.Text.ContainsKey(1))
+						return XleCore.ExhibitInfo[ExhibitID].Text[1];
+					else
+						return "This exhibit does not have any text with key 1.";
+				}
+				else
+				{
+					return "This exhibit is not working.";
+				}
+			}
+				
+		}
 
 		public virtual void PlayerXamine(Player player)
 		{
+			if (CheckOfferReread(player) == false)
+				return;
 
+			ReadRawText(RawText);
 		}
+
+		/// <summary>
+		/// Returns true if we are reading the exhibit for the first time,
+		/// or if the player answered yes to rereading the exhibit.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <returns></returns>
+		protected bool CheckOfferReread(Player player)
+		{
+			if (player.museum[ExhibitID] > 0)
+			{
+				return OfferReread();
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Asks the player if they want to reread the description of the exhibit.
+		/// </summary>
+		/// <returns>True if the player chose yes, false otherwise.</returns>
+		protected bool OfferReread()
+		{
+			g.ClearBottom();
+			g.AddBottom("Do you want to reread the");
+			g.AddBottom("description of this exhibit?");
+			g.AddBottom();
+
+			if (XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
+				return true;
+			else
+				return false;
+		}
+
+		protected void ReadRawText(string rawtext)
+		{
+			g.ClearBottom();
+
+			int ip = 0;
+			int line = 4;
+			Color clr = XleColor.Cyan;
+			ColorStringBuilder text = new ColorStringBuilder();
+			bool waiting = true;
+
+			while (ip < rawtext.Length)
+			{
+				if (rawtext[ip] == '\r') { ip++; continue; }
+
+				if (rawtext[ip] == '\n')
+				{
+					line--;
+					text = new ColorStringBuilder();
+				}
+				else if (rawtext[ip] != '`')
+				{
+					text.AddText(rawtext[ip].ToString(), clr);
+					g.UpdateBottom(text, line);
+					
+					if (waiting)
+						XleCore.wait(50);
+				}
+				else
+				{
+					int next = rawtext.IndexOf('`', ip + 1);
+					if (next < 0)
+						throw new ArgumentException("Text had unmatched quote!");
+
+					string substr = rawtext.Substring(ip+1, next - ip-1);
+
+					ip = next;
+
+					switch (substr)
+					{
+						case "white": clr = XleColor.White; break;
+						case "cyan": clr = XleColor.Cyan; break;
+						case "yellow": clr = XleColor.Yellow; break;
+						case "pause":
+							XleCore.WaitForKey();
+
+							break;
+
+						case "clear":
+							g.ClearBottom();
+							line = 4;
+							break;
+
+						case "sound:VeryGood":
+							SoundMan.PlaySound(LotaSound.VeryGood);
+							break;
+
+						case "wait:off":
+							waiting = false;
+							break;
+
+						case "wait:on":
+							waiting = true;
+							break;
+
+						default:
+							System.Diagnostics.Trace.WriteLine("Failed to understand command: " + substr);
+							break;
+					}
+				}
+
+				ip++;
+			}
+		}
+
 		public virtual bool IsClosed(Player player)
 		{
 			return false;
@@ -67,6 +198,26 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		public virtual bool ViewedBefore(Player player)
 		{
 			return player.museum[ExhibitID] != 0;
+		}
+
+	}
+
+	abstract class ExhibitData
+	{
+		public abstract void Execute();
+	}
+	class ExhibitText : ExhibitData
+	{
+		ColorStringBuilder csb;
+
+		public ExhibitText(ColorStringBuilder csb)
+		{
+			this.csb = csb;
+		}
+
+		public override void Execute()
+		{
+			g.AddBottom(csb);
 		}
 	}
 
@@ -78,6 +229,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			get { return string.Empty; }
 		}
+
 	}
 	class Welcome : Exhibit
 	{
@@ -91,12 +243,6 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			get { return "Tarmalon Museum!"; }
 		}
-
-		public override void PlayerXamine(Player player)
-		{
-
-		}
-		
 	}
 
 	class Weaponry : Exhibit
@@ -111,15 +257,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			}
 		}
 	}
-	class Thornberry : Exhibit
-	{
-		public Thornberry() : base("Thornberry", Coin.Jade) { }
-		public override int ExhibitID { get { return 3; } }
-		public override string LongName
-		{
-			get { return "A typical town of Tarmalon"; }
-		}
-	}
+	
 	class Fountain : Exhibit
 	{
 		public Fountain() : base("A Fountain", Coin.Jade) { }
@@ -195,6 +333,10 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	{
 		public Pegasus() : base("Pegasus", Coin.Diamond) { }
 		public override int ExhibitID { get { return 14; } }
+		public override string LongName
+		{
+			get { return "A flight of fancy"; }
+		}
 	}
 	class AncientArtifact : Exhibit
 	{
@@ -202,10 +344,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		public override int ExhibitID { get { return 15; } }
 		public override string LongName
 		{
-			get
-			{
-				return "An ancient artifact";
-			}
+			get { return "An ancient artifact"; }
 		}
 		public override string CoinString
 		{

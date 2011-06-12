@@ -64,7 +64,7 @@ namespace ERY.Xle.XleMapTypes
 
 		public override bool PlayerUse(Player player, int item)
 		{
-			bool found = false;
+			//bool found = false;
 
 			//switch (item)
 			//{

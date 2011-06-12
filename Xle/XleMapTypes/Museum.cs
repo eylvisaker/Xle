@@ -348,6 +348,8 @@ namespace ERY.Xle.XleMapTypes
 			g.AddBottom();
 			g.AddBottomCentered(ex.LongName, ex.ExhibitColor);
 
+			XleCore.PromptToContinueOnWait = true;
+
 			if (ex.IsClosed(player))
 			{
 				g.AddBottomCentered("- Exhibit closed -", ex.ExhibitColor);
@@ -400,10 +402,10 @@ namespace ERY.Xle.XleMapTypes
 
 		private void RunExhibit(Player player, MuseumDisplays.Exhibit ex)
 		{
+			ex.PlayerXamine(player);
+
 			if (player.museum[ex.ExhibitID] == 0)
 				player.museum[ex.ExhibitID] = 1;
-
-			
 		}
 
 		private void UseCoin(Player player, MuseumDisplays.Coin coin)

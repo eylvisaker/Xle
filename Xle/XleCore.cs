@@ -28,6 +28,8 @@ namespace ERY.Xle
 		[STAThread]
 		public static void Main(string[] args)
 		{
+			PromptToContinueOnWait = true;
+
 			new XleCore().Run(args);
 		}
 
@@ -58,8 +60,6 @@ namespace ERY.Xle
 			}
 		}
 
-
-
 		private static void ParseArgs(string[] args)
 		{
 			string gamePath = "Game";
@@ -89,6 +89,7 @@ namespace ERY.Xle
 		private EquipmentList mWeaponList = new EquipmentList();
 		private EquipmentList mArmorList = new EquipmentList();
 		private Dictionary<int, string> mQualityList = new Dictionary<int, string>();
+		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int,XleMapTypes.MuseumDisplays.ExhibitInfo>();
 
 		public XleCore()
 		{
@@ -172,6 +173,10 @@ namespace ERY.Xle
 					case "Qualities":
 						LoadQualityInfo(root.ChildNodes[i]);
 						break;
+
+					case "Exhibits":
+						LoadExhibitInfo(root.ChildNodes[i]);
+						break;
 				}
 			}
 		}
@@ -250,6 +255,33 @@ namespace ERY.Xle
 				}
 			}
 		}
+		private void LoadExhibitInfo(XmlNode mapNode)
+		{
+			for (int i = 0; i < mapNode.ChildNodes.Count; i++)
+			{
+				XmlNode node = mapNode.ChildNodes[i];
+
+				if (node.Name == "Exhibit")
+				{
+					int id = int.Parse(node.Attributes["ID"].Value);
+
+					var info = new XleMapTypes.MuseumDisplays.ExhibitInfo();
+
+					foreach (XmlNode child in node.ChildNodes)
+					{
+						if (child.Name == "Text")
+						{
+							int textID = int.Parse(child.Attributes["ID"].Value);
+							string text = child.InnerText;
+
+							info.Text.Add(textID, text);
+						}
+					}
+
+					mExhibitInfo.Add(id, info);
+				}
+			}
+		}
 
 		public static string GetMapName(int id)
 		{
@@ -275,6 +307,10 @@ namespace ERY.Xle
 		{
 			get { return inst.mQualityList; }
 		}
+		public static Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> ExhibitInfo
+		{
+			get { return inst.mExhibitInfo; }
+		}
 
 		public static string GetWeaponName(int weaponID, int qualityID)
 		{
@@ -298,14 +334,12 @@ namespace ERY.Xle
 			if (thePlayer == null)
 				return;
 
-
 			player = thePlayer;
 			player.MapChanged += new EventHandler(player_MapChanged);
 
 			commands = new Commands(player);
 
 			Map = LoadMap(player.Map);
-
 
 			Keyboard.KeyDown += new InputEventHandler(Keyboard_KeyDown);
 
@@ -315,7 +349,6 @@ namespace ERY.Xle
 			}
 
 			Keyboard.KeyDown -= Keyboard_KeyDown;
-
 		}
 
 		void player_MapChanged(object sender, EventArgs e)
@@ -344,18 +377,17 @@ namespace ERY.Xle
 		}
 		private void CheckArrowKeys()
 		{
+			if (AcceptKey == false)
+				return;
 
-			if (AcceptKey)
-			{
-				AcceptKey = false;
+			AcceptKey = false;
 
-				if (Keyboard.Keys[KeyCode.Down]) commands.DoCommand(KeyCode.Down);
-				else if (Keyboard.Keys[KeyCode.Left]) commands.DoCommand(KeyCode.Left);
-				else if (Keyboard.Keys[KeyCode.Up]) commands.DoCommand(KeyCode.Up);
-				else if (Keyboard.Keys[KeyCode.Right]) commands.DoCommand(KeyCode.Right);
+			if (Keyboard.Keys[KeyCode.Down]) commands.DoCommand(KeyCode.Down);
+			else if (Keyboard.Keys[KeyCode.Left]) commands.DoCommand(KeyCode.Left);
+			else if (Keyboard.Keys[KeyCode.Up]) commands.DoCommand(KeyCode.Up);
+			else if (Keyboard.Keys[KeyCode.Right]) commands.DoCommand(KeyCode.Right);
 
-				AcceptKey = true;
-			}
+			AcceptKey = true;
 		}
 
 		void Keyboard_KeyDown(InputEventArgs e)
@@ -369,7 +401,7 @@ namespace ERY.Xle
 			AcceptKey = true;
 		}
 
-
+		// TODO: Which of these are obsolete?
 		static bool updating = false;
 		static double lastRaftAnim = 0;
 		static double lastCharAnim = 0;
@@ -378,17 +410,12 @@ namespace ERY.Xle
 		static double frames = 0;
 		static double fps;
 
-
 		public void UpdateAnim()
 		{
-
 			RaftAnim();
-
-
 			CheckAnim();
 
 			map.UpdateAnim();
-
 		}
 
 		public void Draw()
@@ -455,7 +482,6 @@ namespace ERY.Xle
 				WriteText(48, 16 * (i + 1), menuArray[i], menuColor);
 			}
 
-
 			WriteText(32, 16 * (CursorPos + 1), "`", menuColor);
 
 			WriteText(48, 16 * 15, "H.P. " + player.HP.ToString(), g.HPColor);
@@ -463,8 +489,6 @@ namespace ERY.Xle
 			WriteText(48, 16 * 17, "Gold " + player.Gold.ToString(), g.HPColor);
 
 			DrawBottomText();
-
-
 
 			if (map.AutoDrawPlayer)
 			{
@@ -474,6 +498,11 @@ namespace ERY.Xle
 					DrawCharacter(g.AnimFrame, vertLine);
 			}
 
+			if (PromptToContinue)
+			{
+				Display.FillRect(192, 384, 17 * 16, 16, XleColor.Black);
+				WriteText(208, 384, "(Press to Cont)", XleColor.Yellow);
+			}
 
 			/////////////////////////////////////////////////////////////////////////
 			// Check sounds
@@ -485,12 +514,26 @@ namespace ERY.Xle
 			//
 			// End sounds
 			/////////////////////////////////////////////////////////////////////////
+		}
 
+		public static void FlashHPWhileSound(Color clr)
+		{
+			Color oldClr = g.HPColor;
+			Color lastColor = g.HPColor;
 
+			while (SoundMan.IsAnyPlaying())
+			{
+				if (lastColor == clr)
+					lastColor = oldClr;
+				else
+					lastColor = clr;
 
+				g.HPColor = lastColor;
 
+				XleCore.wait(80);
+			}
 
-
+			g.HPColor = oldClr;
 		}
 
 		/****************************************************************************
@@ -748,6 +791,12 @@ namespace ERY.Xle
 		 *																			*
 		 *  This function drives monsters when they are displayed					*
 		 ****************************************************************************/
+		/// <summary>
+		/// Draws monsters on the outside maps.
+		/// </summary>
+		/// <param name="px"></param>
+		/// <param name="py"></param>
+		/// <param name="monst"></param>
 		public static void DrawMonster(int px, int py, int monst)
 		{
 			int tx, ty;
@@ -767,12 +816,11 @@ namespace ERY.Xle
 
 		}
 
-		/****************************************************************************
-		 *  void DrawCharacter ( LPDIRECTDRAWSURFACE7 pDDS )						*
-		 *																			*
-		 *  This function displays the character sprite in the middle of the map	*
-		 *	subscreen.																*
-		 ****************************************************************************/
+		/// <summary>
+		/// Draws the player character.
+		/// </summary>
+		/// <param name="anim"></param>
+		/// <param name="vertLine"></param>
 		static void DrawCharacter(int anim, int vertLine)
 		{
 			if (g.invisible)
@@ -808,11 +856,10 @@ namespace ERY.Xle
 			g.Character.Color = XleColor.White;
 		}
 
-		/****************************************************************************
-		 *  void DrawRafts ( LPDIRECTDRAWSURFACE7 pDDS )							*
-		 *																			*
-		 *  This function draws all the rafts that are on screen.					*
-		 ****************************************************************************/
+		/// <summary>
+		/// Draws the rafts that should be on the screen.
+		/// </summary>
+		/// <param name="inRect"></param>
 		static void DrawRafts(Rectangle inRect)
 		{
 			int tx, ty;
@@ -879,7 +926,7 @@ namespace ERY.Xle
 		 ****************************************************************************/
 		public static void ChangeScreenMode()
 		{
-			Rectangle rect;
+			//Rectangle rect;
 			/*
 			//  Release all the directdraw surfaces so we can change modes.
 			g.Unlock();
@@ -931,17 +978,15 @@ namespace ERY.Xle
 			*/
 		}
 
-		/****************************************************************************
-		 *	void CheckAnim()														*
-		 *																			*
-		 *  This function animates the main character.  It should be called in the	*
-		 *	main drawing loop.														*
-		 *																			*
-		 *	Parameters:	none.														*
-		 *  Returns:	void														*
-		 ****************************************************************************/
+
 		static double lastCheckAnim = 0;
 
+		/// <summary>
+		/// This function animates the main character.  It should be called in the
+		/// main drawing loop. However it doesn't seem to do anything right now and
+		/// may be obsolete.
+		/// </summary>
+		[Obsolete]
 		static void CheckAnim()
 		{
 
@@ -950,29 +995,27 @@ namespace ERY.Xle
 		/****************************************************************************
 		 *	void wait(int howLong)													*
 		 *																			*
-		 *  This function is a message-friendly wait that will continue screen-		*
-		 *	drawing and animation.  It allows the code to pause for a specified		*
-		 *	amount of time.															*
+		 *  														*
 		 *																			*
 		 *	Parameters:	the number of milliseconds to wait							*
 		 *  Returns:	void														*
 		 ****************************************************************************/
+		/// <summary>
+		/// This function is a message-friendly wait that will continue screen
+		/// drawing and animation.  It allows the code to pause for a specified
+		/// amount of time.	
+		/// </summary>
+		/// <param name="howLong"></param>
 		public static void wait(int howLong)
 		{
 			wait(Redraw, howLong, false);
 		}
-		//public static void wait(int howLong, bool keyBreak)
-		//{
-		//    wait(Redraw, howLong, keyBreak );
-
-		//}
 		public static void wait(RedrawDelegate redraw, int howLong)
 		{
 			wait(redraw, howLong, false);
 		}
 		public static void wait(RedrawDelegate redraw, int howLong, bool keyBreak)
 		{
-
 			Timing.StopWatch watch = new Timing.StopWatch();
 
 			do
@@ -986,14 +1029,12 @@ namespace ERY.Xle
 					break;
 
 			} while (watch.TotalMilliseconds < howLong && g.Done == false);
-
 		}
 
-		/****************************************************************************
-		 * void WaitKey()															*
-		 *																			*
-		 *  Waits for a key or joystick press.										*
-		 ****************************************************************************/
+		/// <summary>
+		/// Waits for a key or joystick press.
+		/// </summary>
+		[Obsolete]
 		static void WaitKey()
 		{
 			Keyboard.ReleaseAllKeys();
@@ -1003,16 +1044,14 @@ namespace ERY.Xle
 
 		}
 
-
-		/****************************************************************************
-		 *	int SubMenu(MenuItemList items)											*
-		 *																			*
-		 *  This function creates a sub menu in the top of the map section and		*
-		 *	forces the player to chose an option from the list provided.			*
-		 *																			*
-		 *	Parameters:	a MenuItemList collection of menu items.					*
-		 *  Returns:	the choice the user made.									*
-		 ****************************************************************************/
+		/// <summary>
+		/// This function creates a sub menu in the top of the map section and
+		/// forces the player to chose an option from the list provided.	
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="choice"></param>
+		/// <param name="items">A MenuItemList collection of menu items</param>
+		/// <returns>The choice the user made.</returns>
 		public static int SubMenu(string title, int choice, MenuItemList items)
 		{
 			string displayTitle;
@@ -1134,10 +1173,11 @@ namespace ERY.Xle
 					key = e.KeyCode;
 				};
 
+			PromptToContinue = true;
+
 			Keyboard.KeyDown += keyhandler;
 			do
 			{
-				//Lota.Redraw();
 				redraw();
 
 				if (Display.CurrentWindow.IsClosed == true)
@@ -1167,17 +1207,26 @@ namespace ERY.Xle
 
 			Keyboard.KeyDown -= keyhandler;
 
+			PromptToContinue = false;
+			PromptToContinueOnWait = true;
+
 			return key;
 		}
-		/****************************************************************************
-		 *	void DrawMenu( LPDIRECTDRAWSURFACE7 pDDS )								*
-		 *																			*
-		 *  This function draws the submenu created by SubMenu() onto the direct	*
-		 *	draw surface.															*
-		 *																			*
-		 *	Parameters:	The directdraw surface to write to.							*
-		 *  Returns:	void														*
-		 ****************************************************************************/
+
+		/// <summary>
+		/// Set to false to have WaitForKey not display a prompt 
+		/// with the standard drawing method.
+		/// </summary>
+		public static bool PromptToContinueOnWait { get; set; }
+		/// <summary>
+		/// Set to true to show the (press to cont) prompt.
+		/// </summary>
+		public static bool PromptToContinue { get; set; }
+
+		/// <summary>
+		/// Draws the submenu created by SubMenu.
+		/// </summary>
+		/// <param name="menu"></param>
 		static void DrawMenu(SubMenu menu)
 		{
 			string thestring;
@@ -1238,16 +1287,6 @@ namespace ERY.Xle
 
 		}
 
-		/****************************************************************************
-		 *	int QuickMenu(MenuItemList items, int spaces, int value)				*
-		 *																			*
-		 *  						*
-		 *																			*
-		 *	Parameters:	The MenuItemList, the amount of spaces between the items	*
-		 *		in the list, and the default value, and the initial and changed		*
-		 *		colors.																*
-		 *  Returns:	the player's choice.										*
-		 ****************************************************************************/
 		/// <summary>
 		/// This function creates a quick menu at the bottow of the screen,
 		/// allowing the player to pick from a few choices.	
@@ -1372,21 +1411,13 @@ namespace ERY.Xle
 
 		}
 
-
-		/****************************************************************************
-		 *	void RaftAnim()															*
-		 *																			*
-		 *  This function animates the raft											*
-		 *																			*
-		 *	Parameters:	none														*
-		 *  Returns:	void														*
-		 ****************************************************************************/
-
+		/// <summary>
+		/// Animates the rafts.
+		/// </summary>
 		static void RaftAnim()
 		{
 			if (lastRaftAnim + 100 < Timing.TotalMilliseconds)
 			{
-
 				g.raftAnim++;
 
 				if (g.raftAnim == 3)
@@ -1394,7 +1425,6 @@ namespace ERY.Xle
 
 				lastRaftAnim = Timing.TotalMilliseconds;
 			}
-
 		}
 
 		/****************************************************************************
@@ -1543,16 +1573,11 @@ namespace ERY.Xle
 			*/
 		}
 
-		/****************************************************************************
-		 *	int ChooseNumber(int max)												*
-		 *																			*
-		 *  This function asks the user to choose a number, either by the joystick	*
-		 *	or the keyboard.														*
-		 *																			*
-		 *	Parameters:	the maximum value the user is allowed to select.			*
-		 *  Returns:	the number that the user selected.							*
-		 ****************************************************************************/
-
+		/// <summary>
+		/// Asks the user to choose a number.
+		/// </summary>
+		/// <param name="max">The maximum value the user is allowed to select.</param>
+		/// <returns></returns>
 		public static int ChooseNumber(int max)
 		{
 			return ChooseNumber(Redraw, max);
@@ -1572,7 +1597,7 @@ namespace ERY.Xle
 			builder.AddText("joystick", XleColor.Cyan);
 
 			g.AddBottom(builder);
-			g.AddBottom("");
+			g.AddBottom();
 
 			KeyCode key;
 
@@ -1661,17 +1686,13 @@ namespace ERY.Xle
 			} while (key != KeyCode.Return && !g.Done);
 
 			return amount;
-
 		}
 
-
-
 		/// <summary>
-		/// This will return the first character of the command selected.  It also
-		/// allows setting the command with the argument.  If a matching command is  
-		/// found, then it will set the cursor at that command and return that		
-		/// value.  If not, it will return the last selected value.	 If it's passed	 
-		/// a value that's not in the menu, it returns -1	
+		/// The getter will return the first character of the command selected.  
+		/// The setter allows setting the command.  If a matching command is  
+		/// found, then it will set the cursor at that command.
+		/// If it's passed a value that's not in the menu, nothing changes.
 		/// </summary>
 		public char cursor
 		{
@@ -1681,15 +1702,11 @@ namespace ERY.Xle
 			}
 			set
 			{
-				char newCursor = value;
-				int i;
-
-				newCursor = newCursor.ToString().ToUpper()[0];
+				char newCursor = char.ToUpperInvariant(value);
 
 				if (newCursor != 0)
 				{
-
-					for (i = 0; i < 14; i++)
+					for (int i = 0; i < 14; i++)
 					{
 						if (string.IsNullOrEmpty(menuArray[i]))
 							continue;
@@ -1697,12 +1714,9 @@ namespace ERY.Xle
 						if (menuArray[i][0] == newCursor)
 						{
 							theCursor = newCursor;
-
 						}
-
 					}
 				}
-
 			}
 		}
 
@@ -1756,9 +1770,9 @@ namespace ERY.Xle
 		/// <summary>
 		/// This returns an entire line from the menu that matches the first
 		/// character of the command selected.  If it's passed
-		/// a value that's not in the menu, it returns NULL.
+		/// a value that's not in the menu, it returns an empty string.
 		/// </summary>
-		/// <param name="?"></param>
+		/// <param name="newCursor"></param>
 		/// <returns></returns>
 		public static string Menu(KeyCode newCursor)
 		{
@@ -1782,6 +1796,5 @@ namespace ERY.Xle
 
 			return "";
 		}
-
 	}
 }

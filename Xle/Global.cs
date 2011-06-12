@@ -290,17 +290,25 @@ namespace ERY.Xle
 		{
 			UpdateBottom(line, loc, null);
 		}
-		static public void UpdateBottom(ColorStringBuilder builder, int loc)
+		/// <summary>
+		/// This function updates a line in the action window.
+		/// </summary>
+		/// <param name="builder"></param>
+		/// <param name="lineNumber">The number of the line to update.  0 is the bottom line, 4 is the top.</param>
+		static public void UpdateBottom(ColorStringBuilder builder, int lineNumber)
 		{
-			UpdateBottom(builder.Text, loc, builder.Colors);
+			UpdateBottom(builder.Text, lineNumber, builder.Colors);
 		}
 
 		/// <summary>
 		/// This function updates a line in the action window.
 		/// </summary>
-		static public void UpdateBottom(string line, int loc, Color[] colors)
+		/// <param name="lineNumber">The number of the line to update.  0 is the bottom line, 4 is the top.</param>
+		static public void UpdateBottom(string line, int lineNumber, Color[] colors)
 		{
-			bottom[loc] = line;
+			if (lineNumber < 0 || lineNumber > 4) throw new ArgumentOutOfRangeException("lineNumber", "The line number must be between 0 and 4.");
+
+			bottom[lineNumber] = line;
 
 			if (colors != null)
 			{
@@ -313,7 +321,7 @@ namespace ERY.Xle
 					else
 						clr = colors[colors.Length - 1];
 
-					bottomColor[loc][i] = clr;
+					bottomColor[lineNumber][i] = clr;
 				}
 
 			}
