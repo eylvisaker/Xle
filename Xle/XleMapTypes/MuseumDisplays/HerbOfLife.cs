@@ -16,5 +16,27 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				return "The herb of life";
 			}
 		}
+
+		public override void PlayerXamine(Player player)
+		{
+			ReadRawText(RawText);
+
+			g.AddBottom();
+			g.AddBottom("Do you want to eat the fruit?");
+			g.AddBottom();
+
+			if (XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
+			{
+				SoundMan.PlaySound(LotaSound.Good);
+				g.AddBottom("You feel a tingling sensation.", XleColor.Green);
+
+				while (SoundMan.IsAnyPlaying())
+				{
+					XleCore.wait(10);
+				}
+
+				player.museum[ExhibitID] = 3;
+			}
+		}
 	}
 }

@@ -42,6 +42,10 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				// give magic ice.
 				player.ItemCount(12, 1);
 			}
+			else
+			{
+				ReadRawText(exhibit.Text[1]);
+			}
 		}
 
 		private bool DoLevelUp(Player player)

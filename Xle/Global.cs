@@ -46,6 +46,7 @@ namespace ERY.Xle
 		static Surface pOverlandMonsters;	// stores the handle to the overland monster sprites
 
 		static string[] bottom = new string[5];			// keeps the bottom portion of the screen
+		static int[] bottommargin = new int[5];
 		static Color[][] bottomColor = new Color[5][];	// keeps the bottom colors on the screen
 
 
@@ -195,7 +196,7 @@ namespace ERY.Xle
 		{
 			AddBottom("");
 		}
-		static public void AddBottom(string line)
+		static public void AddBottom(string line, int margin = 1)
 		{
 			AddBottom(line, null);
 		}
@@ -243,7 +244,6 @@ namespace ERY.Xle
 		// adds a line to the bottom of the action window
 		static public void AddBottom(string line, Color[] colors)
 		{
-
 			int i;
 
 			bottom[4] = "";
@@ -252,12 +252,13 @@ namespace ERY.Xle
 			{
 				bottom[i + 1] = bottom[i];
 				bottomColor[i + 1] = bottomColor[i];
+				bottommargin[i + 1] = bottommargin[i];
 			}
-
 
 			bottomColor[0] = new Color[39];
 
 			bottom[0] = line;
+			bottommargin[0] = XleCore.BottomTextMargin;
 
 			if (colors != null)
 			{
@@ -357,11 +358,13 @@ namespace ERY.Xle
 			}
 
 		}
-
+		public static int BottomMargin(int line)
+		{
+			return bottommargin[line];
+		}
 
 		static public Color[] BottomColor(int line)
 		{
-
 			Color[] tempspace = new Color[40];
 
 			if (line >= 0 && line <= 4)
@@ -380,9 +383,7 @@ namespace ERY.Xle
 
 		static public void ClearBottom()
 		{
-			int i;
-
-			for (i = 0; i < 5; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				AddBottom("");
 			}
@@ -390,8 +391,6 @@ namespace ERY.Xle
 
 		static public void WriteSlow(string line, int loc, Color color)
 		{
-
-
 			int i = 0;
 			Color[] colors = new Color[40];
 			string temp;
@@ -405,7 +404,6 @@ namespace ERY.Xle
 
 				XleCore.wait(50);
 			}
-
 		}
 
 

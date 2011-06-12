@@ -112,6 +112,26 @@ Please do not give away coins, or
 feed the tarmalon natives.  Have a
 nice day!`pause`</Text>
     </Exhibit>
+    <Exhibit ID="2">
+      <Text ID="1">Eons ago, nomadic warriors roamed the
+planet tarmalon.  They hunted and
+fought with stone knives, much like
+the one you see in this exhibit.`wait`
+`clear`This knife is primitive - but
+effective.  As a museum patron, you 
+may take it for as long as ou like.
+The knife is now in your inventory.`wait`</Text>
+      <Text ID="2">As Tarmalon culture advanced, weapons
+developed a ceremonial importance.
+In this exhibit you see the famed
+`white`staff of sacrifice.`cyan`  It was used to
+coronate kings.`wait`
+`clear`Although intended for ceremony, the
+staff is actually bladed for combat.
+As a museum patron, you may use this
+weapon for as long as you like.  It
+is now in your possession.</Text>
+    </Exhibit>
     <Exhibit ID="3">
       <Text ID="1">This exhibit shows a typical tarmalon
 town called thornberry.  The town was 

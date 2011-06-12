@@ -117,6 +117,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		protected void ReadRawText(string rawtext)
 		{
+			XleCore.BottomTextMargin = 0;
 			g.ClearBottom();
 
 			int ip = 0;
@@ -187,6 +188,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 				ip++;
 			}
+
+			XleCore.BottomTextMargin = 1;
 		}
 
 		public virtual bool IsClosed(Player player)

@@ -548,11 +548,16 @@ namespace ERY.Xle
 		 ****************************************************************************/
 		public static void DrawBottomText()
 		{
+
 			for (int i = 0; i < 5; i++)
 			{
-				WriteText(32, 368 - 16 * i, g.Bottom(i), g.BottomColor(i));
+				int x = 16 + 16 * g.BottomMargin(i);
+
+				WriteText(x, 368 - 16 * i, g.Bottom(i), g.BottomColor(i));
 			}
 		}
+
+		public static int BottomTextMargin = 1;
 
 		/****************************************************************************
 		 *	void DrawBorder( LPDIRECTDRAWSURFACE7 pDDS, unsigned int boxColor)		*

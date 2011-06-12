@@ -16,6 +16,36 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				return "The ancient art of weaponry";
 			}
 		}
+
+		public override void PlayerXamine(Player player)
+		{
+			if (player.museum[ExhibitID] == 0 && player.TimeDays < 50)
+			{
+				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[1]);
+				
+				// fair knife
+				player.AddWeapon(1, 1);
+			}
+			else if (player.museum[ExhibitID] == 1)
+			{
+				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[2]);
+
+				// great bladed staff
+				player.AddWeapon(3, 3);
+
+				player.museum[ExhibitID] = -1;
+			}
+		}
+		public override bool IsClosed(ERY.Xle.Player player)
+		{
+			if (player.museum[ExhibitID] < 0)
+				return true;
+
+			if (player.museum[ExhibitID] == 1 && player.TimeDays < 50)
+				return true;
+
+			return false;
+		}
 	}
 	
 }
