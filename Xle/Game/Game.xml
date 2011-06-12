@@ -73,6 +73,34 @@
   </Items>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>
+    <Exhibit ID="0">
+      <Text ID="0">`white` You have done well since I last saw
+ you.  By my power as caretaker...
+ </Text>
+      <Text ID="1">`white`"You must do more before I can help
+you again.  You may use the museum
+exhibits or explore the lands
+outside.</Text>
+      <Text ID="2">`white`"Welcome to our museum!  I am the
+museum caretaker.  Although my
+influence outside this museum is
+limited, I'll provide you with help
+and information whenever I can."`pause`
+`clear`"Right now, you should explore the
+world around you.  Feel free to use
+the museum exhibits or, if you'd
+rather, use the doors to go directly 
+outside."`pause`</Text>
+      <Text ID="3">`white`I've heard that your magic scroll
+was stolen.  My sources say that it
+was sold a few days later on the 
+black market."`pause`</Text>
+      <Text ID="10">`white`"The sceptor and crown!  This is truly
+a great day for the tarmalon museum.
+I want you to have this `cyan`magic ice`white`.  It
+may help you someday.  It works best 
+inside."</Text>
+    </Exhibit>
     <Exhibit ID="1">
       <Text ID="1">Welcome, noble traveler, to this
 galactic museum on the planet of 
@@ -150,6 +178,80 @@ you're on your own.`pause`
 `clear`The pirate's lair has many levels.
 At the very bottom, it is said, lies
 a priceless sapphire!</Text>
+    </Exhibit>
+    <Exhibit ID="6">
+      <Text ID="1">Planet natives believe in the curative
+power of a variety of "healing herbs."
+However, the effectiveness of these
+plants has never been verified by
+museum personnel.`pause`
+`clear`This display contains a `green`juton bush`cyan`.
+According to lore, its fruit increases
+the power of other native herbs.`pause`
+`clear`While this claim is doubtful, the
+fruit is really quite tasty.  You may
+sample one.`pause`</Text>
+    </Exhibit>
+    <Exhibit ID="7">
+      <Text ID="1">Different planets have different
+treasures.  On Tarmalon, as on
+many planets, the scarcity of `yellow`gold`cyan`
+makes it exceedingly valuable.`pause`
+`clear`Here you see the museum currency room.
+It contains a small (but noteworthy)
+portion of the planet's wealth.  You
+are welcome to a sample.`pause`
+      </Text>
+    </Exhibit>
+    <Exhibit ID="8">
+      <Text ID="1">`white`Stones of wisdom`cyan` is probably the most
+popular bar-room game on tarmalon.
+It is not only fun, but said to help
+develop a player's intelligence.</Text>
+    </Exhibit>
+    <Exhibit ID="9">
+      <Text ID="1">This giant tapestry is actually a map
+of the planet Tarmalon.  It's the only
+remaining world map made by tarmalon natives.`pause`
+`clear`This museum is located in the north-
+east portion of the main continent.
+Baron Kelfor's castle is on an island
+in the major inland lake.`pause`
+`clear`Near the bottom left of the tapestry,
+you can see the chain of islands
+called the "three sisters."  A large
+pirate's lair is said to be on one
+of these islands.`pause`</Text>
+    </Exhibit>
+    <Exhibit ID="10">
+      <Text ID="1">As you well know, some exhibits in
+this museum can be deadly.  But you
+haven't even seen the most dangerous
+displays.`pause`
+`clear`Many years ago, the innermost section
+of this museum was blocked off.  Some
+exhibits found there were just too
+dangerous.  Museum insurance rates
+were skyrocketing!`pause`
+`clear`Since you have succeeded where many
+others have failed, this part of
+the museum will be open to you from
+now on.  Perhaps you have a chance.
+Probably, you don't.`pause`
+      </Text>
+    </Exhibit>
+    <Exhibit ID="14">
+      <Text ID="1">This magnificent beast was found
+frozen to a high cliff near the museum.`pause`
+`clear`Locals say that `white`pegasus`cyan` stood alert
+for over a lifespan - poised as if
+ready to fly.  Finally, the magical
+animal succumbed to the bitter cold.`pause`
+`clear``white`Suddenly, the ice covering pegasus
+cracks apart!  The winged horse looks
+at you with probing eyes, and then
+lowers one wing, as if asking you to
+climb on.`pause`</Text>
     </Exhibit>
   </Exhibits>
 </LotaGame>
