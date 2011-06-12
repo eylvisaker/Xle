@@ -122,5 +122,34 @@ reward.  Meanwhile, here's some native
 
                    `wait:off``sound:VeryGood``yellow`GOLD:  + 300</Text>
     </Exhibit>
+    <Exhibit ID="5">
+      <Text ID="1">Tarmalon's deep ocean waters are so
+turbulent that few trading ships ever
+venture far from shore.  Yet, long
+ago, the oceans were calm and ocean
+travel flourished.`pause`
+`clear`As time went by, pirates came to rule
+the seas.  They preyed on helpless 
+vessels, taking gold, weapons, armor
+and supplies.`pause`
+`clear`Their treasures were stored in deep
+caves on remote islands.  This booty
+was guarded by paid soldiers and by
+animals bred for their ferocity.`pause`
+`clear`When the oceans became rougher, many
+of the caves could no longer be
+reached.  In this exhibit, you see
+the entrance to one such cave.  The
+wealth stored within is enormous.`pause`
+</Text>
+      <Text ID="2">`white`The pirate's lair is located in a
+chain of islands called the "three
+sisters."  You will be transported
+to the largest island.  From there,
+you're on your own.`pause`
+`clear`The pirate's lair has many levels.
+At the very bottom, it is said, lies
+a priceless sapphire!</Text>
+    </Exhibit>
   </Exhibits>
 </LotaGame>

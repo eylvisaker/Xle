@@ -27,9 +27,16 @@ namespace ERY.Xle
 		{
 			get { return text; }
 		}
+		/// <summary>
+		/// Read only copy of the colors.
+		/// </summary>
 		public Color[] Colors
 		{
 			get { return colors.ToArray(); }
+		}
+		public void SetColor(int index, Color clr)
+		{
+			colors[index] = clr;
 		}
 
 		public void Clear()

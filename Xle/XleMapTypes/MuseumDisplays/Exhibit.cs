@@ -270,11 +270,6 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			}
 		}
 	}
-	class PirateTreasure : Exhibit
-	{
-		public PirateTreasure() : base("Pirate Treasure", Coin.Topaz) { }
-		public override int ExhibitID { get { return 5; } }
-	}
 	class HerbOfLife : Exhibit
 	{
 		public HerbOfLife() : base("Herb of life", Coin.Topaz) { }
