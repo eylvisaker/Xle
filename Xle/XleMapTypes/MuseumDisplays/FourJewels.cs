@@ -7,7 +7,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
 	class FourJewels : Exhibit
 	{
-		public FourJewels() : base("FourJewels", Coin.Ruby) { }
+		public FourJewels() : base("Four Jewels", Coin.Ruby) { }
 		public override int ExhibitID { get { return 12; } }
 	}
 }

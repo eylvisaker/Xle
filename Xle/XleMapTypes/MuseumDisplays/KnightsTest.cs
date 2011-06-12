@@ -7,7 +7,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
 	class KnightsTest : Exhibit
 	{
-		public KnightsTest() : base("KnightsTest", Coin.Sapphire) { }
+		public KnightsTest() : base("Knight's Test", Coin.Sapphire) { }
 		public override int ExhibitID { get { return 11; } }
 	}
 }
