@@ -9,5 +9,14 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	{
 		public FourJewels() : base("Four Jewels", Coin.Ruby) { }
 		public override int ExhibitID { get { return 12; } }
+
+
+		public override void PlayerXamine(Player player)
+		{
+			ReadRawText(RawText);
+
+			player.DungeonLevel = 7;
+			player.SetMap(73, 1, 1);
+		}
 	}
 }

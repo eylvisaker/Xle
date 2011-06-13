@@ -189,7 +189,12 @@ namespace ERY.Xle.XleMapTypes
 
 			Commands.UpdateCommand(command);
 		}
+		public override void OnLoad(Player player)
+		{
+			base.OnLoad(player);
 
+			CurrentLevel = player.DungeonLevel;
+		}
 
 		public override string[] MapMenu()
 		{

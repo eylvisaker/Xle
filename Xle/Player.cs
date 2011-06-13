@@ -791,7 +791,6 @@ namespace ERY.Xle
 				{
 					dungeonLevel = value;
 				}
-
 			}
 		}
 		/// <summary>

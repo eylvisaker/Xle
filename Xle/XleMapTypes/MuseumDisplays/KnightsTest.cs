@@ -21,8 +21,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			ReadRawText(RawText);
 
-			// TODO: do this map
-			//player.SetMap(72, xx, yy);
+			player.DungeonLevel = 7;
+			player.SetMap(72, 1, 1);
 		}
 	}
 }
