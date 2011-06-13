@@ -143,5 +143,17 @@ namespace ERY.Xle.XleMapTypes
 			else
 				return true;
 		}
+
+
+		protected override bool CheckMovementImpl(Player player, int dx, int dy)
+		{
+			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
+		}
+
+
+		public override bool AutoDrawPlayer
+		{
+			get { return false; }
+		}
 	}
 }

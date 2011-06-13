@@ -105,10 +105,6 @@ namespace ERY.Xle.XleMapTypes
 
 		#endregion
 
-		public override bool AutoDrawPlayer
-		{
-			get { return false; }
-		}
 		public override int Height
 		{
 			get { return mHeight; }
@@ -174,10 +170,6 @@ namespace ERY.Xle.XleMapTypes
 		}
 
 
-		protected override bool CheckMovementImpl(Player player, int dx, int dy)
-		{
-			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
-		}
 
 		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
 		{

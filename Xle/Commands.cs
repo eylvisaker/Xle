@@ -830,7 +830,6 @@ namespace ERY.Xle
 
 		public void Xamine()
 		{
-
 			if (XleCore.Map.PlayerXamine(player) == false)
 			{
 

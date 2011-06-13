@@ -21,7 +21,7 @@ namespace ERY.Xle.XleMapTypes
 		int[] mData;
 		int mCurrentLevel;
 
-		
+
 		public override IEnumerable<string> AvailableTilesets
 		{
 			get { yield return "DungeonTiles.png"; }
@@ -139,11 +139,22 @@ namespace ERY.Xle.XleMapTypes
 		{
 			switch (XleCore.Map[player.X, player.Y])
 			{
-				case 0x0D:
-					player.DungeonLevel--;
+				case 0x11:
+					if (player.DungeonLevel == 0)
+					{
+						g.AddBottom("");
+						g.AddBottom("You climb out of the dungeon.");
+
+						// TODO: fix this
+						player.ReturnToOutside();
+
+						return true;
+					}
+					else
+						player.DungeonLevel--;
 					break;
 
-				case 0x0A:
+				case 0x12:
 					player.DungeonLevel++;
 					break;
 
@@ -152,24 +163,12 @@ namespace ERY.Xle.XleMapTypes
 
 			}
 
-			mCurrentLevel = player.DungeonLevel - 1;
+			mCurrentLevel = player.DungeonLevel;
 
-			if (player.DungeonLevel == -1)
-			{
-				g.AddBottom("");
-				g.AddBottom("You climb out of the dungeon.");
+			string tempstring = "You are now at level " + (player.DungeonLevel + 1).ToString() + ".";
 
-				// TODO: fix this
-				player.ReturnToOutside();
-			}
-			else
-			{
-				string tempstring = "You are now at level " + (player.DungeonLevel + 1).ToString() + ".";
-
-				g.AddBottom("");
-				g.AddBottom(tempstring, XleColor.White);
-
-			}
+			g.AddBottom("");
+			g.AddBottom(tempstring, XleColor.White);
 
 			return true;
 		}
@@ -235,11 +234,6 @@ namespace ERY.Xle.XleMapTypes
 		}
 
 		#endregion
-
-		protected override bool CheckMovementImpl(Player player, int dx, int dy)
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
 
 		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
 		{

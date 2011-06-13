@@ -36,7 +36,6 @@ namespace ERY.Xle
 		{
 			get
 			{
-
 				for (int i = 0; i < assemblies.Count; i++)
 				{
 					foreach (Type t in assemblies[i].GetTypes())

@@ -119,6 +119,8 @@
     <Compile Include="IHasRoofs.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="MapData.cs" />
+    <Compile Include="XleEventTypes\ChangeMapEvent.cs" />
+    <Compile Include="XleEventTypes\Store.cs" />
     <Compile Include="XleMapTypes\Castle.cs" />
     <Compile Include="XleMapTypes\Dungeon.cs" />
     <Compile Include="XleMapTypes\Map3D.cs" />

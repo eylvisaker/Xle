@@ -18,6 +18,7 @@
     <Map ID="20" Name="Holy Point" File="HolyPoint.xmf" />
     <Map ID="21" Name="Eagle Hollow" File="EagleHollow.xmf" />
     <Map ID="51" Name="The Castle" File="Castle.xmf" />
+    <Map ID="71" Name="A dungeon" File="PiratesLair.xmf" />
   </Maps>
   <Qualities>
     <Quality ID="0" Name="Shoddy" />
