@@ -30,7 +30,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				SoundMan.PlaySound(LotaSound.Good);
 				g.AddBottom("You feel a tingling sensation.", XleColor.Green);
 
-				while (SoundMan.IsAnyPlaying())
+				while (SoundMan.IsPlaying(LotaSound.Good))
 				{
 					XleCore.wait(10);
 				}

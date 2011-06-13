@@ -18,12 +18,13 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 			g.AddBottom();
 			g.AddBottom();
-			g.AddBottomCentered("Gold:  + " + gold.ToString());
+			g.AddBottomCentered("Gold:  + " + gold.ToString(), XleColor.Yellow);
 			g.AddBottom();
 			g.AddBottom();
 
 			player.Gold += gold;
 
+			SoundMan.PlaySound(LotaSound.VeryGood);
 			XleCore.FlashHPWhileSound(XleColor.Yellow);
 		}
 	}

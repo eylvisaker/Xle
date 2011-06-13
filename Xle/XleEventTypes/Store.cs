@@ -708,8 +708,6 @@ namespace ERY.Xle.XleEventTypes
 
 			}
 
-			CheckOfferMuseumCoin(player);
-
 			return true;
 		}
 	}
@@ -885,6 +883,122 @@ namespace ERY.Xle.XleEventTypes
 	[Serializable]
 	public class StoreHealer : Store
 	{
+		bool buyHerbs = false;
+
+		protected override void GetColors(out Color backColor, out Color borderColor,
+			out Color lineColor, out Color fontColor, out Color titleColor)
+		{
+			backColor = XleColor.Green;
+			borderColor = XleColor.LightGreen;
+			lineColor = XleColor.Yellow;
+			fontColor = XleColor.White;
+			titleColor = XleColor.White;
+
+			if (buyHerbs)
+				backColor = XleColor.LightBlue;
+		}
+
+		public override bool Speak(Player player)
+		{
+			if (CheckLoan(player, true))
+				return true;
+
+			buyHerbs = false;
+			int i = 0;
+			this.player = player;
+			int woundPrice = (int)((player.MaxHP - player.HP) * 0.75);
+			int herbsPrice = (int)(player.Level * 300 * CostFactor);
+
+			theWindow[i++] = " " + ShopName + " ";
+			theWindow[i++] = "";
+			theWindow[i++] = "";
+			theWindow[i++] = "Our sect offers restorative";
+			theWindow[i++] = "cures for your wounds.";
+
+			i += 4;
+
+			string woundString = woundPrice.ToString();
+
+			if (woundPrice <= 0)
+				woundString = "Not needed";
+
+			theWindow[i++] = "1. Wound Care  -  " + woundString;
+			i += 2;
+
+			theWindow[i++] = "2. Healing Herbs -  " + herbsPrice.ToString() + " apiece";
+
+			MenuItemList theList = new MenuItemList("0", "1", "2");
+
+			g.AddBottom("");
+			g.AddBottom("Make choice (hit 0 to cancel)");
+			g.AddBottom("");
+
+			int choice = QuickMenu(theList, 2, 0);
+
+			if (choice == 0)
+			{
+				g.AddBottom("");
+				g.AddBottom("Nothing purchased");
+				g.AddBottom("");
+
+				StoreSound(LotaSound.Medium);
+			}
+			else if (choice == 1)
+			{
+				g.AddBottom("You are cured.");
+				player.HP = player.MaxHP;
+				SoundMan.PlaySound(LotaSound.VeryGood);
+
+				while (SoundMan.IsPlaying(LotaSound.VeryGood))
+				{
+					XleCore.wait(10);
+				}
+			}
+			else if (choice == 2)
+			{
+				if (player.museum[6] <= 1)
+				{
+					g.AddBottom("You're not ready yet.");
+					SoundMan.PlaySound(LotaSound.Medium);
+				}
+				else
+				{
+					int max = player.Gold / herbsPrice;
+					max = Math.Min(max, 40 - player.Item(3));
+
+					buyHerbs = true;
+
+					g.AddBottom();
+					g.AddBottom("Purchase how many healing herbs?");
+
+					int number = ChooseNumber(max);
+
+					if (number == 0)
+					{
+						g.AddBottom("Nothing purchased.");
+						SoundMan.PlaySound(LotaSound.Medium);
+					}
+					else
+					{
+						if (player.Spend(number * herbsPrice) == false)
+						{
+							throw new Exception("Not enough money!");
+						}
+
+						player.ItemCount(3, number);
+
+						g.AddBottom(number.ToString() + " healing herbs purchased.");
+
+						SoundMan.PlaySound(LotaSound.Sale);
+
+						while (SoundMan.IsPlaying(LotaSound.Sale))
+							XleCore.wait(10);
+					}
+				}
+			}
+
+			return true;
+		}
 	}
 
 	[Serializable]

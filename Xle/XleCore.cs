@@ -522,7 +522,9 @@ namespace ERY.Xle
 			Color oldClr = g.HPColor;
 			Color lastColor = g.HPColor;
 
-			while (SoundMan.IsAnyPlaying())
+			while (SoundMan.IsPlaying(LotaSound.VeryGood) ||
+				SoundMan.IsPlaying(LotaSound.Good) ||
+				SoundMan.IsPlaying(LotaSound.VeryBad))
 			{
 				if (lastColor == clr)
 					lastColor = oldClr;
@@ -1179,7 +1181,7 @@ namespace ERY.Xle
 					key = e.KeyCode;
 				};
 
-			PromptToContinue = true;
+			PromptToContinue = PromptToContinueOnWait;
 
 			Keyboard.KeyDown += keyhandler;
 			do
@@ -1607,8 +1609,11 @@ namespace ERY.Xle
 
 			KeyCode key;
 
+
 			do
 			{
+				XleCore.PromptToContinueOnWait = false;
+
 				key = WaitForKey(redraw);
 
 				if (method == 0)
@@ -1690,6 +1695,8 @@ namespace ERY.Xle
 
 
 			} while (key != KeyCode.Return && !g.Done);
+
+			XleCore.PromptToContinueOnWait = true;
 
 			return amount;
 		}
