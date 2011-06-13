@@ -805,7 +805,7 @@ namespace ERY.Xle
 				if (player.WeaponType(i) > 0)
 				{
 					tempstring = XleCore.QualityList[player.WeaponQuality(i)] + " " +
-								 XleCore.ArmorList[player.WeaponType(i)].Name;
+								 XleCore.WeaponList[player.WeaponType(i)].Name;
 
 					theList.Add(tempstring);
 					j++;

@@ -103,80 +103,6 @@ namespace ERY.Xle.XleMapTypes
 			get { return g.MuseumDoor; }
 		}
 
-		VertexBuffer wall_vb;
-		IndexBuffer wall_ib;
-
-		protected internal override void ConstructRenderTimeData()
-		{
-			List<Vertex> vertices = new List<Vertex>();
-			List<int> indices = new List<int>();
-
-			for (int y = 0; y < Height; y++)
-			{
-				for (int x = 0; x < Width; x++)
-				{
-					// museum tiles
-					if (0x40 <= this[x, y] && this[x, y] <= 0x5F)
-						AddWalls(vertices, indices, x - 0.5f, y - 0.5f);
-				}
-			}
-
-			wall_vb = new VertexBuffer(Vertex.VertexLayout, vertices.Count);
-			wall_vb.WriteVertexData(vertices.ToArray());
-			wall_vb.PrimitiveType = PrimitiveType.TriangleList;
-
-			wall_ib = new IndexBuffer(IndexBufferType.Int16, indices.Count);
-			wall_ib.WriteIndices(indices.ToArray());
-		}
-
-		private void AddWalls(List<Vertex> vertices, List<int> indices, float x, float y)
-		{
-			AddWall(vertices, indices, x, y, new Vector3(1, 0, 0), new Vector3(0, -1, 0));
-			AddWall(vertices, indices, x, y + 1, new Vector3(0, -1, 0), new Vector3(-1, 0, 0));
-			AddWall(vertices, indices, x + 1, y, new Vector3(0, 1, 0), new Vector3(1, 0, 0));
-			AddWall(vertices, indices, x + 1, y + 1, new Vector3(-1, 0, 0), new Vector3(0, 1, 0));
-		}
-
-		private void AddWall(List<PositionTextureNormalTangent> vertices, List<int> indices, float x, float y, Vector3 dir, Vector3 normal)
-		{
-			const int zscale = 1;
-
-			Vertex[] verts = new Vertex[4];
-
-			verts[0].Position = new Vector3(x, y, zscale);
-			verts[1].Position = new Vector3(x + dir.X, y + dir.Y, zscale);
-			verts[2].Position = new Vector3(x + dir.X, y + dir.Y, 0);
-			verts[3].Position = new Vector3(x, y, 0);
-
-			verts[0].Texture = new Vector2(0, 0);
-			verts[1].Texture = new Vector2(1, 0);
-			verts[2].Texture = new Vector2(1, 1);
-			verts[3].Texture = new Vector2(0, 1);
-
-			for (int i = 0; i < 4; i++)
-			{
-				verts[i].Normal = normal;
-				verts[i].Tangent = dir;
-			}
-
-			int index = vertices.Count;
-			vertices.AddRange(verts);
-
-			indices.Add(index);
-			indices.Add(index + 1);
-			indices.Add(index + 2);
-
-			indices.Add(index);
-			indices.Add(index + 2);
-			indices.Add(index + 3);
-
-		}
-
-		void Render(object obj)
-		{
-			wall_vb.DrawIndexed(wall_ib);
-		}
-
 		#endregion
 
 		public override bool AutoDrawPlayer
@@ -263,15 +189,7 @@ namespace ERY.Xle.XleMapTypes
 			vertLine = 15 * 16;
 		}
 
-		public override bool CanPlayerStepInto(Player player, int xx, int yy)
-		{
-			if (this[xx, yy] >= 0x40)
-				return false;
-			else if ((this[xx, yy] & 0xf0) == 0x00)
-				return false;
-			else
-				return true;
-		}
+
 
 		public override bool PlayerXamine(Player player)
 		{

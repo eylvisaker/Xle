@@ -158,6 +158,9 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 						case "white": clr = XleColor.White; break;
 						case "cyan": clr = XleColor.Cyan; break;
 						case "yellow": clr = XleColor.Yellow; break;
+						case "green": clr = XleColor.Green; break;
+						case "purple": clr = XleColor.Purple; break;
+
 						case "pause":
 							XleCore.WaitForKey();
 

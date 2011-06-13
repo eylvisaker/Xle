@@ -8,29 +8,54 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
-
+using AgateLib.DisplayLib;
 
 namespace ERY.Xle.XleMapTypes
 {
 	public class Dungeon : Map3D
 	{
-		/// <summary>
-		/// Dungeon data.  Index order is mData[level, y, x].
-		/// </summary>
-		int[, ,] mData;
+		int mWidth;
+		int mHeight;
+		int mLevels = 1;
+
+		int[] mData;
 		int mCurrentLevel;
 
+		
+		public override IEnumerable<string> AvailableTilesets
+		{
+			get { yield return "DungeonTiles.png"; }
+		}
+
+		protected override void ReadData(XleSerializationInfo info)
+		{
+			mWidth = info.ReadInt32("Width");
+			mHeight = info.ReadInt32("Height");
+			mLevels = info.ReadInt32("Levels");
+			mData = info.ReadInt32Array("Data");
+		}
+		protected override void WriteData(XleSerializationInfo info)
+		{
+			info.Write("Width", mWidth, true);
+			info.Write("Height", mHeight, true);
+			info.Write("Levels", mLevels, true);
+			info.Write("Data", mData);
+		}
 		public override bool IsMultiLevelMap
 		{
 			get { return true; }
 		}
 		public override void InitializeMap(int width, int height)
 		{
-			mData = new int[1, height, width];
+			mWidth = width;
+			mHeight = height;
+
+			mData = new int[mLevels * mHeight * mWidth];
 		}
 		public override void SetLevels(int count)
 		{
-			int[, ,] newData = new int[count, Height, Width];
+			int[] newData = new int[count * Height * Width];
+			int levelSize = Height * Width;
 
 			for (int i = 0; i < Levels; i++)
 			{
@@ -38,25 +63,43 @@ namespace ERY.Xle.XleMapTypes
 				{
 					for (int y = 0; y < Height; y++)
 					{
-						newData[i, y, x] = mData[i, y, x];
+						int newIndex = i * levelSize + y * Width + x;
+						int oldIndex = i * levelSize + y * Width + x;
+
+						if (newIndex >= newData.Length ||
+							oldIndex >= mData.Length)
+						{
+							goto done;
+						}
+						newData[newIndex] = mData[oldIndex];
 					}
 				}
 			}
+
+		done:
+			mData = newData;
+			mLevels = count;
 		}
 		public override int Height
 		{
-			get { return mData.GetUpperBound(1) + 1; }
+			get { return mHeight; }
 		}
 		public override int Width
 		{
-			get { return mData.GetUpperBound(2) + 1; }
+			get { return mWidth; }
 		}
 		public override int Levels
 		{
 			get
 			{
-				return mData.GetUpperBound(0) + 1;
+				return mLevels;
 			}
+		}
+
+		public int CurrentLevel
+		{
+			get { return mCurrentLevel; }
+			set { mCurrentLevel = value; }
 		}
 
 		public override Color DefaultColor
@@ -76,7 +119,7 @@ namespace ERY.Xle.XleMapTypes
 				}
 				else
 				{
-					return mData[mCurrentLevel, yy, xx];
+					return mData[mCurrentLevel * Height * Width + yy * Width + xx];
 				}
 			}
 			set
@@ -88,10 +131,8 @@ namespace ERY.Xle.XleMapTypes
 				}
 				else
 				{
-					mData[mCurrentLevel, yy, xx] = value;
-					//mData[(yy + mapExtend) * (mapWidth + 2 * mapExtend) + (xx + mapExtend)] = (byte)val;
+					mData[mCurrentLevel * Height * Width + yy * Width + xx] = value;
 				}
-
 			}
 		}
 		public override bool PlayerClimb(Player player)
@@ -113,7 +154,7 @@ namespace ERY.Xle.XleMapTypes
 
 			mCurrentLevel = player.DungeonLevel - 1;
 
-			if (player.DungeonLevel == 0)
+			if (player.DungeonLevel == -1)
 			{
 				g.AddBottom("");
 				g.AddBottom("You climb out of the dungeon.");
@@ -123,7 +164,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else
 			{
-				string tempstring = "You are now at level " + player.DungeonLevel.ToString() + ".";
+				string tempstring = "You are now at level " + (player.DungeonLevel + 1).ToString() + ".";
 
 				g.AddBottom("");
 				g.AddBottom(tempstring, XleColor.White);
@@ -138,7 +179,7 @@ namespace ERY.Xle.XleMapTypes
 			string command;
 			Point stepDirection;
 
-			_MoveDungeon(player, dir, player.Item(11) > 0,  out command, out stepDirection);
+			_MoveDungeon(player, dir, player.Item(11) > 0, out command, out stepDirection);
 
 			Commands.UpdateCommand(command);
 
@@ -173,18 +214,27 @@ namespace ERY.Xle.XleMapTypes
 			return retval.ToArray();
 		}
 
-		protected override AgateLib.DisplayLib.Surface Backdrop
+
+		#region --- Drawing ---
+
+		protected override Surface Backdrop
 		{
-			get { throw new NotImplementedException(); }
+			get { return g.MuseumBackdrop; }
 		}
-		protected override AgateLib.DisplayLib.Surface Wall
+		protected override Surface Wall
 		{
-			get { throw new NotImplementedException(); }
+			get { return g.MuseumWall; }
 		}
-		protected override AgateLib.DisplayLib.Surface SidePassages
+		protected override Surface SidePassages
 		{
-			get { throw new NotImplementedException(); }
+			get { return g.MuseumSidePassage; }
 		}
+		protected override Surface Door
+		{
+			get { return g.MuseumDoor; }
+		}
+
+		#endregion
 
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)
 		{
@@ -204,28 +254,7 @@ namespace ERY.Xle.XleMapTypes
 
 		public override bool PlayerFight(Player player)
 		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public override bool CanPlayerStepInto(Player player, int xx, int yy)
-		{
-			int t = 0;
-
-			if (this[xx, yy] >= 0x80)
-			{
-				t = 3;
-			}
-			else
-				t = 0;
-
-
-
-			if (t > 0)
-			{
-				return false;
-			}
-			else
-				return true;
+			return false;
 		}
 
 	}

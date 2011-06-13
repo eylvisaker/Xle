@@ -259,6 +259,25 @@ the museum will be open to you from
 now on.  Perhaps you have a chance.
 Probably, you don't.`pause`</Text>
     </Exhibit>
+    <Exhibit ID="11">
+      <Text ID="1">The underground catacombs of armak
+are infamous for their twisting
+passageways and deadly monsters.
+To venture there, it is said, is
+almost certain death.`pause`
+`clear`Yes, for many years, the rulers of
+Tarmalon have cast their `white`best`cyan` knights
+into these dungeon depths.  Only a
+few ever make it back to the surface.`pause`
+`clear`Those who survive become `green`tougher`cyan`,
+`yellow`fiercer`cyan`, and `purple`wiser`cyan`.  They emerge
+virtually unbeatable in battle.`pause`
+`clear`You now face the same test, for in a
+moment, you'll find yourself at the
+very `yellow`bottom`cyan` of armak.  The way out
+lies far above.  `white`The risk is great -
+the payoff greater!!`pause`</Text>
+    </Exhibit>
     <Exhibit ID="13">Legends say that 13 great wizards
 once ruled Tarmalon, but that little
 of their power remains.  Those who

@@ -133,6 +133,15 @@ namespace ERY.Xle.XleMapTypes
 		protected virtual void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
 		{
 		}
-		
+
+		public override bool CanPlayerStepInto(Player player, int xx, int yy)
+		{
+			if (this[xx, yy] >= 0x40)
+				return false;
+			else if ((this[xx, yy] & 0xf0) == 0x00)
+				return false;
+			else
+				return true;
+		}
 	}
 }

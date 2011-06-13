@@ -7,7 +7,22 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
 	class KnightsTest : Exhibit
 	{
-		public KnightsTest() : base("Knight's Test", Coin.Sapphire) { }
+		public KnightsTest() : base("The Test", Coin.Sapphire) { }
 		public override int ExhibitID { get { return 11; } }
+
+		public override string LongName
+		{
+			get
+			{
+				return "A test for knights";
+			}
+		}
+		public override void PlayerXamine(Player player)
+		{
+			ReadRawText(RawText);
+
+			// TODO: do this map
+			//player.SetMap(72, xx, yy);
+		}
 	}
 }
