@@ -19,6 +19,7 @@
     <Map ID="21" Name="Eagle Hollow" File="EagleHollow.xmf" />
     <Map ID="51" Name="The Castle" File="Castle.xmf" />
     <Map ID="71" Name="A dungeon" File="PiratesLair.xmf" />
+    <Map ID="72" Name="Armak" File="Armak.xmf" />
   </Maps>
   <Qualities>
     <Quality ID="0" Name="Shoddy" />
@@ -266,7 +267,7 @@ are infamous for their twisting
 passageways and deadly monsters.
 To venture there, it is said, is
 almost certain death.`pause`
-`clear`Yes, for many years, the rulers of
+`clear`Yet, for many years, the rulers of
 Tarmalon have cast their `white`best`cyan` knights
 into these dungeon depths.  Only a
 few ever make it back to the surface.`pause`

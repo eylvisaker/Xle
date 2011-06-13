@@ -22,7 +22,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			ReadRawText(RawText);
 
 			player.DungeonLevel = 7;
-			player.SetMap(72, 1, 1);
+			player.SetMap(72, 0, 1);
 		}
 	}
 }
