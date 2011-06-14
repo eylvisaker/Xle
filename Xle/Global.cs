@@ -92,9 +92,7 @@ namespace ERY.Xle
 		static public Surface MuseumExhibitFrame { get; private set; }
 		static public Surface MuseumExhibitStatic { get; private set; }
 
-		static public Surface floorTexture;			// stores the pointer to the floor texture
-		static public Surface ceilingTexture;			// stores the pointer to the ceiling texture
-		static public Surface floorHoleTexture;		// stores the pointer to the floorhole texture
+		public static Surface MuseumCloseup { get; private set; }
 
 		// character functions
 
@@ -422,6 +420,12 @@ namespace ERY.Xle
 			MuseumSidePassage = new Surface("MuseumSidePassage.png");
 			MuseumExhibitFrame = new Surface("ExhibitFrame.png");
 			MuseumExhibitStatic = new Surface("ExhibitStatic.png");
+			MuseumCloseup = new Surface("MuseumCloseup.png");
+
+			foreach (var exinfo in XleCore.ExhibitInfo.Values)
+			{
+				exinfo.LoadImage();
+			}
 
 			return true;
 

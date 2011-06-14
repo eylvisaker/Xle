@@ -142,36 +142,9 @@ namespace ERY.Xle.XleMapTypes
 
 			}
 		}
-		public override void PlayerCursorMovement(Player player, Direction dir)
-		{
-			string command;
-			Point stepDirection;
+		
 
-			_MoveDungeon(player, dir, true, out command, out stepDirection);
-
-			if (stepDirection.IsEmpty == false)
-			{
-				if (CanPlayerStepInto(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
-				{
-					command = "Bump into wall";
-					SoundMan.PlaySound(LotaSound.Bump);
-				}
-				//else
-				//    SoundMan.PlaySound(LotaSound.MuseumWalk);
-			}
-			Commands.UpdateCommand(command);
-
-			if (stepDirection.IsEmpty == false)
-			{
-				player.Move(stepDirection.X, stepDirection.Y);
-			}
-
-			Commands.UpdateCommand(command);
-
-			PlayerEnterPosition(player, player.X, player.Y);
-		}
-
-		protected void PlayerEnterPosition(Player player, int x, int y)
+		protected override void PlayerEnterPosition(Player player, int x, int y)
 		{
 			if (x == 12 && y == 13)
 			{
@@ -275,6 +248,28 @@ namespace ERY.Xle.XleMapTypes
 
 		#region --- Museum Exhibits ---
 
+		MuseumDisplays.Exhibit mCloseup;
+		bool mDrawStatic;
+
+		protected override void DrawCloseupImpl(Rectangle inRect)
+		{
+			Rectangle displayRect = new Rectangle(inRect.X + 64, inRect.Y + 64, 240, 128);
+
+			g.MuseumExhibitStatic.Draw(displayRect);
+			g.MuseumCloseup.Draw(inRect);
+			
+			DrawExhibitText(inRect, mCloseup);
+
+			if (mDrawStatic == false)
+			{
+				if (mCloseup.ExhibitInfo.Image != null)
+				{
+					mCloseup.ExhibitInfo.Image.Draw(displayRect);
+					
+				}
+			}
+		}
+
 		private bool InteractWithDisplay(Player player)
 		{
 			Point stepDir = StepDirection(player.FaceDirection);
@@ -286,30 +281,35 @@ namespace ERY.Xle.XleMapTypes
 
 			MuseumDisplays.Exhibit ex = mExhibits[tileAt];
 
+			DrawCloseup = true;
+			mCloseup = ex;
+			mDrawStatic = ex.StaticBeforeCoin;
+
 			g.AddBottom("You see a plaque.  It Reads...");
 			g.AddBottom();
-			g.AddBottomCentered(ex.LongName, ex.ExhibitColor);
+			g.AddBottomCentered(ex.LongName, ex.TextColor);
 
 			XleCore.PromptToContinueOnWait = true;
 
 			if (ex.IsClosed(player))
 			{
-				g.AddBottomCentered("- Exhibit closed -", ex.ExhibitColor);
+				g.AddBottomCentered("- Exhibit closed -", ex.TextColor);
 				g.AddBottom();
 				XleCore.WaitForKey();
 
 				return true;
 			}
-			
-			g.AddBottomCentered(ex.CoinString, ex.ExhibitColor);
+
+			g.AddBottomCentered(ex.CoinString, ex.TextColor);
 			g.AddBottom();
 			XleCore.WaitForKey();
 
-
-
 			if (ex.RequiresCoin == false)
+			{
+				mDrawStatic = false;
 				RunExhibit(player, ex);
-			else 
+			}
+			else
 			{
 				if (player.museum[ex.ExhibitID] == 0)
 					g.AddBottom("You haven't used this exhibit.");
@@ -335,6 +335,7 @@ namespace ERY.Xle.XleMapTypes
 
 					UseCoin(player, ex.Coin);
 
+					mDrawStatic = false;
 					RunExhibit(player, ex);
 				}
 			}
@@ -439,20 +440,26 @@ namespace ERY.Xle.XleMapTypes
 
 			if (distance == 1)
 			{
-				int px = 176;
-				int py = 208;
-
-				int textLength = exhibit.Name.Length;
-
-				px -= (textLength / 2) * 16;
-
-				px += destRect.X;
-				py += destRect.Y;
-
-				AgateLib.DisplayLib.Display.FillRect(px, py, textLength * 16, 16, Color.Black);
-
-				XleCore.WriteText(px, py, exhibit.Name, clr);
+				DrawExhibitText(destRect, exhibit);
 			}
+		}
+
+		private static void DrawExhibitText(Rectangle destRect, MuseumDisplays.Exhibit exhibit)
+		{
+			int px = 176;
+			int py = 208;
+
+			int textLength = exhibit.Name.Length;
+
+			px -= (textLength / 2) * 16;
+
+			px += destRect.X;
+			py += destRect.Y;
+
+			AgateLib.DisplayLib.Display.FillRect(px, py, textLength * 16, 16, Color.Black);
+
+			Color clr = exhibit.TextColor;
+			XleCore.WriteText(px, py, exhibit.Name, clr);
 		}
 
 		private void DrawExhibitStatic(Rectangle destRect, Color clr, int distance)

@@ -13,5 +13,13 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			get { return "A flight of fancy"; }
 		}
+
+		public override bool StaticBeforeCoin
+		{
+			get
+			{
+				return false;
+			}
+		}
 	}
 }

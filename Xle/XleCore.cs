@@ -267,6 +267,11 @@ namespace ERY.Xle
 
 					var info = new XleMapTypes.MuseumDisplays.ExhibitInfo();
 
+					if (node.Attributes["Image"] != null)
+					{
+						info.ImageFile = node.Attributes["Image"].Value;
+					}
+
 					foreach (XmlNode child in node.ChildNodes)
 					{
 						if (child.Name == "Text")

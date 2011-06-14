@@ -26,6 +26,12 @@ namespace ERY.Xle.XleMapTypes
 
 		protected override void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect)
 		{
+			if (DrawCloseup)
+			{
+				DrawCloseupImpl(inRect);
+				return;
+			}
+
 			Point stepDir = StepDirection(faceDirection);
 			Point leftDir = LeftDirection(faceDirection);
 			Point rightDir = RightDirection(faceDirection);
@@ -52,6 +58,13 @@ namespace ERY.Xle.XleMapTypes
 					break;
 				}
 			}
+		}
+
+		protected bool DrawCloseup { get; set; }
+
+		protected virtual void DrawCloseupImpl(Rectangle inRect)
+		{
+			throw new NotImplementedException();
 		}
 
 
@@ -150,6 +163,46 @@ namespace ERY.Xle.XleMapTypes
 			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
 		}
 
+		public override void PlayerCursorMovement(Player player, Direction dir)
+		{
+			string command;
+			Point stepDirection;
+
+			DrawCloseup = false;
+
+			_MoveDungeon(player, dir, ShowDirections(player), out command, out stepDirection);
+
+			if (stepDirection.IsEmpty == false)
+			{
+				if (CanPlayerStepInto(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
+				{
+					command = "Bump into wall";
+					SoundMan.PlaySound(LotaSound.Bump);
+				}
+				//else
+				//    SoundMan.PlaySound(LotaSound.MuseumWalk);
+			}
+			Commands.UpdateCommand(command);
+
+			if (stepDirection.IsEmpty == false)
+			{
+				player.Move(stepDirection.X, stepDirection.Y);
+			}
+
+			Commands.UpdateCommand(command);
+
+			PlayerEnterPosition(player, player.X, player.Y);
+		}
+
+		protected virtual bool ShowDirections(Player player)
+		{
+			return true;
+		}
+
+
+		protected virtual void PlayerEnterPosition(Player player, int x, int y)
+		{
+		}
 
 		public override bool AutoDrawPlayer
 		{

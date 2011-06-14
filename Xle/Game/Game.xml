@@ -75,7 +75,7 @@
   </Items>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>
-    <Exhibit ID="0">
+    <Exhibit ID="0" Image="Information.png">
       <Text ID="0">`white` You have done well since I last saw
  you.  By my power as caretaker...
  </Text>
@@ -103,7 +103,7 @@ I want you to have this `cyan`magic ice`white`.  It
 may help you someday.  It works best 
 inside."`pause`</Text>
     </Exhibit>
-    <Exhibit ID="1">
+    <Exhibit ID="1" Image="Welcome.png">
       <Text ID="1">Welcome, noble traveler, to this
 galactic museum on the planet of 
 tarmalon.  The museum provides `white`views
@@ -151,7 +151,7 @@ coins to view exhibits.`pause`
               Good luck.`pause`
  </Text>
     </Exhibit>
-    <Exhibit ID="2">
+    <Exhibit ID="2" Image="Weaponry1.png">
       <Text ID="1">Eons ago, nomadic warriors roamed the
 planet tarmalon.  They hunted and
 fought with stone knives, much like
@@ -171,7 +171,7 @@ As a museum patron, you may use this
 weapon for as long as you like.  It
 is now in your possession.</Text>
     </Exhibit>
-    <Exhibit ID="3">
+    <Exhibit ID="3" Image="Thornberry.png">
       <Text ID="1">This exhibit shows a typical tarmalon
 town called thornberry.  The town was 
 established over 100 lifespans ago by
@@ -190,7 +190,7 @@ your trip.
 
              `wait:off``sound:VeryGood``yellow`gold:  + 300</Text>
     </Exhibit>
-    <Exhibit ID="4">
+    <Exhibit ID="4" Image="Fountain.png">
       <Text ID="1">Here you see a replica of the famous
 `purple`enchanted flower fountain`cyan`.  Legend
 says that its waters once flowed in
@@ -209,7 +209,7 @@ reward.  Meanwhile, here's some native
 
                    `wait:off``sound:VeryGood``yellow`GOLD:  + 300</Text>
     </Exhibit>
-    <Exhibit ID="5">
+    <Exhibit ID="5" Image="PirateLair.png">
       <Text ID="1">Tarmalon's deep ocean waters are so
 turbulent that few trading ships ever
 venture far from shore.  Yet, long
@@ -238,7 +238,7 @@ you're on your own.`pause`
 At the very bottom, it is said, lies
 a priceless sapphire!</Text>
     </Exhibit>
-    <Exhibit ID="6">
+    <Exhibit ID="6" Image="HerbOfLife.png">
       <Text ID="1">Planet natives believe in the curative
 power of a variety of "healing herbs."
 However, the effectiveness of these
@@ -251,7 +251,7 @@ the power of other native herbs.`pause`
 fruit is really quite tasty.  You may
 sample one.`pause`</Text>
     </Exhibit>
-    <Exhibit ID="7">
+    <Exhibit ID="7" Image="NativeCurrency.png">
       <Text ID="1">Different planets have different
 treasures.  On Tarmalon, as on
 many planets, the scarcity of `yellow`gold`cyan`
@@ -261,13 +261,13 @@ It contains a small (but noteworthy)
 portion of the planet's wealth.  You
 are welcome to a sample.`pause``clear`</Text>
     </Exhibit>
-    <Exhibit ID="8">
+    <Exhibit ID="8" Image="StonesOfWisdom.png">
       <Text ID="1">`white`Stones of wisdom`cyan` is probably the most
 popular bar-room game on tarmalon.
 It is not only fun, but said to help
 develop a player's intelligence.`pause`</Text>
     </Exhibit>
-    <Exhibit ID="9">
+    <Exhibit ID="9" Image="Tapestry.png">
       <Text ID="1">This giant tapestry is actually a map
 of the planet Tarmalon.  It's the only
 remaining world map made by tarmalon
@@ -282,7 +282,7 @@ called the "three sisters."  A large
 pirate's lair is said to be on one
 of these islands.`pause`</Text>
     </Exhibit>
-    <Exhibit ID="10">
+    <Exhibit ID="10" Image="LostDisplays.png">
       <Text ID="1">As you well know, some exhibits in
 this museum can be deadly.  But you
 haven't even seen the most dangerous
@@ -298,7 +298,7 @@ the museum will be open to you from
 now on.  Perhaps you have a chance.
 Probably, you don't.`pause`</Text>
     </Exhibit>
-    <Exhibit ID="11">
+    <Exhibit ID="11" Image="TheTest.png">
       <Text ID="1">The underground catacombs of armak
 are infamous for their twisting
 passageways and deadly monsters.
@@ -317,7 +317,8 @@ very `yellow`bottom`cyan` of armak.  The way out
 lies far above.  `white`The risk is great -
 the payoff greater!!`pause`</Text>
     </Exhibit>
-    <Exhibit ID="13">Legends say that 13 great wizards
+    <Exhibit ID="12" Image="FourJewels.png"></Exhibit>
+    <Exhibit ID="13" Image="Guardian.png">Legends say that 13 great wizards
 once ruled Tarmalon, but that little
 of their power remains.  Those who
 escaped death and treachery ultimately
@@ -327,7 +328,7 @@ wizard of arovyn.  His power largely
 gone, he is said to be imprisoned deep
 within Kelfor castle.  Only the pass-
 word `yellow`"Guardians"`cyan` will open his door.`pause`</Exhibit>
-    <Exhibit ID="14">
+    <Exhibit ID="14" Image="Pegasus.png">
       <Text ID="1">This magnificent beast was found
 frozen to a high cliff near the
 museum.`pause`
@@ -341,5 +342,6 @@ at you with probing eyes, and then
 lowers one wing, as if asking you to
 climb on.`pause`</Text>
     </Exhibit>
+    <Exhibit ID="15" Image="AncientArtifact.png"></Exhibit>
   </Exhibits>
 </LotaGame>

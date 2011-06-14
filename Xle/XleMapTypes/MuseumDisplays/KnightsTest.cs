@@ -24,5 +24,10 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			player.DungeonLevel = 7;
 			player.SetMap(72, 0, 1);
 		}
+
+		public override bool StaticBeforeCoin
+		{
+			get { return false; }
+		}
 	}
 }

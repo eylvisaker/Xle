@@ -9,5 +9,15 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	{
 		public StonesWisdom() : base("Stones of Wisdom", Coin.Amethyst) { }
 		public override int ExhibitID { get { return 8; } }
+
+		public override bool StaticBeforeCoin
+		{
+			get
+			{
+				return false;
+			}
+		}
+
+
 	}
 }

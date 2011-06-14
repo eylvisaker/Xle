@@ -53,6 +53,13 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				}
 			}
 		}
+		/// <summary>
+		/// Gets the color of the text in the museum. Defaults to ExhibitColor.
+		/// </summary>
+		public virtual Color TextColor
+		{
+			get { return ExhibitColor; }
+		}
 		protected virtual string RawText
 		{
 			get
@@ -206,7 +213,15 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			return player.museum[ExhibitID] != 0;
 		}
 
-		protected ExhibitInfo ExhibitInfo { get { return XleCore.ExhibitInfo[ExhibitID]; } }
+		/// <summary>
+		/// Returns true if we should draw the static before a coin is inserted.
+		/// </summary>
+		public virtual bool StaticBeforeCoin
+		{
+			get { return true; }
+		}
+
+		public ExhibitInfo ExhibitInfo { get { return XleCore.ExhibitInfo[ExhibitID]; } }
 	}
 
 

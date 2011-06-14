@@ -19,7 +19,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		public override void PlayerXamine(Player player)
 		{
-			if (player.museum[ExhibitID] == 0 && player.TimeDays < 50)
+			if (player.museum[ExhibitID] == 0 && player.TimeDays < 100)
 			{
 				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[1]);
 				
@@ -41,7 +41,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			if (player.museum[ExhibitID] < 0)
 				return true;
 
-			if (player.museum[ExhibitID] == 1 && player.TimeDays < 50)
+			if (player.museum[ExhibitID] == 1 && player.TimeDays < 100)
 				return true;
 
 			return false;

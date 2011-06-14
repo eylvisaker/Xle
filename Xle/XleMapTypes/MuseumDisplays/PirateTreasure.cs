@@ -10,7 +10,13 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		public PirateTreasure() : base("Pirate Treasure", Coin.Topaz) { }
 		public override int ExhibitID { get { return 5; } }
 
-
+		public override bool StaticBeforeCoin
+		{
+			get
+			{
+				return false;
+			}
+		}
 		public override void PlayerXamine(Player player)
 		{
 			if (CheckOfferReread(player))

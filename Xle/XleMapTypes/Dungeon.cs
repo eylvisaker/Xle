@@ -173,21 +173,10 @@ namespace ERY.Xle.XleMapTypes
 			return true;
 		}
 
-		public override void PlayerCursorMovement(Player player, Direction dir)
+		protected override bool ShowDirections(Player player)
 		{
-			string command;
-			Point stepDirection;
-
-			_MoveDungeon(player, dir, player.Item(11) > 0, out command, out stepDirection);
-
-			Commands.UpdateCommand(command);
-
-			if (stepDirection.IsEmpty == false)
-			{
-				player.Move(stepDirection.X, stepDirection.Y);
-			}
-
-			Commands.UpdateCommand(command);
+			// check for compass.
+			return player.Item(11) > 0;
 		}
 		public override void OnLoad(Player player)
 		{
