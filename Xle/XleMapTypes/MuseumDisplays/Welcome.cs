@@ -17,6 +17,11 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			get { return "Tarmalon Museum!"; }
 		}
+
+		public void PlayGoldArmbandMessage(Player player)
+		{
+			ReadRawText(ExhibitInfo.Text[2]);
+		}
 	}
 
 }

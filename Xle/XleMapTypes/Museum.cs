@@ -167,6 +167,22 @@ namespace ERY.Xle.XleMapTypes
 			}
 
 			Commands.UpdateCommand(command);
+
+			PlayerEnterPosition(player, player.X, player.Y);
+		}
+
+		protected void PlayerEnterPosition(Player player, int x, int y)
+		{
+			if (x == 12 && y == 13)
+			{
+				if (player.museum[1] < 3)
+				{
+					(mExhibits[0x51] as MuseumDisplays.Welcome).PlayGoldArmbandMessage(player);
+					player.museum[1] = 3;
+
+					CheckExhibitStatus(player);
+				}
+			}
 		}
 
 
@@ -356,6 +372,11 @@ namespace ERY.Xle.XleMapTypes
 			{
 				this[4, 1] = 0;
 				this[3, 10] = 0;
+			}
+			else if (player.museum[1] == 1)
+			{
+				this[4, 1] = 0;
+				this[3, 10] = 16;
 			}
 			else
 			{

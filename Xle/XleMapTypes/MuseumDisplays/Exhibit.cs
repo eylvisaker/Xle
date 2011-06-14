@@ -206,6 +206,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			return player.museum[ExhibitID] != 0;
 		}
 
+		protected ExhibitInfo ExhibitInfo { get { return XleCore.ExhibitInfo[ExhibitID]; } }
 	}
 
 
