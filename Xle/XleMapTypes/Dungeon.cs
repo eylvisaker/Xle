@@ -182,6 +182,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			base.OnLoad(player);
 
+			player.beenInDungeon = true;
 			CurrentLevel = player.DungeonLevel;
 		}
 

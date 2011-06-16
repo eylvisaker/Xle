@@ -83,5 +83,13 @@ namespace ERY.Xle
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
+
+		internal static void PlaySoundSync(LotaSound lotaSound)
+		{
+			PlaySound(lotaSound);
+
+			while (IsPlaying(lotaSound))
+				XleCore.wait(50);
+		}
 	}
 }

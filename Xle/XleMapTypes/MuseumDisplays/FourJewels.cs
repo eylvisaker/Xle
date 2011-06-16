@@ -16,9 +16,9 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		}
 		public override void PlayerXamine(Player player)
 		{
-			ReadRawText(RawText);
+			base.PlayerXamine(player);
 
-			player.DungeonLevel = 7;
+			player.DungeonLevel = 0;
 			player.SetMap(73, 1, 1);
 		}
 

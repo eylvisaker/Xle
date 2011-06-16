@@ -93,15 +93,54 @@ world around you.  Feel free to use
 the museum exhibits or, if you'd
 rather, use the doors to go directly 
 outside."`pause`</Text>
-      <Text ID="3">`white`I've heard that your magic scroll
+      <Text ID="3">`white`"I've heard that your magic scroll
 was stolen.  My sources say that it
 was sold a few days later on the 
 black market."`pause`</Text>
+      <Text ID="5">`white`"Perhaps you are now strong enough to
+help me.  Long ago,  two priceless
+specimens were stolen from the museum:
+the jewelled `cyan`crown`white` and `cyan`sceptor`white` of
+mancella."`pause`
+`clear`"Although museum policy will not let
+`yellow`me`white` recover them, perhaps `yellow`you`white` would
+like to try.  I don't know where the
+crown and sceptor are, but I have a
+key which should help you."`pause`
+`clear`"Naturally, there's a reward."`pause`</Text>
+      <Text ID="6">`white`"Thank you and good luck.  Here is
+the key.  If you find the sceptor and
+crown, please bring them back to this
+exhibit."`pause`</Text>
+      <Text ID="7">`white`"Congratulations on finding
+the sceptor!  While you were away, I
+discovered one more thing about the
+crown.  It is stored far away from
+the castle, deep underground."`pause`</Text>
+      <Text ID="8">`white`"I'm glad you've found the crown!
+I've discovered one more thing about
+the sceptor.  It is hidden somewhere
+on this continent."</Text>
       <Text ID="10">`white`"The sceptor and crown!  This is truly
 a great day for the tarmalon museum.
 I want you to have this `cyan`magic ice`white`.  It
 may help you someday.  It works best 
 inside."`pause`</Text>
+      <Text ID="11">A merchant in big rapids</Text>
+      <Text ID="12">`white`"Laingsburg is under attack.  Rumor
+has it that the wizards' compendium
+is behind it all."`pause`</Text>
+      <Text ID="13">`white`"The healer in holy point is now
+missing.  I fear that the entire
+planet is in great danger.   If you
+don't recover the compendium soon,
+all will be lost."`pause`</Text>
+      <Text ID="20">`white`"The evil warlord is apparently using
+the wizards' compendium to create 
+powerful spells of destruction."`pause`</Text>
+      <Text ID="21">`white`"The warlord lives in a fortress far
+across the sea.  It is said to be very
+difficult to reach."`pause`</Text>
     </Exhibit>
     <Exhibit ID="1" Image="Welcome.png">
       <Text ID="1">Welcome, noble traveler, to this
@@ -208,6 +247,8 @@ reward.  Meanwhile, here's some native
 `yellow`gold`cyan` to aid you in your search.
 
                    `wait:off``sound:VeryGood``yellow`GOLD:  + 300</Text>
+      <Text ID="3">Thank you for returning the tulip!
+As a reward, `yellow``wait:off``sound:VeryGood`Charm:  +10`pause`</Text>
     </Exhibit>
     <Exhibit ID="5" Image="PirateLair.png">
       <Text ID="1">Tarmalon's deep ocean waters are so
@@ -317,8 +358,19 @@ very `yellow`bottom`cyan` of armak.  The way out
 lies far above.  `white`The risk is great -
 the payoff greater!!`pause`</Text>
     </Exhibit>
-    <Exhibit ID="12" Image="FourJewels.png"></Exhibit>
-    <Exhibit ID="13" Image="Guardian.png">Legends say that 13 great wizards
+    <Exhibit ID="12" Image="FourJewels.png">
+      <Text ID="1">This exhibit shows the gateway to
+Tarmalon's most dangerous dungeon.  It
+is largely this exhibit which caused
+the inner section of the museum to be
+closed off to casual explorers.`pause`
+`clear`The museum has not charted this
+dungeon, and has little knowledge of
+its contents.  We know primarily
+that nobody has yet emerged alive.`pause`</Text>
+    </Exhibit>
+    <Exhibit ID="13" Image="Guardian.png">
+      <Text ID="1">Legends say that 13 great wizards
 once ruled Tarmalon, but that little
 of their power remains.  Those who
 escaped death and treachery ultimately
@@ -327,7 +379,8 @@ succumbed to the ravages of time.`pause`
 wizard of arovyn.  His power largely
 gone, he is said to be imprisoned deep
 within Kelfor castle.  Only the pass-
-word `yellow`"Guardians"`cyan` will open his door.`pause`</Exhibit>
+word `yellow`"Guardians"`cyan` will open his door.`pause`</Text>
+    </Exhibit>
     <Exhibit ID="14" Image="Pegasus.png">
       <Text ID="1">This magnificent beast was found
 frozen to a high cliff near the

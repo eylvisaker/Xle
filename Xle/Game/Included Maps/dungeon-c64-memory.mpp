@@ -1,5 +1,6 @@
 <XleRoot type="XleMapEditor.MappingInfo">
-  <Keys array="true" encoding="Base64">/wAAAAAAAAAOAAAACQAAAAsAAAAPAAAADAAAAAQAAAAKAAAADQAAAAEAAAADAAAAAgAAAAUAAAA=</Keys>
+  <Keys array="true" encoding="Base64">/wAAAAAAAAAOAAAACQAAAAsAAAAPAAAADAAAAAQAAAAKAAAADQAAAAEAAAADAAAAAgAAAAUAAACA
+AAAA</Keys>
   <Data array="true" type="ERY.Xle.MapData">
     <Item>
       <Width>1</Width>
@@ -70,6 +71,11 @@
       <Width>1</Width>
       <Height>1</Height>
       <Data array="true" encoding="Base64">IQAAAA==</Data>
+    </Item>
+    <Item>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Data array="true" encoding="Base64">EAAAAA==</Data>
     </Item>
   </Data>
 </XleRoot>

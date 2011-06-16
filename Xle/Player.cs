@@ -135,6 +135,11 @@ namespace ERY.Xle
 		public int loan;					// loan amount
 		public int dueDate;				// time in days that the money is due
 
+		/// <summary>
+		/// Guardian variable:
+		/// 1 = Spoke to arovyn in castle.
+		/// 3 = Spoke to healer in eagle hollow.
+		/// </summary>
 		public int guardian;
 		public int ambushed;
 		public int wizardOfPotions;
@@ -145,6 +150,7 @@ namespace ERY.Xle
 
 		public int mailTown;
 
+		public bool beenInDungeon;
 
 		string name;
 
@@ -185,10 +191,8 @@ namespace ERY.Xle
 			x = 3;
 			y = 1;
 
-			//  temporary, until the museum gets implemented.
-			food = 100;
-			gold = 200;
-			/////////////////////////
+			food = 20;
+			gold = 40;
 
 			dungeonLevel = 0;
 			faceDirection = Direction.West;
@@ -298,6 +302,7 @@ namespace ERY.Xle
 			info.Write("Caretaker", caretaker);
 
 			info.Write("MailTown", mailTown);
+			info.Write("BeenInDungeon", beenInDungeon);
 
 			info.Write("Name", name);
 		}
@@ -355,6 +360,8 @@ namespace ERY.Xle
 			caretaker = info.ReadInt32("Caretaker");
 
 			mailTown = info.ReadInt32("MailTown");
+
+			beenInDungeon = info.ReadBoolean("BeenInDungeon", false);
 
 			name = info.ReadString("Name");
 
@@ -532,7 +539,23 @@ namespace ERY.Xle
 		/// </summary>	
 		public int MaxHP
 		{
-			get { return 200 * level; }
+			get
+			{
+				switch (Level)
+				{
+					case 1: return 200;
+					case 2: return 300;
+					case 3: return 500;
+					case 4: return 800;
+					case 5: return 1200;
+					case 6: return 1600;
+					case 7: return 2200;
+					case 10: return 3000;
+
+					default:
+						throw new ArgumentException("Level is wrong!");
+				}
+			}
 		}
 		/// <summary>
 		/// 	// returns or adjusts food

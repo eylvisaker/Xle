@@ -339,6 +339,7 @@
     </Content>
     <Content Include="Game\Game.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Game\Images\AncientArtifact.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

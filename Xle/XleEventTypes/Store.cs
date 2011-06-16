@@ -70,9 +70,10 @@ namespace ERY.Xle.XleEventTypes
 		}
 		public static void OfferMuseumCoin(Player player)
 		{
-			int amount = XleCore.random.Next(30) + 40;
+			// TODO: only allow player to buy a coin if he has less than Level of that type ofcoins.
+
+			int amount = XleCore.random.Next(30) + 40 * player.Level;
 			int coin = -1;
-			int choice;
 			MenuItemList menu = new MenuItemList("Yes", "No");
 
 			if (player.Level == 1)
@@ -83,7 +84,10 @@ namespace ERY.Xle.XleEventTypes
 			if (coin == -1)
 				return;
 
+			// shift value to index within items.
 			coin += 17;
+
+			SoundMan.PlaySound(LotaSound.Question);
 
 			g.AddBottom("Would you like to buy a ");
 			XleCore.wait(1);
@@ -94,9 +98,7 @@ namespace ERY.Xle.XleEventTypes
 			g.AddBottom("");
 			XleCore.wait(1);
 
-			SoundMan.PlaySound(LotaSound.Question);
-
-			choice = XleCore.QuickMenu(menu, 3, 0);
+			int choice = XleCore.QuickMenu(menu, 3, 0);
 
 			if (choice == 0)
 			{
@@ -274,7 +276,7 @@ namespace ERY.Xle.XleEventTypes
 				if (displayMessage)
 				{
 					g.AddBottom("");
-					g.AddBottom("Sorry.  I Can't talk to you.");
+					g.AddBottom("Sorry.  I can't talk to you.");
 					XleCore.wait(500);
 				}
 
@@ -324,6 +326,7 @@ namespace ERY.Xle.XleEventTypes
 			g.AddBottom("You get " + value.ToString() + " gold.", XleColor.Yellow);
 			XleCore.wait(1000);
 			Robbed = true;
+
 			return true;
 		}
 
@@ -734,7 +737,7 @@ namespace ERY.Xle.XleEventTypes
 	[Serializable]
 	public class StoreRaft : Store
 	{
-		// map and coors that mark where a purchased raft shows up
+		// map and coords that mark where a purchased raft shows up
 		int mBuyRaftMap;
 		Point mBuyRaftPt;
 
@@ -866,6 +869,9 @@ namespace ERY.Xle.XleEventTypes
 		{
 			for (int i = 0; i < player.Rafts.Count; i++)
 			{
+				if (player.Rafts[i].MapNumber != BuyRaftMap)
+					continue;
+
 				int dist = Math.Abs(player.Rafts[i].X - BuyRaftPt.X) +
 					Math.Abs(player.Rafts[i].Y - BuyRaftPt.Y);
 
@@ -917,15 +923,30 @@ namespace ERY.Xle.XleEventTypes
 
 			i += 4;
 
-			string woundString = woundPrice.ToString();
+			string woundString = " " + woundPrice.ToString();
 
 			if (woundPrice <= 0)
 				woundString = "Not needed";
 
-			theWindow[i++] = "1. Wound Care  -  " + woundString;
+			theWindow[i++] = "1. Wound Care  - " + woundString;
 			i += 2;
 
 			theWindow[i++] = "2. Healing Herbs -  " + herbsPrice.ToString() + " apiece";
+
+			// display ready message
+			if (player.museum[6] == 3)
+			{
+				i += 2;
+
+				theWindow[i++] = "You're ready for herbs!";
+				// TODO: make it blue!
+
+				SoundMan.PlaySound(LotaSound.VeryGood);
+				while (SoundMan.IsPlaying(LotaSound.VeryGood))
+				{
+					XleCore.wait(RedrawStore, 20);
+				}
+			}
 
 			MenuItemList theList = new MenuItemList("0", "1", "2");
 
@@ -988,6 +1009,7 @@ namespace ERY.Xle.XleEventTypes
 						player.ItemCount(3, number);
 
 						g.AddBottom(number.ToString() + " healing herbs purchased.");
+						player.museum[6] |= 0x04;
 
 						SoundMan.PlaySound(LotaSound.Sale);
 

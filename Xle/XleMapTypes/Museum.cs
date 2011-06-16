@@ -236,6 +236,20 @@ namespace ERY.Xle.XleMapTypes
 					}
 				}
 			}
+
+			// check to see if the caretaker wants to see the player
+			var info = (MuseumDisplays.Information )mExhibits[0x50];
+
+			if (info.ShouldLevelUp(player))
+			{
+				g.ClearBottom();
+				g.AddBottom("The caretaker wants to see you!");
+
+				SoundMan.PlaySound(LotaSound.Good);
+
+				while (SoundMan.IsPlaying(LotaSound.Good))
+					XleCore.wait(50);
+			}
 		}
 
 		private bool IsExhibit(int value)
