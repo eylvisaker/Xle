@@ -94,6 +94,10 @@ namespace ERY.Xle
 
 		public static Surface MuseumCloseup { get; private set; }
 
+		public static Surface DungeonBlueBackdrop { get; private set; }
+		public static Surface DungeonBlueWall { get; private set; }
+		public static Surface DungeonBlueSidePassage { get; private set; }
+
 		// character functions
 
 
@@ -421,6 +425,9 @@ namespace ERY.Xle
 			MuseumExhibitFrame = new Surface("ExhibitFrame.png");
 			MuseumExhibitStatic = new Surface("ExhibitStatic.png");
 			MuseumCloseup = new Surface("MuseumCloseup.png");
+
+			DungeonBlueBackdrop = new Surface("DungeonBackdropBlue.png");
+			DungeonBlueSidePassage = new Surface("DungeonSidePassageBlue.png");
 
 			foreach (var exinfo in XleCore.ExhibitInfo.Values)
 			{

@@ -7,7 +7,7 @@ using AgateLib.Geometry;
 
 namespace ERY.Xle.XleMapTypes
 {
-	public abstract class Map3D : XleMap 
+	public abstract class Map3D : XleMap
 	{
 		protected abstract Surface Backdrop { get; }
 		protected abstract Surface Wall { get; }
@@ -41,7 +41,7 @@ namespace ERY.Xle.XleMapTypes
 			Point loc = new Point(x, y);
 
 			// draw up to terminal wall
-			for (int distance = 0; distance < 6; distance++)
+			for (int distance = 0; distance < 5; distance++)
 			{
 				loc.X = x + distance * stepDir.X;
 				loc.Y = y + distance * stepDir.Y;
@@ -68,7 +68,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 
 
-		private void DrawSidePassages(Point loc, Point leftDir, Point rightDir, int distance, Rectangle destRect)
+		private void DrawSidePassages(Point loc, Point leftDir, Point rightDir, int distance, Rectangle maindestRect)
 		{
 			int leftValue = this[loc.X + leftDir.X, loc.Y + leftDir.Y];
 			int rightValue = this[loc.X + rightDir.X, loc.Y + rightDir.Y];
@@ -76,31 +76,81 @@ namespace ERY.Xle.XleMapTypes
 			bool drawLeft = IsPassable(leftValue);
 			bool drawRight = IsPassable(rightValue);
 
-			if (drawLeft == false && drawRight == false)
-				return;
+			Rectangle srcRect, destRect;
 
-			Rectangle srcRect = new Rectangle(0, distance * imageSize.Height, imageSize.Width, imageSize.Height);
-
-			if (drawLeft == false)
+			if (drawLeft)
 			{
-				srcRect.X = srcRect.Width / 2;
-				srcRect.Width /= 2;
+				srcRect = GetSidePassageSrcRect(distance, false);
+				destRect = GetSidePassageDestRect(distance, false);
 
-				destRect.X += destRect.Width / 2;
-				destRect.Width /= 2;
+				destRect.X += maindestRect.X;
+				destRect.Y += maindestRect.Y;
+
+				SidePassages.Draw(srcRect, destRect);
 			}
-			else if (drawRight == false)
+			if (drawRight)
 			{
-				srcRect.Width /= 2;
-				destRect.Width /= 2;
+				srcRect = GetSidePassageSrcRect(distance, true);
+				destRect = GetSidePassageDestRect(distance, true);
+
+				destRect.X += maindestRect.X;
+				destRect.Y += maindestRect.Y;
+
+				SidePassages.Draw(srcRect, destRect);
 			}
 
-			SidePassages.Draw(srcRect, destRect);
+		}
+
+
+		private Rectangle GetSidePassageSrcRect(int distance, bool rightSide)
+		{
+			Rectangle retval = new Rectangle();
+
+			switch (distance)
+			{
+				case 0: retval = new Rectangle(0, 0, 24, 112); break;
+				case 1: retval = new Rectangle(24, 0, 24, 80); break;
+				case 2: retval = new Rectangle(48, 0, 16, 64); break;
+				case 3: retval = new Rectangle(64, 0, 8, 48); break;
+				case 4: retval = new Rectangle(72, 0, 8, 48); break;
+			}
+
+			if (rightSide)
+				retval.X += 80;
+
+			return retval;
+		}
+
+
+		private Rectangle GetSidePassageDestRect(int distance, bool rightSide)
+		{
+			Rectangle retval = new Rectangle();
+
+			switch (distance)
+			{
+				case 0: retval = new Rectangle(0, 24, 24, 112); break;
+				case 1: retval = new Rectangle(24, 40, 24, 80); break;
+				case 2: retval = new Rectangle(48, 48, 16, 64); break;
+				case 3: retval = new Rectangle(64, 56, 8, 48); break;
+				case 4: retval = new Rectangle(72, 56, 8, 48); break;
+			}
+
+			if (rightSide)
+			{
+				retval.X = 184 - retval.X - retval.Width;
+			}
+
+			retval.X *= 2;
+			retval.Y *= 2;
+			retval.Width *= 2;
+			retval.Height *= 2;
+
+			return retval;
 		}
 
 		protected bool IsPassable(int value)
 		{
-			if (value >= 0x10 && value <= 0x3f) 
+			if (value >= 0x10 && value <= 0x3f)
 				return true;
 			else
 				return false;
@@ -110,7 +160,7 @@ namespace ERY.Xle.XleMapTypes
 		private void DrawWall(int distance, Rectangle destRect)
 		{
 			Rectangle srcRect = new Rectangle(0, (distance - 1) * imageSize.Height, imageSize.Width, imageSize.Height);
-			
+
 			Wall.Draw(srcRect, destRect);
 		}
 
@@ -118,7 +168,7 @@ namespace ERY.Xle.XleMapTypes
 		private void DrawWallOverlay(int distance, Rectangle destRect, int val)
 		{
 			Surface source = null;
-			
+
 			if (val == 0x01)
 			{
 				// torch
@@ -137,7 +187,7 @@ namespace ERY.Xle.XleMapTypes
 
 			if (source == null)
 				return;
-			
+
 			Rectangle srcRect = new Rectangle(0, (distance - 1) * imageSize.Height, imageSize.Width, imageSize.Height);
 
 			source.Draw(srcRect, destRect);

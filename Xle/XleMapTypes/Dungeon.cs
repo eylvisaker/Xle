@@ -190,7 +190,6 @@ namespace ERY.Xle.XleMapTypes
 		{
 			List<string> retval = new List<string>();
 
-
 			retval.Add("Armor");
 			retval.Add("Climb");
 			retval.Add("End");
@@ -213,7 +212,7 @@ namespace ERY.Xle.XleMapTypes
 
 		protected override Surface Backdrop
 		{
-			get { return g.MuseumBackdrop; }
+			get { return g.DungeonBlueBackdrop; }
 		}
 		protected override Surface Wall
 		{
@@ -221,7 +220,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override Surface SidePassages
 		{
-			get { return g.MuseumSidePassage; }
+			get { return g.DungeonBlueSidePassage; }
 		}
 		protected override Surface Door
 		{

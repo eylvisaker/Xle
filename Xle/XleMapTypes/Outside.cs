@@ -977,7 +977,8 @@ namespace ERY.Xle.XleMapTypes
 
 			string dirName;
 
-			if (player.TimeDays >= banditAmbush && banditAmbush > 0)
+			if (player.TimeDays >= banditAmbush && banditAmbush > 0 &&
+				player.Item(15) > 0)
 			{
 				// TODO: create image
 
@@ -1382,7 +1383,10 @@ namespace ERY.Xle.XleMapTypes
 
 		public override void OnLoad(Player player)
 		{
-			if (player.TimeDays > 100 && player.Item(15) > 0)
+			// check to see if we should have bandits ambush the player.
+			if (player.TimeDays > 100 && 
+				player.Item(15) > 0 && // make sure the player has the compendium
+				player.Item(14) == 0) // make sure the player doesn't have the guard jewels.
 			{
 				int min = 40 - (int)( player.TimeDays / 4);
 				if (min < 3) min = 3;
