@@ -29,7 +29,7 @@ namespace ERY.Xle.XleMapTypes
 		Point mDrawMonst;
 		int monstCount, initMonstCount;
 		bool friendly;
-
+		int banditAmbush;
 
 		#region --- Construction and Serialization ---
 
@@ -977,6 +977,44 @@ namespace ERY.Xle.XleMapTypes
 
 			string dirName;
 
+			if (player.TimeDays >= banditAmbush && banditAmbush > 0)
+			{
+				// TODO: create image
+
+				g.AddBottom();
+				g.AddBottom("You are ambushed by bandits!", XleColor.Cyan);
+
+				for (int i = 0; i < 8; i++)
+				{
+					SoundMan.PlaySound(LotaSound.EnemyHit);
+					XleCore.wait(250);
+				}
+
+				g.AddBottom("You fall unconsious.", XleColor.Yellow);
+
+				XleCore.wait(3000);
+
+				g.AddBottom();
+				g.AddBottom("You awake.  The compendium is gone.");
+				g.AddBottom();
+
+				while (player.Item(15) > 0)
+					player.ItemCount(15, -1);
+
+				SoundMan.PlaySoundSync(LotaSound.VeryBad);
+
+				g.AddBottom("You hear a voice...");
+
+				g.AddBottom();
+				g.WriteSlow("Do not be discouraged.  It was", 0, XleColor.White);
+
+				g.AddBottom();
+				g.WriteSlow("inevitable.  Keep to your quest.", 0, XleColor.White);
+
+				XleCore.wait(3000);
+				banditAmbush = 0;
+			}
+
 			if (mMonst.Count == 0)
 				return;
 
@@ -1342,5 +1380,20 @@ namespace ERY.Xle.XleMapTypes
 
 		}
 
+		public override void OnLoad(Player player)
+		{
+			if (player.TimeDays > 100 && player.Item(15) > 0)
+			{
+				int min = 40 - (int)( player.TimeDays / 4);
+				if (min < 3) min = 3;
+
+				int max = 100 - (int)(player.TimeDays / 8);
+				if (max < 8) max = 20;
+
+				banditAmbush = (int)(player.TimeDays) +
+					XleCore.random.Next(min, max);
+			}
+			
+		}
 	}
 }
