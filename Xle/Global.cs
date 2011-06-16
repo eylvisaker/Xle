@@ -428,6 +428,7 @@ namespace ERY.Xle
 
 			DungeonBlueBackdrop = new Surface("DungeonBackdropBlue.png");
 			DungeonBlueSidePassage = new Surface("DungeonSidePassageBlue.png");
+			DungeonBlueWall = new Surface("DungeonWallBlue.png");
 
 			foreach (var exinfo in XleCore.ExhibitInfo.Values)
 			{

@@ -216,7 +216,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override Surface Wall
 		{
-			get { return g.MuseumWall; }
+			get { return g.DungeonBlueWall; }
 		}
 		protected override Surface SidePassages
 		{
