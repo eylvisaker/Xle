@@ -232,10 +232,12 @@ namespace ERY.Xle.XleMapTypes
 					else if (IsExhibit(this[loc.X, loc.Y]))
 					{
 						player.FaceDirection = DirectionFromPoint(new Point(i, j));
-						return;
+						goto exitloop;
 					}
 				}
 			}
+
+			exitloop:
 
 			// check to see if the caretaker wants to see the player
 			var info = (MuseumDisplays.Information )mExhibits[0x50];
