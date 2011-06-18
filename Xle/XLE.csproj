@@ -453,5 +453,6 @@
     <Content Include="Game\Images\Welcome.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="TODO.txt" />
   </ItemGroup>
 </Project>

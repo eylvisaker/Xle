@@ -1,0 +1,63 @@
+﻿Outdoors:
+	Bugs in monsters:
+		Text messages which appear after entering a town.
+		Thrust creepers don't fight back.
+	Refactor encounter state stuff.
+	Animations for water.
+	Audio for mountains?
+	Correct combat damage.
+
+Towns:
+	Redesign the way stores are rendered and data for the window is stored.
+	Armor store
+	Weapon store listings
+	Selling weapons / armor
+	Buyback shops
+	Fix healer text
+	Flip-Flop
+	Blackjack
+	Magic
+	Weapon / armor training
+	Vault
+
+Castle:
+	Fix events in castle.
+	Fix chests.
+	Test doors.
+	Test Cassandra.
+	Implement second floor
+	Test magic ice.
+	Make sure sceptor is available.
+	Make sure tulip is available.
+	Magic seeds?
+	Fix aminations.
+	Make guards work correctly.
+
+Museum:
+	Exhibits:
+		A few more texts for information to be implemented.
+		Weaponry exhibit
+		Fountain exhibit.
+		Stones of wisdom.
+		Test four jewels.
+		Make sure guardian gives password.
+		Implement leaving flight of fancy.
+		Ancient artifact exhibit after compendium is returned.
+		End game.
+	Rendering:
+		Torches.
+		Exhibits on side walls.
+		Door on side wall.
+		HQ2x images.
+	Step sound.
+	Xamine command.
+	Determine extra condition to reach level 4.
+
+Dungeons:
+	Make exiting knight's test and four jewels work right.
+	Implement traps.
+	Implement xamine.
+	Make sure climbing through floor/ceiling hole automatically reveals partner hole if hidden.
+	Monsters!
+	Chests.
+	Boxes.
