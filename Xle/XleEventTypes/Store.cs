@@ -29,12 +29,12 @@ namespace ERY.Xle.XleEventTypes
 			get { return mShopName; }
 			set { mShopName = value; }
 		}
+
 		protected override void WriteData(XleSerializationInfo info)
 		{
 			info.Write("ShopName", mShopName);
 			info.Write("CostFactor", mCostFactor);
 		}
-
 		protected override void ReadData(XleSerializationInfo info)
 		{
 			mShopName = info.ReadString("ShopName");
@@ -58,7 +58,6 @@ namespace ERY.Xle.XleEventTypes
 			get { return mCostFactor; }
 			set { mCostFactor = value; }
 		}
-
 
 		public virtual void CheckOfferMuseumCoin(Player player)
 		{
@@ -264,8 +263,12 @@ namespace ERY.Xle.XleEventTypes
 		/// regardless of whether the player has an overdue loan.
 		/// </summary>
 		/// <param name="player"></param>
-		/// <param name="displayMessage"></param>
-		/// <returns></returns>
+		/// <param name="displayMessage">Pass true to display a default message indicating
+		/// that the shop keeper will not talk to the player.</param>
+		/// <returns>Returns true if the loan for the player is over due and stores should not
+		/// speak with him and optionally displays a message to the player.  
+		/// Returns false if the current map has no lending association
+		/// regardless of whether the player has an overdue loan.</returns>
 		protected bool CheckLoan(Player player, bool displayMessage)
 		{
 			if (XleCore.Map.HasEventType(typeof(XleEventTypes.StoreLending)) == false)
@@ -783,6 +786,7 @@ namespace ERY.Xle.XleEventTypes
 			int gearCost = (int)(50 * this.CostFactor);
 			MenuItemList theList = new MenuItemList("Yes", "No");
 			bool skipRaft = false;
+			bool offerCoin = false;
 
 			if (CheckLoan(player, true))
 				return true;
@@ -810,21 +814,19 @@ namespace ERY.Xle.XleEventTypes
 						SoundMan.PlaySound(LotaSound.Sale);
 						XleCore.wait(1000);
 
-						CheckOfferMuseumCoin(player);
-
 						g.AddBottom("Board raft outside.");
+
+						offerCoin = true;
 					}
 					else
 					{
 						g.AddBottom("Not enough gold.");
 						SoundMan.PlaySound(LotaSound.Medium);
 						XleCore.wait(750);
-
-						CheckOfferMuseumCoin(player);
 					}
 				}
 			}
-
+			
 			if (skipRaft == true || choice == 1)
 			{
 				g.AddBottom("How about some climbing gear");
@@ -840,6 +842,7 @@ namespace ERY.Xle.XleEventTypes
 						g.AddBottom("Climbing gear purchased.");
 
 						player.ItemCount(2, 1);
+						offerCoin = true;
 
 						SoundMan.PlaySound(LotaSound.Sale);
 					}
@@ -858,9 +861,11 @@ namespace ERY.Xle.XleEventTypes
 				}
 
 				XleCore.wait(750);
-				CheckOfferMuseumCoin(player);
 
 			}
+
+			if (offerCoin)
+				CheckOfferMuseumCoin(player);
 
 			return true;
 		}
@@ -938,9 +943,9 @@ namespace ERY.Xle.XleEventTypes
 			{
 				i += 2;
 
-				theWindow[i++] = "You're ready for herbs!";
 				// TODO: make it blue!
-
+				theWindow[i++] = "You're ready for herbs!";
+				
 				SoundMan.PlaySound(LotaSound.VeryGood);
 				while (SoundMan.IsPlaying(LotaSound.VeryGood))
 				{

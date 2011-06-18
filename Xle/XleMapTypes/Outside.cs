@@ -981,6 +981,8 @@ namespace ERY.Xle.XleMapTypes
 				player.Item(15) > 0)
 			{
 				// TODO: create image
+				SoundMan.PlaySound(LotaSound.Encounter);
+				XleCore.wait(500);
 
 				g.AddBottom();
 				g.AddBottom("You are ambushed by bandits!", XleColor.Cyan);
