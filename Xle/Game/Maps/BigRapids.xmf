@@ -36,8 +36,8 @@
       <ShopName>Floyd's Floataway Shop</ShopName>
       <CostFactor>0.495</CostFactor>
       <BuyRaftMap>1</BuyRaftMap>
-      <BuyRaftX>8</BuyRaftX>
-      <BuyRaftY>170</BuyRaftY>
+      <BuyRaftX>6</BuyRaftX>
+      <BuyRaftY>110</BuyRaftY>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreFortune">
       <X>12</X>
@@ -565,5 +565,6 @@ AAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAA
 AACAAAAAgAAAADEAAAAxAAAAMQAAADEAAAAxAAAAMQAAADEAAAAxAAAAMQAAADEAAACAAAAAgAAA
 AIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAA
 gAAAAIAAAACAAAAAgAAAADEAAAAxAAAAMQAAADEAAAA=</MapData>
-  <Mail array="true" encoding="Base64">DwAAAAsAAAA=</Mail>
+  <Mail array="true" encoding="Base64">
+  </Mail>
 </XleRoot>
