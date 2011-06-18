@@ -195,6 +195,8 @@ namespace ERY.Xle.XleMapTypes
 				// door value
 				if (this[test.X, test.Y] == 0x02)
 				{
+					XleCore.wait(1000);
+
 					player.SetMap(1, 114, 42);
 
 					g.ClearBottom();

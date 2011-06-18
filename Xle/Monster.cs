@@ -7,37 +7,33 @@ namespace ERY.Xle
 	[Serializable]
 	public class Monster
 	{
-		public string mName;
-		public TerrainType mTerrain;
-		public int mHP;
-		public int mAttack;
-		public int mDefense;
-		public int mGold;
-		public int mFood;
-		public int mWeapon;
-		public int mImage;
-		public bool mTalks;
-		public int mFriendly;
-
-		public Monster()
-		{ }
+		public string Name { get { return mData.Name; } }
+		public TerrainType Terrain { get { return (TerrainType)mData.Terrain; } }
+		public int HP { get; set; }
+		public int Attack { get { return mData.Attack; } }
+		public int Defense { get { return mData.Defense; } }
+		public int Gold { get { return mData.Gold; } }
+		public int Food { get { return mData.Food; } }
+		public int Weapon { get { return mData.Weapon; } }
+		public int Image { get { return mData.Image; } }
+		public bool Talks { get { return mData.Talks; } }
+		public int Friendly { get { return mData.Friendly; } }
+		private Data.Monster mData;
 
 		public Monster(Monster m) { copyFrom(m); }
 
+		public Monster(Data.Monster monster)
+		{
+			// TODO: Complete member initialization
+			this.mData = monster;
+
+			HP = monster.HP;
+		}
+
 		public void copyFrom(Monster m)
 		{
-			mName = m.mName;
-			mTerrain = m.mTerrain;
-			mHP = m.mHP;
-			mAttack = m.mAttack;
-			mDefense = m.mDefense;
-			mGold = m.mGold;
-			mFood = m.mFood;
-			mWeapon = m.mWeapon;
-			mImage = m.mImage;
-			mTalks = m.mTalks;
-			mFriendly = m.mFriendly;
-
+			mData = m.mData;
+			HP = m.HP;
 		}
 	}
 }

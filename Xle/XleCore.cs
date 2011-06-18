@@ -90,7 +90,9 @@ namespace ERY.Xle
 		private EquipmentList mArmorList = new EquipmentList();
 		private Dictionary<int, string> mQualityList = new Dictionary<int, string>();
 		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int,XleMapTypes.MuseumDisplays.ExhibitInfo>();
+		private Data.AgateDataImport mDatabase;
 
+		
 		public XleCore()
 		{
 			inst = this;
@@ -108,6 +110,7 @@ namespace ERY.Xle
 			AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
 			LoadGameFile();
+			LoadDatabase();
 
 			using (AgateSetup setup = new AgateSetup())
 			{
@@ -179,6 +182,12 @@ namespace ERY.Xle
 						break;
 				}
 			}
+		}
+
+		private static void LoadDatabase()
+		{
+			AgateLib.Data.AgateDatabase _db = AgateLib.Data.AgateDatabase.FromFile("Lota.adb");
+			inst.mDatabase = new Data.AgateDataImport(_db);
 		}
 
 		private static string GetOptionalAttribute(XmlNode node, string attrib, string defaultValue)
@@ -315,6 +324,10 @@ namespace ERY.Xle
 		public static Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> ExhibitInfo
 		{
 			get { return inst.mExhibitInfo; }
+		}
+		public static Data.AgateDataImport Database
+		{
+			get { return inst.mDatabase; }
 		}
 
 		public static string GetWeaponName(int weaponID, int qualityID)
@@ -807,8 +820,8 @@ namespace ERY.Xle
 		/// <summary>
 		/// Draws monsters on the outside maps.
 		/// </summary>
-		/// <param name="px"></param>
-		/// <param name="py"></param>
+		/// <param name="px">The x position of the monster, in screen coordinates.</param>
+		/// <param name="py">The y position of the monster, in screen coordinates.</param>
 		/// <param name="monst"></param>
 		public static void DrawMonster(int px, int py, int monst)
 		{
@@ -823,8 +836,6 @@ namespace ERY.Xle
 			monstRect = new Rectangle(tx, ty, 64, 64);
 			destRect = new Rectangle(px, py, 64, 64);
 
-			//pDDS->Blt(&destRect, g.Character(), &charRect,  DDBLT_WAIT | DDBLT_KEYSRC, NULL);
-			//pDDS->BltFast(destRect.left, destRect.top, g.Monsters(), &monstRect, DDBLTFAST_SRCCOLORKEY);
 			g.Monsters.Draw(monstRect, destRect);
 
 		}
@@ -865,9 +876,13 @@ namespace ERY.Xle
 			g.Character.Color = clr;
 			g.Character.Draw(charRect, destRect);
 
+			CharRect = destRect;
+
 			// todo: remove this
 			g.Character.Color = XleColor.White;
 		}
+
+		public static Rectangle CharRect { get; private set; }
 
 		/// <summary>
 		/// Draws the rafts that should be on the screen.
