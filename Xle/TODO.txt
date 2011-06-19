@@ -6,6 +6,7 @@
 	Animations for water.
 	Audio for mountains?
 	Correct combat damage.
+	Falling unconscious when beaten severly.
 
 Towns:
 	Redesign the way stores are rendered and data for the window is stored.
@@ -19,6 +20,7 @@ Towns:
 	Magic
 	Weapon / armor training
 	Vault
+	Getting arrested / negotiating with jailer.
 
 Castle:
 	Fix events in castle.
@@ -51,7 +53,7 @@ Museum:
 		HQ2x images.
 	Step sound.
 	Xamine command.
-	Determine extra condition to reach level 4.
+	Verify extra condition to reach level 4.
 
 Dungeons:
 	Make exiting knight's test and four jewels work right.
@@ -61,3 +63,8 @@ Dungeons:
 	Monsters!
 	Chests.
 	Boxes.
+
+Fortress:
+	Create tileset.
+	Import maps.
+	Implement everything.
