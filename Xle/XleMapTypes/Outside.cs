@@ -269,7 +269,6 @@ namespace ERY.Xle.XleMapTypes
 		}
 		public override bool PlayerFight(Player player)
 		{
-
 			string weaponName;
 			Point attackPt = Point.Empty, attackPt2 = Point.Empty;
 			Color[] colors = new Color[40];
@@ -279,8 +278,7 @@ namespace ERY.Xle.XleMapTypes
 
 			g.AddBottom("");
 
-
-			if (EncounterState == 10)
+			if (EncounterState == EncounterState.MonsterReady)
 			{
 				int dam = attack(player);
 
@@ -535,14 +533,13 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override bool PlayerSpeakImpl(Player player)
 		{
-
-			if (EncounterState == 0)
+			if (EncounterState == EncounterState.NoEncounter)
 			{
 			}
-			else if (EncounterState < 10)
+			else if (EncounterState != EncounterState.MonsterReady)
 			{
 			}
-			else if (EncounterState == 10)
+			else if (EncounterState == EncounterState.MonsterReady)
 			{
 				SpeakToMonster(player);
 
@@ -552,11 +549,11 @@ namespace ERY.Xle.XleMapTypes
 
 		}
 
-		private int EncounterState { get; set; }
+		private EncounterState EncounterState { get; set; }
 
 		private bool InEncounter
 		{
-			get { return EncounterState == -1; }
+			get { return EncounterState == EncounterState.JustDisengaged; }
 		}
 
 		string MonstName()
@@ -966,322 +963,366 @@ namespace ERY.Xle.XleMapTypes
 			}
 
 		}
-		protected override void PlayerStepImpl(Player player)
+		protected override void PlayerStepImpl(Player player, bool didEvent)
 		{
-			TestEncounter(player);
+			TestEncounter(player, didEvent);
 		}
-		public void TestEncounter(Player player)
+		private void TestEncounter(Player player, bool didEvent)
 		{
-			int waitAtEnd = 0;
-			bool keyBreak = false;
 			bool firstTime = false;
-			Direction dir = player.FaceDirection;
 
-			string dirName;
-
-			if (banditAmbush > 0 &&
-				player.TimeDays >= banditAmbush &&
-				player.Item(15) > 0)
-			{
-				// set a random position for the appearance of the bandits.
-				MonsterDirection(player);
-				displayMonst = 4;
-
-				g.AddBottom();
-				g.AddBottom("You are ambushed by bandits!", XleColor.Cyan);
-
-				SoundMan.PlaySound(LotaSound.Encounter);
-				XleCore.wait(500);
-
-				int maxDamage = player.HP / 15;
-				int minDamage = Math.Min(5, maxDamage / 2);
-
-				for (int i = 0; i < 8; i++)
-				{
-					player.HP -= XleCore.random.Next(minDamage, maxDamage + 1);
-
-					SoundMan.PlaySound(LotaSound.EnemyHit);
-					XleCore.wait(250);
-				}
-
-				g.AddBottom("You fall unconsious.", XleColor.Yellow);
-				
-				XleCore.wait(1000);
-				displayMonst = -1;
-				XleCore.wait(RedrawUnconscious, 3000);
-
-				g.AddBottom();
-				g.AddBottom("You awake.  The compendium is gone.");
-				g.AddBottom();
-
-				while (player.Item(15) > 0)
-					player.ItemCount(15, -1);
-
-				SoundMan.PlaySoundSync(LotaSound.VeryBad);
-
-				g.AddBottom("You hear a voice...");
-
-				g.AddBottom();
-				g.WriteSlow("Do not be discouraged.  It was", 0, XleColor.White);
-
-				g.AddBottom();
-				g.WriteSlow("inevitable.  Keep to your quest.", 0, XleColor.White);
-
-				XleCore.wait(3000);
-				banditAmbush = 0;
-			}
+			if (BanditAmbush(player))
+				return;
 
 			if (XleCore.Database.MonsterList.Count == 0)
 				return;
 
-			var mMonst = XleCore.Database.MonsterList;
-
 			if (g.disableEncounters)
 				return;
 
-			if (EncounterState == 0 && stepCount <= 0)
+			if (EncounterState == EncounterState.NoEncounter && stepCount <= 0)
 			{
-				currentMonst.Clear();
-				stepCount = XleCore.random.Next(1, 16);
-				int type = XleCore.random.Next(0, 21);
-
-				//if (cursorKeys != KeyCode.Left && cursorKeys != KeyCode.Up &&
-				//    cursorKeys != KeyCode.Right && cursorKeys != KeyCode.Down)
-				//    type = 99;
-
-				friendly = false;
-				
-
-				if (type < 10)
-				{
-					dirName = MonsterDirection(player);
-
-					EncounterState = 1;  // unknown creature
-					SoundMan.PlaySound(LotaSound.Encounter);
-
-
-					g.AddBottom("");
-					g.AddBottom("An unknown creature is approaching ", XleColor.Cyan);
-					g.AddBottom("from the " + dirName + ".", XleColor.Cyan);
-
-					waitAtEnd = 1000;
-
-				}
-				else if (type < 15)
-				{
-					EncounterState = 2;	// creature is appearing
-
-					waitAtEnd = 1000;
-				}
-
+				StartEncounter(player);
 			}
-			else if (EncounterState == 0 && stepCount > 0)
+			else if (EncounterState == EncounterState.NoEncounter && stepCount > 0)
 			{
 				currentMonst.Clear();
 				stepCount--;
 			}
-			else if (EncounterState == 1)
+			else if (EncounterState == EncounterState.UnknownCreatureApproaching)
 			{
 				currentMonst.Clear();
-				EncounterState = 2;
-
-				waitAtEnd = 0;
+				EncounterState = EncounterState.CreatureAppearing;
 			}
 
-			if (EncounterState == 2)
+			if (EncounterState == EncounterState.CreatureAppearing)
 			{
-				if (XleCore.random.Next(100) < 55)
-					EncounterState = 5;		// monster has appeared
-				else
-					EncounterState = 10;	// monster is ready
+				MonsterAppearing(player, ref firstTime);
+			}
 
-				int mCount = 0;
-				int val, sel = -1;
-				firstTime = true;
+			if (EncounterState == EncounterState.MonsterAvoided)
+			{
+				AvoidMonster(player);
+			}
+			else if (EncounterState == EncounterState.MonsterAppeared)
+			{
+				MonsterAppeared();
+			}
+			else if (EncounterState == EncounterState.MonsterReady)
+			{
+				MonsterTurn(player, firstTime);
+			}
+		}
 
+		private void StartEncounter(Player player)
+		{
+			currentMonst.Clear();
+			friendly = false;
+
+			stepCount = XleCore.random.Next(1, 16);
+			int type = XleCore.random.Next(0, 21);
+
+			if (type < 10)
+			{
+				string dirName = MonsterDirection(player);
+
+				EncounterState = EncounterState.UnknownCreatureApproaching;
 				SoundMan.PlaySound(LotaSound.Encounter);
 
-				for (int i = 0; i < mMonst.Count; i++)
-				{
-					if ((TerrainType)mMonst[i].Terrain == TerrainType.All && Terrain(player.X, player.Y) != 0)
-						mCount++;
-
-					if ((TerrainType)mMonst[i].Terrain == Terrain(player.X, player.Y))
-						mCount += 3;
-
-					if (Terrain(player.X, player.Y) == TerrainType.Foothills &&
-						(TerrainType)mMonst[i].Terrain == TerrainType.Mountain)
-						mCount += 3;
-				}
-
-				val = 1 + XleCore.random.Next(mCount);
-
-				for (int i = 0; i < mMonst.Count; i++)
-				{
-					if ((TerrainType)mMonst[i].Terrain == TerrainType.All && Terrain(player.X, player.Y) != 0)
-						val--;
-
-					if ((TerrainType)mMonst[i].Terrain == Terrain(player.X, player.Y))
-						val -= 3;
-
-					if (Terrain(player.X, player.Y) == TerrainType.Foothills &&
-						(TerrainType)mMonst[i].Terrain == TerrainType.Mountain)
-						val -= 3;
-
-					if (val == 0 || val == -1 || val == -2)
-					{
-						sel = i;
-						break;
-					}
-				}
-
-				System.Diagnostics.Debug.Assert(sel > -1);
-
-				displayMonst = sel;
-
-				mDrawMonst.X = player.X - 1;
-				mDrawMonst.Y = player.Y - 1;
-
-				switch (monstDir)
-				{
-
-					case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
-					case Direction.North: dirName = "North"; mDrawMonst.Y -= 2; break;
-					case Direction.West: dirName = "West"; mDrawMonst.X -= 2; break;
-					case Direction.South: dirName = "South"; mDrawMonst.Y += 2; break;
-
-				}
-
-
-				int max = 1;
-				initMonstCount = monstCount = 1 + XleCore.random.Next(max);
-
-				for (int i = 0; i < monstCount; i++)
-				{
-					var m= new Monster(mMonst[displayMonst]);
-
-					m.HP = (int)((XleCore.random.NextDouble() * 0.4 + .8) * m.HP);
-
-					currentMonst.Add(m);
-				}
-
-				if (XleCore.random.Next(256) <= currentMonst[0].Friendly)
-					friendly = true;
-				else
-					friendly = false;
-
-				waitAtEnd = 2000;
-
-
-			}
-
-			if (EncounterState == 3)
-			{
 				g.AddBottom("");
-				g.AddBottom("You avoid the unknown creature.");
-				waitAtEnd = player.Gamespeed * 150 + 50;
-
-				EncounterState = 0;
-
+				g.AddBottom("An unknown creature is approaching ", XleColor.Cyan);
+				g.AddBottom("from the " + dirName + ".", XleColor.Cyan);
 			}
-			else if (EncounterState == 5)
+			else if (type < 15)
+			{
+				EncounterState = EncounterState.CreatureAppearing;
+			}
+
+			XleCore.wait(1000);
+		}
+
+		private string MonsterAppearing(Player player, ref bool firstTime)
+		{
+			if (XleCore.random.Next(100) < 55)
+				EncounterState = EncounterState.MonsterAppeared;
+			else
+				EncounterState = EncounterState.MonsterReady;
+
+			SoundMan.PlaySound(LotaSound.Encounter);
+
+			firstTime = true;
+
+			displayMonst = SelectRandomMonster(Terrain(player.X, player.Y));
+
+			mDrawMonst.X = player.X - 1;
+			mDrawMonst.Y = player.Y - 1;
+
+			string dirName;
+
+			switch (monstDir)
+			{
+				case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
+				case Direction.North: dirName = "North"; mDrawMonst.Y -= 2; break;
+				case Direction.West: dirName = "West"; mDrawMonst.X -= 2; break;
+				case Direction.South: dirName = "South"; mDrawMonst.Y += 2; break;
+				default:
+					throw new Exception("Invalid Direction");
+			}
+
+			int max = 1;
+			initMonstCount = monstCount = 1 + XleCore.random.Next(max);
+
+			for (int i = 0; i < monstCount; i++)
+			{
+				var m = new Monster(XleCore.Database.MonsterList[displayMonst]);
+
+				m.HP = (int)((XleCore.random.NextDouble() * 0.4 + 0.8) * m.HP);
+
+				currentMonst.Add(m);
+			}
+
+			if (XleCore.random.Next(256) <= currentMonst[0].Friendly)
+				friendly = true;
+			else
+				friendly = false;
+
+			XleCore.wait(500);
+			return dirName;
+		}
+
+		private void AvoidMonster(Player player)
+		{
+			g.AddBottom();
+			g.AddBottom("You avoid the unknown creature.");
+
+			EncounterState = EncounterState.NoEncounter;
+
+			XleCore.wait(player.Gamespeed * 150 + 50);
+		}
+
+		private void MonsterAppeared()
+		{
+			Color[] colors = new Color[40];
+			string plural = (monstCount > 1) ? "s" : "";
+
+			for (int i = 0; i < 40; i++)
+				colors[i] = XleColor.Cyan;
+
+			colors[0] = XleColor.White;
+
+			EncounterState = EncounterState.MonsterReady;
+
+			g.AddBottom("");
+			g.AddBottom(monstCount.ToString() + " " + currentMonst[0].Name + plural, colors);
+
+			colors[0] = XleColor.Cyan;
+			g.AddBottom("is approaching.", colors);
+
+			XleCore.wait(2000);
+		}
+
+		private void MonsterTurn(Player player, bool firstTime)
+		{
+			if (friendly)
 			{
 				Color[] colors = new Color[40];
-				string s = (monstCount > 1) ? "s" : "";
 
 				for (int i = 0; i < 40; i++)
 					colors[i] = XleColor.Cyan;
-
 				colors[0] = XleColor.White;
 
-				EncounterState = 10;			// appeared and ready
+				g.AddBottom("");
+				g.AddBottom(monstCount.ToString() + " " + currentMonst[0].Name, colors);
+				g.AddBottom("Stands before you.");
+
+				XleCore.wait(1500);
+			}
+			else
+			{
+				ColorStringBuilder builder = new ColorStringBuilder();
+				builder.AddText("Attacked by ", XleColor.White);
+				builder.AddText(monstCount.ToString(), XleColor.Yellow);
+				builder.AddText(" " + currentMonst[0].Name, XleColor.Cyan);
 
 				g.AddBottom("");
-				g.AddBottom(monstCount.ToString() + " " + currentMonst[0].Name + s, colors);
+				g.AddBottom(builder);
 
-				colors[0] = XleColor.Cyan;
-				g.AddBottom("is approaching.", colors);
+				int dam = 0;
+				int hits = 0;
 
-				waitAtEnd = 2000;
-
-			}
-			else if (EncounterState == 10)
-			{
-				if (friendly)
+				for (int i = 0; i < monstCount; i++)
 				{
-					Color[] colors = new Color[40];
+					int t = player.Damage(currentMonst[i].Attack);
 
-					for (int i = 0; i < 40; i++)
-						colors[i] = XleColor.Cyan;
-					colors[0] = XleColor.White;
+					if (t > 0)
+					{
+						dam += t;
+						hits++;
+					}
+				}
 
-					g.AddBottom("");
-					g.AddBottom(monstCount.ToString() + " " + currentMonst[0].Name, colors);
-					g.AddBottom("Stands before you.");
+				builder.Clear();
+				builder.AddText("Hits:  ", XleColor.White);
+				builder.AddText(hits.ToString(), XleColor.Yellow);
+				builder.AddText("   Damage:  ", XleColor.White);
+				builder.AddText(dam.ToString(), XleColor.Yellow);
 
-					if (waitAtEnd == 0)
-						waitAtEnd = 1500;
+				g.AddBottom(builder);
 
+				if (dam > 0)
+				{
+					SoundMan.PlaySound(LotaSound.EnemyHit);
 				}
 				else
 				{
-					ColorStringBuilder builder = new ColorStringBuilder();
-					builder.AddText("Attacked by ", XleColor.White);
-					builder.AddText(monstCount.ToString(), XleColor.Yellow);
-					builder.AddText(" " + currentMonst[0].Name, XleColor.Cyan);
+					SoundMan.PlaySound(LotaSound.EnemyMiss);
+				}
+			}
 
-					g.AddBottom("");
-					g.AddBottom(builder);
+			XleCore.wait(XleCore.Redraw, 250, !firstTime);
+		}
 
-					int dam = 0;
-					int hits = 0;
+		private static int SelectRandomMonster(TerrainType terrain)
+		{
+			int mCount = 0;
+			int val, sel = -1;
 
-					for (int i = 0; i < monstCount; i++)
-					{
-						int t = player.Damage(currentMonst[i].Attack);
+			for (int i = 0; i < XleCore.Database.MonsterList.Count; i++)
+			{
+				if ((TerrainType)XleCore.Database.MonsterList[i].Terrain == TerrainType.All && terrain != 0)
+					mCount++;
 
-						if (t > 0)
-						{
-							dam += t;
-							hits++;
-						}
-					}
+				if ((TerrainType)XleCore.Database.MonsterList[i].Terrain == terrain)
+					mCount += 3;
 
-					builder.Clear();
-					builder.AddText("Hits:  ", XleColor.White);
-					builder.AddText(hits.ToString(), XleColor.Yellow);
-					builder.AddText("   Damage:  ", XleColor.White);
-					builder.AddText(dam.ToString(), XleColor.Yellow);
+				if (terrain == TerrainType.Foothills &&
+					(TerrainType)XleCore.Database.MonsterList[i].Terrain == TerrainType.Mountain)
+					mCount += 3;
+			}
 
-					g.AddBottom(builder);
+			val = 1 + XleCore.random.Next(mCount);
 
-					if (dam > 0)
-					{
-						SoundMan.PlaySound(LotaSound.EnemyHit);
-					}
-					else
-					{
-						SoundMan.PlaySound(LotaSound.EnemyMiss);
-					}
+			for (int i = 0; i < XleCore.Database.MonsterList.Count; i++)
+			{
+				if ((TerrainType)XleCore.Database.MonsterList[i].Terrain == TerrainType.All && terrain != 0)
+					val--;
 
+				if ((TerrainType)XleCore.Database.MonsterList[i].Terrain == terrain)
+					val -= 3;
 
+				if (terrain == TerrainType.Foothills &&
+					(TerrainType)XleCore.Database.MonsterList[i].Terrain == TerrainType.Mountain)
+					val -= 3;
 
+				if (val == 0 || val == -1 || val == -2)
+				{
+					sel = i;
+					break;
+				}
+			}
+
+			System.Diagnostics.Debug.Assert(sel > -1);
+			return sel;
+		}
+
+		/// <summary>
+		/// Check to see if we should have bandits ambush the player. If so,
+		/// sets banditAmbush variable.
+		/// </summary>
+		/// <param name="player"></param>
+		private void SetBanditAmbushTime(Player player)
+		{
+			// make sure the player has the compendium
+			if (player.Item(15) == 0) return;
+			
+			// if the player has the guard jewels we bail.
+			if (player.Item(14) == 4) return;
+			{
+				int pastTime = (int)(player.TimeDays - 100);
+				if (pastTime < 0) pastTime = 0;
+
+				int min = 40 - (int)(pastTime / 2);
+				if (min < 3) min = 3;
+
+				int max = 100 - (int)(pastTime / 5);
+				if (max < 12) max = 12;
+
+				int time = XleCore.random.Next(min, max);
+
+				if (time > player.Food - 2)
+				{
+					time = player.Food - 2;
+					if (time < 0)
+						time = 1;
 				}
 
-				waitAtEnd = 250;
-
-				if (!firstTime)
-					keyBreak = true;
-
+				banditAmbush = (int)(player.TimeDays) + time;
 			}
+		}
+		private bool BanditAmbush(Player player)
+		{
+			// bail if player doesn't have compendium
+			if (player.Item(15) == 0) return false;
+	
+			// bail if player has compendium and guard jewels.
+			if (player.Item(14) < 4) return false;
 
+			if (banditAmbush <= 0) 
+				SetBanditAmbushTime(player);
 
-			if (waitAtEnd > 0)
+			if (player.TimeDays <= banditAmbush) 
+				return false;
+
+			// set a random position for the appearance of the bandits.
+			MonsterDirection(player);
+			
+			// bandit icon is number 4.
+			displayMonst = 4;
+
+			g.AddBottom();
+			g.AddBottom("You are ambushed by bandits!", XleColor.Cyan);
+
+			SoundMan.PlaySound(LotaSound.Encounter);
+			XleCore.wait(500);
+
+			int maxDamage = player.HP / 15;
+			int minDamage = Math.Min(5, maxDamage / 2);
+
+			for (int i = 0; i < 8; i++)
 			{
+				player.HP -= XleCore.random.Next(minDamage, maxDamage + 1);
 
-				XleCore.wait(XleCore.Redraw, waitAtEnd, keyBreak);
-
+				SoundMan.PlaySound(LotaSound.EnemyHit);
+				XleCore.wait(250);
 			}
+
+			g.AddBottom("You fall unconsious.", XleColor.Yellow);
+
+			XleCore.wait(1000);
+			displayMonst = -1;
+			XleCore.wait(RedrawUnconscious, 3000);
+
+			g.AddBottom();
+			g.AddBottom("You awake.  The compendium is gone.");
+			g.AddBottom();
+
+			while (player.Item(15) > 0)
+				player.ItemCount(15, -1);
+
+			SoundMan.PlaySoundSync(LotaSound.VeryBad);
+
+			g.AddBottom("You hear a voice...");
+
+			g.AddBottom();
+			g.WriteSlow("Do not be discouraged.  It was", 0, XleColor.White);
+
+			g.AddBottom();
+			g.WriteSlow("inevitable.  Keep to your quest.", 0, XleColor.White);
+
+			XleCore.wait(3000);
+			banditAmbush = 0;
+
+			return true;
 		}
 
 		void RedrawUnconscious()
@@ -1302,54 +1343,49 @@ namespace ERY.Xle.XleMapTypes
 
 			switch (monstDir)
 			{
-
 				case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
 				case Direction.North: dirName = "North"; mDrawMonst.Y -= 2; break;
 				case Direction.West: dirName = "West"; mDrawMonst.X -= 2; break;
 				case Direction.South: dirName = "South"; mDrawMonst.Y += 2; break;
-				default: dirName = "Unknown"; break;
+				default:
+					throw new Exception("Invalid direction.");
 			}
 			return dirName;
 		}
 
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)
 		{
-			if (EncounterState == 1)
+			if (EncounterState == EncounterState.UnknownCreatureApproaching)
 			{
 				bool moveTowards = false;
 
 				switch (monstDir)
 				{
-
 					case Direction.East: if (dx > 0) moveTowards = true; break;
 					case Direction.North: if (dy < 0) moveTowards = true; break;
 					case Direction.West: if (dx < 0) moveTowards = true; break;
 					case Direction.South: if (dy > 0) moveTowards = true; break;
-
 				}
 
-				if (!moveTowards)
+				if (moveTowards == false)
 				{
 					if (XleCore.random.Next(100) < 50)
 					{
-
-						EncounterState = 3;			// avoided;
+						EncounterState = EncounterState.MonsterAvoided;
 					}
 				}
-
 			}
-			else if (EncounterState == 10)
+			else if (EncounterState == EncounterState.MonsterReady)
 			{
-				if (XleCore.random.Next(100) < 40 && !friendly)
+				if (XleCore.random.Next(100) < 40 && friendly == false)
 				{
 					return false;
 				}
 				else
 				{
-					EncounterState = -1;
+					EncounterState = EncounterState.JustDisengaged;
 					displayMonst = -1;
 				}
-
 			}
 
 			return true;
@@ -1423,30 +1459,7 @@ namespace ERY.Xle.XleMapTypes
 
 		public override void OnLoad(Player player)
 		{
-			// check to see if we should have bandits ambush the player.
-			if (player.Item(15) > 0 && // make sure the player has the compendium
-				player.Item(14) == 0) // make sure the player doesn't have the guard jewels.
-			{
-				int pastTime = (int)(player.TimeDays - 100);
-				if (pastTime < 0) pastTime = 0;
-
-				int min = 40 - (int)(pastTime / 2);
-				if (min < 3) min = 3;
-
-				int max = 100 - (int)(pastTime / 5);
-				if (max < 12) max = 12;
-
-				int time = XleCore.random.Next(min, max);
-
-				if (time > player.Food - 2)
-				{
-					time = player.Food - 2;
-					if (time < 0)
-						time = 1;
-				}
-
-				banditAmbush = (int)(player.TimeDays) + time;
-			}
+			SetBanditAmbushTime(player);
 			
 		}
 	}

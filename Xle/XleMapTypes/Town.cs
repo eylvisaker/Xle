@@ -939,7 +939,7 @@ namespace ERY.Xle.XleMapTypes
 			return true;
 		}
 
-		protected override void PlayerStepImpl(Player player)
+		protected override void PlayerStepImpl(Player player, bool didEvent)
 		{
 			Point pt = new Point(player.X, player.Y);
 

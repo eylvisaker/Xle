@@ -861,16 +861,25 @@ namespace ERY.Xle
 
 		public void PlayerStep(Player player)
 		{
+			bool didEvent = false;
+
 			if (GetEvent(player, 0) != null)
 			{
 				XleEvent evt = XleCore.Map.GetEvent(player, 0);
 
 				evt.StepOn(player);
+
+				didEvent = true;
 			}
 
-			PlayerStepImpl(player);
+			PlayerStepImpl(player, didEvent);
 		}
-		protected virtual void PlayerStepImpl(Player player)
+		/// <summary>
+		/// Called after the player steps.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="didEvent">True if there was an event that occured at this location</param>
+		protected virtual void PlayerStepImpl(Player player, bool didEvent)
 		{
 		}
 
