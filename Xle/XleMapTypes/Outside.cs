@@ -25,7 +25,7 @@ namespace ERY.Xle.XleMapTypes
 		Direction monstDir;
 		Point mDrawMonst;
 		int monstCount, initMonstCount;
-		bool friendly;
+		bool isMonsterFriendly;
 		int banditAmbush;
 
 		#region --- Construction and Serialization ---
@@ -291,12 +291,13 @@ namespace ERY.Xle.XleMapTypes
 
 				builder.AddText("with ", XleColor.White);
 				builder.AddText(weaponName, XleColor.Cyan);
+				g.AddBottom(builder);
+
+				builder.Clear();
 
 				if (dam > 0)
 				{
 					SoundMan.PlaySound(LotaSound.PlayerHit);
-
-					builder = new ColorStringBuilder();
 
 					builder.AddText("Enemy hit by blow of ", XleColor.White);
 					builder.AddText(dam.ToString(), XleColor.Cyan);
@@ -579,7 +580,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 
 			currentMonst[monstCount - 1].HP -= damage;
-			friendly = false;
+			isMonsterFriendly = false;
 
 			return damage;
 		}
@@ -638,7 +639,7 @@ namespace ERY.Xle.XleMapTypes
 
 		void SpeakToMonster(Player player)
 		{
-			if (!friendly)
+			if (!isMonsterFriendly)
 			{
 				g.AddBottom("");
 				g.AddBottom("The " + MonstName() + " does not reply.");
@@ -1017,7 +1018,7 @@ namespace ERY.Xle.XleMapTypes
 		private void StartEncounter(Player player)
 		{
 			currentMonst.Clear();
-			friendly = false;
+			isMonsterFriendly = false;
 
 			stepCount = XleCore.random.Next(1, 16);
 			int type = XleCore.random.Next(0, 21);
@@ -1029,7 +1030,7 @@ namespace ERY.Xle.XleMapTypes
 				EncounterState = EncounterState.UnknownCreatureApproaching;
 				SoundMan.PlaySound(LotaSound.Encounter);
 
-				g.AddBottom("");
+				g.AddBottom();
 				g.AddBottom("An unknown creature is approaching ", XleColor.Cyan);
 				g.AddBottom("from the " + dirName + ".", XleColor.Cyan);
 			}
@@ -1059,6 +1060,9 @@ namespace ERY.Xle.XleMapTypes
 
 			string dirName;
 
+			if (monstDir == Direction.None)
+				MonsterDirection(player);
+
 			switch (monstDir)
 			{
 				case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
@@ -1082,9 +1086,9 @@ namespace ERY.Xle.XleMapTypes
 			}
 
 			if (XleCore.random.Next(256) <= currentMonst[0].Friendly)
-				friendly = true;
+				isMonsterFriendly = true;
 			else
-				friendly = false;
+				isMonsterFriendly = false;
 
 			XleCore.wait(500);
 			return dirName;
@@ -1112,7 +1116,7 @@ namespace ERY.Xle.XleMapTypes
 
 			EncounterState = EncounterState.MonsterReady;
 
-			g.AddBottom("");
+			g.AddBottom();
 			g.AddBottom(monstCount.ToString() + " " + currentMonst[0].Name + plural, colors);
 
 			colors[0] = XleColor.Cyan;
@@ -1123,7 +1127,7 @@ namespace ERY.Xle.XleMapTypes
 
 		private void MonsterTurn(Player player, bool firstTime)
 		{
-			if (friendly)
+			if (isMonsterFriendly)
 			{
 				Color[] colors = new Color[40];
 
@@ -1377,7 +1381,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else if (EncounterState == EncounterState.MonsterReady)
 			{
-				if (XleCore.random.Next(100) < 40 && friendly == false)
+				if (XleCore.random.Next(100) < 40 && isMonsterFriendly == false)
 				{
 					return false;
 				}

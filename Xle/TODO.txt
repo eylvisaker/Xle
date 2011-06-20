@@ -2,7 +2,7 @@
 	Bugs in monsters:
 		Text messages which appear after entering a town.
 		Thrust creepers don't fight back.
-	Refactor encounter state stuff.
+	D - Refactor encounter state stuff.
 	Animations for water.
 	Audio for mountains?
 	Correct combat damage.

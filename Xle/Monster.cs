@@ -24,7 +24,6 @@ namespace ERY.Xle
 
 		public Monster(Data.Monster monster)
 		{
-			// TODO: Complete member initialization
 			this.mData = monster;
 
 			HP = monster.HP;
