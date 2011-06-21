@@ -15,7 +15,6 @@ namespace ERY.Xle
 	[Serializable]
 	public abstract class XleMap : IXleSerializable
 	{
-		static int lastTimeDraw = 0;
 		static int cyclesDraw = 0;
 
 		string mMapName;                    // map name
@@ -510,36 +509,23 @@ namespace ERY.Xle
 			int hAdjust = 0;
 			int tile;
 			//Point mDrawMonst = new Point(0, 0);
-			int now = (int)Timing.TotalMilliseconds;
-			bool setLastTime = false;
-
 			width = width / 2;
 			height = height / 2;
 
 			wAdjust = 1;
 			hAdjust = 1;
 
-
 			int xx = initialxx;
 			int yy = 16;
 
-
-			if (lastTimeDraw + 150 < now)
-				setLastTime = true;
-
+			Rectangle tileRect = new Rectangle(x - width, y - height, width * 2 + wAdjust, height * 2 + hAdjust);
+			AnimateTiles(tileRect);
 
 			for (j = y - height; j < y + height + hAdjust; j++)
 			{
-
 				for (i = x - width; i < x + width + wAdjust; i++)
 				{
 					tile = DrawTile(i, j);
-
-					//if (i == monstPoint.X && j == monstPoint.Y)
-					//{
-					//    mDrawMonst.X = xx;
-					//    mDrawMonst.Y = yy;
-					//}
 
 					XleCore.DrawTile(xx, yy, tile);
 
@@ -549,15 +535,10 @@ namespace ERY.Xle
 				yy += 16;
 				xx = initialxx;
 			}
+		}
 
-
-			if (setLastTime)
-			{
-				lastTimeDraw = (int)Timing.TotalMilliseconds;
-				cyclesDraw++;
-			}
-
-
+		protected virtual void AnimateTiles(Rectangle rectangle)
+		{
 		}
 
 		public abstract void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine);
@@ -1113,10 +1094,6 @@ namespace ERY.Xle
 		public virtual bool AutoDrawPlayer
 		{
 			get { return true; }
-		}
-		public virtual void UpdateAnim()
-		{
-
 		}
 
 		#endregion

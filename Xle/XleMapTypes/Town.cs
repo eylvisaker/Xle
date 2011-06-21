@@ -1088,9 +1088,9 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
-		public override void UpdateAnim()
+		protected override void AnimateTiles(Rectangle rectangle)
 		{
-			AnimateGuards();
+			AnimateGuards(); 
 		}
 		public override string[] MapMenu()
 		{

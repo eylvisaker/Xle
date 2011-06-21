@@ -384,9 +384,7 @@ namespace ERY.Xle
 			UpdateAnim();
 
 			Display.BeginFrame();
-
-			map.UpdateAnim();
-
+			
 			Draw();
 
 			Display.EndFrame();
@@ -433,8 +431,6 @@ namespace ERY.Xle
 		{
 			RaftAnim();
 			CheckAnim();
-
-			map.UpdateAnim();
 		}
 
 		public void Draw()

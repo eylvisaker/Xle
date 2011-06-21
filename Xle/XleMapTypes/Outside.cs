@@ -18,6 +18,9 @@ namespace ERY.Xle.XleMapTypes
 		int mHeight;
 		int mWidth;
 
+		int[] waves;
+		Rectangle drawRect;
+
 		List<Monster> currentMonst = new List<Monster>();
 
 		int stepCount;
@@ -79,14 +82,21 @@ namespace ERY.Xle.XleMapTypes
 		{
 			get
 			{
+				int result;
+
 				if (yy < 0 || yy >= Height || xx < 0 || xx >= Width)
-				{
-					return 0;
-				}
+					result = 0;
 				else
+					result = mData[xx + mWidth * yy];
+
+				if (result == 0)
 				{
-					return mData[xx + mWidth * yy];
+					int index = xx - drawRect.Left + (yy - drawRect.Top) * drawRect.Width;
+
+					return waves[index];
 				}
+
+				return result;
 			}
 			set
 			{
@@ -921,26 +931,59 @@ namespace ERY.Xle.XleMapTypes
 			return false;
 		}
 
-		public override void UpdateAnim()
+
+		int lastAnimate = 0;
+
+		protected override void AnimateTiles(Rectangle rectangle)
 		{
-			/*
-			 if ((setLastTime || g.waterReset == true))
-			 {
-				 if (tile == 0 && Lota.random.Next(0, 1000) < 10 * (Stormy + 1)
-					 && g.waterReset == false)
-				 {
-					 tile = 1;
-					 this[i, j] = tile;
+			int now = (int)Timing.TotalMilliseconds;
 
-				 }
-				 else if ((tile == 1 && Lota.random.Next(0, 1000) < 50) ||
-					 (g.waterReset == true && tile == 1))
-				 {
-					 tile = 0;
-					 this[i, j] = tile;
-				 }
+			if (rectangle != drawRect)
+			{
+				if (waves != null)
+					Array.Clear(waves, 0, waves.Length);
 
-			 }*/
+				// force an update.
+				lastAnimate = now - 500;
+
+				drawRect = rectangle;
+			}
+			if (lastAnimate + 250 > now)
+				return;
+
+			if (waves == null || waves.Length != rectangle.Width * rectangle.Height)
+			{
+				waves = new int[rectangle.Width * rectangle.Height];
+			}
+
+			lastAnimate = now;
+
+			for (int j = 0; j < rectangle.Height; j++)
+			{
+				for (int i = 0; i < rectangle.Width; i++)
+				{
+					int x = i + rectangle.Left;
+					int y = j + rectangle.Top;
+					int index = j * rectangle.Width + i;
+
+					int tile = this[x, y];
+
+					if (tile == 0)
+					{
+						if (XleCore.random.Next(0, 1000) < 20 * (Stormy + 1))
+						{
+							waves[index] = 1;
+						}
+					}
+					else if (tile == 1)
+					{
+						if (XleCore.random.Next(0, 100) < 25)
+						{
+							waves[index] = 0;
+						}
+					}
+				}
+			}
 		}
 		public override void AfterExecuteCommand(Player player, KeyCode cmd)
 		{
@@ -949,7 +992,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
 		{
-			Draw2D(x, y,facingDirection, inRect);
+			Draw2D(x, y, facingDirection, inRect);
 
 			if (displayMonst > -1)
 			{
@@ -1238,7 +1281,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			// make sure the player has the compendium
 			if (player.Item(15) == 0) return;
-			
+
 			// if the player has the guard jewels we bail.
 			if (player.Item(14) == 4) return;
 			{
@@ -1267,19 +1310,19 @@ namespace ERY.Xle.XleMapTypes
 		{
 			// bail if player doesn't have compendium
 			if (player.Item(15) == 0) return false;
-	
+
 			// bail if player has compendium and guard jewels.
 			if (player.Item(14) < 4) return false;
 
-			if (banditAmbush <= 0) 
+			if (banditAmbush <= 0)
 				SetBanditAmbushTime(player);
 
-			if (player.TimeDays <= banditAmbush) 
+			if (player.TimeDays <= banditAmbush)
 				return false;
 
 			// set a random position for the appearance of the bandits.
 			MonsterDirection(player);
-			
+
 			// bandit icon is number 4.
 			displayMonst = 4;
 
@@ -1464,7 +1507,7 @@ namespace ERY.Xle.XleMapTypes
 		public override void OnLoad(Player player)
 		{
 			SetBanditAmbushTime(player);
-			
+
 		}
 	}
 }
