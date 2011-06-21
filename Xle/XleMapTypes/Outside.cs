@@ -987,8 +987,6 @@ namespace ERY.Xle.XleMapTypes
 		}
 		public override void AfterExecuteCommand(Player player, KeyCode cmd)
 		{
-
-
 		}
 		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
 		{
@@ -1005,7 +1003,6 @@ namespace ERY.Xle.XleMapTypes
 
 				XleCore.DrawMonster(pt.X, pt.Y, displayMonst);
 			}
-
 		}
 		protected override void PlayerStepImpl(Player player, bool didEvent)
 		{

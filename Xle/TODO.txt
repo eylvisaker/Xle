@@ -1,9 +1,11 @@
-﻿Outdoors:
+﻿Settings file for adjusting numerical parameters.
+
+Outdoors:
 	Bugs in monsters:
 		Text messages which appear after entering a town.
-		Thrust creepers don't fight back.
+		Monsters only fight back when the player moves.
 	D - Refactor encounter state stuff.
-	Animations for water.
+	D - Animations for water.
 	Audio for mountains?
 	Correct combat damage.
 	Falling unconscious when beaten severly.
