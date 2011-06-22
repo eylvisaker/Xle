@@ -199,7 +199,6 @@ namespace ERY.Xle
 
 		private void AfterDoCommand(int waitTime, KeyCode cmd)
 		{
-
 			XleCore.Map.AfterExecuteCommand(player, cmd);
 
 			XleCore.wait(XleCore.Redraw, waitTime, false);

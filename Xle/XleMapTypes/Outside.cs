@@ -713,6 +713,7 @@ namespace ERY.Xle.XleMapTypes
 
 					}
 
+					g.AddBottom(builder);
 					qcolor = XleColor.Cyan;
 
 					break;
@@ -757,6 +758,7 @@ namespace ERY.Xle.XleMapTypes
 					builder.AddText(" Hit Points for ", XleColor.Green);
 					builder.AddText(cost.ToString(), XleColor.Yellow);
 					builder.AddText(" gold?", XleColor.Green);
+					g.AddBottom(builder);
 
 					qcolor = XleColor.Green;
 
@@ -985,9 +987,6 @@ namespace ERY.Xle.XleMapTypes
 				}
 			}
 		}
-		public override void AfterExecuteCommand(Player player, KeyCode cmd)
-		{
-		}
 		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
 		{
 			Draw2D(x, y, facingDirection, inRect);
@@ -1006,23 +1005,22 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override void PlayerStepImpl(Player player, bool didEvent)
 		{
-			TestEncounter(player, didEvent);
+			StepEncounter(player, didEvent);
 		}
-		private void TestEncounter(Player player, bool didEvent)
+		private void StepEncounter(Player player, bool didEvent)
 		{
+			if (XleCore.Database.MonsterList.Count == 0)				return;
+			if (g.disableEncounters)				return;
+
 			bool firstTime = false;
-
-			if (BanditAmbush(player))
-				return;
-
-			if (XleCore.Database.MonsterList.Count == 0)
-				return;
-
-			if (g.disableEncounters)
-				return;
 
 			if (EncounterState == EncounterState.NoEncounter && stepCount <= 0)
 			{
+				SetNextEncounterStepCount();
+
+				if (BanditAmbush(player))
+					return;
+
 				StartEncounter(player);
 			}
 			else if (EncounterState == EncounterState.NoEncounter && stepCount > 0)
@@ -1041,6 +1039,12 @@ namespace ERY.Xle.XleMapTypes
 				MonsterAppearing(player, ref firstTime);
 			}
 
+		}
+
+
+		public override void AfterExecuteCommand(Player player, KeyCode cmd)
+		{
+
 			if (EncounterState == EncounterState.MonsterAvoided)
 			{
 				AvoidMonster(player);
@@ -1051,7 +1055,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else if (EncounterState == EncounterState.MonsterReady)
 			{
-				MonsterTurn(player, firstTime);
+				MonsterTurn(player, false);
 			}
 		}
 
@@ -1060,7 +1064,6 @@ namespace ERY.Xle.XleMapTypes
 			currentMonst.Clear();
 			isMonsterFriendly = false;
 
-			stepCount = XleCore.random.Next(1, 16);
 			int type = XleCore.random.Next(0, 21);
 
 			if (type < 10)
@@ -1073,13 +1076,25 @@ namespace ERY.Xle.XleMapTypes
 				g.AddBottom();
 				g.AddBottom("An unknown creature is approaching ", XleColor.Cyan);
 				g.AddBottom("from the " + dirName + ".", XleColor.Cyan);
+				
+				XleCore.wait(1000);
 			}
 			else if (type < 15)
 			{
 				EncounterState = EncounterState.CreatureAppearing;
-			}
 
-			XleCore.wait(1000);
+				XleCore.wait(1000);
+			}
+			else
+			{
+				// TODO: figure out what I want to do with this, or eliminate this condition.
+			}
+			
+		}
+
+		private void SetNextEncounterStepCount()
+		{
+			stepCount = XleCore.random.Next(1, 16);
 		}
 
 		private string MonsterAppearing(Player player, ref bool firstTime)
@@ -1141,11 +1156,13 @@ namespace ERY.Xle.XleMapTypes
 
 			EncounterState = EncounterState.NoEncounter;
 
-			XleCore.wait(player.Gamespeed * 150 + 50);
+			XleCore.wait(250);
 		}
 
 		private void MonsterAppeared()
 		{
+			XleCore.wait(500);
+
 			Color[] colors = new Color[40];
 			string plural = (monstCount > 1) ? "s" : "";
 
@@ -1162,11 +1179,13 @@ namespace ERY.Xle.XleMapTypes
 			colors[0] = XleColor.Cyan;
 			g.AddBottom("is approaching.", colors);
 
-			XleCore.wait(2000);
+			XleCore.wait(1000);
 		}
 
 		private void MonsterTurn(Player player, bool firstTime)
 		{
+			XleCore.wait(500);
+
 			if (isMonsterFriendly)
 			{
 				Color[] colors = new Color[40];
