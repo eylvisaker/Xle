@@ -222,6 +222,19 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		}
 
 		public ExhibitInfo ExhibitInfo { get { return XleCore.ExhibitInfo[ExhibitID]; } }
+
+		protected int TotalExhibitsViewed(Player player)
+		{
+			int count = 0;
+
+			for (int i = 2; i < player.museum.Length; i++)
+			{
+				if (player.museum[i] != 0) 
+					count++;
+			}
+
+			return count;
+		}
 	}
 
 

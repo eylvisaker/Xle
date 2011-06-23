@@ -19,7 +19,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		public override void PlayerXamine(Player player)
 		{
-			if (player.museum[ExhibitID] == 0 && player.TimeDays < 100)
+			if (player.museum[ExhibitID] == 0 && TotalExhibitsViewed(player) < 2)
 			{
 				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[1]);
 				
@@ -33,15 +33,15 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				// great bladed staff
 				player.AddWeapon(3, 3);
 
-				player.museum[ExhibitID] = -1;
+				player.museum[ExhibitID] = 10;
 			}
 		}
 		public override bool IsClosed(ERY.Xle.Player player)
 		{
-			if (player.museum[ExhibitID] < 0)
+			if (player.museum[ExhibitID] == 10)
 				return true;
 
-			if (player.museum[ExhibitID] == 1 && player.TimeDays < 100)
+			if (player.museum[ExhibitID] == 1 && TotalExhibitsViewed(player) < 2)
 				return true;
 
 			return false;

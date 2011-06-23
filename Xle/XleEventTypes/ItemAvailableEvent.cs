@@ -114,7 +114,6 @@ namespace ERY.Xle.XleEventTypes
 			info.Write("ContainsItem", mContainsItem);
 			info.Write("Contents", mContents);
 		}
-
 		protected override void ReadData(XleSerializationInfo info)
 		{
 			mContainsItem = info.ReadBoolean("ContainsItem", false);

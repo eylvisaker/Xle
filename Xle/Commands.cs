@@ -427,7 +427,9 @@ namespace ERY.Xle
 				if (player.Item(i) > 0)
 				{
 					string itemName = XleCore.ItemList[i].Name;
-					//TODO: Loadstring(g.hInstance(), i + 19, tempChars, 40);
+
+					if (itemName.Contains("coin"))
+						continue;
 
 					if (i == 9)			// mail
 					{

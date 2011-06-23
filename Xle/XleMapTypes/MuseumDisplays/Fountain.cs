@@ -42,7 +42,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				if (XleCore.QuickMenuYesNo() == 0)
 				{
 					ReadRawText(ExhibitInfo.Text[2]);
-					int amount = player.TimeDays < 100 ? 100 : 300;
+					int amount = TotalExhibitsViewed(player) >= 2 ? 100 : 300;
 					
 					player.Gold += amount;
 

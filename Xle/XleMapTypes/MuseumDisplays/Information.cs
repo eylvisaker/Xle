@@ -163,8 +163,9 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				return 5;
 			}
 
-			// check if we've viewed both amethyst exhibits
-			if (amethystExhibits == 2)
+			// check if we've viewed both amethyst exhibits and opened
+			// the lost displays.
+			if (amethystExhibits == 2 && sapphireExhibits == 1)
 				return 4;
 
 			// check if we've viewed all jade and topaz exhibits and been 
@@ -177,7 +178,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			}
 
 			// check that we've seen at least four exhibits
-			if (jadeExhibits + topazExhibits > 4)
+			if (jadeExhibits + topazExhibits >= 4)
 				return 2;
 
 			// geez, they've done nothing.
