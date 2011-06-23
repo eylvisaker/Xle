@@ -135,5 +135,12 @@ namespace ERY.Xle.XleEventTypes
 		{
 			return OpenImpl(player, false);
 		}
+		public override bool Take(Player player)
+		{
+			g.AddBottom();
+			g.AddBottom("You can't \"take\" the whole chest.");
+
+			return true;
+		}
 	}
 }

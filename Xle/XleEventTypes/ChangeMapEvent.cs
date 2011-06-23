@@ -77,6 +77,7 @@ namespace ERY.Xle.XleEventTypes
 			info.Write("AskUser", mAsk);
 			info.Write("TargetX", TargetX);
 			info.Write("TargetY", TargetY);
+			info.Write("CommandText", mCommandText);
 		}
 		protected override void ReadData(XleSerializationInfo info)
 		{
@@ -84,6 +85,7 @@ namespace ERY.Xle.XleEventTypes
 			mAsk = info.ReadBoolean("AskUser");
 			TargetX = info.ReadInt32("TargetX");
 			TargetY = info.ReadInt32("TargetY");
+			mCommandText = info.ReadString("CommandText", "");
 		}
 
 		public override bool StepOn(Player player)

@@ -6,13 +6,15 @@
   <Events array="true" type="ERY.Xle.XleEvent">
     <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
       <X>36</X>
-      <Y>91</Y>
+      <Y>90</Y>
       <Width>9</Width>
       <Height>1</Height>
       <MapID>1</MapID>
       <AskUser>False</AskUser>
       <TargetX>72</TargetX>
       <TargetY>72</TargetY>
+      <CommandText>
+      </CommandText>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Door">
       <X>1</X>
@@ -147,6 +149,8 @@
       <AskUser>False</AskUser>
       <TargetX>37</TargetX>
       <TargetY>6</TargetY>
+      <CommandText>
+      </CommandText>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
       <X>7</X>
@@ -249,8 +253,8 @@
       <Y>60</Y>
       <Width>3</Width>
       <Height>2</Height>
-      <ContainsItem>True</ContainsItem>
-      <Contents>18</Contents>
+      <ContainsItem>False</ContainsItem>
+      <Contents>130</Contents>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
       <X>67</X>
