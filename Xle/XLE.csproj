@@ -120,7 +120,9 @@
     <Compile Include="IHasRoofs.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="MapData.cs" />
+    <Compile Include="XleEventList.cs" />
     <Compile Include="XleEventTypes\ChangeMapEvent.cs" />
+    <Compile Include="XleEventTypes\ItemAvailableEvent.cs" />
     <Compile Include="XleEventTypes\Store.cs" />
     <Compile Include="XleMapTypes\Castle.cs" />
     <Compile Include="XleMapTypes\Dungeon.cs" />

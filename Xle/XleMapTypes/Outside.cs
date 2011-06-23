@@ -89,7 +89,7 @@ namespace ERY.Xle.XleMapTypes
 				else
 					result = mData[xx + mWidth * yy];
 
-				if (result == 0)
+				if (result == 0 && waves != null)
 				{
 					int index = xx - drawRect.Left + (yy - drawRect.Top) * drawRect.Width;
 
@@ -280,11 +280,9 @@ namespace ERY.Xle.XleMapTypes
 		public override bool PlayerFight(Player player)
 		{
 			string weaponName;
-			Point attackPt = Point.Empty, attackPt2 = Point.Empty;
-			Color[] colors = new Color[40];
 			ColorStringBuilder builder;
 
-			weaponName = player.CurrentWeaponName;
+			weaponName = player.CurrentWeaponType;
 
 			g.AddBottom("");
 
@@ -336,7 +334,7 @@ namespace ERY.Xle.XleMapTypes
 					int gold, food;
 					bool finished = FinishedCombat(out gold, out food);
 
-					XleCore.wait(500 + 100 * player.Gamespeed);
+					XleCore.wait(250 + 150 * player.Gamespeed);
 
 					if (finished)
 					{
@@ -361,6 +359,7 @@ namespace ERY.Xle.XleMapTypes
 								builder.AddText("You gain ", XleColor.White);
 								builder.AddText(food.ToString(), XleColor.Green);
 								builder.AddText(" days of food.", XleColor.White);
+								g.AddBottom(builder);
 
 								player.Food += food;
 							}
@@ -382,16 +381,11 @@ namespace ERY.Xle.XleMapTypes
 
 							g.AddBottom(builder);
 							player.Gold += gold;
-
-
 						}
 
 						XleCore.wait(400 + 100 * player.Gamespeed);
-
 					}
-
 				}
-
 			}
 			else if (EncounterState > 0)
 			{
@@ -720,7 +714,7 @@ namespace ERY.Xle.XleMapTypes
 				case 3:			// buy food
 
 					item = XleCore.random.Next(21) + 20;
-					cost = (int)(item * XleCore.random.NextDouble() * 0.4 + 0.8);
+					cost = (int)(item * (XleCore.random.NextDouble() * 0.4 + 0.8));
 
 					builder = new ColorStringBuilder();
 					builder.AddText("Do you want to buy ", XleColor.Green);
@@ -733,6 +727,7 @@ namespace ERY.Xle.XleMapTypes
 					builder.AddText("Days of food for ", XleColor.Green);
 					builder.AddText(cost.ToString(), XleColor.Yellow);
 					builder.AddText(" gold?", XleColor.Green);
+					g.AddBottom(builder);
 
 					qcolor = XleColor.Green;
 
@@ -785,7 +780,6 @@ namespace ERY.Xle.XleMapTypes
 						g.AddBottom("");
 						g.AddBottom("Purchase Completed.");
 
-						bool flash = false;
 						Color clr2 = XleColor.White;
 
 						switch (type)
@@ -1012,7 +1006,9 @@ namespace ERY.Xle.XleMapTypes
 			if (XleCore.Database.MonsterList.Count == 0)				return;
 			if (g.disableEncounters)				return;
 
-			bool firstTime = false;
+			// bail out if the player entered another map on this step.
+			if (XleCore.Map != this)
+				return;
 
 			if (EncounterState == EncounterState.NoEncounter && stepCount <= 0)
 			{
@@ -1036,7 +1032,7 @@ namespace ERY.Xle.XleMapTypes
 
 			if (EncounterState == EncounterState.CreatureAppearing)
 			{
-				MonsterAppearing(player, ref firstTime);
+				MonsterAppearing(player);
 			}
 
 		}
@@ -1083,7 +1079,7 @@ namespace ERY.Xle.XleMapTypes
 			{
 				EncounterState = EncounterState.CreatureAppearing;
 
-				XleCore.wait(1000);
+				//XleCore.wait(1000);
 			}
 			else
 			{
@@ -1097,7 +1093,7 @@ namespace ERY.Xle.XleMapTypes
 			stepCount = XleCore.random.Next(1, 16);
 		}
 
-		private string MonsterAppearing(Player player, ref bool firstTime)
+		private string MonsterAppearing(Player player)
 		{
 			if (XleCore.random.Next(100) < 55)
 				EncounterState = EncounterState.MonsterAppeared;
@@ -1105,9 +1101,7 @@ namespace ERY.Xle.XleMapTypes
 				EncounterState = EncounterState.MonsterReady;
 
 			SoundMan.PlaySound(LotaSound.Encounter);
-
-			firstTime = true;
-
+			
 			displayMonst = SelectRandomMonster(Terrain(player.X, player.Y));
 
 			mDrawMonst.X = player.X - 1;
@@ -1116,16 +1110,18 @@ namespace ERY.Xle.XleMapTypes
 			string dirName;
 
 			if (monstDir == Direction.None)
-				MonsterDirection(player);
-
-			switch (monstDir)
+				dirName = MonsterDirection(player);
+			else
 			{
-				case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
-				case Direction.North: dirName = "North"; mDrawMonst.Y -= 2; break;
-				case Direction.West: dirName = "West"; mDrawMonst.X -= 2; break;
-				case Direction.South: dirName = "South"; mDrawMonst.Y += 2; break;
-				default:
-					throw new Exception("Invalid Direction");
+				switch (monstDir)
+				{
+					case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
+					case Direction.North: dirName = "North"; mDrawMonst.Y -= 2; break;
+					case Direction.West: dirName = "West"; mDrawMonst.X -= 2; break;
+					case Direction.South: dirName = "South"; mDrawMonst.Y += 2; break;
+					default:
+						throw new Exception("Invalid Direction");
+				}
 			}
 
 			int max = 1;

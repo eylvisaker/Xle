@@ -225,9 +225,7 @@ shops, craftsmen, banks, and places
 of amusement.`pause`
 </Text>
       <Text ID="2">Here's some `yellow`gold`cyan` to spend on
-your trip.
-
-             `wait:off``sound:VeryGood``yellow`gold:  + 300</Text>
+your trip.</Text>
     </Exhibit>
     <Exhibit ID="4" Image="Fountain.png">
       <Text ID="1">Here you see a replica of the famous
@@ -241,12 +239,10 @@ only when that flower is returned
 will the fountain flow again.`pause`
 `clear``white`Myth or fact?  `cyan`Judge for yourself.
 In either case, the museum has agreed
-to help search for the tulip.</Text>
+to help search for the tulip.`pause`</Text>
       <Text ID="2">Bring the tulip back here for a nice
 reward.  Meanwhile, here's some native
-`yellow`gold`cyan` to aid you in your search.
-
-                   `wait:off``sound:VeryGood``yellow`GOLD:  + 300</Text>
+`yellow`gold`cyan` to aid you in your search.</Text>
       <Text ID="3">Thank you for returning the tulip!
 As a reward, `yellow``wait:off``sound:VeryGood`Charm:  +10`pause`</Text>
     </Exhibit>

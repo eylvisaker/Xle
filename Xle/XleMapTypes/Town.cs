@@ -658,9 +658,8 @@ namespace ERY.Xle.XleMapTypes
 			int tile = 0, tile1;
 			int hit = 0;
 			Color[] colors = new Color[40];
-			ColorStringBuilder builder;
 
-			weaponName = player.CurrentWeaponName;
+			weaponName = player.CurrentWeaponType;
 
 
 			if (player.WeaponType(player.CurrentWeapon) == 6 ||
@@ -672,16 +671,7 @@ namespace ERY.Xle.XleMapTypes
 
 			g.AddBottom("");
 
-			tempstring = "";
-
-			//TODO: Loadstring(g.hInstance(), player.WeaponType(player.CurrentWeapon()), tempstring, 25);
-			tempstring = tempstring.TrimEnd();
-
-			if (tempstring == "")
-				tempstring = "Bare hands";
-
-
-			g.AddBottom("Fight with " + tempstring);
+			g.AddBottom("Fight with " + player.CurrentWeaponType);
 			g.AddBottom("Enter direction: ");
 
 			tempstring = "Enter direction: ";

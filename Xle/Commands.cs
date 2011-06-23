@@ -720,13 +720,14 @@ namespace ERY.Xle
 		public void Use()
 		{
 			string commandstring = string.Empty;
-			string failureString = "No effect";
-			
 			bool noEffect = true;
 
 			g.AddBottom("");
 
 			string action = XleCore.ItemList[player.Hold].Action;
+			if (string.IsNullOrEmpty(action))
+				action = "Use";
+
 			commandstring = action + " " + XleCore.ItemList[player.Hold].Name;
 
 			g.AddBottom(commandstring);

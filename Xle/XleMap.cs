@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -12,14 +13,13 @@ using AgateLib.Serialization.Xle;
 
 namespace ERY.Xle
 {
-	[Serializable]
 	public abstract class XleMap : IXleSerializable
 	{
-		static int cyclesDraw = 0;
+		//static int cyclesDraw = 0;
 
 		string mMapName;                    // map name
 
-		List<XleEvent> mEvents = new List<XleEvent>();
+		XleEventList mEvents = new XleEventList();
 
 		int mMapID;					// map number
 		string mTileSet;				// stores which bitmap contains map tiles
@@ -48,7 +48,7 @@ namespace ERY.Xle
 			info.Write("MapID", mMapID);
 			info.Write("Tileset", mTileSet);
 			info.Write("DefaultTile", mDefaultTile);
-			info.Write("Events", mEvents);
+			info.Write("Events", mEvents.ToArray());
 
 			if (this is IHasRoofs)
 				info.Write("Roofs", ((IHasRoofs)this).Roofs);
@@ -193,7 +193,7 @@ namespace ERY.Xle
 		/// <param name="count"></param>
 		public virtual void SetLevels(int count)
 		{
-			if (IsMultiLevelMap)
+			if (IsMultiLevelMap == false)
 				throw new InvalidOperationException("Maptype does not support multiple levels.");
 			else
 				throw new NotImplementedException("SetLevels is not implemented.");
@@ -234,7 +234,7 @@ namespace ERY.Xle
 		}
 
 		[Browsable(false)]
-		public List<XleEvent> Events
+		public XleEventList Events
 		{
 			get { return mEvents; }
 			set { mEvents = value; }
@@ -1141,14 +1141,10 @@ namespace ERY.Xle
 		}
 	}
 
-
-	[Serializable]
 	public class Roof : IXleSerializable
 	{
-		private int[,] mData;
-		Point mLocation;
 		Rectangle mRect;
-		int[] mRoofData;
+		int[] mData;
 
 		private bool mOpen;
 
@@ -1160,53 +1156,13 @@ namespace ERY.Xle
 		public Roof()
 		{ }
 
-		Roof(SerializationInfo info, StreamingContext context)
-		{
-			int[,] data = (int[,])info.GetValue("mData", typeof(int[,]));
-			Point loc = (Point)info.GetValue("mLocation", typeof(Point));
-
-			mRect.X = loc.X;
-			mRect.Y = loc.Y;
-			mRect.Width = data.GetUpperBound(1) + 1;
-			mRect.Height = data.GetUpperBound(0) + 1;
-			mRoofData = new int[Width * Height];
-
-			for (int i = 0; i < Width; i++)
-			{
-				for (int j = 0; j < Height; j++)
-				{
-					mRoofData[i + j * Width] = data[j, i];
-				}
-			}
-		}
-
 		void IXleSerializable.WriteData(XleSerializationInfo info)
 		{
-			if (mData != null)
-			{
-				int[,] data = mData;
-				Point loc = mLocation;
-
-				mRect.X = loc.X;
-				mRect.Y = loc.Y;
-				mRect.Width = data.GetUpperBound(1) + 1;
-				mRect.Height = data.GetUpperBound(0) + 1;
-				mRoofData = new int[Width * Height];
-
-				for (int i = 0; i < Width; i++)
-				{
-					for (int j = 0; j < Height; j++)
-					{
-						mRoofData[i + j * Width] = data[j, i];
-					}
-				}
-			}
-
 			info.Write("X", X);
 			info.Write("Y", Y);
 			info.Write("Width", Width);
 			info.Write("Height", Height);
-			info.Write("RoofData", mRoofData);
+			info.Write("RoofData", mData);
 		}
 
 		void IXleSerializable.ReadData(XleSerializationInfo info)
@@ -1215,7 +1171,7 @@ namespace ERY.Xle
 			mRect.Y = info.ReadInt32("Y");
 			mRect.Width = info.ReadInt32("Width");
 			mRect.Height = info.ReadInt32("Height");
-			mRoofData = info.ReadInt32Array("RoofData");
+			mData = info.ReadInt32Array("RoofData");
 		}
 
 		#endregion
@@ -1247,13 +1203,13 @@ namespace ERY.Xle
 			int[] newData = new int[height * width];
 
 			// copy old data to new data
-			if (mRoofData != null)
+			if (mData != null)
 			{
 				for (int i = 0; i < Math.Min(Width, width); i++)
 				{
 					for (int j = 0; j < Math.Min(Height, height); j++)
 					{
-						newData[i + j * width] = mRoofData[i + j * Width];
+						newData[i + j * width] = mData[i + j * Width];
 					}
 				}
 			}
@@ -1261,7 +1217,7 @@ namespace ERY.Xle
 			mRect.Width = width;
 			mRect.Height = height;
 
-			mRoofData = newData;
+			mData = newData;
 		}
 		public int Width
 		{
@@ -1274,8 +1230,8 @@ namespace ERY.Xle
 
 		public int this[int x, int y]
 		{
-			get { return mRoofData[x + y * Width]; }
-			set { mRoofData[x + y * Width] = value; }
+			get { return mData[x + y * Width]; }
+			set { mData[x + y * Width] = value; }
 		}
 
 

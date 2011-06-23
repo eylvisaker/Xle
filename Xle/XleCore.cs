@@ -419,23 +419,23 @@ namespace ERY.Xle
 		}
 
 		// TODO: Which of these are obsolete?
-		static bool updating = false;
+		//static bool updating = false;
 		static double lastRaftAnim = 0;
-		static double lastCharAnim = 0;
-		static int lastOceanSound = 0;
-		static double timer;
-		static double frames = 0;
-		static double fps;
+		//static double lastCharAnim = 0;
+		//static int lastOceanSound = 0;
+		//static double timer;
+		//static double frames = 0;
+		//static double fps;
 
 		public void UpdateAnim()
 		{
 			RaftAnim();
-			CheckAnim();
+			//CheckAnim();
 		}
 
 		public void Draw()
 		{
-			int i = 0, j = 0;
+			int i = 0;
 			Color boxColor;
 			Color innerColor;
 			Color fontColor;
@@ -625,10 +625,7 @@ namespace ERY.Xle
 					  int length, Color boxColor)
 		{
 			int boxWidth = 12;
-			const int innerOffsetH = 8;
-			const int innerOffsetV = 2;
-			const int innerWidth = 2;
-
+			
 			top += 2;
 
 			if (direction == 1)
@@ -1003,7 +1000,7 @@ namespace ERY.Xle
 		}
 
 
-		static double lastCheckAnim = 0;
+		//static double lastCheckAnim = 0;
 
 		/// <summary>
 		/// This function animates the main character.  It should be called in the
@@ -1312,6 +1309,14 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
+		/// Gives the player a yes/no choice.
+		/// </summary>
+		/// <returns>Returns 0 if the player chose yes, 1 if the player chose no.</returns>
+		public static int QuickMenuYesNo()
+		{
+			return XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3);
+		}
+		/// <summary>
 		/// This function creates a quick menu at the bottow of the screen,
 		/// allowing the player to pick from a few choices.	
 		/// </summary>
@@ -1461,9 +1466,9 @@ namespace ERY.Xle
 		 *	Parameters:	none														*
 		 *  Returns:	void														*
 		 ****************************************************************************/
-		static int buttonTime = 0;		// time when the button was held down
-		static int buttonHeld = 0;		// are they holding the button down?
-		static int lastMove = 0;
+		//static int buttonTime = 0;		// time when the button was held down
+		//static int buttonHeld = 0;		// are they holding the button down?
+		//static int lastMove = 0;
 
 		static void CheckJoystick()
 		{
@@ -1825,5 +1830,6 @@ namespace ERY.Xle
 
 			return "";
 		}
+
 	}
 }

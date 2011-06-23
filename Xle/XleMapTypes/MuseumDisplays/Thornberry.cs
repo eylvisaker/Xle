@@ -29,7 +29,13 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			{
 				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[2]);
 
-				player.Gold += 300;
+				int amount = player.TimeDays < 100 ? 100 : 300;
+
+				player.Gold += amount;
+
+				g.UpdateBottom("             GOLD:  + " + amount.ToString(), 1, XleColor.Yellow);
+
+				SoundMan.PlaySound(LotaSound.VeryGood);
 				XleCore.FlashHPWhileSound(XleColor.Yellow);
 
 				XleCore.WaitForKey();

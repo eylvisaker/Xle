@@ -1177,14 +1177,27 @@ namespace ERY.Xle
 
 		public string CurrentArmorName
 		{
-			get { return "Nothing"; }
+			get
+			{
+				if (currentArmor == 0)
+					return "Nothing";
+
+				return XleCore.ArmorList[armor[currentArmor]].Name;
+			}
 		}
 
-		public string CurrentWeaponName
+		/// <summary>
+		/// Gives the name of the current weapon being used. Does not include the
+		/// quality information (shoddy, good, etc.)
+		/// </summary>
+		public string CurrentWeaponType
 		{
 			get
 			{
-				return "Bare Hands";
+				if (currentWeapon == 0)
+					return "Bare Hands";
+
+				return XleCore.WeaponList[weapon[currentWeapon]].Name;
 			}
 		}
 

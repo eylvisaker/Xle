@@ -293,6 +293,17 @@ namespace ERY.Xle
 		{
 			UpdateBottom(line, loc, null);
 		}
+		static public void UpdateBottom(string line, int loc, Color color)
+		{
+			Color[] colors = new Color[40];
+
+			for (int i = 0; i < 40; i++)
+			{
+				colors[i] = color;
+			}
+
+			UpdateBottom(line, loc, colors);
+		}		
 		/// <summary>
 		/// This function updates a line in the action window.
 		/// </summary>
