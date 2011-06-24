@@ -517,12 +517,13 @@ namespace ERY.Xle
 				// Draw the top box
 				XleCore.WriteText(48, 32, player.Name, fontcolor);
 
-				tempstring = "Level         ";
-				tempstring += player.Level;
+				tempstring = "Level        ";
+				tempstring += player.Level.ToString().PadLeft(2);
 				XleCore.WriteText(48, 64, tempstring, fontcolor);
 
-				tempstring = "Time-days     ";
-				tempstring += ((int)player.TimeDays).ToString();
+				string timeString = ((int)player.TimeDays).ToString().PadLeft(5);
+				tempstring = "Time-days ";
+				tempstring += timeString;
 				XleCore.WriteText(48, 96, tempstring, fontcolor);
 
 				tempstring = "Dexterity     ";

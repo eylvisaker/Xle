@@ -1416,7 +1416,8 @@ namespace ERY.Xle
 
 		//		Combat
 		/// <summary>
-		/// 		// player damages a creature returns damage
+		/// Player damages a creature. Returns the amount of damage the player did,
+		/// or zero if the player missed.
 		/// </summary>
 		/// <param name="defense"></param>
 		/// <returns></returns>
@@ -1424,8 +1425,7 @@ namespace ERY.Xle
 		{
 			int wt = WeaponType(CurrentWeapon);
 			int qt = WeaponQuality(CurrentWeapon);
-			int hit;
-
+			
 			int dam = Attribute[Attributes.strength] - 12;
 			dam += (int)(wt * (qt + 2)) / 2;
 
@@ -1435,31 +1435,20 @@ namespace ERY.Xle
 			if (dam < 3)
 				dam = 1 + XleCore.random.Next(3);
 
-			hit = Attribute[Attributes.dexterity] - (int)(defense * 0.3);
-			hit += qt;
-
-			if (hit > 24)
-				hit = 24;
-			else if (hit < 4)
-				hit = 4;
-
-			hit -= XleCore.random.Next(1 + 25);
-
-			if (XleCore.random.Next(100) < 4)
-				hit -= 10000;
-
-			if (hit < 0 || XleCore.random.Next(100) < 2)
-			{
-				dam = 0;
-			}
+			int hit = Attribute[Attributes.dexterity] * 8 + 15 * qt;
 
 			System.Diagnostics.Debug.WriteLine("Hit: " + hit.ToString() + " Dam: " + dam.ToString());
+			
+			hit -= XleCore.random.Next(400);
+			
+			if (hit < 0)
+				dam = 0;
 
-			return 100;
+			//return 100;
 			return dam;
 		}
 		/// <summary>
-		/// 		// player gets hit
+		/// Called when the player gets hit
 		/// </summary>
 		/// <param name="attack"></param>
 		/// <returns></returns>	
