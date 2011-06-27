@@ -127,6 +127,7 @@
     <Compile Include="XleMapTypes\Castle.cs" />
     <Compile Include="XleMapTypes\Dungeon.cs" />
     <Compile Include="XleMapTypes\EncounterState.cs" />
+    <Compile Include="XleEventTypes\MagicIce.cs" />
     <Compile Include="XleMapTypes\Map3D.cs" />
     <Compile Include="XleMapTypes\Museum.cs" />
     <Compile Include="XleColor.cs" />

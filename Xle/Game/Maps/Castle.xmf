@@ -296,6 +296,24 @@
       <ContainsItem>False</ContainsItem>
       <Contents>450</Contents>
     </Item>
+    <Item type="ERY.Xle.XleEventTypes.MagicIce">
+      <X>41</X>
+      <Y>8</Y>
+      <Width>8</Width>
+      <Height>4</Height>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.MagicIce">
+      <X>41</X>
+      <Y>27</Y>
+      <Width>8</Width>
+      <Height>6</Height>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.MagicIce">
+      <X>34</X>
+      <Y>64</Y>
+      <Width>13</Width>
+      <Height>7</Height>
+    </Item>
   </Events>
   <Roofs array="true" type="ERY.Xle.Roof">
     <Item>

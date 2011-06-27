@@ -18,8 +18,10 @@
     <Map ID="20" Name="Holy Point" File="HolyPoint.xmf" />
     <Map ID="21" Name="Eagle Hollow" File="EagleHollow.xmf" />
     <Map ID="51" Name="The Castle" File="Castle.xmf" />
+    <Map ID="52" Name="The Castle Level 2" File="Castle2.xmf" />
     <Map ID="71" Name="A dungeon" File="PiratesLair.xmf" />
     <Map ID="72" Name="Armak" File="Armak.xmf" />
+    <Map ID="73" Name="Four Jewels" File="FourJewels.xmf" />
   </Maps>
   <Qualities>
     <Quality ID="0" Name="Shoddy" />

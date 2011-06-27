@@ -76,56 +76,35 @@ namespace ERY.Xle.XleMapTypes
 					return UseMagicSeeds(player);
 
 				case 12:				// magic ice
-					return UseMagicIce();
+					return UseMagicIce(player);
 			}
 
 			return false;
 		}
 
-		private bool UseMagicIce()
+		private bool UseMagicIce(Player player)
 		{
-			bool found = false;
+			XleCore.wait(250);
 
-			for (int j = -1; j < 3; j++)
+			var evt = GetEvent<XleEventTypes.MagicIce>(player, 1);
+
+			if (evt == null)
+				return false;
+
+			for (int j = evt.Rectangle.Top; j < evt.Rectangle.Bottom; j++)
 			{
-				for (int i = -1; i < 3; i++)
+				for (int i = evt.Rectangle.Left; i < evt.Rectangle.Right; i++)
 				{
+					int m = this[i, j];
 
-					//if (Lota.Map.CheckSpecial(player.X + i, player.Y + j) == 22 && found == false)
-					//{
-					//    SpecialEvent dave = Lota.Map.GetSpecial(player.X + i, player.Y + j);
-					//    found = true;
-
-					//    g.AddBottom(commandstring);
-					//    Lota.wait(500);
-
-					//    for (j = dave.sy; j < dave.sy + dave.sheight; j++)
-					//    {
-					//        for (i = dave.sx; i < dave.sx + dave.swidth; i++)
-					//        {
-					//            int m = Lota.Map.M(j, i);
-
-					//            if (m % 16 >= 13 && m / 16 <= 2)
-					//            {
-					//                Lota.Map.SetM(j, i, m - 8);
-					//            }
-
-					//        }
-					//    }
-
-					//    break;
-					//}
+					if (m % 16 >= 13 && m / 16 <= 2)
+					{
+						this[i, j] = m - 8;
+					}
 				}
-
-				//						if (found) break;
 			}
 
-			if (found)
-			{
-				return true;
-			}
-
-			return false;
+			return true;
 		}
 
 		private bool UseMagicSeeds(Player player)

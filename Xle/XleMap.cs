@@ -572,6 +572,14 @@ namespace ERY.Xle
 
 			return null;
 		}
+
+		public T GetEvent<T>(Player player, int border) where T : XleEvent 
+		{
+			XleEvent evt = GetEvent(player, border);
+
+			return evt as T;
+		}
+		
 		/// <summary>
 		/// returns the special event at the specified location
 		/// </summary>
