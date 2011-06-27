@@ -64,140 +64,123 @@ namespace ERY.Xle.XleMapTypes
 
 		public override bool PlayerUse(Player player, int item)
 		{
-			//bool found = false;
+			switch (item)
+			{
+				case 4:			// Iron Key
+				case 5:			// Copper Key
+				case 6:			// Brass Key
+				case 7:			// Stone Key
+					return UseKey(player);
 
-			//switch (item)
-			//{
-			//    case 4:			// Iron Key
-			//    case 5:			// Copper Key
-			//    case 6:			// Brass Key
-			//    case 7:			// Stone Key
+				case 8:				// magic seeds
+					return UseMagicSeeds(player);
 
-					//for (j = -1; j < 3; j++)
+				case 12:				// magic ice
+					return UseMagicIce();
+			}
+
+			return false;
+		}
+
+		private bool UseMagicIce()
+		{
+			bool found = false;
+
+			for (int j = -1; j < 3; j++)
+			{
+				for (int i = -1; i < 3; i++)
+				{
+
+					//if (Lota.Map.CheckSpecial(player.X + i, player.Y + j) == 22 && found == false)
 					//{
-					//    for (i = -1; i < 3; i++)
+					//    SpecialEvent dave = Lota.Map.GetSpecial(player.X + i, player.Y + j);
+					//    found = true;
+
+					//    g.AddBottom(commandstring);
+					//    Lota.wait(500);
+
+					//    for (j = dave.sy; j < dave.sy + dave.sheight; j++)
 					//    {
-					//        if (Lota.Map.CheckSpecial(player.X + i, player.Y + j) == 24 && found == false)
+					//        for (i = dave.sx; i < dave.sx + dave.swidth; i++)
 					//        {
-					//            SpecialEvent dave = Lota.Map.GetSpecial(player.X + i, player.Y + j);
+					//            int m = Lota.Map.M(j, i);
 
-					//            if (dave.data[0] == player.Hold())
+					//            if (m % 16 >= 13 && m / 16 <= 2)
 					//            {
-					//                found = true;
-
-					//                g.AddBottom(commandstring);
-					//                SoundMan.PlaySound(LotaSound.UnlockDoor);
-					//                wait(250);
-
-					//                g.AddBottom("Unlock door");
-
-					//                for (j = dave.sy; j < dave.sy + dave.sheight; j++)
-					//                {
-					//                    for (i = dave.sx; i < dave.sx + dave.swidth; i++)
-					//                    {
-					//                        int m = Lota.Map.M(j, i);
-
-					//                        if ((m % 16 < 4 && m / 16 == 13) || (m % 16 >= 2 && m % 16 < 4 && m / 16 == 14))
-					//                        {
-					//                            Lota.Map.SetM(j, i, 0);
-					//                        }
-
-					//                    }
-					//                }
-
-					//                wait(750);
-
-					//                break;
+					//                Lota.Map.SetM(j, i, m - 8);
 					//            }
 
 					//        }
 					//    }
 
-					//    if (found) break;
+					//    break;
 					//}
+				}
 
-			//        if (found)
-			//        {
-			//            noEffect = false;
-			//        }
+				//						if (found) break;
+			}
 
-			//        if (noEffect)
-			//        {
-			//            g.AddBottom(commandstring);
-			//            g.AddBottom("");
-
-			//            Lota.wait(300 + 200 * player.Gamespeed);
-			//            g.UpdateBottom("This key does nothing here.");
-
-			//            noEffect = false;
-
-			//        }
-			//        break;
-			//    case 8:				// magic seeds
-			//        commandstring = "Eat Magic Seeds";
-
-			//        g.AddBottom(commandstring);
-			//        Lota.wait(150);
-
-			//        g.invisible = true;
-			//        g.AddBottom("You're invisible.");
-
-			//        Lota.Map.IsAngry = false;
-
-			//        Lota.wait(500);
-
-			//        player.ItemCount(8, -1);
-			//        noEffect = false;
-
-			//        break;
-
-			//    case 12:				// magic ice
-
-			//        commandstring = "Throw magic ice";
-
-			//        for (j = -1; j < 3; j++)
-			//        {
-			//            for (i = -1; i < 3; i++)
-			//            {
-
-			//                //if (Lota.Map.CheckSpecial(player.X + i, player.Y + j) == 22 && found == false)
-			//                //{
-			//                //    SpecialEvent dave = Lota.Map.GetSpecial(player.X + i, player.Y + j);
-			//                //    found = true;
-
-			//                //    g.AddBottom(commandstring);
-			//                //    Lota.wait(500);
-
-			//                //    for (j = dave.sy; j < dave.sy + dave.sheight; j++)
-			//                //    {
-			//                //        for (i = dave.sx; i < dave.sx + dave.swidth; i++)
-			//                //        {
-			//                //            int m = Lota.Map.M(j, i);
-
-			//                //            if (m % 16 >= 13 && m / 16 <= 2)
-			//                //            {
-			//                //                Lota.Map.SetM(j, i, m - 8);
-			//                //            }
-
-			//                //        }
-			//                //    }
-
-			//                //    break;
-			//                //}
-			//            }
-
-			//            if (found) break;
-			//        }
-
-			//        if (found)
-			//        {
-			//            return true;
-			//        }
-
-			//        break;
-			//}
+			if (found)
+			{
+				return true;
+			}
 
 			return false;
+		}
+
+		private bool UseMagicSeeds(Player player)
+		{
+			XleCore.wait(150);
+
+			g.invisible = true;
+			g.AddBottom("You're invisible.");
+
+			IsAngry = false;
+
+			XleCore.wait(500);
+
+			player.ItemCount(8, -1);
+
+			return true;
+		}
+
+		private bool UseKey(Player player)
+		{
+			bool found = false;
+
+			XleEvent evt = GetEvent(player, 1);
+
+			if (evt is XleEventTypes.Door)
+			{
+				XleEventTypes.Door door = (XleEventTypes.Door)evt;
+
+				if (door.RequiredItem == player.Hold)
+				{
+					found = true;
+					SoundMan.PlaySound(LotaSound.UnlockDoor);
+					XleCore.wait(250);
+
+					g.AddBottom("Unlock door");
+
+					for (int j = door.Rectangle.Y; j < door.Rectangle.Bottom; j++)
+					{
+						for (int i = door.Rectangle.X; i < door.Rectangle.Right; i++)
+						{
+							this[i, j] = 0;
+						}
+					}
+				}
+			}
+
+			if (found == false)
+			{
+				g.AddBottom("");
+
+				XleCore.wait(300 + 200 * player.Gamespeed);
+				g.UpdateBottom("This key does nothing here.");
+			}
+
+			return true;
 		}
 		public override bool PlayerOpen(Player player)
 		{

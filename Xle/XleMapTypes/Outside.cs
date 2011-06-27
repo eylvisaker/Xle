@@ -740,7 +740,7 @@ namespace ERY.Xle.XleMapTypes
 					if (item > (player.MaxHP - player.HP))
 						item = (player.MaxHP - player.HP);
 
-					cost = (int)(item * XleCore.random.NextDouble() * 0.15 + 0.75);
+					cost = (int)(item * (XleCore.random.NextDouble() * 0.15 + 0.75));
 
 					builder = new ColorStringBuilder();
 					builder.AddText("Do you want to buy a potion worth ", XleColor.Green);
@@ -1090,7 +1090,7 @@ namespace ERY.Xle.XleMapTypes
 
 		private void SetNextEncounterStepCount()
 		{
-			stepCount = XleCore.random.Next(1, 16);
+			stepCount = XleCore.random.Next(1, 40);
 		}
 
 		private string MonsterAppearing(Player player)

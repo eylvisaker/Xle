@@ -21,7 +21,7 @@
       <Y>25</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <RequiredItem>0</RequiredItem>
+      <RequiredItem>4</RequiredItem>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Door">
       <X>22</X>
@@ -35,15 +35,15 @@
       <Y>33</Y>
       <Width>1</Width>
       <Height>3</Height>
-      <RequiredItem>0</RequiredItem>
+      <RequiredItem>7</RequiredItem>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.TakeEvent">
       <X>82</X>
       <Y>33</Y>
       <Width>4</Width>
       <Height>4</Height>
-      <ContainsItem>False</ContainsItem>
-      <Contents>0</Contents>
+      <ContainsItem>True</ContainsItem>
+      <Contents>8</Contents>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
       <X>7</X>
@@ -74,7 +74,7 @@
       <Y>72</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <RequiredItem>0</RequiredItem>
+      <RequiredItem>7</RequiredItem>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
       <X>28</X>

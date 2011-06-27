@@ -10,6 +10,7 @@ Outdoors:
 	Audio for mountains?
 	Correct combat damage.
 	Falling unconscious when beaten severly.
+	Attempt to disengage is blocked message is not shown.
 
 Towns:
 	Redesign the way stores are rendered and data for the window is stored.
@@ -28,13 +29,15 @@ Towns:
 Castle:
 	D - Fix events in castle.
 	D - Fix chests.
-	Test doors.
-	Test Cassandra.
+	D - Test doors.
+	Open chests which should be empty when player enters map.
+	Determine algorithm for refilling chests.
+	Implement Cassandra.
 	Implement second floor
 	Test magic ice.
 	D - Make sure sceptor is available.
 	D - Make sure tulip is available.
-	Magic seeds?
+	D - Magic seeds
 	Fix aminations.
 	Make guards work correctly.
 

@@ -11,7 +11,6 @@ using System.ComponentModel;
 
 namespace ERY.Xle.XleEventTypes
 {
-	[Serializable]
 	public abstract class Store : XleEvent
 	{
 		private double mCostFactor = 1.0;
@@ -339,7 +338,6 @@ namespace ERY.Xle.XleEventTypes
 		}
 	}
 
-	[Serializable]
 	public class StoreLending : Store
 	{
 		public override int RobValue()
@@ -479,7 +477,6 @@ namespace ERY.Xle.XleEventTypes
 
 		}
 	}
-	[Serializable]
 	public class StoreBank : Store
 	{
 		public override int RobValue()
@@ -580,8 +577,6 @@ namespace ERY.Xle.XleEventTypes
 			return true;
 		}
 	}
-
-	[Serializable]
 	public class StoreWeapon : Store
 	{
 		protected override void GetColors(out Color backColor, out Color borderColor,
@@ -718,26 +713,19 @@ namespace ERY.Xle.XleEventTypes
 		}
 	}
 
-	[Serializable]
 	public class StoreArmor : Store
 	{
 	}
 
-	[Serializable]
 	public class StoreWeaponTraining : Store
 	{
 	}
-	[Serializable]
 	public class StoreArmorTraining : Store
 	{
 	}
-
-	[Serializable]
 	public class StoreBlackjack : Store
 	{
 	}
-
-	[Serializable]
 	public class StoreRaft : Store
 	{
 		// map and coords that mark where a purchased raft shows up
@@ -890,8 +878,6 @@ namespace ERY.Xle.XleEventTypes
 		}
 
 	}
-
-	[Serializable]
 	public class StoreHealer : Store
 	{
 		bool buyHerbs = false;
@@ -1028,11 +1014,9 @@ namespace ERY.Xle.XleEventTypes
 		}
 	}
 
-	[Serializable]
 	public class StoreJail : Store
 	{
 	}
-	[Serializable]
 	public class StoreFortune : Store
 	{
 		public override bool Speak(Player player)
@@ -1059,17 +1043,12 @@ namespace ERY.Xle.XleEventTypes
 		}
 	}
 
-	[Serializable]
 	public class StoreFlipFlop : Store
 	{
 	}
-
-	[Serializable]
 	public class StoreBuyback : Store
 	{
 	}
-
-	[Serializable]
 	public class StoreFood : Store
 	{
 		protected override void GetColors(out Color backColor, out Color borderColor,
@@ -1138,6 +1117,8 @@ namespace ERY.Xle.XleEventTypes
 					StoreSound(LotaSound.Medium);
 				}
 			}
+
+			CheckOfferMuseumCoin(player);
 
 			return true;
 
@@ -1300,12 +1281,10 @@ namespace ERY.Xle.XleEventTypes
 		}
 	}
 
-	[Serializable]
 	public class StoreVault : Store
 	{
 	}
 
-	[Serializable]
 	public class StoreMagic : Store
 	{
 	}

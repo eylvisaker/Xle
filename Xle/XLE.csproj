@@ -213,6 +213,7 @@
     <None Include="Game\Maps\EagleHollow.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Game\Maps\FourJewels.xmf" />
     <None Include="Game\Maps\GrandLedge.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
