@@ -44,7 +44,6 @@ namespace ERY.Xle
 		{
 			info.Write("Attributes", atr);
 		}
-
 		void IXleSerializable.ReadData(XleSerializationInfo info)
 		{
 			atr = info.ReadInt32Array("Attributes");
@@ -152,7 +151,7 @@ namespace ERY.Xle
 
 		public bool beenInDungeon;
 
-		string name;
+		string mName;
 
 		#region --- Construction and Serialization ---
 
@@ -173,7 +172,7 @@ namespace ERY.Xle
 		{
 			int i;
 
-			name = newName;
+			mName = newName;
 
 			goldBank = 0;
 			gamespeed = 3;
@@ -304,7 +303,7 @@ namespace ERY.Xle
 			info.Write("MailTown", mailTown);
 			info.Write("BeenInDungeon", beenInDungeon);
 
-			info.Write("Name", name);
+			info.Write("Name", mName);
 		}
 
 		void IXleSerializable.ReadData(XleSerializationInfo info)
@@ -363,7 +362,7 @@ namespace ERY.Xle
 
 			beenInDungeon = info.ReadBoolean("BeenInDungeon", false);
 
-			name = info.ReadString("Name");
+			mName = info.ReadString("Name");
 
 			if (museum.Length < 16)
 				museum = new int[16];
@@ -424,24 +423,20 @@ namespace ERY.Xle
 			g.AddBottom("resurrect you from the grave!");
 			g.AddBottom("");
 
-			SoundMan.PlaySound(LotaSound.VeryGood);
-
-			while (SoundMan.IsPlaying(LotaSound.VeryGood))
-				XleCore.wait(50);
-
-
+			SoundMan.PlaySoundSync(LotaSound.VeryGood);
 		}
+
 		public string Name
 		{
 			get
 			{
-				return name;
+				return mName;
 			}
 		}
 
 		public void CheckDead()
 		{
-			if (hp == 0 || food < -2)
+			if (hp == 0 || food < 0)
 				Dead();
 		}
 
@@ -472,7 +467,7 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
-		/// gets or sets the character leve.
+		/// Gets or sets the character level.
 		/// </summary>
 		public int Level
 		{
@@ -550,7 +545,7 @@ namespace ERY.Xle
 					case 5: return 1200;
 					case 6: return 1600;
 					case 7: return 2200;
-					case 10: return 3000;
+					case 10: return 4600;
 
 					default:
 						throw new ArgumentException("Level is wrong!");
@@ -594,7 +589,6 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="amount"></param>
 		/// <returns></returns>
-
 		public bool Spend(int amount)
 		{
 			if (amount <= gold)
@@ -626,12 +620,14 @@ namespace ERY.Xle
 		/// 	// gains gold
 		/// </summary>
 		/// <param name="amount"></param>
+		[Obsolete("Use Gold property instead.")]
 		public void GainGold(int amount)
 		{
 			gold += amount;
 		}
 
 		//		Time
+		[Obsolete("I have no idea what this function is supposed to do.")]
 		public void OneDay()
 		{
 			// TODO: get or write OneDay function.
@@ -652,7 +648,6 @@ namespace ERY.Xle
 				if ((int)value == (int)(timedays + 1))
 				{
 					food--;
-
 				}
 
 				timedays = value;
@@ -801,7 +796,7 @@ namespace ERY.Xle
 
 		}
 		/// <summary>
-		/// 	// sets or returns the current dungeon level for the player
+		/// Sets or returns the current dungeon level for the player
 		/// </summary>
 		/// <param name="i"></param>
 		/// <returns></returns>
@@ -817,7 +812,7 @@ namespace ERY.Xle
 			}
 		}
 		/// <summary>
-		/// 	// sets or returns the direction the player is facing
+		/// Sets or returns the direction the player is facing
 		/// </summary>
 		/// <param name="dir"></param>
 		/// <returns></returns>
@@ -834,7 +829,7 @@ namespace ERY.Xle
 
 		}
 		/// <summary>
-		///  // stores the town number that was last attacked
+		/// Stores the town number that was last attacked
 		/// </summary>
 		/// <param name="newAtt"></param>
 		/// <returns></returns>
@@ -851,14 +846,11 @@ namespace ERY.Xle
 		public List<RaftData> Rafts
 		{
 			get { return rafts; }
-			set { rafts = value; }
 		}
 
 		/// <summary>
-		/// 		// sets or returns the current map
+		/// Gets the current map
 		/// </summary>
-		/// <param name="m"></param>
-		/// <returns></returns>
 		public int Map
 		{
 			get
@@ -887,11 +879,11 @@ namespace ERY.Xle
 			map = newMap;
 
 
-			if (MapChangedStorage != null)
+			if (MapChanged != null)
 			{
 				try
 				{
-					MapChangedStorage(this, EventArgs.Empty);
+					MapChanged(this, EventArgs.Empty);
 
 					x = newX;
 					y = newY;
@@ -908,23 +900,10 @@ namespace ERY.Xle
 			}
 		}
 
-		[NonSerialized]
-		private EventHandler MapChangedStorage;
-
-		public event EventHandler MapChanged
-		{
-			add
-			{
-				MapChangedStorage += value;
-			}
-			remove
-			{
-				MapChangedStorage -= value;
-			}
-		}
+		public event EventHandler MapChanged;
 
 		/// <summary>
-		/// 				// returns the last map the player was on
+		/// Returns the last map the player was on
 		/// </summary>
 		/// <returns></returns>
 		private int LastMap
@@ -954,7 +933,7 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
-		/// // returns the raft that the player is on (or 0 if not)
+		/// Returns the raft that the player is on (or 0 if not)
 		/// </summary>
 		public int OnRaft
 		{
@@ -964,7 +943,7 @@ namespace ERY.Xle
 			}
 		}
 		/// <summary>
-		/// // boards a raft
+		/// Boards a raft
 		/// </summary>
 		/// <param name="?"></param>
 		/// <returns></returns>    			
@@ -977,7 +956,7 @@ namespace ERY.Xle
 
 		}
 		/// <summary>
-		/// 		// disembarks a raft
+		/// Disembarks a raft
 		/// </summary>
 		/// <param name="dir"></param>
 		public void Disembark(Direction dir)
@@ -1003,15 +982,6 @@ namespace ERY.Xle
 			}
 
 		}
-		/// <summary>
-		/// 			// returns the coordinates of a given raft
-		/// </summary>
-		/// <param name="r"></param>
-		/// <returns></returns>
-		public RaftData Raft(int r)
-		{
-			return Rafts[r];
-		}
 
 
 		/// <summary>
@@ -1025,16 +995,17 @@ namespace ERY.Xle
 			Rafts.Add(new RaftData(x, y, map));
 		}
 		/// <summary>
-		/// 			// Clears all rafts from all maps
+		/// Clears all rafts from all maps
 		/// </summary>
 		public void ClearRafts()
 		{
 			Rafts.Clear();
-			rafts.Add(new RaftData(0, 0, 0)); // add a dummy raft, because the list is zero based.
+			//rafts.Add(new RaftData(0, 0, 0)); // add a dummy raft, because the list is zero based.
 		}
 
-		//		Items
+		/// <summary>
 		/// sets or returns the item that is currently being held
+		/// </summary>
 		public int Hold
 		{
 			get { return hold; }
@@ -1055,9 +1026,9 @@ namespace ERY.Xle
 			}
 		}
 		/// <summary>
-		/// 		// sets the item that is currently being held (menu selection)
+		/// Sets the item that is currently being held.
 		/// </summary>
-		/// <param name="h"></param>
+		/// <param name="h">The value of the menu selection chosen.</param>
 		/// <returns></returns>
 		public int HoldMenu(int h)
 		{
@@ -1084,7 +1055,7 @@ namespace ERY.Xle
 
 		}
 		/// <summary>
-		/// 			// returns the armor that the player is carrying in the specified slot
+		/// Returns the armor that the player is carrying in the specified slot
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
@@ -1096,6 +1067,11 @@ namespace ERY.Xle
 			return armor[index];
 
 		}
+		/// <summary>
+		/// returns the weapon that the player is carrying in the specified slot
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
 		public int WeaponType(int index)
 		{
 			if (index <= 0 || index > 5)
@@ -1103,7 +1079,12 @@ namespace ERY.Xle
 
 			return weapon[index];
 
-		}		// returns the weapon that the player is carrying in the specified slot
+		}		
+		/// <summary>
+		/// returns the armor quality
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
 		public int ArmorQuality(int index)
 		{
 			if (index <= 0 || index > 3)
@@ -1111,19 +1092,19 @@ namespace ERY.Xle
 
 			return armorQuality[index];
 
-		}		// returns the armor quality
+		}
+		/// <summary>
+		/// returns the weapon quality
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
 		public int WeaponQuality(int index)
 		{
 			if (index <= 0 || index > 5)
 				return 0;
 
 			return weaponQuality[index];
-
-		}		// returns the weapon quality
-
-
-
-
+		}
 
 		/// sets or returns the armor currently worn
 		public int CurrentArmor
@@ -1202,7 +1183,7 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
-		/// 				// returns the number of the specified items
+		/// Returns the number of the specified items
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
@@ -1213,7 +1194,7 @@ namespace ERY.Xle
 
 		}
 		/// <summary>
-		/// 	// Adjusts the number of items the player has
+		/// Adjusts the number of items the player has
 		/// </summary>
 		/// <param name="itm"></param>
 		/// <param name="inc"></param>
@@ -1237,7 +1218,7 @@ namespace ERY.Xle
 
 		}
 		/// <summary>
-		/// 	// Adds a weapon to inventory
+		/// Adds a weapon to inventory
 		/// </summary>
 		/// <param name="w"></param>
 		/// <param name="q"></param>
@@ -1414,7 +1395,6 @@ namespace ERY.Xle
 			} while (i < 2);
 		}
 
-		//		Combat
 		/// <summary>
 		/// Player damages a creature. Returns the amount of damage the player did,
 		/// or zero if the player missed.
