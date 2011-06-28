@@ -626,8 +626,8 @@ namespace ERY.Xle.XleMapTypes
 
 				}
 
-				gold = (int)(gold * XleCore.random.NextDouble() + 0.5);
-				food = (int)(food * XleCore.random.NextDouble() + 0.5);
+				gold = (int)(gold * (XleCore.random.NextDouble() + 0.5));
+				food = (int)(food * (XleCore.random.NextDouble() + 0.5));
 
 				if (XleCore.random.Next(100) < 50)
 					food = 0;
@@ -637,9 +637,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 
 			return finished;
-
 		}
-
 
 		void SpeakToMonster(Player player)
 		{
@@ -688,7 +686,7 @@ namespace ERY.Xle.XleMapTypes
 					if (type == 1)
 					{
 						item = XleCore.random.Next(4) + 1;
-						cost = (int)(g.ArmorCost(item, qual) * XleCore.random.NextDouble() * 0.6 + 0.6);
+						cost = (int)(g.ArmorCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
 
 						builder.AddText(XleCore.ArmorList[item].Name, XleColor.White);
 						builder.AddText(" for ", XleColor.Cyan);
@@ -698,7 +696,7 @@ namespace ERY.Xle.XleMapTypes
 					else if (type == 2)
 					{
 						item = XleCore.random.Next(7) + 1;
-						cost = (int)(g.WeaponCost(item, qual) * XleCore.random.NextDouble() * 0.6 + 0.6);
+						cost = (int)(g.WeaponCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
 
 						builder.AddText(XleCore.WeaponList[item].Name, XleColor.White);
 						builder.AddText(" for ", XleColor.Cyan);
@@ -1131,7 +1129,7 @@ namespace ERY.Xle.XleMapTypes
 			{
 				var m = new Monster(XleCore.Database.MonsterList[displayMonst]);
 
-				m.HP = (int)((XleCore.random.NextDouble() * 0.4 + 0.8) * m.HP);
+				m.HP = (int)(m.HP * (XleCore.random.NextDouble() * 0.4 + 0.8));
 
 				currentMonst.Add(m);
 			}

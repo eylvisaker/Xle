@@ -1273,7 +1273,7 @@ namespace ERY.Xle
 			return false;
 		}
 		/// <summary>
-		/// 			// sorts weapons and armor
+		/// Sorts weapons and armor
 		/// </summary>	
 		public void SortEquipment()
 		{
@@ -1428,7 +1428,8 @@ namespace ERY.Xle
 			return dam;
 		}
 		/// <summary>
-		/// Called when the player gets hit
+		/// Called when the player gets hit. Returns the damage done to the player and
+		/// subtracts that value from HP.
 		/// </summary>
 		/// <param name="attack"></param>
 		/// <returns></returns>	
@@ -1448,7 +1449,6 @@ namespace ERY.Xle
 			HP -= dam;
 
 			return dam;
-
 		}
 
 
@@ -1464,6 +1464,4 @@ namespace ERY.Xle
 			this.outy = outy;
 		}
 	}
-
-
 }

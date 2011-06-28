@@ -34,12 +34,12 @@ Castle:
 	Determine algorithm for refilling chests.
 	Implement Cassandra.
 	Implement second floor
-	Test magic ice.
+	D - Test magic ice.
 	D - Make sure sceptor is available.
 	D - Make sure tulip is available.
 	D - Magic seeds
-	Fix aminations.
-	Make guards work correctly.
+	D - Fix aminations.
+	D - Make guards work correctly.
 
 Museum:
 	Exhibits:

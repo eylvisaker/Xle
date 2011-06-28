@@ -25,41 +25,66 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
-		public override void AfterExecuteCommand(Player player, KeyCode cmd)
+		double lastAnim;
+		int cycles;
+
+		protected override void AnimateTiles(Rectangle rectangle)
 		{
-			/*
-			if (setLastTime && tile % 16 >= 13 && tile / 16 < 2)
+			base.AnimateTiles(rectangle);
+
+			for (int j = rectangle.Top; j < rectangle.Bottom; j++)
 			{
-				tx = Lota.random.Next(0x0D, 0x10);
-				ty = Lota.random.Next(2);
-
-				tile = ty * 0x10 + tx;
-
-				if (!((tile & 0x0F) >= 0x0D && (tile & 0x10) >> 4 <= 0x01))
+				for (int i = rectangle.Left; i < rectangle.Right; i++)
 				{
-					int qweruio = 1;
-					tile = 0x0F;
+					int tile = this[i, j];
+
+					if ((tile / 16 == 2 && tile % 16 < 8))
+					{
+						tile = cycles % 8 + 0x20;
+
+						this[i, j] = tile;
+					}
 				}
-				this[i, j] = tile;
 			}
-			else if (setLastTime && (tile / 16 == 2 && tile % 16 < 8))
+
+			if (lastAnim + 150 > Timing.TotalMilliseconds)
+				return;
+
+			lastAnim = Timing.TotalMilliseconds;
+			cycles++;
+
+			for (int j = rectangle.Top; j < rectangle.Bottom; j++)
 			{
-				tile = cyclesDraw % 8 + 0x20;
+				for (int i = rectangle.Left; i < rectangle.Right; i++)
+				{
+					int tile = this[i, j];
 
-				this[i, j] = tile;
+					if (tile % 16 >= 13 && tile / 16 < 2)
+					{
+						int tx = XleCore.random.Next(0x0D, 0x10);
+						int ty = XleCore.random.Next(2);
+
+						tile = ty * 0x10 + tx;
+
+						if (!((tile & 0x0F) >= 0x0D && (tile & 0x10) >> 4 <= 0x01))
+						{
+							tile = 0x0F;
+						}
+						this[i, j] = tile;
+					}
+					else if ((tile >= 0x40 && tile < 0x43))
+					{
+						//tile = OriginalM(j, i);
+						//tile -= cyclesDraw % 3;
+						tile--;
+
+						while (tile < 0x40)
+							tile += 3;
+
+						this[i, j] = tile;
+					}
+				}
 			}
-			else if (setLastTime && (tile >= 0x40 && tile < 0x43))
-			{
-				//tile = OriginalM(j, i);
-				//tile -= cyclesDraw % 3;
-				tile--;
-
-				while (tile < 0x40)
-					tile += 3;
-
-				this[i, j] = tile;
-			}
-			 * */
 		}
 
 		public override bool PlayerUse(Player player, int item)
@@ -127,26 +152,21 @@ namespace ERY.Xle.XleMapTypes
 		{
 			bool found = false;
 
-			XleEvent evt = GetEvent(player, 1);
+			var door = GetEvent<XleEventTypes.Door>(player, 1);
 
-			if (evt is XleEventTypes.Door)
+			if (door != null && door.RequiredItem == player.Hold)
 			{
-				XleEventTypes.Door door = (XleEventTypes.Door)evt;
+				found = true;
+				SoundMan.PlaySound(LotaSound.UnlockDoor);
+				XleCore.wait(250);
 
-				if (door.RequiredItem == player.Hold)
+				g.AddBottom("Unlock door");
+
+				for (int j = door.Rectangle.Y; j < door.Rectangle.Bottom; j++)
 				{
-					found = true;
-					SoundMan.PlaySound(LotaSound.UnlockDoor);
-					XleCore.wait(250);
-
-					g.AddBottom("Unlock door");
-
-					for (int j = door.Rectangle.Y; j < door.Rectangle.Bottom; j++)
+					for (int i = door.Rectangle.X; i < door.Rectangle.Right; i++)
 					{
-						for (int i = door.Rectangle.X; i < door.Rectangle.Right; i++)
-						{
-							this[i, j] = 0;
-						}
+						this[i, j] = 0;
 					}
 				}
 			}
@@ -192,13 +212,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else if (g.invisible)
 			{
-				if (XleCore.random.Next(1000) < 800)
-					g.AddBottom("The guard looks startled.");
-				else
-				{
-					g.AddBottom("The guard looks startled,");
-					g.AddBottom("and starts popping prozac pills.");
-				}
+				g.AddBottom("The guard looks startled.");
 			}
 			else if (g.guard)  // for fortress
 			{
