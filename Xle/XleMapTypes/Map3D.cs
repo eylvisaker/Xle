@@ -411,8 +411,6 @@ namespace ERY.Xle.XleMapTypes
 			else
 				return true;
 		}
-
-
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)
 		{
 			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
@@ -446,16 +444,14 @@ namespace ERY.Xle.XleMapTypes
 
 			Commands.UpdateCommand(command);
 
-			PlayerEnterPosition(player, player.X, player.Y);
+			OnPlayerEnterPosition(player, player.X, player.Y);
 		}
 
 		protected virtual bool ShowDirections(Player player)
 		{
 			return true;
 		}
-
-
-		protected virtual void PlayerEnterPosition(Player player, int x, int y)
+		protected virtual void OnPlayerEnterPosition(Player player, int x, int y)
 		{
 		}
 

@@ -144,7 +144,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		
 
-		protected override void PlayerEnterPosition(Player player, int x, int y)
+		protected override void OnPlayerEnterPosition(Player player, int x, int y)
 		{
 			if (x == 12 && y == 13)
 			{

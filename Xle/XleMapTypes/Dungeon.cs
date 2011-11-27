@@ -163,14 +163,19 @@ namespace ERY.Xle.XleMapTypes
 
 			}
 
-			mCurrentLevel = player.DungeonLevel;
+			DungeonLevelText(player);
 
+			return true;
+		}
+
+		private void DungeonLevelText(Player player)
+		{
+			mCurrentLevel = player.DungeonLevel;
+			
 			string tempstring = "You are now at level " + (player.DungeonLevel + 1).ToString() + ".";
 
 			g.AddBottom("");
 			g.AddBottom(tempstring, XleColor.White);
-
-			return true;
 		}
 
 		protected override bool ShowDirections(Player player)
@@ -244,6 +249,112 @@ namespace ERY.Xle.XleMapTypes
 		{
 			return false;
 		}
+		public override bool PlayerXamine(Player player)
+		{
+			Point faceDir = new Point();
 
+			switch (player.FaceDirection)
+			{
+				case Direction.East: faceDir = new Point(1, 0); break;
+				case Direction.West: faceDir = new Point(-1, 0); break;
+				case Direction.North: faceDir = new Point(0, -1); break;
+				case Direction.South: faceDir = new Point(0, 1); break;
+				default: break;
+			}
+
+			g.AddBottom();
+
+			bool revealHidden = false;
+
+			for (int i = 0; i < 5; i++)
+			{
+				Point loc = new Point(player.X + faceDir.X * i, player.Y + faceDir.Y * i);
+
+				if (this[loc.X, loc.Y] < 0x10)
+					break;
+				if (this[loc.X, loc.Y] >= 0x21 && this[loc.X, loc.Y] < 0x2a)
+				{
+					this[loc.X, loc.Y] -= 0x10;
+					revealHidden = true;
+				}
+			}
+
+			if (revealHidden)
+			{
+				g.AddBottom("Hidden objects detected!!!", Color.White);
+			}
+
+
+			XleCore.wait(500);
+			return true;
+		}
+		protected override void OnPlayerEnterPosition(Player player, int x, int y)
+		{
+			int val = this[x, y];
+
+			if (val >= 0x21 && val <= 0x2a)
+			{
+				OnPlayerTriggerTrap(player, x, y);
+			}
+			else if (val >= 0x11 && val <= 0x1a)
+			{
+				OnPlayerAvoidTrap(player, x, y);
+			}
+		}
+
+		private void OnPlayerAvoidTrap(Player player, int x, int y)
+		{
+			// don't print a message for ceiling holes
+			if (this[x, y] == 0x21) return;
+
+			//string name = TrapName(this[x, y]);
+
+			//g.AddBottom();
+			//g.AddBottom("You avoid the " + name + ".");
+			//XleCore.wait(150);
+		}
+		private void OnPlayerTriggerTrap(Player player, int x, int y)
+		{
+			// don't trigger ceiling holes
+			if (this[x, y] == 0x21) return;
+
+			this[x, y] -= 0x10;
+			int damage = 31;
+			g.AddBottom();
+
+			if (this[x, y] == 0x12)
+			{
+				g.AddBottom("You fall through a hidden hole.", Color.White);
+			}
+			else
+			{
+				g.AddBottom("You're ambushed by a " + TrapName(this[x, y]) + ".", Color.White);
+				XleCore.wait(100);
+			}
+
+			g.AddBottom("   H.P. - " + damage.ToString());
+			player.HP -= damage;
+
+			XleCore.wait(400);
+
+			if (this[x, y] == 0x12)
+			{
+				player.DungeonLevel++;
+				DungeonLevelText(player);
+			}
+		}
+
+		string TrapName(int val)
+		{
+			switch (val)
+			{
+				case 0x11: return "ceiling hole";
+				case 0x12: return "floor hole";
+				case 0x13: return "poison gas vent";
+				case 0x14: return "slime splotch";
+				case 0x15: return "trip wire";
+				default: throw new ArgumentException();
+			}
+		}
 	}
 }
