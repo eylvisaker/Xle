@@ -21,7 +21,6 @@ namespace ERY.Xle.XleMapTypes
 		int[] mData;
 		int mCurrentLevel;
 
-
 		public override IEnumerable<string> AvailableTilesets
 		{
 			get { yield return "DungeonTiles.png"; }
@@ -41,6 +40,7 @@ namespace ERY.Xle.XleMapTypes
 			info.Write("Levels", mLevels, true);
 			info.Write("Data", mData);
 		}
+
 		public override bool IsMultiLevelMap
 		{
 			get { return true; }
@@ -211,7 +211,6 @@ namespace ERY.Xle.XleMapTypes
 
 			return retval.ToArray();
 		}
-
 
 		#region --- Drawing ---
 
