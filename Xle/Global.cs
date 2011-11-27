@@ -97,6 +97,7 @@ namespace ERY.Xle
 		public static Surface DungeonBlueBackdrop { get; private set; }
 		public static Surface DungeonBlueWall { get; private set; }
 		public static Surface DungeonBlueSidePassage { get; private set; }
+		public static Surface DungeonBlueExtras { get; private set; }
 
 		// character functions
 
@@ -440,6 +441,7 @@ namespace ERY.Xle
 			DungeonBlueBackdrop = new Surface("DungeonBackdropBlue.png");
 			DungeonBlueSidePassage = new Surface("DungeonSidePassageBlue.png");
 			DungeonBlueWall = new Surface("DungeonWallBlue.png");
+			DungeonBlueExtras = new Surface("DungeonExtrasBlue.png");
 
 			foreach (var exinfo in XleCore.ExhibitInfo.Values)
 			{

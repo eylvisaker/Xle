@@ -359,7 +359,7 @@
     <Content Include="Game\Images\DungeonBackdropBlue.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Game\Images\DungeonChestBlue.png">
+    <Content Include="Game\Images\DungeonExtrasBlue.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Game\Images\DungeonSidePassageBlue.png">

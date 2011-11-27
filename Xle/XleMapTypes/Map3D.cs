@@ -12,6 +12,7 @@ namespace ERY.Xle.XleMapTypes
 		protected abstract Surface Backdrop { get; }
 		protected abstract Surface Wall { get; }
 		protected abstract Surface SidePassages { get; }
+		protected virtual Surface Extras { get { return g.DungeonBlueExtras; } }
 		protected virtual Surface Door { get { return null; } }
 		protected virtual Surface MuseumExhibitFrame
 		{
@@ -40,6 +41,8 @@ namespace ERY.Xle.XleMapTypes
 
 			Point loc = new Point(x, y);
 
+			int maxDistance = 0;
+
 			// draw up to terminal wall
 			for (int distance = 0; distance < 6; distance++)
 			{
@@ -49,6 +52,7 @@ namespace ERY.Xle.XleMapTypes
 				int val = this[loc.X, loc.Y];
 
 				DrawSidePassages(loc, stepDir, leftDir, rightDir, distance, inRect);
+				maxDistance = distance;
 
 				if (IsPassable(val) == false)
 				{
@@ -58,10 +62,19 @@ namespace ERY.Xle.XleMapTypes
 					break;
 				}
 			}
+
+			for (int distance = 0; distance < maxDistance; distance++)
+			{
+				loc.X = x + distance * stepDir.X;
+				loc.Y = y + distance * stepDir.Y;
+
+				int val = this[loc.X, loc.Y];
+
+				DrawExtras(val, loc, distance, inRect);
+			}
 		}
 
 		protected bool DrawCloseup { get; set; }
-
 		protected virtual void DrawCloseupImpl(Rectangle inRect)
 		{
 			throw new NotImplementedException();
@@ -72,6 +85,26 @@ namespace ERY.Xle.XleMapTypes
 			Standard,
 			Parallel,
 			Wall,
+		}
+
+		enum ExtraType
+		{
+			None = -1,
+			Chest,
+			Box,
+			GoUp,
+			GoDown,
+			Needle,
+			Slime,
+			TripWire,
+		}
+
+		protected bool IsPassable(int value)
+		{
+			if (value >= 0x10 && value <= 0x3f)
+				return true;
+			else
+				return false;
 		}
 
 		private void DrawSidePassages(Point loc, Point lookDir, Point leftDir, Point rightDir, int distance, Rectangle maindestRect)
@@ -131,8 +164,6 @@ namespace ERY.Xle.XleMapTypes
 			}
 
 		}
-
-
 		private Rectangle GetSidePassageSrcRect(int distance, bool rightSide, SidePassageType type)
 		{
 			Rectangle retval = new Rectangle();
@@ -155,10 +186,13 @@ namespace ERY.Xle.XleMapTypes
 			if (rightSide)
 				retval.X += 80;
 
+			retval.X *= 2;
+			retval.Y *= 2;
+			retval.Width *= 2;
+			retval.Height *= 2;
+			
 			return retval;
 		}
-
-
 		private Rectangle GetSidePassageDestRect(int distance, bool rightSide)
 		{
 			Rectangle retval = new Rectangle();
@@ -185,14 +219,104 @@ namespace ERY.Xle.XleMapTypes
 			return retval;
 		}
 
-		protected bool IsPassable(int value)
+		private void DrawExtras(int val, Point loc, int distance, Rectangle mainDestRect)
 		{
-			if (value >= 0x10 && value <= 0x3f)
-				return true;
-			else
-				return false;
+			ExtraType extraType = GetExtraType(val);
+
+			if (extraType == ExtraType.None)
+				return;
+
+			Rectangle srcRect = GetExtraSrcRect(extraType, distance);
+			Rectangle destRect = GetExtraDestRect(extraType, distance);
+
+			destRect.X += mainDestRect.X;
+			destRect.Y += mainDestRect.Y;
+
+			if (srcRect.Left >= Extras.SurfaceWidth)
+				return;
+
+			Extras.Draw(srcRect, destRect);
 		}
 
+		private Rectangle GetExtraSrcRect(ExtraType extraType, int distance)
+		{
+			Rectangle retval = new Rectangle();
+
+			switch (distance)
+			{
+				case 0: retval = new Rectangle(0, 0, 96, 48); break;
+				case 1: retval = new Rectangle(0, 48, 80, 32); break;
+				case 2: retval = new Rectangle(0, 80, 48, 24); break;
+				case 3: retval = new Rectangle(0, 104, 48, 24); break;
+				case 4: retval = new Rectangle(0, 128, 16, 16); break;
+			}
+
+			retval.X += (int)extraType * 96;
+
+			return retval;
+		}
+		private Rectangle GetExtraDestRect(ExtraType extraType, int distance)
+		{
+			Rectangle retval = new Rectangle();
+
+			switch (distance)
+			{
+				case 0: retval = new Rectangle(136, 224, 96, 48); break;
+				case 1: retval = new Rectangle(144, 208, 80, 32); break;
+				case 2: retval = new Rectangle(160, 192, 48, 24); break;
+				case 3: retval = new Rectangle(160, 184, 48, 24); break;
+				case 4: retval = new Rectangle(176, 176, 16, 16); break;
+			}
+
+			return retval;
+		}
+
+		private static ExtraType GetExtraType(int val)
+		{
+			ExtraType extraType = ExtraType.None;
+
+			switch (val)
+			{
+				case 0x11:
+					extraType = ExtraType.GoUp;
+					break;
+				case 0x12:
+					extraType = ExtraType.GoDown;
+					break;
+				case 0x13:
+					extraType = ExtraType.Needle;
+					break;
+				case 0x14:
+					extraType = ExtraType.Slime;
+					break;
+				case 0x15:
+					extraType = ExtraType.TripWire;
+					break;
+				case 0x1e:
+					extraType = ExtraType.Box;
+					break;
+				case 0x30:
+				case 0x31:
+				case 0x32:
+				case 0x33:
+				case 0x34:
+				case 0x35:
+				case 0x36:
+				case 0x37:
+				case 0x38:
+				case 0x39:
+				case 0x3a:
+				case 0x3b:
+				case 0x3c:
+				case 0x3d:
+				case 0x3e:
+				case 0x3f:
+					extraType = ExtraType.Chest;
+					break;
+
+			}
+			return extraType;
+		}
 
 		private void DrawWall(int distance, Rectangle main_destRect)
 		{
@@ -217,6 +341,11 @@ namespace ERY.Xle.XleMapTypes
 				case 4: retval = new Rectangle(280, 0, 40, 48); break;
 				case 5: retval = new Rectangle(320, 0, 24, 40); break;
 			}
+
+			retval.X *= 2;
+			retval.Y *= 2;
+			retval.Width *= 2;
+			retval.Height *= 2;
 
 			return retval;
 		}
@@ -335,4 +464,5 @@ namespace ERY.Xle.XleMapTypes
 			get { return false; }
 		}
 	}
+
 }
