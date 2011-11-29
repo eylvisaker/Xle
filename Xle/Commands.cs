@@ -465,18 +465,6 @@ namespace ERY.Xle
 			Color bgcolor;
 			Color fontcolor;
 
-			// select the right colors for the screen.
-			if (inventoryScreen == 0)
-			{
-				bgcolor = XleColor.Brown;
-				fontcolor = XleColor.Yellow;
-			}
-			else
-			{
-				bgcolor = XleColor.Blue;
-				fontcolor = XleColor.Cyan;
-			}
-
 			// Clear the back buffer
 			Keyboard.ReleaseAllKeys();
 			while (inventoryScreen < 2)
@@ -486,6 +474,8 @@ namespace ERY.Xle
 					Keyboard.ReleaseAllKeys();
 					inventoryScreen++;
 				}
+		
+				// select the right colors for the screen.
 				if (inventoryScreen == 0)
 				{
 					bgcolor = XleColor.Brown;
@@ -589,7 +579,7 @@ namespace ERY.Xle
 								tempcolor = fontcolor;
 							}
 
-							XleCore.WriteText(128, ++yy * 16, XleCore.WeaponList[player.ArmorType(i)].Name, tempcolor);
+							XleCore.WriteText(128, ++yy * 16, XleCore.ArmorList[player.ArmorType(i)].Name, tempcolor);
 							XleCore.WriteText(416, yy * 16, XleCore.QualityList[player.ArmorQuality(i)], tempcolor);
 						}
 
