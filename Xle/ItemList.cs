@@ -9,12 +9,18 @@ namespace ERY.Xle
 		public int ID;
 		public string Name;
 		public string Action;
+		public string LongName;
 
-		public ItemInfo(int id, string name, string action)
+		public ItemInfo(int id, string name, string longName, string action)
 		{
 			ID = id;
 			Name = name;
 			Action = action;
+
+			if (string.IsNullOrEmpty(longName))
+				LongName = name;
+			else
+				LongName = longName;
 		}
 
 		public override string ToString()
@@ -24,9 +30,9 @@ namespace ERY.Xle
 	}
 	public class ItemList : Dictionary<int, ItemInfo>
 	{
-		public void Add(int id, string name, string action)
+		public void Add(int id, string name, string longName, string action)
 		{
-			Add(id, new ItemInfo(id, name, action));
+			Add(id, new ItemInfo(id, name, longName, action));
 		}
 		public string GetName(int id)
 		{

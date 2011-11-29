@@ -37,6 +37,8 @@ namespace ERY.Xle
 		OpenChest,
 		UnlockDoor,
 		Encounter,
+		Xamine,
+		XamineDetected,
 	}
 
 	static class SoundMan
@@ -66,9 +68,9 @@ namespace ERY.Xle
 
 		public static bool IsAnyPlaying()
 		{
-			foreach (var snd in mSounds.Values)
+			foreach (var kvp in mSounds)
 			{
-				if (snd.IsPlaying)
+				if (kvp.Value.IsPlaying)
 					return true;
 			}
 

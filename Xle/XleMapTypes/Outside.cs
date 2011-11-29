@@ -1294,27 +1294,26 @@ namespace ERY.Xle.XleMapTypes
 
 			// if the player has the guard jewels we bail.
 			if (player.Item(14) == 4) return;
+		
+			int pastTime = (int)(player.TimeDays - 100);
+			if (pastTime < 0) pastTime = 0;
+
+			int min = 40 - (int)(pastTime / 2);
+			if (min < 3) min = 3;
+
+			int max = 100 - (int)(pastTime / 5);
+			if (max < 12) max = 12;
+
+			int time = XleCore.random.Next(min, max);
+
+			if (time > player.Food - 2)
 			{
-				int pastTime = (int)(player.TimeDays - 100);
-				if (pastTime < 0) pastTime = 0;
-
-				int min = 40 - (int)(pastTime / 2);
-				if (min < 3) min = 3;
-
-				int max = 100 - (int)(pastTime / 5);
-				if (max < 12) max = 12;
-
-				int time = XleCore.random.Next(min, max);
-
-				if (time > player.Food - 2)
-				{
-					time = player.Food - 2;
-					if (time < 0)
-						time = 1;
-				}
-
-				banditAmbush = (int)(player.TimeDays) + time;
+				time = player.Food - 2;
+				if (time < 0)
+					time = 1;
 			}
+
+			banditAmbush = (int)(player.TimeDays) + time;
 		}
 		private bool BanditAmbush(Player player)
 		{
@@ -1322,7 +1321,7 @@ namespace ERY.Xle.XleMapTypes
 			if (player.Item(15) == 0) return false;
 
 			// bail if player has compendium and guard jewels.
-			if (player.Item(14) < 4) return false;
+			if (player.Item(14) == 4) return false;
 
 			if (banditAmbush <= 0)
 				SetBanditAmbushTime(player);
@@ -1517,7 +1516,7 @@ namespace ERY.Xle.XleMapTypes
 		public override void OnLoad(Player player)
 		{
 			SetBanditAmbushTime(player);
-
+			SetNextEncounterStepCount();
 		}
 	}
 }

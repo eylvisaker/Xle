@@ -128,6 +128,11 @@
     <Compile Include="XleMapTypes\Dungeon.cs" />
     <Compile Include="XleMapTypes\EncounterState.cs" />
     <Compile Include="XleEventTypes\MagicIce.cs" />
+    <Compile Include="XleMapTypes\Extenders\ArmakExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\FourJewelsExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\IDungeonExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\LotaDungeonExtenderBase.cs" />
+    <Compile Include="XleMapTypes\Extenders\PirateExtender.cs" />
     <Compile Include="XleMapTypes\Map3D.cs" />
     <Compile Include="XleMapTypes\Museum.cs" />
     <Compile Include="XleColor.cs" />
@@ -341,6 +346,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Game\Audio\WalkOutside.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Game\Audio\Xamine.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Game\Audio\XamineDetected.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Game\Game.xml">

@@ -84,6 +84,14 @@
       <ShopName>Shady Sarah's</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
+    <Item type="ERY.Xle.XleEventTypes.StoreFood">
+      <X>65</X>
+      <Y>25</Y>
+      <Width>3</Width>
+      <Height>5</Height>
+      <ShopName>Grocery</ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
   </Events>
   <Roofs array="true" type="ERY.Xle.Roof">
     <Item>

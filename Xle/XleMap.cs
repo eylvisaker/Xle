@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Reflection;
 using System.Text;
 
 using AgateLib;
@@ -1110,7 +1109,38 @@ namespace ERY.Xle
 		{
 		}
 
+		List<Assembly> mAssemblies;
 
+		protected T CreateExtender<T>(string ScriptClassName) 
+		{
+			if (mAssemblies == null)
+				CreateAssemblyList();
+
+			Type interfaceType = typeof(T);
+
+			foreach (var ass in mAssemblies)
+			{
+				foreach (var type in ass.GetTypes())
+				{
+					if (type.Name != ScriptClassName)
+						continue;
+
+					if (interfaceType.IsAssignableFrom(type) == false)
+						continue;
+
+					return (T)Activator.CreateInstance(type);
+				}
+			}
+
+			return default(T);
+		}
+
+		private void CreateAssemblyList()
+		{
+			mAssemblies = new List<Assembly>();
+
+			mAssemblies.Add(Assembly.GetExecutingAssembly());
+		}
 
 		public virtual int TerrainWaitTime(Player player)
 		{

@@ -151,6 +151,8 @@ namespace ERY.Xle
 
 		public bool beenInDungeon;
 
+		public Dictionary<string, string> Variables = new Dictionary<string, string>();
+
 		string mName;
 
 		#region --- Construction and Serialization ---
@@ -247,7 +249,6 @@ namespace ERY.Xle
 			SortEquipment();
 		}
 
-
 		void IXleSerializable.WriteData(XleSerializationInfo info)
 		{
 			info.Write("Attributes", mAttributes);
@@ -288,7 +289,6 @@ namespace ERY.Xle
 
 			info.Write("Rafts", rafts);
 
-
 			info.Write("Loan", loan);					// loan amount
 			info.Write("DueDate", dueDate);				// time in days that the money is due
 
@@ -304,8 +304,9 @@ namespace ERY.Xle
 			info.Write("BeenInDungeon", beenInDungeon);
 
 			info.Write("Name", mName);
-		}
 
+			info.Write("Variables", Variables);
+		}
 		void IXleSerializable.ReadData(XleSerializationInfo info)
 		{
 			mAttributes = (AttributeContainer)info.ReadObject("Attributes");
@@ -366,6 +367,11 @@ namespace ERY.Xle
 
 			if (museum.Length < 16)
 				museum = new int[16];
+
+			if (info.ContainsKey("Variables"))
+			{
+				Variables = info.ReadDictionaryString<string>("Variables");
+			}
 		}
 
 		#endregion

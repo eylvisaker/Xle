@@ -12,6 +12,8 @@ using AgateLib.DisplayLib;
 
 namespace ERY.Xle.XleMapTypes
 {
+	using Extenders;
+
 	public class Dungeon : Map3D
 	{
 		int mWidth;
@@ -19,7 +21,21 @@ namespace ERY.Xle.XleMapTypes
 		int mLevels = 1;
 
 		int[] mData;
+		int[] mTreasures = new int[16];
 		int mCurrentLevel;
+
+		public int Treasure1 { get { return mTreasures[1]; } set { mTreasures[1] = value; } }
+		public int Treasure2 { get { return mTreasures[2]; } set { mTreasures[2] = value; } }
+		public int Treasure3 { get { return mTreasures[3]; } set { mTreasures[3] = value; } }
+		public int Treasure4 { get { return mTreasures[4]; } set { mTreasures[4] = value; } }
+		public int Treasure5 { get { return mTreasures[5]; } set { mTreasures[5] = value; } }
+		public int Treasure6 { get { return mTreasures[6]; } set { mTreasures[6] = value; } }
+		public int Treasure7 { get { return mTreasures[7]; } set { mTreasures[7] = value; } }
+		public int Treasure8 { get { return mTreasures[8]; } set { mTreasures[8] = value; } }
+
+		public string ScriptClassName { get; set; }
+
+		IDungeonExtender Extender;
 
 		public override IEnumerable<string> AvailableTilesets
 		{
@@ -32,13 +48,22 @@ namespace ERY.Xle.XleMapTypes
 			mHeight = info.ReadInt32("Height");
 			mLevels = info.ReadInt32("Levels");
 			mData = info.ReadInt32Array("Data");
+			ScriptClassName = info.ReadString("ScriptClass", "");
+
+			if (info.ContainsKey("Treasures"))
+				mTreasures = info.ReadInt32Array("Treasures");
+
+			Extender = CreateExtender<IDungeonExtender>(ScriptClassName);
 		}
+
 		protected override void WriteData(XleSerializationInfo info)
 		{
 			info.Write("Width", mWidth, true);
 			info.Write("Height", mHeight, true);
 			info.Write("Levels", mLevels, true);
+			info.Write("ScriptClass", ScriptClassName);
 			info.Write("Data", mData);
+			info.Write("Treasures", mTreasures);
 		}
 
 		public override bool IsMultiLevelMap
@@ -137,7 +162,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		public override bool PlayerClimb(Player player)
 		{
-			switch (XleCore.Map[player.X, player.Y])
+			switch (this[player.X, player.Y])
 			{
 				case 0x11:
 					if (player.DungeonLevel == 0)
@@ -145,13 +170,20 @@ namespace ERY.Xle.XleMapTypes
 						g.AddBottom("");
 						g.AddBottom("You climb out of the dungeon.");
 
+						if (Extender != null)
+							Extender.OnPlayerExitDungeon(player);
+
+						XleCore.wait(1000);
+
 						// TODO: fix this
 						player.ReturnToOutside();
 
 						return true;
 					}
 					else
+					{
 						player.DungeonLevel--;
+					}
 					break;
 
 				case 0x12:
@@ -171,7 +203,7 @@ namespace ERY.Xle.XleMapTypes
 		private void DungeonLevelText(Player player)
 		{
 			mCurrentLevel = player.DungeonLevel;
-			
+
 			string tempstring = "You are now at level " + (player.DungeonLevel + 1).ToString() + ".";
 
 			g.AddBottom("");
@@ -250,6 +282,9 @@ namespace ERY.Xle.XleMapTypes
 		}
 		public override bool PlayerXamine(Player player)
 		{
+			SoundMan.PlaySound(LotaSound.Xamine);
+			XleCore.wait(500);
+
 			Point faceDir = new Point();
 
 			switch (player.FaceDirection)
@@ -280,13 +315,167 @@ namespace ERY.Xle.XleMapTypes
 
 			if (revealHidden)
 			{
-				g.AddBottom("Hidden objects detected!!!", Color.White);
+				g.AddBottom("Hidden objects detected!!!", XleColor.White);
+				SoundMan.PlaySound(LotaSound.XamineDetected);
+			}
+
+			string extraText = string.Empty;
+			bool monster = false;
+
+			for (int i = 0; i < 5; i++)
+			{
+				Point loc = new Point(player.X + faceDir.X * i, player.Y + faceDir.Y * i);
+				int val = this[loc.X, loc.Y];
+
+				if (val < 0x10) break;
+
+				if (extraText == string.Empty)
+				{
+					if (val > 0x10 && val < 0x1a)
+					{
+						extraText = TrapName(val);
+					}
+					if (val >= 0x30 && val <= 0x3f)
+					{
+						extraText = "chest";
+					}
+					if (val == 0x1e)
+					{
+						extraText = "box";
+					}
+				}
+				// check for monsters
+			}
+
+			if (monster)
+			{
+				g.AddBottom("A " + extraText + " is stalking you!!!");
+			}
+			else if (extraText != string.Empty)
+			{
+				g.AddBottom("A " + extraText + " is in sight.");
+			}
+			else
+			{
+				g.AddBottom("Nothing unusual in sight.");
+			}
+
+			return true;
+		}
+		public override bool PlayerOpen(Player player)
+		{
+			int val = this[player.X, player.Y];
+
+			if (val == 0x1e)
+			{
+				OpenBox(player);
+				this[player.X, player.Y] = 0x10;
+			}
+			else if (val >= 0x30 && val <= 0x3f)
+			{
+				OpenChest(player, val);
+				this[player.X, player.Y] = 0x10;
+			}
+			else
+			{
+				g.AddBottom("Nothing to open.");
+				XleCore.wait(1000);
 			}
 
 
-			XleCore.wait(500);
 			return true;
 		}
+
+		private void OpenBox(Player player)
+		{
+			int amount = 40 + mCurrentLevel * 20;
+
+			Commands.UpdateCommand("Open Box");
+			g.AddBottom();
+			XleCore.wait(500);
+
+			if (amount + player.HP > player.MaxHP)
+			{
+				amount = player.MaxHP - player.HP;
+				if (amount < 0)
+					amount = 0;
+			}
+
+			bool handled = false;
+
+			if (Extender != null)
+			{
+				Extender.OnBeforeOpenBox(player, ref handled);
+			}
+
+			if (handled == false)
+			{
+				if (amount == 0)
+					g.AddBottom("You find nothing.");
+				else
+				{
+					g.AddBottom("H.P. + " + amount.ToString());
+					player.HP += amount;
+				}
+			}
+
+			XleCore.wait(1000);
+			while (SoundMan.IsAnyPlaying())
+				XleCore.wait(10);
+		}
+		private void OpenChest(Player player, int val)
+		{
+			val -= 0x30;
+
+			Commands.UpdateCommand("Open Chest");
+			SoundMan.PlaySound(LotaSound.OpenChest);
+			g.AddBottom();
+			XleCore.wait(500);
+
+			if (val == 0)
+			{
+				int amount = 30 + mCurrentLevel * 20;
+
+				g.AddBottom("You find " + amount.ToString() + " gold.", XleColor.Yellow);
+
+				player.Gold += amount;
+
+				XleCore.wait(1000);
+				while (SoundMan.IsAnyPlaying())
+					XleCore.wait(10);
+			}
+			else
+			{
+				int treasure = mTreasures[val];
+
+				if (Extender != null)
+					Extender.OnBeforeGiveItem(player, ref treasure);
+
+				if (treasure > 0)
+				{
+					string text = "You find a " + XleCore.ItemList[treasure].LongName + "!";
+					g.ClearBottom();
+					g.AddBottom(text);
+
+					player.ItemCount(treasure, 1);
+
+					SoundMan.PlaySound(LotaSound.VeryGood);
+
+					while (SoundMan.IsPlaying(LotaSound.VeryGood))
+					{
+						g.UpdateBottom(text, XleColor.White);
+						XleCore.wait(50);
+						g.UpdateBottom(text, XleColor.Yellow);
+						XleCore.wait(50);
+					}
+				}
+				else
+				{
+					g.AddBottom("You find nothing.");
+				}
+			}
+		}
+
 		protected override void OnPlayerEnterPosition(Player player, int x, int y)
 		{
 			int val = this[x, y];
@@ -323,11 +512,11 @@ namespace ERY.Xle.XleMapTypes
 
 			if (this[x, y] == 0x12)
 			{
-				g.AddBottom("You fall through a hidden hole.", Color.White);
+				g.AddBottom("You fall through a hidden hole.", XleColor.White);
 			}
 			else
 			{
-				g.AddBottom("You're ambushed by a " + TrapName(this[x, y]) + ".", Color.White);
+				g.AddBottom("You're ambushed by a " + TrapName(this[x, y]) + ".", XleColor.White);
 				XleCore.wait(100);
 			}
 

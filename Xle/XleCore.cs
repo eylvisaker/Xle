@@ -219,8 +219,9 @@ namespace ERY.Xle
 				int id = int.Parse(node.Attributes["ID"].Value);
 				string name = node.Attributes["Name"].Value;
 				string action = GetOptionalAttribute(node, "Action", "");
+				string longName = GetOptionalAttribute(node, "LongName", "");
 
-				mItemList.Add(id, name, action);
+				mItemList.Add(id, name, longName, action);
 			}
 		}
 		private void LoadEquipmentInfo(XmlNode xmlNode, ref EquipmentList equipmentList)
@@ -1049,7 +1050,7 @@ namespace ERY.Xle
 				if (keyBreak && Keyboard.AnyKeyPressed)
 					break;
 
-			} while (watch.TotalMilliseconds < howLong && g.Done == false);
+			} while (watch.TotalMilliseconds < howLong && g.Done == false && Display.CurrentWindow.IsClosed == false);
 		}
 
 		/// <summary>
@@ -1207,7 +1208,7 @@ namespace ERY.Xle
 						key = keys[0];
 					else
 						key = KeyCode.Escape;
-
+					
 					break;
 				}
 
@@ -1223,7 +1224,7 @@ namespace ERY.Xle
 					}
 				}
 
-			} while (!done);
+			} while (!done && Display.CurrentWindow.IsClosed == false);
 
 
 			Keyboard.KeyDown -= keyhandler;

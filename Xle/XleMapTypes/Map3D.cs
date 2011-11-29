@@ -244,14 +244,14 @@ namespace ERY.Xle.XleMapTypes
 
 			switch (distance)
 			{
-				case 0: retval = new Rectangle(0, 0, 96, 48); break;
+				case 0: retval = new Rectangle(0, 0, 160, 48); break;
 				case 1: retval = new Rectangle(0, 48, 80, 32); break;
 				case 2: retval = new Rectangle(0, 80, 48, 24); break;
 				case 3: retval = new Rectangle(0, 104, 48, 24); break;
 				case 4: retval = new Rectangle(0, 128, 16, 16); break;
 			}
 
-			retval.X += (int)extraType * 96;
+			retval.X += (int)extraType * 160;
 
 			return retval;
 		}
@@ -261,7 +261,7 @@ namespace ERY.Xle.XleMapTypes
 
 			switch (distance)
 			{
-				case 0: retval = new Rectangle(136, 224, 96, 48); break;
+				case 0: retval = new Rectangle(136, 224, 160, 48); break;
 				case 1: retval = new Rectangle(144, 208, 80, 32); break;
 				case 2: retval = new Rectangle(160, 192, 48, 24); break;
 				case 3: retval = new Rectangle(160, 184, 48, 24); break;

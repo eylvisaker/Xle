@@ -56,9 +56,14 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 				// give magic ice.
 				player.ItemCount(12, 1);
+
+				// remove sceptor and crown from inventory
+				player.ItemCount(13, -100);
+				player.ItemCount(16, -100);
+
 				return true;
 			}
-			else if ((player.museum[0] & 0x2) > 0)
+			else if ((player.museum[0] & 0x4) == 0)
 			{
 				if (player.Item(13) > 0)
 				{
@@ -72,7 +77,6 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				{
 					// found crown, give hint about sceptor
 					ReadRawText(ExhibitInfo.Text[8]);
-
 
 					this.SetBit(player, 2);
 					return true;
