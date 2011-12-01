@@ -9,6 +9,25 @@ namespace ERY.Xle.XleMapTypes
 {
 	public abstract class Map3D : XleMap
 	{
+		enum SidePassageType
+		{
+			Standard,
+			Parallel,
+			Wall,
+		}
+
+		enum ExtraType
+		{
+			None = -1,
+			Chest,
+			Box,
+			GoUp,
+			GoDown,
+			Needle,
+			Slime,
+			TripWire,
+		}
+
 		protected abstract Surface Backdrop { get; }
 		protected abstract Surface Wall { get; }
 		protected abstract Surface SidePassages { get; }
@@ -78,25 +97,6 @@ namespace ERY.Xle.XleMapTypes
 		protected virtual void DrawCloseupImpl(Rectangle inRect)
 		{
 			throw new NotImplementedException();
-		}
-
-		enum SidePassageType
-		{
-			Standard,
-			Parallel,
-			Wall,
-		}
-
-		enum ExtraType
-		{
-			None = -1,
-			Chest,
-			Box,
-			GoUp,
-			GoDown,
-			Needle,
-			Slime,
-			TripWire,
 		}
 
 		protected bool IsPassable(int value)
@@ -226,14 +226,13 @@ namespace ERY.Xle.XleMapTypes
 			if (extraType == ExtraType.None)
 				return;
 
-			Rectangle srcRect = GetExtraSrcRect(extraType, distance);
-			Rectangle destRect = GetExtraDestRect(extraType, distance);
+			DungeonExtraInfo info = XleCore.DungeonExtraInfo[(int)extraType];
 
-			destRect.X += mainDestRect.X;
-			destRect.Y += mainDestRect.Y;
+			Rectangle srcRect = info.Images[distance].SrcRect;
+			Rectangle destRect = info.Images[distance].DestRect;
 
-			if (srcRect.Left >= Extras.SurfaceWidth)
-				return;
+			//destRect.X += mainDestRect.X;
+			//destRect.Y += mainDestRect.Y;
 
 			Extras.Draw(srcRect, destRect);
 		}

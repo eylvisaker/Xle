@@ -90,6 +90,8 @@ namespace ERY.Xle
 		private EquipmentList mArmorList = new EquipmentList();
 		private Dictionary<int, string> mQualityList = new Dictionary<int, string>();
 		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int,XleMapTypes.MuseumDisplays.ExhibitInfo>();
+		private Dictionary<int, XleMapTypes.DungeonExtraInfo> mDungeonExtras = new Dictionary<int, XleMapTypes.DungeonExtraInfo>();
+ 
 		private Data.AgateDataImport mDatabase;
 
 		
@@ -180,10 +182,15 @@ namespace ERY.Xle
 					case "Exhibits":
 						LoadExhibitInfo(root.ChildNodes[i]);
 						break;
+
+					case "DungeonExtras":
+						LoadDungeonExtraInfo(root.ChildNodes[i]);
+						break;
 				}
 			}
 		}
 
+		
 		private static void LoadDatabase()
 		{
 			AgateLib.Data.AgateDatabase _db = AgateLib.Data.AgateDatabase.FromFile("Lota.adb");
@@ -297,6 +304,51 @@ namespace ERY.Xle
 				}
 			}
 		}
+		private void LoadDungeonExtraInfo(XmlNode xmlNode)
+		{
+			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
+			{
+				XmlNode node = xmlNode.ChildNodes[i];
+
+				if (node.Name == "Extra")
+				{
+					int id = int.Parse(node.Attributes["ID"].Value);
+					string name = node.Attributes["Name"].Value;
+
+					var info = new XleMapTypes.DungeonExtraInfo();
+
+					foreach (XmlNode child in node.ChildNodes)
+					{
+						if (child.Name == "Image")
+						{
+							int distance = int.Parse(child.Attributes["distance"].Value);
+							Rectangle srcRect = ParseRectangle(child.Attributes["srcRect"].Value);
+							Rectangle destRect = ParseRectangle(child.Attributes["destRect"].Value);
+
+							var img = new XleMapTypes.DungeonExtraImage();
+
+							img.SrcRect = srcRect;
+							img.DestRect = destRect;
+
+							info.Images[distance] = img;
+						}
+					}
+
+					mDungeonExtras.Add(id, info);
+				}
+			}
+		}
+
+		private Rectangle ParseRectangle(string p)
+		{
+			string[] vals = p.Split(',');
+
+			return new Rectangle(
+				int.Parse(vals[0]),
+				int.Parse(vals[1]),
+				int.Parse(vals[2]),
+				int.Parse(vals[3]));
+		}
 
 		public static string GetMapName(int id)
 		{
@@ -326,6 +378,8 @@ namespace ERY.Xle
 		{
 			get { return inst.mExhibitInfo; }
 		}
+		public static Dictionary<int, XleMapTypes.DungeonExtraInfo> DungeonExtraInfo { get { return inst.mDungeonExtras; } }
+
 		public static Data.AgateDataImport Database
 		{
 			get { return inst.mDatabase; }
@@ -339,7 +393,6 @@ namespace ERY.Xle
 		{
 			return inst.mQualityList[qualityID] + " " + inst.mArmorList[armorID].Name;
 		}
-
 
 		public static XleMap LoadMap(int mapID)
 		{
@@ -998,20 +1051,6 @@ namespace ERY.Xle
 			g.Lock();
 			g.ResetTimers();		// reset the animation timers
 			*/
-		}
-
-
-		//static double lastCheckAnim = 0;
-
-		/// <summary>
-		/// This function animates the main character.  It should be called in the
-		/// main drawing loop. However it doesn't seem to do anything right now and
-		/// may be obsolete.
-		/// </summary>
-		[Obsolete]
-		static void CheckAnim()
-		{
-
 		}
 
 		/****************************************************************************

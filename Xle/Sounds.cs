@@ -83,7 +83,10 @@ namespace ERY.Xle
 
 		internal static void StopAllSounds()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			foreach (var kvp in mSounds)
+			{
+				kvp.Value.Stop();
+			}
 		}
 
 		internal static void PlaySoundSync(LotaSound lotaSound)
@@ -92,6 +95,12 @@ namespace ERY.Xle
 
 			while (IsPlaying(lotaSound))
 				XleCore.wait(50);
+		}
+
+		internal static void FinishSounds()
+		{
+			while (IsAnyPlaying())
+				XleCore.wait(10);
 		}
 	}
 }

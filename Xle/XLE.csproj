@@ -114,6 +114,7 @@
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Data\Data.cs" />
+    <Compile Include="XleMapTypes\DungeonExtraInfo.cs" />
     <Compile Include="EquipmentList.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="IHasGuards.cs" />

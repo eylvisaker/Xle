@@ -75,6 +75,17 @@ namespace ERY.Xle
 			if (cmd == KeyCode.None)
 				return;
 
+#if DEBUG
+			if (cmd == KeyCode.Tilde)
+			{
+				player.HP = player.MaxHP;
+				player.Gold += 300;
+				player.Food += 100;
+
+				return;
+			}
+#endif
+
 			int wasRaft = player.OnRaft;
 			int waitTime = 700;
 

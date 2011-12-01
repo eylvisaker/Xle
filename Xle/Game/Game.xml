@@ -395,4 +395,13 @@ climb on.`pause`</Text>
     </Exhibit>
     <Exhibit ID="15" Image="AncientArtifact.png"></Exhibit>
   </Exhibits>
+  <DungeonExtras>
+    <Extra ID="2" Name="Ceiling Hole">
+      <Image distance="0" srcRect="0,0,56,8" destRect="384,16,112,16" />
+      <Image distance="1" srcRect="0,8,40,16" destRect="400,48,80,32" />
+      <Image distance="2" srcRect="0,24,24,16" destRect="416,80,48,32" />
+      <Image distance="3" srcRect="0,40,24,16" destRect="416,96,48,32" />
+      <Image distance="4" srcRect="0,56,24,16" destRect="416,128,48,32" />
+    </Extra>
+  </DungeonExtras>
 </LotaGame>

@@ -321,6 +321,7 @@ namespace ERY.Xle.XleMapTypes
 
 			string extraText = string.Empty;
 			bool monster = false;
+			int distance = 0;
 
 			for (int i = 0; i < 5; i++)
 			{
@@ -331,13 +332,15 @@ namespace ERY.Xle.XleMapTypes
 
 				if (extraText == string.Empty)
 				{
+					distance = i;
+
 					if (val > 0x10 && val < 0x1a)
 					{
 						extraText = TrapName(val);
 					}
 					if (val >= 0x30 && val <= 0x3f)
 					{
-						extraText = "chest";
+						extraText = "treasure chest";
 					}
 					if (val == 0x1e)
 					{
@@ -353,7 +356,15 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else if (extraText != string.Empty)
 			{
-				g.AddBottom("A " + extraText + " is in sight.");
+				if (distance > 0)
+				{
+					g.AddBottom("A " + extraText + " is in sight.");
+				}
+				else
+				{
+					g.AddBottom("You are standing next ");
+					g.AddBottom("to a " + extraText + ".");
+				}
 			}
 			else
 			{
@@ -414,7 +425,7 @@ namespace ERY.Xle.XleMapTypes
 					g.AddBottom("You find nothing.");
 				else
 				{
-					g.AddBottom("H.P. + " + amount.ToString());
+					g.AddBottom("Hit points:  + " + amount.ToString(), XleColor.Yellow);
 					player.HP += amount;
 				}
 			}
@@ -441,8 +452,7 @@ namespace ERY.Xle.XleMapTypes
 				player.Gold += amount;
 
 				XleCore.wait(1000);
-				while (SoundMan.IsAnyPlaying())
-					XleCore.wait(10);
+				SoundMan.FinishSounds();
 			}
 			else
 			{
@@ -463,9 +473,9 @@ namespace ERY.Xle.XleMapTypes
 
 					while (SoundMan.IsPlaying(LotaSound.VeryGood))
 					{
-						g.UpdateBottom(text, XleColor.White);
-						XleCore.wait(50);
 						g.UpdateBottom(text, XleColor.Yellow);
+						XleCore.wait(50);
+						g.UpdateBottom(text, XleColor.White);
 						XleCore.wait(50);
 					}
 				}
@@ -523,7 +533,8 @@ namespace ERY.Xle.XleMapTypes
 			g.AddBottom("   H.P. - " + damage.ToString());
 			player.HP -= damage;
 
-			XleCore.wait(400);
+			SoundMan.PlaySound(LotaSound.EnemyHit);
+			XleCore.wait(500);
 
 			if (this[x, y] == 0x12)
 			{

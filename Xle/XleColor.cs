@@ -9,13 +9,13 @@ namespace ERY.Xle
 	{
 		public static Color Black { get { return Color.FromArgb(0, 0, 0); } }
 		public static Color White { get { return Color.FromArgb(255, 255, 255); } }
-		public static Color Red { get { return Color.FromArgb(223, 63, 63); } }
-		public static Color Cyan { get { return Color.FromArgb(96, 252, 252); } }
+		public static Color Red { get { return Color.FromArgb(147, 58, 76); } }
+		public static Color Cyan { get { return Color.FromArgb(182, 250, 250); } }
 		public static Color Purple { get { return Color.FromArgb(223, 95, 223); } }
 		public static Color Green { get { return Color.FromArgb(63, 223, 63); } }
 		public static Color Blue { get { return Color.FromArgb(63, 63, 223); } }
-		public static Color Yellow { get { return Color.FromArgb(255, 255, 63); } }
-		public static Color Orange { get { return Color.FromArgb(223, 159, 63); } }
+		public static Color Yellow { get { return Color.FromArgb(251, 251, 139); } }
+		public static Color Orange { get { return Color.FromArgb(216, 156, 91); } }
 		public static Color Brown { get { return Color.FromArgb(156, 116, 72); } }
 		public static Color Pink { get { return Color.FromArgb(255, 159, 159); } }
 		public static Color DarkGray { get { return Color.FromArgb(80, 80, 80); } }
