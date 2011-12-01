@@ -472,7 +472,7 @@ namespace ERY.Xle.XleMapTypes
 				{
 					if (treasure > 0)
 					{
-						string text = "You find a " + XleCore.ItemList[treasure].LongName + "!s!";
+						string text = "You find a " + XleCore.ItemList[treasure].LongName + "!!";
 						g.ClearBottom();
 						g.AddBottom(text);
 

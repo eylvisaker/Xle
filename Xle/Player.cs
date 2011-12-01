@@ -439,7 +439,7 @@ namespace ERY.Xle
 
 		public void SavePlayer()
 		{
-			SavePlayer(@"Saved\" + Name + ".chr");
+			SavePlayer(@"Saved/" + Name + ".chr");
 		}
 		private void SavePlayer(string filename)
 		{

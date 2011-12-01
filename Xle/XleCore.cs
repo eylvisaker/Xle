@@ -1375,11 +1375,11 @@ namespace ERY.Xle
 		/// <returns></returns>
 		public static int QuickMenu(MenuItemList items, int spaces)
 		{
-			return QuickMenu(items, spaces, 0, XleColor.White, XleColor.White);
+			return QuickMenu(items, spaces, 0, XleCore.FontColor, XleCore.FontColor);
 		}
 		public static int QuickMenu(MenuItemList items, int spaces, int value = 0)
 		{
-			return QuickMenu(items, spaces, value, XleColor.White, XleColor.White);
+			return QuickMenu(items, spaces, value, XleCore.FontColor, XleCore.FontColor);
 		}
 		public static int QuickMenu(MenuItemList items, int spaces, int value, Color clrInit)
 		{
@@ -1392,11 +1392,11 @@ namespace ERY.Xle
 
 		public static int QuickMenu(RedrawDelegate redraw, MenuItemList items, int spaces)
 		{
-			return QuickMenu(redraw, items, spaces, 0, XleColor.White, XleColor.White);
+			return QuickMenu(redraw, items, spaces, 0, XleCore.FontColor, XleCore.FontColor);
 		}
 		public static int QuickMenu(RedrawDelegate redraw, MenuItemList items, int spaces, int value)
 		{
-			return QuickMenu(redraw, items, spaces, value, XleColor.White, XleColor.White);
+			return QuickMenu(redraw, items, spaces, value, XleCore.FontColor, XleCore.FontColor);
 		}
 		public static int QuickMenu(RedrawDelegate redraw, MenuItemList items, int spaces, int value, Color clrInit)
 		{

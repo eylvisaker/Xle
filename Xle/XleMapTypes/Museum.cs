@@ -479,7 +479,10 @@ namespace ERY.Xle.XleMapTypes
 			Color clr = exhibit.TextColor;
 			XleCore.WriteText(px, py, exhibit.Name, clr);
 		}
-
+		
+		int anim;
+		int offset = 0;
+		
 		private void DrawExhibitStatic(Rectangle destRect, Color clr, int distance)
 		{
 			Rectangle destOffset = new Rectangle(96, 96, 160, 96);
@@ -491,16 +494,51 @@ namespace ERY.Xle.XleMapTypes
 				destOffset.Width = 112;
 				destOffset.Height = 64;
 			}
-
+		
 			Rectangle srcRect = new Rectangle(0, 0, destOffset.Width, destOffset.Height);
-
-			destRect.X += destOffset.X;
-			destRect.Y += destOffset.Y;
-			destRect.Width = srcRect.Width;
-			destRect.Height = srcRect.Height;
-
-			MuseumExhibitStatic.Color = clr;
-			MuseumExhibitStatic.Draw(srcRect, destRect);
+			Rectangle oldDest = destRect;
+			
+			oldDest.X += destOffset.X;
+			oldDest.Y += destOffset.Y;
+			oldDest.Width = srcRect.Width;
+			oldDest.Height = srcRect.Height;
+			
+			int freq = 5;
+			
+			if (1 == 1)
+			{
+				srcRect.X = offset;
+				srcRect.Width -= srcRect.X;
+		
+				destRect.X += destOffset.X;
+				destRect.Y += destOffset.Y;
+				destRect.Width = srcRect.Width;
+				destRect.Height = srcRect.Height;
+		
+				MuseumExhibitStatic.Color = clr;
+				MuseumExhibitStatic.Draw(srcRect, destRect);
+				
+				destRect = Rectangle.FromLTRB(destRect.Right, destRect.Top, oldDest.Right, destRect.Bottom);
+				srcRect.X = 0;
+				srcRect.Width = destRect.Width;
+				
+				MuseumExhibitStatic.Draw(srcRect, destRect);
+			}
+			else
+			{
+				
+				destRect.X += destOffset.X;
+				destRect.Y += destOffset.Y;
+				destRect.Width = srcRect.Width;
+				destRect.Height = srcRect.Height;
+		
+				MuseumExhibitStatic.Color = clr;
+				MuseumExhibitStatic.Draw(srcRect, destRect);
+			}
+			
+			anim++;
+			if (anim % freq == 0)
+				offset = XleCore.random.Next((destOffset.Width - 16) / 4) * 4;
 		}
 	}
 }
