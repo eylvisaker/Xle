@@ -396,12 +396,54 @@ climb on.`pause`</Text>
     <Exhibit ID="15" Image="AncientArtifact.png"></Exhibit>
   </Exhibits>
   <DungeonExtras>
+    <Extra ID="0" Name="Treasure Chest">
+      <Image distance="0" srcRect="128,48,96,48" destRect="128,224,96,48" />
+      <Image distance="1" srcRect="128,96,80,32" destRect="144,208,80,32" />
+      <Image distance="2" srcRect="128,128,48,32" destRect="160,192,48,32" />
+      <Image distance="3" srcRect="176,128,48,16" destRect="160,192,48,16" />
+      <Image distance="4" srcRect="176,144,16,16" destRect="176,176,16,16" />
+    </Extra>
+    <Extra ID="1" Name="Box">
+      <Image distance="0" srcRect="0,112,80,32" destRect="144,240,80,32" />
+      <Image distance="1" srcRect="0,144,48,16" destRect="160,224,48,16" />
+      <Image distance="2" srcRect="0,160,48,32" destRect="160,192,48,32" />
+      <Image distance="3" srcRect="48,144,32,16" destRect="160,192,32,16" />
+      <Image distance="4" srcRect="48,160,16,16" destRect="176,176,16,16" />
+    </Extra>
     <Extra ID="2" Name="Ceiling Hole">
-      <Image distance="0" srcRect="0,0,56,8" destRect="384,16,112,16" />
-      <Image distance="1" srcRect="0,8,40,16" destRect="400,48,80,32" />
-      <Image distance="2" srcRect="0,24,24,16" destRect="416,80,48,32" />
-      <Image distance="3" srcRect="0,40,24,16" destRect="416,96,48,32" />
-      <Image distance="4" srcRect="0,56,24,16" destRect="416,128,48,32" />
+      <Image distance="0" srcRect="0,0,112,16" destRect="128,0,112,16" />
+      <Image distance="1" srcRect="0,16,80,32" destRect="144,32,80,32" />
+      <Image distance="2" srcRect="0,48,48,32" destRect="160,64,48,32" />
+      <Image distance="3" srcRect="48,48,48,32" destRect="160,80,48,32" />
+      <Image distance="4" srcRect="0,80,48,16" destRect="160,112,48,16" />
+    </Extra>
+    <Extra ID="3" Name="Floor Hole">
+      <Image distance="0" srcRect="128,0,144,16" destRect="112,256,144,16" />
+      <Image distance="1" srcRect="128,16,80,16" destRect="144,224,80,16" />
+      <Image distance="2" srcRect="128,32,80,16" destRect="144,208,80,16" />
+      <Image distance="3" srcRect="208,16,48,16" destRect="160,192,48,16" />
+      <Image distance="4" srcRect="208,32,16,16" destRect="176,176,16,16" />
+    </Extra>
+    <Extra ID="4" Name="Poison gas vent">
+      <Image distance="0" srcRect="240,32,80,32" destRect="144,240,80,32" />
+      <Image distance="1" srcRect="240,64,48,16" destRect="160,224,48,16" />
+      <Image distance="2" srcRect="240,80,48,16" destRect="160,208,48,16" />
+      <Image distance="3" srcRect="288,64,32,16" destRect="176,192,32,16" />
+      <Image distance="4" srcRect="288,80,16,16" destRect="176,176,16,16" />
+    </Extra>
+    <Extra ID="5" Name="Slime splotch">
+      <Image distance="0" srcRect="0,192,160,32" destRect="112,240,160,32" />
+      <Image distance="1" srcRect="0,224,96,16" destRect="144,224,96,16" />
+      <Image distance="2" srcRect="96,224,64,16" destRect="160,208,64,16" />
+      <Image distance="3" srcRect="160,192,48,16" destRect="160,192,48,16" />
+      <Image distance="4" srcRect="160,208,16,16" destRect="176,176,16,16" />
+    </Extra>
+    <Extra ID="6" Name="Trip Wire">
+      <Image distance="0" srcRect="240,96,144,16" destRect="112,256,144,16" />
+      <Image distance="1" srcRect="240,112,112,16" destRect="128,224,112,16" />
+      <Image distance="2" srcRect="240,128,48,16" destRect="160,208,48,16" />
+      <Image distance="3" srcRect="288,128,48,16" destRect="160,192,48,16" />
+      <Image distance="4" srcRect="336,128,16,16" destRect="176,176,16,16" />
     </Extra>
   </DungeonExtras>
 </LotaGame>

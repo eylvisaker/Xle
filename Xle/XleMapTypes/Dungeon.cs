@@ -204,6 +204,9 @@ namespace ERY.Xle.XleMapTypes
 		{
 			mCurrentLevel = player.DungeonLevel;
 
+			if (this[player.X, player.Y] == 0x21) this[player.X, player.Y] = 0x11;
+			if (this[player.X, player.Y] == 0x22) this[player.X, player.Y] = 0x12;
+
 			string tempstring = "You are now at level " + (player.DungeonLevel + 1).ToString() + ".";
 
 			g.AddBottom("");

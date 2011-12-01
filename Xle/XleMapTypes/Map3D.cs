@@ -228,11 +228,16 @@ namespace ERY.Xle.XleMapTypes
 
 			DungeonExtraInfo info = XleCore.DungeonExtraInfo[(int)extraType];
 
+			if (info.Images.ContainsKey(distance) == false)
+				return;
+
 			Rectangle srcRect = info.Images[distance].SrcRect;
 			Rectangle destRect = info.Images[distance].DestRect;
 
-			//destRect.X += mainDestRect.X;
-			//destRect.Y += mainDestRect.Y;
+			srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
+
+			destRect.X += mainDestRect.X;
+			destRect.Y += mainDestRect.Y;
 
 			Extras.Draw(srcRect, destRect);
 		}
