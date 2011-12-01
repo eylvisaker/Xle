@@ -68,7 +68,6 @@ namespace ERY.Xle
 			raftFacing = Direction.East;
 			charAnimCount = 0;
 			LeftMenuActive = false;
-			HPColor = XleColor.White;
 
 			disableEncounters = false;
 
@@ -182,7 +181,6 @@ namespace ERY.Xle
 
 		static public SubMenu subMenu;					// the submenu
 		static public bool LeftMenuActive;				// is the left menu active?
-		static public Color HPColor;					// color of left status display
 
 		// action window functions
 		/// <summary>
@@ -241,9 +239,6 @@ namespace ERY.Xle
 
 			p = new string(' ', spaces) + p;
 		}
-
-		static public Color bottomTextColor = XleColor.White;
-
 		// adds a line to the bottom of the action window
 		static public void AddBottom(string line, Color[] colors)
 		{
@@ -281,7 +276,7 @@ namespace ERY.Xle
 			{
 				for (i = 0; i < 39; i++)
 				{
-					bottomColor[0][i] = bottomTextColor;
+					bottomColor[0][i] = XleCore.FontColor;
 				}
 			}
 

@@ -402,9 +402,10 @@ namespace ERY.Xle.XleMapTypes
 
 		private void OpenBox(Player player)
 		{
-			int amount = 40 + mCurrentLevel * 20;
+			int amount = XleCore.random.Next(60, 200);
 
 			Commands.UpdateCommand("Open Box");
+			SoundMan.PlaySound(LotaSound.OpenChest);
 			g.AddBottom();
 			XleCore.wait(500);
 
@@ -425,17 +426,17 @@ namespace ERY.Xle.XleMapTypes
 			if (handled == false)
 			{
 				if (amount == 0)
-					g.AddBottom("You find nothing.");
+					g.AddBottom("You find nothing.", Color.Yellow);
 				else
 				{
 					g.AddBottom("Hit points:  + " + amount.ToString(), XleColor.Yellow);
 					player.HP += amount;
+					SoundMan.PlaySound(LotaSound.Good);
+					XleCore.FlashHPWhileSound(Color.Yellow);
 				}
 			}
 
-			XleCore.wait(1000);
-			while (SoundMan.IsAnyPlaying())
-				XleCore.wait(10);
+			SoundMan.FinishSounds();
 		}
 		private void OpenChest(Player player, int val)
 		{
@@ -446,45 +447,51 @@ namespace ERY.Xle.XleMapTypes
 			g.AddBottom();
 			XleCore.wait(500);
 
+			// TODO: give weapons
+			// TODO: bobby trap chests.
+
 			if (val == 0)
 			{
-				int amount = 30 + mCurrentLevel * 20;
+				int amount = XleCore.random.Next(90, 300);
 
 				g.AddBottom("You find " + amount.ToString() + " gold.", XleColor.Yellow);
 
 				player.Gold += amount;
 
-				XleCore.wait(1000);
-				SoundMan.FinishSounds();
+				XleCore.FlashHPWhileSound(XleColor.Yellow);
 			}
 			else
 			{
 				int treasure = mTreasures[val];
+				bool handled = false;
 
 				if (Extender != null)
-					Extender.OnBeforeGiveItem(player, ref treasure);
+					Extender.OnBeforeGiveItem(player, ref treasure, ref handled);
 
-				if (treasure > 0)
+				if (handled == false)
 				{
-					string text = "You find a " + XleCore.ItemList[treasure].LongName + "!";
-					g.ClearBottom();
-					g.AddBottom(text);
-
-					player.ItemCount(treasure, 1);
-
-					SoundMan.PlaySound(LotaSound.VeryGood);
-
-					while (SoundMan.IsPlaying(LotaSound.VeryGood))
+					if (treasure > 0)
 					{
-						g.UpdateBottom(text, XleColor.Yellow);
-						XleCore.wait(50);
-						g.UpdateBottom(text, XleColor.White);
-						XleCore.wait(50);
+						string text = "You find a " + XleCore.ItemList[treasure].LongName + "!s!";
+						g.ClearBottom();
+						g.AddBottom(text);
+
+						player.ItemCount(treasure, 1);
+
+						SoundMan.PlaySound(LotaSound.VeryGood);
+
+						while (SoundMan.IsPlaying(LotaSound.VeryGood))
+						{
+							g.UpdateBottom(text, XleColor.Yellow);
+							XleCore.wait(50);
+							g.UpdateBottom(text, XleColor.White);
+							XleCore.wait(50);
+						}
 					}
-				}
-				else
-				{
-					g.AddBottom("You find nothing.");
+					else
+					{
+						g.AddBottom("You find nothing.");
+					}
 				}
 			}
 		}
@@ -533,7 +540,7 @@ namespace ERY.Xle.XleMapTypes
 				XleCore.wait(100);
 			}
 
-			g.AddBottom("   H.P. - " + damage.ToString());
+			g.AddBottom("   H.P. - " + damage.ToString(), XleColor.White);
 			player.HP -= damage;
 
 			SoundMan.PlaySound(LotaSound.EnemyHit);

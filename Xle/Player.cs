@@ -391,16 +391,7 @@ namespace ERY.Xle
 
 			SoundMan.PlaySound(LotaSound.VeryBad);
 
-			while (SoundMan.IsPlaying(LotaSound.VeryBad) && !g.Done)
-			{
-				g.HPColor = XleColor.Red;
-				XleCore.wait(50);
-
-				g.HPColor = XleColor.Yellow;
-				XleCore.wait(50);
-			}
-
-			g.HPColor = XleColor.White;
+			XleCore.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
 
 			SetMap(1, 80, 80);
 

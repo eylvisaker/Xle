@@ -94,7 +94,8 @@ namespace ERY.Xle
  
 		private Data.AgateDataImport mDatabase;
 
-		
+		public static Color FontColor { get; private set; }
+
 		public XleCore()
 		{
 			inst = this;
@@ -498,13 +499,9 @@ namespace ERY.Xle
 			int vertLine;
 
 			map.GetBoxColors(out boxColor, out innerColor, out fontColor, out vertLine);
+			FontColor = fontColor;
 
 			menuColor = fontColor;
-
-			if (g.HPColor == XleColor.Black)
-			{
-				g.HPColor = fontColor;
-			}
 
 			if (g.LeftMenuActive)
 			{
@@ -553,9 +550,13 @@ namespace ERY.Xle
 
 			WriteText(32, 16 * (CursorPos + 1), "`", menuColor);
 
-			WriteText(48, 16 * 15, "H.P. " + player.HP.ToString(), g.HPColor);
-			WriteText(48, 16 * 16, "Food " + player.Food.ToString(), g.HPColor);
-			WriteText(48, 16 * 17, "Gold " + player.Gold.ToString(), g.HPColor);
+			Color hpColor = fontColor;
+			if (mOverrideHPColor)
+				hpColor = mHPColor;
+
+			WriteText(48, 16 * 15, "H.P. " + player.HP.ToString(), hpColor);
+			WriteText(48, 16 * 16, "Food " + player.Food.ToString(), hpColor);
+			WriteText(48, 16 * 17, "Gold " + player.Gold.ToString(), hpColor);
 
 			DrawBottomText();
 
@@ -585,26 +586,35 @@ namespace ERY.Xle
 			/////////////////////////////////////////////////////////////////////////
 		}
 
+		bool mOverrideHPColor;
+
+		private static Color mHPColor;
+
 		public static void FlashHPWhileSound(Color clr)
 		{
-			Color oldClr = g.HPColor;
-			Color lastColor = g.HPColor;
+			FlashHPWhileSound(clr, FontColor);
+		}
+		public static void FlashHPWhileSound(Color clr, Color clr2)
+		{
+			Color oldClr = mHPColor;
+			Color lastColor = clr2;
 
-			while (SoundMan.IsPlaying(LotaSound.VeryGood) ||
-				SoundMan.IsPlaying(LotaSound.Good) ||
-				SoundMan.IsPlaying(LotaSound.VeryBad))
+			inst.mOverrideHPColor = true;
+
+			while (SoundMan.IsAnyPlaying())
 			{
 				if (lastColor == clr)
-					lastColor = oldClr;
+					lastColor = clr2;
 				else
 					lastColor = clr;
 
-				g.HPColor = lastColor;
+				mHPColor = lastColor;
 
 				XleCore.wait(80);
 			}
 
-			g.HPColor = oldClr;
+			inst.mOverrideHPColor = false;
+			mHPColor = oldClr;
 		}
 
 		/****************************************************************************
@@ -1870,6 +1880,7 @@ namespace ERY.Xle
 
 			return "";
 		}
+
 
 	}
 }

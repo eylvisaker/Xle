@@ -9,7 +9,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 	{
 		void OnPlayerExitDungeon(Player player);
 
-		void OnBeforeGiveItem(Player player, ref int treasure);
+		void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled);
 
 		void OnBeforeOpenBox(Player player, ref bool handled);
 	}

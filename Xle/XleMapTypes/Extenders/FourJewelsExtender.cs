@@ -15,7 +15,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		{
 			get { return 10; }
 		}
-		public override void OnBeforeGiveItem(Player player, ref int treasure)
+		public override void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled)
 		{
 			// guard jewel
 			if (treasure == 14)

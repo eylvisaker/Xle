@@ -234,45 +234,12 @@ namespace ERY.Xle.XleMapTypes
 			Rectangle srcRect = info.Images[distance].SrcRect;
 			Rectangle destRect = info.Images[distance].DestRect;
 
-			srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
+			//srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
 
 			destRect.X += mainDestRect.X;
 			destRect.Y += mainDestRect.Y;
 
 			Extras.Draw(srcRect, destRect);
-		}
-
-		private Rectangle GetExtraSrcRect(ExtraType extraType, int distance)
-		{
-			Rectangle retval = new Rectangle();
-
-			switch (distance)
-			{
-				case 0: retval = new Rectangle(0, 0, 160, 48); break;
-				case 1: retval = new Rectangle(0, 48, 80, 32); break;
-				case 2: retval = new Rectangle(0, 80, 48, 24); break;
-				case 3: retval = new Rectangle(0, 104, 48, 24); break;
-				case 4: retval = new Rectangle(0, 128, 16, 16); break;
-			}
-
-			retval.X += (int)extraType * 160;
-
-			return retval;
-		}
-		private Rectangle GetExtraDestRect(ExtraType extraType, int distance)
-		{
-			Rectangle retval = new Rectangle();
-
-			switch (distance)
-			{
-				case 0: retval = new Rectangle(136, 224, 160, 48); break;
-				case 1: retval = new Rectangle(144, 208, 80, 32); break;
-				case 2: retval = new Rectangle(160, 192, 48, 24); break;
-				case 3: retval = new Rectangle(160, 184, 48, 24); break;
-				case 4: retval = new Rectangle(176, 176, 16, 16); break;
-			}
-
-			return retval;
 		}
 
 		private static ExtraType GetExtraType(int val)

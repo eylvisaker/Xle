@@ -28,7 +28,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			}
 		}
 
-		public virtual void OnBeforeGiveItem(Player player, ref int treasure)
+		public virtual void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled)
 		{
 		}
 

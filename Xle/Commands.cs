@@ -777,23 +777,7 @@ namespace ERY.Xle
 			player.ItemCount(3, -1);
 			SoundMan.PlaySound(LotaSound.Good);
 
-			Color firstColor = g.HPColor;
-			Color lastColor = XleColor.White;
-
-			do
-			{
-				if (lastColor == XleColor.White)
-					lastColor = XleColor.Cyan;
-				else
-					lastColor = XleColor.White;
-
-				g.HPColor = lastColor;
-
-				XleCore.wait(25);
-
-			} while (SoundMan.IsPlaying(LotaSound.Good));
-
-			g.HPColor = firstColor;
+			XleCore.FlashHPWhileSound(XleColor.Cyan);
 		}
 
 		public void Weapon()

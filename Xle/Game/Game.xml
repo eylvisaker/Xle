@@ -64,7 +64,7 @@
     <Item ID="11" Name="Compass" />
     <Item ID="12" Name="Magic Ice" Action="Throw"/>
     <Item ID="13" Name="Scepter" />
-    <Item ID="14" Name="Guard Jewel" />
+    <Item ID="14" Name="Guard Jewel" LongName="Large pulsating jewel" />
     <Item ID="15" Name="Compendium" />
     <Item ID="16" Name="Crown" LongName="Jeweled crown"/>
     <Item ID="17" Name="Jade coin" />
