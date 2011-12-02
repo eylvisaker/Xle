@@ -1,10 +1,19 @@
 ﻿Settings file for adjusting numerical parameters.
+Resample sounds and do a good job this time.
+	Reduce volume on ocean/mountain sounds
+	Reduce volume on museum steps, swamp steps, desert steps.
+
+Title Screen:
+	Animation of flags.
+	Title Text within menus.
+	Figure out what to do with first three options on first menu.
+		Color test -> quit.
 
 Outdoors:
 	Bugs in monsters:
 		Text messages which appear after entering a town.
-		Monsters only fight back when the player moves.
-		Mosters sometimes appear an extra space away from the player.
+		D - Monsters only fight back when the player moves.
+		D - Mosters sometimes appear an extra space away from the player.
 	D - Refactor encounter state stuff.
 	D - Animations for water.
 	Audio for mountains?
@@ -25,6 +34,7 @@ Towns:
 	Weapon / armor training
 	Vault
 	Getting arrested / negotiating with jailer.
+	Fix mail routes - Thornberry at least has none.
 
 Castle:
 	D - Fix events in castle.
@@ -44,7 +54,7 @@ Castle:
 Museum:
 	Exhibits:
 		A few more texts for information to be implemented.
-		Weaponry exhibit
+		D - Weaponry exhibit
 		D - Fountain exhibit.
 		Stones of wisdom.
 		Test four jewels.
@@ -56,19 +66,23 @@ Museum:
 		Torches.
 		Exhibits on side walls.
 		Door on side wall.
-		HQ2x images.
+		Exhibit animations.
+		Static animation.
 	Step sound.
 	Xamine command.
 	Verify extra condition to reach level 4.
 
 Dungeons:
 	Make exiting knight's test and four jewels work right.
-	Implement traps.
-	Implement xamine.
-	Make sure climbing through floor/ceiling hole automatically reveals partner hole if hidden.
+	D - Implement traps.
+	D - Implement xamine.
+	D - Make sure climbing through floor/ceiling hole automatically reveals partner hole if hidden.
 	Monsters!
-	Chests.
-	Boxes.
+	D - Chests.
+		Booby trap chests
+		Chests which give weapons
+	D - Boxes.
+	Extract red walls and make them work
 
 Fortress:
 	Create tileset.

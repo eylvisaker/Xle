@@ -222,8 +222,7 @@ namespace ERY.Xle.XleEventTypes
 
 		protected void StoreSound(LotaSound sound)
 		{
-			SoundMan.PlaySound(sound);
-			Wait(2000);
+			SoundMan.PlaySoundSync(sound);
 		}
 		protected void Wait(int howLong)
 		{

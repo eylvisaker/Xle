@@ -192,8 +192,8 @@ coins to view exhibits.`pause`
               Good luck.`pause`
  </Text>
     </Exhibit>
-    <Exhibit ID="2" Image="Weaponry1.png">
-      <Text ID="1">Eons ago, nomadic warriors roamed the
+    <Exhibit ID="2" Image="Weaponry.png">
+      <Text ID="1">`image:0`Eons ago, nomadic warriors roamed the
 planet tarmalon.  They hunted and
 fought with stone knives, much like
 the one you see in this exhibit.`pause`
@@ -201,7 +201,7 @@ the one you see in this exhibit.`pause`
 effective.  As a museum patron, you 
 may take it for as long as you like.
 The knife is now in your inventory.`pause`</Text>
-      <Text ID="2">As Tarmalon culture advanced, weapons
+      <Text ID="2">`image:1`As Tarmalon culture advanced, weapons
 developed a ceremonial importance.
 In this exhibit you see the famed
 `white`staff of sacrifice.`cyan`  It was used to

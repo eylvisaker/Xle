@@ -280,11 +280,7 @@ namespace ERY.Xle.XleMapTypes
 
 			if (mDrawStatic == false)
 			{
-				if (mCloseup.ExhibitInfo.Image != null)
-				{
-					mCloseup.ExhibitInfo.Image.Draw(displayRect);
-					
-				}
+				mCloseup.Draw(displayRect);
 			}
 		}
 

@@ -110,7 +110,8 @@ namespace ERY.Xle
 		int dungeon;
 		int hp;
 		int level;
-		int outx, outy, outmap;
+		int returnX, returnY, returnMap;
+		Direction returnFacing;
 		int x, y;
 		int dungeonLevel;
 		Direction faceDirection = Direction.East;
@@ -265,9 +266,10 @@ namespace ERY.Xle
 			info.Write("Dungeon", dungeon);
 			info.Write("HP", hp);
 			info.Write("Level", level);
-			info.Write("OutX", outx);
-			info.Write("OutY", outy);
-			info.Write("OutMap", outmap);
+			info.Write("ReturnMap", returnMap);
+			info.Write("ReturnX", returnX);
+			info.Write("ReturnY", returnY);
+			info.WriteEnum<Direction>("ReturnFacing", returnFacing, false);
 			info.Write("X", x);
 			info.Write("Y", y);
 			info.Write("DungeonLevel", dungeonLevel);
@@ -323,9 +325,10 @@ namespace ERY.Xle
 			dungeon = info.ReadInt32("Dungeon");
 			hp = info.ReadInt32("HP");
 			level = info.ReadInt32("Level");
-			outx = info.ReadInt32("OutX");
-			outy = info.ReadInt32("OutY");
-			outmap = info.ReadInt32("OutMap");
+			returnMap = info.ReadInt32("ReturnMap");
+			returnX = info.ReadInt32("ReturnX");
+			returnY = info.ReadInt32("ReturnY");
+			returnFacing = info.ReadEnum<Direction>("ReturnFacing");
 			x = info.ReadInt32("X");
 			y = info.ReadInt32("Y");
 			dungeonLevel = info.ReadInt32("DungeonLevel");
@@ -770,8 +773,8 @@ namespace ERY.Xle
 			{
 			 * */
 			// store outside map coordinate
-			outx = x;
-			outy = y;
+			returnX = x;
+			returnY = y;
 
 			// set new coordinate
 			x = xx;
@@ -866,9 +869,10 @@ namespace ERY.Xle
 
 			if (XleCore.Map.GetType().Equals(typeof(XleMapTypes.Outside)))
 			{
-				outmap = map;
-				outx = x;
-				outy = y;
+				returnMap = map;
+				returnX = x;
+				returnY = y;
+				returnFacing = Direction.South;
 			}
 
 			lastMap = map;
@@ -1449,16 +1453,22 @@ namespace ERY.Xle
 		}
 
 
-		public void ReturnToOutside()
+		public void ReturnToPreviousMap()
 		{
-			SetMap(outmap, outx, outy);
+			SetMap(returnMap, returnX, returnY);
+			faceDirection = returnFacing;
 		}
 
-		public void SetOutsideLocation(int outmap, int outx, int outy)
+		public void SetReturnLocation(int map, int x, int y)
 		{
-			this.outmap = outmap;
-			this.outx = outx;
-			this.outy = outy;
+			SetReturnLocation(map, x, y, Direction.South);
+		}
+		public void SetReturnLocation(int map, int x, int y, Direction facing)
+		{
+			this.returnMap = map;
+			this.returnX = x;
+			this.returnY = y;
+			this.returnFacing = facing;
 		}
 	}
 }

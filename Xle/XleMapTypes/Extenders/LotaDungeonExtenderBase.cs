@@ -42,7 +42,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 				g.AddBottom("You find a compass!", XleColor.Yellow);
 				player.ItemCount(11, 1);
 
-				SoundMan.PlaySound(LotaSound.Good);
+				SoundMan.PlaySound(LotaSound.VeryGood);
 
 				handled = true;
 			}

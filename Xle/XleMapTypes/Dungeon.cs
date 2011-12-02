@@ -24,6 +24,14 @@ namespace ERY.Xle.XleMapTypes
 		int[] mTreasures = new int[16];
 		int mCurrentLevel;
 
+		double nextSound;
+		LotaSound[] drips;
+
+		public Dungeon()
+		{
+			FillDrips();
+			ResetDripTime();
+		}
 		public int Treasure1 { get { return mTreasures[1]; } set { mTreasures[1] = value; } }
 		public int Treasure2 { get { return mTreasures[2]; } set { mTreasures[2] = value; } }
 		public int Treasure3 { get { return mTreasures[3]; } set { mTreasures[3] = value; } }
@@ -55,7 +63,6 @@ namespace ERY.Xle.XleMapTypes
 
 			Extender = CreateExtender<IDungeonExtender>(ScriptClassName);
 		}
-
 		protected override void WriteData(XleSerializationInfo info)
 		{
 			info.Write("Width", mWidth, true);
@@ -127,6 +134,31 @@ namespace ERY.Xle.XleMapTypes
 			set { mCurrentLevel = value; }
 		}
 
+
+		public override void CheckSounds(Player player)
+		{
+			if (Timing.TotalSeconds > nextSound)
+			{
+				SoundMan.PlaySound(drips[XleCore.random.Next(drips.Length)]);
+
+				ResetDripTime();
+			}
+		}
+
+		private void ResetDripTime()
+		{
+			double time = XleCore.random.NextDouble() * 10 + 2;
+
+			nextSound = Timing.TotalSeconds + time;
+		}
+
+		private void FillDrips()
+		{
+			drips = new LotaSound[2];
+			drips[0] = LotaSound.Drip0;
+			drips[1] = LotaSound.Drip1;
+		}
+
 		public override Color DefaultColor
 		{
 			get
@@ -176,7 +208,7 @@ namespace ERY.Xle.XleMapTypes
 						XleCore.wait(1000);
 
 						// TODO: fix this
-						player.ReturnToOutside();
+						player.ReturnToPreviousMap();
 
 						return true;
 					}
@@ -432,7 +464,7 @@ namespace ERY.Xle.XleMapTypes
 					g.AddBottom("Hit points:  + " + amount.ToString(), XleColor.Yellow);
 					player.HP += amount;
 					SoundMan.PlaySound(LotaSound.Good);
-					XleCore.FlashHPWhileSound(Color.Yellow);
+					XleCore.FlashHPWhileSound(XleColor.Yellow);
 				}
 			}
 

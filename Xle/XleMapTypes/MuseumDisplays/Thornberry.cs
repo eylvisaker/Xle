@@ -41,7 +41,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				XleCore.WaitForKey();
 
 				player.SetMap(11, 75, 17);
-				player.SetOutsideLocation(1, 18, 56);
+				player.SetReturnLocation(1, 18, 56);
 			}
 		}
 	}

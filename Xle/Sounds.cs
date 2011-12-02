@@ -39,6 +39,8 @@ namespace ERY.Xle
 		Encounter,
 		Xamine,
 		XamineDetected,
+		Drip0,
+		Drip1,
 	}
 
 	static class SoundMan

@@ -18,8 +18,14 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			base.PlayerXamine(player);
 
+			int map = player.Map;
+			int x = player.X;
+			int y = player.Y;
+			Direction facing = player.FaceDirection;
+
 			player.DungeonLevel = 0;
-			player.SetMap(73, 1, 1);
+			player.SetMap(73, 0, 1);
+			player.SetReturnLocation(map, x, y, facing);
 		}
 
 		public override bool StaticBeforeCoin

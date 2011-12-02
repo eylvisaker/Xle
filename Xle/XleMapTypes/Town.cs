@@ -861,7 +861,7 @@ namespace ERY.Xle.XleMapTypes
 
 				XleCore.wait(200);
 
-				player.ReturnToOutside();
+				player.ReturnToPreviousMap();
 			}
 
 			return true;
@@ -963,7 +963,7 @@ namespace ERY.Xle.XleMapTypes
 
 				XleCore.wait(2000);
 
-				player.ReturnToOutside();
+				player.ReturnToPreviousMap();
 
 				g.AddBottom("");
 			}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AgateLib.DisplayLib;
+using AgateLib.Geometry;
 
 namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
@@ -16,7 +17,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		public Dictionary<int, string> Text { get; private set; }
 
 		public string ImageFile { get; set; }
-		public Surface Image { get; set; }
+		Surface Image { get; set; }
 
 		public void LoadImage()
 		{
@@ -24,6 +25,13 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				return;
 
 			Image = new Surface(ImageFile);
+		}
+
+		public void DrawImage(Rectangle destRect, int id)
+		{
+			Rectangle srcRect = new Rectangle(0, 128 * id, 240, 128);
+
+			Image.Draw(srcRect, destRect);
 		}
 	}
 }

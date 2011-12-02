@@ -81,6 +81,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				
 		}
 
+		protected int ImageID { get; set; }
+
 		public virtual void PlayerXamine(Player player)
 		{
 			if (CheckOfferReread(player) == false)
@@ -146,7 +148,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				{
 					text.AddText(rawtext[ip].ToString(), clr);
 					g.UpdateBottom(text, line);
-					
+
 					if (waiting)
 						XleCore.wait(50);
 				}
@@ -156,43 +158,52 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 					if (next < 0)
 						throw new ArgumentException("Text had unmatched quote!");
 
-					string substr = rawtext.Substring(ip+1, next - ip-1);
+					string substr = rawtext.Substring(ip + 1, next - ip - 1);
 
 					ip = next;
 
-					switch (substr)
+					if (substr.StartsWith("image:"))
 					{
-						case "white": clr = XleColor.White; break;
-						case "cyan": clr = XleColor.Cyan; break;
-						case "yellow": clr = XleColor.Yellow; break;
-						case "green": clr = XleColor.Green; break;
-						case "purple": clr = XleColor.Purple; break;
+						int image = int.Parse(substr.Substring(6));
 
-						case "pause":
-							XleCore.WaitForKey();
+						ImageID = image;
+					}
+					else
+					{
+						switch (substr)
+						{
+							case "white": clr = XleColor.White; break;
+							case "cyan": clr = XleColor.Cyan; break;
+							case "yellow": clr = XleColor.Yellow; break;
+							case "green": clr = XleColor.Green; break;
+							case "purple": clr = XleColor.Purple; break;
 
-							break;
+							case "pause":
+								XleCore.WaitForKey();
 
-						case "clear":
-							g.ClearBottom();
-							line = 4;
-							break;
+								break;
 
-						case "sound:VeryGood":
-							SoundMan.PlaySound(LotaSound.VeryGood);
-							break;
+							case "clear":
+								g.ClearBottom();
+								line = 4;
+								break;
 
-						case "wait:off":
-							waiting = false;
-							break;
+							case "sound:VeryGood":
+								SoundMan.PlaySound(LotaSound.VeryGood);
+								break;
 
-						case "wait:on":
-							waiting = true;
-							break;
+							case "wait:off":
+								waiting = false;
+								break;
 
-						default:
-							System.Diagnostics.Trace.WriteLine("Failed to understand command: " + substr);
-							break;
+							case "wait:on":
+								waiting = true;
+								break;
+
+							default:
+								System.Diagnostics.Trace.WriteLine("Failed to understand command: " + substr);
+								break;
+						}
 					}
 				}
 
@@ -234,6 +245,11 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			}
 
 			return count;
+		}
+
+		public virtual void Draw(Rectangle displayRect)
+		{
+			ExhibitInfo.DrawImage(displayRect, ImageID);
 		}
 	}
 
