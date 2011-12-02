@@ -88,6 +88,8 @@
       <AskUser>False</AskUser>
       <TargetX>172</TargetX>
       <TargetY>92</TargetY>
+      <CommandText>
+      </CommandText>
     </Item>
   </Events>
   <Roofs array="true" type="ERY.Xle.Roof">
@@ -566,5 +568,5 @@ AAAAkwAAAJMAAACTAAAAkwAAAJMAAACTAAAAkwAAAJMAAACTAAAAkwAAAJMAAACTAAAAkwAAAJMA
 AACTAAAAkwAAAJMAAACTAAAAkwAAAJMAAACTAAAAkwAAAJMAAACTAAAAkwAAAJMAAACTAAAAkwAA
 AJMAAABOAAAATQAAAE4AAABNAAAATgAAAE0AAABOAAAATgAAAE0AAABOAAAATgAAAE0AAABOAAAA
 TQAAAE4AAABOAAAATgAAAE4AAABOAAAATQAAAE4AAAA=</MapData>
-  <Mail array="true" encoding="Base64">DgAAAA==</Mail>
+  <Mail array="true" encoding="Base64">DgAAABQAAAA=</Mail>
 </XleRoot>
