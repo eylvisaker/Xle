@@ -16,9 +16,9 @@ namespace ERY.Xle.XleMapTypes
 			Wall,
 		}
 
-		enum ExtraType
+		protected enum ExtraType
 		{
-			None = -1,
+			None,
 			Chest,
 			Box,
 			GoUp,
@@ -26,6 +26,12 @@ namespace ERY.Xle.XleMapTypes
 			Needle,
 			Slime,
 			TripWire,
+			DisplayCaseLeft,
+			DisplayCaseRight,
+			TorchLeft,
+			TorchRight,
+			DoorLeft,
+			DoorRight,
 		}
 
 		protected abstract Surface Backdrop { get; }
@@ -41,6 +47,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			get { return g.MuseumExhibitStatic; }
 		}
+		protected virtual bool ExtraScale { get { return false; } }
 
 		readonly Size imageSize = new Size(368, 272);
 
@@ -84,12 +91,18 @@ namespace ERY.Xle.XleMapTypes
 
 			for (int distance = 0; distance < maxDistance; distance++)
 			{
-				loc.X = x + distance * stepDir.X;
-				loc.Y = y + distance * stepDir.Y;
+				for (int dir = -1; dir <= 1; dir++)
+				{
+					loc.X = x + distance * stepDir.X + dir * rightDir.X;
+					loc.Y = y + distance * stepDir.Y + dir * rightDir.Y;
 
-				int val = this[loc.X, loc.Y];
+					int val = this[loc.X, loc.Y];
 
-				DrawExtras(val, loc, distance, inRect);
+					if (val == 0) continue;
+					if (val == 0x10) continue;
+
+					DrawExtras(val, dir, loc, distance, inRect);
+				}
 			}
 		}
 
@@ -219,14 +232,14 @@ namespace ERY.Xle.XleMapTypes
 			return retval;
 		}
 
-		private void DrawExtras(int val, Point loc, int distance, Rectangle mainDestRect)
+		private void DrawExtras(int val, int side, Point loc, int distance, Rectangle mainDestRect)
 		{
-			ExtraType extraType = GetExtraType(val);
+			ExtraType extraType = GetExtraType(val, side);
 
 			if (extraType == ExtraType.None)
 				return;
 
-			DungeonExtraInfo info = XleCore.DungeonExtraInfo[(int)extraType];
+			Map3DExtraInfo info = XleCore.Map3DExtraInfo[(int)extraType];
 
 			if (info.Images.ContainsKey(distance) == false)
 				return;
@@ -234,60 +247,87 @@ namespace ERY.Xle.XleMapTypes
 			Rectangle srcRect = info.Images[distance].SrcRect;
 			Rectangle destRect = info.Images[distance].DestRect;
 
-			//srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
+			if (ExtraScale)
+			{
+				srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
+			}
 
 			destRect.X += mainDestRect.X;
 			destRect.Y += mainDestRect.Y;
 
 			Extras.Draw(srcRect, destRect);
+
+			AnimateExtra(extraType, loc, distance, destRect.Location);
 		}
 
-		private static ExtraType GetExtraType(int val)
+		private void AnimateExtra(ExtraType extraType, Point loc, int distance, Point extraDestRect)
 		{
-			ExtraType extraType = ExtraType.None;
+			Map3DExtraInfo info = XleCore.Map3DExtraInfo[(int)extraType];
+			if (info.Images.ContainsKey(distance) == false)
+				return;
 
-			switch (val)
+			var img = info.Images[distance];
+
+			if (img.Animations.Count == 0)
+				return;
+
+			Color clr = ExtraColor(loc);
+			var anim = img.Animations[img.CurrentAnimation];
+
+			if (anim.FrameTime > 0)
 			{
-				case 0x11:
-					extraType = ExtraType.GoUp;
-					break;
-				case 0x12:
-					extraType = ExtraType.GoDown;
-					break;
-				case 0x13:
-					extraType = ExtraType.Needle;
-					break;
-				case 0x14:
-					extraType = ExtraType.Slime;
-					break;
-				case 0x15:
-					extraType = ExtraType.TripWire;
-					break;
-				case 0x1e:
-					extraType = ExtraType.Box;
-					break;
-				case 0x30:
-				case 0x31:
-				case 0x32:
-				case 0x33:
-				case 0x34:
-				case 0x35:
-				case 0x36:
-				case 0x37:
-				case 0x38:
-				case 0x39:
-				case 0x3a:
-				case 0x3b:
-				case 0x3c:
-				case 0x3d:
-				case 0x3e:
-				case 0x3f:
-					extraType = ExtraType.Chest;
-					break;
+				anim.TimeToNextFrame -= Display.DeltaTime;
+				if (anim.TimeToNextFrame < 0)
+				{
+					anim.CurrentFrame++;
+					anim.TimeToNextFrame += anim.FrameTime;
 
+					if (anim.TimeToNextFrame < 0) anim.TimeToNextFrame = 0;
+
+					if (anim.CurrentFrame >= anim.Images.Count)
+					{
+						if (img.Animations.Count > 1)
+						{
+							int lastAnim = img.CurrentAnimation;
+
+							img.CurrentAnimation = XleCore.random.Next(img.Animations.Count - 1);
+							if (img.CurrentAnimation == lastAnim)
+								img.CurrentAnimation++;
+
+							anim = img.Animations[img.CurrentAnimation];
+							anim.CurrentFrame = 0;
+						}
+						else
+							anim.CurrentFrame = 0;
+					}
+				}
 			}
-			return extraType;
+
+			int currentFrame = anim.CurrentFrame;
+
+			Rectangle srcRect = anim.Images[currentFrame].SrcRect;
+			Rectangle destRect = anim.Images[currentFrame].DestRect;
+
+			if (ExtraScale)
+			{
+				srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
+				Extras.InterpolationHint = InterpolationMode.Fastest;
+			}
+
+			destRect.X += extraDestRect.X;
+			destRect.Y += extraDestRect.Y;
+
+			Extras.Color = clr;
+			Extras.Draw(srcRect, destRect);
+			Extras.Color = XleColor.White;
 		}
+
+		protected virtual Color ExtraColor(Point location)
+		{
+			return Color.White;
+		}
+
+		protected abstract ExtraType GetExtraType(int val, int side);
 
 		private void DrawWall(int distance, Rectangle main_destRect)
 		{

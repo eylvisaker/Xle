@@ -585,6 +585,52 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
+		protected override Map3D.ExtraType GetExtraType(int val, int side)
+		{
+			ExtraType extraType = ExtraType.None;
+
+			switch (val)
+			{
+				case 0x11:
+					extraType = ExtraType.GoUp;
+					break;
+				case 0x12:
+					extraType = ExtraType.GoDown;
+					break;
+				case 0x13:
+					extraType = ExtraType.Needle;
+					break;
+				case 0x14:
+					extraType = ExtraType.Slime;
+					break;
+				case 0x15:
+					extraType = ExtraType.TripWire;
+					break;
+				case 0x1e:
+					extraType = ExtraType.Box;
+					break;
+				case 0x30:
+				case 0x31:
+				case 0x32:
+				case 0x33:
+				case 0x34:
+				case 0x35:
+				case 0x36:
+				case 0x37:
+				case 0x38:
+				case 0x39:
+				case 0x3a:
+				case 0x3b:
+				case 0x3c:
+				case 0x3d:
+				case 0x3e:
+				case 0x3f:
+					extraType = ExtraType.Chest;
+					break;
+
+			}
+			return extraType;
+		}
 		string TrapName(int val)
 		{
 			switch (val)

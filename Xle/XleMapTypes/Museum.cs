@@ -102,6 +102,10 @@ namespace ERY.Xle.XleMapTypes
 		{
 			get { return g.MuseumDoor; }
 		}
+		protected override Surface Extras
+		{
+			get { return g.MuseumExtras; }
+		}
 
 		#endregion
 
@@ -142,74 +146,14 @@ namespace ERY.Xle.XleMapTypes
 
 			}
 		}
-		
-
-		protected override void OnPlayerEnterPosition(Player player, int x, int y)
-		{
-			if (x == 12 && y == 13)
-			{
-				if (player.museum[1] < 3)
-				{
-					(mExhibits[0x51] as MuseumDisplays.Welcome).PlayGoldArmbandMessage(player);
-					player.museum[1] = 3;
-
-					CheckExhibitStatus(player);
-				}
-			}
-		}
-
-
 
 		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
 		{
 			fontColor = XleColor.White;
 
-
 			boxColor = XleColor.Gray;
 			innerColor = XleColor.Yellow;
 			vertLine = 15 * 16;
-		}
-
-
-
-		public override bool PlayerXamine(Player player)
-		{
-			g.AddBottom();
-
-			if (InteractWithDisplay(player))
-				return true;
-
-			g.AddBottom("You are in an ancient museum.");
-
-			return true;
-		}
-
-		public override bool PlayerUse(Player player, int item)
-		{
-			// twist gold armband
-			if (item == 1)
-			{
-				Point faceDir = StepDirection(player.FaceDirection);
-				Point test = new Point(player.X + faceDir.X, player.Y + faceDir.Y);
-
-				// door value
-				if (this[test.X, test.Y] == 0x02)
-				{
-					XleCore.wait(1000);
-
-					player.SetMap(1, 114, 42);
-
-					g.ClearBottom();
-				}
-				else
-				{
-					g.AddBottom("The gold armband hums softly.");
-				}
-
-				return true;
-			}
-
-			return false;
 		}
 
 		public override void OnLoad(Player player)
@@ -239,10 +183,10 @@ namespace ERY.Xle.XleMapTypes
 				}
 			}
 
-			exitloop:
+		exitloop:
 
 			// check to see if the caretaker wants to see the player
-			var info = (MuseumDisplays.Information )mExhibits[0x50];
+			var info = (MuseumDisplays.Information)mExhibits[0x50];
 
 			if (info.ShouldLevelUp(player))
 			{
@@ -255,7 +199,56 @@ namespace ERY.Xle.XleMapTypes
 					XleCore.wait(50);
 			}
 		}
+		protected override void OnPlayerEnterPosition(Player player, int x, int y)
+		{
+			if (x == 12 && y == 13)
+			{
+				if (player.museum[1] < 3)
+				{
+					(mExhibits[0x51] as MuseumDisplays.Welcome).PlayGoldArmbandMessage(player);
+					player.museum[1] = 3;
 
+					CheckExhibitStatus(player);
+				}
+			}
+		}
+
+		protected override Color ExtraColor(Point location)
+		{
+			var ex = ExhibitAt(location.X, location.Y);
+
+			if (ex == null)
+				return base.ExtraColor(location);
+
+			return ex.ExhibitColor;
+		}
+
+		protected override Map3D.ExtraType GetExtraType(int val, int side)
+		{
+			if (val >= 0x50 && val <= 0x5f)
+			{
+				if (side == -1) return ExtraType.DisplayCaseLeft;
+				if (side == 1) return ExtraType.DisplayCaseRight;
+			}
+			if (val == 1)
+			{
+				if (side == -1) return ExtraType.TorchLeft;
+				if (side == 1) return ExtraType.TorchRight;
+			}
+
+			return ExtraType.None;
+		}
+		protected override bool ExtraScale
+		{
+			get
+			{
+				return true;
+			}
+		}
+		private bool IsExhibitAt(Point location)
+		{
+			return IsExhibit(this[location.X, location.Y]);
+		}
 		private bool IsExhibit(int value)
 		{
 			if ((value & 0xf0) == 0x50)
@@ -275,7 +268,7 @@ namespace ERY.Xle.XleMapTypes
 
 			g.MuseumExhibitStatic.Draw(displayRect);
 			g.MuseumCloseup.Draw(inRect);
-			
+
 			DrawExhibitText(inRect, mCloseup);
 
 			if (mDrawStatic == false)
@@ -284,16 +277,24 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
+		private MuseumDisplays.Exhibit ExhibitAt(int x, int y)
+		{
+			int tileAt = this[x, y];
+
+			if (mExhibits.ContainsKey(tileAt) == false)
+				return null;
+
+			return mExhibits[tileAt];
+		}
+		
 		private bool InteractWithDisplay(Player player)
 		{
 			Point stepDir = StepDirection(player.FaceDirection);
 
-			int tileAt = this[player.X + stepDir.X, player.Y + stepDir.Y];
+			MuseumDisplays.Exhibit ex = ExhibitAt(player.X + stepDir.X, player.Y + stepDir.Y);
 
-			if (mExhibits.ContainsKey(tileAt) == false)
+			if (ex == null)
 				return false;
-
-			MuseumDisplays.Exhibit ex = mExhibits[tileAt];
 
 			DrawCloseup = true;
 			mCloseup = ex;
@@ -402,7 +403,7 @@ namespace ERY.Xle.XleMapTypes
 
 		private void UseCoin(Player player, MuseumDisplays.Coin coin)
 		{
-			
+
 		}
 
 		private bool PlayerHasCoin(Player player, MuseumDisplays.Coin coin)
@@ -413,6 +414,44 @@ namespace ERY.Xle.XleMapTypes
 
 		#endregion
 
+		public override bool PlayerXamine(Player player)
+		{
+			g.AddBottom();
+
+			if (InteractWithDisplay(player))
+				return true;
+
+			g.AddBottom("You are in an ancient museum.");
+
+			return true;
+		}
+		public override bool PlayerUse(Player player, int item)
+		{
+			// twist gold armband
+			if (item == 1)
+			{
+				Point faceDir = StepDirection(player.FaceDirection);
+				Point test = new Point(player.X + faceDir.X, player.Y + faceDir.Y);
+
+				// door value
+				if (this[test.X, test.Y] == 0x02)
+				{
+					XleCore.wait(1000);
+
+					player.SetMap(1, 114, 42);
+
+					g.ClearBottom();
+				}
+				else
+				{
+					g.AddBottom("The gold armband hums softly.");
+				}
+
+				return true;
+			}
+
+			return false;
+		}
 		public override bool PlayerFight(Player player)
 		{
 			g.AddBottom();
@@ -420,7 +459,6 @@ namespace ERY.Xle.XleMapTypes
 
 			return true;
 		}
-
 		public override bool PlayerRob(Player player)
 		{
 			g.AddBottom();
@@ -428,7 +466,6 @@ namespace ERY.Xle.XleMapTypes
 
 			return true;
 		}
-
 		protected override bool PlayerSpeakImpl(Player player)
 		{
 			g.AddBottom();
@@ -436,7 +473,6 @@ namespace ERY.Xle.XleMapTypes
 
 			return true;
 		}
-
 		public override bool PlayerTake(Player player)
 		{
 			g.AddBottom();
@@ -475,10 +511,10 @@ namespace ERY.Xle.XleMapTypes
 			Color clr = exhibit.TextColor;
 			XleCore.WriteText(px, py, exhibit.Name, clr);
 		}
-		
+
 		int anim;
 		int offset = 0;
-		
+
 		private void DrawExhibitStatic(Rectangle destRect, Color clr, int distance)
 		{
 			Rectangle destOffset = new Rectangle(96, 96, 160, 96);
@@ -490,48 +526,48 @@ namespace ERY.Xle.XleMapTypes
 				destOffset.Width = 112;
 				destOffset.Height = 64;
 			}
-		
+
 			Rectangle srcRect = new Rectangle(0, 0, destOffset.Width, destOffset.Height);
 			Rectangle oldDest = destRect;
-			
+
 			oldDest.X += destOffset.X;
 			oldDest.Y += destOffset.Y;
 			oldDest.Width = srcRect.Width;
 			oldDest.Height = srcRect.Height;
-			
+
 			int freq = 5;
-			
+
 			if (1 == 1)
 			{
 				srcRect.X = offset;
 				srcRect.Width -= srcRect.X;
-		
+
 				destRect.X += destOffset.X;
 				destRect.Y += destOffset.Y;
 				destRect.Width = srcRect.Width;
 				destRect.Height = srcRect.Height;
-		
+
 				MuseumExhibitStatic.Color = clr;
 				MuseumExhibitStatic.Draw(srcRect, destRect);
-				
+
 				destRect = Rectangle.FromLTRB(destRect.Right, destRect.Top, oldDest.Right, destRect.Bottom);
 				srcRect.X = 0;
 				srcRect.Width = destRect.Width;
-				
+
 				MuseumExhibitStatic.Draw(srcRect, destRect);
 			}
 			else
 			{
-				
+
 				destRect.X += destOffset.X;
 				destRect.Y += destOffset.Y;
 				destRect.Width = srcRect.Width;
 				destRect.Height = srcRect.Height;
-		
+
 				MuseumExhibitStatic.Color = clr;
 				MuseumExhibitStatic.Draw(srcRect, destRect);
 			}
-			
+
 			anim++;
 			if (anim % freq == 0)
 				offset = XleCore.random.Next((destOffset.Width - 16) / 4) * 4;

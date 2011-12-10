@@ -89,9 +89,9 @@ namespace ERY.Xle
 		private EquipmentList mWeaponList = new EquipmentList();
 		private EquipmentList mArmorList = new EquipmentList();
 		private Dictionary<int, string> mQualityList = new Dictionary<int, string>();
-		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int,XleMapTypes.MuseumDisplays.ExhibitInfo>();
-		private Dictionary<int, XleMapTypes.DungeonExtraInfo> mDungeonExtras = new Dictionary<int, XleMapTypes.DungeonExtraInfo>();
- 
+		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo>();
+		private Dictionary<int, XleMapTypes.Map3DExtraInfo> mMap3DExtras = new Dictionary<int, XleMapTypes.Map3DExtraInfo>();
+
 		private Data.AgateDataImport mDatabase;
 
 		public static Color FontColor { get; private set; }
@@ -185,13 +185,13 @@ namespace ERY.Xle
 						break;
 
 					case "DungeonExtras":
-						LoadDungeonExtraInfo(root.ChildNodes[i]);
+						Load3DExtraInfo(root.ChildNodes[i]);
 						break;
 				}
 			}
 		}
 
-		
+
 		private static void LoadDatabase()
 		{
 			AgateLib.Data.AgateDatabase _db = AgateLib.Data.AgateDatabase.FromFile("Lota.adb");
@@ -295,7 +295,7 @@ namespace ERY.Xle
 						if (child.Name == "Text")
 						{
 							int textID = int.Parse(child.Attributes["ID"].Value);
-							string text = child.InnerText;
+							string text = TrimExhibitText(child.InnerText);
 
 							info.Text.Add(textID, text);
 						}
@@ -305,7 +305,14 @@ namespace ERY.Xle
 				}
 			}
 		}
-		private void LoadDungeonExtraInfo(XmlNode xmlNode)
+
+		private string TrimExhibitText(string text)
+		{
+			var regex = new System.Text.RegularExpressions.Regex("\r\n *");
+
+			return regex.Replace(text.Trim(), "\r\n");
+		}
+		private void Load3DExtraInfo(XmlNode xmlNode)
 		{
 			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
 			{
@@ -316,7 +323,7 @@ namespace ERY.Xle
 					int id = int.Parse(node.Attributes["ID"].Value);
 					string name = node.Attributes["Name"].Value;
 
-					var info = new XleMapTypes.DungeonExtraInfo();
+					var info = new XleMapTypes.Map3DExtraInfo();
 
 					foreach (XmlNode child in node.ChildNodes)
 					{
@@ -326,16 +333,46 @@ namespace ERY.Xle
 							Rectangle srcRect = ParseRectangle(child.Attributes["srcRect"].Value);
 							Rectangle destRect = ParseRectangle(child.Attributes["destRect"].Value);
 
-							var img = new XleMapTypes.DungeonExtraImage();
+							var img = new XleMapTypes.Map3DExtraImage();
 
 							img.SrcRect = srcRect;
 							img.DestRect = destRect;
 
 							info.Images[distance] = img;
+
+							foreach (XmlNode animNode in child.ChildNodes)
+							{
+								if (animNode.Name != "Animation")
+									continue;
+
+								var anim = new XleMapTypes.Map3DExtraAnimation();
+
+								if (animNode.Attributes["frameTime"] != null)
+									anim.FrameTime = double.Parse(animNode.Attributes["frameTime"].Value);
+
+								foreach (XmlNode frameNode in animNode.ChildNodes)
+								{
+									if (frameNode.Name != "Frame")
+										continue;
+
+									srcRect = ParseRectangle(frameNode.Attributes["srcRect"].Value);
+									destRect = ParseRectangle(frameNode.Attributes["destRect"].Value);
+
+									var frame = new XleMapTypes.Map3DExtraImage();
+
+									frame.SrcRect = srcRect;
+									frame.DestRect = destRect;
+
+									anim.Images.Add(frame);
+								}
+
+								if (anim.Images.Count > 0)
+									img.Animations.Add(anim);
+							}
 						}
 					}
 
-					mDungeonExtras.Add(id, info);
+					mMap3DExtras.Add(id, info);
 				}
 			}
 		}
@@ -379,7 +416,7 @@ namespace ERY.Xle
 		{
 			get { return inst.mExhibitInfo; }
 		}
-		public static Dictionary<int, XleMapTypes.DungeonExtraInfo> DungeonExtraInfo { get { return inst.mDungeonExtras; } }
+		public static Dictionary<int, XleMapTypes.Map3DExtraInfo> Map3DExtraInfo { get { return inst.mMap3DExtras; } }
 
 		public static Data.AgateDataImport Database
 		{
@@ -439,7 +476,7 @@ namespace ERY.Xle
 			UpdateAnim();
 
 			Display.BeginFrame();
-			
+
 			Draw();
 
 			Display.EndFrame();
@@ -563,7 +600,7 @@ namespace ERY.Xle
 			if (map.AutoDrawPlayer)
 			{
 				DrawRafts(mapRect);
-				
+
 				if (player.OnRaft == 0)
 					DrawCharacter(g.AnimFrame, vertLine);
 			}
@@ -689,7 +726,7 @@ namespace ERY.Xle
 					  int length, Color boxColor)
 		{
 			int boxWidth = 12;
-			
+
 			top += 2;
 
 			if (direction == 1)
@@ -1089,6 +1126,9 @@ namespace ERY.Xle
 		{
 			Timing.StopWatch watch = new Timing.StopWatch();
 
+			if (Display.CurrentWindow.IsClosed)
+				return;
+
 			do
 			{
 				inst.UpdateAnim();
@@ -1257,7 +1297,7 @@ namespace ERY.Xle
 						key = keys[0];
 					else
 						key = KeyCode.Escape;
-					
+
 					break;
 				}
 
@@ -1462,7 +1502,7 @@ namespace ERY.Xle
 					{
 						tempItem = items[i];
 
-						if (key - KeyCode.A == 
+						if (key - KeyCode.A ==
 							char.ToUpperInvariant(tempItem[0]) - 'A')
 						{
 							value = i;

@@ -172,6 +172,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 					{
 						switch (substr)
 						{
+							case "": break;
 							case "white": clr = XleColor.White; break;
 							case "cyan": clr = XleColor.Cyan; break;
 							case "yellow": clr = XleColor.Yellow; break;

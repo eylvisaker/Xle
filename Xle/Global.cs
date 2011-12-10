@@ -85,12 +85,12 @@ namespace ERY.Xle
 		static public Surface Monsters { get { return pOverlandMonsters; } }				// returns the handle to the monsters resource
 
 		static public Surface MuseumBackdrop { get; private set; }
-		static public Surface MuseumWall { get ; private set; }			// stores the pointer to the wall texture
-		static public Surface MuseumSidePassage { get ; private set; }
-		static public Surface MuseumDoor { get ; private set; }
+		static public Surface MuseumWall { get; private set; }			// stores the pointer to the wall texture
+		static public Surface MuseumSidePassage { get; private set; }
+		static public Surface MuseumDoor { get; private set; }
 		static public Surface MuseumExhibitFrame { get; private set; }
 		static public Surface MuseumExhibitStatic { get; private set; }
-
+		static public Surface MuseumExtras { get; private set; }
 		public static Surface MuseumCloseup { get; private set; }
 
 		public static Surface DungeonBlueBackdrop { get; private set; }
@@ -171,13 +171,7 @@ namespace ERY.Xle
 			}
 		}
 
-
-
-
 		// menu functions
-
-
-
 
 		static public SubMenu subMenu;					// the submenu
 		static public bool LeftMenuActive;				// is the left menu active?
@@ -213,13 +207,11 @@ namespace ERY.Xle
 			AddBottom(line, colors);
 		}
 
-
 		public static void AddBottomCentered(string p)
 		{
 			BottomCenterString(ref p);
 			AddBottom(p);
 		}
-
 		public static void AddBottomCentered(string p, Color color)
 		{
 			BottomCenterString(ref p);
@@ -299,7 +291,7 @@ namespace ERY.Xle
 			}
 
 			UpdateBottom(line, loc, colors);
-		}		
+		}
 		/// <summary>
 		/// This function updates a line in the action window.
 		/// </summary>
@@ -309,7 +301,6 @@ namespace ERY.Xle
 		{
 			UpdateBottom(builder.Text, lineNumber, builder.Colors);
 		}
-
 		/// <summary>
 		/// This function updates a line in the action window.
 		/// </summary>
@@ -336,8 +327,6 @@ namespace ERY.Xle
 
 			}
 		}
-
-
 		static public void UpdateBottom(string line, Color color)
 		{
 			Color[] colors = new Color[40];
@@ -389,7 +378,6 @@ namespace ERY.Xle
 
 		}
 
-
 		static public void ClearBottom()
 		{
 			for (int i = 0; i < 5; i++)
@@ -432,6 +420,7 @@ namespace ERY.Xle
 			MuseumExhibitFrame = new Surface("ExhibitFrame.png");
 			MuseumExhibitStatic = new Surface("ExhibitStatic.png");
 			MuseumCloseup = new Surface("MuseumCloseup.png");
+			MuseumExtras = new Surface("MuseumExtras.png");
 
 			DungeonBlueBackdrop = new Surface("DungeonBackdropBlue.png");
 			DungeonBlueSidePassage = new Surface("DungeonSidePassageBlue.png");

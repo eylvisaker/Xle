@@ -78,372 +78,503 @@
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>
     <Exhibit ID="0" Image="Information.png">
-      <Text ID="0">`white` You have done well since I last saw
- you.  By my power as caretaker...
- </Text>
-      <Text ID="1">`white`"You must do more before I can help
-you again.  You may use the museum
-exhibits or explore the lands
-outside.`pause`</Text>
-      <Text ID="2">`white`"Welcome to our museum!  I am the
-museum caretaker.  Although my
-influence outside this museum is
-limited, I'll provide you with help
-and information whenever I can."`pause`
-`clear`"Right now, you should explore the
-world around you.  Feel free to use
-the museum exhibits or, if you'd
-rather, use the doors to go directly 
-outside."`pause`</Text>
-      <Text ID="3">`white`"I've heard that your magic scroll
-was stolen.  My sources say that it
-was sold a few days later on the 
-black market."`pause`</Text>
-      <Text ID="5">`white`"Perhaps you are now strong enough to
-help me.  Long ago,  two priceless
-specimens were stolen from the museum:
-the jewelled `cyan`crown`white` and `cyan`sceptor`white` of
-mancella."`pause`
-`clear`"Although museum policy will not let
-`yellow`me`white` recover them, perhaps `yellow`you`white` would
-like to try.  I don't know where the
-crown and sceptor are, but I have a
-key which should help you."`pause`
-`clear`"Naturally, there's a reward."`pause`</Text>
-      <Text ID="6">`white`"Thank you and good luck.  Here is
-the key.  If you find the sceptor and
-crown, please bring them back to this
-exhibit."`pause`</Text>
-      <Text ID="7">`white`"Congratulations on finding
-the sceptor!  While you were away, I
-discovered one more thing about the
-crown.  It is stored far away from
-the castle, deep underground."`pause`</Text>
-      <Text ID="8">`white`"I'm glad you've found the crown!
-I've discovered one more thing about
-the sceptor.  It is hidden somewhere
-on this continent."</Text>
-      <Text ID="10">`white`"The sceptor and crown!  This is truly
-a great day for the tarmalon museum.
-I want you to have this `cyan`magic ice`white`.  It
-may help you someday.  It works best 
-inside."`pause`</Text>
+      <Text ID="0">
+        `white` You have done well since I last saw
+        you.  By my power as caretaker...
+      </Text>
+      <Text ID="1">
+        `white`"You must do more before I can help
+        you again.  You may use the museum
+        exhibits or explore the lands
+        outside.`pause`
+      </Text>
+      <Text ID="2">
+        `white`"Welcome to our museum!  I am the
+        museum caretaker.  Although my
+        influence outside this museum is
+        limited, I'll provide you with help
+        and information whenever I can."`pause`
+        `clear`"Right now, you should explore the
+        world around you.  Feel free to use
+        the museum exhibits or, if you'd
+        rather, use the doors to go directly
+        outside."`pause`
+      </Text>
+      <Text ID="3">
+        `white`"I've heard that your magic scroll
+        was stolen.  My sources say that it
+        was sold a few days later on the
+        black market."`pause`
+      </Text>
+      <Text ID="5">
+        `white`"Perhaps you are now strong enough to
+        help me.  Long ago,  two priceless
+        specimens were stolen from the museum:
+        the jewelled `cyan`crown`white` and `cyan`sceptor`white` of
+        mancella."`pause`
+        `clear`"Although museum policy will not let
+        `yellow`me`white` recover them, perhaps `yellow`you`white` would
+        like to try.  I don't know where the
+        crown and sceptor are, but I have a
+        key which should help you."`pause`
+        `clear`"Naturally, there's a reward."`pause`
+      </Text>
+      <Text ID="6">
+        `white`"Thank you and good luck.  Here is
+        the key.  If you find the sceptor and
+        crown, please bring them back to this
+        exhibit."`pause`
+      </Text>
+      <Text ID="7">
+        `white`"Congratulations on finding
+        the sceptor!  While you were away, I
+        discovered one more thing about the
+        crown.  It is stored far away from
+        the castle, deep underground."`pause`
+      </Text>
+      <Text ID="8">
+        `white`"I'm glad you've found the crown!
+        I've discovered one more thing about
+        the sceptor.  It is hidden somewhere
+        on this continent."
+      </Text>
+      <Text ID="10">
+        `white`"The sceptor and crown!  This is truly
+        a great day for the tarmalon museum.
+        I want you to have this `cyan`magic ice`white`.  It
+        may help you someday.  It works best
+        inside."`pause`
+      </Text>
       <Text ID="11">A merchant in big rapids</Text>
-      <Text ID="12">`white`"Laingsburg is under attack.  Rumor
-has it that the wizards' compendium
-is behind it all."`pause`</Text>
-      <Text ID="13">`white`"The healer in holy point is now
-missing.  I fear that the entire
-planet is in great danger.   If you
-don't recover the compendium soon,
-all will be lost."`pause`</Text>
-      <Text ID="20">`white`"The evil warlord is apparently using
-the wizards' compendium to create 
-powerful spells of destruction."`pause`</Text>
-      <Text ID="21">`white`"The warlord lives in a fortress far
-across the sea.  It is said to be very
-difficult to reach."`pause`</Text>
+      <Text ID="12">
+        `white`"Laingsburg is under attack.  Rumor
+        has it that the wizards' compendium
+        is behind it all."`pause`
+      </Text>
+      <Text ID="13">
+        `white`"The healer in holy point is now
+        missing.  I fear that the entire
+        planet is in great danger.   If you
+        don't recover the compendium soon,
+        all will be lost."`pause`
+      </Text>
+      <Text ID="20">
+        `white`"The evil warlord is apparently using
+        the wizards' compendium to create
+        powerful spells of destruction."`pause`
+      </Text>
+      <Text ID="21">
+        `white`"The warlord lives in a fortress far
+        across the sea.  It is said to be very
+        difficult to reach."`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="1" Image="Welcome.png">
-      <Text ID="1">Welcome, noble traveler, to this
-galactic museum on the planet of 
-tarmalon.  The museum provides `white`views
-`cyan`and `yellow`gateways`cyan` to the many fascinating
-aspects of planetary life.`pause`
-`clear`Use standard coins to view exhibits.
-Please do not give away coins, or
-feed the tarmalon natives.  Have a
-nice day!`pause`</Text>
-      <Text ID="2">Your gold bracelet glows.  A strange
-voice sounds inside your head...
-`white`Do not be alarmed.  You are just
-hearing my thoughts, as recorded by
-the bracelet.`pause`
-`clear`Since you are now wearing my bracelet,
-I must be dead.  I therefore charge
-you to continue my mission:  To
-neutralize the evil scroll of spells
-before it destroys everything!`pause`
-`clear`You see, the leather scroll you now
-carry is the immensely evil `yellow`wizards'
-compendium`white`.  Since it cannot be
-destroyed outright, you must learn
-how to render its magic harmless.`pause`
-`clear`Beware!  There are those who would
-think nothing of killing you in order
-to possess the magic compendium.`pause`
-`clear`There is little more to tell.  By
-now, you must be inside the galactic
-museum, your entrance gained by the
-bracelet and my obsidian code-disk.`pause`
-`clear`This museum was built by a race of
-ancient beings, who constructed many
-such museums on many different
-planets.  These "ancients" designed
-each museum for their own amusement.`pause`
-`clear`If you're clever, you'll find many
-answers here.  Yet, since you're not
-one of the ancients, you'll have to
-scrounge around the countryside for
-coins to view exhibits.`pause`
-`clear``yellow`
-         Remember your quest.
+      <Text ID="1">
+        Welcome, noble traveler, to this
+        galactic museum on the planet of
+        tarmalon.  The museum provides `white`views
+        `cyan`and `yellow`gateways`cyan` to the many fascinating
+        aspects of planetary life.`pause`
+        `clear`Use standard coins to view exhibits.
+        Please do not give away coins, or
+        feed the tarmalon natives.  Have a
+        nice day!`pause`
+      </Text>
+      <Text ID="2">
+        Your gold bracelet glows.  A strange
+        voice sounds inside your head...
+        `white`Do not be alarmed.  You are just
+        hearing my thoughts, as recorded by
+        the bracelet.`pause`
+        `clear`Since you are now wearing my bracelet,
+        I must be dead.  I therefore charge
+        you to continue my mission:  To
+        neutralize the evil scroll of spells
+        before it destroys everything!`pause`
+        `clear`You see, the leather scroll you now
+        carry is the immensely evil `yellow`wizards'
+        compendium`white`.  Since it cannot be
+        destroyed outright, you must learn
+        how to render its magic harmless.`pause`
+        `clear`Beware!  There are those who would
+        think nothing of killing you in order
+        to possess the magic compendium.`pause`
+        `clear`There is little more to tell.  By
+        now, you must be inside the galactic
+        museum, your entrance gained by the
+        bracelet and my obsidian code-disk.`pause`
+        `clear`This museum was built by a race of
+        ancient beings, who constructed many
+        such museums on many different
+        planets.  These "ancients" designed
+        each museum for their own amusement.`pause`
+        `clear`If you're clever, you'll find many
+        answers here.  Yet, since you're not
+        one of the ancients, you'll have to
+        scrounge around the countryside for
+        coins to view exhibits.`pause`
+        `clear``yellow`
+        ``         Remember your quest.
 
-              Good luck.`pause`
- </Text>
+        ``              Good luck.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="2" Image="Weaponry.png">
-      <Text ID="1">`image:0`Eons ago, nomadic warriors roamed the
-planet tarmalon.  They hunted and
-fought with stone knives, much like
-the one you see in this exhibit.`pause`
-`clear`This knife is primitive - but
-effective.  As a museum patron, you 
-may take it for as long as you like.
-The knife is now in your inventory.`pause`</Text>
-      <Text ID="2">`image:1`As Tarmalon culture advanced, weapons
-developed a ceremonial importance.
-In this exhibit you see the famed
-`white`staff of sacrifice.`cyan`  It was used to
-coronate kings.`pause`
-`clear`Although intended for ceremony, the
-staff is actually bladed for combat.
-As a museum patron, you may use this
-weapon for as long as you like.  It
-is now in your possession.`pause`</Text>
+      <Text ID="1">
+        `image:0`Eons ago, nomadic warriors roamed the
+        planet tarmalon.  They hunted and
+        fought with stone knives, much like
+        the one you see in this exhibit.`pause`
+        `clear`This knife is primitive - but
+        effective.  As a museum patron, you
+        may take it for as long as you like.
+        The knife is now in your inventory.`pause`
+      </Text>
+      <Text ID="2">
+        `image:1`As Tarmalon culture advanced, weapons
+        developed a ceremonial importance.
+        In this exhibit you see the famed
+        `white`staff of sacrifice.`cyan`  It was used to
+        coronate kings.`pause`
+        `clear`Although intended for ceremony, the
+        staff is actually bladed for combat.
+        As a museum patron, you may use this
+        weapon for as long as you like.  It
+        is now in your possession.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="3" Image="Thornberry.png">
-      <Text ID="1">This exhibit shows a typical tarmalon
-town called thornberry.  The town was 
-established over 100 lifespans ago by
-a group of wealthy merchants.`pause`
-`clear`Thornberry has changed little since
-its founding.  The rich and the poor
-still live on opposite sides of town
-separated by a massive stone wall.`pause`
-`clear`Despite its inequity, thornberry is
-a bustling community, containing
-shops, craftsmen, banks, and places
-of amusement.`pause`
-</Text>
-      <Text ID="2">Here's some `yellow`gold`cyan` to spend on
-your trip.</Text>
+      <Text ID="1">
+        This exhibit shows a typical tarmalon
+        town called thornberry.  The town was
+        established over 100 lifespans ago by
+        a group of wealthy merchants.`pause`
+        `clear`Thornberry has changed little since
+        its founding.  The rich and the poor
+        still live on opposite sides of town
+        separated by a massive stone wall.`pause`
+        `clear`Despite its inequity, thornberry is
+        a bustling community, containing
+        shops, craftsmen, banks, and places
+        of amusement.`pause`
+      </Text>
+      <Text ID="2">
+        Here's some `yellow`gold`cyan` to spend on
+        your trip.
+      </Text>
     </Exhibit>
     <Exhibit ID="4" Image="Fountain.png">
-      <Text ID="1">Here you see a replica of the famous
-`purple`enchanted flower fountain`cyan`.  Legend
-says that its waters once flowed in
-splendor.`pause`
-`clear`One day a tulip was taken from the
-fountain gardens and the fountain
-waters stopped.  The stories say that
-only when that flower is returned 
-will the fountain flow again.`pause`
-`clear``white`Myth or fact?  `cyan`Judge for yourself.
-In either case, the museum has agreed
-to help search for the tulip.`pause`</Text>
-      <Text ID="2">Bring the tulip back here for a nice
-reward.  Meanwhile, here's some native
-`yellow`gold`cyan` to aid you in your search.</Text>
-      <Text ID="3">Thank you for returning the tulip!
-As a reward, `yellow``wait:off``sound:VeryGood`Charm:  +10`pause`</Text>
+      <Text ID="1">
+        Here you see a replica of the famous
+        `purple`enchanted flower fountain`cyan`.  Legend
+        says that its waters once flowed in
+        splendor.`pause`
+        `clear`One day a tulip was taken from the
+        fountain gardens and the fountain
+        waters stopped.  The stories say that
+        only when that flower is returned
+        will the fountain flow again.`pause`
+        `clear``white`Myth or fact?  `cyan`Judge for yourself.
+        In either case, the museum has agreed
+        to help search for the tulip.`pause`
+      </Text>
+      <Text ID="2">
+        Bring the tulip back here for a nice
+        reward.  Meanwhile, here's some native
+        `yellow`gold`cyan` to aid you in your search.
+      </Text>
+      <Text ID="3">
+        Thank you for returning the tulip!
+        As a reward, `yellow``wait:off``sound:VeryGood`Charm:  +10`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="5" Image="PirateLair.png">
-      <Text ID="1">Tarmalon's deep ocean waters are so
-turbulent that few trading ships ever
-venture far from shore.  Yet, long
-ago, the oceans were calm and ocean
-travel flourished.`pause`
-`clear`As time went by, pirates came to rule
-the seas.  They preyed on helpless 
-vessels, taking gold, weapons, armor
-and supplies.`pause`
-`clear`Their treasures were stored in deep
-caves on remote islands.  This booty
-was guarded by paid soldiers and by
-animals bred for their ferocity.`pause`
-`clear`When the oceans became rougher, many
-of the caves could no longer be
-reached.  In this exhibit, you see
-the entrance to one such cave.  The
-wealth stored within is enormous.`pause`
-</Text>
-      <Text ID="2">`white`The pirate's lair is located in a
-chain of islands called the "three
-sisters."  You will be transported
-to the largest island.  From there,
-you're on your own.`pause`
-`clear`The pirate's lair has many levels.
-At the very bottom, it is said, lies
-a priceless sapphire!</Text>
+      <Text ID="1">
+        Tarmalon's deep ocean waters are so
+        turbulent that few trading ships ever
+        venture far from shore.  Yet, long
+        ago, the oceans were calm and ocean
+        travel flourished.`pause`
+        `clear`As time went by, pirates came to rule
+        the seas.  They preyed on helpless
+        vessels, taking gold, weapons, armor
+        and supplies.`pause`
+        `clear`Their treasures were stored in deep
+        caves on remote islands.  This booty
+        was guarded by paid soldiers and by
+        animals bred for their ferocity.`pause`
+        `clear`When the oceans became rougher, many
+        of the caves could no longer be
+        reached.  In this exhibit, you see
+        the entrance to one such cave.  The
+        wealth stored within is enormous.`pause`
+      </Text>
+      <Text ID="2">
+        `white`The pirate's lair is located in a
+        chain of islands called the "three
+        sisters."  You will be transported
+        to the largest island.  From there,
+        you're on your own.`pause`
+        `clear`The pirate's lair has many levels.
+        At the very bottom, it is said, lies
+        a priceless sapphire!
+      </Text>
     </Exhibit>
     <Exhibit ID="6" Image="HerbOfLife.png">
-      <Text ID="1">Planet natives believe in the curative
-power of a variety of "healing herbs."
-However, the effectiveness of these
-plants has never been verified by
-museum personnel.`pause`
-`clear`This display contains a `green`juton bush`cyan`.
-According to lore, its fruit increases
-the power of other native herbs.`pause`
-`clear`While this claim is doubtful, the
-fruit is really quite tasty.  You may
-sample one.`pause`</Text>
+      <Text ID="1">
+        Planet natives believe in the curative
+        power of a variety of "healing herbs."
+        However, the effectiveness of these
+        plants has never been verified by
+        museum personnel.`pause`
+        `clear`This display contains a `green`juton bush`cyan`.
+        According to lore, its fruit increases
+        the power of other native herbs.`pause`
+        `clear`While this claim is doubtful, the
+        fruit is really quite tasty.  You may
+        sample one.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="7" Image="NativeCurrency.png">
-      <Text ID="1">Different planets have different
-treasures.  On Tarmalon, as on
-many planets, the scarcity of `yellow`gold`cyan`
-makes it exceedingly valuable.`pause`
-`clear`Here you see the museum currency room.
-It contains a small (but noteworthy)
-portion of the planet's wealth.  You
-are welcome to a sample.`pause``clear`</Text>
+      <Text ID="1">
+        Different planets have different
+        treasures.  On Tarmalon, as on
+        many planets, the scarcity of `yellow`gold`cyan`
+        makes it exceedingly valuable.`pause`
+        `clear`Here you see the museum currency room.
+        It contains a small (but noteworthy)
+        portion of the planet's wealth.  You
+        are welcome to a sample.`pause``clear`
+      </Text>
     </Exhibit>
     <Exhibit ID="8" Image="StonesOfWisdom.png">
-      <Text ID="1">`white`Stones of wisdom`cyan` is probably the most
-popular bar-room game on tarmalon.
-It is not only fun, but said to help
-develop a player's intelligence.`pause`</Text>
+      <Text ID="1">
+        `white`Stones of wisdom`cyan` is probably the most
+        popular bar-room game on tarmalon.
+        It is not only fun, but said to help
+        develop a player's intelligence.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="9" Image="Tapestry.png">
-      <Text ID="1">This giant tapestry is actually a map
-of the planet Tarmalon.  It's the only
-remaining world map made by tarmalon
-natives.`pause`
-`clear`This museum is located in the north-
-east portion of the main continent.
-Baron Kelfor's castle is on an island
-in the major inland lake.`pause`
-`clear`Near the bottom left of the tapestry,
-you can see the chain of islands
-called the "three sisters."  A large
-pirate's lair is said to be on one
-of these islands.`pause`</Text>
+      <Text ID="1">
+        This giant tapestry is actually a map
+        of the planet Tarmalon.  It's the only
+        remaining world map made by tarmalon
+        natives.`pause`
+        `clear`This museum is located in the north-
+        east portion of the main continent.
+        Baron Kelfor's castle is on an island
+        in the major inland lake.`pause`
+        `clear`Near the bottom left of the tapestry,
+        you can see the chain of islands
+        called the "three sisters."  A large
+        pirate's lair is said to be on one
+        of these islands.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="10" Image="LostDisplays.png">
-      <Text ID="1">As you well know, some exhibits in
-this museum can be deadly.  But you
-haven't even seen the most dangerous
-displays.`pause`
-`clear`Many years ago, the innermost section
-of this museum was blocked off.  Some
-exhibits found there were just too
-dangerous.  Museum insurance rates
-were skyrocketing!`pause`
-`clear`Since you have succeeded where many
-others have failed, this part of
-the museum will be open to you from
-now on.  Perhaps you have a chance.
-Probably, you don't.`pause`</Text>
+      <Text ID="1">
+        As you well know, some exhibits in
+        this museum can be deadly.  But you
+        haven't even seen the most dangerous
+        displays.`pause`
+        `clear`Many years ago, the innermost section
+        of this museum was blocked off.  Some
+        exhibits found there were just too
+        dangerous.  Museum insurance rates
+        were skyrocketing!`pause`
+        `clear`Since you have succeeded where many
+        others have failed, this part of
+        the museum will be open to you from
+        now on.  Perhaps you have a chance.
+        Probably, you don't.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="11" Image="TheTest.png">
-      <Text ID="1">The underground catacombs of armak
-are infamous for their twisting
-passageways and deadly monsters.
-To venture there, it is said, is
-almost certain death.`pause`
-`clear`Yet, for many years, the rulers of
-Tarmalon have cast their `white`best`cyan` knights
-into these dungeon depths.  Only a
-few ever make it back to the surface.`pause`
-`clear`Those who survive become `green`tougher`cyan`,
-`yellow`fiercer`cyan`, and `purple`wiser`cyan`.  They emerge
-virtually unbeatable in battle.`pause`
-`clear`You now face the same test, for in a
-moment, you'll find yourself at the
-very `yellow`bottom`cyan` of armak.  The way out
-lies far above.  `white`The risk is great -
-the payoff greater!!`pause`</Text>
+      <Text ID="1">
+        The underground catacombs of armak
+        are infamous for their twisting
+        passageways and deadly monsters.
+        To venture there, it is said, is
+        almost certain death.`pause`
+        `clear`Yet, for many years, the rulers of
+        Tarmalon have cast their `white`best`cyan` knights
+        into these dungeon depths.  Only a
+        few ever make it back to the surface.`pause`
+        `clear`Those who survive become `green`tougher`cyan`,
+        `yellow`fiercer`cyan`, and `purple`wiser`cyan`.  They emerge
+        virtually unbeatable in battle.`pause`
+        `clear`You now face the same test, for in a
+        moment, you'll find yourself at the
+        very `yellow`bottom`cyan` of armak.  The way out
+        lies far above.  `white`The risk is great -
+        the payoff greater!!`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="12" Image="FourJewels.png">
-      <Text ID="1">This exhibit shows the gateway to
-Tarmalon's most dangerous dungeon.  It
-is largely this exhibit which caused
-the inner section of the museum to be
-closed off to casual explorers.`pause`
-`clear`The museum has not charted this
-dungeon, and has little knowledge of
-its contents.  We know primarily
-that nobody has yet emerged alive.`pause`</Text>
+      <Text ID="1">
+        This exhibit shows the gateway to
+        Tarmalon's most dangerous dungeon.  It
+        is largely this exhibit which caused
+        the inner section of the museum to be
+        closed off to casual explorers.`pause`
+        `clear`The museum has not charted this
+        dungeon, and has little knowledge of
+        its contents.  We know primarily
+        that nobody has yet emerged alive.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="13" Image="Guardian.png">
-      <Text ID="1">Legends say that 13 great wizards
-once ruled Tarmalon, but that little
-of their power remains.  Those who
-escaped death and treachery ultimately
-succumbed to the ravages of time.`pause`
-`clear`The wax figure before you is the
-wizard of arovyn.  His power largely
-gone, he is said to be imprisoned deep
-within Kelfor castle.  Only the pass-
-word `yellow`"Guardians"`cyan` will open his door.`pause`</Text>
+      <Text ID="1">
+        Legends say that 13 great wizards
+        once ruled Tarmalon, but that little
+        of their power remains.  Those who
+        escaped death and treachery ultimately
+        succumbed to the ravages of time.`pause`
+        `clear`The wax figure before you is the
+        wizard of arovyn.  His power largely
+        gone, he is said to be imprisoned deep
+        within Kelfor castle.  Only the pass-
+        word `yellow`"Guardians"`cyan` will open his door.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="14" Image="Pegasus.png">
-      <Text ID="1">This magnificent beast was found
-frozen to a high cliff near the
-museum.`pause`
-`clear`Locals say that `white`pegasus`cyan` stood alert
-for over a lifespan - poised as if
-ready to fly.  Finally, the magical
-animal succumbed to the bitter cold.`pause`
-`clear``white`Suddenly, the ice covering pegasus
-cracks apart!  The winged horse looks
-at you with probing eyes, and then
-lowers one wing, as if asking you to
-climb on.`pause`</Text>
+      <Text ID="1">
+        This magnificent beast was found
+        frozen to a high cliff near the
+        museum.`pause`
+        `clear`Locals say that `white`pegasus`cyan` stood alert
+        for over a lifespan - poised as if
+        ready to fly.  Finally, the magical
+        animal succumbed to the bitter cold.`pause`
+        `clear``white`Suddenly, the ice covering pegasus
+        cracks apart!  The winged horse looks
+        at you with probing eyes, and then
+        lowers one wing, as if asking you to
+        climb on.`pause`
+      </Text>
     </Exhibit>
     <Exhibit ID="15" Image="AncientArtifact.png"></Exhibit>
   </Exhibits>
   <DungeonExtras>
-    <Extra ID="0" Name="Treasure Chest">
+    <Extra ID="1" Name="Treasure Chest">
       <Image distance="0" srcRect="128,48,96,48" destRect="128,224,96,48" />
       <Image distance="1" srcRect="128,96,80,32" destRect="144,208,80,32" />
       <Image distance="2" srcRect="128,128,48,32" destRect="160,192,48,32" />
       <Image distance="3" srcRect="176,128,48,16" destRect="160,192,48,16" />
       <Image distance="4" srcRect="176,144,16,16" destRect="176,176,16,16" />
     </Extra>
-    <Extra ID="1" Name="Box">
+    <Extra ID="2" Name="Box">
       <Image distance="0" srcRect="0,112,80,32" destRect="144,240,80,32" />
       <Image distance="1" srcRect="0,144,48,16" destRect="160,224,48,16" />
       <Image distance="2" srcRect="0,160,48,32" destRect="160,192,48,32" />
       <Image distance="3" srcRect="48,144,32,16" destRect="160,192,32,16" />
       <Image distance="4" srcRect="48,160,16,16" destRect="176,176,16,16" />
     </Extra>
-    <Extra ID="2" Name="Ceiling Hole">
+    <Extra ID="3" Name="Ceiling Hole">
       <Image distance="0" srcRect="0,0,112,16" destRect="128,0,112,16" />
       <Image distance="1" srcRect="0,16,80,32" destRect="144,32,80,32" />
       <Image distance="2" srcRect="0,48,48,32" destRect="160,64,48,32" />
       <Image distance="3" srcRect="48,48,48,32" destRect="160,80,48,32" />
       <Image distance="4" srcRect="0,80,48,16" destRect="160,112,48,16" />
     </Extra>
-    <Extra ID="3" Name="Floor Hole">
+    <Extra ID="4" Name="Floor Hole">
       <Image distance="0" srcRect="128,0,144,16" destRect="112,256,144,16" />
       <Image distance="1" srcRect="128,16,80,16" destRect="144,224,80,16" />
       <Image distance="2" srcRect="128,32,80,16" destRect="144,208,80,16" />
       <Image distance="3" srcRect="208,16,48,16" destRect="160,192,48,16" />
       <Image distance="4" srcRect="208,32,16,16" destRect="176,176,16,16" />
     </Extra>
-    <Extra ID="4" Name="Poison gas vent">
+    <Extra ID="5" Name="Poison gas vent">
       <Image distance="0" srcRect="240,32,80,32" destRect="144,240,80,32" />
       <Image distance="1" srcRect="240,64,48,16" destRect="160,224,48,16" />
       <Image distance="2" srcRect="240,80,48,16" destRect="160,208,48,16" />
       <Image distance="3" srcRect="288,64,32,16" destRect="176,192,32,16" />
       <Image distance="4" srcRect="288,80,16,16" destRect="176,176,16,16" />
     </Extra>
-    <Extra ID="5" Name="Slime splotch">
+    <Extra ID="6" Name="Slime splotch">
       <Image distance="0" srcRect="0,192,160,32" destRect="112,240,160,32" />
       <Image distance="1" srcRect="0,224,96,16" destRect="144,224,96,16" />
       <Image distance="2" srcRect="96,224,64,16" destRect="160,208,64,16" />
       <Image distance="3" srcRect="160,192,48,16" destRect="160,192,48,16" />
       <Image distance="4" srcRect="160,208,16,16" destRect="176,176,16,16" />
     </Extra>
-    <Extra ID="6" Name="Trip Wire">
+    <Extra ID="7" Name="Trip Wire">
       <Image distance="0" srcRect="240,96,144,16" destRect="112,256,144,16" />
       <Image distance="1" srcRect="240,112,112,16" destRect="128,224,112,16" />
       <Image distance="2" srcRect="240,128,48,16" destRect="160,208,48,16" />
       <Image distance="3" srcRect="288,128,48,16" destRect="160,192,48,16" />
       <Image distance="4" srcRect="336,128,16,16" destRect="176,176,16,16" />
     </Extra>
+    <Extra ID="8" Name="DisplayCaseLeft">
+      <Image distance="0" srcRect="0,0,48,144" destRect="0,80,48,144">
+        <Animation frameTime="120">
+          <Frame srcRect="160,0,32,112" destRect="0,16,32,112" />
+          <Frame srcRect="192,0,32,112" destRect="0,16,32,112" />
+          <Frame srcRect="224,0,32,112" destRect="0,16,32,112" />
+        </Animation>
+      </Image>
+      <Image distance="1" srcRect="48,0,48,80" destRect="48,112,48,80" >
+        <Animation>
+          <Frame srcRect="192,224,16,64" destRect="24,6,16,64" />
+        </Animation>
+      </Image>
+      <Image distance="2" srcRect="96,0,32,80" destRect="96,112,32,80">
+        <Animation>
+          <Frame srcRect="192,288,16,48" destRect="16,22,16,48" />
+        </Animation>
+      </Image>
+      <Image distance="3" srcRect="128,0,16,48" destRect="128,128,16,48">
+        <Animation>
+          <Frame srcRect="192,336,16,32" destRect="8,10,16,32" />
+        </Animation>
+      </Image>
+      <Image distance="4" srcRect="144,0,16,48" destRect="144,128,16,48">
+        <Animation>
+          <Frame srcRect="192,368,16,32" destRect="8,14,16,32" />
+        </Animation>
+      </Image>
+    </Extra>
+    <Extra ID="9" Name="DisplayCaseRight">
+      <Image distance="0" srcRect="0,144,48,144" destRect="320,80,48,144">
+        <Animation>
+          <Frame srcRect="192,112,32,112" destRect="16,16,32,112" />
+        </Animation>
+      </Image>
+      <Image distance="1" srcRect="48,80,48,80" destRect="272,112,48,80">
+        
+      </Image>
+      <Image distance="2" srcRect="96,80,32,80" destRect="240,112,32,80">
+        
+      </Image>
+      <Image distance="3" srcRect="128,48,16,48" destRect="224,128,16,48">
+        
+      </Image>
+      <Image distance="4" srcRect="144,48,16,48" destRect="208,128,16,48">
+        
+      </Image>
+    </Extra>
+    <Extra ID="10" Name="TorchLeft">
+      <Image distance="0" srcRect="0,0,0,0" destRect="0,64,0,0" >
+        <Animation>
+          <Frame srcRect="0,288,48,80" destRect="0,0,48,80" />
+        </Animation>
+      </Image>
+      <Image distance="1" srcRect="0,0,0,0" destRect="64,80,0,0" >
+        <Animation>
+          <Frame srcRect="0,368,32,48" destRect="0,0,32,48" />
+        </Animation>
+      </Image>
+    </Extra>
+    <Extra ID="11" Name="TorchRight">
+    </Extra>
+    <Extra ID="12" Name="DoorLeft">
+    </Extra>
+    <Extra ID="13" Name="DoorRight">
+    </Extra>
   </DungeonExtras>
+  <MuseumExtras>
+
+  </MuseumExtras>
 </LotaGame>

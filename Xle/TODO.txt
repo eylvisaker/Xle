@@ -1,4 +1,4 @@
-﻿Settings file for adjusting numerical parameters.
+﻿Settings file for adjusting numerical parameters, like times to wait.
 Resample sounds and do a good job this time.
 	Reduce volume on ocean/mountain sounds
 	Reduce volume on museum steps, swamp steps, desert steps.
@@ -11,7 +11,7 @@ Title Screen:
 
 Outdoors:
 	Bugs in monsters:
-		Text messages which appear after entering a town.
+		D (I think) - Text messages which appear after entering a town.
 		D - Monsters only fight back when the player moves.
 		D - Mosters sometimes appear an extra space away from the player.
 	D - Refactor encounter state stuff.
@@ -57,7 +57,7 @@ Museum:
 		D - Weaponry exhibit
 		D - Fountain exhibit.
 		Stones of wisdom.
-		Test four jewels.
+		D - Test four jewels.
 		Make sure guardian gives password.
 		Implement leaving flight of fancy.
 		Ancient artifact exhibit after compendium is returned.

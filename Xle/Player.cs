@@ -193,8 +193,8 @@ namespace ERY.Xle
 			x = 3;
 			y = 1;
 
-			food = 20;
-			gold = 40;
+			food = 40;
+			gold = 20;
 
 			dungeonLevel = 0;
 			faceDirection = Direction.West;

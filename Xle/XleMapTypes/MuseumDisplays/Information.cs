@@ -159,7 +159,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			int sapphireExhibits = CountExhibits(player, 10, 11);
 
 			// check if we've viewed both sapphire visits 
-			// (thus having completed the first two dungeons)
+			// (thus having completed the first two dungeons
+			// TODO - this won't work if the player dies in Armak!)
 			// and check if we've returned the crown and sceptor.
 			if (sapphireExhibits == 2 &&
 				player.Item(12) > 0)
