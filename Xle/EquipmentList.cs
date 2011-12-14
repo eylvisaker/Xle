@@ -8,20 +8,28 @@ namespace ERY.Xle
 	{
 		public int ID;
 		public string Name;
-		public int BasePrice;
+		public int[] Prices;
 
-		public EquipmentInfo(int id, string name, int basePrice)
+		public EquipmentInfo(int id, string name, string prices)
 		{
 			ID = id;
 			Name = name;
-			BasePrice = basePrice;
+
+			Prices = new int[5];
+
+			string[] vals = prices.Split(',');
+
+			for (int i = 0; i < vals.Length; i++)
+			{
+				Prices[i] = int.Parse(vals[i]);
+			}
 		}
 	}
 	public class EquipmentList : Dictionary<int, EquipmentInfo>
 	{
-		public void Add(int id, string name, int basePrice)
+		public void Add(int id, string name, string prices)
 		{
-			Add(id, new EquipmentInfo(id, name, basePrice));
+			Add(id, new EquipmentInfo(id, name, prices));
 		}
 		public string GetName(int id)
 		{

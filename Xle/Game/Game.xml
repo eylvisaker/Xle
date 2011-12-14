@@ -32,22 +32,22 @@
   </Qualities>
   <Weapons>
     <Weapon ID="0" Name="Bare Hands" />
-    <Weapon ID="1" Name="Knife" BasePrice="40" />
-    <Weapon ID="2" Name="Leaded Club" BasePrice="120" />
-    <Weapon ID="3" Name="Bladed Staff" BasePrice="200" />
-    <Weapon ID="4" Name="Flail" BasePrice="40" />
-    <Weapon ID="5" Name="War Hammer" BasePrice="40" />
-    <Weapon ID="6" Name="Bow &amp; Arrow" BasePrice="40" />
-    <Weapon ID="7" Name="Broadaxe" BasePrice="40" />
-    <Weapon ID="8" Name="Compound Bow" BasePrice="40" />
+    <Weapon ID="1" Name="Knife" Prices="30,40,52,66,81" />
+    <Weapon ID="2" Name="Leaded Club" Prices="66,80,97,114,133" />
+    <Weapon ID="3" Name="Bladed Staff" Prices="115,134,155,177,200" />
+    <Weapon ID="4" Name="Flail" Prices="180,203,228,254,282" />
+    <Weapon ID="5" Name="War Hammer" Prices="259,286,316,347,379" />
+    <Weapon ID="6" Name="Bow &amp; Arrow" Prices="353,386,420,455,492" />
+    <Weapon ID="7" Name="Broadaxe" Prices="463,501,540,580,662" />
+    <Weapon ID="8" Name="Compound Bow" Prices="590,632,676,721,768" />
   </Weapons>
   <Armor>
     <Armor ID="0" Name="Nothing" />
-    <Armor ID="1" Name="Studded Hide" BasePrice="40" />
-    <Armor ID="2" Name="Ring Mail" BasePrice="40" />
-    <Armor ID="3" Name="Double Mail" BasePrice="40" />
-    <Armor ID="4" Name="Plated Mail" BasePrice="40" />
-    <Armor ID="5" Name="Mythan Plate" BasePrice="1000" />
+    <Armor ID="1" Name="Studded Hide" Prices="50,65,82,103,127" />
+    <Armor ID="2" Name="Ring Mail" Prices="120,147,177,211,249" />
+    <Armor ID="3" Name="Double Mail" Prices="239,281,327,379,436" />
+    <Armor ID="4" Name="Plated Mail" Prices="421,482,549,622,702" />
+    <Armor ID="5" Name="Mythan Plate" Prices="682,766,858,956,1063" />
   </Armor>
   <Items>
     <Item ID="0" Name="Nothing" />

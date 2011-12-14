@@ -239,10 +239,10 @@ namespace ERY.Xle
 				XmlNode node = xmlNode.ChildNodes[i];
 
 				int id = int.Parse(node.Attributes["ID"].Value);
-				int basePrice = int.Parse(GetOptionalAttribute(node, "BasePrice", "0"));
 				string name = node.Attributes["Name"].Value;
+				string prices = node.Attributes["Prices"].Value;
 
-				equipmentList.Add(id, name, basePrice);
+				equipmentList.Add(id, name, prices);
 			}
 		}
 		private void LoadMapInfo(XmlNode mapNode)
@@ -430,6 +430,15 @@ namespace ERY.Xle
 		public static string GetArmorName(int armorID, int qualityID)
 		{
 			return inst.mQualityList[qualityID] + " " + inst.mArmorList[armorID].Name;
+		}
+
+		public static int WeaponCost(int item, int quality)
+		{
+			return WeaponList[item].Prices[quality];
+		}
+		public static int ArmorCost(int item, int quality)
+		{
+			return ArmorList[item].Prices[quality];
 		}
 
 		public static XleMap LoadMap(int mapID)

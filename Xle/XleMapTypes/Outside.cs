@@ -686,7 +686,7 @@ namespace ERY.Xle.XleMapTypes
 					if (type == 1)
 					{
 						item = XleCore.random.Next(4) + 1;
-						cost = (int)(g.ArmorCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
+						cost = (int)(XleCore.ArmorCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
 
 						builder.AddText(XleCore.ArmorList[item].Name, XleColor.White);
 						builder.AddText(" for ", XleColor.Cyan);
@@ -696,7 +696,7 @@ namespace ERY.Xle.XleMapTypes
 					else if (type == 2)
 					{
 						item = XleCore.random.Next(7) + 1;
-						cost = (int)(g.WeaponCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
+						cost = (int)(XleCore.WeaponCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
 
 						builder.AddText(XleCore.WeaponList[item].Name, XleColor.White);
 						builder.AddText(" for ", XleColor.Cyan);

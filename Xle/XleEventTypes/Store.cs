@@ -611,9 +611,13 @@ namespace ERY.Xle.XleEventTypes
 
 			for (i = 1; i <= 8; i++)
 			{
-				itemList[i] = i;
-				qualList[i] = i % 5;
-				priceList[i] = g.WeaponCost(itemList[i], qualList[i]);
+				int item = i;
+				int quality = i % 5;
+
+				itemList[i] = item;
+				qualList[i] = quality;
+
+				priceList[i] = XleCore.WeaponCost(item, quality);
 			}
 
 			for (; i < 16; i++)
@@ -710,6 +714,7 @@ namespace ERY.Xle.XleEventTypes
 
 			return true;
 		}
+
 	}
 
 	public class StoreArmor : Store
