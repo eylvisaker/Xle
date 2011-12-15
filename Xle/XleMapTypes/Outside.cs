@@ -661,12 +661,14 @@ namespace ERY.Xle.XleMapTypes
 			Color qcolor = XleColor.White;
 			ColorStringBuilder builder;
 
-			string[] quality = new string[5] { " Well Crafted", " Slightly Used", " Sparkling New", " Wonderful", " Awesome" };
+			string[] quality = new string[5] { "a Well Crafted", "a Slightly Used", "a Sparkling New", "a Wonderful", "an Awesome" };
 
 			do
 			{
 				type = XleCore.random.Next(talkTypes) + 1;
 			} while (player.MaxHP == player.HP && type == 4);
+
+			string name = "";
 
 			switch (type)
 			{
@@ -674,10 +676,7 @@ namespace ERY.Xle.XleMapTypes
 				case 2:         // buy weapon
 
 					builder = new ColorStringBuilder();
-					builder.AddText("Do you want to buy a", XleColor.Cyan);
-					if (qual == 4)
-						builder.AddText("n", XleColor.Cyan);
-
+					builder.AddText("Do you want to buy ", XleColor.Cyan);
 					builder.AddText(quality[qual], XleColor.White);
 
 					g.AddBottom(builder);
@@ -687,23 +686,19 @@ namespace ERY.Xle.XleMapTypes
 					{
 						item = XleCore.random.Next(4) + 1;
 						cost = (int)(XleCore.ArmorCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
-
-						builder.AddText(XleCore.ArmorList[item].Name, XleColor.White);
-						builder.AddText(" for ", XleColor.Cyan);
-						builder.AddText(cost.ToString(), XleColor.White);
-						builder.AddText(" Gold?", XleColor.Cyan);
+						name = XleCore.ArmorList[item].Name;
 					}
 					else if (type == 2)
 					{
 						item = XleCore.random.Next(7) + 1;
 						cost = (int)(XleCore.WeaponCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
-
-						builder.AddText(XleCore.WeaponList[item].Name, XleColor.White);
-						builder.AddText(" for ", XleColor.Cyan);
-						builder.AddText(cost.ToString(), XleColor.White);
-						builder.AddText(" Gold?", XleColor.Cyan);
-
+						name = XleCore.WeaponList[item].Name;
 					}
+
+					builder.AddText(name, XleColor.White);
+					builder.AddText(" for ", XleColor.Cyan);
+					builder.AddText(cost.ToString(), XleColor.White);
+					builder.AddText(" Gold?", XleColor.Cyan);
 
 					g.AddBottom(builder);
 					qcolor = XleColor.Cyan;
@@ -731,7 +726,6 @@ namespace ERY.Xle.XleMapTypes
 
 					break;
 				case 4:			// buy hp
-
 
 					item = XleCore.random.Next(player.MaxHP / 4) + 20;
 
@@ -808,7 +802,6 @@ namespace ERY.Xle.XleMapTypes
 					}
 					else
 					{
-
 						SoundMan.PlaySound(LotaSound.Medium);
 
 						g.AddBottom("");
@@ -830,7 +823,7 @@ namespace ERY.Xle.XleMapTypes
 				}
 			}
 
-			EncounterState = 0;
+			EncounterState = EncounterState.NoEncounter;
 			displayMonst = -1;
 		}
 
@@ -1001,8 +994,8 @@ namespace ERY.Xle.XleMapTypes
 		}
 		private void StepEncounter(Player player, bool didEvent)
 		{
-			if (XleCore.Database.MonsterList.Count == 0)				return;
-			if (g.disableEncounters)				return;
+			if (XleCore.Database.MonsterList.Count == 0) return;
+			if (g.disableEncounters) return;
 
 			// bail out if the player entered another map on this step.
 			if (XleCore.Map != this)
@@ -1070,7 +1063,7 @@ namespace ERY.Xle.XleMapTypes
 				g.AddBottom();
 				g.AddBottom("An unknown creature is approaching ", XleColor.Cyan);
 				g.AddBottom("from the " + dirName + ".", XleColor.Cyan);
-				
+
 				XleCore.wait(1000);
 			}
 			else if (type < 15)
@@ -1083,7 +1076,7 @@ namespace ERY.Xle.XleMapTypes
 			{
 				// TODO: figure out what I want to do with this, or eliminate this condition.
 			}
-			
+
 		}
 
 		private void SetNextEncounterStepCount()
@@ -1099,7 +1092,7 @@ namespace ERY.Xle.XleMapTypes
 				EncounterState = EncounterState.MonsterReady;
 
 			SoundMan.PlaySound(LotaSound.Encounter);
-			
+
 			displayMonst = SelectRandomMonster(Terrain(player.X, player.Y));
 
 			mDrawMonst.X = player.X - 1;
@@ -1294,7 +1287,7 @@ namespace ERY.Xle.XleMapTypes
 
 			// if the player has the guard jewels we bail.
 			if (player.Item(14) == 4) return;
-		
+
 			int pastTime = (int)(player.TimeDays - 100);
 			if (pastTime < 0) pastTime = 0;
 
