@@ -150,7 +150,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				return 7;
 
 			// check if we've found the leader of the guardians
-			if (player.guardian == 3)
+			if (player.Variables["Guardian"] == 3)
 				return 6;
 
 			int jadeExhibits = CountExhibits(player, 2, 4);
@@ -175,7 +175,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 			// check if we've viewed all jade and topaz exhibits and been 
 			// to the pirate's lair
-			if (player.beenInDungeon &&
+			if (player.Variables.ContainsKey("BeenInDungeon") &&
 				jadeExhibits == 3 &&
 				topazExhibits == 3)
 			{

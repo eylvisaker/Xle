@@ -94,6 +94,127 @@ namespace ERY.Xle
 		#endregion
 	}
 
+	public class VariableContainer : IDictionary<string, int>, IXleSerializable
+	{
+		Dictionary<string, int> mValues = new Dictionary<string, int>();
+
+		#region IDictionary<string,int> Members
+
+		public void Add(string key, int value)
+		{
+			mValues[key] = value;
+		}
+
+		public bool ContainsKey(string key)
+		{
+			return mValues.ContainsKey(key);
+		}
+
+		public ICollection<string> Keys
+		{
+			get { return mValues.Keys; }
+		}
+
+		public bool Remove(string key)
+		{
+			return mValues.Remove(key);
+		}
+
+		public bool TryGetValue(string key, out int value)
+		{
+			return mValues.TryGetValue(key, out value);
+		}
+
+		public ICollection<int> Values
+		{
+			get { return mValues.Values; }
+		}
+
+		public int this[string key]
+		{
+			get
+			{
+				if (mValues.ContainsKey(key))
+					return mValues[key];
+				else
+					return 0;
+			}
+			set
+			{
+				mValues[key] = value;
+			}
+		}
+
+		#endregion
+		#region ICollection<KeyValuePair<string,int>> Members
+
+		void ICollection<KeyValuePair<string, int>>.Add(KeyValuePair<string, int> item)
+		{
+			((ICollection<KeyValuePair<string, int>>)mValues).Add(item);
+		}
+
+		public void Clear()
+		{
+			((ICollection<KeyValuePair<string, int>>)mValues).Clear();
+		}
+
+		bool ICollection<KeyValuePair<string, int>>.Contains(KeyValuePair<string, int> item)
+		{
+			return ((ICollection<KeyValuePair<string, int>>)mValues).Contains(item);
+		}
+
+		void ICollection<KeyValuePair<string, int>>.CopyTo(KeyValuePair<string, int>[] array, int arrayIndex)
+		{
+			((ICollection<KeyValuePair<string, int>>)mValues).CopyTo(array, arrayIndex);
+		}
+
+		public int Count
+		{
+			get { return mValues.Count;}
+		}
+
+		bool ICollection<KeyValuePair<string, int>>.IsReadOnly
+		{
+			get { return false; }
+		}
+
+		bool ICollection<KeyValuePair<string, int>>.Remove(KeyValuePair<string, int> item)
+		{
+			return ((ICollection<KeyValuePair<string, int>>)mValues).Remove(item);
+		}
+
+		#endregion
+		#region IEnumerable<KeyValuePair<string,int>> Members
+
+		public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
+		{
+			return mValues.GetEnumerator();
+		}
+
+		#endregion
+		#region IEnumerable Members
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
+		}
+
+		#endregion
+		#region IXleSerializable Members
+
+		void IXleSerializable.WriteData(XleSerializationInfo info)
+		{
+			info.Write("Values", mValues);
+		}
+
+		void IXleSerializable.ReadData(XleSerializationInfo info)
+		{
+			mValues = info.ReadDictionaryInt32<string>("Values");
+		}
+
+		#endregion
+	}
+
 	public class Player : IXleSerializable
 	{
 		AttributeContainer mAttributes = new AttributeContainer();
@@ -135,24 +256,11 @@ namespace ERY.Xle
 		public int loan;					// loan amount
 		public int dueDate;				// time in days that the money is due
 
-		/// <summary>
-		/// Guardian variable:
-		/// 1 = Spoke to arovyn in castle.
-		/// 3 = Spoke to healer in eagle hollow.
-		/// </summary>
-		public int guardian;
-		public int ambushed;
-		public int wizardOfPotions;
-		public int casandra;
-
 		public int[] museum = new int[16];
-		public int caretaker;
 
 		public int mailTown;
 
-		public bool beenInDungeon;
-
-		public Dictionary<string, string> Variables = new Dictionary<string, string>();
+		public VariableContainer Variables = new VariableContainer();
 
 		string mName;
 
@@ -173,18 +281,12 @@ namespace ERY.Xle
 		/// <param name="newName"></param>
 		private void NewPlayer(string newName)
 		{
-			int i;
-
 			mName = newName;
 
-			goldBank = 0;
-			gamespeed = 3;
-			loan = 0;
-			dueDate = 0;
-
-			dungeon = 0;
 			food = 40;
 			gold = 20;
+
+			gamespeed = 3;
 
 			hp = 200;
 			level = 1;
@@ -203,49 +305,16 @@ namespace ERY.Xle
 			currentArmor = 1;
 			currentWeapon = 0;
 
-			for (i = 1; i <= 5; i++)
-			{
-				weapon[i] = 0;
-				weaponQuality[i] = 0;
-			}
-
 			armor[1] = 1;
 			armorQuality[1] = 0;
-
-			for (i = 2; i <= 3; i++)
-			{
-				armor[i] = 0;
-				armorQuality[i] = 0;
-			}
-
-			for (i = 0; i < 30; i++)
-			{
-				item[i] = 0;
-			}
 
 			item[1] = 1;			// gold armband
 			item[15] = 1;			// compendium
 			item[17] = 2;			// jade coins
 
-			for (i = 0; i < museum.Length; i++)
-			{
-				museum[i] = 0;
-			}
-
-			caretaker = 0;
-			lastAttacked = 0;
 			vaultGold = 17;
 
-			//chests[50] = 0;
-
-			guardian = 0;
-			ambushed = 0;
-			wizardOfPotions = 0;
-			casandra = 0;
-
 			ClearRafts();
-
-			onRaft = 0;
 
 			SortEquipment();
 		}
@@ -294,19 +363,11 @@ namespace ERY.Xle
 			info.Write("Loan", loan);					// loan amount
 			info.Write("DueDate", dueDate);				// time in days that the money is due
 
-			info.Write("Guardian", guardian);
-			info.Write("Ambushed", ambushed);
-			info.Write("Wizard", wizardOfPotions);
-			info.Write("Casandra", casandra);
-
 			info.Write("Museum", museum);
-			info.Write("Caretaker", caretaker);
 
 			info.Write("MailTown", mailTown);
-			info.Write("BeenInDungeon", beenInDungeon);
 
 			info.Write("Name", mName);
-
 			info.Write("Variables", Variables);
 		}
 		void IXleSerializable.ReadData(XleSerializationInfo info)
@@ -350,21 +411,12 @@ namespace ERY.Xle
 
 			rafts.AddRange(info.ReadArray<RaftData>("Rafts"));
 
-
 			loan = info.ReadInt32("Loan");					// loan amount
 			dueDate = info.ReadInt32("DueDate");				// time in days that the money is due
 
-			guardian = info.ReadInt32("Guardian");
-			ambushed = info.ReadInt32("Ambushed");
-			wizardOfPotions = info.ReadInt32("Wizard");
-			casandra = info.ReadInt32("Casandra");
-
 			museum = info.ReadInt32Array("Museum");
-			caretaker = info.ReadInt32("Caretaker");
 
 			mailTown = info.ReadInt32("MailTown");
-
-			beenInDungeon = info.ReadBoolean("BeenInDungeon", false);
 
 			mName = info.ReadString("Name");
 
@@ -373,7 +425,7 @@ namespace ERY.Xle
 
 			if (info.ContainsKey("Variables"))
 			{
-				Variables = info.ReadDictionaryString<string>("Variables");
+				Variables = info.ReadObject<VariableContainer>("Variables");
 			}
 		}
 
@@ -461,7 +513,7 @@ namespace ERY.Xle
 			using (System.IO.Stream ff = System.IO.File.OpenRead(filename))
 			{
 				Player p = (Player)ser.Deserialize(ff);
-				
+
 				return p;
 			}
 		}
@@ -616,23 +668,7 @@ namespace ERY.Xle
 
 			}
 		}
-		/// <summary>
-		/// 	// gains gold
-		/// </summary>
-		/// <param name="amount"></param>
-		[Obsolete("Use Gold property instead.")]
-		public void GainGold(int amount)
-		{
-			gold += amount;
-		}
-
-		//		Time
-		[Obsolete("I have no idea what this function is supposed to do.")]
-		public void OneDay()
-		{
-			// TODO: get or write OneDay function.
-		}
-
+		
 		/// <summary>
 		/// Returns the time in days or increments them.
 		/// </summary>
@@ -1080,7 +1116,7 @@ namespace ERY.Xle
 
 			return weapon[index];
 
-		}		
+		}
 		/// <summary>
 		/// returns the armor quality
 		/// </summary>
@@ -1406,7 +1442,7 @@ namespace ERY.Xle
 		{
 			int wt = WeaponType(CurrentWeapon);
 			int qt = WeaponQuality(CurrentWeapon);
-			
+
 			int dam = Attribute[Attributes.strength] - 12;
 			dam += (int)(wt * (qt + 2)) / 2;
 
@@ -1419,9 +1455,9 @@ namespace ERY.Xle
 			int hit = Attribute[Attributes.dexterity] * 8 + 15 * qt;
 
 			System.Diagnostics.Debug.WriteLine("Hit: " + hit.ToString() + " Dam: " + dam.ToString());
-			
+
 			hit -= XleCore.random.Next(400);
-			
+
 			if (hit < 0)
 				dam = 0;
 

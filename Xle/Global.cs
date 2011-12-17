@@ -441,23 +441,7 @@ namespace ERY.Xle
 
 			return true;
 		}
-
-
-		[Obsolete("blah", true)]
-		static public int WeaponCost(int w, int q)
-		{
-			return (int)(9.639302862 + 12.709725901 * w + 7.448174718 * Math.Pow(w, 2) +
-				5.552075007 * q + 0.731199405 * Math.Pow(q, 2) + 4.290595417 * w * q);
-
-		}
-		[Obsolete("blah", true)]
-		static public int ArmorCost(int a, int q)
-		{
-			return 120 * a + 12 * q + 8 * q * a;
-		}
-
-
-
+		
 		// other commonly used variables that don't need accessors
 		static public int walkTime;				// time to wait between steps
 

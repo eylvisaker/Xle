@@ -260,25 +260,4 @@ namespace ERY.Xle.XleEventTypes
 			return true;
 		}
 	}
-	
-	[Obsolete]
-	enum StoreType
-	{
-		storeBank = 2,					// 2
-		storeWeapon,					// 3
-		storeArmor,						// 4
-		storeWeaponTraining,			// 5
-		storeArmorTraining,				// 6
-		storeBlackjack,					// 7
-		storeLending,					// 8
-		storeRaft,						// 9
-		storeHealer,					// 10
-		storeJail,						// 11
-		storeFortune,					// 12
-		storeFlipFlop,					// 13
-		storeBuyback,					// 14
-		storeFood,						// 15
-		storeVault,						// 16
-		storeMagic						// 17
-	}
 }

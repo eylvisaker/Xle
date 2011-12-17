@@ -13,20 +13,5 @@ namespace ERY.Xle
 			foreach (string s in args)
 				Add(s);
 		}
-
-		//public MenuItemList	operator=(MenuItemList theList);		// assignment operator
-		[Obsolete("Use Add instead")]
-		public void AddItem(string text)
-		{
-			Add(text);
-		}
-
-		/// <summary>
-		/// 		// returns the total number of items
-		/// </summary>
-		[Obsolete("Use Count instead")]
-		public int TotalItems { get { return Count; } }
-
-
 	}
 }

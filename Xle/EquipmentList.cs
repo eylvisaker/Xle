@@ -17,11 +17,14 @@ namespace ERY.Xle
 
 			Prices = new int[5];
 
-			string[] vals = prices.Split(',');
-
-			for (int i = 0; i < vals.Length; i++)
+			if (string.IsNullOrEmpty(prices) == false)
 			{
-				Prices[i] = int.Parse(vals[i]);
+				string[] vals = prices.Split(',');
+
+				for (int i = 0; i < vals.Length; i++)
+				{
+					Prices[i] = int.Parse(vals[i]);
+				}
 			}
 		}
 	}

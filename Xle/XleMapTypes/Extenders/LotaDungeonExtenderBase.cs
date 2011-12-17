@@ -12,6 +12,11 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		protected abstract string CompleteVariable { get; }
 		protected abstract int StrengthBoost { get; }
 
+		public void OnLoad(Player player)
+		{
+			player.Variables["BeenInDungeon"] = 1;
+		}
+
 		public void OnPlayerExitDungeon(Player player)
 		{
 			if (player.Variables.ContainsKey(CompleteVariable))
@@ -19,7 +24,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 
 			if (player.Item(20) > 0 && player.Item(16) > 0)
 			{
-				player.Variables[CompleteVariable] = "yes";
+				player.Variables[CompleteVariable] = 1;
 
 				player.Attribute[Attributes.strength] += StrengthBoost;
 

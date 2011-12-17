@@ -412,50 +412,6 @@ namespace ERY.Xle
 
 		}
 
-
-
-		[Obsolete]
-		static string GetName(int mapNum)
-		{
-			return "MapName";
-			/*
-			HANDLE tempMap;
-			int resID;
-			string	tempName;
-			resID = GetMapResource(mapNum);
-			char*	tempM;
-
-			if (resID > 0) 
-			{
-				tempMap = LoadResource (g.hInstance(), 
-						  FindResource (g.hInstance(), MAKEINTRESOURCE(resID), TEXT("map")));
-	
-				tempM = (char*)LockResource(tempMap);
-
-				for (int i = 0; i < 16; i++)
-				{
-					tempName += tempM[7 + i];
-				}
-		
-				tempName = rtrim(tempName);
-
-				FreeResource (tempMap);
-
-			}
-	
-			if (tempName == "Thomson Crossing")
-				tempName = "Thompson Crossing";
-
-			return tempName;
-			*/
-		}
-
-		[Obsolete("Use this[xx,yy]")]
-		public int M(int yy, int xx)
-		{
-			return this[xx, yy];
-		}
-
 		/*
 		int CheckSpecial()
 		{

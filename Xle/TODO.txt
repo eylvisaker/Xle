@@ -20,6 +20,8 @@ Outdoors:
 	Correct combat damage.
 	Falling unconscious when beaten severly.
 	Attempt to disengage is blocked message is not shown.
+	Refactor Stormy variable to use an enum.
+	Refactor outside to include an extender.
 
 Towns:
 	Redesign the way stores are rendered and data for the window is stored.

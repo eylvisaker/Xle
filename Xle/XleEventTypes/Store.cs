@@ -1236,7 +1236,7 @@ namespace ERY.Xle.XleEventTypes
 			g.UpdateBottom("        Press Key to Continue");
 			WaitForKey();
 
-			player.GainGold(gold);
+			player.Gold += gold;
 			player.ItemCount(9, -1);
 			player.mailTown = 0;
 		}

@@ -240,7 +240,12 @@ namespace ERY.Xle
 
 				int id = int.Parse(node.Attributes["ID"].Value);
 				string name = node.Attributes["Name"].Value;
-				string prices = node.Attributes["Prices"].Value;
+				string prices = "";
+
+				if (node.Attributes["Prices"] != null)
+				{
+					prices = node.Attributes["Prices"].Value;
+				}
 
 				equipmentList.Add(id, name, prices);
 			}
@@ -1150,20 +1155,7 @@ namespace ERY.Xle
 
 			} while (watch.TotalMilliseconds < howLong && g.Done == false && Display.CurrentWindow.IsClosed == false);
 		}
-
-		/// <summary>
-		/// Waits for a key or joystick press.
-		/// </summary>
-		[Obsolete]
-		static void WaitKey()
-		{
-			Keyboard.ReleaseAllKeys();
-
-			while (Keyboard.AnyKeyPressed == false)
-				wait(1);
-
-		}
-
+		
 		/// <summary>
 		/// This function creates a sub menu in the top of the map section and
 		/// forces the player to chose an option from the list provided.	

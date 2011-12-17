@@ -254,8 +254,15 @@ namespace ERY.Xle.XleMapTypes
 		{
 			base.OnLoad(player);
 
-			player.beenInDungeon = true;
+			if (UseExtender)
+				Extender.OnLoad(player);
+			
 			CurrentLevel = player.DungeonLevel;
+		}
+
+		private bool UseExtender
+		{
+			get { return Extender != null; }
 		}
 
 		public override string[] MapMenu()

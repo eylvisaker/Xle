@@ -12,5 +12,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled);
 
 		void OnBeforeOpenBox(Player player, ref bool handled);
+
+		void OnLoad(Player player);
 	}
 }
