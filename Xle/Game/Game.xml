@@ -517,29 +517,31 @@
       </Image>
       <Image distance="1" srcRect="48,0,48,80" destRect="48,112,48,80" >
         <Animation>
-          <Frame srcRect="192,224,16,64" destRect="24,6,16,64" />
+          <Frame srcRect="352,0,16,64" destRect="24,6,16,64" />
         </Animation>
       </Image>
       <Image distance="2" srcRect="96,0,32,80" destRect="96,112,32,80">
         <Animation>
-          <Frame srcRect="192,288,16,48" destRect="16,22,16,48" />
+          <Frame srcRect="160,112,16,48" destRect="16,22,16,48" />
         </Animation>
       </Image>
       <Image distance="3" srcRect="128,0,16,48" destRect="128,128,16,48">
         <Animation>
-          <Frame srcRect="192,336,16,32" destRect="8,10,16,32" />
+          <Frame srcRect="256,112,16,32" destRect="8,10,16,32" />
         </Animation>
       </Image>
       <Image distance="4" srcRect="144,0,16,48" destRect="144,128,16,48">
         <Animation>
-          <Frame srcRect="192,368,16,32" destRect="8,14,16,32" />
+          <Frame srcRect="352,112,16,32" destRect="8,14,16,32" />
         </Animation>
       </Image>
     </Extra>
     <Extra ID="9" Name="DisplayCaseRight">
       <Image distance="0" srcRect="0,144,48,144" destRect="320,80,48,144">
-        <Animation>
-          <Frame srcRect="192,112,32,112" destRect="16,16,32,112" />
+        <Animation frameTime="120">
+          <Frame srcRect="256,0,32,112" destRect="16,16,32,112" />
+          <Frame srcRect="288,0,32,112" destRect="16,16,32,112" />
+          <Frame srcRect="320,0,32,112" destRect="16,16,32,112" />
         </Animation>
       </Image>
       <Image distance="1" srcRect="48,80,48,80" destRect="272,112,48,80">
@@ -566,8 +568,48 @@
           <Frame srcRect="0,368,32,48" destRect="0,0,32,48" />
         </Animation>
       </Image>
+      <Image distance="2" srcRect="0,0,0,0" destRect="96,96,0,0" >
+        <Animation>
+          <Frame srcRect="0,448,48,64" destRect="0,0,48,64" />
+        </Animation>
+      </Image>
+      <Image distance="3" srcRect="0,0,0,0" destRect="128,112,0,0" >
+        <Animation>
+          <Frame srcRect="48,160,32,48" destRect="0,0,32,48" />
+        </Animation>
+      </Image>
+      <Image distance="4" srcRect="0,0,0,0" destRect="144,112,0,0" >
+        <Animation>
+          <Frame srcRect="48,208,32,48" destRect="0,0,32,48" />
+        </Animation>
+      </Image>
     </Extra>
     <Extra ID="11" Name="TorchRight">
+      <Image distance="0" srcRect="0,0,0,0" destRect="320,64,0,0" >
+        <Animation>
+          <Frame srcRect="192,160,48,80" destRect="0,0,48,80" />
+        </Animation>
+      </Image>
+      <Image distance="1" srcRect="0,0,0,0" destRect="256,80,0,0" >
+        <Animation>
+          <Frame srcRect="192,240,48,64" destRect="0,0,48,64" />
+        </Animation>
+      </Image>
+      <Image distance="2" srcRect="0,0,0,0" destRect="224,96,0,0" >
+        <Animation>
+          <Frame srcRect="192,304,48,64" destRect="0,0,48,64" />
+        </Animation>
+      </Image>
+      <Image distance="3" srcRect="0,0,0,0" destRect="208,112,0,0" >
+        <Animation>
+          <Frame srcRect="192,368,32,48" destRect="0,0,32,48" />
+        </Animation>
+      </Image>
+      <Image distance="4" srcRect="0,0,0,0" destRect="192,112,0,0" >
+        <Animation>
+          <Frame srcRect="192,416,32,48" destRect="0,0,32,48" />
+        </Animation>
+      </Image>
     </Extra>
     <Extra ID="12" Name="DoorLeft">
     </Extra>

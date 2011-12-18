@@ -8,6 +8,7 @@ Title Screen:
 	Title Text within menus.
 	Figure out what to do with first three options on first menu.
 		Color test -> quit.
+	Fix bugs in and refactor introductory text to data driven solution.
 
 Outdoors:
 	Bugs in monsters:

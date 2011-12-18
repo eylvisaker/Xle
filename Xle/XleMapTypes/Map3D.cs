@@ -255,7 +255,8 @@ namespace ERY.Xle.XleMapTypes
 			destRect.X += mainDestRect.X;
 			destRect.Y += mainDestRect.Y;
 
-			Extras.Draw(srcRect, destRect);
+			if (srcRect.Width != 0 && srcRect.Height != 0)
+				Extras.Draw(srcRect, destRect);
 
 			AnimateExtra(extraType, loc, distance, destRect.Location);
 		}

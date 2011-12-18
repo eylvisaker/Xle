@@ -150,7 +150,14 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 					g.UpdateBottom(text, line);
 
 					if (waiting)
-						XleCore.wait(50);
+					{
+						if (AgateLib.InputLib.Keyboard.AnyKeyPressed)
+						{
+							XleCore.wait(1);
+						}
+						else
+							XleCore.wait(50);
+					}
 				}
 				else
 				{

@@ -1286,8 +1286,10 @@ namespace ERY.Xle
 				};
 
 			PromptToContinue = PromptToContinueOnWait;
-
+			
+			Keyboard.ReleaseAllKeys();
 			Keyboard.KeyDown += keyhandler;
+
 			do
 			{
 				redraw();
