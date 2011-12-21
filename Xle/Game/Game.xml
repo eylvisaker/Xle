@@ -75,6 +75,14 @@
     <Item ID="22" Name="Ruby coin" />
     <Item ID="23" Name="Diamond coin" />
   </Items>
+  <MagicSpells>
+	<MagicSpell ID="1" Name="Magic Flame" BasePrice="32" />
+	<MagicSpell ID="2" Name="Firebolt" BasePrice="63" />
+	<MagicSpell ID="3" Name="Befuddle Spell" BasePrice="152" />
+	<MagicSpell ID="4" Name="Psycho Strength" BasePrice="189" />
+	<MagicSpell ID="5" Name="Kill Flash" BasePrice="379" />
+	<MagicSpell ID="6" Name="Seek Spell" BasePrice="51" />
+  </MagicSpells>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>
     <Exhibit ID="0" Image="Information.png">
@@ -616,7 +624,44 @@
     <Extra ID="13" Name="DoorRight">
     </Extra>
   </DungeonExtras>
-  <MuseumExtras>
-
-  </MuseumExtras>
+  <Fortunes>
+    <Fortune Level="1">Buyback shops pay nicely once you learn to negotiate.
+I see you playing flip--flop and winning a fortune!
+The lender will give you money at good rates.
+Healers can help you after you find the Juton bush.
+Carry gold -- merchants might sell you museum coins.
+Carry climbing gear. It will prove handy.
+The path to greatness lies through the museum.
+The warlord's agents are everywhere.  Watch out!
+Learn to lie -- so you'll master the Stones of Wisdom.
+The pirate's cave is west of Eagle Hollow.
+Only the 4 jewels can thwart the evil compendium.
+You need herbs to succeed in dungeons.
+It works best to club the slash nettle to death.
+Keep money in the bank in case of death.
+Castle doors require four different keys.
+Visit ALL the museum displays. They will help more than you know.
+Behind the castle gardens lies a special flower.
+In the right places, magic seeds make you invisible.
+Hidden passageways line the castle! LOOK CAREFULLY!!!
+Many guards protect the mints. It's worth the fight.
+An evil warlord's man was here asking about you.
+Healers are more than they seem. Bide your time.
+The Maston Leaper fears only a bladed staff.
+You must master the spiral room.
+Use the bladed staff to neutralize the Neural Cloud.
+Go back to school. You can learn more.
+Speak to the temptress in the castle.
+The castle wizards know many answers.
+There's a path around the castle gas trap.
+You can't climb up the knight's dungeon.  STAY AWAY!
+You can flail the sea swallow to death.
+Have you visited each museum display?
+Watch out.  The agents may be after you.
+One day you will travel high above the sea.
+Talk to the guardians of the scroll.
+Learn the password to the castle wizard's quarters.
+You can trust the winged horse.
+</Fortune>
+  </Fortunes>
 </LotaGame>

@@ -496,8 +496,13 @@ namespace ERY.Xle
 						}
 						else
 						{
-							player = Player.LoadPlayer(files[titleMenu - 1]);
-							titleDone = true;
+							string file = files[titleMenu-1];
+						
+							if (string.IsNullOrEmpty(file) == false)
+							{
+								player = Player.LoadPlayer(file);
+								titleDone = true;
+							}
 						}
 
 					}

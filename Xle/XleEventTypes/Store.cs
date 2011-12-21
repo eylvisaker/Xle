@@ -20,6 +20,8 @@ namespace ERY.Xle.XleEventTypes
 
 		public Store()
 		{
+			LeftOffset = 2;
+			
 			for (int i = 0; i < theWindowColor.Length; i++)
 				theWindowColor[i] = XleColor.White;
 		}
@@ -60,7 +62,6 @@ namespace ERY.Xle.XleEventTypes
 
 		public virtual void CheckOfferMuseumCoin(Player player)
 		{
-			OfferMuseumCoin(player);
 			if (XleCore.random.Next(100) < 3 && robbing == false)
 			{
 				OfferMuseumCoin(player);
@@ -69,7 +70,6 @@ namespace ERY.Xle.XleEventTypes
 		public static void OfferMuseumCoin(Player player)
 		{
 			// TODO: only allow player to buy a coin if he has less than Level of that type ofcoins.
-
 			int amount = XleCore.random.Next(30) + 40 * player.Level;
 			int coin = -1;
 			MenuItemList menu = new MenuItemList("Yes", "No");
@@ -151,7 +151,9 @@ namespace ERY.Xle.XleEventTypes
 			Display.EndFrame();
 			Core.KeepAlive();
 		}
-
+		
+		protected int LeftOffset { get; set; }
+		
 		protected void DrawStore()
 		{
 			string tempString;
@@ -187,7 +189,7 @@ namespace ERY.Xle.XleEventTypes
 				if (string.IsNullOrEmpty(theWindow[i]))
 					continue;
 
-				XleCore.WriteText(320 - (theWindow[i].Length / 2) * 16, i * 16, theWindow[i], theWindowColor[i]);
+				XleCore.WriteText((LeftOffset+1)*16, i * 16, theWindow[i], theWindowColor[i]);
 			}
 
 			if (!robbing)
@@ -1212,7 +1214,7 @@ namespace ERY.Xle.XleEventTypes
 		private int SetTitle()
 		{
 			int i = 0;
-			theWindow[i++] = " " + ShopName + " ";
+			theWindow[0] = " " + ShopName + " ";
 			return i;
 		}
 		private void PayForMail(Player player)
@@ -1287,10 +1289,70 @@ namespace ERY.Xle.XleEventTypes
 
 	public class StoreVault : Store
 	{
+		public override bool Speak (Player player)
+		{
+			return false;
+		}
 	}
 
 	public class StoreMagic : Store
 	{
+		public override bool Speak (Player player)
+		{
+			if (CheckLoan(player, true))
+				return true;
+			
+			this.player = player;
+			
+			LeftOffset = 4;
+			
+			theWindow[0] = " " + ShopName + " ";
+			
+			int i = 1;
+			theWindow[i++] = "";
+			theWindow[i++] = "   General Purpose      Prices";
+			theWindow[i++] = "";
+			theWindow[i++] = "1. Magic flame          " + MagicPrice(1);
+			theWindow[i++] = "2. Firebolt             " + MagicPrice(2);
+			theWindow[i++] = "";
+			theWindow[i++] = "   Dungeon use only     Prices";
+			theWindow[i++] = "";
+			theWindow[i++] = "3. Befuddle spell       " + MagicPrice(3);
+			theWindow[i++] = "4. Psycho strength      " + MagicPrice(4);
+			theWindow[i++] = "5. Kill Flash           " + MagicPrice(5);
+			theWindow[i++] = "";
+			theWindow[i++] = "   Outside use only     Prices";
+			theWindow[i++] = "";
+			theWindow[i++] = "6. Seek spell           " + MagicPrice(6);
+			
+			g.ClearBottom ();
+			g.AddBottom ("Make choice (hit 0 to cancel)");
+			g.AddBottom ();
+			
+			int choice = QuickMenu (new MenuItemList("0","1","2","3","4","5","6"), 2);
+
+			if (choice == 0)
+				return true;
+			
+			int maxCount = player.Gold / MagicPrice(choice);
+			
+			int purchaseCount = XleCore.ChooseNumber(maxCount);
+			
+			if (purchaseCount == 0)
+				return true;
+			
+			
+			
+			
+			return true;
+		}
+		
+		int MagicPrice(int index)
+		{
+			int[] prices = { 32, 63, 152, 189, 379, 51 };
+			
+			return (int)(XleCore.MagicSpells[index].BasePrice * this.CostFactor);
+		}
 	}
 
 }

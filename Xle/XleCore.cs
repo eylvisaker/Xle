@@ -91,7 +91,8 @@ namespace ERY.Xle
 		private Dictionary<int, string> mQualityList = new Dictionary<int, string>();
 		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo>();
 		private Dictionary<int, XleMapTypes.Map3DExtraInfo> mMap3DExtras = new Dictionary<int, XleMapTypes.Map3DExtraInfo>();
-
+		private Dictionary<int, MagicSpell> mMagicSpells = new Dictionary<int, MagicSpell>();
+		
 		private Data.AgateDataImport mDatabase;
 
 		public static Color FontColor { get; private set; }
@@ -163,7 +164,11 @@ namespace ERY.Xle
 					case "Maps":
 						LoadMapInfo(root.ChildNodes[i]);
 						break;
-
+					
+					case "MagicSpells":
+						LoadMagicInfo(root.ChildNodes[i]);
+						break;
+					
 					case "Weapons":
 						LoadEquipmentInfo(root.ChildNodes[i], ref mWeaponList);
 						break;
@@ -230,6 +235,19 @@ namespace ERY.Xle
 				string longName = GetOptionalAttribute(node, "LongName", "");
 
 				mItemList.Add(id, name, longName, action);
+			}
+		}
+		private void LoadMagicInfo(XmlNode xmlNode)
+		{
+			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
+			{
+				XmlNode node = xmlNode.ChildNodes[i];
+
+				int id = int.Parse(node.Attributes["ID"].Value);
+				string name = node.Attributes["Name"].Value;
+				int basePrice = int.Parse (GetOptionalAttribute(node, "BasePrice", "0"));
+				
+				mMagicSpells.Add (id, new MagicSpell { Name = name, BasePrice = basePrice } );
 			}
 		}
 		private void LoadEquipmentInfo(XmlNode xmlNode, ref EquipmentList equipmentList)
@@ -422,7 +440,8 @@ namespace ERY.Xle
 			get { return inst.mExhibitInfo; }
 		}
 		public static Dictionary<int, XleMapTypes.Map3DExtraInfo> Map3DExtraInfo { get { return inst.mMap3DExtras; } }
-
+		public static Dictionary<int, MagicSpell> MagicSpells { get { return inst.mMagicSpells; } }
+		
 		public static Data.AgateDataImport Database
 		{
 			get { return inst.mDatabase; }
