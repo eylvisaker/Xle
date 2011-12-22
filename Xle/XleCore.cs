@@ -1,7 +1,3 @@
-#define Disable3D
-#define ShowCoordinates
-//#define StartFullScreen 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -100,6 +96,7 @@ namespace ERY.Xle
 		public XleCore()
 		{
 			inst = this;
+
 			for (int i = 0; i < 17; i++)
 			{
 				menuArray[i] = "";
@@ -696,9 +693,12 @@ namespace ERY.Xle
 		 *	Parameters:	the direct draw surface to draw to							*
 		 *  Returns:	void														*
 		 ****************************************************************************/
+		/// <summary>
+		/// This function handles draws the action history at the bottom of the
+		/// main window for heartbeat		
+		/// </summary>
 		public static void DrawBottomText()
 		{
-
 			for (int i = 0; i < 5; i++)
 			{
 				int x = 16 + 16 * g.BottomMargin(i);
@@ -720,9 +720,9 @@ namespace ERY.Xle
 		public static void DrawBorder(Color boxColor)
 		{
 			DrawLine(0, 0, 1, myWindowWidth, boxColor);
-			DrawLine(0, 0, 0, myWindowHeight, boxColor);
-			DrawLine(0, myWindowHeight - 12, 1, myWindowWidth, boxColor);
-			DrawLine(myWindowWidth - 12, 0, 0, myWindowHeight, boxColor);
+			DrawLine(0, 0, 0, myWindowHeight-2, boxColor);
+			DrawLine(0, myWindowHeight - 16, 1, myWindowWidth, boxColor);
+			DrawLine(myWindowWidth - 12, 0, 0, myWindowHeight-2, boxColor);
 		}
 
 		/****************************************************************************
@@ -737,9 +737,9 @@ namespace ERY.Xle
 		public static void DrawInnerBorder(Color innerColor)
 		{
 			DrawInnerLine(0, 0, 1, myWindowWidth, innerColor);
-			DrawInnerLine(0, 0, 0, myWindowHeight, innerColor);
-			DrawInnerLine(0, myWindowHeight - 12, 1, myWindowWidth + 2, innerColor);
-			DrawInnerLine(myWindowWidth - 12, 0, 0, myWindowHeight, innerColor);
+			DrawInnerLine(0, 0, 0, myWindowHeight-2, innerColor);
+			DrawInnerLine(0, myWindowHeight - 16, 1, myWindowWidth + 2, innerColor);
+			DrawInnerLine(myWindowWidth - 12, 0, 0, myWindowHeight-2, innerColor);
 
 		}
 
@@ -760,7 +760,7 @@ namespace ERY.Xle
 		{
 			int boxWidth = 12;
 
-			top += 2;
+			top += 4;
 
 			if (direction == 1)
 			{
@@ -795,20 +795,13 @@ namespace ERY.Xle
 		{
 			int boxWidth = 12;
 			int innerOffsetH = 8;
-			int innerOffsetV = 2;
+			int innerOffsetV = 4;
 			int innerWidth = 2;
 
 			top += 2;
 
 			if (direction == 1)
 			{
-				//boxWidth -= 4;
-				//DDPutBox(pDDS, left + innerOffsetH,
-				//                  top + innerOffsetV,
-				//                  length - boxWidth,
-				//                  innerWidth,
-				//                  innerColor);
-
 				Display.FillRect(left + innerOffsetH,
 					top + innerOffsetV,
 					length - boxWidth,
@@ -817,13 +810,6 @@ namespace ERY.Xle
 			}
 			else
 			{
-				//length -= 2;
-
-				//DDPutBox(pDDS, left + innerOffsetH,
-				//                  top + innerOffsetV,
-				//                  innerWidth,
-				//                  length - boxWidth,
-				//                  innerColor);
 
 				Display.FillRect(left + innerOffsetH,
 					top + innerOffsetV,
@@ -1942,7 +1928,6 @@ namespace ERY.Xle
 
 			return "";
 		}
-
 
 	}
 }

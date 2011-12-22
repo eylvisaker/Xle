@@ -74,9 +74,11 @@ Museum:
 	Step sound.
 	Xamine command.
 	Verify extra condition to reach level 4.
+	Exhibit and torch sounds.
+	Dark hallways.
 
 Dungeons:
-	Make exiting knight's test and four jewels work right.
+	D - Make exiting knight's test and four jewels work right.
 	D - Implement traps.
 	D - Implement xamine.
 	D - Make sure climbing through floor/ceiling hole automatically reveals partner hole if hidden.

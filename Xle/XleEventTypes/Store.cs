@@ -18,17 +18,51 @@ namespace ERY.Xle.XleEventTypes
 		private bool mRobbed = false;
 		private string mShopName;
 
+
+		protected string[] theWindow = new string[20];
+		protected Color[][] theWindowColor = new Color[20][];
+
 		public Store()
 		{
 			LeftOffset = 2;
-			
+
 			for (int i = 0; i < theWindowColor.Length; i++)
-				theWindowColor[i] = XleColor.White;
+			{
+				for (int j = 0; j < 40; j++)
+				{
+					theWindowColor[i] = new Color[40];
+				}
+			}
+
+			ClearWindow();
+
+			BottomBackgroundColor = XleColor.Black;
 		}
 		public string ShopName
 		{
 			get { return mShopName; }
 			set { mShopName = value; }
+		}
+
+		protected void ClearWindow()
+		{
+			for (int i = 0; i < theWindow.Length; i++)
+			{
+				theWindow[i] = string.Empty;
+
+				for (int j = 0; j < theWindowColor[i].Length; j++)
+					theWindowColor[i][j] = XleColor.White;
+			}
+		}
+
+		protected void SetColor(int rowNumber, Color color)
+		{
+			SetColor(rowNumber, 0, 40, color);
+		}
+		protected void SetColor(int rowNumber, int start, int length, Color color)
+		{
+			for (int i = 0; i < length; i++)
+				theWindowColor[rowNumber][start + i] = color;
 		}
 
 		protected override void WriteData(XleSerializationInfo info)
@@ -119,10 +153,6 @@ namespace ERY.Xle.XleEventTypes
 			}
 
 		}
-
-		protected string[] theWindow = new string[20];
-		protected Color[] theWindowColor = new Color[20];
-
 		protected virtual void GetColors(out Color backColor, out Color borderColor,
 			out Color lineColor, out Color fontColor, out Color titleColor)
 		{
@@ -151,9 +181,9 @@ namespace ERY.Xle.XleEventTypes
 			Display.EndFrame();
 			Core.KeepAlive();
 		}
-		
+
 		protected int LeftOffset { get; set; }
-		
+
 		protected void DrawStore()
 		{
 			string tempString;
@@ -169,7 +199,7 @@ namespace ERY.Xle.XleEventTypes
 
 			// draw backgrounds
 			Display.Clear(storeBackColor);
-			Display.FillRect(0, 296, 640, 400 - 296, XleColor.Black);
+			Display.FillRect(0, 296, 640, 104, BottomBackgroundColor);
 
 			// Draw the borders
 			XleCore.DrawBorder(storeBorderColor);
@@ -189,10 +219,10 @@ namespace ERY.Xle.XleEventTypes
 				if (string.IsNullOrEmpty(theWindow[i]))
 					continue;
 
-				XleCore.WriteText((LeftOffset+1)*16, i * 16, theWindow[i], theWindowColor[i]);
+				XleCore.WriteText((LeftOffset + 1) * 16, i * 16, theWindow[i], theWindowColor[i]);
 			}
 
-			if (!robbing)
+			if (robbing == false)
 			{
 				// Draw Gold
 				tempString = " Gold: ";
@@ -205,7 +235,8 @@ namespace ERY.Xle.XleEventTypes
 				tempString = " Robbery in progress ";
 			}
 
-			Display.FillRect(320 - (tempString.Length / 2) * 16, 18 * 16, tempString.Length * 16, 16, storeBackColor);
+			Display.FillRect(320 - (tempString.Length / 2) * 16, 18 * 16, tempString.Length * 16, 14,
+				storeBackColor);
 
 			XleCore.WriteText(320 - (tempString.Length / 2) * 16, 18 * 16, tempString, XleColor.White);
 
@@ -214,17 +245,11 @@ namespace ERY.Xle.XleEventTypes
 		}
 
 
-		protected void Clear()
-		{
-			for (int i = 0; i < 18; i++)
-			{
-				theWindow[i] = "";
-			}
-		}
+		protected Color BottomBackgroundColor { get; set; }
 
 		protected void StoreSound(LotaSound sound)
 		{
-			SoundMan.PlaySoundSync(sound);
+			SoundMan.PlaySoundSync(RedrawStore, sound);
 		}
 		protected void Wait(int howLong)
 		{
@@ -349,10 +374,10 @@ namespace ERY.Xle.XleEventTypes
 			out Color lineColor, out Color fontColor, out Color titleColor)
 		{
 			backColor = XleColor.DarkGray;
-			borderColor = XleColor.Gray;
+			borderColor = XleColor.LightGray;
 			lineColor = XleColor.Yellow;
 			fontColor = XleColor.White;
-			titleColor = XleColor.Yellow;
+			titleColor = XleColor.White;
 		}
 		public override bool Speak(Player player)
 		{
@@ -363,9 +388,12 @@ namespace ERY.Xle.XleEventTypes
 			this.player = player;
 			robbing = false;
 
-			theWindow[i++] = " Friendly ";
+			ClearWindow();
+			LeftOffset = 6;
+			
+			theWindow[i++] = "Friendly";
 			theWindow[i++] = "";
-			theWindow[i++] = "Lending Association";
+			theWindow[i++] = "   Lending Association";
 			theWindow[i++] = "";
 			theWindow[i++] = "";
 			theWindow[i++] = "";
@@ -373,8 +401,10 @@ namespace ERY.Xle.XleEventTypes
 
 			if (player.loan == 0)
 			{
-				theWindow[i++] = "We'd be happy to loan you";
-				theWindow[i++] = "money at 'friendly' rates";
+				theWindow[i++] = " We'd be happy to loan you";
+				theWindow[i++] = " money at 'friendly' rates";
+				theWindow[i++] = "";
+				theWindow[i++] = "";
 				theWindow[i++] = "";
 				theWindow[i] = "You may borrow up to ";
 				theWindow[i] += max;
@@ -389,13 +419,22 @@ namespace ERY.Xle.XleEventTypes
 				{
 					player.Gold += choice;
 					player.loan = (int)(choice * 1.5);
-					player.dueDate = (int)player.TimeDays + 120;
+					player.dueDate = (int)(player.TimeDays + 0.999) + 120;
 
-					g.AddBottom("Borrowed " + choice.ToString() + " gold.");
-					g.AddBottom("");
-					g.AddBottom("You'll owe " + player.loan.ToString() + " gold in 120 days!");
+					g.AddBottom();
+					g.AddBottom(choice.ToString() + " gold borrowed.");
 
-					StoreSound(LotaSound.Sale);
+					XleCore.wait(DrawStore, 1000);
+
+					ColorStringBuilder b = new ColorStringBuilder();
+					b.AddText("You'll owe ", XleColor.White);
+					b.AddText(player.loan.ToString(), XleColor.Yellow);
+					b.AddText(" gold", XleColor.Yellow);
+					b.AddText(" in 120 days.", XleColor.White);
+
+					g.AddBottom(b);
+
+					StoreSound(LotaSound.Bad);
 
 				}
 			}
@@ -408,7 +447,7 @@ namespace ERY.Xle.XleEventTypes
 
 				if (player.dueDate - player.TimeDays > 0)
 				{
-					DueDate = ((int)(player.dueDate - player.TimeDays)).ToString() + " days ";
+					DueDate = ((int)(player.dueDate - player.TimeDays + 0.02)).ToString() + " days ";
 					min = 0;
 				}
 				else
@@ -444,7 +483,7 @@ namespace ERY.Xle.XleEventTypes
 
 				if (player.loan <= 0)
 				{
-					g.AddBottom("Loan Repaid");
+					g.AddBottom("Loan Repaid.");
 
 					SoundMan.PlaySound(LotaSound.Sale);
 				}
@@ -604,11 +643,13 @@ namespace ERY.Xle.XleEventTypes
 			int[] qualList = new int[16];
 			int[] priceList = new int[16];
 
+			this.LeftOffset = 4;
 			this.player = player;
 
-			theWindow[i++] = " " + ShopName + " ";
+			ClearWindow();
+			theWindow[i++] = ShopName;
 			theWindow[i++] = "";
-			theWindow[i++] = "Weapons";
+			theWindow[i++] = "            Weapons";
 
 
 			for (i = 1; i <= 8; i++)
@@ -635,7 +676,7 @@ namespace ERY.Xle.XleEventTypes
 			if (choice == 0)
 			{
 
-				theWindow[4] = "Items                   Prices";
+				theWindow[4] = "   Items               Prices";
 
 				StoreSound(LotaSound.Sale);
 
@@ -820,7 +861,7 @@ namespace ERY.Xle.XleEventTypes
 					}
 				}
 			}
-			
+
 			if (skipRaft == true || choice == 1)
 			{
 				g.AddBottom("How about some climbing gear");
@@ -912,20 +953,25 @@ namespace ERY.Xle.XleEventTypes
 			int woundPrice = (int)((player.MaxHP - player.HP) * 0.75);
 			int herbsPrice = (int)(player.Level * 300 * CostFactor);
 
-			theWindow[i++] = " " + ShopName + " ";
+			ClearWindow();
+
+			theWindow[i++] = ShopName;
 			theWindow[i++] = "";
 			theWindow[i++] = "";
-			theWindow[i++] = "Our sect offers restorative";
-			theWindow[i++] = "cures for your wounds.";
+			theWindow[i++] = "    Our sect offers restorative";
+			theWindow[i++] = "        cures for your wounds.";
 
 			i += 4;
 
-			string woundString = " " + woundPrice.ToString();
+			string woundString = woundPrice.ToString() + " gold";
 
 			if (woundPrice <= 0)
+			{
 				woundString = "Not needed";
+				SetColor(i, 18, 12, XleColor.Yellow);
+			}
 
-			theWindow[i++] = "1. Wound Care  - " + woundString;
+			theWindow[i++] = "1. Wound Care  -  " + woundString;
 			i += 2;
 
 			theWindow[i++] = "2. Healing Herbs -  " + herbsPrice.ToString() + " apiece";
@@ -937,7 +983,7 @@ namespace ERY.Xle.XleEventTypes
 
 				// TODO: make it blue!
 				theWindow[i++] = "You're ready for herbs!";
-				
+
 				SoundMan.PlaySound(LotaSound.VeryGood);
 				while (SoundMan.IsPlaying(LotaSound.VeryGood))
 				{
@@ -965,12 +1011,8 @@ namespace ERY.Xle.XleEventTypes
 			{
 				g.AddBottom("You are cured.");
 				player.HP = player.MaxHP;
-				SoundMan.PlaySound(LotaSound.VeryGood);
 
-				while (SoundMan.IsPlaying(LotaSound.VeryGood))
-				{
-					XleCore.wait(10);
-				}
+				StoreSound(LotaSound.VeryGood);
 			}
 			else if (choice == 2)
 			{
@@ -1008,10 +1050,7 @@ namespace ERY.Xle.XleEventTypes
 						g.AddBottom(number.ToString() + " healing herbs purchased.");
 						player.museum[6] |= 0x04;
 
-						SoundMan.PlaySound(LotaSound.Sale);
-
-						while (SoundMan.IsPlaying(LotaSound.Sale))
-							XleCore.wait(10);
+						StoreSound(LotaSound.Sale);
 					}
 				}
 			}
@@ -1094,12 +1133,12 @@ namespace ERY.Xle.XleEventTypes
 			{
 				SetWindow(cost);
 
-				tempString = "Maximum purchase ";
+				tempString = "      Maximum purchase:  ";
 				tempString += max;
 				tempString += " days";
 
 				g.AddBottom("");
-				g.AddBottom(tempString);
+				g.AddBottom(tempString, XleColor.Cyan);
 
 				choice = ChooseNumber(max);
 
@@ -1188,11 +1227,13 @@ namespace ERY.Xle.XleEventTypes
 		}
 		private void SetWindow(double cost)
 		{
+			LeftOffset = 9;
+
 			int i = 1;
 			theWindow[i++] = "";
 			theWindow[i++] = "";
 			theWindow[i++] = "";
-			theWindow[i++] = "Food & water";
+			theWindow[i++] = "    Food & water";
 			theWindow[i++] = "";
 			theWindow[i++] = "";
 			theWindow[i++] = "We sell food for travel.";
@@ -1210,11 +1251,16 @@ namespace ERY.Xle.XleEventTypes
 			}
 			else
 				theWindow[i] = "Robbery in progress";
+
+			for (i = 1; i < theWindowColor.Length; i++)
+				SetColor(i, XleColor.Yellow);
+
 		}
+
 		private int SetTitle()
 		{
 			int i = 0;
-			theWindow[0] = " " + ShopName + " ";
+			theWindow[0] = ShopName;
 			return i;
 		}
 		private void PayForMail(Player player)
@@ -1289,7 +1335,7 @@ namespace ERY.Xle.XleEventTypes
 
 	public class StoreVault : Store
 	{
-		public override bool Speak (Player player)
+		public override bool Speak(Player player)
 		{
 			return false;
 		}
@@ -1297,60 +1343,73 @@ namespace ERY.Xle.XleEventTypes
 
 	public class StoreMagic : Store
 	{
-		public override bool Speak (Player player)
+		protected override void GetColors(out Color backColor, out Color borderColor, out Color lineColor,
+			out Color fontColor, out Color titleColor)
+		{
+			backColor = XleColor.LightBlue;
+			borderColor = XleColor.Cyan;
+			lineColor = XleColor.Yellow;
+			fontColor = XleColor.Cyan;
+			titleColor = XleColor.White;
+		}
+		public override bool Speak(Player player)
 		{
 			if (CheckLoan(player, true))
 				return true;
-			
+
 			this.player = player;
-			
-			LeftOffset = 4;
-			
-			theWindow[0] = " " + ShopName + " ";
-			
+
+			LeftOffset = 7;
+
+			theWindow[0] = ShopName;
+			BottomBackgroundColor = XleColor.Blue;
+
 			int i = 1;
 			theWindow[i++] = "";
-			theWindow[i++] = "   General Purpose      Prices";
+			SetColor(i, XleColor.Blue);
+			theWindow[i++] = "General Purpose      Prices";
 			theWindow[i++] = "";
-			theWindow[i++] = "1. Magic flame          " + MagicPrice(1);
-			theWindow[i++] = "2. Firebolt             " + MagicPrice(2);
+			theWindow[i++] = "1. Magic flame        " + MagicPrice(1);
+			theWindow[i++] = "2. Firebolt           " + MagicPrice(2);
 			theWindow[i++] = "";
-			theWindow[i++] = "   Dungeon use only     Prices";
+			SetColor(i, XleColor.Blue);
+			theWindow[i++] = "Dungeon use only     Prices";
 			theWindow[i++] = "";
-			theWindow[i++] = "3. Befuddle spell       " + MagicPrice(3);
-			theWindow[i++] = "4. Psycho strength      " + MagicPrice(4);
-			theWindow[i++] = "5. Kill Flash           " + MagicPrice(5);
+			theWindow[i++] = "3. Befuddle spell     " + MagicPrice(3);
+			theWindow[i++] = "4. Psycho strength    " + MagicPrice(4);
+			theWindow[i++] = "5. Kill Flash         " + MagicPrice(5);
 			theWindow[i++] = "";
-			theWindow[i++] = "   Outside use only     Prices";
+			SetColor(i, XleColor.Blue);
+			theWindow[i++] = "Outside use only     Prices";
 			theWindow[i++] = "";
-			theWindow[i++] = "6. Seek spell           " + MagicPrice(6);
-			
-			g.ClearBottom ();
-			g.AddBottom ("Make choice (hit 0 to cancel)");
-			g.AddBottom ();
-			
-			int choice = QuickMenu (new MenuItemList("0","1","2","3","4","5","6"), 2);
+			theWindow[i++] = "6. Seek spell         " + MagicPrice(6);
+
+			g.ClearBottom();
+			g.AddBottom("Make choice (hit 0 to cancel)");
+			g.AddBottom();
+
+			int choice = QuickMenu(new MenuItemList("0", "1", "2", "3", "4", "5", "6"), 2);
 
 			if (choice == 0)
 				return true;
-			
+
 			int maxCount = player.Gold / MagicPrice(choice);
-			
+
 			int purchaseCount = XleCore.ChooseNumber(maxCount);
-			
+
 			if (purchaseCount == 0)
 				return true;
-			
-			
-			
-			
+
+
+
+
 			return true;
 		}
-		
+
 		int MagicPrice(int index)
 		{
 			int[] prices = { 32, 63, 152, 189, 379, 51 };
-			
+
 			return (int)(XleCore.MagicSpells[index].BasePrice * this.CostFactor);
 		}
 	}

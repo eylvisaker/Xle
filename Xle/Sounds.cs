@@ -41,6 +41,7 @@ namespace ERY.Xle
 		XamineDetected,
 		Drip0,
 		Drip1,
+		Bad,
 	}
 
 	static class SoundMan
@@ -97,6 +98,13 @@ namespace ERY.Xle
 
 			while (IsPlaying(lotaSound))
 				XleCore.wait(50);
+		}
+		internal static void PlaySoundSync(XleCore.RedrawDelegate redraw, LotaSound lotaSound)
+		{
+			PlaySound(lotaSound);
+
+			while (IsPlaying(lotaSound))
+				XleCore.wait(redraw, 50);
 		}
 
 		internal static void FinishSounds()
