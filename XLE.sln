@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLE", "Xle\XLE.csproj", "{FDE0A61F-558B-4964-8292-B7A212A3AB45}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib", "..\..\Agate\trunk\AgateLib\AgateLib.csproj", "{9490B719-829E-43A7-A5FE-8001F8A81759}"

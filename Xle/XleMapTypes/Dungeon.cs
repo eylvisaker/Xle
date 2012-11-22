@@ -594,6 +594,9 @@ namespace ERY.Xle.XleMapTypes
 
 		protected override Map3D.ExtraType GetExtraType(int val, int side)
 		{
+			if (side != 0)
+				return ExtraType.None;
+
 			ExtraType extraType = ExtraType.None;
 
 			switch (val)
