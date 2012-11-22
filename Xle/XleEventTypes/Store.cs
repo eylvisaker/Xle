@@ -1107,6 +1107,8 @@ namespace ERY.Xle.XleEventTypes
 
 		}
 
+		bool skipMailOffer = false;
+
 		public override bool Speak(Player player)
 		{
 			if (CheckLoan(player, true))
@@ -1128,6 +1130,7 @@ namespace ERY.Xle.XleEventTypes
 			if (player.mailTown == XleCore.Map.MapID)
 			{
 				PayForMail(player);
+				skipMailOffer = true;
 			}
 			else
 			{
@@ -1151,7 +1154,9 @@ namespace ERY.Xle.XleEventTypes
 
 					StoreSound(LotaSound.Sale);
 
-					OfferMail(player);
+					if (skipMailOffer == false)
+						OfferMail(player);
+
 					return true;
 				}
 				else

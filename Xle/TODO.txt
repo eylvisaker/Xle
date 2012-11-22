@@ -38,6 +38,8 @@ Towns:
 	Vault
 	Getting arrested / negotiating with jailer.
 	Fix mail routes - Thornberry at least has none.
+	D - Don't offer mail after delivering it.
+	Weird bug when exiting Isle City. (Leave Tarmalon?)
 
 Castle:
 	D - Fix events in castle.
