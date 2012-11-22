@@ -21,14 +21,14 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			if (player.museum[ExhibitID] == 0 && TotalExhibitsViewed(player) < 2)
 			{
-				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[1]);
-				
+				ReadRawText(ExhibitInfo.Text[1]);
+
 				// fair knife
 				player.AddWeapon(1, 1);
 			}
-			else if (player.museum[ExhibitID] == 1)
+			else
 			{
-				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[2]);
+				ReadRawText(ExhibitInfo.Text[2]);
 
 				// great bladed staff
 				player.AddWeapon(3, 3);

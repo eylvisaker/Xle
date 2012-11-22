@@ -143,6 +143,11 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				{
 					line--;
 					text = new ColorStringBuilder();
+
+					// read to next character as a workaround for
+					// Visual Studio's tendency to autoindent XML files.
+					while (ip < rawtext.Length - 1 && rawtext[ip+1] == ' ')
+						ip++;
 				}
 				else if (rawtext[ip] != '`')
 				{
@@ -246,6 +251,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			int count = 0;
 
+			// skip the information and welcome exhibits since they
+			// cost nothing to view.
 			for (int i = 2; i < player.museum.Length; i++)
 			{
 				if (player.museum[i] != 0) 
@@ -260,7 +267,5 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			ExhibitInfo.DrawImage(displayRect, ImageID);
 		}
 	}
-
-
 
 }
