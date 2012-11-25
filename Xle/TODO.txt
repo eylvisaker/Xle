@@ -20,7 +20,7 @@ Outdoors:
 	Audio for mountains?
 	Correct combat damage.
 	Falling unconscious when beaten severly.
-	Attempt to disengage is blocked message is not shown.
+	D - Attempt to disengage is blocked message is not shown.
 	Refactor Stormy variable to use an enum.
 	Refactor outside class to include an extender.
 

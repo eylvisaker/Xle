@@ -292,7 +292,7 @@ namespace ERY.Xle.XleMapTypes
 
 				builder = new ColorStringBuilder();
 				builder.AddText("Attack ", XleColor.White);
-				builder.AddText(MonstName(), XleColor.Cyan);
+				builder.AddText(MonstName, XleColor.Cyan);
 
 				g.AddBottom(builder);
 				builder.Clear();
@@ -329,7 +329,7 @@ namespace ERY.Xle.XleMapTypes
 					SoundMan.PlaySound(LotaSound.EnemyDie);
 
 					g.AddBottom("");
-					g.AddBottom("the " + MonstName() + " dies.");
+					g.AddBottom("the " + MonstName + " dies.");
 
 					int gold, food;
 					bool finished = FinishedCombat(out gold, out food);
@@ -346,7 +346,7 @@ namespace ERY.Xle.XleMapTypes
 							int choice;
 
 							g.AddBottom("Would you like to use the");
-							g.AddBottom(MonstName() + "'s flesh for food?");
+							g.AddBottom(MonstName + "'s flesh for food?");
 							g.AddBottom("");
 
 							choice = XleCore.QuickMenu(menu, 3, 0);
@@ -424,7 +424,7 @@ namespace ERY.Xle.XleMapTypes
 
 					XleCore.wait(500);
 				}
-				if (player.IsOnRaft)
+				else if (player.IsOnRaft)
 				{
 					SoundMan.PlaySound(LotaSound.Bump);
 
@@ -455,7 +455,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else
 			{
-				if (InEncounter)
+				if (EncounterState == XleMapTypes.EncounterState.JustDisengaged)
 				{
 					g.AddBottom("");
 					g.AddBottom("Attempt to disengage");
@@ -463,13 +463,11 @@ namespace ERY.Xle.XleMapTypes
 
 					XleCore.wait(500);
 
-					EncounterState = 0;
+					EncounterState = XleMapTypes.EncounterState.NoEncounter;
 				}
-
 
 				if (player.IsOnRaft == false)
 				{
-
 					switch (player.Terrain)
 					{
 						case TerrainType.Swamp:
@@ -538,33 +536,36 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override bool PlayerSpeakImpl(Player player)
 		{
-			if (EncounterState == EncounterState.NoEncounter)
+			if (EncounterState != EncounterState.MonsterReady)
 			{
+				return false;
 			}
-			else if (EncounterState != EncounterState.MonsterReady)
-			{
-			}
-			else if (EncounterState == EncounterState.MonsterReady)
-			{
-				SpeakToMonster(player);
+			
+			SpeakToMonster(player);
 
-				return true;
-			}
-			return false;
-
+			return true;
 		}
 
 		private EncounterState EncounterState { get; set; }
 
 		private bool InEncounter
 		{
-			get { return EncounterState == EncounterState.JustDisengaged; }
+			get
+			{
+				switch (EncounterState)
+				{
+					case XleMapTypes.EncounterState.MonsterAppeared:
+					case XleMapTypes.EncounterState.MonsterReady:
+						return true;
+					default:
+						return false;
+				}
+			}
 		}
 
-		string MonstName()
+		string MonstName
 		{
-			return currentMonst[0].Name;
-
+			get { return currentMonst[0].Name; }
 		}
 
 		int attack(Player player)
@@ -600,11 +601,6 @@ namespace ERY.Xle.XleMapTypes
 			}
 
 			return false;
-		}
-
-		void MonstFight()
-		{
-
 		}
 
 		bool FinishedCombat(out int gold, out int food)
@@ -644,7 +640,7 @@ namespace ERY.Xle.XleMapTypes
 			if (!isMonsterFriendly)
 			{
 				g.AddBottom("");
-				g.AddBottom("The " + MonstName() + " does not reply.");
+				g.AddBottom("The " + MonstName + " does not reply.");
 
 				XleCore.wait(250);
 
@@ -830,7 +826,7 @@ namespace ERY.Xle.XleMapTypes
 
 
 		/// <summary>
-		/// 		// sets or returns whether or not the player is in stormy water
+		/// Gets or sets whether or not the player is in stormy water
 		/// </summary>
 		/// <returns></returns>
 		public int Stormy
@@ -841,7 +837,6 @@ namespace ERY.Xle.XleMapTypes
 				System.Diagnostics.Debug.Assert(value >= 0);
 
 				stormy = value;
-
 			}
 		}
 
@@ -1051,7 +1046,7 @@ namespace ERY.Xle.XleMapTypes
 			currentMonst.Clear();
 			isMonsterFriendly = false;
 
-			int type = XleCore.random.Next(0, 21);
+			int type = XleCore.random.Next(0, 15);
 
 			if (type < 10)
 			{
@@ -1426,7 +1421,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else if (EncounterState == EncounterState.MonsterReady)
 			{
-				if (XleCore.random.Next(100) < 40 && isMonsterFriendly == false)
+				if (XleCore.random.Next(100) < 50 && isMonsterFriendly == false)
 				{
 					return false;
 				}
