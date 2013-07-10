@@ -17,6 +17,26 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		Turquoise,
 		Diamond,
 	}
+	enum ExhibitIdentifier
+	{
+		Information,
+		Welcome,
+		Weaponry,
+		Thornberry,
+		Fountain,
+		PirateTreasure,
+		HerbOfLife,
+		NativeCurrency,
+		StonesWisdom,
+		Tapestry,
+		LostDisplays,
+		KnightsTest,
+		FourJewels,
+		Guardian,
+		Pegasus,
+		AncientArtifact,
+	}
+
 	abstract class Exhibit
 	{
 		protected Exhibit(string name, Coin c)
@@ -64,12 +84,12 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			get
 			{
-				if (XleCore.ExhibitInfo.ContainsKey(ExhibitID))
+				if (XleCore.ExhibitInfo.ContainsKey((int)ExhibitID))
 				{
-					var exinfo = XleCore.ExhibitInfo[ExhibitID];
+					var exinfo = XleCore.ExhibitInfo[(int)ExhibitID];
 
 					if (exinfo.Text.ContainsKey(1))
-						return XleCore.ExhibitInfo[ExhibitID].Text[1];
+						return XleCore.ExhibitInfo[(int)ExhibitID].Text[1];
 					else
 						return "This exhibit does not have any text with key 1.";
 				}
@@ -99,7 +119,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		/// <returns></returns>
 		protected bool CheckOfferReread(Player player)
 		{
-			if (player.museum[ExhibitID] > 0)
+			if (player.museum[(int)ExhibitID] > 0)
 			{
 				return OfferReread();
 			}
@@ -144,10 +164,16 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 					line--;
 					text = new ColorStringBuilder();
 
-					// read to next character as a workaround for
-					// Visual Studio's tendency to autoindent XML files.
-					while (ip < rawtext.Length - 1 && rawtext[ip+1] == ' ')
-						ip++;
+					int i = 1;
+					while (rawtext[ip + i] == ' ')
+						i++;
+
+					if (rawtext[ip + i] == '|')
+						ip += i - 1;
+				}
+				else if (rawtext[ip] == '|' && (text.Text == null || text.Text.Trim() == ""))
+				{
+					text.Clear();
 				}
 				else if (rawtext[ip] != '`')
 				{
@@ -231,10 +257,10 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			return false;
 		}
 
-		public abstract int ExhibitID { get; }
+		public abstract ExhibitIdentifier ExhibitID { get; }
 		public virtual bool ViewedBefore(Player player)
 		{
-			return player.museum[ExhibitID] != 0;
+			return player.museum[(int)ExhibitID] != 0;
 		}
 
 		/// <summary>
@@ -245,14 +271,15 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			get { return true; }
 		}
 
-		public ExhibitInfo ExhibitInfo { get { return XleCore.ExhibitInfo[ExhibitID]; } }
+		public ExhibitInfo ExhibitInfo
+		{
+			get { return XleCore.ExhibitInfo[(int)ExhibitID]; }
+		}
 
 		protected int TotalExhibitsViewed(Player player)
 		{
 			int count = 0;
 
-			// skip the information and welcome exhibits since they
-			// cost nothing to view.
 			for (int i = 2; i < player.museum.Length; i++)
 			{
 				if (player.museum[i] != 0) 
@@ -267,5 +294,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			ExhibitInfo.DrawImage(displayRect, ImageID);
 		}
 	}
+
+
 
 }

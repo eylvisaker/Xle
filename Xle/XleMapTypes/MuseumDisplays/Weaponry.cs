@@ -8,7 +8,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Weaponry : Exhibit
 	{
 		public Weaponry() : base("Weaponry", Coin.Jade) { }
-		public override int ExhibitID { get { return 2; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Weaponry; } }
 		public override string LongName
 		{
 			get
@@ -17,31 +17,44 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			}
 		}
 
+		bool viewedThisTime;
+
 		public override void PlayerXamine(Player player)
 		{
-			if (player.museum[ExhibitID] == 0 && TotalExhibitsViewed(player) < 2)
+			int id = (int)ExhibitID;
+
+			if (player.museum[(int)ExhibitIdentifier.Thornberry] != 0)
+			{
+				player.museum[id] = 1;
+			}
+
+			if (player.museum[id] == 0)
 			{
 				ReadRawText(ExhibitInfo.Text[1]);
-
+				
 				// fair knife
 				player.AddWeapon(1, 1);
 			}
-			else
+			else if (player.museum[id] == 1)
 			{
 				ReadRawText(ExhibitInfo.Text[2]);
 
 				// great bladed staff
 				player.AddWeapon(3, 3);
 
-				player.museum[ExhibitID] = 10;
+				player.museum[id] = 10;
 			}
+
+			viewedThisTime = true;
 		}
 		public override bool IsClosed(ERY.Xle.Player player)
 		{
-			if (player.museum[ExhibitID] == 10)
+			int id = (int)ExhibitID;
+
+			if (viewedThisTime)
 				return true;
 
-			if (player.museum[ExhibitID] == 1 && TotalExhibitsViewed(player) < 2)
+			if (player.museum[id] == 10)
 				return true;
 
 			return false;

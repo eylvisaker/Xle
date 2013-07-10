@@ -8,7 +8,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Fountain : Exhibit
 	{
 		public Fountain() : base("A Fountain", Coin.Jade) { }
-		public override int ExhibitID { get { return 4; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Fountain; } }
 		public override string LongName
 		{
 			get
@@ -19,7 +19,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		public override bool IsClosed(ERY.Xle.Player player)
 		{
-			if (player.museum[ExhibitID] == 7)
+			if (player.museum[(int)ExhibitID] == 7)
 				return true;
 			else
 				return false;
@@ -32,7 +32,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				base.PlayerXamine(player);
 				g.AddBottom();
 
-				if (player.museum[ExhibitID] == 0 || player.museum[ExhibitID] == 1)
+				if (player.museum[(int)ExhibitID] == 0 || player.museum[(int)ExhibitID] == 1)
 					g.AddBottom("Do you want to help search?");
 				else
 					g.AddBottom("Do you want to continue searching?");
@@ -42,7 +42,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				if (XleCore.QuickMenuYesNo() == 0)
 				{
 					ReadRawText(ExhibitInfo.Text[2]);
-					int amount = TotalExhibitsViewed(player) >= 2 ? 100 : 300;
+					int amount = player.museum[3] != 0 ? 300 : 100;
 					
 					player.Gold += amount;
 
@@ -53,11 +53,11 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 					XleCore.WaitForKey();
 
-					player.museum[ExhibitID] = 3;
+					player.museum[(int)ExhibitID] = 3;
 				}
 				else
 				{
-					player.museum[ExhibitID] = 1;
+					player.museum[(int)ExhibitID] = 1;
 				}
 			}
 			else
@@ -65,7 +65,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				// remove the tulip from the player, give the reward and shut down the exhibit.
 				player.ItemCount(10, -player.Item(10));
 				player.Attribute[Attributes.charm] += 10;
-				player.museum[ExhibitID] = 7;
+				player.museum[(int)ExhibitID] = 7;
 
 				ReadRawText(ExhibitInfo.Text[3]);
 

@@ -8,6 +8,6 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Tapestry : Exhibit
 	{
 		public Tapestry() : base("A Tapestry", Coin.Amethyst) { }
-		public override int ExhibitID { get { return 9; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Tapestry; } }
 	}
 }

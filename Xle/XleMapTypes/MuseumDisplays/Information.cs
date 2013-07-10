@@ -7,22 +7,80 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
 	class Information : Exhibit
 	{
+		Player player;
+
 		public Information() : base("Information", Coin.None) { }
-		public override int ExhibitID { get { return 0; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Information; } }
 		public override string CoinString
 		{
 			get { return string.Empty; }
 		}
 
+
+		int ExhibitState
+		{
+			get { return player.museum[0]; }
+			set { player.museum[0] = value; }
+		}
+		private void SetBit(int index, bool value)
+		{
+			int val = 1 << index;
+
+			if (value)
+				ExhibitState |= val;
+			else
+				ExhibitState = ~(~ExhibitState | val);
+		}
+
+		private bool GetBit(int index)
+		{
+			int val = 1 << index;
+
+			return (ExhibitState & val) != 0;
+		}
+		private bool[] GetBitStatus(int value)
+		{
+			bool[] retval = new bool[32];
+
+			for (int i = 0; i < 32; i++)
+			{
+				int test = 1 << i;
+
+				retval[i] = (value & test) != 0;
+			}
+
+			return retval;
+		}
+
+
+
+		bool FirstUse
+		{
+			get { return GetBit(0); }
+			set { SetBit(0, value); }
+		}
+		bool LostCompendiumText
+		{
+			get { return GetBit(1); }
+			set { SetBit(1, value); }
+		}
+		bool SceptorCrownHint
+		{
+			get { return GetBit(2); }
+			set { SetBit(2, value); }
+		}
 		public override void PlayerXamine(Player player)
 		{
+			this.player = player;
+
 			bool[] bits = GetBitStatus(player.museum[0]);
 			bool doneAnything = false;
 
-			if (bits[0] == false)
+			if (FirstUse == false)
 			{
 				// introductory text.  it does not follow through.
 				ReadRawText(ExhibitInfo.Text[2]);
+				FirstUse = true;
 				return;
 			}
 			
@@ -31,7 +89,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				// lost compendium
 				ReadRawText(ExhibitInfo.Text[3]);
 
-				SetBit(player, 1);
+				LostCompendiumText = true;
 				doneAnything = true;
 			}
 			doneAnything |= CheckSceptorCrown(player);
@@ -49,6 +107,11 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		private bool CheckSceptorCrown(Player player)
 		{
+			// If the player has not accepted the caretakers offer and
+			// received the iron key, skip any crown/sceptor checks.
+			if (player.Item(4) == 0)
+				return false;
+
 			if (player.Item(13) > 0 && player.Item(16) > 0)
 			{
 				// found scepter and crown
@@ -63,14 +126,14 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 				return true;
 			}
-			else if ((player.museum[0] & 0x4) == 0)
+			else if (SceptorCrownHint == false)
 			{
 				if (player.Item(13) > 0)
 				{
 					// found scepter, give hint about crown
 					ReadRawText(ExhibitInfo.Text[7]);
 
-					this.SetBit(player, 2);
+					SceptorCrownHint = true;
 					return true;
 				}
 				else if (player.Item(16) > 0)
@@ -78,7 +141,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 					// found crown, give hint about sceptor
 					ReadRawText(ExhibitInfo.Text[8]);
 
-					this.SetBit(player, 2);
+					SceptorCrownHint = true;
 					return true;
 				}
 			}
@@ -161,7 +224,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			// check if we've viewed both sapphire visits 
 			// (thus having completed the first two dungeons
 			// TODO - this won't work if the player dies in Armak!)
-			// and check if we've returned the crown and sceptor.
+			// and check if we've returned the crown and sceptor
+			// and received the magic ice.
 			if (sapphireExhibits == 2 &&
 				player.Item(12) > 0)
 			{
@@ -182,8 +246,9 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				return 3;
 			}
 
-			// check that we've seen at least four exhibits
-			if (jadeExhibits + topazExhibits >= 4)
+			// check that we've seen all the jade coin exhibits and we've closed
+			// down the weaponry exhibit.
+			if (jadeExhibits == 3 && player.museum[2] >= 10)
 				return 2;
 
 			// geez, they've done nothing.
@@ -198,32 +263,6 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				ex += player.museum[i] != 0 ? 1 : 0;
 
 			return ex;
-		}
-
-		private bool DoLevelUp(Player player)
-		{
-			return false;
-		}
-
-		private void SetBit(Player player, int p)
-		{
-			int val = 1 << p;
-
-			player.museum[0] |= val;
-		}
-
-		private bool[] GetBitStatus(int value)
-		{
-			bool[] retval = new bool[32];
-
-			for (int i = 0; i < 32; i++)
-			{
-				int test = 1 << i;
-
-				retval[i] = (value & test) != 0;
-			}
-
-			return retval;
 		}
 	}
 }

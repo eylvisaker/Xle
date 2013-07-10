@@ -8,7 +8,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class PirateTreasure : Exhibit
 	{
 		public PirateTreasure() : base("Pirate Treasure", Coin.Topaz) { }
-		public override int ExhibitID { get { return 5; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.PirateTreasure; } }
 
 		public override bool StaticBeforeCoin
 		{
@@ -21,7 +21,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			if (CheckOfferReread(player))
 			{
-				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[1]);
+				ReadRawText(ExhibitInfo.Text[1]);
 			}
 
 			g.AddBottom("Would you like to go");
@@ -30,7 +30,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 			if (XleCore.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
 			{
-				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[2]);
+				ReadRawText(ExhibitInfo.Text[2]);
 
 				ColorStringBuilder b = new ColorStringBuilder();
 

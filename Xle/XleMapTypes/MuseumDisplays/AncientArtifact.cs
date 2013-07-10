@@ -9,7 +9,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class AncientArtifact : Exhibit
 	{
 		public AncientArtifact() : base("Ancient Artifact", Coin.None) { }
-		public override int ExhibitID { get { return 15; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.AncientArtifact; } }
+
 		public override string LongName
 		{
 			get { return "An ancient artifact"; }

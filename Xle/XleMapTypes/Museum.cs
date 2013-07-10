@@ -326,7 +326,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else
 			{
-				if (player.museum[ex.ExhibitID] == 0)
+				if (player.museum[(int)ex.ExhibitID] == 0)
 					g.AddBottom("You haven't used this exhibit.");
 				else
 					g.AddBottom();
@@ -362,8 +362,8 @@ namespace ERY.Xle.XleMapTypes
 		{
 			ex.PlayerXamine(player);
 
-			if (player.museum[ex.ExhibitID] == 0)
-				player.museum[ex.ExhibitID] = 1;
+			if (player.museum[(int)ex.ExhibitID] == 0)
+				player.museum[(int)ex.ExhibitID] = 1;
 
 			CheckExhibitStatus(player);
 		}

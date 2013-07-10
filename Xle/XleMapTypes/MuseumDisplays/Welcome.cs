@@ -8,7 +8,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Welcome : Exhibit
 	{
 		public Welcome() : base("Welcome", Coin.None) { }
-		public override int ExhibitID { get { return 1; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Welcome; } }
 		public override string LongName
 		{
 			get { return "Welcome to the famed"; }

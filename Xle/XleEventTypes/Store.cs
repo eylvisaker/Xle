@@ -96,15 +96,13 @@ namespace ERY.Xle.XleEventTypes
 
 		public virtual void CheckOfferMuseumCoin(Player player)
 		{
-			if (XleCore.random.Next(100) < 3 && robbing == false)
+			if (XleCore.random.Next(1000) < 45 && robbing == false)
 			{
 				OfferMuseumCoin(player);
 			}
 		}
 		public static void OfferMuseumCoin(Player player)
 		{
-			// TODO: only allow player to buy a coin if he has less than Level of that type ofcoins.
-			int amount = XleCore.random.Next(30) + 40 * player.Level;
 			int coin = -1;
 			MenuItemList menu = new MenuItemList("Yes", "No");
 
@@ -115,6 +113,12 @@ namespace ERY.Xle.XleEventTypes
 
 			if (coin == -1)
 				return;
+
+			// TODO: only allow player to buy a coin if he has less than Level of that type of coins.
+			int amount = 50 + (int)(XleCore.random.NextDouble() * 20 * player.Level);
+
+			if (amount > player.Gold)
+				amount /= 2;
 
 			// shift value to index within items.
 			coin += 17;

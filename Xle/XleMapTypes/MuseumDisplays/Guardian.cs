@@ -8,6 +8,6 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Guardian : Exhibit
 	{
 		public Guardian() : base("Guardian", Coin.Turquoise) { }
-		public override int ExhibitID { get { return 13; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Guardian; } }
 	}
 }

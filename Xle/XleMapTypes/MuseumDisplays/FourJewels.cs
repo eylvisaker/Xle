@@ -8,7 +8,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class FourJewels : Exhibit
 	{
 		public FourJewels() : base("Four Jewels", Coin.Ruby) { }
-		public override int ExhibitID { get { return 12; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.FourJewels; } }
 
 		public override AgateLib.Geometry.Color TextColor
 		{

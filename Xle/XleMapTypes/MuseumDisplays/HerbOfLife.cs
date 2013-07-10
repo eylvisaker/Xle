@@ -8,7 +8,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class HerbOfLife : Exhibit
 	{
 		public HerbOfLife() : base("Herb of life", Coin.Topaz) { }
-		public override int ExhibitID { get { return 6; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.HerbOfLife; } }
 		public override string LongName
 		{
 			get
@@ -35,7 +35,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 					XleCore.wait(10);
 				}
 
-				player.museum[ExhibitID] = 3;
+				player.museum[(int)ExhibitID] = 3;
 			}
 		}
 	}

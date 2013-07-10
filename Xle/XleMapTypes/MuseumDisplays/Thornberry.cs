@@ -8,7 +8,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class Thornberry : Exhibit
 	{
 		public Thornberry() : base("Thornberry", Coin.Jade) { }
-		public override int ExhibitID { get { return 3; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Thornberry; } }
 		public override string LongName
 		{
 			get { return "A typical town of Tarmalon"; }
@@ -18,7 +18,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			if (CheckOfferReread(player))
 			{
-				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[1]);
+				ReadRawText(ExhibitInfo.Text[1]);
 			}
 
 			g.AddBottom("Would you like to go");
@@ -27,9 +27,12 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 			if (XleCore.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
 			{
-				ReadRawText(XleCore.ExhibitInfo[ExhibitID].Text[2]);
+				ReadRawText(ExhibitInfo.Text[2]);
 
-				int amount = TotalExhibitsViewed(player) >= 2 ? 100 : 300;
+				int amount = 100;
+
+				if (player.museum[(int)ExhibitID] > 0 || player.museum[(int)ExhibitIdentifier.Fountain] > 0)
+					amount += 200;
 
 				player.Gold += amount;
 

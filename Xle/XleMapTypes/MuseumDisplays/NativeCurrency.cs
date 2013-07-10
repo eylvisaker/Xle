@@ -8,7 +8,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 	class NativeCurrency : Exhibit
 	{
 		public NativeCurrency() : base("Native Currency", Coin.Topaz) { }
-		public override int ExhibitID { get { return 7; } }
+		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.NativeCurrency; } }
 
 		public override void PlayerXamine(Player player)
 		{
