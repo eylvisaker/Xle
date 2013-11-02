@@ -222,6 +222,7 @@ namespace ERY.Xle
 		int gold;
 		int goldBank;
 		double timedays;
+		double timequality;
 
 		int onRaft;
 
@@ -326,6 +327,7 @@ namespace ERY.Xle
 			info.Write("Gold", gold);
 			info.Write("GoldInBank", goldBank);
 			info.Write("TimeDays", timedays);
+			info.Write("TimeQuality", timequality);
 
 			info.Write("OnRaft", onRaft);
 
@@ -377,6 +379,8 @@ namespace ERY.Xle
 			gold = info.ReadInt32("Gold");
 			goldBank = info.ReadInt32("GoldInBank");
 			timedays = info.ReadDouble("TimeDays");
+			if (info.ContainsKey("TimeQuality"))
+				timequality = info.ReadDouble("TimeQuality");
 
 			onRaft = info.ReadInt32("OnRaft");
 
@@ -689,6 +693,12 @@ namespace ERY.Xle
 				timedays = value;
 			}
 		}
+		public double TimeQuality
+		{
+			get { return timequality; }
+			set { timequality = value; }
+		}
+
 
 		/// <summary>
 		/// 				// the current outside terrain the player is standing on

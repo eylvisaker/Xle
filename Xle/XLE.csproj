@@ -131,6 +131,7 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Data\Data.cs" />
@@ -488,6 +489,12 @@
     <Content Include="Game\Images\Welcome.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+<<<<<<< HEAD
+=======
+    <Content Include="Support\LoB\Annotations-LOB.txt" />
+    <Content Include="Support\LotA\Annotations.txt" />
+    <Content Include="Support\LotA\Disassemblies.txt" />
+>>>>>>> 1bf825c0f... Add some unit tests.
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -504,4 +511,9 @@
       <Name>AgateSDL</Name>
     </ProjectReference>
   </ItemGroup>
+<<<<<<< HEAD
 </Project>
+=======
+  <ItemGroup />
+</Project>
+>>>>>>> 1bf825c0f... Add some unit tests.

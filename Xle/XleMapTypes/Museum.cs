@@ -147,6 +147,13 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
+		protected override double StepQuality
+		{
+			get
+			{
+				return 0.5;
+			}
+		}
 		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
 		{
 			fontColor = XleColor.White;

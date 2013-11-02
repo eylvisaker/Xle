@@ -694,7 +694,7 @@ namespace ERY.Xle
 
 			if (basetype.IsAssignableFrom(t) == false)
 			{
-				throw new Exception("Argument to HasSpecialType must derive from XleEvent");
+				throw new ArgumentException("Argument to HasSpecialType must derive from XleEvent");
 			}
 
 			for (int i = 0; i < mEvents.Count; i++)
@@ -706,7 +706,16 @@ namespace ERY.Xle
 			return false;
 		}
 
+		public bool HasEventType<T>() where T : XleEvent
+		{
+			for (int i = 0; i < mEvents.Count; i++)
+			{
+				if (mEvents[i] is T) 
+					return true;
+			}
 
+			return false;
+		}
 
 		#endregion
 		#region --- Menu Stuff ---
@@ -861,7 +870,7 @@ namespace ERY.Xle
 			}
 
 		}
-		protected static void _MoveDungeon(Player player, Direction dir, bool haveCompass, out string command, out Point stepDirection)
+		protected void _MoveDungeon(Player player, Direction dir, bool haveCompass, out string command, out Point stepDirection)
 		{
 			Direction newDirection;
 			command = "";
@@ -892,6 +901,8 @@ namespace ERY.Xle
 
 					if (haveCompass)
 						command = "Walk " + player.FaceDirection.ToString();
+
+					player.TimeQuality += StepQuality;
 
 					break;
 
@@ -936,9 +947,14 @@ namespace ERY.Xle
 						}
 					}
 
+					player.TimeQuality += StepQuality;
+
+
 					break;
 			}
 		}
+
+		protected virtual double StepQuality { get { return 1; } }
 
 		protected static Point StepDirection(Direction dir)
 		{

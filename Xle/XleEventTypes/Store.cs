@@ -621,17 +621,27 @@ namespace ERY.Xle.XleEventTypes
 			return true;
 		}
 	}
-	public class StoreWeapon : Store
+	public abstract class StoreEquipment : Store
 	{
-		protected override void GetColors(out Color backColor, out Color borderColor,
-			out Color lineColor, out Color fontColor, out Color titleColor)
+		protected override void ReadData(XleSerializationInfo info)
 		{
-			backColor = XleColor.Brown;
-			borderColor = XleColor.Orange;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.White;
-			titleColor = XleColor.White;
+			base.ReadData(info);
+
+			if (info.ContainsKey("AllowedItemTypes"))
+			{
+				AllowedItemTypes = info.ReadInt32Array("AllowedItemTypes");
+			}
 		}
+
+		protected override void WriteData(XleSerializationInfo info)
+		{
+			base.WriteData(info);
+
+			info.Write("AllowedItemTypes", AllowedItemTypes);
+		}
+
+		protected abstract string StoreType { get; }
+		public int[] AllowedItemTypes { get; set; }
 
 		public override bool Speak(Player player)
 		{
@@ -653,8 +663,7 @@ namespace ERY.Xle.XleEventTypes
 			ClearWindow();
 			theWindow[i++] = ShopName;
 			theWindow[i++] = "";
-			theWindow[i++] = "            Weapons";
-
+			theWindow[i++] = "            " + StoreType;
 
 			for (i = 1; i <= 8; i++)
 			{
@@ -763,9 +772,30 @@ namespace ERY.Xle.XleEventTypes
 		}
 
 	}
-
-	public class StoreArmor : Store
+	public class StoreWeapon : StoreEquipment
 	{
+		protected override void GetColors(out Color backColor, out Color borderColor,
+			out Color lineColor, out Color fontColor, out Color titleColor)
+		{
+			backColor = XleColor.Brown;
+			borderColor = XleColor.Orange;
+			lineColor = XleColor.Yellow;
+			fontColor = XleColor.White;
+			titleColor = XleColor.White;
+		}
+
+		protected override string StoreType
+		{
+			get { return "Weapon"; }
+		}
+	}
+
+	public class StoreArmor : StoreEquipment
+	{
+		protected override string StoreType
+		{
+			get { return "armor"; }
+		}
 	}
 
 	public class StoreWeaponTraining : Store

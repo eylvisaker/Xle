@@ -512,6 +512,8 @@ namespace ERY.Xle.XleMapTypes
 						player.TimeDays += 0.5;
 						break;
 				}
+
+				player.TimeQuality += 1;
 			}
 		}
 		public override int TerrainWaitTime(Player player)

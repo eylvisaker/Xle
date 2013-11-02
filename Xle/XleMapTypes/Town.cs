@@ -636,7 +636,11 @@ namespace ERY.Xle.XleMapTypes
 			Commands.UpdateCommand(command);
 
 			if (player.Move(stepDirection))
+			{
 				SoundMan.PlaySound(LotaSound.TownWalk);
+
+				player.TimeQuality += 0.03;
+			}
 			else
 			{
 				SoundMan.PlaySound(LotaSound.Invalid);
