@@ -35,6 +35,8 @@
       <Height>3</Height>
       <ShopName>Street Shop</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAIAAAACQAAAAsAAAAMAAAADwAAABEAAAASAAAAFAAAABgAAAAbAAAAHAAAAB8AAAAg
+AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreLending">
       <X>59</X>
@@ -59,6 +61,7 @@
       <Height>3</Height>
       <ShopName>City Steel</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAcAAAAJAAAADAAAAA4AAAAPAAAAEgAAABMAAAAUAAAAFQAAABoAAAAbAAAAHAAAAA==</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreBlackjack">
       <X>17</X>

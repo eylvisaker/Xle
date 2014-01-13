@@ -11,6 +11,8 @@
       <Height>6</Height>
       <ShopName>Whips &amp; Chains</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAYAAAAIAAAADAAAAA0AAAAPAAAAEgAAABQAAAAYAAAAGgAAABwAAAAfAAAAIAAAACQAAAAm
+AAAAKQAAACoAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreFood">
       <X>45</X>
@@ -43,6 +45,7 @@
       <Height>2</Height>
       <ShopName>Lacy's Leather</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAgAAAAJAAAADAAAAA4AAAARAAAAEwAAABQAAAAVAAAAHAAAAB0AAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreFortune">
       <X>54</X>

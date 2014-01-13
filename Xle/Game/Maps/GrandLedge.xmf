@@ -67,6 +67,7 @@
       <Height>4</Height>
       <ShopName>Family Arms</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAYAAAAKAAAACwAAABMAAAAWAAAAGgAAACAAAAAkAAAAKAAAAA==</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreArmor">
       <X>60</X>
@@ -75,6 +76,7 @@
       <Height>3</Height>
       <ShopName>Home Made</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAALAAAAEQAAABUAAAAcAAAA</AllowedItemTypes>
     </Item>
   </Events>
   <Roofs array="true" type="ERY.Xle.Roof">

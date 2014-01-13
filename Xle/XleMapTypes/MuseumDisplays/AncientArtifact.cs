@@ -27,5 +27,9 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			get { return XleColor.Cyan; }
 		}
+		public override bool StaticBeforeCoin
+		{
+			get { return false; }
+		}
 	}
 }

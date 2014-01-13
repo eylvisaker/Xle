@@ -19,6 +19,7 @@
       <Height>3</Height>
       <ShopName>Fluid Motion</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BgAAAAgAAAAMAAAAEgAAABQAAAAcAAAAHwAAACYAAAApAAAA</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreBank">
       <X>4</X>
@@ -51,6 +52,7 @@
       <Height>3</Height>
       <ShopName>Ice Tough</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAkAAAAMAAAAEwAAABUAAAAcAAAA</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreBuyback">
       <X>37</X>

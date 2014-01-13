@@ -70,6 +70,7 @@
       <Height>4</Height>
       <ShopName>Saintly Swords</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAALAAAADgAAABAAAAATAAAAFAAAABcAAAAdAAAAIgAAACYAAAAnAAAAKgAAACwAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreArmor">
       <X>70</X>
@@ -78,6 +79,7 @@
       <Height>3</Height>
       <ShopName>Armageddon Armor</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAANAAAADgAAABMAAAAWAAAAGAAAABoAAAAdAAAA</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreVault">
       <X>33</X>

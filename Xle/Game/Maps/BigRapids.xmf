@@ -11,6 +11,7 @@
       <Height>3</Height>
       <ShopName>Anthony's Armor</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAAMAAAAEgAAABYAAAAdAAAA</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
       <X>27</X>
@@ -19,6 +20,7 @@
       <Height>3</Height>
       <ShopName>Al's Arms</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAkAAAANAAAAEgAAABUAAAAYAAAAGwAAAB8AAAAnAAAALAAAAA==</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreFood">
       <X>8</X>

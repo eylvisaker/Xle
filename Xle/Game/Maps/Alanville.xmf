@@ -59,6 +59,7 @@
       <Height>4</Height>
       <ShopName>Giant Mart</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAgAAAAJAAAADQAAAA4AAAAQAAAAEgAAABUAAAAWAAAAGgAAABsAAAAeAAAAHwAAACMAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreArmor">
       <X>73</X>
@@ -67,6 +68,7 @@
       <Height>8</Height>
       <ShopName>Slew 'N Slay</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BgAAAAgAAAAJAAAADAAAAA0AAAAPAAAAEAAAABQAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreRaft">
       <X>71</X>

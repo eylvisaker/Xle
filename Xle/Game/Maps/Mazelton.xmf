@@ -11,6 +11,7 @@
       <Height>4</Height>
       <ShopName>Man O' Steel</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAALAAAADQAAABEAAAAXAAAAGQAAACEAAAAlAAAAKAAAACoAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreFortune">
       <X>24</X>
@@ -51,6 +52,7 @@
       <Height>3</Height>
       <ShopName>The Body Shop</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAgAAAANAAAAEAAAABcAAAAaAAAA</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreLending">
       <X>75</X>

@@ -30,6 +30,7 @@
       <Height>5</Height>
       <ShopName>The Weapons Club</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">CAAAAA4AAAASAAAAGAAAABwAAAAiAAAAJgAAACwAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreArmor">
       <X>36</X>
@@ -38,6 +39,7 @@
       <Height>2</Height>
       <ShopName>Poor Man's Armor</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BQAAAAsAAAAPAAAAFQAAABkAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreFood">
       <X>44</X>

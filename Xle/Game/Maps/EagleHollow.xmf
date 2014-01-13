@@ -43,6 +43,7 @@
       <Height>4</Height>
       <ShopName>Captain's Shop</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">CQAAAA4AAAATAAAAFwAAABgAAAAcAAAAHQAAAA==</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreRaft">
       <X>51</X>
@@ -62,6 +63,7 @@
       <Height>4</Height>
       <ShopName>Pirate's Treasure</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">CQAAAA4AAAATAAAAGAAAAB0AAAAiAAAAJgAAACcAAAArAAAALAAAAA==</AllowedItemTypes>
     </Item>
   </Events>
   <Roofs array="true" type="ERY.Xle.Roof">

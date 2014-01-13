@@ -43,6 +43,7 @@
       <Height>6</Height>
       <ShopName>Hit Me Hurt Me</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAALAAAADAAAABEAAAATAAAAFgAAAB0AAAAeAAAAIgAAACcAAAArAAAA</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreArmor">
       <X>34</X>
@@ -51,6 +52,7 @@
       <Height>6</Height>
       <ShopName>Heavy Metal</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAKAAAAEwAAABcAAAAYAAAAGwAAABwAAAAdAAAA</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreArmor">
       <X>2</X>
@@ -59,6 +61,8 @@
       <Height>5</Height>
       <ShopName>Combatorium</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreFood">
       <X>6</X>

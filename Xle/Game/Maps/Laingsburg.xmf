@@ -19,6 +19,7 @@
       <Height>4</Height>
       <ShopName>General Weapons</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAKAAAADgAAABAAAAAVAAAAGwAAAB8AAAAhAAAAKQAAACsAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreArmor">
       <X>53</X>
@@ -27,6 +28,7 @@
       <Height>4</Height>
       <ShopName>Refurbished Armor</ShopName>
       <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAAKAAAACwAAABIAAAAVAAAAFgAAABwAAAA=</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.StoreBank">
       <X>7</X>

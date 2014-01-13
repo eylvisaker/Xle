@@ -1453,7 +1453,7 @@ namespace ERY.Xle
 
 		public static int QuickMenu(RedrawDelegate redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
 		{
-			int[] spacing = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+			int[] spacing = new int[18];
 			int last = 0;
 			string tempLine = "Choose: ";
 			string topLine;
@@ -1467,7 +1467,7 @@ namespace ERY.Xle
 
 			spacing[0] = 8;
 
-			// Construct the temporray line
+			// Construct the temporary line
 			for (int i = 0; i < items.Count; i++)
 			{
 				tempItem = items[i];
