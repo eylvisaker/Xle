@@ -23,10 +23,7 @@ namespace ERY.Xle
 
 		public AttributeContainer()
 		{
-			for (int i = 0; i < 5; i++)
-			{
-				atr[i] = 15;
-			}
+			Reset();
 		}
 
 		public int this[Attributes index]
@@ -50,6 +47,14 @@ namespace ERY.Xle
 		}
 
 		#endregion
+
+		internal void Reset()
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				atr[i] = 15;
+			}
+		}
 	}
 
 	public class RaftData : IXleSerializable
@@ -170,7 +175,7 @@ namespace ERY.Xle
 
 		public int Count
 		{
-			get { return mValues.Count;}
+			get { return mValues.Count; }
 		}
 
 		bool ICollection<KeyValuePair<string, int>>.IsReadOnly
@@ -244,9 +249,12 @@ namespace ERY.Xle
 		int[] armor = new int[4];
 		int[] weaponQuality = new int[6];
 		int[] armorQuality = new int[4];
-		int[] item = new int[30];
-		int hold;
+		[Obsolete]
+		int[] item { get { return mItems.ItemArray; } set { mItems.ItemArray = value; } }
 
+		ItemContainer mItems = new ItemContainer();
+
+		int hold;
 		int lastAttacked;
 		int vaultGold;
 
@@ -528,11 +536,7 @@ namespace ERY.Xle
 		public int Level
 		{
 			get { return level; }
-			set
-			{
-				System.Diagnostics.Debug.Assert(value > level);
-				level = value;
-			}
+			set { level = value; }
 		}
 
 		/// <summary>
@@ -672,7 +676,7 @@ namespace ERY.Xle
 
 			}
 		}
-		
+
 		/// <summary>
 		/// Returns the time in days or increments them.
 		/// </summary>
@@ -801,7 +805,6 @@ namespace ERY.Xle
 		/// <param name="yy"></param>
 		public void NewMap(int xx, int yy)
 		{
-
 			SoundMan.StopAllSounds();
 
 			map = XleCore.Map.MapID;
@@ -1250,16 +1253,17 @@ namespace ERY.Xle
 			}
 		}
 
+		public ItemContainer Items { get { return mItems; } }
+
 		/// <summary>
 		/// Returns the number of the specified items
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
+		[Obsolete("Use Items property instead.")]
 		public int Item(int index)
 		{
-
 			return item[index];
-
 		}
 		/// <summary>
 		/// Adjusts the number of items the player has
@@ -1267,6 +1271,7 @@ namespace ERY.Xle
 		/// <param name="itm"></param>
 		/// <param name="inc"></param>
 		/// <returns></returns>
+		[Obsolete("Use Items property instead.")]
 		public int ItemCount(int itm, int inc)
 		{
 			item[itm] += inc;
@@ -1279,11 +1284,9 @@ namespace ERY.Xle
 				{
 					hold = 0;
 				}
-
 			}
 
 			return item[itm];
-
 		}
 		/// <summary>
 		/// Adds a weapon to inventory

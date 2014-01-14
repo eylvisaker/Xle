@@ -18,9 +18,9 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public override void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled)
 		{
 			// crown
-			if (treasure == 16)
+			if (treasure == (int)LotaItem.Crown)
 			{
-				if (player.Item(16) > 0)
+				if (player.Items[LotaItem.Crown] > 0)
 					treasure = 0;
 
 				if (player.Level > 3)

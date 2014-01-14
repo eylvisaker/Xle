@@ -26,8 +26,6 @@ Outdoors:
 
 Towns:
 	Redesign the way stores are rendered and data for the window is stored.
-	Armor store
-	Weapon store listings
 	Selling weapons / armor
 	Buyback shops
 	Fix healer text

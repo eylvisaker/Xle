@@ -248,7 +248,7 @@ namespace ERY.Xle.XleMapTypes
 		protected override bool ShowDirections(Player player)
 		{
 			// check for compass.
-			return player.Item(11) > 0;
+			return player.Items[LotaItem.Compass] > 0;
 		}
 		public override void OnLoad(Player player)
 		{

@@ -227,7 +227,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			// and check if we've returned the crown and sceptor
 			// and received the magic ice.
 			if (sapphireExhibits == 2 &&
-				player.Item(12) > 0)
+				player.Items[LotaItem.MagicIce] > 0)
 			{
 				return 5;
 			}

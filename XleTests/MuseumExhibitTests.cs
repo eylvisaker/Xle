@@ -16,7 +16,7 @@ namespace ERY.XleTests
 		public void InformationLevelupTest()
 		{
 			Player player = new Player();
-			player.ItemCount(15, -1); // remove the compendium the player started with.
+			player.Items.ClearStoryItems(); // remove the compendium the player started with.
 			
 			Information information = new Information();
 
@@ -52,7 +52,7 @@ namespace ERY.XleTests
 			Assert.IsFalse(information.ShouldLevelUp(player));
 
 			player.museum[(int)ExhibitIdentifier.KnightsTest] = 1;
-			player.ItemCount(12, 1); // give magic ice
+			player.Items[LotaItem.MagicIce] = 1; 
 
 			Assert.IsTrue(information.ShouldLevelUp(player));
 
@@ -67,14 +67,38 @@ namespace ERY.XleTests
 			for (int i = 0; i < 4; i++)
 			{
 				Assert.IsFalse(information.ShouldLevelUp(player));
-				player.ItemCount(14, 1); //  add a guard jewel.
+				player.Items[LotaItem.GuardJewel]++; //  add a guard jewel.
 			}
 			Assert.IsTrue(information.ShouldLevelUp(player));
 
 			player.Level = 7;
 			Assert.IsFalse(information.ShouldLevelUp(player));
 
-			player.ItemCount(15, 1); // give the compendium
+			player.Items[LotaItem.Compendium] = 1; // give the compendium
+			Assert.IsTrue(information.ShouldLevelUp(player));
+
+		}
+		[TestMethod]
+		public void InformationLevelupWithCheatTest()
+		{
+			Player player = new Player();
+			XleCore.SetPlayer(player);
+			
+			Information information = new Information();
+
+			Assert.IsFalse(information.ShouldLevelUp(player));
+
+			for (int i = 2; i <= 7; i++)
+			{
+				XleCore.CheatLevel(i);
+				Assert.IsFalse(information.ShouldLevelUp(player));
+
+				player.Level--;
+				Assert.IsTrue(information.ShouldLevelUp(player));
+			}
+
+			XleCore.CheatLevel(10);
+			player.Level = 7;
 			Assert.IsTrue(information.ShouldLevelUp(player));
 
 		}

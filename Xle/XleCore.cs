@@ -10,6 +10,8 @@ using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
+using System.ComponentModel;
+using ERY.Xle.XleMapTypes.MuseumDisplays;
 
 namespace ERY.Xle
 {
@@ -88,7 +90,7 @@ namespace ERY.Xle
 		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo>();
 		private Dictionary<int, XleMapTypes.Map3DExtraInfo> mMap3DExtras = new Dictionary<int, XleMapTypes.Map3DExtraInfo>();
 		private Dictionary<int, MagicSpell> mMagicSpells = new Dictionary<int, MagicSpell>();
-		
+
 		private Data.AgateDataImport mDatabase;
 
 		public static Color FontColor { get; private set; }
@@ -113,6 +115,8 @@ namespace ERY.Xle
 			LoadGameFile();
 			LoadDatabase();
 
+			InitializeConsole();
+
 			using (AgateSetup setup = new AgateSetup())
 			{
 				setup.InitializeAll();
@@ -136,8 +140,159 @@ namespace ERY.Xle
 					RunGame(titleScreen.Player);
 
 				} while (titleScreen.Player != null);
-
 			}
+		}
+
+		private void InitializeConsole()
+		{
+			AgateConsole.Initialize();
+
+			AgateConsole.Instance.CommandProcessor.DescribeCommand += CommandProcessor_DescribeCommand;
+
+			AgateConsole.Commands.Add("gold", new Action<int>(CheatGiveGold));
+			AgateConsole.Commands.Add("food", new Action<int>(CheatGiveFood));
+			AgateConsole.Commands.Add("level", new Action<int>(CheatLevel));
+			AgateConsole.Commands.Add("map", new Action<int>(CheatMap));
+		}
+
+		string CommandProcessor_DescribeCommand(string command)
+		{
+			StringBuilder b = new StringBuilder();
+
+			switch(command)
+			{
+				case "map":
+					b.AppendLine("Jumps to the specified map, given by the ID. Allowed map values are: ");
+
+					bool comma = false;
+					int count = 0;
+
+					foreach (var map in mMapList)
+					{
+						if (comma)
+							b.Append(", ");
+						if (count == 0)
+							b.Append("    ");
+
+						b.Append(map.Key);
+						b.Append(": ");
+						b.Append(map.Value.Name);
+						comma = true;
+
+						count++;
+						if (count > 4)
+						{
+							b.AppendLine();
+							count = 0;
+						}
+					}
+
+					break;
+			}
+
+			return b.ToString();
+		}
+
+		[Description("Gives gold")]
+		void CheatGiveGold(int amount = 1000)
+		{
+			player.Gold += amount;
+		}
+		[Description("Gives food")]
+		void CheatGiveFood(int amount = 500)
+		{
+			player.Food += amount;
+		}
+		[Description("Sets the players level. Gives items and sets story variables to be consistent with the level chosen. Does not affect weapons or armor.")]
+		public static void CheatLevel(int level)
+		{
+			if (level < 0) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
+			if (level == 8) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
+			if (level == 9) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
+			if (level > 10) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
+
+			player.Items.ClearStoryItems();
+			player.Items.ClearCoins();
+
+			Array.Clear(player.museum, 0, player.museum.Length);
+
+			player.Level = level;
+
+			player.Items[LotaItem.JadeCoin] = 2;
+			player.Items[LotaItem.GoldArmband] = 1;
+			player.Items[LotaItem.Compendium] = 1;
+
+			player.Attribute.Reset();
+
+			if (level >= 2)
+			{
+				player.Items.ClearCoins();
+				player.Items[LotaItem.Compendium] = 0;
+				player.Attribute[Attributes.dexterity] = 32;
+				player.Attribute[Attributes.endurance] = 32;
+
+				player.museum[(int)ExhibitIdentifier.Thornberry] = 1;
+				player.museum[(int)ExhibitIdentifier.Weaponry] = 10; // mark weaponry as closed.
+				player.museum[(int)ExhibitIdentifier.Fountain] = 1;
+			}
+			if (level >= 3)
+			{
+				player.museum[(int)ExhibitIdentifier.NativeCurrency] = 1;
+				player.museum[(int)ExhibitIdentifier.HerbOfLife] = 1;
+				player.museum[(int)ExhibitIdentifier.PirateTreasure] = 1;
+
+				player.Variables["BeenInDungeon"] = 1;
+			}
+			if (level >= 4)
+			{
+				player.museum[(int)ExhibitIdentifier.LostDisplays] = 1;
+				player.museum[(int)ExhibitIdentifier.Tapestry] = 1;
+				player.museum[(int)ExhibitIdentifier.StonesWisdom] = 1;
+
+				player.Variables["PirateComplete"] = 1;
+
+				player.Attribute[Attributes.intelligence] = 35;
+				player.Attribute[Attributes.strength] = 25;
+
+				player.Items[LotaItem.SapphireCoin] = 1;
+			}
+			if (level >= 5)
+			{
+				player.museum[(int)ExhibitIdentifier.KnightsTest] = 1;
+				player.Variables["ArmakComplete"] = 1;
+
+				player.Items[LotaItem.SapphireCoin] = 0;
+				player.Items[LotaItem.MagicIce] = 1;
+
+				player.Attribute[Attributes.strength] = 40;
+			}
+			if (level >= 6)
+			{
+				player.Variables["Guardian"] = 3;
+				player.Items[LotaItem.RubyCoin] = 1;
+			}
+			if (level >= 7)
+			{
+				player.Variables["FourJewelComplete"] = 1;
+				player.Attribute[Attributes.strength] = 50;
+				
+				player.Items[LotaItem.RubyCoin] = 0;
+				player.Items[LotaItem.GuardJewel] = 4;
+			}
+			if (level == 10)
+			{
+				player.Items[LotaItem.Compendium] = 1;
+			}
+
+			player.HP = player.MaxHP;
+
+		}
+
+		public static void CheatMap(int mapID)
+		{
+			Map = LoadMap(mapID);
+			map.OnLoad(player);
+
 
 		}
 
@@ -161,11 +316,11 @@ namespace ERY.Xle
 					case "Maps":
 						LoadMapInfo(root.ChildNodes[i]);
 						break;
-					
+
 					case "MagicSpells":
 						LoadMagicInfo(root.ChildNodes[i]);
 						break;
-					
+
 					case "Weapons":
 						LoadEquipmentInfo(root.ChildNodes[i], ref mWeaponList);
 						break;
@@ -242,9 +397,9 @@ namespace ERY.Xle
 
 				int id = int.Parse(node.Attributes["ID"].Value);
 				string name = node.Attributes["Name"].Value;
-				int basePrice = int.Parse (GetOptionalAttribute(node, "BasePrice", "0"));
-				
-				mMagicSpells.Add (id, new MagicSpell { Name = name, BasePrice = basePrice } );
+				int basePrice = int.Parse(GetOptionalAttribute(node, "BasePrice", "0"));
+
+				mMagicSpells.Add(id, new MagicSpell { Name = name, BasePrice = basePrice });
 			}
 		}
 		private void LoadEquipmentInfo(XmlNode xmlNode, ref EquipmentList equipmentList)
@@ -438,7 +593,7 @@ namespace ERY.Xle
 		}
 		public static Dictionary<int, XleMapTypes.Map3DExtraInfo> Map3DExtraInfo { get { return inst.mMap3DExtras; } }
 		public static Dictionary<int, MagicSpell> MagicSpells { get { return inst.mMagicSpells; } }
-		
+
 		public static Data.AgateDataImport Database
 		{
 			get { return inst.mDatabase; }
@@ -512,7 +667,10 @@ namespace ERY.Xle
 			Display.EndFrame();
 			Core.KeepAlive();
 
-			CheckArrowKeys();
+			if (AgateConsole.IsVisible == false)
+			{
+				CheckArrowKeys();
+			}
 		}
 		private void CheckArrowKeys()
 		{
@@ -720,9 +878,9 @@ namespace ERY.Xle
 		public static void DrawBorder(Color boxColor)
 		{
 			DrawLine(0, 0, 1, myWindowWidth, boxColor);
-			DrawLine(0, 0, 0, myWindowHeight-2, boxColor);
+			DrawLine(0, 0, 0, myWindowHeight - 2, boxColor);
 			DrawLine(0, myWindowHeight - 16, 1, myWindowWidth, boxColor);
-			DrawLine(myWindowWidth - 12, 0, 0, myWindowHeight-2, boxColor);
+			DrawLine(myWindowWidth - 12, 0, 0, myWindowHeight - 2, boxColor);
 		}
 
 		/****************************************************************************
@@ -737,9 +895,9 @@ namespace ERY.Xle
 		public static void DrawInnerBorder(Color innerColor)
 		{
 			DrawInnerLine(0, 0, 1, myWindowWidth, innerColor);
-			DrawInnerLine(0, 0, 0, myWindowHeight-2, innerColor);
+			DrawInnerLine(0, 0, 0, myWindowHeight - 2, innerColor);
 			DrawInnerLine(0, myWindowHeight - 16, 1, myWindowWidth + 2, innerColor);
-			DrawInnerLine(myWindowWidth - 12, 0, 0, myWindowHeight-2, innerColor);
+			DrawInnerLine(myWindowWidth - 12, 0, 0, myWindowHeight - 2, innerColor);
 
 		}
 
@@ -1160,7 +1318,7 @@ namespace ERY.Xle
 
 			} while (watch.TotalMilliseconds < howLong && g.Done == false && Display.CurrentWindow.IsClosed == false);
 		}
-		
+
 		/// <summary>
 		/// This function creates a sub menu in the top of the map section and
 		/// forces the player to chose an option from the list provided.	
@@ -1291,7 +1449,7 @@ namespace ERY.Xle
 				};
 
 			PromptToContinue = PromptToContinueOnWait;
-			
+
 			Keyboard.ReleaseAllKeys();
 			Keyboard.KeyDown += keyhandler;
 
@@ -1929,5 +2087,9 @@ namespace ERY.Xle
 			return "";
 		}
 
+		public static void SetPlayer(Player thePlayer)
+		{
+			player = thePlayer;
+		}
 	}
 }

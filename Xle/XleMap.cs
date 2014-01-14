@@ -840,8 +840,8 @@ namespace ERY.Xle
 
 		public abstract bool CanPlayerStepInto(Player player, int xx, int yy);
 
-
 		public abstract void PlayerCursorMovement(Player player, Direction dir);
+
 		protected void _Move2D(Player player, Direction dir, string textStart, out string command, out Point stepDirection)
 		{
 			player.FaceDirection = dir;

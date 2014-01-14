@@ -17,10 +17,9 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		}
 		public override void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled)
 		{
-			// guard jewel
-			if (treasure == 14)
+			if (treasure == (int)LotaItem.GuardJewel)
 			{
-				if (player.Item(14) >= 4)
+				if (player.Items[LotaItem.GuardJewel] >= 4)
 					treasure = 0;
 			}
 		}

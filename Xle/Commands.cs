@@ -28,6 +28,11 @@ namespace ERY.Xle
 
 		}
 
+		/// <summary>
+		/// Returns true if the command is a cursor movement.
+		/// </summary>
+		/// <param name="cmd"></param>
+		/// <returns></returns>
 		private bool CursorMovement(KeyCode cmd)
 		{
 			Direction dir;
@@ -61,14 +66,8 @@ namespace ERY.Xle
 
 			XleCore.Map.PlayerCursorMovement(player, dir);
 
-
-
 			return true;
-
-
 		}
-
-
 
 		public void DoCommand(KeyCode cmd)
 		{
