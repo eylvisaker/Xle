@@ -193,9 +193,9 @@ AI4AAACOAAAAjgAAAI4AAACeAAAAngAAANAAAADRAAAAngAAAH8AAAA=</RoofData>
       <Defense>0</Defense>
     </Item>
   </Guards>
-  <GuardDefaultAttack>0</GuardDefaultAttack>
-  <GuardDefaultDefense>0</GuardDefaultDefense>
-  <GuardDefaultHP>0</GuardDefaultHP>
+  <GuardDefaultAttack>125</GuardDefaultAttack>
+  <GuardDefaultDefense>120</GuardDefaultDefense>
+  <GuardDefaultHP>22</GuardDefaultHP>
   <GuardDefaultColor>0</GuardDefaultColor>
   <Width>80</Width>
   <Height>40</Height>

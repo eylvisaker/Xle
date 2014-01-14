@@ -12,7 +12,7 @@ using AgateLib.Serialization.Xle;
 
 namespace ERY.Xle.XleMapTypes
 {
-	public class Town : XleMap, ERY.Xle.IHasGuards, ERY.Xle.IHasRoofs
+	public class Town : XleMap, IHasGuards, IHasRoofs
 	{
 		int mWidth;
 		int mHeight;
@@ -52,7 +52,16 @@ namespace ERY.Xle.XleMapTypes
 			}
 			catch (XleSerializationException)
 			{ }
+		}
 
+		public void InitializeGuardData()
+		{
+			foreach(var guard in Guards)
+			{
+				guard.Attack = DefaultAttack;
+				guard.Defense = DefaultDefense;
+				guard.HP = DefaultHP;
+			}
 		}
 
 		#endregion
@@ -121,173 +130,157 @@ namespace ERY.Xle.XleMapTypes
 		}
 		public void UpdateGuards(Player player)
 		{
-			if (IsAngry)
+			if (IsAngry == false)
+				return;
+
+			double dist;
+			int xdist;
+			int ydist;
+			int dx;
+			int dy;
+			Point newPt;
+			bool badPt = false;
+
+			for (int i = 0; i < Guards.Count; i++)
 			{
-				int i, j;
-				double dist;
-				int xdist;
-				int ydist;
-				int dx;
-				int dy;
-				Point newPt;
-				bool badPt = false;
-				Color[] color = new Color[40];
-				string tempString;
-				int dam;
+				Guard guard = Guards[i];
 
-				for (i = 0; i < Guards.Count; i++)
+				if (PointInRoof(guard.X, guard.Y) != -1)
+					continue;
+
+				badPt = false;
+
+				newPt = guard.Location;
+
+				xdist = player.X - guard.X;
+				ydist = player.Y - guard.Y;
+
+				if (xdist != 0)
+					dx = xdist / Math.Abs(xdist);
+				else dx = 0;
+				if (ydist != 0)
+					dy = ydist / Math.Abs(ydist);
+				else dy = 0;
+
+				dist = Math.Sqrt(Math.Pow(xdist, 2) + Math.Pow(ydist, 2));
+
+				if (Math.Abs(xdist) <= 2 && Math.Abs(ydist) <= 2)
 				{
-					Guard guard = Guards[i];
+					g.AddBottom("");
 
-					if (PointInRoof(guard.X, guard.Y) == -1)
+					ColorStringBuilder csb = new ColorStringBuilder();
+
+					csb.AddText("Attacked by guard! -- ", XleColor.White);
+
+					if (XleCore.random.NextDouble() < player.Attribute[Attributes.dexterity] / 80.0)
 					{
-						badPt = false;
+						csb.AddText("Missed", XleColor.Cyan);
+						SoundMan.PlaySound(LotaSound.EnemyMiss);
+					}
+					else
+					{
+						int armorType = player.CurrentArmorType;
 
+						double damage = guard.Attack / 99.0 *
+							(120 + XleCore.random.NextDouble() * 250) /
+							Math.Pow(armorType + 3, 0.8) /
+								Math.Pow(player.Attribute[Attributes.endurance], 0.8) + 3;
+
+						int dam = (int)Math.Round(damage);
+
+
+						csb.AddText("Blow ", XleColor.Yellow);
+						csb.AddText(dam.ToString(), XleColor.White);
+						csb.AddText(" H.P.", XleColor.White);
+
+						SoundMan.PlaySound(LotaSound.EnemyHit);
+
+						player.HP -= dam;
+					}
+
+					g.AddBottom(csb);
+
+					XleCore.wait(100 * player.Gamespeed);
+				}
+				else if (dist < 25)
+				{
+					if (Math.Abs(xdist) > Math.Abs(ydist))
+					{
+						newPt.X += dx;
+					}
+					else
+					{
+						newPt.Y += dy;
+					}
+
+					badPt = !CheckGuard(newPt, i);
+
+					if (badPt == true)
+					{
 						newPt = guard.Location;
 
-						xdist = player.X - guard.X;
-						ydist = player.Y - guard.Y;
-
-						if (xdist != 0)
-							dx = xdist / Math.Abs(xdist);
-						else dx = 0;
-						if (ydist != 0)
-							dy = ydist / Math.Abs(ydist);
-						else dy = 0;
-
-						dist = Math.Sqrt(Math.Pow(xdist, 2) + Math.Pow(ydist, 2));
-
-						if (Math.Abs(xdist) <= 2 && Math.Abs(ydist) <= 2)
+						if (Math.Abs(xdist) > Math.Abs(ydist))
 						{
+							xdist = 0;
 
-							g.AddBottom("");
-
-							tempString = "Attacked by guard! -- ";
-							dam = player.Damage(guard.Attack);
-
-							for (j = 0; j < tempString.Length; j++)
+							if (ydist == 0)
 							{
-								color[j] = XleColor.White;
+								dy = XleCore.random.Next(2) * 2 - 1;
 							}
 
-							if (dam > 0)
-							{
-								tempString += "Blow ";
+							dx = 0;
 
-								for (; j < tempString.Length; j++)
-								{
-									color[j] = XleColor.Yellow;
-								}
-								tempString += dam;
-								tempString += " H.P.";
-
-								for (; j < tempString.Length; j++)
-								{
-									color[j] = XleColor.White;
-								}
-
-								SoundMan.PlaySound(LotaSound.EnemyHit);
-
-							}
-							else
-							{
-								tempString += "Missed";
-
-								for (; j < tempString.Length; j++)
-								{
-									color[j] = XleColor.Cyan;
-								}
-								SoundMan.PlaySound(LotaSound.EnemyMiss);
-							}
-
-
-							g.AddBottom(tempString, color);
-
-
-							XleCore.wait(100 * player.Gamespeed);
-
-
+							newPt.Y += dy;
 						}
-						else if (dist < 25)
+						else
 						{
-							if (Math.Abs(xdist) > Math.Abs(ydist))
+							ydist = 0;
+
+							if (xdist == 0)
 							{
-								newPt.X += dx;
-							}
-							else
-							{
-								newPt.Y += dy;
+								dx = XleCore.random.Next(2) * 2 - 1;
 							}
 
-							badPt = !CheckGuard(newPt, i);
+							dy = 0;
 
-							if (badPt == true)
-							{
-								newPt = guard.Location;
-
-								if (Math.Abs(xdist) > Math.Abs(ydist))
-								{
-									xdist = 0;
-
-									if (ydist == 0)
-									{
-										dy = XleCore.random.Next(2) * 2 - 1;
-									}
-
-									dx = 0;
-
-									newPt.Y += dy;
-								}
-								else
-								{
-									ydist = 0;
-
-									if (xdist == 0)
-									{
-										dx = XleCore.random.Next(2) * 2 - 1;
-									}
-
-									dy = 0;
-
-									newPt.X += dx;
-								}
-								badPt = !CheckGuard(newPt, i);
-
-								if (badPt == true)
-									newPt = guard.Location;
-
-							}
-
-							guard.Location = newPt;
-
-							if (Math.Abs(xdist) > Math.Abs(ydist))
-							{
-								if (dx < 0)
-								{
-									guard.Facing = Direction.West;
-								}
-								else
-								{
-									guard.Facing = Direction.East;
-								}
-							}
-							else
-							{
-								if (dy < 0)
-								{
-									guard.Facing = Direction.North;
-								}
-								else
-								{
-									guard.Facing = Direction.South;
-								}
-							}
-
+							newPt.X += dx;
 						}
-					}			// guard(x,y) != (0,0)
+						badPt = !CheckGuard(newPt, i);
+
+						if (badPt == true)
+							newPt = guard.Location;
+
+					}
+
+					guard.Location = newPt;
+
+					if (Math.Abs(xdist) > Math.Abs(ydist))
+					{
+						if (dx < 0)
+						{
+							guard.Facing = Direction.West;
+						}
+						else
+						{
+							guard.Facing = Direction.East;
+						}
+					}
+					else
+					{
+						if (dy < 0)
+						{
+							guard.Facing = Direction.North;
+						}
+						else
+						{
+							guard.Facing = Direction.South;
+						}
+					}
+
 				}
-
 			}
+
+
 		}
 
 		bool CheckGuard(Point pt, int grd)
@@ -332,49 +325,59 @@ namespace ERY.Xle.XleMapTypes
 
 			return true;
 		}
-		int AttackGuard(Player player, int grd)
+		void AttackGuard(Player player, int grd)
+		{
+			AttackGuard(player, Guards[grd]);
+		}
+		void AttackGuard(Player player, Guard guard)
 		{
 			int dam = 0;
+			int weaponType = player.CurrentWeaponType;
+
 			ColorStringBuilder builder = new ColorStringBuilder();
 
-			dam = player.Hit(Guards[grd].Defense);
+			double hitChance = (player.Attribute[Attributes.dexterity] + 16)
+				* (99 + weaponType * 8) / 7000.0 / guard.Defense * 99;
 
-			if (dam > 0)
+			if (XleCore.random.NextDouble() < hitChance)
 			{
+				g.AddBottom("Attack on guard missed", XleColor.Purple);
+				SoundMan.PlaySound(LotaSound.PlayerMiss);
+			}
+			else
+			{
+				double damage = 1 + player.Attribute[Attributes.strength] *
+					(weaponType / 2 + 1) / 4;
+
+				damage *= 0.5 + XleCore.random.NextDouble();
+
+				dam = (int)Math.Round(damage);
+
 				IsAngry = true;
-				//g.player.lastAttacked = MapNumber();
+				player.LastAttacked = MapID;
 
 				builder.AddText("Guard struck  ", XleColor.Yellow);
 				builder.AddText(dam.ToString(), XleColor.White);
+				builder.AddText("  H.P. Blow", XleColor.White);
 
 				g.AddBottom(builder);
 
-				Guards[grd].HP -= dam;
+				guard.HP -= dam;
 
 				SoundMan.PlaySound(LotaSound.PlayerHit);
 
-				if (Guards[grd].HP <= 0)
+				if (guard.HP <= 0)
 				{
 					g.AddBottom("Guard killed");
 
-					Guards.RemoveAt(grd);
+					Guards.Remove(guard);
 
 					XleCore.wait(100);
 
 					SoundMan.StopSound(LotaSound.PlayerHit);
 					SoundMan.PlaySound(LotaSound.EnemyDie);
-
 				}
-
 			}
-			else
-			{
-				g.AddBottom("Attack on guard missed", XleColor.Purple);
-				SoundMan.PlaySound(LotaSound.PlayerMiss);
-			}
-
-			return 0;
-
 		}
 
 		/*
@@ -663,8 +666,7 @@ namespace ERY.Xle.XleMapTypes
 			int hit = 0;
 			Color[] colors = new Color[40];
 
-			weaponName = player.CurrentWeaponType;
-
+			weaponName = player.CurrentWeaponTypeName;
 
 			if (player.WeaponType(player.CurrentWeapon) == 6 ||
 				player.WeaponType(player.CurrentWeapon) == 8)
@@ -675,7 +677,7 @@ namespace ERY.Xle.XleMapTypes
 
 			g.AddBottom("");
 
-			g.AddBottom("Fight with " + player.CurrentWeaponType);
+			g.AddBottom("Fight with " + player.CurrentWeaponTypeName);
 			g.AddBottom("Enter direction: ");
 
 			tempstring = "Enter direction: ";
@@ -1029,7 +1031,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
 		{
-			Draw2D(x, y, facingDirection,  inRect);
+			Draw2D(x, y, facingDirection, inRect);
 
 			DrawGuards(new Point(x, y), inRect);
 		}
@@ -1084,7 +1086,7 @@ namespace ERY.Xle.XleMapTypes
 
 		protected override void AnimateTiles(Rectangle rectangle)
 		{
-			AnimateGuards(); 
+			AnimateGuards();
 		}
 		public override string[] MapMenu()
 		{

@@ -463,9 +463,9 @@ AAB/AAAA</RoofData>
       <Defense>0</Defense>
     </Item>
   </Guards>
-  <GuardDefaultAttack>0</GuardDefaultAttack>
-  <GuardDefaultDefense>0</GuardDefaultDefense>
-  <GuardDefaultHP>0</GuardDefaultHP>
+  <GuardDefaultAttack>100</GuardDefaultAttack>
+  <GuardDefaultDefense>100</GuardDefaultDefense>
+  <GuardDefaultHP>30</GuardDefaultHP>
   <GuardDefaultColor>0</GuardDefaultColor>
   <Width>80</Width>
   <Height>40</Height>

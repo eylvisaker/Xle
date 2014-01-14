@@ -335,9 +335,9 @@ AHAAAABwAAAAfwAAAH8AAAB/AAAAfwAAAH8AAAB/AAAAfwAAAH8AAAB/AAAAfwAAAH8AAAB/AAAA</Ro
       <Defense>0</Defense>
     </Item>
   </Guards>
-  <GuardDefaultAttack>0</GuardDefaultAttack>
-  <GuardDefaultDefense>0</GuardDefaultDefense>
-  <GuardDefaultHP>0</GuardDefaultHP>
+  <GuardDefaultAttack>120</GuardDefaultAttack>
+  <GuardDefaultDefense>100</GuardDefaultDefense>
+  <GuardDefaultHP>25</GuardDefaultHP>
   <GuardDefaultColor>0</GuardDefaultColor>
   <Width>80</Width>
   <Height>40</Height>

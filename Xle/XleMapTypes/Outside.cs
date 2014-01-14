@@ -282,7 +282,7 @@ namespace ERY.Xle.XleMapTypes
 			string weaponName;
 			ColorStringBuilder builder;
 
-			weaponName = player.CurrentWeaponType;
+			weaponName = player.CurrentWeaponTypeName;
 
 			g.AddBottom("");
 

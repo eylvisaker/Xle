@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AgateLib.Geometry;
 
 namespace ERY.Xle
@@ -12,8 +13,10 @@ namespace ERY.Xle
 
 		void AnimateGuards();
 		bool GuardInSpot(int x, int y);
-		System.Collections.Generic.List<Guard> Guards { get; }
+		List<Guard> Guards { get; }
 		bool IsAngry { get; set; }
 		void UpdateGuards(Player player);
+
+		void InitializeGuardData();
 	}
 }

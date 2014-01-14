@@ -85,6 +85,8 @@ namespace ERY.Xle
 				guard.DefaultColor = Color.FromArgb(info.ReadInt32("GuardDefaultColor"));
 				guard.DefaultDefense = info.ReadInt32("GuardDefaultDefense");
 				guard.DefaultHP = info.ReadInt32("GuardDefaultHP");
+
+				guard.InitializeGuardData();
 			}
 
 			// read events

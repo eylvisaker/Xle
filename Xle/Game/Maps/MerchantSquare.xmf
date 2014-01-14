@@ -241,9 +241,9 @@ AACkAAAArAAAAA==</RoofData>
       <Defense>0</Defense>
     </Item>
   </Guards>
-  <GuardDefaultAttack>0</GuardDefaultAttack>
-  <GuardDefaultDefense>0</GuardDefaultDefense>
-  <GuardDefaultHP>0</GuardDefaultHP>
+  <GuardDefaultAttack>94</GuardDefaultAttack>
+  <GuardDefaultDefense>139</GuardDefaultDefense>
+  <GuardDefaultHP>20</GuardDefaultHP>
   <GuardDefaultColor>0</GuardDefaultColor>
   <Width>80</Width>
   <Height>40</Height>

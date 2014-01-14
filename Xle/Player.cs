@@ -1178,7 +1178,7 @@ namespace ERY.Xle
 				}
 			}
 		}
-		/// sets or returns the armor currently equiped
+		/// sets or returns the weapon currently equiped
 		public int CurrentWeapon
 		{
 			get { return currentWeapon; }
@@ -1203,6 +1203,27 @@ namespace ERY.Xle
 			}
 		}
 
+		public int CurrentArmorType
+		{
+			get
+			{
+				if (currentArmor == 0)
+					return 0;
+
+				return armor[currentArmor];
+			}
+		}
+		public int CurrentWeaponType
+		{
+			get
+			{
+				if (currentWeapon == 0)
+					return 0;
+
+				return weapon[currentWeapon];
+			}
+		}
+
 		public string CurrentArmorName
 		{
 			get
@@ -1218,7 +1239,7 @@ namespace ERY.Xle
 		/// Gives the name of the current weapon being used. Does not include the
 		/// quality information (shoddy, good, etc.)
 		/// </summary>
-		public string CurrentWeaponType
+		public string CurrentWeaponTypeName
 		{
 			get
 			{

@@ -338,9 +338,9 @@ AAB/AAAAfwAAAH8AAAB/AAAAfwAAAH8AAAB/AAAAfwAAAH8AAAB/AAAAfwAAAA==</RoofData>
       <Defense>0</Defense>
     </Item>
   </Guards>
-  <GuardDefaultAttack>0</GuardDefaultAttack>
-  <GuardDefaultDefense>0</GuardDefaultDefense>
-  <GuardDefaultHP>0</GuardDefaultHP>
+  <GuardDefaultAttack>89</GuardDefaultAttack>
+  <GuardDefaultDefense>89</GuardDefaultDefense>
+  <GuardDefaultHP>30</GuardDefaultHP>
   <GuardDefaultColor>0</GuardDefaultColor>
   <Width>80</Width>
   <Height>40</Height>
