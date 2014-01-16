@@ -9,19 +9,23 @@ namespace ERY.Xle
 		public int ID;
 		public string Name;
 		public string Filename;
+		public int ParentMapID;
+		public string Alias;
 
-		public MapInfo(int id, string name, string filename)
+		public MapInfo(int id, string name, string filename, int parent, string alias)
 		{
 			ID = id;
 			Name = name;
 			Filename = filename;
+			ParentMapID = parent;
+			Alias = alias;
 		}
 	}
 	public class MapList : Dictionary<int, MapInfo>
 	{
-		public void Add(int id, string name, string filename)
+		public void Add(int id, string name, string filename, int parent, string alias)
 		{
-			this.Add(id, new MapInfo(id, name, filename));
+			this.Add(id, new MapInfo(id, name, filename, parent, alias));
 		}
 
 		public string GetName(int id)

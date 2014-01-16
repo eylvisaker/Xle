@@ -916,7 +916,7 @@ namespace ERY.Xle
 				return;
 			}
 
-			if (XleCore.Map.GetType().Equals(typeof(XleMapTypes.Outside)))
+			if (XleCore.Map is XleMapTypes.Outside)
 			{
 				returnMap = map;
 				returnX = x;
@@ -927,7 +927,6 @@ namespace ERY.Xle
 			lastMap = map;
 
 			map = newMap;
-
 
 			if (MapChanged != null)
 			{

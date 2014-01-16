@@ -149,7 +149,6 @@ namespace ERY.Xle.XleEventTypes
 
 			if (choice == 0)
 			{
-
 				try
 				{
 					player.SetMap(mMapID, mLocation.X, this.mLocation.Y);

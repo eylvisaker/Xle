@@ -5,7 +5,7 @@ using AgateLib.Geometry;
 
 namespace ERY.Xle
 {
-	class XleColor
+	public class XleColor
 	{
 		public static Color Black { get { return Color.FromArgb(0, 0, 0); } }
 		public static Color White { get { return Color.FromArgb(255, 255, 255); } }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -12,6 +13,7 @@ using AgateLib.Geometry;
 using AgateLib.InputLib;
 using System.ComponentModel;
 using ERY.Xle.XleMapTypes.MuseumDisplays;
+using ERY.Xle.XleEventTypes;
 
 namespace ERY.Xle
 {
@@ -143,6 +145,8 @@ namespace ERY.Xle
 			}
 		}
 
+		#region --- Console Commands ---
+
 		private void InitializeConsole()
 		{
 			AgateConsole.Initialize();
@@ -152,17 +156,17 @@ namespace ERY.Xle
 			AgateConsole.Commands.Add("gold", new Action<int>(CheatGiveGold));
 			AgateConsole.Commands.Add("food", new Action<int>(CheatGiveFood));
 			AgateConsole.Commands.Add("level", new Action<int>(CheatLevel));
-			AgateConsole.Commands.Add("map", new Action<int>(CheatMap));
+			AgateConsole.Commands.Add("goto", new Action<string>(CheatGoto));
 		}
 
 		string CommandProcessor_DescribeCommand(string command)
 		{
 			StringBuilder b = new StringBuilder();
 
-			switch(command)
+			switch (command)
 			{
-				case "map":
-					b.AppendLine("Jumps to the specified map, given by the ID. Allowed map values are: ");
+				case "goto":
+					b.AppendLine("Jumps to the specified map. Allowed map values are: ");
 
 					bool comma = false;
 					int count = 0;
@@ -174,9 +178,7 @@ namespace ERY.Xle
 						if (count == 0)
 							b.Append("    ");
 
-						b.Append(map.Key);
-						b.Append(": ");
-						b.Append(map.Value.Name);
+						b.Append(map.Value.Alias);
 						comma = true;
 
 						count++;
@@ -275,7 +277,7 @@ namespace ERY.Xle
 			{
 				player.Variables["FourJewelComplete"] = 1;
 				player.Attribute[Attributes.strength] = 50;
-				
+
 				player.Items[LotaItem.RubyCoin] = 0;
 				player.Items[LotaItem.GuardJewel] = 4;
 			}
@@ -288,13 +290,55 @@ namespace ERY.Xle
 
 		}
 
-		public static void CheatMap(int mapID)
+		public static void CheatGoto(string mapName)
 		{
-			Map = LoadMap(mapID);
-			map.OnLoad(player);
+			var matches = from m in MapList.Values
+						  where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant() )
+						  select m;
 
+			if (matches.Count() == 0)
+			{
+				AgateConsole.WriteLine("Map name not found.");
+			}
+			else if (matches.Count() > 1)
+			{
+				AgateConsole.WriteLine("Found multiple matches:");
+				foreach (var m in matches)
+				{
+					AgateConsole.WriteLine("    {0}", m.Alias);
+				}
+			}
+			else
+			{
+				var mapInfo = matches.First();
+				var map = LoadMap(mapInfo.ParentMapID);
+				int targetX = 0, targetY = 0;
 
+				foreach(ChangeMapEvent evt in from evt in map.Events
+											  where evt is ChangeMapEvent
+											  select (ChangeMapEvent)evt)
+				{
+					if (evt.MapID == mapInfo.ID)
+					{
+						targetX = evt.X;
+						targetY = evt.Y;
+					}
+				}
+
+				if (map.CanPlayerStepInto(player, targetX + 2, targetY))
+					targetX += 2;
+				else if (map.CanPlayerStepInto(player, targetX - 2, targetY))
+					targetX -= 2;
+				else if (map.CanPlayerStepInto(player, targetX, targetY + 2))
+					targetY += 2;
+				else if (map.CanPlayerStepInto(player, targetX, targetY - 2)) 
+					targetY -= 2;
+
+				player.SetMap(map.MapID, targetX, targetY);
+			}
 		}
+
+		#endregion
 
 		public static bool ReturnToTitle
 		{
@@ -431,8 +475,21 @@ namespace ERY.Xle
 					int id = int.Parse(node.Attributes["ID"].Value);
 					string name = node.Attributes["Name"].Value;
 					string filename = node.Attributes["File"].Value;
+					int parent = 0;
 
-					mMapList.Add(id, name, filename);
+					if (node.Attributes["ParentMapID"] != null)
+					{
+						parent = int.Parse(node.Attributes["ParentMapID"].Value);
+					}
+
+					string alias = name;
+
+					if (node.Attributes["Alias"] != null)
+					{
+						alias = node.Attributes["Alias"].Value;
+					}
+
+					mMapList.Add(id, name, filename, parent, alias);
 
 					if (System.IO.File.Exists(@"Maps\" + filename) == false)
 					{

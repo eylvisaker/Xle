@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LotaGame>
   <Maps>
-    <Map ID="0" Name="The Museum" File="Museum.xmf" />
+    <Map ID="0" Name="The Museum" File="Museum.xmf" Alias="Museum" ParentMapID="1" />
     <Map ID="1" Name="Outside" File="Tarmalon.xmf" />
     <Map ID="2" Name="Three Sisters" File="ThreeSisters.xmf" />
     <Map ID="3" Name="Flight" File="Warlord.xmf" />
-    <Map ID="10" Name="Thompson Crossing" File="ThompsonCrossing.xmf" />
-    <Map ID="11" Name="Thornberry" File="Thornberry.xmf" />
-    <Map ID="12" Name="Alanville" File="Alanville.xmf" />
-    <Map ID="13" Name="Isle City" File="IsleCity.xmf" />
-    <Map ID="14" Name="Cobbleton" File="Cobbleton.xmf" />
-    <Map ID="15" Name="Grand Ledge" File="GrandLedge.xmf" />
-    <Map ID="16" Name="Big Rapids" File="BigRapids.xmf" />
-    <Map ID="17" Name="Mazelton" File="Mazelton.xmf" />
-    <Map ID="18" Name="Merchant Square" File="MerchantSquare.xmf" />
-    <Map ID="19" Name="Laingsburg" File="Laingsburg.xmf" />
-    <Map ID="20" Name="Holy Point" File="HolyPoint.xmf" />
-    <Map ID="21" Name="Eagle Hollow" File="EagleHollow.xmf" />
-    <Map ID="51" Name="The Castle" File="Castle.xmf" />
-    <Map ID="52" Name="The Castle Level 2" File="Castle2.xmf" />
-    <Map ID="71" Name="A dungeon" File="PiratesLair.xmf" />
-    <Map ID="72" Name="Armak" File="Armak.xmf" />
-    <Map ID="73" Name="Four Jewels" File="FourJewels.xmf" />
+    <Map ID="10" Name="Thompson Crossing" File="ThompsonCrossing.xmf" Alias="ThompsonCrossing" ParentMapID="1"/>
+    <Map ID="11" Name="Thornberry" File="Thornberry.xmf" ParentMapID="1"/>
+    <Map ID="12" Name="Alanville" File="Alanville.xmf" ParentMapID="1"/>
+    <Map ID="13" Name="Isle City" File="IsleCity.xmf" Alias="IsleCity" ParentMapID="1"/>
+    <Map ID="14" Name="Cobbleton" File="Cobbleton.xmf" ParentMapID="1"/>
+    <Map ID="15" Name="Grand Ledge" File="GrandLedge.xmf" Alias="GrandLedge" ParentMapID="1"/>
+    <Map ID="16" Name="Big Rapids" File="BigRapids.xmf" Alias="BigRapids" ParentMapID="1"/>
+    <Map ID="17" Name="Mazelton" File="Mazelton.xmf" ParentMapID="1"/>
+    <Map ID="18" Name="Merchant Square" File="MerchantSquare.xmf" Alias="MerchantSquare" ParentMapID="1"/>
+    <Map ID="19" Name="Laingsburg" File="Laingsburg.xmf" ParentMapID="1"/>
+    <Map ID="20" Name="Holy Point" File="HolyPoint.xmf" Alias="HolyPoint" ParentMapID="1"/>
+    <Map ID="21" Name="Eagle Hollow" File="EagleHollow.xmf" Alias="EagleHollow" ParentMapID="2"/>
+    <Map ID="51" Name="The Castle" Alias="Castle1" File="Castle.xmf" ParentMapID="1"/>
+    <Map ID="52" Name="The Castle Level 2" Alias="Castle2" File="Castle2.xmf" ParentMapID="51"/>
+    <Map ID="71" Name="A dungeon" File="PiratesLair.xmf" Alias="PiratesLair" ParentMapID="2"/>
+    <Map ID="72" Name="Armak" File="Armak.xmf" ParentMapID="0"/>
+    <Map ID="73" Name="Four Jewels" File="FourJewels.xmf" Alias="FourJewels" ParentMapID="0"/>
+    <Map ID="80" Name="Fortress" File="Fortress.xmf" ParentMapID="3" />
   </Maps>
   <Qualities>
     <Quality ID="0" Name="Shoddy" />

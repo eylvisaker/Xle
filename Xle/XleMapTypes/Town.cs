@@ -1006,7 +1006,7 @@ namespace ERY.Xle.XleMapTypes
 					const int xLimit = 8;
 					const int yLimit = 8;
 
-					test = XleCore.Map[xx + i, yy + j];
+					test = this[xx + i, yy + j];
 
 					if (test >= 16 * yLimit || test % 16 >= xLimit)
 					{

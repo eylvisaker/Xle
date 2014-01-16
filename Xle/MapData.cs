@@ -9,7 +9,7 @@ namespace ERY.Xle
 	{
 		int[] mData;
 		int mWidth, mHeight;
-
+		
 		#region IXleSerializable Members
 
 		void IXleSerializable.WriteData(XleSerializationInfo info)
