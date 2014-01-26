@@ -30,7 +30,7 @@ namespace ERY.Xle
 		{
 			PromptToContinueOnWait = true;
 
-			new XleCore().Run(args);
+			new XleCore().Run();
 		}
 
 		public const int myWindowWidth = 640;
@@ -60,25 +60,6 @@ namespace ERY.Xle
 			}
 		}
 
-		private static void ParseArgs(string[] args)
-		{
-			string gamePath = "Game";
-
-			for (int i = 0; i < args.Length; i++)
-			{
-				if (args[i].StartsWith("-") == false)
-				{
-					System.Diagnostics.Debug.WriteLine("Could not understand argument " + args[i]);
-					continue;
-				}
-
-				if (args[i].ToLower() == "-game")
-					gamePath = args[++i];
-			}
-
-			System.IO.Directory.SetCurrentDirectory(gamePath);
-		}
-
 		#endregion
 
 		private char theCursor = 'P';			// location of the menu dot
@@ -106,10 +87,8 @@ namespace ERY.Xle
 				menuArray[i] = "";
 			}
 		}
-		public void Run(string[] args)
+		public void Run()
 		{
-			ParseArgs(args);
-
 			AgateLib.AgateFileProvider.Images.AddPath("Images");
 			AgateLib.AgateFileProvider.Sounds.AddPath("Audio");
 			AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
