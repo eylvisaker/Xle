@@ -5,13 +5,13 @@ using System.Text;
 
 namespace ERY.Xle
 {
-	public static class XleFactory
+	public static class XleBaseTypeFactory
 	{
 		static List<Assembly> assemblies = new List<Assembly>();
 
-		static XleFactory()
+		static XleBaseTypeFactory()
 		{
-			assemblies.Add(Assembly.GetAssembly(typeof(XleFactory)));
+			assemblies.Add(Assembly.GetAssembly(typeof(XleBaseTypeFactory)));
 		}
 		public static IEnumerable<Type> MapTypes
 		{

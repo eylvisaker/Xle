@@ -40,8 +40,8 @@ namespace ERY.Xle
 	{
 		static int animFrame;
 
-		static FontSurface myFont;		// stores the handle to the font
-		static Surface myTiles;			// stores the handle to the tiles
+		static FontSurface myFont { get { return XleCore.Factory.Font; }}	// stores the handle to the font
+		static Surface myTiles { get { return XleCore.Tiles;}}		// stores the handle to the tiles
 		static Surface myCharacter;		// stores the handle to the character sprites
 		static Surface pOverlandMonsters;	// stores the handle to the overland monster sprites
 
@@ -79,24 +79,24 @@ namespace ERY.Xle
 		}
 
 		// Surfaces
-		static public FontSurface Font { get { return myFont; } }					// returns the handle to the font resource
-		static public Surface Tiles { get { return myTiles; } }				// returns the handle to the tiles resource
-		static public Surface Character { get { return myCharacter; } }		// returns the handle to the character resource
-		static public Surface Monsters { get { return pOverlandMonsters; } }				// returns the handle to the monsters resource
+		static public FontSurface Font { get { return XleCore.Factory.Font;}}					// returns the handle to the font resource
+		public static Surface Tiles { get { return XleCore.Tiles; } }				// returns the handle to the tiles resource
+		public static Surface Character { get { return XleCore.Factory.Character; } }		// returns the handle to the character resource
+		public static Surface Monsters { get { return XleCore.Factory.Monsters; } }				// returns the handle to the monsters resource
 
-		static public Surface MuseumBackdrop { get; private set; }
-		static public Surface MuseumWall { get; private set; }			// stores the pointer to the wall texture
-		static public Surface MuseumSidePassage { get; private set; }
-		static public Surface MuseumDoor { get; private set; }
-		static public Surface MuseumExhibitFrame { get; private set; }
-		static public Surface MuseumExhibitStatic { get; private set; }
-		static public Surface MuseumExtras { get; private set; }
-		public static Surface MuseumCloseup { get; private set; }
+		public static Surface MuseumBackdrop { get { return XleCore.Factory.MuseumBackdrop; } }
+		public static Surface MuseumWall { get { return XleCore.Factory.MuseumWall; } }			// stores the pointer to the wall texture
+		public static Surface MuseumSidePassage { get { return XleCore.Factory.MuseumSidePassage; } }
+		public static Surface MuseumDoor { get { return XleCore.Factory.MuseumDoor; } }
+		public static Surface MuseumExhibitFrame { get { return XleCore.Factory.MuseumExhibitFrame; } }
+		public static Surface MuseumExhibitStatic { get { return XleCore.Factory.MuseumExhibitStatic; } }
+		public static Surface MuseumExtras { get { return XleCore.Factory.MuseumExtras; } }
+		public static Surface MuseumCloseup { get { return XleCore.Factory.MuseumCloseup; } }
 
-		public static Surface DungeonBlueBackdrop { get; private set; }
-		public static Surface DungeonBlueWall { get; private set; }
-		public static Surface DungeonBlueSidePassage { get; private set; }
-		public static Surface DungeonBlueExtras { get; private set; }
+		public static Surface DungeonBlueBackdrop { get { return XleCore.Factory.DungeonBlueBackdrop; } }
+		public static Surface DungeonBlueWall { get { return XleCore.Factory.DungeonBlueWall; } }
+		public static Surface DungeonBlueSidePassage { get { return XleCore.Factory.DungeonBlueSidePassage; } }
+		public static Surface DungeonBlueExtras { get { return XleCore.Factory.DungeonBlueExtras; } }
 
 		// character functions
 
@@ -403,41 +403,10 @@ namespace ERY.Xle
 			}
 		}
 
-
-		// others:
-		static public bool LoadSurfaces()
-		{
-			myFont = FontSurface.BitmapMonospace("font.png", new Size(16, 16));
-			myFont.StringTransformer = StringTransformer.ToUpper;
-
-			myCharacter = new Surface("character.png");
-			pOverlandMonsters = new Surface("OverworldMonsters.png");
-
-			MuseumBackdrop = new Surface("MuseumBackdrop.png");
-			MuseumWall = new Surface("MuseumWall.png");
-			MuseumDoor = new Surface("MuseumDoor.png");
-			MuseumSidePassage = new Surface("MuseumSidePassage.png");
-			MuseumExhibitFrame = new Surface("ExhibitFrame.png");
-			MuseumExhibitStatic = new Surface("ExhibitStatic.png");
-			MuseumCloseup = new Surface("MuseumCloseup.png");
-			MuseumExtras = new Surface("MuseumExtras.png");
-
-			DungeonBlueBackdrop = new Surface("DungeonBackdropBlue.png");
-			DungeonBlueSidePassage = new Surface("DungeonSidePassageBlue.png");
-			DungeonBlueWall = new Surface("DungeonWallBlue.png");
-			DungeonBlueExtras = new Surface("DungeonExtrasBlue.png");
-
-			foreach (var exinfo in XleCore.ExhibitInfo.Values)
-			{
-				exinfo.LoadImage();
-			}
-
-			return true;
-
-		}
+		[Obsolete]
 		static public bool LoadTiles(string tileset)
 		{
-			myTiles = new Surface(tileset);
+			XleCore.LoadTiles(tileset);
 
 			return true;
 		}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA
 {
-	static class LotAProgram
+	static class LotaProgram
 	{
 		/// <summary>
 		/// The main entry point for the application.
@@ -18,7 +18,7 @@ namespace ERY.Xle.LotA
 
 			System.IO.Directory.SetCurrentDirectory("LotA");
 
-			core.Run();
+			core.Run(new LotaFactory());
 		}
 	}
 }

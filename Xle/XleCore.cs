@@ -20,19 +20,7 @@ namespace ERY.Xle
 	public class XleCore
 	{
 		#region --- Static Members ---
-
-		/// <summary>
-		/// Entry point.
-		/// </summary>
-		/// <param name="args"></param>
-		[STAThread]
-		public static void Main(string[] args)
-		{
-			PromptToContinueOnWait = true;
-
-			new XleCore().Run();
-		}
-
+		
 		public const int myWindowWidth = 640;
 		public const int myWindowHeight = 400;
 
@@ -60,10 +48,14 @@ namespace ERY.Xle
 			}
 		}
 
+		public static XleGameFactory Factory { get { return inst.mFactory; } }
+
 		#endregion
 
 		private char theCursor = 'P';			// location of the menu dot
 		private string[] menuArray = new string[17];		// keeps the menu portion of the screen
+
+		private XleGameFactory mFactory;
 
 		private MapList mMapList = new MapList();
 		private ItemList mItemList = new ItemList();
@@ -73,10 +65,12 @@ namespace ERY.Xle
 		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo>();
 		private Dictionary<int, XleMapTypes.Map3DExtraInfo> mMap3DExtras = new Dictionary<int, XleMapTypes.Map3DExtraInfo>();
 		private Dictionary<int, MagicSpell> mMagicSpells = new Dictionary<int, MagicSpell>();
-
+		
 		private Data.AgateDataImport mDatabase;
 
 		public static Color FontColor { get; private set; }
+
+		public static Surface Tiles { get; private set; }
 
 		public XleCore()
 		{
@@ -87,8 +81,12 @@ namespace ERY.Xle
 				menuArray[i] = "";
 			}
 		}
-		public void Run()
+		public void Run(XleGameFactory factory)
 		{
+			if (factory == null) throw new ArgumentNullException();
+
+			mFactory = factory;
+
 			AgateLib.AgateFileProvider.Images.AddPath("Images");
 			AgateLib.AgateFileProvider.Sounds.AddPath("Audio");
 			AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
@@ -104,17 +102,17 @@ namespace ERY.Xle
 				if (setup.WasCanceled)
 					return;
 
-				DisplayWindow wind = DisplayWindow.CreateWindowed("Legacy of the Ancients", 640, 400);
+				DisplayWindow wind = DisplayWindow.CreateWindowed(mFactory.GameTitle, 640, 400);
 
 				SoundMan.Load();
 
-				g.LoadSurfaces();
+				mFactory.LoadSurfaces();
 
-				XleTitleScreen titleScreen;
+				IXleTitleScreen titleScreen;
 
 				do
 				{
-					titleScreen = new XleTitleScreen();
+					titleScreen = mFactory.CreateTitleScreen();
 					titleScreen.Run();
 					returnToTitle = false;
 
@@ -2126,6 +2124,14 @@ namespace ERY.Xle
 		public static void SetPlayer(Player thePlayer)
 		{
 			player = thePlayer;
+		}
+
+		public static void LoadTiles(string tileset)
+		{
+			if (tileset.EndsWith(".png") == false)
+				tileset += ".png";
+
+			Tiles = new Surface(tileset);
 		}
 	}
 }

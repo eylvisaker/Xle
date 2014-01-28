@@ -59,8 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LotAProgram.cs" />
+    <Compile Include="LotaFactory.cs" />
+    <Compile Include="LotaProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TitleScreen\LotaTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

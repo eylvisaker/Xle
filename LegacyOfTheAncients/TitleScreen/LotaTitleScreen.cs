@@ -8,9 +8,9 @@ using AgateLib.DisplayLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 
-namespace ERY.Xle
+namespace ERY.Xle.LotA.TitleScreen
 {
-	public class XleTitleScreen
+	public class LotaTitleScreen : ERY.Xle.IXleTitleScreen
 	{
 		public enum TitleScreenState
 		{
@@ -652,11 +652,12 @@ namespace ERY.Xle
 				wnd[7] = "          0.  Previous Page";
 			}
 
+			string savedDirectory = "Saved";
 
-			// file system?
-			string[] sourceFiles = Directory.GetFiles("Saved");
+			if (Directory.Exists(savedDirectory) == false)
+				Directory.CreateDirectory(savedDirectory);
 
-
+			string[] sourceFiles = Directory.GetFiles(savedDirectory);
 
 			for (int i = 0; i < 8; i++)
 			{

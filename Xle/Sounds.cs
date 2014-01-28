@@ -44,7 +44,7 @@ namespace ERY.Xle
 		Bad,
 	}
 
-	static class SoundMan
+	public static class SoundMan
 	{
 		static Dictionary<LotaSound, SoundBuffer> mSounds = new Dictionary<LotaSound, SoundBuffer>();
 

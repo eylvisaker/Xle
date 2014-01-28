@@ -133,10 +133,12 @@
   -->
   <ItemGroup>
     <Compile Include="ItemContainer.cs" />
+    <Compile Include="IXleTitleScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Data\Data.cs" />
+    <Compile Include="XleGameFactory.cs" />
     <Compile Include="XleMapTypes\Map3DExtraInfo.cs" />
     <Compile Include="EquipmentList.cs" />
     <Compile Include="Global.cs" />
@@ -161,7 +163,7 @@
     <Compile Include="XleMapTypes\Museum.cs" />
     <Compile Include="XleColor.cs" />
     <Compile Include="XleCore.cs" />
-    <Compile Include="XleFactory.cs" />
+    <Compile Include="XleBaseTypeFactory.cs" />
     <Compile Include="XleMap.cs" />
     <Compile Include="MapList.cs" />
     <Compile Include="MenuItemList.cs" />
@@ -190,7 +192,6 @@
     <Compile Include="XleMapTypes\MuseumDisplays\Welcome.cs" />
     <Compile Include="XleMapTypes\Outside.cs" />
     <Compile Include="XleMapTypes\Town.cs" />
-    <Compile Include="XleTitleScreen.cs" />
     <Compile Include="MagicSpell.cs" />
   </ItemGroup>
   <ItemGroup>

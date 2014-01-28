@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB
 {
-	static class LoBProgram
+	static class LobProgram
 	{
 		/// <summary>
 		/// The main entry point for the application.
@@ -17,7 +17,7 @@ namespace ERY.Xle.LoB
 
 			System.IO.Directory.SetCurrentDirectory("LoB");
 
-			core.Run();
+			core.Run(new LobFactory());
 			
 		}
 	}
