@@ -134,6 +134,7 @@ namespace ERY.Xle
 			AgateConsole.Commands.Add("food", new Action<int>(CheatGiveFood));
 			AgateConsole.Commands.Add("level", new Action<int>(CheatLevel));
 			AgateConsole.Commands.Add("goto", new Action<string>(CheatGoto));
+			AgateConsole.Commands.Add("move", new Action<int, int, int>(CheatMove));
 		}
 
 		string CommandProcessor_DescribeCommand(string command)
@@ -265,6 +266,42 @@ namespace ERY.Xle
 
 			player.HP = player.MaxHP;
 
+		}
+		[Description("Moves to a specified place on the current map. Pass no arguments to see the current position. Pass two arguments to set x,y. Pass three arguments to set x,y,level for dungeons.")]
+		private void CheatMove(int x = -1, int y = -1, int level = -1)
+		{
+			if (x == -1)
+			{
+				AgateConsole.WriteLine("Current Position: {0}, {1}", player.X, player.Y);
+				return;
+			}
+			else if (y == -1)
+				throw new Exception("You must pass x and y to move.");
+
+			if (x < 0) throw new Exception("x cannot be less than zero.");
+			if (y < 0) throw new Exception("y cannot be less than zero.");
+			if (x >= Map.Width) throw new Exception(string.Format("x cannot be {0} or greater.", Map.Width));
+			if (y >= Map.Height) throw new Exception(string.Format("y cannot be {0} or greater.", Map.Height)); 
+			
+			if (level == -1)
+			{
+				player.X = x;
+				player.Y = y;
+			}
+			else
+			{
+				if (Map.IsMultiLevelMap == false)
+					AgateConsole.WriteLine("Cannot pass level on a map without levels.");
+				else
+				{
+					if (level < 1 || level > Map.Levels)
+						throw new Exception(string.Format("level cannot be less than 1 or greater than {0}", map.Levels));
+
+					player.X = x;
+					player.Y = y;
+					player.DungeonLevel = level;
+				}
+			}
 		}
 
 		public static void CheatGoto(string mapName)

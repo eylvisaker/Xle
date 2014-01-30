@@ -1024,7 +1024,7 @@ namespace ERY.Xle.XleMapTypes
 
 			int roof = RoofTile(xx, yy);
 
-			if (roof != 127)
+			if (roof != 127 && roof != 0)
 				return roof;
 			else
 				return tile;
