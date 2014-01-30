@@ -8,6 +8,8 @@ namespace ERY.Xle.LoB.TitleScreen
 {
 	class LobTitleScreen : IXleTitleScreen
 	{
+		bool firstRun = false;
+
 		public Player Player
 		{
 			get;
@@ -16,9 +18,20 @@ namespace ERY.Xle.LoB.TitleScreen
 
 		public void Run()
 		{
-			Player = new Player();
+			if (firstRun)
+				Player = null;
+			else
+			{
+				Player = new Player();
 
-			Player.SetMap(1, 40, 40);
+				Player.SetMap(1, 80, 80);
+
+				Player.X = 80;
+				Player.Y = 80;
+
+			}
+
+			firstRun = true;
 		}
 
 		Player IXleTitleScreen.Player

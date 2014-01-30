@@ -1086,7 +1086,7 @@ namespace ERY.Xle
 		List<Assembly> mAssemblies;
 
 		protected T CreateExtender<T>(string ScriptClassName) 
-		{
+		{ 
 			if (mAssemblies == null)
 				CreateAssemblyList();
 

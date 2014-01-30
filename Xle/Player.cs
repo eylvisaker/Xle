@@ -722,6 +722,7 @@ namespace ERY.Xle
 		public int X
 		{
 			get { return x; }
+			set { x = value; }
 		}
 		/// <summary>
 		/// 					// returns y position
@@ -730,7 +731,9 @@ namespace ERY.Xle
 		public int Y
 		{
 			get { return y; }
+			set { y = value; }
 		}
+
 		/// <summary>
 		///  Sets the positions of the player on the current map.  Returns true
 		/// if successful.

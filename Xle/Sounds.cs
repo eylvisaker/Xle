@@ -84,7 +84,7 @@ namespace ERY.Xle
 			return mSounds[sound].IsPlaying;
 		}
 
-		internal static void StopAllSounds()
+		public static void StopAllSounds()
 		{
 			foreach (var kvp in mSounds)
 			{
@@ -92,14 +92,14 @@ namespace ERY.Xle
 			}
 		}
 
-		internal static void PlaySoundSync(LotaSound lotaSound)
+		public static void PlaySoundSync(LotaSound lotaSound)
 		{
 			PlaySound(lotaSound);
 
 			while (IsPlaying(lotaSound))
 				XleCore.wait(50);
 		}
-		internal static void PlaySoundSync(XleCore.RedrawDelegate redraw, LotaSound lotaSound)
+		public static void PlaySoundSync(XleCore.RedrawDelegate redraw, LotaSound lotaSound)
 		{
 			PlaySound(lotaSound);
 
@@ -107,7 +107,7 @@ namespace ERY.Xle
 				XleCore.wait(redraw, 50);
 		}
 
-		internal static void FinishSounds()
+		public static void FinishSounds()
 		{
 			while (IsAnyPlaying())
 				XleCore.wait(10);

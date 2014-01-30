@@ -14,56 +14,78 @@
   </Qualities>
   <Weapons>
     <Weapon ID="0" Name="Bare Hands" />
-    <Weapon ID="1" Name="Knife" Prices="30,40,52,66,81" />
-    <Weapon ID="2" Name="Leaded Club" Prices="66,80,97,114,133" />
-    <Weapon ID="3" Name="Bladed Staff" Prices="115,134,155,177,200" />
-    <Weapon ID="4" Name="Flail" Prices="180,203,228,254,282" />
-    <Weapon ID="5" Name="War Hammer" Prices="259,286,316,347,379" />
-    <Weapon ID="6" Name="Bow &amp; Arrow" Prices="353,386,420,455,492" />
-    <Weapon ID="7" Name="Broadaxe" Prices="463,501,540,580,662" />
-    <Weapon ID="8" Name="Compound Bow" Prices="590,632,676,721,768" />
+    <Weapon ID="1" Name="Dagger" Prices="30,40,52,66,81" />
+    <Weapon ID="2" Name="Whip" Prices="66,80,97,114,133" />
+    <Weapon ID="3" Name="Staff" Prices="115,134,155,177,200" />
+    <Weapon ID="4" Name="Club" Prices="180,203,228,254,282" />
+    <Weapon ID="5" Name="Flail" Prices="259,286,316,347,379" />
+    <Weapon ID="6" Name="Broad Axe" Prices="353,386,420,455,492" />
+    <Weapon ID="7" Name="Sword" Prices="463,501,540,580,662" />
+    <Weapon ID="8" Name="Leaded Club" Prices="590,632,676,721,768" />
+    <Weapon ID="9" Name="Morningstar" Prices="590,632,676,721,768" />
+    <Weapon ID="10" Name="Halberd" Prices="590,632,676,721,768" />
+    <Weapon ID="11" Name="Broad Sword" Prices="590,632,676,721,768" />
+    <Weapon ID="12" Name="Simple Bow" Prices="590,632,676,721,768" />
+    <Weapon ID="13" Name="Crossbow" Prices="590,632,676,721,768" />
+    <Weapon ID="14" Name="Black Blade" Prices="590,632,676,721,768" />
   </Weapons>
   <Armor>
     <Armor ID="0" Name="Nothing" />
-    <Armor ID="1" Name="Studded Hide" Prices="50,65,82,103,127" />
-    <Armor ID="2" Name="Ring Mail" Prices="120,147,177,211,249" />
-    <Armor ID="3" Name="Double Mail" Prices="239,281,327,379,436" />
-    <Armor ID="4" Name="Plated Mail" Prices="421,482,549,622,702" />
-    <Armor ID="5" Name="Mythan Plate" Prices="682,766,858,956,1063" />
+    <Armor ID="1" Name="Leather" Prices="50,65,82,103,127" />
+    <Armor ID="2" Name="Studded Hide" Prices="120,147,177,211,249" />
+    <Armor ID="3" Name="Chain Mail" Prices="239,281,327,379,436" />
+    <Armor ID="4" Name="Bar Mail" Prices="421,482,549,622,702" />
+    <Armor ID="5" Name="Plate Mail" Prices="682,766,858,956,1063" />
   </Armor>
   <Items>
     <Item ID="0" Name="Nothing" />
-    <Item ID="1" Name="Gold Armband" Action="Twist"/>
-    <Item ID="2" Name="Climbing Gear" Action="Ready"/>
-    <Item ID="3" Name="Healing Herb" Action="Eat" />
-    <Item ID="4" Name="Iron Key" />
-    <Item ID="5" Name="Copper Key" />
-    <Item ID="6" Name="Brass Key" />
-    <Item ID="7" Name="Stone Key" />
-    <Item ID="8" Name="Magic Seed" Action="Eat"/>
-    <Item ID="9" Name="Mail" />
-    <Item ID="10" Name="Tulip" />
-    <Item ID="11" Name="Compass" />
-    <Item ID="12" Name="Magic Ice" Action="Throw"/>
-    <Item ID="13" Name="Scepter" />
-    <Item ID="14" Name="Guard Jewel" LongName="Large pulsating jewel" />
-    <Item ID="15" Name="Compendium" />
-    <Item ID="16" Name="Crown" LongName="Jeweled crown"/>
-    <Item ID="17" Name="Jade coin" />
-    <Item ID="18" Name="Topaz coin" />
-    <Item ID="19" Name="Amethyst coin" />
-    <Item ID="20" Name="Sapphire coin" />
-    <Item ID="21" Name="Turquoise coin" />
-    <Item ID="22" Name="Ruby coin" />
-    <Item ID="23" Name="Diamond coin" />
+    <Item ID="1" Name="Crystal Ring" />
+    <Item ID="2" Name="Life Elixir" Action="Drink"/>
+    <Item ID="3" Name="Climbing Gear" Action="Ready" />
+    <Item ID="4" Name="Laggard Vapors" />
+    <Item ID="5" Name="Small Key" />
+    <Item ID="6" Name="Wooden Key" />
+    <Item ID="7" Name="Gold Key" />
+    <Item ID="8" Name="Black Key" />
+    <Item ID="9" Name="Iron Key" />
+    <Item ID="10" Name="Quartz Key" />
+    <Item ID="11" Name="Large Key" />
+    <Item ID="12" Name="Amber Key" />
+    <Item ID="13" Name="Skeleton Key" />
+    <Item ID="14" Name="Lodestone" />
+    <Item ID="15" Name="Rusty Key" />
+    <Item ID="16" Name="Rope &amp; Pulley" />
+    <Item ID="17" Name="Silver Coin" />
+    <Item ID="18" Name="Falcon Feather" />
+    <Item ID="19" Name="Singing Crystal" />
+    <Item ID="20" Name="Glass Orb" />
+    <Item ID="21" Name="Owl Grail" />
+    <Item ID="22" Name="Statuette" />
+    <Item ID="23" Name="Lute" />
+    <Item ID="24" Name="Staff" />
+    <Item ID="25" Name="Signet Ring" />
+    <Item ID="26" Name="Black Wand" />
+    <Item ID="27" Name="Flaxton Incense" />
+    <Item ID="28" Name="Steel Hammer" />
+    <Item ID="29" Name="Blacksilver" />
+    <Item ID="30" Name="Dragon's Tears" />
+    <Item ID="31" Name="Blue Gem" />
+    <Item ID="32" Name="Red Garnet" />
+    <Item ID="33" Name="Amethyst Gem" />
+    <Item ID="34" Name="Emerald" />
+    <Item ID="35" Name="Yellow Diamond" />
+    <Item ID="36" Name="White Diamond" />
+    <Item ID="37" Name="Opal" />
   </Items>
   <MagicSpells>
-	<MagicSpell ID="1" Name="Magic Flame" BasePrice="32" />
-	<MagicSpell ID="2" Name="Firebolt" BasePrice="63" />
-	<MagicSpell ID="3" Name="Befuddle Spell" BasePrice="152" />
-	<MagicSpell ID="4" Name="Psycho Strength" BasePrice="189" />
-	<MagicSpell ID="5" Name="Kill Flash" BasePrice="379" />
-	<MagicSpell ID="6" Name="Seek Spell" BasePrice="51" />
+	  <MagicSpell ID="1" Name="Tongue of Flame" BasePrice="32" />
+	  <MagicSpell ID="2" Name="Lightning Bolt" BasePrice="63" />
+    <MagicSpell ID="3" Name="Glow Tip" BasePrice="152" />
+    <MagicSpell ID="4" Name="Armor Enchant" BasePrice="152" />
+    <MagicSpell ID="5" Name="Psychic Protect" BasePrice="152" />
+    <MagicSpell ID="6" Name="Nimble Step" BasePrice="189" />
+	  <MagicSpell ID="7" Name="Annihilate" BasePrice="379" />
+	  <MagicSpell ID="8" Name="Seek Spell" BasePrice="51" />
   </MagicSpells>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>
