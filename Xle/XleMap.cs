@@ -20,9 +20,15 @@ namespace ERY.Xle
 
 		XleEventList mEvents = new XleEventList();
 
-		int mMapID;					// map number
-		string mTileSet;				// stores which bitmap contains map tiles
+		// map number
+		int mMapID;
+
+		// stores which bitmap contains map tiles
+		string mTileImage;
+
 		int mDefaultTile;
+
+		TileSet mTileSet;
 
 		#region --- Construction and Seralization ---
 
@@ -45,7 +51,8 @@ namespace ERY.Xle
 		{
 			info.Write("MapName", mMapName);
 			info.Write("MapID", mMapID);
-			info.Write("Tileset", mTileSet);
+			info.Write("TileSet", mTileSet);
+			info.Write("TileImage", mTileImage);
 			info.Write("DefaultTile", mDefaultTile);
 			info.Write("Events", mEvents.ToArray());
 
@@ -68,7 +75,17 @@ namespace ERY.Xle
 		{
 			mMapName = info.ReadString("MapName");
 			mMapID = info.ReadInt32("MapID");
-			mTileSet = info.ReadString("Tileset");
+
+			if (info.ContainsKey("Tileset"))
+			{
+				mTileImage = info.ReadString("Tileset");
+			}
+			else
+			{
+				mTileImage = info.ReadString("TileImage");
+				mTileSet = info.ReadObject<TileSet>("TileSet");
+			}
+
 			mDefaultTile = info.ReadInt32("DefaultTile");
 			mEvents.AddRange(info.ReadArray<XleEvent>("Events"));
 
@@ -214,12 +231,13 @@ namespace ERY.Xle
 			}
 		}
 		[Browsable(false)]
-		public string TileSet
+		public string TileImage
 		{
-			get { return mTileSet; }
-			set { mTileSet = value; }
+			get { return mTileImage; }
+			set { mTileImage = value; }
 		}
-		public virtual IEnumerable<string> AvailableTilesets
+		
+		public virtual IEnumerable<string> AvailableTileImages
 		{
 			get
 			{
@@ -530,13 +548,13 @@ namespace ERY.Xle
 			return null;
 		}
 
-		public T GetEvent<T>(Player player, int border) where T : XleEvent 
+		public T GetEvent<T>(Player player, int border) where T : XleEvent
 		{
 			XleEvent evt = GetEvent(player, border);
 
 			return evt as T;
 		}
-		
+
 		/// <summary>
 		/// returns the special event at the specified location
 		/// </summary>
@@ -712,7 +730,7 @@ namespace ERY.Xle
 		{
 			for (int i = 0; i < mEvents.Count; i++)
 			{
-				if (mEvents[i] is T) 
+				if (mEvents[i] is T)
 					return true;
 			}
 
@@ -726,6 +744,8 @@ namespace ERY.Xle
 
 		#endregion
 		#region --- Player movement stuff ---
+
+		public TileSet TileSet { get { return mTileSet; } set { mTileSet = value; } }
 
 		public TerrainType Terrain(int xx, int yy)
 		{
@@ -1018,7 +1038,7 @@ namespace ERY.Xle
 		{
 			return PlayerRobImpl(player);
 		}
-			
+
 
 		protected virtual bool PlayerSpeakImpl(Player player)
 		{
@@ -1085,8 +1105,8 @@ namespace ERY.Xle
 
 		List<Assembly> mAssemblies;
 
-		protected T CreateExtender<T>(string ScriptClassName) 
-		{ 
+		protected T CreateExtender<T>(string ScriptClassName)
+		{
 			if (mAssemblies == null)
 				CreateAssemblyList();
 
@@ -1174,7 +1194,7 @@ namespace ERY.Xle
 			info.Write("Y", Y);
 			info.Write("Width", Width);
 			info.Write("Height", Height);
-			info.Write("RoofData", mData);
+			info.Write("RoofData", mData, NumericEncoding.Csv);
 		}
 
 		void IXleSerializable.ReadData(XleSerializationInfo info)

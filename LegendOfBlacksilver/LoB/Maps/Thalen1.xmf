@@ -2,9 +2,59 @@
   <MapName>
   </MapName>
   <MapID>0</MapID>
-  <Tileset>LobThalen</Tileset>
+  <TileSet type="null" />
+  <TileImage>LobThalen</TileImage>
   <DefaultTile>0</DefaultTile>
-  <Events array="true" type="ERY.Xle.XleEvent" />
+  <Events array="true" type="ERY.Xle.XleEvent">
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>34</X>
+      <Y>56</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>10</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>3</TargetX>
+      <TargetY>20</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>108</X>
+      <Y>4</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>12</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>40</TargetX>
+      <TargetY>2</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>8</X>
+      <Y>88</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>11</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>4</TargetX>
+      <TargetY>35</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>14</X>
+      <Y>168</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>13</MapID>
+      <AskUser>True</AskUser>
+      <TargetX>76</TargetX>
+      <TargetY>19</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+  </Events>
   <Width>190</Width>
   <Height>172</Height>
   <MapData array="true" encoding="Base64">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

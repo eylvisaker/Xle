@@ -52,7 +52,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			info.Write("Width", mWidth, true);
 			info.Write("Height", mHeight, true);
-			info.Write("Data", mData);
+			info.Write("Data", mData, NumericEncoding.Csv);
 		}
 		public override string[] MapMenu()
 		{
@@ -73,7 +73,7 @@ namespace ERY.Xle.XleMapTypes
 
 			return retval.ToArray();
 		}
-		public override IEnumerable<string> AvailableTilesets
+		public override IEnumerable<string> AvailableTileImages
 		{
 			get { yield return "DungeonTiles.png"; }
 		}

@@ -45,7 +45,7 @@ namespace ERY.Xle.XleMapTypes
 
 		IDungeonExtender Extender;
 
-		public override IEnumerable<string> AvailableTilesets
+		public override IEnumerable<string> AvailableTileImages
 		{
 			get { yield return "DungeonTiles.png"; }
 		}
@@ -69,7 +69,7 @@ namespace ERY.Xle.XleMapTypes
 			info.Write("Height", mHeight, true);
 			info.Write("Levels", mLevels, true);
 			info.Write("ScriptClass", ScriptClassName);
-			info.Write("Data", mData);
+			info.Write("Data", mData, NumericEncoding.Csv);
 			info.Write("Treasures", mTreasures);
 		}
 

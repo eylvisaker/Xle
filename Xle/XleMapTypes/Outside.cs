@@ -40,7 +40,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			info.Write("Width", Width);
 			info.Write("Height", Height);
-			info.Write("MapData", mData);
+			info.Write("MapData", mData, NumericEncoding.Csv);
 		}
 		protected override void ReadData(XleSerializationInfo info)
 		{
@@ -62,7 +62,7 @@ namespace ERY.Xle.XleMapTypes
 			mHeight = height;
 			mData = new int[mWidth * mHeight];
 		}
-		public override IEnumerable<string> AvailableTilesets
+		public override IEnumerable<string> AvailableTileImages
 		{
 			get
 			{

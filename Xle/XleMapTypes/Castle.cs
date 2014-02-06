@@ -17,7 +17,7 @@ namespace ERY.Xle.XleMapTypes
 	{
 		public Castle() { }
 
-		public override IEnumerable<string> AvailableTilesets
+		public override IEnumerable<string> AvailableTileImages
 		{
 			get
 			{

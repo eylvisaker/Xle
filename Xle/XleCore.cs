@@ -44,7 +44,7 @@ namespace ERY.Xle
 				XleCore.map = value;
 
 				inst.menuArray = map.MapMenu();
-				g.LoadTiles(map.TileSet);
+				g.LoadTiles(map.TileImage);
 			}
 		}
 

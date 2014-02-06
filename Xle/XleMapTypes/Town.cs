@@ -36,7 +36,7 @@ namespace ERY.Xle.XleMapTypes
 			info.Write("Width", mWidth);
 			info.Write("Height", mHeight);
 			info.Write("OutsideTile", mOutsideTile);
-			info.Write("MapData", mData);
+			info.Write("MapData", mData, NumericEncoding.Csv);
 			info.Write("Mail", mMail.ToArray());
 		}
 		protected override void ReadData(XleSerializationInfo info)
@@ -66,7 +66,7 @@ namespace ERY.Xle.XleMapTypes
 
 		#endregion
 
-		public override IEnumerable<string> AvailableTilesets
+		public override IEnumerable<string> AvailableTileImages
 		{
 			get
 			{
@@ -1003,19 +1003,32 @@ namespace ERY.Xle.XleMapTypes
 			{
 				for (int i = 0; i < 2; i++)
 				{
-					const int xLimit = 8;
-					const int yLimit = 8;
-
 					test = this[xx + i, yy + j];
 
-					if (test >= 16 * yLimit || test % 16 >= xLimit)
-					{
+					if (IsTileBlocked(test))
 						return false;
-					}
 				}
 			}
 
 			return true;
+		}
+
+		private bool IsTileBlocked(int tile)
+		{
+			if (TileSet != null)
+			{
+				return TileSet[tile] == TileInfo.Blocked;
+			}
+
+			const int xLimit = 8;
+			const int yLimit = 8;
+
+			if (tile >= 16 * yLimit || tile % 16 >= xLimit)
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		public override int DrawTile(int xx, int yy)
