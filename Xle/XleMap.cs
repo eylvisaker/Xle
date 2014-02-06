@@ -1317,7 +1317,7 @@ namespace ERY.Xle
 		{
 			if (Rectangle.Contains(ptx, pty))
 			{
-				if (ignoreTransparency == false && this[ptx - X, pty - Y] == 127)
+				if (ignoreTransparency == false && (this[ptx - X, pty - Y] == 127 || this[ptx - X, pty - Y] == 0))
 					return false;
 
 				return true;

@@ -461,9 +461,12 @@ namespace ERY.Xle.XleMapTypes
 		{
 			for (int i = 0; i < mRoofs.Count; i++)
 			{
-				if (mRoofs[i].PointInRoof(ptx, pty, false) && mRoofs[i].Open == false)
+				if (mRoofs[i].PointInRoof(ptx, pty, false))
 				{
-					return i;
+					if (mRoofs[i].Open)
+						return -1;
+					else
+						return i;
 				}
 			}
 
@@ -555,21 +558,39 @@ namespace ERY.Xle.XleMapTypes
 
 		int RoofTile(int xx, int yy)
 		{
+			foreach(var r in Roofs)
+			{
+				Rectangle boundingRect = r.Rectangle;
+
+				if (boundingRect.Contains(new Point(xx, yy)))
+				{
+					var result = r[xx - r.X, yy - r.Y];
+
+					if (result == 0 || result == 127)
+						continue;
+
+					if (r.Open)
+						return 0;
+				}
+			}
+
 			for (int i = 0; i < Roofs.Count; i++)
 			{
 				Roof r = Roofs[i];
 				Rectangle boundingRect = r.Rectangle;
 
-				if (r.Open)
-					continue;
-
 				if (boundingRect.Contains(new Point(xx, yy)))
 				{
+					var result = r[xx - r.X, yy - r.Y];
+					
+					if (result == 0 || result == 127)
+						continue;
+
 					return r[xx - r.X, yy - r.Y];
 				}
 			}
 
-			return 127;
+			return 0;
 		}
 
 
@@ -756,11 +777,11 @@ namespace ERY.Xle.XleMapTypes
 					tile1 = this[attackPt2.X + dx, attackPt2.Y + dy];
 
 					int t = RoofTile(attackPt.X + dx, attackPt.Y + dy);
-					if (t != 127)
+					if (t != 127 && t != 0)
 						tile = 128;
 
 					t = RoofTile(attackPt2.X + dx, attackPt2.Y + dy);
-					if (t != 127)
+					if (t != 127 && t != 0)
 						tile1 = 128;
 
 
