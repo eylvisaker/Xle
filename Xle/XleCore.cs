@@ -1178,7 +1178,8 @@ namespace ERY.Xle
 			monstRect = new Rectangle(tx, ty, 64, 64);
 			destRect = new Rectangle(px, py, 64, 64);
 
-			g.Monsters.Draw(monstRect, destRect);
+			if (g.Monsters != null)
+				g.Monsters.Draw(monstRect, destRect);
 
 		}
 
