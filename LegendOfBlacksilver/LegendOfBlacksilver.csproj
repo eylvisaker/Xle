@@ -88,6 +88,12 @@
     <None Include="LoB\Maps\BeggarsCove.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="LoB\Maps\Citadel1.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Maps\Citadel2.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="LoB\Maps\ClissoldCreek.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -127,6 +133,7 @@
     <None Include="LoB\Maps\Riverbend.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="LoB\Maps\Thalen-no-beaverton.xmf" />
     <None Include="LoB\Maps\Thalen1.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -146,6 +153,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Support\lob-archives.c64bas" />
+    <None Include="Support\lob-blacksmith.c64bas" />
     <None Include="Support\lob-castle.c64bas" />
     <None Include="Support\lob-citadel-speak.c64bas" />
     <None Include="Support\lob-dungeon-special.c64bas" />
@@ -294,6 +302,9 @@
     <Content Include="LoB\Images\font.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="LoB\Images\LobCitadel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="LoB\Images\LobThalen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -306,6 +317,7 @@
     <Content Include="LoB\Images\title.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="LoB\Maps\Thalen-final.png" />
     <Content Include="Support\Annotations-LOB.txt" />
     <Content Include="Support\Disassemblies-LOB.txt" />
   </ItemGroup>

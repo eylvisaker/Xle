@@ -7,6 +7,8 @@
     <Map ID="11" Name="Bad Axe" File="BadAxe.xmf" Alias="Badaxe" ParentMapID="1" />
     <Map ID="12" Name="Appia" File="Appia.xmf" ParentMapID="1" />
     <Map ID="13" Name="Beaverton" File="Beaverton.xmf" ParentMapID="1" />
+    <Map ID="40" Name="Citadel1" File="Citadel1.xmf" Alias="Cit1" ParentMapID="1" />
+    <Map ID="41" Name="Citadel2" File="Citadel2.xmf" Alias="Cit2" ParentMapID="40" />
   </Maps>
   <Qualities>
     <Quality ID="0" Name="Shoddy" />
