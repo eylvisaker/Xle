@@ -1079,8 +1079,6 @@ namespace ERY.Xle.XleMapTypes
 			if (lastGuardAnim + animTime <= Timing.TotalMilliseconds)
 			{
 				guardAnim++;
-				if (guardAnim > 2)
-					guardAnim = 0;
 
 				lastGuardAnim = Timing.TotalMilliseconds;
 			}
@@ -1096,23 +1094,16 @@ namespace ERY.Xle.XleMapTypes
 
 				if (PointInRoof(guard.X, guard.Y) == -1)
 				{
-					int tx = guardAnim * 32;
-					int ty;
-
-					if (IsAngry)
-						ty = ((int)guard.Facing + 3) * 32;
-					else
-						ty = 7 * 32;
-
-					Rectangle charRect = new Rectangle(tx, ty, 32, 32);
+					var facing = guard.Facing;
+					if (IsAngry == false)
+						facing = Direction.South;
 
 					int rx = px - (centerPoint.X - guard.X) * 16;
 					int ry = py - (centerPoint.Y - guard.Y) * 16;
 
 					if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
 					{
-						Rectangle destRect = new Rectangle(rx, ry, 32, 32);
-						g.Character.Draw(charRect, destRect);
+						XleCore.DrawCharacterSprite(rx, ry, facing, true, guardAnim, false, XleColor.Yellow);
 					}
 				}
 			}

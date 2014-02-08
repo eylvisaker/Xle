@@ -111,7 +111,7 @@ namespace ERY.Xle
 				int oldAnim = animFrame;
 
 				if (animWatch.IsPaused == false)
-					animFrame = (((int)animWatch.TotalMilliseconds) / frameTime) % 3;
+					animFrame = (((int)animWatch.TotalMilliseconds) / frameTime);
 
 				if (oldAnim != animFrame)
 				{
@@ -133,9 +133,6 @@ namespace ERY.Xle
 
 				while (animFrame < 0)
 					animFrame += 3;
-
-				if (animFrame >= 3)
-					animFrame = value % 3;
 
 				animWatch.Reset();
 			}

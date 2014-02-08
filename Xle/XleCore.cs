@@ -829,23 +829,6 @@ namespace ERY.Xle
 
 			map.Draw(player.X, player.Y, player.FaceDirection, mapRect);
 
-
-#if ShowCoordinates
-			// Show coordinates & framerate at top
-			Display.FillRect(0, 0, 160, 16, XleColor.Black);
-			Display.FillRect(256, 0, 128, 16, XleColor.Black);
-			Display.FillRect(400, 0, 128, 16, XleColor.Black);
-			Display.FillRect(544, 0, 96, 16, XleColor.Black);
-
-			WriteText(272, 0, "X: " + player.X.ToString());
-			WriteText(416, 0, "Y: " + player.Y.ToString());
-			WriteText(560, 0, "F: " + player.FaceDirection.ToString()[0].ToString());
-
-			WriteText(0, 0, "FPS: " + ((int)(Display.FramesPerSecond + 0.5)).ToString()
-				+ "." + ((int)(Display.FramesPerSecond * 10) % 10).ToString());
-
-#endif
-
 			for (i = 0; i < menuArray.Length; i++)
 			{
 				WriteText(48, 16 * (i + 1), menuArray[i], menuColor);
@@ -868,7 +851,7 @@ namespace ERY.Xle
 				DrawRafts(mapRect);
 
 				if (player.OnRaft == 0)
-					DrawCharacter(g.AnimFrame, vertLine);
+					DrawCharacter(g.Animating, g.AnimFrame, vertLine);
 			}
 
 			if (PromptToContinue)
@@ -1193,43 +1176,61 @@ namespace ERY.Xle
 		/// <summary>
 		/// Draws the player character.
 		/// </summary>
-		/// <param name="anim"></param>
+		/// <param name="animFrame"></param>
 		/// <param name="vertLine"></param>
-		static void DrawCharacter(int anim, int vertLine)
+		static void DrawCharacter(bool animating, int animFrame, int vertLine)
 		{
 			if (g.invisible)
-				DrawCharacter(anim, vertLine, XleColor.Gray);
+				DrawCharacter(animating, animFrame, vertLine, XleColor.Gray);
 			else if (g.guard)
-				DrawCharacter(anim, vertLine, XleColor.Yellow);
+				DrawCharacter(animating, animFrame, vertLine, XleColor.Yellow);
 			else
-				DrawCharacter(anim, vertLine, XleColor.White);
+				DrawCharacter(animating, animFrame, vertLine, XleColor.White);
 
 		}
-		static void DrawCharacter(int anim, int vertLine, Color clr)
+		static void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
 		{
-			int tx, ty;
 			int px = vertLine + 16;
-			int width = (624 - px) / 16;
 			int py = 144;
+			int width = (624 - px) / 16;
+
+			px += (int)(width / 2) * 16;
+
+			DrawCharacterSprite(px, py, player.FaceDirection, animating, animFrame, true, clr);
+
+			CharRect = new Rectangle(px, py, 32, 32);
+		}
+
+		public static void DrawCharacterSprite(int destx, int desty, Direction facing, bool animating, int animFrame, bool allowPingPong, Color clr)
+		{
+			int tx = 0, ty;
 
 			Rectangle charRect;
 			Rectangle destRect;
 
-			px += (int)(width / 2) * 16;
+			if (allowPingPong && (facing == Direction.North || facing == Direction.South))
+			{
+				animFrame %= 4;
 
-			tx = anim * 32;// +g.newGraphics * 96;
-			ty = ((int)player.FaceDirection - 1) * 32;
+				// ping-pong animation
+				if (animFrame == 3)
+					animFrame = 1;
+			}
+			else
+			{
+				animFrame %= 3;
+			}
+
+			if (animating)
+				tx = (1 + animFrame) * 32;
+
+			ty = ((int)facing - 1) * 32;
 
 			charRect = new Rectangle(tx, ty, 32, 32);
-			destRect = new Rectangle(px, py, 32, 32);
+			destRect = new Rectangle(destx, desty, 32, 32);
 
 			g.Character.Color = clr;
 			g.Character.Draw(charRect, destRect);
-
-			CharRect = destRect;
-
-			// todo: remove this
-			g.Character.Color = XleColor.White;
 		}
 
 		public static Rectangle CharRect { get; private set; }

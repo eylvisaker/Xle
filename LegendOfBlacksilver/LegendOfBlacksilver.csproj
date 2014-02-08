@@ -295,6 +295,7 @@
     </Content>
     <Content Include="LoB\Game.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="LoB\Images\character.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
