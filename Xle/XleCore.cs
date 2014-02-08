@@ -272,7 +272,14 @@ namespace ERY.Xle
 		{
 			if (x == -1)
 			{
-				AgateConsole.WriteLine("Current Position: {0}, {1}", player.X, player.Y);
+				if (Map.IsMultiLevelMap)
+				{
+					AgateConsole.WriteLine("Current Position: {0}, {1}, level: {2}", player.X, player.Y, player.DungeonLevel+1);
+				}
+				else
+				{
+					AgateConsole.WriteLine("Current Position: {0}, {1}", player.X, player.Y);
+				}
 				return;
 			}
 			else if (y == -1)
@@ -299,7 +306,7 @@ namespace ERY.Xle
 
 					player.X = x;
 					player.Y = y;
-					player.DungeonLevel = level;
+					player.DungeonLevel = level - 1;
 				}
 			}
 		}

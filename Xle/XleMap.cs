@@ -147,6 +147,7 @@ namespace ERY.Xle
 
 			retval.MapID = id;
 			retval.ConstructRenderTimeData();
+			retval.CreateExtender();
 
 			return retval;
 		}
@@ -167,6 +168,10 @@ namespace ERY.Xle
 					ser.Serialize(file, map);
 				}
 			}
+		}
+
+		protected virtual void CreateExtender()
+		{
 		}
 
 		#endregion
@@ -1101,39 +1106,6 @@ namespace ERY.Xle
 
 		public virtual void CheckSounds(Player player)
 		{
-		}
-
-		List<Assembly> mAssemblies;
-
-		protected T CreateExtender<T>(string ScriptClassName)
-		{
-			if (mAssemblies == null)
-				CreateAssemblyList();
-
-			Type interfaceType = typeof(T);
-
-			foreach (var ass in mAssemblies)
-			{
-				foreach (var type in ass.GetTypes())
-				{
-					if (type.Name != ScriptClassName)
-						continue;
-
-					if (interfaceType.IsAssignableFrom(type) == false)
-						continue;
-
-					return (T)Activator.CreateInstance(type);
-				}
-			}
-
-			return default(T);
-		}
-
-		private void CreateAssemblyList()
-		{
-			mAssemblies = new List<Assembly>();
-
-			mAssemblies.Add(Assembly.GetExecutingAssembly());
 		}
 
 		public virtual int TerrainWaitTime(Player player)

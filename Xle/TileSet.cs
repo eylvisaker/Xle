@@ -38,7 +38,6 @@ namespace ERY.Xle
 
 			info.Write("Tiles", tiles.Select(x => (int)x).ToArray(), NumericEncoding.Csv);
 		}
-
 		void IXleSerializable.ReadData(XleSerializationInfo info)
 		{
 			int[] tiles = info.ReadInt32Array("Tiles");

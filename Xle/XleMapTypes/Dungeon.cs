@@ -60,9 +60,8 @@ namespace ERY.Xle.XleMapTypes
 
 			if (info.ContainsKey("Treasures"))
 				mTreasures = info.ReadInt32Array("Treasures");
-
-			Extender = CreateExtender<IDungeonExtender>(ScriptClassName);
 		}
+
 		protected override void WriteData(XleSerializationInfo info)
 		{
 			info.Write("Width", mWidth, true);
@@ -71,6 +70,14 @@ namespace ERY.Xle.XleMapTypes
 			info.Write("ScriptClass", ScriptClassName);
 			info.Write("Data", mData, NumericEncoding.Csv);
 			info.Write("Treasures", mTreasures);
+		}
+
+		protected override void CreateExtender()
+		{
+			if (XleCore.Factory == null)
+				Extender = new NullDungeonExtender();
+
+			Extender = XleCore.Factory.CreateMapExtender(this);
 		}
 
 		public override bool IsMultiLevelMap
@@ -202,8 +209,7 @@ namespace ERY.Xle.XleMapTypes
 						g.AddBottom("");
 						g.AddBottom("You climb out of the dungeon.");
 
-						if (Extender != null)
-							Extender.OnPlayerExitDungeon(player);
+						Extender.OnPlayerExitDungeon(player);
 
 						XleCore.wait(1000);
 
@@ -538,6 +544,8 @@ namespace ERY.Xle.XleMapTypes
 		protected override void OnPlayerEnterPosition(Player player, int x, int y)
 		{
 			int val = this[x, y];
+
+			CurrentLevel = player.DungeonLevel;
 
 			if (val >= 0x21 && val <= 0x2a)
 			{

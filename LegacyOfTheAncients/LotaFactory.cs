@@ -1,6 +1,8 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using ERY.Xle.LotA.TitleScreen;
+using ERY.Xle.XleMapTypes;
+using ERY.Xle.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +52,18 @@ namespace ERY.Xle.LotA
 		public override IXleTitleScreen CreateTitleScreen()
 		{
 			return new LotaTitleScreen();
+		}
+
+		public override IDungeonExtender CreateMapExtender(Dungeon theMap) 
+		{
+			switch (theMap.MapID)
+			{
+				case 71: return new PirateExtender();
+				case 72: return new ArmakExtender();
+				case 73: return new FourJewelsExtender();
+			}
+
+			return base.CreateMapExtender(theMap);
 		}
 	}
 }

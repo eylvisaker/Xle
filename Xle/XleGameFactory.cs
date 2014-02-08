@@ -1,4 +1,6 @@
 ﻿using AgateLib.DisplayLib;
+using ERY.Xle.XleMapTypes;
+using ERY.Xle.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +36,10 @@ namespace ERY.Xle
 		public Surface DungeonBlueSidePassage { get; protected set; }
 		public Surface DungeonBlueExtras { get; protected set; }
 
+
+		public virtual IDungeonExtender CreateMapExtender(Dungeon theMap)
+		{
+			return new NullDungeonExtender();
+		}
 	}
 }

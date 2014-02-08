@@ -142,6 +142,7 @@
     <Compile Include="TileSet.cs" />
     <Compile Include="XleGameFactory.cs" />
     <Compile Include="XleMapTypes\Extenders\IDungeonExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\NullDungeonExtender.cs" />
     <Compile Include="XleMapTypes\Map3DExtraInfo.cs" />
     <Compile Include="EquipmentList.cs" />
     <Compile Include="Global.cs" />
