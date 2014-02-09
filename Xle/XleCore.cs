@@ -48,7 +48,16 @@ namespace ERY.Xle
 			}
 		}
 
-		public static XleGameFactory Factory { get { return inst.mFactory; } }
+		public static XleGameFactory Factory
+		{
+			get
+			{
+				if (inst == null)
+					return null;
+
+				return inst.mFactory;
+			}
+		}
 
 		#endregion
 
@@ -355,7 +364,7 @@ namespace ERY.Xle
 				else if (map.CanPlayerStepInto(player, targetX, targetY - 2)) 
 					targetY -= 2;
 
-				player.SetMap(map.MapID, targetX, targetY);
+				ChangeMap(player, map.MapID, -1, targetX, targetY);
 			}
 		}
 
@@ -727,7 +736,6 @@ namespace ERY.Xle
 
 		void player_MapChanged(object sender, EventArgs e)
 		{
-			Map = LoadMap(player.Map);
 		}
 
 		public static void Redraw()
@@ -2178,6 +2186,81 @@ namespace ERY.Xle
 				tileset += ".png";
 
 			Tiles = new Surface(tileset);
+		}
+
+		public static void ChangeMap(Player player, int mMapID, int targetEntryPoint, int targetX, int targetY)
+		{
+			if (XleCore.Map == null)
+			{
+				player.Map = mMapID;
+				return;
+			}
+
+			if (XleCore.Map is XleMapTypes.Outside)
+			{
+				player.SetReturnLocation(player.Map, player.X, player.Y, Direction.South);
+			}
+
+			var saveMap = map;
+
+			try
+			{
+				Map = LoadMap(mMapID);
+				player.Map = mMapID;
+
+				g.ClearBottom();
+
+				if (targetEntryPoint < 0 || targetEntryPoint >= Map.EntryPoints.Count)
+				{
+					player.X = targetX;
+					player.Y = targetY;
+
+					if (targetEntryPoint >= 0)
+					{
+						g.AddBottom("Failed to find entry point " + targetEntryPoint.ToString(), XleColor.Yellow);
+						g.AddBottom();
+					}
+				}
+				else
+				{
+					var ep = map.EntryPoints[targetEntryPoint];
+
+					player.X = ep.Location.X;
+					player.Y = ep.Location.Y;
+					player.DungeonLevel = ep.DungeonLevel;
+					player.FaceDirection = ep.Facing;
+
+					if (player.FaceDirection == Direction.None)
+						player.FaceDirection = Direction.South;
+				}
+
+				Map.OnLoad(player);
+
+			}
+			catch (Exception e)
+			{
+				player.Map = saveMap.MapID;
+				map = saveMap;
+
+				throw e;
+			}
+
+			CheckLoan(player);
+		}
+
+		static void CheckLoan(Player player)
+		{
+			if (XleCore.Map.HasEventType(typeof(StoreLending)))
+			{
+				if (player.loan > 0 && player.dueDate - player.TimeDays <= 0)
+				{
+					g.AddBottom("This is your friendly lender.");
+					g.AddBottom("You owe me money!");
+
+					XleCore.wait(1000);
+
+				}
+			}
 		}
 	}
 }

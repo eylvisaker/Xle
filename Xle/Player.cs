@@ -237,7 +237,7 @@ namespace ERY.Xle
 		int dungeon;
 		int hp;
 		int level;
-		int returnX, returnY, returnMap;
+		public int returnX, returnY, returnMap;
 		Direction returnFacing;
 		int x, y;
 		int dungeonLevel;
@@ -903,53 +903,23 @@ namespace ERY.Xle
 		/// <summary>
 		/// Gets the current map
 		/// </summary>
+		[Obsolete("Is this still used???")]
 		public int Map
 		{
 			get
 			{
 				return map;
 			}
+			set
+			{
+				map = value;
+			}
 		}
 
+		[Obsolete]
 		public void SetMap(int newMap, int newX, int newY)
 		{
-			if (XleCore.Map == null)
-			{
-				map = newMap;
-				return;
-			}
-
-			if (XleCore.Map is XleMapTypes.Outside)
-			{
-				returnMap = map;
-				returnX = x;
-				returnY = y;
-				returnFacing = Direction.South;
-			}
-
-			lastMap = map;
-
-			map = newMap;
-
-			if (MapChanged != null)
-			{
-				try
-				{
-					MapChanged(this, EventArgs.Empty);
-
-					x = newX;
-					y = newY;
-
-					XleCore.Map.OnLoad(this);
-
-					g.ClearBottom();
-				}
-				catch (Exception e)
-				{
-					map = lastMap;
-					throw e;
-				}
-			}
+			XleCore.ChangeMap(this, newMap, -1, newX, newY);
 		}
 
 		public event EventHandler MapChanged;

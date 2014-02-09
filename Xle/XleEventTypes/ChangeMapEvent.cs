@@ -48,6 +48,7 @@ namespace ERY.Xle.XleEventTypes
 			set { mLocation = value; }
 		}
 
+		public int TargetEntryPoint { get; set; }
 
 		public int TargetX
 		{
@@ -75,16 +76,22 @@ namespace ERY.Xle.XleEventTypes
 
 			info.Write("MapID", MapID);
 			info.Write("AskUser", mAsk);
+			info.Write("TargetEntryPoint", TargetEntryPoint);
 			info.Write("TargetX", TargetX);
-			info.Write("TargetY", TargetY);
+			info.Write("TargetY", TargetY); 
 			info.Write("CommandText", mCommandText);
 		}
 		protected override void ReadData(XleSerializationInfo info)
 		{
 			MapID = info.ReadInt32("MapID");
 			mAsk = info.ReadBoolean("AskUser");
-			TargetX = info.ReadInt32("TargetX");
-			TargetY = info.ReadInt32("TargetY");
+			if (info.ContainsKey("TargetEntryPoint"))
+				TargetEntryPoint = info.ReadInt32("TargetEntryPoint");
+			if (info.ContainsKey("TargetX"))
+			{
+				TargetX = info.ReadInt32("TargetX");
+				TargetY = info.ReadInt32("TargetY");
+			}
 			mCommandText = info.ReadString("CommandText", "");
 		}
 
@@ -151,9 +158,8 @@ namespace ERY.Xle.XleEventTypes
 			{
 				try
 				{
-					player.SetMap(mMapID, mLocation.X, this.mLocation.Y);
-
-					CheckLoan(player);
+					XleCore.ChangeMap(player, mMapID, TargetEntryPoint, TargetX, TargetY);
+					
 				}
 				catch (Exception e)
 				{
@@ -177,20 +183,6 @@ namespace ERY.Xle.XleEventTypes
 			return true;
 		}
 
-		protected static void CheckLoan(Player player)
-		{
-			if (XleCore.Map.HasEventType(typeof(StoreLending)))
-			{
-				if (player.loan > 0 && player.dueDate - player.TimeDays <= 0)
-				{
-					g.AddBottom("This is your friendly lender.");
-					g.AddBottom("You owe me money!");
-
-					XleCore.wait(1000);
-
-				}
-			}
-		}
 	}
 
 }

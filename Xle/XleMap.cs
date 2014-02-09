@@ -9,6 +9,7 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle
 {
@@ -19,6 +20,7 @@ namespace ERY.Xle
 		string mMapName;                    // map name
 
 		XleEventList mEvents = new XleEventList();
+		List<EntryPoint> mEntryPoints = new List<EntryPoint>();
 
 		// map number
 		int mMapID;
@@ -49,12 +51,18 @@ namespace ERY.Xle
 
 		void IXleSerializable.WriteData(XleSerializationInfo info)
 		{
+			if (EntryPoints == null)
+				EntryPoints = new List<EntryPoint>();
+			while (EntryPoints.Count > 0 && EntryPoints.Last().Location == Point.Empty)
+				EntryPoints.RemoveAt(EntryPoints.Count - 1);
+
 			info.Write("MapName", mMapName);
 			info.Write("MapID", mMapID);
 			info.Write("TileSet", mTileSet);
 			info.Write("TileImage", mTileImage);
 			info.Write("DefaultTile", mDefaultTile);
 			info.Write("Events", mEvents.ToArray());
+			info.Write("EntryPoints", EntryPoints);
 
 			if (this is IHasRoofs)
 				info.Write("Roofs", ((IHasRoofs)this).Roofs);
@@ -76,6 +84,10 @@ namespace ERY.Xle
 			mMapName = info.ReadString("MapName");
 			mMapID = info.ReadInt32("MapID");
 
+			if (info.ContainsKey("EntryPoints"))
+			{
+				EntryPoints = info.ReadList<EntryPoint>("EntryPoints");
+			}
 			if (info.ContainsKey("Tileset"))
 			{
 				mTileImage = info.ReadString("Tileset");
@@ -222,6 +234,7 @@ namespace ERY.Xle
 				throw new NotImplementedException("SetLevels is not implemented.");
 		}
 
+		public List<EntryPoint> EntryPoints { get; set; }
 
 		[Browsable(false)]
 		public string MapName

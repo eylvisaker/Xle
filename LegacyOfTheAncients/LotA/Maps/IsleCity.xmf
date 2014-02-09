@@ -89,12 +89,12 @@
       <Height>5</Height>
       <MapID>1</MapID>
       <AskUser>False</AskUser>
-      <TargetX>172</TargetX>
-      <TargetY>92</TargetY>
+      <TargetEntryPoint>0</TargetEntryPoint>
       <CommandText>
       </CommandText>
     </Item>
   </Events>
+  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint" />
   <Roofs array="true" type="ERY.Xle.Roof">
     <Item>
       <X>72</X>

@@ -67,6 +67,7 @@
       <AllowedItemTypes array="true" encoding="Base64">CQAAAA4AAAATAAAAGAAAAB0AAAAiAAAAJgAAACcAAAArAAAALAAAAA==</AllowedItemTypes>
     </Item>
   </Events>
+  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint" />
   <Roofs array="true" type="ERY.Xle.Roof">
     <Item>
       <X>59</X>

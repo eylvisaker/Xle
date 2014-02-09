@@ -100,6 +100,7 @@
       <CostFactor>0.943</CostFactor>
     </Item>
   </Events>
+  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint" />
   <Roofs array="true" type="ERY.Xle.Roof">
     <Item>
       <X>3</X>

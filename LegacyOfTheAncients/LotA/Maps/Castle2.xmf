@@ -12,12 +12,14 @@
       <Height>2</Height>
       <MapID>51</MapID>
       <AskUser>False</AskUser>
+      <TargetEntryPoint>1</TargetEntryPoint>
       <TargetX>45</TargetX>
       <TargetY>4</TargetY>
       <CommandText>
       </CommandText>
     </Item>
   </Events>
+  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint" />
   <Roofs array="true" type="ERY.Xle.Roof" />
   <Guards array="true" type="ERY.Xle.Guard">
     <Item>

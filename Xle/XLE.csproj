@@ -26,7 +26,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\out\</OutputPath>
+    <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -40,7 +40,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>.</OutputPath>
+    <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -94,7 +94,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\out\</OutputPath>
+    <OutputPath>..\bin\x86\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <FileAlignment>4096</FileAlignment>
@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="ItemContainer.cs" />
     <Compile Include="IXleTitleScreen.cs" />
+    <Compile Include="Maps\EntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="XleMapTypes\MuseumDisplays\Weaponry.cs" />
     <Compile Include="XleMapTypes\MuseumDisplays\Welcome.cs" />
     <Compile Include="XleMapTypes\Outside.cs" />
+    <Compile Include="XleMapTypes\Temple.cs" />
     <Compile Include="XleMapTypes\Town.cs" />
     <Compile Include="MagicSpell.cs" />
   </ItemGroup>

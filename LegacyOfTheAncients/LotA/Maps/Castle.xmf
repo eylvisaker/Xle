@@ -12,6 +12,7 @@
       <Height>1</Height>
       <MapID>1</MapID>
       <AskUser>False</AskUser>
+      <TargetEntryPoint>0</TargetEntryPoint>
       <TargetX>72</TargetX>
       <TargetY>72</TargetY>
       <CommandText>
@@ -148,6 +149,7 @@
       <Height>1</Height>
       <MapID>52</MapID>
       <AskUser>False</AskUser>
+      <TargetEntryPoint>0</TargetEntryPoint>
       <TargetX>37</TargetX>
       <TargetY>6</TargetY>
       <CommandText>
@@ -316,6 +318,7 @@
       <Height>7</Height>
     </Item>
   </Events>
+  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint" />
   <Roofs array="true" type="ERY.Xle.Roof">
     <Item>
       <X>68</X>

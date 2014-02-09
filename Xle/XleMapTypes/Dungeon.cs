@@ -75,9 +75,13 @@ namespace ERY.Xle.XleMapTypes
 		protected override void CreateExtender()
 		{
 			if (XleCore.Factory == null)
+			{
 				Extender = new NullDungeonExtender();
-
-			Extender = XleCore.Factory.CreateMapExtender(this);
+			}
+			else
+			{
+				Extender = XleCore.Factory.CreateMapExtender(this);
+			}
 		}
 
 		public override bool IsMultiLevelMap
