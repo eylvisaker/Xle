@@ -22,6 +22,10 @@ namespace ERY.Xle
 			}
 		}
 
+		public bool ContainsKey(int value)
+		{
+			return mTiles.ContainsKey(value);
+		}
 
 		void IXleSerializable.WriteData(XleSerializationInfo info)
 		{
