@@ -1,5 +1,6 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Geometry;
+using ERY.Xle.LoB.MapExtenders;
 using ERY.Xle.LoB.TitleScreen;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,18 @@ namespace ERY.Xle.LoB
 		public override IXleTitleScreen CreateTitleScreen()
 		{
 			return new LobTitleScreen();
+		}
+
+		public override XleMapTypes.Extenders.IDungeonExtender CreateMapExtender(XleMapTypes.Dungeon theMap)
+		{
+			return base.CreateMapExtender(theMap);
+		}
+		public override XleMapTypes.Extenders.ICastleExtender CreateMapExtender(XleMapTypes.Castle castle)
+		{
+			if (castle.MapName.ToLowerInvariant() == "citadel1")
+				return new CitadelGround();
+
+			return base.CreateMapExtender(castle);
 		}
 	}
 }

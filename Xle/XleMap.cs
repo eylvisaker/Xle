@@ -10,6 +10,7 @@ using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.Maps;
+using ERY.Xle.XleMapTypes.Extenders;
 
 namespace ERY.Xle
 {
@@ -57,6 +58,8 @@ namespace ERY.Xle
 				EntryPoints.RemoveAt(EntryPoints.Count - 1);
 
 			info.Write("MapName", mMapName);
+			info.Write("ExtenderName", ExtenderName);
+
 			info.Write("MapID", mMapID);
 			info.Write("TileSet", mTileSet);
 			info.Write("TileImage", mTileImage);
@@ -83,6 +86,8 @@ namespace ERY.Xle
 		{
 			mMapName = info.ReadString("MapName");
 			mMapID = info.ReadInt32("MapID");
+
+			ExtenderName = info.ReadString("ExtenderName", "");
 
 			if (info.ContainsKey("EntryPoints"))
 			{
@@ -486,6 +491,9 @@ namespace ERY.Xle
 
 		#region --- Drawing ---
 
+		protected IMap2DExtender mBaseExtender;
+		protected Point centerPoint;
+
 		public void Draw(int x, int y, Direction faceDirection, Rectangle inRect)
 		{
 			DrawImpl(x, y, faceDirection, inRect);
@@ -504,6 +512,8 @@ namespace ERY.Xle
 			//Point mDrawMonst = new Point(0, 0);
 			width = width / 2;
 			height = height / 2;
+
+			centerPoint = new Point(x, y);
 
 			wAdjust = 1;
 			hAdjust = 1;
@@ -1156,6 +1166,8 @@ namespace ERY.Xle
 
 			throw new ArgumentException();
 		}
+
+		public string ExtenderName { get; set; }
 	}
 
 	public class Roof : IXleSerializable

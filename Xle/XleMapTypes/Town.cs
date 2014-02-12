@@ -8,6 +8,7 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
+using ERY.Xle.XleMapTypes.Extenders;
 
 
 namespace ERY.Xle.XleMapTypes
@@ -23,7 +24,6 @@ namespace ERY.Xle.XleMapTypes
 		List<Guard> mGuards = new List<Guard>();
 
 		List<int> mMail = new List<int>();				// towns to carry mail to
-
 
 
 		#region --- Construction and Serialization ---
@@ -629,7 +629,12 @@ namespace ERY.Xle.XleMapTypes
 			{
 				if (yy < 0 || yy >= Height || xx < 0 || xx >= Width)
 				{
-					return mOutsideTile;
+					var outsideTile = mBaseExtender.GetOutsideTile(centerPoint, xx, yy);
+
+					if (outsideTile == -1)
+						return mOutsideTile;
+					else
+						return outsideTile;
 				}
 				else
 				{

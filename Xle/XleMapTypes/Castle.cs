@@ -8,6 +8,7 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
+using ERY.Xle.XleMapTypes.Extenders;
 
 
 
@@ -28,9 +29,26 @@ namespace ERY.Xle.XleMapTypes
 		double lastAnim;
 		int cycles;
 
+		protected override void CreateExtender()
+		{
+			if (XleCore.Factory == null)
+			{
+				Extender = new NullCastleExtender();
+			}
+			else
+			{
+				Extender = XleCore.Factory.CreateMapExtender(this);
+			}
+
+			mBaseExtender = Extender;
+		}
+
 		protected override void AnimateTiles(Rectangle rectangle)
 		{
 			base.AnimateTiles(rectangle);
+
+			if (TileSet != null)
+				return;
 
 			for (int j = rectangle.Top; j < rectangle.Bottom; j++)
 			{
@@ -246,5 +264,7 @@ namespace ERY.Xle.XleMapTypes
 
 			return retval.ToArray();
 		}
+
+		public ICastleExtender Extender { get; set; }
 	}
 }

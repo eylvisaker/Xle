@@ -1,4 +1,5 @@
 ﻿using AgateLib.Serialization.Xle;
+using ERY.Xle.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace ERY.Xle
 	{
 		Dictionary<int, TileInfo> mTiles = new Dictionary<int, TileInfo>();
 
+		public TileSet()
+		{
+			TileGroups = new List<TileGroup>();
+		}
 		public TileInfo this[int index]
 		{
 			get { return mTiles[index]; }
@@ -21,6 +26,8 @@ namespace ERY.Xle
 				mTiles[index] = value;
 			}
 		}
+
+		public List<TileGroup> TileGroups { get; set; }
 
 		public bool ContainsKey(int value)
 		{
@@ -41,6 +48,7 @@ namespace ERY.Xle
 			}
 
 			info.Write("Tiles", tiles.Select(x => (int)x).ToArray(), NumericEncoding.Csv);
+			info.Write("TileGroups", TileGroups);
 		}
 		void IXleSerializable.ReadData(XleSerializationInfo info)
 		{
@@ -50,6 +58,9 @@ namespace ERY.Xle
 			{
 				mTiles[i] = (TileInfo)tiles[i];
 			}
+
+			if (info.ContainsKey("TileGroups"))
+				TileGroups = info.ReadList<TileGroup>("TileGroups");
 		}
 	}
 }

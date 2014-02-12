@@ -135,6 +135,7 @@
     <Compile Include="ItemContainer.cs" />
     <Compile Include="IXleTitleScreen.cs" />
     <Compile Include="Maps\EntryPoint.cs" />
+    <Compile Include="Maps\TileGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands.cs" />
@@ -142,8 +143,12 @@
     <Compile Include="TileInfo.cs" />
     <Compile Include="TileSet.cs" />
     <Compile Include="XleGameFactory.cs" />
+    <Compile Include="XleMapTypes\Extenders\ICastleExtender.cs" />
     <Compile Include="XleMapTypes\Extenders\IDungeonExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\IMap2DExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\NullCastleExtender.cs" />
     <Compile Include="XleMapTypes\Extenders\NullDungeonExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\NullMap2DExtender.cs" />
     <Compile Include="XleMapTypes\Map3DExtraInfo.cs" />
     <Compile Include="EquipmentList.cs" />
     <Compile Include="Global.cs" />

@@ -41,5 +41,10 @@ namespace ERY.Xle
 		{
 			return new NullDungeonExtender();
 		}
+
+		public virtual ICastleExtender CreateMapExtender(Castle castle)
+		{
+			return new NullCastleExtender();
+		}
 	}
 }
