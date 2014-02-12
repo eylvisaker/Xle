@@ -40,8 +40,10 @@ namespace ERY.Xle.LoB
 		}
 		public override XleMapTypes.Extenders.ICastleExtender CreateMapExtender(XleMapTypes.Castle castle)
 		{
-			if (castle.MapName.ToLowerInvariant() == "citadel1")
+			if (castle.ExtenderName.ToLowerInvariant() == "citadel1")
 				return new CitadelGround();
+			if (castle.ExtenderName.ToLowerInvariant() == "citadel2")
+				return new CitadelUpper();
 
 			return base.CreateMapExtender(castle);
 		}

@@ -29,7 +29,9 @@ namespace ERY.Xle.XleMapTypes
 		#region --- Construction and Serialization ---
 
 		public Town()
-		{ }
+		{
+			mBaseExtender = new NullMap2DExtender();
+		}
 
 		protected override void WriteData(XleSerializationInfo info)
 		{

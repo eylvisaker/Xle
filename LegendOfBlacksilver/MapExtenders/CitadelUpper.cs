@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders
 {
-	class CitadelGround : NullCastleExtender
+	class CitadelUpper  : NullCastleExtender
 	{
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
-			if (playerPoint.X >= 83 && playerPoint.Y >= 65)
-				return 33;
-			else
-				return 23;
+			return 71;
 		}
 	}
 }

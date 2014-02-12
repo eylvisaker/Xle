@@ -17,7 +17,19 @@ namespace ERY.Xle
 		}
 		public TileInfo this[int index]
 		{
-			get { return mTiles[index]; }
+			get
+			{
+				if (mTiles.ContainsKey(index) == false)
+				{
+					SoundMan.PlaySound(LotaSound.Bad);
+					g.AddBottom("Tileset does not contain " + index.ToString());
+
+					System.Diagnostics.Debug.Print("Tileset does not contain tile " + index.ToString());
+					return TileInfo.Normal;
+				}
+
+				return mTiles[index];
+			}
 			set
 			{
 				if (index > 5000) throw new ArgumentOutOfRangeException();
