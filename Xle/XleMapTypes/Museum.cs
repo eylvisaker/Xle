@@ -154,15 +154,14 @@ namespace ERY.Xle.XleMapTypes
 				return 0.5;
 			}
 		}
-		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
+
+		protected override Extenders.IMapExtender CreateExtender()
 		{
-			fontColor = XleColor.White;
+			if (XleCore.Factory == null)
+				return base.CreateExtender();
 
-			boxColor = XleColor.Gray;
-			innerColor = XleColor.Yellow;
-			vertLine = 15 * 16;
+			return XleCore.Factory.CreateMapExtender(this);
 		}
-
 		public override void OnLoad(Player player)
 		{
 			CheckExhibitStatus(player);

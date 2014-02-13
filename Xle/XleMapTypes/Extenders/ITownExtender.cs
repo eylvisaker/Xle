@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleMapTypes.Extenders
 {
-	public interface ICastleExtender : IMapExtender 
+	public interface ITownExtender : IMapExtender
 	{
 	}
 }

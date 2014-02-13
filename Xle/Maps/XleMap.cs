@@ -33,10 +33,13 @@ namespace ERY.Xle
 
 		TileSet mTileSet;
 
+		protected IMapExtender mBaseExtender;
+
 		#region --- Construction and Seralization ---
 
 		public XleMap()
 		{
+			mBaseExtender = new NullMapExtender();
 		}
 
 		/// <summary>
@@ -164,7 +167,7 @@ namespace ERY.Xle
 
 			retval.MapID = id;
 			retval.ConstructRenderTimeData();
-			retval.CreateExtender();
+			retval.mBaseExtender = retval.CreateExtender();
 
 			return retval;
 		}
@@ -187,8 +190,9 @@ namespace ERY.Xle
 			}
 		}
 
-		protected virtual void CreateExtender()
+		protected virtual IMapExtender CreateExtender()
 		{
+			return new NullMapExtender();
 		}
 
 		#endregion
@@ -259,7 +263,7 @@ namespace ERY.Xle
 			get { return mTileImage; }
 			set { mTileImage = value; }
 		}
-		
+
 		public virtual IEnumerable<string> AvailableTileImages
 		{
 			get
@@ -491,7 +495,6 @@ namespace ERY.Xle
 
 		#region --- Drawing ---
 
-		protected IMap2DExtender mBaseExtender;
 		protected Point centerPoint;
 
 		public void Draw(int x, int y, Direction faceDirection, Rectangle inRect)
@@ -509,9 +512,6 @@ namespace ERY.Xle
 			int wAdjust = 0;
 			int hAdjust = 0;
 			int tile;
-			//Point mDrawMonst = new Point(0, 0);
-			width = width / 2;
-			height = height / 2;
 
 			centerPoint = new Point(x, y);
 
@@ -521,12 +521,15 @@ namespace ERY.Xle
 			int xx = initialxx;
 			int yy = 16;
 
-			Rectangle tileRect = new Rectangle(x - width, y - height, width * 2 + wAdjust, height * 2 + hAdjust);
+			int startx = x - 11;
+			int starty = y - 7;
+
+			Rectangle tileRect = new Rectangle(startx, starty, width, height);
 			AnimateTiles(tileRect);
 
-			for (j = y - height; j < y + height + hAdjust; j++)
+			for (j = starty; j < starty + height; j++)
 			{
-				for (i = x - width; i < x + width + wAdjust; i++)
+				for (i = startx; i < startx + width; i++)
 				{
 					tile = DrawTile(i, j);
 
@@ -544,7 +547,10 @@ namespace ERY.Xle
 		{
 		}
 
-		public abstract void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine);
+		public void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
+		{
+			mBaseExtender.GetBoxColors(out boxColor, out innerColor, out fontColor, out vertLine);
+		}
 
 		#endregion
 

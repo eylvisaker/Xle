@@ -72,7 +72,7 @@ namespace ERY.Xle.XleMapTypes
 			info.Write("Treasures", mTreasures);
 		}
 
-		protected override void CreateExtender()
+		protected override IMapExtender CreateExtender()
 		{
 			if (XleCore.Factory == null)
 			{
@@ -82,6 +82,8 @@ namespace ERY.Xle.XleMapTypes
 			{
 				Extender = XleCore.Factory.CreateMapExtender(this);
 			}
+
+			return Extender;
 		}
 
 		public override bool IsMultiLevelMap
@@ -316,17 +318,6 @@ namespace ERY.Xle.XleMapTypes
 		}
 
 		#endregion
-
-		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
-		{
-			fontColor = XleColor.White;
-
-			boxColor = XleColor.Gray;
-			innerColor = XleColor.LightGreen;
-			fontColor = XleColor.Cyan;
-			vertLine = 15 * 16;
-
-		}
 
 		public override bool PlayerFight(Player player)
 		{

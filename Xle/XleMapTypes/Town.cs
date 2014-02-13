@@ -30,7 +30,6 @@ namespace ERY.Xle.XleMapTypes
 
 		public Town()
 		{
-			mBaseExtender = new NullMap2DExtender();
 		}
 
 		protected override void WriteData(XleSerializationInfo info)
@@ -1092,8 +1091,10 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected void DrawGuards(Point centerPoint, Rectangle inRect)
 		{
-			int px = inRect.Left + ((inRect.Width / 16) / 2) * 16;
-			int py = inRect.Top + ((inRect.Height / 16) / 2) * 16;
+			Point topLeftMapPt = new Point(centerPoint.X - 11, centerPoint.Y - 7);
+
+			int px = inRect.Left;
+			int py = inRect.Top;
 
 			for (int i = 0; i < Guards.Count; i++)
 			{
@@ -1105,8 +1106,8 @@ namespace ERY.Xle.XleMapTypes
 					if (IsAngry == false)
 						facing = Direction.South;
 
-					int rx = px - (centerPoint.X - guard.X) * 16;
-					int ry = py - (centerPoint.Y - guard.Y) * 16;
+					int rx = px + (guard.X - topLeftMapPt.X) * 16;
+					int ry = py + (guard.Y - topLeftMapPt.Y) * 16;
 
 					if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
 					{
@@ -1146,15 +1147,13 @@ namespace ERY.Xle.XleMapTypes
 			return true;
 		}
 
-		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
+		protected override IMapExtender CreateExtender()
 		{
-			fontColor = XleColor.White;
+			if (XleCore.Factory == null)
+				return base.CreateExtender();
 
-			boxColor = XleColor.Orange;
-			innerColor = XleColor.Yellow;
-			vertLine = 13 * 16;
+			return XleCore.Factory.CreateMapExtender(this);
 		}
-
 
 		#region IHasGuards Members
 

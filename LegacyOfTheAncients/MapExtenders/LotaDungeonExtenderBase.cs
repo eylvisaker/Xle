@@ -54,5 +54,21 @@ namespace ERY.Xle.XleMapTypes.Extenders
 
 		}
 
+
+		public int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+		{
+			return 0;
+		}
+
+
+
+
+		public void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
+		{
+			boxColor = XleColor.Gray;
+			innerColor = XleColor.LightGreen;
+			fontColor = XleColor.Cyan;
+			vertLine = 15 * 16;
+		}
 	}
 }

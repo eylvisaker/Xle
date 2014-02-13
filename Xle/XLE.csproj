@@ -145,10 +145,16 @@
     <Compile Include="XleGameFactory.cs" />
     <Compile Include="XleMapTypes\Extenders\ICastleExtender.cs" />
     <Compile Include="XleMapTypes\Extenders\IDungeonExtender.cs" />
-    <Compile Include="XleMapTypes\Extenders\IMap2DExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\IMapExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\IMuseumExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\IOutsideExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\ITownExtender.cs" />
     <Compile Include="XleMapTypes\Extenders\NullCastleExtender.cs" />
     <Compile Include="XleMapTypes\Extenders\NullDungeonExtender.cs" />
-    <Compile Include="XleMapTypes\Extenders\NullMap2DExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\NullMapExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\NullMuseumExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\NullOutsideExtender.cs" />
+    <Compile Include="XleMapTypes\Extenders\NullTownExtender.cs" />
     <Compile Include="XleMapTypes\Map3DExtraInfo.cs" />
     <Compile Include="EquipmentList.cs" />
     <Compile Include="Global.cs" />
@@ -169,7 +175,7 @@
     <Compile Include="XleColor.cs" />
     <Compile Include="XleCore.cs" />
     <Compile Include="XleBaseTypeFactory.cs" />
-    <Compile Include="XleMap.cs" />
+    <Compile Include="Maps\XleMap.cs" />
     <Compile Include="MapList.cs" />
     <Compile Include="MenuItemList.cs" />
     <Compile Include="Monster.cs" />

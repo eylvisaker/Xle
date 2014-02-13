@@ -65,6 +65,7 @@
     <Compile Include="MapExtenders\FourJewelsExtender.cs" />
     <Compile Include="MapExtenders\LotaDungeonExtenderBase.cs" />
     <Compile Include="MapExtenders\PirateExtender.cs" />
+    <Compile Include="MapExtenders\TownExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TitleScreen\LotaTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

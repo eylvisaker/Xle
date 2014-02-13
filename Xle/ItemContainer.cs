@@ -24,12 +24,12 @@ namespace ERY.Xle
 			set { mItems[(int)index] = value; }
 		}
 
-		internal void ClearStoryItems()
+		public void ClearStoryItems()
 		{
 			Array.Clear(mItems, 4, 5);
 			Array.Clear(mItems, 10, 7);
 		}
-		internal void ClearCoins()
+		public  void ClearCoins()
 		{
 			Array.Clear(mItems, 17, 7);
 		}

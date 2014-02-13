@@ -36,6 +36,10 @@ namespace ERY.Xle
 		public Surface DungeonBlueSidePassage { get; protected set; }
 		public Surface DungeonBlueExtras { get; protected set; }
 
+		public virtual void CheatLevel(Player player, int level)
+		{
+			throw new NotImplementedException();
+		}
 
 		public virtual IDungeonExtender CreateMapExtender(Dungeon theMap)
 		{
@@ -45,6 +49,21 @@ namespace ERY.Xle
 		public virtual ICastleExtender CreateMapExtender(Castle castle)
 		{
 			return new NullCastleExtender();
+		}
+
+		public virtual ITownExtender CreateMapExtender(Town town)
+		{
+			return new NullTownExtender();
+		}
+
+		public virtual IMapExtender CreateMapExtender(Outside outside)
+		{
+			return new NullOutsideExtender();
+		}
+
+		public virtual IMapExtender CreateMapExtender(Museum museum)
+		{
+			return new NullMuseumExtender();
 		}
 	}
 }

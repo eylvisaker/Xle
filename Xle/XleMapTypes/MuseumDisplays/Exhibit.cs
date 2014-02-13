@@ -6,7 +6,7 @@ using AgateLib.Geometry;
 
 namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
-	enum Coin
+	public enum Coin
 	{
 		None,
 		Jade,
@@ -17,7 +17,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		Turquoise,
 		Diamond,
 	}
-	enum ExhibitIdentifier
+	public enum ExhibitIdentifier
 	{
 		Information,
 		Welcome,

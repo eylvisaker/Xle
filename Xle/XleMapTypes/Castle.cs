@@ -29,7 +29,7 @@ namespace ERY.Xle.XleMapTypes
 		double lastAnim;
 		int cycles;
 
-		protected override void CreateExtender()
+		protected override IMapExtender CreateExtender()
 		{
 			if (XleCore.Factory == null)
 			{
@@ -40,7 +40,7 @@ namespace ERY.Xle.XleMapTypes
 				Extender = XleCore.Factory.CreateMapExtender(this);
 			}
 
-			mBaseExtender = Extender;
+			return Extender;
 		}
 
 		protected override void AnimateTiles(Rectangle rectangle)

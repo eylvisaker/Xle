@@ -48,7 +48,7 @@ namespace ERY.Xle
 
 		#endregion
 
-		internal void Reset()
+		public void Reset()
 		{
 			for (int i = 0; i < 5; i++)
 			{

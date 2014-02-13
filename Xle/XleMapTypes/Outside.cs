@@ -1457,15 +1457,12 @@ namespace ERY.Xle.XleMapTypes
 			return retval.ToArray();
 		}
 
-		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
+		protected override Extenders.IMapExtender CreateExtender()
 		{
-			fontColor = XleColor.White;
+			if (XleCore.Factory == null)
+				return base.CreateExtender();
 
-
-			boxColor = XleColor.Brown;
-			innerColor = XleColor.Yellow;
-			vertLine = 15 * 16;
-
+			return XleCore.Factory.CreateMapExtender(this);
 		}
 
 		public override bool CanPlayerStepInto(Player player, int xx, int yy)

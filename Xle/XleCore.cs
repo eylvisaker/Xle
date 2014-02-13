@@ -144,6 +144,8 @@ namespace ERY.Xle
 			AgateConsole.Commands.Add("level", new Action<int>(CheatLevel));
 			AgateConsole.Commands.Add("goto", new Action<string>(CheatGoto));
 			AgateConsole.Commands.Add("move", new Action<int, int, int>(CheatMove));
+			AgateConsole.Commands.Add("godmode", new Action(CheatGod));
+
 		}
 
 		string CommandProcessor_DescribeCommand(string command)
@@ -195,87 +197,9 @@ namespace ERY.Xle
 		[Description("Sets the players level. Gives items and sets story variables to be consistent with the level chosen. Does not affect weapons or armor.")]
 		public static void CheatLevel(int level)
 		{
-			if (level < 0) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
-			if (level == 8) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
-			if (level == 9) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
-			if (level > 10) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
-
-			player.Items.ClearStoryItems();
-			player.Items.ClearCoins();
-
-			Array.Clear(player.museum, 0, player.museum.Length);
-
-			player.Level = level;
-
-			player.Items[LotaItem.JadeCoin] = 2;
-			player.Items[LotaItem.GoldArmband] = 1;
-			player.Items[LotaItem.Compendium] = 1;
-
-			player.Attribute.Reset();
-
-			if (level >= 2)
-			{
-				player.Items.ClearCoins();
-				player.Items[LotaItem.Compendium] = 0;
-				player.Attribute[Attributes.dexterity] = 32;
-				player.Attribute[Attributes.endurance] = 32;
-
-				player.museum[(int)ExhibitIdentifier.Thornberry] = 1;
-				player.museum[(int)ExhibitIdentifier.Weaponry] = 10; // mark weaponry as closed.
-				player.museum[(int)ExhibitIdentifier.Fountain] = 1;
-			}
-			if (level >= 3)
-			{
-				player.museum[(int)ExhibitIdentifier.NativeCurrency] = 1;
-				player.museum[(int)ExhibitIdentifier.HerbOfLife] = 1;
-				player.museum[(int)ExhibitIdentifier.PirateTreasure] = 1;
-
-				player.Variables["BeenInDungeon"] = 1;
-			}
-			if (level >= 4)
-			{
-				player.museum[(int)ExhibitIdentifier.LostDisplays] = 1;
-				player.museum[(int)ExhibitIdentifier.Tapestry] = 1;
-				player.museum[(int)ExhibitIdentifier.StonesWisdom] = 1;
-
-				player.Variables["PirateComplete"] = 1;
-
-				player.Attribute[Attributes.intelligence] = 35;
-				player.Attribute[Attributes.strength] = 25;
-
-				player.Items[LotaItem.SapphireCoin] = 1;
-			}
-			if (level >= 5)
-			{
-				player.museum[(int)ExhibitIdentifier.KnightsTest] = 1;
-				player.Variables["ArmakComplete"] = 1;
-
-				player.Items[LotaItem.SapphireCoin] = 0;
-				player.Items[LotaItem.MagicIce] = 1;
-
-				player.Attribute[Attributes.strength] = 40;
-			}
-			if (level >= 6)
-			{
-				player.Variables["Guardian"] = 3;
-				player.Items[LotaItem.RubyCoin] = 1;
-			}
-			if (level >= 7)
-			{
-				player.Variables["FourJewelComplete"] = 1;
-				player.Attribute[Attributes.strength] = 50;
-
-				player.Items[LotaItem.RubyCoin] = 0;
-				player.Items[LotaItem.GuardJewel] = 4;
-			}
-			if (level == 10)
-			{
-				player.Items[LotaItem.Compendium] = 1;
-			}
-
-			player.HP = player.MaxHP;
-
+			Factory.CheatLevel(player, level);
 		}
+
 		[Description("Moves to a specified place on the current map. Pass no arguments to see the current position. Pass two arguments to set x,y. Pass three arguments to set x,y,level for dungeons.")]
 		private void CheatMove(int x = -1, int y = -1, int level = -1)
 		{
@@ -368,6 +292,18 @@ namespace ERY.Xle
 			}
 		}
 
+		[Description("Makes you super powerful.")]
+		public static void CheatGod()
+		{
+			player.Gold = 99999;
+			player.GoldInBank = 999999;
+			player.Food = 99999;
+			player.Attribute[Attributes.strength] = 300;
+			player.Attribute[Attributes.dexterity] = 300;
+			player.Attribute[Attributes.intelligence] = 300;
+			player.Attribute[Attributes.charm] = 300;
+			player.Attribute[Attributes.endurance] = 300;
+		}
 		#endregion
 
 		public static bool ReturnToTitle
@@ -1199,10 +1135,10 @@ namespace ERY.Xle
 		static void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
 		{
 			int px = vertLine + 16;
-			int py = 144;
+			int py = 16 + 7*16;
 			int width = (624 - px) / 16;
 
-			px += (int)(width / 2) * 16;
+			px += 11 * 16;
 
 			DrawCharacterSprite(px, py, player.FaceDirection, animating, animFrame, true, clr);
 

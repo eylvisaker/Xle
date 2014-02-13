@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleMapTypes.Extenders
 {
-	public interface IDungeonExtender
+	public interface IDungeonExtender : IMapExtender
 	{
 		void OnPlayerExitDungeon(Player player);
 

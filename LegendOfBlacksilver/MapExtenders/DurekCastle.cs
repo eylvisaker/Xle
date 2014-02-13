@@ -22,5 +22,12 @@ namespace ERY.Xle.LoB.MapExtenders
 
 			return 32;
 		}
+
+		public override void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
+		{
+			base.GetBoxColors(out boxColor, out innerColor, out fontColor, out vertLine);
+
+			boxColor = XleColor.LightGray;
+		}
 	}
 }
