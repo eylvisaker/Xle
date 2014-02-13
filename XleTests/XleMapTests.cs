@@ -38,10 +38,6 @@ namespace ERY.XleTests
 		{
 			throw new NotImplementedException();
 		}
-		public override void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
-		{
-			throw new NotImplementedException();
-		}
 		public override string[] MapMenu()
 		{
 			throw new NotImplementedException();
