@@ -63,6 +63,7 @@
     <Compile Include="LobProgram.cs" />
     <Compile Include="MapExtenders\CitadelGround.cs" />
     <Compile Include="MapExtenders\CitadelUpper.cs" />
+    <Compile Include="MapExtenders\DurekCastle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TitleScreen\LobTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
