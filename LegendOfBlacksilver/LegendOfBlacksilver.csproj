@@ -121,10 +121,16 @@
     <None Include="LoB\Maps\Ironwood.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="LoB\Maps\Labyrinth1.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Maps\Labyrinth2.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="LoB\Maps\LostCrag.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LoB\Maps\Maelbane3.xmf">
+    <None Include="LoB\Maps\Maelbane.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LoB\Maps\Murkwater.xmf">
@@ -142,8 +148,10 @@
     <None Include="LoB\Maps\Riverbend.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LoB\Maps\Thalen-no-beaverton.xmf" />
-    <None Include="LoB\Maps\Thalen1.xmf">
+    <None Include="LoB\Maps\Thalen-no-beaverton.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Maps\Thalen.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LoB\Maps\ThortonHollow.xmf">
@@ -317,6 +325,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoB\Images\LobCitadel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LoB\Images\LobLabyrinth.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoB\Images\LobMaelbane.png">

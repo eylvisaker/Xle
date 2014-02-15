@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LotaGame>
   <Maps>
-    <Map ID="1" Name="Thalen" File="Thalen1.xmf" />
-    <Map ID="6" Name="Maelbane" File="Maelbane3.xmf" />
+    <Map ID="1" Name="Thalen" File="Thalen.xmf" />
+    <Map ID="6" Name="Maelbane" File="Maelbane.xmf" />
     <Map ID="10" Name="Appia" File="Appia.xmf" ParentMapID="1" />
     <Map ID="11" Name="Bad Axe" File="BadAxe.xmf" Alias="Badaxe" ParentMapID="1" />
     <Map ID="12" Name="Beaverton" File="Beaverton.xmf" ParentMapID="1" />
