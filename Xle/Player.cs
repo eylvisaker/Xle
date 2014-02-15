@@ -873,7 +873,11 @@ namespace ERY.Xle
 			get { return faceDirection; }
 			set
 			{
-				System.Diagnostics.Debug.Assert(value >= Direction.East && value <= Direction.South);
+				System.Diagnostics.Debug.Assert(
+					value == Direction.East ||
+					value == Direction.West ||
+					value == Direction.North ||
+					value == Direction.South);
 
 				faceDirection = value;
 

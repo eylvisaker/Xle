@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleMapTypes
 {
-	public class Temple
+	public class Temple : Town
 	{
 	}
 }

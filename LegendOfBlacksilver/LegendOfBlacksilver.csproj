@@ -124,7 +124,10 @@
     <None Include="LoB\Maps\LostCrag.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LoB\Maps\Maelbane.xmf">
+    <None Include="LoB\Maps\Maelbane3.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Maps\Murkwater.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LoB\Maps\OwlTemple.xmf">
@@ -160,6 +163,7 @@
     </Compile>
     <None Include="Support\lob-archives.c64bas" />
     <None Include="Support\lob-blacksmith.c64bas" />
+    <None Include="Support\lob-castle-kingspeak.c64bas" />
     <None Include="Support\lob-castle.c64bas" />
     <None Include="Support\lob-citadel-speak.c64bas" />
     <None Include="Support\lob-dungeon-special.c64bas" />

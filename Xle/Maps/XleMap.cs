@@ -331,6 +331,19 @@ namespace ERY.Xle
 
 		#region --- Reading / Writing map data ---
 
+		public void CopyMapDataFrom(XleMap map)
+		{
+			InitializeMap(map.Width, map.Height);
+
+			for (int j = 0; j < map.Height; j++)
+			{
+				for (int i = 0; i < map.Width; i++)
+				{
+					this[i, j] = map[i, j];
+				}
+			}
+		}
+
 		public MapData ReadMapData(int x, int y, int width, int height)
 		{
 			return ReadMapDataImpl(new Rectangle(x, y, width, height));
@@ -356,6 +369,7 @@ namespace ERY.Xle
 
 			return retval;
 		}
+
 		public void WriteMapData(MapData data, int x, int y)
 		{
 			WriteMapDataImpl(data, new Point(x, y));
@@ -1174,6 +1188,7 @@ namespace ERY.Xle
 		}
 
 		public string ExtenderName { get; set; }
+
 	}
 
 	public class Roof : IXleSerializable

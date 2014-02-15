@@ -49,17 +49,22 @@ namespace ERY.Xle
 		void IXleSerializable.WriteData(XleSerializationInfo info)
 		{
 			List<TileInfo> tiles = new List<TileInfo>();
-			
-			tiles.Capacity = mTiles.Keys.Max()+1;
-			for(int i = 0; i < mTiles.Keys.Max()+1; i++)
-				tiles.Add(TileInfo.Normal);
 
-			foreach(int key in mTiles.Keys)
+			if (mTiles.Count == 0)
+				info.Write("Tiles", new int[] { });
+			else
 			{
-				tiles[key] = mTiles[key];
-			}
+				tiles.Capacity = mTiles.Keys.Max() + 1;
+				for (int i = 0; i < mTiles.Keys.Max() + 1; i++)
+					tiles.Add(TileInfo.Normal);
 
-			info.Write("Tiles", tiles.Select(x => (int)x).ToArray(), NumericEncoding.Csv);
+				foreach (int key in mTiles.Keys)
+				{
+					tiles[key] = mTiles[key];
+				}
+
+				info.Write("Tiles", tiles.Select(x => (int)x).ToArray(), NumericEncoding.Csv);
+			}
 			info.Write("TileGroups", TileGroups);
 		}
 		void IXleSerializable.ReadData(XleSerializationInfo info)

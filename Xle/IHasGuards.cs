@@ -13,10 +13,10 @@ namespace ERY.Xle
 
 		void AnimateGuards();
 		bool GuardInSpot(int x, int y);
-		List<Guard> Guards { get; }
+		List<Guard> Guards { get; set; }
 		bool IsAngry { get; set; }
-		void UpdateGuards(Player player);
 
+		void UpdateGuards(Player player);
 		void InitializeGuardData();
 	}
 }

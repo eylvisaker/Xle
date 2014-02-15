@@ -91,6 +91,7 @@ namespace ERY.Xle.XleMapTypes
 		public List<Guard> Guards
 		{
 			get { return mGuards; }
+			set { mGuards = value; }
 		}
 		public bool GuardInSpot(int x, int y)
 		{

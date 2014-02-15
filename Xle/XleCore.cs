@@ -250,11 +250,13 @@ namespace ERY.Xle
 						  where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant() )
 						  select m;
 
+			var exactMatch = matches.FirstOrDefault(x => x.Alias.ToUpperInvariant() == mapName.ToUpperInvariant());
+
 			if (matches.Count() == 0)
 			{
 				AgateConsole.WriteLine("Map name not found.");
 			}
-			else if (matches.Count() > 1)
+			else if (matches.Count() > 1 && exactMatch == null)
 			{
 				AgateConsole.WriteLine("Found multiple matches:");
 				foreach (var m in matches)
@@ -264,7 +266,7 @@ namespace ERY.Xle
 			}
 			else
 			{
-				var mapInfo = matches.First();
+				var mapInfo = exactMatch ?? matches.First();
 				var map = LoadMap(mapInfo.ParentMapID);
 				int targetX = 0, targetY = 0;
 

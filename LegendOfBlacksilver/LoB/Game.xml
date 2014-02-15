@@ -3,13 +3,37 @@
   <Maps>
     <Map ID="1" Name="Thalen" File="Thalen1.xmf" />
     <Map ID="6" Name="Maelbane" File="Maelbane3.xmf" />
-    <Map ID="10" Name="Ironwood" File="Ironwood.xmf" ParentMapID="1"/>
+    <Map ID="10" Name="Appia" File="Appia.xmf" ParentMapID="1" />
     <Map ID="11" Name="Bad Axe" File="BadAxe.xmf" Alias="Badaxe" ParentMapID="1" />
-    <Map ID="12" Name="Appia" File="Appia.xmf" ParentMapID="1" />
-    <Map ID="13" Name="Beaverton" File="Beaverton.xmf" ParentMapID="1" />
+    <Map ID="12" Name="Beaverton" File="Beaverton.xmf" ParentMapID="1" />
+    <Map ID="13" Name="Clissold Creek" File="ClissoldCreek.xmf" ParentMapID="1" />
+    <Map ID="14" Name="Crystal Summit" File="CrystalSummit.xmf" ParentMapID="1" />
+    <Map ID="15" Name="Glen Lake" File="GlenLake.xmf" ParentMapID="1" />
+    <Map ID="16" Name="IronForge" File="IronForge.xmf" ParentMapID="1" />
+    <Map ID="17" Name="Ironwood" File="Ironwood.xmf" ParentMapID="1"/>
+    <Map ID="18" Name="Ridgeport" File="Ridgeport.xmf" ParentMapID="1" />
+    <Map ID="19" Name="Riverbend" File="Riverbend.xmf" ParentMapID="1" />
+    <Map ID="20" Name="Tumanis" File="Tumanis.xmf" ParentMapID="1" />
+    <Map ID="21" Name="Beggar's Cove" File="BeggarsCove.xmf" ParentMapID="6" />
+    <Map ID="22" Name="Lost Crag" File="LostCrag.xmf" ParentMapID="6" />
+    <Map ID="23" Name="Murkwater" File="Murkwater.xmf" ParentMapID="6" />
+    <Map ID="24" Name="Ratville" File="Ratville.xmf" ParentMapID="6" />
+    <Map ID="25" Name="Thorton Hollow" File="ThortonHollow.xmf" ParentMapID="6" />
     <Map ID="30" Name="A Castle" File="Castle.xmf" ParentMapID="1" />
     <Map ID="40" Name="Citadel1" File="Citadel1.xmf" Alias="Cit1" ParentMapID="1" />
     <Map ID="41" Name="Citadel2" File="Citadel2.xmf" Alias="Cit2" ParentMapID="40" />
+    <Map ID="45" Name="Labyrinth1" File="Labyrinth1.xmf" Alias="Lab1" ParentMapID="6" />
+    <Map ID="46" Name="Labyrinth2" File="Labyrinth2.xmf" Alias="Lab2" ParentMapID="45" />
+    <Map ID="50" Name="Eagle Temple" File="EagleTemple.xmf" ParentMapID="1" />
+    <Map ID="51" Name="Owl Temple" File="OwlTemple.xmf" Alias="Owl" ParentMapID="1" />
+    <Map ID="52" Name="Hawk Temple" File="HawkTemple.xmf" Alias="Hawk" ParentMapID="1" />
+    <Map ID="53" Name="Owl Archives" File="OwlArchives.xmf" Alias="Arc-Owl" ParentMapID="51" />
+    <Map ID="54" Name="Hawk Archives" File="HawkArchives.xmf" Alias="Arc-Hawk" ParentMapID="52" />
+    <Map ID="61" Name="Island Caverns" File="IslandCaverns.xmf" ParentMapID="1" />
+    <Map ID="62" Name="Taragas Mines" File="TaragasMines.xmf" ParentMapID="1" />
+    <Map ID="63" Name="Marthbane Tunnels" File="MarthbaneTunnels.xmf" ParentMapID="6" />
+    <Map ID="64" Name="Blackmire Pit" File="BlackmirePit.xmf" ParentMapID="6" />
+    <Map ID="65" Name="Deathspire Chasm" File="DeathspireChasm.xmf" ParentMapID="6" />
   </Maps>
   <Qualities>
     <Quality ID="0" Name="Shoddy" />
