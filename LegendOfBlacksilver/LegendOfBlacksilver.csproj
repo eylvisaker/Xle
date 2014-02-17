@@ -112,6 +112,9 @@
     <None Include="LoB\Maps\GlenLake.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="LoB\Maps\HawkArchives.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="LoB\Maps\HawkTemple.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -133,7 +136,16 @@
     <None Include="LoB\Maps\LostCrag.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LoB\Maps\Maelbane.xmf">
+    <None Include="LoB\Maps\Maelbane1.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Maps\Maelbane2.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Maps\Maelbane3.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Maps\MarthbaneTunnels.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LoB\Maps\Murkwater.xmf">
@@ -157,10 +169,13 @@
     <None Include="LoB\Maps\TaragasMines.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LoB\Maps\Thalen-no-beaverton.xmf">
+    <None Include="LoB\Maps\Thalen1.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LoB\Maps\Thalen.xmf">
+    <None Include="LoB\Maps\Thalen2.xmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Maps\Thalen3.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LoB\Maps\ThortonHollow.xmf">
@@ -357,7 +372,6 @@
     <Content Include="LoB\Images\title.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Maps\Thalen-final.png" />
     <Content Include="Support\Annotations-LOB.txt" />
     <Content Include="Support\Disassemblies-LOB.txt" />
   </ItemGroup>
