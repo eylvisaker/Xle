@@ -351,7 +351,7 @@
     <Content Include="LoB\Images\LobCitadel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Images\LobLabyrinth.png">
+    <Content Include="LoB\Images\LobLabyrinth1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoB\Images\LobMaelbane.png">
