@@ -668,7 +668,7 @@ namespace ERY.Xle.XleMapTypes
 
 			if (player.Move(stepDirection))
 			{
-				SoundMan.PlaySound(LotaSound.TownWalk);
+				SoundMan.PlaySound(LotaSound.WalkTown);
 
 				player.TimeQuality += 0.03;
 			}

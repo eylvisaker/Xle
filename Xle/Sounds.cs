@@ -10,9 +10,12 @@ namespace ERY.Xle
 	public enum LotaSound
 	{
 		WalkOutside,
+		WalkTown,
+		WalkMuseum,
+		WalkDungeon,
+		WalkSwamp,
+		WalkDesert,
 		Bump,
-		Swamp,
-		Desert,
 		Question,
 		Invalid,
 		Raft,
@@ -29,7 +32,6 @@ namespace ERY.Xle
 		PlayerHit,
 		PlayerMiss,
 		Medium,
-		TownWalk,
 		Sale,
 		BuildingClose,
 		BuildingOpen,
@@ -42,6 +44,7 @@ namespace ERY.Xle
 		Drip0,
 		Drip1,
 		Bad,
+		Teleporter,
 	}
 
 	public static class SoundMan

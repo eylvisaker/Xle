@@ -471,11 +471,11 @@ namespace ERY.Xle.XleMapTypes
 					switch (player.Terrain)
 					{
 						case TerrainType.Swamp:
-							SoundMan.PlaySound(LotaSound.Swamp);
+							SoundMan.PlaySound(LotaSound.WalkSwamp);
 							break;
 
 						case TerrainType.Desert:
-							SoundMan.PlaySound(LotaSound.Desert);
+							SoundMan.PlaySound(LotaSound.WalkDesert);
 							break;
 
 						case TerrainType.Grass:
