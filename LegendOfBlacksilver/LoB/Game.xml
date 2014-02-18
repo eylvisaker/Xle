@@ -36,7 +36,7 @@
     <Map ID="61" Name="Island Caverns" File="IslandCaverns.xmf" ParentMapID="1" />
     <Map ID="62" Name="Taragas Mines" File="TaragasMines.xmf" ParentMapID="1" />
     <Map ID="63" Name="Marthbane Tunnels" File="MarthbaneTunnels.xmf" ParentMapID="6" />
-    <Map ID="64" Name="Blackmire Pit" File="BlackmirePit.xmf" ParentMapID="6" />
+    <Map ID="64" Name="Blackmire Pit" File="PitsOfBlackmire.xmf" ParentMapID="6" />
     <Map ID="65" Name="Deathspire Chasm" File="DeathspireChasm.xmf" ParentMapID="6" />
   </Maps>
   <Qualities>
