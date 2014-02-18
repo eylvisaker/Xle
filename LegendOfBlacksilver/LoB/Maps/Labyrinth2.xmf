@@ -8,11 +8,267 @@
   </TileSet>
   <TileImage>LobLabyrinth2</TileImage>
   <DefaultTile>0</DefaultTile>
-  <Events array="true" type="ERY.Xle.XleEvent" />
+  <Events array="true" type="ERY.Xle.XleEvent">
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>73</X>
+      <Y>4</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>45</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>1</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>71</X>
+      <Y>15</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>1</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>3</X>
+      <Y>92</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>2</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>10</X>
+      <Y>92</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>3</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>87</X>
+      <Y>3</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>4</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>34</X>
+      <Y>37</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>5</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>63</X>
+      <Y>17</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>0</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>3</X>
+      <Y>71</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>6</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>68</X>
+      <Y>53</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>7</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>86</X>
+      <Y>53</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>8</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>102</X>
+      <Y>53</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>4</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>32</X>
+      <Y>81</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>9</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>62</X>
+      <Y>74</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>10</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>11</X>
+      <Y>4</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>11</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+      <X>6</X>
+      <Y>46</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <MapID>0</MapID>
+      <AskUser>True</AskUser>
+      <TargetEntryPoint>12</TargetEntryPoint>
+      <TargetX>0</TargetX>
+      <TargetY>0</TargetY>
+      <CommandText>
+      </CommandText>
+    </Item>
+  </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
       <Location type="AgateLib.Geometry.Point" X="36" Y="13" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="61" Y="88" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="100" Y="4" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="58" Y="17" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="12" Y="71" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="101" Y="92" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="6" Y="92" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="61" Y="44" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="46" Y="84" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="6" Y="43" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="3" Y="3" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="86" Y="68" />
+      <DungeonLevel>0</DungeonLevel>
+    </Item>
+    <Item>
+      <Facing>South</Facing>
+      <Location type="AgateLib.Geometry.Point" X="32" Y="49" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

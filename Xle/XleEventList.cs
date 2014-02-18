@@ -112,5 +112,16 @@ namespace ERY.Xle
 		}
 
 		#endregion
+
+		public TEventType FindFirst<TEventType>(Predicate<TEventType> condition) where TEventType : XleEvent
+		{
+			foreach(TEventType evt in this.OfType<TEventType>())
+			{
+				if (condition(evt) == true)
+					return evt;
+			}
+
+			return null;
+		}
 	}
 }

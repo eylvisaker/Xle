@@ -2143,10 +2143,13 @@ namespace ERY.Xle
 
 			try
 			{
-				Map = LoadMap(mMapID);
-				player.Map = mMapID;
+				if (mMapID != 0)
+				{
+					Map = LoadMap(mMapID);
+					player.Map = mMapID;
 
-				g.ClearBottom();
+					g.ClearBottom();
+				}
 
 				if (targetEntryPoint < 0 || targetEntryPoint >= Map.EntryPoints.Count)
 				{
@@ -2172,8 +2175,10 @@ namespace ERY.Xle
 						player.FaceDirection = Direction.South;
 				}
 
-				Map.OnLoad(player);
-
+				if (mMapID != 0)
+				{
+					Map.OnLoad(player);
+				}
 			}
 			catch (Exception e)
 			{

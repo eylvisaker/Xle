@@ -4,6 +4,7 @@ using System.Text;
 using AgateLib;
 using AgateLib.AudioLib;
 using AgateLib.DisplayLib;
+using AgateLib.Geometry;
 
 namespace ERY.Xle
 {
@@ -58,17 +59,33 @@ namespace ERY.Xle
 				string name = Enum.GetName(typeof(LotaSound), s);
 				name += ".wav";
 
-				mSounds[s] = new SoundBuffer(name);
+				try
+				{
+					mSounds[s] = new SoundBuffer(name);
+				}
+				catch
+				{ }
 			}
 		}
 
 		static public void PlaySound(LotaSound sound)
 		{
+			if (mSounds.ContainsKey(sound) == false)
+			{
+				g.AddBottom("Could not play sound " + sound.ToString(), XleColor.Red);
+				return;
+			}
+
 			mSounds[sound].Play();
 		}
 
 		public static void StopSound(LotaSound sound)
 		{
+			if (mSounds[sound] == null)
+			{
+				return;
+			}
+
 			mSounds[sound].Stop();
 		}
 
@@ -84,6 +101,9 @@ namespace ERY.Xle
 		}
 		public static bool IsPlaying(LotaSound sound)
 		{
+			if (mSounds.ContainsKey(sound) == false)
+				return false;
+
 			return mSounds[sound].IsPlaying;
 		}
 

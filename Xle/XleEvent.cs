@@ -23,6 +23,9 @@ namespace ERY.Xle
 			set { rect = value; }
 		}
 
+		public Point Location { get { return Rectangle.Location; } set { rect.Location = value; } }
+		public Size Size { get { return rect.Size; } set { rect.Size = value; } }
+
 		public int X
 		{
 			get { return rect.X; }

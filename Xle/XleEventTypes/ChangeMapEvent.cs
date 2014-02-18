@@ -42,7 +42,7 @@ namespace ERY.Xle.XleEventTypes
 		/// What point on the new map to go to
 		/// </summary>
 		[Browsable(false)]
-		public Point Location
+		public Point TargetLocation
 		{
 			get { return mLocation; }
 			set { mLocation = value; }
@@ -103,56 +103,63 @@ namespace ERY.Xle.XleEventTypes
 			if (player.Y >= Y + Height) return false;
 
 			string line = "Enter ";
-			string newTownName;
+			string newTownName = "";
 			int choice = 0;
 
 			MenuItemList theList = new MenuItemList("Yes", "No");
 
-			try
+			if (mMapID != 0)
 			{
-				newTownName = XleCore.GetMapName(mMapID);
-			}
-			catch
-			{
-				SoundMan.PlaySound(LotaSound.Medium);
+				try
+				{
+					newTownName = XleCore.GetMapName(mMapID);
+				}
+				catch
+				{
+					SoundMan.PlaySound(LotaSound.Medium);
 
-				g.AddBottom("");
-				g.AddBottom("Map ID " + mMapID + " not found.");
-				g.AddBottom("");
+					g.AddBottom("");
+					g.AddBottom("Map ID " + mMapID + " not found.");
+					g.AddBottom("");
 
-				XleCore.wait(1500);
+					XleCore.wait(1500);
 
-				return false;
-			}
-			line += newTownName + "?";
+					return false;
+				}
+				line += newTownName + "?";
 
-			if (Ask)
-			{
-				g.AddBottom("");
-				g.AddBottom(line);
+				if (Ask)
+				{
+					g.AddBottom("");
+					g.AddBottom(line);
 
-				SoundMan.PlaySound(LotaSound.Question);
+					SoundMan.PlaySound(LotaSound.Question);
 
-				choice = XleCore.QuickMenu(theList, 3);
+					choice = XleCore.QuickMenu(theList, 3);
+				}
+				else
+				{
+					g.AddBottom("");
+					g.AddBottom("Leave " + XleCore.Map.MapName);
+
+					XleCore.wait(1000);
+				}
+				if (string.IsNullOrEmpty(CommandText) == false)
+				{
+					g.AddBottom("");
+					g.AddBottom(string.Format(CommandText, XleCore.Map.MapName, newTownName));
+
+					g.AddBottom("");
+					XleCore.wait(500);
+
+					choice = 0;
+				}
+
 			}
 			else
 			{
-				g.AddBottom("");
-				g.AddBottom("Leave " + XleCore.Map.MapName);
-
-				XleCore.wait(1000);
+				SoundMan.PlaySoundSync(LotaSound.Teleporter);
 			}
-			if (string.IsNullOrEmpty(CommandText) == false)
-			{
-				g.AddBottom("");
-				g.AddBottom(string.Format(CommandText, XleCore.Map.MapName, newTownName));
-
-				g.AddBottom("");
-				XleCore.wait(500);
-
-				choice = 0;
-			}
-
 
 			if (choice == 0)
 			{
