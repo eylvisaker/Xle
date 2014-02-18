@@ -153,7 +153,7 @@
       <Y>42</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <MapID>0</MapID>
+      <MapID>5</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
       <TargetX>8</TargetX>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LotaGame>
   <Maps>
-    <Map ID="0" Name="The Museum" File="Museum.xmf" Alias="Museum" ParentMapID="1" />
+    <Map ID="5" Name="The Museum" File="Museum.xmf" Alias="Museum" ParentMapID="1" />
     <Map ID="1" Name="Outside" File="Tarmalon.xmf" />
     <Map ID="2" Name="Three Sisters" File="ThreeSisters.xmf" />
     <Map ID="3" Name="Flight" File="Warlord.xmf" />
@@ -20,8 +20,8 @@
     <Map ID="51" Name="The Castle" Alias="Castle1" File="Castle.xmf" ParentMapID="1"/>
     <Map ID="52" Name="The Castle Level 2" Alias="Castle2" File="Castle2.xmf" ParentMapID="51"/>
     <Map ID="71" Name="A dungeon" File="PiratesLair.xmf" Alias="PiratesLair" ParentMapID="2"/>
-    <Map ID="72" Name="Armak" File="Armak.xmf" ParentMapID="0"/>
-    <Map ID="73" Name="Four Jewels" File="FourJewels.xmf" Alias="FourJewels" ParentMapID="0"/>
+    <Map ID="72" Name="Armak" File="Armak.xmf" ParentMapID="5"/>
+    <Map ID="73" Name="Four Jewels" File="FourJewels.xmf" Alias="FourJewels" ParentMapID="5"/>
     <Map ID="80" Name="Fortress" File="Fortress.xmf" ParentMapID="3" />
   </Maps>
   <Qualities>
