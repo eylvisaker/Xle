@@ -30,19 +30,19 @@ namespace ERY.Xle.LotA
 			Character = new Surface("character.png");
 			Monsters = new Surface("OverworldMonsters.png");
 
-			MuseumBackdrop = new Surface("MuseumBackdrop.png");
-			MuseumWall = new Surface("MuseumWall.png");
-			MuseumDoor = new Surface("MuseumDoor.png");
-			MuseumSidePassage = new Surface("MuseumSidePassage.png");
-			MuseumExhibitFrame = new Surface("ExhibitFrame.png");
-			MuseumExhibitStatic = new Surface("ExhibitStatic.png");
-			MuseumCloseup = new Surface("MuseumCloseup.png");
-			MuseumExtras = new Surface("MuseumExtras.png");
+			MuseumBackdrop = new Surface("Museum/MuseumBackdrop.png");
+			MuseumWall = new Surface("Museum/MuseumWall.png");
+			MuseumDoor = new Surface("Museum/MuseumDoor.png");
+			MuseumSidePassage = new Surface("Museum/MuseumSidePassage.png");
+			MuseumExhibitFrame = new Surface("Museum/ExhibitFrame.png");
+			MuseumExhibitStatic = new Surface("Museum/ExhibitStatic.png");
+			MuseumCloseup = new Surface("Museum/MuseumCloseup.png");
+			MuseumExtras = new Surface("Museum/MuseumExtras.png");
 
-			DungeonBlueBackdrop = new Surface("DungeonBackdropBlue.png");
-			DungeonBlueSidePassage = new Surface("DungeonSidePassageBlue.png");
-			DungeonBlueWall = new Surface("DungeonWallBlue.png");
-			DungeonBlueExtras = new Surface("DungeonExtrasBlue.png");
+			DungeonBlueBackdrop = new Surface("Dungeon/Blue/DungeonBackdrop.png");
+			DungeonBlueSidePassage = new Surface("Dungeon/Blue/DungeonSidePassage.png");
+			DungeonBlueWall = new Surface("Dungeon/Blue/DungeonWall.png");
+			DungeonBlueExtras = new Surface("Dungeon/Blue/DungeonExtras.png");
 
 			foreach (var exinfo in XleCore.ExhibitInfo.Values)
 			{

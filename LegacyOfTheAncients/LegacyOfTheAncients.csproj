@@ -313,7 +313,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\AncientArtifact.png">
+    <Content Include="LotA\Images\Museum\Exhibits\AncientArtifact.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Images\CastleTiles.png">
@@ -322,94 +322,91 @@
     <Content Include="LotA\Images\character.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\DungeonBackdropBlue.png">
+    <Content Include="LotA\Images\Dungeon\Blue\DungeonBackdrop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\DungeonExtrasBlue.png">
+    <Content Include="LotA\Images\Dungeon\Blue\DungeonExtras.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\DungeonSidePassageBlue.png">
+    <Content Include="LotA\Images\Dungeon\Blue\DungeonSidePassage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Images\DungeonTiles.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\DungeonWallBlue.png">
+    <Content Include="LotA\Images\Dungeon\Blue\DungeonWall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\ExhibitFrame.png">
+    <Content Include="LotA\Images\Museum\ExhibitFrame.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\ExhibitStatic.png">
+    <Content Include="LotA\Images\Museum\ExhibitStatic.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Images\font.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\Fountain.png">
+    <Content Include="LotA\Images\Museum\Exhibits\Fountain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\FourJewels.png">
+    <Content Include="LotA\Images\Museum\Exhibits\FourJewels.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\Guardian.png">
+    <Content Include="LotA\Images\Museum\Exhibits\Guardian.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\HerbOfLife.png">
+    <Content Include="LotA\Images\Museum\Exhibits\HerbOfLife.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\Information.png">
+    <Content Include="LotA\Images\Museum\Exhibits\Information.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\LostDisplays.png">
+    <Content Include="LotA\Images\Museum\Exhibits\LostDisplays.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\MuseumBackdrop.png">
+    <Content Include="LotA\Images\Museum\MuseumBackdrop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\MuseumCloseup.png">
+    <Content Include="LotA\Images\Museum\MuseumCloseup.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\MuseumDoor.png">
+    <Content Include="LotA\Images\Museum\MuseumDoor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\MuseumExtras.png">
+    <Content Include="LotA\Images\Museum\MuseumExtras.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\MuseumSidePassage.png">
+    <Content Include="LotA\Images\Museum\MuseumSidePassage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\MuseumWall.png">
+    <Content Include="LotA\Images\Museum\MuseumWall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\NativeCurrency.png">
+    <Content Include="LotA\Images\Museum\Exhibits\NativeCurrency.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Images\OverworldMonsters.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\Pegasus.png">
+    <Content Include="LotA\Images\Museum\Exhibits\Pegasus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\PirateLair.png">
+    <Content Include="LotA\Images\Museum\Exhibits\PirateLair.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\StonesOfWisdom.png">
+    <Content Include="LotA\Images\Museum\Exhibits\StonesOfWisdom.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\Tapestry.png">
+    <Content Include="LotA\Images\Museum\Exhibits\Tapestry.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\TheTest.png">
+    <Content Include="LotA\Images\Museum\Exhibits\TheTest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\Thornberry.png">
+    <Content Include="LotA\Images\Museum\Exhibits\Thornberry.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Images\Tiles.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LotA\Images\tiles3d.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Images\title.png">
@@ -418,10 +415,10 @@
     <Content Include="LotA\Images\TownTiles.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\Weaponry.png">
+    <Content Include="LotA\Images\Museum\Exhibits\Weaponry.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Images\Welcome.png">
+    <Content Include="LotA\Images\Museum\Exhibits\Welcome.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Support\Annotations.txt" />
