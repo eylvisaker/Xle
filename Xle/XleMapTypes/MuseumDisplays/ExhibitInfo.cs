@@ -24,7 +24,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			if (string.IsNullOrEmpty(ImageFile))
 				return;
 
-			Image = new Surface(ImageFile);
+			Image = new Surface("Museum/Exhibits/" + ImageFile);
 		}
 
 		public void DrawImage(Rectangle destRect, int id)
