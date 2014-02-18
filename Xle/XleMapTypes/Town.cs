@@ -341,7 +341,7 @@ namespace ERY.Xle.XleMapTypes
 			double hitChance = (player.Attribute[Attributes.dexterity] + 16)
 				* (99 + weaponType * 8) / 7000.0 / guard.Defense * 99;
 
-			if (XleCore.random.NextDouble() < hitChance)
+			if (XleCore.random.NextDouble() > hitChance)
 			{
 				g.AddBottom("Attack on guard missed", XleColor.Purple);
 				SoundMan.PlaySound(LotaSound.PlayerMiss);
