@@ -31,8 +31,8 @@
     <Map ID="50" Name="Eagle Temple" File="EagleTemple.xmf" ParentMapID="1" />
     <Map ID="51" Name="Owl Temple" File="OwlTemple.xmf" Alias="Owl" ParentMapID="1" />
     <Map ID="52" Name="Hawk Temple" File="HawkTemple.xmf" Alias="Hawk" ParentMapID="1" />
-    <Map ID="53" Name="Owl Archives" File="OwlArchives.xmf" Alias="Arc-Owl" ParentMapID="51" />
-    <Map ID="54" Name="Hawk Archives" File="HawkArchives.xmf" Alias="Arc-Hawk" ParentMapID="52" />
+    <Map ID="53" Name="Owl Archives" File="OwlArchives.xmf" Alias="Arc_Owl" ParentMapID="51" />
+    <Map ID="54" Name="Hawk Archives" File="HawkArchives.xmf" Alias="Arc_Hawk" ParentMapID="52" />
     <Map ID="61" Name="Island Caverns" File="IslandCaverns.xmf" ParentMapID="1" />
     <Map ID="62" Name="Taragas Mines" File="TaragasMines.xmf" ParentMapID="1" />
     <Map ID="63" Name="Marthbane Tunnels" File="MarthbaneTunnels.xmf" ParentMapID="6" />
