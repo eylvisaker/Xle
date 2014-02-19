@@ -14,5 +14,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender);
 
 		void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine);
+
+		int StepSize { get; }
 	}
 }

@@ -17,6 +17,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		
 
 
+
 		public virtual void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
 		{
 			throw new NotImplementedException();
@@ -26,6 +27,12 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public virtual IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			return (IEventExtender)Activator.CreateInstance(defaultExtender);
+		}
+
+
+		public virtual int StepSize
+		{
+			get { return 1; }
 		}
 	}
 }

@@ -992,23 +992,24 @@ namespace ERY.Xle
 			player.FaceDirection = dir;
 
 			command = textStart + " " + dir.ToString();
+			int stepSize = mBaseExtender.StepSize;
 
 			switch (dir)
 			{
 				case Direction.West:
-					stepDirection = new Point(-1, 0);
+					stepDirection = new Point(-stepSize, 0);
 					break;
 
 				case Direction.North:
-					stepDirection = new Point(0, -1);
+					stepDirection = new Point(0, -stepSize);
 					break;
 
 				case Direction.East:
-					stepDirection = new Point(1, 0);
+					stepDirection = new Point(stepSize, 0);
 					break;
 
 				case Direction.South:
-					stepDirection = new Point(0, 1);
+					stepDirection = new Point(0, stepSize);
 					break;
 
 				default:

@@ -67,6 +67,7 @@
     <Compile Include="MapExtenders\Labyrinth\ChangeMapTeleporter.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthBase.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthUpper.cs" />
+    <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TitleScreen\LobTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

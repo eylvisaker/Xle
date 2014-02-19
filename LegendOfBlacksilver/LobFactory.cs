@@ -4,6 +4,7 @@ using ERY.Xle.LoB.MapExtenders;
 using ERY.Xle.LoB.MapExtenders.Castle;
 using ERY.Xle.LoB.MapExtenders.Citadel;
 using ERY.Xle.LoB.MapExtenders.Labyrinth;
+using ERY.Xle.LoB.MapExtenders.Outside;
 using ERY.Xle.LoB.TitleScreen;
 using ERY.Xle.XleMapTypes.Extenders;
 using System;
@@ -54,7 +55,10 @@ namespace ERY.Xle.LoB
 			return new LobTitleScreen();
 		}
 
-
+		public override IMapExtender CreateMapExtender(XleMapTypes.Outside outside)
+		{
+			return new LobBaseOutside();
+		}
 		public override IDungeonExtender CreateMapExtender(XleMapTypes.Dungeon theMap)
 		{
 			return base.CreateMapExtender(theMap);
