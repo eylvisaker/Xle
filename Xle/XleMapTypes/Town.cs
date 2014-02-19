@@ -1121,6 +1121,7 @@ namespace ERY.Xle.XleMapTypes
 		protected override void AnimateTiles(Rectangle rectangle)
 		{
 			AnimateGuards();
+			base.AnimateTiles(rectangle);
 		}
 		public override string[] MapMenu()
 		{

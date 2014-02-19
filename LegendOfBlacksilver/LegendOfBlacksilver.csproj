@@ -138,6 +138,7 @@
     </None>
     <None Include="LoB\Maps\Labyrinth1.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="LoB\Maps\Labyrinth2.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

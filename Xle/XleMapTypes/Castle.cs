@@ -42,7 +42,7 @@ namespace ERY.Xle.XleMapTypes
 
 			return Extender;
 		}
-
+		/*
 		protected override void AnimateTiles(Rectangle rectangle)
 		{
 			base.AnimateTiles(rectangle);
@@ -104,7 +104,7 @@ namespace ERY.Xle.XleMapTypes
 				}
 			}
 		}
-
+		*/
 		public override bool PlayerUse(Player player, int item)
 		{
 			switch (item)

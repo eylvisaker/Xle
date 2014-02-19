@@ -17,7 +17,7 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 			Stopwatch watch = new Stopwatch();
 			watch.Start();
 
-			while(watch.ElapsedMilliseconds < 1900)
+			while(watch.ElapsedMilliseconds < 1800)
 			{
 				int index = ((int)watch.ElapsedMilliseconds % 80) / 50;
 

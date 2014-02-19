@@ -199,7 +199,7 @@ namespace ERY.Xle
 
 		protected virtual void CreateEventExtenders()
 		{
-			foreach(var evt in Events)
+			foreach (var evt in Events)
 			{
 				evt.CreateExtender(this);
 			}
@@ -574,8 +574,68 @@ namespace ERY.Xle
 			}
 		}
 
+		private IEnumerable<TileGroup> GetGroupsToAnimate()
+		{
+			foreach (var group in TileSet.TileGroups)
+			{
+				if (group.AnimationType == AnimationType.None)
+					continue;
+				if (group.Tiles.Count < 2)
+					continue;
+
+				group.TimeSinceLastAnim += AgateLib.DisplayLib.Display.DeltaTime;
+
+				if (group.TimeSinceLastAnim >= group.AnimationTime)
+				{
+					group.TimeSinceLastAnim %= group.AnimationTime;
+					yield return group;
+				}
+			}
+		}
+
 		protected virtual void AnimateTiles(Rectangle rectangle)
 		{
+			List<TileGroup> groupsToAnimate = GetGroupsToAnimate().ToList();
+			
+			if (groupsToAnimate.Count == 0)
+				return;
+
+			for (int j = rectangle.Top; j <= rectangle.Bottom; j++)
+			{
+				for (int i = rectangle.Left; i <= rectangle.Right; i++)
+				{
+					int current = this[i, j];
+					TileGroup group = groupsToAnimate.FirstOrDefault(x => x.Tiles.Contains(current)); 
+
+					if (group == null) continue;
+					if (group.AnimationType == AnimationType.None) continue;
+
+					int nextTile = current;
+
+					switch (group.AnimationType)
+					{
+						case AnimationType.Loop:
+							int index = group.Tiles.IndexOf(current);
+							if (index + 1 >= group.Tiles.Count)
+							{
+								index = 0;
+							}
+							else
+								index++;
+
+							nextTile = group.Tiles[index];
+							break;
+
+						case AnimationType.Random:
+							while (nextTile == current)
+								nextTile = group.Tiles[XleCore.random.Next(group.Tiles.Count)];
+
+							break;
+					}
+
+					this[i, j] = nextTile;
+				}
+			}
 		}
 
 		public void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)

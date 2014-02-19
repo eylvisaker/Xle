@@ -4,7 +4,53 @@
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,1,0,0,0,0,0,1,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1</Tiles>
-    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
+    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup">
+      <Item>
+        <Tiles array="true" encoding="Csv">11,12,13</Tiles>
+        <AnimationType>Random</AnimationType>
+        <AnimationTime>200</AnimationTime>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">27,28,29</Tiles>
+        <AnimationType>Random</AnimationType>
+        <AnimationTime>200</AnimationTime>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">43,44,45,46,47</Tiles>
+        <AnimationType>Random</AnimationType>
+        <AnimationTime>130</AnimationTime>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">59,60,61,62</Tiles>
+        <AnimationType>Loop</AnimationType>
+        <AnimationTime>125</AnimationTime>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">55,56,57,58</Tiles>
+        <AnimationType>Loop</AnimationType>
+        <AnimationTime>125</AnimationTime>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">71,72,73,74</Tiles>
+        <AnimationType>Loop</AnimationType>
+        <AnimationTime>125</AnimationTime>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">87,88,89</Tiles>
+        <AnimationType>Random</AnimationType>
+        <AnimationTime>125</AnimationTime>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">90,91,92</Tiles>
+        <AnimationType>Random</AnimationType>
+        <AnimationTime>125</AnimationTime>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">93,94,95</Tiles>
+        <AnimationType>Random</AnimationType>
+        <AnimationTime>125</AnimationTime>
+      </Item>
+    </TileGroups>
   </TileSet>
   <TileImage>LobLabyrinth1</TileImage>
   <DefaultTile>0</DefaultTile>
@@ -345,7 +391,7 @@
       <X>1</X>
       <Y>11</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -353,7 +399,7 @@
       <X>3</X>
       <Y>10</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -361,7 +407,7 @@
       <X>15</X>
       <Y>14</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -369,7 +415,7 @@
       <X>13</X>
       <Y>14</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -377,7 +423,7 @@
       <X>14</X>
       <Y>18</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -385,7 +431,7 @@
       <X>27</X>
       <Y>15</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -393,7 +439,7 @@
       <X>25</X>
       <Y>17</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -401,7 +447,7 @@
       <X>14</X>
       <Y>52</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -409,7 +455,7 @@
       <X>19</X>
       <Y>56</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -417,7 +463,7 @@
       <X>8</X>
       <Y>41</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -425,7 +471,7 @@
       <X>18</X>
       <Y>77</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -433,7 +479,7 @@
       <X>15</X>
       <Y>62</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -441,7 +487,7 @@
       <X>9</X>
       <Y>65</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -449,7 +495,7 @@
       <X>9</X>
       <Y>67</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -457,7 +503,7 @@
       <X>79</X>
       <Y>90</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -465,7 +511,7 @@
       <X>82</X>
       <Y>92</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -473,7 +519,7 @@
       <X>49</X>
       <Y>62</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -481,7 +527,7 @@
       <X>43</X>
       <Y>65</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -489,7 +535,7 @@
       <X>59</X>
       <Y>52</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -497,7 +543,7 @@
       <X>50</X>
       <Y>72</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -505,7 +551,7 @@
       <X>88</X>
       <Y>50</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -513,7 +559,7 @@
       <X>91</X>
       <Y>60</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -521,7 +567,7 @@
       <X>76</X>
       <Y>53</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -529,7 +575,7 @@
       <X>98</X>
       <Y>32</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -537,7 +583,7 @@
       <X>90</X>
       <Y>11</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -545,7 +591,7 @@
       <X>90</X>
       <Y>13</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -553,7 +599,7 @@
       <X>72</X>
       <Y>10</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -561,7 +607,7 @@
       <X>82</X>
       <Y>11</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -569,7 +615,7 @@
       <X>78</X>
       <Y>6</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -577,7 +623,7 @@
       <X>84</X>
       <Y>9</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -585,7 +631,7 @@
       <X>72</X>
       <Y>12</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -593,7 +639,7 @@
       <X>58</X>
       <Y>38</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -601,7 +647,7 @@
       <X>57</X>
       <Y>43</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -609,7 +655,7 @@
       <X>57</X>
       <Y>45</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -617,7 +663,7 @@
       <X>69</X>
       <Y>34</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -625,7 +671,7 @@
       <X>62</X>
       <Y>39</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -633,7 +679,7 @@
       <X>11</X>
       <Y>76</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -641,7 +687,7 @@
       <X>64</X>
       <Y>68</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -649,7 +695,7 @@
       <X>61</X>
       <Y>68</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -657,7 +703,7 @@
       <X>89</X>
       <Y>38</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -665,7 +711,7 @@
       <X>86</X>
       <Y>38</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -673,7 +719,7 @@
       <X>82</X>
       <Y>6</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -681,7 +727,7 @@
       <X>27</X>
       <Y>19</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -689,7 +735,7 @@
       <X>10</X>
       <Y>24</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -697,7 +743,7 @@
       <X>17</X>
       <Y>63</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -705,7 +751,7 @@
       <X>15</X>
       <Y>64</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -713,7 +759,7 @@
       <X>15</X>
       <Y>66</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -721,7 +767,7 @@
       <X>17</X>
       <Y>65</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -729,7 +775,7 @@
       <X>16</X>
       <Y>74</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -737,7 +783,7 @@
       <X>62</X>
       <Y>37</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -745,7 +791,7 @@
       <X>60</X>
       <Y>39</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -753,7 +799,7 @@
       <X>64</X>
       <Y>39</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -761,7 +807,7 @@
       <X>68</X>
       <Y>36</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -769,7 +815,7 @@
       <X>67</X>
       <Y>66</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -777,7 +823,7 @@
       <X>103</X>
       <Y>88</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -785,7 +831,7 @@
       <X>94</X>
       <Y>80</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -793,7 +839,7 @@
       <X>76</X>
       <Y>22</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -801,7 +847,7 @@
       <X>76</X>
       <Y>20</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -809,7 +855,7 @@
       <X>46</X>
       <Y>62</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -817,7 +863,7 @@
       <X>69</X>
       <Y>32</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -825,7 +871,7 @@
       <X>82</X>
       <Y>15</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -833,7 +879,7 @@
       <X>86</X>
       <Y>76</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -841,7 +887,7 @@
       <X>89</X>
       <Y>76</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -849,7 +895,7 @@
       <X>82</X>
       <Y>42</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>110</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
