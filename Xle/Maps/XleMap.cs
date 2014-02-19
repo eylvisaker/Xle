@@ -576,6 +576,9 @@ namespace ERY.Xle
 
 		private IEnumerable<TileGroup> GetGroupsToAnimate()
 		{
+			if (TileSet == null)
+				yield break;
+
 			foreach (var group in TileSet.TileGroups)
 			{
 				if (group.AnimationType == AnimationType.None)

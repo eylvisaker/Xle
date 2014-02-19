@@ -656,5 +656,10 @@ namespace ERY.Xle.XleMapTypes
 				default: throw new ArgumentException();
 			}
 		}
+
+		protected override void PlayPlayerMoveSound()
+		{
+			SoundMan.PlaySound(LotaSound.WalkDungeon);
+		}
 	}
 }

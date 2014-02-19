@@ -456,8 +456,11 @@ namespace ERY.Xle.XleMapTypes
 
 			Commands.UpdateCommand(command);
 
+			PlayPlayerMoveSound();
 			OnPlayerEnterPosition(player, player.X, player.Y);
 		}
+
+		protected abstract void PlayPlayerMoveSound();
 
 		protected virtual bool ShowDirections(Player player)
 		{

@@ -78,6 +78,9 @@ namespace ERY.Xle
 
 			if (info.ContainsKey("TileGroups"))
 				TileGroups = info.ReadList<TileGroup>("TileGroups");
+
+			if (TileGroups == null)
+				TileGroups = new List<TileGroup>();
 		}
 	}
 }

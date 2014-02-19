@@ -578,5 +578,10 @@ namespace ERY.Xle.XleMapTypes
 			if (anim % freq == 0)
 				offset = XleCore.random.Next((destOffset.Width - 16) / 4) * 4;
 		}
+
+		protected override void PlayPlayerMoveSound()
+		{
+			SoundMan.PlaySound(LotaSound.WalkMuseum);
+		}
 	}
 }
