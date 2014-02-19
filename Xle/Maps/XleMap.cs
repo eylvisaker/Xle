@@ -192,7 +192,15 @@ namespace ERY.Xle
 			}
 		}
 
-		protected virtual IMapExtender CreateExtender()
+		private IMapExtender CreateExtender()
+		{
+			var retval = CreateExtenderImpl();
+			
+			retval.TheMap = this;
+
+			return retval;
+		}
+		protected virtual IMapExtender CreateExtenderImpl()
 		{
 			return new NullMapExtender();
 		}

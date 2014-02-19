@@ -9,6 +9,8 @@ namespace ERY.Xle.XleMapTypes.Extenders
 {
 	public class NullMapExtender : IMapExtender
 	{
+		public XleMap TheMap { get; set; }
+
 		public virtual int GetOutsideTile(Point playerPoint, int x, int y)
 		{
 			return -1;

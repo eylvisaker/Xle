@@ -29,7 +29,7 @@ namespace ERY.Xle.XleMapTypes
 		double lastAnim;
 		int cycles;
 
-		protected override IMapExtender CreateExtender()
+		protected override IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
 			{

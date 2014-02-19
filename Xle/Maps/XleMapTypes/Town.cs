@@ -1149,10 +1149,10 @@ namespace ERY.Xle.XleMapTypes
 			return true;
 		}
 
-		protected override IMapExtender CreateExtender()
+		protected override IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
-				return base.CreateExtender();
+				return base.CreateExtenderImpl();
 
 			return XleCore.Factory.CreateMapExtender(this);
 		}

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleMapTypes.Extenders
+namespace ERY.Xle.XleMapTypes.Extenders.Dungeons
 {
-	class FourJewelsExtender : LotaDungeonExtenderBase
+	class PirateExtender : LotaDungeonExtenderBase
 	{
 		protected override string CompleteVariable
 		{
-			get { return "FourJewelComplete"; }
+			get { return "PirateComplete"; }
 		}
 		protected override int StrengthBoost
 		{
@@ -17,9 +17,13 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		}
 		public override void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled)
 		{
-			if (treasure == (int)LotaItem.GuardJewel)
+			// crown
+			if (treasure == (int)LotaItem.Crown)
 			{
-				if (player.Items[LotaItem.GuardJewel] >= 4)
+				if (player.Items[LotaItem.Crown] > 0)
+					treasure = 0;
+
+				if (player.Level > 3)
 					treasure = 0;
 			}
 		}

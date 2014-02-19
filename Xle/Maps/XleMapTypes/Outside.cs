@@ -1457,10 +1457,10 @@ namespace ERY.Xle.XleMapTypes
 			return retval.ToArray();
 		}
 
-		protected override Extenders.IMapExtender CreateExtender()
+		protected override Extenders.IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
-				return base.CreateExtender();
+				return base.CreateExtenderImpl();
 
 			return XleCore.Factory.CreateMapExtender(this);
 		}

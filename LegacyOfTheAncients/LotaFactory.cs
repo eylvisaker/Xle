@@ -1,8 +1,10 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Geometry;
+using ERY.Xle.LotA.MapExtenders.Castle;
 using ERY.Xle.LotA.TitleScreen;
 using ERY.Xle.XleMapTypes;
 using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.XleMapTypes.Extenders.Dungeons;
 using ERY.Xle.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
@@ -66,7 +68,13 @@ namespace ERY.Xle.LotA
 
 			return base.CreateMapExtender(theMap);
 		}
+		public override ICastleExtender CreateMapExtender(Castle castle)
+		{
+			if (castle.ExtenderName.ToLowerInvariant() == "castle1")
+				return new CastleGround();
 
+			return base.CreateMapExtender(castle);
+		}
 		public override void CheatLevel(Player player, int level)
 		{
 			if (level < 0) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");

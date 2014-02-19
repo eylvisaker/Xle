@@ -72,7 +72,7 @@ namespace ERY.Xle.XleMapTypes
 			info.Write("Treasures", mTreasures);
 		}
 
-		protected override IMapExtender CreateExtender()
+		protected override IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
 			{

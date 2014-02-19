@@ -11,6 +11,7 @@ namespace ERY.Xle.Maps
 		Chest,
 		OpenChest,
 		Merchant,
+		Door,
 		PrisonBars,
 
 		Special1,

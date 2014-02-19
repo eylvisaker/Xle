@@ -11,7 +11,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		{
 			fontColor = XleColor.White;
 
-			boxColor = XleColor.Orange;
+			boxColor = XleColor.Gray;
 			innerColor = XleColor.Yellow;
 
 			vertLine = 13 * 16; 
