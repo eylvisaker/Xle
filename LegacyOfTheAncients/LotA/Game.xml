@@ -4,7 +4,7 @@
     <Map ID="5" Name="The Museum" File="Museum.xmf" Alias="Museum" ParentMapID="1" />
     <Map ID="1" Name="Outside" File="Tarmalon.xmf" />
     <Map ID="2" Name="Three Sisters" File="ThreeSisters.xmf" />
-    <Map ID="3" Name="Flight" File="Warlord.xmf" />
+    <Map ID="3" Name="Flight" File="Flight.xmf" />
     <Map ID="10" Name="Thompson Crossing" File="ThompsonCrossing.xmf" Alias="ThompsonCrossing" ParentMapID="1"/>
     <Map ID="11" Name="Thornberry" File="Thornberry.xmf" ParentMapID="1"/>
     <Map ID="12" Name="Alanville" File="Alanville.xmf" ParentMapID="1"/>
@@ -22,7 +22,8 @@
     <Map ID="71" Name="A dungeon" File="PiratesLair.xmf" Alias="PiratesLair" ParentMapID="2"/>
     <Map ID="72" Name="Armak" File="Armak.xmf" ParentMapID="5"/>
     <Map ID="73" Name="Four Jewels" File="FourJewels.xmf" Alias="FourJewels" ParentMapID="5"/>
-    <Map ID="80" Name="Fortress" File="Fortress.xmf" ParentMapID="3" />
+    <Map ID="80" Name="Fortress" File="Fortress1.xmf" ParentMapID="3" />
+    <Map ID="81" Name="Fortress2" File="Fortress2.xmf" ParentMapID="80" />
   </Maps>
   <Qualities>
     <Quality ID="0" Name="Shoddy" />

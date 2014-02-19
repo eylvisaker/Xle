@@ -260,7 +260,20 @@ namespace ERY.Xle
 				throw new NotImplementedException("SetLevels is not implemented.");
 		}
 
-		public List<EntryPoint> EntryPoints { get; set; }
+		public List<EntryPoint> EntryPoints
+		{
+			get
+			{
+				return mEntryPoints;
+			}
+			set
+			{
+				if (value == null)
+					throw new ArgumentNullException();
+
+				mEntryPoints = value;
+			}
+		}
 
 		[Browsable(false)]
 		public string MapName
