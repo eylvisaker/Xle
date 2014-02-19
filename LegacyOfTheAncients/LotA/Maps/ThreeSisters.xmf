@@ -1,5 +1,7 @@
 <XleRoot type="ERY.Xle.XleMapTypes.Outside">
   <MapName>Three Sisters</MapName>
+  <ExtenderName>
+  </ExtenderName>
   <MapID>0</MapID>
   <TileSet type="null" />
   <TileImage>Tiles.png</TileImage>
@@ -25,7 +27,7 @@
       <Height>1</Height>
       <MapID>5</MapID>
       <AskUser>True</AskUser>
-      <TargetEntryPoint>0</TargetEntryPoint>
+      <TargetEntryPoint>3</TargetEntryPoint>
       <TargetX>3</TargetX>
       <TargetY>7</TargetY>
       <CommandText>
