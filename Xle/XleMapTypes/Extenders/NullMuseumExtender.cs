@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleMapTypes.Extenders
 {
-	public class NullMuseumExtender : IMuseumExtender
+	public class NullMuseumExtender : NullMapExtender, IMuseumExtender
 	{
 		public int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{

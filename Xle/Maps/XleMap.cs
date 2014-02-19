@@ -11,6 +11,7 @@ using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.Maps;
 using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle
 {
@@ -168,6 +169,7 @@ namespace ERY.Xle
 			retval.MapID = id;
 			retval.ConstructRenderTimeData();
 			retval.mBaseExtender = retval.CreateExtender();
+			retval.CreateEventExtenders();
 
 			return retval;
 		}
@@ -193,6 +195,21 @@ namespace ERY.Xle
 		protected virtual IMapExtender CreateExtender()
 		{
 			return new NullMapExtender();
+		}
+
+		protected virtual void CreateEventExtenders()
+		{
+			foreach(var evt in Events)
+			{
+				evt.CreateExtender(this);
+			}
+		}
+		public IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		{
+			if (mBaseExtender != null)
+				return mBaseExtender.CreateEventExtender(evt, defaultExtender);
+			else
+				return (IEventExtender)Activator.CreateInstance(defaultExtender);
 		}
 
 		#endregion

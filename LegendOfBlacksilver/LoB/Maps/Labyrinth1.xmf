@@ -269,72 +269,72 @@
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="38" Y="50" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="94" Y="43" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="3" Y="67" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="52" Y="19" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="100" Y="67" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="63" Y="26" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="31" Y="74" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="12" Y="92" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="8" Y="46" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="80" Y="8" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="61" Y="92" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="23" Y="4" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="40" Y="85" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
-      <Facing>South</Facing>
+      <Facing>None</Facing>
       <Location type="AgateLib.Geometry.Point" X="84" Y="56" />
       <DungeonLevel>0</DungeonLevel>
     </Item>

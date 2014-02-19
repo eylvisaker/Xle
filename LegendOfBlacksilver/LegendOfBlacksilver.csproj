@@ -61,9 +61,12 @@
   <ItemGroup>
     <Compile Include="LobFactory.cs" />
     <Compile Include="LobProgram.cs" />
-    <Compile Include="MapExtenders\CitadelGround.cs" />
-    <Compile Include="MapExtenders\CitadelUpper.cs" />
-    <Compile Include="MapExtenders\DurekCastle.cs" />
+    <Compile Include="MapExtenders\Citadel\CitadelGround.cs" />
+    <Compile Include="MapExtenders\Citadel\CitadelUpper.cs" />
+    <Compile Include="MapExtenders\Castle\DurekCastle.cs" />
+    <Compile Include="MapExtenders\Labyrinth\ChangeMapTeleporter.cs" />
+    <Compile Include="MapExtenders\Labyrinth\LabyrinthBase.cs" />
+    <Compile Include="MapExtenders\Labyrinth\LabyrinthUpper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TitleScreen\LobTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

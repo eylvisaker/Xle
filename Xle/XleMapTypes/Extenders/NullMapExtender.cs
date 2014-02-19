@@ -1,4 +1,5 @@
 ﻿using AgateLib.Geometry;
+using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,18 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			return -1;
 		}
 
+		
+
 
 		public virtual void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
 		{
 			throw new NotImplementedException();
+		}
+
+
+		public virtual IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		{
+			return (IEventExtender)Activator.CreateInstance(defaultExtender);
 		}
 	}
 }

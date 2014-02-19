@@ -1,4 +1,5 @@
 ﻿using AgateLib.Geometry;
+using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 	{
 		int GetOutsideTile(Point playerPoint, int x, int y);
 
-
+		IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender);
 
 		void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine);
 	}

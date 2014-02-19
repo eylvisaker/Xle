@@ -84,6 +84,7 @@ namespace ERY.Xle
 		public XleCore()
 		{
 			inst = this;
+			PlayerColor = XleColor.White;
 
 			for (int i = 0; i < 17; i++)
 			{
@@ -1119,6 +1120,7 @@ namespace ERY.Xle
 
 		}
 
+		public static Color PlayerColor { get; set; }
 		/// <summary>
 		/// Draws the player character.
 		/// </summary>
@@ -1126,13 +1128,7 @@ namespace ERY.Xle
 		/// <param name="vertLine"></param>
 		static void DrawCharacter(bool animating, int animFrame, int vertLine)
 		{
-			if (g.invisible)
-				DrawCharacter(animating, animFrame, vertLine, XleColor.Gray);
-			else if (g.guard)
-				DrawCharacter(animating, animFrame, vertLine, XleColor.Yellow);
-			else
-				DrawCharacter(animating, animFrame, vertLine, XleColor.White);
-
+			DrawCharacter(animating, animFrame, vertLine, PlayerColor);
 		}
 		static void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
 		{
@@ -2169,10 +2165,11 @@ namespace ERY.Xle
 					player.X = ep.Location.X;
 					player.Y = ep.Location.Y;
 					player.DungeonLevel = ep.DungeonLevel;
-					player.FaceDirection = ep.Facing;
 
-					if (player.FaceDirection == Direction.None)
-						player.FaceDirection = Direction.South;
+					if (ep.Facing != Direction.None)
+					{
+						player.FaceDirection = ep.Facing;
+					}
 				}
 
 				if (mMapID != 0)

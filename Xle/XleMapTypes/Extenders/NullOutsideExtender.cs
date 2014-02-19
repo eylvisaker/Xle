@@ -1,18 +1,29 @@
-﻿using System;
+﻿using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleEventTypes.Extenders;
+using ERY.Xle.XleEventTypes.Extenders.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace ERY.Xle.XleMapTypes.Extenders
 {
-	class NullOutsideExtender : IOutsideExtender
+	public class NullOutsideExtender : NullMapExtender, IOutsideExtender
 	{
-		public virtual int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			return 0;
 		}
 
-		public virtual void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
+		public override IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		{
+			if (evt is ChangeMapEvent)
+				return new ChangeMapQuestion();
+			else
+				return base.CreateEventExtender(evt, defaultExtender);
+		}
+
+		public override void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
 		{
 
 			fontColor = XleColor.White;

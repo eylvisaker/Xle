@@ -5,19 +5,19 @@ using System.Text;
 
 namespace ERY.Xle.XleMapTypes.Extenders
 {
-	abstract class LotaDungeonExtenderBase : IDungeonExtender
+	abstract class LotaDungeonExtenderBase : NullDungeonExtender
 	{
 		int mBoxesOpened = 0;
 
 		protected abstract string CompleteVariable { get; }
 		protected abstract int StrengthBoost { get; }
 
-		public void OnLoad(Player player)
+		public override void OnLoad(Player player)
 		{
 			player.Variables["BeenInDungeon"] = 1;
 		}
 
-		public void OnPlayerExitDungeon(Player player)
+		public override void OnPlayerExitDungeon(Player player)
 		{
 			if (player.Variables.ContainsKey(CompleteVariable))
 				return;

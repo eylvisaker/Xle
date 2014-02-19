@@ -132,6 +132,7 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="GameState.cs" />
     <Compile Include="ItemContainer.cs" />
     <Compile Include="IXleTitleScreen.cs" />
     <Compile Include="Maps\EntryPoint.cs" />
@@ -142,6 +143,10 @@
     <Compile Include="Data\Data.cs" />
     <Compile Include="TileInfo.cs" />
     <Compile Include="TileSet.cs" />
+    <Compile Include="XleEventTypes\Extenders\ChangeMapExtender.cs" />
+    <Compile Include="XleEventTypes\Extenders\Common\ChangeMapQuestion.cs" />
+    <Compile Include="XleEventTypes\Extenders\IEventExtender.cs" />
+    <Compile Include="XleEventTypes\Extenders\NullEventExtender.cs" />
     <Compile Include="XleGameFactory.cs" />
     <Compile Include="XleMapTypes\Extenders\ICastleExtender.cs" />
     <Compile Include="XleMapTypes\Extenders\IDungeonExtender.cs" />
@@ -162,7 +167,7 @@
     <Compile Include="IHasRoofs.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="MapData.cs" />
-    <Compile Include="XleEventList.cs" />
+    <Compile Include="XleEventTypes\XleEventList.cs" />
     <Compile Include="XleEventTypes\ChangeMapEvent.cs" />
     <Compile Include="XleEventTypes\ItemAvailableEvent.cs" />
     <Compile Include="XleEventTypes\Store.cs" />
@@ -181,7 +186,7 @@
     <Compile Include="Monster.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Sounds.cs" />
-    <Compile Include="XleEvent.cs" />
+    <Compile Include="XleEventTypes\XleEvent.cs" />
     <Compile Include="SubMenu.cs" />
     <Compile Include="XleMapTypes\MuseumDisplays\AncientArtifact.cs" />
     <Compile Include="XleMapTypes\MuseumDisplays\Exhibit.cs" />

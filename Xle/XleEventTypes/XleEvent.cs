@@ -8,6 +8,7 @@ using AgateLib.Geometry;
 using AgateLib.InputLib;
 using AgateLib.Serialization.Xle;
 using System.ComponentModel;
+using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle
 {
@@ -15,6 +16,7 @@ namespace ERY.Xle
 	public abstract class XleEvent : IXleSerializable
 	{
 		private Rectangle rect;
+		IEventExtender extender;
 
 		[Browsable(false)]
 		public Rectangle Rectangle
@@ -125,6 +127,18 @@ namespace ERY.Xle
 		}
 
 		#endregion
+
+		protected virtual Type ExtenderType { get { return typeof(NullEventExtender); } }
+		public void CreateExtender(XleMap map)
+		{
+			extender = CreateExtenderImpl(map);
+			extender.TheEvent = this;
+		}
+
+		protected virtual IEventExtender CreateExtenderImpl(XleMap map)
+		{
+			return map.CreateEventExtender(this, ExtenderType);
+		}
 
 		/// <summary>
 		/// Function called when player speaks in a square inside or next

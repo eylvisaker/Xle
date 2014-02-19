@@ -8,6 +8,7 @@ using AgateLib.Geometry;
 using AgateLib.InputLib;
 using AgateLib.Serialization.Xle;
 using System.ComponentModel;
+using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.XleEventTypes
 {
@@ -18,6 +19,21 @@ namespace ERY.Xle.XleEventTypes
 		private bool mAsk = true;
 		private Point mLocation;
 		private string mCommandText = "";
+		ChangeMapExtender mExtender;
+
+		protected override Type ExtenderType
+		{
+			get
+			{
+				return typeof(ChangeMapExtender);
+			}
+		}
+		protected override IEventExtender CreateExtenderImpl(XleMap map)
+		{
+			mExtender = (ChangeMapExtender)base.CreateExtenderImpl(map);
+
+			return mExtender;
+		}
 
 		/// <summary>
 		/// Text used as a command.
@@ -78,7 +94,7 @@ namespace ERY.Xle.XleEventTypes
 			info.Write("AskUser", mAsk);
 			info.Write("TargetEntryPoint", TargetEntryPoint);
 			info.Write("TargetX", TargetX);
-			info.Write("TargetY", TargetY); 
+			info.Write("TargetY", TargetY);
 			info.Write("CommandText", mCommandText);
 		}
 		protected override void ReadData(XleSerializationInfo info)
@@ -102,89 +118,63 @@ namespace ERY.Xle.XleEventTypes
 			if (player.X >= X + Width) return false;
 			if (player.Y >= Y + Height) return false;
 
-			string line = "Enter ";
-			string newTownName = "";
-			int choice = 0;
+			if (MapID != 0 && VerifyMapExistence() == false)
+				return false;
 
-			MenuItemList theList = new MenuItemList("Yes", "No");
+			bool cancel = false;
 
-			if (mMapID != 0)
+			mExtender.OnStepOn(new GameState(player, XleCore.Map), ref cancel);
+
+			if (cancel)
+				return false;
+
+			try
 			{
-				try
-				{
-					newTownName = XleCore.GetMapName(mMapID);
-				}
-				catch
-				{
-					SoundMan.PlaySound(LotaSound.Medium);
-
-					g.AddBottom("");
-					g.AddBottom("Map ID " + mMapID + " not found.");
-					g.AddBottom("");
-
-					XleCore.wait(1500);
-
-					return false;
-				}
-				line += newTownName + "?";
-
-				if (Ask)
-				{
-					g.AddBottom("");
-					g.AddBottom(line);
-
-					SoundMan.PlaySound(LotaSound.Question);
-
-					choice = XleCore.QuickMenu(theList, 3);
-				}
-				else
-				{
-					g.AddBottom("");
-					g.AddBottom("Leave " + XleCore.Map.MapName);
-
-					XleCore.wait(1000);
-				}
-				if (string.IsNullOrEmpty(CommandText) == false)
-				{
-					g.AddBottom("");
-					g.AddBottom(string.Format(CommandText, XleCore.Map.MapName, newTownName));
-
-					g.AddBottom("");
-					XleCore.wait(500);
-
-					choice = 0;
-				}
-
+				XleCore.ChangeMap(player, mMapID, TargetEntryPoint, TargetX, TargetY);
 			}
-			else
+			catch (Exception e)
 			{
-				SoundMan.PlaySoundSync(LotaSound.Teleporter);
+				System.Diagnostics.Debug.WriteLine(e.Message);
+
+				SoundMan.PlaySound(LotaSound.Medium);
+
+				ColorStringBuilder builder = new ColorStringBuilder();
+
+				builder.AddText("Failed to load ", XleColor.White);
+				builder.AddText(GetMapName(), XleColor.Red);
+				builder.AddText(".", XleColor.White);
+
+				g.AddBottom(builder);
+				g.AddBottom("");
+
+				XleCore.wait(1500);
 			}
 
-			if (choice == 0)
+			return true;
+		}
+
+		public string GetMapName()
+		{
+			return XleCore.GetMapName(mMapID);
+		}
+
+		private bool VerifyMapExistence()
+		{
+			try
 			{
-				try
-				{
-					XleCore.ChangeMap(player, mMapID, TargetEntryPoint, TargetX, TargetY);
-					
-				}
-				catch (Exception e)
-				{
-					System.Diagnostics.Debug.WriteLine(e.Message);
+				string mapName = GetMapName();
+			}
+			catch
+			{
+				SoundMan.PlaySound(LotaSound.Medium);
 
-					SoundMan.PlaySound(LotaSound.Medium);
+				g.AddBottom("");
+				g.AddBottom("Map ID " + mMapID + " not found.");
+				g.AddBottom("");
 
-					ColorStringBuilder builder = new ColorStringBuilder();
+				XleCore.wait(1500);
 
-					builder.AddText("Failed to load ", XleColor.White);
-					builder.AddText(newTownName, XleColor.Red);
-					builder.AddText(".", XleColor.White);
-
-					g.AddBottom(builder);
-					g.AddBottom("");
-
-					XleCore.wait(1500);
-				}
+				return false;
 			}
 
 			return true;
