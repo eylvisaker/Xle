@@ -624,12 +624,12 @@ namespace ERY.Xle
 			if (groupsToAnimate.Count == 0)
 				return;
 
-			for (int j = rectangle.Top; j <= rectangle.Bottom; j++)
+			for (int j = 0; j <= Height; j++)
 			{
-				for (int i = rectangle.Left; i <= rectangle.Right; i++)
+				for (int i = 0; i <= Width; i++)
 				{
 					int current = this[i, j];
-					TileGroup group = groupsToAnimate.FirstOrDefault(x => x.Tiles.Contains(current)); 
+					TileGroup group = groupsToAnimate.FirstOrDefault(x => x.Tiles.Contains(current));
 
 					if (group == null) continue;
 					if (group.AnimationType == AnimationType.None) continue;
@@ -657,7 +657,10 @@ namespace ERY.Xle
 							break;
 					}
 
-					this[i, j] = nextTile;
+					if (group.AnimateChance == 100 || XleCore.random.Next(100) < group.AnimateChance)
+					{
+						this[i, j] = nextTile;
+					}
 				}
 			}
 		}

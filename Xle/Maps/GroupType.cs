@@ -13,6 +13,7 @@ namespace ERY.Xle.Maps
 		Merchant,
 		Door,
 		PrisonBars,
+		Water,
 
 		Special1,
 		Special2,

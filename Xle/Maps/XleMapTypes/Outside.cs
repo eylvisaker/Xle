@@ -956,10 +956,10 @@ namespace ERY.Xle.XleMapTypes
 					{
 						if (XleCore.random.Next(0, 1000) < 20 * (Stormy + 1))
 						{
-							waves[index] = 1;
+							waves[index] = XleCore.random.Next(1, 3);
 						}
 					}
-					else if (tile == 1)
+					else if (tile == 1 || tile == 2)
 					{
 						if (XleCore.random.Next(0, 100) < 25)
 						{

@@ -11,6 +11,7 @@ namespace ERY.Xle.Maps
 		public TileGroup()
 		{
 			Tiles = new List<int>();
+			AnimateChance = 100;
 		}
 
 		public List<int> Tiles { get; set; }
@@ -21,6 +22,7 @@ namespace ERY.Xle.Maps
 			info.Write("AnimationTime", AnimationTime);
 			info.WriteEnum("AnimationType", AnimationType, false);
 			info.WriteEnum("GroupType", GroupType, false);
+			info.Write("AnimateChance", AnimateChance);
 		}
 
 		void IXleSerializable.ReadData(XleSerializationInfo info)
@@ -29,13 +31,24 @@ namespace ERY.Xle.Maps
 			AnimationType = info.ReadEnum<AnimationType>("AnimationType", Maps.AnimationType.Random);
 			AnimationTime = info.ReadInt32("AnimationTime", 50);
 			GroupType = info.ReadEnum<GroupType>("GroupType", Maps.GroupType.None);
+			AnimateChance = info.ReadInt32("AnimateChance", 100);
 		}
 
 		public AnimationType AnimationType { get; set; }
 		public int AnimationTime { get; set; }
-
+		public int AnimateChance { get; set; }
 		public GroupType GroupType { get; set; }
 
+		public string GroupContents
+		{
+			get
+			{
+				if (Tiles.Count == 0)
+					return "{empty}";
+
+				return string.Join(",", Tiles.ToArray());
+			}
+		}
 
 		#region --- Unserialized Properties ---
 
