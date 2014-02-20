@@ -68,6 +68,7 @@
     <Compile Include="MapExtenders\Labyrinth\LabyrinthBase.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthUpper.cs" />
     <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />
+    <Compile Include="MapExtenders\Temples\TempleExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TitleScreen\LobTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -100,6 +101,7 @@
     </None>
     <None Include="LoB\Maps\Castle.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="LoB\Maps\Citadel1.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

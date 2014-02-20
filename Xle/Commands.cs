@@ -434,7 +434,7 @@ namespace ERY.Xle
 
 			foreach (int i in XleCore.ItemList.Keys)
 			{
-				if (player.Item(i) > 0)
+				if (player.Items[i] > 0)
 				{
 					string itemName = XleCore.ItemList[i].Name;
 

@@ -7,7 +7,7 @@ namespace ERY.Xle
 {
 	public class ItemContainer
 	{
-		int[] mItems = new int[30];
+		int[] mItems = new int[50];
 
 		[Obsolete]
 		public int[] ItemArray { get { return mItems; } set { mItems = value; } }
@@ -19,6 +19,11 @@ namespace ERY.Xle
 		}
 
 		public int this[LotaItem index]
+		{
+			get { return mItems[(int)index]; }
+			set { mItems[(int)index] = value; }
+		}
+		public int this[LobItem index]
 		{
 			get { return mItems[(int)index]; }
 			set { mItems[(int)index] = value; }
@@ -65,5 +70,6 @@ namespace ERY.Xle
 	public enum LobItem
 	{
 
+		FalconFeather = 18,
 	}
 }

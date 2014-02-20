@@ -24,11 +24,12 @@ namespace ERY.Xle.LoB.TitleScreen
 			{
 				Player = new Player();
 
-				Player.SetMap(1, 80, 80);
+				Player.SetMap(1, 126, 52);
 
-				Player.X = 80;
-				Player.Y = 80;
+				Player.X = 126;
+				Player.Y = 52;
 
+				Player.Items[LobItem.FalconFeather] = 1;
 			}
 
 			firstRun = true;

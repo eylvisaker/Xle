@@ -1,6 +1,7 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using ERY.Xle.LotA.MapExtenders.Castle;
+using ERY.Xle.LotA.MapExtenders.Fortress;
 using ERY.Xle.LotA.TitleScreen;
 using ERY.Xle.XleMapTypes;
 using ERY.Xle.XleMapTypes.Extenders;
@@ -72,6 +73,8 @@ namespace ERY.Xle.LotA
 		{
 			if (castle.ExtenderName.ToLowerInvariant() == "castle1")
 				return new CastleGround();
+			if (castle.ExtenderName.ToLowerInvariant() == "fortress1")
+				return new FortressEntry();
 
 			return base.CreateMapExtender(castle);
 		}
