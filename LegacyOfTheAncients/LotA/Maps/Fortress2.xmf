@@ -4,7 +4,64 @@
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,0,0,0,1,0,0,0,1,1,0,0,1,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,1,0,1,1,0,1,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,0,0,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,1,0,0,0,1,1,0,1,1,1,1</Tiles>
-    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
+    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup">
+      <Item>
+        <Tiles array="true" encoding="Csv">12,13,14,15,28,29,30,31,44,45,46,47,60,61,62,63</Tiles>
+        <AnimationTime>125</AnimationTime>
+        <AnimationType>Random</AnimationType>
+        <GroupType>Water</GroupType>
+        <AnimateChance>50</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">112,113,128,129</Tiles>
+        <AnimationTime>0</AnimationTime>
+        <AnimationType>None</AnimationType>
+        <GroupType>Chest</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">114,115,130,131</Tiles>
+        <AnimationTime>0</AnimationTime>
+        <AnimationType>None</AnimationType>
+        <GroupType>OpenChest</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">116,117,132,133</Tiles>
+        <AnimationTime>0</AnimationTime>
+        <AnimationType>None</AnimationType>
+        <GroupType>Chest</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">118,119,134,135</Tiles>
+        <AnimationTime>0</AnimationTime>
+        <AnimationType>None</AnimationType>
+        <GroupType>OpenChest</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">80</Tiles>
+        <AnimationTime>0</AnimationTime>
+        <AnimationType>None</AnimationType>
+        <GroupType>PrisonBars</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">48,49,50</Tiles>
+        <AnimationTime>0</AnimationTime>
+        <AnimationType>None</AnimationType>
+        <GroupType>Special1</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">64,65,66,67</Tiles>
+        <AnimationTime>250</AnimationTime>
+        <AnimationType>Loop</AnimationType>
+        <GroupType>None</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
+    </TileGroups>
   </TileSet>
   <TileImage>LotaFortress</TileImage>
   <DefaultTile>0</DefaultTile>
