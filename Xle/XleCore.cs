@@ -146,7 +146,20 @@ namespace ERY.Xle
 			AgateConsole.Commands.Add("goto", new Action<string>(CheatGoto));
 			AgateConsole.Commands.Add("move", new Action<int, int, int>(CheatMove));
 			AgateConsole.Commands.Add("godmode", new Action(CheatGod));
+			AgateConsole.Commands.Add("killall", new Action(CheatKillAll));
+		}
 
+		[Description("Kills all the guards on the map.")]
+		private void CheatKillAll()
+		{
+			if (Map is IHasGuards == false)
+			{
+				throw new InvalidOperationException("There are no guards on this map.");
+			}
+
+			var mp = Map as IHasGuards;
+
+			mp.Guards.Clear();
 		}
 
 		string CommandProcessor_DescribeCommand(string command)
