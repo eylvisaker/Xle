@@ -56,10 +56,10 @@
     <Item ID="1" Name="Gold Armband" Action="Twist"/>
     <Item ID="2" Name="Climbing Gear" Action="Ready"/>
     <Item ID="3" Name="Healing Herb" Action="Eat" />
-    <Item ID="4" Name="Iron Key" />
-    <Item ID="5" Name="Copper Key" />
-    <Item ID="6" Name="Brass Key" />
-    <Item ID="7" Name="Stone Key" />
+    <Item ID="4" Name="Iron Key" isKey="true" />
+    <Item ID="5" Name="Copper Key" isKey="true"/>
+    <Item ID="6" Name="Brass Key" isKey="true" />
+    <Item ID="7" Name="Stone Key" isKey="true"/>
     <Item ID="8" Name="Magic Seed" Action="Eat"/>
     <Item ID="9" Name="Mail" />
     <Item ID="10" Name="Tulip" />

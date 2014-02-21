@@ -18,6 +18,12 @@ namespace ERY.Xle
 		private Rectangle rect;
 		IEventExtender extender;
 
+		public XleEvent()
+		{
+		}
+
+		public string ExtenderName { get; set; }
+
 		[Browsable(false)]
 		public Rectangle Rectangle
 		{
@@ -78,17 +84,6 @@ namespace ERY.Xle
 
 			XleCore.wait(1000);
 		}
-		public XleEvent()
-		{
-			/*
-			data = new byte[g.map.SpecialDataLength() + 1];
-
-			data[0] = 0;
-
-			robbed = 0;
-			id = -1;
-			*/
-		}
 
 		#region IXleSerializable Members
 
@@ -98,6 +93,7 @@ namespace ERY.Xle
 			info.Write("Y", rect.Y);
 			info.Write("Width", rect.Width);
 			info.Write("Height", rect.Height);
+			info.Write("ExtenderName", ExtenderName);
 
 			WriteData(info);
 		}
@@ -107,6 +103,7 @@ namespace ERY.Xle
 			rect.Y = info.ReadInt32("Y");
 			rect.Width = info.ReadInt32("Width");
 			rect.Height = info.ReadInt32("Height");
+			ExtenderName = info.ReadString("ExtenderName", "");
 
 			ReadData(info);
 		}
@@ -148,9 +145,12 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Speak(Player player)
+		public virtual bool Speak(GameState state)
 		{
-			return false;
+			bool handled = false;
+			extender.Speak(state, ref handled);
+
+			return handled;
 		}
 		/// <summary>
 		/// Function called when player executes Rob in a square inside or next
@@ -160,9 +160,12 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Rob(Player player)
+		public virtual bool Rob(GameState state)
 		{
-			return false;
+			bool handled = false;
+			extender.Rob(state, ref handled);
+
+			return handled;
 		}
 		/// <summary>
 		/// Function called when the player executes the Open command inside
@@ -172,9 +175,12 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Open(Player player)
+		public virtual bool Open(GameState state)
 		{
-			return false;
+			bool handled = false;
+			extender.Open(state, ref handled);
+
+			return handled;
 		}
 		/// <summary>
 		/// Function called when the player executes the Take command inside
@@ -184,9 +190,12 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Take(Player player)
+		public virtual bool Take(GameState state)
 		{
-			return false;
+			bool handled = false;
+			extender.Take(state, ref handled);
+
+			return handled;
 		}
 		/// <summary>
 		/// Function called when the player walks inside
@@ -196,13 +205,16 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool StepOn(Player player)
+		public virtual bool StepOn(GameState state)
 		{
-			return false;
+			bool handled = false;
+			extender.StepOn(state, ref handled);
+
+			return handled;
 		}
 		/// <summary>
 		/// Function called when the player tries to walk inside
-		/// the LotaEvent.
+		/// the XleEvent.
 		/// 
 		/// This is before the position is updated.  Returns false to 
 		/// block the player from stepping there, and true if the
@@ -212,22 +224,26 @@ namespace ERY.Xle
 		/// <param name="dx"></param>
 		/// <param name="dy"></param>
 		/// <returns></returns>
-		public virtual bool TryToStepOn(Player player, int dx, int dy)
+		public virtual void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
 		{
-			return true;
+			allowStep = true;
+			extender.TryToStepOn(state, dx, dy, ref allowStep);
 		}
 		/// <summary>
 		/// Function called when the player uses an item
-		/// or next to the LotaEvent.
+		/// or next to the XleEvent.
 		/// 
 		/// Returns true if handled by the event.
 		/// </summary>
 		/// <param name="player"></param>
 		/// <param name="item"></param>
 		/// <returns></returns>
-		public virtual bool Use(Player player, int item)
+		public virtual bool Use(GameState state, int item)
 		{
-			return false;
+			bool handled = false;
+			extender.Use(state, item, ref handled);
+
+			return handled;
 		}
 		/// <summary>
 		/// Function called when the player eXamines next
@@ -237,9 +253,12 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Xamine(Player player)
+		public virtual bool Xamine(GameState state)
 		{
-			return false;
+			bool handled = false;
+			extender.Xamine(state, ref handled);
+
+			return handled;
 		}
 
 	}
@@ -247,34 +266,6 @@ namespace ERY.Xle
 
 namespace ERY.Xle.XleEventTypes
 {
-	
 
-	[Serializable]
-	public class Door : XleEvent
-	{
-		int mItem;
 
-		protected override void ReadData(XleSerializationInfo info)
-		{
-			mItem = info.ReadInt32("RequiredItem", 0);
-		}
-		protected override void WriteData(XleSerializationInfo info)
-		{
-			info.Write("RequiredItem", mItem);
-		}
-
-		public int RequiredItem
-		{
-			get { return mItem; }
-			set { mItem = value; }
-		}
-
-		public override bool Use(Player player, int item)
-		{
-			g.AddBottom("");
-			g.AddBottom("The door just laughs at you.");
-
-			return true;
-		}
-	}
 }

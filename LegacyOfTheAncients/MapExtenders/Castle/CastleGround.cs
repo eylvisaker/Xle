@@ -16,5 +16,93 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			else
 				return base.GetOutsideTile(playerPoint, x, y);
 		}
+
+		public override void PlayerUse(Player player, int item, ref bool handled)
+		{
+
+			switch (item)
+			{
+				case 4:			// Iron Key
+				case 5:			// Copper Key
+				case 6:			// Brass Key
+				case 7:			// Stone Key
+					handled = UseKey(player);
+					break;
+
+				case 8:				// magic seeds
+					handled = UseMagicSeeds(player);
+					break;
+
+				case 12:				// magic ice
+					handled = UseMagicIce(player);
+					break;
+			}
+		}
+		private bool UseMagicIce(Player player)
+		{
+			XleCore.wait(250);
+
+			var evt = TheMap.GetEvent<XleEventTypes.MagicIce>(player, 1);
+
+			if (evt == null)
+				return false;
+
+			for (int j = evt.Rectangle.Top; j < evt.Rectangle.Bottom; j++)
+			{
+				for (int i = evt.Rectangle.Left; i < evt.Rectangle.Right; i++)
+				{
+					int m = TheMap[i, j];
+
+					if (m % 16 >= 13 && m / 16 <= 2)
+					{
+						TheMap[i, j] = m - 8;
+					}
+				}
+			}
+
+			return true;
+		}
+
+		private bool UseMagicSeeds(Player player)
+		{
+			XleCore.wait(150);
+
+			g.invisible = true;
+			g.AddBottom("You're invisible.");
+
+			((IHasGuards)TheMap).IsAngry = false;
+
+			XleCore.wait(500);
+
+			player.ItemCount(8, -1);
+
+			return true;
+		}
+
+		private bool UseKey(Player player)
+		{
+			bool found = false;
+
+			var door = TheMap.GetEvent<XleEventTypes.Door>(player, 1);
+
+			if (door != null && door.RequiredItem == player.Hold)
+			{
+				found = true;
+
+				g.AddBottom("Unlock door");
+
+				
+			}
+
+			if (found == false)
+			{
+				g.AddBottom("");
+
+				XleCore.wait(300 + 200 * player.Gamespeed);
+				g.UpdateBottom("This key does nothing here.");
+			}
+
+			return true;
+		}
 	}
 }

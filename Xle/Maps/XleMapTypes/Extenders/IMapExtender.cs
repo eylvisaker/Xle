@@ -18,5 +18,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine);
 
 		int StepSize { get; }
+
+		void PlayerUse(Player player, int item, ref bool handled);
 	}
 }

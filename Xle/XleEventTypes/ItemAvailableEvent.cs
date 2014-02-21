@@ -123,18 +123,18 @@ namespace ERY.Xle.XleEventTypes
 
 	public class TakeEvent : ItemAvailableEvent
 	{
-		public override bool Take(Player player)
+		public override bool Take(GameState state)
 		{
-			return OpenImpl(player, true);
+			return OpenImpl(state.Player, true);
 		}
 	}
 	public class TreasureChestEvent : ItemAvailableEvent
 	{
-		public override bool Open(Player player)
+		public override bool Open(GameState state)
 		{
-			return OpenImpl(player, false);
+			return OpenImpl(state.Player, false);
 		}
-		public override bool Take(Player player)
+		public override bool Take(GameState state)
 		{
 			g.AddBottom();
 			g.AddBottom("You can't \"take\" the whole chest.");

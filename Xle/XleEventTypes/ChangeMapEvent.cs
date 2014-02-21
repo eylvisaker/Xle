@@ -111,8 +111,10 @@ namespace ERY.Xle.XleEventTypes
 			mCommandText = info.ReadString("CommandText", "");
 		}
 
-		public override bool StepOn(Player player)
+		public override bool StepOn(GameState state)
 		{
+			var player = state.Player;
+
 			if (player.X < X) return false;
 			if (player.Y < Y) return false;
 			if (player.X >= X + Width) return false;

@@ -36,5 +36,10 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		{
 			get { return 1; }
 		}
+
+
+		public virtual void PlayerUse(Player player, int item, ref bool handled)
+		{
+		}
 	}
 }

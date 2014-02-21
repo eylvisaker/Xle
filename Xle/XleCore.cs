@@ -368,10 +368,10 @@ namespace ERY.Xle
 			inst.mDatabase = new Data.AgateDataImport(_db);
 		}
 
-		private static string GetOptionalAttribute(XmlNode node, string attrib, string defaultValue)
+		private static T GetOptionalAttribute<T>(XmlNode node, string attrib, T defaultValue)
 		{
 			if (node.Attributes[attrib] != null)
-				return node.Attributes[attrib].Value;
+				return (T)Convert.ChangeType(node.Attributes[attrib].Value, typeof(T));
 			else
 				return defaultValue;
 		}
@@ -398,8 +398,12 @@ namespace ERY.Xle
 				string name = node.Attributes["Name"].Value;
 				string action = GetOptionalAttribute(node, "Action", "");
 				string longName = GetOptionalAttribute(node, "LongName", "");
+				bool isKey = GetOptionalAttribute(node, "isKey", false);
 
-				mItemList.Add(id, name, longName, action);
+				mItemList.Add(id, new ItemInfo(id, name, longName, action)
+				{ 
+					 IsKey = isKey
+				});
 			}
 		}
 		private void LoadMagicInfo(XmlNode xmlNode)

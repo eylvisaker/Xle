@@ -318,7 +318,7 @@ namespace ERY.Xle.XleEventTypes
 				return false;
 		}
 
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
 			g.AddBottom(ShopName, XleColor.Yellow);
 			g.AddBottom("");
@@ -333,7 +333,8 @@ namespace ERY.Xle.XleEventTypes
 
 			return true;
 		}
-		public override bool Rob(Player player)
+
+		public override bool Rob(GameState state)
 		{
 			if (Robbed)
 			{
@@ -353,7 +354,7 @@ namespace ERY.Xle.XleEventTypes
 				return true;
 			}
 
-			player.Gold += value;
+			state.Player.Gold += value;
 			g.AddBottom();
 			g.AddBottom("You get " + value.ToString() + " gold.", XleColor.Yellow);
 			XleCore.wait(1000);
@@ -383,8 +384,9 @@ namespace ERY.Xle.XleEventTypes
 			fontColor = XleColor.White;
 			titleColor = XleColor.White;
 		}
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
 			int i = 0;
 			int max = 200 * player.Level;
 			int choice;
@@ -543,8 +545,10 @@ namespace ERY.Xle.XleEventTypes
 			fontColor = XleColor.White;
 			titleColor = XleColor.Yellow;
 		}
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
+
 			int i = 0;
 			int choice;
 			int amount;
@@ -647,8 +651,10 @@ namespace ERY.Xle.XleEventTypes
 
 		protected abstract string StoreType { get; }
 
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
+
 			if (CheckLoan(player, true))
 				return true;
 
@@ -952,8 +958,10 @@ namespace ERY.Xle.XleEventTypes
 			else
 				return false;
 		}
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
+
 			int choice = 0;
 			int raftCost = (int)(400 * this.CostFactor);
 			int gearCost = (int)(50 * this.CostFactor);
@@ -1080,8 +1088,10 @@ namespace ERY.Xle.XleEventTypes
 				backColor = XleColor.LightBlue;
 		}
 
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
+
 			if (CheckLoan(player, true))
 				return true;
 
@@ -1202,8 +1212,10 @@ namespace ERY.Xle.XleEventTypes
 	}
 	public class StoreFortune : Store
 	{
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
+
 			if (CheckLoan(player, true))
 				return true;
 
@@ -1247,8 +1259,10 @@ namespace ERY.Xle.XleEventTypes
 
 		bool skipMailOffer = false;
 
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
+
 			if (CheckLoan(player, true))
 				return true;
 
@@ -1434,9 +1448,9 @@ namespace ERY.Xle.XleEventTypes
 
 		int robCount;
 
-		public override bool Rob(Player player)
+		public override bool Rob(GameState state)
 		{
-			this.player = player;
+			this.player = state.Player;
 
 			SetTitle();
 			Wait(1);
@@ -1478,8 +1492,10 @@ namespace ERY.Xle.XleEventTypes
 
 	public class StoreVault : Store
 	{
-		public override bool Speak(Player player)
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
+
 			return false;
 		}
 	}
@@ -1495,8 +1511,11 @@ namespace ERY.Xle.XleEventTypes
 			fontColor = XleColor.Cyan;
 			titleColor = XleColor.White;
 		}
-		public override bool Speak(Player player)
+		
+		public override bool Speak(GameState state)
 		{
+			var player = state.Player;
+
 			if (CheckLoan(player, true))
 				return true;
 

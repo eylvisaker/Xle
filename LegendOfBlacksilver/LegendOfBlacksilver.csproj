@@ -61,6 +61,9 @@
   <ItemGroup>
     <Compile Include="LobFactory.cs" />
     <Compile Include="LobProgram.cs" />
+    <Compile Include="MapExtenders\Castle\EventExtenders\CastleDoor.cs" />
+    <Compile Include="MapExtenders\Castle\EventExtenders\King.cs" />
+    <Compile Include="MapExtenders\Castle\EventExtenders\Seravol.cs" />
     <Compile Include="MapExtenders\Citadel\CitadelGround.cs" />
     <Compile Include="MapExtenders\Citadel\CitadelUpper.cs" />
     <Compile Include="MapExtenders\Castle\DurekCastle.cs" />

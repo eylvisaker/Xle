@@ -1,4 +1,6 @@
-﻿using ERY.Xle.XleMapTypes.Extenders;
+﻿using ERY.Xle.LoB.MapExtenders.Castle.EventExtenders;
+using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,21 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 {
 	class DurekCastle : NullCastleExtender
 	{
+		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		{
+			if (evt is Door)
+				return new CastleDoor();
+			if (evt is SpeakToPerson)
+			{
+				switch(evt.ExtenderName)
+				{
+					case "King": return new King();
+					case "Seravol": return new Seravol();
+				}
+			}
+
+			return base.CreateEventExtender(evt, defaultExtender);
+		}
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			if (playerPoint.X < 12 && playerPoint.Y < 12)

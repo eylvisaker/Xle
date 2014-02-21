@@ -34,7 +34,7 @@ namespace ERY.Xle
 			Array.Clear(mItems, 4, 5);
 			Array.Clear(mItems, 10, 7);
 		}
-		public  void ClearCoins()
+		public void ClearCoins()
 		{
 			Array.Clear(mItems, 17, 7);
 		}
@@ -69,7 +69,43 @@ namespace ERY.Xle
 	}
 	public enum LobItem
 	{
-
+		Nothing = 0,
+		CrystalRing = 1,
+		LifeElixir = 2,
+		ClimbingGear = 3,
+		LaggardVapors = 4,
+		SmallKey = 5,
+		WoodenKey = 6,
+		GoldKey = 7,
+		BlackKey = 8,
+		IronKey = 9,
+		QuartzKey = 10,
+		LargeKey = 11,
+		AmberKey = 12,
+		SkeletonKey = 13,
+		Lodestone = 14,
+		RustyKey = 15,
+		RopeAndPulley = 16,
+		SilverCoin = 17,
 		FalconFeather = 18,
+		SingingCrystal = 19,
+		GlassOrb = 20,
+		OwlGrail = 21,
+		Statuette = 22,
+		Lute = 23,
+		Staff = 24,
+		SignetRing = 25,
+		BlackWand = 26,
+		FlaxtonIncense = 27,
+		SteelHammer = 28,
+		Blacksilver = 29,
+		DragonTear = 30,
+		BlueGem = 31,
+		RedGarnet = 32,
+		AmethystGem = 33,
+		Emerald = 34,
+		YellowDiamond = 35,
+		WhiteDiamond = 36,
+		Opal = 37,
 	}
 }

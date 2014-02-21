@@ -945,7 +945,7 @@ namespace ERY.Xle.XleMapTypes
 					return true;
 				}
 
-				handled = evt.Rob(player);
+				handled = evt.Rob(new GameState(player, this));
 				IsAngry = true;
 
 				if (handled)

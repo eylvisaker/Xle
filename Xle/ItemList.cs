@@ -10,6 +10,7 @@ namespace ERY.Xle
 		public string Name;
 		public string Action;
 		public string LongName;
+		public bool IsKey;
 
 		public ItemInfo(int id, string name, string longName, string action)
 		{
@@ -37,6 +38,11 @@ namespace ERY.Xle
 		public string GetName(int id)
 		{
 			return this[id].Name;
+		}
+
+		public bool IsKey(int item)
+		{
+			return this[item].IsKey;
 		}
 	}
 }

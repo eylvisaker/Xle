@@ -77,20 +77,20 @@
     <Item ID="2" Name="Life Elixir" Action="Drink"/>
     <Item ID="3" Name="Climbing Gear" Action="Ready" />
     <Item ID="4" Name="Laggard Vapors" />
-    <Item ID="5" Name="Small Key" />
-    <Item ID="6" Name="Wooden Key" />
-    <Item ID="7" Name="Gold Key" />
-    <Item ID="8" Name="Black Key" />
-    <Item ID="9" Name="Iron Key" />
-    <Item ID="10" Name="Quartz Key" />
-    <Item ID="11" Name="Large Key" />
-    <Item ID="12" Name="Amber Key" />
-    <Item ID="13" Name="Skeleton Key" />
+    <Item ID="5" Name="Small Key" isKey="true"/>
+    <Item ID="6" Name="Wooden Key" isKey="true"/>
+    <Item ID="7" Name="Gold Key" isKey="true"/>
+    <Item ID="8" Name="Black Key" isKey="true"/>
+    <Item ID="9" Name="Iron Key" isKey="true"/>
+    <Item ID="10" Name="Quartz Key" isKey="true"/>
+    <Item ID="11" Name="Large Key" isKey="true"/>
+    <Item ID="12" Name="Amber Key" isKey="true"/>
+    <Item ID="13" Name="Skeleton Key" isKey="true"/>
     <Item ID="14" Name="Lodestone" />
-    <Item ID="15" Name="Rusty Key" />
+    <Item ID="15" Name="Rusty Key" isKey="true"/>
     <Item ID="16" Name="Rope &amp; Pulley" />
     <Item ID="17" Name="Silver Coin" />
-    <Item ID="18" Name="Falcon Feather" />
+    <Item ID="18" Name="Falcon Feather" isKey="true"/>
     <Item ID="19" Name="Singing Crystal" />
     <Item ID="20" Name="Glass Orb" />
     <Item ID="21" Name="Owl Grail" />

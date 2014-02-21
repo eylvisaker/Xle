@@ -195,7 +195,7 @@ namespace ERY.Xle
 		private IMapExtender CreateExtender()
 		{
 			var retval = CreateExtenderImpl();
-			
+
 			retval.TheMap = this;
 
 			return retval;
@@ -211,6 +211,12 @@ namespace ERY.Xle
 			{
 				evt.CreateExtender(this);
 			}
+		}
+
+
+		public T CreateEventExtender<T>(XleEvent evt) where T : IEventExtender, new()
+		{
+			return (T)CreateEventExtender(evt, typeof(T));
 		}
 		public IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
@@ -620,7 +626,7 @@ namespace ERY.Xle
 		protected virtual void AnimateTiles(Rectangle rectangle)
 		{
 			List<TileGroup> groupsToAnimate = GetGroupsToAnimate().ToList();
-			
+
 			if (groupsToAnimate.Count == 0)
 				return;
 
@@ -970,11 +976,17 @@ namespace ERY.Xle
 		{
 			XleEvent evt = GetEvent(player.X + dx, player.Y + dy, 0);
 
-			if (evt != null && evt.TryToStepOn(player, dx, dy) == false)
-				return false;
+			if (evt != null)
+			{
+				bool allowStep;
 
-			else
-				return CheckMovementImpl(player, dx, dy);
+				evt.TryToStepOn(new GameState(player, this), dx, dy, out allowStep);
+
+				if (allowStep == false)
+					return false;
+			}
+			
+			return CheckMovementImpl(player, dx, dy);
 		}
 		/// <summary>
 		/// Checks to see if the player can move in the specified direction.
@@ -994,7 +1006,7 @@ namespace ERY.Xle
 			{
 				XleEvent evt = XleCore.Map.GetEvent(player, 0);
 
-				evt.StepOn(player);
+				evt.StepOn(new GameState(player, this));
 
 				didEvent = true;
 			}
@@ -1178,7 +1190,7 @@ namespace ERY.Xle
 
 			if (evt != null)
 			{
-				handled = evt.Speak(player);
+				handled = evt.Speak(new GameState(player, this));
 
 				if (handled)
 					return handled;
@@ -1242,6 +1254,30 @@ namespace ERY.Xle
 			return false;
 		}
 
+		/// <summary>
+		/// Returns true if there was an effect of using the item.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="item"></param>
+		/// <returns></returns>
+		public virtual bool PlayerUse(Player player, int item)
+		{
+			XleEvent evt = GetEvent(player, 1);
+			bool handled = false;
+
+			if (evt != null)
+			{
+				handled = evt.Use(new GameState(player, this), item);
+
+				if (handled)
+					return handled;
+			}
+
+			mBaseExtender.PlayerUse(player, item, ref handled);
+
+			return false;
+		}
+
 		#endregion
 		#region --- Animation ---
 
@@ -1261,16 +1297,6 @@ namespace ERY.Xle
 			return 0;
 		}
 
-		/// <summary>
-		/// Returns true if there was an effect of using the item.
-		/// </summary>
-		/// <param name="player"></param>
-		/// <param name="item"></param>
-		/// <returns></returns>
-		public virtual bool PlayerUse(Player player, int item)
-		{
-			return false;
-		}
 
 		/// <summary>
 		/// Called after a map is loaded.
@@ -1293,6 +1319,7 @@ namespace ERY.Xle
 		}
 
 		public string ExtenderName { get; set; }
+
 
 	}
 
