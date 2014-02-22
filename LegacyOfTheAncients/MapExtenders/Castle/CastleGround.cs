@@ -90,8 +90,6 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 				found = true;
 
 				g.AddBottom("Unlock door");
-
-				
 			}
 
 			if (found == false)
@@ -103,6 +101,24 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			}
 
 			return true;
+		}
+
+		public override void SpeakToGuard(GameState gameState, ref bool handled)
+		{
+			if (!g.invisible && !g.guard)
+			{
+
+			}
+			else if (g.invisible)
+			{
+				g.AddBottom("");
+				g.AddBottom("The guard looks startled.");
+				handled = true;
+			}
+			else if (g.guard)  // for fortress
+			{
+
+			}
 		}
 	}
 }

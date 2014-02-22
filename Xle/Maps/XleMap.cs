@@ -713,6 +713,41 @@ namespace ERY.Xle
 			return evt as T;
 		}
 
+		public IEnumerable<XleEvent> EventsAt(Player player, int border)
+		{
+			int px = player.X;
+			int py = player.Y;
+
+			return EventsAt(px, py, border);
+		}
+
+		private IEnumerable<XleEvent> EventsAt(int px, int py, int border)
+		{
+			foreach (var e in mEvents)
+			{
+				bool found = false;
+
+				for (int j = 0; j < 2; j++)
+				{
+					for (int i = 0; i < 2; i++)
+					{
+						int x = px + i;
+						int y = py + j;
+
+						if (x >= e.Rectangle.X - border && y >= e.Rectangle.Y - border &&
+							x < e.Rectangle.Right + border && y < e.Rectangle.Bottom + border)
+						{
+							found = true;
+
+						}
+					}
+				}
+
+				if (found)
+					yield return e;
+			}
+		}
+
 		/// <summary>
 		/// returns the special event at the specified location
 		/// </summary>
@@ -985,7 +1020,7 @@ namespace ERY.Xle
 				if (allowStep == false)
 					return false;
 			}
-			
+
 			return CheckMovementImpl(player, dx, dy);
 		}
 		/// <summary>
@@ -998,6 +1033,14 @@ namespace ERY.Xle
 		/// <returns></returns>
 		protected abstract bool CheckMovementImpl(Player player, int dx, int dy);
 
+
+		public void BeforeStepOn(Player player, int x, int y)
+		{
+			foreach (var evt in EventsAt(x, y, 0))
+			{
+				evt.BeforeStepOn(new GameState(player, this));
+			}
+		}
 		public void PlayerStep(Player player)
 		{
 			bool didEvent = false;
@@ -1185,12 +1228,11 @@ namespace ERY.Xle
 
 		public bool PlayerSpeak(Player player)
 		{
-			XleEvent evt = GetEvent(player, 1);
-			bool handled = false;
+			var evts = EventsAt(player, 1);
 
-			if (evt != null)
+			foreach (var evt in evts)
 			{
-				handled = evt.Speak(new GameState(player, this));
+				bool handled = evt.Speak(new GameState(player, this));
 
 				if (handled)
 					return handled;
@@ -1304,6 +1346,7 @@ namespace ERY.Xle
 		/// <param name="player"></param>
 		public virtual void OnLoad(Player player)
 		{
+			mBaseExtender.OnLoad(new GameState(player, this));
 		}
 
 

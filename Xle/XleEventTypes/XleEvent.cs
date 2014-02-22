@@ -261,6 +261,11 @@ namespace ERY.Xle
 			return handled;
 		}
 
+
+		public virtual void BeforeStepOn(GameState state)
+		{
+			extender.BeforeStepOn(state);
+		}
 	}
 }
 

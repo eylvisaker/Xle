@@ -73,10 +73,10 @@
   </Armor>
   <Items>
     <Item ID="0" Name="Nothing" />
-    <Item ID="1" Name="Crystal Ring" />
+    <Item ID="1" Name="Crystal Ring" Action="Rub"/>
     <Item ID="2" Name="Life Elixir" Action="Drink"/>
     <Item ID="3" Name="Climbing Gear" Action="Ready" />
-    <Item ID="4" Name="Laggard Vapors" />
+    <Item ID="4" Name="Laggard Vapors" Action="Uncork" />
     <Item ID="5" Name="Small Key" isKey="true"/>
     <Item ID="6" Name="Wooden Key" isKey="true"/>
     <Item ID="7" Name="Gold Key" isKey="true"/>
@@ -86,30 +86,31 @@
     <Item ID="11" Name="Large Key" isKey="true"/>
     <Item ID="12" Name="Amber Key" isKey="true"/>
     <Item ID="13" Name="Skeleton Key" isKey="true"/>
-    <Item ID="14" Name="Lodestone" />
+    <Item ID="14" Name="Lodestone" Action="Align"/>
     <Item ID="15" Name="Rusty Key" isKey="true"/>
-    <Item ID="16" Name="Rope &amp; Pulley" />
-    <Item ID="17" Name="Silver Coin" />
-    <Item ID="18" Name="Falcon Feather" isKey="true"/>
-    <Item ID="19" Name="Singing Crystal" />
-    <Item ID="20" Name="Glass Orb" />
-    <Item ID="21" Name="Owl Grail" />
-    <Item ID="22" Name="Statuette" />
-    <Item ID="23" Name="Lute" />
-    <Item ID="24" Name="Staff" />
-    <Item ID="25" Name="Signet Ring" />
-    <Item ID="26" Name="Black Wand" />
-    <Item ID="27" Name="Flaxton Incense" />
-    <Item ID="28" Name="Steel Hammer" />
-    <Item ID="29" Name="Blacksilver" />
-    <Item ID="30" Name="Dragon's Tears" />
-    <Item ID="31" Name="Blue Gem" />
-    <Item ID="32" Name="Red Garnet" />
-    <Item ID="33" Name="Amethyst Gem" />
-    <Item ID="34" Name="Emerald" />
-    <Item ID="35" Name="Yellow Diamond" />
-    <Item ID="36" Name="White Diamond" />
-    <Item ID="37" Name="Opal" />
+    <Item ID="16" Name="Pkg." Action="Look at"/>
+    <Item ID="17" Name="Rope &amp; Pulley" />
+    <Item ID="18" Name="Silver Coin" Action="Take out"/>
+    <Item ID="19" Name="Falcon Feather" Action="Display" isKey="true"/>
+    <Item ID="20" Name="Singing Crystal" Action="Stroke"/>
+    <Item ID="21" Name="Glass Orb" Action="Look Into"/>
+    <Item ID="22" Name="Owl Grail" Action="Drink From"/>
+    <Item ID="23" Name="Statuette" Action="Display"/>
+    <Item ID="24" Name="Lute" Action="Struf"/>
+    <Item ID="25" Name="Staff" Action="Pound"/>
+    <Item ID="26" Name="Signet Ring" Action="Stroke"/>
+    <Item ID="27" Name="Black Wand"  Action="Wave"/>
+    <Item ID="28" Name="Flaxton Incense" Action="Burn"/>
+    <Item ID="29" Name="Steel Hammer" Action="Pound"/>
+    <Item ID="30" Name="Blacksilver" Action="Hold"/>
+    <Item ID="31" Name="Dragon's Tears" />
+    <Item ID="32" Name="Blue Gem" />
+    <Item ID="33" Name="Red Garnet" />
+    <Item ID="34" Name="Amethyst Gem" />
+    <Item ID="35" Name="Emerald" />
+    <Item ID="36" Name="Yellow Diamond" />
+    <Item ID="37" Name="White Diamond" />
+    <Item ID="38" Name="Opal" />
   </Items>
   <MagicSpells>
 	  <MagicSpell ID="1" Name="Tongue of Flame" BasePrice="32" />

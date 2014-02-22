@@ -99,6 +99,7 @@ namespace ERY.Xle
 		#endregion
 	}
 
+	[Obsolete]
 	public class VariableContainer : IDictionary<string, int>, IXleSerializable
 	{
 		Dictionary<string, int> mValues = new Dictionary<string, int>();
@@ -269,7 +270,10 @@ namespace ERY.Xle
 
 		public int mailTown;
 
+		[Obsolete]
 		public VariableContainer Variables = new VariableContainer();
+
+		public IXleSerializable StoryData { get; set; }
 
 		string mName;
 
@@ -317,9 +321,9 @@ namespace ERY.Xle
 			armor[1] = 1;
 			armorQuality[1] = 0;
 
-			item[1] = 1;			// gold armband
-			item[15] = 1;			// compendium
-			item[17] = 2;			// jade coins
+			Items[LotaItem.GoldArmband] = 1;
+			Items[LotaItem.Compendium] = 1;
+			Items[LotaItem.JadeCoin] = 2;
 
 			vaultGold = 17;
 
@@ -360,7 +364,7 @@ namespace ERY.Xle
 			info.Write("Armor", armor);
 			info.Write("WeaponQuality", weaponQuality);
 			info.Write("ArmorQuality", armorQuality);
-			info.Write("Item", item);
+			info.Write("Item", Items);
 			info.Write("Hold", hold);
 
 			info.Write("LastAttacked", lastAttacked);
@@ -378,7 +382,7 @@ namespace ERY.Xle
 			info.Write("MailTown", mailTown);
 
 			info.Write("Name", mName);
-			info.Write("Variables", Variables);
+			info.Write("StoryData", StoryData);
 		}
 		void IXleSerializable.ReadData(XleSerializationInfo info)
 		{
@@ -785,6 +789,8 @@ namespace ERY.Xle
 			{
 				if (XleCore.Map.CheckMovement(this, dx, dy))
 				{
+					XleCore.Map.BeforeStepOn(this, x + dx, y + dy);
+
 					return SetPos(x + dx, y + dy);
 				}
 			}

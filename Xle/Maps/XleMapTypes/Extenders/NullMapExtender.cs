@@ -16,7 +16,8 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			return -1;
 		}
 
-		
+		public virtual void OnLoad(GameState state)
+		{ }
 
 
 

@@ -17,5 +17,9 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			innerColor = XleColor.Yellow;
 			vertLine = 13 * 16;			
 		}
+
+		public virtual void SpeakToGuard(GameState gameState, ref bool handled)
+		{
+		}
 	}
 }

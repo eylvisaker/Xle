@@ -13,7 +13,7 @@ namespace ERY.Xle
 
 		public int IndexOf(XleEvent item)
 		{
-			return IndexOf(item);
+			return mList.IndexOf(item);
 		}
 
 		public void Insert(int index, XleEvent item)

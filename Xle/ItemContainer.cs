@@ -1,14 +1,25 @@
-﻿using System;
+﻿using AgateLib.Serialization.Xle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace ERY.Xle
 {
-	public class ItemContainer
+	public class ItemContainer : IXleSerializable
 	{
 		int[] mItems = new int[50];
 
+
+		void IXleSerializable.WriteData(XleSerializationInfo info)
+		{
+			info.Write("Items", mItems);
+		}
+
+		void IXleSerializable.ReadData(XleSerializationInfo info)
+		{
+			mItems = info.ReadInt32Array("Items");
+		}
 		[Obsolete]
 		public int[] ItemArray { get { return mItems; } set { mItems = value; } }
 
@@ -85,27 +96,28 @@ namespace ERY.Xle
 		SkeletonKey = 13,
 		Lodestone = 14,
 		RustyKey = 15,
-		RopeAndPulley = 16,
-		SilverCoin = 17,
-		FalconFeather = 18,
-		SingingCrystal = 19,
-		GlassOrb = 20,
-		OwlGrail = 21,
-		Statuette = 22,
-		Lute = 23,
-		Staff = 24,
-		SignetRing = 25,
-		BlackWand = 26,
-		FlaxtonIncense = 27,
-		SteelHammer = 28,
-		Blacksilver = 29,
-		DragonTear = 30,
-		BlueGem = 31,
-		RedGarnet = 32,
-		AmethystGem = 33,
-		Emerald = 34,
-		YellowDiamond = 35,
-		WhiteDiamond = 36,
-		Opal = 37,
+		Package = 16,
+		RopeAndPulley = 17,
+		SilverCoin = 18,
+		FalconFeather = 19,
+		SingingCrystal = 20,
+		GlassOrb = 21,
+		OwlGrail = 22,
+		Statuette = 23,
+		Lute = 24,
+		Staff = 25,
+		SignetRing = 26,
+		BlackWand = 27,
+		FlaxtonIncense = 28,
+		SteelHammer = 29,
+		Blacksilver = 30,
+		DragonTear = 31,
+		BlueGem = 32,
+		RedGarnet = 33,
+		AmethystGem = 34,
+		Emerald = 35,
+		YellowDiamond = 36,
+		WhiteDiamond = 37,
+		Opal = 38,
 	}
 }

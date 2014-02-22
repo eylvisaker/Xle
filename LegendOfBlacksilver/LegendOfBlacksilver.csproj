@@ -61,7 +61,9 @@
   <ItemGroup>
     <Compile Include="LobFactory.cs" />
     <Compile Include="LobProgram.cs" />
+    <Compile Include="LobStory.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\CastleDoor.cs" />
+    <Compile Include="MapExtenders\Castle\EventExtenders\DaisMessage.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\King.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\Seravol.cs" />
     <Compile Include="MapExtenders\Citadel\CitadelGround.cs" />
@@ -250,7 +252,9 @@
       <Name>XLE</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Support\EasyFlash\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="LoB\Audio\BumpFirst.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

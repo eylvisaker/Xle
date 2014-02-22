@@ -1,5 +1,6 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Geometry;
+using AgateLib.Serialization.Xle;
 using ERY.Xle.LotA.MapExtenders.Castle;
 using ERY.Xle.LotA.MapExtenders.Fortress;
 using ERY.Xle.LotA.TitleScreen;
@@ -25,6 +26,10 @@ namespace ERY.Xle.LotA
 			}
 		}
 
+		public override IXleSerializable CreateStoryData()
+		{
+			return new LotaStory();
+		}
 		public override void LoadSurfaces()
 		{
 			Font = FontSurface.BitmapMonospace("font.png", new Size(16, 16));

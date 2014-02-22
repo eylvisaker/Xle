@@ -17,5 +17,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 		void TryToStepOn(GameState state, int dx, int dy, ref bool allowStep);
 		void Use(GameState state, int item, ref bool handled);
 		void Xamine(GameState state, ref bool handled);
+
+		void BeforeStepOn(GameState state);
 	}
 }

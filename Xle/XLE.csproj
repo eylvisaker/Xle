@@ -151,6 +151,7 @@
     <Compile Include="XleEventTypes\Extenders\DoorExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\IEventExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\NullEventExtender.cs" />
+    <Compile Include="XleEventTypes\Script.cs" />
     <Compile Include="XleEventTypes\SpeakToPerson.cs" />
     <Compile Include="XleGameFactory.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\ICastleExtender.cs" />

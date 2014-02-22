@@ -9,8 +9,11 @@ namespace ERY.Xle.XleEventTypes.Extenders
 	{
 		public XleEvent TheEvent { get;set;}
 
+		public virtual void BeforeStepOn(GameState state)
+		{
 
-		public virtual void Speak(GameState gameState, ref bool handled)
+		}
+		public virtual void Speak(GameState state, ref bool handled)
 		{
 		}
 

@@ -1,4 +1,5 @@
 ﻿using AgateLib.DisplayLib;
+using AgateLib.Serialization.Xle;
 using ERY.Xle.XleMapTypes;
 using ERY.Xle.XleMapTypes.Extenders;
 using System;
@@ -15,6 +16,8 @@ namespace ERY.Xle
 		public abstract void LoadSurfaces();
 
 		public abstract IXleTitleScreen CreateTitleScreen();
+
+		public abstract IXleSerializable CreateStoryData();
 
 		// Surfaces
 		public FontSurface Font { get; protected set; }					// returns the handle to the font resource

@@ -24,7 +24,22 @@ namespace ERY.Xle.XleMapTypes
 		List<Guard> mGuards = new List<Guard>();
 
 		List<int> mMail = new List<int>();				// towns to carry mail to
+		
+		public ITownExtender Extender { get; protected set; }
 
+		protected override IMapExtender CreateExtenderImpl()
+		{
+			if (XleCore.Factory == null)
+			{
+				Extender = new NullTownExtender();
+			}
+			else
+			{
+				Extender = XleCore.Factory.CreateMapExtender(this);
+			}
+
+			return Extender;
+		}
 
 		#region --- Construction and Serialization ---
 
@@ -1016,8 +1031,14 @@ namespace ERY.Xle.XleMapTypes
 
 		protected virtual void SpeakToGuard(Player player)
 		{
-			g.AddBottom("");
-			g.AddBottom("The guard salutes.");
+			bool handled = false;
+			Extender.SpeakToGuard(new GameState(player, this), ref handled);
+
+			if (handled == false)
+			{
+				g.AddBottom("");
+				g.AddBottom("The guard salutes.");
+			}
 		}
 
 		public override bool CanPlayerStepInto(Player player, int xx, int yy)
@@ -1149,13 +1170,6 @@ namespace ERY.Xle.XleMapTypes
 			return true;
 		}
 
-		protected override IMapExtender CreateExtenderImpl()
-		{
-			if (XleCore.Factory == null)
-				return base.CreateExtenderImpl();
-
-			return XleCore.Factory.CreateMapExtender(this);
-		}
 
 		#region IHasGuards Members
 
@@ -1187,5 +1201,7 @@ namespace ERY.Xle.XleMapTypes
 
 		#endregion
 
+
+		
 	}
 }

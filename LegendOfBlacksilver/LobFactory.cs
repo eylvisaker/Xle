@@ -1,5 +1,6 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Geometry;
+using AgateLib.Serialization.Xle;
 using ERY.Xle.LoB.MapExtenders;
 using ERY.Xle.LoB.MapExtenders.Castle;
 using ERY.Xle.LoB.MapExtenders.Citadel;
@@ -22,6 +23,11 @@ namespace ERY.Xle.LoB
 		public LobFactory()
 		{
 			FillExtenderDictionaries();
+		}
+		
+		public override IXleSerializable CreateStoryData()
+		{
+			return new LobStory();
 		}
 
 		private void FillExtenderDictionaries()

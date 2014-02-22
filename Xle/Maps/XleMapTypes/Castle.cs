@@ -40,6 +40,8 @@ namespace ERY.Xle.XleMapTypes
 				Extender = XleCore.Factory.CreateMapExtender(this);
 			}
 
+			base.Extender = Extender;
+
 			return Extender;
 		}
 		
@@ -64,23 +66,6 @@ namespace ERY.Xle.XleMapTypes
 			return evt.Take(new GameState(player, this));
 		}
 
-		protected override void SpeakToGuard(Player player)
-		{
-			g.AddBottom("");
-
-			if (!g.invisible && !g.guard)
-			{
-				g.AddBottom("The guard ignores you.");
-			}
-			else if (g.invisible)
-			{
-				g.AddBottom("The guard looks startled.");
-			}
-			else if (g.guard)  // for fortress
-			{
-
-			}
-		}
 		protected override void OpenRoof(Roof roof)
 		{
 		}
@@ -109,6 +94,6 @@ namespace ERY.Xle.XleMapTypes
 			return retval.ToArray();
 		}
 
-		public ICastleExtender Extender { get; set; }
+		public new ICastleExtender Extender { get; set; }
 	}
 }
