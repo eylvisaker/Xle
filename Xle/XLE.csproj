@@ -143,6 +143,7 @@
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Data\Data.cs" />
+    <Compile Include="TextArea.cs" />
     <Compile Include="TileInfo.cs" />
     <Compile Include="Maps\TileSet.cs" />
     <Compile Include="XleEventTypes\Door.cs" />

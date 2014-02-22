@@ -40,12 +40,6 @@ namespace ERY.Xle
 	{
 		static int animFrame;
 
-		static FontSurface myFont { get { return XleCore.Factory.Font; }}	// stores the handle to the font
-		static Surface myTiles { get { return XleCore.Tiles;}}		// stores the handle to the tiles
-		static Surface myCharacter;		// stores the handle to the character sprites
-		static Surface pOverlandMonsters;	// stores the handle to the overland monster sprites
-
-		static string[] bottom = new string[5];			// keeps the bottom portion of the screen
 		static int[] bottommargin = new int[5];
 		static Color[][] bottomColor = new Color[5][];	// keeps the bottom colors on the screen
 
@@ -79,10 +73,6 @@ namespace ERY.Xle
 		}
 
 		// Surfaces
-		static public FontSurface Font { get { return XleCore.Factory.Font;}}					// returns the handle to the font resource
-		public static Surface Tiles { get { return XleCore.Tiles; } }				// returns the handle to the tiles resource
-		public static Surface Character { get { return XleCore.Factory.Character; } }		// returns the handle to the character resource
-		public static Surface Monsters { get { return XleCore.Factory.Monsters; } }				// returns the handle to the monsters resource
 
 		public static Surface MuseumBackdrop { get { return XleCore.Factory.MuseumBackdrop; } }
 		public static Surface MuseumWall { get { return XleCore.Factory.MuseumWall; } }			// stores the pointer to the wall texture
@@ -99,8 +89,6 @@ namespace ERY.Xle
 		public static Surface DungeonBlueExtras { get { return XleCore.Factory.DungeonBlueExtras; } }
 
 		// character functions
-
-
 		static Timing.StopWatch animWatch = new Timing.StopWatch();
 		const int frameTime = 150;
 
@@ -179,19 +167,23 @@ namespace ERY.Xle
 		/// scrolls the remaining lines up one each.
 		/// </summary>
 		/// <param name="?"></param>
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void AddBottom(ColorStringBuilder builder)
 		{
 			AddBottom(builder.Text, builder.Colors);
 		}
 
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void AddBottom()
 		{
 			AddBottom("");
 		}
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void AddBottom(string line, int margin = 1)
 		{
 			AddBottom(line, null);
 		}
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void AddBottom(string line, Color color)
 		{
 			Color[] colors = new Color[40];
@@ -204,22 +196,26 @@ namespace ERY.Xle
 			AddBottom(line, colors);
 		}
 
+		[Obsolete("Use XleCore.TextArea instead.")]
 		public static void AddBottomCentered(string p)
 		{
 			BottomCenterString(ref p);
 			AddBottom(p);
 		}
+		[Obsolete("Use XleCore.TextArea instead.")]
 		public static void AddBottomCentered(string p, Color color)
 		{
 			BottomCenterString(ref p);
 			AddBottom(p, color);
 		}
+		[Obsolete("Use XleCore.TextArea instead.")]
 		public static void AddBottomCentered(string p, Color[] colors)
 		{
 			BottomCenterString(ref p);
 			AddBottom(p, colors);
 		}
 
+		[Obsolete("Use XleCore.TextArea instead.")]
 		private static void BottomCenterString(ref string p)
 		{
 			int spaces = 36 - p.Length;
@@ -229,8 +225,11 @@ namespace ERY.Xle
 			p = new string(' ', spaces) + p;
 		}
 		// adds a line to the bottom of the action window
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void AddBottom(string line, Color[] colors)
 		{
+			XleCore.TextArea.WriteLine(line, colors);
+			/*
 			int i;
 
 			bottom[4] = "";
@@ -268,16 +267,19 @@ namespace ERY.Xle
 					bottomColor[0][i] = XleCore.FontColor;
 				}
 			}
-
+			*/
 		}
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void UpdateBottom(string line)
 		{
 			UpdateBottom(line, 0, null);
 		}
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void UpdateBottom(string line, int loc)
 		{
 			UpdateBottom(line, loc, null);
 		}
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void UpdateBottom(string line, int loc, Color color)
 		{
 			Color[] colors = new Color[40];
@@ -294,6 +296,7 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="builder"></param>
 		/// <param name="lineNumber">The number of the line to update.  0 is the bottom line, 4 is the top.</param>
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void UpdateBottom(ColorStringBuilder builder, int lineNumber)
 		{
 			UpdateBottom(builder.Text, lineNumber, builder.Colors);
@@ -302,8 +305,11 @@ namespace ERY.Xle
 		/// This function updates a line in the action window.
 		/// </summary>
 		/// <param name="lineNumber">The number of the line to update.  0 is the bottom line, 4 is the top.</param>
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void UpdateBottom(string line, int lineNumber, Color[] colors)
 		{
+			XleCore.TextArea.UpdateLine(4 - lineNumber, 0, line, colors);
+			/*
 			if (lineNumber < 0 || lineNumber > 4) throw new ArgumentOutOfRangeException("lineNumber", "The line number must be between 0 and 4.");
 
 			bottom[lineNumber] = line;
@@ -323,7 +329,9 @@ namespace ERY.Xle
 				}
 
 			}
+			 * */
 		}
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void UpdateBottom(string line, Color color)
 		{
 			Color[] colors = new Color[40];
@@ -337,8 +345,11 @@ namespace ERY.Xle
 
 		}
 
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public string Bottom(int line)
 		{
+			return XleCore.TextArea.GetTextLine(4 - line);
+			/*
 			string tempspace;
 
 			if (line >= 0 && line <= 4)
@@ -350,31 +361,12 @@ namespace ERY.Xle
 			else
 			{
 				return null;
-			}
-
-		}
-		public static int BottomMargin(int line)
-		{
-			return bottommargin[line];
-		}
-
-		static public Color[] BottomColor(int line)
-		{
-			Color[] tempspace = new Color[40];
-
-			if (line >= 0 && line <= 4)
-			{
-				bottomColor[line].CopyTo(tempspace, 0);
-
-				return tempspace;
-			}
-			else
-			{
-				return null;
-			}
+			}*/
 
 		}
 
+
+		[Obsolete("Use XleCore.TextArea.Clear instead.")]
 		static public void ClearBottom()
 		{
 			for (int i = 0; i < 5; i++)
@@ -383,6 +375,7 @@ namespace ERY.Xle
 			}
 		}
 
+		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void WriteSlow(string line, int loc, Color color)
 		{
 			int i = 0;
@@ -398,14 +391,6 @@ namespace ERY.Xle
 
 				XleCore.wait(50);
 			}
-		}
-
-		[Obsolete]
-		static public bool LoadTiles(string tileset)
-		{
-			XleCore.LoadTiles(tileset);
-
-			return true;
 		}
 		
 		// other commonly used variables that don't need accessors

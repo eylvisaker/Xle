@@ -44,7 +44,7 @@ namespace ERY.Xle
 				XleCore.map = value;
 
 				inst.menuArray = map.MapMenu();
-				g.LoadTiles(map.TileImage);
+				XleCore.LoadTiles(map.TileImage);
 			}
 		}
 
@@ -81,6 +81,8 @@ namespace ERY.Xle
 
 		public static Surface Tiles { get; private set; }
 
+		public static TextArea TextArea { get; private set; }
+
 		public XleCore()
 		{
 			inst = this;
@@ -90,6 +92,8 @@ namespace ERY.Xle
 			{
 				menuArray[i] = "";
 			}
+
+			TextArea = new TextArea();
 		}
 		public void Run(XleGameFactory factory)
 		{
@@ -880,17 +884,15 @@ namespace ERY.Xle
 		/// This function handles draws the action history at the bottom of the
 		/// main window for heartbeat		
 		/// </summary>
+		[Obsolete("Use TextArea.DrawArea instead.")]
 		public static void DrawBottomText()
 		{
-			for (int i = 0; i < 5; i++)
-			{
-				int x = 16 + 16 * g.BottomMargin(i);
+			TextArea.DrawArea();
 
-				WriteText(x, 368 - 16 * i, g.Bottom(i), g.BottomColor(i));
-			}
 		}
 
-		public static int BottomTextMargin = 1;
+		[Obsolete("Use TextArea.Margin instead.")]
+		public static int BottomTextMargin { get { return TextArea.Margin; } set { TextArea.Margin = value; } }
 
 		/****************************************************************************
 		 *	void DrawBorder( LPDIRECTDRAWSURFACE7 pDDS, unsigned int boxColor)		*
@@ -1075,12 +1077,10 @@ namespace ERY.Xle
 				fx = c % 16 * 16;//+ 256 * g.newGraphics;
 				fy = (int)(c / 16) * 16;
 
-				g.Font.Color = color;
+				Factory.Font.Color = color;
 
-				g.Font.DrawText(px, py, c.ToString());
-
+				Factory.Font.DrawText(px, py, c.ToString());
 			}
-
 		}
 
 		/****************************************************************************
@@ -1104,8 +1104,7 @@ namespace ERY.Xle
 			tileRect = new Rectangle(tx, ty, 16, 16);
 			destRect = new Rectangle(px, py, 16, 16);
 
-			g.Tiles.Draw(tileRect, destRect);
-
+			Tiles.Draw(tileRect, destRect);
 		}
 
 		/****************************************************************************
@@ -1132,8 +1131,8 @@ namespace ERY.Xle
 			monstRect = new Rectangle(tx, ty, 64, 64);
 			destRect = new Rectangle(px, py, 64, 64);
 
-			if (g.Monsters != null)
-				g.Monsters.Draw(monstRect, destRect);
+			if (Factory.Monsters != null)
+				Factory.Monsters.Draw(monstRect, destRect);
 
 		}
 
@@ -1188,8 +1187,8 @@ namespace ERY.Xle
 			charRect = new Rectangle(tx, ty, 32, 32);
 			destRect = new Rectangle(destx, desty, 32, 32);
 
-			g.Character.Color = clr;
-			g.Character.Draw(charRect, destRect);
+			Factory.Character.Color = clr;
+			Factory.Character.Draw(charRect, destRect);
 		}
 
 		public static Rectangle CharRect { get; private set; }
@@ -1242,12 +1241,9 @@ namespace ERY.Xle
 
 				if (rx >= lx && ry >= 16 && rx <= 592 && ry < 272)
 				{
-
 					destRect = new Rectangle(rx, ry, 32, 32);
-					//pDDS->Blt(&destRect, g.Character(), &charRect,  DDBLT_WAIT | DDBLT_KEYSRC, NULL);
-					//pDDS->BltFast(destRect.left, destRect.top, g.Character(), &charRect, DDBLTFAST_SRCCOLORKEY);
-
-					g.Character.Draw(charRect, destRect);
+					
+					Factory.Character.Draw(charRect, destRect);
 				}
 			}
 		}

@@ -133,7 +133,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		/// <returns>True if the player chose yes, false otherwise.</returns>
 		protected bool OfferReread()
 		{
-			g.ClearBottom();
+			XleCore.TextArea.Clear();
 			g.AddBottom("Do you want to reread the");
 			g.AddBottom("description of this exhibit?");
 			g.AddBottom();
@@ -146,8 +146,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		protected void ReadRawText(string rawtext)
 		{
-			XleCore.BottomTextMargin = 0;
-			g.ClearBottom();
+			XleCore.TextArea.Margin = 0;
+			XleCore.TextArea.Clear(true);
 
 			int ip = 0;
 			int line = 4;
@@ -157,6 +157,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 			while (ip < rawtext.Length)
 			{
+				// ignore any \r characters. we will interpret \n as the new line character.
 				if (rawtext[ip] == '\r') { ip++; continue; }
 
 				if (rawtext[ip] == '\n')
@@ -170,6 +171,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 					if (rawtext[ip + i] == '|')
 						ip += i - 1;
+
+					XleCore.TextArea.PrintLine();
 				}
 				else if (rawtext[ip] == '|' && (text.Text == null || text.Text.Trim() == ""))
 				{
@@ -178,7 +181,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				else if (rawtext[ip] != '`')
 				{
 					text.AddText(rawtext[ip].ToString(), clr);
-					g.UpdateBottom(text, line);
+					//g.UpdateBottom(text, line);
+					XleCore.TextArea.Print(rawtext[ip].ToString(), clr);
 
 					if (waiting)
 					{
@@ -223,7 +227,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 								break;
 
 							case "clear":
-								g.ClearBottom();
+								XleCore.TextArea.Clear(true);
 								line = 4;
 								break;
 
@@ -249,7 +253,8 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				ip++;
 			}
 
-			XleCore.BottomTextMargin = 1;
+			XleCore.TextArea.Margin = 1;
+			XleCore.TextArea.PrintLine();
 		}
 
 		public virtual bool IsClosed(Player player)

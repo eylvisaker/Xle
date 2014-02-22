@@ -208,6 +208,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="MapExtenders\Museum\" />
     <Folder Include="Support\OldMaps\" />
   </ItemGroup>
   <ItemGroup>
