@@ -10,6 +10,15 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class CastleGround : NullCastleExtender
 	{
+
+		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		{
+			if (evt is Door)
+				return new CastleDoor();
+
+			return base.CreateEventExtender(evt, defaultExtender);
+		}
+
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			if (y >= TheMap.Height)
@@ -120,14 +129,6 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			{
 
 			}
-		}
-
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-		{
-			if (evt is Door)
-				return new CastleDoor();
-
-			return base.CreateEventExtender(evt, defaultExtender);
 		}
 	}
 }

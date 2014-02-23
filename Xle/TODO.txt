@@ -1,5 +1,5 @@
 ﻿Settings file for adjusting numerical parameters, like times to wait.
-Resample sounds and do a good job this time.
+D - Resample sounds and do a good job this time.
 	Reduce volume on ocean/mountain sounds
 	Reduce volume on museum steps, swamp steps, desert steps.
 
@@ -22,7 +22,7 @@ Outdoors:
 	Falling unconscious when beaten severly.
 	D - Attempt to disengage is blocked message is not shown.
 	Refactor Stormy variable to use an enum.
-	Refactor outside class to include an extender.
+	D - Refactor outside class to include an extender.
 
 Towns:
 	Redesign the way stores are rendered and data for the window is stored.
@@ -90,6 +90,6 @@ Dungeons:
 	Extract red walls and make them work
 
 Fortress:
-	Create tileset.
-	Import maps.
+	D - Create tileset.
+	D - Import maps.
 	Implement everything.
