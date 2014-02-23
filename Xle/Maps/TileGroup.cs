@@ -55,5 +55,10 @@ namespace ERY.Xle.Maps
 		public double TimeSinceLastAnim { get; set; }
 
 		#endregion
+
+		public int RandomTile()
+		{
+			return Tiles[XleCore.random.Next(Tiles.Count)];
+		}
 	}
 }

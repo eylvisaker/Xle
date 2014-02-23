@@ -61,6 +61,20 @@
         <GroupType>None</GroupType>
         <AnimateChance>100</AnimateChance>
       </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">146,147,148</Tiles>
+        <AnimationTime>50</AnimationTime>
+        <AnimationType>Random</AnimationType>
+        <GroupType>Special2</GroupType>
+        <AnimateChance>25</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">144,145</Tiles>
+        <AnimationTime>0</AnimationTime>
+        <AnimationType>None</AnimationType>
+        <GroupType>Door</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
     </TileGroups>
   </TileSet>
   <TileImage>LotaFortress</TileImage>
