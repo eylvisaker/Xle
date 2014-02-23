@@ -126,13 +126,13 @@ namespace ERY.Xle.XleEventTypes
 			SoundMan.PlaySound(LotaSound.Question);
 
 			g.AddBottom("Would you like to buy a ");
-			XleCore.wait(1);
+			XleCore.Wait(1);
 
 			g.AddBottom("museum coin for " + amount.ToString() + " gold?");
-			XleCore.wait(1);
+			XleCore.Wait(1);
 
 			g.AddBottom("");
-			XleCore.wait(1);
+			XleCore.Wait(1);
 
 			int choice = XleCore.QuickMenu(menu, 3, 0);
 
@@ -257,7 +257,7 @@ namespace ERY.Xle.XleEventTypes
 		}
 		protected void Wait(int howLong)
 		{
-			XleCore.wait(RedrawStore, howLong);
+			XleCore.Wait(howLong, RedrawStore);
 		}
 		protected void WaitForKey(params KeyCode[] keys)
 		{
@@ -309,7 +309,7 @@ namespace ERY.Xle.XleEventTypes
 				{
 					g.AddBottom("");
 					g.AddBottom("Sorry.  I can't talk to you.");
-					XleCore.wait(500);
+					XleCore.Wait(500);
 				}
 
 				return true;
@@ -329,7 +329,7 @@ namespace ERY.Xle.XleEventTypes
 
 			g.AddBottom("");
 
-			XleCore.wait(1000);
+			XleCore.Wait(1000);
 
 			return true;
 		}
@@ -340,7 +340,7 @@ namespace ERY.Xle.XleEventTypes
 			{
 				g.AddBottom();
 				g.AddBottom("No items within reach here.");
-				XleCore.wait(1000);
+				XleCore.Wait(1000);
 				return true;
 			}
 
@@ -350,14 +350,14 @@ namespace ERY.Xle.XleEventTypes
 			{
 				g.AddBottom();
 				g.AddBottom("There's nothing to really carry here.");
-				XleCore.wait(1000);
+				XleCore.Wait(1000);
 				return true;
 			}
 
 			state.Player.Gold += value;
 			g.AddBottom();
 			g.AddBottom("You get " + value.ToString() + " gold.", XleColor.Yellow);
-			XleCore.wait(1000);
+			XleCore.Wait(1000);
 			Robbed = true;
 
 			return true;
@@ -430,7 +430,7 @@ namespace ERY.Xle.XleEventTypes
 					g.AddBottom();
 					g.AddBottom(choice.ToString() + " gold borrowed.");
 
-					XleCore.wait(DrawStore, 1000);
+					XleCore.Wait(1000, DrawStore);
 
 					ColorStringBuilder b = new ColorStringBuilder();
 					b.AddText("You'll owe ", XleColor.White);
@@ -993,7 +993,7 @@ namespace ERY.Xle.XleEventTypes
 
 						g.AddBottom("Raft purchased.");
 						SoundMan.PlaySound(LotaSound.Sale);
-						XleCore.wait(1000);
+						XleCore.Wait(1000);
 
 						g.AddBottom("Board raft outside.");
 
@@ -1003,7 +1003,7 @@ namespace ERY.Xle.XleEventTypes
 					{
 						g.AddBottom("Not enough gold.");
 						SoundMan.PlaySound(LotaSound.Medium);
-						XleCore.wait(750);
+						XleCore.Wait(750);
 					}
 				}
 			}
@@ -1041,7 +1041,7 @@ namespace ERY.Xle.XleEventTypes
 					SoundMan.PlaySound(LotaSound.Medium);
 				}
 
-				XleCore.wait(750);
+				XleCore.Wait(750);
 
 			}
 
@@ -1135,7 +1135,7 @@ namespace ERY.Xle.XleEventTypes
 				SoundMan.PlaySound(LotaSound.VeryGood);
 				while (SoundMan.IsPlaying(LotaSound.VeryGood))
 				{
-					XleCore.wait(RedrawStore, 20);
+					XleCore.Wait(20, RedrawStore);
 				}
 			}
 

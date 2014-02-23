@@ -1,6 +1,7 @@
 ﻿using AgateLib.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -218,12 +219,17 @@ namespace ERY.Xle
 				{
 					Print(text[i].ToString(), XleCore.FontColor);
 				}
+
+				XleCore.Wait(50);
 			}
 		}
-		public void PrintLineSlow(string text, Color[] colors = null)
+		public void PrintLineSlow(string text = "", Color[] colors = null)
 		{
+			PrintSlow(text, colors);
 
+			PrintLine();
 		}
+
 		public void Clear(bool cursorAtTop = false)
 		{
 			foreach (var line in lines)
@@ -237,6 +243,49 @@ namespace ERY.Xle
 
 			if (cursorAtTop)
 				cursor.Y = 0;
+		}
+
+		public int FlashRate = 125;
+
+		/// <summary>
+		/// Flashes lines of text on the screen.
+		/// </summary>
+		/// <param name="howLong">How many milliseconds to flash for.</param>
+		/// <param name="color">The color to flash to.</param>
+		/// <param name="lines">Which lines. Don't pass any extra parameters to flash the whole text area.</param>
+		public void FlashLines(int howLong, Color color, params int[] lines)
+		{
+			if (lines == null || lines.Length == 0)
+			{
+				FlashLines(howLong, color, 0, 1, 2, 3, 4);
+				return;
+			}
+
+			Stopwatch watch = new Stopwatch();
+			watch.Start();
+
+			while (watch.ElapsedMilliseconds < howLong)
+			{
+				int index = (int)watch.ElapsedMilliseconds % FlashRate / (FlashRate / 2);
+
+				Color clr = color;
+
+				if (index == 1)
+					clr = XleCore.FontColor;
+
+				foreach(var line in lines)
+				{
+					this.lines[line].SetColor(clr);
+				}
+
+				XleCore.Redraw();
+			}
+
+
+			foreach (var line in lines)
+			{
+				this.lines[line].SetColor(XleCore.FontColor);
+			}
 		}
 	}
 }

@@ -320,11 +320,11 @@ namespace ERY.Xle.XleMapTypes
 					g.AddBottom("Your Attack missed.", XleColor.Yellow);
 				}
 
-				XleCore.wait(XleCore.Redraw, 250 + 100 * player.Gamespeed, true);
+				XleCore.Wait(250 + 100 * player.Gamespeed, true, XleCore.Redraw);
 
 				if (KilledOne())
 				{
-					XleCore.wait(250);
+					XleCore.Wait(250);
 
 					SoundMan.PlaySound(LotaSound.EnemyDie);
 
@@ -334,7 +334,7 @@ namespace ERY.Xle.XleMapTypes
 					int gold, food;
 					bool finished = FinishedCombat(out gold, out food);
 
-					XleCore.wait(250 + 150 * player.Gamespeed);
+					XleCore.Wait(250 + 150 * player.Gamespeed);
 
 					if (finished)
 					{
@@ -383,7 +383,7 @@ namespace ERY.Xle.XleMapTypes
 							player.Gold += gold;
 						}
 
-						XleCore.wait(400 + 100 * player.Gamespeed);
+						XleCore.Wait(400 + 100 * player.Gamespeed);
 					}
 				}
 			}
@@ -392,7 +392,7 @@ namespace ERY.Xle.XleMapTypes
 				g.AddBottom("The unknown creature is not ");
 				g.AddBottom("within range.");
 
-				XleCore.wait(300 + 100 * player.Gamespeed);
+				XleCore.Wait(300 + 100 * player.Gamespeed);
 			}
 			else
 			{
@@ -422,7 +422,7 @@ namespace ERY.Xle.XleMapTypes
 					g.AddBottom("Attempt to disengage");
 					g.AddBottom("is blocked.");
 
-					XleCore.wait(500);
+					XleCore.Wait(500);
 				}
 				else if (player.IsOnRaft)
 				{
@@ -461,7 +461,7 @@ namespace ERY.Xle.XleMapTypes
 					g.AddBottom("Attempt to disengage");
 					g.AddBottom("is successful.");
 
-					XleCore.wait(500);
+					XleCore.Wait(500);
 
 					EncounterState = XleMapTypes.EncounterState.NoEncounter;
 				}
@@ -644,7 +644,7 @@ namespace ERY.Xle.XleMapTypes
 				g.AddBottom("");
 				g.AddBottom("The " + MonstName + " does not reply.");
 
-				XleCore.wait(250);
+				XleCore.Wait(250);
 
 				return;
 			}
@@ -903,7 +903,7 @@ namespace ERY.Xle.XleMapTypes
 					g.AddBottom("");
 				}
 
-				XleCore.wait(1000);
+				XleCore.Wait(1000);
 
 				if (Stormy == 3)
 				{
@@ -1061,7 +1061,7 @@ namespace ERY.Xle.XleMapTypes
 				g.AddBottom("An unknown creature is approaching ", XleColor.Cyan);
 				g.AddBottom("from the " + dirName + ".", XleColor.Cyan);
 
-				XleCore.wait(1000);
+				XleCore.Wait(1000);
 			}
 			else if (type < 15)
 			{
@@ -1129,7 +1129,7 @@ namespace ERY.Xle.XleMapTypes
 			else
 				isMonsterFriendly = false;
 
-			XleCore.wait(500);
+			XleCore.Wait(500);
 			return dirName;
 		}
 
@@ -1140,12 +1140,12 @@ namespace ERY.Xle.XleMapTypes
 
 			EncounterState = EncounterState.NoEncounter;
 
-			XleCore.wait(250);
+			XleCore.Wait(250);
 		}
 
 		private void MonsterAppeared()
 		{
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			Color[] colors = new Color[40];
 			string plural = (monstCount > 1) ? "s" : "";
@@ -1163,12 +1163,12 @@ namespace ERY.Xle.XleMapTypes
 			colors[0] = XleColor.Cyan;
 			g.AddBottom("is approaching.", colors);
 
-			XleCore.wait(1000);
+			XleCore.Wait(1000);
 		}
 
 		private void MonsterTurn(Player player, bool firstTime)
 		{
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			if (isMonsterFriendly)
 			{
@@ -1182,7 +1182,7 @@ namespace ERY.Xle.XleMapTypes
 				g.AddBottom(monstCount.ToString() + " " + currentMonst[0].Name, colors);
 				g.AddBottom("Stands before you.");
 
-				XleCore.wait(1500);
+				XleCore.Wait(1500);
 			}
 			else
 			{
@@ -1226,7 +1226,7 @@ namespace ERY.Xle.XleMapTypes
 				}
 			}
 
-			XleCore.wait(XleCore.Redraw, 250, !firstTime);
+			XleCore.Wait(250, !firstTime, XleCore.Redraw);
 		}
 
 		private static int SelectRandomMonster(TerrainType terrain)
@@ -1329,7 +1329,7 @@ namespace ERY.Xle.XleMapTypes
 			g.AddBottom("You are ambushed by bandits!", XleColor.Cyan);
 
 			SoundMan.PlaySound(LotaSound.Encounter);
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			int maxDamage = player.HP / 15;
 			int minDamage = Math.Min(5, maxDamage / 2);
@@ -1339,14 +1339,14 @@ namespace ERY.Xle.XleMapTypes
 				player.HP -= XleCore.random.Next(minDamage, maxDamage + 1);
 
 				SoundMan.PlaySound(LotaSound.EnemyHit);
-				XleCore.wait(250);
+				XleCore.Wait(250);
 			}
 
 			g.AddBottom("You fall unconsious.", XleColor.Yellow);
 
-			XleCore.wait(1000);
+			XleCore.Wait(1000);
 			displayMonst = -1;
-			XleCore.wait(RedrawUnconscious, 3000);
+			XleCore.Wait(3000, RedrawUnconscious);
 
 			g.AddBottom();
 			g.AddBottom("You awake.  The compendium is gone.");
@@ -1365,7 +1365,7 @@ namespace ERY.Xle.XleMapTypes
 			g.AddBottom();
 			g.WriteSlow("inevitable.  Keep to your quest.", 0, XleColor.White);
 
-			XleCore.wait(3000);
+			XleCore.Wait(3000);
 			banditAmbush = 0;
 
 			return true;

@@ -217,7 +217,7 @@ namespace ERY.Xle.XleMapTypes
 
 					g.AddBottom(csb);
 
-					XleCore.wait(100 * player.Gamespeed);
+					XleCore.Wait(100 * player.Gamespeed);
 				}
 				else if (dist < 25)
 				{
@@ -389,7 +389,7 @@ namespace ERY.Xle.XleMapTypes
 
 					Guards.Remove(guard);
 
-					XleCore.wait(100);
+					XleCore.Wait(100);
 
 					SoundMan.StopSound(LotaSound.PlayerHit);
 					SoundMan.PlaySound(LotaSound.EnemyDie);
@@ -791,7 +791,7 @@ namespace ERY.Xle.XleMapTypes
 							AttackGuard(player, k);
 							attacked = true;
 
-							XleCore.wait(200);
+							XleCore.Wait(200);
 						}
 					}
 
@@ -890,7 +890,7 @@ namespace ERY.Xle.XleMapTypes
 				g.AddBottom("Nothing hit");
 			}
 
-			XleCore.wait(XleCore.Redraw, 200 + 50 * player.Gamespeed, true);
+			XleCore.Wait(200 + 50 * player.Gamespeed, true, XleCore.Redraw);
 
 			return true;
 		}
@@ -908,7 +908,7 @@ namespace ERY.Xle.XleMapTypes
 				g.AddBottom("Leave " + MapName);
 				g.AddBottom("");
 
-				XleCore.wait(200);
+				XleCore.Wait(200);
 
 				player.ReturnToPreviousMap();
 			}
@@ -973,7 +973,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			g.AddBottom();
 			g.AddBottom("Nothing to rob");
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			return true;
 		}
@@ -1010,7 +1010,7 @@ namespace ERY.Xle.XleMapTypes
 
 				g.AddBottom("");
 
-				XleCore.wait(2000);
+				XleCore.Wait(2000);
 
 				player.ReturnToPreviousMap();
 
@@ -1021,12 +1021,12 @@ namespace ERY.Xle.XleMapTypes
 		protected virtual void CloseRoof(Roof roof)
 		{
 			SoundMan.PlaySound(LotaSound.BuildingClose);
-			XleCore.wait(50);
+			XleCore.Wait(50);
 		}
 		protected virtual void OpenRoof(Roof roof)
 		{
 			SoundMan.PlaySound(LotaSound.BuildingOpen);
-			XleCore.wait(50);
+			XleCore.Wait(50);
 		}
 
 		protected virtual void SpeakToGuard(Player player)

@@ -120,20 +120,20 @@ namespace ERY.Xle
 			PlaySound(lotaSound);
 
 			while (IsPlaying(lotaSound))
-				XleCore.wait(50);
+				XleCore.Wait(50);
 		}
-		public static void PlaySoundSync(XleCore.RedrawDelegate redraw, LotaSound lotaSound)
+		public static void PlaySoundSync(Action redraw, LotaSound lotaSound)
 		{
 			PlaySound(lotaSound);
 
 			while (IsPlaying(lotaSound))
-				XleCore.wait(redraw, 50);
+				XleCore.Wait(50, redraw);
 		}
 
 		public static void FinishSounds()
 		{
 			while (IsAnyPlaying())
-				XleCore.wait(10);
+				XleCore.Wait(10);
 		}
 	}
 }

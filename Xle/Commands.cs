@@ -126,7 +126,7 @@ namespace ERY.Xle
 			{
 				SoundMan.PlaySound(LotaSound.Invalid);
 
-				XleCore.wait(waitTime);
+				XleCore.Wait(waitTime);
 				return;
 			}
 			else
@@ -211,7 +211,7 @@ namespace ERY.Xle
 		{
 			XleCore.Map.AfterExecuteCommand(player, cmd);
 
-			XleCore.wait(XleCore.Redraw, waitTime, false);
+			XleCore.Wait(waitTime, false, XleCore.Redraw);
 			Prompt();
 		}
 
@@ -375,7 +375,7 @@ namespace ERY.Xle
 				g.AddBottom("");
 			}
 
-			XleCore.wait(1500);
+			XleCore.Wait(1500);
 
 			g.AddBottom("Quit and return to title screen?");
 
@@ -419,7 +419,7 @@ namespace ERY.Xle
 			g.AddBottom(builder);
 
 
-			XleCore.wait(300 + 200 * player.Gamespeed);
+			XleCore.Wait(300 + 200 * player.Gamespeed);
 
 
 		}
@@ -673,7 +673,7 @@ namespace ERY.Xle
 				g.AddBottom("");
 				g.AddBottom("Nothing opens.");
 
-				XleCore.wait(500);
+				XleCore.Wait(500);
 			}
 
 		}
@@ -716,7 +716,7 @@ namespace ERY.Xle
 				g.AddBottom("");
 				g.AddBottom("Nothing to take.");
 
-				XleCore.wait(500);
+				XleCore.Wait(500);
 			}
 		}
 
@@ -764,7 +764,7 @@ namespace ERY.Xle
 			if (noEffect == true)
 			{
 				g.AddBottom("");
-				XleCore.wait(400 + 100 * player.Gamespeed);
+				XleCore.Wait(400 + 100 * player.Gamespeed);
 				g.UpdateBottom("No effect");
 			}
 

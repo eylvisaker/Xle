@@ -59,7 +59,7 @@ namespace ERY.Xle.XleEventTypes
 				return;
 				
 			g.AddBottom("");
-			XleCore.wait(300 + 200 * state.Player.Gamespeed);
+			XleCore.Wait(300 + 200 * state.Player.Gamespeed);
 			g.AddBottom("This key does nothing here.");
 		}
 
@@ -86,7 +86,7 @@ namespace ERY.Xle.XleEventTypes
 				return;
 
 			SoundMan.PlaySound(LotaSound.UnlockDoor);
-			XleCore.wait(250);
+			XleCore.Wait(250);
 		}
 		public void RemoveDoor(GameState state)
 		{

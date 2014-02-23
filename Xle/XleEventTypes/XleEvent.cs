@@ -82,7 +82,7 @@ namespace ERY.Xle
 			g.AddBottom();
 			g.AddBottom("The merchant won't let you rob.");
 
-			XleCore.wait(1000);
+			XleCore.Wait(1000);
 		}
 
 		#region IXleSerializable Members

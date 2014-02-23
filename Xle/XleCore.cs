@@ -20,7 +20,7 @@ namespace ERY.Xle
 	public class XleCore
 	{
 		#region --- Static Members ---
-		
+
 		public const int myWindowWidth = 640;
 		public const int myWindowHeight = 400;
 
@@ -74,7 +74,7 @@ namespace ERY.Xle
 		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo>();
 		private Dictionary<int, XleMapTypes.Map3DExtraInfo> mMap3DExtras = new Dictionary<int, XleMapTypes.Map3DExtraInfo>();
 		private Dictionary<int, MagicSpell> mMagicSpells = new Dictionary<int, MagicSpell>();
-		
+
 		private Data.AgateDataImport mDatabase;
 
 		public static Color FontColor { get; private set; }
@@ -148,6 +148,7 @@ namespace ERY.Xle
 			AgateConsole.Commands.Add("food", new Action<int>(CheatGiveFood));
 			AgateConsole.Commands.Add("level", new Action<int>(CheatLevel));
 			AgateConsole.Commands.Add("goto", new Action<string>(CheatGoto));
+			AgateConsole.Commands.Add("enter", new Action<string, int>(CheatEnter));
 			AgateConsole.Commands.Add("move", new Action<int, int, int>(CheatMove));
 			AgateConsole.Commands.Add("godmode", new Action(CheatGod));
 			AgateConsole.Commands.Add("killall", new Action(CheatKillAll));
@@ -173,34 +174,47 @@ namespace ERY.Xle
 			switch (command)
 			{
 				case "goto":
-					b.AppendLine("Jumps to the specified map. Allowed map values are: ");
+					b.AppendLine("Jumps to the entrance of the specified map. Allowed map values are: ");
 
-					bool comma = false;
-					int count = 0;
+					ConsolePrintMapList(b);
 
-					foreach (var map in mMapList)
-					{
-						if (comma)
-							b.Append(", ");
-						if (count == 0)
-							b.Append("    ");
+					break;
 
-						b.Append(map.Value.Alias);
-						comma = true;
+				case "enter":
+					b.AppendLine("Jumps to the specified map. You can specify the map name and optionally and entry point.");
 
-						count++;
-						if (count > 4)
-						{
-							b.AppendLine();
-							count = 0;
-						}
-					}
+					ConsolePrintMapList(b);
 
 					break;
 			}
 
 			return b.ToString();
 		}
+
+		private void ConsolePrintMapList(StringBuilder b)
+		{
+			bool comma = false;
+			int count = 0;
+
+			foreach (var map in mMapList)
+			{
+				if (comma)
+					b.Append(", ");
+				if (count == 0)
+					b.Append("    ");
+
+				b.Append(map.Value.Alias);
+				comma = true;
+
+				count++;
+				if (count > 4)
+				{
+					b.AppendLine();
+					count = 0;
+				}
+			}
+		}
+
 
 		[Description("Gives gold")]
 		void CheatGiveGold(int amount = 1000)
@@ -225,7 +239,7 @@ namespace ERY.Xle
 			{
 				if (Map.IsMultiLevelMap)
 				{
-					AgateConsole.WriteLine("Current Position: {0}, {1}, level: {2}", player.X, player.Y, player.DungeonLevel+1);
+					AgateConsole.WriteLine("Current Position: {0}, {1}, level: {2}", player.X, player.Y, player.DungeonLevel + 1);
 				}
 				else
 				{
@@ -239,8 +253,8 @@ namespace ERY.Xle
 			if (x < 0) throw new Exception("x cannot be less than zero.");
 			if (y < 0) throw new Exception("y cannot be less than zero.");
 			if (x >= Map.Width) throw new Exception(string.Format("x cannot be {0} or greater.", Map.Width));
-			if (y >= Map.Height) throw new Exception(string.Format("y cannot be {0} or greater.", Map.Height)); 
-			
+			if (y >= Map.Height) throw new Exception(string.Format("y cannot be {0} or greater.", Map.Height));
+
 			if (level == -1)
 			{
 				player.X = x;
@@ -262,54 +276,75 @@ namespace ERY.Xle
 			}
 		}
 
+
+		private static void CheatEnter(string mapName, int entryPoint = 0)
+		{
+			MapInfo mapInfo = FindMapByPartialName(mapName);
+
+			if (mapInfo == null)
+				return;
+
+			ChangeMap(player, mapInfo.ID, entryPoint, 0, 0);
+		}
 		public static void CheatGoto(string mapName)
 		{
-			var matches = from m in MapList.Values
-						  where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant() )
-						  select m;
+			MapInfo mapInfo = FindMapByPartialName(mapName);
 
-			var exactMatch = matches.FirstOrDefault(x => x.Alias.ToUpperInvariant() == mapName.ToUpperInvariant());
+			if (mapInfo == null)
+				return;
+
+			var map = LoadMap(mapInfo.ParentMapID);
+			int targetX = 0, targetY = 0;
+
+			foreach (ChangeMapEvent evt in from evt in map.Events
+										   where evt is ChangeMapEvent
+										   select (ChangeMapEvent)evt)
+			{
+				if (evt.MapID == mapInfo.ID)
+				{
+					targetX = evt.X;
+					targetY = evt.Y;
+				}
+			}
+
+			if (map.CanPlayerStepInto(player, targetX + 2, targetY))
+				targetX += 2;
+			else if (map.CanPlayerStepInto(player, targetX - 2, targetY))
+				targetX -= 2;
+			else if (map.CanPlayerStepInto(player, targetX, targetY + 2))
+				targetY += 2;
+			else if (map.CanPlayerStepInto(player, targetX, targetY - 2))
+				targetY -= 2;
+
+			ChangeMap(player, map.MapID, -1, targetX, targetY);
+		}
+
+		private static MapInfo FindMapByPartialName(string mapName)
+		{
+			IEnumerable<MapInfo> matches = from m in MapList.Values
+					  where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant())
+					  select m;
+
+			MapInfo exactMatch = matches.FirstOrDefault(x => x.Alias.ToUpperInvariant() == mapName.ToUpperInvariant());
 
 			if (matches.Count() == 0)
 			{
 				AgateConsole.WriteLine("Map name not found.");
+				return null;
 			}
 			else if (matches.Count() > 1 && exactMatch == null)
 			{
 				AgateConsole.WriteLine("Found multiple matches:");
+				
 				foreach (var m in matches)
 				{
 					AgateConsole.WriteLine("    {0}", m.Alias);
 				}
+
+				return null;
 			}
-			else
-			{
-				var mapInfo = exactMatch ?? matches.First();
-				var map = LoadMap(mapInfo.ParentMapID);
-				int targetX = 0, targetY = 0;
 
-				foreach(ChangeMapEvent evt in from evt in map.Events
-											  where evt is ChangeMapEvent
-											  select (ChangeMapEvent)evt)
-				{
-					if (evt.MapID == mapInfo.ID)
-					{
-						targetX = evt.X;
-						targetY = evt.Y;
-					}
-				}
-
-				if (map.CanPlayerStepInto(player, targetX + 2, targetY))
-					targetX += 2;
-				else if (map.CanPlayerStepInto(player, targetX - 2, targetY))
-					targetX -= 2;
-				else if (map.CanPlayerStepInto(player, targetX, targetY + 2))
-					targetY += 2;
-				else if (map.CanPlayerStepInto(player, targetX, targetY - 2)) 
-					targetY -= 2;
-
-				ChangeMap(player, map.MapID, -1, targetX, targetY);
-			}
+			return exactMatch ?? matches.First();
 		}
 
 		[Description("Makes you super powerful.")]
@@ -418,8 +453,8 @@ namespace ERY.Xle
 				bool isKey = GetOptionalAttribute(node, "isKey", false);
 
 				mItemList.Add(id, new ItemInfo(id, name, longName, action)
-				{ 
-					 IsKey = isKey
+				{
+					IsKey = isKey
 				});
 			}
 		}
@@ -864,7 +899,7 @@ namespace ERY.Xle
 
 				mHPColor = lastColor;
 
-				XleCore.wait(80);
+				XleCore.Wait(80);
 			}
 
 			inst.mOverrideHPColor = false;
@@ -1149,7 +1184,7 @@ namespace ERY.Xle
 		static void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
 		{
 			int px = vertLine + 16;
-			int py = 16 + 7*16;
+			int py = 16 + 7 * 16;
 			int width = (624 - px) / 16;
 
 			px += 11 * 16;
@@ -1242,7 +1277,7 @@ namespace ERY.Xle
 				if (rx >= lx && ry >= 16 && rx <= 592 && ry < 272)
 				{
 					destRect = new Rectangle(rx, ry, 32, 32);
-					
+
 					Factory.Character.Draw(charRect, destRect);
 				}
 			}
@@ -1326,15 +1361,15 @@ namespace ERY.Xle
 		/// amount of time.	
 		/// </summary>
 		/// <param name="howLong"></param>
-		public static void wait(int howLong)
+		public static void Wait(int howLong)
 		{
-			wait(Redraw, howLong, false);
+			Wait(howLong, false, Redraw);
 		}
-		public static void wait(RedrawDelegate redraw, int howLong)
+		public static void Wait(int howLong, Action redraw)
 		{
-			wait(redraw, howLong, false);
+			Wait(howLong, false, redraw);
 		}
-		public static void wait(RedrawDelegate redraw, int howLong, bool keyBreak)
+		public static void Wait(int howLong, bool keyBreak, Action redraw)
 		{
 			Timing.StopWatch watch = new Timing.StopWatch();
 
@@ -1388,7 +1423,7 @@ namespace ERY.Xle
 				menu.width = displayTitle.Length + 2;
 			}
 
-			RedrawDelegate redraw =
+			Action redraw =
 				delegate()
 				{
 					inst.UpdateAnim();
@@ -1445,14 +1480,12 @@ namespace ERY.Xle
 
 			} while (key != KeyCode.Return && !g.Done);
 
-			wait(300);
+			Wait(300);
 
 
 			return menu.value;
 
 		}
-
-		public delegate void RedrawDelegate();
 
 		/// <summary>
 		/// Waits for one of the specified keys, while redrawing the screen.
@@ -1472,7 +1505,7 @@ namespace ERY.Xle
 		/// <param name="keys">A list of keys which will break out of the wait. 
 		/// Pass none for any key to break out.</param>
 		/// <returns></returns>
-		public static KeyCode WaitForKey(RedrawDelegate redraw, params KeyCode[] keys)
+		public static KeyCode WaitForKey(Action redraw, params KeyCode[] keys)
 		{
 			KeyCode key = KeyCode.None;
 			bool done = false;
@@ -1631,20 +1664,20 @@ namespace ERY.Xle
 			return QuickMenu(Redraw, items, spaces, value, clrInit, clrChanged);
 		}
 
-		public static int QuickMenu(RedrawDelegate redraw, MenuItemList items, int spaces)
+		public static int QuickMenu(Action redraw, MenuItemList items, int spaces)
 		{
 			return QuickMenu(redraw, items, spaces, 0, XleCore.FontColor, XleCore.FontColor);
 		}
-		public static int QuickMenu(RedrawDelegate redraw, MenuItemList items, int spaces, int value)
+		public static int QuickMenu(Action redraw, MenuItemList items, int spaces, int value)
 		{
 			return QuickMenu(redraw, items, spaces, value, XleCore.FontColor, XleCore.FontColor);
 		}
-		public static int QuickMenu(RedrawDelegate redraw, MenuItemList items, int spaces, int value, Color clrInit)
+		public static int QuickMenu(Action redraw, MenuItemList items, int spaces, int value, Color clrInit)
 		{
 			return QuickMenu(redraw, items, spaces, value, clrInit, clrInit);
 		}
 
-		public static int QuickMenu(RedrawDelegate redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
+		public static int QuickMenu(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
 		{
 			int[] spacing = new int[18];
 			int last = 0;
@@ -1723,7 +1756,7 @@ namespace ERY.Xle
 
 			} while (key != KeyCode.Return && Display.CurrentWindow.IsClosed == false);
 
-			wait(redraw, 100);
+			Wait(100, redraw);
 
 			g.AddBottom("");
 
@@ -1902,7 +1935,7 @@ namespace ERY.Xle
 		{
 			return ChooseNumber(Redraw, max);
 		}
-		public static int ChooseNumber(RedrawDelegate redraw, int max)
+		public static int ChooseNumber(Action redraw, int max)
 		{
 			int method = 0;
 			int amount = 0;
@@ -2210,7 +2243,7 @@ namespace ERY.Xle
 					g.AddBottom("This is your friendly lender.");
 					g.AddBottom("You owe me money!");
 
-					XleCore.wait(1000);
+					XleCore.Wait(1000);
 
 				}
 			}

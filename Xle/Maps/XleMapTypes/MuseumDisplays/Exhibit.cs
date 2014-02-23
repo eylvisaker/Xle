@@ -188,10 +188,10 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 					{
 						if (AgateLib.InputLib.Keyboard.AnyKeyPressed)
 						{
-							XleCore.wait(1);
+							XleCore.Wait(1);
 						}
 						else
-							XleCore.wait(50);
+							XleCore.Wait(50);
 					}
 				}
 				else

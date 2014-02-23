@@ -40,7 +40,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		}
 		private bool UseMagicIce(Player player)
 		{
-			XleCore.wait(250);
+			XleCore.Wait(250);
 
 			var evt = TheMap.GetEvent<XleEventTypes.MagicIce>(player, 1);
 
@@ -65,14 +65,14 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		private bool UseMagicSeeds(Player player)
 		{
-			XleCore.wait(150);
+			XleCore.Wait(150);
 
 			g.invisible = true;
 			g.AddBottom("You're invisible.");
 
 			((IHasGuards)TheMap).IsAngry = false;
 
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			player.ItemCount(8, -1);
 
@@ -96,7 +96,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			{
 				g.AddBottom("");
 
-				XleCore.wait(300 + 200 * player.Gamespeed);
+				XleCore.Wait(300 + 200 * player.Gamespeed);
 				g.UpdateBottom("This key does nothing here.");
 			}
 

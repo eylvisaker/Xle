@@ -32,7 +32,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 				while (SoundMan.IsPlaying(LotaSound.Good))
 				{
-					XleCore.wait(10);
+					XleCore.Wait(10);
 				}
 
 				player.museum[(int)ExhibitID] = 3;

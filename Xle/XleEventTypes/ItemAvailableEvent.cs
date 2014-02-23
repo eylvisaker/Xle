@@ -44,7 +44,7 @@ namespace ERY.Xle.XleEventTypes
 
 			SoundMan.PlaySound(LotaSound.OpenChest);
 
-			XleCore.wait(750);
+			XleCore.Wait(750);
 
 
 			for (int j = this.Rectangle.Top; j < this.Rectangle.Bottom; j++)
@@ -104,7 +104,7 @@ namespace ERY.Xle.XleEventTypes
 
 			mClosed = false;
 
-			XleCore.wait(500 + 200 * player.Gamespeed);
+			XleCore.Wait(500 + 200 * player.Gamespeed);
 
 			return true;
 		}

@@ -90,7 +90,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 				g.AddBottom("I should not converse, sir.");
 			}
 
-			XleCore.wait(2500);
+			XleCore.Wait(2500);
 			handled = true;
 		}
 	}

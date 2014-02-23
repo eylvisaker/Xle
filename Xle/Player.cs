@@ -485,7 +485,7 @@ namespace ERY.Xle
 			onRaft = 0;
 
 			while (SoundMan.IsPlaying(LotaSound.VeryBad))
-				XleCore.wait(40);
+				XleCore.Wait(40);
 
 			g.AddBottom("The powers of the museum");
 			g.AddBottom("resurrect you from the grave!");
@@ -848,7 +848,7 @@ namespace ERY.Xle
 				g.AddBottom("");
 				g.AddBottom("");
 
-				XleCore.wait(2000);
+				XleCore.Wait(2000);
 
 			}
 

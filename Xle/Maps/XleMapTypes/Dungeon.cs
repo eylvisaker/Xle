@@ -217,7 +217,7 @@ namespace ERY.Xle.XleMapTypes
 
 						Extender.OnPlayerExitDungeon(player);
 
-						XleCore.wait(1000);
+						XleCore.Wait(1000);
 
 						// TODO: fix this
 						player.ReturnToPreviousMap();
@@ -326,7 +326,7 @@ namespace ERY.Xle.XleMapTypes
 		public override bool PlayerXamine(Player player)
 		{
 			SoundMan.PlaySound(LotaSound.Xamine);
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			Point faceDir = new Point();
 
@@ -433,7 +433,7 @@ namespace ERY.Xle.XleMapTypes
 			else
 			{
 				g.AddBottom("Nothing to open.");
-				XleCore.wait(1000);
+				XleCore.Wait(1000);
 			}
 
 
@@ -447,7 +447,7 @@ namespace ERY.Xle.XleMapTypes
 			Commands.UpdateCommand("Open Box");
 			SoundMan.PlaySound(LotaSound.OpenChest);
 			g.AddBottom();
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			if (amount + player.HP > player.MaxHP)
 			{
@@ -485,7 +485,7 @@ namespace ERY.Xle.XleMapTypes
 			Commands.UpdateCommand("Open Chest");
 			SoundMan.PlaySound(LotaSound.OpenChest);
 			g.AddBottom();
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			// TODO: give weapons
 			// TODO: bobby trap chests.
@@ -523,9 +523,9 @@ namespace ERY.Xle.XleMapTypes
 						while (SoundMan.IsPlaying(LotaSound.VeryGood))
 						{
 							g.UpdateBottom(text, XleColor.Yellow);
-							XleCore.wait(50);
+							XleCore.Wait(50);
 							g.UpdateBottom(text, XleColor.White);
-							XleCore.wait(50);
+							XleCore.Wait(50);
 						}
 					}
 					else
@@ -579,14 +579,14 @@ namespace ERY.Xle.XleMapTypes
 			else
 			{
 				g.AddBottom("You're ambushed by a " + TrapName(this[x, y]) + ".", XleColor.White);
-				XleCore.wait(100);
+				XleCore.Wait(100);
 			}
 
 			g.AddBottom("   H.P. - " + damage.ToString(), XleColor.White);
 			player.HP -= damage;
 
 			SoundMan.PlaySound(LotaSound.EnemyHit);
-			XleCore.wait(500);
+			XleCore.Wait(500);
 
 			if (this[x, y] == 0x12)
 			{

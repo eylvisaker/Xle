@@ -38,7 +38,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 				for (int i = 0; i < 8; i++)
 				{
-					XleCore.wait(50);
+					XleCore.Wait(50);
 
 					b.SetColor(12 + i, XleColor.Cyan);
 					g.UpdateBottom(b, 2);

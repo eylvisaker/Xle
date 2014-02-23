@@ -25,7 +25,7 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
 				g.AddBottom(string.Format(ChangeMap.CommandText, XleCore.Map.MapName, newMapName));
 
 				g.AddBottom("");
-				XleCore.wait(500);
+				XleCore.Wait(500);
 
 				choice = 0;
 			}

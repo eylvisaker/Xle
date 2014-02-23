@@ -389,7 +389,7 @@ namespace ERY.Xle
 
 				UpdateBottom(temp, loc, colors);
 
-				XleCore.wait(50);
+				XleCore.Wait(50);
 			}
 		}
 		

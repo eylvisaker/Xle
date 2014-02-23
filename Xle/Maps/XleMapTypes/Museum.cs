@@ -202,7 +202,7 @@ namespace ERY.Xle.XleMapTypes
 				SoundMan.PlaySound(LotaSound.Good);
 
 				while (SoundMan.IsPlaying(LotaSound.Good))
-					XleCore.wait(50);
+					XleCore.Wait(50);
 			}
 		}
 		protected override void OnPlayerEnterPosition(Player player, int x, int y)
@@ -340,7 +340,7 @@ namespace ERY.Xle.XleMapTypes
 				if (PlayerHasCoin(player, ex.Coin) == false)
 				{
 					g.AddBottom("You'll need a " + ex.Coin.ToString() + " coin.");
-					XleCore.wait(500);
+					XleCore.Wait(500);
 
 					return true;
 				}
@@ -442,7 +442,7 @@ namespace ERY.Xle.XleMapTypes
 				// door value
 				if (this[test.X, test.Y] == 0x02)
 				{
-					XleCore.wait(1000);
+					XleCore.Wait(1000);
 
 					player.SetMap(1, 114, 42);
 

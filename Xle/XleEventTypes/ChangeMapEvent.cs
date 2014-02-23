@@ -149,7 +149,7 @@ namespace ERY.Xle.XleEventTypes
 				g.AddBottom(builder);
 				g.AddBottom("");
 
-				XleCore.wait(1500);
+				XleCore.Wait(1500);
 			}
 
 			return true;
@@ -174,7 +174,7 @@ namespace ERY.Xle.XleEventTypes
 				g.AddBottom("Map ID " + mMapID + " not found.");
 				g.AddBottom("");
 
-				XleCore.wait(1500);
+				XleCore.Wait(1500);
 
 				return false;
 			}
