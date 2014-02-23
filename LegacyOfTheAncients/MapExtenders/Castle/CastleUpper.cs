@@ -10,8 +10,12 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 	{
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
-			if (evt.ExtenderName.ToLowerInvariant() == "spiral")
+			var name = evt.ExtenderName.ToLowerInvariant();
+
+			if (name == "spiral")
 				return new Spiral();
+			else if (name == "spiralsuccess")
+				return new SpiralSuccess();
 
 			return base.CreateEventExtender(evt, defaultExtender);
 		}

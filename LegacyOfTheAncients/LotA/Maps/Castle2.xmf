@@ -144,6 +144,13 @@
       <Height>5</Height>
       <ExtenderName>Wizard</ExtenderName>
     </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>10</X>
+      <Y>22</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <ExtenderName>SpiralSuccess</ExtenderName>
+    </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>

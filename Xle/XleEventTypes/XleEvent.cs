@@ -20,6 +20,7 @@ namespace ERY.Xle
 
 		public XleEvent()
 		{
+			Enabled = true;
 		}
 
 		public string ExtenderName { get; set; }
@@ -266,6 +267,8 @@ namespace ERY.Xle
 		{
 			extender.BeforeStepOn(state);
 		}
+
+		public bool Enabled { get; set; }
 	}
 }
 

@@ -7,5 +7,9 @@ namespace ERY.Xle.XleEventTypes
 {
 	public class MagicIce : XleEvent 
 	{
+		public MagicIce()
+		{
+			ExtenderName = "MagicIce";
+		}
 	}
 }

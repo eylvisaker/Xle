@@ -66,6 +66,7 @@
     <Compile Include="MapExtenders\Castle\CastleDoor.cs" />
     <Compile Include="MapExtenders\Castle\CastleGround.cs" />
     <Compile Include="MapExtenders\Castle\CastleUpper.cs" />
+    <Compile Include="MapExtenders\Castle\MagicIce.cs" />
     <Compile Include="MapExtenders\Castle\Spiral.cs" />
     <Compile Include="MapExtenders\Dungeons\ArmakExtender.cs" />
     <Compile Include="MapExtenders\Dungeons\FourJewelsExtender.cs" />

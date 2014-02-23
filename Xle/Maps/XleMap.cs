@@ -688,6 +688,7 @@ namespace ERY.Xle
 		/// <param name="player"></param>
 		/// <param name="border">How many tiles away from the player to consider</param>
 		/// <returns></returns>
+		[Obsolete("Use EventsAt instead.")]
 		public XleEvent GetEvent(Player player, int border)
 		{
 			XleEvent evt = GetEvent(player.X, player.Y, border);
@@ -705,7 +706,7 @@ namespace ERY.Xle
 
 			return null;
 		}
-
+		[Obsolete("Use EventsAt instead.")]
 		public T GetEvent<T>(Player player, int border) where T : XleEvent
 		{
 			XleEvent evt = GetEvent(player, border);
@@ -726,6 +727,9 @@ namespace ERY.Xle
 			foreach (var e in mEvents)
 			{
 				bool found = false;
+
+				if (e.Enabled == false) 
+					continue;
 
 				for (int j = 0; j < 2; j++)
 				{
@@ -1045,12 +1049,9 @@ namespace ERY.Xle
 		{
 			bool didEvent = false;
 
-			if (GetEvent(player, 0) != null)
+			foreach(var evt in EventsAt(player.X, player.Y, 0))
 			{
-				XleEvent evt = XleCore.Map.GetEvent(player, 0);
-
 				evt.StepOn(new GameState(player, this));
-
 				didEvent = true;
 			}
 

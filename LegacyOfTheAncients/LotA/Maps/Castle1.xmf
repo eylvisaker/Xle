@@ -413,29 +413,26 @@
       <ContainsItem>False</ContainsItem>
       <Contents>450</Contents>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.MagicIce">
+    <Item type="ERY.Xle.XleEventTypes.Script">
       <X>41</X>
       <Y>8</Y>
       <Width>8</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>MagicIce</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.MagicIce">
+    <Item type="ERY.Xle.XleEventTypes.Script">
       <X>41</X>
       <Y>27</Y>
       <Width>8</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>MagicIce</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.MagicIce">
+    <Item type="ERY.Xle.XleEventTypes.Script">
       <X>34</X>
       <Y>64</Y>
       <Width>13</Width>
       <Height>7</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>MagicIce</ExtenderName>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.SpeakToPerson">
       <X>7</X>
