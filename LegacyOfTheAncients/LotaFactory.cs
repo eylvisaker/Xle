@@ -78,6 +78,8 @@ namespace ERY.Xle.LotA
 		{
 			if (castle.ExtenderName.ToLowerInvariant() == "castle1")
 				return new CastleGround();
+			if (castle.ExtenderName.ToLowerInvariant() == "castle2")
+				return new CastleUpper();
 			if (castle.ExtenderName.ToLowerInvariant() == "fortress1")
 				return new FortressEntry();
 
