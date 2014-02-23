@@ -221,6 +221,9 @@ namespace ERY.Xle
 				}
 
 				XleCore.Wait(50);
+
+				if (text[i] == '.')
+					XleCore.Wait(400);
 			}
 		}
 		public void PrintLineSlow(string text = "", Color[] colors = null)
@@ -245,35 +248,51 @@ namespace ERY.Xle
 				cursor.Y = 0;
 		}
 
-		public int FlashRate = 125;
-
 		/// <summary>
 		/// Flashes lines of text on the screen.
 		/// </summary>
 		/// <param name="howLong">How many milliseconds to flash for.</param>
 		/// <param name="color">The color to flash to.</param>
 		/// <param name="lines">Which lines. Don't pass any extra parameters to flash the whole text area.</param>
-		public void FlashLines(int howLong, Color color, params int[] lines)
+		public void FlashLines(int howLong, Color color, int flashRate, params int[] lines)
 		{
 			if (lines == null || lines.Length == 0)
 			{
-				FlashLines(howLong, color, 0, 1, 2, 3, 4);
+				FlashLines(howLong, color, flashRate, 0, 1, 2, 3, 4);
 				return;
 			}
+			if (flashRate == 0)
+				throw new ArgumentOutOfRangeException("flashRate must be positive.");
 
 			Stopwatch watch = new Stopwatch();
 			watch.Start();
 
-			while (watch.ElapsedMilliseconds < howLong)
-			{
-				int index = (int)watch.ElapsedMilliseconds % FlashRate / (FlashRate / 2);
+			FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, XleCore.FontColor, color, flashRate, lines);
+		}
 
-				Color clr = color;
+		public void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)
+		{
+			if (lines == null || lines.Length == 0)
+			{
+				FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
+				return;
+			}
+			if (flashRate == 0)
+				throw new ArgumentOutOfRangeException("flashRate must be positive.");
+
+			Stopwatch watch = new Stopwatch();
+			watch.Start();
+
+			while (pred())
+			{
+				int index = (int)watch.ElapsedMilliseconds % flashRate / (flashRate / 2);
+
+				Color clr = color2;
 
 				if (index == 1)
-					clr = XleCore.FontColor;
+					clr = color1;
 
-				foreach(var line in lines)
+				foreach (var line in lines)
 				{
 					this.lines[line].SetColor(clr);
 				}
@@ -281,10 +300,9 @@ namespace ERY.Xle
 				XleCore.Redraw();
 			}
 
-
 			foreach (var line in lines)
 			{
-				this.lines[line].SetColor(XleCore.FontColor);
+				this.lines[line].SetColor(color1);
 			}
 		}
 	}

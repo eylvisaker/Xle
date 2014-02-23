@@ -65,12 +65,12 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 				XleCore.TextArea.PrintLineSlow("and all areas around here.");
 				XleCore.TextArea.PrintLineSlow();
 
-				XleCore.TextArea.FlashLines(2000, XleColor.Yellow);
+				XleCore.TextArea.FlashLines(2000, XleColor.Yellow, 250);
 				XleCore.Wait(500);
 			}
 
 			XleCore.TextArea.PrintLineSlow("I see you have an interesting");
-			XleCore.TextArea.PrintLineSlow("feature. May I have it?");
+			XleCore.TextArea.PrintLineSlow("feather. May I have it?");
 
 			if (1 == XleCore.QuickMenuYesNo())
 			{

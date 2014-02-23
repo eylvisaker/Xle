@@ -1,4 +1,5 @@
-﻿using ERY.Xle.XleMapTypes.Extenders;
+﻿using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,6 +120,14 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			{
 
 			}
+		}
+
+		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		{
+			if (evt is Door)
+				return new CastleDoor();
+
+			return base.CreateEventExtender(evt, defaultExtender);
 		}
 	}
 }

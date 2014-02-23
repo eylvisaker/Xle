@@ -63,6 +63,7 @@
     <Compile Include="LotaFactory.cs" />
     <Compile Include="LotaProgram.cs" />
     <Compile Include="LotaStory.cs" />
+    <Compile Include="MapExtenders\Castle\CastleDoor.cs" />
     <Compile Include="MapExtenders\Castle\CastleGround.cs" />
     <Compile Include="MapExtenders\Dungeons\ArmakExtender.cs" />
     <Compile Include="MapExtenders\Dungeons\FourJewelsExtender.cs" />

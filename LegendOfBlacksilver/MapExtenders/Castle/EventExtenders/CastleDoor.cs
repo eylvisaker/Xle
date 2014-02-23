@@ -15,10 +15,21 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 			if (item == 7)
 				itemUnlocksDoor = true;
 		}
+
+		public override void PrintUnlockFailureText(GameState state, int item, ref bool handled)
+		{
+			XleCore.TextArea.PrintLine("It doesn't fit this door.");
+			handled = true;
+		}
 	}
 
 	class FeatherDoor : CastleDoor
 	{
+		public override void ItemUnlocksDoor(GameState state, int item, ref bool itemUnlocksDoor)
+		{
+			if (item == 5 || item == 6 || item == 7)
+				itemUnlocksDoor = true;
+		}
 		public override void RemoveDoor(GameState state, ref bool handled)
 		{
 			var rect = TheEvent.Rectangle;

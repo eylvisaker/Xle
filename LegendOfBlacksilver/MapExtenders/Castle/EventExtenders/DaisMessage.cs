@@ -20,30 +20,16 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 			givenMessage = true;
 
-			g.ClearBottom();
-			g.UpdateBottom("   You see the prince on a dais!", 3);
-
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
+			XleCore.TextArea.Clear(true);
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("   You see the prince on a dais!");
 
 			SoundMan.PlaySound(LotaSound.VeryGood);
 
-			while (SoundMan.IsPlaying(LotaSound.VeryGood))
-			{
-				XleCore.Redraw();
+			XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
+				XleColor.Yellow, XleColor.Cyan, 80, 1);
 
-				int index = (int)watch.ElapsedMilliseconds % 100 / 50;
-
-				if (index == 0)
-				{
-					g.UpdateBottom(g.Bottom(3), 3, XleColor.Yellow);
-				}
-				else
-				{
-					g.UpdateBottom(g.Bottom(3), 3, XleColor.Cyan);
-				}
-			}
-
+			XleCore.TextArea.Clear();
 		}
 	}
 }

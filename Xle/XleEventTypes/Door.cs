@@ -60,7 +60,7 @@ namespace ERY.Xle.XleEventTypes
 				
 			g.AddBottom("");
 			XleCore.Wait(300 + 200 * state.Player.Gamespeed);
-			g.AddBottom("This key does nothing here.");
+			XleCore.TextArea.PrintLine("It doesn't fit this door.");
 		}
 
 		private void UnlockDoor(GameState state, int item)
@@ -70,7 +70,7 @@ namespace ERY.Xle.XleEventTypes
 			mExtender.PrintUnlockText(state, item, ref handled);
 			
 			if (handled == false)
-				g.AddBottom("Unlock door");
+				g.AddBottom("Unlock door.");
 
 			PlayRemoveSound();
 			RemoveDoor(state);
