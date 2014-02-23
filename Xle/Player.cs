@@ -443,6 +443,15 @@ namespace ERY.Xle
 			{
 				Variables = info.ReadObject<VariableContainer>("Variables");
 			}
+
+			if (info.ContainsKey("StoryData"))
+			{
+				StoryData = info.ReadObject<IXleSerializable>("StoryData");
+			}
+			else
+			{
+				StoryData = XleCore.Factory.CreateStoryData();
+			}
 		}
 
 		#endregion

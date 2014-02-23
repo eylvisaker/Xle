@@ -16,5 +16,7 @@ namespace ERY.Xle.LotA
 		{
 			info.ReadPublicProperties(this);
 		}
+
+		public bool Invisible { get; set; }
 	}
 }

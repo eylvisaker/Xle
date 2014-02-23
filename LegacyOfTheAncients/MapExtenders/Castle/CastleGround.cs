@@ -10,8 +10,6 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class CastleGround : NullCastleExtender
 	{
-		bool invisible;
-
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			if (evt is Door)
@@ -34,7 +32,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 			switch (item)
 			{
-				case 8:				// magic seeds
+				case (int)LotaItem.MagicSeed:
 					handled = UseMagicSeeds(player);
 					break;
 			}
@@ -43,7 +41,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 			XleCore.Wait(150);
 
-			invisible = true;
+			player.Story().Invisible = true;
 			XleCore.TextArea.PrintLine("You're invisible.");
 			XleCore.PlayerColor = XleColor.DarkGray;
 
@@ -56,9 +54,9 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			return true;
 		}
 
-		public override void SpeakToGuard(GameState gameState, ref bool handled)
+		public override void SpeakToGuard(GameState state, ref bool handled)
 		{
-			if (invisible)
+			if (state.Story().Invisible)
 			{
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("The guard looks startled.");

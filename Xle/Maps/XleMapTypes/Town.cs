@@ -971,8 +971,8 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override bool PlayerRobImpl(Player player)
 		{
-			g.AddBottom();
-			g.AddBottom("Nothing to rob");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Nothing to rob");
 			XleCore.Wait(500);
 
 			return true;
@@ -1005,16 +1005,7 @@ namespace ERY.Xle.XleMapTypes
 					player.LastAttacked = this.MapID;
 				}
 
-				g.AddBottom("");
-				g.AddBottom("Leave " + XleCore.Map.MapName);
-
-				g.AddBottom("");
-
-				XleCore.Wait(2000);
-
-				player.ReturnToPreviousMap();
-
-				g.AddBottom("");
+				LeaveMap(player);
 			}
 		}
 
@@ -1036,8 +1027,8 @@ namespace ERY.Xle.XleMapTypes
 
 			if (handled == false)
 			{
-				g.AddBottom("");
-				g.AddBottom("The guard salutes.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("The guard salutes.");
 			}
 		}
 

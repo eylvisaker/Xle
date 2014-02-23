@@ -1340,6 +1340,18 @@ namespace ERY.Xle
 			return 0;
 		}
 
+		public virtual void LeaveMap(Player player)
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Leave " + XleCore.Map.MapName);
+			XleCore.TextArea.PrintLine();
+
+			XleCore.Wait(2000);
+
+			player.ReturnToPreviousMap();
+
+			XleCore.TextArea.PrintLine();
+		}
 
 		/// <summary>
 		/// Called after a map is loaded.

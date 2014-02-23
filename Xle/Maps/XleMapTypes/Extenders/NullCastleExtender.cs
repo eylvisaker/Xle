@@ -17,7 +17,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			vertLine = 13 * 16; 
 		}
 
-		public virtual void SpeakToGuard(GameState gameState, ref bool handled)
+		public virtual void SpeakToGuard(GameState state, ref bool handled)
 		{
 			g.AddBottom("");
 			g.AddBottom("The guard ignores you.");

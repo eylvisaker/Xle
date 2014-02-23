@@ -12,5 +12,9 @@ namespace ERY.Xle.LotA
 		{
 			return (LotaStory)player.StoryData;
 		}
+		public static LotaStory Story(this GameState state)
+		{
+			return state.Player.Story();
+		}
 	}
 }

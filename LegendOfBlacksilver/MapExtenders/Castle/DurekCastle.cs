@@ -75,9 +75,9 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			door.RemoveDoor(state);
 		}
 
-		public override void SpeakToGuard(GameState gameState, ref bool handled)
+		public override void SpeakToGuard(GameState state, ref bool handled)
 		{
-			if (gameState.Player.Items[LobItem.FalconFeather] > 0)
+			if (state.Player.Items[LobItem.FalconFeather] > 0)
 			{
 				g.AddBottom("");
 				g.AddBottom("I see you have the feather,");

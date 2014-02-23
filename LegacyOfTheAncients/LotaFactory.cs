@@ -3,6 +3,7 @@ using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.LotA.MapExtenders.Castle;
 using ERY.Xle.LotA.MapExtenders.Fortress;
+using ERY.Xle.LotA.MapExtenders.Outside;
 using ERY.Xle.LotA.TitleScreen;
 using ERY.Xle.XleMapTypes;
 using ERY.Xle.XleMapTypes.Extenders;
@@ -63,6 +64,10 @@ namespace ERY.Xle.LotA
 			return new LotaTitleScreen();
 		}
 
+		public override IMapExtender CreateMapExtender(Outside outside)
+		{
+			return new TarmalonExtender();
+		}
 		public override IDungeonExtender CreateMapExtender(Dungeon theMap) 
 		{
 			switch (theMap.MapID)

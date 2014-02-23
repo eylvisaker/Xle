@@ -7,6 +7,6 @@ namespace ERY.Xle.XleMapTypes.Extenders
 {
 	public interface ITownExtender : IMapExtender
 	{
-		void SpeakToGuard(GameState gameState, ref bool handled);
+		void SpeakToGuard(GameState state, ref bool handled);
 	}
 }

@@ -1504,6 +1504,13 @@ namespace ERY.Xle.XleMapTypes
 		{
 			SetBanditAmbushTime(player);
 			SetNextEncounterStepCount();
+
+			base.OnLoad(player);
+		}
+
+		public override void LeaveMap(Player player)
+		{
+			throw new InvalidOperationException();
 		}
 	}
 }
