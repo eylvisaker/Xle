@@ -56,7 +56,7 @@
       </Item>
       <Item>
         <Tiles array="true" encoding="Csv">64,65,66,67</Tiles>
-        <AnimationTime>250</AnimationTime>
+        <AnimationTime>50</AnimationTime>
         <AnimationType>Loop</AnimationType>
         <GroupType>None</GroupType>
         <AnimateChance>100</AnimateChance>
@@ -65,7 +65,29 @@
   </TileSet>
   <TileImage>LotaFortress</TileImage>
   <DefaultTile>0</DefaultTile>
-  <Events array="true" type="ERY.Xle.XleEvent" />
+  <Events array="true" type="ERY.Xle.XleEvent">
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>12</X>
+      <Y>33</Y>
+      <Width>3</Width>
+      <Height>3</Height>
+      <ExtenderName>MagicIce</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>12</X>
+      <Y>42</Y>
+      <Width>2</Width>
+      <Height>2</Height>
+      <ExtenderName>Compendium</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>11</X>
+      <Y>70</Y>
+      <Width>4</Width>
+      <Height>3</Height>
+      <ExtenderName>DoorShut</ExtenderName>
+    </Item>
+  </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
@@ -80,6 +102,13 @@
       <Width>23</Width>
       <Height>12</Height>
       <RoofData array="true" encoding="Csv">0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0</RoofData>
+    </Item>
+    <Item>
+      <X>2</X>
+      <Y>44</Y>
+      <Width>12</Width>
+      <Height>12</Height>
+      <RoofData array="true" encoding="Csv">11,11,11,0,0,0,0,0,0,0,0,0,11,11,11,0,0,0,0,0,0,0,0,0,11,11,11,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,11,11</RoofData>
     </Item>
   </Roofs>
   <Guards array="true" type="ERY.Xle.Guard">

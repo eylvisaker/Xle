@@ -56,7 +56,7 @@
       </Item>
       <Item>
         <Tiles array="true" encoding="Csv">64,65,66,67</Tiles>
-        <AnimationTime>250</AnimationTime>
+        <AnimationTime>50</AnimationTime>
         <AnimationType>Loop</AnimationType>
         <GroupType>None</GroupType>
         <AnimateChance>100</AnimateChance>
@@ -71,6 +71,8 @@
       <Y>31</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>81</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -78,6 +80,57 @@
       <TargetY>0</TargetY>
       <CommandText>
       </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>14</X>
+      <Y>34</Y>
+      <Width>24</Width>
+      <Height>2</Height>
+      <ExtenderName>Elevator</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>38</X>
+      <Y>42</Y>
+      <Width>17</Width>
+      <Height>13</Height>
+      <ExtenderName>MagicIce</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>39</X>
+      <Y>24</Y>
+      <Width>3</Width>
+      <Height>1</Height>
+      <ExtenderName>GasTrap</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>44</X>
+      <Y>24</Y>
+      <Width>3</Width>
+      <Height>1</Height>
+      <ExtenderName>GasTrap</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>28</X>
+      <Y>22</Y>
+      <Width>2</Width>
+      <Height>2</Height>
+      <ExtenderName>Armor</ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>0</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>79</X>
+      <Y>25</Y>
+      <Width>1</Width>
+      <Height>3</Height>
+      <ExtenderName>GuardWarning</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>93</X>
+      <Y>47</Y>
+      <Width>1</Width>
+      <Height>3</Height>
+      <ExtenderName>SeeCompendium</ExtenderName>
     </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
