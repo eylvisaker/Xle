@@ -10,5 +10,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 	{
 		[Obsolete]
 		Exhibit GetExhibitByTile(int p);
+
+		void CheckExhibitStatus(GameState gameState);
 	}
 }

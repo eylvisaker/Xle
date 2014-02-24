@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
-	class Welcome : Exhibit
+	public class Welcome : Exhibit
 	{
 		public Welcome() : base("Welcome", Coin.None) { }
 		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Welcome; } }

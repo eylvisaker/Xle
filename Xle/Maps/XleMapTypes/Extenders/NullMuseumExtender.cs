@@ -54,5 +54,10 @@ namespace ERY.Xle.XleMapTypes.Extenders
 
 			return mExhibits[tile];
 		}
+
+
+		public virtual void CheckExhibitStatus(GameState state)
+		{
+		}
 	}
 }

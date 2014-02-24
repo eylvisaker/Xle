@@ -461,18 +461,19 @@ namespace ERY.Xle.XleMapTypes
 			Commands.UpdateCommand(command);
 
 			PlayPlayerMoveSound();
-			OnPlayerEnterPosition(player, player.X, player.Y);
 		}
 
 		protected abstract void PlayPlayerMoveSound();
 
+		protected override void PlayerStepImpl(Player player, bool didEvent)
+		{
+			base.PlayerStepImpl(player, didEvent);
+		}
 		protected virtual bool ShowDirections(Player player)
 		{
 			return true;
 		}
-		protected virtual void OnPlayerEnterPosition(Player player, int x, int y)
-		{
-		}
+		
 
 		public override bool AutoDrawPlayer
 		{

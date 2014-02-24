@@ -80,6 +80,14 @@
       <Project>{9490b719-829e-43a7-a5fe-8001f8a81759}</Project>
       <Name>AgateLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LegacyOfTheAncients\LegacyOfTheAncients.csproj">
+      <Project>{44a9fc5d-abdd-42f8-9d86-aa5001ebda14}</Project>
+      <Name>LegacyOfTheAncients</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LegendOfBlacksilver\LegendOfBlacksilver.csproj">
+      <Project>{9ef5e01a-90b0-4cc4-ac37-5b7307872ebe}</Project>
+      <Name>LegendOfBlacksilver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XleMapEditor\XleMapEditor.csproj">
       <Project>{e6a48d1c-d8e3-4fe4-a65a-6d550580938b}</Project>
       <Name>XleMapEditor</Name>

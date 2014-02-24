@@ -131,59 +131,7 @@ namespace ERY.Xle.XleMapTypes
 			base.OnLoad(player);
 
 			CheckExhibitStatus(player);
-			/*
-			// face the player in a direction with an open passage
-			// or to the nearest exhibit.
-			for (int i = -1; i <= 1; i++)
-			{
-				for (int j = -1; j <= 1; j++)
-				{
-					if (Math.Abs(i) + Math.Abs(j) == 2) continue;
-					if (i == 0 && j == 0) continue;
-
-					Point loc = new Point(player.X + i, player.Y + j);
-
-					if (IsPassable(this[loc.X, loc.Y]))
-					{
-						player.FaceDirection = DirectionFromPoint(new Point(i, j));
-					}
-					else if (IsExhibit(this[loc.X, loc.Y]))
-					{
-						player.FaceDirection = DirectionFromPoint(new Point(i, j));
-						goto exitloop;
-					}
-				}
-			}
-			*/
-		exitloop:
-
-			// check to see if the caretaker wants to see the player
-			var info = (MuseumDisplays.Information)Extender.GetExhibitByTile(0x50);
-
-			if (info.ShouldLevelUp(player))
-			{
-				XleCore.TextArea.Clear();
-				XleCore.TextArea.PrintLine("The caretaker wants to see you!");
-
-				SoundMan.PlaySound(LotaSound.Good);
-
-				while (SoundMan.IsPlaying(LotaSound.Good))
-					XleCore.Wait(50);
-			}
-		}
-		protected override void OnPlayerEnterPosition(Player player, int x, int y)
-		{
-			if (x == 12 && y == 13)
-			{
-				if (player.museum[1] < 3)
-				{
-					var welcome = (MuseumDisplays.Welcome)Extender.GetExhibitByTile(0x51);
-					welcome.PlayGoldArmbandMessage(player);
-					player.museum[1] = 3;
-
-					CheckExhibitStatus(player);
-				}
-			}
+			
 		}
 
 		protected override Color ExtraColor(Point location)
@@ -340,35 +288,7 @@ namespace ERY.Xle.XleMapTypes
 
 		private void CheckExhibitStatus(Player player)
 		{
-			// lost displays
-			if (player.museum[0xa] > 0)
-			{
-				for (int i = 0; i < Width; i++)
-				{
-					for (int j = 0; j < Height; j++)
-					{
-						if (this[i, j] == 0x5a)
-							this[i, j] = 0x10;
-					}
-				}
-			}
-
-			// welcome exhibit
-			if (player.museum[1] == 0)
-			{
-				this[4, 1] = 0;
-				this[3, 10] = 0;
-			}
-			else if (player.museum[1] == 1)
-			{
-				this[4, 1] = 0;
-				this[3, 10] = 16;
-			}
-			else
-			{
-				this[4, 1] = 16;
-				this[3, 10] = 16;
-			}
+			Extender.CheckExhibitStatus(new GameState(player, this));
 		}
 
 		private void UseCoin(Player player, MuseumDisplays.Coin coin)

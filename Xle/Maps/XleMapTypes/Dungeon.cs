@@ -540,20 +540,22 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
-		protected override void OnPlayerEnterPosition(Player player, int x, int y)
+		protected override void PlayerStepImpl(Player player, bool didEvent)
 		{
-			int val = this[x, y];
+			int val = this[player.X, player.Y];
 
 			CurrentLevel = player.DungeonLevel;
 
 			if (val >= 0x21 && val <= 0x2a)
 			{
-				OnPlayerTriggerTrap(player, x, y);
+				OnPlayerTriggerTrap(player, player.X, player.Y);
 			}
 			else if (val >= 0x11 && val <= 0x1a)
 			{
-				OnPlayerAvoidTrap(player, x, y);
+				OnPlayerAvoidTrap(player, player.X, player.Y);
 			}
+		
+			base.PlayerStepImpl(player, didEvent);
 		}
 
 		private void OnPlayerAvoidTrap(Player player, int x, int y)

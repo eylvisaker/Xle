@@ -1057,6 +1057,7 @@ namespace ERY.Xle
 			}
 
 			PlayerStepImpl(player, didEvent);
+			mBaseExtender.PlayerStep(new GameState(player, this));
 		}
 		/// <summary>
 		/// Called after the player steps.
@@ -1065,6 +1066,7 @@ namespace ERY.Xle
 		/// <param name="didEvent">True if there was an event that occured at this location</param>
 		protected virtual void PlayerStepImpl(Player player, bool didEvent)
 		{
+			
 		}
 
 		public abstract bool CanPlayerStepInto(Player player, int xx, int yy);
