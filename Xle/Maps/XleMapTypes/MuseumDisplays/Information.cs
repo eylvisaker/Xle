@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
-	class Information : Exhibit
+	public class Information : Exhibit
 	{
 		Player player;
 

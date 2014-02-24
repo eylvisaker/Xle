@@ -39,7 +39,12 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		}
 
 
-		public virtual void PlayerUse(Player player, int item, ref bool handled)
+		public virtual void PlayerUse(GameState state, int item, ref bool handled)
+		{
+		}
+
+
+		public virtual void BeforeEntry(GameState state, ref int targetEntryPoint)
 		{
 		}
 	}

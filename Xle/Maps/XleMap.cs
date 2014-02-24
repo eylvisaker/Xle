@@ -1188,7 +1188,7 @@ namespace ERY.Xle
 
 		protected virtual double StepQuality { get { return 1; } }
 
-		protected static Point StepDirection(Direction dir)
+		public static Point StepDirection(Direction dir)
 		{
 			switch (dir)
 			{
@@ -1200,7 +1200,7 @@ namespace ERY.Xle
 				default: throw new ArgumentException("Invalid direction!");
 			}
 		}
-		protected static Point LeftDirection(Direction dir)
+		public static Point LeftDirection(Direction dir)
 		{
 			switch (dir)
 			{
@@ -1212,7 +1212,7 @@ namespace ERY.Xle
 				default: throw new ArgumentException("Invalid direction!");
 			}
 		}
-		protected static Point RightDirection(Direction dir)
+		public static Point RightDirection(Direction dir)
 		{
 			switch (dir)
 			{
@@ -1306,20 +1306,20 @@ namespace ERY.Xle
 		/// <returns></returns>
 		public virtual bool PlayerUse(Player player, int item)
 		{
-			XleEvent evt = GetEvent(player, 1);
+			var state = new GameState(player, this);
 			bool handled = false;
 
-			if (evt != null)
-			{
-				handled = evt.Use(new GameState(player, this), item);
+			foreach(var evt in EventsAt(player, 1))
+			{ 
+				handled = evt.Use(state, item);
 
 				if (handled)
 					return handled;
 			}
 
-			mBaseExtender.PlayerUse(player, item, ref handled);
+			mBaseExtender.PlayerUse(state, item, ref handled);
 
-			return false;
+			return handled;
 		}
 
 		#endregion
@@ -1378,6 +1378,11 @@ namespace ERY.Xle
 		public string ExtenderName { get; set; }
 
 
+
+		public void BeforeEntry(GameState state, ref int targetEntryPoint)
+		{
+			mBaseExtender.BeforeEntry(state, ref targetEntryPoint);
+		}
 	}
 
 	public class Roof : IXleSerializable

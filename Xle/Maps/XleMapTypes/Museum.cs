@@ -12,6 +12,7 @@ using AgateLib.Serialization.Xle;
 using AgateLib.DisplayLib;
 
 using Vertex = AgateLib.Geometry.VertexTypes.PositionTextureNormalTangent;
+using ERY.Xle.XleMapTypes.Extenders;
 
 namespace ERY.Xle.XleMapTypes
 {
@@ -20,28 +21,13 @@ namespace ERY.Xle.XleMapTypes
 		int[] mData;
 		int mHeight;
 		int mWidth;
-		Dictionary<int, MuseumDisplays.Exhibit> mExhibits = new Dictionary<int, MuseumDisplays.Exhibit>();
+		
+		IMuseumExtender Extender { get; set; }
 
 		public Museum()
 		{
-			mExhibits.Add(0x50, new MuseumDisplays.Information());
-			mExhibits.Add(0x51, new MuseumDisplays.Welcome());
-			mExhibits.Add(0x52, new MuseumDisplays.Weaponry());
-			mExhibits.Add(0x53, new MuseumDisplays.Thornberry());
-			mExhibits.Add(0x54, new MuseumDisplays.Fountain());
-			mExhibits.Add(0x55, new MuseumDisplays.PirateTreasure());
-			mExhibits.Add(0x56, new MuseumDisplays.HerbOfLife());
-			mExhibits.Add(0x57, new MuseumDisplays.NativeCurrency());
-			mExhibits.Add(0x58, new MuseumDisplays.StonesWisdom());
-			mExhibits.Add(0x59, new MuseumDisplays.Tapestry());
-			mExhibits.Add(0x5A, new MuseumDisplays.LostDisplays());
-			mExhibits.Add(0x5B, new MuseumDisplays.KnightsTest());
-			mExhibits.Add(0x5C, new MuseumDisplays.FourJewels());
-			mExhibits.Add(0x5D, new MuseumDisplays.Guardian());
-			mExhibits.Add(0x5E, new MuseumDisplays.Pegasus());
-			mExhibits.Add(0x5F, new MuseumDisplays.AncientArtifact());
 		}
-
+		
 		protected override void ReadData(XleSerializationInfo info)
 		{
 			mWidth = info.ReadInt32("Width");
@@ -133,16 +119,19 @@ namespace ERY.Xle.XleMapTypes
 		protected override Extenders.IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
-				return base.CreateExtenderImpl();
+				Extender = new NullMuseumExtender();
+			else
+				Extender = XleCore.Factory.CreateMapExtender(this);
 
-			return XleCore.Factory.CreateMapExtender(this);
+			return Extender;
 		}
+
 		public override void OnLoad(Player player)
 		{
 			base.OnLoad(player);
 
 			CheckExhibitStatus(player);
-
+			/*
 			// face the player in a direction with an open passage
 			// or to the nearest exhibit.
 			for (int i = -1; i <= 1; i++)
@@ -165,16 +154,16 @@ namespace ERY.Xle.XleMapTypes
 					}
 				}
 			}
-
+			*/
 		exitloop:
 
 			// check to see if the caretaker wants to see the player
-			var info = (MuseumDisplays.Information)mExhibits[0x50];
+			var info = (MuseumDisplays.Information)Extender.GetExhibitByTile(0x50);
 
 			if (info.ShouldLevelUp(player))
 			{
-				g.ClearBottom();
-				g.AddBottom("The caretaker wants to see you!");
+				XleCore.TextArea.Clear();
+				XleCore.TextArea.PrintLine("The caretaker wants to see you!");
 
 				SoundMan.PlaySound(LotaSound.Good);
 
@@ -188,7 +177,8 @@ namespace ERY.Xle.XleMapTypes
 			{
 				if (player.museum[1] < 3)
 				{
-					(mExhibits[0x51] as MuseumDisplays.Welcome).PlayGoldArmbandMessage(player);
+					var welcome = (MuseumDisplays.Welcome)Extender.GetExhibitByTile(0x51);
+					welcome.PlayGoldArmbandMessage(player);
 					player.museum[1] = 3;
 
 					CheckExhibitStatus(player);
@@ -264,10 +254,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			int tileAt = this[x, y];
 
-			if (mExhibits.ContainsKey(tileAt) == false)
-				return null;
-
-			return mExhibits[tileAt];
+			return Extender.GetExhibitByTile(tileAt);
 		}
 		
 		private bool InteractWithDisplay(Player player)
@@ -408,33 +395,6 @@ namespace ERY.Xle.XleMapTypes
 
 			return true;
 		}
-		public override bool PlayerUse(Player player, int item)
-		{
-			// twist gold armband
-			if (item == 1)
-			{
-				Point faceDir = StepDirection(player.FaceDirection);
-				Point test = new Point(player.X + faceDir.X, player.Y + faceDir.Y);
-
-				// door value
-				if (this[test.X, test.Y] == 0x02)
-				{
-					XleCore.Wait(1000);
-
-					player.SetMap(1, 114, 42);
-
-					g.ClearBottom();
-				}
-				else
-				{
-					g.AddBottom("The gold armband hums softly.");
-				}
-
-				return true;
-			}
-
-			return false;
-		}
 		public override bool PlayerFight(Player player)
 		{
 			g.AddBottom();
@@ -466,7 +426,7 @@ namespace ERY.Xle.XleMapTypes
 
 		protected override void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
 		{
-			var exhibit = mExhibits[val];
+			var exhibit = Extender.GetExhibitByTile(val);
 			Color clr = exhibit.ExhibitColor;
 
 			DrawExhibitStatic(destRect, clr, distance);

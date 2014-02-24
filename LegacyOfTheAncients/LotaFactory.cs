@@ -3,6 +3,7 @@ using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.LotA.MapExtenders.Castle;
 using ERY.Xle.LotA.MapExtenders.Fortress;
+using ERY.Xle.LotA.MapExtenders.Museum;
 using ERY.Xle.LotA.MapExtenders.Outside;
 using ERY.Xle.LotA.TitleScreen;
 using ERY.Xle.Maps;
@@ -64,7 +65,7 @@ namespace ERY.Xle.LotA
 			return new LotaTitleScreen();
 		}
 
-		public override IMapExtender CreateMapExtender(Outside outside)
+		public override IOutsideExtender CreateMapExtender(Outside outside)
 		{
 			return new TarmalonExtender();
 		}
@@ -78,6 +79,10 @@ namespace ERY.Xle.LotA
 			}
 
 			return base.CreateMapExtender(theMap);
+		}
+		public override IMuseumExtender CreateMapExtender(Museum museum)
+		{
+			return new MuseumExtender();
 		}
 		public override ICastleExtender CreateMapExtender(Castle castle)
 		{

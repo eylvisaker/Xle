@@ -2206,6 +2206,8 @@ namespace ERY.Xle
 				}
 				else
 				{
+					map.BeforeEntry(new GameState(player, map), ref targetEntryPoint);
+
 					var ep = map.EntryPoints[targetEntryPoint];
 
 					player.X = ep.Location.X;

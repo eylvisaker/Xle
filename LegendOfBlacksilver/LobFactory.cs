@@ -71,7 +71,7 @@ namespace ERY.Xle.LoB
 				return Lob3DSurfaces.DungeonBlue;
 		}
 
-		public override IMapExtender CreateMapExtender(XleMapTypes.Outside outside)
+		public override IOutsideExtender CreateMapExtender(XleMapTypes.Outside outside)
 		{
 			return new LobBaseOutside();
 		}

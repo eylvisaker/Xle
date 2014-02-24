@@ -37,7 +37,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		AncientArtifact,
 	}
 
-	abstract class Exhibit
+	public abstract class Exhibit
 	{
 		protected Exhibit(string name, Coin c)
 		{

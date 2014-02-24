@@ -14,9 +14,11 @@ namespace ERY.Xle.LotA
 		}
 		void IXleSerializable.ReadData(XleSerializationInfo info)
 		{
-			info.ReadPublicProperties(this);
+			info.ReadPublicProperties(this, true);
 		}
 
 		public bool Invisible { get; set; }
+
+		public int MuseumEntryPoint { get; set; }
 	}
 }

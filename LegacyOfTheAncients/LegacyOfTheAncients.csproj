@@ -75,7 +75,7 @@
     <Compile Include="MapExtenders\Fortress\Elevator.cs" />
     <Compile Include="MapExtenders\Fortress\FortressEntry.cs" />
     <Compile Include="MapExtenders\Fortress\GasTrap.cs" />
-    <Compile Include="MapExtenders\Museum\MuseumExtensions.cs" />
+    <Compile Include="MapExtenders\Museum\MuseumExtender.cs" />
     <Compile Include="MapExtenders\Outside\TarmalonExtender.cs" />
     <Compile Include="MapExtenders\TownExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

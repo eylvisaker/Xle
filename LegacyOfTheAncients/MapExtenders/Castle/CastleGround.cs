@@ -28,12 +28,12 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 				return base.GetOutsideTile(playerPoint, x, y);
 		}
 
-		public override void PlayerUse(Player player, int item, ref bool handled)
+		public override void PlayerUse(GameState state, int item, ref bool handled)
 		{
 			switch (item)
 			{
 				case (int)LotaItem.MagicSeed:
-					handled = UseMagicSeeds(player);
+					handled = UseMagicSeeds(state.Player);
 					break;
 			}
 		}

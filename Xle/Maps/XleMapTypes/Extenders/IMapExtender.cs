@@ -19,8 +19,10 @@ namespace ERY.Xle.XleMapTypes.Extenders
 
 		int StepSize { get; }
 
-		void PlayerUse(Player player, int item, ref bool handled);
+		void PlayerUse(GameState state, int item, ref bool handled);
 
 		void OnLoad(GameState gameState);
+
+		void BeforeEntry(GameState state, ref int targetEntryPoint);
 	}
 }

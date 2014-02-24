@@ -417,7 +417,6 @@ namespace ERY.Xle
 			armor = info.ReadInt32Array("Armor");
 			weaponQuality = info.ReadInt32Array("WeaponQuality");
 			armorQuality = info.ReadInt32Array("ArmorQuality");
-			item = info.ReadInt32Array("Item");
 			hold = info.ReadInt32("Hold");
 
 			lastAttacked = info.ReadInt32("LastAttacked");
@@ -745,6 +744,16 @@ namespace ERY.Xle
 		{
 			get { return y; }
 			set { y = value; }
+		}
+
+
+		public Point Location
+		{
+			get { return new Point(x, y); }
+			set
+			{
+				SetPos(value.X, value.Y);
+			}
 		}
 
 		/// <summary>

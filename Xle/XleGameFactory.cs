@@ -44,12 +44,12 @@ namespace ERY.Xle
 			return new NullTownExtender();
 		}
 
-		public virtual IMapExtender CreateMapExtender(Outside outside)
+		public virtual IOutsideExtender CreateMapExtender(Outside outside)
 		{
 			return new NullOutsideExtender();
 		}
 
-		public virtual IMapExtender CreateMapExtender(Museum museum)
+		public virtual IMuseumExtender CreateMapExtender(Museum museum)
 		{
 			return new NullMuseumExtender();
 		}
