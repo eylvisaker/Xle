@@ -7,6 +7,7 @@ using ERY.Xle.LoB.MapExtenders.Citadel;
 using ERY.Xle.LoB.MapExtenders.Labyrinth;
 using ERY.Xle.LoB.MapExtenders.Outside;
 using ERY.Xle.LoB.TitleScreen;
+using ERY.Xle.XleMapTypes;
 using ERY.Xle.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
@@ -53,12 +54,21 @@ namespace ERY.Xle.LoB
 			Font.StringTransformer = StringTransformer.ToUpper;
 
 			Character = new Surface("character.png");
-			
+
+			Lob3DSurfaces.LoadSurfaces();
 		}
 
 		public override IXleTitleScreen CreateTitleScreen()
 		{
 			return new LobTitleScreen();
+		}
+
+		public override Maps.Map3DSurfaces GetMap3DSurfaces(Map3D map3D)
+		{
+			if (map3D is Museum)
+				return Lob3DSurfaces.Archives;
+			else
+				return Lob3DSurfaces.DungeonBlue;
 		}
 
 		public override IMapExtender CreateMapExtender(XleMapTypes.Outside outside)

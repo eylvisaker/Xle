@@ -905,6 +905,7 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="t"></param>
 		/// <returns></returns>
+		[Obsolete("Use Events.Any(x => x is Type) instead.", true)]
 		public bool HasEventType(Type t)
 		{
 			Type basetype = typeof(XleEvent);
@@ -922,7 +923,7 @@ namespace ERY.Xle
 
 			return false;
 		}
-
+		[Obsolete("Use Events.Any(x => x is Type) instead.", true)]
 		public bool HasEventType<T>() where T : XleEvent
 		{
 			for (int i = 0; i < mEvents.Count; i++)

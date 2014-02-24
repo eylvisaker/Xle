@@ -138,6 +138,7 @@
     <Compile Include="Maps\AnimationType.cs" />
     <Compile Include="Maps\EntryPoint.cs" />
     <Compile Include="Maps\GroupType.cs" />
+    <Compile Include="Maps\Map3DSurfaces.cs" />
     <Compile Include="Maps\TileGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColorStringBuilder.cs" />

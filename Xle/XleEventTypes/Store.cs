@@ -300,15 +300,15 @@ namespace ERY.Xle.XleEventTypes
 		/// regardless of whether the player has an overdue loan.</returns>
 		protected bool CheckLoan(Player player, bool displayMessage)
 		{
-			if (XleCore.Map.HasEventType(typeof(XleEventTypes.StoreLending)) == false)
+			if (XleCore.Map.Events.Any(x => x is StoreLending) == false)
 				return false;
 
 			if (player.loan > 0 && player.dueDate - player.TimeDays <= 0)
 			{
 				if (displayMessage)
 				{
-					g.AddBottom("");
-					g.AddBottom("Sorry.  I can't talk to you.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Sorry.  I can't talk to you.");
 					XleCore.Wait(500);
 				}
 
@@ -320,14 +320,14 @@ namespace ERY.Xle.XleEventTypes
 
 		public override bool Speak(GameState state)
 		{
-			g.AddBottom(ShopName, XleColor.Yellow);
-			g.AddBottom("");
-			g.AddBottom("A Sign Says, ");
-			g.AddBottom("Closed for remodelling.");
+			XleCore.TextArea.PrintLine(ShopName, XleColor.Yellow);
+			XleCore.TextArea.PrintLine("");
+			XleCore.TextArea.PrintLine("A Sign Says, ");
+			XleCore.TextArea.PrintLine("Closed for remodelling.");
 
 			SoundMan.PlaySound(LotaSound.Medium);
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 
 			XleCore.Wait(1000);
 
@@ -338,8 +338,8 @@ namespace ERY.Xle.XleEventTypes
 		{
 			if (Robbed)
 			{
-				g.AddBottom();
-				g.AddBottom("No items within reach here.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("No items within reach here.");
 				XleCore.Wait(1000);
 				return true;
 			}
@@ -348,15 +348,15 @@ namespace ERY.Xle.XleEventTypes
 
 			if (value == 0)
 			{
-				g.AddBottom();
-				g.AddBottom("There's nothing to really carry here.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("There's nothing to really carry here.");
 				XleCore.Wait(1000);
 				return true;
 			}
 
 			state.Player.Gold += value;
-			g.AddBottom();
-			g.AddBottom("You get " + value.ToString() + " gold.", XleColor.Yellow);
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You get " + value.ToString() + " gold.", XleColor.Yellow);
 			XleCore.Wait(1000);
 			Robbed = true;
 
@@ -416,8 +416,8 @@ namespace ERY.Xle.XleEventTypes
 				theWindow[i] += max;
 				theWindow[i++] += " gold";
 
-				g.AddBottom("");
-				g.AddBottom("Borrow how much?");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Borrow how much?");
 
 				choice = ChooseNumber(max);
 
@@ -427,8 +427,8 @@ namespace ERY.Xle.XleEventTypes
 					player.loan = (int)(choice * 1.5);
 					player.dueDate = (int)(player.TimeDays + 0.999) + 120;
 
-					g.AddBottom();
-					g.AddBottom(choice.ToString() + " gold borrowed.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine(choice.ToString() + " gold borrowed.");
 
 					XleCore.Wait(1000, DrawStore);
 

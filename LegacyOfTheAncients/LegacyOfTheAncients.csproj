@@ -75,9 +75,11 @@
     <Compile Include="MapExtenders\Fortress\Elevator.cs" />
     <Compile Include="MapExtenders\Fortress\FortressEntry.cs" />
     <Compile Include="MapExtenders\Fortress\GasTrap.cs" />
+    <Compile Include="MapExtenders\Museum\MuseumExtensions.cs" />
     <Compile Include="MapExtenders\Outside\TarmalonExtender.cs" />
     <Compile Include="MapExtenders\TownExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Lota3DSurfaces.cs" />
     <Compile Include="TitleScreen\LotaTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -215,7 +217,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MapExtenders\Museum\" />
     <Folder Include="Support\OldMaps\" />
   </ItemGroup>
   <ItemGroup>

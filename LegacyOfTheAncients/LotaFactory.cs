@@ -5,6 +5,7 @@ using ERY.Xle.LotA.MapExtenders.Castle;
 using ERY.Xle.LotA.MapExtenders.Fortress;
 using ERY.Xle.LotA.MapExtenders.Outside;
 using ERY.Xle.LotA.TitleScreen;
+using ERY.Xle.Maps;
 using ERY.Xle.XleMapTypes;
 using ERY.Xle.XleMapTypes.Extenders;
 using ERY.Xle.XleMapTypes.Extenders.Dungeons;
@@ -39,24 +40,23 @@ namespace ERY.Xle.LotA
 			Character = new Surface("character.png");
 			Monsters = new Surface("OverworldMonsters.png");
 
-			MuseumBackdrop = new Surface("Museum/MuseumBackdrop.png");
-			MuseumWall = new Surface("Museum/MuseumWall.png");
-			MuseumDoor = new Surface("Museum/MuseumDoor.png");
-			MuseumSidePassage = new Surface("Museum/MuseumSidePassage.png");
-			MuseumExhibitFrame = new Surface("Museum/ExhibitFrame.png");
-			MuseumExhibitStatic = new Surface("Museum/ExhibitStatic.png");
-			MuseumCloseup = new Surface("Museum/MuseumCloseup.png");
-			MuseumExtras = new Surface("Museum/MuseumExtras.png");
-
-			DungeonBlueBackdrop = new Surface("Dungeon/Blue/DungeonBackdrop.png");
-			DungeonBlueSidePassage = new Surface("Dungeon/Blue/DungeonSidePassage.png");
-			DungeonBlueWall = new Surface("Dungeon/Blue/DungeonWall.png");
-			DungeonBlueExtras = new Surface("Dungeon/Blue/DungeonExtras.png");
+			Lota3DSurfaces.LoadSurfaces();
 
 			foreach (var exinfo in XleCore.ExhibitInfo.Values)
 			{
 				exinfo.LoadImage();
 			}
+		}
+
+		public override Map3DSurfaces GetMap3DSurfaces(Map3D map)
+		{
+			if (map is Museum)
+				return Lota3DSurfaces.Museum;
+
+			if (map.MapID == 71 || map.MapID == 73)
+				return Lota3DSurfaces.DungeonBlue;
+			else
+				return Lota3DSurfaces.DungeonRed;
 		}
 
 		public override IXleTitleScreen CreateTitleScreen()

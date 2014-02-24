@@ -2185,12 +2185,12 @@ namespace ERY.Xle
 
 			try
 			{
-				if (mMapID != 0)
+				if (mMapID != 0 && saveMap != null && mMapID != saveMap.MapID)
 				{
 					Map = LoadMap(mMapID);
 					player.Map = mMapID;
 
-					g.ClearBottom();
+					TextArea.Clear();
 				}
 
 				if (targetEntryPoint < 0 || targetEntryPoint >= Map.EntryPoints.Count)
@@ -2200,8 +2200,8 @@ namespace ERY.Xle
 
 					if (targetEntryPoint >= 0)
 					{
-						g.AddBottom("Failed to find entry point " + targetEntryPoint.ToString(), XleColor.Yellow);
-						g.AddBottom();
+						TextArea.PrintLine("Failed to find entry point " + targetEntryPoint.ToString(), XleColor.Yellow);
+						TextArea.PrintLine();
 					}
 				}
 				else
@@ -2236,15 +2236,14 @@ namespace ERY.Xle
 
 		static void CheckLoan(Player player)
 		{
-			if (XleCore.Map.HasEventType(typeof(StoreLending)))
+			if (XleCore.Map.Events.Any(x => x is StoreLending))
 			{
 				if (player.loan > 0 && player.dueDate - player.TimeDays <= 0)
 				{
-					g.AddBottom("This is your friendly lender.");
-					g.AddBottom("You owe me money!");
+					TextArea.PrintLine("This is your friendly lender.");
+					TextArea.PrintLine("You owe me money!");
 
 					XleCore.Wait(1000);
-
 				}
 			}
 		}

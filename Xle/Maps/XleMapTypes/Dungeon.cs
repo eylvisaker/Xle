@@ -300,21 +300,25 @@ namespace ERY.Xle.XleMapTypes
 
 		#region --- Drawing ---
 
-		protected override Surface Backdrop
+		[Obsolete("Use surfaces instead.", true)]
+		protected Surface Backdrop
 		{
-			get { return g.DungeonBlueBackdrop; }
+			get { return Surfaces.Backdrop; }
 		}
-		protected override Surface Wall
+		[Obsolete("Use surfaces instead.", true)]
+		protected Surface Wall
 		{
-			get { return g.DungeonBlueWall; }
+			get { return Surfaces.Wall; }
 		}
-		protected override Surface SidePassages
+		[Obsolete("Use surfaces instead.", true)]
+		protected Surface SidePassages
 		{
-			get { return g.DungeonBlueSidePassage; }
+			get { return Surfaces.SidePassages; }
 		}
-		protected override Surface Door
+		[Obsolete("Use surfaces instead.", true)]
+		protected Surface Door
 		{
-			get { return g.MuseumDoor; }
+			get { return Surfaces.Door; }
 		}
 
 		#endregion

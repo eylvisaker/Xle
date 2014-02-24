@@ -16,8 +16,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 			while (state.Player.X < TheEvent.Rectangle.Right)
 			{
-				XleCore.Wait(125);
-					state.Player.X++;
+				AdvancePlayer(state);
 
 				if (state.Player.X == 25)
 				{
@@ -28,11 +27,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 						do
 						{
-							XleCore.Wait(125);
-							state.Player.X++;
-
-							if (state.Player.X == state.Map.Width)
-								state.Player.X = 0;
+							AdvancePlayer(state);
 
 						} while (state.Player.X != 98);
 					}
@@ -41,6 +36,12 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 					state.Player.X = 25;
 				}
 			}
+		}
+
+		private static void AdvancePlayer(GameState state)
+		{
+			XleCore.Wait(125);
+			state.Player.X++;
 		} 
 	}
 }

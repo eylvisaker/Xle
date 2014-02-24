@@ -83,32 +83,7 @@ namespace ERY.Xle.XleMapTypes
 			mHeight = height;
 			mWidth = width;
 		}
-
-		#region --- Drawing ---
-
-		protected override Surface Backdrop
-		{
-			get { return g.MuseumBackdrop; }
-		}
-		protected override Surface Wall
-		{
-			get { return g.MuseumWall; }
-		}
-		protected override Surface SidePassages
-		{
-			get { return g.MuseumSidePassage; }
-		}
-		protected override Surface Door
-		{
-			get { return g.MuseumDoor; }
-		}
-		protected override Surface Extras
-		{
-			get { return g.MuseumExtras; }
-		}
-
-		#endregion
-
+		
 		public override int Height
 		{
 			get { return mHeight; }
@@ -164,6 +139,8 @@ namespace ERY.Xle.XleMapTypes
 		}
 		public override void OnLoad(Player player)
 		{
+			base.OnLoad(player);
+
 			CheckExhibitStatus(player);
 
 			// face the player in a direction with an open passage
@@ -272,8 +249,8 @@ namespace ERY.Xle.XleMapTypes
 		{
 			Rectangle displayRect = new Rectangle(inRect.X + 64, inRect.Y + 64, 240, 128);
 
-			g.MuseumExhibitStatic.Draw(displayRect);
-			g.MuseumCloseup.Draw(inRect);
+			Surfaces.MuseumExhibitStatic.Draw(displayRect);
+			Surfaces.MuseumExhibitCloseup.Draw(inRect);
 
 			DrawExhibitText(inRect, mCloseup);
 
@@ -553,14 +530,14 @@ namespace ERY.Xle.XleMapTypes
 				destRect.Width = srcRect.Width;
 				destRect.Height = srcRect.Height;
 
-				MuseumExhibitStatic.Color = clr;
-				MuseumExhibitStatic.Draw(srcRect, destRect);
+				Surfaces.MuseumExhibitStatic.Color = clr;
+				Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
 
 				destRect = Rectangle.FromLTRB(destRect.Right, destRect.Top, oldDest.Right, destRect.Bottom);
 				srcRect.X = 0;
 				srcRect.Width = destRect.Width;
 
-				MuseumExhibitStatic.Draw(srcRect, destRect);
+				Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
 			}
 			else
 			{
@@ -570,8 +547,8 @@ namespace ERY.Xle.XleMapTypes
 				destRect.Width = srcRect.Width;
 				destRect.Height = srcRect.Height;
 
-				MuseumExhibitStatic.Color = clr;
-				MuseumExhibitStatic.Draw(srcRect, destRect);
+				Surfaces.MuseumExhibitStatic.Color = clr;
+				Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
 			}
 
 			anim++;

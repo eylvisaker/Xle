@@ -24,21 +24,6 @@ namespace ERY.Xle
 		public Surface Character { get; protected set; }		// returns the handle to the character resource
 		public Surface Monsters { get; protected set; }				// returns the handle to the monsters resource
 
-		public Surface MuseumBackdrop { get; protected set; }
-		public Surface MuseumWall { get; protected set; }			// stores the pointer to the wall texture
-		public Surface MuseumSidePassage { get; protected set; }
-		public Surface MuseumDoor { get; protected set; }
-		public Surface MuseumExhibitFrame { get; protected set; }
-		public Surface MuseumExhibit{ get; protected set; }
-		public Surface MuseumExhibitStatic { get; protected set; }
-		public Surface MuseumExtras { get; protected set; }
-		public Surface MuseumCloseup { get; protected set; }
-
-		public Surface DungeonBlueBackdrop { get; protected set; }
-		public Surface DungeonBlueWall { get; protected set; }
-		public Surface DungeonBlueSidePassage { get; protected set; }
-		public Surface DungeonBlueExtras { get; protected set; }
-
 		public virtual void CheatLevel(Player player, int level)
 		{
 			throw new NotImplementedException();
@@ -68,5 +53,7 @@ namespace ERY.Xle
 		{
 			return new NullMuseumExtender();
 		}
+
+		public abstract Maps.Map3DSurfaces GetMap3DSurfaces(Map3D map3D);
 	}
 }

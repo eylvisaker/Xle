@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle.XleMapTypes
 {
@@ -34,20 +35,23 @@ namespace ERY.Xle.XleMapTypes
 			DoorRight,
 		}
 
-		protected abstract Surface Backdrop { get; }
-		protected abstract Surface Wall { get; }
-		protected abstract Surface SidePassages { get; }
-		protected virtual Surface Extras { get { return g.DungeonBlueExtras; } }
-		protected virtual Surface Door { get { return null; } }
-		protected virtual Surface MuseumExhibitFrame
-		{
-			get { return g.MuseumExhibitFrame; }
-		}
-		protected virtual Surface MuseumExhibitStatic
-		{
-			get { return g.MuseumExhibitStatic; }
-		}
+		public Map3DSurfaces Surfaces { get; set; }
 		protected virtual bool ExtraScale { get { return false; } }
+
+		public override void OnLoad(Player player)
+		{
+			base.OnLoad(player);
+
+			LoadImages();
+		}
+
+		private void LoadImages()
+		{
+			if (XleCore.Factory == null)
+				return;
+
+			Surfaces = XleCore.Factory.GetMap3DSurfaces(this);
+		}
 
 		readonly Size imageSize = new Size(368, 272);
 
@@ -63,7 +67,7 @@ namespace ERY.Xle.XleMapTypes
 			Point leftDir = LeftDirection(faceDirection);
 			Point rightDir = RightDirection(faceDirection);
 
-			Backdrop.Draw(inRect);
+			Surfaces.Backdrop.Draw(inRect);
 
 			Point loc = new Point(x, y);
 
@@ -151,7 +155,7 @@ namespace ERY.Xle.XleMapTypes
 				destRect.X += maindestRect.X;
 				destRect.Y += maindestRect.Y;
 
-				SidePassages.Draw(srcRect, destRect);
+				Surfaces.SidePassages.Draw(srcRect, destRect);
 			}
 			if (drawRight)
 			{
@@ -173,7 +177,7 @@ namespace ERY.Xle.XleMapTypes
 				destRect.X += maindestRect.X;
 				destRect.Y += maindestRect.Y;
 
-				SidePassages.Draw(srcRect, destRect);
+				Surfaces.SidePassages.Draw(srcRect, destRect);
 			}
 
 		}
@@ -256,7 +260,7 @@ namespace ERY.Xle.XleMapTypes
 			destRect.Y += mainDestRect.Y;
 
 			if (srcRect.Width != 0 && srcRect.Height != 0)
-				Extras.Draw(srcRect, destRect);
+				Surfaces.Extras.Draw(srcRect, destRect);
 
 			AnimateExtra(extraType, loc, distance, destRect.Location);
 		}
@@ -312,15 +316,15 @@ namespace ERY.Xle.XleMapTypes
 			if (ExtraScale)
 			{
 				srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
-				Extras.InterpolationHint = InterpolationMode.Fastest;
+				Surfaces.Extras.InterpolationHint = InterpolationMode.Fastest;
 			}
 
 			destRect.X += extraDestRect.X;
 			destRect.Y += extraDestRect.Y;
 
-			Extras.Color = clr;
-			Extras.Draw(srcRect, destRect);
-			Extras.Color = XleColor.White;
+			Surfaces.Extras.Color = clr;
+			Surfaces.Extras.Draw(srcRect, destRect);
+			Surfaces.Extras.Color = XleColor.White;
 		}
 
 		protected virtual Color ExtraColor(Point location)
@@ -338,7 +342,7 @@ namespace ERY.Xle.XleMapTypes
 			destRect.X += main_destRect.X;
 			destRect.Y += main_destRect.Y;
 
-			Wall.Draw(srcRect, destRect);
+			Surfaces.Wall.Draw(srcRect, destRect);
 		}
 
 		private Rectangle GetWallSrcRect(int distance)
@@ -393,11 +397,11 @@ namespace ERY.Xle.XleMapTypes
 			else if (val == 0x02)
 			{
 				// door
-				source = Door;
+				source = Surfaces.Door;
 			}
 			else if (val >= 0x50 && val <= 0x5f)
 			{
-				source = MuseumExhibitFrame;
+				source = Surfaces.MuseumExhibitFrame;
 
 				DrawMuseumExhibit(distance, destRect, val);
 			}

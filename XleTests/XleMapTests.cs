@@ -63,30 +63,5 @@ namespace ERY.XleTests
 	[TestClass]
 	public class XleMapTests
 	{
-		[TestMethod]
-		public void HasEventTypeTest()
-		{
-			XleMap map = new FakeMap();
-
-			bool threwException = false;
-			try
-			{
-				map.HasEventType(typeof(int));
-			}
-			catch (ArgumentException e)
-			{
-				threwException = true;
-			}
-			Assert.IsTrue(threwException);
-
-			map.Events.Add(new StoreBank());
-
-			Assert.IsTrue(map.HasEventType<StoreBank>());
-			Assert.IsTrue(map.HasEventType(typeof(StoreBank)));
-
-			Assert.IsFalse(map.HasEventType<StoreArmor>());
-			Assert.IsFalse(map.HasEventType(typeof(StoreArmor)));
-
-		}
 	}
 }

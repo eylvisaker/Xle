@@ -72,22 +72,6 @@ namespace ERY.Xle
 
 		}
 
-		// Surfaces
-
-		public static Surface MuseumBackdrop { get { return XleCore.Factory.MuseumBackdrop; } }
-		public static Surface MuseumWall { get { return XleCore.Factory.MuseumWall; } }			// stores the pointer to the wall texture
-		public static Surface MuseumSidePassage { get { return XleCore.Factory.MuseumSidePassage; } }
-		public static Surface MuseumDoor { get { return XleCore.Factory.MuseumDoor; } }
-		public static Surface MuseumExhibitFrame { get { return XleCore.Factory.MuseumExhibitFrame; } }
-		public static Surface MuseumExhibitStatic { get { return XleCore.Factory.MuseumExhibitStatic; } }
-		public static Surface MuseumExtras { get { return XleCore.Factory.MuseumExtras; } }
-		public static Surface MuseumCloseup { get { return XleCore.Factory.MuseumCloseup; } }
-
-		public static Surface DungeonBlueBackdrop { get { return XleCore.Factory.DungeonBlueBackdrop; } }
-		public static Surface DungeonBlueWall { get { return XleCore.Factory.DungeonBlueWall; } }
-		public static Surface DungeonBlueSidePassage { get { return XleCore.Factory.DungeonBlueSidePassage; } }
-		public static Surface DungeonBlueExtras { get { return XleCore.Factory.DungeonBlueExtras; } }
-
 		// character functions
 		static Timing.StopWatch animWatch = new Timing.StopWatch();
 		const int frameTime = 150;
@@ -420,12 +404,5 @@ namespace ERY.Xle
 		static public bool guard;					// is the player in guard colors?
 
 		static public bool disableEncounters;		// used to disable overworld encounters
-
-
-		internal static bool HasCommand(KeyCode cmd)
-		{
-			return true;
-		}
-
 	}
 }
