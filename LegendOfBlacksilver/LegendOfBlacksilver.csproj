@@ -63,6 +63,9 @@
     <Compile Include="LobProgram.cs" />
     <Compile Include="LobStory.cs" />
     <Compile Include="Lob3DSurfaces.cs" />
+    <Compile Include="MapExtenders\Archives\Exhibits\IslandCaverns.cs" />
+    <Compile Include="MapExtenders\Archives\HawkArchive.cs" />
+    <Compile Include="MapExtenders\Archives\OwlArchive.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\CastleDoor.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\DaisMessage.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\King.cs" />

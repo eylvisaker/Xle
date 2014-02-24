@@ -2,6 +2,7 @@
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.LoB.MapExtenders;
+using ERY.Xle.LoB.MapExtenders.Archives;
 using ERY.Xle.LoB.MapExtenders.Castle;
 using ERY.Xle.LoB.MapExtenders.Citadel;
 using ERY.Xle.LoB.MapExtenders.Labyrinth;
@@ -70,7 +71,15 @@ namespace ERY.Xle.LoB
 			else
 				return Lob3DSurfaces.DungeonBlue;
 		}
+		public override IMuseumExtender CreateMapExtender(Museum museum)
+		{
+			if (museum.MapID == 53)
+				return new OwlArchive();
+			else if (museum.MapID == 54)
+				return new HawkArchive();
 
+			return base.CreateMapExtender(museum);
+		}
 		public override IOutsideExtender CreateMapExtender(XleMapTypes.Outside outside)
 		{
 			return new LobBaseOutside();

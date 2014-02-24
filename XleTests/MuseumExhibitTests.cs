@@ -1,4 +1,5 @@
 ﻿using ERY.Xle;
+using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
 using ERY.Xle.XleMapTypes.MuseumDisplays;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

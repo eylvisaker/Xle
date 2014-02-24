@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AgateLib.Geometry;
+using ERY.Xle.XleMapTypes.MuseumDisplays;
 
-namespace ERY.Xle.XleMapTypes.MuseumDisplays
+namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
 	class AncientArtifact : Exhibit
 	{

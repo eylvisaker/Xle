@@ -31,7 +31,14 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			Rectangle srcRect = new Rectangle(0, 128 * id, 240, 128);
 
-			Image.Draw(srcRect, destRect);
+			if (Image != null)
+			{
+				Image.Draw(srcRect, destRect);
+			}
+			else
+			{
+				System.Diagnostics.Debug.Print("Null image in exhibit: " + Text);
+			}
 		}
 	}
 }

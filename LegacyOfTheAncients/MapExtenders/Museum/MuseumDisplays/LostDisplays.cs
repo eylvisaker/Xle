@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ERY.Xle.XleMapTypes.MuseumDisplays;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleMapTypes.MuseumDisplays
+namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
 	class LostDisplays : Exhibit
 	{
