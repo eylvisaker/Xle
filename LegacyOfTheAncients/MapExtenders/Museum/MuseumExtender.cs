@@ -161,5 +161,19 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 				XleCore.TextArea.PrintLine("The gold armband hums softly.");
 			}
 		}
+
+		public override void NeedsCoinMessage(Player player, Exhibit ex)
+		{
+			var lotaex = (LotaExhibit)ex;
+
+			XleCore.TextArea.PrintLine("You'll need a " + lotaex.Coin.ToString() + " coin.");
+		}
+
+		public override void PrintUseCoinMessage(Player player, Exhibit ex)
+		{
+			var lotaex = (LotaExhibit)ex;
+
+			XleCore.TextArea.PrintLine("insert your " + lotaex.Coin.ToString() + " coin?");
+		}
 	}
 }

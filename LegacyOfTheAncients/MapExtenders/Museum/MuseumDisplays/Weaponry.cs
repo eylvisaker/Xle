@@ -6,10 +6,10 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class Weaponry : Exhibit
+	class Weaponry : LotaExhibit
 	{
 		public Weaponry() : base("Weaponry", Coin.Jade) { }
-		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Weaponry; } }
+		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Weaponry; } }
 		public override string LongName
 		{
 			get
@@ -22,7 +22,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public override void PlayerXamine(Player player)
 		{
-			int id = (int)ExhibitID;
+			int id = (int)ExhibitIdentifier;
 
 			if (player.museum[(int)ExhibitIdentifier.Thornberry] != 0)
 			{
@@ -50,7 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		}
 		public override bool IsClosed(ERY.Xle.Player player)
 		{
-			int id = (int)ExhibitID;
+			int id = (int)ExhibitIdentifier;
 
 			if (viewedThisTime)
 				return true;

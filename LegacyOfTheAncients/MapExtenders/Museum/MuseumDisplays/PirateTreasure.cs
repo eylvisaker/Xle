@@ -6,10 +6,10 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class PirateTreasure : Exhibit
+	class PirateTreasure : LotaExhibit
 	{
 		public PirateTreasure() : base("Pirate Treasure", Coin.Topaz) { }
-		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.PirateTreasure; } }
+		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.PirateTreasure; } }
 
 		public override bool StaticBeforeCoin
 		{

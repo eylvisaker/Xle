@@ -6,73 +6,20 @@ using AgateLib.Geometry;
 
 namespace ERY.Xle.XleMapTypes.MuseumDisplays
 {
-	public enum Coin
-	{
-		None,
-		Jade,
-		Topaz,
-		Amethyst,
-		Sapphire,
-		Ruby,
-		Turquoise,
-		Diamond,
-	}
-	public enum ExhibitIdentifier
-	{
-		Information,
-		Welcome,
-		Weaponry,
-		Thornberry,
-		Fountain,
-		PirateTreasure,
-		HerbOfLife,
-		NativeCurrency,
-		StonesWisdom,
-		Tapestry,
-		LostDisplays,
-		KnightsTest,
-		FourJewels,
-		Guardian,
-		Pegasus,
-		AncientArtifact,
-	}
-
 	public abstract class Exhibit
 	{
-		protected Exhibit(string name, Coin c)
+		protected Exhibit(string name)
 		{
 			Name = name;
-			Coin = c;
 		}
 
 		public string Name { get; private set; }
-		public Coin Coin { get; private set; }
-		public bool RequiresCoin { get { return Coin != Coin.None; } }
 		public virtual string LongName { get { return Name; } }
-		public virtual string CoinString
-		{
-			get { return "(Insert " + Coin.ToString() + " coin)"; }
-		}
-		public virtual Color ExhibitColor
-		{
-			get
-			{
-				switch (Coin)
-				{
-					case Coin.Jade: return XleColor.Green;
-					case Coin.Topaz: return XleColor.Yellow;
-					case Coin.Amethyst: return XleColor.Purple;
-					case Coin.Sapphire: return XleColor.Blue;
-					case Coin.Ruby: return XleColor.Red;
-					case Coin.Turquoise: return XleColor.Cyan;
 
-					case Coin.Diamond:
-					case Coin.None:
-					default:
-						return XleColor.White;
-				}
-			}
-		}
+		public abstract Color ExhibitColor { get; }
+
+		public abstract int ExhibitID { get; }
+
 		/// <summary>
 		/// Gets the color of the text in the museum. Defaults to ExhibitColor.
 		/// </summary>
@@ -84,12 +31,12 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		{
 			get
 			{
-				if (XleCore.ExhibitInfo.ContainsKey((int)ExhibitID))
+				if (XleCore.ExhibitInfo.ContainsKey(ExhibitID))
 				{
-					var exinfo = XleCore.ExhibitInfo[(int)ExhibitID];
+					var exinfo = XleCore.ExhibitInfo[ExhibitID];
 
 					if (exinfo.Text.ContainsKey(1))
-						return XleCore.ExhibitInfo[(int)ExhibitID].Text[1];
+						return XleCore.ExhibitInfo[ExhibitID].Text[1];
 					else
 						return "This exhibit does not have any text with key 1.";
 				}
@@ -262,11 +209,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			return false;
 		}
 
-		public abstract ExhibitIdentifier ExhibitID { get; }
-		public virtual bool ViewedBefore(Player player)
-		{
-			return player.museum[(int)ExhibitID] != 0;
-		}
+		public abstract bool ViewedBefore(Player player);
 
 		/// <summary>
 		/// Returns true if we should draw the static before a coin is inserted.
@@ -276,28 +219,11 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			get { return true; }
 		}
 
-		public ExhibitInfo ExhibitInfo
-		{
-			get { return XleCore.ExhibitInfo[(int)ExhibitID]; }
-		}
+		public abstract void Draw(Rectangle displayRect);
 
-		protected int TotalExhibitsViewed(Player player)
-		{
-			int count = 0;
+		public abstract string CoinString { get; }
 
-			for (int i = 2; i < player.museum.Length; i++)
-			{
-				if (player.museum[i] != 0) 
-					count++;
-			}
-
-			return count;
-		}
-
-		public virtual void Draw(Rectangle displayRect)
-		{
-			ExhibitInfo.DrawImage(displayRect, ImageID);
-		}
+		public abstract bool RequiresCoin(GameState state);
 	}
 
 

@@ -15,8 +15,17 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 
 		public OwlArchive()
 		{
+			mExhibits.Add(0x5e, new MetalWorks());
+			mExhibits.Add(0x5f, new SingingCrystal());
+			mExhibits.Add(0x5D, new IslandRetreat());
 
-			mExhibits.Add(0x5D, new IslandCaverns());
+			mExhibits.Add(0x56, new GameOfHonor());
+			mExhibits.Add(0x55, new StormingGear());
+			mExhibits.Add(0x57, new TheWealthy());
+
+			mExhibits.Add(0x58, new Mountains());
+			mExhibits.Add(0x59, new MagicEtherium());
+			mExhibits.Add(0x50, new VaseOfSouls());
 		}
 
 

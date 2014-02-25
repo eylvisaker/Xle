@@ -6,10 +6,10 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class Thornberry : Exhibit
+	class Thornberry : LotaExhibit
 	{
 		public Thornberry() : base("Thornberry", Coin.Jade) { }
-		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Thornberry; } }
+		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Thornberry; } }
 		public override string LongName
 		{
 			get { return "A typical town of Tarmalon"; }
@@ -32,7 +32,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 				int amount = 100;
 
-				if (player.museum[(int)ExhibitID] > 0 || player.museum[(int)ExhibitIdentifier.Fountain] > 0)
+				if (player.museum[(int)ExhibitIdentifier] > 0 || player.museum[(int)ExhibitIdentifier.Fountain] > 0)
 					amount += 200;
 
 				player.Gold += amount;

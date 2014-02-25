@@ -4,6 +4,7 @@ using AgateLib.Serialization.Xle;
 using ERY.Xle.LotA.MapExtenders.Castle;
 using ERY.Xle.LotA.MapExtenders.Fortress;
 using ERY.Xle.LotA.MapExtenders.Museum;
+using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
 using ERY.Xle.LotA.MapExtenders.Outside;
 using ERY.Xle.LotA.TitleScreen;
 using ERY.Xle.Maps;

@@ -39,5 +39,26 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public virtual void CheckExhibitStatus(GameState state)
 		{
 		}
+
+
+		public virtual void InteractWithDisplay(Player player)
+		{
+			
+		}
+
+
+		public virtual bool PlayerHasCoin(Player player, Exhibit ex)
+		{
+			return true;
+		}
+		public virtual void NeedsCoinMessage(Player player, Exhibit ex)
+		{
+		}
+		public virtual void UseCoin(Player player, Exhibit ex)
+		{
+		}
+		public virtual void PrintUseCoinMessage(Player player, Exhibit ex)
+		{
+		}
 	}
 }

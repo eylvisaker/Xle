@@ -6,10 +6,10 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class NativeCurrency : Exhibit
+	class NativeCurrency : LotaExhibit
 	{
 		public NativeCurrency() : base("Native Currency", Coin.Topaz) { }
-		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.NativeCurrency; } }
+		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.NativeCurrency; } }
 
 		public override void PlayerXamine(Player player)
 		{

@@ -6,10 +6,10 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	public class Welcome : Exhibit
+	public class Welcome : LotaExhibit
 	{
 		public Welcome() : base("Welcome", Coin.None) { }
-		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Welcome; } }
+		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Welcome; } }
 		public override string LongName
 		{
 			get { return "Welcome to the famed"; }

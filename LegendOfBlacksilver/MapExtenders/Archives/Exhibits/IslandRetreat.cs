@@ -7,20 +7,13 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class IslandCaverns : Exhibit
+	class IslandRetreat : LobExhibit
 	{
-		public IslandCaverns() : base("Island Caverns", Coin.Sapphire) { }
+		public IslandRetreat() : base("Island Retreat", Coin.BlueGem) { }
 
-		public override ExhibitIdentifier ExhibitID
+		public override ExhibitIdentifier ExhibitIdentifier
 		{
-			get { return (ExhibitIdentifier)0x0d; }
-		}
-		public override string LongName
-		{
-			get
-			{
-				return base.LongName;
-			}
+			get { return ExhibitIdentifier.IslandRetreat; }
 		}
 
 		public override void PlayerXamine(Player player)

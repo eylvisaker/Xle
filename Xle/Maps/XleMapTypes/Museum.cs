@@ -237,7 +237,7 @@ namespace ERY.Xle.XleMapTypes
 			g.AddBottom();
 			XleCore.WaitForKey();
 
-			if (ex.RequiresCoin == false)
+			if (ex.RequiresCoin(GameState) == false)
 			{
 				mDrawStatic = false;
 				RunExhibit(player, ex);
@@ -249,16 +249,16 @@ namespace ERY.Xle.XleMapTypes
 				else
 					g.AddBottom();
 
-				if (PlayerHasCoin(player, ex.Coin) == false)
+				if (Extender.PlayerHasCoin(player, ex) == false)
 				{
-					g.AddBottom("You'll need a " + ex.Coin.ToString() + " coin.");
+					Extender.NeedsCoinMessage(player, ex);
 					XleCore.Wait(500);
 
 					return true;
 				}
 				else
 				{
-					g.AddBottom("insert your " + ex.Coin.ToString() + " coin?");
+					Extender.PrintUseCoinMessage(player, ex);
 					g.AddBottom();
 
 					int choice = XleCore.QuickMenu(new MenuItemList("Yes", "no"), 3);
@@ -266,7 +266,7 @@ namespace ERY.Xle.XleMapTypes
 					if (choice == 1)
 						return true;
 
-					UseCoin(player, ex.Coin);
+					Extender.UseCoin(player, ex);
 
 					mDrawStatic = false;
 					RunExhibit(player, ex);
@@ -289,16 +289,6 @@ namespace ERY.Xle.XleMapTypes
 		private void CheckExhibitStatus(Player player)
 		{
 			Extender.CheckExhibitStatus(GameState);
-		}
-
-		private void UseCoin(Player player, MuseumDisplays.Coin coin)
-		{
-
-		}
-
-		private bool PlayerHasCoin(Player player, MuseumDisplays.Coin coin)
-		{
-			return true;
 		}
 
 

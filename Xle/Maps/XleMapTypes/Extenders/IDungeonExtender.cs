@@ -14,5 +14,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		void OnBeforeOpenBox(Player player, ref bool handled);
 
 		void OnLoad(Player player);
+
+		string TrapName(int val);
 	}
 }

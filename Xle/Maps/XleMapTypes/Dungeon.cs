@@ -652,15 +652,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		string TrapName(int val)
 		{
-			switch (val)
-			{
-				case 0x11: return "ceiling hole";
-				case 0x12: return "floor hole";
-				case 0x13: return "poison gas vent";
-				case 0x14: return "slime splotch";
-				case 0x15: return "trip wire";
-				default: throw new ArgumentException();
-			}
+			return Extender.TrapName(val);
 		}
 
 		protected override void PlayPlayerMoveSound()

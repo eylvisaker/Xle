@@ -6,10 +6,10 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class HerbOfLife : Exhibit
+	class HerbOfLife : LotaExhibit
 	{
 		public HerbOfLife() : base("Herb of life", Coin.Topaz) { }
-		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.HerbOfLife; } }
+		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.HerbOfLife; } }
 		public override string LongName
 		{
 			get
@@ -36,7 +36,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 					XleCore.Wait(10);
 				}
 
-				player.museum[(int)ExhibitID] = 3;
+				player.museum[(int)ExhibitIdentifier] = 3;
 			}
 		}
 	}

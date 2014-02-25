@@ -176,7 +176,7 @@
     <Compile Include="IHasGuards.cs" />
     <Compile Include="IHasRoofs.cs" />
     <Compile Include="ItemList.cs" />
-    <Compile Include="MapData.cs" />
+    <Compile Include="Maps\MapData.cs" />
     <Compile Include="XleEventTypes\XleEventList.cs" />
     <Compile Include="XleEventTypes\ChangeMapEvent.cs" />
     <Compile Include="XleEventTypes\ItemAvailableEvent.cs" />
@@ -191,7 +191,7 @@
     <Compile Include="XleCore.cs" />
     <Compile Include="XleBaseTypeFactory.cs" />
     <Compile Include="Maps\XleMap.cs" />
-    <Compile Include="MapList.cs" />
+    <Compile Include="Maps\MapList.cs" />
     <Compile Include="MenuItemList.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Player.cs" />

@@ -6,10 +6,10 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class FourJewels : Exhibit
+	class FourJewels : LotaExhibit
 	{
 		public FourJewels() : base("Four Jewels", Coin.Ruby) { }
-		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.FourJewels; } }
+		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.FourJewels; } }
 
 		public override AgateLib.Geometry.Color TextColor
 		{

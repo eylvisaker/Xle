@@ -6,9 +6,9 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class Tapestry : Exhibit
+	class Tapestry : LotaExhibit
 	{
 		public Tapestry() : base("A Tapestry", Coin.Amethyst) { }
-		public override ExhibitIdentifier ExhibitID { get { return ExhibitIdentifier.Tapestry; } }
+		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Tapestry; } }
 	}
 }
