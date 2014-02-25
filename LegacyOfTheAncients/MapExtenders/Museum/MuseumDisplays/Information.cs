@@ -12,7 +12,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public Information() : base("Information", Coin.None) { }
 		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Information; } }
-		public override string CoinString
+		public override string InsertCoinText
 		{
 			get { return string.Empty; }
 		}
@@ -20,8 +20,8 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		int ExhibitState
 		{
-			get { return player.museum[0]; }
-			set { player.museum[0] = value; }
+			get { return player.Story().Museum[0]; }
+			set { player.Story().Museum[0] = value; }
 		}
 		private void SetBit(int index, bool value)
 		{
@@ -70,11 +70,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			get { return GetBit(2); }
 			set { SetBit(2, value); }
 		}
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
 			this.player = player;
 
-			bool[] bits = GetBitStatus(player.museum[0]);
+			bool[] bits = GetBitStatus(player.Story().Museum[0]);
 			bool doneAnything = false;
 
 			if (FirstUse == false)
@@ -84,7 +84,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				FirstUse = true;
 				return;
 			}
-			
+
 			if (bits[1] == false && player.Item(15) == 0)
 			{
 				// lost compendium
@@ -214,7 +214,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				return 7;
 
 			// check if we've found the leader of the guardians
-			if (player.Variables["Guardian"] == 3)
+			if (player.Story().FoundGuardianLeader == true)
 				return 6;
 
 			int jadeExhibits = CountExhibits(player, 2, 4);
@@ -240,7 +240,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 			// check if we've viewed all jade and topaz exhibits and been 
 			// to the pirate's lair
-			if (player.Variables.ContainsKey("BeenInDungeon") &&
+			if (player.Story().BeenInDungeon &&
 				jadeExhibits == 3 &&
 				topazExhibits == 3)
 			{
@@ -249,7 +249,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 			// check that we've seen all the jade coin exhibits and we've closed
 			// down the weaponry exhibit.
-			if (jadeExhibits == 3 && player.museum[2] >= 10)
+			if (jadeExhibits == 3 && player.Story().Museum[2] >= 10)
 				return 2;
 
 			// geez, they've done nothing.
@@ -261,7 +261,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			int ex = 0;
 
 			for (int i = start; i <= finish; i++)
-				ex += player.museum[i] != 0 ? 1 : 0;
+				ex += player.Story().Museum[i] != 0 ? 1 : 0;
 
 			return ex;
 		}

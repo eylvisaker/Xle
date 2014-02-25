@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class MetalWorks : LobExhibit
+	class MetalWork : LobExhibit
 	{
-		public MetalWorks()
-			: base("Metal Works", Coin.BlueGem)
+		public MetalWork()
+			: base("Metalwork", Coin.BlueGem)
 		{ }
 
 		public override ExhibitIdentifier ExhibitIdentifier
 		{
-			get { return ExhibitIdentifier.VaseOfSouls; }
+			get { return ExhibitIdentifier.MetalWork; }
 		}
 	}
 }

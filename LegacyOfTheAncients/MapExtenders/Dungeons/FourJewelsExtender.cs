@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleMapTypes.Extenders.Dungeons
+namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
 	class FourJewelsExtender : LotaDungeonExtenderBase
 	{
-		protected override string CompleteVariable
+		protected override bool IsComplete(Player player)
 		{
-			get { return "FourJewelComplete"; }
+			return player.Story().FourJewelsComplete;
 		}
+		protected override void SetComplete(Player player)
+		{
+			player.Story().FourJewelsComplete = true;
+		}
+
 		protected override int StrengthBoost
 		{
 			get { return 10; }

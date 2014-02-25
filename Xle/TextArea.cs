@@ -206,8 +206,8 @@ namespace ERY.Xle
 			cursor.Y++;
 			cursor.X = margin;
 		}
-
-		public void PrintSlow(string text, Color[] colors= null)
+		
+		void PrintSlowImpl(string text, Color defaultColor, Color[] colors = null)
 		{
 			for (int i = 0; i < text.Length; i++)
 			{
@@ -217,7 +217,7 @@ namespace ERY.Xle
 				}
 				else
 				{
-					Print(text[i].ToString(), XleCore.FontColor);
+					Print(text[i].ToString(), defaultColor);
 				}
 
 				XleCore.Wait(50);
@@ -226,10 +226,22 @@ namespace ERY.Xle
 					XleCore.Wait(400);
 			}
 		}
+		public void PrintSlow(string text, Color[] colors= null)
+		{
+			PrintSlowImpl(text, XleCore.FontColor, colors);
+		}
+		public void PrintSlow(string text, Color color)
+		{
+			PrintSlowImpl(text, color, null);
+		}
 		public void PrintLineSlow(string text = "", Color[] colors = null)
 		{
 			PrintSlow(text, colors);
-
+			PrintLine();
+		}
+		public void PrintLineSlow(string text, Color color)
+		{
+			PrintSlow(text, color);
 			PrintLine();
 		}
 
@@ -305,5 +317,6 @@ namespace ERY.Xle
 				this.lines[line].SetColor(color1);
 			}
 		}
+
 	}
 }

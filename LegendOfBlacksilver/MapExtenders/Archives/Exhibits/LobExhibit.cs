@@ -15,18 +15,14 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			Coin = c;
 		}
-		
+
 		public Coin Coin { get; private set; }
-		public override bool RequiresCoin(GameState state)
-		{ 
-			return Coin != Coin.None; 
-		} 
-		
+
 		string CoinName
 		{
 			get
 			{
-				switch(Coin)
+				switch (Coin)
 				{
 					case Exhibits.Coin.BlueGem: return "Blue gem";
 					case Exhibits.Coin.RedGarnet: return "red garnet";
@@ -40,10 +36,19 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 				}
 			}
 		}
-				
-		public override string CoinString
+
+		protected override Color ArticleTextColor
 		{
-			get { return "(Insert " + CoinName + ")"; }
+			get { return XleColor.White; }
+		}
+		protected override int TextAreaMargin
+		{
+			get { return 1; }
+		}
+
+		public override string InsertCoinText
+		{
+			get { return "";}
 		}
 		public override Color ExhibitColor
 		{
@@ -68,6 +73,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public abstract ExhibitIdentifier ExhibitIdentifier { get; }
 
+		
 		public override int ExhibitID
 		{
 			get
@@ -80,27 +86,39 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return XleCore.ExhibitInfo[(int)ExhibitID]; }
 		}
-		
-		public override bool ViewedBefore(Player player)
-		{
-			return player.museum[(int)ExhibitID] != 0;
-		}
-	
+
 		public override void Draw(Rectangle displayRect)
 		{
 			ExhibitInfo.DrawImage(displayRect, ImageID);
 		}
-		protected int TotalExhibitsViewed(Player player)
+
+		protected override void MarkAsVisited(Player player)
 		{
-			int count = 0;
+			player.Story().VisitedArchive[ExhibitID] = 1;
+		}
+		public override bool HasBeenVisited(Player player)
+		{
+			return player.Story().VisitedArchive[ExhibitID] != 0;
+		}
 
-			for (int i = 2; i < player.museum.Length; i++)
+		public override bool RequiresCoin(Player player)
+		{
+			return Coin != Coin.None;
+		}
+
+		public override string IntroductionText
+		{
+			get
 			{
-				if (player.museum[i] != 0) 
-					count++;
+				return "A sign says...";
 			}
-
-			return count;
+		}
+		public override string UseCoinMessage
+		{
+			get
+			{
+				return "cost:  one " + CoinName;
+			}
 		}
 	}
 }

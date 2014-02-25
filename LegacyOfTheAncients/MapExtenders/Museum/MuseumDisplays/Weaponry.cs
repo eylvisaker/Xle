@@ -20,30 +20,30 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		bool viewedThisTime;
 
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
 			int id = (int)ExhibitIdentifier;
 
-			if (player.museum[(int)ExhibitIdentifier.Thornberry] != 0)
+			if (player.Story().Museum[(int)ExhibitIdentifier.Thornberry] != 0)
 			{
-				player.museum[id] = 1;
+				player.Story().Museum[id] = 1;
 			}
 
-			if (player.museum[id] == 0)
+			if (player.Story().Museum[id] == 0)
 			{
 				ReadRawText(ExhibitInfo.Text[1]);
 				
 				// fair knife
 				player.AddWeapon(1, 1);
 			}
-			else if (player.museum[id] == 1)
+			else if (player.Story().Museum[id] == 1)
 			{
 				ReadRawText(ExhibitInfo.Text[2]);
 
 				// great bladed staff
 				player.AddWeapon(3, 3);
 
-				player.museum[id] = 10;
+				player.Story().Museum[id] = 10;
 			}
 
 			viewedThisTime = true;
@@ -55,7 +55,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			if (viewedThisTime)
 				return true;
 
-			if (player.museum[id] == 10)
+			if (player.Story().Museum[id] == 10)
 				return true;
 
 			return false;

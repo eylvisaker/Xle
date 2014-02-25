@@ -1124,6 +1124,8 @@ namespace ERY.Xle.XleEventTypes
 
 			theWindow[i++] = "2. Healing Herbs -  " + herbsPrice.ToString() + " apiece";
 
+			throw new NotImplementedException();
+			/*
 			// display ready message
 			if (player.museum[6] == 3)
 			{
@@ -1204,6 +1206,7 @@ namespace ERY.Xle.XleEventTypes
 			}
 
 			return true;
+			 * */
 		}
 	}
 
@@ -1279,7 +1282,7 @@ namespace ERY.Xle.XleEventTypes
 			Wait(1);
 
 
-			if (player.mailTown == XleCore.Map.MapID)
+			if (player.mailTown == state.Map.MapID)
 			{
 				PayForMail(player);
 				skipMailOffer = true;
@@ -1307,7 +1310,7 @@ namespace ERY.Xle.XleEventTypes
 					StoreSound(LotaSound.Sale);
 
 					if (skipMailOffer == false)
-						OfferMail(player);
+						OfferMail(state);
 
 					return true;
 				}
@@ -1326,9 +1329,11 @@ namespace ERY.Xle.XleEventTypes
 
 		}
 
-		private void OfferMail(Player player)
+		private void OfferMail(GameState state)
 		{
-			XleMapTypes.Town twn = XleCore.Map as XleMapTypes.Town;
+			var player = state.Player;
+
+			XleMapTypes.Town twn = state.Map as XleMapTypes.Town;
 
 			if (player.Item(9) > 0) return;
 			if (twn == null) return;

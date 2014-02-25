@@ -52,7 +52,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		public override void CheckExhibitStatus(GameState state)
 		{
 			// lost displays
-			if (state.Player.museum[0xa] > 0)
+			if (state.Story().Museum[0xa] > 0)
 			{
 				for (int i = 0; i < state.Map.Width; i++)
 				{
@@ -65,12 +65,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 			}
 
 			// welcome exhibit
-			if (state.Player.museum[1] == 0)
+			if (state.Story().Museum[1] == 0)
 			{
 				state.Map[4, 1] = 0;
 				state.Map[3, 10] = 0;
 			}
-			else if (state.Player.museum[1] == 1)
+			else if (state.Story().Museum[1] == 1)
 			{
 				state.Map[4, 1] = 0;
 				state.Map[3, 10] = 16;
@@ -125,11 +125,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		{
 			if (state.Player.X == 12 && state.Player.Y == 13)
 			{
-				if (state.Player.museum[1] < 3)
+				if (state.Story().Museum[1] < 3)
 				{
 					var welcome = (Welcome)GetExhibitByTile(0x51);
 					welcome.PlayGoldArmbandMessage(state.Player);
-					state.Player.museum[1] = 3;
+					state.Story().Museum[1] = 3;
 
 					CheckExhibitStatus(state);
 				}
@@ -173,7 +173,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		{
 			var lotaex = (LotaExhibit)ex;
 
-			XleCore.TextArea.PrintLine("insert your " + lotaex.Coin.ToString() + " coin?");
+			XleCore.TextArea.PrintLine();
 		}
 	}
 }

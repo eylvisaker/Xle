@@ -11,16 +11,38 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 	{
 		public IslandRetreat() : base("Island Retreat", Coin.BlueGem) { }
 
+		public override string LongName
+		{
+			get
+			{
+				return "An island retreat";
+			}
+		}
 		public override ExhibitIdentifier ExhibitIdentifier
 		{
 			get { return ExhibitIdentifier.IslandRetreat; }
 		}
 
-		public override void PlayerXamine(Player player)
+		public override bool RequiresCoin(Player player)
 		{
-			base.PlayerXamine(player);
+			if (HasBeenVisited(player))
+				return false;
 
-			XleCore.ChangeMap(player, 1, 1, 0, 0);
+			return base.RequiresCoin(player);
+		}
+
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
+
+			XleCore.TextArea.PrintLine("Would you like to go");
+			XleCore.TextArea.PrintLine("to the island caverns now?");
+			XleCore.TextArea.PrintLine();
+
+			if (XleCore.QuickMenuYesNo() == 0)
+			{
+				XleCore.ChangeMap(player, 1, 1, 0, 0);
+			}
 		}
 	}
 }

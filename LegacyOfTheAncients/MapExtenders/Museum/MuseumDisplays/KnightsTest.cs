@@ -18,7 +18,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				return "A test for knights";
 			}
 		}
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
 			ReadRawText(RawText);
 

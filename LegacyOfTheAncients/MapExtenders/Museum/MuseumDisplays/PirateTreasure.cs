@@ -18,7 +18,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				return false;
 			}
 		}
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
 			if (CheckOfferReread(player))
 			{

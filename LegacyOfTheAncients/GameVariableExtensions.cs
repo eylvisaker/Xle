@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA
 {
-	static class GameVariableExtensions
+	public static class GameVariableExtensions
 	{
 		public static LotaStory Story(this Player player)
 		{

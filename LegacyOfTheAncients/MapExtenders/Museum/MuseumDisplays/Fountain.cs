@@ -20,20 +20,20 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public override bool IsClosed(ERY.Xle.Player player)
 		{
-			if (player.museum[(int)ExhibitIdentifier] == 7)
+			if (player.Story().Museum[(int)ExhibitIdentifier] == 7)
 				return true;
 			else
 				return false;
 		}
 
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
 			if (player.Item(10) == 0)
 			{
-				base.PlayerXamine(player);
+				base.RunExhibit(player);
 				g.AddBottom();
 
-				if (player.museum[(int)ExhibitIdentifier] == 0 || player.museum[(int)ExhibitIdentifier] == 1)
+				if (player.Story().Museum[(int)ExhibitIdentifier] == 0 || player.Story().Museum[(int)ExhibitIdentifier] == 1)
 					g.AddBottom("Do you want to help search?");
 				else
 					g.AddBottom("Do you want to continue searching?");
@@ -43,7 +43,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				if (XleCore.QuickMenuYesNo() == 0)
 				{
 					ReadRawText(ExhibitInfo.Text[2]);
-					int amount = player.museum[3] != 0 ? 300 : 100;
+					int amount = player.Story().Museum[3] != 0 ? 300 : 100;
 					
 					player.Gold += amount;
 
@@ -56,11 +56,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 					XleCore.WaitForKey();
 
-					player.museum[(int)ExhibitIdentifier] = 3;
+					player.Story().Museum[(int)ExhibitIdentifier] = 3;
 				}
 				else
 				{
-					player.museum[(int)ExhibitIdentifier] = 1;
+					player.Story().Museum[(int)ExhibitIdentifier] = 1;
 				}
 			}
 			else
@@ -68,7 +68,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				// remove the tulip from the player, give the reward and shut down the exhibit.
 				player.ItemCount(10, -player.Item(10));
 				player.Attribute[Attributes.charm] += 10;
-				player.museum[(int)ExhibitIdentifier] = 7;
+				player.Story().Museum[(int)ExhibitIdentifier] = 7;
 
 				ReadRawText(ExhibitInfo.Text[3]);
 

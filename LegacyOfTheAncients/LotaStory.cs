@@ -6,8 +6,13 @@ using System.Text;
 
 namespace ERY.Xle.LotA
 {
-	class LotaStory : IXleSerializable
+	public class LotaStory : IXleSerializable
 	{
+		public LotaStory()
+		{
+			Museum = new int[16];
+		}
+
 		void IXleSerializable.WriteData(XleSerializationInfo info)
 		{
 			info.WritePublicProperties(this);
@@ -20,5 +25,19 @@ namespace ERY.Xle.LotA
 		public bool Invisible { get; set; }
 
 		public int MuseumEntryPoint { get; set; }
+
+		public int[] Museum { get; set; }
+
+		public bool BeenInDungeon { get; set; }
+
+		public bool ArmakComplete { get; set; }
+		public bool PirateComplete { get; set; }
+		public bool FourJewelsComplete { get; set; }
+
+		public bool FoundGuardianLeader { get; set; }
+
+		public bool HasGuardianPassword { get; set; }
+
+		public bool HasGuardianMark { get; set; }
 	}
 }

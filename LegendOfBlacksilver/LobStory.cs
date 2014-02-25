@@ -8,6 +8,11 @@ namespace ERY.Xle.LoB
 {
 	public class LobStory : IXleSerializable
 	{
+		public LobStory()
+		{
+			VisitedArchive = new int[17];
+		}
+
 		void IXleSerializable.WriteData(XleSerializationInfo info)
 		{
 			info.WritePublicProperties(this);
@@ -17,6 +22,9 @@ namespace ERY.Xle.LoB
 			info.ReadPublicProperties(this);
 		}
 
+		public int[] VisitedArchive { get; set; }
+
+		public bool ProcuredSingingCrystal { get; set; }
 	}
 
 	public static class LobStoryExtensions

@@ -124,159 +124,46 @@
   </MagicSpells>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>
-    <Exhibit ID="0" Image="Information.png">
-      <Text ID="0">
-        |`white` You have done well since I last saw
-        | you.  By my power as caretaker...
-      </Text>
+    <Exhibit ID="0" Image="Metalwork.png">
       <Text ID="1">
-        |`white`"You must do more before I can help
-        |you again.  You may use the museum
-        |exhibits or explore the lands
-        |outside.`pause`
-      </Text>
-      <Text ID="2">
-        |`white`"Welcome to our museum!  I am the
-        |museum caretaker.  Although my
-        |influence outside this museum is
-        |limited, I'll provide you with help
-        |and information whenever I can."`pause`
-        |`clear`"Right now, you should explore the
-        |world around you.  Feel free to use
-        |the museum exhibits or, if you'd
-        |rather, use the doors to go directly
-        |outside."`pause`
-      </Text>
-      <Text ID="3">
-        |`white`"I've heard that your magic scroll
-        |was stolen.  My sources say that it
-        |was sold a few days later on the
-        |black market."`pause`
-      </Text>
-      <Text ID="5">
-        |`white`"Perhaps you are now strong enough to
-        |help me.  Long ago,  two priceless
-        |specimens were stolen from the museum:
-        |the jewelled `cyan`crown`white` and `cyan`sceptor`white` of
-        |mancella."`pause`
-        |`clear`"Although museum policy will not let
-        |`yellow`me`white` recover them, perhaps `yellow`you`white` would
-        |like to try.  I don't know where the
-        |crown and sceptor are, but I have a
-        |key which should help you."`pause`
-        |`clear`"Naturally, there's a reward."`pause`
-      </Text>
-      <Text ID="6">
-        |`white`"Thank you and good luck.  Here is
-        |the key.  If you find the sceptor and
-        |crown, please bring them back to this
-        |exhibit."`pause`
-      </Text>
-      <Text ID="7">
-        |`white`"Congratulations on finding
-        |the sceptor!  While you were away, I
-        |discovered one more thing about the
-        |crown.  It is stored far away from
-        |the castle, deep underground."`pause`
-      </Text>
-      <Text ID="8">
-        |`white`"I'm glad you've found the crown!
-        |I've discovered one more thing about
-        |the sceptor.  It is hidden somewhere
-        |on this continent."
-      </Text>
-      <Text ID="10">
-        |`white`"The sceptor and crown!  This is truly
-        |a great day for the tarmalon museum.
-        |I want you to have this `cyan`magic ice`white`.  It
-        |may help you someday.  It works best
-        |inside."`pause`
-      </Text>
-      <Text ID="11">A merchant in big rapids</Text>
-      <Text ID="12">
-        |`white`"Laingsburg is under attack.  Rumor
-        |has it that the wizards' compendium
-        |is behind it all."`pause`
-      </Text>
-      <Text ID="13">
-        |`white`"The healer in holy point is now
-        |missing.  I fear that the entire
-        |planet is in great danger.   If you
-        |don't recover the compendium soon,
-        |all will be lost."`pause`
-      </Text>
-      <Text ID="20">
-        |`white`"The evil warlord is apparently using
-        |the wizards' compendium to create
-        |powerful spells of destruction."`pause`
-      </Text>
-      <Text ID="21">
-        |`white`"The warlord lives in a fortress far
-        |across the sea.  It is said to be very
-        |difficult to reach."`pause`
+        |Although temples are places of holy
+        |nonviolent reflection, we enjoy the
+        |artistry of various military pieces.`pause`
+        |`clear`You see before you a splendid sample
+        |of modern chain-mail.  Note the
+        |exquisite artistry of the decorative
+        |engravings.  No two are alike.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="1" Image="Welcome.png">
+    <Exhibit ID="1" Image="SingingCrystal.png">
       <Text ID="1">
-        |Welcome, noble traveler, to this
-        |galactic museum on the planet of
-        |tarmalon.  The museum provides `white`views
-        |`cyan`and `yellow`gateways`cyan` to the many fascinating
-        |aspects of planetary life.`pause`
-        |`clear`Use standard coins to view exhibits.
-        |Please do not give away coins, or
-        |feed the tarmalon natives.  Have a
-        |nice day!`pause`
-      </Text>
-      <Text ID="2">
-        |Your gold bracelet glows.  A strange
-        |voice sounds inside your head...
-        |`white`Do not be alarmed.  You are just
-        |hearing my thoughts, as recorded by
-        |the bracelet.`pause`
-        |`clear`Since you are now wearing my bracelet,
-        |I must be dead.  I therefore charge
-        |you to continue my mission:  To
-        |neutralize the evil scroll of spells
-        |before it destroys everything!`pause`
-        |`clear`You see, the leather scroll you now
-        |carry is the immensely evil `yellow`wizards'
-        |compendium`white`.  Since it cannot be
-        |destroyed outright, you must learn
-        |how to render its magic harmless.`pause`
-        |`clear`Beware!  There are those who would
-        |think nothing of killing you in order
-        |to possess the magic compendium.`pause`
-        |`clear`There is little more to tell.  By
-        |now, you must be inside the galactic
-        |museum, your entrance gained by the
-        |bracelet and my obsidian code-disk.`pause`
-        |`clear`This museum was built by a race of
-        |ancient beings, who constructed many
-        |such museums on many different
-        |planets.  These "ancients" designed
-        |each museum for their own amusement.`pause`
-        |`clear`If you're clever, you'll find many
-        |answers here.  Yet, since you're not
-        |one of the ancients, you'll have to
-        |scrounge around the countryside for
-        |coins to view exhibits.`pause`
-        |`clear``yellow`
-        |``         Remember your quest.
-        | 
-        |``              Good luck.`pause`
+        |Bantross miners have long used the
+        |special powers of the singing
+        |crystal to aid them in their mining
+        |activities.`pause`
+        |`clear`These unique vibrating rocks actually
+        |loosen the structure of nearby rocks.
+        |A trained miner can direct this power
+        |to bore tunnels and even clear
+        |caverns.`pause`
+        |`clear`Here is a small 'singing crystal' for
+        |your own use.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="2" Image="Weaponry.png">
+    <Exhibit ID="2" Image="IslandRetreat.png">
       <Text ID="1">
-        |`image:0`Eons ago, nomadic warriors roamed the
-        |planet tarmalon.  They hunted and
-        |fought with stone knives, much like
-        |the one you see in this exhibit.`pause`
-        |`clear`This knife is primitive - but
-        |effective.  As a museum patron, you
-        |may take it for as long as you like.
-        |The knife is now in your inventory.`pause`
+        |Few people visit the caverns of ban-
+        |tross, for these dungeons are places
+        |of treachery and death.  Yet for the
+        |intrepid explorer, they're worth the
+        |danger.`pause`
+        |`clear`These island caverns are actually 
+        |visible from the northern coast of
+        |Thalen.  Yet, few know of their 
+        |existence.`pause`
+        |`clear`Through this exhibit, you're now
+        |free to visit the island caverns as
+        |many times as you dare.`pause`
       </Text>
       <Text ID="2">
         |`image:1`As Tarmalon culture advanced, weapons

@@ -16,6 +16,10 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 				return new Spiral();
 			else if (name == "spiralsuccess")
 				return new SpiralSuccess();
+			else if (name == "password")
+				return new PasswordDoor();
+			else if (name == "arovyn")
+				return new Arovyn();
 
 			return base.CreateEventExtender(evt, defaultExtender);
 		}

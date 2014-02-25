@@ -32,7 +32,6 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public virtual Exhibit GetExhibitByTile(int tile)
 		{
 			throw new NotImplementedException();
-			return null;
 		}
 
 

@@ -23,7 +23,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		/// <summary>
 		/// Gets the color of the text in the museum. Defaults to ExhibitColor.
 		/// </summary>
-		public virtual Color TextColor
+		public virtual Color TitleColor
 		{
 			get { return ExhibitColor; }
 		}
@@ -50,13 +50,18 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		protected int ImageID { get; set; }
 
-		public virtual void PlayerXamine(Player player)
+		public virtual void RunExhibit(Player player)
 		{
 			if (CheckOfferReread(player) == false)
 				return;
 
 			ReadRawText(RawText);
+
+			if (HasBeenVisited(player) == false)
+				MarkAsVisited(player);
 		}
+
+		protected abstract void MarkAsVisited(Player player);
 
 		/// <summary>
 		/// Returns true if we are reading the exhibit for the first time,
@@ -66,7 +71,7 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 		/// <returns></returns>
 		protected bool CheckOfferReread(Player player)
 		{
-			if (player.museum[(int)ExhibitID] > 0)
+			if (HasBeenVisited(player))
 			{
 				return OfferReread();
 			}
@@ -91,14 +96,17 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 				return false;
 		}
 
+		protected virtual Color ArticleTextColor { get { return XleColor.Cyan; } }
+		protected virtual int TextAreaMargin { get { return 0; } }
+
 		protected void ReadRawText(string rawtext)
 		{
-			XleCore.TextArea.Margin = 0;
+			XleCore.TextArea.Margin = TextAreaMargin;
 			XleCore.TextArea.Clear(true);
 
 			int ip = 0;
 			int line = 4;
-			Color clr = XleColor.Cyan;
+			Color clr = ArticleTextColor;
 			ColorStringBuilder text = new ColorStringBuilder();
 			bool waiting = true;
 
@@ -209,8 +217,6 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 			return false;
 		}
 
-		public abstract bool ViewedBefore(Player player);
-
 		/// <summary>
 		/// Returns true if we should draw the static before a coin is inserted.
 		/// </summary>
@@ -221,11 +227,17 @@ namespace ERY.Xle.XleMapTypes.MuseumDisplays
 
 		public abstract void Draw(Rectangle displayRect);
 
-		public abstract string CoinString { get; }
+		public abstract string InsertCoinText { get; }
 
-		public abstract bool RequiresCoin(GameState state);
+		public abstract bool RequiresCoin(Player player);
+
+		public abstract bool HasBeenVisited(Player player);
+
+		public virtual string IntroductionText
+		{
+			get { return "You see a plaque.  It Reads..."; }
+		}
+
+		public abstract string UseCoinMessage { get; }
 	}
-
-
-
 }

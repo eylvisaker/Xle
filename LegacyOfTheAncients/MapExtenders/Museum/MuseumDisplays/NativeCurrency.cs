@@ -11,9 +11,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		public NativeCurrency() : base("Native Currency", Coin.Topaz) { }
 		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.NativeCurrency; } }
 
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
-			base.PlayerXamine(player);
+			base.RunExhibit(player);
 
 			int gold = XleCore.random.Next(1500, 2500);
 

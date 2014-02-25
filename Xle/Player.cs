@@ -266,11 +266,9 @@ namespace ERY.Xle
 		public int loan;					// loan amount
 		public int dueDate;				// time in days that the money is due
 
-		public int[] museum = new int[16];
-
 		public int mailTown;
 
-		[Obsolete]
+		[Obsolete("Use Story instead.", true)]
 		public VariableContainer Variables = new VariableContainer();
 
 		public IXleSerializable StoryData { get; set; }
@@ -377,8 +375,6 @@ namespace ERY.Xle
 			info.Write("Loan", loan);					// loan amount
 			info.Write("DueDate", dueDate);				// time in days that the money is due
 
-			info.Write("Museum", museum);
-
 			info.Write("MailTown", mailTown);
 
 			info.Write("Name", mName);
@@ -429,19 +425,9 @@ namespace ERY.Xle
 			loan = info.ReadInt32("Loan");					// loan amount
 			dueDate = info.ReadInt32("DueDate");				// time in days that the money is due
 
-			museum = info.ReadInt32Array("Museum");
-
 			mailTown = info.ReadInt32("MailTown");
 
 			mName = info.ReadString("Name");
-
-			if (museum.Length < 16)
-				museum = new int[16];
-
-			if (info.ContainsKey("Variables"))
-			{
-				Variables = info.ReadObject<VariableContainer>("Variables");
-			}
 
 			if (info.ContainsKey("StoryData"))
 			{

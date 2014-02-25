@@ -7,6 +7,8 @@ namespace ERY.Xle.XleEventTypes.Extenders
 {
 	public class DoorExtender : NullEventExtender
 	{
+		public new Door TheEvent { get { return (Door)base.TheEvent; } }
+
 		public virtual void PlayRemoveSound(ref bool handled)
 		{
 		}

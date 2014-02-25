@@ -18,7 +18,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			}
 		}
 
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
 			ReadRawText(RawText);
 
@@ -36,7 +36,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 					XleCore.Wait(10);
 				}
 
-				player.museum[(int)ExhibitIdentifier] = 3;
+				player.Story().Museum[ExhibitID] = 3;
 			}
 		}
 	}

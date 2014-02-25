@@ -57,6 +57,18 @@ namespace ERY.Xle.LoB
 			Character = new Surface("character.png");
 
 			Lob3DSurfaces.LoadSurfaces();
+
+			foreach (var exinfo in XleCore.ExhibitInfo.Values)
+			{
+				try
+				{
+					exinfo.LoadImage();
+				}
+				catch(System.IO.FileNotFoundException)
+				{
+					System.Diagnostics.Debug.Print("Image " + exinfo.ImageFile + " not found.");
+				}
+			}
 		}
 
 		public override IXleTitleScreen CreateTitleScreen()

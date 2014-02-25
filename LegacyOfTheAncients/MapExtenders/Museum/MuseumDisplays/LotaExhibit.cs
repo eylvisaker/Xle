@@ -17,13 +17,21 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		}
 		
 		public Coin Coin { get; private set; }
-		public override bool RequiresCoin(GameState state)
+		public override bool RequiresCoin(Player player)
 		{ 
 			return Coin != Coin.None; 
-		} 
-		
+		}
+		protected override void MarkAsVisited(Player player)
+		{
+			if (player.Story().Museum[ExhibitID] == 0)
+				player.Story().Museum[ExhibitID] = 1;
+		}
+		public override bool HasBeenVisited(Player player)
+		{
+			return player.Story().Museum[ExhibitID] != 0;
+		}
 				
-		public override string CoinString
+		public override string InsertCoinText
 		{
 			get { return "(Insert " + Coin.ToString() + " coin)"; }
 		}
@@ -62,11 +70,6 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			get { return XleCore.ExhibitInfo[(int)ExhibitID]; }
 		}
-		
-		public override bool ViewedBefore(Player player)
-		{
-			return player.museum[(int)ExhibitID] != 0;
-		}
 	
 		public override void Draw(Rectangle displayRect)
 		{
@@ -76,13 +79,21 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			int count = 0;
 
-			for (int i = 2; i < player.museum.Length; i++)
+			for (int i = 2; i < player.Story().Museum.Length; i++)
 			{
-				if (player.museum[i] != 0) 
+				if (player.Story().Museum[i] != 0) 
 					count++;
 			}
 
 			return count;
+		}
+
+		public override string UseCoinMessage
+		{
+			get
+			{
+				return "insert your " + Coin.ToString() + " coin?";
+			}
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			get { return "An ancient artifact"; }
 		}
-		public override string CoinString
+		public override string InsertCoinText
 		{
 			get { return string.Empty; }
 		}

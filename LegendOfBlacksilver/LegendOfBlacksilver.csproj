@@ -74,7 +74,7 @@
     <Compile Include="MapExtenders\Archives\Exhibits\LobExhibit.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\MagicEtherium.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\MarthbaneTunnels.cs" />
-    <Compile Include="MapExtenders\Archives\Exhibits\MetalWorks.cs" />
+    <Compile Include="MapExtenders\Archives\Exhibits\MetalWork.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\MorningStar.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\Mountains.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\SingingCrystal.cs" />
@@ -441,52 +441,7 @@
     <Content Include="LoB\Images\Museum\ExhibitStatic.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\AncientArtifact.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\Fountain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\FourJewels.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\Guardian.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\HerbOfLife.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\Information.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\LostDisplays.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\NativeCurrency.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\Pegasus.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\PirateLair.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\StonesOfWisdom.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\Tapestry.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\TheTest.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\Thornberry.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\Weaponry.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LoB\Images\Museum\Exhibits\Welcome.png">
+    <Content Include="LoB\Images\Museum\Exhibits\IslandRetreat.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoB\Images\Museum\MuseumBackdrop.png">

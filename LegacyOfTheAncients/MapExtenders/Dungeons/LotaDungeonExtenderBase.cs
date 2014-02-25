@@ -1,30 +1,32 @@
-﻿using System;
+﻿using ERY.Xle.XleMapTypes.Extenders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleMapTypes.Extenders
+namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
 	abstract class LotaDungeonExtenderBase : NullDungeonExtender
 	{
 		int mBoxesOpened = 0;
 
-		protected abstract string CompleteVariable { get; }
 		protected abstract int StrengthBoost { get; }
+		protected abstract bool IsComplete(Player player);
+		protected abstract void SetComplete(Player player);
 
 		public override void OnLoad(Player player)
 		{
-			player.Variables["BeenInDungeon"] = 1;
+			player.Story().BeenInDungeon = true;
 		}
 
 		public override void OnPlayerExitDungeon(Player player)
 		{
-			if (player.Variables.ContainsKey(CompleteVariable))
+			if (IsComplete(player))
 				return;
 
 			if (player.Item(20) > 0 && player.Item(16) > 0)
 			{
-				player.Variables[CompleteVariable] = 1;
+				SetComplete(player);
 
 				player.Attribute[Attributes.strength] += StrengthBoost;
 

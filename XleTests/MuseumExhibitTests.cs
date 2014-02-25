@@ -1,4 +1,5 @@
 ﻿using ERY.Xle;
+using ERY.Xle.LotA;
 using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
 using ERY.Xle.XleMapTypes.MuseumDisplays;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,36 +24,38 @@ namespace ERY.XleTests
 
 			Assert.IsFalse(information.ShouldLevelUp(player));
 
-			player.museum[(int)ExhibitIdentifier.Thornberry] = 1;
-			player.museum[(int)ExhibitIdentifier.Weaponry] = 10; // mark weaponry as closed.
-			player.museum[(int)ExhibitIdentifier.Fountain] = 1;
+			var museum = GameVariableExtensions.Story(player).Museum;
+
+			museum[(int)ExhibitIdentifier.Thornberry] = 1;
+			museum[(int)ExhibitIdentifier.Weaponry] = 10; // mark weaponry as closed.
+			museum[(int)ExhibitIdentifier.Fountain] = 1;
 
 			Assert.IsTrue(information.ShouldLevelUp(player));
 
 			player.Level = 2;
 			Assert.IsFalse(information.ShouldLevelUp(player));
 
-			player.museum[(int)ExhibitIdentifier.NativeCurrency] = 1;
-			player.museum[(int)ExhibitIdentifier.HerbOfLife] = 1;
-			player.museum[(int)ExhibitIdentifier.PirateTreasure] = 1;
+			museum[(int)ExhibitIdentifier.NativeCurrency] = 1;
+			museum[(int)ExhibitIdentifier.HerbOfLife] = 1;
+			museum[(int)ExhibitIdentifier.PirateTreasure] = 1;
 
 			Assert.IsFalse(information.ShouldLevelUp(player));
-			player.Variables["BeenInDungeon"] = 1;
+			player.Story().BeenInDungeon = true;
 			Assert.IsTrue(information.ShouldLevelUp(player));
 
 			player.Level = 3;
 			Assert.IsFalse(information.ShouldLevelUp(player));
 
-			player.museum[(int)ExhibitIdentifier.StonesWisdom] = 1;
-			player.museum[(int)ExhibitIdentifier.Tapestry] = 1;
-			player.museum[(int)ExhibitIdentifier.LostDisplays] = 1;
+			museum[(int)ExhibitIdentifier.StonesWisdom] = 1;
+			museum[(int)ExhibitIdentifier.Tapestry] = 1;
+			museum[(int)ExhibitIdentifier.LostDisplays] = 1;
 
 			Assert.IsTrue(information.ShouldLevelUp(player));
 
 			player.Level = 4;
 			Assert.IsFalse(information.ShouldLevelUp(player));
 
-			player.museum[(int)ExhibitIdentifier.KnightsTest] = 1;
+			museum[(int)ExhibitIdentifier.KnightsTest] = 1;
 			player.Items[LotaItem.MagicIce] = 1; 
 
 			Assert.IsTrue(information.ShouldLevelUp(player));
@@ -60,7 +63,7 @@ namespace ERY.XleTests
 			player.Level = 5;
 			Assert.IsFalse(information.ShouldLevelUp(player));
 
-			player.Variables["Guardian"] = 3;
+			player.Story().FoundGuardianLeader = true;
 			Assert.IsTrue(information.ShouldLevelUp(player));
 
 			player.Level = 6;
@@ -83,7 +86,7 @@ namespace ERY.XleTests
 		public void InformationLevelupWithCheatTest()
 		{
 			Player player = new Player();
-			XleCore.SetPlayer(player);
+			XleCore.GameState.Player = player;
 			
 			Information information = new Information();
 

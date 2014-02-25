@@ -15,7 +15,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			get { return "A typical town of Tarmalon"; }
 		}
 
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
 			if (CheckOfferReread(player))
 			{
@@ -32,7 +32,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 				int amount = 100;
 
-				if (player.museum[(int)ExhibitIdentifier] > 0 || player.museum[(int)ExhibitIdentifier.Fountain] > 0)
+				if (player.Story().Museum[(int)ExhibitIdentifier] > 0 || player.Story().Museum[(int)ExhibitIdentifier.Fountain] > 0)
 					amount += 200;
 
 				player.Gold += amount;

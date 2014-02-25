@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleMapTypes.Extenders.Dungeons
+namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
 	class PirateExtender : LotaDungeonExtenderBase
 	{
-		protected override string CompleteVariable
+		protected override bool IsComplete(ERY.Xle.Player player)
 		{
-			get { return "PirateComplete"; }
+			return player.Story().PirateComplete;
+		}
+		protected override void SetComplete(Player player)
+		{
+			player.Story().PirateComplete = true;
 		}
 		protected override int StrengthBoost
 		{

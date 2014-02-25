@@ -15,7 +15,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 
 		public OwlArchive()
 		{
-			mExhibits.Add(0x5e, new MetalWorks());
+			mExhibits.Add(0x5e, new MetalWork());
 			mExhibits.Add(0x5f, new SingingCrystal());
 			mExhibits.Add(0x5D, new IslandRetreat());
 
@@ -35,6 +35,14 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 				return null;
 
 			return mExhibits[tile];
+		}
+		public override bool PlayerHasCoin(Player player, Exhibit ex)
+		{
+			return true;
+		}
+		public override void NeedsCoinMessage(Player player, Exhibit ex)
+		{
+			XleCore.TextArea.PrintLine(ex.UseCoinMessage);
 		}
 	}
 }

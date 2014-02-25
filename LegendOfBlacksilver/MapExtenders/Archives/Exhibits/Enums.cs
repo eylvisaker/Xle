@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 	}
 	public enum ExhibitIdentifier
 	{
-		MetalWorks,
+		MetalWork,
 		SingingCrystal,
 		IslandRetreat,
 		GameOfHonor,

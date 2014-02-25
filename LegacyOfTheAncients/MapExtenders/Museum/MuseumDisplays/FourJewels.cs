@@ -11,13 +11,13 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		public FourJewels() : base("Four Jewels", Coin.Ruby) { }
 		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.FourJewels; } }
 
-		public override AgateLib.Geometry.Color TextColor
+		public override AgateLib.Geometry.Color TitleColor
 		{
 			get { return XleColor.Yellow; }
 		}
-		public override void PlayerXamine(Player player)
+		public override void RunExhibit(Player player)
 		{
-			base.PlayerXamine(player);
+			base.RunExhibit(player);
 
 			int map = player.MapID;
 			int x = player.X;

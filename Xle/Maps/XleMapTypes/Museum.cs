@@ -218,33 +218,33 @@ namespace ERY.Xle.XleMapTypes
 			mCloseup = ex;
 			mDrawStatic = ex.StaticBeforeCoin;
 
-			g.AddBottom("You see a plaque.  It Reads...");
-			g.AddBottom();
-			g.AddBottomCentered(ex.LongName, ex.TextColor);
+			XleCore.TextArea.PrintLine(ex.IntroductionText);
+			XleCore.TextArea.PrintLine();
+			g.AddBottomCentered(ex.LongName, ex.TitleColor);
 
 			XleCore.PromptToContinueOnWait = true;
 
 			if (ex.IsClosed(player))
 			{
-				g.AddBottomCentered("- Exhibit closed -", ex.TextColor);
+				g.AddBottomCentered("- Exhibit closed -", ex.TitleColor);
 				g.AddBottom();
 				XleCore.WaitForKey();
 
 				return true;
 			}
 
-			g.AddBottomCentered(ex.CoinString, ex.TextColor);
+			g.AddBottomCentered(ex.InsertCoinText, ex.TitleColor);
 			g.AddBottom();
 			XleCore.WaitForKey();
 
-			if (ex.RequiresCoin(GameState) == false)
+			if (ex.RequiresCoin(player) == false)
 			{
 				mDrawStatic = false;
 				RunExhibit(player, ex);
 			}
 			else
 			{
-				if (player.museum[(int)ex.ExhibitID] == 0)
+				if (ex.HasBeenVisited(player) == false)
 					g.AddBottom("You haven't used this exhibit.");
 				else
 					g.AddBottom();
@@ -258,8 +258,8 @@ namespace ERY.Xle.XleMapTypes
 				}
 				else
 				{
-					Extender.PrintUseCoinMessage(player, ex);
-					g.AddBottom();
+					XleCore.TextArea.PrintLine(ex.UseCoinMessage);
+					XleCore.TextArea.PrintLine();
 
 					int choice = XleCore.QuickMenu(new MenuItemList("Yes", "no"), 3);
 
@@ -278,10 +278,7 @@ namespace ERY.Xle.XleMapTypes
 
 		private void RunExhibit(Player player, MuseumDisplays.Exhibit ex)
 		{
-			ex.PlayerXamine(player);
-
-			if (player.museum[(int)ex.ExhibitID] == 0)
-				player.museum[(int)ex.ExhibitID] = 1;
+			ex.RunExhibit(player);
 
 			CheckExhibitStatus(player);
 		}
@@ -361,7 +358,7 @@ namespace ERY.Xle.XleMapTypes
 
 			AgateLib.DisplayLib.Display.FillRect(px, py, textLength * 16, 16, Color.Black);
 
-			Color clr = exhibit.TextColor;
+			Color clr = exhibit.TitleColor;
 			XleCore.WriteText(px, py, exhibit.Name, clr);
 		}
 

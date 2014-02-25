@@ -1,5 +1,6 @@
 ﻿using ERY.Xle.LoB.MapExtenders.Archives.Exhibits;
 using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 			mExhibits.Add(0x5e, new KloryksCage());
 
 			mExhibits.Add(0x5a, new CrystalTears());
+		}
+
+		public override Exhibit GetExhibitByTile(int tile)
+		{
+			if (mExhibits.ContainsKey(tile) == false)
+				return null;
+
+			return mExhibits[tile];
 		}
 	}
 }

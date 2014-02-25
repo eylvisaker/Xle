@@ -14,7 +14,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override ExhibitIdentifier ExhibitIdentifier
 		{
-			get { return ExhibitIdentifier.VaseOfSouls; }
+			get { return ExhibitIdentifier.FlaxtonIncense; }
 		}
 	}
 }
