@@ -10,6 +10,31 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 	{
 		public override void Speak(GameState state, ref bool handled)
 		{
+			if (state.Player.Attribute[Attributes.strength] <= 25)
+			{
+				TooWeakMessage(state);
+			}
+			else
+			{
+				GiveMark(state);
+			}
+		}
+
+		private void TooWeakMessage(GameState state)
+		{
+			var ta = XleCore.TextArea;
+
+			ta.PrintLine();
+			ta.PrintLineSlow("I would like to confide in you, but", XleColor.Yellow);
+			ta.PrintLineSlow("you are not strong enough to help.", XleColor.Yellow);
+			ta.PrintLineSlow("see me when your strength has grown.", XleColor.Yellow);
+
+			XleCore.Wait(1500);
+
+		}
+
+		private static void GiveMark(GameState state)
+		{
 			var ta = XleCore.TextArea;
 
 			ta.PrintLine();
@@ -20,11 +45,13 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			ta.PrintLineSlow("They are in many towns, but", XleColor.Yellow);
 			ta.PrintLineSlow("talk only to those with a special", XleColor.Yellow);
 			ta.PrintLineSlow("secret mark.", XleColor.Yellow);
-			
-			XleCore.Wait(1500);
+
+			XleCore.Wait(3000);
 
 			ta.PrintLineSlow("I've now put this magic mark on your", XleColor.Cyan);
 			ta.PrintLineSlow("forearm.  Only guardians can see it.", XleColor.Cyan);
+
+			XleCore.Wait(4000);
 
 			state.Story().HasGuardianMark = true;
 		}
