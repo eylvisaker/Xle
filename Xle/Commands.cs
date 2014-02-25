@@ -407,8 +407,9 @@ namespace ERY.Xle
 			g.AddBottom(builder);
 
 
-			XleCore.Wait(300 + 200 * player.Gamespeed);
+			XleCore.Factory.SetGameSpeed(XleCore.GameState, player.Gamespeed);
 
+			XleCore.Wait(XleCore.GameState.GameSpeed.AfterSetGamespeedTime);
 
 		}
 

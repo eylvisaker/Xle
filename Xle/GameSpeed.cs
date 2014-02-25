@@ -7,5 +7,10 @@ namespace ERY.Xle
 {
 	public class GameSpeed
 	{
+		public int CastleOpenChestTime { get; set; }
+
+		public int AfterSetGamespeedTime { get; set; }
+
+		public int CastleOpenChestSoundTime { get; set; }
 	}
 }

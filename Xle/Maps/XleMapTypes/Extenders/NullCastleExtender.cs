@@ -7,6 +7,8 @@ namespace ERY.Xle.XleMapTypes.Extenders
 {
 	public class NullCastleExtender : NullMapExtender, ICastleExtender
 	{
+		public new Castle TheMap { get { return (Castle)base.TheMap; } }
+
 		public override void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
 		{
 			fontColor = XleColor.White;
@@ -23,6 +25,11 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			g.AddBottom("The guard ignores you.");
 
 			handled = true;
+		}
+
+
+		public virtual void SetAngry(bool value)
+		{
 		}
 	}
 }

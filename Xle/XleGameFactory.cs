@@ -55,5 +55,12 @@ namespace ERY.Xle
 		}
 
 		public abstract Maps.Map3DSurfaces GetMap3DSurfaces(Map3D map3D);
+
+		public virtual void SetGameSpeed(GameState state, int Gamespeed)
+		{
+			state.GameSpeed.CastleOpenChestTime = 500 + 200 * Gamespeed;
+			state.GameSpeed.AfterSetGamespeedTime = 300 + 200 * Gamespeed;
+			state.GameSpeed.CastleOpenChestSoundTime = 750;
+		}
 	}
 }

@@ -133,11 +133,7 @@ namespace ERY.Xle.XleMapTypes
 			{
 				mIsAngry = value;
 
-				if (mIsAngry)
-				{
-					g.invisible = false;
-					g.guard = false;
-				}
+				Extender.SetAngry(value);
 			}
 		}
 

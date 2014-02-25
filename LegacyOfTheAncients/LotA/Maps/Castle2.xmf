@@ -151,6 +151,136 @@
       <Height>1</Height>
       <ExtenderName>SpiralSuccess</ExtenderName>
     </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>1</X>
+      <Y>1</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>True</ContainsItem>
+      <Contents>5</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>81</X>
+      <Y>83</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>True</ContainsItem>
+      <Contents>21</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>65</X>
+      <Y>36</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>300</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>86</X>
+      <Y>36</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>420</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>86</X>
+      <Y>49</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>320</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>55</X>
+      <Y>44</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>320</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>55</X>
+      <Y>48</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>350</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>85</X>
+      <Y>59</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>2000</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>3</X>
+      <Y>68</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1500</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>10</X>
+      <Y>68</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1700</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>16</X>
+      <Y>68</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>True</ContainsItem>
+      <Contents>5</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>16</X>
+      <Y>75</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>2000</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>10</X>
+      <Y>75</Y>
+      <Width>3</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1300</Contents>
+    </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>

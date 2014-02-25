@@ -64,12 +64,16 @@
     <Compile Include="LotaProgram.cs" />
     <Compile Include="LotaStory.cs" />
     <Compile Include="MapExtenders\Castle\Arovyn.cs" />
+    <Compile Include="MapExtenders\Castle\Casandra.cs" />
     <Compile Include="MapExtenders\Castle\CastleDoor.cs" />
     <Compile Include="MapExtenders\Castle\CastleGround.cs" />
     <Compile Include="MapExtenders\Castle\CastleUpper.cs" />
+    <Compile Include="MapExtenders\Castle\Chest.cs" />
     <Compile Include="MapExtenders\Castle\MagicIce.cs" />
     <Compile Include="MapExtenders\Castle\PasswordDoor.cs" />
+    <Compile Include="MapExtenders\Castle\SeedPlant.cs" />
     <Compile Include="MapExtenders\Castle\Spiral.cs" />
+    <Compile Include="MapExtenders\Castle\Wizard.cs" />
     <Compile Include="MapExtenders\Dungeons\ArmakExtender.cs" />
     <Compile Include="MapExtenders\Dungeons\FourJewelsExtender.cs" />
     <Compile Include="MapExtenders\Dungeons\LotaDungeonExtenderBase.cs" />

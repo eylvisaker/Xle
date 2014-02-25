@@ -716,11 +716,13 @@ namespace ERY.Xle
 			GameState = new Xle.GameState();
 
 			GameState.Player = thePlayer;
-
+			
 			GameState.commands = new Commands(GameState.Player);
 
 			GameState.Map = LoadMap(GameState.Player.MapID);
 			GameState.Map.OnLoad(GameState.Player);
+
+			Factory.SetGameSpeed(GameState, thePlayer.Gamespeed);
 
 			SetTilesAndCommands();
 

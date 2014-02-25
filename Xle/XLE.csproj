@@ -157,6 +157,7 @@
     <Compile Include="XleEventTypes\LeaveEvent.cs" />
     <Compile Include="XleEventTypes\Script.cs" />
     <Compile Include="XleEventTypes\SpeakToPerson.cs" />
+    <Compile Include="XleEventTypes\Extenders\TreasureChestExtender.cs" />
     <Compile Include="XleGameFactory.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\ICastleExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\IDungeonExtender.cs" />
@@ -179,7 +180,7 @@
     <Compile Include="Maps\MapData.cs" />
     <Compile Include="XleEventTypes\XleEventList.cs" />
     <Compile Include="XleEventTypes\ChangeMapEvent.cs" />
-    <Compile Include="XleEventTypes\ItemAvailableEvent.cs" />
+    <Compile Include="XleEventTypes\TreasureChestEvent.cs" />
     <Compile Include="XleEventTypes\Store.cs" />
     <Compile Include="Maps\XleMapTypes\Castle.cs" />
     <Compile Include="Maps\XleMapTypes\Dungeon.cs" />

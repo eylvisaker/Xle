@@ -89,7 +89,7 @@
       <RequiredItem>7</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.TakeEvent">
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
       <X>82</X>
       <Y>33</Y>
       <Width>4</Width>

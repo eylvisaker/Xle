@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleEventTypes.Extenders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class CastleUpper : CastleGround
 	{
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			var name = evt.ExtenderName.ToLowerInvariant();
 
@@ -20,8 +22,19 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 				return new PasswordDoor();
 			else if (name == "arovyn")
 				return new Arovyn();
+			else if (name == "casandra")
+				return new Casandra();
+			else if (name == "wizard")
+				return new Wizard();
+			else if (evt is TreasureChestEvent)
+				return new Chest { CastleLevel = 2 };
 
 			return base.CreateEventExtender(evt, defaultExtender);
+		}
+
+		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+		{
+			return TheMap.OutsideTile;
 		}
 	}
 }

@@ -21,5 +21,10 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public virtual void SpeakToGuard(GameState state, ref bool handled)
 		{
 		}
+
+
+		public virtual void SetAngry(bool value)
+		{
+		}
 	}
 }

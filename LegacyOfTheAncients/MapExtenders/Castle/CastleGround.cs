@@ -12,10 +12,16 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 	{
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
+			string name = evt.ExtenderName.ToLowerInvariant();
+
 			if (evt is Door)
 				return new CastleDoor();
-			if (evt.ExtenderName.ToLowerInvariant() == "magicice")
+			if (name == "magicice")
 				return new MagicIce();
+			if (name == "seeds")
+				return new SeedPlant();
+			if (evt is TreasureChestEvent)
+				return new Chest { CastleLevel = 1 };
 
 			return base.CreateEventExtender(evt, defaultExtender);
 		}
@@ -67,6 +73,14 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			{
 
 			}
+		}
+
+		public override void SetAngry(bool value)
+		{
+			var state = XleCore.GameState;
+
+			state.Story().Invisible = false;
+			XleCore.PlayerColor = XleColor.White;
 		}
 	}
 }
