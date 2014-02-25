@@ -516,26 +516,7 @@ namespace ERY.Xle.XleMapTypes
 				player.TimeQuality += 1;
 			}
 		}
-		public override int TerrainWaitTime(Player player)
-		{
-			switch (player.Terrain)
-			{
-				case TerrainType.Water:
-				case TerrainType.Grass:
-				case TerrainType.Forest:
-					return 0;
-				case TerrainType.Swamp:
-					return 75;
-				case TerrainType.Mountain:
-					return 150;
-				case TerrainType.Desert:
-					return 150;
-				case TerrainType.Mixed:
-					return 50;
-			}
 
-			return base.TerrainWaitTime(player);
-		}
 		protected override bool PlayerSpeakImpl(Player player)
 		{
 			if (EncounterState != EncounterState.MonsterReady)

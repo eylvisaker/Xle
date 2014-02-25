@@ -22,7 +22,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			ReadRawText(RawText);
 
-			int map = player.Map;
+			int map = player.MapID;
 			int x = player.X;
 			int y = player.Y;
 			Direction facing = player.FaceDirection;

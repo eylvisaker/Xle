@@ -21,14 +21,11 @@ namespace ERY.Xle
 	{
 		#region --- Static Members ---
 
+
 		public const int myWindowWidth = 640;
 		public const int myWindowHeight = 400;
 
 		public static Random random = new Random();
-
-		private static XleMap map;
-		private static Player player;
-		private static Commands commands;
 
 		private static bool AcceptKey = true;
 
@@ -36,15 +33,13 @@ namespace ERY.Xle
 
 		private static bool returnToTitle = false;
 
+		[Obsolete("Use GameState.Map instead.")]
 		public static XleMap Map
 		{
-			get { return XleCore.map; }
+			get { return GameState.Map; }
 			set
 			{
-				XleCore.map = value;
-
-				inst.menuArray = map.MapMenu();
-				XleCore.LoadTiles(map.TileImage);
+				GameState.Map = value;
 			}
 		}
 
@@ -219,22 +214,24 @@ namespace ERY.Xle
 		[Description("Gives gold")]
 		void CheatGiveGold(int amount = 1000)
 		{
-			player.Gold += amount;
+			GameState.Player.Gold += amount;
 		}
 		[Description("Gives food")]
 		void CheatGiveFood(int amount = 500)
 		{
-			player.Food += amount;
+			GameState.Player.Food += amount;
 		}
 		[Description("Sets the players level. Gives items and sets story variables to be consistent with the level chosen. Does not affect weapons or armor.")]
 		public static void CheatLevel(int level)
 		{
-			Factory.CheatLevel(player, level);
+			Factory.CheatLevel(GameState.Player, level);
 		}
 
 		[Description("Moves to a specified place on the current map. Pass no arguments to see the current position. Pass two arguments to set x,y. Pass three arguments to set x,y,level for dungeons.")]
 		private void CheatMove(int x = -1, int y = -1, int level = -1)
 		{
+			Player player = GameState.Player;
+
 			if (x == -1)
 			{
 				if (Map.IsMultiLevelMap)
@@ -262,12 +259,12 @@ namespace ERY.Xle
 			}
 			else
 			{
-				if (Map.IsMultiLevelMap == false)
+				if (GameState.Map.IsMultiLevelMap == false)
 					AgateConsole.WriteLine("Cannot pass level on a map without levels.");
 				else
 				{
-					if (level < 1 || level > Map.Levels)
-						throw new Exception(string.Format("level cannot be less than 1 or greater than {0}", map.Levels));
+					if (level < 1 || level > GameState.Map.Levels)
+						throw new Exception(string.Format("level cannot be less than 1 or greater than {0}", GameState.Map.Levels));
 
 					player.X = x;
 					player.Y = y;
@@ -284,10 +281,12 @@ namespace ERY.Xle
 			if (mapInfo == null)
 				return;
 
-			ChangeMap(player, mapInfo.ID, entryPoint, 0, 0);
+			ChangeMap(GameState.Player, mapInfo.ID, entryPoint, 0, 0);
 		}
 		public static void CheatGoto(string mapName)
 		{
+			Player player = GameState.Player;
+
 			MapInfo mapInfo = FindMapByPartialName(mapName);
 
 			if (mapInfo == null)
@@ -322,8 +321,8 @@ namespace ERY.Xle
 		private static MapInfo FindMapByPartialName(string mapName)
 		{
 			IEnumerable<MapInfo> matches = from m in MapList.Values
-					  where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant())
-					  select m;
+										   where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant())
+										   select m;
 
 			MapInfo exactMatch = matches.FirstOrDefault(x => x.Alias.ToUpperInvariant() == mapName.ToUpperInvariant());
 
@@ -335,7 +334,7 @@ namespace ERY.Xle
 			else if (matches.Count() > 1 && exactMatch == null)
 			{
 				AgateConsole.WriteLine("Found multiple matches:");
-				
+
 				foreach (var m in matches)
 				{
 					AgateConsole.WriteLine("    {0}", m.Alias);
@@ -350,6 +349,8 @@ namespace ERY.Xle
 		[Description("Makes you super powerful.")]
 		public static void CheatGod()
 		{
+			Player player = GameState.Player;
+
 			player.Gold = 99999;
 			player.GoldInBank = 999999;
 			player.Food = 99999;
@@ -413,6 +414,7 @@ namespace ERY.Xle
 			}
 		}
 
+		public static GameState GameState { get; set; }
 
 		private static void LoadDatabase()
 		{
@@ -710,14 +712,17 @@ namespace ERY.Xle
 		{
 			if (thePlayer == null)
 				return;
+			
+			GameState = new Xle.GameState();
 
-			player = thePlayer;
-			player.MapChanged += new EventHandler(player_MapChanged);
+			GameState.Player = thePlayer;
 
-			commands = new Commands(player);
+			GameState.commands = new Commands(GameState.Player);
 
-			Map = LoadMap(player.Map);
-			Map.OnLoad(player);
+			GameState.Map = LoadMap(GameState.Player.MapID);
+			GameState.Map.OnLoad(GameState.Player);
+
+			SetTilesAndCommands();
 
 			Keyboard.KeyDown += new InputEventHandler(Keyboard_KeyDown);
 
@@ -727,6 +732,12 @@ namespace ERY.Xle
 			}
 
 			Keyboard.KeyDown -= Keyboard_KeyDown;
+		}
+
+		private static void SetTilesAndCommands()
+		{
+			inst.menuArray = GameState.Map.MapMenu();
+			XleCore.LoadTiles(GameState.Map.TileImage);
 		}
 
 		void player_MapChanged(object sender, EventArgs e)
@@ -760,10 +771,10 @@ namespace ERY.Xle
 
 			AcceptKey = false;
 
-			if (Keyboard.Keys[KeyCode.Down]) commands.DoCommand(KeyCode.Down);
-			else if (Keyboard.Keys[KeyCode.Left]) commands.DoCommand(KeyCode.Left);
-			else if (Keyboard.Keys[KeyCode.Up]) commands.DoCommand(KeyCode.Up);
-			else if (Keyboard.Keys[KeyCode.Right]) commands.DoCommand(KeyCode.Right);
+			if (Keyboard.Keys[KeyCode.Down]) GameState.commands.DoCommand(KeyCode.Down);
+			else if (Keyboard.Keys[KeyCode.Left]) GameState.commands.DoCommand(KeyCode.Left);
+			else if (Keyboard.Keys[KeyCode.Up]) GameState.commands.DoCommand(KeyCode.Up);
+			else if (Keyboard.Keys[KeyCode.Right]) GameState.commands.DoCommand(KeyCode.Right);
 
 			AcceptKey = true;
 		}
@@ -773,10 +784,15 @@ namespace ERY.Xle
 			if (AcceptKey == false)
 				return;
 
-			AcceptKey = false;
-			commands.DoCommand(e.KeyCode);
-
-			AcceptKey = true;
+			try
+			{
+				AcceptKey = false;
+				GameState.commands.DoCommand(e.KeyCode);
+			}
+			finally
+			{
+				AcceptKey = true;
+			}
 		}
 
 		// TODO: Which of these are obsolete?
@@ -796,6 +812,9 @@ namespace ERY.Xle
 
 		public void Draw()
 		{
+			Player player = GameState.Player;
+			XleMap map = GameState.Map;
+
 			int i = 0;
 			Color boxColor;
 			Color innerColor;
@@ -1189,7 +1208,7 @@ namespace ERY.Xle
 
 			px += 11 * 16;
 
-			DrawCharacterSprite(px, py, player.FaceDirection, animating, animFrame, true, clr);
+			DrawCharacterSprite(px, py, GameState.Player.FaceDirection, animating, animFrame, true, clr);
 
 			CharRect = new Rectangle(px, py, 32, 32);
 		}
@@ -1234,6 +1253,7 @@ namespace ERY.Xle
 		/// <param name="inRect"></param>
 		static void DrawRafts(Rectangle inRect)
 		{
+			Player player = GameState.Player; 
 			int tx, ty;
 			int lx = inRect.Left;
 			int width = inRect.Width;
@@ -1252,7 +1272,7 @@ namespace ERY.Xle
 			{
 				RaftData raft = player.Rafts[i];
 
-				if (map.MapID != raft.MapNumber)
+				if (GameState.Map.MapID != raft.MapNumber)
 					continue;
 
 				rx = px - (player.X - raft.X) * 16;
@@ -2155,9 +2175,10 @@ namespace ERY.Xle
 			return "";
 		}
 
+		[Obsolete("Use GameState.Player instead.")]
 		public static void SetPlayer(Player thePlayer)
 		{
-			player = thePlayer;
+			GameState.Player = thePlayer;
 		}
 
 		public static void LoadTiles(string tileset)
@@ -2170,25 +2191,25 @@ namespace ERY.Xle
 
 		public static void ChangeMap(Player player, int mMapID, int targetEntryPoint, int targetX, int targetY)
 		{
-			if (XleCore.Map == null)
+			if (GameState.Map == null)
 			{
-				player.Map = mMapID;
+				player.MapID = mMapID;
 				return;
 			}
 
-			if (XleCore.Map is XleMapTypes.Outside)
+			if (GameState.Map is XleMapTypes.Outside)
 			{
-				player.SetReturnLocation(player.Map, player.X, player.Y, Direction.South);
+				player.SetReturnLocation(player.MapID, player.X, player.Y, Direction.South);
 			}
 
-			var saveMap = map;
+			var saveMap = GameState.Map;
 
 			try
 			{
 				if (mMapID != 0 && saveMap != null && mMapID != saveMap.MapID)
 				{
-					Map = LoadMap(mMapID);
-					player.Map = mMapID;
+					GameState.Map = LoadMap(mMapID);
+					player.MapID = mMapID;
 
 					TextArea.Clear();
 				}
@@ -2206,9 +2227,9 @@ namespace ERY.Xle
 				}
 				else
 				{
-					map.BeforeEntry(new GameState(player, map), ref targetEntryPoint);
+					GameState.Map.BeforeEntry(GameState, ref targetEntryPoint);
 
-					var ep = map.EntryPoints[targetEntryPoint];
+					var ep = GameState.Map.EntryPoints[targetEntryPoint];
 
 					player.X = ep.Location.X;
 					player.Y = ep.Location.Y;
@@ -2222,13 +2243,16 @@ namespace ERY.Xle
 
 				if (mMapID != 0)
 				{
-					Map.OnLoad(player);
+					GameState.Map.OnLoad(player);
 				}
+
+				GameState.Map.GameState = GameState;
+				SetTilesAndCommands();
 			}
 			catch (Exception e)
 			{
-				player.Map = saveMap.MapID;
-				map = saveMap;
+				player.MapID = saveMap.MapID;
+				GameState.Map = saveMap;
 
 				throw e;
 			}

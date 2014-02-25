@@ -125,7 +125,7 @@ namespace ERY.Xle.XleEventTypes
 
 			bool cancel = false;
 
-			mExtender.OnStepOn(new GameState(player, XleCore.Map), ref cancel);
+			mExtender.OnStepOn(state, ref cancel);
 
 			if (cancel)
 				return false;

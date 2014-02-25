@@ -960,7 +960,7 @@ namespace ERY.Xle.XleMapTypes
 					return true;
 				}
 
-				handled = evt.Rob(new GameState(player, this));
+				handled = evt.Rob(GameState);
 				IsAngry = true;
 
 				if (handled)
@@ -1023,7 +1023,7 @@ namespace ERY.Xle.XleMapTypes
 		protected virtual void SpeakToGuard(Player player)
 		{
 			bool handled = false;
-			Extender.SpeakToGuard(new GameState(player, this), ref handled);
+			Extender.SpeakToGuard(GameState, ref handled);
 
 			if (handled == false)
 			{

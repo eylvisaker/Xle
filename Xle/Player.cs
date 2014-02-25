@@ -772,7 +772,7 @@ namespace ERY.Xle
 
 				for (int i = 1; i < rafts.Count; i++)
 				{
-					if (Rafts[i].MapNumber != Map)
+					if (Rafts[i].MapNumber != MapID)
 						continue;
 
 					if (Rafts[i].Location.Equals(new Point(xx, yy)))
@@ -929,19 +929,12 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
-		/// Gets the current map
+		/// Gets the current map ID. This is used for serialization.
 		/// </summary>
-		[Obsolete("Is this still used???")]
-		public int Map
+		public int MapID
 		{
-			get
-			{
-				return map;
-			}
-			set
-			{
-				map = value;
-			}
+			get { return map; }
+			set { map = value; }
 		}
 
 		[Obsolete]
@@ -949,8 +942,6 @@ namespace ERY.Xle
 		{
 			XleCore.ChangeMap(this, newMap, -1, newX, newY);
 		}
-
-		public event EventHandler MapChanged;
 
 		/// <summary>
 		/// Returns the last map the player was on

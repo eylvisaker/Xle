@@ -11,7 +11,6 @@ namespace ERY.Xle
 {
 	public class Commands
 	{
-		//int			inventoryScreen = 0;
 		Player player;
 
 		public Commands(Player p)
@@ -74,17 +73,6 @@ namespace ERY.Xle
 			if (cmd == KeyCode.None)
 				return;
 
-#if DEBUG
-			if (cmd == KeyCode.Tilde)
-			{
-				player.HP = player.MaxHP;
-				player.Gold += 300;
-				player.Food += 100;
-
-				return;
-			}
-#endif
-
 			int wasRaft = player.OnRaft;
 			int waitTime = 700;
 
@@ -96,7 +84,7 @@ namespace ERY.Xle
 					g.AnimFrame = 0;
 				}
 
-				waitTime = g.walkTime + XleCore.Map.TerrainWaitTime(player);
+				waitTime = g.walkTime;
 
 				g.charAnimCount = 0;
 
@@ -824,28 +812,6 @@ namespace ERY.Xle
 
 
 		}
-		/*
-		void DrawSpecial()
-		{
-			int i = 0;
-
-			switch (g.stdDisplay)
-			{
-				case 'S':
-					DrawStore(pDDS);
-					break;
-
-				case 'I':
-
-			}
-
-		}
-		*/
-
-
 
 	}
-
-
-
 }

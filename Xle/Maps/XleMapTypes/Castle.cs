@@ -52,7 +52,7 @@ namespace ERY.Xle.XleMapTypes
 			if (evt == null)
 				return false;
 
-			return evt.Open(new GameState(player, this));
+			return evt.Open(GameState);
 
 		}
 
@@ -63,7 +63,7 @@ namespace ERY.Xle.XleMapTypes
 			if (evt == null)
 				return false;
 
-			return evt.Take(new GameState(player, this));
+			return evt.Take(GameState);
 		}
 
 		protected override void OpenRoof(Roof roof)

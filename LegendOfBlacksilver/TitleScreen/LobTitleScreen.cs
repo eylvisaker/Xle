@@ -24,7 +24,7 @@ namespace ERY.Xle.LoB.TitleScreen
 			{
 				Player = new Player();
 
-				Player.SetMap(1, 126, 52);
+				Player.MapID = 1;
 
 				Player.X = 126;
 				Player.Y = 52;

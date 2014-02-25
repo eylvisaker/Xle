@@ -132,6 +132,7 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="GameSpeed.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="ItemContainer.cs" />
     <Compile Include="IXleTitleScreen.cs" />

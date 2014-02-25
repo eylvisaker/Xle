@@ -19,7 +19,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			base.PlayerXamine(player);
 
-			int map = player.Map;
+			int map = player.MapID;
 			int x = player.X;
 			int y = player.Y;
 			Direction facing = player.FaceDirection;

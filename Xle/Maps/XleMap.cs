@@ -170,6 +170,7 @@ namespace ERY.Xle
 			retval.ConstructRenderTimeData();
 			retval.mBaseExtender = retval.CreateExtender();
 			retval.CreateEventExtenders();
+			retval.GameState = XleCore.GameState;
 
 			return retval;
 		}
@@ -228,6 +229,17 @@ namespace ERY.Xle
 
 		#endregion
 		#region --- Public Properties ---
+
+		GameState theState;
+
+		public GameState GameState
+		{
+			get { return theState; }
+			set
+			{
+				theState = value;
+			}
+		}
 
 		[Browsable(false)]
 		public abstract int Width { get; }
@@ -1020,7 +1032,7 @@ namespace ERY.Xle
 			{
 				bool allowStep;
 
-				evt.TryToStepOn(new GameState(player, this), dx, dy, out allowStep);
+				evt.TryToStepOn(GameState, dx, dy, out allowStep);
 
 				if (allowStep == false)
 					return false;
@@ -1043,7 +1055,7 @@ namespace ERY.Xle
 		{
 			foreach (var evt in EventsAt(x, y, 0))
 			{
-				evt.BeforeStepOn(new GameState(player, this));
+				evt.BeforeStepOn(GameState);
 			}
 		}
 		public void PlayerStep(Player player)
@@ -1052,12 +1064,12 @@ namespace ERY.Xle
 
 			foreach(var evt in EventsAt(player.X, player.Y, 0))
 			{
-				evt.StepOn(new GameState(player, this));
+				evt.StepOn(GameState);
 				didEvent = true;
 			}
 
 			PlayerStepImpl(player, didEvent);
-			mBaseExtender.PlayerStep(new GameState(player, this));
+			mBaseExtender.PlayerStep(GameState);
 		}
 		/// <summary>
 		/// Called after the player steps.
@@ -1236,7 +1248,7 @@ namespace ERY.Xle
 
 			foreach (var evt in evts)
 			{
-				bool handled = evt.Speak(new GameState(player, this));
+				bool handled = evt.Speak(GameState);
 
 				if (handled)
 					return handled;
@@ -1308,7 +1320,7 @@ namespace ERY.Xle
 		/// <returns></returns>
 		public virtual bool PlayerUse(Player player, int item)
 		{
-			var state = new GameState(player, this);
+			var state = GameState;
 			bool handled = false;
 
 			foreach(var evt in EventsAt(player, 1))
@@ -1338,11 +1350,6 @@ namespace ERY.Xle
 		{
 		}
 
-		public virtual int TerrainWaitTime(Player player)
-		{
-			return 0;
-		}
-
 		public virtual void LeaveMap(Player player)
 		{
 			XleCore.TextArea.PrintLine();
@@ -1362,7 +1369,7 @@ namespace ERY.Xle
 		/// <param name="player"></param>
 		public virtual void OnLoad(Player player)
 		{
-			mBaseExtender.OnLoad(new GameState(player, this));
+			mBaseExtender.OnLoad(GameState);
 		}
 
 

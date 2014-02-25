@@ -288,7 +288,7 @@ namespace ERY.Xle.XleMapTypes
 
 		private void CheckExhibitStatus(Player player)
 		{
-			Extender.CheckExhibitStatus(new GameState(player, this));
+			Extender.CheckExhibitStatus(GameState);
 		}
 
 		private void UseCoin(Player player, MuseumDisplays.Coin coin)
