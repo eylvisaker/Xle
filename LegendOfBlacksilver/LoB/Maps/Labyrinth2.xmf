@@ -55,7 +55,14 @@
         <AnimateChance>100</AnimateChance>
       </Item>
       <Item>
-        <Tiles array="true" encoding="Csv">80,96,112</Tiles>
+        <Tiles array="true" encoding="Csv">80,96,112,128</Tiles>
+        <AnimationTime>250</AnimationTime>
+        <AnimationType>Loop</AnimationType>
+        <GroupType>None</GroupType>
+        <AnimateChance>100</AnimateChance>
+      </Item>
+      <Item>
+        <Tiles array="true" encoding="Csv">144,145,146,147</Tiles>
         <AnimationTime>250</AnimationTime>
         <AnimationType>Loop</AnimationType>
         <GroupType>None</GroupType>
@@ -71,6 +78,8 @@
       <Y>4</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>45</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>
@@ -84,6 +93,8 @@
       <Y>15</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>
@@ -97,6 +108,8 @@
       <Y>92</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>2</TargetEntryPoint>
@@ -110,6 +123,8 @@
       <Y>92</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>3</TargetEntryPoint>
@@ -123,6 +138,8 @@
       <Y>3</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>4</TargetEntryPoint>
@@ -136,6 +153,8 @@
       <Y>37</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>5</TargetEntryPoint>
@@ -149,6 +168,8 @@
       <Y>17</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -162,6 +183,8 @@
       <Y>71</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>6</TargetEntryPoint>
@@ -175,6 +198,8 @@
       <Y>53</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>7</TargetEntryPoint>
@@ -188,6 +213,8 @@
       <Y>53</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>8</TargetEntryPoint>
@@ -201,6 +228,8 @@
       <Y>53</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>4</TargetEntryPoint>
@@ -214,6 +243,8 @@
       <Y>81</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>9</TargetEntryPoint>
@@ -227,6 +258,8 @@
       <Y>74</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>10</TargetEntryPoint>
@@ -240,6 +273,8 @@
       <Y>4</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>11</TargetEntryPoint>
@@ -253,6 +288,8 @@
       <Y>46</Y>
       <Width>1</Width>
       <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>12</TargetEntryPoint>
@@ -260,6 +297,286 @@
       <TargetY>0</TargetY>
       <CommandText>
       </CommandText>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>54</X>
+      <Y>1</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>800</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>86</X>
+      <Y>9</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>450</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>49</X>
+      <Y>11</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>True</ContainsItem>
+      <Contents>18</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>54</X>
+      <Y>12</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>700</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>38</X>
+      <Y>17</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>600</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>89</X>
+      <Y>26</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>650</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>64</X>
+      <Y>29</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>620</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>29</X>
+      <Y>31</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>True</ContainsItem>
+      <Contents>18</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>96</X>
+      <Y>31</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>350</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>50</X>
+      <Y>34</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1150</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>82</X>
+      <Y>36</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>550</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>72</X>
+      <Y>39</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>True</ContainsItem>
+      <Contents>18</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>43</X>
+      <Y>40</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>310</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>84</X>
+      <Y>45</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>570</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>91</X>
+      <Y>45</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>900</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>47</X>
+      <Y>46</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>800</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>29</X>
+      <Y>52</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>True</ContainsItem>
+      <Contents>18</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>29</X>
+      <Y>55</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1800</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>45</X>
+      <Y>57</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>650</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>28</X>
+      <Y>65</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1480</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>59</X>
+      <Y>67</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>760</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>48</X>
+      <Y>75</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1200</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>50</X>
+      <Y>78</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1420</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>65</X>
+      <Y>83</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>1540</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>84</X>
+      <Y>84</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>5000</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>103</X>
+      <Y>87</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>500</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>46</X>
+      <Y>90</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>530</Contents>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>255</X>
+      <Y>255</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ContainsItem>True</ContainsItem>
+      <Contents>0</Contents>
     </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
@@ -335,7 +652,7 @@
       <X>46</X>
       <Y>3</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -343,7 +660,7 @@
       <X>29</X>
       <Y>8</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -351,7 +668,7 @@
       <X>66</X>
       <Y>10</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -359,7 +676,7 @@
       <X>62</X>
       <Y>10</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -367,7 +684,7 @@
       <X>72</X>
       <Y>1</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -375,7 +692,7 @@
       <X>70</X>
       <Y>1</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -383,7 +700,7 @@
       <X>70</X>
       <Y>11</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -391,7 +708,7 @@
       <X>73</X>
       <Y>11</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -399,7 +716,7 @@
       <X>92</X>
       <Y>11</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -407,7 +724,7 @@
       <X>92</X>
       <Y>8</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -415,7 +732,7 @@
       <X>90</X>
       <Y>22</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -423,7 +740,7 @@
       <X>93</X>
       <Y>22</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -431,7 +748,7 @@
       <X>80</X>
       <Y>29</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -439,7 +756,7 @@
       <X>54</X>
       <Y>32</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -447,7 +764,7 @@
       <X>54</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -455,7 +772,7 @@
       <X>57</X>
       <Y>32</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -463,7 +780,7 @@
       <X>33</X>
       <Y>25</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -471,7 +788,7 @@
       <X>29</X>
       <Y>23</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -479,7 +796,7 @@
       <X>37</X>
       <Y>24</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -487,7 +804,7 @@
       <X>39</X>
       <Y>34</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -495,7 +812,7 @@
       <X>57</X>
       <Y>28</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -503,7 +820,7 @@
       <X>54</X>
       <Y>28</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -511,7 +828,7 @@
       <X>37</X>
       <Y>26</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -519,7 +836,7 @@
       <X>29</X>
       <Y>36</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -527,7 +844,7 @@
       <X>29</X>
       <Y>26</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -535,7 +852,7 @@
       <X>40</X>
       <Y>25</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -543,7 +860,7 @@
       <X>43</X>
       <Y>24</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -551,7 +868,7 @@
       <X>76</X>
       <Y>74</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -559,7 +876,7 @@
       <X>79</X>
       <Y>74</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -567,7 +884,7 @@
       <X>95</X>
       <Y>74</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -575,7 +892,7 @@
       <X>98</X>
       <Y>74</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -583,7 +900,7 @@
       <X>88</X>
       <Y>93</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -591,7 +908,7 @@
       <X>86</X>
       <Y>93</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -599,7 +916,7 @@
       <X>82</X>
       <Y>93</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -607,7 +924,7 @@
       <X>80</X>
       <Y>93</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -615,7 +932,7 @@
       <X>80</X>
       <Y>84</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -623,7 +940,7 @@
       <X>88</X>
       <Y>84</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -631,7 +948,7 @@
       <X>49</X>
       <Y>57</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -639,7 +956,7 @@
       <X>57</X>
       <Y>59</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -647,7 +964,7 @@
       <X>57</X>
       <Y>61</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -655,7 +972,7 @@
       <X>57</X>
       <Y>63</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -663,7 +980,7 @@
       <X>37</X>
       <Y>56</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -671,7 +988,7 @@
       <X>42</X>
       <Y>71</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -679,7 +996,7 @@
       <X>42</X>
       <Y>68</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -687,7 +1004,7 @@
       <X>34</X>
       <Y>61</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -695,7 +1012,7 @@
       <X>49</X>
       <Y>63</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -703,7 +1020,7 @@
       <X>31</X>
       <Y>5</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -711,7 +1028,7 @@
       <X>31</X>
       <Y>11</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -719,7 +1036,7 @@
       <X>99</X>
       <Y>14</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -727,7 +1044,7 @@
       <X>100</X>
       <Y>18</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -735,7 +1052,7 @@
       <X>103</X>
       <Y>24</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -743,7 +1060,7 @@
       <X>103</X>
       <Y>28</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -751,7 +1068,7 @@
       <X>65</X>
       <Y>34</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -759,7 +1076,7 @@
       <X>65</X>
       <Y>37</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -767,7 +1084,7 @@
       <X>46</X>
       <Y>25</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -775,7 +1092,7 @@
       <X>101</X>
       <Y>84</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -783,7 +1100,7 @@
       <X>78</X>
       <Y>3</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -791,7 +1108,7 @@
       <X>78</X>
       <Y>16</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -799,7 +1116,7 @@
       <X>61</X>
       <Y>33</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -807,7 +1124,7 @@
       <X>59</X>
       <Y>71</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -815,7 +1132,7 @@
       <X>45</X>
       <Y>78</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -823,7 +1140,7 @@
       <X>44</X>
       <Y>53</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>
@@ -831,7 +1148,7 @@
       <X>44</X>
       <Y>47</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
+      <HP>32</HP>
       <Attack>0</Attack>
       <Defense>0</Defense>
     </Item>

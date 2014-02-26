@@ -17,5 +17,13 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 
 			return base.CreateEventExtender(evt, defaultExtender);
 		}
+
+		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+		{
+			if (playerPoint.Y < 22 && playerPoint.X > 35 && playerPoint.X < 70)
+				return base.GetOutsideTile(playerPoint, x, y);
+			else
+				return 22;
+		}
 	}
 }

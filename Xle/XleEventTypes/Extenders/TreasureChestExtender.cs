@@ -22,7 +22,10 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 		public virtual void PrintObtainItemMessage(GameState state, int item, int count)
 		{
-			XleCore.TextArea.PrintLine("You find a " + XleCore.ItemList[item].Name + "!");
+			var itemName = XleCore.ItemList[item].Name;
+			var space = "aeiou".Contains(itemName.ToLowerInvariant()[0]) ? "n " : " ";
+
+			XleCore.TextArea.PrintLine("You find a" + space + itemName + "!");
 		}
 
 		public virtual void PlayObtainItemSound(GameState state, int item, int count)

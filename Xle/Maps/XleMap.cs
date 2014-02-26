@@ -734,7 +734,6 @@ namespace ERY.Xle
 
 			return EventsAt(px, py, border);
 		}
-
 		private IEnumerable<XleEvent> EventsAt(int px, int py, int border)
 		{
 			foreach (var e in mEvents)

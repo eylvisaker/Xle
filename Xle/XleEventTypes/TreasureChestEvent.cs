@@ -135,10 +135,12 @@ namespace ERY.Xle.XleEventTypes
 		{
 			var firstTile = map[X, Y];
 			var chestGroup = map.TileSet.TileGroups.FirstOrDefault(
-				x => x.Tiles.Contains(firstTile));
-			var openChestGroup = map.TileSet.TileGroups.Where(
-				x => x.Tiles.All(y => y > firstTile)).OrderBy(x => x.Tiles.Min())
-				.FirstOrDefault();
+				x => x.GroupType == Maps.GroupType.Chest && x.Tiles.Contains(firstTile));
+			var openChestGroup = (from grp in map.TileSet.TileGroups
+								  where grp.GroupType == Maps.GroupType.OpenChest &&
+									 grp.Tiles.All(x => x > firstTile)
+								  orderby grp.Tiles.Min()
+								  select grp).FirstOrDefault();
 
 			Closed = false;
 

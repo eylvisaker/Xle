@@ -99,18 +99,19 @@
     <Item ID="24" Name="Lute" Action="Struf"/>
     <Item ID="25" Name="Staff" Action="Pound"/>
     <Item ID="26" Name="Signet Ring" Action="Stroke"/>
-    <Item ID="27" Name="Black Wand"  Action="Wave"/>
-    <Item ID="28" Name="Flaxton Incense" Action="Burn"/>
-    <Item ID="29" Name="Steel Hammer" Action="Pound"/>
-    <Item ID="30" Name="Blacksilver" Action="Hold"/>
-    <Item ID="31" Name="Dragon's Tears" />
-    <Item ID="32" Name="Blue Gem" />
-    <Item ID="33" Name="Red Garnet" />
-    <Item ID="34" Name="Amethyst Gem" />
-    <Item ID="35" Name="Emerald" />
-    <Item ID="36" Name="Yellow Diamond" />
-    <Item ID="37" Name="White Diamond" />
-    <Item ID="38" Name="Opal" />
+    <Item ID="27" Name="unused" />
+    <Item ID="28" Name="Black Wand"  Action="Wave"/>
+    <Item ID="29" Name="Flaxton Incense" Action="Burn"/>
+    <Item ID="30" Name="Steel Hammer" Action="Pound"/>
+    <Item ID="31" Name="Blacksilver" Action="Hold"/>
+    <Item ID="32" Name="Dragon's Tears" />
+    <Item ID="33" Name="Blue Gem" />
+    <Item ID="34" Name="Red Garnet" />
+    <Item ID="35" Name="Amethyst Gem" />
+    <Item ID="36" Name="Emerald" />
+    <Item ID="37" Name="Yellow Diamond" />
+    <Item ID="38" Name="White Diamond" />
+    <Item ID="39" Name="Opal" />
   </Items>
   <MagicSpells>
 	  <MagicSpell ID="1" Name="Tongue of Flame" BasePrice="32" />
