@@ -13,6 +13,8 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 	{
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
+			if (evt is TreasureChestEvent)
+				return new Chest { ChestArrayIndex = 0 };
 			if (evt is Door)
 			{
 				if ((evt as Door).RequiredItem == (int)LobItem.FalconFeather)

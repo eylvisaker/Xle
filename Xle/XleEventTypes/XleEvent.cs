@@ -269,6 +269,11 @@ namespace ERY.Xle
 		}
 
 		public bool Enabled { get; set; }
+
+		public virtual void OnLoad(GameState state)
+		{
+			extender.OnLoad(state);
+		}
 	}
 }
 

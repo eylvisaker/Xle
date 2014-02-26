@@ -16,5 +16,26 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		}
 
 		public int CastleLevel { get; set; }
+
+		public override void MarkChestAsOpen(GameState state)
+		{
+			var chests = ChestArray(state);
+
+			chests[TheEvent.ChestID] = 1;
+		}
+		public override void OpenIfMarked(GameState state)
+		{
+			var chests = ChestArray(state);
+
+			if (chests[TheEvent.ChestID] != 0)
+				TheEvent.SetOpenTilesOnMap(state.Map);
+		}
+
+		private int[] ChestArray(GameState state)
+		{
+			var chests = CastleLevel == 1 ? state.Story().CastleGroundChests : state.Story().CastleUpperChests;
+
+			return chests;
+		}
 	}
 }

@@ -12,6 +12,7 @@ using AgateLib.Serialization.Xle;
 using ERY.Xle.Maps;
 using ERY.Xle.XleMapTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders;
+using ERY.Xle.XleEventTypes;
 
 namespace ERY.Xle
 {
@@ -1370,6 +1371,23 @@ namespace ERY.Xle
 		public virtual void OnLoad(Player player)
 		{
 			mBaseExtender.OnLoad(GameState);
+
+			SetChestIDs();
+
+			foreach(var evt in Events)
+			{
+				evt.OnLoad(XleCore.GameState);
+			}
+		}
+
+		private void SetChestIDs()
+		{
+			int index = 0;
+			foreach(TreasureChestEvent chest in Events.OfType<TreasureChestEvent>())
+			{
+				chest.ChestID = index;
+				index++;
+			}
 		}
 
 

@@ -2205,6 +2205,8 @@ namespace ERY.Xle
 			}
 
 			var saveMap = GameState.Map;
+			var saveX = player.X;
+			var saveY = player.Y;
 
 			try
 			{
@@ -2255,6 +2257,8 @@ namespace ERY.Xle
 			{
 				player.MapID = saveMap.MapID;
 				GameState.Map = saveMap;
+				player.X = saveX;
+				player.Y = saveY;
 
 				throw e;
 			}

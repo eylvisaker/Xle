@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.XleEventTypes.Extenders;
+using System.ComponentModel;
 
 namespace ERY.Xle.XleEventTypes
 {
@@ -25,11 +26,15 @@ namespace ERY.Xle.XleEventTypes
 			set { mContents = value; }
 		}
 
+		[Browsable(false)]
 		public bool Closed
 		{
 			get { return mClosed; }
 			set { mClosed = value; }
 		}
+
+		[Browsable(false)]
+		public int ChestID { get; internal set; }
 
 		TreasureChestExtender Extender { get; set; }
 
@@ -90,7 +95,7 @@ namespace ERY.Xle.XleEventTypes
 
 			XleCore.Wait(state.GameSpeed.CastleOpenChestSoundTime);
 
-			SetChestOpenOnMap(state.Map);
+			SetOpenTilesOnMap(state.Map);
 
 			if (Extender.MakesGuardsAngry)
 				Extender.SetAngry(state);
@@ -126,7 +131,7 @@ namespace ERY.Xle.XleEventTypes
 			return true;
 		}
 
-		public void SetChestOpenOnMap(XleMap map)
+		public void SetOpenTilesOnMap(XleMap map)
 		{
 			var firstTile = map[X, Y];
 			var chestGroup = map.TileSet.TileGroups.FirstOrDefault(
@@ -134,6 +139,8 @@ namespace ERY.Xle.XleEventTypes
 			var openChestGroup = map.TileSet.TileGroups.Where(
 				x => x.Tiles.All(y => y > firstTile)).OrderBy(x => x.Tiles.Min())
 				.FirstOrDefault();
+
+			Closed = false;
 
 			if (chestGroup == null || openChestGroup == null)
 				return;
@@ -160,6 +167,16 @@ namespace ERY.Xle.XleEventTypes
 		private void PrintAlreadyOpenMessage()
 		{
 			XleCore.TextArea.PrintLine(Extender.AlreadyOpenMessage);
+		}
+
+		public override void OnLoad(GameState state)
+		{
+			OpenIfMarked(state);
+		}
+
+		public void OpenIfMarked(GameState state)
+		{
+			Extender.OpenIfMarked(state);
 		}
 
 		protected override void WriteData(XleSerializationInfo info)

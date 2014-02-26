@@ -44,5 +44,8 @@ namespace ERY.Xle.XleEventTypes.Extenders
 		public virtual void Xamine(GameState state, ref bool handled)
 		{
 		}
+
+		public virtual void OnLoad(GameState state)
+		{ }
 	}
 }

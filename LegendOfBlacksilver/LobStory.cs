@@ -11,6 +11,11 @@ namespace ERY.Xle.LoB
 		public LobStory()
 		{
 			VisitedArchive = new int[17];
+
+			CastleChests = new int[5][];
+
+			for (int i = 0; i < 5; i++)
+				CastleChests[i] = new int[50];
 		}
 
 		void IXleSerializable.WriteData(XleSerializationInfo info)
@@ -25,6 +30,8 @@ namespace ERY.Xle.LoB
 		public int[] VisitedArchive { get; set; }
 
 		public bool ProcuredSingingCrystal { get; set; }
+
+		public int[][] CastleChests { get; set;}
 	}
 
 	public static class LobStoryExtensions

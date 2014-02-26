@@ -19,5 +19,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 		void Xamine(GameState state, ref bool handled);
 
 		void BeforeStepOn(GameState state);
+
+		void OnLoad(GameState state);
 	}
 }

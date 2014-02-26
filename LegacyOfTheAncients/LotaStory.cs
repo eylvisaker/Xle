@@ -11,6 +11,8 @@ namespace ERY.Xle.LotA
 		public LotaStory()
 		{
 			Museum = new int[16];
+			CastleGroundChests = new int[40];
+			CastleUpperChests = new int[24];
 		}
 
 		void IXleSerializable.WriteData(XleSerializationInfo info)
@@ -27,6 +29,8 @@ namespace ERY.Xle.LotA
 		public int MuseumEntryPoint { get; set; }
 
 		public int[] Museum { get; set; }
+		public int[] CastleGroundChests { get; set; }
+		public int[] CastleUpperChests { get; set; }
 
 		public bool BeenInDungeon { get; set; }
 

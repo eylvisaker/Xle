@@ -42,5 +42,9 @@ namespace ERY.Xle.XleEventTypes.Extenders
 		public virtual void MarkChestAsOpen(GameState state)
 		{
 		}
+
+		public virtual void OpenIfMarked(GameState state)
+		{
+		}
 	}
 }
