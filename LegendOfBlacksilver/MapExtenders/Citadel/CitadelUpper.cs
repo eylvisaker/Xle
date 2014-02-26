@@ -1,4 +1,5 @@
 ﻿using ERY.Xle.LoB.MapExtenders.Labyrinth;
+using ERY.Xle.LoB.MapExtenders.Labyrinth.EventExtenders;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleMapTypes.Extenders;
 using System;
@@ -13,7 +14,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 	{
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
-			return 71;
+			return TheMap.OutsideTile;
 		}
 
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)

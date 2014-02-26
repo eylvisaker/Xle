@@ -430,10 +430,11 @@ namespace ERY.Xle
 					if (itemName.Contains("coin"))
 						continue;
 
+					/*
 					if (i == 9)			// mail
 					{
 						itemName = XleCore.GetMapName(player.mailTown) + " " + itemName;
-					}
+					}*/
 
 					if (i <= player.Hold)
 					{

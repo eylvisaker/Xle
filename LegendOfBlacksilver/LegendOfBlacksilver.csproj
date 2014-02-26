@@ -92,7 +92,9 @@
     <Compile Include="MapExtenders\Citadel\CitadelGround.cs" />
     <Compile Include="MapExtenders\Citadel\CitadelUpper.cs" />
     <Compile Include="MapExtenders\Castle\DurekCastle.cs" />
-    <Compile Include="MapExtenders\Labyrinth\ChangeMapTeleporter.cs" />
+    <Compile Include="MapExtenders\Citadel\EventExtenders\CitadelDoor.cs" />
+    <Compile Include="MapExtenders\Labyrinth\EventExtenders\ChangeMapTeleporter.cs" />
+    <Compile Include="MapExtenders\Labyrinth\EventExtenders\LabyrinthDoor.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthBase.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthUpper.cs" />
     <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />

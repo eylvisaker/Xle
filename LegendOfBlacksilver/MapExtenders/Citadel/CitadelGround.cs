@@ -1,4 +1,6 @@
-﻿using ERY.Xle.XleMapTypes.Extenders;
+﻿using ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders;
+using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,14 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 				return 33;
 			else
 				return 23;
+		}
+
+		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		{
+			if (evt is Door)
+				return new CitadelDoor();
+
+			return base.CreateEventExtender(evt, defaultExtender);
 		}
 	}
 }

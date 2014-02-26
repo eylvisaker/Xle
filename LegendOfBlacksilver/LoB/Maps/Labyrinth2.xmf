@@ -578,6 +578,26 @@
       <ContainsItem>True</ContainsItem>
       <Contents>0</Contents>
     </Item>
+    <Item type="ERY.Xle.XleEventTypes.Door">
+      <X>28</X>
+      <Y>88</Y>
+      <Width>1</Width>
+      <Height>2</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <RequiredItem>12</RequiredItem>
+      <ReplacementTile>17</ReplacementTile>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Door">
+      <X>86</X>
+      <Y>60</Y>
+      <Width>2</Width>
+      <Height>1</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <RequiredItem>13</RequiredItem>
+      <ReplacementTile>17</ReplacementTile>
+    </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>

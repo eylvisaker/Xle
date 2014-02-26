@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Labyrinth
+namespace ERY.Xle.LoB.MapExtenders.Labyrinth.EventExtenders
 {
 	class ChangeMapTeleporter : ChangeMapExtender
 	{

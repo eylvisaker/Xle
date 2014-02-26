@@ -1,4 +1,5 @@
-﻿using ERY.Xle.XleEventTypes;
+﻿using ERY.Xle.LoB.MapExtenders.Labyrinth.EventExtenders;
+using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 {
-	class LabyrinthBase :NullCastleExtender
+	class LabyrinthBase : NullCastleExtender
 	{
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
+			if (evt is Door)
+				return new LabyrinthDoor();
 			if (evt is ChangeMapEvent)
 				return new ChangeMapTeleporter();
 
