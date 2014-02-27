@@ -130,6 +130,13 @@ namespace ERY.Xle.XleEventTypes
 			if (cancel)
 				return false;
 
+			ExecuteMapChange(player);
+
+			return true;
+		}
+
+		public void ExecuteMapChange(Player player)
+		{
 			try
 			{
 				XleCore.ChangeMap(player, mMapID, TargetEntryPoint, TargetX, TargetY);
@@ -151,8 +158,6 @@ namespace ERY.Xle.XleEventTypes
 
 				XleCore.Wait(1500);
 			}
-
-			return true;
 		}
 
 		public string GetMapName()

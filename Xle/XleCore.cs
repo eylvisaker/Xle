@@ -1661,7 +1661,8 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
-		/// Gives the player a yes/no choice.
+		/// Gives the player a yes/no choice, returning 0 if the player chose yes and
+		/// 1 if the player chose no.
 		/// </summary>
 		/// <returns>Returns 0 if the player chose yes, 1 if the player chose no.</returns>
 		public static int QuickMenuYesNo()

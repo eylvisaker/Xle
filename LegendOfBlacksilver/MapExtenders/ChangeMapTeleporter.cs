@@ -6,11 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Labyrinth.EventExtenders
+namespace ERY.Xle.LoB.MapExtenders
 {
 	class ChangeMapTeleporter : ChangeMapExtender
 	{
 		public override void OnStepOn(GameState state, ref bool cancel)
+		{
+			TeleportAnimation();
+		}
+
+		protected void TeleportAnimation()
 		{
 			SoundMan.PlaySound(LotaSound.Teleporter);
 
@@ -20,7 +25,7 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth.EventExtenders
 			while (watch.ElapsedMilliseconds < 100)
 				XleCore.Redraw();
 
-			while(watch.ElapsedMilliseconds < 1800)
+			while (watch.ElapsedMilliseconds < 1800)
 			{
 				int index = ((int)watch.ElapsedMilliseconds % 80) / 50;
 

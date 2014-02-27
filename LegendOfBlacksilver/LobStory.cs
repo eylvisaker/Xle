@@ -32,6 +32,8 @@ namespace ERY.Xle.LoB
 		public bool ProcuredSingingCrystal { get; set; }
 
 		public int[][] CastleChests { get; set;}
+
+		public bool MantrekKilled { get; set; }
 	}
 
 	public static class LobStoryExtensions

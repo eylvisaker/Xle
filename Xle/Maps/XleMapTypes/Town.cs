@@ -226,7 +226,7 @@ namespace ERY.Xle.XleMapTypes
 						newPt.Y += dy;
 					}
 
-					badPt = !CheckGuard(newPt, i);
+					badPt = !CanGuardStepInto(newPt, i);
 
 					if (badPt == true)
 					{
@@ -258,7 +258,7 @@ namespace ERY.Xle.XleMapTypes
 
 							newPt.X += dx;
 						}
-						badPt = !CheckGuard(newPt, i);
+						badPt = !CanGuardStepInto(newPt, i);
 
 						if (badPt == true)
 							newPt = guard.Location;
@@ -296,7 +296,7 @@ namespace ERY.Xle.XleMapTypes
 
 		}
 
-		bool CheckGuard(Point pt, int grd)
+		bool CanGuardStepInto(Point pt, int grd)
 		{
 			int i, j, k;
 			Size guardSize = new Size(2, 2);
@@ -305,10 +305,10 @@ namespace ERY.Xle.XleMapTypes
 			{
 				for (i = 0; i < 2; i++)
 				{
-					if (this[pt.X + i, pt.Y + j] >= 128 || (this[pt.X + i, pt.Y + j] % 16) >= 7)
-					{
+					var tile = this[pt.X + i, pt.Y + j];
+
+					if (TileSet[tile] == TileInfo.Blocked)
 						return false;
-					}
 
 					// check for guard-guard collisions
 					Rectangle grdRect = new Rectangle(pt, guardSize);
