@@ -93,6 +93,8 @@ namespace ERY.Xle.LotA
 				return new CastleUpper();
 			if (castle.ExtenderName.ToLowerInvariant() == "fortress1")
 				return new FortressEntry();
+			if (castle.ExtenderName.ToLowerInvariant() == "fortress2")
+				return new FortressFinal();
 
 			return base.CreateMapExtender(castle);
 		}

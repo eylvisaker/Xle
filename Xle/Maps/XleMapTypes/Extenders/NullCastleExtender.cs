@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleMapTypes.Extenders
 {
-	public class NullCastleExtender : NullMapExtender, ICastleExtender
+	public class NullCastleExtender : NullTownExtender, ICastleExtender
 	{
 		public new Castle TheMap { get { return (Castle)base.TheMap; } }
 
@@ -19,17 +19,13 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			vertLine = 13 * 16; 
 		}
 
-		public virtual void SpeakToGuard(GameState state, ref bool handled)
+		public override void SpeakToGuard(GameState state, ref bool handled)
 		{
-			g.AddBottom("");
-			g.AddBottom("The guard ignores you.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("The guard ignores you.");
 
 			handled = true;
 		}
 
-
-		public virtual void SetAngry(bool value)
-		{
-		}
 	}
 }

@@ -925,7 +925,7 @@ namespace ERY.Xle
 
 				count++;
 
-				if (count > 1000/80)
+				if (count > 10000/80)
 					break;
 			}
 

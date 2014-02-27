@@ -11,6 +11,26 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 {
 	class CitadelGround : NullCastleExtender
 	{
+		CastleDamageCalculator cdc = new CastleDamageCalculator 
+		{ v5 = 1.3, v6 = 1.5, v7 = 1.5 };
+
+		public override double ChanceToHitGuard(Player player, Guard guard, int distance)
+		{
+			return cdc.ChanceToHitGuard(player, distance);
+		}
+		public override double ChanceToHitPlayer(Player player, Guard guard)
+		{
+			return cdc.ChanceToHitPlayer(player);
+		}
+		public override int RollDamageToGuard(Player player, Guard guard)
+		{
+			return cdc.RollDamageToGuard(player);
+		}
+		public override int RollDamageToPlayer(Player player, Guard guard)
+		{
+			return cdc.RollDamageToPlayer(player);
+		}
+
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			if (playerPoint.X >= 83 && playerPoint.Y >= 65)

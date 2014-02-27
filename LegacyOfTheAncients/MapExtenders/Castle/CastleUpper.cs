@@ -10,6 +10,10 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class CastleUpper : CastleGround
 	{
+		public CastleUpper()
+		{
+			CastleLevel = 2;
+		}
 		public override IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			var name = evt.ExtenderName.ToLowerInvariant();

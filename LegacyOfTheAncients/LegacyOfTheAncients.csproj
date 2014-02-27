@@ -80,6 +80,7 @@
     <Compile Include="MapExtenders\Dungeons\PirateExtender.cs" />
     <Compile Include="MapExtenders\Fortress\Elevator.cs" />
     <Compile Include="MapExtenders\Fortress\FortressEntry.cs" />
+    <Compile Include="MapExtenders\Fortress\FortressFinal.cs" />
     <Compile Include="MapExtenders\Fortress\GasTrap.cs" />
     <Compile Include="MapExtenders\Museum\MuseumDisplays\AncientArtifact.cs" />
     <Compile Include="MapExtenders\Museum\MuseumDisplays\Enums.cs" />

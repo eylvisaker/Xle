@@ -84,6 +84,7 @@
     <Compile Include="MapExtenders\Archives\Exhibits\VaseOfSouls.cs" />
     <Compile Include="MapExtenders\Archives\HawkArchive.cs" />
     <Compile Include="MapExtenders\Archives\OwlArchive.cs" />
+    <Compile Include="MapExtenders\CastleDamageCalculator.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\CastleDoor.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\Chest.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\DaisMessage.cs" />

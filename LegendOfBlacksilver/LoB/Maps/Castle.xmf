@@ -721,7 +721,7 @@
   </Guards>
   <GuardDefaultAttack>0</GuardDefaultAttack>
   <GuardDefaultDefense>0</GuardDefaultDefense>
-  <GuardDefaultHP>32</GuardDefaultHP>
+  <GuardDefaultHP>25</GuardDefaultHP>
   <GuardDefaultColor>0</GuardDefaultColor>
   <Width>106</Width>
   <Height>96</Height>

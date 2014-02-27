@@ -10,6 +10,10 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class CastleGround : NullCastleExtender
 	{
+		public CastleGround()
+		{
+
+		}
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			string name = evt.ExtenderName.ToLowerInvariant();
@@ -81,6 +85,53 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 			state.Story().Invisible = false;
 			XleCore.PlayerColor = XleColor.White;
+		}
+
+		protected int WhichCastle = 1;
+		protected double CastleLevel = 1;
+		protected double GuardAttack = 1;
+
+		public override double ChanceToHitGuard(Player player, Guard guard, int distance)
+		{
+			int weaponType = player.CurrentWeaponType;
+			double GuardDefense = 1;
+
+			if (WhichCastle == 2)
+				GuardDefense = player.Attribute[Attributes.dexterity] / 26.0;
+
+			return (player.Attribute[Attributes.dexterity] + 13)
+				* (99 + weaponType * 11) / 7500.0 / GuardDefense;
+		}
+
+
+		public override int RollDamageToGuard(Player player, Guard guard)
+		{
+			int weaponType = player.CurrentWeaponType;
+
+			double damage = player.Attribute[Attributes.strength] *
+					   (weaponType / 2 + 1) / 7;
+
+			damage *= 1 + 2 * XleCore.random.NextDouble();
+
+			return (int)Math.Round(damage);
+		}
+
+
+		public override double ChanceToHitPlayer(Player player, Guard guard)
+		{
+			return 1 - (player.Attribute[Attributes.dexterity] / 99.0);
+		}
+
+
+		public override int RollDamageToPlayer(Player player, Guard guard)
+		{
+			int armorType = player.CurrentArmorType;
+
+			double damage =
+				Math.Pow(CastleLevel, 1.8) * GuardAttack * (300 + XleCore.random.NextDouble() * 600) /
+				(armorType + 2) / Math.Pow(player.Attribute[Attributes.endurance], 0.9) + 2;
+
+			return (int)Math.Round(damage);
 		}
 	}
 }

@@ -11,6 +11,26 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 {
 	class LabyrinthBase : NullCastleExtender
 	{
+		CastleDamageCalculator cdc = new CastleDamageCalculator
+		{ v5 = 1.7, v6 = 18, v7 = 1.7 };
+
+		public override double ChanceToHitGuard(Player player, Guard guard, int distance)
+		{
+			return cdc.ChanceToHitGuard(player, distance);
+		}
+		public override double ChanceToHitPlayer(Player player, Guard guard)
+		{
+			return cdc.ChanceToHitPlayer(player);
+		}
+		public override int RollDamageToGuard(Player player, Guard guard)
+		{
+			return cdc.RollDamageToGuard(player);
+		}
+		public override int RollDamageToPlayer(Player player, Guard guard)
+		{
+			return cdc.RollDamageToPlayer(player);
+		}
+
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			if (evt is Door)

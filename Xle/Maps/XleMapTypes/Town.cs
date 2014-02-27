@@ -77,6 +77,10 @@ namespace ERY.Xle.XleMapTypes
 				guard.Attack = DefaultAttack;
 				guard.Defense = DefaultDefense;
 				guard.HP = DefaultHP;
+				guard.Color = DefaultColor;
+
+				if (guard.Color.ToArgb() == 0)
+					guard.Color = XleColor.Yellow;
 			}
 		}
 
@@ -185,7 +189,7 @@ namespace ERY.Xle.XleMapTypes
 
 					csb.AddText("Attacked by guard! -- ", XleColor.White);
 
-					if (XleCore.random.NextDouble() < player.Attribute[Attributes.dexterity] / 80.0)
+					if (XleCore.random.NextDouble() > Extender.ChanceToHitPlayer(player, guard))
 					{
 						csb.AddText("Missed", XleColor.Cyan);
 						SoundMan.PlaySound(LotaSound.EnemyMiss);
@@ -194,13 +198,7 @@ namespace ERY.Xle.XleMapTypes
 					{
 						int armorType = player.CurrentArmorType;
 
-						double damage = guard.Attack / 99.0 *
-							(120 + XleCore.random.NextDouble() * 250) /
-							Math.Pow(armorType + 3, 0.8) /
-								Math.Pow(player.Attribute[Attributes.endurance], 0.8) + 3;
-
-						int dam = (int)Math.Round(damage);
-
+						int dam = Extender.RollDamageToPlayer(player, guard);
 
 						csb.AddText("Blow ", XleColor.Yellow);
 						csb.AddText(dam.ToString(), XleColor.White);
@@ -323,34 +321,22 @@ namespace ERY.Xle.XleMapTypes
 
 						if (grdRect.IntersectsWith(guardRect))
 							return false;
-
-						/*
-							if ((guard.X == pt.X - 1 || guard[k].X == pt.X || guard[k].X == pt.X + 1) &&
-								(guard.Y == pt.Y - 1 || guard[k].Y == pt.Y || guard[k].Y == pt.Y + 1))
-							{
-								return false;
-							}
-						 * */
-
 					}
 				}
 			}
 
 			return true;
 		}
-		void AttackGuard(Player player, int grd)
+		void AttackGuard(Player player, int grd, int distance)
 		{
-			AttackGuard(player, Guards[grd]);
+			AttackGuard(player, Guards[grd], distance);
 		}
-		void AttackGuard(Player player, Guard guard)
+		void AttackGuard(Player player, Guard guard, int distance)
 		{
-			int dam = 0;
-			int weaponType = player.CurrentWeaponType;
-
 			ColorStringBuilder builder = new ColorStringBuilder();
 
-			double hitChance = (player.Attribute[Attributes.dexterity] + 16)
-				* (99 + weaponType * 8) / 7000.0 / guard.Defense * 99;
+			double hitChance = Extender.ChanceToHitGuard(player, guard, distance);
+			
 
 			if (XleCore.random.NextDouble() > hitChance)
 			{
@@ -359,12 +345,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else
 			{
-				double damage = 1 + player.Attribute[Attributes.strength] *
-					(weaponType / 2 + 1) / 4;
-
-				damage *= 0.5 + XleCore.random.NextDouble();
-
-				dam = (int)Math.Round(damage);
+				int dam = Extender.RollDamageToGuard(player, guard);
 
 				IsAngry = true;
 				player.LastAttacked = MapID;
@@ -392,64 +373,6 @@ namespace ERY.Xle.XleMapTypes
 				}
 			}
 		}
-
-		/*
- Point GuardPos(int i)
- {
-	 return guad
-	 Point tempPt;
-
-	 tempPt.X = guard[i].X;
-	 tempPt.Y = guard[i].Y;
-
-	 return tempPt;
-
- }
- */
-		/*
-		int SpecialDataLength()
-		{
-			switch (MapType())
-			{
-				case MapTypes.Outside:
-					return 104;
-					break;
-				case MapTypes.Town:
-				case MapTypes.Castle:
-					return 104;
-					break;
-			}
-
-			return 5;
-		}
-		*/
-
-
-
-		/*
-		void CheckRoof(int ptx, int pty)
-		{
-			if (mapType != MapTypes.Town && mapType != MapTypes.Castle)
-			{
-				return;
-			}
-
-			if (!IsAngry)
-			{
-				for (int i = 0; i < mRoofs.Count; i++)
-					mRoofs[i].Open = false;
-			}
-
-			int roofID = InRoof(ptx, pty);
-
-			if (roofID >= 0)
-			{
-				mRoofs[roofID].Open = true;
-			}
-
-		}
-
-		*/
 
 		/// <summary>
 		/// Returns the index of the roof the character standing at the point
@@ -784,7 +707,7 @@ namespace ERY.Xle.XleMapTypes
 							&&
 							attacked == false)
 						{
-							AttackGuard(player, k);
+							AttackGuard(player, k, Math.Max(i,j));
 							attacked = true;
 
 							XleCore.Wait(200);
@@ -914,7 +837,7 @@ namespace ERY.Xle.XleMapTypes
 		public override bool PlayerXamine(Player player)
 		{
 			g.AddBottom("");
-			g.AddBottom("You are in " + XleCore.Map.MapName + ".");
+			g.AddBottom("You are in " + MapName + ".");
 			g.AddBottom("Look about to see more.");
 
 			return true;
@@ -1120,7 +1043,7 @@ namespace ERY.Xle.XleMapTypes
 
 					if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
 					{
-						XleCore.DrawCharacterSprite(rx, ry, facing, true, guardAnim, false, XleColor.Yellow);
+						XleCore.DrawCharacterSprite(rx, ry, facing, true, guardAnim, false, guard.Color);
 					}
 				}
 			}
