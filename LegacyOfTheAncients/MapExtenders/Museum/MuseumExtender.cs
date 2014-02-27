@@ -45,7 +45,10 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		public override void OnLoad(GameState state)
 		{
 			CheckExhibitStatus(state);
+		}
 
+		public override void OnAfterEntry(GameState state)
+		{
 			CheckInformationMessage(state);
 		}
 

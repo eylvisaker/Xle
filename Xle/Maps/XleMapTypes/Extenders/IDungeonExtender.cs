@@ -9,7 +9,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 	{
 		void OnPlayerExitDungeon(Player player);
 
-		void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled);
+		void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled, ref bool clearBox);
 
 		void OnBeforeOpenBox(Player player, ref bool handled);
 
@@ -18,5 +18,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		string TrapName(int val);
 
 		int GetTreasure(GameState gameState, int CurrentLevel, int val);
+
+		bool ShowDirection(Player player);
 	}
 }

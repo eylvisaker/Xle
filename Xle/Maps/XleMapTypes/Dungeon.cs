@@ -245,8 +245,7 @@ namespace ERY.Xle.XleMapTypes
 
 		protected override bool ShowDirections(Player player)
 		{
-			// check for compass.
-			return player.Items[LotaItem.Compass] > 0;
+			return Extender.ShowDirection(player);
 		}
 		public override void OnLoad(Player player)
 		{
@@ -403,16 +402,21 @@ namespace ERY.Xle.XleMapTypes
 		public override bool PlayerOpen(Player player)
 		{
 			int val = this[player.X, player.Y];
+			bool clearBox = true;
 
 			if (val == 0x1e)
 			{
-				OpenBox(player);
-				this[player.X, player.Y] = 0x10;
+				OpenBox(player, ref clearBox);
+
+				if (clearBox)
+					this[player.X, player.Y] = 0x10;
 			}
 			else if (val >= 0x30 && val <= 0x3f)
 			{
-				OpenChest(player, val);
-				this[player.X, player.Y] = 0x10;
+				OpenChest(player, val, ref clearBox);
+
+				if (clearBox)
+					this[player.X, player.Y] = 0x10;
 			}
 			else
 			{
@@ -424,7 +428,7 @@ namespace ERY.Xle.XleMapTypes
 			return true;
 		}
 
-		private void OpenBox(Player player)
+		private void OpenBox(Player player, ref bool clearBox)
 		{
 			int amount = XleCore.random.Next(60, 200);
 
@@ -459,7 +463,7 @@ namespace ERY.Xle.XleMapTypes
 
 			SoundMan.FinishSounds();
 		}
-		private void OpenChest(Player player, int val)
+		private void OpenChest(Player player, int val, ref bool clearBox)
 		{
 			val -= 0x30;
 
@@ -483,10 +487,11 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else
 			{
-				int treasure = Extender.GetTreasure(XleCore.GameState, CurrentLevel, val);
+				int treasure = Extender.GetTreasure(XleCore.GameState, CurrentLevel + 1, val);
+
 				bool handled = false;
 
-				Extender.OnBeforeGiveItem(player, ref treasure, ref handled);
+				Extender.OnBeforeGiveItem(player, ref treasure, ref handled, ref clearBox);
 
 				if (handled == false)
 				{

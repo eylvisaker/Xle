@@ -11,7 +11,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		{
 		}
 
-		public virtual void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled)
+		public virtual void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled, ref bool clearBox)
 		{
 		}
 
@@ -50,6 +50,12 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public virtual int GetTreasure(GameState state, int dungeonLevel, int chestID)
 		{
 			return 0;
+		}
+
+
+		public virtual bool ShowDirection(Player player)
+		{
+			return true;
 		}
 	}
 }

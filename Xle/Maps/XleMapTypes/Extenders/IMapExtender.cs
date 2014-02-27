@@ -26,5 +26,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		void BeforeEntry(GameState state, ref int targetEntryPoint);
 
 		void PlayerStep(GameState state);
+
+		void OnAfterEntry(GameState state);
 	}
 }

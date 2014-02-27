@@ -1409,6 +1409,11 @@ namespace ERY.Xle
 		{
 			mBaseExtender.BeforeEntry(state, ref targetEntryPoint);
 		}
+
+		public virtual void OnAfterEntry(Xle.GameState state)
+		{
+			mBaseExtender.OnAfterEntry(state);
+		}
 	}
 
 	public class Roof : IXleSerializable

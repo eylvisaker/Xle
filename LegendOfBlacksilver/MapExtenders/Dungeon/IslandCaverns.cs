@@ -10,10 +10,10 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 	{
 		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
 		{
-			if (dungeonLevel == 3 && chestID == 3)
+			if (chestID == 3)
 				return (int)LobItem.CrystalRing;
 
-			return 0;
+			return base.GetTreasure(state, dungeonLevel, chestID);
 		}
 	}
 }

@@ -31,6 +31,9 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
 		{
+			if (state.Player.Items[LotaItem.GuardJewel] >= 4)
+				return 0;
+
 			return (int)LotaItem.GuardJewel;
 		}
 	}

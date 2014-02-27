@@ -910,6 +910,7 @@ namespace ERY.Xle
 			Color lastColor = clr2;
 
 			inst.mOverrideHPColor = true;
+			int count = 0;
 
 			while (SoundMan.IsAnyPlaying())
 			{
@@ -921,6 +922,11 @@ namespace ERY.Xle
 				mHPColor = lastColor;
 
 				XleCore.Wait(80);
+
+				count++;
+
+				if (count > 1000/80)
+					break;
 			}
 
 			inst.mOverrideHPColor = false;
@@ -2245,12 +2251,13 @@ namespace ERY.Xle
 					}
 				}
 
+				GameState.Map.GameState = GameState;
+
 				if (mMapID != 0)
 				{
 					GameState.Map.OnLoad(player);
 				}
 
-				GameState.Map.GameState = GameState;
 				SetTilesAndCommands();
 			}
 			catch (Exception e)
@@ -2260,9 +2267,10 @@ namespace ERY.Xle
 				player.X = saveX;
 				player.Y = saveY;
 
-				throw e;
+				throw;
 			}
 
+			GameState.Map.OnAfterEntry(GameState);
 			CheckLoan(player);
 		}
 

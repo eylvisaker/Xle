@@ -49,5 +49,10 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public virtual void BeforeEntry(GameState state, ref int targetEntryPoint)
 		{
 		}
+
+
+		public virtual void OnAfterEntry(GameState GameState)
+		{
+		}
 	}
 }

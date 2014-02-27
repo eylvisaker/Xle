@@ -867,10 +867,7 @@ namespace ERY.Xle
 			get { return dungeonLevel; }
 			set
 			{
-				if (value >= 0 && value <= 8)
-				{
-					dungeonLevel = value;
-				}
+				dungeonLevel = value;
 			}
 		}
 		/// <summary>

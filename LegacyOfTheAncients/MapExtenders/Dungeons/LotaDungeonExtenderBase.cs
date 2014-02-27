@@ -56,13 +56,11 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 		}
 
-
-		public int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+		public override bool ShowDirection(Player player)
 		{
-			return 0;
+			// check for compass.
+			return player.Items[LotaItem.Compass] > 0;
 		}
-
-
 
 
 		public void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)

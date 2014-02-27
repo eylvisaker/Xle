@@ -16,8 +16,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 
 			return 0;
 		}
-
-		
+				
 		public override string TrapName(int val)
 		{
 			switch (val)
