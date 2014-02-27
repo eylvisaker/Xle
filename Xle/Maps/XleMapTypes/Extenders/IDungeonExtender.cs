@@ -16,5 +16,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		void OnLoad(Player player);
 
 		string TrapName(int val);
+
+		int GetTreasure(GameState gameState, int CurrentLevel, int val);
 	}
 }

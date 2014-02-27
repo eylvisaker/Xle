@@ -31,5 +31,12 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 					treasure = 0;
 			}
 		}
+		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
+		{
+			if (chestID == 1) return 16;
+			if (chestID == 2) return 20;
+
+			return 0;
+		}
 	}
 }

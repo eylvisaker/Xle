@@ -12,5 +12,7 @@ namespace ERY.Xle
 		public int AfterSetGamespeedTime { get; set; }
 
 		public int CastleOpenChestSoundTime { get; set; }
+
+		public int DungeonOpenChestSoundTime { get; set; }
 	}
 }

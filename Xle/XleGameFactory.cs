@@ -61,6 +61,7 @@ namespace ERY.Xle
 			state.GameSpeed.CastleOpenChestTime = 500 + 200 * Gamespeed;
 			state.GameSpeed.AfterSetGamespeedTime = 300 + 200 * Gamespeed;
 			state.GameSpeed.CastleOpenChestSoundTime = 750;
+			state.GameSpeed.DungeonOpenChestSoundTime = 500;
 		}
 	}
 }

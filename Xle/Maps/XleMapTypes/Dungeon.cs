@@ -21,7 +21,6 @@ namespace ERY.Xle.XleMapTypes
 		int mLevels = 1;
 
 		int[] mData;
-		int[] mTreasures = new int[16];
 		int mCurrentLevel;
 
 		double nextSound;
@@ -32,14 +31,6 @@ namespace ERY.Xle.XleMapTypes
 			FillDrips();
 			ResetDripTime();
 		}
-		public int Treasure1 { get { return mTreasures[1]; } set { mTreasures[1] = value; } }
-		public int Treasure2 { get { return mTreasures[2]; } set { mTreasures[2] = value; } }
-		public int Treasure3 { get { return mTreasures[3]; } set { mTreasures[3] = value; } }
-		public int Treasure4 { get { return mTreasures[4]; } set { mTreasures[4] = value; } }
-		public int Treasure5 { get { return mTreasures[5]; } set { mTreasures[5] = value; } }
-		public int Treasure6 { get { return mTreasures[6]; } set { mTreasures[6] = value; } }
-		public int Treasure7 { get { return mTreasures[7]; } set { mTreasures[7] = value; } }
-		public int Treasure8 { get { return mTreasures[8]; } set { mTreasures[8] = value; } }
 
 		public string ScriptClassName { get; set; }
 
@@ -57,11 +48,7 @@ namespace ERY.Xle.XleMapTypes
 			mLevels = info.ReadInt32("Levels");
 			mData = info.ReadInt32Array("Data");
 			ScriptClassName = info.ReadString("ScriptClass", "");
-
-			if (info.ContainsKey("Treasures"))
-				mTreasures = info.ReadInt32Array("Treasures");
 		}
-
 		protected override void WriteData(XleSerializationInfo info)
 		{
 			info.Write("Width", mWidth, true);
@@ -69,7 +56,6 @@ namespace ERY.Xle.XleMapTypes
 			info.Write("Levels", mLevels, true);
 			info.Write("ScriptClass", ScriptClassName);
 			info.Write("Data", mData, NumericEncoding.Csv);
-			info.Write("Treasures", mTreasures);
 		}
 
 		protected override IMapExtender CreateExtenderImpl()
@@ -266,15 +252,9 @@ namespace ERY.Xle.XleMapTypes
 		{
 			base.OnLoad(player);
 
-			if (UseExtender)
-				Extender.OnLoad(player);
+			Extender.OnLoad(player);
 			
 			CurrentLevel = player.DungeonLevel;
-		}
-
-		private bool UseExtender
-		{
-			get { return Extender != null; }
 		}
 
 		public override string[] MapMenu()
@@ -462,10 +442,7 @@ namespace ERY.Xle.XleMapTypes
 
 			bool handled = false;
 
-			if (Extender != null)
-			{
-				Extender.OnBeforeOpenBox(player, ref handled);
-			}
+			Extender.OnBeforeOpenBox(player, ref handled);
 
 			if (handled == false)
 			{
@@ -488,8 +465,8 @@ namespace ERY.Xle.XleMapTypes
 
 			Commands.UpdateCommand("Open Chest");
 			SoundMan.PlaySound(LotaSound.OpenChest);
-			g.AddBottom();
-			XleCore.Wait(500);
+			XleCore.TextArea.PrintLine();
+			XleCore.Wait(XleCore.GameState.GameSpeed.DungeonOpenChestSoundTime);
 
 			// TODO: give weapons
 			// TODO: bobby trap chests.
@@ -506,11 +483,10 @@ namespace ERY.Xle.XleMapTypes
 			}
 			else
 			{
-				int treasure = mTreasures[val];
+				int treasure = Extender.GetTreasure(XleCore.GameState, CurrentLevel, val);
 				bool handled = false;
 
-				if (Extender != null)
-					Extender.OnBeforeGiveItem(player, ref treasure, ref handled);
+				Extender.OnBeforeGiveItem(player, ref treasure, ref handled);
 
 				if (handled == false)
 				{

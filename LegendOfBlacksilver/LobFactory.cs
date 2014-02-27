@@ -5,6 +5,7 @@ using ERY.Xle.LoB.MapExtenders;
 using ERY.Xle.LoB.MapExtenders.Archives;
 using ERY.Xle.LoB.MapExtenders.Castle;
 using ERY.Xle.LoB.MapExtenders.Citadel;
+using ERY.Xle.LoB.MapExtenders.Dungeon;
 using ERY.Xle.LoB.MapExtenders.Labyrinth;
 using ERY.Xle.LoB.MapExtenders.Outside;
 using ERY.Xle.LoB.TitleScreen;
@@ -98,7 +99,16 @@ namespace ERY.Xle.LoB
 		}
 		public override IDungeonExtender CreateMapExtender(XleMapTypes.Dungeon theMap)
 		{
-			return base.CreateMapExtender(theMap);
+			switch(theMap.MapID)
+			{
+				case 61: return new IslandCaverns();
+				case 62: return new TaragasMines();
+				case 63: return new MarthbaneTunnels();
+				case 64: return new PitsOfBlackmire();
+				case 65: return new DeathspireChasm();
+
+				default: return base.CreateMapExtender(theMap);
+			}
 		}
 		public override ICastleExtender CreateMapExtender(XleMapTypes.Castle castle)
 		{
@@ -108,6 +118,13 @@ namespace ERY.Xle.LoB
 				return (ICastleExtender)Activator.CreateInstance(mExtenders[ext]);
 
 			return base.CreateMapExtender(castle);
+		}
+
+		public override void SetGameSpeed(GameState state, int Gamespeed)
+		{
+			base.SetGameSpeed(state, Gamespeed);
+
+			state.GameSpeed.CastleOpenChestSoundTime = 300;
 		}
 	}
 }

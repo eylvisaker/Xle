@@ -32,6 +32,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 				case 0x13: return "poison gas vent";
 				case 0x14: return "slime splotch";
 				case 0x15: return "trip wire";
+				case 0x16: return "gas vent";
 				default: throw new ArgumentException();
 			}
 		}
@@ -43,6 +44,12 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			innerColor = XleColor.LightGreen;
 			fontColor = XleColor.Cyan;
 			vertLine = 15 * 16;
+		}
+
+
+		public virtual int GetTreasure(GameState state, int dungeonLevel, int chestID)
+		{
+			return 0;
 		}
 	}
 }
