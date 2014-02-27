@@ -34,6 +34,12 @@ namespace ERY.Xle.LoB
 		public int[][] CastleChests { get; set;}
 
 		public bool MantrekKilled { get; set; }
+
+		public bool DefeatedOrcs { get; set; }
+
+		public bool ArmanGaveElixirs { get; set; }
+
+		public bool ClearedRockSlide { get; set; }
 	}
 
 	public static class LobStoryExtensions

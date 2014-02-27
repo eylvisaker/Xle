@@ -119,8 +119,15 @@ namespace ERY.Xle
 		{
 			PlaySound(lotaSound);
 
+			int time = 0;
 			while (IsPlaying(lotaSound))
+			{
 				XleCore.Wait(50);
+
+				time += 50;
+				if (time > 10000)
+					break;
+			}
 		}
 		public static void PlaySoundSync(Action redraw, LotaSound lotaSound)
 		{

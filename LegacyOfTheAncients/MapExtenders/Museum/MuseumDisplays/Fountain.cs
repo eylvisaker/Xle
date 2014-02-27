@@ -20,7 +20,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public override bool IsClosed(ERY.Xle.Player player)
 		{
-			if (player.Story().Museum[(int)ExhibitIdentifier] == 7)
+			if (player.Story().Museum[(int)ExhibitIdentifier] >= 10)
 				return true;
 			else
 				return false;
@@ -28,7 +28,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public override void RunExhibit(Player player)
 		{
-			if (player.Item(10) == 0)
+			if (player.Items[LotaItem.Tulip] == 0)
 			{
 				base.RunExhibit(player);
 				g.AddBottom();
@@ -66,12 +66,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			else
 			{
 				// remove the tulip from the player, give the reward and shut down the exhibit.
-				player.ItemCount(10, -player.Item(10));
+				player.Items[LotaItem.Tulip] = 0;
 				player.Attribute[Attributes.charm] += 10;
-				player.Story().Museum[(int)ExhibitIdentifier] = 7;
+				player.Story().Museum[ExhibitID] = 10;
 
 				ReadRawText(ExhibitInfo.Text[3]);
-
 			}
 		}
 	}

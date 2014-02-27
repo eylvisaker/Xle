@@ -85,7 +85,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				return;
 			}
 
-			if (bits[1] == false && player.Item(15) == 0)
+			if (bits[1] == false && player.Items[LotaItem.Compendium] == 0)
 			{
 				// lost compendium
 				ReadRawText(ExhibitInfo.Text[3]);
@@ -110,26 +110,26 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			// If the player has not accepted the caretakers offer and
 			// received the iron key, skip any crown/sceptor checks.
-			if (player.Item(4) == 0)
+			if (player.Items[LotaItem.IronKey] == 0)
 				return false;
 
-			if (player.Item(13) > 0 && player.Item(16) > 0)
+			if (player.Items[LotaItem.Scepter] > 0 && player.Items[LotaItem.Crown] > 0)
 			{
 				// found scepter and crown
 				ReadRawText(ExhibitInfo.Text[10]);
 
 				// give magic ice.
-				player.ItemCount(12, 1);
+				player.Items[LotaItem.MagicIce] = 1;
 
 				// remove sceptor and crown from inventory
-				player.ItemCount(13, -100);
-				player.ItemCount(16, -100);
+				player.Items[LotaItem.Scepter] = 0;
+				player.Items[LotaItem.Crown] = 0;
 
 				return true;
 			}
 			else if (SceptorCrownHint == false)
 			{
-				if (player.Item(13) > 0)
+				if (player.Items[LotaItem.Scepter] > 0)
 				{
 					// found scepter, give hint about crown
 					ReadRawText(ExhibitInfo.Text[7]);
@@ -137,7 +137,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 					SceptorCrownHint = true;
 					return true;
 				}
-				else if (player.Item(16) > 0)
+				else if (player.Items[LotaItem.Crown] > 0)
 				{
 					// found crown, give hint about sceptor
 					ReadRawText(ExhibitInfo.Text[8]);
@@ -152,7 +152,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		private bool OfferIronKey(Player player)
 		{
-			if (player.Level >= 3 && player.Item(4) == 0)
+			if (player.Level >= 3 && player.Items[LotaItem.IronKey] == 0)
 			{
 				ReadRawText(ExhibitInfo.Text[5]);
 
@@ -164,7 +164,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				{
 					ReadRawText(ExhibitInfo.Text[6]);
 
-					player.ItemCount(4, 1);
+					player.Items[LotaItem.IronKey] = 1;
 				}
 
 				return true;
@@ -203,14 +203,14 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		private int TargetLevel(Player player)
 		{
 			// check if we have compendium and guard jewels
-			if (player.Item(15) > 0 &&
-				player.Item(14) >= 4)
+			if (player.Items[LotaItem.Compendium] > 0 &&
+				player.Items[LotaItem.GuardJewel] >= 4)
 			{
 				return 10;
 			}
 
 			// check if we've gotten the four jewels
-			if (player.Item(14) >= 4)
+			if (player.Items[LotaItem.GuardJewel] >= 4)
 				return 7;
 
 			// check if we've found the leader of the guardians

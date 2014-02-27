@@ -1,4 +1,5 @@
-﻿using ERY.Xle.LoB.MapExtenders.Castle.EventExtenders;
+﻿using AgateLib.Geometry;
+using ERY.Xle.LoB.MapExtenders.Castle.EventExtenders;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleMapTypes.Extenders;
 using System;
@@ -41,19 +42,18 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 				else
 					return new CastleDoor();
 			}
-			if (evt is SpeakToPerson)
+
+			switch (evt.ExtenderName)
 			{
-				switch(evt.ExtenderName)
-				{
-					case "King": return new King();
-					case "Seravol": return new Seravol();
-				}
+				case "King": return new King();
+				case "Seravol": return new Seravol();
+				case "Arman": return new Arman();
+				case "DaisMessage": return new DaisMessage();
+				case "AngryOrcs": return new AngryOrcs(this);
+				case "AngryCastle": return new AngryCastle(this);
+				case "SingingCrystal": return new SingingCrystal();
 			}
-			if (evt is Script)
-			{
-				if (evt.ExtenderName == "DaisMessage")
-					return new DaisMessage();
-			}
+
 
 			return base.CreateEventExtender(evt, defaultExtender);
 		}
@@ -85,7 +85,36 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			{
 				RemoveFalconFeatherDoor(state);
 			}
-			
+			if (state.Story().ClearedRockSlide)
+			{
+				RemoveRockSlide(state);
+			}
+
+			if (state.Story().DefeatedOrcs == false)
+			{
+				ColorOrcs(state);
+			}
+		}
+
+		private void RemoveRockSlide(GameState state)
+		{
+			var evt = TheMap.Events.FirstOrDefault(x => x.ExtenderName == "SingingCrystal");
+
+			SingingCrystal.RemoveRockSlide(TheMap, evt.Rectangle);
+		}
+
+		private void ColorOrcs(GameState state)
+		{
+			if (state.Story().DefeatedOrcs == false)
+			{
+				Rectangle area = Rectangle.FromLTRB(66, 0, TheMap.Width, 68);
+
+				foreach (var guard in TheMap.Guards)
+				{
+					if (area.Contains(guard.Location))
+						guard.Color = XleColor.Blue;
+				}
+			}
 		}
 
 		private void RemoveFalconFeatherDoor(GameState state)
@@ -114,5 +143,9 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			XleCore.Wait(2500);
 			handled = true;
 		}
+
+		public bool StoredAngryFlag { get; set; }
+
+		public bool InOrcArea { get; set; }
 	}
 }

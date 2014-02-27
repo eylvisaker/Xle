@@ -43,5 +43,7 @@ namespace ERY.Xle.LotA
 		public bool HasGuardianPassword { get; set; }
 
 		public bool HasGuardianMark { get; set; }
+
+		public bool EatenJutonFruit { get; set; }
 	}
 }
