@@ -71,13 +71,15 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			return 32;
 		}
 
-		public override void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
+		public override void SetColorScheme(ColorScheme scheme)
 		{
-			base.GetBoxColors(out boxColor, out innerColor, out fontColor, out vertLine);
+			scheme.TextColor = XleColor.White;
 
-			boxColor = XleColor.LightGray;
+			scheme.FrameColor = XleColor.LightGray;
+			scheme.FrameHighlightColor = XleColor.Yellow;
+
+			scheme.VerticalLinePosition = 13 * 16;
 		}
-
 
 		public override void OnLoad(GameState state)
 		{

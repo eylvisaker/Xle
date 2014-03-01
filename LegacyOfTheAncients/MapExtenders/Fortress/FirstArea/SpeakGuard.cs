@@ -54,8 +54,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
 		private void MoveGuard(Guard guard, int dx, int dy)
 		{
-			guard.Location.X += dx;
-			guard.Location.Y += dy;
+			guard.X += dx;
+			guard.Y += dy;
 			guard.Facing = XleMap.DirectionFromPoint(new Point(dx, dy));
 			
 			XleCore.Wait(150);

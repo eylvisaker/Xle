@@ -28,6 +28,15 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 			extenders.Add("SeeCompendium", new SeeCompendium());
 		}
 
+		public override void SetColorScheme(ColorScheme scheme)
+		{
+			scheme.TextColor = XleColor.White;
+
+			scheme.FrameColor = XleColor.Gray;
+			scheme.FrameHighlightColor = XleColor.Yellow;
+
+			scheme.VerticalLinePosition = 13 * 16;
+		}
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			return extenders.Find(evt.ExtenderName) ??

@@ -42,6 +42,7 @@ namespace ERY.Xle
 		public XleMap()
 		{
 			mBaseExtender = new NullMapExtender();
+			ColorScheme = new ColorScheme();
 		}
 
 		/// <summary>
@@ -691,9 +692,12 @@ namespace ERY.Xle
 			}
 		}
 
+		public ColorScheme ColorScheme { get; private set; }
+
+		[Obsolete("Use ColorScheme instead.", true)]
 		public void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
 		{
-			mBaseExtender.GetBoxColors(out boxColor, out innerColor, out fontColor, out vertLine);
+			throw new NotImplementedException();
 		}
 
 		#endregion
@@ -751,7 +755,7 @@ namespace ERY.Xle
 			{
 				bool found = false;
 
-				if (e.Enabled == false) 
+				if (e.Enabled == false)
 					continue;
 
 				for (int j = 0; j < 2; j++)
@@ -912,7 +916,7 @@ namespace ERY.Xle
 		{
 			bool didEvent = false;
 
-			foreach(var evt in EventsAt(player.X, player.Y, 0))
+			foreach (var evt in EventsAt(player.X, player.Y, 0))
 			{
 				evt.StepOn(GameState);
 				didEvent = true;
@@ -928,7 +932,7 @@ namespace ERY.Xle
 		/// <param name="didEvent">True if there was an event that occured at this location</param>
 		protected virtual void PlayerStepImpl(Player player, bool didEvent)
 		{
-			
+
 		}
 
 		public abstract bool CanPlayerStepInto(Player player, int xx, int yy);
@@ -1183,8 +1187,8 @@ namespace ERY.Xle
 			var state = GameState;
 			bool handled = false;
 
-			foreach(var evt in EventsAt(player, 1))
-			{ 
+			foreach (var evt in EventsAt(player, 1))
+			{
 				handled = evt.Use(state, item);
 
 				if (handled)
@@ -1230,10 +1234,11 @@ namespace ERY.Xle
 		public virtual void OnLoad(Player player)
 		{
 			mBaseExtender.OnLoad(GameState);
+			mBaseExtender.SetColorScheme(this.ColorScheme);
 
 			SetChestIDs();
 
-			foreach(var evt in Events)
+			foreach (var evt in Events)
 			{
 				evt.OnLoad(XleCore.GameState);
 			}
@@ -1242,7 +1247,7 @@ namespace ERY.Xle
 		private void SetChestIDs()
 		{
 			int index = 0;
-			foreach(TreasureChestEvent chest in Events.OfType<TreasureChestEvent>())
+			foreach (TreasureChestEvent chest in Events.OfType<TreasureChestEvent>())
 			{
 				chest.ChestID = index;
 				index++;
@@ -1283,7 +1288,7 @@ namespace ERY.Xle
 				{
 					var tile = this[rectangle.X + i, rectangle.Y + j];
 					var group = TileSet.TileGroups.FirstOrDefault(
-						x => x.Tiles.Contains(tile) && 
+						x => x.Tiles.Contains(tile) &&
 						x.GroupType == GroupType.PrisonBars);
 
 					if (group == null)
@@ -1453,22 +1458,39 @@ namespace ERY.Xle
 	[Serializable]
 	public class Guard : IXleSerializable
 	{
-		public Point Location;				// the guards' locations on the map
-		public int HP;			// stores the current hp for the guards
-		public Direction Facing = Direction.South;		// direction the guards are facing
-		public Color Color = XleColor.Yellow;
+		public Guard()
+		{
+			Name = "Guard";
+			Facing = Direction.South;
+			Color = XleColor.Yellow;
+		}
 
-		public int Attack;			// attack and defense for the guards
-		public int Defense;
+		public Point Location
+		{
+			get { return new Point(X, Y); }
+			set
+			{
+				X = value.X;
+				Y = value.Y;
+			}
+		}
+		public int HP { get; set; }
+		public Direction Facing { get; set; }
+		public Color Color { get; set; }
 
-		public int X { get { return Location.X; } set { Location.X = value; } }
-		public int Y { get { return Location.Y; } set { Location.Y = value; } }
+		public int Attack { get; set; }
+		public int Defense { get; set; }
+
+		public int X { get; set; }
+		public int Y { get; set; }
 
 		/// <summary>
 		/// Method called when attacked by the player.
 		/// Return true to cancel further processing of the attack.
 		/// </summary>
 		public Func<GameState, Guard, bool> OnPlayerAttack;
+		public Func<GameState, Guard, bool> OnGuardDead;
+		public bool SkipAttacking { get; set; }
 
 		#region IXleSerializable Members
 
@@ -1495,5 +1517,7 @@ namespace ERY.Xle
 		}
 
 		#endregion
+
+		public string Name { get; set; }
 	}
 }

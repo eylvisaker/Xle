@@ -1,4 +1,5 @@
-﻿using ERY.Xle.LotA.MapExtenders.Fortress.FirstArea;
+﻿using AgateLib.Geometry;
+using ERY.Xle.LotA.MapExtenders.Fortress.FirstArea;
 using ERY.Xle.LotA.MapExtenders.Fortress.SecondArea;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,9 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 	class FortressFinal : FortressEntry
 	{
 		ExtenderDictionary extenders = new ExtenderDictionary();
+		Guard warlord;
+
+		double compendiumStrength = 140;
 
 		public FortressFinal()
 		{
@@ -20,7 +24,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 			extenders.Add("DoorShut", new DoorShut());
 			extenders.Add("Compendium", new Compendium(this));
-			extenders.Add("FinalMagicIce", new FinalMagicIce(this));
+			extenders.Add("MagicIce", new FinalMagicIce(this));
 		}
 
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
@@ -30,7 +34,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
-			if (y >= TheMap.Height) 
+			if (y >= TheMap.Height)
 				return 0;
 			else
 				return 11;
@@ -40,30 +44,126 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 		public override void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
 		{
-			Guard warlord = FindWarlord(state);
-
 			if (warlord != null)
+			{
 				WarlordAttack(state);
+			}
 			else if (CompendiumAttacking)
+			{
 				CompendiumAttack(state);
+			}
 		}
 
 		private void CompendiumAttack(GameState state)
 		{
-			throw new NotImplementedException();
+			int damage = XleCore.random.Next((int)compendiumStrength / 2, (int)compendiumStrength);
+
+			XleCore.Wait(75);
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Compendium attack - blow " + damage + " H.P.", XleColor.Green);
+
+			SoundMan.PlaySound(LotaSound.FireBolt);
+			XleCore.Wait(500);
+			SoundMan.StopSound(LotaSound.FireBolt);
+			SoundMan.PlaySound(LotaSound.MagicHit);
+			XleCore.Wait(250, FlashBorder);
+			TheMap.ColorScheme.FrameColor = XleColor.Gray;
+
+			state.Player.HP -= damage;
+
+			XleCore.Wait(75);
+
+			if (state.Player.Items[LotaItem.HealingHerb] > 24)
+			{
+				int amount = (int)(state.Player.Items[LotaItem.HealingHerb] / 9);
+
+				amount = (int)(amount * (1 + XleCore.random.NextDouble()) * 0.5);
+
+				XleCore.TextArea.PrintLine("** " + amount.ToString() + " healing herbs destroyed! **", XleColor.Yellow);
+
+				state.Player.Items[LotaItem.HealingHerb] -= amount;
+
+				XleCore.Wait(75);
+			}
+		}
+
+		int borderIndex;
+		Color flashColor = XleColor.LightGreen;
+
+		private void FlashBorder()
+		{
+			borderIndex++;
+
+			if (borderIndex % 4 < 2)
+				TheMap.ColorScheme.FrameColor = flashColor;
+			else
+				TheMap.ColorScheme.FrameColor = XleColor.Gray;
+
+			XleCore.Redraw();
 		}
 
 		private void WarlordAttack(GameState state)
 		{
+			int damage = (int)(99 * XleCore.random.NextDouble() + 80);
+
+			TheMap.ColorScheme.FrameColor = XleColor.Pink;
+			flashColor = XleColor.Red;
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
+			
+			SoundMan.PlaySound(LotaSound.MagicFlame);
+			XleCore.Wait(500);
+			SoundMan.StopSound(LotaSound.MagicFlame);
+			SoundMan.PlaySound(LotaSound.MagicHit);
+			XleCore.Wait(250, FlashBorder);
+			TheMap.ColorScheme.FrameColor = XleColor.Gray;
+
+			XleCore.Wait(150);
+		}
+
+
+		public void CreateWarlord(GameState state)
+		{
+			warlord = new Guard
+			{
+				X = 5,
+				Y = 45,
+				HP = 420,
+				Color = XleColor.LightGreen,
+				Name = "Warlord",
+				OnGuardDead = WarlordDead,
+				SkipAttacking = true,
+			};
+
+			TheMap.Guards.Add(warlord);
+		}
+
+		private bool WarlordDead(GameState state, Guard unused)
+		{
+			this.warlord = null;
+
+			XleCore.TextArea.Clear(true);
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("        ** warlord killed **");
+
+			for (int i = 0; i < 5; i++)
+			{
+				SoundMan.PlaySound(LotaSound.Good);
+				XleCore.Wait(750);
+			}
+			XleCore.Wait(1000);
+			
+			SoundMan.PlaySoundSync(LotaSound.VeryGood);
+
+			PrintSecurityAlertMessage();
+
+			return true;
+		}
+
+		private void PrintSecurityAlertMessage()
+		{
 			throw new NotImplementedException();
 		}
-
-		private Guard FindWarlord(GameState state)
-		{
-			IHasGuards gd = (IHasGuards)state.Map;
-
-			return gd.Guards.FirstOrDefault(x => x.Color == XleColor.LightGreen);
-		}
-		
 	}
 }

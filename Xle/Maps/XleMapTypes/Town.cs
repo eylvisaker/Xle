@@ -186,40 +186,12 @@ namespace ERY.Xle.XleMapTypes
 
 				if (Math.Abs(xdist) <= 2 && Math.Abs(ydist) <= 2)
 				{
-					g.AddBottom("");
-
 					if (Math.Abs(xdist) > Math.Abs(ydist))
 						dy = 0;
 					else
 						dx = 0;
 
-					ColorStringBuilder csb = new ColorStringBuilder();
-
-					csb.AddText("Attacked by guard! -- ", XleColor.White);
-
-					if (XleCore.random.NextDouble() > Extender.ChanceToHitPlayer(player, guard))
-					{
-						csb.AddText("Missed", XleColor.Cyan);
-						SoundMan.PlaySound(LotaSound.EnemyMiss);
-					}
-					else
-					{
-						int armorType = player.CurrentArmorType;
-
-						int dam = Extender.RollDamageToPlayer(player, guard);
-
-						csb.AddText("Blow ", XleColor.Yellow);
-						csb.AddText(dam.ToString(), XleColor.White);
-						csb.AddText(" H.P.", XleColor.White);
-
-						SoundMan.PlaySound(LotaSound.EnemyHit);
-
-						player.HP -= dam;
-					}
-
-					g.AddBottom(csb);
-
-					XleCore.Wait(100 * player.Gamespeed);
+					GuardAttackPlayer(player, guard);
 				}
 				else if (dist < 25)
 				{
@@ -314,6 +286,42 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
+		private void GuardAttackPlayer(Player player, Guard guard)
+		{
+			if (guard.SkipAttacking)
+				return;
+
+			g.AddBottom("");
+
+			ColorStringBuilder csb = new ColorStringBuilder();
+
+			csb.AddText("Attacked by " + guard.Name + "! -- ", XleColor.White);
+
+			if (XleCore.random.NextDouble() > Extender.ChanceToHitPlayer(player, guard))
+			{
+				csb.AddText("Missed", XleColor.Cyan);
+				SoundMan.PlaySound(LotaSound.EnemyMiss);
+			}
+			else
+			{
+				int armorType = player.CurrentArmorType;
+
+				int dam = Extender.RollDamageToPlayer(player, guard);
+
+				csb.AddText("Blow ", XleColor.Yellow);
+				csb.AddText(dam.ToString(), XleColor.White);
+				csb.AddText(" H.P.", XleColor.White);
+
+				SoundMan.PlaySound(LotaSound.EnemyHit);
+
+				player.HP -= dam;
+			}
+
+			g.AddBottom(csb);
+
+			XleCore.Wait(100 * player.Gamespeed);
+		}
+
 		bool CanGuardStepInto(Point pt, int grd)
 		{
 			int i, j, k;
@@ -368,7 +376,7 @@ namespace ERY.Xle.XleMapTypes
 
 			if (XleCore.random.NextDouble() > hitChance)
 			{
-				g.AddBottom("Attack on guard missed", XleColor.Purple);
+				g.AddBottom("Attack on " + guard.Name + " missed", XleColor.Purple);
 				SoundMan.PlaySound(LotaSound.PlayerMiss);
 			}
 			else
@@ -378,7 +386,7 @@ namespace ERY.Xle.XleMapTypes
 				IsAngry = true;
 				player.LastAttacked = MapID;
 
-				builder.AddText("Guard struck  ", XleColor.Yellow);
+				builder.AddText(guard.Name + " struck  ", XleColor.Yellow);
 				builder.AddText(dam.ToString(), XleColor.White);
 				builder.AddText("  H.P. Blow", XleColor.White);
 
@@ -390,7 +398,7 @@ namespace ERY.Xle.XleMapTypes
 
 				if (guard.HP <= 0)
 				{
-					g.AddBottom("Guard killed");
+					g.AddBottom(guard.Name + " killed");
 
 					Guards.Remove(guard);
 
@@ -398,6 +406,9 @@ namespace ERY.Xle.XleMapTypes
 
 					SoundMan.StopSound(LotaSound.PlayerHit);
 					SoundMan.PlaySound(LotaSound.EnemyDie);
+
+					if (guard.OnGuardDead != null)
+						guard.OnGuardDead(XleCore.GameState, guard);
 				}
 			}
 		}

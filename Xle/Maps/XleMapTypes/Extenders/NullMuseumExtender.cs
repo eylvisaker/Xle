@@ -15,14 +15,14 @@ namespace ERY.Xle.XleMapTypes.Extenders
 			throw new NotImplementedException();
 		}
 
-		public void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
+		public override void SetColorScheme(ColorScheme scheme)
 		{
+			scheme.TextColor = XleColor.White;
 
-			fontColor = XleColor.White;
+			scheme.FrameColor = XleColor.DarkGray;
+			scheme.FrameHighlightColor = XleColor.Yellow;
 
-			boxColor = XleColor.Gray;
-			innerColor = XleColor.Yellow;
-			vertLine = 15 * 16;
+			scheme.VerticalLinePosition = 15 * 16;
 		}
 		
 		

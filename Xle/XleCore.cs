@@ -818,17 +818,13 @@ namespace ERY.Xle
 			XleMap map = GameState.Map;
 
 			int i = 0;
-			Color boxColor;
-			Color innerColor;
-			Color fontColor;
-			Color menuColor;
+			Color boxColor = map.ColorScheme.FrameColor;
+			Color innerColor = map.ColorScheme.FrameHighlightColor;
 			int horizLine = 18 * 16;
-			int vertLine;
+			int vertLine = map.ColorScheme.VerticalLinePosition;
 
-			map.GetBoxColors(out boxColor, out innerColor, out fontColor, out vertLine);
-			FontColor = fontColor;
-
-			menuColor = fontColor;
+			FontColor = map.ColorScheme.TextColor;
+			Color menuColor = map.ColorScheme.TextColor;
 
 			if (g.LeftMenuActive)
 			{
@@ -860,7 +856,7 @@ namespace ERY.Xle
 
 			WriteText(32, 16 * (CursorPos + 1), "`", menuColor);
 
-			Color hpColor = fontColor;
+			Color hpColor = map.ColorScheme.TextColor;
 			if (mOverrideHPColor)
 				hpColor = mHPColor;
 

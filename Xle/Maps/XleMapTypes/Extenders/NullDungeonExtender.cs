@@ -38,12 +38,14 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		}
 
 
-		public override void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
+		public override void SetColorScheme(ColorScheme scheme)
 		{
-			boxColor = XleColor.Gray;
-			innerColor = XleColor.LightGreen;
-			fontColor = XleColor.Cyan;
-			vertLine = 15 * 16;
+			scheme.TextColor = XleColor.Cyan;
+
+			scheme.FrameColor = XleColor.Gray;
+			scheme.FrameHighlightColor = XleColor.LightGreen;
+
+			scheme.VerticalLinePosition = 15 * 16;
 		}
 
 

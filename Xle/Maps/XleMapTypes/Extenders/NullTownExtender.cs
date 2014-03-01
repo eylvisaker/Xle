@@ -8,14 +8,14 @@ namespace ERY.Xle.XleMapTypes.Extenders
 {
 	public class NullTownExtender : NullMapExtender, ITownExtender
 	{
-		public override void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
+		public override void SetColorScheme(ColorScheme scheme)
 		{
+			scheme.TextColor = XleColor.White;
 
-			fontColor = XleColor.White;
+			scheme.FrameColor = XleColor.Orange;
+			scheme.FrameHighlightColor = XleColor.Yellow;
 
-			boxColor = XleColor.Orange;
-			innerColor = XleColor.Yellow;
-			vertLine = 13 * 16;
+			scheme.VerticalLinePosition = 13 * 16;
 		}
 
 		public virtual void SpeakToGuard(GameState state, ref bool handled)

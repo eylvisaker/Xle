@@ -15,7 +15,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 
 		IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender);
 
-		void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine);
+		void SetColorScheme(ColorScheme scheme);
 
 		int StepSize { get; }
 
@@ -30,5 +30,6 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		void OnAfterEntry(GameState state);
 
 		void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd);
+
 	}
 }

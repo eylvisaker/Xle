@@ -132,6 +132,7 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="ColorScheme.cs" />
     <Compile Include="CountdownTimer.cs" />
     <Compile Include="GameSpeed.cs" />
     <Compile Include="GameState.cs" />

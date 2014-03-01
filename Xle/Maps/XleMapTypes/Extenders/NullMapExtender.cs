@@ -23,7 +23,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public virtual void PlayerStep(GameState state)
 		{ }
 
-		public virtual void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
+		public virtual void SetColorScheme(ColorScheme scheme)
 		{
 			throw new NotImplementedException();
 		}

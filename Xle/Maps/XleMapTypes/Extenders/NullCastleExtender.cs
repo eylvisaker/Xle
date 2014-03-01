@@ -9,14 +9,14 @@ namespace ERY.Xle.XleMapTypes.Extenders
 	{
 		public new Castle TheMap { get { return (Castle)base.TheMap; } }
 
-		public override void GetBoxColors(out AgateLib.Geometry.Color boxColor, out AgateLib.Geometry.Color innerColor, out AgateLib.Geometry.Color fontColor, out int vertLine)
+		public override void SetColorScheme(ColorScheme scheme)
 		{
-			fontColor = XleColor.White;
+			scheme.TextColor = XleColor.White;
 
-			boxColor = XleColor.Gray;
-			innerColor = XleColor.Yellow;
+			scheme.FrameColor = XleColor.Gray;
+			scheme.FrameHighlightColor = XleColor.Yellow;
 
-			vertLine = 13 * 16; 
+			scheme.VerticalLinePosition = 13 * 16;
 		}
 
 		public override void SpeakToGuard(GameState state, ref bool handled)
