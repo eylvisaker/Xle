@@ -10,6 +10,8 @@ namespace ERY.Xle.XleMapTypes.Extenders
 {
 	public class NullOutsideExtender : NullMapExtender, IOutsideExtender
 	{
+		public new Outside TheMap { get { return (Outside)base.TheMap; } }
+
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			return 0;

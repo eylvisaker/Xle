@@ -14,7 +14,19 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			get { return "A flight of fancy"; }
 		}
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
 
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Do you want to climb on?");
+			XleCore.TextArea.PrintLine();
+
+			if (0 == XleCore.QuickMenuYesNo())
+			{
+				XleCore.ChangeMap(player, 3, 0, 0, 0);
+			}
+		}
 		public override bool StaticBeforeCoin
 		{
 			get

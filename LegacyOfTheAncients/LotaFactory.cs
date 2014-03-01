@@ -68,7 +68,10 @@ namespace ERY.Xle.LotA
 
 		public override IOutsideExtender CreateMapExtender(Outside outside)
 		{
-			return new TarmalonExtender();
+			if (outside.ExtenderName == "Flight")
+				return new Flight();
+			else
+				return new TarmalonExtender();
 		}
 		public override IDungeonExtender CreateMapExtender(Dungeon theMap) 
 		{

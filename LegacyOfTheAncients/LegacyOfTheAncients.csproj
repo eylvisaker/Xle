@@ -109,6 +109,7 @@
     <Compile Include="MapExtenders\Museum\MuseumDisplays\Weaponry.cs" />
     <Compile Include="MapExtenders\Museum\MuseumDisplays\Welcome.cs" />
     <Compile Include="MapExtenders\Museum\MuseumExtender.cs" />
+    <Compile Include="MapExtenders\Outside\Flight.cs" />
     <Compile Include="MapExtenders\Outside\TarmalonExtender.cs" />
     <Compile Include="MapExtenders\TownExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,9 +198,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LotA\Maps\ThreeSisters.xmf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="LotA\Maps\Warlord.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LotA\Saved\davey.chr">

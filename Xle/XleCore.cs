@@ -712,11 +712,11 @@ namespace ERY.Xle
 		{
 			if (thePlayer == null)
 				return;
-			
+
 			GameState = new Xle.GameState();
 
 			GameState.Player = thePlayer;
-			
+
 			GameState.commands = new Commands(GameState.Player);
 
 			GameState.Map = LoadMap(GameState.Player.MapID);
@@ -861,7 +861,7 @@ namespace ERY.Xle
 				hpColor = mHPColor;
 
 			WriteText(48, 16 * 15, "H.P. " + player.HP.ToString(), hpColor);
-			WriteText(48, 16 * 16, "Food " + player.Food.ToString(), hpColor);
+			WriteText(48, 16 * 16, "Food " + ((int)player.Food).ToString(), hpColor);
 			WriteText(48, 16 * 17, "Gold " + player.Gold.ToString(), hpColor);
 
 			DrawBottomText();
@@ -870,7 +870,7 @@ namespace ERY.Xle
 			{
 				DrawRafts(mapRect);
 
-				if (player.OnRaft == 0)
+				if (player.OnRaft < 0)
 					DrawCharacter(g.Animating, g.AnimFrame, vertLine);
 			}
 
@@ -1262,27 +1262,39 @@ namespace ERY.Xle
 		/// <param name="inRect"></param>
 		static void DrawRafts(Rectangle inRect)
 		{
-			Player player = GameState.Player; 
+			Player player = GameState.Player;
 			int tx, ty;
 			int lx = inRect.Left;
 			int width = inRect.Width;
 			int px = lx + (int)((width / 16) / 2) * 16;
-			int py = 144;
+			int py = 128;
 			int rx, ry;
 			Rectangle charRect;
 			Rectangle destRect;
 
-			tx = g.raftAnim * 32;
-			ty = 256;
-
-			charRect = new Rectangle(tx, ty, 32, 32);
-
-			for (int i = 1; i < player.Rafts.Count; i++)
+			
+			for (int i = 0; i < player.Rafts.Count; i++)
 			{
 				RaftData raft = player.Rafts[i];
 
+				int raftAnim = g.raftAnim;
+				if (raft.RaftImage > 0)
+					raftAnim %= 4;
+				else
+					raftAnim %= 3;
+
+				int sourceX = raftAnim * 32;
+				int sourceY = 256;
+
+				tx = sourceX;
+				ty = sourceY;
+
 				if (GameState.Map.MapID != raft.MapNumber)
 					continue;
+				if (raft.RaftImage > 0)
+				{
+					tx += 32 * 4;
+				}
 
 				rx = px - (player.X - raft.X) * 16;
 				ry = py - (player.Y - raft.Y) * 16;
@@ -1803,9 +1815,6 @@ namespace ERY.Xle
 			{
 				g.raftAnim++;
 
-				if (g.raftAnim == 3)
-					g.raftAnim = 0;
-
 				lastRaftAnim = Timing.TotalMilliseconds;
 			}
 		}
@@ -2199,7 +2208,16 @@ namespace ERY.Xle
 			Tiles = new Surface(tileset);
 		}
 
+		public static void ChangeMap(Player player, int mMapID, int targetEntryPoint)
+		{
+			ChangeMapImpl(player, mMapID, targetEntryPoint, 0, 0);
+		}
+		[Obsolete]
 		public static void ChangeMap(Player player, int mMapID, int targetEntryPoint, int targetX, int targetY)
+		{
+			ChangeMapImpl(player, mMapID, targetEntryPoint, targetX, targetY);
+		}
+		static void ChangeMapImpl(Player player, int mMapID, int targetEntryPoint, int targetX, int targetY)
 		{
 			if (GameState.Map == null)
 			{

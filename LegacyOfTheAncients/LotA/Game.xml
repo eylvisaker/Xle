@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LotaGame>
   <Maps>
-    <Map ID="5" Name="The Museum" File="Museum.xmf" Alias="Museum" ParentMapID="1" />
     <Map ID="1" Name="Outside" File="Tarmalon.xmf" />
     <Map ID="2" Name="Three Sisters" File="ThreeSisters.xmf" />
     <Map ID="3" Name="Flight" File="Flight.xmf" />
+    <Map ID="5" Name="The Museum" File="Museum.xmf" Alias="Museum" ParentMapID="1" />
     <Map ID="10" Name="Thompson Crossing" File="ThompsonCrossing.xmf" Alias="ThompsonCrossing" ParentMapID="1"/>
     <Map ID="11" Name="Thornberry" File="Thornberry.xmf" ParentMapID="1"/>
     <Map ID="12" Name="Alanville" File="Alanville.xmf" ParentMapID="1"/>

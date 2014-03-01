@@ -15,5 +15,12 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
 			XleCore.PlayerColor = XleColor.White;
 		}
+
+		public int Stormy
+		{
+			get { return TheMap.Stormy; }
+			set { TheMap.Stormy = value; }
+		}
+
 	}
 }

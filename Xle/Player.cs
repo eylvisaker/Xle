@@ -97,6 +97,8 @@ namespace ERY.Xle
 		}
 
 		#endregion
+
+		public int RaftImage { get; set; }
 	}
 
 	[Obsolete]
@@ -224,13 +226,13 @@ namespace ERY.Xle
 	public class Player : IXleSerializable
 	{
 		AttributeContainer mAttributes = new AttributeContainer();
-		int food;
+		double food;
 		int gold;
 		int goldBank;
 		double timedays;
 		double timequality;
 
-		int onRaft;
+		int onRaft = -1;
 
 		int gamespeed;
 		int map;
@@ -340,6 +342,7 @@ namespace ERY.Xle
 			info.Write("TimeQuality", timequality);
 
 			info.Write("OnRaft", onRaft);
+			info.Write("Rafts", rafts);
 
 			info.Write("GameSpeed", gamespeed);
 			info.Write("Map", map);
@@ -370,8 +373,6 @@ namespace ERY.Xle
 
 			info.Write("Chests", chests);
 
-			info.Write("Rafts", rafts);
-
 			info.Write("Loan", loan);					// loan amount
 			info.Write("DueDate", dueDate);				// time in days that the money is due
 
@@ -383,7 +384,7 @@ namespace ERY.Xle
 		void IXleSerializable.ReadData(XleSerializationInfo info)
 		{
 			mAttributes = (AttributeContainer)info.ReadObject("Attributes");
-			food = info.ReadInt32("Food");
+			food = info.ReadDouble("Food");
 			gold = info.ReadInt32("Gold");
 			goldBank = info.ReadInt32("GoldInBank");
 			timedays = info.ReadDouble("TimeDays");
@@ -391,6 +392,12 @@ namespace ERY.Xle
 				timequality = info.ReadDouble("TimeQuality");
 
 			onRaft = info.ReadInt32("OnRaft");
+			if (info.ContainsKey("Rafts"))
+			{
+				rafts = info.ReadList<RaftData>("Rafts");
+			}
+			else
+				onRaft = -1;
 
 			gamespeed = info.ReadInt32("GameSpeed");
 			map = info.ReadInt32("Map");
@@ -419,8 +426,6 @@ namespace ERY.Xle
 			vaultGold = info.ReadInt32("VaultGold");
 
 			chests = info.ReadInt32Array("Chests");
-
-			rafts.AddRange(info.ReadArray<RaftData>("Rafts"));
 
 			loan = info.ReadInt32("Loan");					// loan amount
 			dueDate = info.ReadInt32("DueDate");				// time in days that the money is due
@@ -476,7 +481,7 @@ namespace ERY.Xle
 			hp = MaxHP;
 			food = 30 + XleCore.random.Next(10);
 			gold = 25 + XleCore.random.Next(30);
-			onRaft = 0;
+			onRaft = -1;
 
 			while (SoundMan.IsPlaying(LotaSound.VeryBad))
 				XleCore.Wait(40);
@@ -611,11 +616,11 @@ namespace ERY.Xle
 			}
 		}
 		/// <summary>
-		/// 	// returns or adjusts food
+		/// Gets or sets food.
 		/// </summary>
 		/// <param name="change"></param>
 		/// <returns></returns>
-		public int Food
+		public double Food
 		{
 			get
 			{
@@ -687,10 +692,9 @@ namespace ERY.Xle
 			{
 				System.Diagnostics.Debug.Assert(value >= timedays);
 
-				if ((int)value == (int)(timedays + 1))
-				{
-					food--;
-				}
+				double diff = value - timedays;
+
+				food -= diff;
 
 				timedays = value;
 			}
@@ -720,7 +724,11 @@ namespace ERY.Xle
 		public int X
 		{
 			get { return x; }
-			set { x = value; }
+			set
+			{
+				x = value;
+				UpdateRaftPosition();
+			}
 		}
 		/// <summary>
 		/// 					// returns y position
@@ -729,7 +737,11 @@ namespace ERY.Xle
 		public int Y
 		{
 			get { return y; }
-			set { y = value; }
+			set
+			{
+				y = value;
+				UpdateRaftPosition();
+			}
 		}
 
 
@@ -742,6 +754,15 @@ namespace ERY.Xle
 			}
 		}
 
+
+		private void UpdateRaftPosition()
+		{
+			if (IsOnRaft)
+			{
+				rafts[onRaft].X = X;
+				rafts[onRaft].Y = Y;
+			}
+		}
 		/// <summary>
 		///  Sets the positions of the player on the current map.  Returns true
 		/// if successful.
@@ -756,7 +777,7 @@ namespace ERY.Xle
 				x = xx;
 				y = yy;
 
-				for (int i = 1; i < rafts.Count; i++)
+				for (int i = 0; i < rafts.Count; i++)
 				{
 					if (Rafts[i].MapNumber != MapID)
 						continue;
@@ -767,10 +788,7 @@ namespace ERY.Xle
 					}
 				}
 
-				if (OnRaft > 0)
-				{
-					rafts[onRaft].Location = new Point(x, y);
-				}
+				UpdateRaftPosition();
 
 				return true;
 			}
@@ -952,12 +970,12 @@ namespace ERY.Xle
 		{
 			get
 			{
-				return onRaft > 0;
+				return onRaft >= 0;
 			}
 		}
 
 		/// <summary>
-		/// Returns the raft that the player is on (or 0 if not)
+		/// Returns the raft that the player is on (or -1 if not)
 		/// </summary>
 		public int OnRaft
 		{
@@ -965,27 +983,39 @@ namespace ERY.Xle
 			{
 				return onRaft;
 			}
+			set
+			{
+				if (value < -1 || value >= rafts.Count)
+					throw new ArgumentOutOfRangeException();
+
+				onRaft = value;
+			}
 		}
 		/// <summary>
 		/// Boards a raft
 		/// </summary>
 		/// <param name="?"></param>
-		/// <returns></returns>    			
+		/// <returns></returns>    
+		[Obsolete("Majorly.")]
 		public void BoardRaft(int raftNum)
 		{
-			if (!(raftNum < 1 || (Rafts[raftNum].X == -10 && Rafts[raftNum].Y == -10)))
+			if (!(raftNum < 0 || (Rafts[raftNum].X == -10 && Rafts[raftNum].Y == -10)))
 			{
 				onRaft = raftNum;
 			}
-
 		}
+		public void BoardRaft(RaftData raft)
+		{
+			onRaft = rafts.IndexOf(raft);
+		}
+
 		/// <summary>
 		/// Disembarks a raft
 		/// </summary>
 		/// <param name="dir"></param>
 		public void Disembark(Direction dir)
 		{
-			onRaft = 0;
+			onRaft = -1;
 
 			FaceDirection = dir;
 

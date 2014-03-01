@@ -119,7 +119,7 @@ namespace ERY.Xle.XleMapTypes
 
 		public override void CheckSounds(Player player)
 		{
-			if (player.OnRaft > 0)
+			if (player.OnRaft >= 0)
 			{
 				if (SoundMan.IsPlaying(LotaSound.Raft1) == false)
 					SoundMan.PlaySound(LotaSound.Raft1);
@@ -905,11 +905,7 @@ namespace ERY.Xle.XleMapTypes
 
 			if (rectangle != drawRect)
 			{
-				if (waves != null)
-					Array.Clear(waves, 0, waves.Length);
-
-				// force an update.
-				lastAnimate = now - 500;
+				ClearWaves();
 
 				drawRect = rectangle;
 			}
@@ -950,6 +946,18 @@ namespace ERY.Xle.XleMapTypes
 				}
 			}
 		}
+
+		public void ClearWaves()
+		{
+			if (waves != null)
+				Array.Clear(waves, 0, waves.Length);
+
+			int now = (int)Timing.TotalMilliseconds;
+
+			// force an update.
+			lastAnimate = now - 500;
+		}
+
 		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
 		{
 			Draw2D(x, y, facingDirection, inRect);
@@ -1279,7 +1287,7 @@ namespace ERY.Xle.XleMapTypes
 
 			if (time > player.Food - 2)
 			{
-				time = player.Food - 2;
+				time = (int)player.Food - 2;
 				if (time < 0)
 					time = 1;
 			}

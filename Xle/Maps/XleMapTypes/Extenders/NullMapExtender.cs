@@ -51,7 +51,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		}
 
 
-		public virtual void OnAfterEntry(GameState GameState)
+		public virtual void OnAfterEntry(GameState state)
 		{
 		}
 
