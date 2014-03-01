@@ -906,13 +906,18 @@ namespace ERY.Xle
 		}
 		public static void FlashHPWhileSound(Color clr, Color clr2)
 		{
+			FlashHPWhile(clr, clr2, () => SoundMan.IsAnyPlaying());
+
+		}
+		public static void FlashHPWhile(Color clr, Color clr2, Func<bool> pred)
+		{
 			Color oldClr = mHPColor;
 			Color lastColor = clr2;
 
 			inst.mOverrideHPColor = true;
 			int count = 0;
 
-			while (SoundMan.IsAnyPlaying())
+			while (pred())
 			{
 				if (lastColor == clr)
 					lastColor = clr2;
@@ -925,14 +930,14 @@ namespace ERY.Xle
 
 				count++;
 
-				if (count > 10000/80)
+				if (count > 10000 / 80)
 					break;
 			}
 
 			inst.mOverrideHPColor = false;
 			mHPColor = oldClr;
-		}
 
+		}
 		/****************************************************************************
 		 *	void DrawBottomText ( LPDIRECTDRAWSURFACE7 pDDS )						*
 		 *																			*

@@ -380,7 +380,14 @@ namespace ERY.Xle
 			get { return XleColor.White; }
 		}
 
-		public virtual void AfterExecuteCommand(Player player, KeyCode cmd)
+		public void AfterExecuteCommand(Player player, KeyCode cmd)
+		{
+			AfterExecuteCommandImpl(player, cmd);
+
+			mBaseExtender.AfterExecuteCommand(XleCore.GameState, cmd);
+		}
+
+		protected virtual void AfterExecuteCommandImpl(Player player, KeyCode cmd)
 		{
 		}
 
@@ -701,7 +708,7 @@ namespace ERY.Xle
 		/// <param name="player"></param>
 		/// <param name="border">How many tiles away from the player to consider</param>
 		/// <returns></returns>
-		[Obsolete("Use EventsAt instead.")]
+		[Obsolete("Use EventsAt or EnabledEventsAt instead.")]
 		public XleEvent GetEvent(Player player, int border)
 		{
 			XleEvent evt = GetEvent(player.X, player.Y, border);
@@ -719,7 +726,7 @@ namespace ERY.Xle
 
 			return null;
 		}
-		[Obsolete("Use EventsAt instead.")]
+		[Obsolete("Use EventsAt or EnabledEventsAt instead.")]
 		public T GetEvent<T>(Player player, int border) where T : XleEvent
 		{
 			XleEvent evt = GetEvent(player, border);
@@ -727,6 +734,10 @@ namespace ERY.Xle
 			return evt as T;
 		}
 
+		public IEnumerable<XleEvent> EnabledEventsAt(Player player, int border)
+		{
+			return EventsAt(player, border).Where(e => e.Enabled);
+		}
 		public IEnumerable<XleEvent> EventsAt(Player player, int border)
 		{
 			int px = player.X;
@@ -784,167 +795,6 @@ namespace ERY.Xle
 			}
 
 			return null;
-		}
-
-		/*
-		SpecialEvent GetSpecial(int x, int y)			// retuns the special event at the player coordinates
-		{
-			int i;
-			SpecialEvent dave = new SpecialEvent ();
-
-			for (i = 0; i < 120; i++)
-			{
-				if (x >= specialx(i) && y >= specialy(i) &&
-					x <= specialx(i) + specialwidth(i) - 1 && y <= specialy(i) + specialheight(i) - 1)
-				{
-					dave.sx = specialx(i);
-					dave.sy = specialy(i);
-					dave.swidth = specialwidth(i);
-					dave.sheight = specialheight(i);
-					dave.type = specialType(i);
-					dave.id = i;
-					dave.marked = specialmarked(i);
-					dave.robbed = 0;
-
-					//specialData(i, dave.data);
-
-					return dave;
-
-				}
-			}
-
-			dave.type = 0;
-
-			return dave;
-
-		}
-		/*
-		void MarkSpecial(SpecialEvent dave)
-		{
-			spcMarked[dave.id] = true;
-		}
-
-		int specialType(int i)
-		{
-			int off = Height * Width + offset;
-			int type;
-
-			off += i * (SpecialDataLength() + 5);
-
-			type = m[off];
-
-			return type;
-		}
-
-		int specialx(int i)
-		{
-			int off = mapHeight * mapWidth + offset;
-			int type;
-
-			off += i * (SpecialDataLength() + 5) + 1;
-
-			type = m[off++] * 256;
-			type += m[off];
-
-			return type;
-		}
-
-		int specialy(int i)
-		{
-			int type;
-			int off = mapHeight * mapWidth + offset;
-
-			off += i * (SpecialDataLength() + 5) + 3;
-
-			type = m[off++] * 256;
-			type += m[off];
-
-			return type;
-		}
-
-		int specialwidth(int i)
-		{
-			int type;
-			int off = mapHeight * mapWidth + offset;
-
-			off += i * (SpecialDataLength() + 5) + 5;
-
-			type = m[off++] * 256;
-			type += m[off];
-
-			return type;
-		}
-
-		int specialheight(int i)
-		{
-			int type;
-			int off = mapHeight * mapWidth + offset;
-
-			off += i * (SpecialDataLength() + 5) + 7;
-
-			type = m[off++] * 256;
-			type += m[off];
-
-			return type;
-		}
-
-		string specialData(int i)
-		{
-			return null;
-            
-			byte[] buffer = new byte[200];
-
-			int off = mapHeight * mapWidth + offset;
-
-			off += i * (SpecialDataLength() + 5) + 9;
-
-			for (int j = 0; j < SpecialDataLength(); j++)
-			{
-				buffer[j] = m[off + j];
-			}
-
-			buffer[j] = 0;
-
-			return new string(buffer);
-            
-		}
-		*/
-
-
-		/// <summary>
-		/// Returns whether or not the specified type is present in this map's special events.
-		/// Passed type must derive from XleEvent.
-		/// </summary>
-		/// <param name="t"></param>
-		/// <returns></returns>
-		[Obsolete("Use Events.Any(x => x is Type) instead.", true)]
-		public bool HasEventType(Type t)
-		{
-			Type basetype = typeof(XleEvent);
-
-			if (basetype.IsAssignableFrom(t) == false)
-			{
-				throw new ArgumentException("Argument to HasSpecialType must derive from XleEvent");
-			}
-
-			for (int i = 0; i < mEvents.Count; i++)
-			{
-				if (t.IsAssignableFrom(mEvents[i].GetType()))
-					return true;
-			}
-
-			return false;
-		}
-		[Obsolete("Use Events.Any(x => x is Type) instead.", true)]
-		public bool HasEventType<T>() where T : XleEvent
-		{
-			for (int i = 0; i < mEvents.Count; i++)
-			{
-				if (mEvents[i] is T)
-					return true;
-			}
-
-			return false;
 		}
 
 		#endregion
@@ -1244,9 +1094,7 @@ namespace ERY.Xle
 
 		public bool PlayerSpeak(Player player)
 		{
-			var evts = EventsAt(player, 1);
-
-			foreach (var evt in evts)
+			foreach (var evt in EnabledEventsAt(player, 1))
 			{
 				bool handled = evt.Speak(GameState);
 
@@ -1304,11 +1152,23 @@ namespace ERY.Xle
 
 		public virtual bool PlayerTake(Player player)
 		{
+			foreach (var evt in EnabledEventsAt(player, 1))
+			{
+				if (evt.Take(GameState))
+					return true;
+			}
+
 			return false;
 		}
 
 		public virtual bool PlayerOpen(Player player)
 		{
+			foreach (var evt in EnabledEventsAt(player, 1))
+			{
+				if (evt.Open(GameState))
+					return true;
+			}
+
 			return false;
 		}
 
@@ -1391,7 +1251,7 @@ namespace ERY.Xle
 
 
 
-		protected Direction DirectionFromPoint(Point point)
+		public static Direction DirectionFromPoint(Point point)
 		{
 			if (point.X < 0 && point.Y == 0) return Direction.West;
 			if (point.X > 0 && point.Y == 0) return Direction.East;
@@ -1413,6 +1273,25 @@ namespace ERY.Xle
 		public virtual void OnAfterEntry(Xle.GameState state)
 		{
 			mBaseExtender.OnAfterEntry(state);
+		}
+
+		public void RemoveJailBars(Rectangle rectangle, int replacementTile)
+		{
+			for (int j = 0; j < rectangle.Height; j++)
+			{
+				for (int i = 0; i < rectangle.Width; i++)
+				{
+					var tile = this[rectangle.X + i, rectangle.Y + j];
+					var group = TileSet.TileGroups.FirstOrDefault(
+						x => x.Tiles.Contains(tile) && 
+						x.GroupType == GroupType.PrisonBars);
+
+					if (group == null)
+						continue;
+
+					this[rectangle.X + i, rectangle.Y + j] = replacementTile;
+				}
+			}
 		}
 	}
 
@@ -1585,6 +1464,11 @@ namespace ERY.Xle
 		public int X { get { return Location.X; } set { Location.X = value; } }
 		public int Y { get { return Location.Y; } set { Location.Y = value; } }
 
+		/// <summary>
+		/// Method called when attacked by the player.
+		/// Return true to cancel further processing of the attack.
+		/// </summary>
+		public Func<GameState, Guard, bool> OnPlayerAttack;
 
 		#region IXleSerializable Members
 

@@ -28,5 +28,7 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		void PlayerStep(GameState state);
 
 		void OnAfterEntry(GameState state);
+
+		void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd);
 	}
 }

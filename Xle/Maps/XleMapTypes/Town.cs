@@ -24,7 +24,7 @@ namespace ERY.Xle.XleMapTypes
 		List<Guard> mGuards = new List<Guard>();
 
 		List<int> mMail = new List<int>();				// towns to carry mail to
-		
+
 		public ITownExtender Extender { get; protected set; }
 
 		protected override IMapExtender CreateExtenderImpl()
@@ -72,12 +72,13 @@ namespace ERY.Xle.XleMapTypes
 
 		public void InitializeGuardData()
 		{
-			foreach(var guard in Guards)
+			foreach (var guard in Guards)
 			{
 				guard.Attack = DefaultAttack;
 				guard.Defense = DefaultDefense;
 				guard.HP = DefaultHP;
 				guard.Color = DefaultColor;
+				guard.Facing = Direction.South;
 
 				if (guard.Color.ToArgb() == 0)
 					guard.Color = XleColor.Yellow;
@@ -141,7 +142,7 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
-		public override void AfterExecuteCommand(Player player, KeyCode cmd)
+		protected override void AfterExecuteCommandImpl(Player player, KeyCode cmd)
 		{
 			UpdateGuards(player);
 		}
@@ -180,10 +181,17 @@ namespace ERY.Xle.XleMapTypes
 				else dy = 0;
 
 				dist = Math.Sqrt(Math.Pow(xdist, 2) + Math.Pow(ydist, 2));
+				if (dist >= 25)
+					continue;
 
 				if (Math.Abs(xdist) <= 2 && Math.Abs(ydist) <= 2)
 				{
 					g.AddBottom("");
+
+					if (Math.Abs(xdist) > Math.Abs(ydist))
+						dy = 0;
+					else
+						dx = 0;
 
 					ColorStringBuilder csb = new ColorStringBuilder();
 
@@ -218,10 +226,12 @@ namespace ERY.Xle.XleMapTypes
 					if (Math.Abs(xdist) > Math.Abs(ydist))
 					{
 						newPt.X += dx;
+						dy = 0;
 					}
 					else
 					{
 						newPt.Y += dy;
+						dx = 0;
 					}
 
 					badPt = !CanGuardStepInto(newPt, i);
@@ -232,12 +242,10 @@ namespace ERY.Xle.XleMapTypes
 
 						if (Math.Abs(xdist) > Math.Abs(ydist))
 						{
-							xdist = 0;
-
 							if (ydist == 0)
-							{
 								dy = XleCore.random.Next(2) * 2 - 1;
-							}
+							else
+								dy = ydist / Math.Abs(ydist);
 
 							dx = 0;
 
@@ -245,12 +253,10 @@ namespace ERY.Xle.XleMapTypes
 						}
 						else
 						{
-							ydist = 0;
-
 							if (xdist == 0)
-							{
 								dx = XleCore.random.Next(2) * 2 - 1;
-							}
+							else
+								dx = xdist / Math.Abs(xdist);
 
 							dy = 0;
 
@@ -264,34 +270,48 @@ namespace ERY.Xle.XleMapTypes
 					}
 
 					guard.Location = newPt;
+				}
 
-					if (Math.Abs(xdist) > Math.Abs(ydist))
+				if (badPt)
+				{
+					if (Math.Abs(xdist) >= Math.Abs(ydist))
 					{
-						if (dx < 0)
-						{
+						if (xdist < 0)
 							guard.Facing = Direction.West;
-						}
 						else
-						{
 							guard.Facing = Direction.East;
-						}
 					}
 					else
 					{
-						if (dy < 0)
-						{
+						if (ydist < 0)
 							guard.Facing = Direction.North;
-						}
 						else
-						{
 							guard.Facing = Direction.South;
-						}
 					}
-
+				}
+				else if (dy == 0)
+				{
+					if (xdist < 0)
+					{
+						guard.Facing = Direction.West;
+					}
+					else
+					{
+						guard.Facing = Direction.East;
+					}
+				}
+				else // dx == 0
+				{
+					if (ydist < 0)
+					{
+						guard.Facing = Direction.North;
+					}
+					else
+					{
+						guard.Facing = Direction.South;
+					}
 				}
 			}
-
-
 		}
 
 		bool CanGuardStepInto(Point pt, int grd)
@@ -305,7 +325,8 @@ namespace ERY.Xle.XleMapTypes
 				{
 					var tile = this[pt.X + i, pt.Y + j];
 
-					if (TileSet[tile] == TileInfo.Blocked)
+					if (TileSet[tile] == TileInfo.Blocked ||
+						TileSet[tile] == TileInfo.NormalBlockGuards)
 						return false;
 
 					// check for guard-guard collisions
@@ -333,10 +354,17 @@ namespace ERY.Xle.XleMapTypes
 		}
 		void AttackGuard(Player player, Guard guard, int distance)
 		{
+			if (guard.OnPlayerAttack != null)
+			{
+				bool cancel = guard.OnPlayerAttack(XleCore.GameState, guard);
+				if (cancel)
+					return;
+			}
+
 			ColorStringBuilder builder = new ColorStringBuilder();
 
 			double hitChance = Extender.ChanceToHitGuard(player, guard, distance);
-			
+
 
 			if (XleCore.random.NextDouble() > hitChance)
 			{
@@ -494,7 +522,7 @@ namespace ERY.Xle.XleMapTypes
 
 		int RoofTile(int xx, int yy)
 		{
-			foreach(var r in Roofs)
+			foreach (var r in Roofs)
 			{
 				Rectangle boundingRect = r.Rectangle;
 
@@ -518,7 +546,7 @@ namespace ERY.Xle.XleMapTypes
 				if (boundingRect.Contains(new Point(xx, yy)))
 				{
 					var result = r[xx - r.X, yy - r.Y];
-					
+
 					if (result == 0 || result == 127)
 						continue;
 
@@ -707,7 +735,7 @@ namespace ERY.Xle.XleMapTypes
 							&&
 							attacked == false)
 						{
-							AttackGuard(player, k, Math.Max(i,j));
+							AttackGuard(player, k, Math.Max(i, j));
 							attacked = true;
 
 							XleCore.Wait(200);
@@ -844,7 +872,6 @@ namespace ERY.Xle.XleMapTypes
 		}
 		protected override bool PlayerSpeakImpl(Player player)
 		{
-
 			for (int j = -1; j < 3; j++)
 			{
 				for (int i = -1; i < 3; i++)
@@ -906,13 +933,13 @@ namespace ERY.Xle.XleMapTypes
 				if (Roofs[i].Open == false && Roofs[i].CharIn(pt))
 				{
 					Roofs[i].Open = true;
-					OpenRoof(mRoofs[i]);
+					PlayOpenRoofSound(mRoofs[i]);
 				}
 				else if (Roofs[i].Open == true && IsAngry == false
 					&& Roofs[i].CharIn(pt) == false)
 				{
 					Roofs[i].Open = false;
-					CloseRoof(mRoofs[i]);
+					PlayCloseRoofSound(mRoofs[i]);
 				}
 			}
 
@@ -928,12 +955,12 @@ namespace ERY.Xle.XleMapTypes
 			}
 		}
 
-		protected virtual void CloseRoof(Roof roof)
+		protected virtual void PlayCloseRoofSound(Roof roof)
 		{
 			SoundMan.PlaySound(LotaSound.BuildingClose);
 			XleCore.Wait(50);
 		}
-		protected virtual void OpenRoof(Roof roof)
+		protected virtual void PlayOpenRoofSound(Roof roof)
 		{
 			SoundMan.PlaySound(LotaSound.BuildingOpen);
 			XleCore.Wait(50);
@@ -979,6 +1006,7 @@ namespace ERY.Xle.XleMapTypes
 				return TileSet[tile] == TileInfo.Blocked;
 			}
 
+			throw new NotImplementedException("This code is obsolete. You should have a fricken tileset by now.");
 			const int xLimit = 8;
 			const int yLimit = 8;
 
@@ -1009,7 +1037,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 		public void AnimateGuards()
 		{
-			int animTime = 1000;
+			int animTime = 460;
 
 			if (IsAngry)
 				animTime = 150;
@@ -1035,8 +1063,6 @@ namespace ERY.Xle.XleMapTypes
 				if (PointInRoof(guard.X, guard.Y) == -1)
 				{
 					var facing = guard.Facing;
-					if (IsAngry == false)
-						facing = Direction.South;
 
 					int rx = px + (guard.X - topLeftMapPt.X) * 16;
 					int ry = py + (guard.Y - topLeftMapPt.Y) * 16;
@@ -1112,6 +1138,6 @@ namespace ERY.Xle.XleMapTypes
 		#endregion
 
 
-		
+
 	}
 }

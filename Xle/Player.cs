@@ -791,9 +791,9 @@ namespace ERY.Xle
 		{
 			if (dx != 0 || dy != 0)
 			{
-				if (XleCore.Map.CheckMovement(this, dx, dy))
+				if (XleCore.GameState.Map.CheckMovement(this, dx, dy))
 				{
-					XleCore.Map.BeforeStepOn(this, x + dx, y + dy);
+					XleCore.GameState.Map.BeforeStepOn(this, x + dx, y + dy);
 
 					return SetPos(x + dx, y + dy);
 				}
@@ -1274,7 +1274,7 @@ namespace ERY.Xle
 
 			for (i = 1; i <= 5; i++)
 			{
-				if (WeaponType(i) == 0)
+				if (weapon[i] == 0)
 				{
 					weapon[i] = w;
 					weaponQuality[i] = q;
@@ -1308,14 +1308,42 @@ namespace ERY.Xle
 			return false;
 		}
 
-		public bool RemoveWeapon(int w)
+		public bool RemoveWeapon(int index)
 		{
-			return false;
+			if (index < 1 || index > 5) throw new ArgumentOutOfRangeException();
+
+			if (weapon[index] == 0)
+				return false;
+
+			for (int i = index; i < 5; i++)
+			{
+				weapon[i] = weapon[i + 1];
+				weaponQuality[i] = weaponQuality[i + 1];
+			}
+
+			weapon[5] = 0;
+			weaponQuality[5] = 0;
+
+			return true;
 		}
 
-		public bool RemoveArmor(int a)
+		public bool RemoveArmor(int index)
 		{
-			return false;
+			if (index < 1 || index > 3) throw new ArgumentOutOfRangeException();
+
+			if (armor[index] == 0)
+				return false;
+
+			for (int i = index; i < 3; i++)
+			{
+				armor[i] = armor[i + 1];
+				armorQuality[i] = armorQuality[i + 1];
+			}
+
+			armor[3] = 0;
+			armorQuality[3] = 0;
+
+			return true;
 		}
 		/// <summary>
 		/// Sorts weapons and armor

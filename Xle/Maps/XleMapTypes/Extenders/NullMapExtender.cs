@@ -54,5 +54,10 @@ namespace ERY.Xle.XleMapTypes.Extenders
 		public virtual void OnAfterEntry(GameState GameState)
 		{
 		}
+
+
+		public virtual void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
+		{
+		}
 	}
 }

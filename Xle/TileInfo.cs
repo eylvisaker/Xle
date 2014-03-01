@@ -9,5 +9,6 @@ namespace ERY.Xle
 	{
 		Normal,
 		Blocked,
+		NormalBlockGuards,
 	}
 }

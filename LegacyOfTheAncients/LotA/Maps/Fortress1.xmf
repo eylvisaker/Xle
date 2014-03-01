@@ -126,7 +126,7 @@
       <Contents>0</Contents>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Script">
-      <X>79</X>
+      <X>77</X>
       <Y>25</Y>
       <Width>1</Width>
       <Height>3</Height>
@@ -135,9 +135,25 @@
     <Item type="ERY.Xle.XleEventTypes.Script">
       <X>93</X>
       <Y>47</Y>
-      <Width>1</Width>
+      <Width>2</Width>
       <Height>3</Height>
       <ExtenderName>SeeCompendium</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>25</X>
+      <Y>45</Y>
+      <Width>12</Width>
+      <Height>9</Height>
+      <ExtenderName>SpeakGuard</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+      <X>99</X>
+      <Y>47</Y>
+      <Width>2</Width>
+      <Height>2</Height>
+      <ExtenderName>CompendiumFirst</ExtenderName>
+      <ContainsItem>False</ContainsItem>
+      <Contents>0</Contents>
     </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">

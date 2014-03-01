@@ -90,6 +90,11 @@ namespace ERY.Xle.XleEventTypes
 
 				return true;
 			}
+			bool handled = false;
+			
+			Extender.Open(state, ref handled);
+			if (handled)
+				return true;
 
 			Extender.PlayOpenChestSound();
 

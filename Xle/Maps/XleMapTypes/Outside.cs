@@ -1007,7 +1007,7 @@ namespace ERY.Xle.XleMapTypes
 		}
 
 
-		public override void AfterExecuteCommand(Player player, KeyCode cmd)
+		protected override void AfterExecuteCommandImpl(Player player, KeyCode cmd)
 		{
 
 			if (EncounterState == EncounterState.MonsterAvoided)

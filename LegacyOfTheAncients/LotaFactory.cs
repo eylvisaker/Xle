@@ -98,6 +98,7 @@ namespace ERY.Xle.LotA
 
 			return base.CreateMapExtender(castle);
 		}
+
 		public override void CheatLevel(Player player, int level)
 		{
 			if (level < 0) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
@@ -139,6 +140,7 @@ namespace ERY.Xle.LotA
 				story.Museum[(int)ExhibitIdentifier.HerbOfLife] = 1;
 				story.Museum[(int)ExhibitIdentifier.PirateTreasure] = 1;
 
+				player.Items[LotaItem.HealingHerb] = 40;
 				player.Story().BeenInDungeon = true;
 			}
 			if (level >= 4)
@@ -153,6 +155,7 @@ namespace ERY.Xle.LotA
 				player.Attribute[Attributes.strength] = 25;
 
 				player.Items[LotaItem.SapphireCoin] = 1;
+				player.Items[LotaItem.StoneKey] = 1;
 			}
 			if (level >= 5)
 			{
@@ -161,6 +164,7 @@ namespace ERY.Xle.LotA
 
 				player.Items[LotaItem.SapphireCoin] = 0;
 				player.Items[LotaItem.MagicIce] = 1;
+				player.Items[LotaItem.IronKey] = 1;
 
 				player.Attribute[Attributes.strength] = 40;
 			}
@@ -168,6 +172,9 @@ namespace ERY.Xle.LotA
 			{
 				player.Story().FoundGuardianLeader = true;
 				player.Items[LotaItem.RubyCoin] = 1;
+
+				player.Items[LotaItem.CopperKey] = 1;
+				player.Items[LotaItem.BrassKey] = 1;
 			}
 			if (level >= 7)
 			{

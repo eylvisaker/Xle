@@ -45,32 +45,14 @@ namespace ERY.Xle.XleMapTypes
 			return Extender;
 		}
 		
-		public override bool PlayerOpen(Player player)
+
+		protected override void PlayOpenRoofSound(Roof roof)
 		{
-			XleEvent evt = this.GetEvent(player, 1);
-
-			if (evt == null)
-				return false;
-
-			return evt.Open(GameState);
-
+			// do nothing here
 		}
-
-		public override bool PlayerTake(Player player)
+		protected override void PlayCloseRoofSound(Roof roof)
 		{
-			XleEvent evt = this.GetEvent(player, 1);
-
-			if (evt == null)
-				return false;
-
-			return evt.Take(GameState);
-		}
-
-		protected override void OpenRoof(Roof roof)
-		{
-		}
-		protected override void CloseRoof(Roof roof)
-		{
+			// do nothing here
 		}
 
 		public override string[] MapMenu()

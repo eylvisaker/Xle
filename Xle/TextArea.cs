@@ -220,7 +220,7 @@ namespace ERY.Xle
 					Print(text[i].ToString(), defaultColor);
 				}
 
-				XleCore.Wait(50);
+				XleCore.Wait(50, true, XleCore.Redraw);
 
 				if (text[i] == '.')
 					XleCore.Wait(400);
@@ -318,5 +318,16 @@ namespace ERY.Xle
 			}
 		}
 
+
+		public void SetLineColor(Color color, params int[] lines )
+		{
+			if (lines.Length == 0)
+				SetLineColor(color, 0, 1, 2, 3, 4);
+
+			foreach(var line in lines)
+			{
+				this.lines[line].SetColor(color);
+			}
+		}
 	}
 }

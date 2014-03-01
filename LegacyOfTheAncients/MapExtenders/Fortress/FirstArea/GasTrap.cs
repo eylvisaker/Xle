@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress
+namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
 	class GasTrap : NullEventExtender
 	{
@@ -54,7 +54,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 		private void RemoveWeaponsAndArmor(GameState state)
 		{
-
+			while (state.Player.RemoveArmor(1)) ;
+			while (state.Player.RemoveWeapon(1));
 		}
 
 		private void DrawBlankScreen()

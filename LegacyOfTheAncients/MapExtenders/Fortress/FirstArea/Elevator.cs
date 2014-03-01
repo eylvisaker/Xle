@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress
+namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
 	class Elevator : NullEventExtender
 	{

@@ -17,7 +17,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 			handled = true;
 
-			Rectangle area = new Rectangle(state.Player.X - 2, state.Player.Y - 2, 6, 6);
+			Rectangle area = new Rectangle(state.Player.X - 2, state.Player.Y - 3, 6, 8);
 
 			RemoveRockSlide(state.Map, area);
 

@@ -46,6 +46,8 @@ namespace ERY.Xle
 		Drip1,
 		Bad,
 		Teleporter,
+		MagicFlame,
+		FireBolt,
 	}
 
 	public static class SoundMan
