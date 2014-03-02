@@ -55,27 +55,6 @@ namespace ERY.Xle.XleMapTypes
 			// do nothing here
 		}
 
-		public override string[] MapMenu()
-		{
-			List<string> retval = new List<string>();
-
-			retval.Add("Armor");
-			retval.Add("Fight");
-			retval.Add("Gamespeed");
-			retval.Add("Hold");
-			retval.Add("Inventory");
-			retval.Add("Magic");
-			retval.Add("Open");
-			retval.Add("Pass");
-			retval.Add("Speak");
-			retval.Add("Take");
-			retval.Add("Use");
-			retval.Add("Weapon");
-			retval.Add("Xamine");
-
-			return retval.ToArray();
-		}
-
 		public new ICastleExtender Extender { get; set; }
 	}
 }

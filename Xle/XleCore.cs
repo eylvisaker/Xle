@@ -732,7 +732,6 @@ namespace ERY.Xle
 
 		private static void SetTilesAndCommands()
 		{
-			//inst.menuArray = GameState.Map.MapMenu();
 			GameState.Commands.Items.Clear();
 
 			GameState.Map.SetCommands(GameState.Commands);

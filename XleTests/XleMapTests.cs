@@ -38,10 +38,6 @@ namespace ERY.XleTests
 		{
 			throw new NotImplementedException();
 		}
-		public override string[] MapMenu()
-		{
-			throw new NotImplementedException();
-		}
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)
 		{
 			throw new NotImplementedException();

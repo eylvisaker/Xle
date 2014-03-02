@@ -805,9 +805,6 @@ namespace ERY.Xle
 		#endregion
 		#region --- Menu Stuff ---
 
-		[Obsolete]
-		public abstract string[] MapMenu();
-
 		#endregion
 		#region --- Player movement stuff ---
 

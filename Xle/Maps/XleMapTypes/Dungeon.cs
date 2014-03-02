@@ -256,27 +256,6 @@ namespace ERY.Xle.XleMapTypes
 			CurrentLevel = player.DungeonLevel;
 		}
 
-		public override string[] MapMenu()
-		{
-			List<string> retval = new List<string>();
-
-			retval.Add("Armor");
-			retval.Add("Climb");
-			retval.Add("End");
-			retval.Add("Fight");
-			retval.Add("Gamespeed");
-			retval.Add("Hold");
-			retval.Add("Inventory");
-			retval.Add("Magic");
-			retval.Add("Open");
-			retval.Add("Pass");
-			retval.Add("Use");
-			retval.Add("Weapon");
-			retval.Add("Xamine");
-
-			return retval.ToArray();
-		}
-
 		#region --- Drawing ---
 
 		[Obsolete("Use surfaces instead.", true)]

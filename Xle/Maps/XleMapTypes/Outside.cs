@@ -1424,27 +1424,7 @@ namespace ERY.Xle.XleMapTypes
 
 			return true;
 		}
-		public override string[] MapMenu()
-		{
-			List<string> retval = new List<string>();
-
-			retval.Add("Armor");
-			retval.Add("Disembark");
-			retval.Add("End");
-			retval.Add("Fight");
-			retval.Add("Gamespeed");
-			retval.Add("Hold");
-			retval.Add("Inventory");
-			retval.Add("Magic");
-			retval.Add("Pass");
-			retval.Add("Speak");
-			retval.Add("Use");
-			retval.Add("Weapon");
-			retval.Add("Xamine");
-
-			return retval.ToArray();
-		}
-
+	
 		protected override Extenders.IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)

@@ -1091,26 +1091,6 @@ namespace ERY.Xle.XleMapTypes
 			AnimateGuards();
 			base.AnimateTiles(rectangle);
 		}
-		public override string[] MapMenu()
-		{
-			List<string> retval = new List<string>();
-
-			retval.Add("Armor");
-			retval.Add("Fight");
-			retval.Add("Gamespeed");
-			retval.Add("Hold");
-			retval.Add("Inventory");
-			retval.Add("Leave");
-			retval.Add("Magic");
-			retval.Add("Pass");
-			retval.Add("Rob");
-			retval.Add("Speak");
-			retval.Add("Use");
-			retval.Add("Weapon");
-			retval.Add("Xamine");
-
-			return retval.ToArray();
-		}
 
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)
 		{

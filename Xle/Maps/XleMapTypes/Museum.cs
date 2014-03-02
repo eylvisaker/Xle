@@ -40,25 +40,6 @@ namespace ERY.Xle.XleMapTypes
 			info.Write("Height", mHeight, true);
 			info.Write("Data", mData, NumericEncoding.Csv);
 		}
-		public override string[] MapMenu()
-		{
-			List<string> retval = new List<string>();
-
-			retval.Add("Armor");
-			retval.Add("Fight");
-			retval.Add("Gamespeed");
-			retval.Add("Hold");
-			retval.Add("Inventory");
-			retval.Add("Pass");
-			retval.Add("Rob");
-			retval.Add("Speak");
-			retval.Add("Take");
-			retval.Add("Use");
-			retval.Add("Weapon");
-			retval.Add("Xamine");
-
-			return retval.ToArray();
-		}
 		public override IEnumerable<string> AvailableTileImages
 		{
 			get { yield return "DungeonTiles.png"; }
