@@ -14,6 +14,7 @@ using AgateLib.InputLib;
 using System.ComponentModel;
 using ERY.Xle.XleMapTypes.MuseumDisplays;
 using ERY.Xle.XleEventTypes;
+using ERY.Xle.Commands;
 
 namespace ERY.Xle
 {
@@ -716,8 +717,7 @@ namespace ERY.Xle
 			GameState = new Xle.GameState();
 
 			GameState.Player = thePlayer;
-
-			GameState.commands = new Commands.CommandList(GameState);
+			GameState.Commands = new CommandList(GameState);
 
 			GameState.Map = LoadMap(GameState.Player.MapID);
 			GameState.Map.OnLoad(GameState.Player);
@@ -739,6 +739,10 @@ namespace ERY.Xle
 		private static void SetTilesAndCommands()
 		{
 			inst.menuArray = GameState.Map.MapMenu();
+			GameState.Commands.Items.Clear();
+
+			GameState.Map.SetCommands(GameState.Commands);
+
 			XleCore.LoadTiles(GameState.Map.TileImage);
 		}
 
@@ -773,10 +777,10 @@ namespace ERY.Xle
 
 			AcceptKey = false;
 
-			if (Keyboard.Keys[KeyCode.Down]) GameState.commands.DoCommand(KeyCode.Down);
-			else if (Keyboard.Keys[KeyCode.Left]) GameState.commands.DoCommand(KeyCode.Left);
-			else if (Keyboard.Keys[KeyCode.Up]) GameState.commands.DoCommand(KeyCode.Up);
-			else if (Keyboard.Keys[KeyCode.Right]) GameState.commands.DoCommand(KeyCode.Right);
+			if (Keyboard.Keys[KeyCode.Down]) GameState.Commands.DoCommand(KeyCode.Down);
+			else if (Keyboard.Keys[KeyCode.Left]) GameState.Commands.DoCommand(KeyCode.Left);
+			else if (Keyboard.Keys[KeyCode.Up]) GameState.Commands.DoCommand(KeyCode.Up);
+			else if (Keyboard.Keys[KeyCode.Right]) GameState.Commands.DoCommand(KeyCode.Right);
 
 			AcceptKey = true;
 		}
@@ -789,7 +793,7 @@ namespace ERY.Xle
 			try
 			{
 				AcceptKey = false;
-				GameState.commands.DoCommand(e.KeyCode);
+				GameState.Commands.DoCommand(e.KeyCode);
 			}
 			finally
 			{
@@ -864,7 +868,7 @@ namespace ERY.Xle
 			WriteText(48, 16 * 16, "Food " + ((int)player.Food).ToString(), hpColor);
 			WriteText(48, 16 * 17, "Gold " + player.Gold.ToString(), hpColor);
 
-			DrawBottomText();
+			TextArea.Draw();
 
 			if (map.AutoDrawPlayer)
 			{
@@ -885,7 +889,7 @@ namespace ERY.Xle
 			//
 			//CheckFade();
 
-			Map.CheckSounds(player);
+			GameState.Map.CheckSounds(player);
 
 			//
 			// End sounds
@@ -950,12 +954,9 @@ namespace ERY.Xle
 		[Obsolete("Use TextArea.DrawArea instead.")]
 		public static void DrawBottomText()
 		{
-			TextArea.DrawArea();
+			TextArea.Draw();
 
 		}
-
-		[Obsolete("Use TextArea.Margin instead.")]
-		public static int BottomTextMargin { get { return TextArea.Margin; } set { TextArea.Margin = value; } }
 
 		/****************************************************************************
 		 *	void DrawBorder( LPDIRECTDRAWSURFACE7 pDDS, unsigned int boxColor)		*
@@ -1440,14 +1441,17 @@ namespace ERY.Xle
 		/// <returns>The choice the user made.</returns>
 		public static int SubMenu(string title, int choice, MenuItemList items)
 		{
-			string displayTitle;
 			SubMenu menu = new SubMenu();
 
 			menu.title = title;
 			menu.value = choice;
 			menu.theList = items;
-			menu.width = 0;
 
+			return RunSubMenu(menu);
+		}
+
+		private static int RunSubMenu(SubMenu menu)
+		{
 			for (int i = 0; i < menu.theList.Count; i++)
 			{
 				if (menu.theList[i].Length + 6 > menu.width)
@@ -1457,26 +1461,25 @@ namespace ERY.Xle
 
 			}
 
-			displayTitle = "Choose " + menu.title;
+			string displayTitle = "Choose " + menu.title;
 
 			if (displayTitle.Length + 2 > menu.width)
 			{
 				menu.width = displayTitle.Length + 2;
 			}
 
-			Action redraw =
-				delegate()
-				{
-					inst.UpdateAnim();
+			Action redraw = () =>
+			{
+				inst.UpdateAnim();
 
-					Display.BeginFrame();
+				Display.BeginFrame();
 
-					inst.Draw();
-					DrawMenu(menu);
+				inst.Draw();
+				DrawMenu(menu);
 
-					Display.EndFrame();
-					Core.KeepAlive();
-				};
+				Display.EndFrame();
+				Core.KeepAlive();
+			};
 
 			KeyCode key;
 
@@ -1493,8 +1496,8 @@ namespace ERY.Xle
 				if (key == KeyCode.Down)
 				{
 					menu.value++;
-					if (menu.value >= items.Count)
-						menu.value = items.Count - 1;
+					if (menu.value >= menu.theList.Count)
+						menu.value = menu.theList.Count - 1;
 				}
 				else if (key >= KeyCode.D0)
 				{
@@ -1509,23 +1512,17 @@ namespace ERY.Xle
 						v = key - KeyCode.D0;
 					}
 
-					if (v < items.Count)
+					if (v < menu.theList.Count)
 					{
 						menu.value = v;
 						key = KeyCode.Return;
 					}
-
-
 				}
-
-
 			} while (key != KeyCode.Return && !g.Done);
 
 			Wait(300);
 
-
 			return menu.value;
-
 		}
 
 		/// <summary>
@@ -1551,11 +1548,7 @@ namespace ERY.Xle
 			KeyCode key = KeyCode.None;
 			bool done = false;
 
-			InputEventHandler keyhandler =
-				delegate(InputEventArgs e)
-				{
-					key = e.KeyCode;
-				};
+			InputEventHandler keyhandler = e => key = e.KeyCode;
 
 			PromptToContinue = PromptToContinueOnWait;
 
@@ -2086,38 +2079,6 @@ namespace ERY.Xle
 		}
 
 		/// <summary>
-		/// The getter will return the first character of the command selected.  
-		/// The setter allows setting the command.  If a matching command is  
-		/// found, then it will set the cursor at that command.
-		/// If it's passed a value that's not in the menu, nothing changes.
-		/// </summary>
-		public char cursor
-		{
-			get
-			{
-				return theCursor;
-			}
-			set
-			{
-				char newCursor = char.ToUpperInvariant(value);
-
-				if (newCursor != 0)
-				{
-					for (int i = 0; i < 14; i++)
-					{
-						if (string.IsNullOrEmpty(menuArray[i]))
-							continue;
-
-						if (menuArray[i][0] == newCursor)
-						{
-							theCursor = newCursor;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
 		/// This will return the numerical position of the cursor so that it may 	
 		/// be plotted on the screen.	
 		/// </summary>
@@ -2171,10 +2132,12 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="newCursor"></param>
 		/// <returns></returns>
+		[Obsolete]
 		public static string Menu(KeyCode newCursor)
 		{
 			return inst.MenuImpl(newCursor);
 		}
+		[Obsolete]
 		private string MenuImpl(KeyCode newCursor)
 		{
 			char keychar = (char)('A' + (newCursor - KeyCode.A));
@@ -2192,12 +2155,6 @@ namespace ERY.Xle
 			}
 
 			return "";
-		}
-
-		[Obsolete("Use GameState.Player instead.")]
-		public static void SetPlayer(Player thePlayer)
-		{
-			GameState.Player = thePlayer;
 		}
 
 		public static void LoadTiles(string tileset)

@@ -13,6 +13,7 @@ using ERY.Xle.Maps;
 using ERY.Xle.XleMapTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes;
+using ERY.Xle.Commands;
 
 namespace ERY.Xle
 {
@@ -804,6 +805,7 @@ namespace ERY.Xle
 		#endregion
 		#region --- Menu Stuff ---
 
+		[Obsolete]
 		public abstract string[] MapMenu();
 
 		#endregion
@@ -1114,11 +1116,23 @@ namespace ERY.Xle
 			return PlayerSpeakImpl(state.Player);
 		}
 
+
+
+
+		public virtual bool PlayerRob(GameState state)
+		{
+			return PlayerRobImpl(state);
+		}
+		[Obsolete]
 		public virtual bool PlayerRob(Player player)
 		{
 			return PlayerRobImpl(player);
 		}
 
+		protected virtual bool PlayerRobImpl(Xle.GameState state)
+		{
+			return false;
+		}
 
 		protected virtual bool PlayerSpeakImpl(Player player)
 		{
@@ -1304,6 +1318,10 @@ namespace ERY.Xle
 			}
 		}
 
+		public void SetCommands(CommandList commands)
+		{
+			mBaseExtender.SetCommands(commands);
+		}
 	}
 
 	public class Roof : IXleSerializable

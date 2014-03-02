@@ -1,4 +1,5 @@
 ﻿using AgateLib.Geometry;
+using ERY.Xle.Commands;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
@@ -31,5 +32,6 @@ namespace ERY.Xle.XleMapTypes.Extenders
 
 		void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd);
 
+		void SetCommands(CommandList commands);
 	}
 }

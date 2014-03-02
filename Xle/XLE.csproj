@@ -134,11 +134,24 @@
   <ItemGroup>
     <Compile Include="ColorScheme.cs" />
     <Compile Include="Commands\Armor.cs" />
+    <Compile Include="Commands\Climb.cs" />
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\Disembark.cs" />
+    <Compile Include="Commands\End.cs" />
+    <Compile Include="Commands\Fight.cs" />
+    <Compile Include="Commands\Gamespeed.cs" />
     <Compile Include="Commands\Hold.cs" />
+    <Compile Include="Commands\Inventory.cs" />
+    <Compile Include="Commands\Leave.cs" />
+    <Compile Include="Commands\Magic.cs" />
+    <Compile Include="Commands\Open.cs" />
+    <Compile Include="Commands\Pass.cs" />
+    <Compile Include="Commands\Rob.cs" />
     <Compile Include="Commands\Speak.cs" />
+    <Compile Include="Commands\Take.cs" />
     <Compile Include="Commands\Use.cs" />
     <Compile Include="Commands\Weapon.cs" />
+    <Compile Include="Commands\Xamine.cs" />
     <Compile Include="CountdownTimer.cs" />
     <Compile Include="GameSpeed.cs" />
     <Compile Include="GameState.cs" />

@@ -112,6 +112,7 @@
     <Compile Include="MapExtenders\Outside\Flight.cs" />
     <Compile Include="MapExtenders\Outside\TarmalonExtender.cs" />
     <Compile Include="MapExtenders\TownExtender.cs" />
+    <Compile Include="MapExtenders\Towns\LotaTown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Lota3DSurfaces.cs" />
     <Compile Include="TitleScreen\LotaTitleScreen.cs" />

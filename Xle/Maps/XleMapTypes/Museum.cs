@@ -309,7 +309,7 @@ namespace ERY.Xle.XleMapTypes
 
 			return true;
 		}
-		public override bool PlayerRob(Player player)
+		public override bool PlayerRob(GameState state)
 		{
 			g.AddBottom();
 			g.AddBottom("There is nothing to rob.");

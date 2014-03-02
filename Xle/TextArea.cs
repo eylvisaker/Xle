@@ -87,7 +87,7 @@ namespace ERY.Xle
 
 		public int Margin { get { return margin; } set { margin = value; } }
 
-		public void DrawArea()
+		public void Draw()
 		{
 			for (int i = 0; i < 5; i++)
 			{

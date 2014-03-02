@@ -20,5 +20,23 @@ namespace ERY.Xle.LotA
 
 			core.Run(new LotaFactory());
 		}
+
+		public static IEnumerable<Commands.Command> CommonLotaCommands
+		{
+			get
+			{
+				yield return new Commands.Armor();
+				yield return new Commands.Fight();
+				yield return new Commands.Gamespeed();
+				yield return new Commands.Hold();
+				yield return new Commands.Inventory();
+				yield return new Commands.Magic();
+				yield return new Commands.Pass();
+				yield return new Commands.Speak();
+				yield return new Commands.Use { ShowItemMenu = false };
+				yield return new Commands.Weapon();
+				yield return new Commands.Xamine();
+			}
+		}
 	}
 }

@@ -34,7 +34,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 			mExhibits.Add(0x5E, new MuseumDisplays.Pegasus());
 			mExhibits.Add(0x5F, new MuseumDisplays.AncientArtifact());
 		}
+		public override void SetCommands(Commands.CommandList commands)
+		{
 
+			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+
+		}
 		public override Exhibit GetExhibitByTile(int tile)
 		{
 			if (mExhibits.ContainsKey(tile) == false)

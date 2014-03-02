@@ -7,6 +7,7 @@ using ERY.Xle.LotA.MapExtenders.Fortress;
 using ERY.Xle.LotA.MapExtenders.Museum;
 using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
 using ERY.Xle.LotA.MapExtenders.Outside;
+using ERY.Xle.LotA.MapExtenders.Towns;
 using ERY.Xle.LotA.TitleScreen;
 using ERY.Xle.Maps;
 using ERY.Xle.XleMapTypes;
@@ -66,6 +67,10 @@ namespace ERY.Xle.LotA
 			return new LotaTitleScreen();
 		}
 
+		public override ITownExtender CreateMapExtender(Town town)
+		{
+			return new LotaTown();
+		}
 		public override IOutsideExtender CreateMapExtender(Outside outside)
 		{
 			if (outside.ExtenderName == "Flight")

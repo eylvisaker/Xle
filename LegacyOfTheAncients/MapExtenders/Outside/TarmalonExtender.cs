@@ -22,5 +22,12 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			set { TheMap.Stormy = value; }
 		}
 
+		public override void SetCommands(Commands.CommandList commands)
+		{
+			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+
+			commands.Items.Add(new Commands.Disembark());
+			commands.Items.Add(new Commands.End());
+		}
 	}
 }
