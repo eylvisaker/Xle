@@ -136,6 +136,7 @@
     <Compile Include="Commands\Armor.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\Hold.cs" />
+    <Compile Include="Commands\Speak.cs" />
     <Compile Include="Commands\Use.cs" />
     <Compile Include="Commands\Weapon.cs" />
     <Compile Include="CountdownTimer.cs" />

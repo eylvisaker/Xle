@@ -451,14 +451,13 @@ namespace ERY.Xle.XleMapTypes
 				//else
 				//    SoundMan.PlaySound(LotaSound.MuseumWalk);
 			}
-			Commands.CommandList.UpdateCommand(command);
+
+			XleCore.TextArea.PrintLine(command);
 
 			if (stepDirection.IsEmpty == false)
 			{
 				player.Move(stepDirection.X, stepDirection.Y);
 			}
-
-			Commands.CommandList.UpdateCommand(command);
 
 			PlayPlayerMoveSound();
 		}

@@ -637,7 +637,7 @@ namespace ERY.Xle.XleMapTypes
 
 			_Move2D(player, dir, "Move", out command, out stepDirection);
 
-			Commands.CommandList.UpdateCommand(command);
+			XleCore.TextArea.PrintLine(command);
 
 			if (player.Move(stepDirection))
 			{

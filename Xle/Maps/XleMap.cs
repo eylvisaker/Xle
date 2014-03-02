@@ -1096,17 +1096,22 @@ namespace ERY.Xle
 		#endregion
 		#region --- Player commands ---
 
+		[Obsolete]
 		public bool PlayerSpeak(Player player)
 		{
-			foreach (var evt in EnabledEventsAt(player, 1))
+			return PlayerSpeak(XleCore.GameState);
+		}
+		public bool PlayerSpeak(GameState state)
+		{
+			foreach (var evt in EnabledEventsAt(state.Player, 1))
 			{
-				bool handled = evt.Speak(GameState);
+				bool handled = evt.Speak(state);
 
 				if (handled)
 					return handled;
 			}
 
-			return PlayerSpeakImpl(player);
+			return PlayerSpeakImpl(state.Player);
 		}
 
 		public virtual bool PlayerRob(Player player)
@@ -1298,6 +1303,7 @@ namespace ERY.Xle
 				}
 			}
 		}
+
 	}
 
 	public class Roof : IXleSerializable

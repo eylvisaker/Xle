@@ -36,6 +36,7 @@ namespace ERY.Xle.Commands
 			Items.Add(new Hold());
 			Items.Add(new Use { ShowItemMenu = false });
 			Items.Add(new Weapon());
+			Items.Add(new Speak());
 		}
 
 		public void Prompt()
@@ -124,9 +125,6 @@ namespace ERY.Xle.Commands
 						case KeyCode.G:
 							GameSpeed();
 							break;
-						case KeyCode.H:
-							Hold();
-							break;
 						case KeyCode.I:
 							Inventory();
 							break;
@@ -150,12 +148,6 @@ namespace ERY.Xle.Commands
 							break;
 						case KeyCode.T:
 							Take();
-							break;
-						case KeyCode.U:
-							Use();
-							break;
-						case KeyCode.W:
-							Weapon();
 							break;
 						case KeyCode.X:
 							Xamine();
@@ -230,43 +222,6 @@ namespace ERY.Xle.Commands
 			Prompt();
 		}
 
-
-		public void Armor()
-		{
-			throw new NotImplementedException();
-			MenuItemList theList = new MenuItemList();
-			string tempstring;
-			int value = 0;
-			int j = 0;
-
-			theList.Add("Nothing");
-
-			for (int i = 1; i <= 5; i++)
-			{
-				if (player.ArmorType(i) > 0)
-				{
-					tempstring = XleCore.QualityList[player.ArmorQuality(i)] + " " +
-								 XleCore.ArmorList[player.ArmorType(i)].Name;
-
-					theList.Add(tempstring);
-					j++;
-
-					if (player.CurrentArmor == i)
-						value = j;
-
-				}
-
-			}
-
-			ColorStringBuilder builder = new ColorStringBuilder();
-			builder.AddText(g.Bottom(0), XleCore.Map.DefaultColor);
-			builder.AddText("-choose above", XleColor.Cyan);
-
-			g.UpdateBottom(builder, 0);
-
-			player.CurrentArmor = XleCore.SubMenu("Pick Armor", value, theList);
-
-		}
 
 		public void Climb()
 		{
@@ -404,11 +359,6 @@ namespace ERY.Xle.Commands
 
 			XleCore.Wait(XleCore.GameState.GameSpeed.AfterSetGamespeedTime);
 
-		}
-
-		public void Hold()
-		{
-			
 		}
 
 		public void Inventory()
@@ -650,7 +600,6 @@ namespace ERY.Xle.Commands
 
 		public void Speak()
 		{
-			XleCore.Map.PlayerSpeak(player);
 		}
 
 		public void Take()
@@ -662,13 +611,6 @@ namespace ERY.Xle.Commands
 
 				XleCore.Wait(500);
 			}
-		}
-
-		public void Use()
-		{
-		}
-		public void Weapon()
-		{
 		}
 
 		public void Xamine()
