@@ -17,7 +17,13 @@ namespace ERY.Xle.LoB.MapExtenders.Temples
 			commands.Items.Add(new Commands.Leave());
 			commands.Items.Add(new Commands.Magic());
 			commands.Items.Add(new Commands.Speak());
+		}
 
+		public override void SetColorScheme(ColorScheme scheme)
+		{
+			base.SetColorScheme(scheme);
+
+			scheme.FrameColor = XleColor.LightGray;
 		}
 	}
 }
