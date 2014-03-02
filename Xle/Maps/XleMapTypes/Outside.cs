@@ -53,7 +53,6 @@ namespace ERY.Xle.XleMapTypes
 
 		#endregion
 
-		[NonSerialized]
 		int stormy;
 
 		public override void InitializeMap(int width, int height)

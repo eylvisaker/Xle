@@ -5,11 +5,8 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes
 {
-	public class MagicIce : XleEvent 
+
+	public class StoreJail : Store
 	{
-		public MagicIce()
-		{
-			ExtenderName = "MagicIce";
-		}
 	}
 }

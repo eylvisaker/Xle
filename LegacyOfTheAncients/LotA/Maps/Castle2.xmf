@@ -281,6 +281,27 @@
       <ContainsItem>False</ContainsItem>
       <Contents>1300</Contents>
     </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>50</X>
+      <Y>4</Y>
+      <Width>8</Width>
+      <Height>6</Height>
+      <ExtenderName>MagicIce</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>28</X>
+      <Y>20</Y>
+      <Width>5</Width>
+      <Height>15</Height>
+      <ExtenderName>MagicIce</ExtenderName>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Script">
+      <X>84</X>
+      <Y>20</Y>
+      <Width>5</Width>
+      <Height>14</Height>
+      <ExtenderName>MagicIce</ExtenderName>
+    </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>
