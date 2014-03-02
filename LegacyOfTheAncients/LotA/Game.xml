@@ -53,9 +53,9 @@
   </Armor>
   <Items>
     <Item ID="0" Name="Nothing" />
-    <Item ID="1" Name="Gold Armband" Action="Twist"/>
-    <Item ID="2" Name="Climbing Gear" Action="Ready"/>
-    <Item ID="3" Name="Healing Herb" Action="Eat" />
+    <Item ID="1" Name="Gold Armband" Action="Twist gold armband"/>
+    <Item ID="2" Name="Climbing Gear" Action="Ready climbing gear"/>
+    <Item ID="3" Name="Healing Herb" Action="Eat healing herbs" />
     <Item ID="4" Name="Iron Key" isKey="true" />
     <Item ID="5" Name="Copper Key" isKey="true"/>
     <Item ID="6" Name="Brass Key" isKey="true" />
@@ -64,7 +64,7 @@
     <Item ID="9" Name="Mail" />
     <Item ID="10" Name="Tulip" />
     <Item ID="11" Name="Compass" />
-    <Item ID="12" Name="Magic Ice" Action="Throw"/>
+    <Item ID="12" Name="Magic Ice" Action="Throw magic ice"/>
     <Item ID="13" Name="Scepter" />
     <Item ID="14" Name="Guard Jewel" LongName="Large pulsating jewel" />
     <Item ID="15" Name="Compendium" />

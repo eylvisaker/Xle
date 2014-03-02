@@ -407,7 +407,7 @@ namespace ERY.Xle.XleMapTypes
 
 			_Move2D(player, dir, "Move", out command, out stepDirection);
 
-			Commands.UpdateCommand(command);
+			Commands.CommandList.UpdateCommand(command);
 
 			if (player.Move(stepDirection) == false)
 			{

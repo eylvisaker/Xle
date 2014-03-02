@@ -1,112 +1,88 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
+using ERY.Xle.Commands;
 
-namespace ERY.Xle
+namespace ERY.Xle.Commands
 {
-	public class Commands
+	public class CommandList
 	{
-		Player player;
+		public GameState State { get; set; }
+		Player player { get { return State.Player; } }
 
-		public Commands(Player p)
+		Dictionary<KeyCode, Direction> mDirectionMap = new Dictionary<KeyCode, Direction>();
+
+		public CommandList(GameState state)
 		{
-			player = p;
+			State = state;
+
+			mDirectionMap[KeyCode.Right] = Direction.East;
+			mDirectionMap[KeyCode.Up] = Direction.North;
+			mDirectionMap[KeyCode.Left] = Direction.West;
+			mDirectionMap[KeyCode.Down] = Direction.South;
+
+			mDirectionMap[KeyCode.OpenBracket] = Direction.North;
+			mDirectionMap[KeyCode.Semicolon] = Direction.West;
+			mDirectionMap[KeyCode.Quotes] = Direction.East;
+			mDirectionMap[KeyCode.Slash] = Direction.South;
+
+			Items = new List<Command>();
+
+			Items.Add(new Armor());
+			Items.Add(new Hold());
+			Items.Add(new Use { ShowItemMenu = false });
+			Items.Add(new Weapon());
 		}
 
 		public void Prompt()
 		{
 			player.CheckDead();
 
-			g.AddBottom("");
-			g.AddBottom("Enter command:  ");
-
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.Print("Enter command: ");
 		}
 
+		public List<Command> Items { get; set; }
 		/// <summary>
 		/// Returns true if the command is a cursor movement.
 		/// </summary>
 		/// <param name="cmd"></param>
 		/// <returns></returns>
-		private bool CursorMovement(KeyCode cmd)
+		private void CursorMovement(KeyCode cmd)
 		{
-			Direction dir;
+			Direction dir = mDirectionMap[cmd];
 
-			// Test for cursor movement so we can get the right command first
+			XleCore.Map.PlayerCursorMovement(player, dir);
+		}
+
+		bool IsCursorMovement(KeyCode cmd)
+		{
 			switch (cmd)
 			{
 				case KeyCode.Right:
-					dir = Direction.East;
-
-					break;
-
 				case KeyCode.Up:
-					dir = Direction.North;
-
-					break;
-
 				case KeyCode.Left:
-					dir = Direction.West;
-
-					break;
-
 				case KeyCode.Down:
-					dir = Direction.South;
-
-					break;
+					return true;
 
 				default:
 					return false;
 			}
-
-			XleCore.Map.PlayerCursorMovement(player, dir);
-
-			return true;
 		}
-
 		public void DoCommand(KeyCode cmd)
 		{
 			if (cmd == KeyCode.None)
 				return;
 
-			int wasRaft = player.OnRaft;
 			int waitTime = 700;
 
-			if (CursorMovement(cmd))
+			if (IsCursorMovement(cmd))
 			{
-				if (g.Animating == false)
-				{
-					g.Animating = true;
-					g.AnimFrame = 0;
-				}
-
-				waitTime = g.walkTime;
-
-				g.charAnimCount = 0;
-
-
-				if (wasRaft != player.OnRaft)
-				{
-					if (player.IsOnRaft)
-					{
-						g.AddBottom("");
-						g.AddBottom("You climb onto a raft.");
-
-						SoundMan.PlaySound(LotaSound.BoardRaft);
-					}
-
-				}
-
-				// check for events
-				XleCore.Map.PlayerStep(player);
-
-				AfterDoCommand(waitTime, cmd);
-
-
+				ExecuteCursorMovement(cmd);
 				return;
 			}
 
@@ -119,67 +95,74 @@ namespace ERY.Xle
 			}
 			else
 			{
-				UpdateCommand(XleCore.Menu(cmd));
+				var command = FindCommand(cmd);
 
-
-				switch (cmd)
+				if (command != null)
 				{
-					case KeyCode.A:
-						Armor();
-						break;
-					case KeyCode.C:
-						Climb();
-						break;
-					case KeyCode.D:
-						Disembark();
-						break;
-					case KeyCode.E:
-						End();
-						break;
-					case KeyCode.F:
-						Fight();
-						break;
-					case KeyCode.G:
-						GameSpeed();
-						break;
-					case KeyCode.H:
-						Hold();
-						break;
-					case KeyCode.I:
-						Inventory();
-						break;
-					case KeyCode.L:
-						Leave();
-						break;
-					case KeyCode.M:
-						Magic();
-						break;
-					case KeyCode.O:
-						Open();
-						break;
-					case KeyCode.P:
-						Pass();
-						break;
-					case KeyCode.R:
-						Rob();
-						break;
-					case KeyCode.S:
-						Speak();
-						break;
-					case KeyCode.T:
-						Take();
-						break;
-					case KeyCode.U:
-						Use();
-						break;
-					case KeyCode.W:
-						Weapon();
-						break;
-					case KeyCode.X:
-						Xamine();
-						break;
-					default:
-						break;
+					XleCore.TextArea.Print(command.Name);
+
+					command.Execute(State);
+				}
+				else
+				{
+					UpdateCommand(XleCore.Menu(cmd));
+
+					switch (cmd)
+					{
+						case KeyCode.C:
+							Climb();
+							break;
+						case KeyCode.D:
+							Disembark();
+							break;
+						case KeyCode.E:
+							End();
+							break;
+						case KeyCode.F:
+							Fight();
+							break;
+						case KeyCode.G:
+							GameSpeed();
+							break;
+						case KeyCode.H:
+							Hold();
+							break;
+						case KeyCode.I:
+							Inventory();
+							break;
+						case KeyCode.L:
+							Leave();
+							break;
+						case KeyCode.M:
+							Magic();
+							break;
+						case KeyCode.O:
+							Open();
+							break;
+						case KeyCode.P:
+							Pass();
+							break;
+						case KeyCode.R:
+							Rob();
+							break;
+						case KeyCode.S:
+							Speak();
+							break;
+						case KeyCode.T:
+							Take();
+							break;
+						case KeyCode.U:
+							Use();
+							break;
+						case KeyCode.W:
+							Weapon();
+							break;
+						case KeyCode.X:
+							Xamine();
+							break;
+						default:
+							break;
+					}
 				}
 			}
 
@@ -187,6 +170,50 @@ namespace ERY.Xle
 
 			AfterDoCommand(waitTime, cmd);
 
+		}
+
+		private Command FindCommand(KeyCode cmd)
+		{
+			var command = Items.Find(x => x.Name.StartsWith(AgateLib.InputLib.Keyboard.GetKeyString(cmd,
+				new KeyModifiers()), StringComparison.InvariantCultureIgnoreCase));
+
+			return command;
+			
+		}
+
+		private void ExecuteCursorMovement(KeyCode cmd)
+		{
+			int wasRaft = player.OnRaft;
+
+			CursorMovement(cmd);
+
+			if (g.Animating == false)
+			{
+				g.Animating = true;
+				g.AnimFrame = 0;
+			}
+
+			var waitTime = g.walkTime;
+
+			g.charAnimCount = 0;
+
+
+			if (wasRaft != player.OnRaft)
+			{
+				if (player.IsOnRaft)
+				{
+					g.AddBottom("");
+					g.AddBottom("You climb onto a raft.");
+
+					SoundMan.PlaySound(LotaSound.BoardRaft);
+				}
+
+			}
+
+			// check for events
+			XleCore.Map.PlayerStep(player);
+
+			AfterDoCommand(waitTime, cmd);
 		}
 
 		public static void UpdateCommand(string command)
@@ -204,43 +231,9 @@ namespace ERY.Xle
 		}
 
 
-		/*
-	case 20:
-		
-		int dy = 0;
-		
-		// Test for cursor movement so we can move throught the menu command first
-		switch (originalCmd)
-		{
-		case KeyCode.UP:
-			dy = -1;
-			
-			break;
-			
-		case KeyCode.Down:
-			dy = 1;
-			
-			break;
-			
-		}
-		
-		if (dy)
-		{
-			// TODO:  wtf???
-			g.commandMode = (CmdMode)21;
-			
-			g.cursorPos(dy);
-			wait(125);
-			
-			g.commandMode = (CmdMode)20;
-			
-		}
-		
-	}*/
-
-
 		public void Armor()
 		{
+			throw new NotImplementedException();
 			MenuItemList theList = new MenuItemList();
 			string tempstring;
 			int value = 0;
@@ -415,46 +408,7 @@ namespace ERY.Xle
 
 		public void Hold()
 		{
-			MenuItemList theList = new MenuItemList();
-			int value = 0;
-			Color[] colors = new Color[40];
-
-			theList.Add("Nothing");
-
-			foreach (int i in XleCore.ItemList.Keys)
-			{
-				if (player.Items[i] > 0)
-				{
-					string itemName = XleCore.ItemList[i].Name;
-
-					if (itemName.Contains("coin"))
-						continue;
-
-					/*
-					if (i == 9)			// mail
-					{
-						itemName = XleCore.GetMapName(player.mailTown) + " " + itemName;
-					}*/
-
-					if (i <= player.Hold)
-					{
-						value++;
-					}
-
-					theList.Add(itemName);
-				}
-
-			}
-
-			ColorStringBuilder builder = new ColorStringBuilder();
-
-			builder.AddText(g.Bottom(0), XleCore.Map.DefaultColor);
-			builder.AddText("-choose above", XleColor.Cyan);
-
-			g.UpdateBottom(builder, 0);
-
-			player.HoldMenu(XleCore.SubMenu("Hold Item", value, theList));
-
+			
 		}
 
 		public void Inventory()
@@ -712,97 +666,9 @@ namespace ERY.Xle
 
 		public void Use()
 		{
-			string commandstring = string.Empty;
-			bool noEffect = true;
-
-			g.AddBottom("");
-
-			string action = XleCore.ItemList[player.Hold].Action;
-			if (string.IsNullOrEmpty(action))
-				action = "Use";
-
-			commandstring = action + " " + XleCore.ItemList[player.Hold].Name;
-
-			g.AddBottom(commandstring);
-
-			switch (player.Hold)
-			{
-				case 3:
-					commandstring = "Eat Healing Herbs";
-					noEffect = false;
-					EatHealingHerbs();
-					break;
-
-				case 4:			// Iron Key
-				case 5:			// Copper Key
-				case 6:			// Brass Key
-				case 7:			// Stone Key
-				case 9:				// mail
-				case 10:			// tulip
-				case 11:			// compass
-				case 13:			// scepter
-				case 14:			// guard jewel
-				case 15:			// compendium
-				case 16:			// crown
-
-				default:
-					noEffect = !XleCore.Map.PlayerUse(player, player.Hold);
-
-					break;
-			}
-
-			if (noEffect == true)
-			{
-				g.AddBottom("");
-				XleCore.Wait(400 + 100 * player.Gamespeed);
-				g.UpdateBottom("No effect");
-			}
-
 		}
-
-		private void EatHealingHerbs()
-		{
-			player.HP += player.MaxHP / 2;
-			player.ItemCount(3, -1);
-			SoundMan.PlaySound(LotaSound.Good);
-
-			XleCore.FlashHPWhileSound(XleColor.Cyan);
-		}
-
 		public void Weapon()
 		{
-			MenuItemList theList = new MenuItemList();
-			string tempstring;
-			int value = 0;
-			int j = 0;
-			theList.Add("Nothing");
-
-			for (int i = 1; i <= 5; i++)
-			{
-				if (player.WeaponType(i) > 0)
-				{
-					tempstring = XleCore.QualityList[player.WeaponQuality(i)] + " " +
-								 XleCore.WeaponList[player.WeaponType(i)].Name;
-
-					theList.Add(tempstring);
-					j++;
-
-					if (player.CurrentWeapon == i)
-					{
-						value = j;
-					}
-				}
-
-			}
-
-			ColorStringBuilder builder = new ColorStringBuilder();
-			builder.AddText(g.Bottom(0), XleCore.Map.DefaultColor);
-			builder.AddText("-choose above", XleColor.Cyan);
-
-			g.UpdateBottom(builder, 0);
-
-
-			player.CurrentWeapon = XleCore.SubMenu("Pick Weapon", value, theList);
 		}
 
 		public void Xamine()

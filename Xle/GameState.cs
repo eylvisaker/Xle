@@ -17,6 +17,6 @@ namespace ERY.Xle
 
 		public GameSpeed GameSpeed { get; set; }
 
-		public Commands commands;
+		public  ERY.Xle.Commands.CommandList commands;
 	}
 }

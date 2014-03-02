@@ -717,7 +717,7 @@ namespace ERY.Xle
 
 			GameState.Player = thePlayer;
 
-			GameState.commands = new Commands(GameState.Player);
+			GameState.commands = new Commands.CommandList(GameState);
 
 			GameState.Map = LoadMap(GameState.Player.MapID);
 			GameState.Map.OnLoad(GameState.Player);

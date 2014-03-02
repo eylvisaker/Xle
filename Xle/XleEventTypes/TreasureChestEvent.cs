@@ -168,7 +168,7 @@ namespace ERY.Xle.XleEventTypes
 
 		private static void UpdateCommand()
 		{
-			Commands.UpdateCommand("Open Chest");
+			Commands.CommandList.UpdateCommand("Open Chest");
 		}
 
 		private void PrintAlreadyOpenMessage()

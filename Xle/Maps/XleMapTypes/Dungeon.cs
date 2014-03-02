@@ -432,7 +432,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			int amount = XleCore.random.Next(60, 200);
 
-			Commands.UpdateCommand("Open Box");
+			Commands.CommandList.UpdateCommand("Open Box");
 			SoundMan.PlaySound(LotaSound.OpenChest);
 			g.AddBottom();
 			XleCore.Wait(500);
@@ -467,7 +467,7 @@ namespace ERY.Xle.XleMapTypes
 		{
 			val -= 0x30;
 
-			Commands.UpdateCommand("Open Chest");
+			Commands.CommandList.UpdateCommand("Open Chest");
 			SoundMan.PlaySound(LotaSound.OpenChest);
 			XleCore.TextArea.PrintLine();
 			XleCore.Wait(XleCore.GameState.GameSpeed.DungeonOpenChestSoundTime);
