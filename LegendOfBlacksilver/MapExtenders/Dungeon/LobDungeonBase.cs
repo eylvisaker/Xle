@@ -9,6 +9,17 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
 	class LobDungeonBase : NullDungeonExtender
 	{
+		public override void SetCommands(Commands.CommandList commands)
+		{
+			commands.Items.AddRange(LobProgram.CommonLobCommands);
+
+			commands.Items.Add(new Commands.Climb());
+			commands.Items.Add(new Commands.End());
+			commands.Items.Add(new Commands.Magic());
+			commands.Items.Add(new Commands.Open());
+			commands.Items.Add(new Commands.Speak());
+		}
+
 		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
 		{
 			if (chestID == 1)

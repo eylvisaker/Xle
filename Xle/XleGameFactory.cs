@@ -39,6 +39,11 @@ namespace ERY.Xle
 			return new NullCastleExtender();
 		}
 
+		public virtual ITempleExtender CreateMapExtender(Temple town)
+		{
+			return new NullTempleExtender();
+		}
+
 		public virtual ITownExtender CreateMapExtender(Town town)
 		{
 			return new NullTownExtender();

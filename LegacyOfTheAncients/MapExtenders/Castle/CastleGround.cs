@@ -17,6 +17,10 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		public override void SetCommands(Commands.CommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+
+			commands.Items.Add(new Commands.Magic());
+			commands.Items.Add(new Commands.Open());
+			commands.Items.Add(new Commands.Take());
 		}
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{

@@ -83,6 +83,7 @@
     <Compile Include="MapExtenders\Archives\Exhibits\UnderwaterPort.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\VaseOfSouls.cs" />
     <Compile Include="MapExtenders\Archives\HawkArchive.cs" />
+    <Compile Include="MapExtenders\Archives\LobArchiveExtenderBase.cs" />
     <Compile Include="MapExtenders\Archives\OwlArchive.cs" />
     <Compile Include="MapExtenders\CastleDamageCalculator.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\AngryCastle.cs" />
@@ -113,7 +114,12 @@
     <Compile Include="MapExtenders\Labyrinth\LabyrinthBase.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthUpper.cs" />
     <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />
-    <Compile Include="MapExtenders\Temples\TempleExtender.cs" />
+    <Compile Include="MapExtenders\Outside\Maelbane.cs" />
+    <Compile Include="MapExtenders\Outside\Thalen.cs" />
+    <Compile Include="MapExtenders\Temples\LobTempleExtender.cs" />
+    <Compile Include="MapExtenders\Towns\LobTownExtender.cs" />
+    <Compile Include="MapExtenders\Towns\MaelbaneTownExtender.cs" />
+    <Compile Include="MapExtenders\Towns\ThalenTownExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TitleScreen\LobTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -58,7 +58,6 @@ namespace ERY.Xle
 		#endregion
 
 		private char theCursor = 'P';			// location of the menu dot
-		private string[] menuArray = new string[17];		// keeps the menu portion of the screen
 
 		private XleGameFactory mFactory;
 
@@ -83,11 +82,6 @@ namespace ERY.Xle
 		{
 			inst = this;
 			PlayerColor = XleColor.White;
-
-			for (int i = 0; i < 17; i++)
-			{
-				menuArray[i] = "";
-			}
 
 			TextArea = new TextArea();
 		}
@@ -738,10 +732,11 @@ namespace ERY.Xle
 
 		private static void SetTilesAndCommands()
 		{
-			inst.menuArray = GameState.Map.MapMenu();
+			//inst.menuArray = GameState.Map.MapMenu();
 			GameState.Commands.Items.Clear();
 
 			GameState.Map.SetCommands(GameState.Commands);
+			GameState.Commands.ResetCommands();
 
 			XleCore.LoadTiles(GameState.Map.TileImage);
 		}
@@ -853,12 +848,19 @@ namespace ERY.Xle
 
 			map.Draw(player.X, player.Y, player.FaceDirection, mapRect);
 
-			for (i = 0; i < menuArray.Length; i++)
+			i = 0;
+			int cursorPos = 0;
+			foreach(var cmd in GameState.Commands.Items)
 			{
-				WriteText(48, 16 * (i + 1), menuArray[i], menuColor);
+				WriteText(48, 16 * (i + 1), cmd.Name, menuColor);
+
+				if (cmd == GameState.Commands.CurrentCommand)
+					cursorPos = i;
+
+				i++;
 			}
 
-			WriteText(32, 16 * (CursorPos + 1), "`", menuColor);
+			WriteText(32, 16 * (cursorPos + 1), "`", menuColor);
 
 			Color hpColor = map.ColorScheme.TextColor;
 			if (mOverrideHPColor)
@@ -2078,85 +2080,6 @@ namespace ERY.Xle
 			return amount;
 		}
 
-		/// <summary>
-		/// This will return the numerical position of the cursor so that it may 	
-		/// be plotted on the screen.	
-		/// </summary>
-		/// <returns></returns>
-		[Obsolete]
-		int CursorPos
-		{
-			get
-			{
-				for (int i = 0; i < 14; i++)
-				{
-					if (menuArray[i][0] == theCursor)
-						return i;
-				}
-
-				return 0;
-			}
-			set
-			{
-				bool found = false;
-				int change = value - theCursor;
-
-				do
-				{
-					theCursor += (char)change;
-
-					if (theCursor < 'A')
-						theCursor = 'Z';
-
-					if (theCursor > 'Z')
-						theCursor = 'A';
-
-					for (int i = 0; i < 14; i++)
-					{
-
-						if (menuArray[i][0] == theCursor)
-						{
-							found = true;
-							return;
-						}
-					}
-				} while (!found && change != 0);
-
-			}
-		}
-
-		/// <summary>
-		/// This returns an entire line from the menu that matches the first
-		/// character of the command selected.  If it's passed
-		/// a value that's not in the menu, it returns an empty string.
-		/// </summary>
-		/// <param name="newCursor"></param>
-		/// <returns></returns>
-		[Obsolete]
-		public static string Menu(KeyCode newCursor)
-		{
-			return inst.MenuImpl(newCursor);
-		}
-		[Obsolete]
-		private string MenuImpl(KeyCode newCursor)
-		{
-			char keychar = (char)('A' + (newCursor - KeyCode.A));
-
-			for (int i = 0; i < menuArray.Length; i++)
-			{
-				if (menuArray[i].Length == 0)
-					continue;
-
-				if (menuArray[i][0] == keychar)
-				{
-					return menuArray[i];
-				}
-
-			}
-
-			return "";
-		}
-
 		public static void LoadTiles(string tileset)
 		{
 			if (tileset.EndsWith(".png") == false)
@@ -2239,6 +2162,9 @@ namespace ERY.Xle
 			}
 			catch (Exception e)
 			{
+				System.Diagnostics.Debug.Print(e.Message);
+				System.Diagnostics.Debug.Print(e.StackTrace);
+
 				player.MapID = saveMap.MapID;
 				GameState.Map = saveMap;
 				player.X = saveX;

@@ -12,6 +12,10 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 		public override void SetCommands(Commands.CommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+
+			commands.Items.Add(new Commands.Magic());
+			commands.Items.Add(new Commands.Leave { ConfirmPrompt = LotaOptions.EnhancedUserInterface });
+			commands.Items.Add(new Commands.Rob());
 		}
 	}
 }

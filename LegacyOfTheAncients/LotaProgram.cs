@@ -30,7 +30,6 @@ namespace ERY.Xle.LotA
 				yield return new Commands.Gamespeed();
 				yield return new Commands.Hold();
 				yield return new Commands.Inventory();
-				yield return new Commands.Magic();
 				yield return new Commands.Pass();
 				yield return new Commands.Speak();
 				yield return new Commands.Use { ShowItemMenu = false };

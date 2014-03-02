@@ -8,6 +8,8 @@ using ERY.Xle.LoB.MapExtenders.Citadel;
 using ERY.Xle.LoB.MapExtenders.Dungeon;
 using ERY.Xle.LoB.MapExtenders.Labyrinth;
 using ERY.Xle.LoB.MapExtenders.Outside;
+using ERY.Xle.LoB.MapExtenders.Temples;
+using ERY.Xle.LoB.MapExtenders.Towns;
 using ERY.Xle.LoB.TitleScreen;
 using ERY.Xle.XleMapTypes;
 using ERY.Xle.XleMapTypes.Extenders;
@@ -95,7 +97,10 @@ namespace ERY.Xle.LoB
 		}
 		public override IOutsideExtender CreateMapExtender(XleMapTypes.Outside outside)
 		{
-			return new LobBaseOutside();
+			if (outside.MapID < 5)
+				return new Thalen();
+			else
+				return new Maelbane();
 		}
 		public override IDungeonExtender CreateMapExtender(XleMapTypes.Dungeon theMap)
 		{
@@ -118,6 +123,17 @@ namespace ERY.Xle.LoB
 				return (ICastleExtender)Activator.CreateInstance(mExtenders[ext]);
 
 			return base.CreateMapExtender(castle);
+		}
+		public override ITempleExtender CreateMapExtender(Temple town)
+		{
+			return new LobTempleExtender();
+		}
+		public override ITownExtender CreateMapExtender(Town town)
+		{
+			if (town.MapID <= 20)
+				return new ThalenTownExtender();
+			else
+				return new MaelbaneTownExtender();
 		}
 
 		public override void SetGameSpeed(GameState state, int Gamespeed)

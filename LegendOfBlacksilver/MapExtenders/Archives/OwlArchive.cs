@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives
 {
-	class OwlArchive : NullMuseumExtender 
+	class OwlArchive : LobArchiveExtenderBase 
 	{
 		Dictionary<int, Exhibit> mExhibits = new Dictionary<int, Exhibit>();
 

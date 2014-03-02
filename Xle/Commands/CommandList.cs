@@ -100,33 +100,25 @@ namespace ERY.Xle.Commands
 				return;
 			}
 
-			if (XleCore.Menu(cmd) == "")
+			var command = FindCommand(cmd);
+
+			if (command != null)
+			{
+				CurrentCommand = command;
+
+				XleCore.TextArea.Print(command.Name);
+
+				command.Execute(State);
+			}
+			else
 			{
 				SoundMan.PlaySound(LotaSound.Invalid);
 
 				XleCore.Wait(waitTime);
 				return;
 			}
-			else
-			{
-				var command = FindCommand(cmd);
-
-				if (command != null)
-				{
-					XleCore.TextArea.Print(command.Name);
-
-					command.Execute(State);
-				}
-				else
-				{
-					throw new InvalidOperationException();
-				}
-			}
-
-
 
 			AfterDoCommand(waitTime, cmd);
-
 		}
 
 		private Command FindCommand(KeyCode cmd)
@@ -135,7 +127,7 @@ namespace ERY.Xle.Commands
 				new KeyModifiers()), StringComparison.InvariantCultureIgnoreCase));
 
 			return command;
-			
+
 		}
 
 		private void ExecuteCursorMovement(KeyCode cmd)
@@ -179,6 +171,16 @@ namespace ERY.Xle.Commands
 			g.UpdateBottom("Enter Command: " + command);
 		}
 
+		public void ResetCommands()
+		{
+			Items.Sort((x, y) => x.Name.CompareTo(y.Name));
+			CurrentCommand = Items.Find(x => x is Pass);
+
+			if (CurrentCommand == null)
+				CurrentCommand = Items[0];
+		}
+
+		public Command CurrentCommand { get; set; }
 
 		private void AfterDoCommand(int waitTime, KeyCode cmd)
 		{

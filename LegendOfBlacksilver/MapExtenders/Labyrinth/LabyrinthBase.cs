@@ -14,6 +14,26 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 		CastleDamageCalculator cdc = new CastleDamageCalculator
 		{ v5 = 1.7, v6 = 18, v7 = 1.7 };
 
+		public override void SetColorScheme(ColorScheme scheme)
+		{
+			scheme.TextColor = XleColor.White;
+
+			scheme.FrameColor = XleColor.Gray;
+			scheme.FrameHighlightColor = XleColor.Yellow;
+
+			scheme.VerticalLinePosition = 13 * 16;
+		}
+
+		public override void SetCommands(Commands.CommandList commands)
+		{
+			commands.Items.AddRange(LobProgram.CommonLobCommands);
+
+			commands.Items.Add(new Commands.Open());
+			commands.Items.Add(new Commands.Magic());
+			commands.Items.Add(new Commands.Take());
+			commands.Items.Add(new Commands.Speak());
+		}
+
 		public override double ChanceToHitGuard(Player player, Guard guard, int distance)
 		{
 			return cdc.ChanceToHitGuard(player, distance);

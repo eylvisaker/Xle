@@ -71,6 +71,17 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			return 32;
 		}
 
+		public override void SetCommands(Commands.CommandList commands)
+		{
+			commands.Items.AddRange(LobProgram.CommonLobCommands);
+
+			commands.Items.Add(new Commands.Leave());
+			commands.Items.Add(new Commands.Open());
+			commands.Items.Add(new Commands.Magic());
+			commands.Items.Add(new Commands.Take());
+			commands.Items.Add(new Commands.Speak());
+		}
+
 		public override void SetColorScheme(ColorScheme scheme)
 		{
 			scheme.TextColor = XleColor.White;
@@ -129,21 +140,31 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
 		public override void SpeakToGuard(GameState state, ref bool handled)
 		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+
 			if (state.Player.Items[LobItem.FalconFeather] > 0)
 			{
-				g.AddBottom("");
-				g.AddBottom("I see you have the feather,");
-				g.AddBottom("why not use it?");
-
+				XleCore.TextArea.PrintLine("I see you have the feather,");
+				XleCore.TextArea.PrintLine("why not use it?");
 			}
 			else
 			{
-				g.AddBottom("");
-				g.AddBottom("I should not converse, sir.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("I should not converse, sir.");
 			}
 
 			XleCore.Wait(2500);
 			handled = true;
+		}
+
+		public override void PlayerUse(GameState state, int item, ref bool handled)
+		{
+			if (item == (int)LobItem.FalconFeather)
+			{
+				XleCore.TextArea.PrintLine("You're not by a door.");
+				handled = true;
+			}
 		}
 
 		public bool StoredAngryFlag { get; set; }

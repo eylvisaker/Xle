@@ -20,5 +20,20 @@ namespace ERY.Xle.LoB
 			core.Run(new LobFactory());
 			
 		}
+
+		public static IEnumerable<Commands.Command> CommonLobCommands
+		{
+			get
+			{
+				yield return new Commands.Armor();
+				yield return new Commands.Fight();
+				yield return new Commands.Gamespeed();
+				yield return new Commands.Inventory();
+				yield return new Commands.Pass();
+				yield return new Commands.Use();
+				yield return new Commands.Weapon();
+				yield return new Commands.Xamine();
+			}
+		}
 	}
 }

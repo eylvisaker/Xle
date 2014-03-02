@@ -27,12 +27,11 @@ namespace ERY.Xle.Commands
 			XleCore.TextArea.PrintLine();
 
 			string action = XleCore.ItemList[state.Player.Hold].Action;
+
 			if (string.IsNullOrEmpty(action))
 				action = "Use " + XleCore.ItemList[state.Player.Hold].Name;
-			else 
-				commandstring = action;
 
-			XleCore.TextArea.PrintLine(commandstring + ".");
+			XleCore.TextArea.PrintLine(action + ".");
 
 			switch (state.Player.Hold)
 			{

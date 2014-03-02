@@ -36,10 +36,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		}
 		public override void SetCommands(Commands.CommandList commands)
 		{
-
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
+			commands.Items.Add(new Commands.Rob());
+			commands.Items.Add(new Commands.Take());
 		}
+
 		public override Exhibit GetExhibitByTile(int tile)
 		{
 			if (mExhibits.ContainsKey(tile) == false)
