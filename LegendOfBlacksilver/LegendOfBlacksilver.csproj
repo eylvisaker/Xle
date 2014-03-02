@@ -113,6 +113,7 @@
     <Compile Include="MapExtenders\Labyrinth\EventExtenders\LabyrinthDoor.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthBase.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthUpper.cs" />
+    <Compile Include="MapExtenders\Outside\Events\Drawbridge.cs" />
     <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />
     <Compile Include="MapExtenders\Outside\Maelbane.cs" />
     <Compile Include="MapExtenders\Outside\Thalen.cs" />

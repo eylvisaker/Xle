@@ -19,6 +19,11 @@ namespace ERY.Xle.Commands
 
 			if (ConfirmPrompt)
 			{
+				if (string.IsNullOrWhiteSpace(PromptText) == false)
+				{
+					XleCore.TextArea.PrintLine(PromptText);
+					XleCore.TextArea.PrintLine();
+				}
 				if (XleCore.QuickMenuYesNo() == 1)
 					return;
 			}
@@ -27,5 +32,7 @@ namespace ERY.Xle.Commands
 		}
 
 		public bool ConfirmPrompt { get; set; }
+
+		public string PromptText { get; set; }
 	}
 }

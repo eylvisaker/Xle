@@ -13,7 +13,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Commands.Leave());
+			commands.Items.Add(new Commands.Leave { PromptText = "Leave the archives?" });
 			commands.Items.Add(new Commands.Open());
 			commands.Items.Add(new Commands.Rob());
 			commands.Items.Add(new Commands.Take());

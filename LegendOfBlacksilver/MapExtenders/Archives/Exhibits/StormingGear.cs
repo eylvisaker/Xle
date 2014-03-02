@@ -16,5 +16,12 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return ExhibitIdentifier.StormingGear; }
 		}
+
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
+
+			player.Items[LobItem.RopeAndPulley] = 1;
+		}
 	}
 }
