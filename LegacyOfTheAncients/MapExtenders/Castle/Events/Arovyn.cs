@@ -18,12 +18,15 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			{
 				GiveMark(state);
 			}
+
+			handled = true;
 		}
 
 		private void TooWeakMessage(GameState state)
 		{
 			var ta = XleCore.TextArea;
 
+			ta.PrintLine();
 			ta.PrintLine();
 			ta.PrintLineSlow("I would like to confide in you, but", XleColor.Yellow);
 			ta.PrintLineSlow("you are not strong enough to help.", XleColor.Yellow);
@@ -37,6 +40,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 			var ta = XleCore.TextArea;
 
+			ta.PrintLine();
 			ta.PrintLine();
 			ta.PrintLineSlow("My health declines.  You are my last", XleColor.Yellow);
 			ta.PrintSlow("hope.  Find the ", XleColor.Yellow);

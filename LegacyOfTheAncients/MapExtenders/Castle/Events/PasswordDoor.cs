@@ -18,13 +18,11 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 			if (state.Story().HasGuardianPassword)
 			{
-				g.UpdateBottom("enter command: speak password.");
+				XleCore.TextArea.PrintLine(" password.");
 				SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
 				((Door)TheEvent).RemoveDoor(state);
 				handled = true;
-
-				XleCore.TextArea.PrintLine();
 			}
 		}
 	}
