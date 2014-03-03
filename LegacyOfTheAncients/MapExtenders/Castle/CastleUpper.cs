@@ -36,6 +36,16 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			return base.CreateEventExtender(evt, defaultExtender);
 		}
 
+		public override void OnAfterEntry(GameState state)
+		{
+			if (state.Story().Invisible == false)
+			{
+				XleCore.TextArea.PrintLine("Private level!");
+
+				TheMap.IsAngry = true;
+			}
+		}
+
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			return TheMap.OutsideTile;

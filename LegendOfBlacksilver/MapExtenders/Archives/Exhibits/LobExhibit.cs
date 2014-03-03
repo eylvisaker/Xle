@@ -37,6 +37,26 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 			}
 		}
 
+		public static LobItem ItemFromCoin(Coin c)
+		{
+			int idx = (int)c - (int)Coin.BlueGem;
+
+			return (LobItem)((int)LobItem.BlueGem + idx);
+		}
+		public static Coin CoinFromItem(LobItem it)
+		{
+			int idx = (int)it - (int)LobItem.BlueGem;
+
+			return (Coin)((int)Coin.BlueGem + idx);
+		}
+		protected void ReturnGem(Player player)
+		{
+			player.Items[ItemFromCoin(Coin)]++;
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("We're returning your gem.");
+		}
+
 		protected override Color ArticleTextColor
 		{
 			get { return XleColor.White; }

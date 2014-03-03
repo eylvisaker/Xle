@@ -166,231 +166,112 @@
         |free to visit the island caverns as
         |many times as you dare.`pause`
       </Text>
-      <Text ID="2">
-        |`image:1`As Tarmalon culture advanced, weapons
-        |developed a ceremonial importance.
-        |In this exhibit you see the famed
-        |`white`staff of sacrifice.`cyan`  It was used to
-        |coronate kings.`pause`
-        |`clear`Although intended for ceremony, the
-        |staff is actually bladed for combat.
-        |As a museum patron, you may use this
-        |weapon for as long as you like.  It
-        |is now in your possession.`pause`
-      </Text>
     </Exhibit>
-    <Exhibit ID="3" Image="Thornberry.png">
+    <Exhibit ID="3" Image="GameOfHonor.png">
       <Text ID="1">
-        |This exhibit shows a typical tarmalon
-        |town called thornberry.  The town was
-        |established over 100 lifespans ago by
-        |a group of wealthy merchants.`pause`
-        |`clear`Thornberry has changed little since
-        |its founding.  The rich and the poor
-        |still live on opposite sides of town
-        |separated by a massive stone wall.`pause`
-        |`clear`Despite its inequity, thornberry is
-        |a bustling community, containing
-        |shops, craftsmen, banks, and places
-        |of amusement.`pause`
-      </Text>
-      <Text ID="2">
-        |Here's some `yellow`gold`cyan` to spend on
-        |your trip.
+        |You see before you, a reproduction of
+        |one of Thalen's most famous games of
+        |trist. It was a fierce battle of wits
+        |between two most noble adversaries.`pause`
+        |`clear`The mental rigors of trist are said
+        |to increase a player's intelligence.
+        |The game is available only in one of
+        |our temples, and only to those
+        |registered to play.`pause`
+        |`clear`Your name has now been added to this
+        |elite list.  We wish you well.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="4" Image="Fountain.png">
+    <Exhibit ID="4" Image="StormingGear.png">
       <Text ID="1">
-        |Here you see a replica of the famous
-        |`purple`enchanted flower fountain`cyan`.  Legend
-        |says that its waters once flowed in
-        |splendor.`pause`
-        |`clear`One day a tulip was taken from the
-        |fountain gardens and the fountain
-        |waters stopped.  The stories say that
-        |only when that flower is returned
-        |will the fountain flow again.`pause`
-        |`clear``white`Myth or fact?  `cyan`Judge for yourself.
-        |In either case, the museum has agreed
-        |to help search for the tulip.`pause`
-      </Text>
-      <Text ID="2">
-        |Bring the tulip back here for a nice
-        |reward.  Meanwhile, here's some native
-        |`yellow`gold`cyan` to aid you in your search.
-      </Text>
-      <Text ID="3">
-        |Thank you for returning the tulip!
-        |As a reward, `yellow``wait:off``sound:VeryGood`Charm:  +10`pause`
+        |This rope, grapple, and pulley are
+        |typical of the gear needed to storm a
+        |well protected castle.  In the hands
+        |of a master, in the dead of the
+        |night, few places are inpenetrable.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="5" Image="PirateLair.png">
+    <Exhibit ID="5" Image="TheWealthy.png">
       <Text ID="1">
-        |Tarmalon's deep ocean waters are so
-        |turbulent that few trading ships ever
-        |venture far from shore.  Yet, long
-        |ago, the oceans were calm and ocean
-        |travel flourished.`pause`
-        |`clear`As time went by, pirates came to rule
-        |the seas.  They preyed on helpless
-        |vessels, taking gold, weapons, armor
-        |and supplies.`pause`
-        |`clear`Their treasures were stored in deep
-        |caves on remote islands.  This booty
-        |was guarded by paid soldiers and by
-        |animals bred for their ferocity.`pause`
-        |`clear`When the oceans became rougher, many
-        |of the caves could no longer be
-        |reached.  In this exhibit, you see
-        |the entrance to one such cave.  The
-        |wealth stored within is enormous.`pause`
-      </Text>
-      <Text ID="2">
-        |`white`The pirate's lair is located in a
-        |chain of islands called the "three
-        |sisters."  You will be transported
-        |to the largest island.  From there,
-        |you're on your own.`pause`
-        |`clear`The pirate's lair has many levels.
-        |At the very bottom, it is said, lies
-        |a priceless sapphire!
+        |Although we prefer to remain quiet
+        |about this accomplishment, this
+        |vault contains much of the gold and
+        |many of the lost gems of the lost
+        |lands of Maelbane.`pause`
+        |`clear`Although some consider this gold 
+        |tainted, others feel that 'gold is
+        |gold.' As our guest, you may have
+        |a sample.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="6" Image="HerbOfLife.png">
+    <Exhibit ID="6" Image="Mountains.png">
       <Text ID="1">
-        |Planet natives believe in the curative
-        |power of a variety of "healing herbs."
-        |However, the effectiveness of these
-        |plants has never been verified by
-        |museum personnel.`pause`
-        |`clear`This display contains a `green`juton bush`cyan`.
-        |According to lore, its fruit increases
-        |the power of other native herbs.`pause`
-        |`clear`While this claim is doubtful, the
-        |fruit is really quite tasty.  You may
-        |sample one.`pause`
+        |The treacherous terrain and rugged
+        |near-vertical slopes of Bantross
+        |mountain ranges have always made
+        |mountain travel impossible.`pause`
+        |`clear`Through years of work, one of our
+        |monks designed the climbing gear you
+        |see before you.  With practice, it
+        |renders the ranges passible.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="7" Image="NativeCurrency.png">
+    <Exhibit ID="7" Image="MagicEtherium.png">
       <Text ID="1">
-        |Different planets have different
-        |treasures.  On Tarmalon, as on
-        |many planets, the scarcity of `yellow`gold`cyan`
-        |makes it exceedingly valuable.`pause`
-        |`clear`Here you see the museum currency room.
-        |It contains a small (but noteworthy)
-        |portion of the planet's wealth.  You
-        |are welcome to a sample.`pause``clear`
+        |With the dispersal of blacksilver,
+        |there are no longer any true wizards
+        |on the planet Bantross.  Yet, we
+        |still have some knowledge of their
+        |lives, training, and practices.`pause`
+        |`clear`Through a constant honing of skills,
+        |young wizard apprentices were taught
+        |scores of "minor" spells.  Sometimes
+        |years went by before the "changing."`pause`
+        |`clear`Only when a wizard was deemed ready,
+        |could he drink the potion that would
+        |alter his magical mind, making it
+        |possible for him to finally perform
+        |truly awesome feats.`pause`
+        |`clear`Although magic is a nearly lost art,
+        |the temples still brew the mystical
+        |etherium.  You're free to take a sip,
+        |if you think you're ready.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="8" Image="StonesOfWisdom.png">
+    <Exhibit ID="8" Image="VaseOfSouls.png">
       <Text ID="1">
-        |`white`Stones of wisdom`cyan` is probably the most
-        |popular bar-room game on tarmalon.
-        |It is not only fun, but said to help
-        |develop a player's intelligence.`pause`
+        |The magical vase of Jantyr has been
+        |damaged by the earthquakes.  We're
+        |sorry you can't see the vase in its
+        |original splendor.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="9" Image="Tapestry.png">
+    <Exhibit ID="9" Image="MorningStar.png">
       <Text ID="1">
-        |This giant tapestry is actually a map
-        |of the planet Tarmalon.  It's the only
-        |remaining world map made by tarmalon
-        |natives.`pause`
-        |`clear`This museum is located in the north-
-        |east portion of the main continent.
-        |Baron Kelfor's castle is on an island
-        |in the major inland lake.`pause`
-        |`clear`Near the bottom left of the tapestry,
-        |you can see the chain of islands
-        |called the "three sisters."  A large
-        |pirate's lair is said to be on one
-        |of these islands.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="10" Image="LostDisplays.png">
+    <Exhibit ID="10" Image="MarthbaneTunnels.png">
       <Text ID="1">
-        |As you well know, some exhibits in
-        |this museum can be deadly.  But you
-        |haven't even seen the most dangerous
-        |displays.`pause`
-        |`clear`Many years ago, the innermost section
-        |of this museum was blocked off.  Some
-        |exhibits found there were just too
-        |dangerous.  Museum insurance rates
-        |were skyrocketing!`pause`
-        |`clear`Since you have succeeded where many
-        |others have failed, this part of
-        |the museum will be open to you from
-        |now on.  Perhaps you have a chance.
-        |Probably, you don't.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="11" Image="TheTest.png">
+    <Exhibit ID="11" Image="DarkWand.png">
       <Text ID="1">
-        |The underground catacombs of armak
-        |are infamous for their twisting
-        |passageways and deadly monsters.
-        |To venture there, it is said, is
-        |almost certain death.`pause`
-        |`clear`Yet, for many years, the rulers of
-        |Tarmalon have cast their `white`best`cyan` knights
-        |into these dungeon depths.  Only a
-        |few ever make it back to the surface.`pause`
-        |`clear`Those who survive become `green`tougher`cyan`,
-        |`yellow`fiercer`cyan`, and `purple`wiser`cyan`.  They emerge
-        |virtually unbeatable in battle.`pause`
-        |`clear`You now face the same test, for in a
-        |moment, you'll find yourself at the
-        |very `yellow`bottom`cyan` of armak.  The way out
-        |lies far above.  `white`The risk is great -
-        |the payoff greater!!`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="12" Image="FourJewels.png">
+    <Exhibit ID="12" Image="UnderwaterPort.png">
       <Text ID="1">
-        |This exhibit shows the gateway to
-        |Tarmalon's most dangerous dungeon.  It
-        |is largely this exhibit which caused
-        |the inner section of the museum to be
-        |closed off to casual explorers.`pause`
-        |`clear`The museum has not charted this
-        |dungeon, and has little knowledge of
-        |its contents.  We know primarily
-        |that nobody has yet emerged alive.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="13" Image="Guardian.png">
+    <Exhibit ID="13" Image="Blacksmith.png">
       <Text ID="1">
-        |Legends say that 13 great wizards
-        |once ruled Tarmalon, but that little
-        |of their power remains.  Those who
-        |escaped death and treachery ultimately
-        |succumbed to the ravages of time.`pause`
-        |`clear`The wax figure before you is the
-        |wizard of Arovyn.  His power largely
-        |gone, he is said to be imprisoned deep
-        |within Kelfor castle.  Only the pass-
-        |word `yellow`"Guardians"`cyan` will open his door.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="14" Image="Pegasus.png">
+    <Exhibit ID="14" Image="FlaxtonIncense.png">
       <Text ID="1">
-        |This magnificent beast was found
-        |frozen to a high cliff near the
-        |museum.`pause`
-        |`clear`Locals say that `white`pegasus`cyan` stood alert
-        |for over a lifespan - poised as if
-        |ready to fly.  Finally, the magical
-        |animal succumbed to the bitter cold.`pause`
-        |`clear``white`Suddenly, the ice covering pegasus
-        |cracks apart!  The winged horse looks
-        |at you with probing eyes, and then
-        |lowers one wing, as if asking you to
-        |climb on.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="15" Image="AncientArtifact.png"></Exhibit>
+    <Exhibit ID="15" Image="KloryksCage.png"></Exhibit>
+    <Exhibit ID="16" Image="CrystalTears.png"></Exhibit>
   </Exhibits>
   <DungeonExtras>
     <Extra ID="1" Name="Treasure Chest">

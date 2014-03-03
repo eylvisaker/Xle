@@ -847,12 +847,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			if (IsAngry)
 			{
-				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("Walk out yourself.");
+				XleCore.Wait(200);
 			}
 			else
 			{
-				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("Leave " + MapName);
 				XleCore.TextArea.PrintLine();
 
@@ -865,6 +864,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		public override bool PlayerXamine(Player player)
 		{
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("You are in " + MapName + ".");
 			XleCore.TextArea.PrintLine("Look about to see more.");
@@ -974,6 +974,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (handled == false)
 			{
+				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("The guard salutes.");
 			}

@@ -40,6 +40,12 @@ namespace ERY.Xle.LoB
 		public bool ArmanGaveElixirs { get; set; }
 
 		public bool ClearedRockSlide { get; set; }
+
+		public bool ClosedVaseOfSouls { get; set; }
+
+		public bool DrankEtherium { get; set; }
+
+		public bool RegisteredForTrist { get; set; }
 	}
 
 	public static class LobStoryExtensions

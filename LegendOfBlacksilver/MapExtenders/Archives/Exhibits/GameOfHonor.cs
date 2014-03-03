@@ -16,5 +16,27 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return ExhibitIdentifier.GameOfHonor; }
 		}
+
+		public override bool IsClosed(Player player)
+		{
+			return player.Story().RegisteredForTrist;
+		}
+		public override void RunExhibit(Player player)
+		{
+			if (player.Level < 3)
+			{
+				XleCore.TextArea.PrintLine("You must be more advanced");
+				XleCore.TextArea.PrintLine("to use this exhibit.");
+				XleCore.TextArea.PrintLine();
+
+				ReturnGem(player);
+			}
+			else
+			{
+				base.RunExhibit(player);
+
+				player.Story().RegisteredForTrist = true;
+			}
+		}
 	}
 }

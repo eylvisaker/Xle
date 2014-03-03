@@ -16,5 +16,19 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return ExhibitIdentifier.VaseOfSouls; }
 		}
+
+		public override bool IsClosed(Player player)
+		{
+			return player.Story().ClosedVaseOfSouls;
+		}
+
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
+
+			ReturnGem(player);
+
+			player.Story().ClosedVaseOfSouls = true;
+		}
 	}
 }

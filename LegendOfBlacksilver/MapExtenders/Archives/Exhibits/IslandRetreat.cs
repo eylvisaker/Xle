@@ -41,7 +41,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 			if (XleCore.QuickMenuYesNo() == 0)
 			{
-				XleCore.ChangeMap(player, 1, 1, 0, 0);
+				XleCore.ChangeMap(player, 1, 1);
 			}
 		}
 	}

@@ -75,13 +75,19 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		public override void SpeakToGuard(GameState state, ref bool handled)
 		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+
 			if (state.Story().Invisible)
 			{
-				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("The guard looks startled.");
-
-				handled = true;
 			}
+			else
+			{
+				XleCore.TextArea.PrintLine("The guard ignores you.");
+			}
+
+			handled = true;
 		}
 
 		public override void SetAngry(bool value)
