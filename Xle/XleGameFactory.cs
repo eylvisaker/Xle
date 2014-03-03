@@ -1,7 +1,7 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Serialization.Xle;
-using ERY.Xle.XleMapTypes;
-using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.Maps.XleMapTypes;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

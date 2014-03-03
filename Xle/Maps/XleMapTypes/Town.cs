@@ -8,10 +8,10 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
-using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 
 
-namespace ERY.Xle.XleMapTypes
+namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Town : XleMap, IHasGuards, IHasRoofs
 	{

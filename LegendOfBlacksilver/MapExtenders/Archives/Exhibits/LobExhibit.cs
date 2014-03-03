@@ -1,5 +1,5 @@
 ﻿using AgateLib.Geometry;
-using ERY.Xle.XleMapTypes.MuseumDisplays;
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;

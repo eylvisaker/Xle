@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Castle">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Castle">
   <MapName>isle city</MapName>
   <ExtenderName>Castle1</ExtenderName>
   <MapID>0</MapID>

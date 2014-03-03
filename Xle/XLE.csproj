@@ -164,6 +164,7 @@
     <Compile Include="Maps\TileGroup.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\ITempleExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\NullTempleExtender.cs" />
+    <Compile Include="Maps\XleTypeBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands\CommandList.cs" />

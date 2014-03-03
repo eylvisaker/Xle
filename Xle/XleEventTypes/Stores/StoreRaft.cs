@@ -1,11 +1,12 @@
 ﻿using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
+using ERY.Xle.Maps.XleMapTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes
+namespace ERY.Xle.XleEventTypes.Stores
 {
 
 	public class StoreRaft : Store
@@ -44,7 +45,7 @@ namespace ERY.Xle.XleEventTypes
 
 		public override bool AllowedOnMapType(XleMap type)
 		{
-			if (type.Equals(typeof(XleMapTypes.Town)))
+			if (type.Equals(typeof(Town)))
 				return true;
 			else
 				return false;

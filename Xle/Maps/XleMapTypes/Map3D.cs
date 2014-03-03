@@ -6,7 +6,7 @@ using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using ERY.Xle.Maps;
 
-namespace ERY.Xle.XleMapTypes
+namespace ERY.Xle.Maps.XleMapTypes
 {
 	public abstract class Map3D : XleMap
 	{

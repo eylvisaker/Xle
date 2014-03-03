@@ -1,10 +1,10 @@
-﻿using ERY.Xle.XleMapTypes.Extenders;
+﻿using ERY.Xle.Maps.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleMapTypes
+namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Temple : Town
 	{

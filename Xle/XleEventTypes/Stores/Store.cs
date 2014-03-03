@@ -8,8 +8,9 @@ using AgateLib.Geometry;
 using AgateLib.InputLib;
 using AgateLib.Serialization.Xle;
 using System.ComponentModel;
+using ERY.Xle.XleEventTypes.Stores;
 
-namespace ERY.Xle.XleEventTypes
+namespace ERY.Xle.XleEventTypes.Stores
 {
 	public abstract class Store : XleEvent
 	{

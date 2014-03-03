@@ -1,4 +1,4 @@
-﻿using ERY.Xle.XleMapTypes.Extenders;
+﻿using ERY.Xle.Maps.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,16 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 	abstract class LotaDungeonExtenderBase : NullDungeonExtender
 	{
 		int mBoxesOpened = 0;
+
+		public override void SetCommands(Commands.CommandList commands)
+		{
+			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+
+			commands.Items.Add(new Commands.Climb());
+			commands.Items.Add(new Commands.End());
+			commands.Items.Add(new Commands.Magic());
+			commands.Items.Add(new Commands.Open());
+		}
 
 		protected abstract int StrengthBoost { get; }
 		protected abstract bool IsComplete(Player player);

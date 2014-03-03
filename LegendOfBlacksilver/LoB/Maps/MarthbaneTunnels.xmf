@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Dungeon" Width="16" Height="16" Levels="8">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Dungeon" Width="16" Height="16" Levels="8">
   <MapName>
   </MapName>
   <ExtenderName>

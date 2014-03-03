@@ -12,9 +12,12 @@ using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
 using System.ComponentModel;
-using ERY.Xle.XleMapTypes.MuseumDisplays;
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Commands;
+using ERY.Xle.XleEventTypes.Stores;
+using ERY.Xle.Maps.XleMapTypes;
+using ERY.Xle.XleEventTypes;
 
 namespace ERY.Xle
 {
@@ -66,8 +69,8 @@ namespace ERY.Xle
 		private EquipmentList mWeaponList = new EquipmentList();
 		private EquipmentList mArmorList = new EquipmentList();
 		private Dictionary<int, string> mQualityList = new Dictionary<int, string>();
-		private Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> mExhibitInfo = new Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo>();
-		private Dictionary<int, XleMapTypes.Map3DExtraInfo> mMap3DExtras = new Dictionary<int, XleMapTypes.Map3DExtraInfo>();
+		private Dictionary<int, ExhibitInfo> mExhibitInfo = new Dictionary<int, ExhibitInfo>();
+		private Dictionary<int, Map3DExtraInfo> mMap3DExtras = new Dictionary<int, Map3DExtraInfo>();
 		private Dictionary<int, MagicSpell> mMagicSpells = new Dictionary<int, MagicSpell>();
 
 		private Data.AgateDataImport mDatabase;
@@ -537,7 +540,7 @@ namespace ERY.Xle
 				{
 					int id = int.Parse(node.Attributes["ID"].Value);
 
-					var info = new XleMapTypes.MuseumDisplays.ExhibitInfo();
+					var info = new ExhibitInfo();
 
 					if (node.Attributes["Image"] != null)
 					{
@@ -577,7 +580,7 @@ namespace ERY.Xle
 					int id = int.Parse(node.Attributes["ID"].Value);
 					string name = node.Attributes["Name"].Value;
 
-					var info = new XleMapTypes.Map3DExtraInfo();
+					var info = new Map3DExtraInfo();
 
 					foreach (XmlNode child in node.ChildNodes)
 					{
@@ -587,7 +590,7 @@ namespace ERY.Xle
 							Rectangle srcRect = ParseRectangle(child.Attributes["srcRect"].Value);
 							Rectangle destRect = ParseRectangle(child.Attributes["destRect"].Value);
 
-							var img = new XleMapTypes.Map3DExtraImage();
+							var img = new Map3DExtraImage();
 
 							img.SrcRect = srcRect;
 							img.DestRect = destRect;
@@ -599,7 +602,7 @@ namespace ERY.Xle
 								if (animNode.Name != "Animation")
 									continue;
 
-								var anim = new XleMapTypes.Map3DExtraAnimation();
+								var anim = new Map3DExtraAnimation();
 
 								if (animNode.Attributes["frameTime"] != null)
 									anim.FrameTime = double.Parse(animNode.Attributes["frameTime"].Value);
@@ -612,7 +615,7 @@ namespace ERY.Xle
 									srcRect = ParseRectangle(frameNode.Attributes["srcRect"].Value);
 									destRect = ParseRectangle(frameNode.Attributes["destRect"].Value);
 
-									var frame = new XleMapTypes.Map3DExtraImage();
+									var frame = new Map3DExtraImage();
 
 									frame.SrcRect = srcRect;
 									frame.DestRect = destRect;
@@ -666,11 +669,11 @@ namespace ERY.Xle
 		{
 			get { return inst.mQualityList; }
 		}
-		public static Dictionary<int, XleMapTypes.MuseumDisplays.ExhibitInfo> ExhibitInfo
+		public static Dictionary<int, ExhibitInfo> ExhibitInfo
 		{
 			get { return inst.mExhibitInfo; }
 		}
-		public static Dictionary<int, XleMapTypes.Map3DExtraInfo> Map3DExtraInfo { get { return inst.mMap3DExtras; } }
+		public static Dictionary<int, Map3DExtraInfo> Map3DExtraInfo { get { return inst.mMap3DExtras; } }
 		public static Dictionary<int, MagicSpell> MagicSpells { get { return inst.mMagicSpells; } }
 
 		public static Data.AgateDataImport Database
@@ -2104,7 +2107,7 @@ namespace ERY.Xle
 				return;
 			}
 
-			if (GameState.Map is XleMapTypes.Outside)
+			if (GameState.Map is Outside)
 			{
 				player.SetReturnLocation(player.MapID, player.X, player.Y, Direction.South);
 			}

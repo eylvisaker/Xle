@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AgateLib.Geometry;
-using ERY.Xle.XleMapTypes.MuseumDisplays;
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {

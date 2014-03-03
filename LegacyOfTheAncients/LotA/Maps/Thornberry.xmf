@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Town">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Town">
   <MapName>thornberry</MapName>
   <ExtenderName>Thornberry</ExtenderName>
   <MapID>0</MapID>
@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreRaft">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreRaft">
       <X>66</X>
       <Y>16</Y>
       <Width>4</Width>
@@ -30,7 +30,7 @@
       <BuyRaftX>18</BuyRaftX>
       <BuyRaftY>54</BuyRaftY>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
       <X>20</X>
       <Y>26</Y>
       <Width>5</Width>
@@ -40,7 +40,7 @@
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
       <X>6</X>
       <Y>5</Y>
       <Width>3</Width>
@@ -51,7 +51,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">CAAAAA4AAAASAAAAGAAAABwAAAAiAAAAJgAAACwAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
       <X>36</X>
       <Y>27</Y>
       <Width>2</Width>
@@ -62,7 +62,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAsAAAAPAAAAFQAAABkAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
       <X>44</X>
       <Y>27</Y>
       <Width>3</Width>
@@ -72,7 +72,7 @@
       <ShopName>Soup Kitchen</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreLending">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreLending">
       <X>46</X>
       <Y>7</Y>
       <Width>3</Width>
@@ -82,7 +82,7 @@
       <ShopName>Friendly</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBuyback">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBuyback">
       <X>60</X>
       <Y>3</Y>
       <Width>4</Width>
@@ -92,7 +92,7 @@
       <ShopName>Pedro's Buy-Back Shop</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFlipFlop">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFlipFlop">
       <X>54</X>
       <Y>33</Y>
       <Width>2</Width>
@@ -102,7 +102,7 @@
       <ShopName>The Lucky Winner</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBlackjack">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBlackjack">
       <X>54</X>
       <Y>28</Y>
       <Width>4</Width>
@@ -112,7 +112,7 @@
       <ShopName>The Lucky Winner</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFortune">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFortune">
       <X>64</X>
       <Y>29</Y>
       <Width>5</Width>
@@ -122,7 +122,7 @@
       <ShopName>The Cloudy Crystal</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreVault">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreVault">
       <X>7</X>
       <Y>27</Y>
       <Width>1</Width>

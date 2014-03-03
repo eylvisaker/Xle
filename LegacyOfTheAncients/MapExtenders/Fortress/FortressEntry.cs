@@ -1,6 +1,6 @@
 ﻿using ERY.Xle.LotA.MapExtenders.Castle;
 using ERY.Xle.LotA.MapExtenders.Fortress.FirstArea;
-using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

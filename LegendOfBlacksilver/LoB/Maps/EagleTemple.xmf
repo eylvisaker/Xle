@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Temple">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Temple">
   <MapName>eagle</MapName>
   <ExtenderName>EagleTemple</ExtenderName>
   <MapID>0</MapID>

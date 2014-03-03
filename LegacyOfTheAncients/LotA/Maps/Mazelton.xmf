@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Town">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Town">
   <MapName>mazelton</MapName>
   <ExtenderName>Mazelton</ExtenderName>
   <MapID>0</MapID>
@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
       <X>12</X>
       <Y>18</Y>
       <Width>3</Width>
@@ -28,7 +28,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAALAAAADQAAABEAAAAXAAAAGQAAACEAAAAlAAAAKAAAACoAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFortune">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFortune">
       <X>24</X>
       <Y>1</Y>
       <Width>5</Width>
@@ -38,7 +38,7 @@
       <ShopName>Sincere Secrets</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
       <X>32</X>
       <Y>3</Y>
       <Width>4</Width>
@@ -48,7 +48,7 @@
       <ShopName>Razzle Dazzle</ShopName>
       <CostFactor>0.60613810741688</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreHealer">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreHealer">
       <X>33</X>
       <Y>16</Y>
       <Width>4</Width>
@@ -58,7 +58,7 @@
       <ShopName>Feels so good</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
       <X>55</X>
       <Y>31</Y>
       <Width>3</Width>
@@ -68,7 +68,7 @@
       <ShopName>Nibbles &amp; Bits</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
       <X>70</X>
       <Y>7</Y>
       <Width>5</Width>
@@ -79,7 +79,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAgAAAANAAAAEAAAABcAAAAaAAAA</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreLending">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreLending">
       <X>75</X>
       <Y>2</Y>
       <Width>3</Width>

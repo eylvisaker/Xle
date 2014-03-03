@@ -10,7 +10,7 @@ using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.Maps;
-using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Commands;
@@ -160,6 +160,7 @@ namespace ERY.Xle
 				throw new ArgumentException("File extension not recognized.");
 
 			XleSerializer ser = new XleSerializer(typeof(XleMap));
+			ser.Binder = new XleTypeBinder(ser.Binder);
 
 			XleMap retval;
 

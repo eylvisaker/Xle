@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Town">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Town">
   <MapName>big rapids</MapName>
   <ExtenderName>BigRapids</ExtenderName>
   <MapID>0</MapID>
@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
       <X>33</X>
       <Y>29</Y>
       <Width>8</Width>
@@ -28,7 +28,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAAMAAAAEgAAABYAAAAdAAAA</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
       <X>27</X>
       <Y>32</Y>
       <Width>3</Width>
@@ -39,7 +39,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAkAAAANAAAAEgAAABUAAAAYAAAAGwAAAB8AAAAnAAAALAAAAA==</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
       <X>8</X>
       <Y>6</Y>
       <Width>3</Width>
@@ -49,7 +49,7 @@
       <ShopName>Bertha's Buns</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreRaft">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreRaft">
       <X>15</X>
       <Y>14</Y>
       <Width>3</Width>
@@ -62,7 +62,7 @@
       <BuyRaftX>6</BuyRaftX>
       <BuyRaftY>110</BuyRaftY>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFortune">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFortune">
       <X>12</X>
       <Y>36</Y>
       <Width>5</Width>
@@ -72,7 +72,7 @@
       <ShopName>Felicia's Fortunes</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
       <X>8</X>
       <Y>35</Y>
       <Width>3</Width>

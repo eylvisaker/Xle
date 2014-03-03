@@ -1,6 +1,6 @@
 ﻿using ERY.Xle.LoB.MapExtenders.Archives.Exhibits;
-using ERY.Xle.XleMapTypes.Extenders;
-using ERY.Xle.XleMapTypes.MuseumDisplays;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;

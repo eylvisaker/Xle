@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Museum" Width="24" Height="24">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Museum" Width="24" Height="24">
   <MapName>
   </MapName>
   <ExtenderName>

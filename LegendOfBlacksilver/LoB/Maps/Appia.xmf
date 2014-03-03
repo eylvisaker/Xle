@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Town">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Town">
   <MapName>appia</MapName>
   <ExtenderName>Appia</ExtenderName>
   <MapID>0</MapID>
@@ -65,105 +65,105 @@
       <X>24</X>
       <Y>3</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>31</X>
       <Y>4</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>31</X>
       <Y>7</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>34</X>
       <Y>4</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>55</X>
       <Y>4</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>52</X>
       <Y>4</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>55</X>
       <Y>7</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>62</X>
       <Y>3</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>46</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>44</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>42</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>40</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
     <Item>
       <X>25</X>
       <Y>19</Y>
       <Color>-3418267</Color>
-      <HP>0</HP>
-      <Attack>0</Attack>
-      <Defense>0</Defense>
+      <HP>25</HP>
+      <Attack>100</Attack>
+      <Defense>100</Defense>
     </Item>
   </Guards>
   <GuardDefaultAttack>100</GuardDefaultAttack>

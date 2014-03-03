@@ -5,6 +5,7 @@ using System.Text;
 using AgateLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
+using ERY.Xle.Maps.XleMapTypes;
 
 namespace ERY.Xle
 {
@@ -862,7 +863,7 @@ namespace ERY.Xle
 
 			if (map == lastAttacked)
 			{
-				(XleCore.Map as XleMapTypes.Town).IsAngry = true;
+				(XleCore.Map as Town).IsAngry = true;
 
 				g.ClearBottom();
 				g.AddBottom("We remember you - slime!");

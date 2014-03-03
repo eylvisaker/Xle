@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Town">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Town">
   <MapName>laingsburg</MapName>
   <ExtenderName>Laingsburg</ExtenderName>
   <MapID>0</MapID>
@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
       <X>67</X>
       <Y>13</Y>
       <Width>7</Width>
@@ -27,7 +27,7 @@
       <ShopName>Ern's Fairly Decent Grocery</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
       <X>45</X>
       <Y>5</Y>
       <Width>3</Width>
@@ -38,7 +38,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAKAAAADgAAABAAAAAVAAAAGwAAAB8AAAAhAAAAKQAAACsAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
       <X>53</X>
       <Y>5</Y>
       <Width>4</Width>
@@ -49,7 +49,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAAKAAAACwAAABIAAAAVAAAAFgAAABwAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
       <X>7</X>
       <Y>7</Y>
       <Width>3</Width>
@@ -59,7 +59,7 @@
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreHealer">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreHealer">
       <X>47</X>
       <Y>22</Y>
       <Width>2</Width>
@@ -70,7 +70,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeaponTraining">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeaponTraining">
       <X>43</X>
       <Y>29</Y>
       <Width>2</Width>

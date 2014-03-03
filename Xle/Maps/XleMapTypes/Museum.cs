@@ -12,9 +12,9 @@ using AgateLib.Serialization.Xle;
 using AgateLib.DisplayLib;
 
 using Vertex = AgateLib.Geometry.VertexTypes.PositionTextureNormalTangent;
-using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 
-namespace ERY.Xle.XleMapTypes
+namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Museum : Map3D
 	{

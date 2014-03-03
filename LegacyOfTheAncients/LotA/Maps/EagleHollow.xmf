@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Town">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Town">
   <MapName>eagle hollow</MapName>
   <ExtenderName>EagleHollow</ExtenderName>
   <MapID>0</MapID>
@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreHealer">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreHealer">
       <X>13</X>
       <Y>30</Y>
       <Width>5</Width>
@@ -27,7 +27,7 @@
       <ShopName>The Surgery</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
       <X>6</X>
       <Y>5</Y>
       <Width>3</Width>
@@ -37,7 +37,7 @@
       <ShopName>Deadly's</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
       <X>47</X>
       <Y>20</Y>
       <Width>4</Width>
@@ -47,7 +47,7 @@
       <ShopName>Last Chance</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
       <X>61</X>
       <Y>23</Y>
       <Width>3</Width>
@@ -57,7 +57,7 @@
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
       <X>69</X>
       <Y>25</Y>
       <Width>5</Width>
@@ -68,7 +68,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">CQAAAA4AAAATAAAAFwAAABgAAAAcAAAAHQAAAA==</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreRaft">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreRaft">
       <X>51</X>
       <Y>3</Y>
       <Width>3</Width>
@@ -81,7 +81,7 @@
       <BuyRaftX>112</BuyRaftX>
       <BuyRaftY>4</BuyRaftY>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
       <X>46</X>
       <Y>3</Y>
       <Width>3</Width>

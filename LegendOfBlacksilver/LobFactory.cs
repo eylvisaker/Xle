@@ -11,8 +11,8 @@ using ERY.Xle.LoB.MapExtenders.Outside;
 using ERY.Xle.LoB.MapExtenders.Temples;
 using ERY.Xle.LoB.MapExtenders.Towns;
 using ERY.Xle.LoB.TitleScreen;
-using ERY.Xle.XleMapTypes;
-using ERY.Xle.XleMapTypes.Extenders;
+using ERY.Xle.Maps.XleMapTypes;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,14 +95,14 @@ namespace ERY.Xle.LoB
 
 			return base.CreateMapExtender(museum);
 		}
-		public override IOutsideExtender CreateMapExtender(XleMapTypes.Outside outside)
+		public override IOutsideExtender CreateMapExtender(Outside outside)
 		{
 			if (outside.MapID < 5)
 				return new Thalen();
 			else
 				return new Maelbane();
 		}
-		public override IDungeonExtender CreateMapExtender(XleMapTypes.Dungeon theMap)
+		public override IDungeonExtender CreateMapExtender(Dungeon theMap)
 		{
 			switch(theMap.MapID)
 			{
@@ -115,7 +115,7 @@ namespace ERY.Xle.LoB
 				default: return base.CreateMapExtender(theMap);
 			}
 		}
-		public override ICastleExtender CreateMapExtender(XleMapTypes.Castle castle)
+		public override ICastleExtender CreateMapExtender(Castle castle)
 		{
 			string ext = castle.ExtenderName.ToLowerInvariant();
 

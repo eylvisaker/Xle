@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AgateLib.Geometry;
 
-namespace ERY.Xle.XleMapTypes.MuseumDisplays
+namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 {
 	public abstract class Exhibit
 	{

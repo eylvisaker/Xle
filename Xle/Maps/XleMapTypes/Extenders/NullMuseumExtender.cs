@@ -1,10 +1,10 @@
-﻿using ERY.Xle.XleMapTypes.MuseumDisplays;
+﻿using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleMapTypes.Extenders
+namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
 	public class NullMuseumExtender : NullMapExtender, IMuseumExtender
 	{

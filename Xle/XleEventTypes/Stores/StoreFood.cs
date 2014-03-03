@@ -1,10 +1,11 @@
 ﻿using AgateLib.Geometry;
+using ERY.Xle.Maps.XleMapTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes
+namespace ERY.Xle.XleEventTypes.Stores
 {
 
 	public class StoreFood : Store
@@ -93,7 +94,7 @@ namespace ERY.Xle.XleEventTypes
 		{
 			var player = state.Player;
 
-			XleMapTypes.Town twn = state.Map as XleMapTypes.Town;
+			Town twn = state.Map as Town;
 
 			if (player.Item(9) > 0) return;
 			if (twn == null) return;

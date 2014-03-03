@@ -5,7 +5,7 @@ using System.Text;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 
-namespace ERY.Xle.XleMapTypes.MuseumDisplays
+namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 {
 	public class ExhibitInfo
 	{

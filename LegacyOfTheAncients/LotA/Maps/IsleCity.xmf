@@ -1,4 +1,4 @@
-<XleRoot type="ERY.Xle.XleMapTypes.Town">
+<XleRoot type="ERY.Xle.Maps.XleMapTypes.Town">
   <MapName>isle city</MapName>
   <ExtenderName>IsleCity</ExtenderName>
   <MapID>0</MapID>
@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
       <X>76</X>
       <Y>2</Y>
       <Width>3</Width>
@@ -27,7 +27,7 @@
       <ShopName>Water Snacks</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
       <X>46</X>
       <Y>2</Y>
       <Width>3</Width>
@@ -38,7 +38,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAgAAAAMAAAAEgAAABQAAAAcAAAAHwAAACYAAAApAAAA</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
       <X>4</X>
       <Y>4</Y>
       <Width>3</Width>
@@ -48,7 +48,7 @@
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
       <X>3</X>
       <Y>28</Y>
       <Width>5</Width>
@@ -58,7 +58,7 @@
       <ShopName>Liquid Illusions</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
       <X>8</X>
       <Y>32</Y>
       <Width>5</Width>
@@ -68,7 +68,7 @@
       <ShopName>Liquid Illusions</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
       <X>37</X>
       <Y>25</Y>
       <Width>4</Width>
@@ -79,7 +79,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAkAAAAMAAAAEwAAABUAAAAcAAAA</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreBuyback">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBuyback">
       <X>37</X>
       <Y>20</Y>
       <Width>3</Width>
@@ -89,7 +89,7 @@
       <ShopName>Captain Greed's Buy-Back Shop</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreLending">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreLending">
       <X>66</X>
       <Y>27</Y>
       <Width>3</Width>
@@ -99,7 +99,7 @@
       <ShopName>Friendly</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.StoreRaft">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreRaft">
       <X>67</X>
       <Y>33</Y>
       <Width>7</Width>

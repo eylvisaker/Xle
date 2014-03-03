@@ -8,9 +8,10 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
+using ERY.Xle.XleEventTypes.Stores;
 
 
-namespace ERY.Xle.XleMapTypes
+namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Outside : XleMap
 	{
@@ -729,7 +730,7 @@ namespace ERY.Xle.XleMapTypes
 
 					break;
 				case 5:			// buy museum coin
-					XleEventTypes.Store.OfferMuseumCoin(player);
+					Store.OfferMuseumCoin(player);
 
 					break;
 

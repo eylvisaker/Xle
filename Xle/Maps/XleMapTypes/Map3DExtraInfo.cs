@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AgateLib.Geometry;
 
-namespace ERY.Xle.XleMapTypes
+namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Map3DExtraInfo
 	{
