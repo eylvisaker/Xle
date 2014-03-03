@@ -31,7 +31,6 @@ namespace ERY.Xle.LotA
 				yield return new Commands.Hold();
 				yield return new Commands.Inventory();
 				yield return new Commands.Pass();
-				yield return new Commands.Speak();
 				yield return new Commands.Use { ShowItemMenu = false };
 				yield return new Commands.Weapon();
 				yield return new Commands.Xamine();

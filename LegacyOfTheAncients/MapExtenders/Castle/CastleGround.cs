@@ -21,6 +21,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			commands.Items.Add(new Commands.Magic());
 			commands.Items.Add(new Commands.Open());
 			commands.Items.Add(new Commands.Take());
+			commands.Items.Add(new Commands.Speak());
 		}
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{

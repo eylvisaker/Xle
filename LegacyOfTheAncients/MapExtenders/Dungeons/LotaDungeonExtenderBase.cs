@@ -50,14 +50,14 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 		}
 
 		
-		public virtual void OnBeforeOpenBox(Player player, ref bool handled)
+		public override void OnBeforeOpenBox(Player player, ref bool handled)
 		{
 			mBoxesOpened++;
 
-			if (mBoxesOpened == 3 && player.Item(11) == 0)
+			if (mBoxesOpened == 3 && player.Items[LotaItem.Compass]  == 0)
 			{
-				g.AddBottom("You find a compass!", XleColor.Yellow);
-				player.ItemCount(11, 1);
+				XleCore.TextArea.PrintLine("You find a compass!", XleColor.Yellow);
+				player.Items[LotaItem.Compass] += 1;
 
 				SoundMan.PlaySound(LotaSound.VeryGood);
 

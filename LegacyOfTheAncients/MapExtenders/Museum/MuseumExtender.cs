@@ -40,6 +40,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 
 			commands.Items.Add(new Commands.Rob());
 			commands.Items.Add(new Commands.Take());
+			commands.Items.Add(new Commands.Speak());
 		}
 
 		public override Exhibit GetExhibitByTile(int tile)

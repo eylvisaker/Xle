@@ -411,9 +411,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			int amount = XleCore.random.Next(60, 200);
 
-			Commands.CommandList.UpdateCommand("Open Box");
+			XleCore.TextArea.PrintLine(" Box");
+			XleCore.TextArea.PrintLine();
 			SoundMan.PlaySound(LotaSound.OpenChest);
-			g.AddBottom();
 			XleCore.Wait(500);
 
 			if (amount + player.HP > player.MaxHP)
@@ -430,10 +430,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (handled == false)
 			{
 				if (amount == 0)
-					g.AddBottom("You find nothing.", Color.Yellow);
+					XleCore.TextArea.PrintLine("You find nothing.", Color.Yellow);
 				else
 				{
-					g.AddBottom("Hit points:  + " + amount.ToString(), XleColor.Yellow);
+					XleCore.TextArea.PrintLine("Hit points:  + " + amount.ToString(), XleColor.Yellow);
 					player.HP += amount;
 					SoundMan.PlaySound(LotaSound.Good);
 					XleCore.FlashHPWhileSound(XleColor.Yellow);
@@ -446,9 +446,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			val -= 0x30;
 
-			Commands.CommandList.UpdateCommand("Open Chest");
-			SoundMan.PlaySound(LotaSound.OpenChest);
+			XleCore.TextArea.PrintLine(" Chest");
 			XleCore.TextArea.PrintLine();
+
+			SoundMan.PlaySound(LotaSound.OpenChest);
 			XleCore.Wait(XleCore.GameState.GameSpeed.DungeonOpenChestSoundTime);
 
 			// TODO: give weapons
@@ -477,24 +478,19 @@ namespace ERY.Xle.Maps.XleMapTypes
 					if (treasure > 0)
 					{
 						string text = "You find a " + XleCore.ItemList[treasure].LongName + "!!";
-						g.ClearBottom();
-						g.AddBottom(text);
+						XleCore.TextArea.Clear();
+						XleCore.TextArea.PrintLine(text);
 
-						player.ItemCount(treasure, 1);
+						player.Items[treasure] += 1;
 
 						SoundMan.PlaySound(LotaSound.VeryGood);
 
-						while (SoundMan.IsPlaying(LotaSound.VeryGood))
-						{
-							g.UpdateBottom(text, XleColor.Yellow);
-							XleCore.Wait(50);
-							g.UpdateBottom(text, XleColor.White);
-							XleCore.Wait(50);
-						}
+						XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
+							XleColor.White, XleColor.Yellow, 100);
 					}
 					else
 					{
-						g.AddBottom("You find nothing.");
+						XleCore.TextArea.PrintLine("You find nothing.");
 					}
 				}
 			}

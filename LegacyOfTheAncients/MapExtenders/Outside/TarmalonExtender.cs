@@ -29,6 +29,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			commands.Items.Add(new Commands.Disembark());
 			commands.Items.Add(new Commands.End());
 			commands.Items.Add(new Commands.Magic());
+			commands.Items.Add(new Commands.Speak());
 
 		}
 	}
