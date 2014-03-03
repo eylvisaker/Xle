@@ -40,7 +40,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 				player.Attribute[Attributes.strength] += StrengthBoost;
 
-				g.AddBottom("Strength + " + StrengthBoost.ToString());
+				XleCore.TextArea.PrintLine("Strength + " + StrengthBoost.ToString());
 				SoundMan.PlaySoundSync(LotaSound.VeryGood);
 			}
 		}

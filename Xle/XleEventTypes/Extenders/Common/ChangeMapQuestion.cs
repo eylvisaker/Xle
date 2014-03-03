@@ -12,8 +12,8 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
 		public override void OnStepOn(GameState state, ref bool cancel)
 		{
 			string newMapName = ChangeMap.GetMapName();
-			g.AddBottom("");
-			g.AddBottom("Enter " + newMapName + "?");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Enter " + newMapName + "?");
 
 			SoundMan.PlaySound(LotaSound.Question);
 
@@ -21,10 +21,12 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
 
 			if (string.IsNullOrEmpty(ChangeMap.CommandText) == false)
 			{
-				g.AddBottom("");
-				g.AddBottom(string.Format(ChangeMap.CommandText, XleCore.Map.MapName, newMapName));
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine(
+					string.Format(ChangeMap.CommandText, 
+					state.Map.MapName, newMapName));
 
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
 				XleCore.Wait(500);
 
 				choice = 0;

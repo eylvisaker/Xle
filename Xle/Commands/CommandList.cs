@@ -151,8 +151,8 @@ namespace ERY.Xle.Commands
 			{
 				if (player.IsOnRaft)
 				{
-					g.AddBottom("");
-					g.AddBottom("You climb onto a raft.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("You climb onto a raft.");
 
 					SoundMan.PlaySound(LotaSound.BoardRaft);
 				}

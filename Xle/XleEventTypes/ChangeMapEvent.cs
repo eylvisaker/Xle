@@ -154,7 +154,7 @@ namespace ERY.Xle.XleEventTypes
 				builder.AddText(".", XleColor.White);
 
 				g.AddBottom(builder);
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
 
 				XleCore.Wait(1500);
 			}
@@ -175,9 +175,9 @@ namespace ERY.Xle.XleEventTypes
 			{
 				SoundMan.PlaySound(LotaSound.Medium);
 
-				g.AddBottom("");
-				g.AddBottom("Map ID " + mMapID + " not found.");
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Map ID " + mMapID + " not found.");
+				XleCore.TextArea.PrintLine();
 
 				XleCore.Wait(1500);
 

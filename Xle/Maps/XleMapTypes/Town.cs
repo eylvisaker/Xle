@@ -291,15 +291,13 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (guard.SkipAttacking)
 				return;
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 
-			ColorStringBuilder csb = new ColorStringBuilder();
-
-			csb.AddText("Attacked by " + guard.Name + "! -- ", XleColor.White);
+			XleCore.TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
 
 			if (XleCore.random.NextDouble() > Extender.ChanceToHitPlayer(player, guard))
 			{
-				csb.AddText("Missed", XleColor.Cyan);
+				XleCore.TextArea.Print("Missed", XleColor.Cyan);
 				SoundMan.PlaySound(LotaSound.EnemyMiss);
 			}
 			else
@@ -308,16 +306,16 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 				int dam = Extender.RollDamageToPlayer(player, guard);
 
-				csb.AddText("Blow ", XleColor.Yellow);
-				csb.AddText(dam.ToString(), XleColor.White);
-				csb.AddText(" H.P.", XleColor.White);
+				XleCore.TextArea.Print("Blow ", XleColor.Yellow);
+				XleCore.TextArea.Print(dam.ToString(), XleColor.White);
+				XleCore.TextArea.Print(" H.P.", XleColor.White);
 
 				SoundMan.PlaySound(LotaSound.EnemyHit);
 
 				player.HP -= dam;
 			}
 
-			g.AddBottom(csb);
+			XleCore.TextArea.PrintLine();
 
 			XleCore.Wait(100 * player.Gamespeed);
 		}
@@ -376,7 +374,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (XleCore.random.NextDouble() > hitChance)
 			{
-				g.AddBottom("Attack on " + guard.Name + " missed", XleColor.Purple);
+				XleCore.TextArea.PrintLine("Attack on " + guard.Name + " missed", XleColor.Purple);
 				SoundMan.PlaySound(LotaSound.PlayerMiss);
 			}
 			else
@@ -398,7 +396,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 				if (guard.HP <= 0)
 				{
-					g.AddBottom(guard.Name + " killed");
+					XleCore.TextArea.PrintLine(guard.Name + " killed");
 
 					Guards.Remove(guard);
 
@@ -655,7 +653,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		public override bool PlayerFight(Player player)
 		{
-			string tempstring;
 			string weaponName;
 			Point attackPt = Point.Empty, attackPt2 = Point.Empty;
 			int i = 0, j = 0;
@@ -676,12 +673,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 				maxYdist = 8;
 			}
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 
-			g.AddBottom("Fight with " + player.CurrentWeaponTypeName);
-			g.AddBottom("Enter direction: ");
-
-			tempstring = "Enter direction: ";
+			XleCore.TextArea.PrintLine("Fight with " + player.CurrentWeaponTypeName);
+			XleCore.TextArea.Print("Enter direction: ");
 
 			KeyCode key = XleCore.WaitForKey(KeyCode.Up, KeyCode.Down, KeyCode.Left, KeyCode.Right);
 
@@ -694,7 +690,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			switch (key)
 			{
 				case KeyCode.Right:
-					tempstring += "east";
 					player.FaceDirection = Direction.East;
 					attackPt.X++;
 					attackPt2.X++;
@@ -702,19 +697,16 @@ namespace ERY.Xle.Maps.XleMapTypes
 					dx = 1;
 					break;
 				case KeyCode.Up:
-					tempstring += "north";
 					player.FaceDirection = Direction.North;
 					dy = -1;
 					attackPt2.X++;
 					break;
 				case KeyCode.Left:
-					tempstring += "west";
 					player.FaceDirection = Direction.West;
 					dx = -1;
 					attackPt2.Y++;
 					break;
 				case KeyCode.Down:
-					tempstring += "south";
 					player.FaceDirection = Direction.South;
 					dy = 1;
 					attackPt.Y++;
@@ -723,7 +715,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 					break;
 			}
 
-			g.UpdateBottom(tempstring);
+			XleCore.TextArea.PrintLine(player.FaceDirection.ToString());
 
 			for (i = 1; i <= maxXdist && attacked == false && tile < 128; i++)
 			{
@@ -812,10 +804,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 						int dam = XleCore.random.Next(10) + 30;
 
-						tempstring = (string)"Merchant killed by blow of " + dam.ToString();
-
-						g.AddBottom("");
-						g.AddBottom(tempstring);
+						XleCore.TextArea.PrintLine();
+						XleCore.TextArea.PrintLine("Merchant killed by blow of " + dam.ToString());
 
 						this[attackPt.X + dx, attackPt.Y + dy] = 0x52;
 						this[attackPt.X + dx, attackPt.Y + dy + 1] = 0x52;
@@ -833,7 +823,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					if (tile == 176 || tile1 == 176 || tile == 192 || tile == 192)
 					{
-						g.AddBottom("The prison bars hold.");
+						XleCore.TextArea.PrintLine("The prison bars hold.");
 
 						SoundMan.PlaySound(LotaSound.Bump);
 
@@ -845,7 +835,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (attacked == false)
 			{
-				g.AddBottom("Nothing hit");
+				XleCore.TextArea.PrintLine("Nothing hit");
 			}
 
 			XleCore.Wait(200 + 50 * player.Gamespeed, true, XleCore.Redraw);
@@ -857,14 +847,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			if (IsAngry)
 			{
-				g.AddBottom("");
-				g.AddBottom("Walk out yourself.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Walk out yourself.");
 			}
 			else
 			{
-				g.AddBottom("");
-				g.AddBottom("Leave " + MapName);
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Leave " + MapName);
+				XleCore.TextArea.PrintLine();
 
 				XleCore.Wait(200);
 
@@ -875,9 +865,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		public override bool PlayerXamine(Player player)
 		{
-			g.AddBottom("");
-			g.AddBottom("You are in " + MapName + ".");
-			g.AddBottom("Look about to see more.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You are in " + MapName + ".");
+			XleCore.TextArea.PrintLine("Look about to see more.");
 
 			return true;
 		}

@@ -208,14 +208,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (ex.IsClosed(player))
 			{
 				g.AddBottomCentered("- Exhibit closed -", ex.TitleColor);
-				g.AddBottom();
+				XleCore.TextArea.PrintLine();
 				XleCore.WaitForKey();
 
 				return true;
 			}
 
 			g.AddBottomCentered(ex.InsertCoinText, ex.TitleColor);
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
 			XleCore.WaitForKey();
 
 			if (ex.RequiresCoin(player) == false)
@@ -226,9 +226,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 			else
 			{
 				if (ex.HasBeenVisited(player) == false)
-					g.AddBottom("You haven't used this exhibit.");
+					XleCore.TextArea.PrintLine("You haven't used this exhibit.");
 				else
-					g.AddBottom();
+					XleCore.TextArea.PrintLine();
 
 				if (Extender.PlayerHasCoin(player, ex) == false)
 				{
@@ -274,40 +274,40 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public override bool PlayerXamine(Player player)
 		{
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
 
 			if (InteractWithDisplay(player))
 				return true;
 
-			g.AddBottom("You are in an ancient museum.");
+			XleCore.TextArea.PrintLine("You are in an ancient museum.");
 
 			return true;
 		}
 		public override bool PlayerFight(Player player)
 		{
-			g.AddBottom();
-			g.AddBottom("There is nothing to fight.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("There is nothing to fight.");
 
 			return true;
 		}
 		public override bool PlayerRob(GameState state)
 		{
-			g.AddBottom();
-			g.AddBottom("There is nothing to rob.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("There is nothing to rob.");
 
 			return true;
 		}
 		protected override bool PlayerSpeakImpl(Player player)
 		{
-			g.AddBottom();
-			g.AddBottom("There is no reply.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("There is no reply.");
 
 			return true;
 		}
 		public override bool PlayerTake(Player player)
 		{
-			g.AddBottom();
-			g.AddBottom("There is nothing to take.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("There is nothing to take.");
 
 			return true;
 		}

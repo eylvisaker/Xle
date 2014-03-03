@@ -22,9 +22,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				ReadRawText(ExhibitInfo.Text[1]);
 			}
 
-			g.AddBottom("Would you like to go");
-			g.AddBottom("to thornberry?");
-			g.AddBottom();
+			XleCore.TextArea.PrintLine("Would you like to go");
+			XleCore.TextArea.PrintLine("to thornberry?");
+			XleCore.TextArea.PrintLine();
 
 			if (XleCore.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
 			{

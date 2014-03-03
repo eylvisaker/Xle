@@ -56,8 +56,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 				tempString += max;
 				tempString += " days";
 
-				g.AddBottom("");
-				g.AddBottom(tempString, XleColor.Cyan);
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine(tempString, XleColor.Cyan);
 
 				choice = ChooseNumber(max);
 
@@ -66,7 +66,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 					player.Spend((int)(choice * cost));
 					player.Food += choice;
 
-					g.AddBottom(choice + " days of food bought.");
+					XleCore.TextArea.PrintLine(choice + " days of food bought.");
 
 					StoreSound(LotaSound.Sale);
 
@@ -77,8 +77,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 				}
 				else
 				{
-					g.AddBottom("");
-					g.AddBottom("Nothing Purchased");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Nothing Purchased");
 
 					StoreSound(LotaSound.Medium);
 				}
@@ -127,8 +127,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			SoundMan.PlaySound(LotaSound.Question);
 
-			g.AddBottom("");
-			g.AddBottom("Would you like to earn some gold?");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Would you like to earn some gold?");
 
 			MenuItemList menu = new MenuItemList("Yes", "No");
 
@@ -139,11 +139,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 				player.ItemCount(9, 1);
 				player.mailTown = target;
 
-				g.AddBottom("");
-				g.AddBottom("Here's some mail to");
-				g.AddBottom("deliver to " + XleCore.GetMapName(target) + ".");
-				g.AddBottom("");
-				g.AddBottom("        Press Key to Continue");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Here's some mail to");
+				XleCore.TextArea.PrintLine("deliver to " + XleCore.GetMapName(target) + ".");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("        Press Key to Continue");
 
 				WaitForKey();
 			}
@@ -197,11 +197,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 				case 3: gold = 125; break;
 			}
 
-			g.AddBottom("");
-			g.AddBottom("Thanks for the delivery. ");
-			g.AddBottom("Here's " + gold.ToString() + " gold.");
-			g.AddBottom("");
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Thanks for the delivery. ");
+			XleCore.TextArea.PrintLine("Here's " + gold.ToString() + " gold.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 
 			StoreSound(LotaSound.Good);
 			g.UpdateBottom("        Press Key to Continue");
@@ -231,8 +231,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 				int choice = XleCore.random.Next(1, 16) + XleCore.random.Next(20, 36);
 
-				g.AddBottom("");
-				g.AddBottom("Stole " + choice.ToString() + " days of food.", XleColor.Yellow);
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Stole " + choice.ToString() + " days of food.", XleColor.Yellow);
 
 				player.Food += choice;
 				SoundMan.PlaySound(LotaSound.Sale);
@@ -243,13 +243,13 @@ namespace ERY.Xle.XleEventTypes.Stores
 			}
 			else
 			{
-				g.AddBottom("");
-				g.AddBottom("No items within reach now.", XleColor.Yellow);
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("No items within reach now.", XleColor.Yellow);
 
 				SoundMan.PlaySound(LotaSound.Medium);
 			}
 
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
 			Wait(2000);
 
 			return true;

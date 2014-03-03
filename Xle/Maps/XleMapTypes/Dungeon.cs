@@ -198,8 +198,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 				case 0x11:
 					if (player.DungeonLevel == 0)
 					{
-						g.AddBottom("");
-						g.AddBottom("You climb out of the dungeon.");
+						XleCore.TextArea.PrintLine();
+						XleCore.TextArea.PrintLine("You climb out of the dungeon.");
 
 						Extender.OnPlayerExitDungeon(player);
 
@@ -239,8 +239,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			string tempstring = "You are now at level " + (player.DungeonLevel + 1).ToString() + ".";
 
-			g.AddBottom("");
-			g.AddBottom(tempstring, XleColor.White);
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine(tempstring, XleColor.White);
 		}
 
 		protected override bool ShowDirections(Player player)
@@ -301,7 +301,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				default: break;
 			}
 
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
 
 			bool revealHidden = false;
 
@@ -320,7 +320,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (revealHidden)
 			{
-				g.AddBottom("Hidden objects detected!!!", XleColor.White);
+				XleCore.TextArea.PrintLine("Hidden objects detected!!!", XleColor.White);
 				SoundMan.PlaySound(LotaSound.XamineDetected);
 			}
 
@@ -357,23 +357,23 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (monster)
 			{
-				g.AddBottom("A " + extraText + " is stalking you!!!");
+				XleCore.TextArea.PrintLine("A " + extraText + " is stalking you!!!");
 			}
 			else if (extraText != string.Empty)
 			{
 				if (distance > 0)
 				{
-					g.AddBottom("A " + extraText + " is in sight.");
+					XleCore.TextArea.PrintLine("A " + extraText + " is in sight.");
 				}
 				else
 				{
-					g.AddBottom("You are standing next ");
-					g.AddBottom("to a " + extraText + ".");
+					XleCore.TextArea.PrintLine("You are standing next ");
+					XleCore.TextArea.PrintLine("to a " + extraText + ".");
 				}
 			}
 			else
 			{
-				g.AddBottom("Nothing unusual in sight.");
+				XleCore.TextArea.PrintLine("Nothing unusual in sight.");
 			}
 
 			return true;
@@ -399,7 +399,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 			else
 			{
-				g.AddBottom("Nothing to open.");
+				XleCore.TextArea.PrintLine("Nothing to open.");
 				XleCore.Wait(1000);
 			}
 
@@ -459,7 +459,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				int amount = XleCore.random.Next(90, 300);
 
-				g.AddBottom("You find " + amount.ToString() + " gold.", XleColor.Yellow);
+				XleCore.TextArea.PrintLine("You find " + amount.ToString() + " gold.", XleColor.Yellow);
 
 				player.Gold += amount;
 
@@ -521,8 +521,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			//string name = TrapName(this[x, y]);
 
-			//g.AddBottom();
-			//g.AddBottom("You avoid the " + name + ".");
+			//XleCore.TextArea.PrintLine();
+			//XleCore.TextArea.PrintLine("You avoid the " + name + ".");
 			//XleCore.wait(150);
 		}
 		private void OnPlayerTriggerTrap(Player player, int x, int y)
@@ -532,19 +532,19 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			this[x, y] -= 0x10;
 			int damage = 31;
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
 
 			if (this[x, y] == 0x12)
 			{
-				g.AddBottom("You fall through a hidden hole.", XleColor.White);
+				XleCore.TextArea.PrintLine("You fall through a hidden hole.", XleColor.White);
 			}
 			else
 			{
-				g.AddBottom("You're ambushed by a " + TrapName(this[x, y]) + ".", XleColor.White);
+				XleCore.TextArea.PrintLine("You're ambushed by a " + TrapName(this[x, y]) + ".", XleColor.White);
 				XleCore.Wait(100);
 			}
 
-			g.AddBottom("   H.P. - " + damage.ToString(), XleColor.White);
+			XleCore.TextArea.PrintLine("   H.P. - " + damage.ToString(), XleColor.White);
 			player.HP -= damage;
 
 			SoundMan.PlaySound(LotaSound.EnemyHit);

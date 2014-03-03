@@ -105,8 +105,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 				theWindow[i++] = "";
 				theWindow[i++] = "Due Date: " + DueDate;
 
-				g.AddBottom("");
-				g.AddBottom("Pay how much?");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Pay how much?");
 
 				if (min > 0)
 				{
@@ -127,27 +127,27 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 				if (player.loan <= 0)
 				{
-					g.AddBottom("Loan Repaid.");
+					XleCore.TextArea.PrintLine("Loan Repaid.");
 
 					SoundMan.PlaySound(LotaSound.Sale);
 				}
 				else if (min == 0)
 				{
-					g.AddBottom("You Owe " + player.loan.ToString() + " gold.");
-					g.AddBottom("Take your time.");
+					XleCore.TextArea.PrintLine("You Owe " + player.loan.ToString() + " gold.");
+					XleCore.TextArea.PrintLine("Take your time.");
 
 					SoundMan.PlaySound(LotaSound.Sale);
 				}
 				else if (choice >= min)
 				{
-					g.AddBottom("You have 14 days to pay the rest!");
+					XleCore.TextArea.PrintLine("You have 14 days to pay the rest!");
 					player.dueDate = (int)player.TimeDays + 14;
 
 					SoundMan.PlaySound(LotaSound.Sale);
 				}
 				else
 				{
-					g.AddBottom("Better pay up!");
+					XleCore.TextArea.PrintLine("Better pay up!");
 
 					//LotaPlaySound(snd_Bad);
 

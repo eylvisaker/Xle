@@ -454,11 +454,11 @@ namespace ERY.Xle
 		{
 			hp = 0;
 
-			g.AddBottom("");
-			g.AddBottom("");
-			g.AddBottom("            You died!");
-			g.AddBottom("");
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("            You died!");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 
 			SoundMan.PlaySound(LotaSound.VeryBad);
 
@@ -487,9 +487,9 @@ namespace ERY.Xle
 			while (SoundMan.IsPlaying(LotaSound.VeryBad))
 				XleCore.Wait(40);
 
-			g.AddBottom("The powers of the museum");
-			g.AddBottom("resurrect you from the grave!");
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine("The powers of the museum");
+			XleCore.TextArea.PrintLine("resurrect you from the grave!");
+			XleCore.TextArea.PrintLine();
 
 			SoundMan.PlaySoundSync(LotaSound.VeryGood);
 		}
@@ -866,10 +866,10 @@ namespace ERY.Xle
 				(XleCore.Map as Town).IsAngry = true;
 
 				g.ClearBottom();
-				g.AddBottom("We remember you - slime!");
-				g.AddBottom("");
-				g.AddBottom("");
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine("We remember you - slime!");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine();
 
 				XleCore.Wait(2000);
 

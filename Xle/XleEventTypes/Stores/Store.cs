@@ -126,13 +126,13 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			SoundMan.PlaySound(LotaSound.Question);
 
-			g.AddBottom("Would you like to buy a ");
+			XleCore.TextArea.PrintLine("Would you like to buy a ");
 			XleCore.Wait(1);
 
-			g.AddBottom("museum coin for " + amount.ToString() + " gold?");
+			XleCore.TextArea.PrintLine("museum coin for " + amount.ToString() + " gold?");
 			XleCore.Wait(1);
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 			XleCore.Wait(1);
 
 			int choice = XleCore.QuickMenu(menu, 3, 0);
@@ -143,7 +143,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 				{
 					string coinName = XleCore.ItemList[coin].Name;
 
-					g.AddBottom("Use this " + coinName + " well!");
+					XleCore.TextArea.PrintLine("Use this " + coinName + " well!");
 
 					player.ItemCount(coin, 1);
 
@@ -151,7 +151,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 				}
 				else
 				{
-					g.AddBottom("Not enough gold.");
+					XleCore.TextArea.PrintLine("Not enough gold.");
 					SoundMan.PlaySound(LotaSound.Medium);
 				}
 

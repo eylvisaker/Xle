@@ -12,8 +12,8 @@ namespace ERY.Xle.Commands
 
 			if (state.Map.PlayerTake(state.Player) == false)
 			{
-				g.AddBottom("");
-				g.AddBottom("Nothing to take.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Nothing to take.");
 
 				XleCore.Wait(500);
 			}

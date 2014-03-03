@@ -79,23 +79,23 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			MenuItemList theList = new MenuItemList("0", "1", "2");
 
-			g.AddBottom("");
-			g.AddBottom("Make choice (hit 0 to cancel)");
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Make choice (hit 0 to cancel)");
+			XleCore.TextArea.PrintLine();
 
 			int choice = QuickMenu(theList, 2, 0);
 
 			if (choice == 0)
 			{
-				g.AddBottom("");
-				g.AddBottom("Nothing purchased");
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Nothing purchased");
+				XleCore.TextArea.PrintLine();
 
 				StoreSound(LotaSound.Medium);
 			}
 			else if (choice == 1)
 			{
-				g.AddBottom("You are cured.");
+				XleCore.TextArea.PrintLine("You are cured.");
 				player.HP = player.MaxHP;
 
 				StoreSound(LotaSound.VeryGood);
@@ -104,7 +104,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			{
 				if (player.museum[6] <= 1)
 				{
-					g.AddBottom("You're not ready yet.");
+					XleCore.TextArea.PrintLine("You're not ready yet.");
 					SoundMan.PlaySound(LotaSound.Medium);
 				}
 				else
@@ -114,14 +114,14 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 					buyHerbs = true;
 
-					g.AddBottom();
-					g.AddBottom("Purchase how many healing herbs?");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Purchase how many healing herbs?");
 
 					int number = ChooseNumber(max);
 
 					if (number == 0)
 					{
-						g.AddBottom("Nothing purchased.");
+						XleCore.TextArea.PrintLine("Nothing purchased.");
 						SoundMan.PlaySound(LotaSound.Medium);
 					}
 					else
@@ -133,7 +133,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 						player.ItemCount(3, number);
 
-						g.AddBottom(number.ToString() + " healing herbs purchased.");
+						XleCore.TextArea.PrintLine(number.ToString() + " healing herbs purchased.");
 						player.museum[6] |= 0x04;
 
 						StoreSound(LotaSound.Sale);

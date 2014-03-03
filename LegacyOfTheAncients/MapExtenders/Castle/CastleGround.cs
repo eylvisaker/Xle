@@ -82,10 +82,6 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 				handled = true;
 			}
-			else if (g.guard)  // for fortress
-			{
-
-			}
 		}
 
 		public override void SetAngry(bool value)

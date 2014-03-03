@@ -1743,8 +1743,8 @@ namespace ERY.Xle
 				last = spacing[i] + spaces + 1;
 			}
 
-			g.AddBottom(tempLine, clrInit);
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine(tempLine, clrInit);
+			XleCore.TextArea.PrintLine();
 
 			topLine = tempLine;
 			tempLine = new string(' ', spacing[value]) + "`";
@@ -1797,7 +1797,7 @@ namespace ERY.Xle
 
 			Wait(100, redraw);
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 
 			return value;
 
@@ -1976,7 +1976,7 @@ namespace ERY.Xle
 			int method = 0;
 			int amount = 0;
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 
 			ColorStringBuilder builder = new ColorStringBuilder();
 
@@ -1986,7 +1986,7 @@ namespace ERY.Xle
 			builder.AddText("joystick", XleColor.Cyan);
 
 			g.AddBottom(builder);
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
 
 			KeyCode key;
 
@@ -2009,20 +2009,20 @@ namespace ERY.Xle
 						case KeyCode.Left:
 						case KeyCode.Down:
 
-							g.AddBottom("Use joystick - press button when done");
-							g.AddBottom("");
-							g.AddBottom("  Horizontal - Slow change", XleColor.Cyan);
-							g.AddBottom("  Vertical   - Fast change", XleColor.Cyan);
-							g.AddBottom("                          - 0 -");
+							XleCore.TextArea.PrintLine("Use joystick - press button when done");
+							XleCore.TextArea.PrintLine();
+							XleCore.TextArea.PrintLine("  Horizontal - Slow change", XleColor.Cyan);
+							XleCore.TextArea.PrintLine("  Vertical   - Fast change", XleColor.Cyan);
+							XleCore.TextArea.PrintLine("                          - 0 -");
 
 							method = 2;
 
 							break;
 						default:
-							g.AddBottom("Keyboard entry-press return when done", XleColor.Yellow);
-							g.AddBottom("");
-							g.AddBottom("");
-							g.AddBottom("                          - 0 -");
+							XleCore.TextArea.PrintLine("Keyboard entry-press return when done", XleColor.Yellow);
+							XleCore.TextArea.PrintLine();
+							XleCore.TextArea.PrintLine();
+							XleCore.TextArea.PrintLine("                          - 0 -");
 							method = 1;
 
 							break;

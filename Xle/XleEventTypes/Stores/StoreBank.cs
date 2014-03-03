@@ -52,9 +52,9 @@ namespace ERY.Xle.XleEventTypes.Stores
 			theWindow[i++] = "";
 			theWindow[i++] = "3.  Balance Inquiry  ";
 
-			g.AddBottom("");
-			g.AddBottom("Make choice (Hit 0 to cancel)");
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Make choice (Hit 0 to cancel)");
+			XleCore.TextArea.PrintLine();
 
 			MenuItemList theList = new MenuItemList("0", "1", "2", "3");
 			choice = QuickMenu(theList, 2, 0);
@@ -63,8 +63,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 			{
 
 				case 1:
-					g.AddBottom("");
-					g.AddBottom("Deposit how much?");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Deposit how much?");
 					amount = ChooseNumber(player.Gold);
 
 					player.Spend(amount);
@@ -75,8 +75,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 					if (player.GoldInBank > 0)
 					{
 
-						g.AddBottom("");
-						g.AddBottom("Withdraw how much?");
+						XleCore.TextArea.PrintLine();
+						XleCore.TextArea.PrintLine("Withdraw how much?");
 						amount = ChooseNumber(player.GoldInBank);
 
 						player.Gold += amount;
@@ -85,7 +85,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 					else
 					{
 						g.ClearBottom();
-						g.AddBottom("Nothing to withdraw");
+						XleCore.TextArea.PrintLine("Nothing to withdraw");
 
 						StoreSound(LotaSound.Medium);
 						choice = 0;
@@ -96,7 +96,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			if (choice > 0)
 			{
-				g.AddBottom("Current balance: " + player.GoldInBank + " gold.");
+				XleCore.TextArea.PrintLine("Current balance: " + player.GoldInBank + " gold.");
 
 				if (choice != 3)
 				{

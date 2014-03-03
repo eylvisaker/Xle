@@ -67,12 +67,12 @@ namespace ERY.Xle.XleEventTypes.Stores
 			// check to see if there are any rafts near the raft drop point
 			skipRaft = CheckForNearbyRaft(player, skipRaft);
 
-			g.AddBottom("** " + this.ShopName + " **", XleColor.Yellow);
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine("** " + this.ShopName + " **", XleColor.Yellow);
+			XleCore.TextArea.PrintLine();
 
 			if (skipRaft == false)
 			{
-				g.AddBottom("Want to buy a raft for " + raftCost.ToString() + " gold?");
+				XleCore.TextArea.PrintLine("Want to buy a raft for " + raftCost.ToString() + " gold?");
 
 				choice = XleCore.QuickMenu(theList, 3, 1);
 
@@ -83,17 +83,17 @@ namespace ERY.Xle.XleEventTypes.Stores
 					{
 						player.AddRaft(BuyRaftMap, BuyRaftPt.X, BuyRaftPt.Y);
 
-						g.AddBottom("Raft purchased.");
+						XleCore.TextArea.PrintLine("Raft purchased.");
 						SoundMan.PlaySound(LotaSound.Sale);
 						XleCore.Wait(1000);
 
-						g.AddBottom("Board raft outside.");
+						XleCore.TextArea.PrintLine("Board raft outside.");
 
 						offerCoin = true;
 					}
 					else
 					{
-						g.AddBottom("Not enough gold.");
+						XleCore.TextArea.PrintLine("Not enough gold.");
 						SoundMan.PlaySound(LotaSound.Medium);
 						XleCore.Wait(750);
 					}
@@ -102,9 +102,9 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			if (skipRaft == true || choice == 1)
 			{
-				g.AddBottom("How about some climbing gear");
-				g.AddBottom("for " + gearCost.ToString() + " gold?");
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine("How about some climbing gear");
+				XleCore.TextArea.PrintLine("for " + gearCost.ToString() + " gold?");
+				XleCore.TextArea.PrintLine();
 
 				choice = XleCore.QuickMenu(theList, 3, 1);
 
@@ -112,7 +112,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 				{
 					if (player.Spend(gearCost))
 					{
-						g.AddBottom("Climbing gear purchased.");
+						XleCore.TextArea.PrintLine("Climbing gear purchased.");
 
 						player.ItemCount(2, 1);
 						offerCoin = true;
@@ -121,14 +121,14 @@ namespace ERY.Xle.XleEventTypes.Stores
 					}
 					else
 					{
-						g.AddBottom("Not enough gold.");
+						XleCore.TextArea.PrintLine("Not enough gold.");
 						SoundMan.PlaySound(LotaSound.Medium);
 					}
 				}
 				else if (choice == 1)
 				{
-					g.AddBottom("");
-					g.AddBottom("Nothing Purchased.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Nothing Purchased.");
 
 					SoundMan.PlaySound(LotaSound.Medium);
 				}

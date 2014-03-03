@@ -75,7 +75,7 @@ namespace ERY.Xle
 		{
 			if (mSounds.ContainsKey(sound) == false)
 			{
-				g.AddBottom("Could not play sound " + sound.ToString(), XleColor.Red);
+				XleCore.TextArea.PrintLine("Could not play sound " + sound.ToString(), XleColor.Red);
 				return;
 			}
 

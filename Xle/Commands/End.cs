@@ -15,10 +15,10 @@ namespace ERY.Xle.Commands
 			int choice;
 			bool saved = false;
 
-			g.AddBottom("");
-			g.AddBottom("Would you like to save");
-			g.AddBottom("the game in progress?");
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Would you like to save");
+			XleCore.TextArea.PrintLine("the game in progress?");
+			XleCore.TextArea.PrintLine();
 
 			choice = XleCore.QuickMenu(menu, 2);
 
@@ -28,8 +28,8 @@ namespace ERY.Xle.Commands
 
 				saved = true;
 
-				g.AddBottom("Game Saved.");
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine("Game Saved.");
+				XleCore.TextArea.PrintLine();
 			}
 			else
 			{
@@ -40,19 +40,19 @@ namespace ERY.Xle.Commands
 				builder.AddText(" saved.", XleColor.White);
 
 				g.AddBottom(builder);
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
 			}
 
 			XleCore.Wait(1500);
 
-			g.AddBottom("Quit and return to title screen?");
+			XleCore.TextArea.PrintLine("Quit and return to title screen?");
 
 			if (saved == false)
-				g.AddBottom("Unsaved progress will be lost.", XleColor.Yellow);
+				XleCore.TextArea.PrintLine("Unsaved progress will be lost.", XleColor.Yellow);
 			else
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 
 			choice = XleCore.QuickMenu(menu, 2, 1);
 

@@ -22,14 +22,14 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			ReadRawText(RawText);
 
-			g.AddBottom();
-			g.AddBottom("Do you want to eat the fruit?");
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Do you want to eat the fruit?");
+			XleCore.TextArea.PrintLine();
 
 			if (XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
 			{
 				SoundMan.PlaySound(LotaSound.Good);
-				g.AddBottom("You feel a tingling sensation.", XleColor.Green);
+				XleCore.TextArea.PrintLine("You feel a tingling sensation.", XleColor.Green);
 
 				while (SoundMan.IsPlaying(LotaSound.Good))
 				{

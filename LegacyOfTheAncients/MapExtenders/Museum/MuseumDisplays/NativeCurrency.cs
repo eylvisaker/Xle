@@ -17,11 +17,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 			int gold = XleCore.random.Next(1500, 2500);
 
-			g.AddBottom();
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 			g.AddBottomCentered("Gold:  + " + gold.ToString(), XleColor.Yellow);
-			g.AddBottom();
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 
 			player.Gold += gold;
 

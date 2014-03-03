@@ -86,9 +86,9 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 		protected bool OfferReread()
 		{
 			XleCore.TextArea.Clear();
-			g.AddBottom("Do you want to reread the");
-			g.AddBottom("description of this exhibit?");
-			g.AddBottom();
+			XleCore.TextArea.PrintLine("Do you want to reread the");
+			XleCore.TextArea.PrintLine("description of this exhibit?");
+			XleCore.TextArea.PrintLine();
 
 			if (XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
 				return true;

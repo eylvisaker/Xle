@@ -80,8 +80,8 @@ namespace ERY.Xle
 		/// </summary>
 		public virtual void RobFail()
 		{
-			g.AddBottom();
-			g.AddBottom("The merchant won't let you rob.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("The merchant won't let you rob.");
 
 			XleCore.Wait(1000);
 		}

@@ -260,11 +260,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			}
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 
 			thestring = "You are in " + terrain.ToString() + ".";
 
-			g.AddBottom(thestring);
+			XleCore.TextArea.PrintLine(thestring);
 
 			ColorStringBuilder builder = new ColorStringBuilder();
 
@@ -284,7 +284,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			weaponName = player.CurrentWeaponTypeName;
 
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 
 			if (EncounterState == EncounterState.MonsterReady)
 			{
@@ -317,7 +317,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				{
 					SoundMan.PlaySound(LotaSound.PlayerMiss);
 
-					g.AddBottom("Your Attack missed.", XleColor.Yellow);
+					XleCore.TextArea.PrintLine("Your Attack missed.", XleColor.Yellow);
 				}
 
 				XleCore.Wait(250 + 100 * player.Gamespeed, true, XleCore.Redraw);
@@ -328,8 +328,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					SoundMan.PlaySound(LotaSound.EnemyDie);
 
-					g.AddBottom("");
-					g.AddBottom("the " + MonstName + " dies.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("the " + MonstName + " dies.");
 
 					int gold, food;
 					bool finished = FinishedCombat(out gold, out food);
@@ -338,16 +338,16 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					if (finished)
 					{
-						g.AddBottom("");
+						XleCore.TextArea.PrintLine();
 
 						if (food > 0)
 						{
 							MenuItemList menu = new MenuItemList("Yes", "No");
 							int choice;
 
-							g.AddBottom("Would you like to use the");
-							g.AddBottom(MonstName + "'s flesh for food?");
-							g.AddBottom("");
+							XleCore.TextArea.PrintLine("Would you like to use the");
+							XleCore.TextArea.PrintLine(MonstName + "'s flesh for food?");
+							XleCore.TextArea.PrintLine();
 
 							choice = XleCore.QuickMenu(menu, 3, 0);
 
@@ -389,8 +389,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 			else if (EncounterState > 0)
 			{
-				g.AddBottom("The unknown creature is not ");
-				g.AddBottom("within range.");
+				XleCore.TextArea.PrintLine("The unknown creature is not ");
+				XleCore.TextArea.PrintLine("within range.");
 
 				XleCore.Wait(300 + 100 * player.Gamespeed);
 			}
@@ -418,9 +418,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 				{
 					SoundMan.PlaySound(LotaSound.Bump);
 
-					g.AddBottom("");
-					g.AddBottom("Attempt to disengage");
-					g.AddBottom("is blocked.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Attempt to disengage");
+					XleCore.TextArea.PrintLine("is blocked.");
 
 					XleCore.Wait(500);
 				}
@@ -428,23 +428,23 @@ namespace ERY.Xle.Maps.XleMapTypes
 				{
 					SoundMan.PlaySound(LotaSound.Bump);
 
-					g.AddBottom("");
-					g.AddBottom("The raft must stay in the water.", XleColor.Cyan);
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("The raft must stay in the water.", XleColor.Cyan);
 				}
 				else if (terrain == TerrainType.Water)
 				{
 					SoundMan.PlaySound(LotaSound.Bump);
 
-					g.AddBottom("");
-					g.AddBottom("There is too much water for travel.", XleColor.Cyan);
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("There is too much water for travel.", XleColor.Cyan);
 				}
 				else if (terrain == TerrainType.Mountain)
 				{
 					SoundMan.PlaySound(LotaSound.Bump);
 
-					g.AddBottom("");
-					g.AddBottom("You are not equipped to");
-					g.AddBottom("cross the mountains.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("You are not equipped to");
+					XleCore.TextArea.PrintLine("cross the mountains.");
 				}
 				else
 				{
@@ -457,9 +457,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				if (EncounterState == XleMapTypes.EncounterState.JustDisengaged)
 				{
-					g.AddBottom("");
-					g.AddBottom("Attempt to disengage");
-					g.AddBottom("is successful.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Attempt to disengage");
+					XleCore.TextArea.PrintLine("is successful.");
 
 					XleCore.Wait(500);
 
@@ -622,8 +622,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			if (!isMonsterFriendly)
 			{
-				g.AddBottom("");
-				g.AddBottom("The " + MonstName + " does not reply.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("The " + MonstName + " does not reply.");
 
 				XleCore.Wait(250);
 
@@ -738,7 +738,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (type != 5)
 			{
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
 
 				int choice = XleCore.QuickMenu(menu, 3, 0, qcolor);
 
@@ -748,8 +748,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 					{
 						SoundMan.PlaySound(LotaSound.Sale);
 
-						g.AddBottom("");
-						g.AddBottom("Purchase Completed.");
+						XleCore.TextArea.PrintLine();
+						XleCore.TextArea.PrintLine("Purchase Completed.");
 
 						Color clr2 = XleColor.White;
 
@@ -783,8 +783,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 					{
 						SoundMan.PlaySound(LotaSound.Medium);
 
-						g.AddBottom("");
-						g.AddBottom("You don't have enough gold...");
+						XleCore.TextArea.PrintLine();
+						XleCore.TextArea.PrintLine("You don't have enough gold...");
 					}
 
 				}
@@ -792,12 +792,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 				{
 					SoundMan.PlaySound(LotaSound.Medium);
 
-					g.AddBottom("");
+					XleCore.TextArea.PrintLine();
 
 					if (1 + XleCore.random.Next(2) == 1)
-						g.AddBottom("Maybe Later...");
+						XleCore.TextArea.PrintLine("Maybe Later...");
 					else
-						g.AddBottom("You passed up a good deal!");
+						XleCore.TextArea.PrintLine("You passed up a good deal!");
 
 				}
 			}
@@ -857,31 +857,31 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				if (Stormy == 1 && wasStormy == 0)
 				{
-					g.AddBottom("");
-					g.AddBottom("You are sailing into stormy water.", XleColor.Yellow);
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
 				}
 				else if (Stormy == 2 || Stormy == 3)
 				{
-					g.AddBottom("");
-					g.AddBottom("The water is now very rough.", XleColor.White);
-					g.AddBottom("It will soon swamp your raft.", XleColor.Yellow);
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("The water is now very rough.", XleColor.White);
+					XleCore.TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
 				}
 				else if (Stormy == 1 && wasStormy == 2)
 				{
-					g.AddBottom("");
-					g.AddBottom("You are out of immediate danger.", XleColor.Yellow);
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
 				}
 				else if (Stormy == 0 && wasStormy == 1)
 				{
-					g.AddBottom("");
-					g.AddBottom("You leave the storm behind.", XleColor.Cyan);
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
 				}
 
 				if (Stormy == 3)
 				{
-					g.AddBottom("");
-					g.AddBottom("Your raft sinks.", XleColor.Yellow);
-					g.AddBottom("");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
+					XleCore.TextArea.PrintLine();
 				}
 
 				XleCore.Wait(1000);
@@ -1046,9 +1046,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 				EncounterState = EncounterState.UnknownCreatureApproaching;
 				SoundMan.PlaySound(LotaSound.Encounter);
 
-				g.AddBottom();
-				g.AddBottom("An unknown creature is approaching ", XleColor.Cyan);
-				g.AddBottom("from the " + dirName + ".", XleColor.Cyan);
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("An unknown creature is approaching ", XleColor.Cyan);
+				XleCore.TextArea.PrintLine("from the " + dirName + ".", XleColor.Cyan);
 
 				XleCore.Wait(1000);
 			}
@@ -1124,8 +1124,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		private void AvoidMonster(Player player)
 		{
-			g.AddBottom();
-			g.AddBottom("You avoid the unknown creature.");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You avoid the unknown creature.");
 
 			EncounterState = EncounterState.NoEncounter;
 
@@ -1146,11 +1146,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			EncounterState = EncounterState.MonsterReady;
 
-			g.AddBottom();
-			g.AddBottom(monstCount.ToString() + " " + currentMonst[0].Name + plural, colors);
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name + plural, colors);
 
 			colors[0] = XleColor.Cyan;
-			g.AddBottom("is approaching.", colors);
+			XleCore.TextArea.PrintLine("is approaching.", colors);
 
 			XleCore.Wait(1000);
 		}
@@ -1167,9 +1167,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 					colors[i] = XleColor.Cyan;
 				colors[0] = XleColor.White;
 
-				g.AddBottom("");
-				g.AddBottom(monstCount.ToString() + " " + currentMonst[0].Name, colors);
-				g.AddBottom("Stands before you.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name, colors);
+				XleCore.TextArea.PrintLine("Stands before you.");
 
 				XleCore.Wait(1500);
 			}
@@ -1180,7 +1180,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				builder.AddText(monstCount.ToString(), XleColor.Yellow);
 				builder.AddText(" " + currentMonst[0].Name, XleColor.Cyan);
 
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
 				g.AddBottom(builder);
 
 				int dam = 0;
@@ -1314,8 +1314,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 			// bandit icon is number 4.
 			displayMonst = 4;
 
-			g.AddBottom();
-			g.AddBottom("You are ambushed by bandits!", XleColor.Cyan);
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
 
 			SoundMan.PlaySound(LotaSound.Encounter);
 			XleCore.Wait(500);
@@ -1331,27 +1331,27 @@ namespace ERY.Xle.Maps.XleMapTypes
 				XleCore.Wait(250);
 			}
 
-			g.AddBottom("You fall unconsious.", XleColor.Yellow);
+			XleCore.TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
 
 			XleCore.Wait(1000);
 			displayMonst = -1;
 			XleCore.Wait(3000, RedrawUnconscious);
 
-			g.AddBottom();
-			g.AddBottom("You awake.  The compendium is gone.");
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You awake.  The compendium is gone.");
+			XleCore.TextArea.PrintLine();
 
 			while (player.Item(15) > 0)
 				player.ItemCount(15, -1);
 
 			SoundMan.PlaySoundSync(LotaSound.VeryBad);
 
-			g.AddBottom("You hear a voice...");
+			XleCore.TextArea.PrintLine("You hear a voice...");
 
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
 			g.WriteSlow("Do not be discouraged.  It was", 0, XleColor.White);
 
-			g.AddBottom();
+			XleCore.TextArea.PrintLine();
 			g.WriteSlow("inevitable.  Keep to your quest.", 0, XleColor.White);
 
 			XleCore.Wait(3000);

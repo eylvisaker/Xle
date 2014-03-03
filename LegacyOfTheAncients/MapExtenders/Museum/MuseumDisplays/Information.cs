@@ -156,9 +156,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			{
 				ReadRawText(ExhibitInfo.Text[5]);
 
-				g.AddBottom();
-				g.AddBottom("Do you accept the");
-				g.AddBottom("Caretaker's offer?");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Do you accept the");
+				XleCore.TextArea.PrintLine("Caretaker's offer?");
 
 				if (XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
 				{

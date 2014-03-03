@@ -18,9 +18,9 @@ namespace ERY.Xle.XleEventTypes.Stores
 			MenuItemList theList = new MenuItemList("Yes", "No");
 			int choice;
 
-			g.AddBottom(this.ShopName, XleColor.Green);
-			g.AddBottom("");
-			g.AddBottom("Read your fortune for " + (int)(6 * CostFactor) + " gold?");
+			XleCore.TextArea.PrintLine(this.ShopName, XleColor.Green);
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Read your fortune for " + (int)(6 * CostFactor) + " gold?");
 
 			choice = XleCore.QuickMenu(theList, 3, 1);
 

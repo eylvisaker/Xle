@@ -31,15 +31,15 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			if (player.Items[LotaItem.Tulip] == 0)
 			{
 				base.RunExhibit(player);
-				g.AddBottom();
+				XleCore.TextArea.PrintLine();
 
 				if (player.Story().Museum[(int)ExhibitIdentifier] == 0 || player.Story().Museum[(int)ExhibitIdentifier] == 1)
-					g.AddBottom("Do you want to help search?");
+					XleCore.TextArea.PrintLine("Do you want to help search?");
 				else
-					g.AddBottom("Do you want to continue searching?");
+					XleCore.TextArea.PrintLine("Do you want to continue searching?");
 
 
-				g.AddBottom();
+				XleCore.TextArea.PrintLine();
 				if (XleCore.QuickMenuYesNo() == 0)
 				{
 					ReadRawText(ExhibitInfo.Text[2]);

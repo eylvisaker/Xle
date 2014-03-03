@@ -54,8 +54,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 			theWindow[i++] = "6. Seek spell         " + MagicPrice(6);
 
 			g.ClearBottom();
-			g.AddBottom("Make choice (hit 0 to cancel)");
-			g.AddBottom();
+			XleCore.TextArea.PrintLine("Make choice (hit 0 to cancel)");
+			XleCore.TextArea.PrintLine();
 
 			int choice = QuickMenu(new MenuItemList("0", "1", "2", "3", "4", "5", "6"), 2);
 

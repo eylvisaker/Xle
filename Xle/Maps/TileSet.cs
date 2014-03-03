@@ -22,7 +22,7 @@ namespace ERY.Xle
 				if (mTiles.ContainsKey(index) == false)
 				{
 					SoundMan.PlaySound(LotaSound.Bad);
-					g.AddBottom("Tileset does not contain " + index.ToString());
+					XleCore.TextArea.PrintLine("Tileset does not contain " + index.ToString());
 
 					System.Diagnostics.Debug.Print("Tileset does not contain tile " + index.ToString());
 					return TileInfo.Normal;

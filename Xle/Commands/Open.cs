@@ -11,8 +11,8 @@ namespace ERY.Xle.Commands
 		{
 			if (state.Map.PlayerOpen(state.Player) == false)
 			{
-				g.AddBottom("");
-				g.AddBottom("Nothing opens.");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Nothing opens.");
 
 				XleCore.Wait(500);
 			}

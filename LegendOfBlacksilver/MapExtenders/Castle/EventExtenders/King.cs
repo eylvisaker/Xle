@@ -14,7 +14,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 		public override void Speak(GameState state, ref bool handled)
 		{
 			g.UpdateBottom("Enter command: speak to the " + Name(state) + ".");
-			g.AddBottom("");
+			XleCore.TextArea.PrintLine();
 			SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
 			if (state.Player.Items[LobItem.FalconFeather] > 0)

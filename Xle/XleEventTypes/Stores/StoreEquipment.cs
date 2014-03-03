@@ -92,17 +92,17 @@ namespace ERY.Xle.XleEventTypes.Stores
 					theList2.Add(k.ToString());
 				}
 
-				g.AddBottom("");
-				g.AddBottom("Make choice (hit 0 to cancel)");
-				g.AddBottom("");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Make choice (hit 0 to cancel)");
+				XleCore.TextArea.PrintLine();
 
 				choice = QuickMenu(theList2, 2, 0);
 
 				if (choice == 0)
 				{
-					g.AddBottom("");
-					g.AddBottom("Nothing purchased");
-					g.AddBottom("");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Nothing purchased");
+					XleCore.TextArea.PrintLine();
 
 					StoreSound(LotaSound.Medium);
 				}
@@ -111,21 +111,21 @@ namespace ERY.Xle.XleEventTypes.Stores
 					// spend the cash, if they have it
 					if (AddItem(player, itemList[choice], qualList[choice]))
 					{
-						g.AddBottom(ItemName(itemList[choice], qualList[choice]) + " purchased.");
-						g.AddBottom("");
+						XleCore.TextArea.PrintLine(ItemName(itemList[choice], qualList[choice]) + " purchased.");
+						XleCore.TextArea.PrintLine();
 
 						StoreSound(LotaSound.Sale);
 					}
 					else
 					{
 						player.Gold += priceList[choice];
-						g.AddBottom("No room in inventory");
+						XleCore.TextArea.PrintLine("No room in inventory");
 					}
 
 				}
 				else
 				{
-					g.AddBottom("You're short on gold.");
+					XleCore.TextArea.PrintLine("You're short on gold.");
 					StoreSound(LotaSound.Medium);
 				}
 			}

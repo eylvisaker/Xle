@@ -23,8 +23,8 @@ namespace ERY.Xle.Commands
 			if (player.IsOnRaft)
 			{
 
-				g.AddBottom("");
-				g.AddBottom("Disembark in which direction?");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Disembark in which direction?");
 
 				do
 				{
@@ -55,8 +55,8 @@ namespace ERY.Xle.Commands
 			}
 			else
 			{
-				g.AddBottom("");
-				g.AddBottom("Nothing to disembark", XleColor.Yellow);
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Nothing to disembark", XleColor.Yellow);
 
 			}
 		}
