@@ -56,7 +56,7 @@ namespace ERY.Xle
 
 			private void WriteColors(int x, int length, Color newColor)
 			{
-				for (int i = 0; i < length; i++)
+				for (int i = 0; i < length && x+i < Colors.Length; i++)
 					Colors[x + i] = newColor;
 			}
 

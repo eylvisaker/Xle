@@ -46,6 +46,9 @@ namespace ERY.Xle.LoB
 		public bool DrankEtherium { get; set; }
 
 		public bool RegisteredForTrist { get; set; }
+
+		public bool ClosedMorningStar { get; set; }
+
 	}
 
 	public static class LobStoryExtensions

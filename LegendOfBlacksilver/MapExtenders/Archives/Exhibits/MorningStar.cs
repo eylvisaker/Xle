@@ -16,5 +16,34 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return ExhibitIdentifier.MorningStar; }
 		}
+
+		public override bool IsClosed(Player player)
+		{
+			return player.Story().ClosedMorningStar;
+		}
+
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Do you want to borrow this item?");
+			XleCore.TextArea.PrintLine();
+
+			if (0 == XleCore.QuickMenuYesNo())
+			{
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Fight bravely.");
+
+				SoundMan.PlaySoundSync(LotaSound.VeryGood);
+
+				player.AddWeapon(9, 4);
+				player.Story().ClosedMorningStar = true;
+
+			}
+			else
+				ReturnGem(player);
+		}
 	}
 }

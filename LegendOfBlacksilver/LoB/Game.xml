@@ -248,10 +248,32 @@
     </Exhibit>
     <Exhibit ID="9" Image="MorningStar.png">
       <Text ID="1">
+        |As much as we abhor violence and
+        |death, the power of fine weaponry
+        |holds a certain perverse fascination.
+        |For this reason, we collect and 
+        |exhibit weapons.`pause`
+        |`clear`The iron spikes, jutting from the
+        |surface of this morningstar, bear
+        |little resemblance to the shimmering
+        |rays of a waning star, but it's cold
+        |polished beauty is equally alluring.`pause`
       </Text>
     </Exhibit>
     <Exhibit ID="10" Image="MarthbaneTunnels.png">
       <Text ID="1">
+        |Eons ago, when the evil lands of
+        |Maelbane perished beneath the ocean
+        |waters, one mountain was tall enough
+        |to become an island atoll.`pause`
+        |`clear`This jutting precipice contains the
+        |ancient marthbane tunnels, once home
+        |of an awesome sorcerer.  His vile
+        |creatures filled the grotto
+        |corridors.`pause`
+        |`clear`The power of this temple can 
+        |transport you to marthbane, as many 
+        |times as you dare.`pause`
       </Text>
     </Exhibit>
     <Exhibit ID="11" Image="DarkWand.png">
