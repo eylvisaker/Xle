@@ -198,6 +198,10 @@ namespace ERY.Xle.XleEventTypes.Stores
 				retval.Add(item);
 			}
 
+			// add the bottom item if there are none.
+			if (retval.Count == 0)
+				retval.Add(stock.Min());
+
 			return retval;
 		}
 		protected abstract int MaxItem(double timeQuality);

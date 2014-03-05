@@ -43,6 +43,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 			theWindow[i++] = "";
 			theWindow[i++] = "";
 
+			XleCore.TextArea.PrintLine();
+
 			if (player.loan == 0)
 			{
 				theWindow[i++] = " We'd be happy to loan you";

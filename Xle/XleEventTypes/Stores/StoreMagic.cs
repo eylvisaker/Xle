@@ -33,6 +33,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			theWindow[0] = ShopName;
 			BottomBackgroundColor = XleColor.Blue;
 
+
 			int i = 1;
 			theWindow[i++] = "";
 			SetColor(i, XleColor.Blue);
@@ -53,7 +54,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 			theWindow[i++] = "";
 			theWindow[i++] = "6. Seek spell         " + MagicPrice(6);
 
-			g.ClearBottom();
+
+			XleCore.TextArea.Clear();
 			XleCore.TextArea.PrintLine("Make choice (hit 0 to cancel)");
 			XleCore.TextArea.PrintLine();
 

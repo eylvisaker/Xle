@@ -42,6 +42,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			Wait(1);
 
+			XleCore.TextArea.PrintLine();
 
 			if (player.mailTown == state.Map.MapID)
 			{

@@ -53,6 +53,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			theWindow[i++] = "3.  Balance Inquiry  ";
 
 			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Make choice (Hit 0 to cancel)");
 			XleCore.TextArea.PrintLine();
 

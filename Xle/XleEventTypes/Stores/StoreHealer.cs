@@ -78,7 +78,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 			}
 
 			MenuItemList theList = new MenuItemList("0", "1", "2");
-
+			
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Make choice (hit 0 to cancel)");
 			XleCore.TextArea.PrintLine();

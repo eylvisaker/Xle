@@ -10,8 +10,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 	{
 		public override bool Speak(GameState state)
 		{
-			var player = state.Player;
-
 			return false;
 		}
 	}

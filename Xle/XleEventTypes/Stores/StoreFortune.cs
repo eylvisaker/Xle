@@ -18,6 +18,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			MenuItemList theList = new MenuItemList("Yes", "No");
 			int choice;
 
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine(this.ShopName, XleColor.Green);
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Read your fortune for " + (int)(6 * CostFactor) + " gold?");
