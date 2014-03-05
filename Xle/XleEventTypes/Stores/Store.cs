@@ -321,6 +321,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		public override bool Speak(GameState state)
 		{
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine(ShopName, XleColor.Yellow);
 			XleCore.TextArea.PrintLine("");
 			XleCore.TextArea.PrintLine("A Sign Says, ");

@@ -32,8 +32,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 				int amount = 100;
 
-				if (player.Story().Museum[(int)ExhibitIdentifier] > 0 || player.Story().Museum[(int)ExhibitIdentifier.Fountain] > 0)
+				if (player.Story().Museum[(int)ExhibitIdentifier] > 0 ||
+					player.Story().Museum[(int)ExhibitIdentifier.Fountain] > 0)
+				{
 					amount += 200;
+				}
 
 				player.Gold += amount;
 
@@ -44,7 +47,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 				XleCore.WaitForKey();
 
-				player.SetMap(11, 75, 17);
+				XleCore.ChangeMap(player, 11, 0);
 				player.SetReturnLocation(1, 18, 56);
 			}
 		}

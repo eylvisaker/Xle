@@ -24,6 +24,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 			if (0 == XleCore.QuickMenuYesNo())
 			{
+				if (player.Food < 150)
+					player.Food = 150;
+
 				XleCore.ChangeMap(player, 3, 0, 0, 0);
 			}
 		}

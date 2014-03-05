@@ -16,5 +16,28 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return ExhibitIdentifier.CrystalTears; }
 		}
+
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Do you want to borrow them?");
+			XleCore.TextArea.PrintLine();
+
+			if (0 == XleCore.QuickMenuYesNo())
+			{
+				player.Items[LobItem.DragonTear] += 2;
+
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("You receive two dragon's tears.");
+
+				SoundMan.PlaySoundSync(LotaSound.VeryGood);
+			}
+			else
+			{
+				ReturnGem(player);
+			}
+		}
 	}
 }

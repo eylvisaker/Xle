@@ -3,7 +3,7 @@
   <ExtenderName>Laingsburg</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
-    <Tiles array="true" encoding="Csv">0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,0,1,1,0,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1</Tiles>
+    <Tiles array="true" encoding="Csv">1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1</Tiles>
     <TileGroups array="true" type="ERY.Xle.Maps.TileGroup">
       <Item>
         <Tiles array="true" encoding="Csv">0,1,16,17</Tiles>
@@ -123,79 +123,79 @@
       <X>25</X>
       <Y>37</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>37</X>
       <Y>37</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>64</X>
       <Y>20</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>68</X>
       <Y>18</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>57</X>
       <Y>9</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>45</X>
       <Y>9</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>11</X>
       <Y>5</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>9</X>
       <Y>5</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>49</X>
       <Y>26</Y>
       <Color>-3418267</Color>
-      <HP>22</HP>
-      <Attack>125</Attack>
-      <Defense>120</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
   </Guards>
   <GuardDefaultAttack>125</GuardDefaultAttack>
   <GuardDefaultDefense>120</GuardDefaultDefense>
   <GuardDefaultHP>22</GuardDefaultHP>
-  <GuardDefaultColor>0</GuardDefaultColor>
+  <GuardDefaultColor>-3418267</GuardDefaultColor>
   <Width>80</Width>
   <Height>40</Height>
   <OutsideTile>32</OutsideTile>

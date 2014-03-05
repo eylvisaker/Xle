@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ERY.Xle
 {
-	public class TileSet : IXleSerializable
+	public class TileSet : IXleSerializable, IEnumerable<KeyValuePair<int, TileInfo>>
 	{
 		Dictionary<int, TileInfo> mTiles = new Dictionary<int, TileInfo>();
 
@@ -21,8 +21,15 @@ namespace ERY.Xle
 			{
 				if (mTiles.ContainsKey(index) == false)
 				{
-					SoundMan.PlaySound(LotaSound.Bad);
-					XleCore.TextArea.PrintLine("Tileset does not contain " + index.ToString());
+					try
+					{
+						SoundMan.PlaySound(LotaSound.Bad);
+						XleCore.TextArea.PrintLine("Tileset does not contain " + index.ToString());
+					}
+					catch(Exception e)
+					{
+						System.Diagnostics.Debug.Print("Exception " + e.ToString() + " when using Xle output.");
+					}
 
 					System.Diagnostics.Debug.Print("Tileset does not contain tile " + index.ToString());
 					return TileInfo.Normal;
@@ -38,6 +45,7 @@ namespace ERY.Xle
 				mTiles[index] = value;
 			}
 		}
+
 
 		public List<TileGroup> TileGroups { get; set; }
 
@@ -81,6 +89,16 @@ namespace ERY.Xle
 
 			if (TileGroups == null)
 				TileGroups = new List<TileGroup>();
+		}
+
+		IEnumerator<KeyValuePair<int, TileInfo>> IEnumerable<KeyValuePair<int, TileInfo>>.GetEnumerator()
+		{
+			return mTiles.GetEnumerator();
+		}
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return mTiles.GetEnumerator();
 		}
 	}
 }

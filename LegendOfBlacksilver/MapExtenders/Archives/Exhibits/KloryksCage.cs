@@ -16,5 +16,17 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return ExhibitIdentifier.KloryksCage; }
 		}
+
+		public override bool IsClosed(Player player)
+		{
+			return HasBeenVisited(player);
+		}
+
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
+
+			ReturnGem(player);
+		}
 	}
 }

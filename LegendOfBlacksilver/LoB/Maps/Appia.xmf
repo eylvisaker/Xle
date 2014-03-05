@@ -3,7 +3,7 @@
   <ExtenderName>Appia</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
-    <Tiles array="true" encoding="Csv">1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,0,0,1,1,1,0,1,0,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,0,0,1</Tiles>
+    <Tiles array="true" encoding="Csv">1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,0,0,1,1,1,0,1,0,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1</Tiles>
     <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
   </TileSet>
   <TileImage>LobTown</TileImage>
@@ -65,111 +65,111 @@
       <X>24</X>
       <Y>3</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>31</X>
       <Y>4</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>31</X>
       <Y>7</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>34</X>
       <Y>4</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>55</X>
       <Y>4</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>52</X>
       <Y>4</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>55</X>
       <Y>7</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>62</X>
       <Y>3</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>46</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>44</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>42</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>40</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>25</X>
       <Y>19</Y>
       <Color>-3418267</Color>
-      <HP>25</HP>
-      <Attack>100</Attack>
-      <Defense>100</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
   </Guards>
   <GuardDefaultAttack>100</GuardDefaultAttack>
   <GuardDefaultDefense>100</GuardDefaultDefense>
   <GuardDefaultHP>25</GuardDefaultHP>
-  <GuardDefaultColor>0</GuardDefaultColor>
+  <GuardDefaultColor>-3418267</GuardDefaultColor>
   <Width>80</Width>
   <Height>40</Height>
   <OutsideTile>0</OutsideTile>

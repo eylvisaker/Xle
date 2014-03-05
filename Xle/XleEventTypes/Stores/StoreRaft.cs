@@ -67,6 +67,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			// check to see if there are any rafts near the raft drop point
 			skipRaft = CheckForNearbyRaft(player, skipRaft);
 
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("** " + this.ShopName + " **", XleColor.Yellow);
 			XleCore.TextArea.PrintLine();
 

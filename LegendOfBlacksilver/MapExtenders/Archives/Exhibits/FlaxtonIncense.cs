@@ -16,5 +16,30 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return ExhibitIdentifier.FlaxtonIncense; }
 		}
+
+		public override bool IsClosed(Player player)
+		{
+			return player.Story().EatenFlaxton;
+		}
+
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Do you want to partake?");
+			XleCore.TextArea.PrintLine();
+
+			if (0 == XleCore.QuickMenuYesNo())
+			{
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("It's sour but doesn't taste that bad.");
+
+				player.Story().EatenFlaxton = true;
+			}
+			else
+				ReturnGem(player);
+		}
 	}
 }

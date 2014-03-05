@@ -3,7 +3,7 @@
   <ExtenderName>CrystalSummit</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
-    <Tiles array="true" encoding="Csv">1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,1,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0</Tiles>
+    <Tiles array="true" encoding="Csv">1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0</Tiles>
     <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
   </TileSet>
   <TileImage>LobTown</TileImage>
@@ -44,95 +44,95 @@
       <X>17</X>
       <Y>2</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>36</X>
       <Y>2</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>38</X>
       <Y>7</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>47</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>49</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>65</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>67</X>
       <Y>35</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>69</X>
       <Y>13</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>45</X>
       <Y>11</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>13</X>
       <Y>28</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
     <Item>
       <X>62</X>
       <Y>24</Y>
       <Color>-3418267</Color>
-      <HP>30</HP>
-      <Attack>129</Attack>
-      <Defense>160</Defense>
+      <HP>0</HP>
+      <Attack>0</Attack>
+      <Defense>0</Defense>
     </Item>
   </Guards>
   <GuardDefaultAttack>129</GuardDefaultAttack>
   <GuardDefaultDefense>160</GuardDefaultDefense>
   <GuardDefaultHP>30</GuardDefaultHP>
-  <GuardDefaultColor>0</GuardDefaultColor>
+  <GuardDefaultColor>-3418267</GuardDefaultColor>
   <Width>80</Width>
   <Height>40</Height>
   <OutsideTile>0</OutsideTile>

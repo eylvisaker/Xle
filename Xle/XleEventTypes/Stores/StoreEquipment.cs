@@ -59,7 +59,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			FillItems(player.TimeQuality, itemList, qualList, priceList);
 
-			g.ClearBottom();
+			XleCore.TextArea.Clear();
 			choice = QuickMenu(theList, 2, 0);
 			Wait(1);
 

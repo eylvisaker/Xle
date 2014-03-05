@@ -16,5 +16,34 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 		{
 			get { return ExhibitIdentifier.Blacksmith; }
 		}
+
+		public override bool IsClosed(Player player)
+		{
+			return player.Story().ProcuredSteelHammer;
+		}
+
+		public override void RunExhibit(Player player)
+		{
+			base.RunExhibit(player);
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Do you want to have it?");
+			XleCore.TextArea.PrintLine();
+
+			if (0 == XleCore.QuickMenuYesNo())
+			{
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("It is yours.");
+
+				SoundMan.PlaySoundSync(LotaSound.Good);
+
+				player.Items[LobItem.SteelHammer] = 1;
+
+				player.Story().ProcuredSteelHammer = true;
+			}
+			else
+				ReturnGem(player);
+		}
 	}
 }

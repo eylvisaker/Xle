@@ -15,7 +15,8 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			base.RunExhibit(player);
 
-			int gold = XleCore.random.Next(1500, 2500);
+			int gold = (int)(350 * (1 + player.Level) 
+				* (1 + XleCore.random.NextDouble()));
 
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();

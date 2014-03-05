@@ -49,6 +49,10 @@ namespace ERY.Xle.LoB
 
 		public bool ClosedMorningStar { get; set; }
 
+
+		public bool ProcuredSteelHammer { get; set; }
+
+		public bool EatenFlaxton { get; set; }
 	}
 
 	public static class LobStoryExtensions

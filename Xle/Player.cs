@@ -464,7 +464,7 @@ namespace ERY.Xle
 
 			XleCore.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
 
-			SetMap(1, 80, 80);
+			XleCore.ChangeMap(this, 1, 0);
 
 			TerrainType t;
 

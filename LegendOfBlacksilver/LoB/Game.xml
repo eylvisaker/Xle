@@ -278,22 +278,117 @@
     </Exhibit>
     <Exhibit ID="11" Image="DarkWand.png">
       <Text ID="1">
+        |The prize possession of this temple
+        |was once the black wand, an ancient
+        |magical device dating back to the
+        |days of blacksilver.`pause`
+        |`clear`We know far too little about the
+        |black wand.  We do know that it was
+        |an extremely dangerous weapon in the
+        |hands of one trained in its use, but
+        |no one untrained should dare use it.`pause`
+        |`clear`Several years ago, the wand was
+        |stolen from this archive.  We would
+        |handsomely reward anyone who returns
+        |it here for safekeeping.`pause`
+        |`clear`One warning:  Don't use the wand!  If
+        |it is still charged, it may kill you.`pause`
       </Text>
     </Exhibit>
     <Exhibit ID="12" Image="UnderwaterPort.png">
       <Text ID="1">
+        |When the lands of Maelbane sunk, its
+        |cities were lost to the sea.  You
+        |see before you a model of Murkwater,
+        |formerly Maelbane's largest city.`pause`
+        |`clear`As you may have heard, the lands of
+        |Maelbane are rising, and with it the
+        |water logged city of Murkwater.`pause`
+        |`clear`We're working on a magical transport
+        |to Murkwater.  Until it's done, 
+        |however, you must rely on primitive
+        |means of travel.`pause`
+      </Text>
+      <Text ID="2">
+        |You see before you a portal to a
+        |newly risen city which was once
+        |called Murkwater.  As the land of
+        |Maelbane slowly rose from the sea,
+        |this was the first city to emerge.`pause`
+        |`clear`No one knows whether the city is now
+        |inhabited.  Ancient tales say that 
+        |Maelbane never died - life was just
+        |suspended while it lay under the sea.`pause`
+        |`clear`This portal will take you to the 
+        |countryside outside Murkwater.`pause`
       </Text>
     </Exhibit>
     <Exhibit ID="13" Image="Blacksmith.png">
       <Text ID="1">
+        |Just this morning, new and ancient
+        |lands rose on the continent Maelbane.
+        |These were the lands of the world's 
+        |best blacksmiths.`pause`
+        |`clear`In days gone by, a town blacksmith
+        |was more than just a shoer of horses.
+        |A skilled smithy could make all
+        |manner of utensils, weapons, armor, 
+        |and tools.`pause`
+        |`clear`No smithy was ever better known than
+        |Dalvid, a skilled artisan from Mael-
+        |bane's oldest town.  He was one of
+        |the few decent men who lived on that
+        |depraved continent.`pause`
+        |`clear`The hammer shown here was originally
+        |constructed by Dalvid's great-great
+        |grandfather.  It is one of the few
+        |remaining artifacts from the age of
+        |quality.`pause`
       </Text>
     </Exhibit>
     <Exhibit ID="14" Image="FlaxtonIncense.png">
       <Text ID="1">
+        |According to Thalen healing lore, the
+        |medicinal properties of the flaxton
+        |plant are exceptional.  In the hands
+        |of a trained healer, flaxton can help
+        |cure many ailments.`pause`
+        |`clear`Flaxton salves are spread on wounds;
+        |flaxton-based incenses are inhaled to
+        |cure diseases.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="15" Image="KloryksCage.png"></Exhibit>
-    <Exhibit ID="16" Image="CrystalTears.png"></Exhibit>
+    <Exhibit ID="15" Image="KloryksCage.png">
+      <Text ID="1">
+        |Here are the remains of Kloryk's 
+        |cage.  This relic of the mage wars
+        |once trapped the souls of valiant
+        |warriors who sought to end the mad
+        |duke's reign.`pause`
+        |`clear`Recent tremors collapsed this part
+        |of the archives and destroyed the
+        |cage.  Witnesses believed they heard
+        |a chorus of ghostly sighs as the 
+        |glittering trap was smashed.`pause`
+      </Text>
+    </Exhibit>
+    <Exhibit ID="16" Image="CrystalTears.png">
+      <Text ID="1">
+        |Dragons cry only once, for the tears
+        |of a dragon preceed only its death.
+        |As its fiery breath turns to steam, a
+        |tear of liquid crystal flows from
+        |each eye.`pause`
+        |`clear`All this is legend, of course, for
+        |dragons perished with the decline of
+        |blacksilver.  Yet, the gems you see
+        |before you are called "dragon tears."
+        |They bear the legend of the dragon.`pause`
+        |`clear`It is said that the life-force of an
+        |ancient dragon resides in these
+        |beautiful pools of liquid crystal.`pause`
+      </Text>
+    </Exhibit>
   </Exhibits>
   <DungeonExtras>
     <Extra ID="1" Name="Treasure Chest">
