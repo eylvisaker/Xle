@@ -15,55 +15,17 @@ namespace ERY.Xle.XleEventTypes.Stores
 	public abstract class Store : XleEvent
 	{
 		private double mCostFactor = 1.0;
-		private bool mLoanOverdue = false;
 		private bool mRobbed = false;
 		private string mShopName;
 
-
-		protected string[] theWindow = new string[20];
-		protected Color[][] theWindowColor = new Color[20][];
-
 		public Store()
 		{
-			LeftOffset = 2;
-
-			for (int i = 0; i < theWindowColor.Length; i++)
-			{
-				for (int j = 0; j < 40; j++)
-				{
-					theWindowColor[i] = new Color[40];
-				}
-			}
-
-			ClearWindow();
-
-			BottomBackgroundColor = XleColor.Black;
 		}
+
 		public string ShopName
 		{
 			get { return mShopName; }
 			set { mShopName = value; }
-		}
-
-		protected void ClearWindow()
-		{
-			for (int i = 0; i < theWindow.Length; i++)
-			{
-				theWindow[i] = string.Empty;
-
-				for (int j = 0; j < theWindowColor[i].Length; j++)
-					theWindowColor[i][j] = XleColor.White;
-			}
-		}
-
-		protected void SetColor(int rowNumber, Color color)
-		{
-			SetColor(rowNumber, 0, 40, color);
-		}
-		protected void SetColor(int rowNumber, int start, int length, Color color)
-		{
-			for (int i = 0; i < length; i++)
-				theWindowColor[rowNumber][start + i] = color;
 		}
 
 		protected override void WriteData(XleSerializationInfo info)
@@ -82,11 +44,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			get { return mRobbed; }
 			set { mRobbed = value; }
-		}
-
-		protected bool LoanOverdue
-		{
-			get { return mLoanOverdue; }
 		}
 
 		public double CostFactor
@@ -154,18 +111,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 					XleCore.TextArea.PrintLine("Not enough gold.");
 					SoundMan.PlaySound(LotaSound.Medium);
 				}
-
 			}
-
-		}
-		protected virtual void GetColors(out Color backColor, out Color borderColor,
-			out Color lineColor, out Color fontColor, out Color titleColor)
-		{
-			backColor = XleColor.Green;
-			borderColor = XleColor.Brown;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.White;
-			titleColor = fontColor;
 		}
 
 		/// <summary>
@@ -177,115 +123,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 		/// </summary>
 		protected bool robbing;
 
-		protected void RedrawStore()
-		{
-			Display.BeginFrame();
 
-			DrawStore();
-
-			Display.EndFrame();
-			Core.KeepAlive();
-		}
-
-		protected int LeftOffset { get; set; }
-
-		protected void DrawStore()
-		{
-			string tempString;
-
-			Color storeBackColor;
-			Color storeBorderColor;
-			Color storeLineColor;
-			Color storeFontColor;
-			Color storeTitleColor;
-
-			GetColors(out storeBackColor, out storeBorderColor, out storeLineColor,
-				out storeFontColor, out storeTitleColor);
-
-			// draw backgrounds
-			Display.Clear(storeBackColor);
-			Display.FillRect(0, 296, 640, 104, BottomBackgroundColor);
-
-			// Draw the borders
-			XleCore.DrawBorder(storeBorderColor);
-			XleCore.DrawLine(0, 288, 1, 640, storeBorderColor);
-
-			XleCore.DrawInnerBorder(storeLineColor);
-			XleCore.DrawInnerLine(0, 288, 1, 640, storeLineColor);
-
-			// Draw the title
-			Display.FillRect(320 - (theWindow[0].Length + 2) / 2 * 16, 0,
-				(theWindow[0].Length + 2) * 16, 16, storeBackColor);
-
-			XleCore.WriteText(320 - (theWindow[0].Length / 2) * 16, 0, theWindow[0], storeTitleColor);
-
-			for (int i = 1; i < 18; i++)
-			{
-				if (string.IsNullOrEmpty(theWindow[i]))
-					continue;
-
-				XleCore.WriteText((LeftOffset + 1) * 16, i * 16, theWindow[i], theWindowColor[i]);
-			}
-
-			if (robbing == false)
-			{
-				// Draw Gold
-				tempString = " Gold: ";
-				tempString += player.Gold;
-				tempString += " ";
-			}
-			else
-			{
-				// don't need gold if we're robbing it!
-				tempString = " Robbery in progress ";
-			}
-
-			Display.FillRect(320 - (tempString.Length / 2) * 16, 18 * 16, tempString.Length * 16, 14,
-				storeBackColor);
-
-			XleCore.WriteText(320 - (tempString.Length / 2) * 16, 18 * 16, tempString, XleColor.White);
-
-			XleCore.DrawBottomText();
-
-		}
-
-
-		protected Color BottomBackgroundColor { get; set; }
-
-		protected void StoreSound(LotaSound sound)
-		{
-			SoundMan.PlaySoundSync(RedrawStore, sound);
-		}
-		protected void Wait(int howLong)
-		{
-			XleCore.Wait(howLong, RedrawStore);
-		}
-		protected void WaitForKey(params KeyCode[] keys)
-		{
-			XleCore.WaitForKey(RedrawStore, keys);
-		}
-
-		protected int QuickMenu(MenuItemList menu, int spaces)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value, clrInit);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit, Color clrChanged)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value, clrInit, clrChanged);
-		}
-
-		protected int ChooseNumber(int max)
-		{
-			return XleCore.ChooseNumber(RedrawStore, max);
-		}
 		/// <summary>
 		/// Returns true if the loan for the player is over due and stores should not
 		/// speak with him and optionally displays a message to the player.  

@@ -7,21 +7,15 @@ using System.Text;
 namespace ERY.Xle.XleEventTypes.Stores
 {
 
-	public class StoreHealer : Store
+	public class StoreHealer : StoreFront
 	{
 		bool buyHerbs = false;
 
-		protected override void GetColors(out Color backColor, out Color borderColor,
-			out Color lineColor, out Color fontColor, out Color titleColor)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
-			backColor = XleColor.Green;
-			borderColor = XleColor.LightGreen;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.White;
-			titleColor = XleColor.White;
-
-			if (buyHerbs)
-				backColor = XleColor.LightBlue;
+			cs.BackColor = buyHerbs ? XleColor.LightBlue : XleColor.Green;
+			cs.FrameColor = XleColor.LightGreen;
+			cs.FrameHighlightColor = XleColor.Yellow;
 		}
 
 		public override bool Speak(GameState state)

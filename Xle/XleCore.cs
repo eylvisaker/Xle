@@ -18,6 +18,7 @@ using ERY.Xle.Commands;
 using ERY.Xle.XleEventTypes.Stores;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.XleEventTypes;
+using ERY.Xle.Rendering;
 
 namespace ERY.Xle
 {
@@ -75,16 +76,15 @@ namespace ERY.Xle
 
 		private Data.AgateDataImport mDatabase;
 
-		public static Color FontColor { get; private set; }
-
-		public static Surface Tiles { get; private set; }
-
+		
 		public static TextArea TextArea { get; private set; }
 
 		public XleCore()
 		{
 			inst = this;
-			PlayerColor = XleColor.White;
+			Renderer = new XleRenderer();
+
+			Renderer.PlayerColor = XleColor.White;
 
 			TextArea = new TextArea();
 		}
@@ -413,6 +413,7 @@ namespace ERY.Xle
 		}
 
 		public static GameState GameState { get; set; }
+		public static XleRenderer Renderer { get; set; }
 
 		private static void LoadDatabase()
 		{
@@ -757,7 +758,7 @@ namespace ERY.Xle
 
 			Display.BeginFrame();
 
-			Draw();
+			Renderer.Draw();
 
 			Display.EndFrame();
 			Core.KeepAlive();
@@ -813,100 +814,9 @@ namespace ERY.Xle
 			//CheckAnim();
 		}
 
-		public void Draw()
-		{
-			Player player = GameState.Player;
-			XleMap map = GameState.Map;
-
-			int i = 0;
-			Color boxColor = map.ColorScheme.FrameColor;
-			Color innerColor = map.ColorScheme.FrameHighlightColor;
-			int horizLine = 18 * 16;
-			int vertLine = map.ColorScheme.VerticalLinePosition;
-
-			FontColor = map.ColorScheme.TextColor;
-			Color menuColor = map.ColorScheme.TextColor;
-
-			if (g.LeftMenuActive)
-			{
-				menuColor = XleColor.Yellow;
-			}
-
-			// Clear the back buffer
-			Display.Clear();
-
-			DrawBorder(boxColor);
-
-			DrawLine(vertLine, 0, 0, horizLine + 12, boxColor);
-			DrawLine(0, horizLine, 1, myWindowWidth, boxColor);
-
-			DrawInnerBorder(innerColor);
-
-			DrawInnerLine(vertLine, 0, 0, horizLine + 12, innerColor);
-			DrawInnerLine(0, horizLine, 1, myWindowWidth, innerColor);
-
-			Rectangle mapRect = Rectangle.FromLTRB
-				(vertLine + 16, 16, XleCore.myWindowWidth - 16, horizLine);
-
-			map.Draw(player.X, player.Y, player.FaceDirection, mapRect);
-
-			i = 0;
-			int cursorPos = 0;
-			foreach(var cmd in GameState.Commands.Items)
-			{
-				WriteText(48, 16 * (i + 1), cmd.Name, menuColor);
-
-				if (cmd == GameState.Commands.CurrentCommand)
-					cursorPos = i;
-
-				i++;
-			}
-
-			WriteText(32, 16 * (cursorPos + 1), "`", menuColor);
-
-			Color hpColor = map.ColorScheme.TextColor;
-			if (mOverrideHPColor)
-				hpColor = mHPColor;
-
-			WriteText(48, 16 * 15, "H.P. " + player.HP.ToString(), hpColor);
-			WriteText(48, 16 * 16, "Food " + ((int)player.Food).ToString(), hpColor);
-			WriteText(48, 16 * 17, "Gold " + player.Gold.ToString(), hpColor);
-
-			TextArea.Draw();
-
-			if (map.AutoDrawPlayer)
-			{
-				DrawRafts(mapRect);
-
-				if (player.OnRaft < 0)
-					DrawCharacter(g.Animating, g.AnimFrame, vertLine);
-			}
-
-			if (PromptToContinue)
-			{
-				Display.FillRect(192, 384, 17 * 16, 16, XleColor.Black);
-				WriteText(208, 384, "(Press to Cont)", XleColor.Yellow);
-			}
-
-			/////////////////////////////////////////////////////////////////////////
-			// Check sounds
-			//
-			//CheckFade();
-
-			GameState.Map.CheckSounds(player);
-
-			//
-			// End sounds
-			/////////////////////////////////////////////////////////////////////////
-		}
-
-		bool mOverrideHPColor;
-
-		private static Color mHPColor;
-
 		public static void FlashHPWhileSound(Color clr)
 		{
-			FlashHPWhileSound(clr, FontColor);
+			FlashHPWhileSound(clr, Renderer.FontColor);
 		}
 		public static void FlashHPWhileSound(Color clr, Color clr2)
 		{
@@ -915,419 +825,10 @@ namespace ERY.Xle
 		}
 		public static void FlashHPWhile(Color clr, Color clr2, Func<bool> pred)
 		{
-			Color oldClr = mHPColor;
-			Color lastColor = clr2;
-
-			inst.mOverrideHPColor = true;
-			int count = 0;
-
-			while (pred())
-			{
-				if (lastColor == clr)
-					lastColor = clr2;
-				else
-					lastColor = clr;
-
-				mHPColor = lastColor;
-
-				XleCore.Wait(80);
-
-				count++;
-
-				if (count > 10000 / 80)
-					break;
-			}
-
-			inst.mOverrideHPColor = false;
-			mHPColor = oldClr;
+			Renderer.FlashHPWhile(clr, clr2, pred);
 
 		}
-		/****************************************************************************
-		 *	void DrawBottomText ( LPDIRECTDRAWSURFACE7 pDDS )						*
-		 *																			*
-		 *  This function handles draws the action history at the bottom of the		*
-		 *	main window for heartbeat												*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to							*
-		 *  Returns:	void														*
-		 ****************************************************************************/
-		/// <summary>
-		/// This function handles draws the action history at the bottom of the
-		/// main window for heartbeat		
-		/// </summary>
-		[Obsolete("Use TextArea.DrawArea instead.")]
-		public static void DrawBottomText()
-		{
-			TextArea.Draw();
-
-		}
-
-		/****************************************************************************
-		 *	void DrawBorder( LPDIRECTDRAWSURFACE7 pDDS, unsigned int boxColor)		*
-		 *																			*
-		 *  This function draws the border around the screen.						*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to, and the color to draw	*
-		 *  Returns:	void														*
-		 ****************************************************************************/
-		public static void DrawBorder(Color boxColor)
-		{
-			DrawLine(0, 0, 1, myWindowWidth, boxColor);
-			DrawLine(0, 0, 0, myWindowHeight - 2, boxColor);
-			DrawLine(0, myWindowHeight - 16, 1, myWindowWidth, boxColor);
-			DrawLine(myWindowWidth - 12, 0, 0, myWindowHeight - 2, boxColor);
-		}
-
-		/****************************************************************************
-		 *	void DrawInnerBorder( LPDIRECTDRAWSURFACE7 pDDS,						*
-		 *						  unsigned int innerColor)							*
-		 *																			*
-		 *  This function draws the colored lines inside the border					*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to, and the color to draw	*
-		 *  Returns:	void														*
-		 ****************************************************************************/
-		public static void DrawInnerBorder(Color innerColor)
-		{
-			DrawInnerLine(0, 0, 1, myWindowWidth, innerColor);
-			DrawInnerLine(0, 0, 0, myWindowHeight - 2, innerColor);
-			DrawInnerLine(0, myWindowHeight - 16, 1, myWindowWidth + 2, innerColor);
-			DrawInnerLine(myWindowWidth - 12, 0, 0, myWindowHeight - 2, innerColor);
-
-		}
-
-		/****************************************************************************
-		 *	void DrawLine(LPDIRECTDRAWSURFACE7 pDDS, int left, int top,				*
-		 *				int direction, int length, unsigned int boxColor)			*
-		 *																			*
-		 *																			*
-		 *  This function draws a single colored line at the point specified.		*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to, the left and top		*
-		 *		coordinates, direction = 1 for drawing to the right, or 0 for down,	*
-		 *		the length of the line, and the color to draw.						*
-		 *  Returns:	void														*
-		 ****************************************************************************/
-		public static void DrawLine(int left, int top, int direction,
-					  int length, Color boxColor)
-		{
-			int boxWidth = 12;
-
-			top += 4;
-
-			if (direction == 1)
-			{
-				boxWidth -= 2;
-
-				Display.FillRect(left, top, length, boxWidth, boxColor);
-
-			}
-			else
-			{
-				length -= 4;
-
-				Display.FillRect(left, top, boxWidth, length, boxColor);
-			}
-
-		}
-
-		/****************************************************************************
-		 *	void DrawInnerLine(LPDIRECTDRAWSURFACE7 pDDS, int left, int top,		*
-		 *				int direction,  int length, unsigned int innerColor)		*
-		 *																			*
-		 *																			*
-		 *  This function draws the inner border at the location specified.			*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to, the left and top		*
-		 *		coordinates, direction = 1 for drawing to the right, or 0 for down,	*
-		 *		the length of the line, and the color to draw.						*
-		 *  Returns:	void														*
-		 ****************************************************************************/
-		public static void DrawInnerLine(int left, int top, int direction,
-					  int length, Color innerColor)
-		{
-			int boxWidth = 12;
-			int innerOffsetH = 8;
-			int innerOffsetV = 4;
-			int innerWidth = 2;
-
-			top += 2;
-
-			if (direction == 1)
-			{
-				Display.FillRect(left + innerOffsetH,
-					top + innerOffsetV,
-					length - boxWidth,
-					innerWidth,
-					innerColor);
-			}
-			else
-			{
-
-				Display.FillRect(left + innerOffsetH,
-					top + innerOffsetV,
-					innerWidth,
-					length - boxWidth,
-					innerColor);
-
-			}
-
-		}
-
-		/****************************************************************************
-		 *  void WriteText ( LPDIRECTDRAWSURFACE7 pDDS, int px, int py,				*
-		 *					 const char *theText, const unsigned int* coloring)		*
-		 *																			*
-		 *  This function is the message driver that writes to our direct draw surface	*
-		 *	the message we want at the x,y point given in our font.					*
-		 *	The color is is overloaded so an array of coloring can be passed, or	*
-		 *	just a single color.													*
-		 ****************************************************************************/
-		public static void WriteText(int px, int py, string theText)
-		{
-			WriteText(px, py, theText, XleColor.White);
-		}
-		public static void WriteText(int px, int py, string theText, Color c)
-		{
-			if (string.IsNullOrEmpty(theText)) return;
-
-			int i, len = theText.Length + 1;
-			Color[] coloring = new Color[len];
-
-			for (i = 0; i < len; i++)
-			{
-				coloring[i] = c;
-			}
-
-			WriteText(px, py, theText, coloring);
-
-		}
-
-		/// <summary>
-		/// Writes out the specified text to the back buffer.
-		/// </summary>
-		/// <param name="px"></param>
-		/// <param name="py"></param>
-		/// <param name="theText"></param>
-		/// <param name="coloring"></param>
-		public static void WriteText(int px, int py, string theText, Color[] coloring)
-		{
-			if (string.IsNullOrEmpty(theText))
-				return;
-
-			int i;
-			int fx, fy;
-
-			int len = theText.Length;
-			Color color;
-
-			for (i = 0; i < len; i++, px += 16)
-			{
-				char c = theText[i];
-
-				if (coloring != null)
-				{
-					if (i < coloring.Length)
-						color = coloring[i];
-					else
-					{
-						System.Diagnostics.Debug.WriteLine("Warning: coloring array was too short.");
-						color = coloring[coloring.Length - 1];
-					}
-				}
-				else
-				{
-					color = XleColor.White;
-				}
-
-				///  removed the new graphics because colored message looks like crap.  I need to 
-				///	 antialias it some other way
-				fx = c % 16 * 16;//+ 256 * g.newGraphics;
-				fy = (int)(c / 16) * 16;
-
-				Factory.Font.Color = color;
-
-				Factory.Font.DrawText(px, py, c.ToString());
-			}
-		}
-
-		/****************************************************************************
-		 *  void DrawTile ( LPDIRECTDRAWSURFACE7 pDDS, int px, int py,				*
-		 *					 int tile)												*
-		 *																			*
-		 *  This function drives the tiles that are printed on the screen for the	*
-		 *	maps.  It takes an x and y coordinate and a tile number, then prints	*
-		 *	it on the screen.														*
-		 ****************************************************************************/
-		public static void DrawTile(int px, int py, int tile)
-		{
-			int tx, ty;
-
-			Rectangle tileRect;
-			Rectangle destRect;
-
-			tx = tile % 16 * 16;
-			ty = (int)(tile / 16) * 16;
-
-			tileRect = new Rectangle(tx, ty, 16, 16);
-			destRect = new Rectangle(px, py, 16, 16);
-
-			Tiles.Draw(tileRect, destRect);
-		}
-
-		/****************************************************************************
-		 *  DrawMonster( LPDIRECTDRAWSURFACE7 pDDS, int px, int py, int monst)		*											*
-		 *																			*
-		 *  This function drives monsters when they are displayed					*
-		 ****************************************************************************/
-		/// <summary>
-		/// Draws monsters on the outside maps.
-		/// </summary>
-		/// <param name="px">The x position of the monster, in screen coordinates.</param>
-		/// <param name="py">The y position of the monster, in screen coordinates.</param>
-		/// <param name="monst"></param>
-		public static void DrawMonster(int px, int py, int monst)
-		{
-			int tx, ty;
-
-			Rectangle monstRect;
-			Rectangle destRect;
-
-			tx = (monst % 8) * 64;
-			ty = (monst / 8) * 64;
-
-			monstRect = new Rectangle(tx, ty, 64, 64);
-			destRect = new Rectangle(px, py, 64, 64);
-
-			if (Factory.Monsters != null)
-				Factory.Monsters.Draw(monstRect, destRect);
-
-		}
-
-		public static Color PlayerColor { get; set; }
-		/// <summary>
-		/// Draws the player character.
-		/// </summary>
-		/// <param name="animFrame"></param>
-		/// <param name="vertLine"></param>
-		static void DrawCharacter(bool animating, int animFrame, int vertLine)
-		{
-			DrawCharacter(animating, animFrame, vertLine, PlayerColor);
-		}
-		static void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
-		{
-			int px = vertLine + 16;
-			int py = 16 + 7 * 16;
-			int width = (624 - px) / 16;
-
-			px += 11 * 16;
-
-			DrawCharacterSprite(px, py, GameState.Player.FaceDirection, animating, animFrame, true, clr);
-
-			CharRect = new Rectangle(px, py, 32, 32);
-		}
-
-		public static void DrawCharacterSprite(int destx, int desty, Direction facing, bool animating, int animFrame, bool allowPingPong, Color clr)
-		{
-			int tx = 0, ty;
-
-			Rectangle charRect;
-			Rectangle destRect;
-
-			if (allowPingPong && (facing == Direction.North || facing == Direction.South))
-			{
-				animFrame %= 4;
-
-				// ping-pong animation
-				if (animFrame == 3)
-					animFrame = 1;
-			}
-			else
-			{
-				animFrame %= 3;
-			}
-
-			if (animating)
-				tx = (1 + animFrame) * 32;
-
-			ty = ((int)facing - 1) * 32;
-
-			charRect = new Rectangle(tx, ty, 32, 32);
-			destRect = new Rectangle(destx, desty, 32, 32);
-
-			Factory.Character.Color = clr;
-			Factory.Character.Draw(charRect, destRect);
-		}
-
-		public static Rectangle CharRect { get; private set; }
-
-		/// <summary>
-		/// Draws the rafts that should be on the screen.
-		/// </summary>
-		/// <param name="inRect"></param>
-		static void DrawRafts(Rectangle inRect)
-		{
-			Player player = GameState.Player;
-			int tx, ty;
-			int lx = inRect.Left;
-			int width = inRect.Width;
-			int px = lx + (int)((width / 16) / 2) * 16;
-			int py = 128;
-			int rx, ry;
-			Rectangle charRect;
-			Rectangle destRect;
-
-			
-			for (int i = 0; i < player.Rafts.Count; i++)
-			{
-				RaftData raft = player.Rafts[i];
-
-				int raftAnim = g.raftAnim;
-				if (raft.RaftImage > 0)
-					raftAnim %= 4;
-				else
-					raftAnim %= 3;
-
-				int sourceX = raftAnim * 32;
-				int sourceY = 256;
-
-				tx = sourceX;
-				ty = sourceY;
-
-				if (GameState.Map.MapID != raft.MapNumber)
-					continue;
-				if (raft.RaftImage > 0)
-				{
-					tx += 32 * 4;
-				}
-
-				rx = px - (player.X - raft.X) * 16;
-				ry = py - (player.Y - raft.Y) * 16;
-
-				if (i == player.OnRaft)
-				{
-					if (g.raftFacing == Direction.West)
-					{
-						charRect = new Rectangle(tx, ty + 64, 32, 32);
-					}
-					else
-					{
-						charRect = new Rectangle(tx, ty + 32, 32, 32);
-					}
-				}
-				else
-				{
-					charRect = new Rectangle(tx, ty, 32, 32);
-				}
-
-				if (rx >= lx && ry >= 16 && rx <= 592 && ry < 272)
-				{
-					destRect = new Rectangle(rx, ry, 32, 32);
-
-					Factory.Character.Draw(charRect, destRect);
-				}
-			}
-		}
+		
 
 		/****************************************************************************
 		 *	void ChangeScreenMode()													*
@@ -1478,7 +979,7 @@ namespace ERY.Xle
 
 				Display.BeginFrame();
 
-				inst.Draw();
+				Renderer.Draw();
 				DrawMenu(menu);
 
 				Display.EndFrame();
@@ -1637,7 +1138,7 @@ namespace ERY.Xle
 
 			thestring = menu.title;
 
-			WriteText(xx + (int)((624 - xx) / 32) * 16 - (int)(thestring.Length / 2) * 16,
+			Renderer.WriteText(xx + (int)((624 - xx) / 32) * 16 - (int)(thestring.Length / 2) * 16,
 					   yy, thestring, fontColor);
 
 			yy += 16;
@@ -1654,14 +1155,14 @@ namespace ERY.Xle
 
 				thestring += ". " + buffer;
 
-				WriteText(xx, yy, thestring);
+				Renderer.WriteText(xx, yy, thestring);
 
 				if (i == menu.value)
 				{
 					int xx1;
 
 					xx1 = xx + thestring.Length * 16;
-					WriteText(xx1, yy, "`");
+					Renderer.WriteText(xx1, yy, "`");
 				}
 
 
@@ -1688,11 +1189,11 @@ namespace ERY.Xle
 		/// <returns></returns>
 		public static int QuickMenu(MenuItemList items, int spaces)
 		{
-			return QuickMenu(items, spaces, 0, XleCore.FontColor, XleCore.FontColor);
+			return QuickMenu(items, spaces, 0, XleCore.Renderer.FontColor, XleCore.Renderer.FontColor);
 		}
 		public static int QuickMenu(MenuItemList items, int spaces, int value = 0)
 		{
-			return QuickMenu(items, spaces, value, XleCore.FontColor, XleCore.FontColor);
+			return QuickMenu(items, spaces, value, XleCore.Renderer.FontColor, XleCore.Renderer.FontColor);
 		}
 		public static int QuickMenu(MenuItemList items, int spaces, int value, Color clrInit)
 		{
@@ -1705,11 +1206,11 @@ namespace ERY.Xle
 
 		public static int QuickMenu(Action redraw, MenuItemList items, int spaces)
 		{
-			return QuickMenu(redraw, items, spaces, 0, XleCore.FontColor, XleCore.FontColor);
+			return QuickMenu(redraw, items, spaces, 0, XleCore.Renderer.FontColor, XleCore.Renderer.FontColor);
 		}
 		public static int QuickMenu(Action redraw, MenuItemList items, int spaces, int value)
 		{
-			return QuickMenu(redraw, items, spaces, value, XleCore.FontColor, XleCore.FontColor);
+			return QuickMenu(redraw, items, spaces, value, XleCore.Renderer.FontColor, XleCore.Renderer.FontColor);
 		}
 		public static int QuickMenu(Action redraw, MenuItemList items, int spaces, int value, Color clrInit)
 		{
@@ -2087,7 +1588,7 @@ namespace ERY.Xle
 			if (tileset.EndsWith(".png") == false)
 				tileset += ".png";
 
-			Tiles = new Surface(tileset);
+			Renderer.Tiles = new Surface(tileset);
 		}
 
 		public static void ChangeMap(Player player, int mMapID, int targetEntryPoint)

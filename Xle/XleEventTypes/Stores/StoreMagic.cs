@@ -6,17 +6,16 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-
-	public class StoreMagic : Store
+	public class StoreMagic : StoreFront
 	{
-		protected override void GetColors(out Color backColor, out Color borderColor, out Color lineColor,
-			out Color fontColor, out Color titleColor)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
-			backColor = XleColor.LightBlue;
-			borderColor = XleColor.Cyan;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.Cyan;
-			titleColor = XleColor.White;
+			cs.BackColor = XleColor.LightBlue;
+			cs.FrameColor = XleColor.Cyan;
+			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.TextColor = XleColor.Cyan;
+			cs.TitleColor = XleColor.White;
+			cs.TextAreaBackColor = XleColor.Blue;
 		}
 
 		public override bool Speak(GameState state)
@@ -31,7 +30,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 			LeftOffset = 7;
 
 			theWindow[0] = ShopName;
-			BottomBackgroundColor = XleColor.Blue;
 
 
 			int i = 1;

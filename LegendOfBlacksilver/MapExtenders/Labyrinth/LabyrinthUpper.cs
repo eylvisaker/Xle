@@ -17,8 +17,6 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 
 			scheme.FrameColor = XleColor.DarkGray;
 			scheme.FrameHighlightColor = XleColor.Yellow;
-
-			scheme.VerticalLinePosition = 13 * 16;
 		}
 
 		public override double ChanceToHitGuard(Player player, Guard guard, int distance)

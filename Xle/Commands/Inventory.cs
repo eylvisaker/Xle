@@ -14,6 +14,7 @@ namespace ERY.Xle.Commands
 		public override void Execute(GameState state)
 		{
 			var player = state.Player;
+			var renderer = XleCore.Renderer;
 
 			int inventoryScreen = 0;
 
@@ -46,55 +47,55 @@ namespace ERY.Xle.Commands
 				Display.Clear(bgcolor);
 
 				// Draw the borders
-				XleCore.DrawBorder(Color.Gray);
-				XleCore.DrawLine(0, 128, 1, XleCore.myWindowWidth, XleColor.Gray);
+				renderer.DrawFrame(Color.Gray);
+				renderer.DrawFrameLine(0, 128, 1, XleCore.myWindowWidth, XleColor.Gray);
 
-				XleCore.DrawInnerBorder(Color.Yellow);
-				XleCore.DrawInnerLine(0, 128, 1, XleCore.myWindowWidth, XleColor.Yellow);
+				renderer.DrawFrameHighlight(Color.Yellow);
+				renderer.DrawInnerFrameHighlight(0, 128, 1, XleCore.myWindowWidth, XleColor.Yellow);
 
 				// Draw the title
 				Display.FillRect(new Rectangle(176, 0, 288, 16), bgcolor);
-				XleCore.WriteText(176, 0, " Player Inventory", fontcolor);
+				renderer.WriteText(176, 0, " Player Inventory", fontcolor);
 
 				// Draw the prompt
 				Display.FillRect(144, 384, 336, 16, bgcolor);
-				XleCore.WriteText(144, 384, " Hit key to continue", fontcolor);
+				renderer.WriteText(144, 384, " Hit key to continue", fontcolor);
 
 				// Draw the top box
-				XleCore.WriteText(48, 32, player.Name, fontcolor);
+				renderer.WriteText(48, 32, player.Name, fontcolor);
 
 				tempstring = "Level        ";
 				tempstring += player.Level.ToString().PadLeft(2);
-				XleCore.WriteText(48, 64, tempstring, fontcolor);
+				renderer.WriteText(48, 64, tempstring, fontcolor);
 
 				string timeString = ((int)player.TimeDays).ToString().PadLeft(5);
 				tempstring = "Time-days ";
 				tempstring += timeString;
-				XleCore.WriteText(48, 96, tempstring, fontcolor);
+				renderer.WriteText(48, 96, tempstring, fontcolor);
 
 				tempstring = "Dexterity     ";
 				tempstring += player.Attribute[Attributes.dexterity];
-				XleCore.WriteText(336, 32, tempstring, fontcolor);
+				renderer.WriteText(336, 32, tempstring, fontcolor);
 
 				tempstring = "Strength      ";
 				tempstring += player.Attribute[Attributes.strength];
-				XleCore.WriteText(336, 48, tempstring, fontcolor);
+				renderer.WriteText(336, 48, tempstring, fontcolor);
 
 				tempstring = "Charm         ";
 				tempstring += player.Attribute[Attributes.charm];
-				XleCore.WriteText(336, 64, tempstring, fontcolor);
+				renderer.WriteText(336, 64, tempstring, fontcolor);
 
 				tempstring = "Endurance     ";
 				tempstring += player.Attribute[Attributes.endurance];
-				XleCore.WriteText(336, 80, tempstring, fontcolor);
+				renderer.WriteText(336, 80, tempstring, fontcolor);
 
 				tempstring = "Intelligence  ";
 				tempstring += player.Attribute[Attributes.intelligence];
-				XleCore.WriteText(336, 96, tempstring, fontcolor);
+				renderer.WriteText(336, 96, tempstring, fontcolor);
 
 				if (inventoryScreen == 0)
 				{
-					XleCore.WriteText(80, 160, "Armor & Weapons  -  Quality", fontcolor);
+					renderer.WriteText(80, 160, "Armor & Weapons  -  Quality", fontcolor);
 
 					int yy = 11;
 					Color tempcolor;
@@ -113,8 +114,8 @@ namespace ERY.Xle.Commands
 								tempcolor = fontcolor;
 							}
 
-							XleCore.WriteText(128, ++yy * 16, XleCore.WeaponList[player.WeaponType(i)].Name, tempcolor);
-							XleCore.WriteText(416, yy * 16, XleCore.QualityList[player.WeaponQuality(i)], tempcolor);
+							renderer.WriteText(128, ++yy * 16, XleCore.WeaponList[player.WeaponType(i)].Name, tempcolor);
+							renderer.WriteText(416, yy * 16, XleCore.QualityList[player.WeaponQuality(i)], tempcolor);
 						}
 
 					}
@@ -135,8 +136,8 @@ namespace ERY.Xle.Commands
 								tempcolor = fontcolor;
 							}
 
-							XleCore.WriteText(128, ++yy * 16, XleCore.ArmorList[player.ArmorType(i)].Name, tempcolor);
-							XleCore.WriteText(416, yy * 16, XleCore.QualityList[player.ArmorQuality(i)], tempcolor);
+							renderer.WriteText(128, ++yy * 16, XleCore.ArmorList[player.ArmorType(i)].Name, tempcolor);
+							renderer.WriteText(416, yy * 16, XleCore.QualityList[player.ArmorQuality(i)], tempcolor);
 						}
 
 					}
@@ -147,7 +148,7 @@ namespace ERY.Xle.Commands
 
 					// Draw the middle prompt
 					Display.FillRect(160, 128, 288, 16, bgcolor);
-					XleCore.WriteText(160, 128, " Other Possesions", fontcolor);
+					renderer.WriteText(160, 128, " Other Possesions", fontcolor);
 
 					string line;
 					int yy = 9;
@@ -189,7 +190,7 @@ namespace ERY.Xle.Commands
 							// tempstring += tempstring2;
 							line += XleCore.ItemList[i].Name;
 
-							XleCore.WriteText(xx, ++yy * 16, line, tempcolor);
+							renderer.WriteText(xx, ++yy * 16, line, tempcolor);
 						}
 					}
 

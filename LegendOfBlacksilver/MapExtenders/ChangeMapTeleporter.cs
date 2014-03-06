@@ -30,14 +30,14 @@ namespace ERY.Xle.LoB.MapExtenders
 				int index = ((int)watch.ElapsedMilliseconds % 80) / 50;
 
 				if (index == 0)
-					XleCore.PlayerColor = XleColor.Black;
+					XleCore.Renderer.PlayerColor = XleColor.Black;
 				else
-					XleCore.PlayerColor = XleColor.White;
+					XleCore.Renderer.PlayerColor = XleColor.White;
 
 				XleCore.Redraw();
 			}
 
-			XleCore.PlayerColor = XleColor.White;
+			XleCore.Renderer.PlayerColor = XleColor.White;
 
 			while (watch.ElapsedMilliseconds < 2000)
 			{

@@ -13,7 +13,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 		{
 			state.Story().Invisible = false;
 
-			XleCore.PlayerColor = XleColor.White;
+			XleCore.Renderer.PlayerColor = XleColor.White;
 		}
 
 		public int Stormy
@@ -31,6 +31,13 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			commands.Items.Add(new Commands.Magic());
 			commands.Items.Add(new Commands.Speak());
 
+		}
+
+		public override void SetColorScheme(ColorScheme scheme)
+		{
+			base.SetColorScheme(scheme);
+
+			scheme.MapAreaWidth = 23;
 		}
 	}
 }

@@ -14,8 +14,6 @@ namespace ERY.Xle.LoB.MapExtenders.Towns
 
 			scheme.FrameColor = XleColor.Gray;
 			scheme.FrameHighlightColor = XleColor.Yellow;
-
-			scheme.VerticalLinePosition = 13 * 16;
 		}
 	}
 }

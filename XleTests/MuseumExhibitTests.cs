@@ -19,7 +19,8 @@ namespace ERY.XleTests
 		{
 			Player player = new Player();
 			player.Items.ClearStoryItems(); // remove the compendium the player started with.
-			
+			player.StoryData = new LotaStory();
+
 			Information information = new Information();
 
 			Assert.IsFalse(information.ShouldLevelUp(player));
@@ -86,22 +87,24 @@ namespace ERY.XleTests
 		public void InformationLevelupWithCheatTest()
 		{
 			Player player = new Player();
-			XleCore.GameState.Player = player;
+			player.StoryData = new LotaStory();
+
+			LotaFactory factory = new LotaFactory();
 			
 			Information information = new Information();
 
 			Assert.IsFalse(information.ShouldLevelUp(player));
-
+			
 			for (int i = 2; i <= 7; i++)
 			{
-				XleCore.CheatLevel(i);
+				factory.CheatLevel(player, i);
 				Assert.IsFalse(information.ShouldLevelUp(player));
 
 				player.Level--;
 				Assert.IsTrue(information.ShouldLevelUp(player));
 			}
 
-			XleCore.CheatLevel(10);
+			factory.CheatLevel(player, 10);
 			player.Level = 7;
 			Assert.IsTrue(information.ShouldLevelUp(player));
 

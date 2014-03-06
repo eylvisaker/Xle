@@ -20,8 +20,6 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 
 			scheme.FrameColor = XleColor.Orange;
 			scheme.FrameHighlightColor = XleColor.Yellow;
-
-			scheme.VerticalLinePosition = 13 * 16;
 		}
 
 		public override void SetCommands(Commands.CommandList commands)

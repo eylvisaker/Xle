@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-	public class StoreBank : Store
+	public class StoreBank : StoreFront
 	{
 		public override int RobValue()
 		{
@@ -19,14 +19,13 @@ namespace ERY.Xle.XleEventTypes.Stores
 				return true;
 			}
 		}
-		protected override void GetColors(out Color backColor, out Color borderColor,
-			out Color lineColor, out Color fontColor, out Color titleColor)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
-			backColor = XleColor.DarkGray;
-			borderColor = XleColor.Green;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.White;
-			titleColor = XleColor.Yellow;
+			cs.BackColor = XleColor.DarkGray;
+			cs.FrameColor = XleColor.Green;
+			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.TitleColor = XleColor.Yellow;
+			cs.BorderColor = XleColor.Gray;
 		}
 		public override bool Speak(GameState state)
 		{

@@ -138,7 +138,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				mIsAngry = value;
 
-				Extender.SetAngry(value);
+				Extender.OnSetAngry(value);
 			}
 		}
 
@@ -1071,7 +1071,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
 					{
-						XleCore.DrawCharacterSprite(rx, ry, facing, true, guardAnim, false, guard.Color);
+						XleCore.Renderer.DrawCharacterSprite(rx, ry, facing, true, guardAnim, false, guard.Color);
 					}
 				}
 			}

@@ -32,7 +32,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			scheme.FrameColor = XleColor.Brown;
 			scheme.FrameHighlightColor = XleColor.Yellow;
 
-			scheme.VerticalLinePosition = 15 * 16;
+			scheme.MapAreaWidth = 25;
 		}
 	}
 }

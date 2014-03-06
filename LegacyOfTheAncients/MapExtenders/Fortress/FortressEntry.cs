@@ -34,8 +34,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 			scheme.FrameColor = XleColor.Gray;
 			scheme.FrameHighlightColor = XleColor.Yellow;
-
-			scheme.VerticalLinePosition = 13 * 16;
 		}
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
@@ -43,11 +41,11 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 					base.CreateEventExtender(evt, defaultExtender);
 		}
 
-		public override void SetAngry(bool value)
+		public override void OnSetAngry(bool value)
 		{
-			base.SetAngry(value);
+			base.OnSetAngry(value);
 
-			XleCore.PlayerColor = XleColor.White;
+			XleCore.Renderer.PlayerColor = XleColor.White;
 		}
 
 		public override void SpeakToGuard(GameState state, ref bool handled)

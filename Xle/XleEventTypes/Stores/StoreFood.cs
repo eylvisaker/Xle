@@ -7,18 +7,14 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-
-	public class StoreFood : Store
+	public class StoreFood : StoreFront
 	{
-		protected override void GetColors(out Color backColor, out Color borderColor,
-			out Color lineColor, out Color fontColor, out Color titleColor)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
-			backColor = XleColor.DarkGray;
-			borderColor = XleColor.Green;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.Yellow;
-			titleColor = XleColor.White;
-
+			cs.BackColor = XleColor.DarkGray;
+			cs.FrameColor = XleColor.Green;
+			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.TextColor = XleColor.Yellow;
 		}
 
 		bool skipMailOffer = false;

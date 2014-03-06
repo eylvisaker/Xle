@@ -15,8 +15,6 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 			scheme.FrameColor = XleColor.Orange;
 			scheme.FrameHighlightColor = XleColor.Green;
 			scheme.TextColor = XleColor.White;
-
-			scheme.VerticalLinePosition = 13 * 16;
 		}
 	}
 }

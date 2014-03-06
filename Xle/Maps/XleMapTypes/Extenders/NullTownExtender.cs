@@ -14,8 +14,6 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			scheme.FrameColor = XleColor.Orange;
 			scheme.FrameHighlightColor = XleColor.Yellow;
-
-			scheme.VerticalLinePosition = 13 * 16;
 		}
 
 		public virtual void SpeakToGuard(GameState state, ref bool handled)
@@ -23,7 +21,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		}
 
 
-		public virtual void SetAngry(bool value)
+		public virtual void OnSetAngry(bool value)
 		{
 		}
 

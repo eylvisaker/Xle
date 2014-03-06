@@ -340,7 +340,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			AgateLib.DisplayLib.Display.FillRect(px, py, textLength * 16, 16, Color.Black);
 
 			Color clr = exhibit.TitleColor;
-			XleCore.WriteText(px, py, exhibit.Name, clr);
+			XleCore.Renderer.WriteText(px, py, exhibit.Name, clr);
 		}
 
 		int anim;

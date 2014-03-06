@@ -9,7 +9,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	{
 		void SpeakToGuard(GameState state, ref bool handled);
 
-		void SetAngry(bool value);
+		void OnSetAngry(bool value);
 
 		double ChanceToHitGuard(Player player, Guard guard, int distance);
 

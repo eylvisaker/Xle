@@ -111,9 +111,10 @@ namespace ERY.Xle.LotA.TitleScreen
 		}
 		void DisplayTitleScreen()
 		{
-			Color borderColor, lineColor;
+			Color frameColor, lineColor;
 
 			Display.Clear(bgColor);
+			var renderer = XleCore.Renderer;
 
 			// draw borders & stuff	
 			switch (titleState)
@@ -125,63 +126,63 @@ namespace ERY.Xle.LotA.TitleScreen
 					break;
 
 				case TitleScreenState.Menu1:
-					borderColor = XleColor.Blue;
+					frameColor = XleColor.Blue;
 					lineColor = XleColor.White;
 
-					XleCore.DrawBorder(borderColor);
+					renderer.DrawFrame(frameColor);
 
-					XleCore.DrawLine(0, 20 * 16, 1, XleCore.myWindowWidth, borderColor);
-					XleCore.DrawLine(3 * 16 + 8, 0, 0, 7 * 16, borderColor);
-					XleCore.DrawLine(35 * 16 + 8, 0, 0, 7 * 16, borderColor);
-					XleCore.DrawLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, borderColor);
+					renderer.DrawFrameLine(0, 20 * 16, 1, XleCore.myWindowWidth, frameColor);
+					renderer.DrawFrameLine(3 * 16 + 8, 0, 0, 7 * 16, frameColor);
+					renderer.DrawFrameLine(35 * 16 + 8, 0, 0, 7 * 16, frameColor);
+					renderer.DrawFrameLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, frameColor);
 
-					XleCore.DrawInnerBorder(lineColor);
+					renderer.DrawFrameHighlight(lineColor);
 
-					XleCore.DrawInnerLine(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
-					XleCore.DrawInnerLine(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					XleCore.DrawInnerLine(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					XleCore.DrawInnerLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
+					renderer.DrawInnerFrameHighlight(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
+					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
+					renderer.DrawInnerFrameHighlight(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
+					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
 
 					break;
 
 				case TitleScreenState.Menu2:
-					borderColor = XleColor.Brown;
+					frameColor = XleColor.Brown;
 					lineColor = XleColor.Yellow;
 
-					XleCore.DrawBorder(borderColor);
+					renderer.DrawFrame(frameColor);
 
-					XleCore.DrawLine(0, 20 * 16, 1, XleCore.myWindowWidth, borderColor);
-					XleCore.DrawLine(3 * 16 + 8, 0, 0, 7 * 16, borderColor);
-					XleCore.DrawLine(35 * 16 + 8, 0, 0, 7 * 16, borderColor);
-					XleCore.DrawLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, borderColor);
+					renderer.DrawFrameLine(0, 20 * 16, 1, XleCore.myWindowWidth, frameColor);
+					renderer.DrawFrameLine(3 * 16 + 8, 0, 0, 7 * 16, frameColor);
+					renderer.DrawFrameLine(35 * 16 + 8, 0, 0, 7 * 16, frameColor);
+					renderer.DrawFrameLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, frameColor);
 
-					XleCore.DrawInnerBorder(lineColor);
+					renderer.DrawFrameHighlight(lineColor);
 
-					XleCore.DrawInnerLine(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
-					XleCore.DrawInnerLine(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					XleCore.DrawInnerLine(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					XleCore.DrawInnerLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
+					renderer.DrawInnerFrameHighlight(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
+					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
+					renderer.DrawInnerFrameHighlight(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
+					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
 
 					break;
 
 				case TitleScreenState.NewGame:
 
-					borderColor = XleColor.LightGray;
+					frameColor = XleColor.LightGray;
 					lineColor = XleColor.Yellow;
 
-					XleCore.DrawBorder(borderColor);
+					renderer.DrawFrame(frameColor);
 
-					XleCore.DrawLine(10 * 16, 10 * 16, 1, 19 * 16 - 4, borderColor);  // top
-					XleCore.DrawLine(10 * 16, 12 * 16, 1, 19 * 16 - 4, borderColor);  // bottom
-					XleCore.DrawLine(10 * 16, 10 * 16, 0, 3 * 16 - 4, borderColor);   // left
-					XleCore.DrawLine(28 * 16, 10 * 16, 0, 3 * 16 - 4, borderColor);   // right
+					renderer.DrawFrameLine(10 * 16, 10 * 16, 1, 19 * 16 - 4, frameColor);  // top
+					renderer.DrawFrameLine(10 * 16, 12 * 16, 1, 19 * 16 - 4, frameColor);  // bottom
+					renderer.DrawFrameLine(10 * 16, 10 * 16, 0, 3 * 16 - 4, frameColor);   // left
+					renderer.DrawFrameLine(28 * 16, 10 * 16, 0, 3 * 16 - 4, frameColor);   // right
 
-					XleCore.DrawInnerBorder(lineColor);
+					renderer.DrawFrameHighlight(lineColor);
 
-					XleCore.DrawInnerLine(10 * 16, 10 * 16, 1, 19 * 16 - 4, XleColor.White);
-					XleCore.DrawInnerLine(10 * 16, 12 * 16, 1, 19 * 16 - 2, XleColor.White);
-					XleCore.DrawInnerLine(10 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
-					XleCore.DrawInnerLine(28 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
+					renderer.DrawInnerFrameHighlight(10 * 16, 10 * 16, 1, 19 * 16 - 4, XleColor.White);
+					renderer.DrawInnerFrameHighlight(10 * 16, 12 * 16, 1, 19 * 16 - 2, XleColor.White);
+					renderer.DrawInnerFrameHighlight(10 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
+					renderer.DrawInnerFrameHighlight(28 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
 
 
 
@@ -194,18 +195,18 @@ namespace ERY.Xle.LotA.TitleScreen
 				case TitleScreenState.NewGameText:
 				case TitleScreenState.LoadGame:
 
-					borderColor = XleColor.LightGray;
+					frameColor = XleColor.LightGray;
 					lineColor = XleColor.Yellow;
 
-					XleCore.DrawBorder(borderColor);
-					XleCore.DrawInnerBorder(lineColor);
+					renderer.DrawFrame(frameColor);
+					renderer.DrawFrameHighlight(lineColor);
 
 					break;
 			}
 
 			for (int i = 0; i < 25; i++)
 			{
-				XleCore.WriteText(0, i * 16, wnd[i], color[i]);
+				renderer.WriteText(0, i * 16, wnd[i], color[i]);
 			}
 
 		}

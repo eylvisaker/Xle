@@ -88,8 +88,6 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
 			scheme.FrameColor = XleColor.LightGray;
 			scheme.FrameHighlightColor = XleColor.Yellow;
-
-			scheme.VerticalLinePosition = 13 * 16;
 		}
 
 		public override void OnLoad(GameState state)

@@ -968,10 +968,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 				pt.X *= 16;
 				pt.Y *= 16;
 
-				pt.X += XleCore.CharRect.X;
-				pt.Y += XleCore.CharRect.Y;
+				pt.X += XleCore.Renderer.CharRect.X;
+				pt.Y += XleCore.Renderer.CharRect.Y;
 
-				XleCore.DrawMonster(pt.X, pt.Y, displayMonst);
+				XleCore.Renderer.DrawMonster(pt.X, pt.Y, displayMonst);
 			}
 		}
 		protected override void PlayerStepImpl(Player player, bool didEvent)

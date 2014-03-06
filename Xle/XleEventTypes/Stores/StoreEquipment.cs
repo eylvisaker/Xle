@@ -8,7 +8,7 @@ using System.Text;
 namespace ERY.Xle.XleEventTypes.Stores
 {
 
-	public abstract class StoreEquipment : Store
+	public abstract class StoreEquipment : StoreFront
 	{
 		public StoreEquipment()
 		{
@@ -212,14 +212,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 	}
 	public class StoreWeapon : StoreEquipment
 	{
-		protected override void GetColors(out Color backColor, out Color borderColor,
-			out Color lineColor, out Color fontColor, out Color titleColor)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
-			backColor = XleColor.Brown;
-			borderColor = XleColor.Orange;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.White;
-			titleColor = XleColor.White;
+			cs.BackColor = XleColor.Brown;
+			cs.FrameColor = XleColor.Orange;
+			cs.FrameHighlightColor = XleColor.Yellow;
 		}
 
 		protected override string StoreType
@@ -254,16 +251,13 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 	public class StoreArmor : StoreEquipment
 	{
-		protected override void GetColors(out Color backColor, out Color borderColor,
-			out Color lineColor, out Color fontColor, out Color titleColor)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
-			backColor = XleColor.Purple;
-			borderColor = XleColor.Blue;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.White;
-			titleColor = XleColor.White;
+			cs.BackColor = XleColor.Purple;
+			cs.FrameColor = XleColor.Blue;
+			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.BorderColor = XleColor.LightBlue;
 		}
-
 
 		protected override string StoreType
 		{

@@ -614,7 +614,7 @@ namespace ERY.Xle
 				{
 					tile = DrawTile(i, j);
 
-					XleCore.DrawTile(xx, yy, tile);
+					XleCore.Renderer.DrawTile(xx, yy, tile);
 
 					xx += 16;
 				}

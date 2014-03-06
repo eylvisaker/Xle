@@ -42,7 +42,7 @@ namespace ERY.Xle
 				}
 				else
 				{
-					WriteColors(x, t.Length, XleCore.FontColor);
+					WriteColors(x, t.Length, XleCore.Renderer.FontColor);
 				}
 			}
 			public void WriteText(int x, string t, Color? color)
@@ -51,7 +51,7 @@ namespace ERY.Xle
 
 				Text += t;
 
-				WriteColors(x, t.Length, color ?? XleCore.FontColor);
+				WriteColors(x, t.Length, color ?? XleCore.Renderer.FontColor);
 			}
 
 			private void WriteColors(int x, int length, Color newColor)
@@ -104,7 +104,7 @@ namespace ERY.Xle
 
 		private void DrawText(int x, int y, string text, Color[] color)
 		{
-			XleCore.WriteText(x, y, text, color);
+			XleCore.Renderer.WriteText(x, y, text, color);
 		}
 
 
@@ -228,7 +228,7 @@ namespace ERY.Xle
 		}
 		public void PrintSlow(string text, Color[] colors= null)
 		{
-			PrintSlowImpl(text, XleCore.FontColor, colors);
+			PrintSlowImpl(text, XleCore.Renderer.FontColor, colors);
 		}
 		public void PrintSlow(string text, Color color)
 		{
@@ -250,7 +250,7 @@ namespace ERY.Xle
 			foreach (var line in lines)
 			{
 				line.Text = "";
-				line.SetColor(XleCore.FontColor);
+				line.SetColor(XleCore.Renderer.FontColor);
 			}
 
 			cursor.X = margin;
@@ -279,7 +279,7 @@ namespace ERY.Xle
 			Stopwatch watch = new Stopwatch();
 			watch.Start();
 
-			FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, XleCore.FontColor, color, flashRate, lines);
+			FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, XleCore.Renderer.FontColor, color, flashRate, lines);
 		}
 
 		public void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)

@@ -6,22 +6,19 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-
-	public class StoreLending : Store
+	public class StoreLending : StoreFront
 	{
 		public override int RobValue()
 		{
 			return XleCore.random.Next(180, 231);
 		}
-		protected override void GetColors(out Color backColor, out Color borderColor,
-			out Color lineColor, out Color fontColor, out Color titleColor)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
-			backColor = XleColor.DarkGray;
-			borderColor = XleColor.LightGray;
-			lineColor = XleColor.Yellow;
-			fontColor = XleColor.White;
-			titleColor = XleColor.White;
+			cs.BackColor = XleColor.DarkGray;
+			cs.FrameColor = XleColor.LightGray;
+			cs.FrameHighlightColor = XleColor.Yellow;
 		}
+
 		public override bool Speak(GameState state)
 		{
 			var player = state.Player;

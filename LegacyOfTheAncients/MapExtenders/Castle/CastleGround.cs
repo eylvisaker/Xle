@@ -62,7 +62,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 			player.Story().Invisible = true;
 			XleCore.TextArea.PrintLine("You're invisible.");
-			XleCore.PlayerColor = XleColor.DarkGray;
+			XleCore.Renderer.PlayerColor = XleColor.DarkGray;
 
 			((IHasGuards)TheMap).IsAngry = false;
 
@@ -90,12 +90,12 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			handled = true;
 		}
 
-		public override void SetAngry(bool value)
+		public override void OnSetAngry(bool value)
 		{
 			var state = XleCore.GameState;
 
 			state.Story().Invisible = false;
-			XleCore.PlayerColor = XleColor.White;
+			XleCore.Renderer.PlayerColor = XleColor.White;
 		}
 
 		protected int WhichCastle = 1;

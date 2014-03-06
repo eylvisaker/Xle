@@ -36,7 +36,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
 			((IHasGuards)state.Map).IsAngry = false;
 
-			XleCore.PlayerColor = XleColor.Yellow;
+			XleCore.Renderer.PlayerColor = XleColor.Yellow;
 
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("you put on armor.");

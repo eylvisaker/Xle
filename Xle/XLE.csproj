@@ -169,6 +169,7 @@
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands\CommandList.cs" />
     <Compile Include="Data\Data.cs" />
+    <Compile Include="Rendering\XleRenderer.cs" />
     <Compile Include="TextArea.cs" />
     <Compile Include="TileInfo.cs" />
     <Compile Include="Maps\TileSet.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="XleEventTypes\Stores\StoreEquipment.cs" />
     <Compile Include="XleEventTypes\Stores\StoreFood.cs" />
     <Compile Include="XleEventTypes\Stores\StoreFortune.cs" />
+    <Compile Include="XleEventTypes\Stores\StoreFront.cs" />
     <Compile Include="XleEventTypes\Stores\StoreHealer.cs" />
     <Compile Include="XleEventTypes\Stores\StoreJail.cs" />
     <Compile Include="XleEventTypes\Stores\StoreLending.cs" />
@@ -559,5 +561,8 @@
       <Project>{00C7FA95-98F4-43D9-9B63-34122B1DB003}</Project>
       <Name>AgateSDL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="XleEventTypes\Stores\Extenders\" />
   </ItemGroup>
 </Project>

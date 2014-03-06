@@ -70,6 +70,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ColorSchemeTests.cs" />
     <Compile Include="MuseumExhibitTests.cs" />
     <Compile Include="XleBaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +97,9 @@
       <Project>{fde0a61f-558b-4964-8292-b7a212a3ab45}</Project>
       <Name>XLE</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
