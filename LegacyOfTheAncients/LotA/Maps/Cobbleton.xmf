@@ -3,7 +3,7 @@
   <ExtenderName>Cobbleton</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
-    <Tiles array="true" encoding="Csv">1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,1,0,1,1,1,1,0,1,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1</Tiles>
+    <Tiles array="true" encoding="Csv">1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,1,0,1,1,1,1,0,1,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,1,1,1,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1</Tiles>
     <TileGroups array="true" type="ERY.Xle.Maps.TileGroup">
       <Item>
         <Tiles array="true" encoding="Csv">0,1,16,17</Tiles>
@@ -32,8 +32,7 @@
       <Y>34</Y>
       <Width>2</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>Healer</ExtenderName>
       <ShopName>The Gentle Touch</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -48,9 +47,9 @@
       <CostFactor>1</CostFactor>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
-      <X>65</X>
-      <Y>8</Y>
-      <Width>3</Width>
+      <X>59</X>
+      <Y>5</Y>
+      <Width>4</Width>
       <Height>3</Height>
       <ExtenderName>
       </ExtenderName>
@@ -60,9 +59,9 @@
 AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Stores.StoreLending">
-      <X>59</X>
-      <Y>5</Y>
-      <Width>4</Width>
+      <X>66</X>
+      <Y>8</Y>
+      <Width>3</Width>
       <Height>3</Height>
       <ExtenderName>
       </ExtenderName>

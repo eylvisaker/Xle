@@ -65,8 +65,6 @@ namespace ERY.Xle
 
 			disableEncounters = false;
 
-			walkTime = 150;
-
 			invisible = false;
 			guard = false;
 
@@ -378,8 +376,6 @@ namespace ERY.Xle
 		}
 		
 		// other commonly used variables that don't need accessors
-		static public int walkTime;				// time to wait between steps
-
 		//		full screen mode
 		static private bool done;
 

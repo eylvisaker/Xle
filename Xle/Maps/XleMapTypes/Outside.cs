@@ -1481,5 +1481,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			throw new InvalidOperationException();
 		}
+		public override int WaitTimeAfterStep
+		{
+			get
+			{
+				return XleCore.GameState.GameSpeed.OutsideStepTime;
+			}
+		}
 	}
 }

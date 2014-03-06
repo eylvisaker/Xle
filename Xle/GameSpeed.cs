@@ -16,5 +16,7 @@ namespace ERY.Xle
 		public int DungeonOpenChestSoundTime { get; set; }
 
 		public int OutsideStepTime { get; set; }
+
+		public int GeneralStepTime { get; set; }
 	}
 }

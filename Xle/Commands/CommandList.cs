@@ -142,7 +142,8 @@ namespace ERY.Xle.Commands
 				g.AnimFrame = 0;
 			}
 
-			var waitTime = g.walkTime;
+
+			var waitTime = State.Map.WaitTimeAfterStep;
 
 			g.charAnimCount = 0;
 
@@ -160,7 +161,7 @@ namespace ERY.Xle.Commands
 			}
 
 			// check for events
-			XleCore.Map.PlayerStep(player);
+			State.Map.PlayerStep(player);
 
 			AfterDoCommand(waitTime, cmd);
 		}

@@ -1320,6 +1320,14 @@ namespace ERY.Xle
 		{
 			mBaseExtender.SetCommands(commands);
 		}
+
+		public virtual int WaitTimeAfterStep
+		{
+			get
+			{
+				return XleCore.GameState.GameSpeed.GeneralStepTime;
+			}
+		}
 	}
 
 	public class Roof : IXleSerializable
