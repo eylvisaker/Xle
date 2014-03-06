@@ -193,6 +193,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		public override bool PlayerClimb(Player player)
 		{
+			XleCore.TextArea.PrintLine();
+
 			switch (this[player.X, player.Y])
 			{
 				case 0x11:
@@ -301,7 +303,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				default: break;
 			}
 
-			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("\n");
 
 			bool revealHidden = false;
 
