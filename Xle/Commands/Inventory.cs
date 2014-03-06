@@ -44,7 +44,8 @@ namespace ERY.Xle.Commands
 					fontcolor = XleColor.Cyan;
 				}
 				Display.BeginFrame();
-				Display.Clear(bgcolor);
+				XleCore.SetOrthoProjection(XleColor.DarkGray);
+				Display.FillRect(new Rectangle(0, 0, 640, 480), bgcolor);
 
 				// Draw the borders
 				renderer.DrawFrame(Color.Gray);

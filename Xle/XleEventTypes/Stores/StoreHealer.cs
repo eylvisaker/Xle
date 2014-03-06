@@ -16,6 +16,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			cs.BackColor = buyHerbs ? XleColor.LightBlue : XleColor.Green;
 			cs.FrameColor = XleColor.LightGreen;
 			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.BorderColor = XleColor.Gray;
 		}
 
 		public override bool Speak(GameState state)
@@ -54,6 +55,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			theWindow[i++] = "2. Healing Herbs -  " + herbsPrice.ToString() + " apiece";
 
+			Wait(1000);
+			return true;
 			throw new NotImplementedException();
 			/*
 			// display ready message

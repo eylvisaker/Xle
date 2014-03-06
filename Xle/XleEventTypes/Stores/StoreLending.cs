@@ -15,8 +15,9 @@ namespace ERY.Xle.XleEventTypes.Stores
 		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.DarkGray;
-			cs.FrameColor = XleColor.LightGray;
+			cs.FrameColor = XleColor.Gray;
 			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.BorderColor = XleColor.Black;
 		}
 
 		public override bool Speak(GameState state)

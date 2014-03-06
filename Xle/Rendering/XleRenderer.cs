@@ -112,7 +112,7 @@ namespace ERY.Xle.Rendering
 			{
 				Display.FillRect(left + innerOffsetH,
 					top + innerOffsetV,
-					length - boxWidth,
+					length - boxWidth + 2,
 					innerWidth,
 					innerColor);
 			}
@@ -121,7 +121,7 @@ namespace ERY.Xle.Rendering
 
 				Display.FillRect(left + innerOffsetH,
 					top + innerOffsetV,
-					innerWidth,
+					innerWidth + 2,
 					length - boxWidth,
 					innerColor);
 
@@ -404,9 +404,6 @@ namespace ERY.Xle.Rendering
 			{
 				menuColor = XleColor.Yellow;
 			}
-
-			// Clear the back buffer
-			Display.Clear();
 
 			DrawFrame(boxColor);
 

@@ -7,7 +7,6 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-
 	public abstract class StoreEquipment : StoreFront
 	{
 		public StoreEquipment()
@@ -217,6 +216,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			cs.BackColor = XleColor.Brown;
 			cs.FrameColor = XleColor.Orange;
 			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.BorderColor = XleColor.Red;
 		}
 
 		protected override string StoreType

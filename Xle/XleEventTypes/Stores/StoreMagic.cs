@@ -10,6 +10,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 	{
 		protected override void SetColorScheme(ColorScheme cs)
 		{
+			cs.BorderColor = XleColor.Purple;
 			cs.BackColor = XleColor.LightBlue;
 			cs.FrameColor = XleColor.Cyan;
 			cs.FrameHighlightColor = XleColor.Yellow;

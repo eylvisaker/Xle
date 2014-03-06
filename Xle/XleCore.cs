@@ -103,13 +103,16 @@ namespace ERY.Xle
 
 			InitializeConsole();
 
+			Size windowSize = new Size(640+borderSize * 2, 400+borderSize * 2);
+
 			using (AgateSetup setup = new AgateSetup())
 			{
 				setup.InitializeAll();
 				if (setup.WasCanceled)
 					return;
 
-				DisplayWindow wind = DisplayWindow.CreateWindowed(mFactory.GameTitle, 640, 400);
+				DisplayWindow wind = DisplayWindow.CreateWindowed(
+					mFactory.GameTitle, windowSize.Width, windowSize.Height);
 
 				SoundMan.Load();
 
@@ -127,6 +130,25 @@ namespace ERY.Xle
 
 				} while (titleScreen.Player != null);
 			}
+		}
+
+		const int borderSize = 20;
+
+		public static void SetOrthoProjection(Color clearColor)
+		{
+			AgateLib.DisplayLib.Shaders.Basic2DShader shader = new AgateLib.DisplayLib.Shaders.Basic2DShader();
+			
+			shader.CoordinateSystem = new Rectangle(-borderSize, -borderSize, 640 + borderSize * 2, 400 + borderSize * 2);
+			shader.Activate();
+
+			Display.Clear(clearColor);
+		}
+		public static void SetProjectionAndBackColors(ColorScheme cs)
+		{
+			SetOrthoProjection(cs.BorderColor);
+			
+			Display.FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
+			Display.FillRect(0, 296, 640, 104, cs.TextAreaBackColor);
 		}
 
 		#region --- Console Commands ---
@@ -757,6 +779,7 @@ namespace ERY.Xle
 			UpdateAnim();
 
 			Display.BeginFrame();
+			XleCore.SetProjectionAndBackColors(GameState.Map.ColorScheme);
 
 			Renderer.Draw();
 
@@ -978,6 +1001,7 @@ namespace ERY.Xle
 				inst.UpdateAnim();
 
 				Display.BeginFrame();
+				XleCore.SetProjectionAndBackColors(GameState.Map.ColorScheme);
 
 				Renderer.Draw();
 				DrawMenu(menu);
@@ -1116,7 +1140,7 @@ namespace ERY.Xle
 			string thestring;
 			int xx, yy, i = 0, height;
 			string buffer;
-			Color fontColor = Map.DefaultColor;
+			Color fontColor = GameState.Map.DefaultColor;
 
 			xx = 624 - menu.width * 16;
 			yy = 16;
@@ -1693,5 +1717,6 @@ namespace ERY.Xle
 				}
 			}
 		}
+
 	}
 }

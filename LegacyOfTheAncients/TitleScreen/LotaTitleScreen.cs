@@ -113,7 +113,7 @@ namespace ERY.Xle.LotA.TitleScreen
 		{
 			Color frameColor, lineColor;
 
-			Display.Clear(bgColor);
+			Display.FillRect(new Rectangle(0, 0, 640, 400), bgColor);
 			var renderer = XleCore.Renderer;
 
 			// draw borders & stuff	
@@ -251,6 +251,7 @@ namespace ERY.Xle.LotA.TitleScreen
 				UpdateTitleScreen();
 
 				Display.BeginFrame();
+				XleCore.SetOrthoProjection(XleColor.DarkGray);
 
 				DisplayTitleScreen();
 
@@ -523,6 +524,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			while (!g.Done && watch.TotalMilliseconds < milliseconds)
 			{
 				Display.BeginFrame();
+				XleCore.SetOrthoProjection(XleColor.DarkGray);
 
 				DisplayTitleScreen();
 
