@@ -36,7 +36,6 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 					XleCore.Wait(10);
 				}
 
-				player.Story().Museum[ExhibitID] = 3;
 				player.Story().EatenJutonFruit = true;
 			}
 		}

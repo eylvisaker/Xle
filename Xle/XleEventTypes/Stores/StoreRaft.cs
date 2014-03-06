@@ -61,7 +61,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			bool skipRaft = false;
 			bool offerCoin = false;
 
-			if (CheckLoan(player, true))
+			if (IsLoanOverdue(player, true))
 				return true;
 
 			// check to see if there are any rafts near the raft drop point

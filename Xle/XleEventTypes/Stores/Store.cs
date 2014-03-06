@@ -9,6 +9,7 @@ using AgateLib.InputLib;
 using AgateLib.Serialization.Xle;
 using System.ComponentModel;
 using ERY.Xle.XleEventTypes.Stores;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
@@ -37,6 +38,12 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			mShopName = info.ReadString("ShopName");
 			mCostFactor = info.ReadDouble("CostFactor");
+		}
+
+		protected override XleEventTypes.Extenders.IEventExtender CreateExtenderImpl(XleMap map)
+		{
+			Extender = map.CreateEventExtender<StoreExtender>(this);
+			return Extender;
 		}
 
 		[Browsable(false)]
@@ -137,10 +144,12 @@ namespace ERY.Xle.XleEventTypes.Stores
 		/// speak with him and optionally displays a message to the player.  
 		/// Returns false if the current map has no lending association
 		/// regardless of whether the player has an overdue loan.</returns>
-		protected bool CheckLoan(Player player, bool displayMessage)
+		public bool IsLoanOverdue(GameState state, bool displayMessage)
 		{
-			if (XleCore.Map.Events.Any(x => x is StoreLending) == false)
+			if (state.Map.Events.Any(x => x is StoreLending) == false)
 				return false;
+
+			var player = state.Player;
 
 			if (player.loan > 0 && player.dueDate - player.TimeDays <= 0)
 			{
@@ -156,8 +165,26 @@ namespace ERY.Xle.XleEventTypes.Stores
 			else
 				return false;
 		}
-
+		[Obsolete("Use Gamestate overload instead.")]
+		protected bool IsLoanOverdue(Player player, bool displayMessage)
+		{
+			return IsLoanOverdue(XleCore.GameState, displayMessage);
+		}
 		public override bool Speak(GameState state)
+		{
+			player = state.Player;
+			
+			bool handled = false;
+
+			Extender.Speak(state, ref handled);
+
+			if (handled)
+				return true;
+
+			return StoreNotImplementedMessage();
+		}
+
+		protected bool StoreNotImplementedMessage()
 		{
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine(ShopName, XleColor.Yellow);
@@ -207,6 +234,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			return 0;
 		}
+
+		public StoreExtender Extender { get; protected set; }
 	}
 
 }

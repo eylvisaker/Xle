@@ -172,6 +172,7 @@ namespace ERY.Xle.Rendering
 
 			int i;
 			int fx, fy;
+			int startx = px;
 
 			int len = theText.Length;
 			Color color;
@@ -179,6 +180,12 @@ namespace ERY.Xle.Rendering
 			for (i = 0; i < len; i++, px += 16)
 			{
 				char c = theText[i];
+
+				if (c == '\n')
+				{
+					px = startx - 16;
+					py += 16;
+				}
 
 				if (coloring != null)
 				{

@@ -12,7 +12,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			var player = state.Player;
 
-			if (CheckLoan(player, true))
+			if (IsLoanOverdue(player, true))
 				return true;
 
 			MenuItemList theList = new MenuItemList("Yes", "No");

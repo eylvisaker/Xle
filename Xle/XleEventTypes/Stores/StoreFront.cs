@@ -2,6 +2,7 @@
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,20 @@ namespace ERY.Xle.XleEventTypes.Stores
 {
 	public abstract class StoreFront : Store
 	{
+		[Obsolete]
 		protected string[] theWindow = new string[20];
+		[Obsolete]
 		protected Color[][] theWindowColor = new Color[20][];
 
 		ColorScheme mColorScheme = new ColorScheme();
+		
+		public new StoreFrontExtender Extender { get; protected set; }
+		public List<StoreFrontWindow> Windows { get; private set; }
 
 		public StoreFront()
 		{
+			Windows = new List<StoreFrontWindow>();
+
 			LeftOffset = 2;
 
 			for (int i = 0; i < theWindowColor.Length; i++)
@@ -33,8 +41,17 @@ namespace ERY.Xle.XleEventTypes.Stores
 			mColorScheme.BackColor = XleColor.Green;
 		}
 
+		protected override XleEventTypes.Extenders.IEventExtender CreateExtenderImpl(XleMap map)
+		{
+			Extender = map.CreateEventExtender<StoreFrontExtender>(this);
+			base.Extender = Extender;
+
+			return Extender;
+		}
+
 		protected void ClearWindow()
 		{
+			Windows.Clear();
 			for (int i = 0; i < theWindow.Length; i++)
 			{
 				theWindow[i] = string.Empty;
@@ -58,9 +75,10 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		protected abstract void SetColorScheme(ColorScheme cs);
 
-		protected void RedrawStore()
+		protected internal void RedrawStore()
 		{
 			SetColorScheme(mColorScheme);
+			Extender.SetColorScheme(mColorScheme);
 
 			Display.BeginFrame();
 			XleCore.SetProjectionAndBackColors(mColorScheme);
@@ -70,6 +88,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			Display.EndFrame();
 			Core.KeepAlive();
 		}
+
 		protected void DrawStore()
 		{
 			string tempString;
@@ -84,19 +103,32 @@ namespace ERY.Xle.XleEventTypes.Stores
 			renderer.DrawInnerFrameHighlight(0, 288, 1, 640, mColorScheme.FrameHighlightColor);
 
 			// Draw the title
-			Display.FillRect(320 - (theWindow[0].Length + 2) / 2 * 16, 0,
-				(theWindow[0].Length + 2) * 16, 16, mColorScheme.BackColor);
-
-			renderer.WriteText(320 - (theWindow[0].Length / 2) * 16, 0, theWindow[0], mColorScheme.TitleColor);
-
-			for (int i = 1; i < 18; i++)
+			if (string.IsNullOrEmpty(Title))
 			{
-				if (string.IsNullOrEmpty(theWindow[i]))
-					continue;
-
-				renderer.WriteText((LeftOffset + 1) * 16, i * 16, theWindow[i], theWindowColor[i]);
+				DrawTitle(theWindow[0]);
+			}
+			else
+			{
+				DrawTitle(Title);
 			}
 
+			if (Windows.Count == 0)
+			{
+				for (int i = 1; i < 18; i++)
+				{
+					if (string.IsNullOrEmpty(theWindow[i]))
+						continue;
+
+					renderer.WriteText((LeftOffset + 1) * 16, i * 16, theWindow[i], theWindowColor[i]);
+				}
+			}
+			else
+			{
+				foreach(var window in Windows)
+				{
+					window.Draw();
+				}
+			}
 			if (robbing == false)
 			{
 				// Draw Gold
@@ -117,6 +149,14 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			XleCore.TextArea.Draw();
 
+		}
+
+		private void DrawTitle(string title)
+		{
+			Display.FillRect(320 - (title.Length + 2) / 2 * 16, 0,
+						 (title.Length + 2) * 16, 16, mColorScheme.BackColor);
+
+			XleCore.Renderer.WriteText(320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
 		}
 
 		protected void StoreSound(LotaSound sound)
@@ -155,5 +195,21 @@ namespace ERY.Xle.XleEventTypes.Stores
 			return XleCore.ChooseNumber(RedrawStore, max);
 		}
 
+		public string Title { get; set; }
+
+		public override bool Speak(GameState state)
+		{
+			player = state.Player;
+			Title = ShopName;
+
+			bool handled = false;
+
+			Extender.Speak(state, ref handled);
+
+			if (handled)
+				return true;
+
+			return StoreNotImplementedMessage();
+		}
 	}
 }

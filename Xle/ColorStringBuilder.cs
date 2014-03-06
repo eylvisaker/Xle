@@ -22,6 +22,11 @@ namespace ERY.Xle
 			for (int i = 0; i < text.Length; i++)
 				colors.Add(color);
 		}
+		public void AddLine(string text, Color color)
+		{
+			AddText(text, color);
+			AddText("\n", color);
+		}
 
 		public string Text
 		{
@@ -44,6 +49,5 @@ namespace ERY.Xle
 			text = "";
 			colors.Clear();
 		}
-
 	}
 }
