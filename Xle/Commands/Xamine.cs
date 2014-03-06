@@ -9,10 +9,7 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
-			if (state.Map.PlayerXamine(state.Player) == false)
-			{
-
-			}
+			state.Map.PlayerXamine(state.Player);
 		}
 	}
 }

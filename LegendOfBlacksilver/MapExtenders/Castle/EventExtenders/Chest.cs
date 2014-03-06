@@ -27,5 +27,13 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 		}
 
 		public int ChestArrayIndex { get; set; }
+
+		public override string TakeFailMessage
+		{
+			get
+			{
+				return "Nothing to take.";
+			}
+		}
 	}
 }

@@ -24,7 +24,7 @@ namespace ERY.Xle
 				for (int i = 0; i < Colors.Length; i++)
 					Colors[i] = color;
 			}
-			public void WriteText(int x, string t, Color[] newColors)
+			public void WriteText(int x, string t, Color[] newColors, int colorStartIndex = 0)
 			{
 				SetTextLength(x);
 
@@ -32,7 +32,7 @@ namespace ERY.Xle
 
 				if (newColors != null)
 				{
-					for (int i = 0; i < newColors.Length; i++)
+					for (int i = colorStartIndex; i < newColors.Length; i++)
 					{
 						if (x + i >= Colors.Length)
 							break;
@@ -56,7 +56,7 @@ namespace ERY.Xle
 
 			private void WriteColors(int x, int length, Color newColor)
 			{
-				for (int i = 0; i < length && x+i < Colors.Length; i++)
+				for (int i = 0; i < length && x + i < Colors.Length; i++)
 					Colors[x + i] = newColor;
 			}
 
@@ -72,7 +72,6 @@ namespace ERY.Xle
 			{
 				return Text;
 			}
-
 		}
 
 		TextLine[] lines = new TextLine[5];
@@ -174,39 +173,66 @@ namespace ERY.Xle
 				CycleLines();
 			}
 		}
+		Color[] tempColors;
 
 		public void Print(string text, Color? color)
 		{
-			CycleIfNeeded();
+			if (tempColors == null || tempColors.Length < text.Length)
+			{
+				tempColors = new Color[text.Length];
+			}
 
-			lines[cursor.Y].WriteText(cursor.X, text, color);
-			cursor.X += text.Length;
+			for (int i = 0; i < tempColors.Length; i++)
+			{
+				tempColors[i] = color ?? XleCore.Renderer.FontColor;
+			}
+
+			PrintImpl(text, tempColors);
 		}
 		public void Print(string text = "", Color[] colors = null)
 		{
-			CycleIfNeeded();
+			PrintImpl(text, colors);
+		}
 
-			var current = lines[cursor.Y];
+		private void PrintImpl(string text, Color[] colors)
+		{
+			int startIndex = 0;
 
-			current.WriteText(cursor.X, text, colors);
-			cursor.X += text.Length;
+			while (startIndex < text.Length)
+			{
+				CycleIfNeeded();
+
+				int endIndex = text.IndexOf("\n", startIndex);
+				var current = lines[cursor.Y];
+
+				if (endIndex == -1)
+				{
+					current.WriteText(cursor.X, text.Substring(startIndex), colors, startIndex);
+					cursor.X += text.Length - startIndex;
+					startIndex = text.Length;
+				}
+				else
+				{
+					current.WriteText(cursor.X, text.Substring(startIndex, endIndex - startIndex), colors, startIndex);
+
+					startIndex = endIndex + 1;
+					cursor.X = Margin;
+					cursor.Y++;
+				}
+			}
+
+			XleCore.Wait(1);
 		}
 
 		public void PrintLine(string text, Color color)
 		{
-			Print(text, color);
-
-			cursor.Y++;
-			cursor.X = margin;
+			Print(text + "\n", color);
 		}
 		public void PrintLine(string text = "", Color[] colors = null)
 		{
-			Print(text, colors);
-
-			cursor.Y++;
-			cursor.X = margin;
+			Print(text + "\n", colors);
 		}
-		
+
 		void PrintSlowImpl(string text, Color defaultColor, Color[] colors = null)
 		{
 			for (int i = 0; i < text.Length; i++)
@@ -226,7 +252,7 @@ namespace ERY.Xle
 					XleCore.Wait(400);
 			}
 		}
-		public void PrintSlow(string text, Color[] colors= null)
+		public void PrintSlow(string text, Color[] colors = null)
 		{
 			PrintSlowImpl(text, XleCore.Renderer.FontColor, colors);
 		}
@@ -310,6 +336,9 @@ namespace ERY.Xle
 				}
 
 				XleCore.Redraw();
+
+				if (watch.ElapsedMilliseconds > 10000)
+					break;
 			}
 
 			foreach (var line in lines)
@@ -319,15 +348,20 @@ namespace ERY.Xle
 		}
 
 
-		public void SetLineColor(Color color, params int[] lines )
+		public void SetLineColor(Color color, params int[] lines)
 		{
 			if (lines.Length == 0)
 				SetLineColor(color, 0, 1, 2, 3, 4);
 
-			foreach(var line in lines)
+			foreach (var line in lines)
 			{
 				this.lines[line].SetColor(color);
 			}
+		}
+
+		public void SetCharacterColor(int line, int x, Color color)
+		{
+			lines[line].Colors[x] = color;
 		}
 	}
 }

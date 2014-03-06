@@ -72,8 +72,7 @@ namespace ERY.Xle.XleEventTypes
 			if (handled)
 				return true;
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine(Extender.TakeFailMessage);
+			XleCore.TextArea.PrintLine("\n\n" + Extender.TakeFailMessage);
 
 			return true;
 		}
@@ -168,7 +167,7 @@ namespace ERY.Xle.XleEventTypes
 
 		private static void UpdateCommand()
 		{
-			Commands.CommandList.UpdateCommand("Open Chest");
+			XleCore.TextArea.PrintLine(" chest");
 		}
 
 		private void PrintAlreadyOpenMessage()

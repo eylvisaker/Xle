@@ -56,8 +56,7 @@ namespace ERY.Xle.Commands
 		{
 			player.CheckDead();
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.Print("Enter command: ");
+			XleCore.TextArea.Print("\nEnter command: ");
 		}
 
 		public List<Command> Items { get; set; }

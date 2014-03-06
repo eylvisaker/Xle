@@ -145,14 +145,13 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			{
 				XleCore.TextArea.PrintLine("I see you have the feather,");
 				XleCore.TextArea.PrintLine("why not use it?");
+				XleCore.Wait(1500);
 			}
 			else
 			{
-				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("I should not converse, sir.");
 			}
 
-			XleCore.Wait(2500);
 			handled = true;
 		}
 

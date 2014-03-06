@@ -9,11 +9,9 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
-
 			if (state.Map.PlayerTake(state.Player) == false)
 			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Nothing to take.");
+				XleCore.TextArea.PrintLine("\n\nNothing to take.");
 
 				XleCore.Wait(500);
 			}

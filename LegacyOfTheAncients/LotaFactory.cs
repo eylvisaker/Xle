@@ -213,12 +213,6 @@ namespace ERY.Xle.LotA
 		public override void SetGameSpeed(GameState state, int speed)
 		{
 			base.SetGameSpeed(state, speed);
-
-			if (speed == 1)
-			{
-				state.GameSpeed.GeneralStepTime /= 2;
-				state.GameSpeed.OutsideStepTime = state.GameSpeed.GeneralStepTime;
-			}
 		}
 	}
 }

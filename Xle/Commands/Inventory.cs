@@ -13,6 +13,8 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
+			XleCore.TextArea.PrintLine();
+
 			var player = state.Player;
 			var renderer = XleCore.Renderer;
 
@@ -45,7 +47,7 @@ namespace ERY.Xle.Commands
 				}
 				Display.BeginFrame();
 				XleCore.SetOrthoProjection(XleColor.DarkGray);
-				Display.FillRect(new Rectangle(0, 0, 640, 480), bgcolor);
+				Display.FillRect(new Rectangle(0, 0, 640, 400), bgcolor);
 
 				// Draw the borders
 				renderer.DrawFrame(Color.Gray);

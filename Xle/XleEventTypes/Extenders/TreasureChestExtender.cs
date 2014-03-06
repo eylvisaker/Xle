@@ -40,7 +40,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 			SoundMan.PlaySound(LotaSound.OpenChest);
 		}
 
-		public string TakeFailMessage { get { return "You can't \"take\" the whole chest."; } }
+		public virtual string TakeFailMessage { get { return "You can't \"take\" the whole chest."; } }
 
 		public virtual void MarkChestAsOpen(GameState state)
 		{

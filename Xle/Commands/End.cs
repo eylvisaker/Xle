@@ -15,8 +15,7 @@ namespace ERY.Xle.Commands
 			int choice;
 			bool saved = false;
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Would you like to save");
+			XleCore.TextArea.PrintLine("\nWould you like to save");
 			XleCore.TextArea.PrintLine("the game in progress?");
 			XleCore.TextArea.PrintLine();
 

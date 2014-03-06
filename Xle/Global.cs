@@ -32,7 +32,6 @@ namespace ERY.Xle
 		Swamp,
 		Mixed,
 		Foothills,
-		Scrubland,
 	}
 
 

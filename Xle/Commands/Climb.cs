@@ -11,8 +11,7 @@ namespace ERY.Xle.Commands
 		{
 			if (state.Map.PlayerClimb(state.Player) == false)
 			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Nothing to climb");
+				XleCore.TextArea.PrintLine("\n\nNothing to climb");
 			}
 		}
 	}

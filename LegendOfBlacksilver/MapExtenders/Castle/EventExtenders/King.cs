@@ -13,7 +13,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 		public override void Speak(GameState state, ref bool handled)
 		{
-			g.UpdateBottom("Enter command: speak to the " + Name(state) + ".");
+			XleCore.TextArea.PrintLine(" to the " + Name(state) + ".");
 			XleCore.TextArea.PrintLine();
 			SoundMan.PlaySoundSync(LotaSound.VeryGood);
 

@@ -23,7 +23,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 				SoundMan.PlaySound(LotaSound.Good);
 
-				ta.PrintLineSlow("Welcome traveler, I'm arman, the");
+				ta.PrintLineSlow("\nWelcome traveler, I'm arman, the");
 				ta.PrintLineSlow("apprentice to the great wizard");
 				ta.PrintLineSlow("Seravol.  He's up to his neck with");
 				ta.PrintLineSlow("these orcs, farther along.");
@@ -57,7 +57,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 			}
 			else
 			{
-				ta.PrintLine("I'm busy.  Go away now.");
+				ta.PrintLine("\nI'm busy.  Go away now.");
 				ta.PrintLine();
 			}
 

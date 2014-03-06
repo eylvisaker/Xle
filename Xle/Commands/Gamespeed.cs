@@ -18,7 +18,7 @@ namespace ERY.Xle.Commands
 
 			state.Player.Gamespeed = 1 + XleCore.QuickMenu(theList, 2, state.Player.Gamespeed - 1);
 
-			XleCore.TextArea.Print(" Gamespeed is: ", XleColor.Yellow);
+			XleCore.TextArea.Print("Gamespeed is: ", XleColor.Yellow);
 			XleCore.TextArea.PrintLine(state.Player.Gamespeed.ToString(), XleColor.White);
 
 			XleCore.Factory.SetGameSpeed(XleCore.GameState, state.Player.Gamespeed);

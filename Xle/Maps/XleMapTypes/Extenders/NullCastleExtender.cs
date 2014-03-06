@@ -19,8 +19,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		public override void SpeakToGuard(GameState state, ref bool handled)
 		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("The guard ignores you.");
+			XleCore.TextArea.PrintLine("\n\nThe guard ignores you.");
 
 			handled = true;
 		}

@@ -974,9 +974,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (handled == false)
 			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("The guard salutes.");
+				XleCore.TextArea.PrintLine("\n\nThe guard salutes.");
 			}
 		}
 
@@ -1003,21 +1001,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		private bool IsTileBlocked(int tile)
 		{
-			if (TileSet != null)
-			{
-				return TileSet[tile] == TileInfo.Blocked;
-			}
-
-			throw new NotImplementedException("This code is obsolete. You should have a fricken tileset by now.");
-			const int xLimit = 8;
-			const int yLimit = 8;
-
-			if (tile >= 16 * yLimit || tile % 16 >= xLimit)
-			{
-				return true;
-			}
-
-			return false;
+			return TileSet[tile] == TileInfo.Blocked;
 		}
 
 		public override int DrawTile(int xx, int yy)

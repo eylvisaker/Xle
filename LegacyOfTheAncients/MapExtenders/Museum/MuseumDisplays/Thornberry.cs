@@ -40,7 +40,8 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 				player.Gold += amount;
 
-				g.UpdateBottom("             GOLD:  + " + amount.ToString(), 1, XleColor.Yellow);
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("             GOLD:  + " + amount.ToString(), XleColor.Yellow);
 
 				SoundMan.PlaySound(LotaSound.VeryGood);
 				XleCore.FlashHPWhileSound(XleColor.Yellow);

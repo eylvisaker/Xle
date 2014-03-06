@@ -33,21 +33,15 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			{
 				ReadRawText(ExhibitInfo.Text[2]);
 
-				ColorStringBuilder b = new ColorStringBuilder();
-
-				b.AddText("A priceless sapphire!", XleColor.White);
-
 				for (int i = 0; i < 8; i++)
 				{
 					XleCore.Wait(50);
-
-					b.SetColor(12 + i, XleColor.Cyan);
-					g.UpdateBottom(b, 2);
+					XleCore.TextArea.SetCharacterColor(2, 12 + i, XleColor.Cyan);
 				}
 
 				XleCore.WaitForKey();
 
-				player.SetMap(2, 100, 34);
+				XleCore.ChangeMap(player, 2, 0);
 			}
 		}
 	}

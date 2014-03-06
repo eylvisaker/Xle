@@ -9,6 +9,7 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
+			XleCore.TextArea.PrintLine();
 		}
 	}
 }

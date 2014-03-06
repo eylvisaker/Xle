@@ -17,13 +17,13 @@ namespace ERY.Xle.LoB.MapExtenders.Outside.Events
 			{
 				XleCore.TextArea.PrintLine("You're not equipped");
 				XleCore.TextArea.PrintLine("to storm the citadel.");
-				SoundMan.PlaySoundSync(LotaSound.Bad);
+				SoundMan.PlaySound(LotaSound.Bad);
 			}
 			else
 			{
 				XleCore.TextArea.PrintLine("The drawbridge is up.");
 				XleCore.TextArea.PrintLine("You may wish to lower it.");
-				SoundMan.PlaySoundSync(LotaSound.Question);
+				SoundMan.PlaySound(LotaSound.Question);
 			}
 
 			XleCore.Wait(1000);

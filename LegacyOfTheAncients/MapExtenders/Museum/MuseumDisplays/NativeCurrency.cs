@@ -20,7 +20,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
-			g.AddBottomCentered("Gold:  + " + gold.ToString(), XleColor.Yellow);
+			XleCore.TextArea.PrintLine("             Gold:  + " + gold.ToString(), XleColor.Yellow);
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 
