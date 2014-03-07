@@ -8,7 +8,7 @@ namespace ERY.Xle.LoB.TitleScreen
 {
 	class LobTitleScreen : IXleTitleScreen
 	{
-		bool firstRun = false;
+		static bool firstRun = false;
 
 		public Player Player
 		{
@@ -39,11 +39,6 @@ namespace ERY.Xle.LoB.TitleScreen
 		Player IXleTitleScreen.Player
 		{
 			get { return Player; }
-		}
-
-		void IXleTitleScreen.Run()
-		{
-			Run();
 		}
 	}
 }
