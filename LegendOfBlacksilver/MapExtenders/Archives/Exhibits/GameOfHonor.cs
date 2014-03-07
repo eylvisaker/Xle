@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool IsClosed(Player player)
 		{
-			return player.Story().RegisteredForTrist;
+			return Lob.Story.RegisteredForTrist;
 		}
 		public override void RunExhibit(Player player)
 		{
@@ -35,7 +35,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 			{
 				base.RunExhibit(player);
 
-				player.Story().RegisteredForTrist = true;
+				Lob.Story.RegisteredForTrist = true;
 			}
 		}
 	}

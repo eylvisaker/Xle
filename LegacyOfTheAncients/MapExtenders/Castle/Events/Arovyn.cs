@@ -57,7 +57,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 			XleCore.Wait(4000);
 
-			state.Story().HasGuardianMark = true;
+			Lota.Story.HasGuardianMark = true;
 		}
 	}
 }

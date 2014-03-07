@@ -26,7 +26,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 		public override void OnLoad(Player player)
 		{
-			player.Story().BeenInDungeon = true;
+			Lota.Story.BeenInDungeon = true;
 		}
 
 		public override void OnPlayerExitDungeon(Player player)

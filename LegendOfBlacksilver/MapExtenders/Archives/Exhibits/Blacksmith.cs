@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool IsClosed(Player player)
 		{
-			return player.Story().ProcuredSteelHammer;
+			return Lob.Story.ProcuredSteelHammer;
 		}
 
 		public override void RunExhibit(Player player)
@@ -40,7 +40,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 				player.Items[LobItem.SteelHammer] = 1;
 
-				player.Story().ProcuredSteelHammer = true;
+				Lob.Story.ProcuredSteelHammer = true;
 			}
 			else
 				ReturnGem(player);

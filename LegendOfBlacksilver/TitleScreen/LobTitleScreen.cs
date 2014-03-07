@@ -25,9 +25,9 @@ namespace ERY.Xle.LoB.TitleScreen
 				Player = new Player();
 
 				Player.MapID = 1;
-
 				Player.X = 126;
 				Player.Y = 52;
+
 				Player.StoryData = new LobStory();
 
 				Player.Items[LobItem.FalconFeather] = 1;

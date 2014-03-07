@@ -12,9 +12,10 @@ namespace ERY.Xle.LotA
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
-		static void Main()
+		static void Main(string[] args)
 		{
 			XleCore core = new XleCore();
+			core.ProcessArguments(args);
 
 			System.IO.Directory.SetCurrentDirectory("LotA");
 

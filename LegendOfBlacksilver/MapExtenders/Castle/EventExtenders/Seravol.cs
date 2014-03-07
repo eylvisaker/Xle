@@ -66,8 +66,8 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 			state.Player.Items[LobItem.WoodenKey] = 0;
 			state.Player.Items[LobItem.SmallKey] = 0;
 
-			state.Story().ClearedRockSlide = true;
-			state.Story().DefeatedOrcs = true;
+			Lob.Story.ClearedRockSlide = true;
+			Lob.Story.DefeatedOrcs = true;
 
 			XleCore.TextArea.PrintLineSlow("My orb of vision has been stolen and");
 			XleCore.TextArea.PrintLineSlow("removed from this castle.  Without ");

@@ -114,7 +114,7 @@ namespace ERY.Xle.LotA
 			if (level == 9) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
 			if (level > 10) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
 
-			var story = player.Story();
+			var story = Lota.Story;
 
 			ClearStoryItems(player);
 			ClearMuseumCoins(player);
@@ -149,7 +149,7 @@ namespace ERY.Xle.LotA
 				story.Museum[(int)ExhibitIdentifier.PirateTreasure] = 1;
 
 				player.Items[LotaItem.HealingHerb] = 40;
-				player.Story().BeenInDungeon = true;
+				Lota.Story.BeenInDungeon = true;
 			}
 			if (level >= 4)
 			{
@@ -157,7 +157,7 @@ namespace ERY.Xle.LotA
 				story.Museum[(int)ExhibitIdentifier.Tapestry] = 1;
 				story.Museum[(int)ExhibitIdentifier.StonesWisdom] = 1;
 
-				player.Story().PirateComplete = true;
+				Lota.Story.PirateComplete = true;
 
 				player.Attribute[Attributes.intelligence] = 35;
 				player.Attribute[Attributes.strength] = 25;
@@ -168,7 +168,7 @@ namespace ERY.Xle.LotA
 			if (level >= 5)
 			{
 				story.Museum[(int)ExhibitIdentifier.KnightsTest] = 1;
-				player.Story().ArmakComplete = true;
+				Lota.Story.ArmakComplete = true;
 
 				player.Items[LotaItem.SapphireCoin] = 0;
 				player.Items[LotaItem.MagicIce] = 1;
@@ -178,7 +178,7 @@ namespace ERY.Xle.LotA
 			}
 			if (level >= 6)
 			{
-				player.Story().FoundGuardianLeader = true;
+				Lota.Story.FoundGuardianLeader = true;
 				player.Items[LotaItem.RubyCoin] = 1;
 
 				player.Items[LotaItem.CopperKey] = 1;
@@ -186,7 +186,7 @@ namespace ERY.Xle.LotA
 			}
 			if (level >= 7)
 			{
-				player.Story().FourJewelsComplete = true;
+				Lota.Story.FourJewelsComplete = true;
 				player.Attribute[Attributes.strength] = 50;
 
 				player.Items[LotaItem.RubyCoin] = 0;
@@ -213,6 +213,8 @@ namespace ERY.Xle.LotA
 		public override void SetGameSpeed(GameState state, int speed)
 		{
 			base.SetGameSpeed(state, speed);
+
+			state.GameSpeed.OutsideStepTime = 400;
 		}
 	}
 }

@@ -63,7 +63,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		public override void CheckExhibitStatus(GameState state)
 		{
 			// lost displays
-			if (state.Story().Museum[0xa] > 0)
+			if (Lota.Story.Museum[0xa] > 0)
 			{
 				for (int i = 0; i < state.Map.Width; i++)
 				{
@@ -76,12 +76,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 			}
 
 			// welcome exhibit
-			if (state.Story().Museum[1] == 0)
+			if (Lota.Story.Museum[1] == 0)
 			{
 				state.Map[4, 1] = 0;
 				state.Map[3, 10] = 0;
 			}
-			else if (state.Story().Museum[1] == 1)
+			else if (Lota.Story.Museum[1] == 1)
 			{
 				state.Map[4, 1] = 0;
 				state.Map[3, 10] = 16;
@@ -118,7 +118,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		public override void BeforeEntry(GameState state, ref int targetEntryPoint)
 		{
 			if (targetEntryPoint < 3)
-				targetEntryPoint = state.Story().MuseumEntryPoint;
+				targetEntryPoint = Lota.Story.MuseumEntryPoint;
 		}
 
 		public override void PlayerUse(GameState state, int item, ref bool handled)
@@ -136,11 +136,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		{
 			if (state.Player.X == 12 && state.Player.Y == 13)
 			{
-				if (state.Story().Museum[1] < 3)
+				if (Lota.Story.Museum[1] < 3)
 				{
 					var welcome = (Welcome)GetExhibitByTile(0x51);
 					welcome.PlayGoldArmbandMessage(state.Player);
-					state.Story().Museum[1] = 3;
+					Lota.Story.Museum[1] = 3;
 
 					CheckExhibitStatus(state);
 				}
@@ -160,7 +160,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 				{
 					if (entry.Location == state.Player.Location)
 					{
-						state.Story().MuseumEntryPoint = state.Map.EntryPoints.IndexOf(entry);
+						Lota.Story.MuseumEntryPoint = state.Map.EntryPoints.IndexOf(entry);
 					}
 				}
 

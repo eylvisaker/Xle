@@ -69,7 +69,7 @@ namespace ERY.Xle
 			state.GameSpeed.DungeonOpenChestSoundTime = 500;
 
 			state.GameSpeed.GeneralStepTime = 150;
-			state.GameSpeed.OutsideStepTime = 500;
+			state.GameSpeed.OutsideStepTime = 350;
 
 
 

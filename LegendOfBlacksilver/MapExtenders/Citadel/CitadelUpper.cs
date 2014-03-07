@@ -62,7 +62,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 			{
 				var mantrek = new Mantrek();
 				
-				if (XleCore.GameState.Story().MantrekKilled)
+				if (Lob.Story.MantrekKilled)
 					mantrek.EraseMantrek(TheMap);
 
 				return mantrek;

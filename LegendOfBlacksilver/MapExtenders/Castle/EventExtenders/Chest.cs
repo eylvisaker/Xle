@@ -15,12 +15,12 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 		public override void MarkChestAsOpen(GameState state)
 		{
-			state.Story().CastleChests[ChestArrayIndex][TheEvent.ChestID] = 1;
+			Lob.Story.CastleChests[ChestArrayIndex][TheEvent.ChestID] = 1;
 		}
 
 		public override void OpenIfMarked(GameState state)
 		{
-			if (state.Story().CastleChests[ChestArrayIndex][TheEvent.ChestID] == 1)
+			if (Lob.Story.CastleChests[ChestArrayIndex][TheEvent.ChestID] == 1)
 			{
 				TheEvent.SetOpenTilesOnMap(state.Map);
 			}

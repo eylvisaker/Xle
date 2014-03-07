@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool IsClosed(Player player)
 		{
-			return player.Story().EatenFlaxton;
+			return Lob.Story.EatenFlaxton;
 		}
 
 		public override void RunExhibit(Player player)
@@ -36,7 +36,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("It's sour but doesn't taste that bad.");
 
-				player.Story().EatenFlaxton = true;
+				Lob.Story.EatenFlaxton = true;
 			}
 			else
 				ReturnGem(player);

@@ -13,7 +13,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public override bool IsClosed(Player player)
 		{
-			if (player.Story().HasGuardianPassword)
+			if (Lota.Story.HasGuardianPassword)
 				return true;
 
 			return false;
@@ -23,7 +23,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			base.RunExhibit(player);
 
-			player.Story().HasGuardianPassword = true;
+			Lota.Story.HasGuardianPassword = true;
 		}
 	}
 }

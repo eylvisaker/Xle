@@ -23,12 +23,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		}
 		protected override void MarkAsVisited(Player player)
 		{
-			if (player.Story().Museum[ExhibitID] == 0)
-				player.Story().Museum[ExhibitID] = 1;
+			if (Lota.Story.Museum[ExhibitID] == 0)
+				Lota.Story.Museum[ExhibitID] = 1;
 		}
 		public override bool HasBeenVisited(Player player)
 		{
-			return player.Story().Museum[ExhibitID] != 0;
+			return Lota.Story.Museum[ExhibitID] != 0;
 		}
 				
 		public override string InsertCoinText
@@ -79,9 +79,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			int count = 0;
 
-			for (int i = 2; i < player.Story().Museum.Length; i++)
+			for (int i = 2; i < Lota.Story.Museum.Length; i++)
 			{
-				if (player.Story().Museum[i] != 0) 
+				if (Lota.Story.Museum[i] != 0) 
 					count++;
 			}
 

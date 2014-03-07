@@ -38,10 +38,10 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			SetDescriptionText();
 			SetOptionsText(woundPrice, herbsPrice);
 
-			var museum = state.Story().Museum;
+			var museum = Lota.Story.Museum;
 
 			// display ready message
-			if (state.Story().EatenJutonFruit && state.Story().PurchasedHerbs == false)
+			if (Lota.Story.EatenJutonFruit && Lota.Story.PurchasedHerbs == false)
 			{
 				StoreFrontWindow wind = new StoreFrontWindow();
 				wind.Location = new Point(3, 15);
@@ -77,7 +77,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			}
 			else if (choice == 2)
 			{
-				if (state.Story().EatenJutonFruit == false)
+				if (Lota.Story.EatenJutonFruit == false)
 				{
 					XleCore.TextArea.PrintLine("You're not ready yet.");
 					SoundMan.PlaySound(LotaSound.Medium);
@@ -109,7 +109,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 						player.Items[LotaItem.HealingHerb] += number;
 
 						XleCore.TextArea.PrintLine(number.ToString() + " healing herbs purchased.");
-						state.Story().PurchasedHerbs = true;
+						Lota.Story.PurchasedHerbs = true;
 
 						StoreSound(LotaSound.Sale);
 					}

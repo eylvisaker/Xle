@@ -38,7 +38,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		public override void OnAfterEntry(GameState state)
 		{
-			if (state.Story().Invisible == false)
+			if (Lota.Story.Invisible == false)
 			{
 				XleCore.TextArea.PrintLine("Private level!");
 

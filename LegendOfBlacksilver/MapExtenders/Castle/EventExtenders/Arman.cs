@@ -16,9 +16,9 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 			ta.PrintLine();
 
-			if (state.Story().DefeatedOrcs == false && state.Story().ArmanGaveElixirs == false)
+			if (Lob.Story.DefeatedOrcs == false && Lob.Story.ArmanGaveElixirs == false)
 			{
-				state.Story().ArmanGaveElixirs = true;
+				Lob.Story.ArmanGaveElixirs = true;
 				state.Player.Items[LobItem.LifeElixir] += 2;
 
 				SoundMan.PlaySound(LotaSound.Good);

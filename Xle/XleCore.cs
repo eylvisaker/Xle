@@ -1,24 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Xml;
-
 using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
-using System.ComponentModel;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
-using ERY.Xle.XleEventTypes;
 using ERY.Xle.Commands;
-using ERY.Xle.XleEventTypes.Stores;
 using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.XleEventTypes;
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using ERY.Xle.Rendering;
+using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleEventTypes.Stores;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Xml;
 
 namespace ERY.Xle
 {
@@ -61,8 +56,6 @@ namespace ERY.Xle
 
 		#endregion
 
-		private char theCursor = 'P';			// location of the menu dot
-
 		private XleGameFactory mFactory;
 
 		private MapList mMapList = new MapList();
@@ -103,16 +96,31 @@ namespace ERY.Xle
 
 			InitializeConsole();
 
-			Size windowSize = new Size(640+borderSize * 2, 400+borderSize * 2);
-
 			using (AgateSetup setup = new AgateSetup())
 			{
 				setup.InitializeAll();
 				if (setup.WasCanceled)
 					return;
 
-				DisplayWindow wind = DisplayWindow.CreateWindowed(
-					mFactory.GameTitle, windowSize.Width, windowSize.Height);
+				DisplayWindow wind;
+				
+				if (EnableDebugMode)
+				{
+					Size windowSize = new Size(
+						640 + windowBorderSize.Width * 2, 
+						400 + windowBorderSize.Height * 2);
+
+					wind = DisplayWindow.CreateWindowed(
+						mFactory.GameTitle, windowSize.Width, windowSize.Height);
+				}
+				else
+				{
+					windowBorderSize.Width = 80;
+					windowBorderSize.Height = 100;
+
+					wind = DisplayWindow.CreateFullScreen(
+						mFactory.GameTitle, 800, 600);
+				}
 
 				SoundMan.Load();
 
@@ -122,6 +130,8 @@ namespace ERY.Xle
 
 				do
 				{
+					GameState = null;
+
 					titleScreen = mFactory.CreateTitleScreen();
 					titleScreen.Run();
 					returnToTitle = false;
@@ -132,13 +142,18 @@ namespace ERY.Xle
 			}
 		}
 
-		const int borderSize = 20;
+		static Size windowBorderSize = new Size(20, 20);
 
 		public static void SetOrthoProjection(Color clearColor)
 		{
 			AgateLib.DisplayLib.Shaders.Basic2DShader shader = new AgateLib.DisplayLib.Shaders.Basic2DShader();
 			
-			shader.CoordinateSystem = new Rectangle(-borderSize, -borderSize, 640 + borderSize * 2, 400 + borderSize * 2);
+			shader.CoordinateSystem = new Rectangle(
+				-windowBorderSize.Width, 
+				-windowBorderSize.Height, 
+				640 + windowBorderSize.Width * 2, 
+				400 + windowBorderSize.Height * 2);
+
 			shader.Activate();
 
 			Display.Clear(clearColor);
@@ -794,14 +809,19 @@ namespace ERY.Xle
 			if (AcceptKey == false)
 				return;
 
-			AcceptKey = false;
+			try
+			{
+				AcceptKey = false;
 
-			if (Keyboard.Keys[KeyCode.Down]) GameState.Commands.DoCommand(KeyCode.Down);
-			else if (Keyboard.Keys[KeyCode.Left]) GameState.Commands.DoCommand(KeyCode.Left);
-			else if (Keyboard.Keys[KeyCode.Up]) GameState.Commands.DoCommand(KeyCode.Up);
-			else if (Keyboard.Keys[KeyCode.Right]) GameState.Commands.DoCommand(KeyCode.Right);
-
-			AcceptKey = true;
+				if (Keyboard.Keys[KeyCode.Down]) GameState.Commands.DoCommand(KeyCode.Down);
+				else if (Keyboard.Keys[KeyCode.Left]) GameState.Commands.DoCommand(KeyCode.Left);
+				else if (Keyboard.Keys[KeyCode.Up]) GameState.Commands.DoCommand(KeyCode.Up);
+				else if (Keyboard.Keys[KeyCode.Right]) GameState.Commands.DoCommand(KeyCode.Right);
+			}
+			finally
+			{
+				AcceptKey = true;
+			}
 		}
 
 		void Keyboard_KeyDown(InputEventArgs e)
@@ -1716,5 +1736,20 @@ namespace ERY.Xle
 			}
 		}
 
+
+		public void ProcessArguments(string[] args)
+		{
+			for(int i = 0; i < args.Length; i++)
+			{
+				switch(args[i])
+				{
+					case "-debug":
+						EnableDebugMode = true;
+						break;
+				}
+			}
+		}
+
+		public static bool EnableDebugMode { get; set; }
 	}
 }

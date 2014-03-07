@@ -36,7 +36,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 					XleCore.Wait(10);
 				}
 
-				player.Story().EatenJutonFruit = true;
+				Lota.Story.EatenJutonFruit = true;
 			}
 		}
 	}

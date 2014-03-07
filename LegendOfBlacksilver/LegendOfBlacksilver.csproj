@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lob.cs" />
     <Compile Include="LobFactory.cs" />
     <Compile Include="LobProgram.cs" />
     <Compile Include="LobStory.cs" />

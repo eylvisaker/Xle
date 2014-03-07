@@ -96,12 +96,12 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			{
 				RemoveFalconFeatherDoor(state);
 			}
-			if (state.Story().ClearedRockSlide)
+			if (Lob.Story.ClearedRockSlide)
 			{
 				RemoveRockSlide(state);
 			}
 
-			if (state.Story().DefeatedOrcs == false)
+			if (Lob.Story.DefeatedOrcs == false)
 			{
 				ColorOrcs(state);
 			}
@@ -116,7 +116,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
 		private void ColorOrcs(GameState state)
 		{
-			if (state.Story().DefeatedOrcs == false)
+			if (Lob.Story.DefeatedOrcs == false)
 			{
 				Rectangle area = Rectangle.FromLTRB(66, 0, TheMap.Width, 68);
 

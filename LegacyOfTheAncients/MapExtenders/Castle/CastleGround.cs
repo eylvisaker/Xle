@@ -60,7 +60,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 			XleCore.Wait(150);
 
-			player.Story().Invisible = true;
+			Lota.Story.Invisible = true;
 			XleCore.TextArea.PrintLine("You're invisible.");
 			XleCore.Renderer.PlayerColor = XleColor.DarkGray;
 
@@ -78,7 +78,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 
-			if (state.Story().Invisible)
+			if (Lota.Story.Invisible)
 			{
 				XleCore.TextArea.PrintLine("The guard looks startled.");
 			}
@@ -94,7 +94,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 			var state = XleCore.GameState;
 
-			state.Story().Invisible = false;
+			Lota.Story.Invisible = false;
 			XleCore.Renderer.PlayerColor = XleColor.White;
 		}
 

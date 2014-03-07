@@ -30,7 +30,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 				XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryBad), XleColor.Yellow, XleColor.Red, 250);
 
-				state.Story().ClearedRockSlide = true;
+				Lob.Story.ClearedRockSlide = true;
 			}
 		}
 

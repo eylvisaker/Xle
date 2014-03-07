@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameVariableExtensions.cs" />
+    <Compile Include="Lota.cs" />
     <Compile Include="LotaFactory.cs" />
     <Compile Include="LotaOptions.cs" />
     <Compile Include="LotaProgram.cs" />
@@ -490,6 +491,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Images\title.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LotA\Images\TitleHeader1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LotA\Images\TitleHeader2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Images\TownTiles.png">

@@ -33,7 +33,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		private int[] ChestArray(GameState state)
 		{
-			var chests = CastleLevel == 1 ? state.Story().CastleGroundChests : state.Story().CastleUpperChests;
+			var chests = CastleLevel == 1 ? Lota.Story.CastleGroundChests : Lota.Story.CastleUpperChests;
 
 			return chests;
 		}

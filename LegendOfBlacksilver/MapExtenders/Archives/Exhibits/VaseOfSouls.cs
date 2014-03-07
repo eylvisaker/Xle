@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool IsClosed(Player player)
 		{
-			return player.Story().ClosedVaseOfSouls;
+			return Lob.Story.ClosedVaseOfSouls;
 		}
 
 		public override void RunExhibit(Player player)
@@ -28,7 +28,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 			ReturnGem(player);
 
-			player.Story().ClosedVaseOfSouls = true;
+			Lob.Story.ClosedVaseOfSouls = true;
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		public override void Speak(GameState state, ref bool handled)
 		{
-			if (state.Story().HasGuardianPassword)
+			if (Lota.Story.HasGuardianPassword)
 			{
 				XleCore.TextArea.PrintLine(" password.");
 				SoundMan.PlaySoundSync(LotaSound.VeryGood);

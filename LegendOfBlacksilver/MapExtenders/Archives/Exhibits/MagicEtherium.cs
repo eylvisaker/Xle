@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool IsClosed(Player player)
 		{
-			return player.Story().DrankEtherium;
+			return Lob.Story.DrankEtherium;
 		}
 
 		public override void RunExhibit(Player player)
@@ -37,7 +37,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 				XleCore.Wait(1500);
 				XleCore.TextArea.PrintLine("The feeling passes.");
 
-				player.Story().DrankEtherium = true;
+				Lob.Story.DrankEtherium = true;
 			}
 			else
 				ReturnGem(player);

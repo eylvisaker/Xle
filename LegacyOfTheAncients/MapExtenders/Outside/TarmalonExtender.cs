@@ -11,7 +11,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 	{
 		public override void OnLoad(GameState state)
 		{
-			state.Story().Invisible = false;
+			Lota.Story.Invisible = false;
 
 			XleCore.Renderer.PlayerColor = XleColor.White;
 		}

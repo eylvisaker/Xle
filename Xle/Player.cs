@@ -271,9 +271,6 @@ namespace ERY.Xle
 
 		public int mailTown;
 
-		[Obsolete("Use Story instead.", true)]
-		public VariableContainer Variables = new VariableContainer();
-
 		public IXleSerializable StoryData { get; set; }
 
 		string mName;
@@ -305,32 +302,12 @@ namespace ERY.Xle
 			hp = 200;
 			level = 1;
 
-			map = 0;
-			x = 3;
-			y = 1;
-
-			food = 40;
-			gold = 20;
-
-			dungeonLevel = 0;
-			faceDirection = Direction.West;
-			mailTown = 0;
-
-			currentArmor = 1;
-			currentWeapon = 0;
-
-			armor[1] = 1;
-			armorQuality[1] = 0;
-
-			Items[LotaItem.GoldArmband] = 1;
-			Items[LotaItem.Compendium] = 1;
-			Items[LotaItem.JadeCoin] = 2;
-
 			vaultGold = 17;
 
 			ClearRafts();
 
 			SortEquipment();
+			DebugSettings();
 		}
 
 		void IXleSerializable.WriteData(XleSerializationInfo info)
@@ -443,6 +420,16 @@ namespace ERY.Xle
 			{
 				StoryData = XleCore.Factory.CreateStoryData();
 			}
+			DebugSettings();
+		}
+
+		private void DebugSettings()
+		{
+
+			if (XleCore.EnableDebugMode)
+			{
+				gamespeed = 0;
+			}
 		}
 
 		#endregion
@@ -514,6 +501,9 @@ namespace ERY.Xle
 		}
 		private void SavePlayer(string filename)
 		{
+			if (StoryData == null)
+				throw new NullReferenceException("StoryData cannot be null!");
+
 			XleSerializer ser = new XleSerializer(typeof(Player));
 
 			using (System.IO.Stream ff = System.IO.File.Open
@@ -773,6 +763,14 @@ namespace ERY.Xle
 		/// <returns></returns>
 		public bool SetPos(int xx, int yy)
 		{
+			if (XleCore.GameState == null || XleCore.GameState.Map == null)
+			{
+				x = xx;
+				y = yy;
+
+				return true;
+			}
+
 			if (XleCore.Map.CanPlayerStepInto(this, xx, yy))
 			{
 				x = xx;

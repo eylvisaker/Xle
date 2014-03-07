@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool IsClosed(Player player)
 		{
-			return player.Story().ClosedMorningStar;
+			return Lob.Story.ClosedMorningStar;
 		}
 
 		public override void RunExhibit(Player player)
@@ -39,7 +39,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 				SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
 				player.AddWeapon(9, 4);
-				player.Story().ClosedMorningStar = true;
+				Lob.Story.ClosedMorningStar = true;
 
 			}
 			else

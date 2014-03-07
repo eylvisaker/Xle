@@ -114,11 +114,11 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		protected override void MarkAsVisited(Player player)
 		{
-			player.Story().VisitedArchive[ExhibitID] = 1;
+			Lob.Story.VisitedArchive[ExhibitID] = 1;
 		}
 		public override bool HasBeenVisited(Player player)
 		{
-			return player.Story().VisitedArchive[ExhibitID] != 0;
+			return Lob.Story.VisitedArchive[ExhibitID] != 0;
 		}
 
 		public override bool RequiresCoin(Player player)

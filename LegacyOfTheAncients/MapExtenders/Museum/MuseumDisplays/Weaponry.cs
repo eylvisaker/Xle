@@ -24,26 +24,26 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			int id = (int)ExhibitIdentifier;
 
-			if (player.Story().Museum[(int)ExhibitIdentifier.Thornberry] != 0)
+			if (Lota.Story.Museum[(int)ExhibitIdentifier.Thornberry] != 0)
 			{
-				player.Story().Museum[id] = 1;
+				Lota.Story.Museum[id] = 1;
 			}
 
-			if (player.Story().Museum[id] == 0)
+			if (Lota.Story.Museum[id] == 0)
 			{
 				ReadRawText(ExhibitInfo.Text[1]);
 				
 				// fair knife
 				player.AddWeapon(1, 1);
 			}
-			else if (player.Story().Museum[id] == 1)
+			else if (Lota.Story.Museum[id] == 1)
 			{
 				ReadRawText(ExhibitInfo.Text[2]);
 
 				// great bladed staff
 				player.AddWeapon(3, 3);
 
-				player.Story().Museum[id] = 10;
+				Lota.Story.Museum[id] = 10;
 			}
 
 			viewedThisTime = true;
@@ -55,7 +55,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			if (viewedThisTime)
 				return true;
 
-			if (player.Story().Museum[id] == 10)
+			if (Lota.Story.Museum[id] == 10)
 				return true;
 
 			return false;

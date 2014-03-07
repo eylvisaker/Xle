@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool IsClosed(ERY.Xle.Player player)
 		{
-			if (player.Story().ProcuredSingingCrystal)
+			if (Lob.Story.ProcuredSingingCrystal)
 				return true;
 
 			return base.IsClosed(player);
@@ -31,7 +31,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 			XleCore.TextArea.Clear();
 
 			player.Items[LobItem.SingingCrystal] = 1;
-			player.Story().ProcuredSingingCrystal = true;
+			Lob.Story.ProcuredSingingCrystal = true;
 
 			SoundMan.PlaySoundSync(LotaSound.VeryGood);
 		}

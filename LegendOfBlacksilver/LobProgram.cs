@@ -11,14 +11,14 @@ namespace ERY.Xle.LoB
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
-		static void Main()
+		static void Main(string[] args)
 		{
 			XleCore core = new XleCore();
+			core.ProcessArguments(args);
 
 			System.IO.Directory.SetCurrentDirectory("LoB");
 
 			core.Run(new LobFactory());
-			
 		}
 
 		public static IEnumerable<Commands.Command> CommonLobCommands

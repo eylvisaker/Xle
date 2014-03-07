@@ -11,7 +11,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 	{
 		public override void Speak(GameState state, ref bool handled)
 		{
-			if (state.Story().MantrekKilled)
+			if (Lob.Story.MantrekKilled)
 				return;
 
 			handled = true;
@@ -27,7 +27,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 
 			XleCore.ChangeMap(state.Player, state.Player.MapID, 1, 0, 0);
 
-			state.Story().MantrekKilled = true;
+			Lob.Story.MantrekKilled = true;
 
 			EraseMantrek(state.Map);
 		}

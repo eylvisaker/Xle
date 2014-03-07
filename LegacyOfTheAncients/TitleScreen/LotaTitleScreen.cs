@@ -24,6 +24,8 @@ namespace ERY.Xle.LotA.TitleScreen
 		};
 
 		Surface titleScreenSurface;			// stores the image of the title screen.
+		Surface titleHeader1;
+		Surface titleHeader2;
 
 		TitleScreenState titleState = TitleScreenState.NoState;
 
@@ -32,6 +34,7 @@ namespace ERY.Xle.LotA.TitleScreen
 		string[] wnd = new string[25];
 		Color[][] color = new Color[25][];
 		Color bgColor = XleColor.Black;
+		Color borderColor = XleColor.DarkGray;
 
 		string tempName;
 		string[] files = new string[8];
@@ -111,10 +114,12 @@ namespace ERY.Xle.LotA.TitleScreen
 		}
 		void DisplayTitleScreen()
 		{
-			Color frameColor, lineColor;
-
+			Display.BeginFrame();
+			XleCore.SetOrthoProjection(StateBorderColor);
 			Display.FillRect(new Rectangle(0, 0, 640, 400), bgColor);
+
 			var renderer = XleCore.Renderer;
+			Color frameColor, lineColor;
 
 			// draw borders & stuff	
 			switch (titleState)
@@ -129,19 +134,22 @@ namespace ERY.Xle.LotA.TitleScreen
 					frameColor = XleColor.Blue;
 					lineColor = XleColor.White;
 
+					
 					renderer.DrawFrame(frameColor);
 
 					renderer.DrawFrameLine(0, 20 * 16, 1, XleCore.myWindowWidth, frameColor);
-					renderer.DrawFrameLine(3 * 16 + 8, 0, 0, 7 * 16, frameColor);
-					renderer.DrawFrameLine(35 * 16 + 8, 0, 0, 7 * 16, frameColor);
-					renderer.DrawFrameLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, frameColor);
+					//renderer.DrawFrameLine(3 * 16 + 8, 0, 0, 7 * 16, frameColor);
+					//renderer.DrawFrameLine(35 * 16 + 8, 0, 0, 7 * 16, frameColor);
+					//renderer.DrawFrameLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, frameColor);
 
 					renderer.DrawFrameHighlight(lineColor);
 
 					renderer.DrawInnerFrameHighlight(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
-					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					renderer.DrawInnerFrameHighlight(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
+					//renderer.DrawInnerFrameHighlight(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
+					//renderer.DrawInnerFrameHighlight(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
+					//renderer.DrawInnerFrameHighlight(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
+
+					DrawTitleHeader(frameColor, lineColor);
 
 					break;
 
@@ -151,17 +159,19 @@ namespace ERY.Xle.LotA.TitleScreen
 
 					renderer.DrawFrame(frameColor);
 
-					renderer.DrawFrameLine(0, 20 * 16, 1, XleCore.myWindowWidth, frameColor);
-					renderer.DrawFrameLine(3 * 16 + 8, 0, 0, 7 * 16, frameColor);
-					renderer.DrawFrameLine(35 * 16 + 8, 0, 0, 7 * 16, frameColor);
+					//renderer.DrawFrameLine(0, 20 * 16, 1, XleCore.myWindowWidth, frameColor);
+					//renderer.DrawFrameLine(3 * 16 + 8, 0, 0, 7 * 16, frameColor);
+					//renderer.DrawFrameLine(35 * 16 + 8, 0, 0, 7 * 16, frameColor);
 					renderer.DrawFrameLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, frameColor);
 
 					renderer.DrawFrameHighlight(lineColor);
 
-					renderer.DrawInnerFrameHighlight(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
-					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					renderer.DrawInnerFrameHighlight(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
+					//renderer.DrawInnerFrameHighlight(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
+					//renderer.DrawInnerFrameHighlight(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
+					//renderer.DrawInnerFrameHighlight(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
 					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
+
+					DrawTitleHeader(frameColor, lineColor);
 
 					break;
 
@@ -209,6 +219,42 @@ namespace ERY.Xle.LotA.TitleScreen
 				renderer.WriteText(0, i * 16, wnd[i], color[i]);
 			}
 
+			Display.EndFrame();
+		}
+
+		private void DrawTitleHeader(Color frameColor, Color lineColor)
+		{
+			titleHeader1.Color = frameColor;
+			titleHeader2.Color = lineColor;
+
+			titleHeader1.Draw();
+			titleHeader2.Draw();
+		}
+
+		private Color StateBorderColor
+		{
+			get
+			{
+				switch (titleState)
+				{
+					case TitleScreenState.NoState: return XleColor.DarkGray;
+					case TitleScreenState.Menu1: return XleColor.Purple;
+					case TitleScreenState.Menu2: return XleColor.DarkGray;
+
+					case TitleScreenState.NewGameMusic:
+					case TitleScreenState.NewGame: 
+						return XleColor.LightGreen;
+
+					case TitleScreenState.NewGameText:
+						return XleColor.Blue;
+
+					case TitleScreenState.LoadGame: 
+						return XleColor.Red;
+
+					default:
+						return XleColor.DarkGray;
+				}
+			}
 		}
 
 		private void SetText(int y, int x, string text)
@@ -238,7 +284,11 @@ namespace ERY.Xle.LotA.TitleScreen
 		public void Run()
 		{
 			if (titleScreenSurface == null)
+			{
 				titleScreenSurface = new Surface("title.png");
+				titleHeader1 = new Surface("TitleHeader1.png");
+				titleHeader2 = new Surface("TitleHeader2.png");
+			}
 
 			player = null;
 			titleDone = false;
@@ -249,13 +299,8 @@ namespace ERY.Xle.LotA.TitleScreen
 			while (Display.CurrentWindow.IsClosed == false && !titleDone)
 			{
 				UpdateTitleScreen();
-
-				Display.BeginFrame();
-				XleCore.SetOrthoProjection(XleColor.DarkGray);
-
 				DisplayTitleScreen();
 
-				Display.EndFrame();
 				Core.KeepAlive();
 			}
 
@@ -395,7 +440,6 @@ namespace ERY.Xle.LotA.TitleScreen
 						}
 						else
 						{
-
 							SoundMan.PlaySound(LotaSound.VeryGood);
 							titleState = TitleScreenState.NewGameMusic;
 
@@ -407,6 +451,18 @@ namespace ERY.Xle.LotA.TitleScreen
 							wnd[16] = "    " + tempName + "'s adventures begin";
 
 							player = new Player(tempName);
+							player.MapID = 5;
+							player.Location = new Point(3, 1);
+							player.FaceDirection = Direction.West; 
+
+							player.Items[LotaItem.GoldArmband] = 1;
+							player.Items[LotaItem.Compendium] = 1;
+							player.Items[LotaItem.JadeCoin] = 2;
+
+							player.AddArmor(1, 0);
+							player.CurrentArmor = 1;
+
+							player.StoryData = new LotaStory();
 							player.SavePlayer();
 						}
 					}
@@ -523,12 +579,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
 			while (!g.Done && watch.TotalMilliseconds < milliseconds)
 			{
-				Display.BeginFrame();
-				XleCore.SetOrthoProjection(XleColor.DarkGray);
-
 				DisplayTitleScreen();
-
-				Display.EndFrame();
 				Core.KeepAlive();
 			}
 
@@ -632,7 +683,6 @@ namespace ERY.Xle.LotA.TitleScreen
 
 
 		}
-
 		public void SetRestoreGame()
 		{
 			titleState = TitleScreenState.LoadGame;

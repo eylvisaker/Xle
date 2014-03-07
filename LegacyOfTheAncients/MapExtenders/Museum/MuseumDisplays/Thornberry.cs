@@ -32,8 +32,8 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 				int amount = 100;
 
-				if (player.Story().Museum[(int)ExhibitIdentifier] > 0 ||
-					player.Story().Museum[(int)ExhibitIdentifier.Fountain] > 0)
+				if (Lota.Story.Museum[(int)ExhibitIdentifier] > 0 ||
+					Lota.Story.Museum[(int)ExhibitIdentifier.Fountain] > 0)
 				{
 					amount += 200;
 				}
