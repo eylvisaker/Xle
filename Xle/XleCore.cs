@@ -172,14 +172,12 @@ namespace ERY.Xle
 		[Description("Kills all the guards on the map.")]
 		private void CheatKillAll()
 		{
-			if (Map is IHasGuards == false)
+			if (GameState.Map.HasGuards == false)
 			{
 				throw new InvalidOperationException("There are no guards on this map.");
 			}
 
-			var mp = Map as IHasGuards;
-
-			mp.Guards.Clear();
+			GameState.Map.Guards.Clear();
 		}
 
 		string CommandProcessor_DescribeCommand(string command)

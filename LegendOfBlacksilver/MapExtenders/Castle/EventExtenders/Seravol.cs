@@ -94,9 +94,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 		private bool AllOrcsKilled(GameState state)
 		{
-			IHasGuards gd = (IHasGuards)state.Map;
-
-			if (gd.Guards.Any(x => x.Color == XleColor.Blue))
+			if (state.Map.Guards.Any(x => x.Color == XleColor.Blue))
 				return false;
 			else
 				return true;

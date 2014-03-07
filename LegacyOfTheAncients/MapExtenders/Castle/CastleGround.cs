@@ -64,7 +64,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			XleCore.TextArea.PrintLine("You're invisible.");
 			XleCore.Renderer.PlayerColor = XleColor.DarkGray;
 
-			((IHasGuards)TheMap).IsAngry = false;
+			TheMap.Guards.IsAngry = false;
 
 			XleCore.Wait(500);
 

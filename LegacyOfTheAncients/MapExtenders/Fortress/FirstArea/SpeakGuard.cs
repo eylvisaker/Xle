@@ -67,9 +67,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			XleCore.TextArea.PrintLine("You surprise the guard and kill him.");
 			SoundMan.PlaySound(LotaSound.EnemyDie);
 
-			IHasGuards gd = (IHasGuards)state.Map;
-			gd.Guards.Remove(guard);
-			gd.IsAngry = true;
+			state.Map.Guards.Remove(guard);
+			state.Map.Guards.IsAngry = true;
 
 			XleCore.Wait(1500);
 
@@ -96,9 +95,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
 		private Guard FindGuard(GameState state)
 		{
-			IHasGuards gd = (IHasGuards)state.Map;
-			
-			foreach(var guard in gd.Guards)
+			foreach(var guard in state.Map.Guards)
 			{
 				if (TheEvent.Rectangle.Contains(guard.Location))
 					return guard;

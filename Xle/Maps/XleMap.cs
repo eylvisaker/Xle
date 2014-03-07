@@ -36,6 +36,9 @@ namespace ERY.Xle
 
 		TileSet mTileSet;
 
+		List<Roof> mRoofs;
+		GuardList mGuards;
+
 		protected IMapExtender mBaseExtender;
 
 		#region --- Construction and Seralization ---
@@ -55,7 +58,7 @@ namespace ERY.Xle
 		public abstract void InitializeMap(int width, int height);
 
 
-		#region IXleSerializable Members
+		#region --- IXleSerializable Members ---
 
 		void IXleSerializable.WriteData(XleSerializationInfo info)
 		{
@@ -74,18 +77,8 @@ namespace ERY.Xle
 			info.Write("Events", mEvents.ToArray());
 			info.Write("EntryPoints", EntryPoints);
 
-			if (this is IHasRoofs)
-				info.Write("Roofs", ((IHasRoofs)this).Roofs);
-			if (this is IHasGuards)
-			{
-				IHasGuards guard = (IHasGuards)this;
-
-				info.Write("Guards", guard.Guards);
-				info.Write("GuardDefaultAttack", guard.DefaultAttack);
-				info.Write("GuardDefaultDefense", guard.DefaultDefense);
-				info.Write("GuardDefaultHP", guard.DefaultHP);
-				info.Write("GuardDefaultColor", guard.DefaultColor.ToArgb());
-			}
+			if (HasRoofs) info.Write("Roofs", Roofs);
+			if (HasGuards) info.Write("Guards", Guards);
 
 			WriteData(info);
 		}
@@ -113,25 +106,10 @@ namespace ERY.Xle
 			mDefaultTile = info.ReadInt32("DefaultTile");
 			mEvents.AddRange(info.ReadArray<XleEvent>("Events"));
 
-			if (this is IHasRoofs)
-			{
-				((IHasRoofs)this).Roofs.AddRange(info.ReadArray<Roof>("Roofs"));
-			}
-			if (this is IHasGuards)
-			{
-				IHasGuards guard = (IHasGuards)this;
-
-				guard.Guards.AddRange(info.ReadArray<Guard>("Guards"));
-				guard.DefaultAttack = info.ReadInt32("GuardDefaultAttack");
-				guard.DefaultColor = Color.FromArgb(info.ReadInt32("GuardDefaultColor"));
-				guard.DefaultDefense = info.ReadInt32("GuardDefaultDefense");
-				guard.DefaultHP = info.ReadInt32("GuardDefaultHP");
-
-				guard.InitializeGuardData();
-			}
+			if (info.ContainsKey("Roofs")) Roofs = info.ReadList<Roof>("Roofs");
+			if (info.ContainsKey("Guards")) Guards = info.ReadObject<GuardList>("Guards");
 
 			// read events
-
 			ReadData(info);
 		}
 
@@ -606,6 +584,10 @@ namespace ERY.Xle
 			int starty = y - 7;
 
 			Rectangle tileRect = new Rectangle(startx, starty, width, height);
+
+			if (HasGuards)
+				Guards.AnimateGuards();
+
 			AnimateTiles(tileRect);
 
 			for (j = starty; j < starty + height; j++)
@@ -623,6 +605,7 @@ namespace ERY.Xle
 				xx = initialxx;
 			}
 		}
+
 
 		private IEnumerable<TileGroup> GetGroupsToAnimate()
 		{
@@ -1272,6 +1255,27 @@ namespace ERY.Xle
 		}
 
 
+		public bool HasRoofs
+		{
+			get { return mRoofs != null; }
+			set { mRoofs = new List<Roof>(); }
+		}
+		public bool HasGuards
+		{
+			get { return mGuards != null; }
+			set { mGuards = new GuardList(); }
+		}
+
+		public List<Roof> Roofs
+		{
+			get { return mRoofs; }
+			set { mRoofs = value; }
+		}
+		public GuardList Guards
+		{
+			get { return mGuards; }
+			set { mGuards = value; }
+		}
 
 		public static Direction DirectionFromPoint(Point point)
 		{
@@ -1285,7 +1289,21 @@ namespace ERY.Xle
 
 		public string ExtenderName { get; set; }
 
+		public int PointInRoof(int ptx, int pty)
+		{
+			for (int i = 0; i < mRoofs.Count; i++)
+			{
+				if (mRoofs[i].PointInRoof(ptx, pty, false))
+				{
+					if (mRoofs[i].Open)
+						return -1;
+					else
+						return i;
+				}
+			}
 
+			return -1;
+		}
 
 		public void BeforeEntry(GameState state, ref int targetEntryPoint)
 		{
@@ -1327,6 +1345,39 @@ namespace ERY.Xle
 			{
 				return XleCore.GameState.GameSpeed.GeneralStepTime;
 			}
+		}
+
+
+
+		public void GuardAttackPlayer(Player player, Guard guard)
+		{
+			XleCore.TextArea.PrintLine();
+
+			XleCore.TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
+
+			if (XleCore.random.NextDouble() > mBaseExtender.ChanceToHitPlayer(player, guard))
+			{
+				XleCore.TextArea.Print("Missed", XleColor.Cyan);
+				SoundMan.PlaySound(LotaSound.EnemyMiss);
+			}
+			else
+			{
+				int armorType = player.CurrentArmorType;
+
+				int dam = mBaseExtender.RollDamageToPlayer(player, guard);
+
+				XleCore.TextArea.Print("Blow ", XleColor.Yellow);
+				XleCore.TextArea.Print(dam.ToString(), XleColor.White);
+				XleCore.TextArea.Print(" H.P.", XleColor.White);
+
+				SoundMan.PlaySound(LotaSound.EnemyHit);
+
+				player.HP -= dam;
+			}
+
+			XleCore.TextArea.PrintLine();
+
+			XleCore.Wait(100 * player.Gamespeed);
 		}
 	}
 

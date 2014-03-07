@@ -34,7 +34,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 		{
 			handled = true;
 
-			((IHasGuards)state.Map).IsAngry = false;
+			state.Map.Guards.IsAngry = false;
 
 			XleCore.Renderer.PlayerColor = XleColor.Yellow;
 

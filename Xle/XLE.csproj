@@ -160,6 +160,7 @@
     <Compile Include="Maps\AnimationType.cs" />
     <Compile Include="Maps\EntryPoint.cs" />
     <Compile Include="Maps\GroupType.cs" />
+    <Compile Include="Maps\GuardList.cs" />
     <Compile Include="Maps\Map3DSurfaces.cs" />
     <Compile Include="Maps\TileGroup.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\ITempleExtender.cs" />
@@ -215,8 +216,6 @@
     <Compile Include="Maps\XleMapTypes\Map3DExtraInfo.cs" />
     <Compile Include="EquipmentList.cs" />
     <Compile Include="Global.cs" />
-    <Compile Include="IHasGuards.cs" />
-    <Compile Include="IHasRoofs.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="Maps\MapData.cs" />
     <Compile Include="XleEventTypes\XleEventList.cs" />

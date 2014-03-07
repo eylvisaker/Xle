@@ -284,7 +284,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			weaponName = player.CurrentWeaponTypeName;
 
-			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("\n");
 
 			if (EncounterState == EncounterState.MonsterReady)
 			{
@@ -620,6 +620,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		void SpeakToMonster(Player player)
 		{
+			XleCore.TextArea.PrintLine();
+
 			if (!isMonsterFriendly)
 			{
 				XleCore.TextArea.PrintLine();

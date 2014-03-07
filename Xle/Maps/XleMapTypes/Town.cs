@@ -13,16 +13,15 @@ using ERY.Xle.Maps.XleMapTypes.Extenders;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
-	public class Town : XleMap, IHasGuards, IHasRoofs
+	public class Town : XleMap
 	{
 		int mWidth;
 		int mHeight;
 		int[] mData;
 		int mOutsideTile = 0;
 
-		List<Roof> mRoofs = new List<Roof>();
 		List<Guard> mGuards = new List<Guard>();
-
+		
 		List<int> mMail = new List<int>();				// towns to carry mail to
 
 		public ITownExtender Extender { get; protected set; }
@@ -45,6 +44,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public Town()
 		{
+			HasRoofs = true;
+			HasGuards = true;
 		}
 
 		protected override void WriteData(XleSerializationInfo info)
@@ -95,24 +96,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		double lastGuardAnim = 0;
-
-		public List<Roof> Roofs
-		{
-			get { return mRoofs; }
-			set { mRoofs = value; }
-		}
-
 		bool mIsAngry = false;					// whether or not the guards are chasing the player
 
 		int guardAnim;
 
 
-		public List<Guard> Guards
-		{
-			get { return mGuards; }
-			set { mGuards = value; }
-		}
 		public bool GuardInSpot(int x, int y)
 		{
 			for (int i = 0; i < Guards.Count; i++)
@@ -286,40 +274,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		private void GuardAttackPlayer(Player player, Guard guard)
-		{
-			if (guard.SkipAttacking)
-				return;
-
-			XleCore.TextArea.PrintLine();
-
-			XleCore.TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
-
-			if (XleCore.random.NextDouble() > Extender.ChanceToHitPlayer(player, guard))
-			{
-				XleCore.TextArea.Print("Missed", XleColor.Cyan);
-				SoundMan.PlaySound(LotaSound.EnemyMiss);
-			}
-			else
-			{
-				int armorType = player.CurrentArmorType;
-
-				int dam = Extender.RollDamageToPlayer(player, guard);
-
-				XleCore.TextArea.Print("Blow ", XleColor.Yellow);
-				XleCore.TextArea.Print(dam.ToString(), XleColor.White);
-				XleCore.TextArea.Print(" H.P.", XleColor.White);
-
-				SoundMan.PlaySound(LotaSound.EnemyHit);
-
-				player.HP -= dam;
-			}
-
-			XleCore.TextArea.PrintLine();
-
-			XleCore.Wait(100 * player.Gamespeed);
-		}
-
 		bool CanGuardStepInto(Point pt, int grd)
 		{
 			int i, j, k;
@@ -430,36 +384,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return -1;
 		}
-		int PointInRoof(int ptx, int pty)
-		{
-			for (int i = 0; i < mRoofs.Count; i++)
-			{
-				if (mRoofs[i].PointInRoof(ptx, pty, false))
-				{
-					if (mRoofs[i].Open)
-						return -1;
-					else
-						return i;
-				}
-			}
-
-			return -1;
-
-			/*
-			if (pty >= 0 && pty < Height && ptx >= 0 && ptx < Width)
-			{
-				//roof = mRoof[pty, ptx];
-
-				if (mRoofs[roof].Open)
-				{
-					roof = -1;
-				}
-
-			}
-			return roof;
-			*/
-
-		}
+		
 		/*
 
 		Point RoofAnchor(int r)
@@ -929,18 +854,18 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			Point pt = new Point(player.X, player.Y);
 
-			for (int i = 0; i < mRoofs.Count; i++)
+			for (int i = 0; i < Roofs.Count; i++)
 			{
 				if (Roofs[i].Open == false && Roofs[i].CharIn(pt))
 				{
 					Roofs[i].Open = true;
-					PlayOpenRoofSound(mRoofs[i]);
+					PlayOpenRoofSound(Roofs[i]);
 				}
 				else if (Roofs[i].Open == true && IsAngry == false
 					&& Roofs[i].CharIn(pt) == false)
 				{
 					Roofs[i].Open = false;
-					PlayCloseRoofSound(mRoofs[i]);
+					PlayCloseRoofSound(Roofs[i]);
 				}
 			}
 
@@ -1021,20 +946,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			DrawGuards(new Point(x, y), inRect);
 		}
-		public void AnimateGuards()
-		{
-			int animTime = 460;
-
-			if (IsAngry)
-				animTime = 150;
-
-			if (lastGuardAnim + animTime <= Timing.TotalMilliseconds)
-			{
-				guardAnim++;
-
-				lastGuardAnim = Timing.TotalMilliseconds;
-			}
-		}
 		protected void DrawGuards(Point centerPoint, Rectangle inRect)
 		{
 			Point topLeftMapPt = new Point(centerPoint.X - 11, centerPoint.Y - 7);
@@ -1055,18 +966,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
 					{
-						XleCore.Renderer.DrawCharacterSprite(rx, ry, facing, true, guardAnim, false, guard.Color);
+						XleCore.Renderer.DrawCharacterSprite(rx, ry, facing, true, Guards.AnimFrame, false, guard.Color);
 					}
 				}
 			}
 		}
-
-		protected override void AnimateTiles(Rectangle rectangle)
-		{
-			AnimateGuards();
-			base.AnimateTiles(rectangle);
-		}
-
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)
 		{
 			return true;

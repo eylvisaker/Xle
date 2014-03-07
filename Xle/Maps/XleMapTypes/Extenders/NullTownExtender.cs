@@ -47,24 +47,5 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			return (int)Math.Round(damage);
 		}
-
-
-		public virtual double ChanceToHitPlayer(Player player, Guard guard)
-		{
-			return (player.Attribute[Attributes.dexterity] / 80.0);
-		}
-
-
-		public virtual int RollDamageToPlayer(Player player, Guard guard)
-		{
-			int armorType = player.CurrentArmorType;
-
-			double damage = guard.Attack / 99.0 *
-							   (120 + XleCore.random.NextDouble() * 250) /
-							   Math.Pow(armorType + 3, 0.8) /
-								   Math.Pow(player.Attribute[Attributes.endurance], 0.8) + 3;
-
-			return (int)Math.Round(damage);
-		}
 	}
 }

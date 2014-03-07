@@ -11,7 +11,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 		public virtual void SetAngry(GameState state)
 		{
-			(state.Map as IHasGuards).IsAngry = true;
+			
 		}
 
 		public virtual bool MakesGuardsAngry { get { return true; } }

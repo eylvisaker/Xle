@@ -25,13 +25,11 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
 			paralyzed = true;
 
-			var gd = (IHasGuards)state.Map;
-
 			Guard warlord = new Guard();
 			warlord.Location = new AgateLib.Geometry.Point(106, 47);
 			warlord.Color = XleColor.LightGreen;
 
-			gd.Guards.Add(warlord);
+			state.Map.Guards.Add(warlord);
 
 			PrintSeeCompendiumMessage(state);
 			DoSonicMagic(state, warlord);
@@ -47,7 +45,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
 			MoveWarlordOut(warlord);
 
-			gd.Guards.Remove(warlord);
+			state.Map.Guards.Remove(warlord);
 		}
 
 		private void RemoveCompendium(GameState state)

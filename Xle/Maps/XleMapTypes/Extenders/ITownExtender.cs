@@ -15,8 +15,5 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		int RollDamageToGuard(Player player, Guard guard);
 
-		double ChanceToHitPlayer(Player player, Guard guard);
-
-		int RollDamageToPlayer(Player player, Guard guard);
 	}
 }
