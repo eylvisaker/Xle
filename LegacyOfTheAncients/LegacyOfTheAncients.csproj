@@ -222,7 +222,6 @@
     <None Include="Support\lota-dungeon.c64bas" />
     <None Include="Support\lota-flipflop.c64bas" />
     <None Include="Support\lota-museum.c64bas" />
-    <None Include="Support\lota-outside-pegasus.c64bas" />
     <None Include="Support\lota-outside.c64bas" />
     <None Include="Support\lota-startup.c64bas" />
     <None Include="Support\lota-stones_of_wisdom.c64bas" />
