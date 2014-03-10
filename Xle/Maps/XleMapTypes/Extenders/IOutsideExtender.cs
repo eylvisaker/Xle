@@ -7,5 +7,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
 	public interface IOutsideExtender : IMapExtender
 	{
+		void ModifyTerrainInfo(TerrainInfo info, TerrainType terrain);
+
 	}
 }

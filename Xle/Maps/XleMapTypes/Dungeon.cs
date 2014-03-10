@@ -401,6 +401,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 			else
 			{
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("Nothing to open.");
 				XleCore.Wait(1000);
 			}
@@ -498,7 +500,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		protected override void PlayerStepImpl(Player player, bool didEvent)
+		protected override void AfterStepImpl(Player player, bool didEvent)
 		{
 			int val = this[player.X, player.Y];
 
@@ -513,7 +515,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				OnPlayerAvoidTrap(player, player.X, player.Y);
 			}
 		
-			base.PlayerStepImpl(player, didEvent);
+			base.AfterStepImpl(player, didEvent);
 		}
 
 		private void OnPlayerAvoidTrap(Player player, int x, int y)

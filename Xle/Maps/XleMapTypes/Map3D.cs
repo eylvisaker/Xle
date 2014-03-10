@@ -464,9 +464,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		protected abstract void PlayPlayerMoveSound();
 
-		protected override void PlayerStepImpl(Player player, bool didEvent)
+		protected override void AfterStepImpl(Player player, bool didEvent)
 		{
-			base.PlayerStepImpl(player, didEvent);
+			base.AfterStepImpl(player, didEvent);
 		}
 		protected virtual bool ShowDirections(Player player)
 		{

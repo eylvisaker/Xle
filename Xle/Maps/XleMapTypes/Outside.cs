@@ -9,6 +9,7 @@ using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.XleEventTypes.Stores;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 
 
 namespace ERY.Xle.Maps.XleMapTypes
@@ -93,7 +94,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 				{
 					int index = xx - drawRect.Left + (yy - drawRect.Top) * drawRect.Width;
 
-					return waves[index];
+					if (index >= 0 && index < waves.Length)
+						return waves[index];
 				}
 
 				return result;
@@ -207,75 +209,120 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		public override bool PlayerXamine(Player player)
 		{
+			TerrainInfo info = GetTerrainInfo(player);
 
-			string terrain;
-			string travel;
-			string food;
-			string thestring;
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You are in " + info.TerrainName + ".");
 
-			switch (player.Terrain)
+			XleCore.TextArea.Print("Travel: ", XleColor.White);
+			XleCore.TextArea.Print(info.TravelText, XleColor.Green);
+			XleCore.TextArea.Print("  -  Food use: ", XleColor.White);
+			XleCore.TextArea.Print(info.FoodUseText, XleColor.Green);
+			XleCore.TextArea.PrintLine();
+
+			return true;
+		}
+
+		private TerrainInfo GetTerrainInfo(Player player)
+		{
+			var terrain = TerrainAt(player.X, player.Y);
+
+			return GetTerrainInfo(terrain);
+		}
+
+		TerrainInfo GetTerrainInfo(TerrainType terrain)
+		{
+			TerrainInfo info = new TerrainInfo();
+
+			switch (terrain)
 			{
-				case TerrainType.Grass:
-					terrain = "grasslands";
-					travel = "easy";
-					food = "low";
-					break;
 				case TerrainType.Water:
-					terrain = "water";
-					travel = "easy";
-					food = "low";
-					break;
-				case TerrainType.Mountain:
-					terrain = "the mountains";
-					travel = "slow";
-					food = "high";
-					break;
+				case TerrainType.Grass:
 				case TerrainType.Forest:
-					terrain = "a forest";
-					travel = "easy";
-					food = "low";
-					break;
-				case TerrainType.Desert:
-					terrain = "a desert";
-					travel = "slow";
-					food = "high";
+					info.StepTimeDays += .25;
 					break;
 				case TerrainType.Swamp:
-					terrain = "a swamp";
-					travel = "average";
-					food = "medium";
+					info.StepTimeDays += .5;
+					break;
+				case TerrainType.Mountain:
+					info.StepTimeDays += 1;
+					break;
+				case TerrainType.Desert:
+					info.StepTimeDays += 1;
+					break;
+				case TerrainType.Mixed:
+					info.StepTimeDays += 0.5;
+					break;
+			}
+
+			switch (terrain)
+			{
+				case TerrainType.Swamp:
+					info.WalkSound = (LotaSound.WalkSwamp);
+					break;
+
+				case TerrainType.Desert:
+					info.WalkSound = (LotaSound.WalkDesert);
+					break;
+
+				case TerrainType.Grass:
+				case TerrainType.Forest:
+				case TerrainType.Mixed:
+				default:
+					info.WalkSound = (LotaSound.WalkOutside);
+					break;
+			}
+			switch (terrain)
+			{
+				case TerrainType.Grass:
+					info.TerrainName = "grasslands";
+					info.TravelText = "easy";
+					info.FoodUseText = "low";
+					break;
+				case TerrainType.Water:
+					info.TerrainName = "water";
+					info.TravelText = "easy";
+					info.FoodUseText = "low";
+					break;
+				case TerrainType.Mountain:
+					info.TerrainName = "the mountains";
+					info.TravelText = "slow";
+					info.FoodUseText = "high";
+					break;
+				case TerrainType.Forest:
+					info.TerrainName = "a forest";
+					info.TravelText = "easy";
+					info.FoodUseText = "low";
+					break;
+				case TerrainType.Desert:
+					info.TerrainName = "a desert";
+					info.TravelText = "slow";
+					info.FoodUseText = "high";
+					break;
+				case TerrainType.Swamp:
+					info.TerrainName = "a swamp";
+					info.TravelText = "average";
+					info.FoodUseText = "medium";
 					break;
 				case TerrainType.Foothills:
-					terrain = "mountain foothills";
-					travel = "average";
-					food = "medium";
+					info.TerrainName = "mountain foothills";
+					info.TravelText = "average";
+					info.FoodUseText = "medium";
 					break;
 
 				default:
 				case TerrainType.Mixed:
-					terrain = "mixed terrain";
-					travel = "average";
-					food = "medium";
+					info.TerrainName = "mixed terrain";
+					info.TravelText = "average";
+					info.FoodUseText = "medium";
 					break;
 
 			}
 
-			XleCore.TextArea.PrintLine();
-
-			thestring = "You are in " + terrain.ToString() + ".";
-
-			XleCore.TextArea.PrintLine(thestring);
-
-			ColorStringBuilder builder = new ColorStringBuilder();
-
-			builder.AddText("Travel: ", XleColor.White);
-			builder.AddText(travel.ToString(), XleColor.Green);
-			builder.AddText("  -  Food use: ", XleColor.White);
-			builder.AddText(food.ToString(), XleColor.Green);
-
-			g.AddBottom(builder);
-
-			return true;
+			Extender.ModifyTerrainInfo(info, terrain);
+		
+			return info;
 		}
 		public override bool PlayerFight(Player player)
 		{
@@ -412,7 +459,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (player.Move(stepDirection) == false)
 			{
-				TerrainType terrain = Terrain(player.X + stepDirection.X, player.Y + stepDirection.Y);
+				TerrainType terrain = TerrainAt(player.X + stepDirection.X, player.Y + stepDirection.Y);
 
 				if (InEncounter)
 				{
@@ -466,25 +513,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 					EncounterState = XleMapTypes.EncounterState.NoEncounter;
 				}
 
+				TerrainInfo info = GetTerrainInfo(player);
+
 				if (player.IsOnRaft == false)
 				{
-					switch (player.Terrain)
-					{
-						case TerrainType.Swamp:
-							SoundMan.PlaySound(LotaSound.WalkSwamp);
-							break;
+					SoundMan.PlaySound(info.WalkSound);
 
-						case TerrainType.Desert:
-							SoundMan.PlaySound(LotaSound.WalkDesert);
-							break;
-
-						case TerrainType.Grass:
-						case TerrainType.Forest:
-						case TerrainType.Mixed:
-						default:
-							SoundMan.PlaySound(LotaSound.WalkOutside);
-							break;
-					}
 				}
 				else if (CheckStormy(player))
 				{
@@ -492,27 +526,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 					return;
 				}
 
-				switch (player.Terrain)
-				{
-					case TerrainType.Water:
-					case TerrainType.Grass:
-					case TerrainType.Forest:
-						player.TimeDays += .25;
-						break;
-					case TerrainType.Swamp:
-						player.TimeDays += .5;
-						break;
-					case TerrainType.Mountain:
-						player.TimeDays += 1;
-						break;
-					case TerrainType.Desert:
-						player.TimeDays += 1;
-						break;
-					case TerrainType.Mixed:
-						player.TimeDays += 0.5;
-						break;
-				}
-
+				player.TimeDays += info.StepTimeDays;
 				player.TimeQuality += 1;
 			}
 		}
@@ -976,8 +990,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 				XleCore.Renderer.DrawMonster(pt.X, pt.Y, displayMonst);
 			}
 		}
-		protected override void PlayerStepImpl(Player player, bool didEvent)
+		protected override void AfterStepImpl(Player player, bool didEvent)
 		{
+			Extender.AfterPlayerStep(XleCore.GameState);
+
 			StepEncounter(player, didEvent);
 		}
 		private void StepEncounter(Player player, bool didEvent)
@@ -1081,7 +1097,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			SoundMan.PlaySound(LotaSound.Encounter);
 
-			displayMonst = SelectRandomMonster(Terrain(player.X, player.Y));
+			displayMonst = SelectRandomMonster(TerrainAt(player.X, player.Y));
 
 			mDrawMonst.X = player.X - 1;
 			mDrawMonst.Y = player.Y - 1;
@@ -1431,14 +1447,20 @@ namespace ERY.Xle.Maps.XleMapTypes
 		protected override Extenders.IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
-				return base.CreateExtenderImpl();
+			{
+				Extender = new NullOutsideExtender();
+			}
+			else
+			{
+				Extender = XleCore.Factory.CreateMapExtender(this);
+			}
 
-			return XleCore.Factory.CreateMapExtender(this);
+			return Extender;
 		}
 
 		public override bool CanPlayerStepInto(Player player, int xx, int yy)
 		{
-			TerrainType terrain = Terrain(xx, yy);
+			TerrainType terrain = TerrainAt(xx, yy);
 			int test = (int)terrain;
 
 			if (player.IsOnRaft)
@@ -1490,5 +1512,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				return XleCore.GameState.GameSpeed.OutsideStepTime;
 			}
 		}
+
+		public IOutsideExtender Extender { get; private set; }
 	}
 }

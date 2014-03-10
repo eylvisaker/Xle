@@ -14,7 +14,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
 		}
 
-		public override void OnAfterEntry(GameState state)
+		public override void AfterEntry(GameState state)
 		{
 			if (state.Player.X == 11 && state.Player.Y == 8)
 			{

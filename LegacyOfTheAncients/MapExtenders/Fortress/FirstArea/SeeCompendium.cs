@@ -23,6 +23,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			if (paralyzed)
 				return;
 
+			XleCore.TextArea.PrintLine();
+
 			paralyzed = true;
 
 			Guard warlord = new Guard();
@@ -41,7 +43,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			HitPlayer(state);
 			WarlordSpeech();
 			RemoveCompendium(state);
-
 
 			MoveWarlordOut(warlord);
 
@@ -120,9 +121,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 		private void WarlordSpeech()
 		{
 			XleCore.TextArea.PrintSlow("You fool!  ", XleColor.Yellow);
-			XleCore.Wait(1500);
 			XleCore.TextArea.PrintSlow("You can't stop me!  ", XleColor.Yellow);
-			XleCore.Wait(1500);
 			XleCore.TextArea.PrintLineSlow("as you", XleColor.Yellow);
 			XleCore.TextArea.PrintLineSlow("stand helpless, I'll use this scroll", XleColor.Yellow);
 			XleCore.TextArea.PrintSlow("to cast the ", XleColor.Yellow);

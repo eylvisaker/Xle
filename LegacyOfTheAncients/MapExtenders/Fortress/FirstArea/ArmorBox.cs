@@ -14,6 +14,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			handled = true;
 
 			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+
 			if (TheEvent.Closed)
 			{
 				XleCore.TextArea.PrintLine("you see yellow guard");
@@ -38,6 +40,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
 			XleCore.Renderer.PlayerColor = XleColor.Yellow;
 
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("you put on armor.");
 

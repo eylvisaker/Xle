@@ -163,7 +163,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 		private void PrintSecurityAlertMessage()
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

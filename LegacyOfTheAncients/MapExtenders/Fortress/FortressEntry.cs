@@ -51,6 +51,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 		public override void SpeakToGuard(GameState state, ref bool handled)
 		{
 			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+
 			handled = true;
 
 			if (TheMap.IsAngry)

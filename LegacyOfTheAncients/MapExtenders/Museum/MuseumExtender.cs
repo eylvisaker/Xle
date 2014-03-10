@@ -55,7 +55,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 			CheckExhibitStatus(state);
 		}
 
-		public override void OnAfterEntry(GameState state)
+		public override void AfterEntry(GameState state)
 		{
 			CheckInformationMessage(state);
 		}
@@ -132,7 +132,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 				return;
 			}
 		}
-		public override void PlayerStep(GameState state)
+		public override void AfterPlayerStep(GameState state)
 		{
 			if (state.Player.X == 12 && state.Player.Y == 13)
 			{

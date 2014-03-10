@@ -26,9 +26,9 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		void BeforeEntry(GameState state, ref int targetEntryPoint);
 
-		void PlayerStep(GameState state);
+		void AfterPlayerStep(GameState state);
 
-		void OnAfterEntry(GameState state);
+		void AfterEntry(GameState state);
 
 		void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd);
 

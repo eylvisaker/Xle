@@ -21,7 +21,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		{ }
 
 
-		public virtual void PlayerStep(GameState state)
+		public virtual void AfterPlayerStep(GameState state)
 		{ }
 
 		public virtual void SetColorScheme(ColorScheme scheme)
@@ -52,7 +52,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		}
 
 
-		public virtual void OnAfterEntry(GameState state)
+		public virtual void AfterEntry(GameState state)
 		{
 		}
 

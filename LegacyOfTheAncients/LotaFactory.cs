@@ -69,6 +69,9 @@ namespace ERY.Xle.LotA
 
 		public override ITownExtender CreateMapExtender(Town town)
 		{
+			if (town.ExtenderName == "EagleHollow")
+				return new EagleHollow();
+
 			return new LotaTown();
 		}
 		public override IOutsideExtender CreateMapExtender(Outside outside)

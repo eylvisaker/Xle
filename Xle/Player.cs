@@ -460,7 +460,7 @@ namespace ERY.Xle
 				x = XleCore.random.Next(XleCore.Map.Width);
 				y = XleCore.random.Next(XleCore.Map.Height);
 
-				t = Terrain;
+				t = XleCore.GameState.Map.TerrainAt(x, y);
 
 			} while (t != TerrainType.Grass && t != TerrainType.Forest);
 
@@ -698,14 +698,14 @@ namespace ERY.Xle
 
 
 		/// <summary>
-		/// 				// the current outside terrain the player is standing on
+		/// the current outside terrain the player is standing on
 		/// </summary>
 		/// <returns></returns>
 		public TerrainType Terrain
 		{
 			get
 			{
-				return XleCore.Map.Terrain(x, y);
+				return XleCore.Map.TerrainAt(x, y);
 			}
 		}
 		/// <summary>

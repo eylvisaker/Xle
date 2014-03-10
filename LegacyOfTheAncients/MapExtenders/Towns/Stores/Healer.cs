@@ -30,7 +30,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 				return;
 
 			buyingHerbs = false;
-			
+
 			int woundPrice = (int)((player.MaxHP - player.HP) * 0.75);
 			int herbsPrice = (int)(player.Level * 300 * TheEvent.CostFactor);
 
@@ -52,7 +52,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			}
 
 			MenuItemList theList = new MenuItemList("0", "1", "2");
-			
+
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Make choice (hit 0 to cancel)");
@@ -115,6 +115,18 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 					}
 				}
 			}
+
+			AfterSpeak(state);
+		}
+
+		protected virtual void AfterSpeak(GameState state)
+		{
+			if (Lota.Story.HasGuardianMark == false)
+				return;
+
+			XleCore.TextArea.PrintLine("A distant healer awaits you.", XleColor.Yellow);
+
+			SoundMan.PlaySoundSync(LotaSound.Encounter);
 		}
 
 		private void SetOptionsText(int woundPrice, int herbsPrice)

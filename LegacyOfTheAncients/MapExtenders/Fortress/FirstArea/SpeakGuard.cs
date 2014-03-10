@@ -33,6 +33,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 				return;
 
 			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("The guard walks over.");
 
 			for (int i = 0; i < 5; i++)
@@ -63,6 +64,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
 		private bool KillGuard(GameState state, Guard guard)
 		{
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("You surprise the guard and kill him.");
 			SoundMan.PlaySound(LotaSound.EnemyDie);

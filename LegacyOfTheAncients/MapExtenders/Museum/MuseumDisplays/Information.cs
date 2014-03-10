@@ -180,7 +180,8 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				ReadRawText(ExhibitInfo.Text[0]);
 				int newLevel = TargetLevel(player);
 
-				XleCore.TextArea.PrintLine(" Your level is now " + newLevel.ToString() + "!!");
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("Your level is now " + newLevel.ToString() + "!!");
 
 				SoundMan.PlaySoundSync(LotaSound.VeryGood);
 

@@ -160,7 +160,7 @@ namespace ERY.Xle.Commands
 			}
 
 			// check for events
-			State.Map.PlayerStep(player);
+			State.Map.AfterPlayerStep(player);
 
 			AfterDoCommand(waitTime, cmd);
 		}

@@ -37,14 +37,15 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 		{
 			handled = true;
 
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+
 			if (fortressFinal.CompendiumAttacking)
 			{
-				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("You can't hold it.");
 			}
 			else
 			{
-				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("You grab the compendium.");
 				SoundMan.PlaySound(LotaSound.VeryGood);
 				XleCore.Wait(500);

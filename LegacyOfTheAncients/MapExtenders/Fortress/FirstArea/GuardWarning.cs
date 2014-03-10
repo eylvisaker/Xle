@@ -12,7 +12,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 		{
 			handled = true;
 			TheEvent.Enabled = false;
-			
+
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("The guards eye you warily", XleColor.Yellow);
 

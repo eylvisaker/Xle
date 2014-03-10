@@ -34,5 +34,9 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			scheme.MapAreaWidth = 25;
 		}
+
+		public virtual void ModifyTerrainInfo(TerrainInfo info, TerrainType terrain)
+		{
+		}
 	}
 }

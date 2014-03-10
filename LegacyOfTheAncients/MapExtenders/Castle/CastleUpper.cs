@@ -36,7 +36,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			return base.CreateEventExtender(evt, defaultExtender);
 		}
 
-		public override void OnAfterEntry(GameState state)
+		public override void AfterEntry(GameState state)
 		{
 			if (Lota.Story.Invisible == false)
 			{

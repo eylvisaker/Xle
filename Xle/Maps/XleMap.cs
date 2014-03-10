@@ -794,7 +794,7 @@ namespace ERY.Xle
 
 		public TileSet TileSet { get { return mTileSet; } set { mTileSet = value; } }
 
-		public TerrainType Terrain(int xx, int yy)
+		public TerrainType TerrainAt(int xx, int yy)
 		{
 			int[,] t = new int[2, 2] { { 0, 0 }, { 0, 0 } };
 			int[] tc = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -895,7 +895,7 @@ namespace ERY.Xle
 				evt.BeforeStepOn(GameState);
 			}
 		}
-		public void PlayerStep(Player player)
+		public void AfterPlayerStep(Player player)
 		{
 			bool didEvent = false;
 
@@ -905,15 +905,15 @@ namespace ERY.Xle
 				didEvent = true;
 			}
 
-			PlayerStepImpl(player, didEvent);
-			mBaseExtender.PlayerStep(GameState);
+			AfterStepImpl(player, didEvent);
+			mBaseExtender.AfterPlayerStep(GameState);
 		}
 		/// <summary>
 		/// Called after the player steps.
 		/// </summary>
 		/// <param name="player"></param>
 		/// <param name="didEvent">True if there was an event that occured at this location</param>
-		protected virtual void PlayerStepImpl(Player player, bool didEvent)
+		protected virtual void AfterStepImpl(Player player, bool didEvent)
 		{
 
 		}
@@ -1312,7 +1312,7 @@ namespace ERY.Xle
 
 		public virtual void OnAfterEntry(Xle.GameState state)
 		{
-			mBaseExtender.OnAfterEntry(state);
+			mBaseExtender.AfterEntry(state);
 		}
 
 		public void RemoveJailBars(Rectangle rectangle, int replacementTile)

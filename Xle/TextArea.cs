@@ -248,8 +248,10 @@ namespace ERY.Xle
 
 				XleCore.Wait(50, true, XleCore.Redraw);
 
-				if (text[i] == '.')
-					XleCore.Wait(400);
+				if (text[i] == '.' || text[i] == '!')
+					XleCore.Wait(500);
+				if (text[i] == ',')
+					XleCore.Wait(350);
 			}
 		}
 		public void PrintSlow(string text, Color[] colors = null)
