@@ -571,7 +571,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (currentMonst[monstCount - 1].Weapon > 0)
 			{
-				if (player.WeaponType(player.CurrentWeapon) == currentMonst[monstCount - 1].Weapon)
+				if (player.WeaponType(player.CurrentWeaponIndex) == currentMonst[monstCount - 1].Weapon)
 				{
 					damage += XleCore.random.Next(11) + 20;
 				}

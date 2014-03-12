@@ -460,7 +460,7 @@ namespace ERY.Xle.LotA.TitleScreen
 							player.Items[LotaItem.JadeCoin] = 2;
 
 							player.AddArmor(1, 0);
-							player.CurrentArmor = 1;
+							player.CurrentArmorIndex = 1;
 
 							player.StoryData = new LotaStory();
 							player.SavePlayer();

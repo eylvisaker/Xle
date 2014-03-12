@@ -116,11 +116,11 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			return monst;
 		}
 
-		public override bool RollToHitMonster(GameState state)
+		public override bool RollToHitMonster(GameState state, DungeonMonster monster)
 		{
 			return XleCore.random.NextDouble() * 70 < state.Player.Attribute[Attributes.dexterity] + 30;
 		}
-		public override int RollDamageToMonster(GameState state)
+		public override int RollDamageToMonster(GameState state, DungeonMonster monster)
 		{
 			double damage = state.Player.Attribute[Attributes.strength] + 30;
 			damage /= 45;
@@ -137,6 +137,25 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 				damage *= 1.5;
 
 			return (int)(damage * (0.5 + XleCore.random.NextDouble()));
+		}
+
+		public override bool RollToHitPlayer(GameState state, DungeonMonster monster)
+		{
+			if (XleCore.random.NextDouble() * 70 > state.Player.Attribute[Attributes.dexterity])
+			{
+				return true;
+			}
+			else
+				return false;
+		}
+
+		public override int RollDamageToPlayer(GameState state, DungeonMonster monster)
+		{
+			double vc = state.Player.CurrentArmorType + state.Player.CurrentArmorQuality / 3.5;
+
+			double damage = 10 * TheMap.MonsterDamageScale / (vc + 3) * (state.Player.DungeonLevel + 7);
+
+			return (int)((XleCore.random.NextDouble() + 0.5) * damage);
 		}
 	}
 }

@@ -26,7 +26,7 @@ namespace ERY.Xle.Commands
 					theList.Add(tempstring);
 					j++;
 
-					if (state.Player.CurrentArmor == i)
+					if (state.Player.CurrentArmorIndex == i)
 						value = j;
 
 				}
@@ -35,7 +35,7 @@ namespace ERY.Xle.Commands
 
 			XleCore.TextArea.PrintLine("-choose above", XleColor.Cyan);
 
-			state.Player.CurrentArmor = XleCore.SubMenu("Pick Armor", value, theList);
+			state.Player.CurrentArmorIndex = XleCore.SubMenu("Pick Armor", value, theList);
 
 		}
 	}

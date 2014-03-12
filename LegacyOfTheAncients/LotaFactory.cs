@@ -143,7 +143,9 @@ namespace ERY.Xle.LotA
 				story.Museum[(int)ExhibitIdentifier.Thornberry] = 1;
 				story.Museum[(int)ExhibitIdentifier.Weaponry] = 10; // mark weaponry as closed.
 				story.Museum[(int)ExhibitIdentifier.Fountain] = 1;
-				
+
+				player.AddWeapon(3, 3);
+				player.AddArmor(2, 3);
 			}
 			if (level >= 3)
 			{

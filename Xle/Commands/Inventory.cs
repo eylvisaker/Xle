@@ -108,7 +108,7 @@ namespace ERY.Xle.Commands
 						if (player.WeaponType(i) > 0)
 						{
 
-							if (player.CurrentWeapon == i)
+							if (player.CurrentWeaponIndex == i)
 							{
 								tempcolor = XleColor.White;
 							}
@@ -130,7 +130,7 @@ namespace ERY.Xle.Commands
 						if (player.ArmorType(i) > 0)
 						{
 
-							if (player.CurrentArmor == i)
+							if (player.CurrentArmorIndex == i)
 							{
 								tempcolor = XleColor.White;
 							}

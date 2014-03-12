@@ -33,8 +33,5 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd);
 
 		void SetCommands(CommandList commands);
-		
-		double ChanceToHitPlayer(Player player, Guard guard);
-		int RollDamageToPlayer(Player player, Guard guard);
 	}
 }

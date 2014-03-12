@@ -45,6 +45,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			mData = info.ReadInt32Array("Data");
 			MaxMonsters = info.ReadInt32("MaxMonsters");
 			MonsterHealthScale = info.ReadInt32("MonsterHealthScale");
+			MonsterDamageScale = info.ReadInt32("MonsterDamageScale");
 		}
 		protected override void WriteData(XleSerializationInfo info)
 		{
@@ -54,6 +55,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			info.Write("Data", mData, NumericEncoding.Csv);
 			info.Write("MaxMonsters", MaxMonsters);
 			info.Write("MonsterHealthScale", MonsterHealthScale);
+			info.Write("MonsterDamageScale", MonsterDamageScale);
 		}
 
 		protected override IMapExtender CreateExtenderImpl()
@@ -127,6 +129,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public int MaxMonsters { get; set; }
 		public int MonsterHealthScale { get; set; }
+		public int MonsterDamageScale { get; set; }
 
 		public int CurrentLevel
 		{
@@ -301,7 +304,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				return true;
 			}
 
-			bool hit = Extender.RollToHitMonster(XleCore.GameState);
+			bool hit = Extender.RollToHitMonster(XleCore.GameState, monst);
 			
 			XleCore.TextArea.Print("Hit ");
 			XleCore.TextArea.Print(monst.Name, XleColor.White);
@@ -309,7 +312,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (hit)
 			{
-				int damage = Extender.RollDamageToMonster(XleCore.GameState);
+				int damage = Extender.RollDamageToMonster(XleCore.GameState, monst);
 
 				SoundMan.PlaySound(LotaSound.PlayerHit);
 				
@@ -620,7 +623,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 				if (Math.Abs(delta.X) + Math.Abs(delta.Y) == 1)
 				{
-					// this monster can attack
+					MonsterAttackPlayer(state, monster);
 				}
 				else
 				{
@@ -643,6 +646,66 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				SpawnMonster(state);
 			}
+		}
+
+		private void MonsterAttackPlayer(GameState state, DungeonMonster monster)
+		{
+			XleCore.TextArea.PrintLine();
+
+			var delta = new Point(
+				monster.Location.X - state.Player.X,
+				monster.Location.Y - state.Player.Y);
+
+			var forward = StepDirection(state.Player.FaceDirection);
+			var right = RightDirection(state.Player.FaceDirection);
+			var left = LeftDirection(state.Player.FaceDirection);
+			bool allowEffect = false;
+
+			if (delta == forward)
+			{
+				XleCore.TextArea.Print("Attacked by ");
+				XleCore.TextArea.Print(monster.Name, XleColor.Yellow);
+				XleCore.TextArea.PrintLine("!");
+
+				allowEffect = true;
+			}
+			else if (delta == right)
+			{
+				XleCore.TextArea.Print("Attacked from the ");
+				XleCore.TextArea.Print("right", XleColor.Yellow);
+				XleCore.TextArea.PrintLine(".");
+			}
+			else if (delta == left)
+			{
+				XleCore.TextArea.Print("Attacked from the ");
+				XleCore.TextArea.Print("left", XleColor.Yellow);
+				XleCore.TextArea.PrintLine(".");
+			}
+			else
+			{
+				XleCore.TextArea.Print("Attacked from ");
+				XleCore.TextArea.Print("behind", XleColor.Yellow);
+				XleCore.TextArea.PrintLine(".");
+			}
+
+			if (Extender.RollToHitPlayer(state, monster))
+			{
+				int damage = Extender.RollDamageToPlayer(state, monster);
+
+				SoundMan.PlaySound(LotaSound.EnemyHit);
+				XleCore.TextArea.Print("Hit by blow of ");
+				XleCore.TextArea.Print(damage.ToString(), XleColor.Yellow);
+				XleCore.TextArea.PrintLine("!");
+
+				state.Player.HP -= damage;
+			}
+			else
+			{
+				SoundMan.PlaySound(LotaSound.EnemyMiss);
+				XleCore.TextArea.PrintLine("Attack missed.", XleColor.Green);
+			}
+
+			XleCore.Wait(250);
 		}
 
 		private bool TryMonsterStep(DungeonMonster monster, Point delta)
@@ -829,5 +892,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			SoundMan.PlaySound(LotaSound.WalkDungeon);
 		}
+
 	}
 }

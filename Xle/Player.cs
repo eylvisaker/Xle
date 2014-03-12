@@ -1159,7 +1159,7 @@ namespace ERY.Xle
 		}
 
 		/// sets or returns the armor currently worn
-		public int CurrentArmor
+		public int CurrentArmorIndex
 		{
 			get
 			{
@@ -1184,7 +1184,7 @@ namespace ERY.Xle
 			}
 		}
 		/// sets or returns the weapon currently equiped
-		public int CurrentWeapon
+		public int CurrentWeaponIndex
 		{
 			get { return currentWeapon; }
 			set
@@ -1218,6 +1218,17 @@ namespace ERY.Xle
 				return armor[currentArmor];
 			}
 		}
+		public double CurrentArmorQuality
+		{
+			get
+			{
+				if (currentArmor == 0)
+					return 0;
+
+				return armorQuality[currentArmor];
+			}
+		}
+
 		public int CurrentWeaponType
 		{
 			get
@@ -1515,8 +1526,8 @@ namespace ERY.Xle
 		/// <returns></returns>
 		public int Hit(int defense)
 		{
-			int wt = WeaponType(CurrentWeapon);
-			int qt = WeaponQuality(CurrentWeapon);
+			int wt = WeaponType(CurrentWeaponIndex);
+			int qt = WeaponQuality(CurrentWeaponIndex);
 
 			int dam = Attribute[Attributes.strength] - 12;
 			dam += (int)(wt * (qt + 2)) / 2;
@@ -1548,12 +1559,12 @@ namespace ERY.Xle
 		public int Damage(int attack)
 		{
 			int dam = (int)(attack - (Attribute[Attributes.endurance]
-				+ ArmorType(CurrentArmor) * 4) * 0.8);
+				+ ArmorType(CurrentArmorIndex) * 4) * 0.8);
 
 			dam += (int)(dam * XleCore.random.Next(-50, 100) / 100 + 0.5);
 
 			if (dam < 0 || 1 + XleCore.random.Next(60) + attack / 15
-							< Attribute[Attributes.dexterity] + ArmorQuality(CurrentArmor))
+							< Attribute[Attributes.dexterity] + ArmorQuality(CurrentArmorIndex))
 			{
 				dam = 0;
 			}
@@ -1584,5 +1595,6 @@ namespace ERY.Xle
 
 
 		public int WeaponEnchantTurnsLeft { get; set; }
+
 	}
 }

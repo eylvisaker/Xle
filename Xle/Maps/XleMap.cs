@@ -1351,39 +1351,13 @@ namespace ERY.Xle
 
 
 
-		public void GuardAttackPlayer(Player player, Guard guard)
-		{
-			XleCore.TextArea.PrintLine();
-
-			XleCore.TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
-
-			if (XleCore.random.NextDouble() > mBaseExtender.ChanceToHitPlayer(player, guard))
-			{
-				XleCore.TextArea.Print("Missed", XleColor.Cyan);
-				SoundMan.PlaySound(LotaSound.EnemyMiss);
-			}
-			else
-			{
-				int armorType = player.CurrentArmorType;
-
-				int dam = mBaseExtender.RollDamageToPlayer(player, guard);
-
-				XleCore.TextArea.Print("Blow ", XleColor.Yellow);
-				XleCore.TextArea.Print(dam.ToString(), XleColor.White);
-				XleCore.TextArea.Print(" H.P.", XleColor.White);
-
-				SoundMan.PlaySound(LotaSound.EnemyHit);
-
-				player.HP -= dam;
-			}
-
-			XleCore.TextArea.PrintLine();
-
-			XleCore.Wait(100 * player.Gamespeed);
-		}
-
 		public virtual void PlayerMagic(GameState state)
 		{
+		}
+
+		public virtual void GuardAttackPlayer(Player player, Guard guard)
+		{
+			throw new NotImplementedException();
 		}
 	}
 

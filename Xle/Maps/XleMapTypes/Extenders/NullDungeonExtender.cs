@@ -45,7 +45,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			scheme.TextColor = XleColor.Cyan;
 
 			scheme.FrameColor = XleColor.DarkGray;
-			scheme.FrameHighlightColor = XleColor.LightGreen;
+			scheme.FrameHighlightColor = XleColor.Green;
 
 			scheme.MapAreaWidth = 23;
 		}
@@ -74,15 +74,28 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		}
 
 
-		public virtual bool RollToHitMonster(GameState state)
+		public virtual bool RollToHitMonster(GameState state, DungeonMonster monster)
 		{
 			return true;
 		}
 
 
-		public virtual int RollDamageToMonster(GameState state)
+		public virtual int RollDamageToMonster(GameState state, DungeonMonster monster)
 		{
 			return 9999;
+		}
+
+		int count = 0;
+		public virtual bool RollToHitPlayer(GameState state, DungeonMonster monster)
+		{
+			count++;
+			return count % 2 == 1;
+		}
+
+
+		public virtual int RollDamageToPlayer(GameState state, DungeonMonster monster)
+		{
+			return 4;
 		}
 	}
 }

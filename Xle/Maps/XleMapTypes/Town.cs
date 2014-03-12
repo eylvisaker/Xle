@@ -462,6 +462,37 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 
 
+		public override void GuardAttackPlayer(Player player, Guard guard)
+		{
+			XleCore.TextArea.PrintLine();
+
+			XleCore.TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
+
+			if (XleCore.random.NextDouble() > Extender.ChanceToHitPlayer(player, guard))
+			{
+				XleCore.TextArea.Print("Missed", XleColor.Cyan);
+				SoundMan.PlaySound(LotaSound.EnemyMiss);
+			}
+			else
+			{
+				int armorType = player.CurrentArmorType;
+
+				int dam = Extender.RollDamageToPlayer(player, guard);
+
+				XleCore.TextArea.Print("Blow ", XleColor.Yellow);
+				XleCore.TextArea.Print(dam.ToString(), XleColor.White);
+				XleCore.TextArea.Print(" H.P.", XleColor.White);
+
+				SoundMan.PlaySound(LotaSound.EnemyHit);
+
+				player.HP -= dam;
+			}
+
+			XleCore.TextArea.PrintLine();
+
+			XleCore.Wait(100 * player.Gamespeed);
+		}
+
 		public List<int> Mail
 		{
 			get { return mMail; }
@@ -476,8 +507,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 			int tile = 0, tile1;
 			int hit = 0;
 
-			if (player.WeaponType(player.CurrentWeapon) == 6 ||
-				player.WeaponType(player.CurrentWeapon) == 8)
+			if (player.WeaponType(player.CurrentWeaponIndex) == 6 ||
+				player.WeaponType(player.CurrentWeaponIndex) == 8)
 			{
 				maxXdist = 12;
 				maxYdist = 8;
