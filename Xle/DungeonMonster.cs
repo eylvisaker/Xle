@@ -8,6 +8,7 @@ namespace ERY.Xle
 {
 	public class DungeonMonster
 	{
+		public int MonsterID { get; set; }
 		public int DungeonLevel { get; set; }
 		public Point Location { get; set; }
 

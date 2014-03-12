@@ -153,7 +153,9 @@
     <Compile Include="Commands\Weapon.cs" />
     <Compile Include="Commands\Xamine.cs" />
     <Compile Include="CountdownTimer.cs" />
+    <Compile Include="Data\XleData.cs" />
     <Compile Include="DungeonMonster.cs" />
+    <Compile Include="DungeonMonsterData.cs" />
     <Compile Include="GameSpeed.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="ItemContainer.cs" />
@@ -255,6 +257,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

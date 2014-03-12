@@ -3,6 +3,7 @@ using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
 using ERY.Xle.Commands;
+using ERY.Xle.Data;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using ERY.Xle.Rendering;
@@ -58,18 +59,8 @@ namespace ERY.Xle
 
 		private XleGameFactory mFactory;
 
-		private MapList mMapList = new MapList();
-		private ItemList mItemList = new ItemList();
-		private EquipmentList mWeaponList = new EquipmentList();
-		private EquipmentList mArmorList = new EquipmentList();
-		private Dictionary<int, string> mQualityList = new Dictionary<int, string>();
-		private Dictionary<int, ExhibitInfo> mExhibitInfo = new Dictionary<int, ExhibitInfo>();
-		private Dictionary<int, Map3DExtraInfo> mMap3DExtras = new Dictionary<int, Map3DExtraInfo>();
-		private Dictionary<int, MagicSpell> mMagicSpells = new Dictionary<int, MagicSpell>();
+		XleData mData ;
 
-		private Data.AgateDataImport mDatabase;
-
-		
 		public static TextArea TextArea { get; private set; }
 
 		public XleCore()
@@ -92,7 +83,7 @@ namespace ERY.Xle
 			AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
 			LoadGameFile();
-			LoadDatabase();
+			mData.LoadDatabase();
 
 			InitializeConsole();
 
@@ -224,7 +215,7 @@ namespace ERY.Xle
 			bool comma = false;
 			int count = 0;
 
-			foreach (var map in mMapList)
+			foreach (var map in Data.MapList)
 			{
 				if (comma)
 					b.Append(", ");
@@ -406,338 +397,83 @@ namespace ERY.Xle
 			XmlDocument doc = new XmlDocument();
 			doc.Load("Game.xml");
 
-			XmlNode root = doc.ChildNodes[1];
-
-			for (int i = 0; i < root.ChildNodes.Count; i++)
-			{
-				switch (root.ChildNodes[i].Name)
-				{
-					case "Maps":
-						LoadMapInfo(root.ChildNodes[i]);
-						break;
-
-					case "MagicSpells":
-						LoadMagicInfo(root.ChildNodes[i]);
-						break;
-
-					case "Weapons":
-						LoadEquipmentInfo(root.ChildNodes[i], ref mWeaponList);
-						break;
-
-					case "Armor":
-						LoadEquipmentInfo(root.ChildNodes[i], ref mArmorList);
-						break;
-
-					case "Items":
-						LoadItemInfo(root.ChildNodes[i]);
-						break;
-
-					case "Qualities":
-						LoadQualityInfo(root.ChildNodes[i]);
-						break;
-
-					case "Exhibits":
-						LoadExhibitInfo(root.ChildNodes[i]);
-						break;
-
-					case "DungeonExtras":
-						Load3DExtraInfo(root.ChildNodes[i]);
-						break;
-				}
-			}
+			mData = new XleData();
+			mData.LoadGameFile(doc);
 		}
+
 
 		public static GameState GameState { get; set; }
 		public static XleRenderer Renderer { get; set; }
 
-		private static void LoadDatabase()
-		{
-			AgateLib.Data.AgateDatabase _db = AgateLib.Data.AgateDatabase.FromFile("Lota.adb");
-			inst.mDatabase = new Data.AgateDataImport(_db);
-		}
+		public static XleData Data { get { return inst.mData; } }
 
-		private static T GetOptionalAttribute<T>(XmlNode node, string attrib, T defaultValue)
-		{
-			if (node.Attributes[attrib] != null)
-				return (T)Convert.ChangeType(node.Attributes[attrib].Value, typeof(T));
-			else
-				return defaultValue;
-		}
-
-		private void LoadQualityInfo(XmlNode xmlNode)
-		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
-			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				int id = int.Parse(node.Attributes["ID"].Value);
-				string name = node.Attributes["Name"].Value;
-
-				mQualityList[id] = name;
-			}
-		}
-		private void LoadItemInfo(XmlNode xmlNode)
-		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
-			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				int id = int.Parse(node.Attributes["ID"].Value);
-				string name = node.Attributes["Name"].Value;
-				string action = GetOptionalAttribute(node, "Action", "");
-				string longName = GetOptionalAttribute(node, "LongName", "");
-				bool isKey = GetOptionalAttribute(node, "isKey", false);
-
-				mItemList.Add(id, new ItemInfo(id, name, longName, action)
-				{
-					IsKey = isKey
-				});
-			}
-		}
-		private void LoadMagicInfo(XmlNode xmlNode)
-		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
-			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				int id = int.Parse(node.Attributes["ID"].Value);
-				string name = node.Attributes["Name"].Value;
-				int basePrice = int.Parse(GetOptionalAttribute(node, "BasePrice", "0"));
-
-				mMagicSpells.Add(id, new MagicSpell { Name = name, BasePrice = basePrice });
-			}
-		}
-		private void LoadEquipmentInfo(XmlNode xmlNode, ref EquipmentList equipmentList)
-		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
-			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				int id = int.Parse(node.Attributes["ID"].Value);
-				string name = node.Attributes["Name"].Value;
-				string prices = "";
-
-				if (node.Attributes["Prices"] != null)
-				{
-					prices = node.Attributes["Prices"].Value;
-				}
-
-				equipmentList.Add(id, name, prices);
-			}
-		}
-		private void LoadMapInfo(XmlNode mapNode)
-		{
-			for (int i = 0; i < mapNode.ChildNodes.Count; i++)
-			{
-				XmlNode node = mapNode.ChildNodes[i];
-
-				if (node.Name == "Map")
-				{
-					int id = int.Parse(node.Attributes["ID"].Value);
-					string name = node.Attributes["Name"].Value;
-					string filename = node.Attributes["File"].Value;
-					int parent = 0;
-
-					if (node.Attributes["ParentMapID"] != null)
-					{
-						parent = int.Parse(node.Attributes["ParentMapID"].Value);
-					}
-
-					string alias = name;
-
-					if (node.Attributes["Alias"] != null)
-					{
-						alias = node.Attributes["Alias"].Value;
-					}
-
-					mMapList.Add(id, name, filename, parent, alias);
-
-					if (System.IO.File.Exists(@"Maps\" + filename) == false)
-					{
-						System.Diagnostics.Debug.WriteLine("WARNING: File " + filename +
-							" for Map ID = " + id + " does not exist.");
-					}
-
-				}
-				else
-				{
-					System.Diagnostics.Debug.WriteLine(
-						"Could not understand node Maps." + node.Name);
-				}
-			}
-		}
-		private void LoadExhibitInfo(XmlNode mapNode)
-		{
-			for (int i = 0; i < mapNode.ChildNodes.Count; i++)
-			{
-				XmlNode node = mapNode.ChildNodes[i];
-
-				if (node.Name == "Exhibit")
-				{
-					int id = int.Parse(node.Attributes["ID"].Value);
-
-					var info = new ExhibitInfo();
-
-					if (node.Attributes["Image"] != null)
-					{
-						info.ImageFile = node.Attributes["Image"].Value;
-					}
-
-					foreach (XmlNode child in node.ChildNodes)
-					{
-						if (child.Name == "Text")
-						{
-							int textID = int.Parse(child.Attributes["ID"].Value);
-							string text = TrimExhibitText(child.InnerText);
-
-							info.Text.Add(textID, text);
-						}
-					}
-
-					mExhibitInfo.Add(id, info);
-				}
-			}
-		}
-
-		private string TrimExhibitText(string text)
-		{
-			var regex = new System.Text.RegularExpressions.Regex("\r\n *");
-
-			return regex.Replace(text.Trim(), "\r\n");
-		}
-		private void Load3DExtraInfo(XmlNode xmlNode)
-		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
-			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				if (node.Name == "Extra")
-				{
-					int id = int.Parse(node.Attributes["ID"].Value);
-					string name = node.Attributes["Name"].Value;
-
-					var info = new Map3DExtraInfo();
-
-					foreach (XmlNode child in node.ChildNodes)
-					{
-						if (child.Name == "Image")
-						{
-							int distance = int.Parse(child.Attributes["distance"].Value);
-							Rectangle srcRect = ParseRectangle(child.Attributes["srcRect"].Value);
-							Rectangle destRect = ParseRectangle(child.Attributes["destRect"].Value);
-
-							var img = new Map3DExtraImage();
-
-							img.SrcRect = srcRect;
-							img.DestRect = destRect;
-
-							info.Images[distance] = img;
-
-							foreach (XmlNode animNode in child.ChildNodes)
-							{
-								if (animNode.Name != "Animation")
-									continue;
-
-								var anim = new Map3DExtraAnimation();
-
-								if (animNode.Attributes["frameTime"] != null)
-									anim.FrameTime = double.Parse(animNode.Attributes["frameTime"].Value);
-
-								foreach (XmlNode frameNode in animNode.ChildNodes)
-								{
-									if (frameNode.Name != "Frame")
-										continue;
-
-									srcRect = ParseRectangle(frameNode.Attributes["srcRect"].Value);
-									destRect = ParseRectangle(frameNode.Attributes["destRect"].Value);
-
-									var frame = new Map3DExtraImage();
-
-									frame.SrcRect = srcRect;
-									frame.DestRect = destRect;
-
-									anim.Images.Add(frame);
-								}
-
-								if (anim.Images.Count > 0)
-									img.Animations.Add(anim);
-							}
-						}
-					}
-
-					mMap3DExtras.Add(id, info);
-				}
-			}
-		}
-
-		private Rectangle ParseRectangle(string p)
-		{
-			string[] vals = p.Split(',');
-
-			return new Rectangle(
-				int.Parse(vals[0]),
-				int.Parse(vals[1]),
-				int.Parse(vals[2]),
-				int.Parse(vals[3]));
-		}
-
+		[Obsolete("Use Data.MapList[id].Name instead.")]
 		public static string GetMapName(int id)
 		{
-			return inst.mMapList[id].Name;
+			return Data.MapList[id].Name;
 		}
+		[Obsolete("Use Data.MapList instead.")]
 		public static MapList MapList
 		{
-			get { return inst.mMapList; }
+			get { return Data.MapList; }
 		}
+		[Obsolete("Use Data.ItemList instead.")]
 		public static ItemList ItemList
 		{
-			get { return inst.mItemList; }
+			get { return Data.ItemList; }
 		}
+		[Obsolete("Use Data.WeaponList instead.")]
 		public static EquipmentList WeaponList
 		{
-			get { return inst.mWeaponList; }
+			get { return Data.WeaponList; }
 		}
+		[Obsolete("Use Data.ArmorList instead.")]
 		public static EquipmentList ArmorList
 		{
-			get { return inst.mArmorList; }
+			get { return Data.ArmorList; }
 		}
+		[Obsolete("Use Data.QualityList instead.")]
 		public static Dictionary<int, string> QualityList
 		{
-			get { return inst.mQualityList; }
+			get { return Data.QualityList; }
 		}
+		[Obsolete("Use Data.ExhibitInfo instead.")]
 		public static Dictionary<int, ExhibitInfo> ExhibitInfo
 		{
-			get { return inst.mExhibitInfo; }
+			get { return Data.ExhibitInfo; }
 		}
-		public static Dictionary<int, Map3DExtraInfo> Map3DExtraInfo { get { return inst.mMap3DExtras; } }
-		public static Dictionary<int, MagicSpell> MagicSpells { get { return inst.mMagicSpells; } }
+		[Obsolete("Use Data.Map3DExtraInfo instead.")]
+		public static Dictionary<int, Map3DExtraInfo> Map3DExtraInfo { get { return Data.Map3DExtraInfo; } }
+		[Obsolete("Use Data.MagicSpells instead.")]
+		public static Dictionary<int, MagicSpell> MagicSpells { get { return Data.MagicSpells; } }
 
+		[Obsolete("Use Data.Database instead.")]
 		public static Data.AgateDataImport Database
 		{
-			get { return inst.mDatabase; }
+			get { return Data.Database; }
 		}
 
 		public static string GetWeaponName(int weaponID, int qualityID)
 		{
-			return inst.mQualityList[qualityID] + " " + inst.mWeaponList[weaponID].Name;
+			return Data.QualityList[qualityID] + " " + Data.WeaponList[weaponID].Name;
 		}
 		public static string GetArmorName(int armorID, int qualityID)
 		{
-			return inst.mQualityList[qualityID] + " " + inst.mArmorList[armorID].Name;
+			return Data.QualityList[qualityID] + " " + Data.ArmorList[armorID].Name;
 		}
 
 		public static int WeaponCost(int item, int quality)
 		{
-			return WeaponList[item].Prices[quality];
+			return Data.WeaponList[item].Prices[quality];
 		}
 		public static int ArmorCost(int item, int quality)
 		{
-			return ArmorList[item].Prices[quality];
+			return Data.ArmorList[item].Prices[quality];
 		}
 
 		public static XleMap LoadMap(int mapID)
 		{
-			string file = System.IO.Path.Combine("Maps", inst.mMapList[mapID].Filename);
+			string file = System.IO.Path.Combine("Maps", Data.MapList[mapID].Filename);
 
 			return XleMap.LoadMap(file, mapID);
 		}
