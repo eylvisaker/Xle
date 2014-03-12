@@ -394,11 +394,8 @@ namespace ERY.Xle
 
 		private void LoadGameFile()
 		{
-			XmlDocument doc = new XmlDocument();
-			doc.Load("Game.xml");
-
 			mData = new XleData();
-			mData.LoadGameFile(doc);
+			mData.LoadGameFile("Game.xml");
 		}
 
 

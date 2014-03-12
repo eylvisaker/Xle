@@ -32,77 +32,42 @@ namespace ERY.Xle.Data
 		public void LoadDatabase()
 		{
 			AgateLib.Data.AgateDatabase _db = AgateLib.Data.AgateDatabase.FromFile("Lota.adb");
-			
+
 			mDatabase = new Data.AgateDataImport(_db);
 		}
 
-		public void LoadGameFile(XmlDocument doc)
+		public void LoadGameFile(string filename)
 		{
-			XmlNode root = doc.ChildNodes[1];
+			XDocument doc = XDocument.Load(filename);
+			XElement root = doc.Root;
 
-			for (int i = 0; i < root.ChildNodes.Count; i++)
-			{
-				switch (root.ChildNodes[i].Name)
-				{
-					case "Maps":
-						LoadMapInfo(root.ChildNodes[i]);
-						break;
-
-					case "MagicSpells":
-						LoadMagicInfo(root.ChildNodes[i]);
-						break;
-
-					case "Weapons":
-						LoadEquipmentInfo(root.ChildNodes[i], ref mWeaponList);
-						break;
-
-					case "Armor":
-						LoadEquipmentInfo(root.ChildNodes[i], ref mArmorList);
-						break;
-
-					case "Items":
-						LoadItemInfo(root.ChildNodes[i]);
-						break;
-
-					case "Qualities":
-						LoadQualityInfo(root.ChildNodes[i]);
-						break;
-
-					case "Exhibits":
-						LoadExhibitInfo(root.ChildNodes[i]);
-						break;
-
-					case "DungeonExtras":
-						Load3DExtraInfo(root.ChildNodes[i]);
-						break;
-
-					case "DungeonMonsters":
-						LoadDungeonMonsters(root.ChildNodes[i]);
-						break;
-				}
-			}
+			LoadMapInfo(root.Element("Maps"));
+			LoadMagicInfo(root.Element("MagicSpells"));
+			LoadEquipmentInfo(root.Element("Weapons"), ref mWeaponList);
+			LoadEquipmentInfo(root.Element("Armor"), ref mArmorList);
+			LoadItemInfo(root.Element("Items"));
+			LoadQualityInfo(root.Element("Qualities"));
+			LoadExhibitInfo(root.Element("Exhibits"));
+			Load3DExtraInfo(root.Element("DungeonExtras"));
+			LoadDungeonMonsters(root.Element("DungeonMonsters"));
 		}
 
-		private void LoadQualityInfo(XmlNode xmlNode)
+		private void LoadQualityInfo(XElement element)
 		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
+			foreach (var node in element.Elements())
 			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				int id = int.Parse(node.Attributes["ID"].Value);
-				string name = node.Attributes["Name"].Value;
+				int id = int.Parse(node.Attribute("ID").Value);
+				string name = node.Attribute("Name").Value;
 
 				mQualityList[id] = name;
 			}
 		}
-		private void LoadItemInfo(XmlNode xmlNode)
+		private void LoadItemInfo(XElement element)
 		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
+			foreach (var node in element.Elements())
 			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				int id = int.Parse(node.Attributes["ID"].Value);
-				string name = node.Attributes["Name"].Value;
+				int id = int.Parse(node.Attribute("ID").Value);
+				string name = node.Attribute("Name").Value;
 				string action = GetOptionalAttribute(node, "Action", "");
 				string longName = GetOptionalAttribute(node, "LongName", "");
 				bool isKey = GetOptionalAttribute(node, "isKey", false);
@@ -113,60 +78,54 @@ namespace ERY.Xle.Data
 				});
 			}
 		}
-		private void LoadMagicInfo(XmlNode xmlNode)
+		private void LoadMagicInfo(XElement element)
 		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
+			foreach (var node in element.Elements())
 			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				int id = int.Parse(node.Attributes["ID"].Value);
-				string name = node.Attributes["Name"].Value;
+				int id = int.Parse(node.Attribute("ID").Value);
+				string name = node.Attribute("Name").Value;
 				int basePrice = int.Parse(GetOptionalAttribute(node, "BasePrice", "0"));
 
 				mMagicSpells.Add(id, new MagicSpell { Name = name, BasePrice = basePrice });
 			}
 		}
-		private void LoadEquipmentInfo(XmlNode xmlNode, ref EquipmentList equipmentList)
+		private void LoadEquipmentInfo(XElement element, ref EquipmentList equipmentList)
 		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
+			foreach (var node in element.Elements())
 			{
-				XmlNode node = xmlNode.ChildNodes[i];
-
-				int id = int.Parse(node.Attributes["ID"].Value);
-				string name = node.Attributes["Name"].Value;
+				int id = int.Parse(node.Attribute("ID").Value);
+				string name = node.Attribute("Name").Value;
 				string prices = "";
 
-				if (node.Attributes["Prices"] != null)
+				if (node.Attribute("Prices") != null)
 				{
-					prices = node.Attributes["Prices"].Value;
+					prices = node.Attribute("Prices").Value;
 				}
 
 				equipmentList.Add(id, name, prices);
 			}
 		}
-		private void LoadMapInfo(XmlNode mapNode)
+		private void LoadMapInfo(XElement element)
 		{
-			for (int i = 0; i < mapNode.ChildNodes.Count; i++)
+			foreach (var node in element.Elements())
 			{
-				XmlNode node = mapNode.ChildNodes[i];
-
 				if (node.Name == "Map")
 				{
-					int id = int.Parse(node.Attributes["ID"].Value);
-					string name = node.Attributes["Name"].Value;
-					string filename = node.Attributes["File"].Value;
+					int id = int.Parse(node.Attribute("ID").Value);
+					string name = node.Attribute("Name").Value;
+					string filename = node.Attribute("File").Value;
 					int parent = 0;
 
-					if (node.Attributes["ParentMapID"] != null)
+					if (node.Attribute("ParentMapID") != null)
 					{
-						parent = int.Parse(node.Attributes["ParentMapID"].Value);
+						parent = int.Parse(node.Attribute("ParentMapID").Value);
 					}
 
 					string alias = name;
 
-					if (node.Attributes["Alias"] != null)
+					if (node.Attribute("Alias") != null)
 					{
-						alias = node.Attributes["Alias"].Value;
+						alias = node.Attribute("Alias").Value;
 					}
 
 					mMapList.Add(id, name, filename, parent, alias);
@@ -185,99 +144,66 @@ namespace ERY.Xle.Data
 				}
 			}
 		}
-		private void LoadExhibitInfo(XmlNode mapNode)
+		private void LoadExhibitInfo(XElement element)
 		{
-			for (int i = 0; i < mapNode.ChildNodes.Count; i++)
+			foreach (var node in element.Elements("Exhibit"))
 			{
-				XmlNode node = mapNode.ChildNodes[i];
+				int id = int.Parse(node.Attribute("ID").Value);
 
-				if (node.Name == "Exhibit")
+				var info = new ExhibitInfo();
+
+				if (node.Attribute("Image") != null)
 				{
-					int id = int.Parse(node.Attributes["ID"].Value);
-
-					var info = new ExhibitInfo();
-
-					if (node.Attributes["Image"] != null)
-					{
-						info.ImageFile = node.Attributes["Image"].Value;
-					}
-
-					foreach (XmlNode child in node.ChildNodes)
-					{
-						if (child.Name == "Text")
-						{
-							int textID = int.Parse(child.Attributes["ID"].Value);
-							string text = TrimExhibitText(child.InnerText);
-
-							info.Text.Add(textID, text);
-						}
-					}
-
-					mExhibitInfo.Add(id, info);
+					info.ImageFile = node.Attribute("Image").Value;
 				}
+
+				foreach (XElement child in node.Elements("Text"))
+				{
+					int textID = int.Parse(child.Attribute("ID").Value);
+					string text = TrimExhibitText(child.Value);
+
+					info.Text.Add(textID, text);
+				}
+
+				mExhibitInfo.Add(id, info);
 			}
 		}
-		private void LoadDungeonMonsters(XmlNode xmlNode)
+		private void LoadDungeonMonsters(XElement element)
 		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
+			foreach (var node in element.Elements("Monster"))
 			{
-				XmlNode node = xmlNode.ChildNodes[i];
+				var monster = new DungeonMonsterData();
 
-				if (node.Name == "Extra")
+				monster.ID = int.Parse(node.Attribute("ID").Value);
+				monster.Name = node.Attribute("Name").Value;
+
+				foreach (XElement child in node.Elements("Image"))
 				{
-					int id = int.Parse(node.Attributes["ID"].Value);
-					string name = node.Attributes["Name"].Value;
+					DungeonMonsterImage image = new DungeonMonsterImage();
 
-					var info = new Map3DExtraInfo();
+					image.DrawPoint = new Point(
+						int.Parse(node.Attribute("dest_x").Value),
+						int.Parse(node.Attribute("dest_y").Value));
 
-					foreach (XmlNode child in node.ChildNodes)
+					foreach (XElement xsource in child.Elements("SourceRect"))
 					{
-						if (child.Name == "Image")
-						{
-							int distance = int.Parse(child.Attributes["distance"].Value);
-							Rectangle srcRect = ParseRectangle(child.Attributes["srcRect"].Value);
-							Rectangle destRect = ParseRectangle(child.Attributes["destRect"].Value);
-
-							var img = new Map3DExtraImage();
-
-							img.SrcRect = srcRect;
-							img.DestRect = destRect;
-
-							info.Images[distance] = img;
-
-							foreach (XmlNode animNode in child.ChildNodes)
-							{
-								if (animNode.Name != "Animation")
-									continue;
-
-								var anim = new Map3DExtraAnimation();
-
-								if (animNode.Attributes["frameTime"] != null)
-									anim.FrameTime = double.Parse(animNode.Attributes["frameTime"].Value);
-
-								foreach (XmlNode frameNode in animNode.ChildNodes)
-								{
-									if (frameNode.Name != "Frame")
-										continue;
-
-									srcRect = ParseRectangle(frameNode.Attributes["srcRect"].Value);
-									destRect = ParseRectangle(frameNode.Attributes["destRect"].Value);
-
-									var frame = new Map3DExtraImage();
-
-									frame.SrcRect = srcRect;
-									frame.DestRect = destRect;
-
-									anim.Images.Add(frame);
-								}
-
-								if (anim.Images.Count > 0)
-									img.Animations.Add(anim);
-							}
-						}
+						Rectangle rect = new Rectangle(
+							int.Parse(node.Attribute("x").Value),
+							int.Parse(node.Attribute("y").Value),
+							int.Parse(node.Attribute("width").Value),
+							int.Parse(node.Attribute("height").Value));
 					}
 
-					mMap3DExtraInfo.Add(id, info);
+					monster.Images.Add(image);
+				}
+
+				if (monster.Images.Count > 0)
+				{
+					mDungeonMonsters.Add(monster.ID, monster);
+				}
+				else
+				{
+					System.Diagnostics.Debug.Print("Could not add monster " + monster.Name);
 				}
 			}
 		}
@@ -288,68 +214,54 @@ namespace ERY.Xle.Data
 
 			return regex.Replace(text.Trim(), "\r\n");
 		}
-		private void Load3DExtraInfo(XmlNode xmlNode)
+		private void Load3DExtraInfo(XElement element)
 		{
-			for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
+			foreach (var node in element.Elements("Extra"))
 			{
-				XmlNode node = xmlNode.ChildNodes[i];
+				int id = int.Parse(node.Attribute("ID").Value);
+				string name = node.Attribute("Name").Value;
 
-				if (node.Name == "Extra")
+				var info = new Map3DExtraInfo();
+
+				foreach (XElement child in node.Elements("Image"))
 				{
-					int id = int.Parse(node.Attributes["ID"].Value);
-					string name = node.Attributes["Name"].Value;
+					int distance = int.Parse(child.Attribute("distance").Value);
+					Rectangle srcRect = ParseRectangle(child.Attribute("srcRect").Value);
+					Rectangle destRect = ParseRectangle(child.Attribute("destRect").Value);
 
-					var info = new Map3DExtraInfo();
+					var img = new Map3DExtraImage();
 
-					foreach (XmlNode child in node.ChildNodes)
+					img.SrcRect = srcRect;
+					img.DestRect = destRect;
+
+					info.Images[distance] = img;
+
+					foreach (XElement animNode in child.Elements("Animation"))
 					{
-						if (child.Name == "Image")
+						var anim = new Map3DExtraAnimation();
+
+						if (animNode.Attribute("frameTime") != null)
+							anim.FrameTime = double.Parse(animNode.Attribute("frameTime").Value);
+
+						foreach (XElement frameNode in animNode.Elements("Frame"))
 						{
-							int distance = int.Parse(child.Attributes["distance"].Value);
-							Rectangle srcRect = ParseRectangle(child.Attributes["srcRect"].Value);
-							Rectangle destRect = ParseRectangle(child.Attributes["destRect"].Value);
+							srcRect = ParseRectangle(frameNode.Attribute("srcRect").Value);
+							destRect = ParseRectangle(frameNode.Attribute("destRect").Value);
 
-							var img = new Map3DExtraImage();
+							var frame = new Map3DExtraImage();
 
-							img.SrcRect = srcRect;
-							img.DestRect = destRect;
+							frame.SrcRect = srcRect;
+							frame.DestRect = destRect;
 
-							info.Images[distance] = img;
-
-							foreach (XmlNode animNode in child.ChildNodes)
-							{
-								if (animNode.Name != "Animation")
-									continue;
-
-								var anim = new Map3DExtraAnimation();
-
-								if (animNode.Attributes["frameTime"] != null)
-									anim.FrameTime = double.Parse(animNode.Attributes["frameTime"].Value);
-
-								foreach (XmlNode frameNode in animNode.ChildNodes)
-								{
-									if (frameNode.Name != "Frame")
-										continue;
-
-									srcRect = ParseRectangle(frameNode.Attributes["srcRect"].Value);
-									destRect = ParseRectangle(frameNode.Attributes["destRect"].Value);
-
-									var frame = new Map3DExtraImage();
-
-									frame.SrcRect = srcRect;
-									frame.DestRect = destRect;
-
-									anim.Images.Add(frame);
-								}
-
-								if (anim.Images.Count > 0)
-									img.Animations.Add(anim);
-							}
+							anim.Images.Add(frame);
 						}
-					}
 
-					mMap3DExtraInfo.Add(id, info);
+						if (anim.Images.Count > 0)
+							img.Animations.Add(anim);
+					}
 				}
+
+				mMap3DExtraInfo.Add(id, info);
 			}
 		}
 
@@ -381,10 +293,10 @@ namespace ERY.Xle.Data
 		public Dictionary<int, MagicSpell> MagicSpells { get { return mMagicSpells; } }
 
 
-		private static T GetOptionalAttribute<T>(XmlNode node, string attrib, T defaultValue)
+		private static T GetOptionalAttribute<T>(XElement node, string attrib, T defaultValue)
 		{
-			if (node.Attributes[attrib] != null)
-				return (T)Convert.ChangeType(node.Attributes[attrib].Value, typeof(T));
+			if (node.Attribute(attrib) != null)
+				return (T)Convert.ChangeType(node.Attribute(attrib).Value, typeof(T));
 			else
 				return defaultValue;
 		}
