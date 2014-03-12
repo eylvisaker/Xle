@@ -173,28 +173,9 @@ namespace ERY.Xle
 				CycleLines();
 			}
 		}
+
 		Color[] tempColors;
-
-		public void Print(string text, Color? color)
-		{
-			if (tempColors == null || tempColors.Length < text.Length)
-			{
-				tempColors = new Color[text.Length];
-			}
-
-			for (int i = 0; i < tempColors.Length; i++)
-			{
-				tempColors[i] = color ?? XleCore.Renderer.FontColor;
-			}
-
-			PrintImpl(text, tempColors);
-		}
-		public void Print(string text = "", Color[] colors = null)
-		{
-			PrintImpl(text, colors);
-		}
-
-		private void PrintImpl(string text, Color[] colors)
+		void PrintImpl(string text, Color[] colors)
 		{
 			int startIndex = 0;
 
@@ -223,16 +204,6 @@ namespace ERY.Xle
 
 			XleCore.Wait(1);
 		}
-
-		public void PrintLine(string text, Color color)
-		{
-			Print(text + "\n", color);
-		}
-		public void PrintLine(string text = "", Color[] colors = null)
-		{
-			Print(text + "\n", colors);
-		}
-
 		void PrintSlowImpl(string text, Color defaultColor, Color[] colors = null)
 		{
 			for (int i = 0; i < text.Length; i++)
@@ -254,6 +225,35 @@ namespace ERY.Xle
 					XleCore.Wait(350);
 			}
 		}
+
+		public void Print(string text, Color? color)
+		{
+			if (tempColors == null || tempColors.Length < text.Length)
+			{
+				tempColors = new Color[text.Length];
+			}
+
+			for (int i = 0; i < tempColors.Length; i++)
+			{
+				tempColors[i] = color ?? XleCore.Renderer.FontColor;
+			}
+
+			PrintImpl(text, tempColors);
+		}
+		public void Print(string text = "", Color[] colors = null)
+		{
+			PrintImpl(text, colors);
+		}
+
+		public void PrintLine(string text, Color color)
+		{
+			Print(text + "\n", color);
+		}
+		public void PrintLine(string text = "", Color[] colors = null)
+		{
+			Print(text + "\n", colors);
+		}
+
 		public void PrintSlow(string text, Color[] colors = null)
 		{
 			PrintSlowImpl(text, XleCore.Renderer.FontColor, colors);
@@ -286,6 +286,14 @@ namespace ERY.Xle
 
 			if (cursorAtTop)
 				cursor.Y = 0;
+		}
+
+		public void RewriteLine(int line, string text, Color? color)
+		{
+			cursor.X = margin;
+			cursor.Y = line;
+
+			Print(text, color);
 		}
 
 		/// <summary>
@@ -349,6 +357,7 @@ namespace ERY.Xle
 			}
 		}
 
+		public Point CursorLocation { get { return cursor; } }
 
 		public void SetLineColor(Color color, params int[] lines)
 		{

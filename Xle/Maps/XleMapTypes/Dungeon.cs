@@ -23,18 +23,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 		int[] mData;
 		int mCurrentLevel;
 
-		double nextSound;
-		LotaSound[] drips;
-
 		public Dungeon()
 		{
-			FillDrips();
-			ResetDripTime();
+			Monsters = new List<DungeonMonster>();
 		}
 
-		public string ScriptClassName { get; set; }
-
 		IDungeonExtender Extender;
+
+		public List<DungeonMonster> Monsters { get; set; }
 
 		public override IEnumerable<string> AvailableTileImages
 		{
@@ -47,15 +43,17 @@ namespace ERY.Xle.Maps.XleMapTypes
 			mHeight = info.ReadInt32("Height");
 			mLevels = info.ReadInt32("Levels");
 			mData = info.ReadInt32Array("Data");
-			ScriptClassName = info.ReadString("ScriptClass", "");
+			MaxMonsters = info.ReadInt32("MaxMonsters");
+			MonsterHealthScale = info.ReadInt32("MonsterHealthScale");
 		}
 		protected override void WriteData(XleSerializationInfo info)
 		{
 			info.Write("Width", mWidth, true);
 			info.Write("Height", mHeight, true);
 			info.Write("Levels", mLevels, true);
-			info.Write("ScriptClass", ScriptClassName);
 			info.Write("Data", mData, NumericEncoding.Csv);
+			info.Write("MaxMonsters", MaxMonsters);
+			info.Write("MonsterHealthScale", MonsterHealthScale);
 		}
 
 		protected override IMapExtender CreateExtenderImpl()
@@ -127,6 +125,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
+		public int MaxMonsters { get; set; }
+		public int MonsterHealthScale { get; set; }
+
 		public int CurrentLevel
 		{
 			get { return mCurrentLevel; }
@@ -136,26 +137,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public override void CheckSounds(Player player)
 		{
-			if (Timing.TotalSeconds > nextSound)
-			{
-				SoundMan.PlaySound(drips[XleCore.random.Next(drips.Length)]);
-
-				ResetDripTime();
-			}
-		}
-
-		private void ResetDripTime()
-		{
-			double time = XleCore.random.NextDouble() * 10 + 2;
-
-			nextSound = Timing.TotalSeconds + time;
-		}
-
-		private void FillDrips()
-		{
-			drips = new LotaSound[2];
-			drips[0] = LotaSound.Drip0;
-			drips[1] = LotaSound.Drip1;
+			Extender.CheckSounds(XleCore.GameState);
 		}
 
 		public override Color DefaultColor
@@ -409,6 +391,29 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 
 			return true;
+		}
+		public override void PlayerMagic(GameState state)
+		{
+			XleCore.TextArea.Clear(true);
+			XleCore.TextArea.PrintLine("Use which magic?", XleColor.Purple);
+			XleCore.TextArea.PrintLine();
+
+			int defaultValue = 0;
+
+			if (state.Player.Items[LotaItem.MagicFlame] == 0)
+			{
+				defaultValue = 1;
+			
+				if (state.Player.Items[LotaItem.Firebolt] == 0)
+					defaultValue = 2;
+
+			}
+			
+
+			int choice = XleCore.QuickMenu(new MenuItemList("Flame", "Bolt", "Other"), 2, defaultValue,
+				XleColor.Purple, XleColor.White);
+
+
 		}
 
 		private void OpenBox(Player player, ref bool clearBox)

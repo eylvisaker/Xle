@@ -425,7 +425,6 @@ namespace ERY.Xle
 
 		private void DebugSettings()
 		{
-
 			if (XleCore.EnableDebugMode)
 			{
 				gamespeed = 0;

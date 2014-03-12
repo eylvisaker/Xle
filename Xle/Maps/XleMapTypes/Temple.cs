@@ -6,9 +6,9 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
-	public class Temple : Town
+	public class Temple : Map2D
 	{
-		ITempleExtender Extender { get; set; }
+		public new ITempleExtender Extender { get; private set; }
 
 		protected override IMapExtender CreateExtenderImpl()
 		{
@@ -22,6 +22,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 
 			return Extender;
+		}
+
+		protected override void PlayerFight(Player player, Direction fightDir)
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Nothing much hit.");
+
+			SoundMan.PlaySound(LotaSound.Bump);
 		}
 	}
 }

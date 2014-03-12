@@ -7,13 +7,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
 	class PirateExtender : LotaDungeonExtenderBase
 	{
-		protected override bool IsComplete(ERY.Xle.Player player)
+		protected override bool IsCompleted
 		{
-			return Lota.Story.PirateComplete;
-		}
-		protected override void SetComplete(Player player)
-		{
-			Lota.Story.PirateComplete = true;
+			get { return Lota.Story.PirateComplete; }
+			set { Lota.Story.PirateComplete = value; }
 		}
 		protected override int StrengthBoost
 		{
@@ -33,10 +30,22 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 		}
 		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
 		{
-			if (chestID == 1) return 16;
-			if (chestID == 2) return 20;
+			if (chestID == 1) return (int)LotaItem.Crown;
+			if (chestID == 2) return (int)LotaItem.SapphireCoin;
 
 			return 0;
+		}
+		public override void OnPlayerExitDungeon(Player player)
+		{
+			if (IsCompleted)
+				return;
+
+			if (player.Items[LotaItem.Crown] > 0 && player.Items[LotaItem.SapphireCoin] > 0)
+			{
+				IsCompleted = true;
+
+				GivePermanentStrengthBoost(player);
+			}
 		}
 	}
 }

@@ -153,6 +153,7 @@
     <Compile Include="Commands\Weapon.cs" />
     <Compile Include="Commands\Xamine.cs" />
     <Compile Include="CountdownTimer.cs" />
+    <Compile Include="DungeonMonster.cs" />
     <Compile Include="GameSpeed.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="ItemContainer.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Maps\TileGroup.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\ITempleExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\NullTempleExtender.cs" />
+    <Compile Include="Maps\XleMapTypes\Map2D.cs" />
     <Compile Include="Maps\XleMapTypes\TerrainInfo.cs" />
     <Compile Include="Maps\XleTypeBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

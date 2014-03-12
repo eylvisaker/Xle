@@ -114,14 +114,14 @@
     <Item ID="39" Name="Opal" />
   </Items>
   <MagicSpells>
-	  <MagicSpell ID="1" Name="Tongue of Flame" BasePrice="32" />
-	  <MagicSpell ID="2" Name="Lightning Bolt" BasePrice="63" />
+    <MagicSpell ID="1" Name="Tongue of Flame" BasePrice="32" />
+    <MagicSpell ID="2" Name="Lightning Bolt" BasePrice="63" />
     <MagicSpell ID="3" Name="Glow Tip" BasePrice="152" />
     <MagicSpell ID="4" Name="Armor Enchant" BasePrice="152" />
     <MagicSpell ID="5" Name="Psychic Protect" BasePrice="152" />
     <MagicSpell ID="6" Name="Nimble Step" BasePrice="189" />
-	  <MagicSpell ID="7" Name="Annihilate" BasePrice="379" />
-	  <MagicSpell ID="8" Name="Seek Spell" BasePrice="51" />
+    <MagicSpell ID="7" Name="Annihilate" BasePrice="379" />
+    <MagicSpell ID="8" Name="Seek Spell" BasePrice="51" />
   </MagicSpells>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>
@@ -158,9 +158,9 @@
         |of treachery and death.  Yet for the
         |intrepid explorer, they're worth the
         |danger.`pause`
-        |`clear`These island caverns are actually 
+        |`clear`These island caverns are actually
         |visible from the northern coast of
-        |Thalen.  Yet, few know of their 
+        |Thalen.  Yet, few know of their
         |existence.`pause`
         |`clear`Through this exhibit, you're now
         |free to visit the island caverns as
@@ -198,7 +198,7 @@
         |vault contains much of the gold and
         |many of the lost gems of the lost
         |lands of Maelbane.`pause`
-        |`clear`Although some consider this gold 
+        |`clear`Although some consider this gold
         |tainted, others feel that 'gold is
         |gold.' As our guest, you may have
         |a sample.`pause`
@@ -251,7 +251,7 @@
         |As much as we abhor violence and
         |death, the power of fine weaponry
         |holds a certain perverse fascination.
-        |For this reason, we collect and 
+        |For this reason, we collect and
         |exhibit weapons.`pause`
         |`clear`The iron spikes, jutting from the
         |surface of this morningstar, bear
@@ -271,8 +271,8 @@
         |of an awesome sorcerer.  His vile
         |creatures filled the grotto
         |corridors.`pause`
-        |`clear`The power of this temple can 
-        |transport you to marthbane, as many 
+        |`clear`The power of this temple can
+        |transport you to marthbane, as many
         |times as you dare.`pause`
       </Text>
     </Exhibit>
@@ -305,7 +305,7 @@
         |Maelbane are rising, and with it the
         |water logged city of Murkwater.`pause`
         |`clear`We're working on a magical transport
-        |to Murkwater.  Until it's done, 
+        |to Murkwater.  Until it's done,
         |however, you must rely on primitive
         |means of travel.`pause`
       </Text>
@@ -316,10 +316,10 @@
         |Maelbane slowly rose from the sea,
         |this was the first city to emerge.`pause`
         |`clear`No one knows whether the city is now
-        |inhabited.  Ancient tales say that 
+        |inhabited.  Ancient tales say that
         |Maelbane never died - life was just
         |suspended while it lay under the sea.`pause`
-        |`clear`This portal will take you to the 
+        |`clear`This portal will take you to the
         |countryside outside Murkwater.`pause`
       </Text>
     </Exhibit>
@@ -327,12 +327,12 @@
       <Text ID="1">
         |Just this morning, new and ancient
         |lands rose on the continent Maelbane.
-        |These were the lands of the world's 
+        |These were the lands of the world's
         |best blacksmiths.`pause`
         |`clear`In days gone by, a town blacksmith
         |was more than just a shoer of horses.
         |A skilled smithy could make all
-        |manner of utensils, weapons, armor, 
+        |manner of utensils, weapons, armor,
         |and tools.`pause`
         |`clear`No smithy was ever better known than
         |Dalvid, a skilled artisan from Mael-
@@ -360,7 +360,7 @@
     </Exhibit>
     <Exhibit ID="15" Image="KloryksCage.png">
       <Text ID="1">
-        |Here are the remains of Kloryk's 
+        |Here are the remains of Kloryk's
         |cage.  This relic of the mage wars
         |once trapped the souls of valiant
         |warriors who sought to end the mad
@@ -368,7 +368,7 @@
         |`clear`Recent tremors collapsed this part
         |of the archives and destroyed the
         |cage.  Witnesses believed they heard
-        |a chorus of ghostly sighs as the 
+        |a chorus of ghostly sighs as the
         |glittering trap was smashed.`pause`
       </Text>
     </Exhibit>
@@ -478,16 +478,16 @@
         </Animation>
       </Image>
       <Image distance="1" srcRect="48,80,48,80" destRect="272,112,48,80">
-        
+
       </Image>
       <Image distance="2" srcRect="96,80,32,80" destRect="240,112,32,80">
-        
+
       </Image>
       <Image distance="3" srcRect="128,48,16,48" destRect="224,128,16,48">
-        
+
       </Image>
       <Image distance="4" srcRect="144,48,16,48" destRect="208,128,16,48">
-        
+
       </Image>
     </Extra>
     <Extra ID="10" Name="TorchLeft">
@@ -549,44 +549,65 @@
     <Extra ID="13" Name="DoorRight">
     </Extra>
   </DungeonExtras>
+  <DungeonMonsters>
+    <Monster ID="0" Name="urp"></Monster>
+    <Monster ID="1" Name="assassin"></Monster>
+    <Monster ID="2" Name="kapok"></Monster>
+    <Monster ID="3" Name="thumper"></Monster>
+    <Monster ID="4" Name="idol"></Monster>
+    <Monster ID="5" Name="scorpod"></Monster>
+    <Monster ID="6" Name="eaton eye"></Monster>
+    <Monster ID="7" Name="growler"></Monster>
+    <Monster ID="8" Name="bag-o-bones"></Monster>
+    <Monster ID="9" Name="sludge heave"></Monster>
+    <Monster ID="10" Name="snap jaw"></Monster>
+    <Monster ID="11" Name="toad colony"></Monster>
+    <Monster ID="12" Name="angel tooth"></Monster>
+    <Monster ID="13" Name="whibas"></Monster>
+    <Monster ID="14" Name="mind trill"></Monster>
+    <Monster ID="15" Name="shadow fiend"></Monster>
+    <Monster ID="16" Name="spike"></Monster>
+    <Monster ID="17" Name="needler"></Monster>
+  </DungeonMonsters>
   <Fortunes>
-    <Fortune Level="1">Buyback shops pay nicely once you learn to negotiate.
-I see you playing flip--flop and winning a fortune!
-The lender will give you money at good rates.
-Healers can help you after you find the Juton bush.
-Carry gold -- merchants might sell you museum coins.
-Carry climbing gear. It will prove handy.
-The path to greatness lies through the museum.
-The warlord's agents are everywhere.  Watch out!
-Learn to lie -- so you'll master the Stones of Wisdom.
-The pirate's cave is west of Eagle Hollow.
-Only the 4 jewels can thwart the evil compendium.
-You need herbs to succeed in dungeons.
-It works best to club the slash nettle to death.
-Keep money in the bank in case of death.
-Castle doors require four different keys.
-Visit ALL the museum displays. They will help more than you know.
-Behind the castle gardens lies a special flower.
-In the right places, magic seeds make you invisible.
-Hidden passageways line the castle! LOOK CAREFULLY!!!
-Many guards protect the mints. It's worth the fight.
-An evil warlord's man was here asking about you.
-Healers are more than they seem. Bide your time.
-The Maston Leaper fears only a bladed staff.
-You must master the spiral room.
-Use the bladed staff to neutralize the Neural Cloud.
-Go back to school. You can learn more.
-Speak to the temptress in the castle.
-The castle wizards know many answers.
-There's a path around the castle gas trap.
-You can't climb up the knight's dungeon.  STAY AWAY!
-You can flail the sea swallow to death.
-Have you visited each museum display?
-Watch out.  The agents may be after you.
-One day you will travel high above the sea.
-Talk to the guardians of the scroll.
-Learn the password to the castle wizard's quarters.
-You can trust the winged horse.
-</Fortune>
+    <Fortune Level="1">
+      Buyback shops pay nicely once you learn to negotiate.
+      I see you playing flip--flop and winning a fortune!
+      The lender will give you money at good rates.
+      Healers can help you after you find the Juton bush.
+      Carry gold -- merchants might sell you museum coins.
+      Carry climbing gear. It will prove handy.
+      The path to greatness lies through the museum.
+      The warlord's agents are everywhere.  Watch out!
+      Learn to lie -- so you'll master the Stones of Wisdom.
+      The pirate's cave is west of Eagle Hollow.
+      Only the 4 jewels can thwart the evil compendium.
+      You need herbs to succeed in dungeons.
+      It works best to club the slash nettle to death.
+      Keep money in the bank in case of death.
+      Castle doors require four different keys.
+      Visit ALL the museum displays. They will help more than you know.
+      Behind the castle gardens lies a special flower.
+      In the right places, magic seeds make you invisible.
+      Hidden passageways line the castle! LOOK CAREFULLY!!!
+      Many guards protect the mints. It's worth the fight.
+      An evil warlord's man was here asking about you.
+      Healers are more than they seem. Bide your time.
+      The Maston Leaper fears only a bladed staff.
+      You must master the spiral room.
+      Use the bladed staff to neutralize the Neural Cloud.
+      Go back to school. You can learn more.
+      Speak to the temptress in the castle.
+      The castle wizards know many answers.
+      There's a path around the castle gas trap.
+      You can't climb up the knight's dungeon.  STAY AWAY!
+      You can flail the sea swallow to death.
+      Have you visited each museum display?
+      Watch out.  The agents may be after you.
+      One day you will travel high above the sea.
+      Talk to the guardians of the scroll.
+      Learn the password to the castle wizard's quarters.
+      You can trust the winged horse.
+    </Fortune>
   </Fortunes>
 </LotaGame>

@@ -7,18 +7,25 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
 	class ArmakExtender : LotaDungeonExtenderBase
 	{
-		protected override bool IsComplete(Player player)
+		protected override bool IsCompleted
 		{
-			return Lota.Story.ArmakComplete;
-		}
-		protected override void SetComplete(Player player)
-		{
-			Lota.Story.ArmakComplete = true;
+			get { return Lota.Story.ArmakComplete; }
+			set { Lota.Story.ArmakComplete = value; }
 		}
 
 		protected override int StrengthBoost
 		{
 			get { return 15; }
+		}
+
+		public override void OnPlayerExitDungeon(Player player)
+		{
+			if (IsCompleted)
+				return;
+
+			IsCompleted = true;
+
+			GivePermanentStrengthBoost(player);
 		}
 	}
 }

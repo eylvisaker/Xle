@@ -464,17 +464,6 @@ namespace ERY.Xle.Rendering
 				Display.FillRect(192, 384, 17 * 16, 16, XleColor.Black);
 				WriteText(208, 384, "(Press to Cont)", XleColor.Yellow);
 			}
-
-			/////////////////////////////////////////////////////////////////////////
-			// Check sounds
-			//
-			//CheckFade();
-
-			XleCore.GameState.Map.CheckSounds(player);
-
-			//
-			// End sounds
-			/////////////////////////////////////////////////////////////////////////
 		}
 
 

@@ -20,5 +20,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		int GetTreasure(GameState gameState, int CurrentLevel, int val);
 
 		bool ShowDirection(Player player);
+
+		void CheckSounds(GameState gameState);
 	}
 }

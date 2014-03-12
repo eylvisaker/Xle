@@ -61,8 +61,8 @@ Museum:
 		D - Fountain exhibit.
 		Stones of wisdom.
 		D - Test four jewels.
-		Make sure guardian gives password.
-		Implement leaving flight of fancy.
+		D - Make sure guardian gives password.
+		D - Implement leaving flight of fancy.
 		Ancient artifact exhibit after compendium is returned.
 		End game.
 	Rendering:
@@ -71,7 +71,7 @@ Museum:
 		Door on side wall.
 		Exhibit animations.
 		Static animation.
-	Step sound.
+	D - Step sound.
 	Xamine command.
 	Verify extra condition to reach level 4.
 	Exhibit and torch sounds.
@@ -92,4 +92,4 @@ Dungeons:
 Fortress:
 	D - Create tileset.
 	D - Import maps.
-	Implement everything.
+	D - Implement everything (nearly).

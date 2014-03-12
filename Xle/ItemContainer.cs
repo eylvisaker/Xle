@@ -77,6 +77,12 @@ namespace ERY.Xle
 		TurquoiseCoin = 21,
 		RubyCoin = 22,
 		DiamondCoin = 23,
+		MagicFlame = 24,
+		Firebolt = 25,
+		Befuddle = 26,
+		PsychoStrength = 27,
+		KillFlash = 28,
+		SeekSpell = 29,
 	}
 	public enum LobItem
 	{

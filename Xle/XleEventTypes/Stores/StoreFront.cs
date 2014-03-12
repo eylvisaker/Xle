@@ -86,7 +86,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			DrawStore();
 
 			Display.EndFrame();
-			Core.KeepAlive();
+			XleCore.KeepAlive();
 		}
 
 		protected void DrawStore()

@@ -797,7 +797,7 @@ namespace ERY.Xle
 			Renderer.Draw();
 
 			Display.EndFrame();
-			Core.KeepAlive();
+			XleCore.KeepAlive();
 
 			if (AgateConsole.IsVisible == false)
 			{
@@ -969,7 +969,7 @@ namespace ERY.Xle
 				inst.UpdateAnim();
 
 				redraw();
-				Core.KeepAlive();
+				XleCore.KeepAlive();
 
 				if (keyBreak && Keyboard.AnyKeyPressed)
 					break;
@@ -1025,7 +1025,7 @@ namespace ERY.Xle
 				DrawMenu(menu);
 
 				Display.EndFrame();
-				Core.KeepAlive();
+				XleCore.KeepAlive();
 			};
 
 			KeyCode key;
@@ -1070,6 +1070,13 @@ namespace ERY.Xle
 			Wait(300);
 
 			return menu.value;
+		}
+
+		public static void KeepAlive()
+		{
+			XleCore.GameState.Map.CheckSounds(GameState.Player);
+
+			Core.KeepAlive();
 		}
 
 		/// <summary>
@@ -1261,13 +1268,23 @@ namespace ERY.Xle
 
 		public static int QuickMenu(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
 		{
-			int[] spacing = new int[18];
+			return QuickMenuImpl(redraw, items, spaces, value, clrInit, clrChanged);
+		}
+		public static int QuickMenuImpl(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
+		{
+			int[] spacing = new int[items.Count];
 			int last = 0;
 			string tempLine = "Choose: ";
 			string topLine;
-			string tempItem;
+			string bulletLine;
+			int lineIndex = XleCore.TextArea.CursorLocation.Y;
 			Color[] colors = new Color[40];
 
+			System.Diagnostics.Debug.Assert(value >= 0);
+			System.Diagnostics.Debug.Assert(value < items.Count);
+
+			if (value < 0)
+				value = 0;
 
 			for (int i = 0; i < 40; i++)
 				colors[i] = clrChanged;
@@ -1278,11 +1295,11 @@ namespace ERY.Xle
 			// Construct the temporary line
 			for (int i = 0; i < items.Count; i++)
 			{
-				tempItem = items[i];
+				bulletLine = items[i];
 
-				tempLine += tempItem + new string(' ', spaces);
+				tempLine += bulletLine + new string(' ', spaces);
 
-				spacing[i] += last + tempItem.Length - 1;
+				spacing[i] += last + bulletLine.Length - 1;
 				last = spacing[i] + spaces + 1;
 			}
 
@@ -1292,7 +1309,7 @@ namespace ERY.Xle
 			topLine = tempLine;
 			tempLine = new string(' ', spacing[value]) + "`";
 
-			g.UpdateBottom(tempLine, clrInit);
+			XleCore.TextArea.RewriteLine(lineIndex + 1, tempLine, clrInit);
 
 			KeyCode key;
 
@@ -1316,10 +1333,10 @@ namespace ERY.Xle
 				{
 					for (int i = 0; i < items.Count; i++)
 					{
-						tempItem = items[i];
+						bulletLine = items[i];
 
 						if (key - KeyCode.A ==
-							char.ToUpperInvariant(tempItem[0]) - 'A')
+							char.ToUpperInvariant(bulletLine[0]) - 'A')
 						{
 							value = i;
 							key = KeyCode.Return;
@@ -1331,8 +1348,8 @@ namespace ERY.Xle
 
 				if (key != KeyCode.None)
 				{
-					g.UpdateBottom(topLine, 1, colors);
-					g.UpdateBottom(tempLine, clrChanged);
+					XleCore.TextArea.RewriteLine(lineIndex, topLine, clrChanged);
+					XleCore.TextArea.RewriteLine(lineIndex + 1, tempLine, clrChanged);
 				}
 
 

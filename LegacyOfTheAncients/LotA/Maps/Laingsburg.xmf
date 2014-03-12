@@ -127,73 +127,73 @@
         <X>25</X>
         <Y>37</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
       <Item>
         <X>37</X>
         <Y>37</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
       <Item>
         <X>64</X>
         <Y>20</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
       <Item>
         <X>68</X>
         <Y>18</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
       <Item>
         <X>57</X>
         <Y>9</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
       <Item>
         <X>45</X>
         <Y>9</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
       <Item>
         <X>11</X>
         <Y>5</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
       <Item>
         <X>9</X>
         <Y>5</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
       <Item>
         <X>49</X>
         <Y>26</Y>
         <Color>-3418267</Color>
-        <HP>0</HP>
-        <Attack>0</Attack>
-        <Defense>0</Defense>
+        <HP>22</HP>
+        <Attack>125</Attack>
+        <Defense>120</Defense>
       </Item>
     </Guards>
   </Guards>

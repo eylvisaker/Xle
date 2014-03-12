@@ -59,5 +59,10 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		{
 			return true;
 		}
+
+
+		public virtual void CheckSounds(GameState state)
+		{
+		}
 	}
 }

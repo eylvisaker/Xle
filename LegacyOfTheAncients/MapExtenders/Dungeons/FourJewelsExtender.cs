@@ -7,13 +7,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
 	class FourJewelsExtender : LotaDungeonExtenderBase
 	{
-		protected override bool IsComplete(Player player)
+		protected override bool IsCompleted
 		{
-			return Lota.Story.FourJewelsComplete;
-		}
-		protected override void SetComplete(Player player)
-		{
-			Lota.Story.FourJewelsComplete = true;
+			get { return Lota.Story.FourJewelsComplete; }
+			set { Lota.Story.FourJewelsComplete = value; }
 		}
 
 		protected override int StrengthBoost
@@ -35,6 +32,18 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 				return 0;
 
 			return (int)LotaItem.GuardJewel;
+		}
+
+		public override void OnPlayerExitDungeon(Player player)
+		{
+			if (IsCompleted)
+				return;
+
+			if (player.Items[LotaItem.GuardJewel] >= 4)
+			{
+				IsCompleted = true;
+				GivePermanentStrengthBoost(player);
+			}
 		}
 	}
 }

@@ -1339,6 +1339,8 @@ namespace ERY.Xle
 			mBaseExtender.SetCommands(commands);
 		}
 
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public virtual int WaitTimeAfterStep
 		{
 			get
@@ -1378,6 +1380,10 @@ namespace ERY.Xle
 			XleCore.TextArea.PrintLine();
 
 			XleCore.Wait(100 * player.Gamespeed);
+		}
+
+		public virtual void PlayerMagic(GameState state)
+		{
 		}
 	}
 
