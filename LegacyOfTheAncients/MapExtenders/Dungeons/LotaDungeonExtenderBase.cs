@@ -102,6 +102,9 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 		public override DungeonMonster GetMonsterToSpawn(GameState state)
 		{
+			if (XleCore.random.NextDouble() > 0.07) 
+				return null;
+
 			int monsterID = 0;
 
 			DungeonMonster monst = new DungeonMonster(

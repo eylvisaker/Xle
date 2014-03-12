@@ -44,7 +44,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		{
 			scheme.TextColor = XleColor.Cyan;
 
-			scheme.FrameColor = XleColor.Gray;
+			scheme.FrameColor = XleColor.DarkGray;
 			scheme.FrameHighlightColor = XleColor.LightGreen;
 
 			scheme.MapAreaWidth = 23;
