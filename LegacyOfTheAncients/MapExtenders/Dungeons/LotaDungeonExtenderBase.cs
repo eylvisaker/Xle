@@ -112,5 +112,28 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 			return monst;
 		}
+
+		public override bool RollToHitMonster(GameState state)
+		{
+			return XleCore.random.NextDouble() * 70 < state.Player.Attribute[Attributes.dexterity] + 30;
+		}
+		public override int RollDamageToMonster(GameState state)
+		{
+			double damage = state.Player.Attribute[Attributes.strength] + 30;
+			damage /= 45;
+
+			double vd = state.Player.CurrentWeaponType + 1 + state.Player.CurrentWeaponQuality / 2.8;
+
+			damage *= vd + 4;
+
+			if (state.Player.WeaponEnchantTurnsLeft > 0)
+			{
+				damage *= 2.5;
+			}
+			else
+				damage *= 1.5;
+
+			return (int)(damage * (0.5 + XleCore.random.NextDouble()));
+		}
 	}
 }

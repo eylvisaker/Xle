@@ -74,13 +74,13 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		}
 
 
-		public virtual bool RollToHitMonster(GameState gameState)
+		public virtual bool RollToHitMonster(GameState state)
 		{
 			return true;
 		}
 
 
-		public virtual int RollDamageToMonster(GameState gameState)
+		public virtual int RollDamageToMonster(GameState state)
 		{
 			return 9999;
 		}

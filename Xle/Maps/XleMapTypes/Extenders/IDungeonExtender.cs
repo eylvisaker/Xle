@@ -25,8 +25,8 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		DungeonMonster GetMonsterToSpawn(GameState state);
 
-		bool RollToHitMonster(GameState gameState);
+		bool RollToHitMonster(GameState state);
 
-		int RollDamageToMonster(GameState gameState);
+		int RollDamageToMonster(GameState state);
 	}
 }

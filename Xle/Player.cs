@@ -1229,6 +1229,17 @@ namespace ERY.Xle
 			}
 		}
 
+		public double CurrentWeaponQuality
+		{
+			get
+			{
+				if (currentWeapon == 0)
+					return 0;
+
+				return weaponQuality[currentWeapon];
+			}
+		}
+
 		public string CurrentArmorName
 		{
 			get
@@ -1570,5 +1581,8 @@ namespace ERY.Xle
 			this.returnY = y;
 			this.returnFacing = facing;
 		}
+
+
+		public int WeaponEnchantTurnsLeft { get; set; }
 	}
 }

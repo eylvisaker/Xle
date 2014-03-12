@@ -302,16 +302,17 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 
 			bool hit = Extender.RollToHitMonster(XleCore.GameState);
+			
+			XleCore.TextArea.Print("Hit ");
+			XleCore.TextArea.Print(monst.Name, XleColor.White);
+			XleCore.TextArea.PrintLine(" with " + player.CurrentWeaponTypeName);
 
 			if (hit)
 			{
 				int damage = Extender.RollDamageToMonster(XleCore.GameState);
 
 				SoundMan.PlaySound(LotaSound.PlayerHit);
-				XleCore.TextArea.Print("Hit ");
-				XleCore.TextArea.Print(monst.Name, XleColor.White);
-				XleCore.TextArea.PrintLine(" with " + player.CurrentWeaponTypeName);
-
+				
 				XleCore.TextArea.Print("Enemy hit by blow of ");
 				XleCore.TextArea.Print(damage.ToString(), XleColor.White);
 				XleCore.TextArea.PrintLine("!");
@@ -328,6 +329,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					XleCore.Wait(500);
 				}
+			}
+			else
+			{
+				SoundMan.PlaySound(LotaSound.PlayerMiss);
+				XleCore.TextArea.PrintLine("Your attack misses.");
+				XleCore.Wait(500);
 			}
 
 			return true;
