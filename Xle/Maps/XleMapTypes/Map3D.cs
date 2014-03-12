@@ -55,6 +55,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		readonly Size imageSize = new Size(368, 272);
 
+		public override int WaitTimeAfterStep
+		{
+			get
+			{
+				return XleCore.GameState.GameSpeed.DungeonStepTime;
+			}
+		}
+
 		protected override void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect)
 		{
 			if (DrawCloseup)
@@ -108,6 +116,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 					DrawExtras(val, dir, loc, distance, inRect);
 				}
 			}
+
+			DrawMonsters(x, y, faceDirection, inRect, maxDistance);
+		}
+
+		protected virtual void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
+		{
 		}
 
 		protected bool DrawCloseup { get; set; }
@@ -420,13 +434,30 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public override bool CanPlayerStepInto(Player player, int xx, int yy)
 		{
-			if (this[xx, yy] >= 0x40)
+			if (IsMapSpaceBlocked(xx, yy))
 				return false;
-			else if ((this[xx, yy] & 0xf0) == 0x00)
+
+			if (IsSpaceBlockedByExtra(player, xx, yy))
 				return false;
-			else
-				return true;
+
+			return true;
 		}
+
+		protected bool IsMapSpaceBlocked(int xx, int yy)
+		{
+			if (this[xx, yy] >= 0x40)
+				return true;
+			else if ((this[xx, yy] & 0xf0) == 0x00)
+				return true;
+
+			return false;
+		}
+
+		protected virtual bool IsSpaceBlockedByExtra(Player player, int xx, int yy)
+		{
+			return true;
+		}
+
 		protected override bool CheckMovementImpl(Player player, int dx, int dy)
 		{
 			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
@@ -445,7 +476,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				if (CanPlayerStepInto(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
 				{
-					command = "Bump into wall";
+					CommandTextForInvalidMovement(ref command);
 					SoundMan.PlaySound(LotaSound.Bump);
 				}
 				//else
@@ -460,6 +491,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 
 			PlayPlayerMoveSound();
+		}
+
+		protected virtual void CommandTextForInvalidMovement(ref string command)
+		{
 		}
 
 		protected abstract void PlayPlayerMoveSound();

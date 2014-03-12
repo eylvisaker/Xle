@@ -116,6 +116,7 @@ namespace ERY.Xle
 				SoundMan.Load();
 
 				mFactory.LoadSurfaces();
+				mData.LoadDungeonMonsterSurfaces();
 
 				IXleTitleScreen titleScreen;
 
@@ -1012,6 +1013,9 @@ namespace ERY.Xle
 			string bulletLine;
 			int lineIndex = XleCore.TextArea.CursorLocation.Y;
 			Color[] colors = new Color[40];
+
+			if (lineIndex >= 4)
+				lineIndex = 3;
 
 			System.Diagnostics.Debug.Assert(value >= 0);
 			System.Diagnostics.Debug.Assert(value < items.Count);

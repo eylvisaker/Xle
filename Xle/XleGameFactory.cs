@@ -70,13 +70,13 @@ namespace ERY.Xle
 
 			state.GameSpeed.GeneralStepTime = 150;
 			state.GameSpeed.OutsideStepTime = 350;
-
-
+			state.GameSpeed.DungeonStepTime = 333;
 
 			if (speed == 1)
 			{
 				state.GameSpeed.GeneralStepTime /= 2;
 				state.GameSpeed.OutsideStepTime = state.GameSpeed.GeneralStepTime;
+				state.GameSpeed.DungeonStepTime = 200;
 			}
 		}
 	}

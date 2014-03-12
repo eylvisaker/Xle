@@ -427,7 +427,7 @@ namespace ERY.Xle
 		{
 			if (XleCore.EnableDebugMode)
 			{
-				gamespeed = 0;
+				Gamespeed = 1;
 			}
 		}
 
@@ -551,7 +551,7 @@ namespace ERY.Xle
 			get { return gamespeed; }
 			set
 			{
-				System.Diagnostics.Debug.Assert(value > 0 && value < 6);
+				System.Diagnostics.Debug.Assert(value >= 1 && value <= 5);
 
 				gamespeed = value;
 

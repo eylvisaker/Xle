@@ -21,13 +21,13 @@ namespace ERY.Xle.Maps.XleMapTypes
 		int[] mData;
 		int mHeight;
 		int mWidth;
-		
+
 		IMuseumExtender Extender { get; set; }
 
 		public Museum()
 		{
 		}
-		
+
 		protected override void ReadData(XleSerializationInfo info)
 		{
 			mWidth = info.ReadInt32("Width");
@@ -40,6 +40,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 			info.Write("Height", mHeight, true);
 			info.Write("Data", mData, NumericEncoding.Csv);
 		}
+		protected override void CommandTextForInvalidMovement(ref string command)
+		{
+			command = "Bump into wall";
+		}
 		public override IEnumerable<string> AvailableTileImages
 		{
 			get { yield return "DungeonTiles.png"; }
@@ -50,7 +54,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			mHeight = height;
 			mWidth = width;
 		}
-		
+
 		public override int Height
 		{
 			get { return mHeight; }
@@ -112,7 +116,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			base.OnLoad(player);
 
 			CheckExhibitStatus(player);
-			
+
 		}
 
 		protected override Color ExtraColor(Point location)
@@ -185,7 +189,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return Extender.GetExhibitByTile(tileAt);
 		}
-		
+
 		private bool InteractWithDisplay(Player player)
 		{
 			Point stepDir = StepDirection(player.FaceDirection);

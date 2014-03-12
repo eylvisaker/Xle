@@ -18,5 +18,7 @@ namespace ERY.Xle
 		public int OutsideStepTime { get; set; }
 
 		public int GeneralStepTime { get; set; }
+
+		public int DungeonStepTime { get; set; }
 	}
 }

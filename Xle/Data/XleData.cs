@@ -68,9 +68,9 @@ namespace ERY.Xle.Data
 			{
 				int id = int.Parse(node.Attribute("ID").Value);
 				string name = node.Attribute("Name").Value;
-				string action = GetOptionalAttribute(node, "Action", "");
-				string longName = GetOptionalAttribute(node, "LongName", "");
-				bool isKey = GetOptionalAttribute(node, "isKey", false);
+				string action = node.GetOptionalAttribute("Action", "");
+				string longName = node.GetOptionalAttribute("LongName", "");
+				bool isKey = node.GetOptionalAttribute("isKey", false);
 
 				mItemList.Add(id, new ItemInfo(id, name, longName, action)
 				{
@@ -84,7 +84,7 @@ namespace ERY.Xle.Data
 			{
 				int id = int.Parse(node.Attribute("ID").Value);
 				string name = node.Attribute("Name").Value;
-				int basePrice = int.Parse(GetOptionalAttribute(node, "BasePrice", "0"));
+				int basePrice = int.Parse(node.GetOptionalAttribute("BasePrice", "0"));
 
 				mMagicSpells.Add(id, new MagicSpell { Name = name, BasePrice = basePrice });
 			}
@@ -102,7 +102,12 @@ namespace ERY.Xle.Data
 					prices = node.Attribute("Prices").Value;
 				}
 
-				equipmentList.Add(id, name, prices);
+				var equipment = new EquipmentInfo(id, name, prices);
+
+				if (node.Attribute("Ranged") != null)
+					equipment.Ranged = true;
+
+				equipmentList.Add(equipment.ID, equipment);
 			}
 		}
 		private void LoadMapInfo(XElement element)
@@ -176,28 +181,31 @@ namespace ERY.Xle.Data
 
 				monster.ID = int.Parse(node.Attribute("ID").Value);
 				monster.Name = node.Attribute("Name").Value;
+				monster.ImageFile = node.GetOptionalAttribute("ImageFile", "");
 
 				foreach (XElement child in node.Elements("Image"))
 				{
 					DungeonMonsterImage image = new DungeonMonsterImage();
 
 					image.DrawPoint = new Point(
-						int.Parse(node.Attribute("dest_x").Value),
-						int.Parse(node.Attribute("dest_y").Value));
+						int.Parse(child.Attribute("dest_x").Value),
+						int.Parse(child.Attribute("dest_y").Value));
 
 					foreach (XElement xsource in child.Elements("SourceRect"))
 					{
 						Rectangle rect = new Rectangle(
-							int.Parse(node.Attribute("x").Value),
-							int.Parse(node.Attribute("y").Value),
-							int.Parse(node.Attribute("width").Value),
-							int.Parse(node.Attribute("height").Value));
+							int.Parse(xsource.Attribute("x").Value),
+							int.Parse(xsource.Attribute("y").Value),
+							int.Parse(xsource.Attribute("width").Value),
+							int.Parse(xsource.Attribute("height").Value));
+
+						image.SourceRects.Add(rect);
 					}
 
 					monster.Images.Add(image);
 				}
 
-				if (monster.Images.Count > 0)
+				if (monster.IsValid)
 				{
 					mDungeonMonsters.Add(monster.ID, monster);
 				}
@@ -291,15 +299,7 @@ namespace ERY.Xle.Data
 		}
 		public Dictionary<int, Map3DExtraInfo> Map3DExtraInfo { get { return mMap3DExtraInfo; } }
 		public Dictionary<int, MagicSpell> MagicSpells { get { return mMagicSpells; } }
-
-
-		private static T GetOptionalAttribute<T>(XElement node, string attrib, T defaultValue)
-		{
-			if (node.Attribute(attrib) != null)
-				return (T)Convert.ChangeType(node.Attribute(attrib).Value, typeof(T));
-			else
-				return defaultValue;
-		}
+		public Dictionary<int, DungeonMonsterData> DungeonMonsters { get { return mDungeonMonsters; } }
 
 		private Rectangle ParseRectangle(string p)
 		{
@@ -312,5 +312,24 @@ namespace ERY.Xle.Data
 				int.Parse(vals[3]));
 		}
 
+		public void LoadDungeonMonsterSurfaces()
+		{
+			foreach(var dm in DungeonMonsters)
+			{
+				dm.Value.Surface = new AgateLib.DisplayLib.Surface("Dungeon/Monsters/" + dm.Value.ImageFile);
+			}
+		}
 	}
+	static class XmlExtensions
+	{
+		public static T GetOptionalAttribute<T>(this XElement node, string attrib, T defaultValue)
+		{
+			if (node.Attribute(attrib) != null)
+				return (T)Convert.ChangeType(node.Attribute(attrib).Value, typeof(T));
+			else
+				return defaultValue;
+		}
+
+	}
+
 }

@@ -99,5 +99,18 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			nextSound = Timing.TotalSeconds + time;
 		}
 
+
+		public override DungeonMonster GetMonsterToSpawn(GameState state)
+		{
+			int monsterID = 0;
+
+			DungeonMonster monst = new DungeonMonster(
+				XleCore.Data.DungeonMonsters[monsterID]);
+
+			monst.HP = (int)
+				((monsterID + 15 + 15 * XleCore.random.NextDouble()) * 2.4 * TheMap.MonsterHealthScale);
+
+			return monst;
+		}
 	}
 }

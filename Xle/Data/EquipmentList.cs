@@ -6,9 +6,10 @@ namespace ERY.Xle
 {
 	public class EquipmentInfo
 	{
-		public int ID;
-		public string Name;
-		public int[] Prices;
+		public int ID { get; private set; }
+		public string Name { get; private set; }
+		public int[] Prices { get; private set; }
+		public bool Ranged { get; set; }
 
 		public EquipmentInfo(int id, string name, string prices)
 		{

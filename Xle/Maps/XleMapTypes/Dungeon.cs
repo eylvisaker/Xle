@@ -236,7 +236,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			base.OnLoad(player);
 
 			Extender.OnLoad(player);
-			
+
 			CurrentLevel = player.DungeonLevel;
 		}
 
@@ -267,8 +267,77 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public override bool PlayerFight(Player player)
 		{
-			return false;
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+
+			int distance = 0;
+			int maxDistance = 1;
+			if (XleCore.Data.WeaponList[player.CurrentWeaponType].Ranged)
+				maxDistance = 5;
+
+			Point fightDir = StepDirection(player.FaceDirection);
+			DungeonMonster monst = null;
+
+			for (int i = 1; i <= 5; i++)
+			{
+				Point loc = new Point(player.X + fightDir.X * i, player.Y + fightDir.Y * i);
+
+				distance = i;
+				monst = MonsterAt(loc);
+
+				if (monst != null)
+					break;
+			}
+
+			if (monst == null)
+			{
+				XleCore.TextArea.PrintLine("Nothing to fight.");
+				return true;
+			}
+			else if (distance > maxDistance)
+			{
+				XleCore.TextArea.PrintLine("The " + monst.Name + " is out-of-range");
+				XleCore.TextArea.PrintLine("of your " + player.CurrentWeaponTypeName + ".");
+				return true;
+			}
+
+			bool hit = Extender.RollToHitMonster(XleCore.GameState);
+
+			if (hit)
+			{
+				int damage = Extender.RollDamageToMonster(XleCore.GameState);
+
+				SoundMan.PlaySound(LotaSound.PlayerHit);
+				XleCore.TextArea.Print("Hit ");
+				XleCore.TextArea.Print(monst.Name, XleColor.White);
+				XleCore.TextArea.PrintLine(" with " + player.CurrentWeaponTypeName);
+
+				XleCore.TextArea.Print("Enemy hit by blow of ");
+				XleCore.TextArea.Print(damage.ToString(), XleColor.White);
+				XleCore.TextArea.PrintLine("!");
+
+				monst.HP -= damage;
+				XleCore.Wait(500);
+
+				if (monst.HP <= 0)
+				{
+					Monsters.Remove(monst);
+					XleCore.TextArea.PrintLine(monst.Name + " dies!!");
+
+					SoundMan.PlaySound(LotaSound.EnemyDie);
+
+					XleCore.Wait(500);
+				}
+			}
+
+			return true;
 		}
+
+		private DungeonMonster MonsterAt(Point loc)
+		{
+			return Monsters.FirstOrDefault(m => m.Location == loc);
+		}
+
 		public override bool PlayerXamine(Player player)
 		{
 			SoundMan.PlaySound(LotaSound.Xamine);
@@ -288,11 +357,16 @@ namespace ERY.Xle.Maps.XleMapTypes
 			XleCore.TextArea.PrintLine("\n");
 
 			bool revealHidden = false;
+			DungeonMonster foundMonster = null;
 
 			for (int i = 0; i < 5; i++)
 			{
 				Point loc = new Point(player.X + faceDir.X * i, player.Y + faceDir.Y * i);
 
+				foundMonster = MonsterAt(loc);
+
+				if (foundMonster != null)
+					break;
 				if (this[loc.X, loc.Y] < 0x10)
 					break;
 				if (this[loc.X, loc.Y] >= 0x21 && this[loc.X, loc.Y] < 0x2a)
@@ -309,55 +383,56 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 
 			string extraText = string.Empty;
-			bool monster = false;
 			int distance = 0;
 
-			for (int i = 0; i < 5; i++)
+			if (foundMonster != null)
 			{
-				Point loc = new Point(player.X + faceDir.X * i, player.Y + faceDir.Y * i);
-				int val = this[loc.X, loc.Y];
-
-				if (val < 0x10) break;
-
-				if (extraText == string.Empty)
-				{
-					distance = i;
-
-					if (val > 0x10 && val < 0x1a)
-					{
-						extraText = TrapName(val);
-					}
-					if (val >= 0x30 && val <= 0x3f)
-					{
-						extraText = "treasure chest";
-					}
-					if (val == 0x1e)
-					{
-						extraText = "box";
-					}
-				}
-				// check for monsters
-			}
-
-			if (monster)
-			{
-				XleCore.TextArea.PrintLine("A " + extraText + " is stalking you!!!");
-			}
-			else if (extraText != string.Empty)
-			{
-				if (distance > 0)
-				{
-					XleCore.TextArea.PrintLine("A " + extraText + " is in sight.");
-				}
-				else
-				{
-					XleCore.TextArea.PrintLine("You are standing next ");
-					XleCore.TextArea.PrintLine("to a " + extraText + ".");
-				}
+				XleCore.TextArea.PrintLine("A " + foundMonster.Name + " is stalking you!!!", XleColor.White);
 			}
 			else
 			{
-				XleCore.TextArea.PrintLine("Nothing unusual in sight.");
+				for (int i = 0; i < 5; i++)
+				{
+					Point loc = new Point(player.X + faceDir.X * i, player.Y + faceDir.Y * i);
+					int val = this[loc.X, loc.Y];
+
+					if (val < 0x10) break;
+
+					if (extraText == string.Empty)
+					{
+						distance = i;
+
+						if (val > 0x10 && val < 0x1a)
+						{
+							extraText = TrapName(val);
+						}
+						if (val >= 0x30 && val <= 0x3f)
+						{
+							extraText = "treasure chest";
+						}
+						if (val == 0x1e)
+						{
+							extraText = "box";
+						}
+					}
+				}
+
+				if (extraText != string.Empty)
+				{
+					if (distance > 0)
+					{
+						XleCore.TextArea.PrintLine("A " + extraText + " is in sight.");
+					}
+					else
+					{
+						XleCore.TextArea.PrintLine("You are standing next ");
+						XleCore.TextArea.PrintLine("to a " + extraText + ".");
+					}
+				}
+				else
+				{
+					XleCore.TextArea.PrintLine("Nothing unusual in sight.");
+				}
 			}
 
 			return true;
@@ -403,12 +478,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (state.Player.Items[LotaItem.MagicFlame] == 0)
 			{
 				defaultValue = 1;
-			
+
 				if (state.Player.Items[LotaItem.Firebolt] == 0)
 					defaultValue = 2;
 
 			}
-			
+
 
 			int choice = XleCore.QuickMenu(new MenuItemList("Flame", "Bolt", "Other"), 2, defaultValue,
 				XleColor.Purple, XleColor.White);
@@ -486,7 +561,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				{
 					if (treasure > 0)
 					{
-						string text = "You find a " + XleCore.ItemList[treasure].LongName + "!!";
+						string text = "You find a " + XleCore.Data.ItemList[treasure].LongName + "!!";
 						XleCore.TextArea.Clear();
 						XleCore.TextArea.PrintLine(text);
 
@@ -505,6 +580,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
+		protected override void AfterExecuteCommandImpl(Player player, KeyCode cmd)
+		{
+			XleCore.Wait(100);
+			UpdateMonsters(XleCore.GameState);
+		}
 		protected override void AfterStepImpl(Player player, bool didEvent)
 		{
 			int val = this[player.X, player.Y];
@@ -519,8 +599,126 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				OnPlayerAvoidTrap(player, player.X, player.Y);
 			}
-		
+
 			base.AfterStepImpl(player, didEvent);
+		}
+
+		private void UpdateMonsters(GameState state)
+		{
+			foreach (var monster in Monsters)
+			{
+				var delta = new Point(
+					state.Player.X - monster.Location.X,
+					state.Player.Y - monster.Location.Y);
+
+				if (Math.Abs(delta.X) + Math.Abs(delta.Y) == 1)
+				{
+					// this monster can attack
+				}
+				else
+				{
+					if (Math.Abs(delta.X) > Math.Abs(delta.Y))
+					{
+						if (false == TryMonsterStep(monster, new Point(delta.X, 0)))
+						{
+							TryMonsterStep(monster, new Point(0, delta.Y));
+						}
+					}
+					else
+					{
+						if (false == TryMonsterStep(monster, new Point(0, delta.Y)))
+							TryMonsterStep(monster, new Point(delta.X, 0));
+					}
+				}
+			}
+
+			if (Monsters.Count < MaxMonsters)
+			{
+				SpawnMonster(state);
+			}
+		}
+
+		private bool TryMonsterStep(DungeonMonster monster, Point delta)
+		{
+			if (delta.X != 0 && delta.Y != 0) throw new ArgumentOutOfRangeException();
+			if (delta.X == 0 && delta.Y == 0) return false;
+
+			if (delta.X != 0) delta.X /= Math.Abs(delta.X);
+			if (delta.Y != 0) delta.Y /= Math.Abs(delta.Y);
+
+			if (CanMonsterStepInto(monster, new Point(monster.Location.X + delta.X, monster.Location.Y + delta.Y)))
+			{
+				monster.Location = new Point(
+					monster.Location.X + delta.X,
+					monster.Location.Y + delta.Y);
+
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool CanMonsterStepInto(DungeonMonster monster, Point newPt)
+		{
+			if (IsMapSpaceBlocked(newPt.X, newPt.Y))
+				return false;
+
+			if (IsSpaceBlockedByExtra(XleCore.GameState.Player, newPt.X, newPt.Y))
+				return false;
+
+			return true;
+		}
+
+		private void SpawnMonster(Xle.GameState state)
+		{
+			DungeonMonster monster = Extender.GetMonsterToSpawn(state);
+
+			if (monster == null)
+				return;
+
+			do
+			{
+				monster.Location = new Point(
+					XleCore.random.Next(1, 15),
+					XleCore.random.Next(1, 15));
+
+			} while (this.CanPlayerStepInto(state.Player, monster.Location.X, monster.Location.Y) == false || monster.Location == state.Player.Location);
+
+			Monsters.Add(monster);
+		}
+
+		protected override void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
+		{
+			Point stepDir = StepDirection(faceDirection);
+
+			for (int distance = 1; distance < maxDistance + 1; distance++)
+			{
+				Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
+
+				var monster = MonsterAt(loc);
+
+				if (monster == null)
+					continue;
+
+				var data = XleCore.Data.DungeonMonsters[monster.MonsterID];
+				int image = distance - 1;
+				var imageInfo = data.Images[image];
+
+				var drawPoint = imageInfo.DrawPoint;
+				drawPoint.X += inRect.X;
+				drawPoint.Y += inRect.Y;
+
+				var srcRect = imageInfo.SourceRects[0];
+
+				data.Surface.Draw(srcRect, drawPoint);
+
+				break;
+			}
+		}
+
+		protected override bool IsSpaceBlockedByExtra(Player player, int xx, int yy)
+		{
+			return MonsterAt(new Point(xx, yy)) != null;
 		}
 
 		private void OnPlayerAvoidTrap(Player player, int x, int y)

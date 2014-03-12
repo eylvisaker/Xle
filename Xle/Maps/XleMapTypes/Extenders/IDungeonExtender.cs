@@ -22,5 +22,11 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		bool ShowDirection(Player player);
 
 		void CheckSounds(GameState gameState);
+
+		DungeonMonster GetMonsterToSpawn(GameState state);
+
+		bool RollToHitMonster(GameState gameState);
+
+		int RollDamageToMonster(GameState gameState);
 	}
 }

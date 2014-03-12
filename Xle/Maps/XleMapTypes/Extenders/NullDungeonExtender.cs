@@ -7,6 +7,8 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
 	public class NullDungeonExtender : NullMapExtender, IDungeonExtender
 	{
+		public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
+
 		public virtual void OnPlayerExitDungeon(Player player)
 		{
 		}
@@ -63,6 +65,24 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		public virtual void CheckSounds(GameState state)
 		{
+		}
+
+
+		public virtual DungeonMonster GetMonsterToSpawn(GameState state)
+		{
+			return null;
+		}
+
+
+		public virtual bool RollToHitMonster(GameState gameState)
+		{
+			return true;
+		}
+
+
+		public virtual int RollDamageToMonster(GameState gameState)
+		{
+			return 9999;
 		}
 	}
 }

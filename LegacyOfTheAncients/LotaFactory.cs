@@ -217,7 +217,8 @@ namespace ERY.Xle.LotA
 		{
 			base.SetGameSpeed(state, speed);
 
-			state.GameSpeed.OutsideStepTime = 400;
+			if (speed != 1)
+				state.GameSpeed.OutsideStepTime = 400;
 		}
 	}
 }

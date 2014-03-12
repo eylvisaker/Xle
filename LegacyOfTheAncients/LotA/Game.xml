@@ -39,9 +39,9 @@
     <Weapon ID="3" Name="Bladed Staff" Prices="115,134,155,177,200" />
     <Weapon ID="4" Name="Flail" Prices="180,203,228,254,282" />
     <Weapon ID="5" Name="War Hammer" Prices="259,286,316,347,379" />
-    <Weapon ID="6" Name="Bow &amp; Arrow" Prices="353,386,420,455,492" />
+    <Weapon ID="6" Name="Bow &amp; Arrow" Prices="353,386,420,455,492" Ranged="true"/>
     <Weapon ID="7" Name="Broadaxe" Prices="463,501,540,580,662" />
-    <Weapon ID="8" Name="Compound Bow" Prices="590,632,676,721,768" />
+    <Weapon ID="8" Name="Compound Bow" Prices="590,632,676,721,768"  Ranged="true"/>
   </Weapons>
   <Armor>
     <Armor ID="0" Name="Nothing" />
@@ -628,19 +628,19 @@
   </DungeonExtras>
   <DungeonMonsters>
     <Monster ID="0" Name="nerve streaker" ImageFile="monster00.png">
-      <Image dest_x="80" dest_y="32">
+      <Image dest_x="120" dest_y="32">
         <SourceRect x="0" y="0" width="100" height="200"></SourceRect>
       </Image>
-      <Image dest_x="80" dest_y="32">
+      <Image dest_x="120" dest_y="32">
         <SourceRect x="100" y="0" width="100" height="200"></SourceRect>
       </Image>
-      <Image dest_x="80" dest_y="32">
+      <Image dest_x="120" dest_y="32">
         <SourceRect x="200" y="0" width="100" height="200"></SourceRect>
       </Image>
-      <Image dest_x="80" dest_y="32">
+      <Image dest_x="120" dest_y="32">
         <SourceRect x="300" y="0" width="100" height="200"></SourceRect>
       </Image>
-      <Image dest_x="80" dest_y="32">
+      <Image dest_x="120" dest_y="32">
         <SourceRect x="400" y="0" width="100" height="200"></SourceRect>
       </Image>
     </Monster>

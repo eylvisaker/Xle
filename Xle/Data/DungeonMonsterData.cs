@@ -1,4 +1,5 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.DisplayLib;
+using AgateLib.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,26 @@ namespace ERY.Xle
 		public int ID { get; set; }
 		public string ImageFile { get; set; }
 
+		public Surface Surface { get; set; }
+
 		public List<DungeonMonsterImage> Images { get; private set; }
+
+		public bool IsValid
+		{
+			get
+			{
+				if (Images.Count == 0) return false;
+				if (string.IsNullOrWhiteSpace(ImageFile)) return false;
+
+				foreach(var image in Images)
+				{
+					if (image.SourceRects.Count == 0)
+						return false;
+				}
+
+				return true;
+			}
+		}
 	}
 
 	public class DungeonMonsterImage
