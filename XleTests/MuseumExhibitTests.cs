@@ -20,6 +20,7 @@ namespace ERY.XleTests
 			Player player = new Player();
 			player.Items.ClearStoryItems(); // remove the compendium the player started with.
 			player.StoryData = new LotaStory();
+			XleCore.GameState = new GameState { Player = player };
 
 			Information information = new Information();
 
@@ -88,6 +89,7 @@ namespace ERY.XleTests
 		{
 			Player player = new Player();
 			player.StoryData = new LotaStory();
+			XleCore.GameState = new GameState { Player = player };
 
 			LotaFactory factory = new LotaFactory();
 			
