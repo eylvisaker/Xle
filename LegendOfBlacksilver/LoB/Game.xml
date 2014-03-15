@@ -550,8 +550,8 @@
     </Extra>
   </DungeonExtras>
   <DungeonMonsters>
-    <Monster ID="0" Name="urp">
-      <Image dest_x="106" dest_y="28">
+    <Monster ID="0" Name="urp" ImageFile="monster00.png">
+      <Image dest_x="106" dest_y="24">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="74">
@@ -567,8 +567,8 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="1" Name="assassin">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="1" Name="assassin" ImageFile="monster01.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -580,12 +580,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="2" Name="kapok">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="2" Name="kapok" ImageFile="monster02.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -597,12 +597,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="3" Name="thumper">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="3" Name="thumper" ImageFile="monster03.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -614,12 +614,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="4" Name="idol">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="4" Name="idol" ImageFile="monster04.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -631,12 +631,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="5" Name="scorpod">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="5" Name="scorpod" ImageFile="monster05.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -648,12 +648,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="6" Name="eaton eye">
-      <Image dest_x="106" dest_y="28">
+    <Monster ID="6" Name="eaton eye" ImageFile="monster06.png">
+      <Image dest_x="106" dest_y="24">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="74">
@@ -669,8 +669,8 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="7" Name="growler">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="7" Name="growler" ImageFile="monster07.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -682,12 +682,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="8" Name="bag-o-bones">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="8" Name="bag-o-bones" ImageFile="monster08.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -699,12 +699,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="9" Name="sludge heave">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="9" Name="sludge heave" ImageFile="monster09.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -716,12 +716,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="10" Name="snap jaw">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="10" Name="snap jaw" ImageFile="monster10.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -733,12 +733,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="11" Name="toad colony">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="11" Name="toad colony" ImageFile="monster11.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -750,12 +750,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="12" Name="angel tooth">
-      <Image dest_x="106" dest_y="28">
+    <Monster ID="12" Name="angel tooth" ImageFile="monster12.png">
+      <Image dest_x="106" dest_y="24">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="74">
@@ -771,8 +771,8 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="13" Name="whibas">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="13" Name="whibas" ImageFile="monster13.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -784,12 +784,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="14" Name="mind trill">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="14" Name="mind trill" ImageFile="monster14.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -801,12 +801,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="15" Name="shadow fiend">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="15" Name="shadow fiend" ImageFile="monster15.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -818,12 +818,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="16" Name="spike">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="16" Name="spike" ImageFile="monster16.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -835,12 +835,12 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="17" Name="needler">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="17" Name="needler" ImageFile="monster17.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="138" dest_y="128">
@@ -852,25 +852,13 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="18" Name="king">
-      <Image dest_x="106" dest_y="110">
+    <Monster ID="18" Name="king" ImageFile="monster18.png">
+      <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
-      </Image>
-      <Image dest_x="138" dest_y="128">
-        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
-      </Image>
-      <Image dest_x="138" dest_y="130">
-        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
-      </Image>
-      <Image dest_x="162" dest_y="150">
-        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
-      </Image>
-      <Image dest_x="162" dest_y="150">
-        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
   </DungeonMonsters>

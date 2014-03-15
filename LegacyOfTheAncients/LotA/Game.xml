@@ -657,7 +657,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -674,7 +674,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -691,7 +691,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -708,7 +708,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -725,7 +725,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -759,7 +759,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -776,7 +776,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -793,7 +793,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -810,7 +810,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
@@ -827,7 +827,7 @@
       <Image dest_x="162" dest_y="150">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="162" dest_y="150">
+      <Image dest_x="162" dest_y="146">
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>

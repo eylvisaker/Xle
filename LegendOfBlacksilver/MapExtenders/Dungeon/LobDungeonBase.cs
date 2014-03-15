@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
-	class LobDungeonBase : NullDungeonExtender
+	abstract class LobDungeonBase : NullDungeonExtender
 	{
 		public override void SetCommands(Commands.CommandList commands)
 		{
@@ -40,6 +40,26 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 				case 0x16: return "gas vent";
 				default: return base.TrapName(val);
 			}
+		}
+
+		protected abstract int MonsterGroup(int dungeonLevel);
+
+		public override DungeonMonster GetMonsterToSpawn(GameState state)
+		{
+			if (XleCore.random.NextDouble() > 0.07)
+				return null;
+
+			int monsterID = XleCore.random.Next(6);
+
+			monsterID += 6 * MonsterGroup(state.Player.DungeonLevel + 1);
+
+			DungeonMonster monst = new DungeonMonster(
+				XleCore.Data.DungeonMonsters[monsterID]);
+
+			monst.HP = (int)
+				((monsterID + 15 + 15 * XleCore.random.NextDouble()) * 2.4 * TheMap.MonsterHealthScale);
+
+			return monst;
 		}
 
 	}

@@ -56,5 +56,13 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			}
 			base.PlayerUse(state, item, ref handled);
 		}
+
+		protected override int MonsterGroup(int dungeonLevel)
+		{
+			if (dungeonLevel <= 2) return 0;
+			if (dungeonLevel <= 6) return 1;
+
+			return 2;
+		}
 	}
 }
