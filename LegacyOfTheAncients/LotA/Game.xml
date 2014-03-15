@@ -629,19 +629,19 @@
   <DungeonMonsters>
     <Monster ID="0" Name="nerve streaker" ImageFile="monster00.png">
       <Image dest_x="120" dest_y="32">
-        <SourceRect x="0" y="0" width="100" height="200"></SourceRect>
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
       <Image dest_x="120" dest_y="32">
-        <SourceRect x="100" y="0" width="100" height="200"></SourceRect>
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
       </Image>
       <Image dest_x="120" dest_y="32">
-        <SourceRect x="200" y="0" width="100" height="200"></SourceRect>
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
       </Image>
       <Image dest_x="120" dest_y="32">
-        <SourceRect x="300" y="0" width="100" height="200"></SourceRect>
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
       <Image dest_x="120" dest_y="32">
-        <SourceRect x="400" y="0" width="100" height="200"></SourceRect>
+        <SourceRect x="192" y="0" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
     <Monster ID="1" Name="gnasher turtle"></Monster>
