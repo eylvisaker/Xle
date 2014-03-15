@@ -389,13 +389,13 @@ namespace ERY.Xle.Rendering
 			}
 		}
 
-		public Action OnRedraw { get; set; }
+		public Action ReplacementDrawMethod { get; set; }
 
 		public void Draw()
 		{
-			if (OnRedraw != null)
+			if (ReplacementDrawMethod != null)
 			{
-				OnRedraw();
+				ReplacementDrawMethod();
 				return;
 			}
 

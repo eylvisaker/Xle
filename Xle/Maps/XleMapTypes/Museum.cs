@@ -205,20 +205,20 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			XleCore.TextArea.PrintLine(ex.IntroductionText);
 			XleCore.TextArea.PrintLine();
-			g.AddBottomCentered(ex.LongName, ex.TitleColor);
+			XleCore.TextArea.PrintLineCentered(ex.LongName + " ", ex.TitleColor);
 
 			XleCore.PromptToContinueOnWait = true;
 
 			if (ex.IsClosed(player))
 			{
-				g.AddBottomCentered("- Exhibit closed -", ex.TitleColor);
+				XleCore.TextArea.PrintLineCentered(" - Exhibit closed - ", ex.TitleColor);
 				XleCore.TextArea.PrintLine();
 				XleCore.WaitForKey();
 
 				return true;
 			}
 
-			g.AddBottomCentered(ex.InsertCoinText, ex.TitleColor);
+			XleCore.TextArea.PrintLineCentered(ex.InsertCoinText + " ", ex.TitleColor);
 			XleCore.TextArea.PrintLine();
 			XleCore.WaitForKey();
 

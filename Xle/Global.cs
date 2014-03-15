@@ -46,42 +46,7 @@ namespace ERY.Xle
 		[Obsolete("Use XleCore.TextArea instead.")]
 		static public void AddBottom(ColorStringBuilder builder)
 		{
-			AddBottom(builder.Text, builder.Colors);
-		}
-
-		[Obsolete("Use XleCore.TextArea instead.")]
-		static public void AddBottom(string line, int margin = 1)
-		{
-			AddBottom(line, null);
-		}
-		[Obsolete("Use XleCore.TextArea instead.")]
-		static public void AddBottom(string line, Color color)
-		{
-			Color[] colors = new Color[40];
-
-			for (int i = 0; i < 40; i++)
-			{
-				colors[i] = color;
-			}
-
-			AddBottom(line, colors);
-		}
-
-		[Obsolete("Use XleCore.TextArea instead.")]
-		public static void AddBottomCentered(string p, Color color)
-		{
-			BottomCenterString(ref p);
-			AddBottom(p, color);
-		}
-
-		[Obsolete("Use XleCore.TextArea instead.")]
-		private static void BottomCenterString(ref string p)
-		{
-			int spaces = 36 - p.Length;
-			spaces /= 2;
-			if (spaces < 0) spaces = 0;
-
-			p = new string(' ', spaces) + p;
+			XleCore.TextArea.PrintLine(builder.Text, builder.Colors);
 		}
 		// adds a line to the bottom of the action window
 		[Obsolete("Use XleCore.TextArea instead.")]
@@ -164,24 +129,6 @@ namespace ERY.Xle
 			 * */
 		}
 
-		[Obsolete("Use XleCore.TextArea instead.")]
-		static public void WriteSlow(string line, int loc, Color color)
-		{
-			int i = 0;
-			Color[] colors = new Color[40];
-			string temp;
-
-			while (i < line.Length && i < 40)
-			{
-				colors[i++] = color;
-				temp = line.Substring(0, i);
-
-				UpdateBottom(temp, loc, colors);
-
-				XleCore.Wait(50);
-			}
-		}
-		
 		static public bool disableEncounters;		// used to disable overworld encounters
 	}
 }

@@ -38,5 +38,10 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		public virtual void ModifyTerrainInfo(TerrainInfo info, TerrainType terrain)
 		{
 		}
+
+
+		public virtual void UpdateEncounterState(GameState state, ref bool handled)
+		{
+		}
 	}
 }

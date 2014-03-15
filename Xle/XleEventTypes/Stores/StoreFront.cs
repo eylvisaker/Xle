@@ -82,7 +82,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			Display.BeginFrame();
 			XleCore.SetProjectionAndBackColors(mColorScheme);
-
+			
 			DrawStore();
 
 			Display.EndFrame();
@@ -201,13 +201,13 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			try
 			{
-				XleCore.Renderer.OnRedraw = RedrawStore;
+				XleCore.Renderer.ReplacementDrawMethod = DrawStore;
 
 				return SpeakImpl(state);
 			}
 			finally
 			{
-				XleCore.Renderer.OnRedraw = null;
+				XleCore.Renderer.ReplacementDrawMethod = null;
 			}
 		}
 		protected virtual bool SpeakImpl(GameState state)

@@ -9,5 +9,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	{
 		void ModifyTerrainInfo(TerrainInfo info, TerrainType terrain);
 
+
+		void UpdateEncounterState(GameState state, ref bool handled);
 	}
 }

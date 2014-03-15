@@ -32,12 +32,12 @@ namespace ERY.Xle
 
 				if (newColors != null)
 				{
-					for (int i = colorStartIndex; i < newColors.Length; i++)
+					for (int i = 0; i < t.Length; i++)
 					{
-						if (x + i >= Colors.Length)
+						if (x + i + colorStartIndex >= Colors.Length)
 							break;
 
-						Colors[x + i] = newColors[i];
+						Colors[x + i] = newColors[i + colorStartIndex];
 					}
 				}
 				else
@@ -373,6 +373,13 @@ namespace ERY.Xle
 		public void SetCharacterColor(int line, int x, Color color)
 		{
 			lines[line].Colors[x] = color;
+		}
+
+		public void PrintLineCentered(string text, Color color)
+		{
+			text = new string(' ', 19 - text.Length / 2) + text;
+
+			PrintLine(text, color);
 		}
 	}
 }

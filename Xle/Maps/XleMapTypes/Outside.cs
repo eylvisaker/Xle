@@ -26,12 +26,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 		List<Monster> currentMonst = new List<Monster>();
 
 		int stepCount;
-		int displayMonst = -1;
+		public int displayMonst = -1;
 		Direction monstDir;
 		Point mDrawMonst;
 		int monstCount, initMonstCount;
 		bool isMonsterFriendly;
-		int banditAmbush;
 
 		#region --- Construction and Serialization ---
 
@@ -1077,12 +1076,15 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (XleCore.Map != this)
 				return;
 
+			bool handled = false;
+			Extender.UpdateEncounterState(XleCore.GameState, ref handled);
+
+			if (handled)
+				return;
+
 			if (EncounterState == EncounterState.NoEncounter && stepCount <= 0)
 			{
 				SetNextEncounterStepCount();
-
-				if (BanditAmbush(player))
-					return;
 
 				StartEncounter(player);
 			}
@@ -1351,114 +1353,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return sel;
 		}
 
-		/// <summary>
-		/// Check to see if we should have bandits ambush the player. If so,
-		/// sets banditAmbush variable.
-		/// </summary>
-		/// <param name="player"></param>
-		private void SetBanditAmbushTime(Player player)
-		{
-			// make sure the player has the compendium
-			if (player.Item(15) == 0) return;
-
-			// if the player has the guard jewels we bail.
-			if (player.Item(14) == 4) return;
-
-			int pastTime = (int)(player.TimeDays - 100);
-			if (pastTime < 0) pastTime = 0;
-
-			int min = 40 - (int)(pastTime / 2);
-			if (min < 3) min = 3;
-
-			int max = 100 - (int)(pastTime / 5);
-			if (max < 12) max = 12;
-
-			int time = XleCore.random.Next(min, max);
-
-			if (time > player.Food - 2)
-			{
-				time = (int)player.Food - 2;
-				if (time < 0)
-					time = 1;
-			}
-
-			banditAmbush = (int)(player.TimeDays) + time;
-		}
-		private bool BanditAmbush(Player player)
-		{
-			// bail if player doesn't have compendium
-			if (player.Item(15) == 0) return false;
-
-			// bail if player has compendium and guard jewels.
-			if (player.Item(14) == 4) return false;
-
-			if (banditAmbush <= 0)
-				SetBanditAmbushTime(player);
-
-			if (player.TimeDays <= banditAmbush)
-				return false;
-
-			// set a random position for the appearance of the bandits.
-			MonsterDirection(player);
-
-			// bandit icon is number 4.
-			displayMonst = 4;
-
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
-
-			SoundMan.PlaySound(LotaSound.Encounter);
-			XleCore.Wait(500);
-
-			int maxDamage = player.HP / 15;
-			int minDamage = Math.Min(5, maxDamage / 2);
-
-			for (int i = 0; i < 8; i++)
-			{
-				player.HP -= XleCore.random.Next(minDamage, maxDamage + 1);
-
-				SoundMan.PlaySound(LotaSound.EnemyHit);
-				XleCore.Wait(250);
-			}
-
-			XleCore.TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
-
-			XleCore.Wait(1000);
-			displayMonst = -1;
-			XleCore.Wait(3000, RedrawUnconscious);
-
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("You awake.  The compendium is gone.");
-			XleCore.TextArea.PrintLine();
-
-			while (player.Item(15) > 0)
-				player.ItemCount(15, -1);
-
-			SoundMan.PlaySoundSync(LotaSound.VeryBad);
-
-			XleCore.TextArea.PrintLine("You hear a voice...");
-
-			XleCore.TextArea.PrintLine();
-			g.WriteSlow("Do not be discouraged.  It was", 0, XleColor.White);
-
-			XleCore.TextArea.PrintLine();
-			g.WriteSlow("inevitable.  Keep to your quest.", 0, XleColor.White);
-
-			XleCore.Wait(3000);
-			banditAmbush = 0;
-
-			return true;
-		}
-
-		void RedrawUnconscious()
-		{
-			AgateLib.DisplayLib.Display.BeginFrame();
-
-			AgateLib.DisplayLib.Display.Clear(XleColor.Gray);
-
-			AgateLib.DisplayLib.Display.EndFrame();
-		}
-		private string MonsterDirection(Player player)
+		[Obsolete("This function is weird and should be replaced with something else.")]
+		public string MonsterDirection(Player player)
 		{
 			string dirName;
 			mDrawMonst.X = player.X - 1;
@@ -1565,7 +1461,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public override void OnLoad(Player player)
 		{
-			SetBanditAmbushTime(player);
 			SetNextEncounterStepCount();
 
 			base.OnLoad(player);
