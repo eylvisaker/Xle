@@ -437,7 +437,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (IsMapSpaceBlocked(xx, yy))
 				return false;
 
-			if (IsSpaceBlockedByExtra(player, xx, yy))
+			if (IsSpaceOccupiedByMonster(player, xx, yy))
 				return false;
 
 			return true;
@@ -453,7 +453,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return false;
 		}
 
-		protected virtual bool IsSpaceBlockedByExtra(Player player, int xx, int yy)
+		protected virtual bool IsSpaceOccupiedByMonster(Player player, int xx, int yy)
 		{
 			return true;
 		}

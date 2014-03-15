@@ -152,6 +152,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		public override int this[int xx, int yy]
 		{
+			get { return this[xx, yy, mCurrentLevel]; }
+			set { this[xx, yy, mCurrentLevel] = value; }
+		}
+		public int this[int xx, int yy, int dungeonLevel]
+		{
 			get
 			{
 				if (yy < 0 || yy >= Height || xx < 0 || xx >= Width)
@@ -160,7 +165,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 				else
 				{
-					return mData[mCurrentLevel * Height * Width + yy * Width + xx];
+					return mData[dungeonLevel * Height * Width + yy * Width + xx];
 				}
 			}
 			set
@@ -172,21 +177,18 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 				else
 				{
-					mData[mCurrentLevel * Height * Width + yy * Width + xx] = value;
+					mData[dungeonLevel * Height * Width + yy * Width + xx] = value;
 				}
 			}
 		}
 		public override bool PlayerClimb(Player player)
 		{
-			XleCore.TextArea.PrintLine();
-
 			switch (this[player.X, player.Y])
 			{
 				case 0x11:
 					if (player.DungeonLevel == 0)
 					{
-						XleCore.TextArea.PrintLine();
-						XleCore.TextArea.PrintLine("You climb out of the dungeon.");
+						XleCore.TextArea.PrintLine("\n\nYou climb out of the dungeon.");
 
 						Extender.OnPlayerExitDungeon(player);
 
@@ -224,10 +226,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (this[player.X, player.Y] == 0x21) this[player.X, player.Y] = 0x11;
 			if (this[player.X, player.Y] == 0x22) this[player.X, player.Y] = 0x12;
 
-			string tempstring = "You are now at level " + (player.DungeonLevel + 1).ToString() + ".";
-
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine(tempstring, XleColor.White);
+			XleCore.TextArea.PrintLine("\n\nYou are now at level " + (player.DungeonLevel + 1).ToString() + ".", XleColor.White);
 		}
 
 		protected override bool ShowDirections(Player player)
@@ -286,7 +285,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				Point loc = new Point(player.X + fightDir.X * i, player.Y + fightDir.Y * i);
 
 				distance = i;
-				monst = MonsterAt(loc);
+				monst = MonsterAt(player.DungeonLevel, loc);
 
 				if (monst != null)
 					break;
@@ -343,9 +342,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return true;
 		}
 
-		private DungeonMonster MonsterAt(Point loc)
+		private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
 		{
-			return Monsters.FirstOrDefault(m => m.Location == loc);
+			return Monsters.FirstOrDefault(m => m.DungeonLevel == dungeonLevel && m.Location == loc);
 		}
 
 		public override bool PlayerXamine(Player player)
@@ -373,7 +372,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				Point loc = new Point(player.X + faceDir.X * i, player.Y + faceDir.Y * i);
 
-				foundMonster = MonsterAt(loc);
+				foundMonster = MonsterAt(player.DungeonLevel, loc);
 
 				if (foundMonster != null)
 					break;
@@ -397,7 +396,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (foundMonster != null)
 			{
-				XleCore.TextArea.PrintLine("A " + foundMonster.Name + " is stalking you!!!", XleColor.White);
+				bool handled = false;
+
+				Extender.PrintExamineMonsterMessage(foundMonster, ref handled);
+
+				if (false == handled)
+				{
+					XleCore.TextArea.PrintLine("A " + foundMonster.Name + " is stalking you!!!", XleColor.White);
+				}
 			}
 			else
 			{
@@ -501,6 +507,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		}
 
+		protected override bool PlayerSpeakImpl(Player player)
+		{
+			bool handled = false;
+
+			Extender.PlayerSpeak(XleCore.GameState, ref handled);
+
+			return handled;
+		}
 		private void OpenBox(Player player, ref bool clearBox)
 		{
 			int amount = XleCore.random.Next(60, 200);
@@ -615,7 +629,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		private void UpdateMonsters(GameState state)
 		{
-			foreach (var monster in Monsters)
+			bool handled = false;
+			Extender.UpdateMonsters(state, ref handled);
+			if (handled)
+				return;
+
+			foreach (var monster in Monsters.Where(x => x.DungeonLevel == state.Player.DungeonLevel))
 			{
 				var delta = new Point(
 					state.Player.X - monster.Location.X,
@@ -642,7 +661,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 			}
 
-			if (Monsters.Count < MaxMonsters)
+			if (Extender.SpawnMonsters(state) &&
+				Monsters.Count(monst => monst.DungeonLevel == state.Player.DungeonLevel) < MaxMonsters)
 			{
 				SpawnMonster(state);
 			}
@@ -733,7 +753,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (IsMapSpaceBlocked(newPt.X, newPt.Y))
 				return false;
 
-			if (IsSpaceBlockedByExtra(XleCore.GameState.Player, newPt.X, newPt.Y))
+			if (IsSpaceOccupiedByMonster(XleCore.GameState.Player, newPt.X, newPt.Y))
 				return false;
 
 			return true;
@@ -754,6 +774,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			} while (this.CanPlayerStepInto(state.Player, monster.Location.X, monster.Location.Y) == false || monster.Location == state.Player.Location);
 
+			monster.DungeonLevel = state.Player.DungeonLevel;
+
 			Monsters.Add(monster);
 		}
 
@@ -765,7 +787,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
 
-				var monster = MonsterAt(loc);
+				var monster = MonsterAt(XleCore.GameState.Player.DungeonLevel, loc);
 
 				if (monster == null)
 					continue;
@@ -786,9 +808,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		protected override bool IsSpaceBlockedByExtra(Player player, int xx, int yy)
+		protected override bool IsSpaceOccupiedByMonster(Player player, int xx, int yy)
 		{
-			return MonsterAt(new Point(xx, yy)) != null;
+			return MonsterAt(player.DungeonLevel, new Point(xx, yy)) != null;
 		}
 
 		private void OnPlayerAvoidTrap(Player player, int x, int y)

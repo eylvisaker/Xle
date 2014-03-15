@@ -32,5 +32,13 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		bool RollToHitPlayer(GameState state, DungeonMonster monster);
 
 		int RollDamageToPlayer(GameState state, DungeonMonster monster);
+
+		bool SpawnMonsters(GameState state);
+
+		void UpdateMonsters(GameState state, ref bool handled);
+
+		void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled);
+
+		void PlayerSpeak(GameState state, ref bool handled);
 	}
 }

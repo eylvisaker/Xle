@@ -52,6 +52,10 @@ namespace ERY.Xle.LoB
 		public bool ProcuredSteelHammer { get; set; }
 
 		public bool EatenFlaxton { get; set; }
+
+		public bool MarthbaneOfferedHelpToKing { get; set; }
+
+		public bool RescuedKing { get; set; }
 	}
 
 	public static class LobStoryExtensions

@@ -97,5 +97,26 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		{
 			return 4;
 		}
+
+
+		public virtual bool SpawnMonsters(GameState state)
+		{
+			return true;
+		}
+
+
+		public virtual void UpdateMonsters(GameState state, ref bool handled)
+		{
+		}
+
+
+		public virtual void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
+		{
+		}
+
+
+		public virtual void PlayerSpeak(GameState state, ref bool handled)
+		{
+		}
 	}
 }
