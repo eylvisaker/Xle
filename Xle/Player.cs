@@ -614,12 +614,6 @@ namespace ERY.Xle
 			set { map = value; }
 		}
 
-		[Obsolete]
-		public void SetMap(int newMap, int newX, int newY)
-		{
-			XleCore.ChangeMap(this, newMap, -1, newX, newY);
-		}
-
 		/// <summary>
 		/// Returns the last map the player was on
 		/// </summary>
@@ -1194,7 +1188,8 @@ namespace ERY.Xle
 
 		public void ReturnToPreviousMap()
 		{
-			SetMap(returnMap, returnX, returnY);
+			XleCore.ChangeMap(this, returnMap, -1, returnX, returnY);
+
 			faceDirection = returnFacing;
 		}
 

@@ -136,17 +136,18 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 				else if (rawtext[ip] != '`')
 				{
 					text.AddText(rawtext[ip].ToString(), clr);
-					//g.UpdateBottom(text, line);
 					XleCore.TextArea.Print(rawtext[ip].ToString(), clr);
 
 					if (waiting)
 					{
-						if (AgateLib.InputLib.Keyboard.AnyKeyPressed)
-						{
+						string punctuation = ",.!";
+
+						if (punctuation.Contains(rawtext[ip]))
+							XleCore.Wait(350 * (1+punctuation.IndexOf(rawtext[ip])));
+						else if (AgateLib.InputLib.Keyboard.AnyKeyPressed)
 							XleCore.Wait(1);
-						}
 						else
-							XleCore.Wait(50);
+							XleCore.Wait(30);
 					}
 				}
 				else

@@ -27,9 +27,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			int y = player.Y;
 			Direction facing = player.FaceDirection;
 
-			player.DungeonLevel = 7;
-			player.SetMap(72, 0, 1);
+			//player.DungeonLevel = 7;
+			//player.SetMap(72, 0, 1);
+			XleCore.ChangeMap(player, 72, 0);
 			player.SetReturnLocation(map, x, y, facing);
+
 		}
 
 		public override bool StaticBeforeCoin
