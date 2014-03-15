@@ -628,33 +628,209 @@
   </DungeonExtras>
   <DungeonMonsters>
     <Monster ID="0" Name="nerve streaker" ImageFile="monster00.png">
-      <Image dest_x="120" dest_y="32">
+      <Image dest_x="106" dest_y="28">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
-      <Image dest_x="120" dest_y="32">
+      <Image dest_x="138" dest_y="74">
         <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
       </Image>
-      <Image dest_x="120" dest_y="32">
+      <Image dest_x="138" dest_y="80">
         <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
       </Image>
-      <Image dest_x="120" dest_y="32">
+      <Image dest_x="162" dest_y="106">
         <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
       </Image>
-      <Image dest_x="120" dest_y="32">
-        <SourceRect x="192" y="0" width="48" height="42"></SourceRect>
+      <Image dest_x="162" dest_y="110">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="1" Name="gnasher turtle"></Monster>
-    <Monster ID="2" Name="tendro snapper"></Monster>
-    <Monster ID="3" Name="night stalker"></Monster>
-    <Monster ID="4" Name="grappler"></Monster>
-    <Monster ID="5" Name="knuckles"></Monster>
-    <Monster ID="6" Name="dangler"></Monster>
-    <Monster ID="7" Name="mr potato"></Monster>
-    <Monster ID="8" Name="raker brute"></Monster>
-    <Monster ID="9" Name="blue lion"></Monster>
-    <Monster ID="10" Name="giant slug"></Monster>
-    <Monster ID="11" Name="slime wart"></Monster>
+    <Monster ID="1" Name="gnasher turtle" ImageFile="monster01.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="2" Name="tendro snapper" ImageFile="monster02.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="3" Name="night stalker" ImageFile="monster03.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="4" Name="grappler" ImageFile="monster04.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="5" Name="knuckles" ImageFile="monster05.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="6" Name="dangler" ImageFile="monster06.png">
+      <Image dest_x="106" dest_y="28">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="74">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="80">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="106">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="110">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="7" Name="mr potato" ImageFile="monster07.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="8" Name="raker brute" ImageFile="monster08.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="9" Name="blue lion" ImageFile="monster09.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="10" Name="giant slug" ImageFile="monster10.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
+    <Monster ID="11" Name="slime wart" ImageFile="monster11.png">
+      <Image dest_x="106" dest_y="110">
+        <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="128">
+        <SourceRect x="0" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="138" dest_y="130">
+        <SourceRect x="96" y="126" width="96" height="84"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="126" width="48" height="42"></SourceRect>
+      </Image>
+      <Image dest_x="162" dest_y="150">
+        <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
+      </Image>
+    </Monster>
   </DungeonMonsters>
   <Fortunes>
     <Fortune Level="1">

@@ -761,7 +761,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			Point stepDir = StepDirection(faceDirection);
 
-			for (int distance = 1; distance < maxDistance + 1; distance++)
+			for (int distance = 1; distance <= maxDistance; distance++)
 			{
 				Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
 

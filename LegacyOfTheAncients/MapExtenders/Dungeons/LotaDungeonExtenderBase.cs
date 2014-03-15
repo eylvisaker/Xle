@@ -105,7 +105,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			if (XleCore.random.NextDouble() > 0.07) 
 				return null;
 
-			int monsterID = 0;
+			int monsterID = XleCore.random.Next(6);
+
+			if (state.Player.DungeonLevel >= 4)
+				monsterID += 6;
 
 			DungeonMonster monst = new DungeonMonster(
 				XleCore.Data.DungeonMonsters[monsterID]);
