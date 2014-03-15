@@ -228,8 +228,6 @@
       <MapID>52</MapID>
       <AskUser>False</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>37</TargetX>
-      <TargetY>6</TargetY>
       <CommandText>
       </CommandText>
     </Item>

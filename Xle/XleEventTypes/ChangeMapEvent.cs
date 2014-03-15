@@ -93,21 +93,13 @@ namespace ERY.Xle.XleEventTypes
 			info.Write("MapID", MapID);
 			info.Write("AskUser", mAsk);
 			info.Write("TargetEntryPoint", TargetEntryPoint);
-			info.Write("TargetX", TargetX);
-			info.Write("TargetY", TargetY);
 			info.Write("CommandText", mCommandText);
 		}
 		protected override void ReadData(XleSerializationInfo info)
 		{
 			MapID = info.ReadInt32("MapID");
 			mAsk = info.ReadBoolean("AskUser");
-			if (info.ContainsKey("TargetEntryPoint"))
-				TargetEntryPoint = info.ReadInt32("TargetEntryPoint");
-			if (info.ContainsKey("TargetX"))
-			{
-				TargetX = info.ReadInt32("TargetX");
-				TargetY = info.ReadInt32("TargetY");
-			}
+			TargetEntryPoint = info.ReadInt32("TargetEntryPoint");
 			mCommandText = info.ReadString("CommandText", "");
 		}
 

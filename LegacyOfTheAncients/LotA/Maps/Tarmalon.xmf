@@ -20,8 +20,6 @@
       <MapID>11</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>75</TargetX>
-      <TargetY>17</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -35,8 +33,6 @@
       <MapID>12</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>2</TargetX>
-      <TargetY>20</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -50,8 +46,6 @@
       <MapID>10</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>77</TargetX>
-      <TargetY>18</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -65,8 +59,6 @@
       <MapID>17</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>1</TargetX>
-      <TargetY>30</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -80,8 +72,6 @@
       <MapID>16</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>49</TargetX>
-      <TargetY>35</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -95,8 +85,6 @@
       <MapID>15</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>1</TargetX>
-      <TargetY>17</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -110,8 +98,6 @@
       <MapID>51</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>39</TargetX>
-      <TargetY>87</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -125,8 +111,6 @@
       <MapID>14</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>75</TargetX>
-      <TargetY>2</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -140,8 +124,6 @@
       <MapID>13</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>64</TargetX>
-      <TargetY>17</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -155,8 +137,6 @@
       <MapID>18</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>2</TargetX>
-      <TargetY>7</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -170,8 +150,6 @@
       <MapID>19</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>31</TargetX>
-      <TargetY>37</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -185,8 +163,6 @@
       <MapID>5</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>8</TargetX>
-      <TargetY>1</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -200,8 +176,6 @@
       <MapID>20</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>1</TargetX>
-      <TargetY>17</TargetY>
       <CommandText>
       </CommandText>
     </Item>

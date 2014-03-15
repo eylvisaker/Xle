@@ -20,8 +20,6 @@
       <MapID>21</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>59</TargetX>
-      <TargetY>38</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -35,8 +33,6 @@
       <MapID>5</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>3</TargetEntryPoint>
-      <TargetX>3</TargetX>
-      <TargetY>7</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -50,8 +46,6 @@
       <MapID>71</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>1</TargetX>
-      <TargetY>1</TargetY>
       <CommandText>
       </CommandText>
     </Item>

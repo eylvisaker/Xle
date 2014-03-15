@@ -97,8 +97,6 @@
       <MapID>40</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>
-      <TargetX>0</TargetX>
-      <TargetY>0</TargetY>
       <CommandText>
       </CommandText>
     </Item>
@@ -452,8 +450,6 @@
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>2</TargetEntryPoint>
-      <TargetX>0</TargetX>
-      <TargetY>0</TargetY>
       <CommandText>
       </CommandText>
     </Item>

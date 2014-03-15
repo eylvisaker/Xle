@@ -69,8 +69,6 @@
       <MapID>51</MapID>
       <AskUser>False</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>
-      <TargetX>45</TargetX>
-      <TargetY>4</TargetY>
       <CommandText>
       </CommandText>
     </Item>

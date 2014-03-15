@@ -90,8 +90,6 @@
       <MapID>81</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
-      <TargetX>0</TargetX>
-      <TargetY>0</TargetY>
       <CommandText>
       </CommandText>
     </Item>
