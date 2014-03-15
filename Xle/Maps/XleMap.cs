@@ -853,6 +853,11 @@ namespace ERY.Xle
 			return (TerrainType)2;
 		}
 
+		public bool CanPlayerStep(Player player, Point stepDirection)
+		{
+			return CanPlayerStep(player, stepDirection.X, stepDirection.Y);
+		}
+
 		/// <summary>
 		/// Checks to see if the player can move in the specified direction.
 		/// Returns true if the player can move in that direction.
@@ -861,7 +866,7 @@ namespace ERY.Xle
 		/// <param name="dx"></param>
 		/// <param name="dy"></param>
 		/// <returns></returns>
-		public bool CheckMovement(Player player, int dx, int dy)
+		public bool CanPlayerStep(Player player, int dx, int dy)
 		{
 			XleEvent evt = GetEvent(player.X + dx, player.Y + dy, 0);
 
@@ -875,7 +880,7 @@ namespace ERY.Xle
 					return false;
 			}
 
-			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
+			return CanPlayerStepIntoImpl(player, player.X + dx, player.Y + dy);
 		}
 
 		public void BeforeStepOn(Player player, int x, int y)
@@ -908,7 +913,7 @@ namespace ERY.Xle
 
 		}
 
-		public abstract bool CanPlayerStepInto(Player player, int xx, int yy);
+		public abstract bool CanPlayerStepIntoImpl(Player player, int xx, int yy);
 
 		public abstract void PlayerCursorMovement(Player player, Direction dir);
 
@@ -1355,33 +1360,22 @@ namespace ERY.Xle
 			return false;
 		}
 
-
-		protected virtual bool MovePlayer(GameState state, Point stepDirection)
+		/// <summary>
+		/// Executes the movement of the player in a certain direction.
+		/// Assumes validation has already been performed. Call CanPlayerStep
+		/// first to check to see if the movement is valid.
+		/// </summary>
+		/// <param name="state"></param>
+		/// <param name="stepDirection"></param>
+		protected virtual void MovePlayer(GameState state, Point stepDirection)
 		{
-			if (stepDirection.IsEmpty)
-				return false;
-
 			Point newPoint = new Point(state.Player.X + stepDirection.X, state.Player.Y + stepDirection.Y);
 
-			if (CheckMovement(state.Player, stepDirection.X, stepDirection.Y))
-			{
-				BeforeStepOn(state.Player, newPoint.X, newPoint.Y);
+			BeforeStepOn(state.Player, newPoint.X, newPoint.Y);
 
-				if (CanPlayerStepInto(state.Player, newPoint.X, newPoint.Y))
-				{
-					state.Player.Location = newPoint;
+			state.Player.Location = newPoint;
 
-					AfterPlayerStep(state.Player);
-
-					return true;
-				}
-				else
-					return false;
-
-			}
-			else
-				return false;
-
+			AfterPlayerStep(state.Player);
 		}
 	}
 

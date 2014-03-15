@@ -90,7 +90,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		public override bool CanPlayerStepInto(Player player, int xx, int yy)
+		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
 		{
 			int test = 0;
 
@@ -128,10 +128,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			_Move2D(player, dir, "Move", out command, out stepDirection);
 
-			XleCore.TextArea.PrintLine(command);
-
-			if (MovePlayer(XleCore.GameState, stepDirection))
+			if (CanPlayerStep(player, stepDirection))
 			{
+				XleCore.TextArea.PrintLine(command);
+
+				MovePlayer(XleCore.GameState, stepDirection);
 				SoundMan.PlaySound(LotaSound.WalkTown);
 
 				player.TimeQuality += 0.03;
@@ -140,7 +141,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				SoundMan.PlaySound(LotaSound.Invalid);
 
-				Commands.CommandList.UpdateCommand("Move Nowhere");
+				//Commands.CommandList.UpdateCommand("Move Nowhere");
+				XleCore.TextArea.PrintLine("Move nowhere");
 			}
 		}
 
@@ -148,7 +150,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			Draw2D(x, y, facingDirection, inRect);
 		}
-		
+
 		public override bool PlayerFight(Player player)
 		{
 			XleCore.TextArea.PrintLine();
@@ -161,7 +163,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			Direction fightDir;
 
-			switch(key)
+			switch (key)
 			{
 				case KeyCode.Right: fightDir = Direction.East; break;
 				case KeyCode.Up: fightDir = Direction.North; break;

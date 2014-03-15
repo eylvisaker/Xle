@@ -432,7 +432,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 		}
 
-		public override bool CanPlayerStepInto(Player player, int xx, int yy)
+		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
 		{
 			if (IsMapSpaceBlocked(xx, yy))
 				return false;
@@ -469,7 +469,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (stepDirection.IsEmpty == false)
 			{
-				if (CanPlayerStepInto(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
+				if (CanPlayerStepIntoImpl(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
 				{
 					CommandTextForInvalidMovement(ref command);
 					SoundMan.PlaySound(LotaSound.Bump);

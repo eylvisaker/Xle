@@ -62,7 +62,6 @@
     <Compile Include="GameVariableExtensions.cs" />
     <Compile Include="Lota.cs" />
     <Compile Include="LotaFactory.cs" />
-    <Compile Include="LotaOptions.cs" />
     <Compile Include="LotaProgram.cs" />
     <Compile Include="LotaStory.cs" />
     <Compile Include="MapExtenders\Castle\Events\Arovyn.cs" />

@@ -27,6 +27,7 @@ namespace ERY.Xle.Commands
 
 				saved = true;
 
+				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("Game Saved.");
 				XleCore.TextArea.PrintLine();
 			}
@@ -34,6 +35,7 @@ namespace ERY.Xle.Commands
 			{
 				ColorStringBuilder builder = new ColorStringBuilder();
 
+				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.Print("Game ", XleColor.White);
 				XleCore.TextArea.Print("not", XleColor.Yellow);
 				XleCore.TextArea.Print(" saved.", XleColor.White);

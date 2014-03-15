@@ -137,15 +137,12 @@ namespace ERY.Xle.XleEventTypes
 			{
 				System.Diagnostics.Debug.WriteLine(e.Message);
 
-				SoundMan.PlaySound(LotaSound.Medium);
+				SoundMan.PlaySound(LotaSound.Bad);
 
-				ColorStringBuilder builder = new ColorStringBuilder();
-
-				builder.AddText("Failed to load ", XleColor.White);
-				builder.AddText(GetMapName(), XleColor.Red);
-				builder.AddText(".", XleColor.White);
-
-				g.AddBottom(builder);
+				XleCore.TextArea.Print("Failed to load ", XleColor.White);
+				XleCore.TextArea.Print(GetMapName(), XleColor.Red);
+				XleCore.TextArea.Print(".", XleColor.White);
+				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine();
 
 				XleCore.Wait(1500);

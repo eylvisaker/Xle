@@ -772,7 +772,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 					XleCore.random.Next(1, 15),
 					XleCore.random.Next(1, 15));
 
-			} while (this.CanPlayerStepInto(state.Player, monster.Location.X, monster.Location.Y) == false || monster.Location == state.Player.Location);
+			} while (this.CanPlayerStepIntoImpl(state.Player, monster.Location.X, monster.Location.Y) == false || monster.Location == state.Player.Location);
 
 			monster.DungeonLevel = state.Player.DungeonLevel;
 

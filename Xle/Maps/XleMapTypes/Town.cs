@@ -285,8 +285,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 					return;
 			}
 
-			ColorStringBuilder builder = new ColorStringBuilder();
-
 			double hitChance = Extender.ChanceToHitGuard(player, guard, distance);
 
 
@@ -302,11 +300,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 				IsAngry = true;
 				player.LastAttackedMapID = MapID;
 
-				builder.AddText(guard.Name + " struck  ", XleColor.Yellow);
-				builder.AddText(dam.ToString(), XleColor.White);
-				builder.AddText("  H.P. Blow", XleColor.White);
-
-				g.AddBottom(builder);
+				XleCore.TextArea.Print(guard.Name + " struck  ", XleColor.Yellow);
+				XleCore.TextArea.Print(dam.ToString(), XleColor.White);
+				XleCore.TextArea.Print("  H.P. Blow", XleColor.White);
+				XleCore.TextArea.PrintLine();
 
 				guard.HP -= dam;
 

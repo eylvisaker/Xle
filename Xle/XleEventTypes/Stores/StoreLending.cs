@@ -70,16 +70,13 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 					XleCore.Wait(1000, DrawStore);
 
-					ColorStringBuilder b = new ColorStringBuilder();
-					b.AddText("You'll owe ", XleColor.White);
-					b.AddText(player.loan.ToString(), XleColor.Yellow);
-					b.AddText(" gold", XleColor.Yellow);
-					b.AddText(" in 120 days.", XleColor.White);
-
-					g.AddBottom(b);
+					XleCore.TextArea.Print("You'll owe ", XleColor.White);
+					XleCore.TextArea.Print(player.loan.ToString(), XleColor.Yellow);
+					XleCore.TextArea.Print(" gold", XleColor.Yellow);
+					XleCore.TextArea.Print(" in 120 days.", XleColor.White);
+					XleCore.TextArea.PrintLine();
 
 					StoreSound(LotaSound.Bad);
-
 				}
 			}
 			else

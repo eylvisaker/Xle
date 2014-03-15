@@ -31,12 +31,12 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 		{
 			get
 			{
-				if (XleCore.ExhibitInfo.ContainsKey(ExhibitID))
+				if (XleCore.Data.ExhibitInfo.ContainsKey(ExhibitID))
 				{
-					var exinfo = XleCore.ExhibitInfo[ExhibitID];
+					var exinfo = XleCore.Data.ExhibitInfo[ExhibitID];
 
 					if (exinfo.Text.ContainsKey(1))
-						return XleCore.ExhibitInfo[ExhibitID].Text[1];
+						return XleCore.Data.ExhibitInfo[ExhibitID].Text[1];
 					else
 						return "This exhibit does not have any text with key 1.";
 				}

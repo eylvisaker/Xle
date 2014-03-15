@@ -38,7 +38,7 @@ namespace ERY.XleTests
 		{
 			throw new NotImplementedException();
 		}
-		public override bool CanPlayerStepInto(Player player, int xx, int yy)
+		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
 		{
 			throw new NotImplementedException();
 		}

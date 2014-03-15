@@ -160,12 +160,6 @@ namespace ERY.Xle.Commands
 			AfterDoCommand(waitTime, cmd);
 		}
 
-		[Obsolete]
-		public static void UpdateCommand(string command)
-		{
-			g.UpdateBottom("Enter Command: " + command);
-		}
-
 		public void ResetCommands()
 		{
 			Items.Sort((x, y) => x.Name.CompareTo(y.Name));

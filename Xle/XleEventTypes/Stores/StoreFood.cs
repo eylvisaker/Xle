@@ -27,8 +27,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 				return true;
 
 			string tempString;
-			double cost = 15 / player.Attribute[Attributes.charm];
-			int choice;
+			double cost = ((int)(13 - player.Attribute[Attributes.charm] / 7)) / 10.0;
+			
+			if (cost < 0.1)
+				cost = 0.1;
+			
 			int max = (int)(player.Gold / cost);
 
 			SetTitle();
@@ -39,6 +42,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 			Wait(1);
 
 			XleCore.TextArea.PrintLine();
+			
+			int choice;
 
 			if (player.mailTown == state.Map.MapID)
 			{
@@ -63,7 +68,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 					player.Spend((int)(choice * cost));
 					player.Food += choice;
 
-					XleCore.TextArea.PrintLine(choice + " days of food bought.");
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine(" " + choice + " days of food bought.");
 
 					StoreSound(LotaSound.Sale);
 
@@ -201,7 +207,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			XleCore.TextArea.PrintLine();
 
 			StoreSound(LotaSound.Good);
-			g.UpdateBottom("        Press Key to Continue");
+			XleCore.TextArea.RewriteLine(4, "        Press Key to Continue");
 			WaitForKey();
 
 			player.Gold += gold;

@@ -66,12 +66,14 @@ namespace ERY.Xle
 		public XleCore()
 		{
 			inst = this;
-			Renderer = new XleRenderer();
 
+			Renderer = new XleRenderer();
 			Renderer.PlayerColor = XleColor.White;
 
 			TextArea = new TextArea();
+			Options = new XleOptions();
 		}
+
 		public void Run(XleGameFactory factory)
 		{
 			try
@@ -336,13 +338,13 @@ namespace ERY.Xle
 				}
 			}
 
-			if (map.CanPlayerStepInto(player, targetX + 2, targetY))
+			if (map.CanPlayerStepIntoImpl(player, targetX + 2, targetY))
 				targetX += 2;
-			else if (map.CanPlayerStepInto(player, targetX - 2, targetY))
+			else if (map.CanPlayerStepIntoImpl(player, targetX - 2, targetY))
 				targetX -= 2;
-			else if (map.CanPlayerStepInto(player, targetX, targetY + 2))
+			else if (map.CanPlayerStepIntoImpl(player, targetX, targetY + 2))
 				targetY += 2;
-			else if (map.CanPlayerStepInto(player, targetX, targetY - 2))
+			else if (map.CanPlayerStepIntoImpl(player, targetX, targetY - 2))
 				targetY -= 2;
 
 			ChangeMap(player, map.MapID, -1, targetX, targetY);
@@ -407,7 +409,7 @@ namespace ERY.Xle
 
 		public static GameState GameState { get; set; }
 		public static XleRenderer Renderer { get; set; }
-
+		public static XleOptions Options { get; set; }
 		public static XleData Data { get { return inst.mData; } }
 
 		[Obsolete("Use Data.MapList[id].Name instead.")]
@@ -1318,8 +1320,7 @@ namespace ERY.Xle
 					if (amount < 0)
 						amount = 0;
 
-					g.UpdateBottom("                          - " + amount.ToString() + " -");
-
+					XleCore.TextArea.RewriteLine(4, "                          - " + amount.ToString() + " -");
 				}
 				else if (method == 2)
 				{
@@ -1344,14 +1345,15 @@ namespace ERY.Xle
 
 					if (amount < 0)
 						amount = 0;
-
-					g.UpdateBottom("                          - " + amount.ToString() + " -");
+					
+					XleCore.TextArea.RewriteLine(4, "                          - " + amount.ToString() + " -");
 				}
 
 
 			} while (key != KeyCode.Return);
 
 			XleCore.PromptToContinueOnWait = true;
+			XleCore.TextArea.PrintLine();
 
 			return amount;
 		}

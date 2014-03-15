@@ -22,7 +22,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
 			commands.Items.Add(new Commands.Magic());
-			commands.Items.Add(new Commands.Leave { ConfirmPrompt = LotaOptions.EnhancedUserInterface });
+			commands.Items.Add(new Commands.Leave { ConfirmPrompt = XleOptions.EnhancedUserInterface });
 			commands.Items.Add(new Commands.Rob());
 			commands.Items.Add(new Commands.Speak());
 		}

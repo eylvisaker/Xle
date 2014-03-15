@@ -288,7 +288,7 @@ namespace ERY.Xle
 				cursor.Y = 0;
 		}
 
-		public void RewriteLine(int line, string text, Color? color)
+		public void RewriteLine(int line, string text, Color? color = null)
 		{
 			cursor.X = margin;
 			cursor.Y = line;

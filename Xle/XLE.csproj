@@ -154,6 +154,7 @@
     <Compile Include="Commands\Xamine.cs" />
     <Compile Include="CountdownTimer.cs" />
     <Compile Include="Data\XleData.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="MainWindowClosedException.cs" />
     <Compile Include="Maps\DungeonMonster.cs" />
     <Compile Include="Data\DungeonMonsterData.cs" />
@@ -221,7 +222,7 @@
     <Compile Include="Maps\XleMapTypes\Extenders\NullTownExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Map3DExtraInfo.cs" />
     <Compile Include="Data\EquipmentList.cs" />
-    <Compile Include="Global.cs" />
+    <Compile Include="TerrainType.cs" />
     <Compile Include="Data\ItemList.cs" />
     <Compile Include="Maps\MapData.cs" />
     <Compile Include="XleEventTypes\XleEventList.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Maps\XleMapTypes\Temple.cs" />
     <Compile Include="Maps\XleMapTypes\Town.cs" />
     <Compile Include="Data\MagicSpell.cs" />
+    <Compile Include="XleOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

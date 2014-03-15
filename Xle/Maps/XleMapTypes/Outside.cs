@@ -326,8 +326,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		public override bool PlayerFight(Player player)
 		{
 			string weaponName;
-			ColorStringBuilder builder;
-
+			
 			weaponName = player.CurrentWeaponTypeName;
 
 			XleCore.TextArea.PrintLine("\n");
@@ -336,28 +335,22 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				int dam = attack(player);
 
-				builder = new ColorStringBuilder();
-				builder.AddText("Attack ", XleColor.White);
-				builder.AddText(MonstName, XleColor.Cyan);
+				XleCore.TextArea.Print("Attack ", XleColor.White);
+				XleCore.TextArea.Print(MonstName, XleColor.Cyan);
+				XleCore.TextArea.PrintLine();
 
-				g.AddBottom(builder);
-				builder.Clear();
-
-				builder.AddText("with ", XleColor.White);
-				builder.AddText(weaponName, XleColor.Cyan);
-				g.AddBottom(builder);
-
-				builder.Clear();
+				XleCore.TextArea.Print("with ", XleColor.White);
+				XleCore.TextArea.Print(weaponName, XleColor.Cyan);
+				XleCore.TextArea.PrintLine();
 
 				if (dam > 0)
 				{
 					SoundMan.PlaySound(LotaSound.PlayerHit);
 
-					builder.AddText("Enemy hit by blow of ", XleColor.White);
-					builder.AddText(dam.ToString(), XleColor.Cyan);
-					builder.AddText(".", XleColor.White);
-
-					g.AddBottom(builder);
+					XleCore.TextArea.Print("Enemy hit by blow of ", XleColor.White);
+					XleCore.TextArea.Print(dam.ToString(), XleColor.Cyan);
+					XleCore.TextArea.Print(".", XleColor.White);
+					XleCore.TextArea.PrintLine();
 				}
 				else
 				{
@@ -401,11 +394,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 								food = 0;
 							else
 							{
-								builder = new ColorStringBuilder();
-								builder.AddText("You gain ", XleColor.White);
-								builder.AddText(food.ToString(), XleColor.Green);
-								builder.AddText(" days of food.", XleColor.White);
-								g.AddBottom(builder);
+								XleCore.TextArea.Print("You gain ", XleColor.White);
+								XleCore.TextArea.Print(food.ToString(), XleColor.Green);
+								XleCore.TextArea.Print(" days of food.", XleColor.White);
+								XleCore.TextArea.PrintLine();
 
 								player.Food += food;
 							}
@@ -419,13 +411,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 						}
 						else if (gold > 0)
 						{
-							builder = new ColorStringBuilder();
+							XleCore.TextArea.Print("You find ", XleColor.White);
+							XleCore.TextArea.Print(gold.ToString(), XleColor.Yellow);
+							XleCore.TextArea.Print(" gold.", XleColor.White);
+							XleCore.TextArea.PrintLine();
 
-							builder.AddText("You find ", XleColor.White);
-							builder.AddText(gold.ToString(), XleColor.Yellow);
-							builder.AddText(" gold.", XleColor.White);
-
-							g.AddBottom(builder);
 							player.Gold += gold;
 						}
 
@@ -456,7 +446,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			XleCore.TextArea.PrintLine(command);
 
-			if (MovePlayer(XleCore.GameState, stepDirection) == false)
+			if (CanPlayerStep(player, stepDirection) == false)
 			{
 				TerrainType terrain = TerrainAt(player.X + stepDirection.X, player.Y + stepDirection.Y);
 
@@ -494,13 +484,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 				else
 				{
+					throw new NotImplementedException();
 					SoundMan.PlaySound(LotaSound.Invalid);
-
-					g.UpdateBottom("Enter command: Move nowhere");
 				}
 			}
 			else
 			{
+				MovePlayer(XleCore.GameState, stepDirection);
+
 				if (EncounterState == XleMapTypes.EncounterState.JustDisengaged)
 				{
 					XleCore.TextArea.PrintLine();
@@ -698,7 +689,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			MenuItemList menu = new MenuItemList("Yes", "No");
 
 			Color qcolor = XleColor.White;
-			ColorStringBuilder builder;
 
 			string[] quality = new string[5] { "a Well Crafted", "a Slightly Used", "a Sparkling New", "a Wonderful", "an Awesome" };
 
@@ -714,13 +704,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 				case 1:			// buy armor
 				case 2:         // buy weapon
 
-					builder = new ColorStringBuilder();
-					builder.AddText("Do you want to buy ", XleColor.Cyan);
-					builder.AddText(quality[qual], XleColor.White);
-
-					g.AddBottom(builder);
-					builder.Clear();
-
+					XleCore.TextArea.Print("Do you want to buy ", XleColor.Cyan);
+					XleCore.TextArea.Print(quality[qual], XleColor.White);
+					XleCore.TextArea.PrintLine();
+					
 					if (type == 1)
 					{
 						item = XleCore.random.Next(4) + 1;
@@ -734,12 +721,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 						name = XleCore.WeaponList[item].Name;
 					}
 
-					builder.AddText(name, XleColor.White);
-					builder.AddText(" for ", XleColor.Cyan);
-					builder.AddText(cost.ToString(), XleColor.White);
-					builder.AddText(" Gold?", XleColor.Cyan);
+					XleCore.TextArea.Print(name, XleColor.White);
+					XleCore.TextArea.Print(" for ", XleColor.Cyan);
+					XleCore.TextArea.Print(cost.ToString(), XleColor.White);
+					XleCore.TextArea.Print(" Gold?", XleColor.Cyan);
+					XleCore.TextArea.PrintLine();
 
-					g.AddBottom(builder);
 					qcolor = XleColor.Cyan;
 
 					break;
@@ -748,18 +735,15 @@ namespace ERY.Xle.Maps.XleMapTypes
 					item = XleCore.random.Next(21) + 20;
 					cost = (int)(item * (XleCore.random.NextDouble() * 0.4 + 0.8));
 
-					builder = new ColorStringBuilder();
-					builder.AddText("Do you want to buy ", XleColor.Green);
-					builder.AddText(item.ToString(), XleColor.Yellow);
-
-					g.AddBottom(builder);
-					builder.Clear();
+					XleCore.TextArea.Print("Do you want to buy ", XleColor.Green);
+					XleCore.TextArea.Print(item.ToString(), XleColor.Yellow);
+					XleCore.TextArea.PrintLine();
 
 					// line 2
-					builder.AddText("Days of food for ", XleColor.Green);
-					builder.AddText(cost.ToString(), XleColor.Yellow);
-					builder.AddText(" gold?", XleColor.Green);
-					g.AddBottom(builder);
+					XleCore.TextArea.Print("Days of food for ", XleColor.Green);
+					XleCore.TextArea.Print(cost.ToString(), XleColor.Yellow);
+					XleCore.TextArea.Print(" gold?", XleColor.Green);
+					XleCore.TextArea.PrintLine();
 
 					qcolor = XleColor.Green;
 
@@ -773,18 +757,15 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					cost = (int)(item * (XleCore.random.NextDouble() * 0.15 + 0.75));
 
-					builder = new ColorStringBuilder();
-					builder.AddText("Do you want to buy a potion worth ", XleColor.Green);
-
-					g.AddBottom(builder);
-					builder.Clear();
+					XleCore.TextArea.Print("Do you want to buy a potion worth ", XleColor.Green);
+					XleCore.TextArea.PrintLine();
 
 					// line 2
-					builder.AddText(item.ToString(), XleColor.Yellow);
-					builder.AddText(" Hit Points for ", XleColor.Green);
-					builder.AddText(cost.ToString(), XleColor.Yellow);
-					builder.AddText(" gold?", XleColor.Green);
-					g.AddBottom(builder);
+					XleCore.TextArea.Print(item.ToString(), XleColor.Yellow);
+					XleCore.TextArea.Print(" Hit Points for ", XleColor.Green);
+					XleCore.TextArea.Print(cost.ToString(), XleColor.Yellow);
+					XleCore.TextArea.Print(" gold?", XleColor.Green);
+					XleCore.TextArea.PrintLine();
 
 					qcolor = XleColor.Green;
 
@@ -1069,11 +1050,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		private void StepEncounter(Player player, bool didEvent)
 		{
-			if (XleCore.Database.MonsterList.Count == 0) return;
-			if (g.disableEncounters) return;
+			if (XleCore.Data.Database.MonsterList.Count == 0) return;
+			if (XleCore.Options.DisableOutsideEncounters) return;
 
 			// bail out if the player entered another map on this step.
-			if (XleCore.Map != this)
+			if (XleCore.GameState.Map != this)
 				return;
 
 			bool handled = false;
@@ -1267,13 +1248,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 			else
 			{
-				ColorStringBuilder builder = new ColorStringBuilder();
-				builder.AddText("Attacked by ", XleColor.White);
-				builder.AddText(monstCount.ToString(), XleColor.Yellow);
-				builder.AddText(" " + currentMonst[0].Name, XleColor.Cyan);
-
 				XleCore.TextArea.PrintLine();
-				g.AddBottom(builder);
+				XleCore.TextArea.Print("Attacked by ", XleColor.White);
+				XleCore.TextArea.Print(monstCount.ToString(), XleColor.Yellow);
+				XleCore.TextArea.Print(" " + currentMonst[0].Name, XleColor.Cyan);
+				XleCore.TextArea.PrintLine();
 
 				int dam = 0;
 				int hits = 0;
@@ -1289,14 +1268,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 					}
 				}
 
-				builder.Clear();
-				builder.AddText("Hits:  ", XleColor.White);
-				builder.AddText(hits.ToString(), XleColor.Yellow);
-				builder.AddText("   Damage:  ", XleColor.White);
-				builder.AddText(dam.ToString(), XleColor.Yellow);
-
-				g.AddBottom(builder);
-
+				XleCore.TextArea.Print("Hits:  ", XleColor.White);
+				XleCore.TextArea.Print(hits.ToString(), XleColor.Yellow);
+				XleCore.TextArea.Print("   Damage:  ", XleColor.White);
+				XleCore.TextArea.Print(dam.ToString(), XleColor.Yellow);
+				XleCore.TextArea.PrintLine();
+				
 				if (dam > 0)
 				{
 					SoundMan.PlaySound(LotaSound.EnemyHit);
@@ -1388,7 +1365,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return Extender;
 		}
 
-		public override bool CanPlayerStepInto(Player player, int xx, int yy)
+		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
 		{
 			if (EncounterState == EncounterState.UnknownCreatureApproaching)
 			{
