@@ -90,10 +90,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		protected override bool CheckMovementImpl(Player player, int dx, int dy)
-		{
-			return true;
-		}
 		public override bool CanPlayerStepInto(Player player, int xx, int yy)
 		{
 			int test = 0;
@@ -134,7 +130,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			XleCore.TextArea.PrintLine(command);
 
-			if (player.Move(stepDirection))
+			if (MovePlayer(XleCore.GameState, stepDirection))
 			{
 				SoundMan.PlaySound(LotaSound.WalkTown);
 

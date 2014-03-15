@@ -22,7 +22,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 				pegasus.RaftImage = 1;
 
 				state.Player.Rafts.Add(pegasus);
-				state.Player.BoardRaft(pegasus);
+				state.Player.BoardedRaft = pegasus;
 
 				PegasusFlightToIsland(state);
 				XleCore.TextArea.PrintLine("Pegasus sets you down.");
@@ -30,7 +30,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
 				state.Player.FaceDirection = Direction.South;
 
-				state.Player.OnRaft = -1;
+				state.Player.BoardedRaft = null;
 				pegasus.X += 3;
 			}
 		}

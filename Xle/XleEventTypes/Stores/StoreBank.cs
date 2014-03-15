@@ -27,7 +27,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			cs.TitleColor = XleColor.Yellow;
 			cs.BorderColor = XleColor.Gray;
 		}
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
 
@@ -84,7 +84,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 					}
 					else
 					{
-						g.ClearBottom();
+						XleCore.TextArea.Clear();
 						XleCore.TextArea.PrintLine("Nothing to withdraw");
 
 						StoreSound(LotaSound.Medium);

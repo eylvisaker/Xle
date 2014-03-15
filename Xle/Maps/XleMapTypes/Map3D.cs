@@ -455,12 +455,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		protected virtual bool IsSpaceOccupiedByMonster(Player player, int xx, int yy)
 		{
-			return true;
-		}
-
-		protected override bool CheckMovementImpl(Player player, int dx, int dy)
-		{
-			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
+			return false;
 		}
 
 		public override void PlayerCursorMovement(Player player, Direction dir)
@@ -487,7 +482,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (stepDirection.IsEmpty == false)
 			{
-				player.Move(stepDirection.X, stepDirection.Y);
+				MovePlayer(XleCore.GameState, stepDirection);
 			}
 
 			PlayPlayerMoveSound();

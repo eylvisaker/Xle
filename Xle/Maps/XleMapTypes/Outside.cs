@@ -121,7 +121,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public override void CheckSounds(Player player)
 		{
-			if (player.OnRaft >= 0)
+			if (player.IsOnRaft)
 			{
 				if (SoundMan.IsPlaying(LotaSound.Raft1) == false)
 					SoundMan.PlaySound(LotaSound.Raft1);
@@ -321,7 +321,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 
 			Extender.ModifyTerrainInfo(info, terrain);
-		
+
 			return info;
 		}
 		public override bool PlayerFight(Player player)
@@ -457,7 +457,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			XleCore.TextArea.PrintLine(command);
 
-			if (player.Move(stepDirection) == false)
+			if (MovePlayer(XleCore.GameState, stepDirection) == false)
 			{
 				TerrainType terrain = TerrainAt(player.X + stepDirection.X, player.Y + stepDirection.Y);
 
@@ -531,13 +531,58 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
+		public override bool PlayerDisembark(GameState state)
+		{
+			XleCore.TextArea.PrintLine(" raft");
+
+			if (state.Player.IsOnRaft == false)
+				return false;
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Disembark in which direction?");
+
+			do
+			{
+				XleCore.Redraw();
+
+			} while (!(
+				Keyboard.Keys[KeyCode.Left] || Keyboard.Keys[KeyCode.Right] ||
+				Keyboard.Keys[KeyCode.Up] || Keyboard.Keys[KeyCode.Down]));
+
+			int newx = state.Player.X;
+			int newy = state.Player.Y;
+
+			Direction dir = Direction.East;
+
+			if (Keyboard.Keys[KeyCode.Left])
+				dir = Direction.West;
+			else if (Keyboard.Keys[KeyCode.Up])
+				dir = Direction.North;
+			else if (Keyboard.Keys[KeyCode.Down])
+				dir = Direction.South;
+			else if (Keyboard.Keys[KeyCode.Right])
+				dir = Direction.East;
+
+			PlayerDisembark(state, dir);
+
+			return true;
+		}
+
+		private void PlayerDisembark(GameState state, Direction dir)
+		{
+			state.Player.BoardedRaft = null;
+			PlayerCursorMovement(state.Player, dir);
+
+			SoundMan.StopSound(LotaSound.Raft1);
+		}
+
 		protected override bool PlayerSpeakImpl(Player player)
 		{
 			if (EncounterState != EncounterState.MonsterReady)
 			{
 				return false;
 			}
-			
+
 			SpeakToMonster(player);
 
 			return true;
@@ -994,7 +1039,34 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			Extender.AfterPlayerStep(XleCore.GameState);
 
+			UpdateRaftState(player);
+
 			StepEncounter(player, didEvent);
+		}
+
+		private void UpdateRaftState(Player player)
+		{
+			if (player.IsOnRaft == false)
+			{
+				foreach (var raft in player.Rafts)
+				{
+					if (raft.MapNumber != MapID)
+						continue;
+
+					if (raft.Location.Equals(player.Location))
+					{
+						player.BoardedRaft = raft;
+					}
+				}
+			}
+
+			if (player.IsOnRaft)
+			{
+				var raft = player.BoardedRaft;
+
+				raft.X = player.X;
+				raft.Y = player.Y;
+			}
 		}
 		private void StepEncounter(Player player, bool didEvent)
 		{
@@ -1406,11 +1478,28 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return dirName;
 		}
 
-		protected override bool CheckMovementImpl(Player player, int dx, int dy)
+		protected override Extenders.IMapExtender CreateExtenderImpl()
+		{
+			if (XleCore.Factory == null)
+			{
+				Extender = new NullOutsideExtender();
+			}
+			else
+			{
+				Extender = XleCore.Factory.CreateMapExtender(this);
+			}
+
+			return Extender;
+		}
+
+		public override bool CanPlayerStepInto(Player player, int xx, int yy)
 		{
 			if (EncounterState == EncounterState.UnknownCreatureApproaching)
 			{
 				bool moveTowards = false;
+
+				int dx = xx - player.X;
+				int dy = yy - player.Y;
 
 				switch (monstDir)
 				{
@@ -1441,25 +1530,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 			}
 
-			return true;
-		}
-	
-		protected override Extenders.IMapExtender CreateExtenderImpl()
-		{
-			if (XleCore.Factory == null)
-			{
-				Extender = new NullOutsideExtender();
-			}
-			else
-			{
-				Extender = XleCore.Factory.CreateMapExtender(this);
-			}
-
-			return Extender;
-		}
-
-		public override bool CanPlayerStepInto(Player player, int xx, int yy)
-		{
 			TerrainType terrain = TerrainAt(xx, yy);
 			int test = (int)terrain;
 
@@ -1473,7 +1543,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (terrain == TerrainType.Water)
 			{
-				for (int i = 1; i < player.Rafts.Count; i++)
+				for (int i = 0; i < player.Rafts.Count; i++)
 				{
 					if (Math.Abs(player.Rafts[i].X - xx) < 2 && Math.Abs(player.Rafts[i].Y - yy) < 2)
 					{

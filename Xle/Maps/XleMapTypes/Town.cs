@@ -16,7 +16,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 	public class Town : Map2D
 	{
 		List<Guard> mGuards = new List<Guard>();
-		
+
 		List<int> mMail = new List<int>();				// towns to carry mail to
 
 		public ITownExtender Extender { get; protected set; }
@@ -109,27 +109,20 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (IsAngry == false)
 				return;
 
-			double dist;
-			int xdist;
-			int ydist;
-			int dx;
-			int dy;
-			Point newPt;
-			bool badPt = false;
-
-			for (int i = 0; i < Guards.Count; i++)
+			foreach (var guard in Guards)
 			{
-				Guard guard = Guards[i];
-
+				if (guard.SkipMovement)
+					continue;
 				if (PointInRoof(guard.X, guard.Y) != -1)
 					continue;
 
-				badPt = false;
+				bool badPt = false;
 
-				newPt = guard.Location;
+				int xdist = player.X - guard.X;
+				int ydist = player.Y - guard.Y;
 
-				xdist = player.X - guard.X;
-				ydist = player.Y - guard.Y;
+				int dx = 0;
+				int dy = 0;
 
 				if (xdist != 0)
 					dx = xdist / Math.Abs(xdist);
@@ -138,9 +131,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 					dy = ydist / Math.Abs(ydist);
 				else dy = 0;
 
-				dist = Math.Sqrt(Math.Pow(xdist, 2) + Math.Pow(ydist, 2));
+				double dist = Math.Sqrt(Math.Pow(xdist, 2) + Math.Pow(ydist, 2));
 				if (dist >= 25)
 					continue;
+
+				Point newPt = guard.Location;
 
 				if (Math.Abs(xdist) <= 2 && Math.Abs(ydist) <= 2)
 				{
@@ -164,7 +159,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 						dx = 0;
 					}
 
-					badPt = !CanGuardStepInto(newPt, i);
+					badPt = !CanGuardStepInto(newPt, guard);
 
 					if (badPt == true)
 					{
@@ -192,7 +187,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 							newPt.X += dx;
 						}
-						badPt = !CanGuardStepInto(newPt, i);
+						badPt = !CanGuardStepInto(newPt, guard);
 
 						if (badPt == true)
 							newPt = guard.Location;
@@ -244,7 +239,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		bool CanGuardStepInto(Point pt, int grd)
+		bool CanGuardStepInto(Point pt, Guard guard)
 		{
 			int i, j, k;
 			Size guardSize = new Size(2, 2);
@@ -260,17 +255,16 @@ namespace ERY.Xle.Maps.XleMapTypes
 						return false;
 
 					// check for guard-guard collisions
-					Rectangle grdRect = new Rectangle(pt, guardSize);
+					Rectangle guardRect = new Rectangle(pt, guardSize);
 
-					for (k = 0; k < Guards.Count; k++)
+					foreach (var otherGuard in Guards)
 					{
-						if (k == grd)
+						if (otherGuard == guard)
 							continue;
 
-						Guard guard = Guards[k];
-						Rectangle guardRect = new Rectangle(guard.Location, guardSize);
+						Rectangle otherGuardRect = new Rectangle(otherGuard.Location, guardSize);
 
-						if (grdRect.IntersectsWith(guardRect))
+						if (guardRect.IntersectsWith(otherGuardRect))
 							return false;
 					}
 				}
@@ -306,7 +300,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				int dam = Extender.RollDamageToGuard(player, guard);
 
 				IsAngry = true;
-				player.LastAttacked = MapID;
+				player.LastAttackedMapID = MapID;
 
 				builder.AddText(guard.Name + " struck  ", XleColor.Yellow);
 				builder.AddText(dam.ToString(), XleColor.White);
@@ -354,7 +348,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return -1;
 		}
-		
+
 		/*
 
 		Point RoofAnchor(int r)
@@ -779,10 +773,27 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				if (IsAngry && this.GetType().Equals(typeof(Town)))
 				{
-					player.LastAttacked = this.MapID;
+					player.LastAttackedMapID = this.MapID;
 				}
 
 				LeaveMap(player);
+			}
+		}
+
+		public override void OnAfterEntry(GameState state)
+		{
+			if (MapID == state.Player.LastAttackedMapID)
+			{
+				IsAngry = true;
+
+				XleCore.TextArea.Clear(true);
+				XleCore.TextArea.PrintLine("\nWe remember you - slime!");
+
+				XleCore.Wait(2000);
+			}
+			else
+			{
+				state.Player.LastAttackedMapID = 0;
 			}
 		}
 

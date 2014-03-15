@@ -875,18 +875,8 @@ namespace ERY.Xle
 					return false;
 			}
 
-			return CheckMovementImpl(player, dx, dy);
+			return CanPlayerStepInto(player, player.X + dx, player.Y + dy);
 		}
-		/// <summary>
-		/// Checks to see if the player can move in the specified direction.
-		/// Returns true if the player can move in that direction.
-		/// </summary>
-		/// <param name="player"></param>
-		/// <param name="dx"></param>
-		/// <param name="dy"></param>
-		/// <returns></returns>
-		protected abstract bool CheckMovementImpl(Player player, int dx, int dy);
-
 
 		public void BeforeStepOn(Player player, int x, int y)
 		{
@@ -1359,6 +1349,40 @@ namespace ERY.Xle
 		{
 			throw new NotImplementedException();
 		}
+
+		public virtual bool PlayerDisembark(Xle.GameState state)
+		{
+			return false;
+		}
+
+
+		protected virtual bool MovePlayer(GameState state, Point stepDirection)
+		{
+			if (stepDirection.IsEmpty)
+				return false;
+
+			Point newPoint = new Point(state.Player.X + stepDirection.X, state.Player.Y + stepDirection.Y);
+
+			if (CheckMovement(state.Player, stepDirection.X, stepDirection.Y))
+			{
+				BeforeStepOn(state.Player, newPoint.X, newPoint.Y);
+
+				if (CanPlayerStepInto(state.Player, newPoint.X, newPoint.Y))
+				{
+					state.Player.Location = newPoint;
+
+					AfterPlayerStep(state.Player);
+
+					return true;
+				}
+				else
+					return false;
+
+			}
+			else
+				return false;
+
+		}
 	}
 
 	public class Roof : IXleSerializable
@@ -1551,7 +1575,9 @@ namespace ERY.Xle
 		/// </summary>
 		public Func<GameState, Guard, bool> OnPlayerAttack;
 		public Func<GameState, Guard, bool> OnGuardDead;
+
 		public bool SkipAttacking { get; set; }
+		public bool SkipMovement { get; set; }
 
 		#region IXleSerializable Members
 
@@ -1580,5 +1606,6 @@ namespace ERY.Xle
 		#endregion
 
 		public string Name { get; set; }
+
 	}
 }

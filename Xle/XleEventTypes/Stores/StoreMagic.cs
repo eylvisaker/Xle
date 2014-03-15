@@ -19,7 +19,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			cs.TextAreaBackColor = XleColor.Blue;
 		}
 
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
 

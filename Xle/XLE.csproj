@@ -154,6 +154,7 @@
     <Compile Include="Commands\Xamine.cs" />
     <Compile Include="CountdownTimer.cs" />
     <Compile Include="Data\XleData.cs" />
+    <Compile Include="MainWindowClosedException.cs" />
     <Compile Include="Maps\DungeonMonster.cs" />
     <Compile Include="Data\DungeonMonsterData.cs" />
     <Compile Include="GameSpeed.cs" />

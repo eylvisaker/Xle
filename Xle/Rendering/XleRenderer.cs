@@ -1,4 +1,5 @@
-﻿using AgateLib.DisplayLib;
+﻿using AgateLib;
+using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using System;
 using System.Collections.Generic;
@@ -340,15 +341,12 @@ namespace ERY.Xle.Rendering
 			Rectangle destRect;
 
 
-			for (int i = 0; i < player.Rafts.Count; i++)
+			foreach (var raft in player.Rafts)
 			{
-				RaftData raft = player.Rafts[i];
-
-				int raftAnim = g.raftAnim;
 				if (raft.RaftImage > 0)
 					raftAnim %= 4;
 				else
-					raftAnim %= 3;
+					raftAnim = 1 + raftAnim % 3;
 
 				int sourceX = raftAnim * 32;
 				int sourceY = 256;
@@ -366,9 +364,9 @@ namespace ERY.Xle.Rendering
 				rx = px - (player.X - raft.X) * 16;
 				ry = py - (player.Y - raft.Y) * 16;
 
-				if (i == player.OnRaft)
+				if (raft == player.BoardedRaft)
 				{
-					if (g.raftFacing == Direction.West)
+					if (player.RaftFaceDirection == Direction.West)
 					{
 						charRect = new Rectangle(tx, ty + 64, 32, 32);
 					}
@@ -391,10 +389,16 @@ namespace ERY.Xle.Rendering
 			}
 		}
 
-
+		public Action OnRedraw { get; set; }
 
 		public void Draw()
 		{
+			if (OnRedraw != null)
+			{
+				OnRedraw();
+				return;
+			}
+
 			Player player = XleCore.GameState.Player;
 			XleMap map = XleCore.GameState.Map;
 
@@ -407,7 +411,7 @@ namespace ERY.Xle.Rendering
 			FontColor = map.ColorScheme.TextColor;
 			Color menuColor = map.ColorScheme.TextColor;
 
-			if (g.LeftMenuActive)
+			if (XleCore.GameState.Commands.IsLeftMenuActive)
 			{
 				menuColor = XleColor.Yellow;
 			}
@@ -455,8 +459,8 @@ namespace ERY.Xle.Rendering
 			{
 				DrawRafts(mapRect);
 
-				if (player.OnRaft < 0)
-					DrawCharacter(g.Animating, g.AnimFrame, vertLine);
+				if (player.IsOnRaft == false)
+					DrawCharacter(Animating, AnimFrame, vertLine);
 			}
 
 			if (XleCore.PromptToContinue)
@@ -495,6 +499,121 @@ namespace ERY.Xle.Rendering
 			mOverrideHPColor = false;
 			mHPColor = oldClr;
 
+		}
+
+		public void AnimateStep()
+		{
+			if (Animating == false)
+			{
+				Animating = true;
+				AnimFrame = 0;
+			}
+
+			charAnimCount = 0;
+		}
+
+		/// <summary>
+		/// sets or returns whether or not the character is animating
+		/// </summary>
+		/// <returns></returns>
+		bool Animating
+		{
+			get
+			{
+				if (animWatch.IsPaused == true)
+				{
+					animFrame = 0;
+				}
+
+				return animWatch.IsPaused == false;
+			}
+			set
+			{
+				if (value == false)
+				{
+					animFrame = 0;
+					charAnimCount = 0;
+
+					if (animWatch.IsPaused == false)
+						animWatch.Pause();
+				}
+				else
+					animWatch.Resume();
+
+			}
+		}
+
+		// character functions
+		static Timing.StopWatch animWatch = new Timing.StopWatch();
+		const int frameTime = 150;
+
+		static int animFrame;
+
+		int AnimFrame
+		{
+			get
+			{
+				int oldAnim = animFrame;
+
+				if (animWatch.IsPaused == false)
+					animFrame = (((int)animWatch.TotalMilliseconds) / frameTime);
+
+				if (oldAnim != animFrame)
+				{
+					charAnimCount++;
+
+					if (charAnimCount > 6)
+					{
+						animFrame = 0;
+						charAnimCount = 0;
+						Animating = false;
+					}
+				}
+
+				return animFrame;
+			}
+			set
+			{
+				animFrame = value;
+
+				while (animFrame < 0)
+					animFrame += 3;
+
+				animWatch.Reset();
+			}
+		}
+		int charAnimCount;			// animation count for the player
+
+		/// <summary>
+		/// Animates the rafts.
+		/// </summary>
+		void RaftAnim()
+		{
+			if (lastRaftAnim + 100 < Timing.TotalMilliseconds)
+			{
+				raftAnim++;
+
+				lastRaftAnim = Timing.TotalMilliseconds;
+			}
+		}
+		
+		public int raftAnim;				// raft animation frame
+
+		// TODO: Which of these are obsolete?
+		//static bool updating = false;
+		static double lastRaftAnim = 0;
+		//static double lastCharAnim = 0;
+		//static int lastOceanSound = 0;
+		//static double timer;
+		//static double frames = 0;
+		//static double fps;
+
+
+
+		public void UpdateAnim()
+		{
+			RaftAnim();
+			//CheckAnim();
 		}
 	}
 }

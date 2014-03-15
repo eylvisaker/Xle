@@ -134,6 +134,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 				Name = "Warlord",
 				OnGuardDead = WarlordDead,
 				SkipAttacking = true,
+				SkipMovement = true,
 			};
 
 			TheMap.Guards.Add(warlord);

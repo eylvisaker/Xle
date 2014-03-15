@@ -5,7 +5,6 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-
 	public class StoreBuyback : StoreFront
 	{
 		protected override void SetColorScheme(ColorScheme cs)
@@ -16,7 +15,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			cs.TextAreaBackColor = XleColor.Brown;
 			cs.BorderColor = XleColor.Red;
 		}
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
 
@@ -73,7 +72,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 					}
 					else
 					{
-						g.ClearBottom();
+						XleCore.TextArea.Clear();
 						XleCore.TextArea.PrintLine("Nothing to withdraw");
 
 						StoreSound(LotaSound.Medium);

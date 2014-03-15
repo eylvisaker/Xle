@@ -33,7 +33,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		protected abstract string StoreType { get; }
 
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
 

@@ -74,64 +74,69 @@ namespace ERY.Xle
 		}
 		public void Run(XleGameFactory factory)
 		{
-			if (factory == null) throw new ArgumentNullException();
-
-			mFactory = factory;
-
-			AgateLib.AgateFileProvider.Images.AddPath("Images");
-			AgateLib.AgateFileProvider.Sounds.AddPath("Audio");
-			AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
-
-			LoadGameFile();
-			mData.LoadDatabase();
-
-			InitializeConsole();
-
-			using (AgateSetup setup = new AgateSetup())
+			try
 			{
-				setup.InitializeAll();
-				if (setup.WasCanceled)
-					return;
+				if (factory == null) throw new ArgumentNullException();
 
-				DisplayWindow wind;
-				
-				if (EnableDebugMode)
+				mFactory = factory;
+
+				AgateLib.AgateFileProvider.Images.AddPath("Images");
+				AgateLib.AgateFileProvider.Sounds.AddPath("Audio");
+				AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
+
+				LoadGameFile();
+				mData.LoadDatabase();
+
+				InitializeConsole();
+
+				using (AgateSetup setup = new AgateSetup())
 				{
-					Size windowSize = new Size(
-						640 + windowBorderSize.Width * 2, 
-						400 + windowBorderSize.Height * 2);
+					setup.InitializeAll();
+					if (setup.WasCanceled)
+						return;
 
-					wind = DisplayWindow.CreateWindowed(
-						mFactory.GameTitle, windowSize.Width, windowSize.Height);
+					DisplayWindow wind;
+
+					if (EnableDebugMode)
+					{
+						Size windowSize = new Size(
+							640 + windowBorderSize.Width * 2,
+							400 + windowBorderSize.Height * 2);
+
+						wind = DisplayWindow.CreateWindowed(
+							mFactory.GameTitle, windowSize.Width, windowSize.Height);
+					}
+					else
+					{
+						windowBorderSize.Width = 80;
+						windowBorderSize.Height = 100;
+
+						wind = DisplayWindow.CreateFullScreen(
+							mFactory.GameTitle, 800, 600);
+					}
+
+					SoundMan.Load();
+
+					mFactory.LoadSurfaces();
+					mData.LoadDungeonMonsterSurfaces();
+
+					IXleTitleScreen titleScreen;
+
+					do
+					{
+						GameState = null;
+
+						titleScreen = mFactory.CreateTitleScreen();
+						titleScreen.Run();
+						returnToTitle = false;
+
+						RunGame(titleScreen.Player);
+
+					} while (titleScreen.Player != null);
 				}
-				else
-				{
-					windowBorderSize.Width = 80;
-					windowBorderSize.Height = 100;
-
-					wind = DisplayWindow.CreateFullScreen(
-						mFactory.GameTitle, 800, 600);
-				}
-
-				SoundMan.Load();
-
-				mFactory.LoadSurfaces();
-				mData.LoadDungeonMonsterSurfaces();
-
-				IXleTitleScreen titleScreen;
-
-				do
-				{
-					GameState = null;
-
-					titleScreen = mFactory.CreateTitleScreen();
-					titleScreen.Run();
-					returnToTitle = false;
-
-					RunGame(titleScreen.Player);
-
-				} while (titleScreen.Player != null);
 			}
+			catch (MainWindowClosedException)
+			{ }
 		}
 
 		static Size windowBorderSize = new Size(20, 20);
@@ -523,7 +528,7 @@ namespace ERY.Xle
 		}
 		private void RedrawImpl()
 		{
-			UpdateAnim();
+			Renderer.UpdateAnim();
 
 			Display.BeginFrame();
 			XleCore.SetProjectionAndBackColors(GameState.Map.ColorScheme);
@@ -574,20 +579,6 @@ namespace ERY.Xle
 			}
 		}
 
-		// TODO: Which of these are obsolete?
-		//static bool updating = false;
-		static double lastRaftAnim = 0;
-		//static double lastCharAnim = 0;
-		//static int lastOceanSound = 0;
-		//static double timer;
-		//static double frames = 0;
-		//static double fps;
-
-		public void UpdateAnim()
-		{
-			RaftAnim();
-			//CheckAnim();
-		}
 
 		public static void FlashHPWhileSound(Color clr)
 		{
@@ -700,7 +691,7 @@ namespace ERY.Xle
 
 			do
 			{
-				inst.UpdateAnim();
+				Renderer.UpdateAnim();
 
 				redraw();
 				XleCore.KeepAlive();
@@ -708,7 +699,7 @@ namespace ERY.Xle
 				if (keyBreak && Keyboard.AnyKeyPressed)
 					break;
 
-			} while (watch.TotalMilliseconds < howLong && g.Done == false && Display.CurrentWindow.IsClosed == false);
+			} while (watch.TotalMilliseconds < howLong);
 		}
 
 		/// <summary>
@@ -750,7 +741,7 @@ namespace ERY.Xle
 
 			Action redraw = () =>
 			{
-				inst.UpdateAnim();
+				Renderer.UpdateAnim();
 
 				Display.BeginFrame();
 				XleCore.SetProjectionAndBackColors(GameState.Map.ColorScheme);
@@ -799,7 +790,7 @@ namespace ERY.Xle
 						key = KeyCode.Return;
 					}
 				}
-			} while (key != KeyCode.Return && !g.Done);
+			} while (key != KeyCode.Return);
 
 			Wait(300);
 
@@ -811,6 +802,9 @@ namespace ERY.Xle
 			XleCore.GameState.Map.CheckSounds(GameState.Player);
 
 			Core.KeepAlive();
+
+			if (Display.CurrentWindow.IsClosed)
+				throw new MainWindowClosedException();
 		}
 
 		/// <summary>
@@ -905,9 +899,11 @@ namespace ERY.Xle
 			yy = 16;
 			height = (menu.theList.Count + 3) * 16;
 
-			if (xx < g.vertLine + 16)
+			var vertLine = GameState.Map.ColorScheme.VerticalLinePosition;
+
+			if (xx < vertLine + 16)
 			{
-				xx = g.vertLine + 16;
+				xx = vertLine + 16;
 				i = 1;
 			}
 
@@ -1098,19 +1094,6 @@ namespace ERY.Xle
 
 			return value;
 
-		}
-
-		/// <summary>
-		/// Animates the rafts.
-		/// </summary>
-		static void RaftAnim()
-		{
-			if (lastRaftAnim + 100 < Timing.TotalMilliseconds)
-			{
-				g.raftAnim++;
-
-				lastRaftAnim = Timing.TotalMilliseconds;
-			}
 		}
 
 		/****************************************************************************
@@ -1372,7 +1355,7 @@ namespace ERY.Xle
 				}
 
 
-			} while (key != KeyCode.Return && !g.Done);
+			} while (key != KeyCode.Return);
 
 			XleCore.PromptToContinueOnWait = true;
 

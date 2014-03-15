@@ -199,6 +199,19 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		public override bool Speak(GameState state)
 		{
+			try
+			{
+				XleCore.Renderer.OnRedraw = RedrawStore;
+
+				return SpeakImpl(state);
+			}
+			finally
+			{
+				XleCore.Renderer.OnRedraw = null;
+			}
+		}
+		protected virtual bool SpeakImpl(GameState state)
+		{
 			player = state.Player;
 			Title = ShopName;
 

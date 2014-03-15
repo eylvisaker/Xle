@@ -82,7 +82,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 					// Purchase raft
 					if (player.Spend(raftCost))
 					{
-						player.AddRaft(BuyRaftMap, BuyRaftPt.X, BuyRaftPt.Y);
+						player.Rafts.Add(new RaftData(BuyRaftPt.X, BuyRaftPt.Y, BuyRaftMap));
 
 						XleCore.TextArea.PrintLine("Raft purchased.");
 						SoundMan.PlaySound(LotaSound.Sale);

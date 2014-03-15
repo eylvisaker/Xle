@@ -20,7 +20,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			cs.BorderColor = XleColor.Black;
 		}
 
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
 			int i = 0;
@@ -87,7 +87,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 				String DueDate;
 				max = Math.Max(player.Gold, player.loan);
 				int min;
-				Color[] color = new Color[44];
 
 				if (player.dueDate - player.TimeDays > 0)
 				{
@@ -106,16 +105,14 @@ namespace ERY.Xle.XleEventTypes.Stores
 				theWindow[i++] = "Due Date: " + DueDate;
 
 				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Pay how much?");
+				XleCore.TextArea.Print("Pay how much? ");
 
 				if (min > 0)
 				{
-					for (i = 0; i < 13; i++, color[i] = XleColor.White) ;
-					for (; i < 40; i++, color[i] = XleColor.Yellow) ;
-
-					g.UpdateBottom("Pay how much? (At Least " + min.ToString() + " gold)", 0, color);
-
+					XleCore.TextArea.Print("(At Least " + min.ToString() + " gold)", XleColor.Yellow);
 				}
+
+				XleCore.TextArea.PrintLine();
 
 				choice = ChooseNumber(max);
 

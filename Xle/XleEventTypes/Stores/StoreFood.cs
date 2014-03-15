@@ -19,7 +19,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		bool skipMailOffer = false;
 
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
 
@@ -219,7 +219,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			Wait(1);
 			SetWindow(0);
 
-			g.ClearBottom();
+			XleCore.TextArea.Clear();
 
 			if (robCount < 4)
 			{

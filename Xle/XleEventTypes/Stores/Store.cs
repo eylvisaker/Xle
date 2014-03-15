@@ -105,11 +105,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 			{
 				if (player.Spend(amount))
 				{
-					string coinName = XleCore.ItemList[coin].Name;
+					string coinName = XleCore.Data.ItemList[coin].Name;
 
 					XleCore.TextArea.PrintLine("Use this " + coinName + " well!");
 
-					player.ItemCount(coin, 1);
+					player.Items[coin] += 1;
 
 					SoundMan.PlaySound(LotaSound.Sale);
 				}

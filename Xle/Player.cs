@@ -101,129 +101,7 @@ namespace ERY.Xle
 
 		public int RaftImage { get; set; }
 	}
-
-	[Obsolete]
-	public class VariableContainer : IDictionary<string, int>, IXleSerializable
-	{
-		Dictionary<string, int> mValues = new Dictionary<string, int>();
-
-		#region IDictionary<string,int> Members
-
-		public void Add(string key, int value)
-		{
-			mValues[key] = value;
-		}
-
-		public bool ContainsKey(string key)
-		{
-			return mValues.ContainsKey(key);
-		}
-
-		public ICollection<string> Keys
-		{
-			get { return mValues.Keys; }
-		}
-
-		public bool Remove(string key)
-		{
-			return mValues.Remove(key);
-		}
-
-		public bool TryGetValue(string key, out int value)
-		{
-			return mValues.TryGetValue(key, out value);
-		}
-
-		public ICollection<int> Values
-		{
-			get { return mValues.Values; }
-		}
-
-		public int this[string key]
-		{
-			get
-			{
-				if (mValues.ContainsKey(key))
-					return mValues[key];
-				else
-					return 0;
-			}
-			set
-			{
-				mValues[key] = value;
-			}
-		}
-
-		#endregion
-		#region ICollection<KeyValuePair<string,int>> Members
-
-		void ICollection<KeyValuePair<string, int>>.Add(KeyValuePair<string, int> item)
-		{
-			((ICollection<KeyValuePair<string, int>>)mValues).Add(item);
-		}
-
-		public void Clear()
-		{
-			((ICollection<KeyValuePair<string, int>>)mValues).Clear();
-		}
-
-		bool ICollection<KeyValuePair<string, int>>.Contains(KeyValuePair<string, int> item)
-		{
-			return ((ICollection<KeyValuePair<string, int>>)mValues).Contains(item);
-		}
-
-		void ICollection<KeyValuePair<string, int>>.CopyTo(KeyValuePair<string, int>[] array, int arrayIndex)
-		{
-			((ICollection<KeyValuePair<string, int>>)mValues).CopyTo(array, arrayIndex);
-		}
-
-		public int Count
-		{
-			get { return mValues.Count; }
-		}
-
-		bool ICollection<KeyValuePair<string, int>>.IsReadOnly
-		{
-			get { return false; }
-		}
-
-		bool ICollection<KeyValuePair<string, int>>.Remove(KeyValuePair<string, int> item)
-		{
-			return ((ICollection<KeyValuePair<string, int>>)mValues).Remove(item);
-		}
-
-		#endregion
-		#region IEnumerable<KeyValuePair<string,int>> Members
-
-		public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
-		{
-			return mValues.GetEnumerator();
-		}
-
-		#endregion
-		#region IEnumerable Members
-
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
-
-		#endregion
-		#region IXleSerializable Members
-
-		void IXleSerializable.WriteData(XleSerializationInfo info)
-		{
-			info.Write("Values", mValues);
-		}
-
-		void IXleSerializable.ReadData(XleSerializationInfo info)
-		{
-			mValues = info.ReadDictionaryInt32<string>("Values");
-		}
-
-		#endregion
-	}
-
+	
 	public class Player : IXleSerializable
 	{
 		AttributeContainer mAttributes = new AttributeContainer();
@@ -293,6 +171,8 @@ namespace ERY.Xle
 		private void NewPlayer(string newName)
 		{
 			mName = newName;
+
+			RaftFaceDirection = Direction.West;
 
 			food = 40;
 			gold = 20;
@@ -714,11 +594,7 @@ namespace ERY.Xle
 		public int X
 		{
 			get { return x; }
-			set
-			{
-				x = value;
-				UpdateRaftPosition();
-			}
+			set { x = value; }
 		}
 		/// <summary>
 		/// 					// returns y position
@@ -727,152 +603,19 @@ namespace ERY.Xle
 		public int Y
 		{
 			get { return y; }
-			set
-			{
-				y = value;
-				UpdateRaftPosition();
-			}
+			set { y = value; }
 		}
-
 
 		public Point Location
 		{
 			get { return new Point(x, y); }
 			set
 			{
-				SetPos(value.X, value.Y);
+				x = value.X;
+				y = value.Y;
 			}
 		}
 
-
-		private void UpdateRaftPosition()
-		{
-			if (IsOnRaft)
-			{
-				rafts[onRaft].X = X;
-				rafts[onRaft].Y = Y;
-			}
-		}
-		/// <summary>
-		///  Sets the positions of the player on the current map.  Returns true
-		/// if successful.
-		/// </summary>
-		/// <param name="xx"></param>
-		/// <param name="yy"></param>
-		/// <returns></returns>
-		public bool SetPos(int xx, int yy)
-		{
-			if (XleCore.GameState == null || XleCore.GameState.Map == null)
-			{
-				x = xx;
-				y = yy;
-
-				return true;
-			}
-
-			if (XleCore.Map.CanPlayerStepInto(this, xx, yy))
-			{
-				x = xx;
-				y = yy;
-
-				for (int i = 0; i < rafts.Count; i++)
-				{
-					if (Rafts[i].MapNumber != MapID)
-						continue;
-
-					if (Rafts[i].Location.Equals(new Point(xx, yy)))
-					{
-						BoardRaft(i);
-					}
-				}
-
-				UpdateRaftPosition();
-
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-
-		}
-		/// <summary>
-		/// Moves the PC in the specified direction.
-		/// Returns true if successful.
-		/// </summary>
-		/// <param name="dx"></param>
-		/// <param name="dy"></param>
-		/// <returns></returns>
-		public bool Move(int dx, int dy)
-		{
-			if (dx != 0 || dy != 0)
-			{
-				if (XleCore.GameState.Map.CheckMovement(this, dx, dy))
-				{
-					XleCore.GameState.Map.BeforeStepOn(this, x + dx, y + dy);
-
-					return SetPos(x + dx, y + dy);
-				}
-			}
-
-			return false;
-		}
-
-		public bool Move(Point stepDirection)
-		{
-			return Move(stepDirection.X, stepDirection.Y);
-		}
-
-		public void NewMap()
-		{
-			NewMap(0, 0);
-		}
-		/// <summary>
-		/// 	// sets coordinates for a new map & loads coordinates for outside
-		/// </summary>
-		/// <param name="xx"></param>
-		/// <param name="yy"></param>
-		public void NewMap(int xx, int yy)
-		{
-			SoundMan.StopAllSounds();
-
-			map = XleCore.Map.MapID;
-			/*
-			if (Lota.Map.MapType == MapTypes.Outside && outmap == map)
-			{
-				x = outx;
-				y = outy;
-
-				dungeonLevel = 0;
-
-				Lota.Map.IsAngry = false;
-			}
-			else
-			{
-			 * */
-			// store outside map coordinate
-			returnX = x;
-			returnY = y;
-
-			// set new coordinate
-			x = xx;
-			y = yy;
-
-			if (map == lastAttacked)
-			{
-				(XleCore.Map as Town).IsAngry = true;
-
-				g.ClearBottom();
-				XleCore.TextArea.PrintLine("We remember you - slime!");
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-
-				XleCore.Wait(2000);
-
-			}
-
-		}
 		/// <summary>
 		/// Sets or returns the current dungeon level for the player
 		/// </summary>
@@ -904,6 +647,8 @@ namespace ERY.Xle
 
 				faceDirection = value;
 
+				if (value == Direction.East || value == Direction.West)
+					RaftFaceDirection = value;
 			}
 
 		}
@@ -912,7 +657,7 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="newAtt"></param>
 		/// <returns></returns>
-		public int LastAttacked
+		public int LastAttackedMapID
 		{
 			get { return lastAttacked; }
 			set
@@ -964,6 +709,10 @@ namespace ERY.Xle
 			}
 		}
 
+		/// <summary>
+		/// Gets whether or not the player is on a raft. If you want to have the player
+		/// disembark, set the OnRaft property to -1.
+		/// </summary>
 		public bool IsOnRaft
 		{
 			get
@@ -975,6 +724,7 @@ namespace ERY.Xle
 		/// <summary>
 		/// Returns the raft that the player is on (or -1 if not)
 		/// </summary>
+		[Obsolete("Use BoardedRaft instead.", true)]
 		public int OnRaft
 		{
 			get
@@ -989,70 +739,24 @@ namespace ERY.Xle
 				onRaft = value;
 			}
 		}
-		/// <summary>
-		/// Boards a raft
-		/// </summary>
-		/// <param name="?"></param>
-		/// <returns></returns>    
-		[Obsolete("Majorly.")]
-		public void BoardRaft(int raftNum)
+		public RaftData BoardedRaft
 		{
-			if (!(raftNum < 0 || (Rafts[raftNum].X == -10 && Rafts[raftNum].Y == -10)))
+			get
 			{
-				onRaft = raftNum;
+				if (onRaft == -1)
+					return null;
+
+				return Rafts[onRaft];
 			}
-		}
-		public void BoardRaft(RaftData raft)
-		{
-			onRaft = rafts.IndexOf(raft);
+			set { onRaft = Rafts.IndexOf(value); }
 		}
 
-		/// <summary>
-		/// Disembarks a raft
-		/// </summary>
-		/// <param name="dir"></param>
-		public void Disembark(Direction dir)
-		{
-			onRaft = -1;
-
-			FaceDirection = dir;
-
-			switch (dir)
-			{
-				case Direction.East:
-					Move(1, 0);
-					break;
-				case Direction.North:
-					Move(0, -1);
-					break;
-				case Direction.West:
-					Move(-1, 0);
-					break;
-				case Direction.South:
-					Move(0, 1);
-					break;
-			}
-
-		}
-
-
-		/// <summary>
-		/// adds a raft to the map
-		/// </summary>
-		/// <param name="map"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		public void AddRaft(int map, int x, int y)
-		{
-			Rafts.Add(new RaftData(x, y, map));
-		}
 		/// <summary>
 		/// Clears all rafts from all maps
 		/// </summary>
 		public void ClearRafts()
 		{
 			Rafts.Clear();
-			//rafts.Add(new RaftData(0, 0, 0)); // add a dummy raft, because the list is zero based.
 		}
 
 		/// <summary>
@@ -1218,17 +922,6 @@ namespace ERY.Xle
 				return armor[currentArmor];
 			}
 		}
-		public double CurrentArmorQuality
-		{
-			get
-			{
-				if (currentArmor == 0)
-					return 0;
-
-				return armorQuality[currentArmor];
-			}
-		}
-
 		public int CurrentWeaponType
 		{
 			get
@@ -1239,7 +932,16 @@ namespace ERY.Xle
 				return weapon[currentWeapon];
 			}
 		}
+		public double CurrentArmorQuality
+		{
+			get
+			{
+				if (currentArmor == 0)
+					return 0;
 
+				return armorQuality[currentArmor];
+			}
+		}
 		public double CurrentWeaponQuality
 		{
 			get
@@ -1251,14 +953,14 @@ namespace ERY.Xle
 			}
 		}
 
-		public string CurrentArmorName
+		public string CurrentArmorTypeName
 		{
 			get
 			{
 				if (currentArmor == 0)
 					return "Nothing";
 
-				return XleCore.ArmorList[armor[currentArmor]].Name;
+				return XleCore.Data.ArmorList[armor[currentArmor]].Name;
 			}
 		}
 
@@ -1273,7 +975,7 @@ namespace ERY.Xle
 				if (currentWeapon == 0)
 					return "Bare Hands";
 
-				return XleCore.WeaponList[weapon[currentWeapon]].Name;
+				return XleCore.Data.WeaponList[weapon[currentWeapon]].Name;
 			}
 		}
 
@@ -1596,5 +1298,7 @@ namespace ERY.Xle
 
 		public int WeaponEnchantTurnsLeft { get; set; }
 
+
+		public Direction RaftFaceDirection { get; private set; }
 	}
 }

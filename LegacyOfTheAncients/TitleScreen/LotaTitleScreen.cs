@@ -577,7 +577,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			Keyboard.KeyDown -= Keyboard_KeyDown;
 			Timing.StopWatch watch = new Timing.StopWatch();
 
-			while (!g.Done && watch.TotalMilliseconds < milliseconds)
+			while (watch.TotalMilliseconds < milliseconds)
 			{
 				DisplayTitleScreen();
 				Core.KeepAlive();
@@ -592,7 +592,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			int i = 0;
 			int length = source.Length;
 
-			while (i <= length && !g.Done)
+			while (i <= length)
 			{
 				target = source.Substring(0, i);
 
@@ -795,7 +795,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			wnd[24] = "    (Press key/button to continue)";
 
 			Keyboard.ReleaseAllKeys();
-			while (g.Done == false && Keyboard.AnyKeyPressed == false)
+			while (Keyboard.AnyKeyPressed == false)
 			{
 				Wait(50);
 			}
@@ -840,7 +840,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
 
 			Keyboard.ReleaseAllKeys();
-			while (!g.Done && Keyboard.AnyKeyPressed == false)
+			while (Keyboard.AnyKeyPressed == false)
 			{
 				Wait(50);
 			}

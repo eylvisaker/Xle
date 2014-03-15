@@ -131,23 +131,15 @@ namespace ERY.Xle.Commands
 
 		private void ExecuteCursorMovement(KeyCode cmd)
 		{
-			int wasRaft = player.OnRaft;
+			var wasRaft = player.BoardedRaft;
 
 			CursorMovement(cmd);
 
-			if (g.Animating == false)
-			{
-				g.Animating = true;
-				g.AnimFrame = 0;
-			}
-
+			XleCore.Renderer.AnimateStep();
 
 			var waitTime = State.Map.WaitTimeAfterStep;
 
-			g.charAnimCount = 0;
-
-
-			if (wasRaft != player.OnRaft)
+			if (wasRaft != player.BoardedRaft)
 			{
 				if (player.IsOnRaft)
 				{
@@ -189,5 +181,7 @@ namespace ERY.Xle.Commands
 			XleCore.Wait(waitTime, false, XleCore.Redraw);
 			Prompt();
 		}
+
+		public bool IsLeftMenuActive { get; set; }
 	}
 }
