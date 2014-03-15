@@ -217,12 +217,11 @@ namespace ERY.Xle.Maps
 
 		private bool CanGuardStepInto(Point pt, Guard guard)
 		{
-			int i, j, k;
 			Size guardSize = new Size(2, 2);
 
-			for (j = 0; j < 2; j++)
+			for (int j = 0; j < 2; j++)
 			{
-				for (i = 0; i < 2; i++)
+				for (int i = 0; i < 2; i++)
 				{
 					var tile = TheMap[pt.X + i, pt.Y + j];
 

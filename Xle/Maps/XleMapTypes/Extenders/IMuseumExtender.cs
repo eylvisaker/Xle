@@ -8,7 +8,6 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
 	public interface IMuseumExtender : IMapExtender
 	{
-		[Obsolete]
 		Exhibit GetExhibitByTile(int p);
 
 		void CheckExhibitStatus(GameState gameState);

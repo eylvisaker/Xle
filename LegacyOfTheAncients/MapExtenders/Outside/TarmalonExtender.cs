@@ -20,10 +20,10 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			SetBanditAmbushTime(state);
 		}
 
-		public int Stormy
+		public int WaterAnimLevel
 		{
-			get { return TheMap.Stormy; }
-			set { TheMap.Stormy = value; }
+			get { return TheMap.WaterAnimLevel; }
+			set { TheMap.WaterAnimLevel = value; }
 		}
 
 		public override void SetCommands(Commands.CommandList commands)
@@ -154,6 +154,86 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			AgateLib.DisplayLib.Display.Clear(XleColor.Gray);
 			AgateLib.DisplayLib.Display.EndFrame();
 		}
-		
+
+		public override void AfterPlayerStep(GameState state)
+		{
+
+		}
+
+
+		/// <summary>
+		/// Returns true if the player drowns.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <returns></returns>
+		private bool CheckStormy(Player player)
+		{
+			int wasStormy = WaterAnimLevel;
+
+
+			if (player.X < -45 || player.X > TheMap.Width + 45 ||
+				player.Y < -45 || player.Y > TheMap.Height + 45)
+			{
+				WaterAnimLevel = 3;
+			}
+			else if (player.X < -30 || player.X > TheMap.Width + 30 ||
+				player.Y < -30 || player.Y > TheMap.Height + 30)
+			{
+				WaterAnimLevel = 2;
+			}
+			else if (player.X < -15 || player.X > TheMap.Width + 15 ||
+				player.Y < -15 || player.Y > TheMap.Height + 15)
+			{
+				WaterAnimLevel = 1;
+			}
+			else
+			{
+				WaterAnimLevel = 0;
+			}
+
+			if (WaterAnimLevel != wasStormy || WaterAnimLevel >= 2)
+			{
+				if (WaterAnimLevel == 1 && wasStormy == 0)
+				{
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
+				}
+				else if (WaterAnimLevel == 2 || WaterAnimLevel == 3)
+				{
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("The water is now very rough.", XleColor.White);
+					XleCore.TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
+				}
+				else if (WaterAnimLevel == 1 && wasStormy == 2)
+				{
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
+				}
+				else if (WaterAnimLevel == 0 && wasStormy == 1)
+				{
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
+				}
+
+				if (WaterAnimLevel == 3)
+				{
+					XleCore.TextArea.PrintLine();
+					XleCore.TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
+					XleCore.TextArea.PrintLine();
+				}
+
+				XleCore.Wait(1000);
+
+				if (WaterAnimLevel == 3)
+				{
+					player.HP = 0;
+					return true;
+				}
+
+			}
+			return false;
+		}
+
+
 	}
 }

@@ -50,7 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 				var range = points[i];
 
 				if (i == points.Length - 1)
-					Stormy = 0;
+					WaterAnimLevel = 0;
 
 				for (int x = range.Item1; x <= range.Item2; x++)
 				{
@@ -58,7 +58,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 				}
 
 				if (i == 0)
-					Stormy = 1;
+					WaterAnimLevel = 1;
 
 				if (i < points.Length - 1)
 				{

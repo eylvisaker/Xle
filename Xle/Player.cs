@@ -131,8 +131,6 @@ namespace ERY.Xle
 		int[] armor = new int[4];
 		int[] weaponQuality = new int[6];
 		int[] armorQuality = new int[4];
-		[Obsolete]
-		int[] item { get { return mItems.ItemArray; } set { mItems.ItemArray = value; } }
 
 		ItemContainer mItems = new ItemContainer();
 
@@ -678,7 +676,7 @@ namespace ERY.Xle
 			{
 				if (value > 0 && value < 30)
 				{
-					if (item[value] > 0)
+					if (Items[value] > 0)
 					{
 						hold = value;
 					}
@@ -890,39 +888,6 @@ namespace ERY.Xle
 
 		public ItemContainer Items { get { return mItems; } }
 
-		/// <summary>
-		/// Returns the number of the specified items
-		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
-		[Obsolete("Use Items property instead.")]
-		public int Item(int index)
-		{
-			return item[index];
-		}
-		/// <summary>
-		/// Adjusts the number of items the player has
-		/// </summary>
-		/// <param name="itm"></param>
-		/// <param name="inc"></param>
-		/// <returns></returns>
-		[Obsolete("Use Items property instead.")]
-		public int ItemCount(int itm, int inc)
-		{
-			item[itm] += inc;
-
-			if (item[itm] <= 0)
-			{
-				item[itm] = 0;
-
-				if (hold == itm)
-				{
-					hold = 0;
-				}
-			}
-
-			return item[itm];
-		}
 		/// <summary>
 		/// Adds a weapon to inventory
 		/// </summary>
@@ -1187,7 +1152,7 @@ namespace ERY.Xle
 
 		public void ReturnToPreviousMap()
 		{
-			XleCore.ChangeMap(this, returnMap, -1, returnX, returnY);
+			XleCore.ChangeMap(this, returnMap, new Point(returnX, returnY));
 
 			faceDirection = returnFacing;
 		}

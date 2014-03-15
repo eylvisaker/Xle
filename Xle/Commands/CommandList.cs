@@ -72,7 +72,7 @@ namespace ERY.Xle.Commands
 		{
 			Direction dir = mDirectionMap[cmd];
 
-			XleCore.Map.PlayerCursorMovement(player, dir);
+			State.Map.PlayerCursorMovement(player, dir);
 		}
 
 		bool IsCursorMovement(KeyCode cmd)

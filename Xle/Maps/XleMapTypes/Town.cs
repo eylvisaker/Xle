@@ -241,12 +241,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		bool CanGuardStepInto(Point pt, Guard guard)
 		{
-			int i, j, k;
 			Size guardSize = new Size(2, 2);
 
-			for (j = 0; j < 2; j++)
+			for (int j = 0; j < 2; j++)
 			{
-				for (i = 0; i < 2; i++)
+				for (int i = 0; i < 2; i++)
 				{
 					var tile = this[pt.X + i, pt.Y + j];
 
@@ -717,11 +716,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		public override bool PlayerRob(GameState state)
 		{
-			XleEvent evt = GetEvent(state.Player, 1);
-			bool handled = false;
-
-			if (evt != null)
+			foreach (var evt in EventsAt(state.Player, 1))
 			{
+				bool handled = false;
+
 				if (evt.AllowRobWhenNotAngry == false && this.IsAngry == false)
 				{
 					evt.RobFail();
@@ -765,8 +763,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 			}
 
-			if (player.X < 0 || player.X + 1 >= XleCore.Map.Width ||
-				player.Y < 0 || player.Y + 1 >= XleCore.Map.Height)
+			if (player.X < 0 || player.X >= Width ||
+				player.Y < 0 || player.Y >= Height)
 			{
 				if (IsAngry && this.GetType().Equals(typeof(Town)))
 				{

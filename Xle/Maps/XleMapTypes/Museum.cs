@@ -372,36 +372,23 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			int freq = 5;
 
-			if (1 == 1)
-			{
-				srcRect.X = offset;
-				srcRect.Width -= srcRect.X;
+			srcRect.X = offset;
+			srcRect.Width -= srcRect.X;
 
-				destRect.X += destOffset.X;
-				destRect.Y += destOffset.Y;
-				destRect.Width = srcRect.Width;
-				destRect.Height = srcRect.Height;
+			destRect.X += destOffset.X;
+			destRect.Y += destOffset.Y;
+			destRect.Width = srcRect.Width;
+			destRect.Height = srcRect.Height;
 
-				Surfaces.MuseumExhibitStatic.Color = clr;
-				Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
+			Surfaces.MuseumExhibitStatic.Color = clr;
+			Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
 
-				destRect = Rectangle.FromLTRB(destRect.Right, destRect.Top, oldDest.Right, destRect.Bottom);
-				srcRect.X = 0;
-				srcRect.Width = destRect.Width;
+			destRect = Rectangle.FromLTRB(destRect.Right, destRect.Top, oldDest.Right, destRect.Bottom);
+			srcRect.X = 0;
+			srcRect.Width = destRect.Width;
 
-				Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
-			}
-			else
-			{
+			Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
 
-				destRect.X += destOffset.X;
-				destRect.Y += destOffset.Y;
-				destRect.Width = srcRect.Width;
-				destRect.Height = srcRect.Height;
-
-				Surfaces.MuseumExhibitStatic.Color = clr;
-				Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
-			}
 
 			anim++;
 			if (anim % freq == 0)

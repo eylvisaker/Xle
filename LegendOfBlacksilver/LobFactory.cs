@@ -61,7 +61,7 @@ namespace ERY.Xle.LoB
 
 			Lob3DSurfaces.LoadSurfaces();
 
-			foreach (var exinfo in XleCore.ExhibitInfo.Values)
+			foreach (var exinfo in XleCore.Data.ExhibitInfo.Values)
 			{
 				try
 				{
@@ -141,6 +141,19 @@ namespace ERY.Xle.LoB
 			base.SetGameSpeed(state, Gamespeed);
 
 			state.GameSpeed.CastleOpenChestSoundTime = 300;
+		}
+
+		public override int MailItemID
+		{
+			get { return (int)LobItem.Package; }
+		}
+		public override int HealingItemID
+		{
+			get { return (int)LobItem.LifeElixir; }
+		}
+		public override int ClimbingGearItemID
+		{
+			get { return (int)LobItem.ClimbingGear; }
 		}
 	}
 }

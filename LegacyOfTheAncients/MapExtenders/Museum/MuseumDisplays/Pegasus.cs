@@ -27,7 +27,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				if (player.Food < 150)
 					player.Food = 150;
 
-				XleCore.ChangeMap(player, 3, 0, 0, 0);
+				XleCore.ChangeMap(player, 3, 0);
 			}
 		}
 		public override bool StaticBeforeCoin

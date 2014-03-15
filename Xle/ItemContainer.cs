@@ -20,8 +20,6 @@ namespace ERY.Xle
 		{
 			mItems = info.ReadInt32Array("Items");
 		}
-		[Obsolete]
-		public int[] ItemArray { get { return mItems; } set { mItems = value; } }
 
 		public int this[int index]
 		{

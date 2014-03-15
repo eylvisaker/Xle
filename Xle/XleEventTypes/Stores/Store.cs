@@ -165,11 +165,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 			else
 				return false;
 		}
-		[Obsolete("Use Gamestate overload instead.")]
-		protected bool IsLoanOverdue(Player player, bool displayMessage)
-		{
-			return IsLoanOverdue(XleCore.GameState, displayMessage);
-		}
 		public override bool Speak(GameState state)
 		{
 			player = state.Player;

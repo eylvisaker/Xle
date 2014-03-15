@@ -26,24 +26,21 @@ namespace ERY.Xle.Commands
 
 			XleCore.TextArea.PrintLine();
 
-			string action = XleCore.ItemList[state.Player.Hold].Action;
+			string action = XleCore.Data.ItemList[state.Player.Hold].Action;
 
 			if (string.IsNullOrEmpty(action))
-				action = "Use " + XleCore.ItemList[state.Player.Hold].Name;
+				action = "Use " + XleCore.Data.ItemList[state.Player.Hold].Name;
 
 			XleCore.TextArea.PrintLine(action + ".");
 
-			switch (state.Player.Hold)
+			if (state.Player.Hold == XleCore.Factory.HealingItemID)
 			{
-				case 3:
-					noEffect = false;
-					EatHealingHerbs(state);
-					break;
-
-				default: 
-					noEffect = !state.Map.PlayerUse(state.Player, state.Player.Hold);
-
-					break;
+				noEffect = false;
+				UseHealingItem(state, state.Player.Hold);
+			}
+			else
+			{
+				noEffect = !state.Map.PlayerUse(state.Player, state.Player.Hold);
 			}
 
 			if (noEffect == true)
@@ -62,11 +59,11 @@ namespace ERY.Xle.Commands
 
 			theList.Add("Nothing");
 
-			foreach (int i in XleCore.ItemList.Keys)
+			foreach (int i in XleCore.Data.ItemList.Keys)
 			{
 				if (state.Player.Items[i] > 0)
 				{
-					string itemName = XleCore.ItemList[i].Name;
+					string itemName = XleCore.Data.ItemList[i].Name;
 
 					if (itemName.Contains("coin"))
 						continue;
@@ -90,10 +87,10 @@ namespace ERY.Xle.Commands
 			state.Player.HoldMenu(XleCore.SubMenu("Hold Item", value, theList));
 		}
 
-		private void EatHealingHerbs(GameState state)
+		private void UseHealingItem(GameState state, int itemID)
 		{
 			state.Player.HP += state.Player.MaxHP / 2;
-			state.Player.ItemCount(3, -1);
+			state.Player.Items[itemID] -= 1;
 			SoundMan.PlaySound(LotaSound.Good);
 
 			XleCore.FlashHPWhileSound(XleColor.Cyan);

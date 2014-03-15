@@ -34,16 +34,6 @@ namespace ERY.Xle
 
 		private static bool returnToTitle = false;
 
-		[Obsolete("Use GameState.Map instead.")]
-		public static XleMap Map
-		{
-			get { return GameState.Map; }
-			set
-			{
-				GameState.Map = value;
-			}
-		}
-
 		public static XleGameFactory Factory
 		{
 			get
@@ -181,17 +171,44 @@ namespace ERY.Xle
 			AgateConsole.Commands.Add("move", new Action<int, int, int>(CheatMove));
 			AgateConsole.Commands.Add("godmode", new Action(CheatGod));
 			AgateConsole.Commands.Add("killall", new Action(CheatKillAll));
+			AgateConsole.Commands.Add("encounters", new Action<string>(CheatEncounters));
 		}
 
-		[Description("Kills all the guards on the map.")]
+		[Description("Turns encounters on or off.\nUsage: encounters [on|off]")]
+		private void CheatEncounters(string action)
+		{
+			if (action != null)
+				action = action.ToLowerInvariant();
+
+			if (action == "on")
+				XleCore.Options.DisableOutsideEncounters = false;
+			else if (action == "off")
+				XleCore.Options.DisableOutsideEncounters = true;
+			else
+				throw new ArgumentException("Could not understand '" + action + "'");
+			
+			AgateConsole.WriteLine("Outside encounters are now " + (
+				XleCore.Options.DisableOutsideEncounters ? "off." : "on."));
+		}
+
+		[Description("Kills all the guards or monsters on the map.")]
 		private void CheatKillAll()
 		{
-			if (GameState.Map.HasGuards == false)
+			if (GameState.Map is Dungeon)
 			{
-				throw new InvalidOperationException("There are no guards on this map.");
-			}
+				var dung = GameState.Map as Dungeon;
 
-			GameState.Map.Guards.Clear();
+				dung.Monsters.Clear();
+			}
+			else
+			{
+				if (GameState.Map.HasGuards == false)
+				{
+					throw new InvalidOperationException("There are no guards or monsters on this map.");
+				}
+
+				GameState.Map.Guards.Clear();
+			}
 		}
 
 		string CommandProcessor_DescribeCommand(string command)
@@ -266,7 +283,7 @@ namespace ERY.Xle
 
 			if (x == -1)
 			{
-				if (Map.IsMultiLevelMap)
+				if (GameState.Map.IsMultiLevelMap)
 				{
 					AgateConsole.WriteLine("Current Position: {0}, {1}, level: {2}", player.X, player.Y, player.DungeonLevel + 1);
 				}
@@ -281,8 +298,8 @@ namespace ERY.Xle
 
 			if (x < 0) throw new Exception("x cannot be less than zero.");
 			if (y < 0) throw new Exception("y cannot be less than zero.");
-			if (x >= Map.Width) throw new Exception(string.Format("x cannot be {0} or greater.", Map.Width));
-			if (y >= Map.Height) throw new Exception(string.Format("y cannot be {0} or greater.", Map.Height));
+			if (x >= GameState.Map.Width) throw new Exception(string.Format("x cannot be {0} or greater.", GameState.Map.Width));
+			if (y >= GameState.Map.Height) throw new Exception(string.Format("y cannot be {0} or greater.", GameState.Map.Height));
 
 			if (level == -1)
 			{
@@ -313,7 +330,7 @@ namespace ERY.Xle
 			if (mapInfo == null)
 				return;
 
-			ChangeMap(GameState.Player, mapInfo.ID, entryPoint, 0, 0);
+			ChangeMap(GameState.Player, mapInfo.ID, entryPoint);
 		}
 		public static void CheatGoto(string mapName)
 		{
@@ -347,12 +364,12 @@ namespace ERY.Xle
 			else if (map.CanPlayerStepIntoImpl(player, targetX, targetY - 2))
 				targetY -= 2;
 
-			ChangeMap(player, map.MapID, -1, targetX, targetY);
+			ChangeMap(player, map.MapID, new Point(targetX, targetY));
 		}
 
 		private static MapInfo FindMapByPartialName(string mapName)
 		{
-			IEnumerable<MapInfo> matches = from m in MapList.Values
+			IEnumerable<MapInfo> matches = from m in Data.MapList.Values
 										   where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant())
 										   select m;
 
@@ -411,52 +428,6 @@ namespace ERY.Xle
 		public static XleRenderer Renderer { get; set; }
 		public static XleOptions Options { get; set; }
 		public static XleData Data { get { return inst.mData; } }
-
-		[Obsolete("Use Data.MapList[id].Name instead.")]
-		public static string GetMapName(int id)
-		{
-			return Data.MapList[id].Name;
-		}
-		[Obsolete("Use Data.MapList instead.")]
-		public static MapList MapList
-		{
-			get { return Data.MapList; }
-		}
-		[Obsolete("Use Data.ItemList instead.")]
-		public static ItemList ItemList
-		{
-			get { return Data.ItemList; }
-		}
-		[Obsolete("Use Data.WeaponList instead.")]
-		public static EquipmentList WeaponList
-		{
-			get { return Data.WeaponList; }
-		}
-		[Obsolete("Use Data.ArmorList instead.")]
-		public static EquipmentList ArmorList
-		{
-			get { return Data.ArmorList; }
-		}
-		[Obsolete("Use Data.QualityList instead.")]
-		public static Dictionary<int, string> QualityList
-		{
-			get { return Data.QualityList; }
-		}
-		[Obsolete("Use Data.ExhibitInfo instead.")]
-		public static Dictionary<int, ExhibitInfo> ExhibitInfo
-		{
-			get { return Data.ExhibitInfo; }
-		}
-		[Obsolete("Use Data.Map3DExtraInfo instead.")]
-		public static Dictionary<int, Map3DExtraInfo> Map3DExtraInfo { get { return Data.Map3DExtraInfo; } }
-		[Obsolete("Use Data.MagicSpells instead.")]
-		public static Dictionary<int, MagicSpell> MagicSpells { get { return Data.MagicSpells; } }
-
-		[Obsolete("Use Data.Database instead.")]
-		public static Data.AgateDataImport Database
-		{
-			get { return Data.Database; }
-		}
 
 		public static string GetWeaponName(int weaponID, int qualityID)
 		{
@@ -580,7 +551,7 @@ namespace ERY.Xle
 			}
 		}
 
-
+		
 		public static void FlashHPWhileSound(Color clr)
 		{
 			FlashHPWhileSound(clr, Renderer.FontColor);
@@ -1370,10 +1341,9 @@ namespace ERY.Xle
 		{
 			ChangeMapImpl(player, mMapID, targetEntryPoint, 0, 0);
 		}
-		[Obsolete]
-		public static void ChangeMap(Player player, int mMapID, int targetEntryPoint, int targetX, int targetY)
+		public static void ChangeMap(Player player, int mMapID, Point targetPoint)
 		{
-			ChangeMapImpl(player, mMapID, targetEntryPoint, targetX, targetY);
+			ChangeMapImpl(player, mMapID, -1, targetPoint.X, targetPoint.Y);
 		}
 		static void ChangeMapImpl(Player player, int mMapID, int targetEntryPoint, int targetX, int targetY)
 		{
@@ -1402,7 +1372,7 @@ namespace ERY.Xle
 					TextArea.Clear();
 				}
 
-				if (targetEntryPoint < 0 || targetEntryPoint >= Map.EntryPoints.Count)
+				if (targetEntryPoint < 0 || targetEntryPoint >= GameState.Map.EntryPoints.Count)
 				{
 					player.X = targetX;
 					player.Y = targetY;
@@ -1457,7 +1427,7 @@ namespace ERY.Xle
 
 		static void CheckLoan(Player player)
 		{
-			if (XleCore.Map.Events.Any(x => x is StoreLending))
+			if (XleCore.GameState.Map.Events.Any(x => x is StoreLending))
 			{
 				if (player.loan > 0 && player.dueDate - player.TimeDays <= 0)
 				{

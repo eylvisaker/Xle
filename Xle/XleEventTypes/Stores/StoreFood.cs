@@ -99,33 +99,13 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			Town twn = state.Map as Town;
 
-			if (player.Item(9) > 0) return;
+			if (player.Items[XleCore.Factory.MailItemID] > 0) return;
 			if (twn == null) return;
 			if (twn.Mail.Count == 0) return;
+			
+			int target = SelectDeliveryTarget(twn);
 
-			int mMap = XleCore.random.Next(twn.Mail.Count);
-			int target;
-			int count = 0;
-			bool valid = false;
-
-			// search for a valid map
-			do
-			{
-				target = twn.Mail[mMap];
-
-				if (XleCore.GetMapName(target) != "")
-					valid = true;
-				else
-				{
-					mMap++;
-					if (mMap == twn.Mail.Count) mMap = 0;
-				}
-
-				count++;
-
-			} while (count < 6 && valid == false);
-
-			if (valid == false)
+			if (target < 0)
 				return;
 
 			SoundMan.PlaySound(LotaSound.Question);
@@ -139,17 +119,51 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			if (choice == 0)
 			{
-				player.ItemCount(9, 1);
+				player.Items[XleCore.Factory.MailItemID] = 1;
 				player.mailTown = target;
 
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("Here's some mail to");
-				XleCore.TextArea.PrintLine("deliver to " + XleCore.GetMapName(target) + ".");
+				XleCore.TextArea.PrintLine("deliver to " + XleCore.Data.MapList[target].Name + ".");
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("        Press Key to Continue");
 
 				WaitForKey();
 			}
+		}
+
+		private static int SelectDeliveryTarget(Town twn)
+		{
+			int target;
+			int mMap = XleCore.random.Next(twn.Mail.Count);
+
+			int count = 0;
+			bool valid = false;
+
+			// search for a valid map
+			do
+			{
+				target = twn.Mail[mMap];
+
+				if (XleCore.Data.MapList.ContainsKey(target) &&
+					XleCore.Data.MapList[target].Name != "")
+				{
+					valid = true;
+				}
+				else
+				{
+					mMap++;
+					if (mMap == twn.Mail.Count) mMap = 0;
+				}
+
+				count++;
+
+			} while (count < 6 && valid == false);
+
+			if (valid == false)
+				return -1;
+
+			return target;
 		}
 		private void SetWindow(double cost)
 		{
@@ -211,7 +225,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			WaitForKey();
 
 			player.Gold += gold;
-			player.ItemCount(9, -1);
+			player.Items[XleCore.Factory.MailItemID] = 0;
 			player.mailTown = 0;
 		}
 

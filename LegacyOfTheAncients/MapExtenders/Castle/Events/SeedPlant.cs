@@ -22,7 +22,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		public override void PrintObtainItemMessage(GameState state, int item, int count)
 		{
-			XleCore.TextArea.PrintLine("You take " + count.ToString() + " " + XleCore.ItemList[item].Name + "s.");
+			XleCore.TextArea.PrintLine("You take " + count.ToString() + " " + XleCore.Data.ItemList[item].Name + "s.");
 		}
 		public override void PlayObtainItemSound(GameState state, int item, int count)
 		{

@@ -242,30 +242,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			CurrentLevel = player.DungeonLevel;
 		}
 
-		#region --- Drawing ---
-
-		[Obsolete("Use surfaces instead.", true)]
-		protected Surface Backdrop
-		{
-			get { return Surfaces.Backdrop; }
-		}
-		[Obsolete("Use surfaces instead.", true)]
-		protected Surface Wall
-		{
-			get { return Surfaces.Wall; }
-		}
-		[Obsolete("Use surfaces instead.", true)]
-		protected Surface SidePassages
-		{
-			get { return Surfaces.SidePassages; }
-		}
-		[Obsolete("Use surfaces instead.", true)]
-		protected Surface Door
-		{
-			get { return Surfaces.Door; }
-		}
-
-		#endregion
 
 		public override bool PlayerFight(Player player)
 		{
@@ -402,11 +378,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 				if (false == handled)
 				{
-					string text = " " + foundMonster.Name;
+					string name = " " + foundMonster.Name;
 					if ("aeiou".Contains(foundMonster.Name[0]))
-						text = "n" + text;
+						name = "n" + name;
 
-					XleCore.TextArea.PrintLine("A" + text + " is stalking you!!!", XleColor.White);
+					XleCore.TextArea.PrintLine("A" + name + " is stalking you!!!", XleColor.White);
 				}
 			}
 			else

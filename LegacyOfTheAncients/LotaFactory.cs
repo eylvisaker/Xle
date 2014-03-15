@@ -45,7 +45,7 @@ namespace ERY.Xle.LotA
 
 			Lota3DSurfaces.LoadSurfaces();
 
-			foreach (var exinfo in XleCore.ExhibitInfo.Values)
+			foreach (var exinfo in XleCore.Data.ExhibitInfo.Values)
 			{
 				exinfo.LoadImage();
 			}
@@ -221,6 +221,19 @@ namespace ERY.Xle.LotA
 
 			if (speed != 1)
 				state.GameSpeed.OutsideStepTime = 400;
+		}
+
+		public override int MailItemID
+		{
+			get { return (int)LotaItem.Mail; }
+		}
+		public override int HealingItemID
+		{
+			get { return (int)LotaItem.HealingHerb; }
+		}
+		public override int ClimbingGearItemID
+		{
+			get { return (int)LotaItem.ClimbingGear; }
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 			XleCore.TextArea.PrintLine();
 			XleCore.QuickMenuYesNo();
 
-			XleCore.ChangeMap(state.Player, state.Player.MapID, 1, 0, 0);
+			XleCore.ChangeMap(state.Player, state.Player.MapID, 1);
 
 			Lob.Story.MantrekKilled = true;
 

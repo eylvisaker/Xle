@@ -117,8 +117,8 @@ namespace ERY.Xle.Commands
 								tempcolor = fontcolor;
 							}
 
-							renderer.WriteText(128, ++yy * 16, XleCore.WeaponList[player.WeaponType(i)].Name, tempcolor);
-							renderer.WriteText(416, yy * 16, XleCore.QualityList[player.WeaponQuality(i)], tempcolor);
+							renderer.WriteText(128, ++yy * 16, XleCore.Data.WeaponList[player.WeaponType(i)].Name, tempcolor);
+							renderer.WriteText(416, yy * 16, XleCore.Data.QualityList[player.WeaponQuality(i)], tempcolor);
 						}
 
 					}
@@ -139,8 +139,8 @@ namespace ERY.Xle.Commands
 								tempcolor = fontcolor;
 							}
 
-							renderer.WriteText(128, ++yy * 16, XleCore.ArmorList[player.ArmorType(i)].Name, tempcolor);
-							renderer.WriteText(416, yy * 16, XleCore.QualityList[player.ArmorQuality(i)], tempcolor);
+							renderer.WriteText(128, ++yy * 16, XleCore.Data.ArmorList[player.ArmorType(i)].Name, tempcolor);
+							renderer.WriteText(416, yy * 16, XleCore.Data.QualityList[player.ArmorQuality(i)], tempcolor);
 						}
 
 					}
@@ -158,7 +158,7 @@ namespace ERY.Xle.Commands
 					int xx = 48;
 					Color tempcolor;
 
-					foreach (int i in XleCore.ItemList.Keys)
+					foreach (int i in XleCore.Data.ItemList.Keys)
 					{
 						if (player.Items[i] > 0)
 						{
@@ -183,15 +183,12 @@ namespace ERY.Xle.Commands
 
 							line = player.Items[i].ToString() + " ";
 
-							if (i == 9)			// mail
+							if (i == XleCore.Factory.MailItemID)
 							{
-								line += XleCore.GetMapName(player.mailTown) + " ";
+								line += XleCore.Data.MapList[player.mailTown].Name + " ";
 							}
 
-							//TODO: Loadstring (g.hInstance(), i + 19, tempstring2, 39);
-
-							// tempstring += tempstring2;
-							line += XleCore.ItemList[i].Name;
+							line += XleCore.Data.ItemList[i].Name;
 
 							renderer.WriteText(xx, ++yy * 16, line, tempcolor);
 						}

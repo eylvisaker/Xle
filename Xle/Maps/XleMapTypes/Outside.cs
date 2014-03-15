@@ -31,6 +31,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		Point mDrawMonst;
 		int monstCount, initMonstCount;
 		bool isMonsterFriendly;
+		int mWaterAnimLevel;
 
 		#region --- Construction and Serialization ---
 
@@ -54,7 +55,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		#endregion
 
-		int stormy;
 
 		public override void InitializeMap(int width, int height)
 		{
@@ -485,11 +485,13 @@ namespace ERY.Xle.Maps.XleMapTypes
 				else
 				{
 					throw new NotImplementedException();
-					SoundMan.PlaySound(LotaSound.Invalid);
+					//SoundMan.PlaySound(LotaSound.Invalid);
 				}
 			}
 			else
 			{
+				BeforeStepOn(player, player.X + stepDirection.X, player.Y + stepDirection.Y);
+
 				MovePlayer(XleCore.GameState, stepDirection);
 
 				if (EncounterState == XleMapTypes.EncounterState.JustDisengaged)
@@ -508,14 +510,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 				if (player.IsOnRaft == false)
 				{
 					SoundMan.PlaySound(info.WalkSound);
-
-				}
-				else if (CheckStormy(player))
-				{
-					// check stormy returns true if the player died.
-					return;
 				}
 
+				AfterPlayerStep(player);
+				
 				player.TimeDays += info.StepTimeDays;
 				player.TimeQuality += 1;
 			}
@@ -712,13 +710,13 @@ namespace ERY.Xle.Maps.XleMapTypes
 					{
 						item = XleCore.random.Next(4) + 1;
 						cost = (int)(XleCore.ArmorCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
-						name = XleCore.ArmorList[item].Name;
+						name = XleCore.Data.ArmorList[item].Name;
 					}
 					else if (type == 2)
 					{
 						item = XleCore.random.Next(7) + 1;
 						cost = (int)(XleCore.WeaponCost(item, qual) * (XleCore.random.NextDouble() * 0.6 + 0.6));
-						name = XleCore.WeaponList[item].Name;
+						name = XleCore.Data.WeaponList[item].Name;
 					}
 
 					XleCore.TextArea.Print(name, XleColor.White);
@@ -853,90 +851,16 @@ namespace ERY.Xle.Maps.XleMapTypes
 		/// Gets or sets whether or not the player is in stormy water
 		/// </summary>
 		/// <returns></returns>
-		public int Stormy
+		public int WaterAnimLevel
 		{
-			get { return stormy; }
+			get { return mWaterAnimLevel; }
 			set
 			{
 				System.Diagnostics.Debug.Assert(value >= 0);
 
-				stormy = value;
+				mWaterAnimLevel = value;
 			}
 		}
-
-		/// <summary>
-		/// Returns true if the player drowns.
-		/// </summary>
-		/// <param name="player"></param>
-		/// <returns></returns>
-		private bool CheckStormy(Player player)
-		{
-			int wasStormy = stormy;
-
-
-			if (player.X < -45 || player.X > XleCore.Map.Width + 45 ||
-				player.Y < -45 || player.Y > XleCore.Map.Height + 45)
-			{
-				Stormy = 3;
-			}
-			else if (player.X < -30 || player.X > XleCore.Map.Width + 30 ||
-				player.Y < -30 || player.Y > XleCore.Map.Height + 30)
-			{
-				Stormy = 2;
-			}
-			else if (player.X < -15 || player.X > XleCore.Map.Width + 15 ||
-				player.Y < -15 || player.Y > XleCore.Map.Height + 15)
-			{
-				Stormy = 1;
-			}
-			else
-			{
-				Stormy = 0;
-			}
-
-			if (Stormy != wasStormy || Stormy >= 2)
-			{
-				if (Stormy == 1 && wasStormy == 0)
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
-				}
-				else if (Stormy == 2 || Stormy == 3)
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("The water is now very rough.", XleColor.White);
-					XleCore.TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
-				}
-				else if (Stormy == 1 && wasStormy == 2)
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
-				}
-				else if (Stormy == 0 && wasStormy == 1)
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
-				}
-
-				if (Stormy == 3)
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
-					XleCore.TextArea.PrintLine();
-				}
-
-				XleCore.Wait(1000);
-
-				if (Stormy == 3)
-				{
-					player.HP = 0;
-					return true;
-				}
-
-			}
-			return false;
-		}
-
 
 		int lastAnimate = 0;
 
@@ -972,7 +896,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					if (tile == 0)
 					{
-						if (XleCore.random.Next(0, 1000) < 20 * (Stormy + 1))
+						if (XleCore.random.Next(0, 1000) < 20 * (WaterAnimLevel + 1))
 						{
 							waves[index] = XleCore.random.Next(1, 3);
 						}
@@ -1179,7 +1103,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			for (int i = 0; i < monstCount; i++)
 			{
-				var m = new Monster(XleCore.Database.MonsterList[displayMonst]);
+				var m = new Monster(XleCore.Data.Database.MonsterList[displayMonst]);
 
 				m.HP = (int)(m.HP * (XleCore.random.NextDouble() * 0.4 + 0.8));
 
@@ -1292,31 +1216,31 @@ namespace ERY.Xle.Maps.XleMapTypes
 			int mCount = 0;
 			int val, sel = -1;
 
-			for (int i = 0; i < XleCore.Database.MonsterList.Count; i++)
+			for (int i = 0; i < XleCore.Data.Database.MonsterList.Count; i++)
 			{
-				if ((TerrainType)XleCore.Database.MonsterList[i].Terrain == TerrainType.All && terrain != 0)
+				if ((TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == TerrainType.All && terrain != 0)
 					mCount++;
 
-				if ((TerrainType)XleCore.Database.MonsterList[i].Terrain == terrain)
+				if ((TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == terrain)
 					mCount += 3;
 
 				if (terrain == TerrainType.Foothills &&
-					(TerrainType)XleCore.Database.MonsterList[i].Terrain == TerrainType.Mountain)
+					(TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == TerrainType.Mountain)
 					mCount += 3;
 			}
 
 			val = 1 + XleCore.random.Next(mCount);
 
-			for (int i = 0; i < XleCore.Database.MonsterList.Count; i++)
+			for (int i = 0; i < XleCore.Data.Database.MonsterList.Count; i++)
 			{
-				if ((TerrainType)XleCore.Database.MonsterList[i].Terrain == TerrainType.All && terrain != 0)
+				if ((TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == TerrainType.All && terrain != 0)
 					val--;
 
-				if ((TerrainType)XleCore.Database.MonsterList[i].Terrain == terrain)
+				if ((TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == terrain)
 					val -= 3;
 
 				if (terrain == TerrainType.Foothills &&
-					(TerrainType)XleCore.Database.MonsterList[i].Terrain == TerrainType.Mountain)
+					(TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == TerrainType.Mountain)
 					val -= 3;
 
 				if (val == 0 || val == -1 || val == -2)
@@ -1427,7 +1351,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				return false;
 			}
 
-			if (terrain == TerrainType.Mountain && player.Hold != 2)
+			if (terrain == TerrainType.Mountain && player.Hold != XleCore.Factory.ClimbingGearItemID)
 			{
 				return false;
 			}

@@ -80,7 +80,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			int[] prices = { 32, 63, 152, 189, 379, 51 };
 
-			return (int)(XleCore.MagicSpells[index].BasePrice * this.CostFactor);
+			return (int)(XleCore.Data.MagicSpells[index].BasePrice * this.CostFactor);
 		}
 	}
 }

@@ -61,7 +61,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			bool skipRaft = false;
 			bool offerCoin = false;
 
-			if (IsLoanOverdue(player, true))
+			if (IsLoanOverdue(state, true))
 				return true;
 
 			// check to see if there are any rafts near the raft drop point
@@ -115,7 +115,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 					{
 						XleCore.TextArea.PrintLine("Climbing gear purchased.");
 
-						player.ItemCount(2, 1);
+						player.Items[XleCore.Factory.ClimbingGearItemID] += 1;
 						offerCoin = true;
 
 						SoundMan.PlaySound(LotaSound.Sale);

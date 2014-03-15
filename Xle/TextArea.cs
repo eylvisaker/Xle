@@ -106,18 +106,6 @@ namespace ERY.Xle
 			XleCore.Renderer.WriteText(x, y, text, color);
 		}
 
-
-		[Obsolete("This is for compatibility with g.AddBottom. Use Print and PrintLine instead.")]
-		public void WriteLine(string line, Color[] colors)
-		{
-			if (cursor.Y == 5)
-			{
-				CycleLines();
-			}
-
-			PrintLine(line, colors);
-		}
-
 		private void CycleLines()
 		{
 			var old = lines[0];
@@ -134,30 +122,6 @@ namespace ERY.Xle
 
 			if (cursor.Y < 0) cursor.Y = 0;
 			if (cursor.Y >= lines.Length) cursor.Y = lines.Length - 1;
-		}
-
-
-		[Obsolete("This is for compatibility with g.AddBottom. Use Print and PrintLine instead.")]
-		public void UpdateLine(int line, int x, string text, Color[] colors)
-		{
-			var target = lines[line];
-
-			target.Text = new string(' ', x + margin) + text;
-
-			if (colors != null)
-			{
-				if (colors.Length == 40)
-					target.Colors = colors;
-
-				else
-				{
-					for (int i = 0; i < colors.Length && i + x + margin < target.Colors.Length; i++)
-					{
-						target.Colors[i + x + margin] = colors[i];
-					}
-				}
-
-			}
 		}
 
 		public string GetTextLine(int line)

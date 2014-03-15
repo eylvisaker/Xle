@@ -10,7 +10,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 	class SeeCompendium : NullEventExtender
 	{
 		bool paralyzed = false;
-		bool ran = false;
 
 		public override void StepOn(GameState state, ref bool handled)
 		{

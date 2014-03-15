@@ -568,14 +568,9 @@ namespace ERY.Xle
 			int initialxx = inRect.X;
 			int width = inRect.Width / 16;
 			int height = inRect.Height / 16;
-			int wAdjust = 0;
-			int hAdjust = 0;
 			int tile;
 
 			centerPoint = new Point(x, y);
-
-			wAdjust = 1;
-			hAdjust = 1;
 
 			int xx = initialxx;
 			int yy = 16;
@@ -679,49 +674,9 @@ namespace ERY.Xle
 
 		public ColorScheme ColorScheme { get; private set; }
 
-		[Obsolete("Use ColorScheme instead.", true)]
-		public void GetBoxColors(out Color boxColor, out Color innerColor, out Color fontColor, out int vertLine)
-		{
-			throw new NotImplementedException();
-		}
-
 		#endregion
 
 		#region --- Events ---
-
-		/// <summary>
-		/// returns the special event at the player coordinates
-		/// 
-		/// null if there is none.
-		/// </summary>
-		/// <param name="player"></param>
-		/// <param name="border">How many tiles away from the player to consider</param>
-		/// <returns></returns>
-		[Obsolete("Use EventsAt or EnabledEventsAt instead.")]
-		public XleEvent GetEvent(Player player, int border)
-		{
-			XleEvent evt = GetEvent(player.X, player.Y, border);
-			if (evt != null) return evt;
-
-
-			evt = GetEvent(player.X, player.Y + 1, border);
-			if (evt != null) return evt;
-
-			evt = GetEvent(player.X + 1, player.Y, border);
-			if (evt != null) return evt;
-
-			evt = GetEvent(player.X + 1, player.Y + 1, border);
-			if (evt != null) return evt;
-
-			return null;
-		}
-		[Obsolete("Use EventsAt or EnabledEventsAt instead.")]
-		public T GetEvent<T>(Player player, int border) where T : XleEvent
-		{
-			XleEvent evt = GetEvent(player, border);
-
-			return evt as T;
-		}
 
 		public IEnumerable<XleEvent> EnabledEventsAt(Player player, int border)
 		{
@@ -1074,11 +1029,6 @@ namespace ERY.Xle
 		#endregion
 		#region --- Player commands ---
 
-		[Obsolete]
-		public bool PlayerSpeak(Player player)
-		{
-			return PlayerSpeak(XleCore.GameState);
-		}
 		public bool PlayerSpeak(GameState state)
 		{
 			foreach (var evt in EnabledEventsAt(state.Player, 1))
@@ -1092,17 +1042,9 @@ namespace ERY.Xle
 			return PlayerSpeakImpl(state.Player);
 		}
 
-
-
-
 		public virtual bool PlayerRob(GameState state)
 		{
 			return PlayerRobImpl(state);
-		}
-		[Obsolete]
-		public virtual bool PlayerRob(Player player)
-		{
-			return PlayerRobImpl(player);
 		}
 
 		protected virtual bool PlayerRobImpl(Xle.GameState state)
@@ -1212,7 +1154,7 @@ namespace ERY.Xle
 		public virtual void LeaveMap(Player player)
 		{
 			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Leave " + XleCore.Map.MapName);
+			XleCore.TextArea.PrintLine("Leave " + MapName);
 			XleCore.TextArea.PrintLine();
 
 			XleCore.Wait(2000);

@@ -123,5 +123,9 @@ namespace ERY.Xle
 
 			SoundMan.PlaySoundSync(LotaSound.VeryGood);
 		}
+
+		public abstract int MailItemID { get; }
+		public abstract int HealingItemID { get; }
+		public abstract int ClimbingGearItemID { get; }
 	}
 }

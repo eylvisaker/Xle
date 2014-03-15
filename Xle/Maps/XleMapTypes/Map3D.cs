@@ -257,7 +257,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (extraType == ExtraType.None)
 				return;
 
-			Map3DExtraInfo info = XleCore.Map3DExtraInfo[(int)extraType];
+			Map3DExtraInfo info = XleCore.Data.Map3DExtraInfo[(int)extraType];
 
 			if (info.Images.ContainsKey(distance) == false)
 				return;
@@ -281,7 +281,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		private void AnimateExtra(ExtraType extraType, Point loc, int distance, Point extraDestRect)
 		{
-			Map3DExtraInfo info = XleCore.Map3DExtraInfo[(int)extraType];
+			Map3DExtraInfo info = XleCore.Data.Map3DExtraInfo[(int)extraType];
 			if (info.Images.ContainsKey(distance) == false)
 				return;
 

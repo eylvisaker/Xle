@@ -151,7 +151,7 @@ namespace ERY.Xle.XleEventTypes
 
 		public string GetMapName()
 		{
-			return XleCore.GetMapName(mMapID);
+			return XleCore.Data.MapList[mMapID].Name;
 		}
 
 		private bool VerifyMapExistence()

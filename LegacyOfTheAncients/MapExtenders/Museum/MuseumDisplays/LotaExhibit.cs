@@ -68,7 +68,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public ExhibitInfo ExhibitInfo
 		{
-			get { return XleCore.ExhibitInfo[(int)ExhibitID]; }
+			get { return XleCore.Data.ExhibitInfo[(int)ExhibitID]; }
 		}
 	
 		public override void Draw(Rectangle displayRect)
