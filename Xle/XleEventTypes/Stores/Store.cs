@@ -71,10 +71,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			int coin = -1;
 			MenuItemList menu = new MenuItemList("Yes", "No");
 
-			if (player.Level == 1)
-				coin = XleCore.random.Next(2);
-			else if (player.Level <= 3)
-				coin = XleCore.random.Next(3);
+			coin = XleCore.Factory.NextMuseumCoinOffer(XleCore.GameState);
 
 			if (coin == -1)
 				return;
@@ -84,9 +81,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			if (amount > player.Gold)
 				amount /= 2;
-
-			// shift value to index within items.
-			coin += 17;
 
 			SoundMan.PlaySound(LotaSound.Question);
 

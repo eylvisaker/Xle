@@ -14,6 +14,11 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 
 		}
+		public override void OnLoad(GameState state)
+		{
+			Lota.SetMuseumCoinOffers(state);
+		}
+
 		public override void SetCommands(Commands.CommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);

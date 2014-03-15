@@ -44,6 +44,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			player.Items[LotaItem.Tulip] = 0;
 			player.Attribute[Attributes.charm] += 10;
 			Lota.Story.Museum[ExhibitID] = 10;
+			Lota.Story.ReturnedTulip = true;
 
 			ReadRawText(ExhibitInfo.Text[3]);
 		}
@@ -76,6 +77,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				XleCore.WaitForKey();
 
 				Lota.Story.Museum[(int)ExhibitIdentifier] = 3;
+				Lota.Story.SearchingForTulip = true;
 			}
 			else
 			{

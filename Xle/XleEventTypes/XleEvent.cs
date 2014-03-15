@@ -81,6 +81,7 @@ namespace ERY.Xle
 		public virtual void RobFail()
 		{
 			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("The merchant won't let you rob.");
 
 			XleCore.Wait(1000);

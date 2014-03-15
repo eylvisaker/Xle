@@ -47,5 +47,11 @@ namespace ERY.Xle.LotA
 		public bool EatenJutonFruit { get; set; }
 
 		public bool PurchasedHerbs { get; set; }
+
+		public bool ReturnedTulip { get; set; }
+
+		public bool SearchingForTulip { get; set; }
+
+		public bool FortressComplete { get; set; }
 	}
 }

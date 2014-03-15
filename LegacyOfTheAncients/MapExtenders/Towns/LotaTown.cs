@@ -17,6 +17,11 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 			mExtenders.Add("Healer", new Healer());
 		}
 
+		public override void OnLoad(GameState state)
+		{
+			Lota.SetMuseumCoinOffers(XleCore.GameState);
+		}
+
 		public override void SetCommands(Commands.CommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);

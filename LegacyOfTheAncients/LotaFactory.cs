@@ -235,5 +235,10 @@ namespace ERY.Xle.LotA
 		{
 			get { return (int)LotaItem.ClimbingGear; }
 		}
+
+		public override int NextMuseumCoinOffer(GameState state)
+		{
+			return Lota.NextMuseumCoinOffer();
+		}
 	}
 }
