@@ -26,9 +26,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		double lastAnim;
-		int cycles;
-
 		protected override IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)

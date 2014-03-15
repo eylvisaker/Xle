@@ -1185,7 +1185,6 @@ namespace ERY.Xle
 			return dam;
 		}
 
-
 		public void ReturnToPreviousMap()
 		{
 			XleCore.ChangeMap(this, returnMap, -1, returnX, returnY);
@@ -1205,9 +1204,8 @@ namespace ERY.Xle
 			this.returnFacing = facing;
 		}
 
-
-		public int WeaponEnchantTurnsLeft { get; set; }
-
+		public int WeaponEnchantTurnsRemaining { get; set; }
+		public int ArmorEnchantTurnsRemaining { get; set; }
 
 		public Direction RaftFaceDirection { get; private set; }
 	}

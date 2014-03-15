@@ -77,11 +77,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		protected internal void RedrawStore()
 		{
-			SetColorScheme(mColorScheme);
-			Extender.SetColorScheme(mColorScheme);
-
 			Display.BeginFrame();
-			XleCore.SetProjectionAndBackColors(mColorScheme);
 			
 			DrawStore();
 
@@ -94,6 +90,10 @@ namespace ERY.Xle.XleEventTypes.Stores
 			string tempString;
 
 			var renderer = XleCore.Renderer;
+
+			SetColorScheme(mColorScheme);
+			Extender.SetColorScheme(mColorScheme);
+			XleCore.SetProjectionAndBackColors(mColorScheme);
 
 			// Draw the borders
 			renderer.DrawFrame(mColorScheme.FrameColor);

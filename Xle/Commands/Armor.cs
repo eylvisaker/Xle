@@ -20,8 +20,8 @@ namespace ERY.Xle.Commands
 			{
 				if (state.Player.ArmorType(i) > 0)
 				{
-					tempstring = XleCore.QualityList[state.Player.ArmorQuality(i)] + " " +
-								 XleCore.ArmorList[state.Player.ArmorType(i)].Name;
+					tempstring = XleCore.Data.QualityList[state.Player.ArmorQuality(i)] + " " +
+								 XleCore.Data.ArmorList[state.Player.ArmorType(i)].Name;
 
 					theList.Add(tempstring);
 					j++;

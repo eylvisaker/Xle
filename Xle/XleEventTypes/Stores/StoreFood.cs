@@ -23,7 +23,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			var player = state.Player;
 
-			if (IsLoanOverdue(player, true))
+			if (IsLoanOverdue(state, true))
 				return true;
 
 			string tempString;

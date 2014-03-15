@@ -399,6 +399,8 @@ namespace ERY.Xle.Rendering
 				return;
 			}
 
+			XleCore.SetProjectionAndBackColors(XleCore.GameState.Map.ColorScheme);
+
 			Player player = XleCore.GameState.Player;
 			XleMap map = XleCore.GameState.Map;
 

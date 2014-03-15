@@ -32,7 +32,7 @@ namespace ERY.Xle.XleEventTypes
 
 		public override bool Use(GameState state, int item)
 		{
-			if (XleCore.ItemList.IsKey(item) == false)
+			if (XleCore.Data.ItemList.IsKey(item) == false)
 				return false;
 
 			bool itemUnlocksDoor = item == RequiredItem;

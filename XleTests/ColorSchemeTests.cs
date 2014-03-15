@@ -12,6 +12,7 @@ namespace ERY.XleTests
 	public class ColorSchemeTests
 	{
 		[TestMethod]
+		[Obsolete]
 		public void VertLine()
 		{
 			ColorScheme cs = new ColorScheme();

@@ -132,7 +132,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 			damage *= vd + 4;
 
-			if (state.Player.WeaponEnchantTurnsLeft > 0)
+			if (state.Player.WeaponEnchantTurnsRemaining > 0)
 			{
 				damage *= 2.5;
 			}

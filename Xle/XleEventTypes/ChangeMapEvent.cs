@@ -139,7 +139,7 @@ namespace ERY.Xle.XleEventTypes
 		{
 			try
 			{
-				XleCore.ChangeMap(player, mMapID, TargetEntryPoint, TargetX, TargetY);
+				XleCore.ChangeMap(player, mMapID, TargetEntryPoint);
 			}
 			catch (Exception e)
 			{

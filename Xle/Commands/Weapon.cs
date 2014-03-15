@@ -19,8 +19,8 @@ namespace ERY.Xle.Commands
 			{
 				if (state.Player.WeaponType(i) > 0)
 				{
-					tempstring = XleCore.QualityList[state.Player.WeaponQuality(i)] + " " +
-								 XleCore.WeaponList[state.Player.WeaponType(i)].Name;
+					tempstring = XleCore.Data.QualityList[state.Player.WeaponQuality(i)] + " " +
+								 XleCore.Data.WeaponList[state.Player.WeaponType(i)].Name;
 
 					theList.Add(tempstring);
 					j++;

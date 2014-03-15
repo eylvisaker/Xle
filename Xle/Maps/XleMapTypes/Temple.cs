@@ -8,7 +8,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Temple : Map2D
 	{
-		public new ITempleExtender Extender { get; private set; }
+		public ITempleExtender Extender { get; private set; }
 
 		protected override IMapExtender CreateExtenderImpl()
 		{

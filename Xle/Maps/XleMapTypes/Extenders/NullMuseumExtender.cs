@@ -10,7 +10,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	{
 		public new Museum TheMap { get { return (Museum)base.TheMap;  } }
 
-		public int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			throw new NotImplementedException();
 		}

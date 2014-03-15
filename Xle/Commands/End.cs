@@ -34,11 +34,11 @@ namespace ERY.Xle.Commands
 			{
 				ColorStringBuilder builder = new ColorStringBuilder();
 
-				builder.AddText("Game ", XleColor.White);
-				builder.AddText("not", XleColor.Yellow);
-				builder.AddText(" saved.", XleColor.White);
+				XleCore.TextArea.Print("Game ", XleColor.White);
+				XleCore.TextArea.Print("not", XleColor.Yellow);
+				XleCore.TextArea.Print(" saved.", XleColor.White);
 
-				g.AddBottom(builder);
+				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine();
 			}
 

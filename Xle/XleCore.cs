@@ -531,7 +531,6 @@ namespace ERY.Xle
 			Renderer.UpdateAnim();
 
 			Display.BeginFrame();
-			XleCore.SetProjectionAndBackColors(GameState.Map.ColorScheme);
 
 			Renderer.Draw();
 
@@ -685,9 +684,6 @@ namespace ERY.Xle
 		public static void Wait(int howLong, bool keyBreak, Action redraw)
 		{
 			Timing.StopWatch watch = new Timing.StopWatch();
-
-			if (Display.CurrentWindow.IsClosed)
-				return;
 
 			do
 			{
@@ -1258,14 +1254,12 @@ namespace ERY.Xle
 
 			XleCore.TextArea.PrintLine();
 
-			ColorStringBuilder builder = new ColorStringBuilder();
+			XleCore.TextArea.Print("Enter number by ", XleColor.White);
+			XleCore.TextArea.Print("keyboard", XleColor.Yellow);
+			XleCore.TextArea.Print(" or ", XleColor.White);
+			XleCore.TextArea.Print("joystick", XleColor.Cyan);
 
-			builder.AddText("Enter number by ", XleColor.White);
-			builder.AddText("keyboard", XleColor.Yellow);
-			builder.AddText(" or ", XleColor.White);
-			builder.AddText("joystick", XleColor.Cyan);
-
-			g.AddBottom(builder);
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 
 			KeyCode key;
