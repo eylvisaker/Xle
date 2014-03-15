@@ -54,7 +54,10 @@ namespace ERY.Xle.Commands
 
 		public void Prompt()
 		{
-			player.CheckDead();
+			if (player.HP <= 0 || player.Food <= 0)
+			{
+				XleCore.PlayerIsDead();
+			}
 
 			XleCore.TextArea.Print("\nEnter command: ");
 		}
@@ -179,6 +182,7 @@ namespace ERY.Xle.Commands
 			State.Map.AfterExecuteCommand(player, cmd);
 
 			XleCore.Wait(waitTime, false, XleCore.Redraw);
+
 			Prompt();
 		}
 

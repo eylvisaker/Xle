@@ -79,5 +79,49 @@ namespace ERY.Xle
 				state.GameSpeed.DungeonStepTime = 200;
 			}
 		}
+
+		public virtual void PlayerIsDead(GameState state)
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("            You died!");
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+
+			SoundMan.PlaySound(LotaSound.VeryBad);
+
+			XleCore.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
+
+			var player = state.Player;
+
+			XleCore.ChangeMap(XleCore.GameState.Player, 1, -1);
+
+			TerrainType t;
+
+			do
+			{
+				player.X = XleCore.random.Next(state.Map.Width);
+				player.Y = XleCore.random.Next(state.Map.Height);
+
+				t = XleCore.GameState.Map.TerrainAt(player.X, player.Y);
+
+			} while (t != TerrainType.Grass && t != TerrainType.Forest);
+
+			player.Rafts.Clear();
+
+			player.HP = player.MaxHP;
+			player.Food = 30 + XleCore.random.Next(10);
+			player.Gold = 25 + XleCore.random.Next(30);
+			player.BoardedRaft = null;
+
+			while (SoundMan.IsPlaying(LotaSound.VeryBad))
+				XleCore.Wait(40);
+
+			XleCore.TextArea.PrintLine("The powers of the museum");
+			XleCore.TextArea.PrintLine("resurrect you from the grave!");
+			XleCore.TextArea.PrintLine();
+
+			SoundMan.PlaySoundSync(LotaSound.VeryGood);
+		}
 	}
 }

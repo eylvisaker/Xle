@@ -160,7 +160,7 @@ namespace ERY.Xle.Commands
 
 					foreach (int i in XleCore.ItemList.Keys)
 					{
-						if (player.Item(i) > 0)
+						if (player.Items[i] > 0)
 						{
 							if (player.Hold == i)
 							{
@@ -181,7 +181,7 @@ namespace ERY.Xle.Commands
 								yy++;
 							}
 
-							line = player.Item(i).ToString() + " ";
+							line = player.Items[i].ToString() + " ";
 
 							if (i == 9)			// mail
 							{

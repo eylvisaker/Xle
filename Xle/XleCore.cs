@@ -1488,5 +1488,10 @@ namespace ERY.Xle
 		}
 
 		public static bool EnableDebugMode { get; set; }
+
+		public static void PlayerIsDead()
+		{
+			Factory.PlayerIsDead(GameState);
+		}
 	}
 }

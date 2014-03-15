@@ -948,7 +948,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 				if (Stormy == 3)
 				{
-					player.Dead();
+					player.HP = 0;
 					return true;
 				}
 

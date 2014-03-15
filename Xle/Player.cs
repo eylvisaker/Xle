@@ -313,65 +313,12 @@ namespace ERY.Xle
 
 		#endregion
 
-		/// <summary>
-		/// The player has died
-		/// </summary>
-		public void Dead()
-		{
-			hp = 0;
-
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("            You died!");
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-
-			SoundMan.PlaySound(LotaSound.VeryBad);
-
-			XleCore.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
-
-			XleCore.ChangeMap(this, 1, 0);
-
-			TerrainType t;
-
-			do
-			{
-				x = XleCore.random.Next(XleCore.Map.Width);
-				y = XleCore.random.Next(XleCore.Map.Height);
-
-				t = XleCore.GameState.Map.TerrainAt(x, y);
-
-			} while (t != TerrainType.Grass && t != TerrainType.Forest);
-
-			Rafts.Clear();
-
-			hp = MaxHP;
-			food = 30 + XleCore.random.Next(10);
-			gold = 25 + XleCore.random.Next(30);
-			onRaft = -1;
-
-			while (SoundMan.IsPlaying(LotaSound.VeryBad))
-				XleCore.Wait(40);
-
-			XleCore.TextArea.PrintLine("The powers of the museum");
-			XleCore.TextArea.PrintLine("resurrect you from the grave!");
-			XleCore.TextArea.PrintLine();
-
-			SoundMan.PlaySoundSync(LotaSound.VeryGood);
-		}
-
 		public string Name
 		{
 			get
 			{
 				return mName;
 			}
-		}
-
-		public void CheckDead()
-		{
-			if (hp == 0 || food < 0)
-				Dead();
 		}
 
 		public void SavePlayer()
@@ -437,7 +384,6 @@ namespace ERY.Xle
 
 			}
 		}
-
 
 		/// <summary>
 		/// Returns or adjusts current HP
@@ -575,18 +521,6 @@ namespace ERY.Xle
 			set { timequality = value; }
 		}
 
-
-		/// <summary>
-		/// the current outside terrain the player is standing on
-		/// </summary>
-		/// <returns></returns>
-		public TerrainType Terrain
-		{
-			get
-			{
-				return XleCore.Map.TerrainAt(x, y);
-			}
-		}
 		/// <summary>
 		/// 					// returns x position
 		/// </summary>
@@ -666,7 +600,6 @@ namespace ERY.Xle
 			}
 		}
 
-
 		public List<RaftData> Rafts
 		{
 			get { return rafts; }
@@ -721,24 +654,6 @@ namespace ERY.Xle
 			}
 		}
 
-		/// <summary>
-		/// Returns the raft that the player is on (or -1 if not)
-		/// </summary>
-		[Obsolete("Use BoardedRaft instead.", true)]
-		public int OnRaft
-		{
-			get
-			{
-				return onRaft;
-			}
-			set
-			{
-				if (value < -1 || value >= rafts.Count)
-					throw new ArgumentOutOfRangeException();
-
-				onRaft = value;
-			}
-		}
 		public RaftData BoardedRaft
 		{
 			get
@@ -794,7 +709,7 @@ namespace ERY.Xle
 			{
 				for (i = 1; i <= h && h < 30; i++)
 				{
-					if (item[i] == 0)
+					if (Items[i] == 0)
 					{
 						h++;
 					}
