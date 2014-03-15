@@ -402,7 +402,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 				if (false == handled)
 				{
-					XleCore.TextArea.PrintLine("A " + foundMonster.Name + " is stalking you!!!", XleColor.White);
+					string text = " " + foundMonster.Name;
+					if ("aeiou".Contains(foundMonster.Name[0]))
+						text = "n" + text;
+
+					XleCore.TextArea.PrintLine("A" + text + " is stalking you!!!", XleColor.White);
 				}
 			}
 			else
@@ -447,6 +451,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 				else
 				{
+					if (Extender.PrintLevelDuringXamine)
+					{
+						XleCore.TextArea.PrintLine("Level " + (player.DungeonLevel + 1).ToString() + ".");
+					}
+
 					XleCore.TextArea.PrintLine("Nothing unusual in sight.");
 				}
 			}

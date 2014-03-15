@@ -118,5 +118,11 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		public virtual void PlayerSpeak(GameState state, ref bool handled)
 		{
 		}
+
+
+		public virtual bool PrintLevelDuringXamine
+		{
+			get { return true; }
+		}
 	}
 }

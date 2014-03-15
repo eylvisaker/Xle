@@ -40,5 +40,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled);
 
 		void PlayerSpeak(GameState state, ref bool handled);
+
+		bool PrintLevelDuringXamine { get; }
 	}
 }

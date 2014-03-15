@@ -15,6 +15,11 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			ResetDripTime();
 		}
 
+		public override bool PrintLevelDuringXamine
+		{
+			get { return XleCore.Options.EnhancedGameplay; }
+		}
+
 		public override void SetCommands(Commands.CommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
@@ -45,14 +50,14 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 		{
 		}
 
-		
+
 		public override void OnBeforeOpenBox(Player player, ref bool handled)
 		{
 			if (player.DungeonLevel == 0)
 				return;
 			if (player.Items[LotaItem.Compass] > 0)
 				return;
-			
+
 			if (XleCore.random.NextDouble() < .6)
 			{
 				XleCore.TextArea.PrintLine("You find a compass!", XleColor.Yellow);
@@ -102,7 +107,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 		public override DungeonMonster GetMonsterToSpawn(GameState state)
 		{
-			if (XleCore.random.NextDouble() > 0.07) 
+			if (XleCore.random.NextDouble() > 0.07)
 				return null;
 
 			int monsterID = XleCore.random.Next(6);
