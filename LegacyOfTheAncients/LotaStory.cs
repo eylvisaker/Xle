@@ -55,5 +55,7 @@ namespace ERY.Xle.LotA
 		public bool FortressComplete { get; set; }
 
 		public bool VisitedCasandra { get; set; }
+
+		public bool BoughtPotion { get; set; }
 	}
 }
