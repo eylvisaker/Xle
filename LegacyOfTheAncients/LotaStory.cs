@@ -53,5 +53,7 @@ namespace ERY.Xle.LotA
 		public bool SearchingForTulip { get; set; }
 
 		public bool FortressComplete { get; set; }
+
+		public bool VisitedCasandra { get; set; }
 	}
 }

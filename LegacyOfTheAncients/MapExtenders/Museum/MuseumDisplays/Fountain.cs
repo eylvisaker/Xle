@@ -20,10 +20,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public override bool IsClosed(ERY.Xle.Player player)
 		{
-			if (Lota.Story.Museum[(int)ExhibitIdentifier] >= 10)
-				return true;
-			else
-				return false;
+			return Lota.Story.ReturnedTulip;
 		}
 
 		public override void RunExhibit(Player player)
@@ -43,7 +40,6 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			// remove the tulip from the player, give the reward and shut down the exhibit.
 			player.Items[LotaItem.Tulip] = 0;
 			player.Attribute[Attributes.charm] += 10;
-			Lota.Story.Museum[ExhibitID] = 10;
 			Lota.Story.ReturnedTulip = true;
 
 			ReadRawText(ExhibitInfo.Text[3]);
@@ -54,7 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			base.RunExhibit(player);
 			XleCore.TextArea.PrintLine();
 
-			if (Lota.Story.Museum[(int)ExhibitIdentifier] == 0 || Lota.Story.Museum[(int)ExhibitIdentifier] == 1)
+			if (Lota.Story.SearchingForTulip == false)
 				XleCore.TextArea.PrintLine("Do you want to help search?");
 			else
 				XleCore.TextArea.PrintLine("Do you want to continue searching?");
@@ -64,7 +60,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			if (XleCore.QuickMenuYesNo() == 0)
 			{
 				ReadRawText(ExhibitInfo.Text[2]);
-				int amount = Lota.Story.Museum[3] != 0 ? 300 : 100;
+				int amount = 100;
+				
+				if (HasBeenVisited(player) || HasBeenVisited(player, ExhibitIdentifier.Thornberry))
+				{
+					amount += 200;
+				}
 
 				player.Gold += amount;
 
@@ -76,12 +77,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 				XleCore.WaitForKey();
 
-				Lota.Story.Museum[(int)ExhibitIdentifier] = 3;
 				Lota.Story.SearchingForTulip = true;
-			}
-			else
-			{
-				Lota.Story.Museum[(int)ExhibitIdentifier] = 1;
 			}
 		}
 	}

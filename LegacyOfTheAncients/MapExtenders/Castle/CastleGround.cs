@@ -38,6 +38,8 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 				return new MagicIce();
 			if (name == "seeds")
 				return new SeedPlant();
+			if (name == "casandra")
+				return new Casandra();
 			if (evt is TreasureChestEvent)
 				return new Chest { CastleLevel = 1 };
 
