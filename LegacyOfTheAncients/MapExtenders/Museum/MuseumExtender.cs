@@ -50,6 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 
 			return mExhibits[tile];
 		}
+
 		public override void OnLoad(GameState state)
 		{
 			CheckExhibitStatus(state);

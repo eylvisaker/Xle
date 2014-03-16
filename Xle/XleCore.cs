@@ -1422,23 +1422,8 @@ namespace ERY.Xle
 			}
 
 			GameState.Map.OnAfterEntry(GameState);
-			CheckLoan(player);
+			GameState.Commands.Prompt();
 		}
-
-		static void CheckLoan(Player player)
-		{
-			if (XleCore.GameState.Map.Events.Any(x => x is StoreLending))
-			{
-				if (player.loan > 0 && player.dueDate - player.TimeDays <= 0)
-				{
-					TextArea.PrintLine("This is your friendly lender.");
-					TextArea.PrintLine("You owe me money!");
-
-					XleCore.Wait(1000);
-				}
-			}
-		}
-
 
 		public void ProcessArguments(string[] args)
 		{

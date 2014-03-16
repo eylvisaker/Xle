@@ -240,5 +240,8 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 		}
 
 		public abstract string UseCoinMessage { get; }
+
+		public abstract bool PlayerHasCoin(Player player);
+		public abstract void UseCoin(Player player);
 	}
 }

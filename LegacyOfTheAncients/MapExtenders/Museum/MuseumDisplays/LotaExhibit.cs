@@ -17,10 +17,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		}
 		
 		public Coin Coin { get; private set; }
+
 		public override bool RequiresCoin(Player player)
 		{ 
 			return Coin != Coin.None; 
 		}
+		
 		protected override void MarkAsVisited(Player player)
 		{
 			if (Lota.Story.Museum[ExhibitID] == 0)
@@ -58,6 +60,22 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				}
 			}
 		}
+		public static LotaItem ItemFromCoin(Coin coin)
+		{
+			switch (coin)
+			{
+				case Coin.Jade: return LotaItem.JadeCoin;
+				case Coin.Topaz: return LotaItem.TopazCoin;
+				case Coin.Amethyst: return LotaItem.AmethystCoin;
+				case Coin.Sapphire: return LotaItem.SapphireCoin;
+				case Coin.Ruby: return LotaItem.RubyCoin;
+				case Coin.Turquoise: return LotaItem.TurquoiseCoin;
+				case Coin.Diamond: return LotaItem.DiamondCoin;
+				case Coin.None:
+				default:
+					return 0;
+			}
+		}
 
 		public abstract ExhibitIdentifier ExhibitIdentifier { get; }
 
@@ -78,18 +96,6 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			ExhibitInfo.DrawImage(displayRect, ImageID);
 		}
-		protected int TotalExhibitsViewed(Player player)
-		{
-			int count = 0;
-
-			for (int i = 2; i < Lota.Story.Museum.Length; i++)
-			{
-				if (Lota.Story.Museum[i] != 0) 
-					count++;
-			}
-
-			return count;
-		}
 
 		public override string UseCoinMessage
 		{
@@ -97,6 +103,19 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			{
 				return "insert your " + Coin.ToString() + " coin?";
 			}
+		}
+
+		public override bool PlayerHasCoin(Player player)
+		{
+			return player.Items[ItemFromCoin(Coin)] > 0;
+		}
+
+		public override void UseCoin(Player player)
+		{
+			if (player.Items[ItemFromCoin(Coin)] <= 0)
+				throw new InvalidOperationException("Cannot use a coin the player does not have!");
+
+			player.Items[ItemFromCoin(Coin)]--;
 		}
 	}
 }

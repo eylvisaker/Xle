@@ -763,8 +763,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 			}
 
-			if (player.X < 0 || player.X >= Width ||
-				player.Y < 0 || player.Y >= Height)
+			if (player.X < 0 || player.X >= Width - 1 ||
+				player.Y < 0 || player.Y >= Height - 1)
 			{
 				if (IsAngry && this.GetType().Equals(typeof(Town)))
 				{

@@ -472,20 +472,24 @@ namespace ERY.Xle.Maps.XleMapTypes
 				if (CanPlayerStepIntoImpl(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
 				{
 					CommandTextForInvalidMovement(ref command);
+					XleCore.TextArea.PrintLine(command);
 					SoundMan.PlaySound(LotaSound.Bump);
 				}
-				//else
-				//    SoundMan.PlaySound(LotaSound.MuseumWalk);
+				else
+				{
+					XleCore.TextArea.PrintLine(command);
+
+					PlayPlayerMoveSound();
+					MovePlayer(XleCore.GameState, stepDirection);
+				}
 			}
-
-			XleCore.TextArea.PrintLine(command);
-
-			if (stepDirection.IsEmpty == false)
+			else
 			{
-				MovePlayer(XleCore.GameState, stepDirection);
-			}
+				// Turning in place
+				XleCore.TextArea.PrintLine(command);
 
-			PlayPlayerMoveSound();
+				PlayPlayerMoveSound();
+			}
 		}
 
 		protected virtual void CommandTextForInvalidMovement(ref string command)

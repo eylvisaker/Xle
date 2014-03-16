@@ -140,5 +140,13 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 				return "cost:  one " + CoinName;
 			}
 		}
+
+		public override bool PlayerHasCoin(Player player)
+		{
+			return true;
+		}
+		public override void UseCoin(Player player)
+		{
+		}
 	}
 }

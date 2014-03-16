@@ -234,7 +234,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				else
 					XleCore.TextArea.PrintLine();
 
-				if (Extender.PlayerHasCoin(player, ex) == false)
+				if (ex.PlayerHasCoin(player) == false)
 				{
 					Extender.NeedsCoinMessage(player, ex);
 					XleCore.Wait(500);
@@ -251,7 +251,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 					if (choice == 1)
 						return true;
 
-					Extender.UseCoin(player, ex);
+					ex.UseCoin(player);
 
 					mDrawStatic = false;
 					RunExhibit(player, ex);

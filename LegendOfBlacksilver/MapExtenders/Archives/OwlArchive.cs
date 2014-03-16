@@ -36,10 +36,6 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 
 			return mExhibits[tile];
 		}
-		public override bool PlayerHasCoin(Player player, Exhibit ex)
-		{
-			return true;
-		}
 		public override void NeedsCoinMessage(Player player, Exhibit ex)
 		{
 			XleCore.TextArea.PrintLine(ex.UseCoinMessage);
