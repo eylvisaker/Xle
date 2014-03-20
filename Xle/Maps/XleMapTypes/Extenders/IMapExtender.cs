@@ -33,5 +33,10 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd);
 
 		void SetCommands(CommandList commands);
+
+		IEnumerable<MagicSpell> ValidMagic { get; }
+		void CastSpell(GameState state, MagicSpell magic);
+		bool RollSpellFizzle(GameState state, MagicSpell magic);
+		int RollSpellDamage(GameState state, MagicSpell magic);
 	}
 }

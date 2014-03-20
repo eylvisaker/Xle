@@ -85,5 +85,30 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			return (int)Math.Round(damage);
 		}
+
+
+		/// <summary>
+		/// Returns the list of magic spells that can be used on this map.
+		/// </summary>
+		/// <param name="state"></param>
+		/// <returns></returns>
+		public virtual IEnumerable<MagicSpell> ValidMagic
+		{
+			get { yield break; }
+		}
+
+		public virtual void CastSpell(GameState state, MagicSpell magic)
+		{
+		}
+
+		public virtual bool RollSpellFizzle(GameState state, MagicSpell magic)
+		{
+			return XleCore.random.Next(10) < 5;
+		}
+
+		public virtual int RollSpellDamage(GameState state, MagicSpell magic)
+		{
+			return (int)((magic.ID + 0.5) * 15 * (XleCore.random.NextDouble() + 1));
+		}
 	}
 }

@@ -234,11 +234,45 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			return false;
 		}
 
-		public override IEnumerable<string> GetValidMagic(GameState state)
+		public override IEnumerable<MagicSpell> ValidMagic
 		{
-			if (state.Player.Items[LotaItem.MagicFlame] > 0) yield return "Magic flame";
-			if (state.Player.Items[LotaItem.Firebolt] > 0) yield return "firebolt";
-			if (state.Player.Items[LotaItem.SeekSpell] > 0) yield return "seek spell";
+			get
+			{
+				yield return XleCore.Data.MagicSpells[1];
+				yield return XleCore.Data.MagicSpells[2];
+				yield return XleCore.Data.MagicSpells[6];
+			}
+		}
+
+		public override void CastSpell(GameState state, MagicSpell magic)
+		{
+			if (magic.ID == 6)
+			{
+				CastSeekSpell(state);
+			}
+		}
+
+		private void CastSeekSpell(GameState state)
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Cast seek spell.");
+
+			if (state.Player.IsOnRaft)
+			{
+				XleCore.TextArea.PrintLine("The water mutes the spell.");
+			}
+			else if (TheMap.MapID != 1)
+			{
+				XleCore.TextArea.PrintLine("You're too far away.");
+			}
+			else
+			{
+				state.Player.FaceDirection = Direction.West;
+				SoundMan.PlaySoundSync(LotaSound.VeryGood);
+
+				XleCore.ChangeMap(state.Player, 1, 0);
+				TheMap.EncounterState = 0;
+			}
 		}
 
 	}

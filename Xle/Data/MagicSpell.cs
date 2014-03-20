@@ -25,6 +25,8 @@ namespace ERY.Xle
 					return Name + "s";
 			}
 		}
+
+		public int ID { get; set; }
 	}
 }
 

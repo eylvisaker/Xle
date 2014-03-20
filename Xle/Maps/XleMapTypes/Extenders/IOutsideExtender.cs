@@ -8,10 +8,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	public interface IOutsideExtender : IMapExtender
 	{
 		void ModifyTerrainInfo(TerrainInfo info, TerrainType terrain);
-
-
 		void UpdateEncounterState(GameState state, ref bool handled);
 
-		IEnumerable<string> GetValidMagic(GameState state);
 	}
 }

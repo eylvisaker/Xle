@@ -206,7 +206,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				*/
 			}
 		}
-		
+
 		private TerrainInfo GetTerrainInfo(Player player)
 		{
 			var terrain = TerrainAt(player.X, player.Y);
@@ -327,7 +327,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		public override bool PlayerFight(Player player)
 		{
 			string weaponName;
-			
+
 			weaponName = player.CurrentWeaponTypeName;
 
 			XleCore.TextArea.PrintLine("\n");
@@ -344,85 +344,18 @@ namespace ERY.Xle.Maps.XleMapTypes
 				XleCore.TextArea.Print(weaponName, XleColor.Cyan);
 				XleCore.TextArea.PrintLine();
 
-				if (dam > 0)
-				{
-					SoundMan.PlaySound(LotaSound.PlayerHit);
-
-					XleCore.TextArea.Print("Enemy hit by blow of ", XleColor.White);
-					XleCore.TextArea.Print(dam.ToString(), XleColor.Cyan);
-					XleCore.TextArea.Print(".", XleColor.White);
-					XleCore.TextArea.PrintLine();
-				}
-				else
+				if (dam <= 0)
 				{
 					SoundMan.PlaySound(LotaSound.PlayerMiss);
 
 					XleCore.TextArea.PrintLine("Your Attack missed.", XleColor.Yellow);
+
+					return true;
 				}
 
-				XleCore.Wait(250 + 100 * player.Gamespeed, true, XleCore.Redraw);
+				SoundMan.PlaySound(LotaSound.PlayerHit);
 
-				if (KilledOne())
-				{
-					XleCore.Wait(250);
-
-					SoundMan.PlaySound(LotaSound.EnemyDie);
-
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("the " + MonstName + " dies.");
-
-					int gold, food;
-					bool finished = FinishedCombat(out gold, out food);
-
-					XleCore.Wait(250 + 150 * player.Gamespeed);
-
-					if (finished)
-					{
-						XleCore.TextArea.PrintLine();
-
-						if (food > 0)
-						{
-							MenuItemList menu = new MenuItemList("Yes", "No");
-							int choice;
-
-							XleCore.TextArea.PrintLine("Would you like to use the");
-							XleCore.TextArea.PrintLine(MonstName + "'s flesh for food?");
-							XleCore.TextArea.PrintLine();
-
-							choice = XleCore.QuickMenu(menu, 3, 0);
-
-							if (choice == 1)
-								food = 0;
-							else
-							{
-								XleCore.TextArea.Print("You gain ", XleColor.White);
-								XleCore.TextArea.Print(food.ToString(), XleColor.Green);
-								XleCore.TextArea.Print(" days of food.", XleColor.White);
-								XleCore.TextArea.PrintLine();
-
-								player.Food += food;
-							}
-
-						}
-
-
-						if (gold < 0)
-						{
-							// gain weapon or armor
-						}
-						else if (gold > 0)
-						{
-							XleCore.TextArea.Print("You find ", XleColor.White);
-							XleCore.TextArea.Print(gold.ToString(), XleColor.Yellow);
-							XleCore.TextArea.Print(" gold.", XleColor.White);
-							XleCore.TextArea.PrintLine();
-
-							player.Gold += gold;
-						}
-
-						XleCore.Wait(400 + 100 * player.Gamespeed);
-					}
-				}
+				HitMonster(player, dam);
 			}
 			else if (EncounterState > 0)
 			{
@@ -438,14 +371,147 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return true;
 		}
+
+		private void HitMonster(Player player, int dam)
+		{
+			XleCore.TextArea.Print("Enemy hit by blow of ", XleColor.White);
+			XleCore.TextArea.Print(dam.ToString(), XleColor.Cyan);
+			XleCore.TextArea.Print(".", XleColor.White);
+			XleCore.TextArea.PrintLine();
+
+			XleCore.Wait(250 + 100 * player.Gamespeed, true, XleCore.Redraw);
+
+			currentMonst[monstCount - 1].HP -= dam;
+
+			if (KilledOne())
+			{
+				XleCore.Wait(250);
+
+				SoundMan.PlaySound(LotaSound.EnemyDie);
+
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("the " + MonstName + " dies.");
+
+				int gold, food;
+				bool finished = FinishedCombat(out gold, out food);
+
+				XleCore.Wait(250 + 150 * player.Gamespeed);
+
+				if (finished)
+				{
+					XleCore.TextArea.PrintLine();
+
+					if (food > 0)
+					{
+						MenuItemList menu = new MenuItemList("Yes", "No");
+						int choice;
+
+						XleCore.TextArea.PrintLine("Would you like to use the");
+						XleCore.TextArea.PrintLine(MonstName + "'s flesh for food?");
+						XleCore.TextArea.PrintLine();
+
+						choice = XleCore.QuickMenu(menu, 3, 0);
+
+						if (choice == 1)
+							food = 0;
+						else
+						{
+							XleCore.TextArea.Print("You gain ", XleColor.White);
+							XleCore.TextArea.Print(food.ToString(), XleColor.Green);
+							XleCore.TextArea.Print(" days of food.", XleColor.White);
+							XleCore.TextArea.PrintLine();
+
+							player.Food += food;
+						}
+
+					}
+
+
+					if (gold < 0)
+					{
+						// gain weapon or armor
+					}
+					else if (gold > 0)
+					{
+						XleCore.TextArea.Print("You find ", XleColor.White);
+						XleCore.TextArea.Print(gold.ToString(), XleColor.Yellow);
+						XleCore.TextArea.Print(" gold.", XleColor.White);
+						XleCore.TextArea.PrintLine();
+
+						player.Gold += gold;
+					}
+
+					XleCore.Wait(400 + 100 * player.Gamespeed);
+				}
+			}
+		}
 		public override void PlayerMagic(GameState state)
 		{
+			var magics = Extender.ValidMagic.Where(x => state.Player.Items[x.ItemID] > 0).ToList();
+
 			MenuItemList menu = new MenuItemList();
 			menu.Add("Nothing");
-			menu.AddRange(Extender.GetValidMagic(state));
+			menu.AddRange(magics.Select(x => x.Name));
 
-			XleCore.SubMenu("Pick Magic", 0, menu);
+			XleCore.TextArea.PrintLine(" - select above", XleColor.Cyan);
+			int choice = XleCore.SubMenu("Pick Magic", 0, menu);
 
+			if (choice == 0)
+				return;
+
+			var magic = magics[choice-1];
+
+			XleCore.TextArea.PrintLine();
+
+			state.Player.Items[magic.ItemID]--;
+
+			switch (choice)
+			{
+				case 1:
+				case 2:
+					if (EncounterState == 0)
+					{
+						state.Player.Items[magic.ItemID]++;
+						XleCore.TextArea.PrintLine("Nothing to fight.");
+						return;
+					}
+					else if (EncounterState != XleMapTypes.EncounterState.MonsterReady)
+					{
+						state.Player.Items[magic.ItemID]++;
+						XleCore.TextArea.PrintLine("The unknown creature is out of range.");
+						return;
+					}
+
+					XleCore.TextArea.PrintLine("Attack with " + magic.Name + ".");
+
+					if (choice == 1) SoundMan.PlaySound(LotaSound.MagicFlame);
+					else SoundMan.PlaySound(LotaSound.FireBolt);
+
+					XleCore.Wait(250);
+					SoundMan.StopSound(LotaSound.MagicFlame);
+					SoundMan.StopSound(LotaSound.FireBolt);
+
+					if (Extender.RollSpellFizzle(state, magic))
+					{
+						SoundMan.PlaySound(LotaSound.MagicFizzle);
+
+						XleCore.TextArea.PrintLine("Attack fizzles.", XleColor.Yellow);
+						return;
+					}
+
+					SoundMan.PlaySound(LotaSound.MagicHit);
+
+					int damage = Extender.RollSpellDamage(state, magic);
+
+					HitMonster(state.Player, damage);
+
+					break;
+
+				default:
+
+					Extender.CastSpell(state, magic);
+					break;
+			}
 		}
 		public override void PlayerCursorMovement(Player player, Direction dir)
 		{
@@ -523,7 +589,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 
 				AfterPlayerStep(player);
-				
+
 				player.TimeDays += info.StepTimeDays;
 				player.TimeQuality += 1;
 			}
@@ -585,7 +651,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return true;
 		}
 
-		private EncounterState EncounterState { get; set; }
+		public EncounterState EncounterState { get; set; }
 
 		private bool InEncounter
 		{
@@ -622,8 +688,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 					damage = 1 + XleCore.random.Next((damage < 10) ? damage : 10);
 				}
 			}
-
-			currentMonst[monstCount - 1].HP -= damage;
 			isMonsterFriendly = false;
 
 			return damage;
@@ -714,7 +778,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 					XleCore.TextArea.Print("Do you want to buy ", XleColor.Cyan);
 					XleCore.TextArea.Print(quality[qual], XleColor.White);
 					XleCore.TextArea.PrintLine();
-					
+
 					if (type == 1)
 					{
 						item = XleCore.random.Next(4) + 1;
@@ -1206,7 +1270,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				XleCore.TextArea.Print("   Damage:  ", XleColor.White);
 				XleCore.TextArea.Print(dam.ToString(), XleColor.Yellow);
 				XleCore.TextArea.PrintLine();
-				
+
 				if (dam > 0)
 				{
 					SoundMan.PlaySound(LotaSound.EnemyHit);

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
-	enum EncounterState
+	public enum EncounterState
 	{
 		NoEncounter,
 		/// <summary>

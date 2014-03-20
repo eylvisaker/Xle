@@ -49,6 +49,7 @@ namespace ERY.Xle
 		MagicFlame,
 		FireBolt,
 		MagicHit,
+		MagicFizzle,
 	}
 
 	public static class SoundMan

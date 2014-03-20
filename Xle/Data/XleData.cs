@@ -88,7 +88,14 @@ namespace ERY.Xle.Data
 				int maxCarry = node.GetOptionalAttribute("MaxCarry", 10);
 				int itemID = int.Parse(node.Attribute("ItemID").Value);
 
-				mMagicSpells.Add(id, new MagicSpell { Name = name, BasePrice = basePrice, MaxCarry = maxCarry, ItemID = itemID });
+				mMagicSpells.Add(id, new MagicSpell
+				{
+					Name = name,
+					ID = id,
+					BasePrice = basePrice,
+					MaxCarry = maxCarry,
+					ItemID = itemID
+				});
 			}
 		}
 		private void LoadEquipmentInfo(XElement element, ref EquipmentList equipmentList)
