@@ -194,6 +194,7 @@
     <Compile Include="XleEventTypes\Stores\Buyback.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreExtender.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreFrontExtender.cs" />
+    <Compile Include="XleEventTypes\Stores\Extenders\StoreMagicExtender.cs" />
     <Compile Include="XleEventTypes\Stores\StoreBank.cs" />
     <Compile Include="XleEventTypes\Stores\StoreEquipment.cs" />
     <Compile Include="XleEventTypes\Stores\StoreFood.cs" />

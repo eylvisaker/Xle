@@ -234,6 +234,12 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			return false;
 		}
 
+		public override IEnumerable<string> GetValidMagic(GameState state)
+		{
+			if (state.Player.Items[LotaItem.MagicFlame] > 0) yield return "Magic flame";
+			if (state.Player.Items[LotaItem.Firebolt] > 0) yield return "firebolt";
+			if (state.Player.Items[LotaItem.SeekSpell] > 0) yield return "seek spell";
+		}
 
 	}
 }

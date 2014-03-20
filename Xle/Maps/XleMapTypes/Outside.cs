@@ -206,23 +206,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				*/
 			}
 		}
-		public override bool PlayerXamine(Player player)
-		{
-			TerrainInfo info = GetTerrainInfo(player);
-
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("You are in " + info.TerrainName + ".");
-
-			XleCore.TextArea.Print("Travel: ", XleColor.White);
-			XleCore.TextArea.Print(info.TravelText, XleColor.Green);
-			XleCore.TextArea.Print("  -  Food use: ", XleColor.White);
-			XleCore.TextArea.Print(info.FoodUseText, XleColor.Green);
-			XleCore.TextArea.PrintLine();
-
-			return true;
-		}
-
+		
 		private TerrainInfo GetTerrainInfo(Player player)
 		{
 			var terrain = TerrainAt(player.X, player.Y);
@@ -322,6 +306,23 @@ namespace ERY.Xle.Maps.XleMapTypes
 			Extender.ModifyTerrainInfo(info, terrain);
 
 			return info;
+		}
+
+		public override bool PlayerXamine(Player player)
+		{
+			TerrainInfo info = GetTerrainInfo(player);
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You are in " + info.TerrainName + ".");
+
+			XleCore.TextArea.Print("Travel: ", XleColor.White);
+			XleCore.TextArea.Print(info.TravelText, XleColor.Green);
+			XleCore.TextArea.Print("  -  Food use: ", XleColor.White);
+			XleCore.TextArea.Print(info.FoodUseText, XleColor.Green);
+			XleCore.TextArea.PrintLine();
+
+			return true;
 		}
 		public override bool PlayerFight(Player player)
 		{
@@ -437,6 +438,15 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return true;
 		}
+		public override void PlayerMagic(GameState state)
+		{
+			MenuItemList menu = new MenuItemList();
+			menu.Add("Nothing");
+			menu.AddRange(Extender.GetValidMagic(state));
+
+			XleCore.SubMenu("Pick Magic", 0, menu);
+
+		}
 		public override void PlayerCursorMovement(Player player, Direction dir)
 		{
 			string command;
@@ -518,7 +528,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 				player.TimeQuality += 1;
 			}
 		}
-
 		public override bool PlayerDisembark(GameState state)
 		{
 			XleCore.TextArea.PrintLine(" raft");

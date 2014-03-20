@@ -123,5 +123,14 @@ namespace ERY.Xle
 		YellowDiamond = 37,
 		WhiteDiamond = 38,
 		Opal = 39,
+		TongueOfFlame = 40,
+		LightningBolt = 41,
+		GlowTip = 42,
+		ArmorEnchant = 43,
+		Annihilate = 44,
+		NimbleStep = 45,
+		PsychicProtect = 46, 
+		LightSpell = 47,
+		Teleport = 48,
 	}
 }

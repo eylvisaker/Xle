@@ -43,5 +43,11 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		public virtual void UpdateEncounterState(GameState state, ref bool handled)
 		{
 		}
+
+
+		public virtual IEnumerable<string> GetValidMagic(GameState state)
+		{
+			yield break;
+		}
 	}
 }

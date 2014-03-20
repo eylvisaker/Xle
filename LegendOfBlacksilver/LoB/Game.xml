@@ -112,16 +112,26 @@
     <Item ID="37" Name="Yellow Diamond" />
     <Item ID="38" Name="White Diamond" />
     <Item ID="39" Name="Opal" />
+    <Item ID="40" Name="Tongue of Flame" />
+    <Item ID="41" Name="Lightning Bolt" />
+    <Item ID="42" Name="Glow Tip" />
+    <Item ID="43" Name="Armor Enchant" />
+    <Item ID="44" Name="Annihilate" />
+    <Item ID="45" Name="Nimble Step" />
+    <Item ID="46" Name="Psychic Protect" />
+    <Item ID="47" Name="Light Spell" />
+    <Item ID="48" Name="Teleport" />
   </Items>
   <MagicSpells>
-    <MagicSpell ID="1" Name="Tongue of Flame" BasePrice="32" />
-    <MagicSpell ID="2" Name="Lightning Bolt" BasePrice="63" />
-    <MagicSpell ID="3" Name="Glow Tip" BasePrice="152" />
-    <MagicSpell ID="4" Name="Armor Enchant" BasePrice="152" />
-    <MagicSpell ID="5" Name="Psychic Protect" BasePrice="152" />
-    <MagicSpell ID="6" Name="Nimble Step" BasePrice="189" />
-    <MagicSpell ID="7" Name="Annihilate" BasePrice="379" />
-    <MagicSpell ID="8" Name="Seek Spell" BasePrice="51" />
+    <MagicSpell ID="1" ItemID="40" MaxCarry="50" Name="Tongue of Flame" BasePrice="32" />
+    <MagicSpell ID="2" ItemID="41" MaxCarry="50" Name="Lightning Bolt" BasePrice="63" />
+    <MagicSpell ID="3" ItemID="42" MaxCarry="50" Name="Glow Tip" BasePrice="152" />
+    <MagicSpell ID="4" ItemID="43" MaxCarry="50" Name="Armor Enchant" BasePrice="152" />
+    <MagicSpell ID="5" ItemID="44" MaxCarry="10" Name="Annihilate" BasePrice="379" />
+    <MagicSpell ID="6" ItemID="45" MaxCarry="20" Name="Nimble Step" BasePrice="189" />
+    <MagicSpell ID="7" ItemID="46" MaxCarry="20" Name="Psychic Protect" BasePrice="152" />
+    <MagicSpell ID="8" ItemID="47" MaxCarry="50" Name="Light Spell" BasePrice="51" />
+    <MagicSpell ID="9" ItemID="48" MaxCarry="50" Name="Teleport" BasePrice="51" />
   </MagicSpells>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>

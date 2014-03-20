@@ -84,9 +84,11 @@ namespace ERY.Xle.Data
 			{
 				int id = int.Parse(node.Attribute("ID").Value);
 				string name = node.Attribute("Name").Value;
-				int basePrice = int.Parse(node.GetOptionalAttribute("BasePrice", "0"));
+				int basePrice = node.GetOptionalAttribute("BasePrice", 0);
+				int maxCarry = node.GetOptionalAttribute("MaxCarry", 10);
+				int itemID = int.Parse(node.Attribute("ItemID").Value);
 
-				mMagicSpells.Add(id, new MagicSpell { Name = name, BasePrice = basePrice });
+				mMagicSpells.Add(id, new MagicSpell { Name = name, BasePrice = basePrice, MaxCarry = maxCarry, ItemID = itemID });
 			}
 		}
 		private void LoadEquipmentInfo(XElement element, ref EquipmentList equipmentList)
@@ -314,7 +316,7 @@ namespace ERY.Xle.Data
 
 		public void LoadDungeonMonsterSurfaces()
 		{
-			foreach(var dm in DungeonMonsters)
+			foreach (var dm in DungeonMonsters)
 			{
 				dm.Value.Surface = new AgateLib.DisplayLib.Surface("Dungeon/Monsters/" + dm.Value.ImageFile);
 			}

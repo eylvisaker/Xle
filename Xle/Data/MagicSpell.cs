@@ -11,6 +11,20 @@ namespace ERY.Xle
 		
 		public string Name { get; set; }
 		public int BasePrice { get; set; }
+		public int MaxCarry { get; set; }
+
+		public int ItemID { get; set; }
+
+		public string PluralName
+		{
+			get
+			{
+				if (Name.EndsWith("sh"))
+					return Name + "es";
+				else
+					return Name + "s";
+			}
+		}
 	}
 }
 

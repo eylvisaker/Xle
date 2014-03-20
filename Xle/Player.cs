@@ -244,16 +244,10 @@ namespace ERY.Xle
 			gold = info.ReadInt32("Gold");
 			goldBank = info.ReadInt32("GoldInBank");
 			timedays = info.ReadDouble("TimeDays");
-			if (info.ContainsKey("TimeQuality"))
 				timequality = info.ReadDouble("TimeQuality");
 
 			onRaft = info.ReadInt32("OnRaft");
-			if (info.ContainsKey("Rafts"))
-			{
-				rafts = info.ReadList<RaftData>("Rafts");
-			}
-			else
-				onRaft = -1;
+			rafts = info.ReadList<RaftData>("Rafts");
 
 			gamespeed = info.ReadInt32("GameSpeed");
 			map = info.ReadInt32("Map");
@@ -276,6 +270,7 @@ namespace ERY.Xle
 			armor = info.ReadInt32Array("Armor");
 			weaponQuality = info.ReadInt32Array("WeaponQuality");
 			armorQuality = info.ReadInt32Array("ArmorQuality");
+			mItems = info.ReadObject<ItemContainer>("Item");
 			hold = info.ReadInt32("Hold");
 
 			lastAttacked = info.ReadInt32("LastAttacked");

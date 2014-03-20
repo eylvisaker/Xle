@@ -408,7 +408,13 @@ namespace ERY.Xle
 			player.Attribute[Attributes.intelligence] = 300;
 			player.Attribute[Attributes.charm] = 300;
 			player.Attribute[Attributes.endurance] = 300;
+
+			foreach(var spell in Data.MagicSpells.Values)
+			{
+				player.Items[spell.ItemID] = spell.MaxCarry;
+			}
 		}
+
 		#endregion
 
 		public static bool ReturnToTitle

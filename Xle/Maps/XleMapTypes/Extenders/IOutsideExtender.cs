@@ -11,5 +11,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 
 		void UpdateEncounterState(GameState state, ref bool handled);
+
+		IEnumerable<string> GetValidMagic(GameState state);
 	}
 }

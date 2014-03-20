@@ -76,14 +76,20 @@
     <Item ID="21" Name="Turquoise coin" />
     <Item ID="22" Name="Ruby coin" />
     <Item ID="23" Name="Diamond coin" />
+    <Item ID="24" Name="Magic Flame" />
+    <Item ID="25" Name="Firebolt" />
+    <Item ID="26" Name="Befuddle Spell" />
+    <Item ID="27" Name="Psycho Strength" />
+    <Item ID="28" Name="Kill Flash" />
+    <Item ID="29" Name="Seek Spell" />    
   </Items>
   <MagicSpells>
-    <MagicSpell ID="1" Name="Magic Flame" BasePrice="32" />
-    <MagicSpell ID="2" Name="Firebolt" BasePrice="63" />
-    <MagicSpell ID="3" Name="Befuddle Spell" BasePrice="152" />
-    <MagicSpell ID="4" Name="Psycho Strength" BasePrice="189" />
-    <MagicSpell ID="5" Name="Kill Flash" BasePrice="379" />
-    <MagicSpell ID="6" Name="Seek Spell" BasePrice="51" />
+    <MagicSpell ID="1" ItemID="24" BasePrice="32" MaxCarry="100" Name="Magic Flame" />
+    <MagicSpell ID="2" ItemID="25" BasePrice="63"  MaxCarry="100" Name="Firebolt" />
+    <MagicSpell ID="3" ItemID="26" BasePrice="152" MaxCarry="100" Name="Befuddle Spell" />
+    <MagicSpell ID="4" ItemID="27" BasePrice="189"  MaxCarry="100" Name="Psycho Strength" />
+    <MagicSpell ID="5" ItemID="28" BasePrice="379"  MaxCarry="20" Name="Kill Flash" />
+    <MagicSpell ID="6" ItemID="29" BasePrice="51"  MaxCarry="100" Name="Seek Spell" />
   </MagicSpells>
   <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
   <Exhibits>

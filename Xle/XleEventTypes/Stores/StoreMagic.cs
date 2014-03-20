@@ -1,4 +1,5 @@
 ﻿using AgateLib.Geometry;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,15 @@ namespace ERY.Xle.XleEventTypes.Stores
 {
 	public class StoreMagic : StoreFront
 	{
+		protected new StoreMagicExtender Extender { get; set; }
+
+		protected override XleEventTypes.Extenders.IEventExtender CreateExtenderImpl(XleMap map)
+		{
+			Extender = map.CreateEventExtender<StoreMagicExtender>(this);
+			base.Extender = Extender;
+
+			return Extender;
+		}
 		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BorderColor = XleColor.Purple;
@@ -30,57 +40,98 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 			LeftOffset = 7;
 
-			theWindow[0] = ShopName;
+			Windows.Clear();
+			Windows.AddRange(Extender.CreateStoreWindows());
 
-
-			int i = 1;
-			theWindow[i++] = "";
-			SetColor(i, XleColor.Blue);
-			theWindow[i++] = "General Purpose      Prices";
-			theWindow[i++] = "";
-			theWindow[i++] = "1. Magic flame        " + MagicPrice(1);
-			theWindow[i++] = "2. Firebolt           " + MagicPrice(2);
-			theWindow[i++] = "";
-			SetColor(i, XleColor.Blue);
-			theWindow[i++] = "Dungeon use only     Prices";
-			theWindow[i++] = "";
-			theWindow[i++] = "3. Befuddle spell     " + MagicPrice(3);
-			theWindow[i++] = "4. Psycho strength    " + MagicPrice(4);
-			theWindow[i++] = "5. Kill Flash         " + MagicPrice(5);
-			theWindow[i++] = "";
-			SetColor(i, XleColor.Blue);
-			theWindow[i++] = "Outside use only     Prices";
-			theWindow[i++] = "";
-			theWindow[i++] = "6. Seek spell         " + MagicPrice(6);
-
+			Title = ShopName;
 
 			XleCore.TextArea.Clear();
 			XleCore.TextArea.PrintLine("Make choice (hit 0 to cancel)");
 			XleCore.TextArea.PrintLine();
 
-			int choice = QuickMenu(new MenuItemList("0", "1", "2", "3", "4", "5", "6"), 2);
+			IEnumerable<MagicSpell> magicSpells = Extender.AvailableSpells;
+
+			int choice = QuickMenu(MenuItemList.Numbers(0, magicSpells.Count()), 2);
 
 			if (choice == 0)
+			{
+				NothingPurchased("Nothing purchased.");
 				return true;
+			}
 
-			int maxCount = player.Gold / MagicPrice(choice);
+			var item = magicSpells.ToArray()[choice - 1];
 
-			int purchaseCount = XleCore.ChooseNumber(maxCount);
+			int maxCarry = item.MaxCarry - player.Items[item.ItemID];
+			int maxAfford = player.Gold / MagicPrice(item);
+			int maxPurchase = Math.Min(maxCarry, maxAfford);
+
+			if (maxAfford <= 0)
+			{
+				NothingPurchased("You can't afford any " + item.PluralName + ".");
+				return true;
+			}
+
+			if (XleCore.Options.EnhancedUserInterface)
+			{
+				if (maxCarry == 0)
+				{
+					NothingPurchased("You can't buy any more " + item.PluralName + ".");
+					return true;
+				}
+			}
+			else
+				maxPurchase = maxAfford;
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Purchase how many " + item.PluralName + "?");
+
+			int purchaseCount = XleCore.ChooseNumber(maxPurchase);
 
 			if (purchaseCount == 0)
+			{
+				NothingPurchased("Nothing purchased.");
 				return true;
+			}
 
+			if (player.Items[item.ItemID] + purchaseCount > item.MaxCarry)
+			{
+				NothingPurchased("You can't buy this many.");
+				return true;
+			}
 
+			int cost = purchaseCount * Extender.MagicPrice(choice);
 
+			if (cost > player.Gold)
+			{
+				NothingPurchased("You're short on gold.");
+				return true;
+			}
+
+			player.Items[item.ItemID] += purchaseCount;
+			player.Gold -= purchaseCount * Extender.MagicPrice(choice);
+
+			XleCore.TextArea.Clear();
+			XleCore.TextArea.PrintLine(" " + purchaseCount.ToString() + " " +
+				((purchaseCount != 1) ? item.PluralName : item.Name) + " purchased.");
+			XleCore.TextArea.PrintLine();
+
+			StoreSound(LotaSound.Sale);
 
 			return true;
 		}
 
-		int MagicPrice(int index)
+		private void NothingPurchased(string message)
 		{
-			int[] prices = { 32, 63, 152, 189, 379, 51 };
+			XleCore.TextArea.Clear();
+			XleCore.TextArea.PrintLine(message);
 
-			return (int)(XleCore.Data.MagicSpells[index].BasePrice * this.CostFactor);
+			StoreSound(LotaSound.Medium);
+		}
+
+
+		public int MagicPrice(MagicSpell magicSpell)
+		{
+			return (int)(magicSpell.BasePrice * CostFactor);
 		}
 	}
 }

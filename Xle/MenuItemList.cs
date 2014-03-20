@@ -13,5 +13,15 @@ namespace ERY.Xle
 			foreach (string s in args)
 				Add(s);
 		}
+
+		public static MenuItemList Numbers(int start, int end)
+		{
+			MenuItemList retval = new MenuItemList();
+
+			for (int i = start; i <= end; i++)
+				retval.Add(i.ToString());
+
+			return retval;
+		}
 	}
 }
