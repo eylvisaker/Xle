@@ -15,6 +15,16 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			ResetDripTime();
 		}
 
+		public override IEnumerable<MagicSpell> ValidMagic
+		{
+			get
+			{
+				// everything but seek spell
+				return from m in XleCore.Data.MagicSpells
+					   where m.Key != 6
+					   select m.Value;
+			}
+		}
 		public override bool PrintLevelDuringXamine
 		{
 			get { return XleCore.Options.EnhancedGameplay; }
@@ -164,6 +174,17 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			double damage = 10 * TheMap.MonsterDamageScale / (vc + 3) * (state.Player.DungeonLevel + 7);
 
 			return (int)((XleCore.random.NextDouble() + 0.5) * damage);
+		}
+
+		public override bool RollSpellFizzle(GameState state, MagicSpell magic)
+		{
+			return XleCore.random.NextDouble() * 45 > state.Player.Attribute[Attributes.intelligence] || XleCore.random.NextDouble() < .5;
+		}
+		public override int RollSpellDamage(GameState state, MagicSpell magic, int distance)
+		{
+			var dam =  (1.0 / distance + .3) * 45 * (1 + XleCore.random.NextDouble()) * ((magic.ID == 2) ? 2 : 1);
+
+			return (int)dam;
 		}
 	}
 }

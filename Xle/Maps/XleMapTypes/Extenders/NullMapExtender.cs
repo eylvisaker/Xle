@@ -106,7 +106,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			return XleCore.random.Next(10) < 5;
 		}
 
-		public virtual int RollSpellDamage(GameState state, MagicSpell magic)
+		public virtual int RollSpellDamage(GameState state, MagicSpell magic, int distance)
 		{
 			return (int)((magic.ID + 0.5) * 15 * (XleCore.random.NextDouble() + 1));
 		}

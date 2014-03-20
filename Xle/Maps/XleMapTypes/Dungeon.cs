@@ -253,19 +253,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			if (XleCore.Data.WeaponList[player.CurrentWeaponType].Ranged)
 				maxDistance = 5;
 
-			Point fightDir = StepDirection(player.FaceDirection);
-			DungeonMonster monst = null;
-
-			for (int i = 1; i <= 5; i++)
-			{
-				Point loc = new Point(player.X + fightDir.X * i, player.Y + fightDir.Y * i);
-
-				distance = i;
-				monst = MonsterAt(player.DungeonLevel, loc);
-
-				if (monst != null)
-					break;
-			}
+			DungeonMonster monst = MonsterInFrontOfPlayer(player, ref distance);
 
 			if (monst == null)
 			{
@@ -290,23 +278,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 				int damage = Extender.RollDamageToMonster(XleCore.GameState, monst);
 
 				SoundMan.PlaySound(LotaSound.PlayerHit);
-				
-				XleCore.TextArea.Print("Enemy hit by blow of ");
-				XleCore.TextArea.Print(damage.ToString(), XleColor.White);
-				XleCore.TextArea.PrintLine("!");
 
-				monst.HP -= damage;
-				XleCore.Wait(500);
-
-				if (monst.HP <= 0)
-				{
-					Monsters.Remove(monst);
-					XleCore.TextArea.PrintLine(monst.Name + " dies!!");
-
-					SoundMan.PlaySound(LotaSound.EnemyDie);
-
-					XleCore.Wait(500);
-				}
+				HitMonster(monst, damage, XleColor.Cyan);
 			}
 			else
 			{
@@ -316,6 +289,85 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 
 			return true;
+		}
+
+		private void HitMonster(DungeonMonster monst, int damage, Color clr)
+		{
+			XleCore.TextArea.Print("Enemy hit by blow of ", clr);
+			XleCore.TextArea.Print(damage.ToString(), XleColor.White);
+			XleCore.TextArea.PrintLine("!");
+
+			monst.HP -= damage;
+			XleCore.Wait(1000);
+
+			if (monst.HP <= 0)
+			{
+				Monsters.Remove(monst);
+				XleCore.TextArea.PrintLine(monst.Name + " dies!!");
+
+				SoundMan.PlaySound(LotaSound.EnemyDie);
+
+				XleCore.Wait(500);
+			}
+		}
+
+		private DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
+		{
+			Point fightDir = StepDirection(player.FaceDirection);
+			DungeonMonster monst = null;
+
+			for (int i = 1; i <= 5; i++)
+			{
+				Point loc = new Point(player.X + fightDir.X * i, player.Y + fightDir.Y * i);
+
+				distance = i;
+				monst = MonsterAt(player.DungeonLevel, loc);
+
+				if (monst != null)
+					break;
+			}
+			return monst;
+		}
+		protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
+		{
+			switch(magic.ID)
+			{
+				case 1:
+				case 2:
+					UseAttackMagic(state, magic);
+					break;
+			}
+		}
+		private void UseAttackMagic(GameState state, MagicSpell magic)
+		{
+			int distance = 0;
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Shoot " + magic.Name + ".", XleColor.White);
+			
+			DungeonMonster monst = MonsterInFrontOfPlayer(state.Player, ref distance);
+			var magicSound = magic.ID == 1 ? LotaSound.MagicFlame : LotaSound.FireBolt;
+
+			if (monst == null)
+			{
+				PlayMagicSound(magicSound, LotaSound.MagicHit, distance);
+				XleCore.TextArea.PrintLine("There is no effect.", XleColor.White);
+			}
+			else
+			{
+				if (Extender.RollSpellFizzle(state, magic))
+				{
+					PlayMagicSound(magicSound, LotaSound.MagicFizzle, distance);
+					XleCore.TextArea.PrintLine("Attack fizzles.", XleColor.White);
+					XleCore.Wait(500);
+				}
+				else
+				{
+					PlayMagicSound(magicSound, LotaSound.MagicHit, distance);
+					int damage = Extender.RollSpellDamage(state, magic, distance);
+
+					HitMonster(monst, damage, XleColor.White);
+				}
+			}
 		}
 
 		private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
@@ -468,29 +520,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return true;
 		}
-		public override void PlayerMagic(GameState state)
-		{
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLine("Use which magic?", XleColor.Purple);
-			XleCore.TextArea.PrintLine();
 
-			int defaultValue = 0;
-
-			if (state.Player.Items[LotaItem.MagicFlame] == 0)
-			{
-				defaultValue = 1;
-
-				if (state.Player.Items[LotaItem.Firebolt] == 0)
-					defaultValue = 2;
-
-			}
-
-
-			int choice = XleCore.QuickMenu(new MenuItemList("Flame", "Bolt", "Other"), 2, defaultValue,
-				XleColor.Purple, XleColor.White);
-
-
-		}
 
 		protected override bool PlayerSpeakImpl(Player player)
 		{

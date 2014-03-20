@@ -1137,6 +1137,103 @@ namespace ERY.Xle
 			return handled;
 		}
 
+
+		public virtual bool PlayerDisembark(Xle.GameState state)
+		{
+			return false;
+		}
+
+		public virtual void PlayerMagic(GameState state)
+		{
+			var magics = mBaseExtender.ValidMagic.Where(x => state.Player.Items[x.ItemID] > 0).ToList();
+
+			var magic = MagicPrompt(state, magics.ToArray());
+
+			if (magic == null)
+				return;
+
+			if (state.Player.Items[magic.ItemID] <= 0)
+			{
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("You have no " + magic.PluralName + ".", XleColor.White);
+				return;
+			}
+
+			state.Player.Items[magic.ItemID]--;
+
+			PlayerMagicImpl(state, magic);
+		}
+
+		protected virtual void PlayerMagicImpl(GameState state, MagicSpell magic)
+		{
+		}
+
+		protected static MagicSpell MagicPrompt(GameState state, MagicSpell[] magics)
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Use which magic?", XleColor.Purple);
+			XleCore.TextArea.PrintLine();
+
+			bool hasFlames = magics.Contains(XleCore.Data.MagicSpells[1]);
+			bool hasBolts = magics.Contains(XleCore.Data.MagicSpells[2]);
+
+			int defaultValue = 0;
+			int otherStart = 2 - (hasBolts ? 0 : 1) - (hasFlames ? 0 : 1);
+			bool anyOthers = otherStart < magics.Length;
+
+			if (hasFlames == false)
+			{
+				defaultValue = 1;
+
+				if (hasBolts == false)
+					defaultValue = 2;
+			}
+
+			var menu = new MenuItemList("Flame", "Bolt", anyOthers? "Other" : "None");
+
+			int choice = XleCore.QuickMenu(menu, 2, defaultValue,
+				XleColor.Purple, XleColor.White);
+
+			if (choice == 0)
+				return XleCore.Data.MagicSpells[1];
+			else if (choice == 1)
+				return XleCore.Data.MagicSpells[2];
+			else
+			{
+				if (anyOthers == false)
+					return null;
+
+				XleCore.TextArea.PrintLine(" - select above", XleColor.White);
+				XleCore.TextArea.PrintLine();
+
+				menu = new MenuItemList("Nothing");
+
+				for(int i = otherStart; i < magics.Length; i++)
+				{
+					menu.Add(magics[i].Name);
+				}
+
+				choice = XleCore.SubMenu("Pick magic", 0, menu);
+
+				if (choice == 0)
+				{
+					XleCore.TextArea.PrintLine("Select no magic.", XleColor.White);
+					return null;
+				}
+
+				return magics[otherStart + choice - 1];
+			}
+		}
+
+		protected void PlayMagicSound(LotaSound sound, LotaSound endSound, int distance)
+		{
+			SoundMan.PlaySound(sound);
+			XleCore.Wait(250 * distance);
+			SoundMan.StopSound(sound);
+			SoundMan.PlaySound(endSound);
+		}
+
 		#endregion
 		#region --- Animation ---
 
@@ -1287,20 +1384,11 @@ namespace ERY.Xle
 		}
 
 
-
-		public virtual void PlayerMagic(GameState state)
-		{
-		}
-
 		public virtual void GuardAttackPlayer(Player player, Guard guard)
 		{
 			throw new NotImplementedException();
 		}
 
-		public virtual bool PlayerDisembark(Xle.GameState state)
-		{
-			return false;
-		}
 
 		/// <summary>
 		/// Executes the movement of the player in a certain direction.

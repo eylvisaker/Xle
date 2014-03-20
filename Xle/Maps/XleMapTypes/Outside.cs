@@ -484,24 +484,19 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					XleCore.TextArea.PrintLine("Attack with " + magic.Name + ".");
 
-					if (choice == 1) SoundMan.PlaySound(LotaSound.MagicFlame);
-					else SoundMan.PlaySound(LotaSound.FireBolt);
-
-					XleCore.Wait(250);
-					SoundMan.StopSound(LotaSound.MagicFlame);
-					SoundMan.StopSound(LotaSound.FireBolt);
-
+					var sound = (choice == 1) ? LotaSound.MagicFlame : LotaSound.FireBolt;
+					
 					if (Extender.RollSpellFizzle(state, magic))
 					{
-						SoundMan.PlaySound(LotaSound.MagicFizzle);
+						PlayMagicSound(sound, LotaSound.MagicFizzle, 1);
 
 						XleCore.TextArea.PrintLine("Attack fizzles.", XleColor.Yellow);
 						return;
 					}
+					else 
+						PlayMagicSound(sound, LotaSound.MagicHit, 1);
 
-					SoundMan.PlaySound(LotaSound.MagicHit);
-
-					int damage = Extender.RollSpellDamage(state, magic);
+					int damage = Extender.RollSpellDamage(state, magic, 0);
 
 					HitMonster(state.Player, damage);
 
@@ -513,6 +508,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 					break;
 			}
 		}
+
 		public override void PlayerCursorMovement(Player player, Direction dir)
 		{
 			string command;
