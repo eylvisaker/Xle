@@ -134,7 +134,115 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="LoB\Audio\Bad.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\BoardRaft.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\BuildingClose.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\BuildingOpen.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Bump.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\BumpFirst.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Encounter.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\EnemyDie.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\EnemyHit.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\EnemyMiss.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Good.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Invalid.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Medium.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Mountains.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Ocean1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Ocean2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\OpenChest.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\PlayerHit.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\PlayerMiss.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Prompt.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Question.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Raft.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Raft1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Sale.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Teleporter.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="LoB\Audio\Title.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\UnlockDoor.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\VeryBad.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\VeryGood.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\WalkDesert.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\WalkDungeon.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\WalkMuseum.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\WalkOutside.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\WalkSwamp.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\WalkTown.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\Xamine.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LoB\Audio\XamineDetected.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LoB\Lota.adb">
@@ -304,115 +412,115 @@
     <Folder Include="Support\EasyFlash\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LoB\Audio\BumpFirst.wav">
+    <Content Include="LoB\Audio\Source\BumpFirst.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Teleporter.wav">
+    <Content Include="LoB\Audio\Source\Teleporter.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\WalkDungeon.wav">
+    <Content Include="LoB\Audio\Source\WalkDungeon.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\WalkMuseum.wav">
+    <Content Include="LoB\Audio\Source\WalkMuseum.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoB\Images\DungeonTiles.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Bad.wav">
+    <Content Include="LoB\Audio\Source\Bad.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\BoardRaft.wav">
+    <Content Include="LoB\Audio\Source\BoardRaft.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\BuildingClose.wav">
+    <Content Include="LoB\Audio\Source\BuildingClose.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\BuildingOpen.wav">
+    <Content Include="LoB\Audio\Source\BuildingOpen.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Bump.wav">
+    <Content Include="LoB\Audio\Source\Bump.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\WalkDesert.wav">
+    <Content Include="LoB\Audio\Source\WalkDesert.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Encounter.wav">
+    <Content Include="LoB\Audio\Source\Encounter.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\EnemyDie.wav">
+    <Content Include="LoB\Audio\Source\EnemyDie.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\EnemyHit.wav">
+    <Content Include="LoB\Audio\Source\EnemyHit.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\EnemyMiss.wav">
+    <Content Include="LoB\Audio\Source\EnemyMiss.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Good.wav">
+    <Content Include="LoB\Audio\Source\Good.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Invalid.wav">
+    <Content Include="LoB\Audio\Source\Invalid.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Medium.wav">
+    <Content Include="LoB\Audio\Source\Medium.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Mountains.wav">
+    <Content Include="LoB\Audio\Source\Mountains.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Ocean1.wav">
+    <Content Include="LoB\Audio\Source\Ocean1.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Ocean2.wav">
+    <Content Include="LoB\Audio\Source\Ocean2.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\OpenChest.wav">
+    <Content Include="LoB\Audio\Source\OpenChest.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\PlayerHit.wav">
+    <Content Include="LoB\Audio\Source\PlayerHit.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\PlayerMiss.wav">
+    <Content Include="LoB\Audio\Source\PlayerMiss.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Prompt.wav">
+    <Content Include="LoB\Audio\Source\Prompt.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Question.wav">
+    <Content Include="LoB\Audio\Source\Question.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Raft.wav">
+    <Content Include="LoB\Audio\Source\Raft.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Raft1.wav">
+    <Content Include="LoB\Audio\Source\Raft1.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Sale.wav">
+    <Content Include="LoB\Audio\Source\Sale.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\WalkSwamp.wav">
+    <Content Include="LoB\Audio\Source\WalkSwamp.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\WalkTown.wav">
+    <Content Include="LoB\Audio\Source\WalkTown.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\UnlockDoor.wav">
+    <Content Include="LoB\Audio\Source\UnlockDoor.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\VeryBad.wav">
+    <Content Include="LoB\Audio\Source\VeryBad.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\VeryGood.wav">
+    <Content Include="LoB\Audio\Source\VeryGood.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\WalkOutside.wav">
+    <Content Include="LoB\Audio\Source\WalkOutside.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\Xamine.wav">
+    <Content Include="LoB\Audio\Source\Xamine.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LoB\Audio\XamineDetected.wav">
+    <Content Include="LoB\Audio\Source\XamineDetected.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoB\Game.xml">

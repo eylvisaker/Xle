@@ -19,27 +19,20 @@ namespace ERY.Xle
 {
 	public abstract class XleMap : IXleSerializable
 	{
-		//static int cyclesDraw = 0;
-
-		string mMapName;                    // map name
-
-		XleEventList mEvents = new XleEventList();
-		List<EntryPoint> mEntryPoints = new List<EntryPoint>();
-
-		// map number
+		string mMapName;
 		int mMapID;
-
-		// stores which bitmap contains map tiles
-		string mTileImage;
-
 		int mDefaultTile;
 
+		string mTileImage;
 		TileSet mTileSet;
 
 		List<Roof> mRoofs;
 		GuardList mGuards;
 
 		protected IMapExtender mBaseExtender;
+
+		XleEventList mEvents = new XleEventList();
+		List<EntryPoint> mEntryPoints = new List<EntryPoint>();
 
 		#region --- Construction and Seralization ---
 
@@ -1168,7 +1161,7 @@ namespace ERY.Xle
 		{
 		}
 
-		protected static MagicSpell MagicPrompt(GameState state, MagicSpell[] magics)
+		protected virtual MagicSpell MagicPrompt(GameState state, MagicSpell[] magics)
 		{
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
@@ -1190,7 +1183,7 @@ namespace ERY.Xle
 					defaultValue = 2;
 			}
 
-			var menu = new MenuItemList("Flame", "Bolt", anyOthers? "Other" : "None");
+			var menu = new MenuItemList("Flame", "Bolt", anyOthers? "Other" : "Nothing");
 
 			int choice = XleCore.QuickMenu(menu, 2, defaultValue,
 				XleColor.Purple, XleColor.White);
@@ -1228,9 +1221,14 @@ namespace ERY.Xle
 
 		protected void PlayMagicSound(LotaSound sound, LotaSound endSound, int distance)
 		{
+			if (distance <= 0)
+				throw new ArgumentOutOfRangeException("distance", "Distance must be greater than zero.");
+
 			SoundMan.PlaySound(sound);
 			XleCore.Wait(250 * distance);
 			SoundMan.StopSound(sound);
+
+			SoundMan.SetSoundVolume(endSound, Math.Pow(distance, -0.5));
 			SoundMan.PlaySound(endSound);
 		}
 
