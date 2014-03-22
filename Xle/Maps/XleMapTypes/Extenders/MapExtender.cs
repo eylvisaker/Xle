@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
-	public class NullMapExtender : IMapExtender
+	public class MapExtender : IMapExtender
 	{
 		public XleMap TheMap { get; set; }
 

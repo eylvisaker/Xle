@@ -1,5 +1,6 @@
 ﻿using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
+using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using System;
 using System.Collections.Generic;

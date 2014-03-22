@@ -1,6 +1,7 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.LotA.MapExtenders.Fortress.FirstArea;
 using ERY.Xle.LotA.MapExtenders.Fortress.SecondArea;
+using ERY.Xle.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;

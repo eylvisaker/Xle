@@ -31,32 +31,32 @@ namespace ERY.Xle
 
 		public virtual IDungeonExtender CreateMapExtender(Dungeon theMap)
 		{
-			return new NullDungeonExtender();
+			return new DungeonExtender();
 		}
 
 		public virtual ICastleExtender CreateMapExtender(Castle castle)
 		{
-			return new NullCastleExtender();
+			return new CastleExtender();
 		}
 
 		public virtual ITempleExtender CreateMapExtender(Temple town)
 		{
-			return new NullTempleExtender();
+			return new TempleExtender();
 		}
 
 		public virtual ITownExtender CreateMapExtender(Town town)
 		{
-			return new NullTownExtender();
+			return new TownExtender();
 		}
 
 		public virtual IOutsideExtender CreateMapExtender(Outside outside)
 		{
-			return new NullOutsideExtender();
+			return new OutsideExtender();
 		}
 
 		public virtual IMuseumExtender CreateMapExtender(Museum museum)
 		{
-			return new NullMuseumExtender();
+			return new MuseumExtender();
 		}
 
 		public abstract Maps.Map3DSurfaces GetMap3DSurfaces(Map3D map3D);

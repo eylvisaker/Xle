@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
-	abstract class LobDungeonBase : NullDungeonExtender
+	abstract class LobDungeonBase : DungeonExtender
 	{
 		public override void SetCommands(Commands.CommandList commands)
 		{

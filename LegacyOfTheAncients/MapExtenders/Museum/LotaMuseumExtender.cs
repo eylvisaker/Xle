@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum
 {
-	class MuseumExtender : NullMuseumExtender
+	class LotaMuseumExtender : MuseumExtender
 	{
 		Dictionary<int, Exhibit> mExhibits = new Dictionary<int, Exhibit>();
 
-		public MuseumExtender()
+		public LotaMuseumExtender()
 		{
 			mExhibits.Add(0x50, new MuseumDisplays.Information());
 			mExhibits.Add(0x51, new MuseumDisplays.Welcome());

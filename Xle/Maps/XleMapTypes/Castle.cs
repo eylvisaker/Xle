@@ -10,8 +10,6 @@ using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.Maps.XleMapTypes.Extenders;
 
-
-
 namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Castle : Town
@@ -30,7 +28,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			if (XleCore.Factory == null)
 			{
-				Extender = new NullCastleExtender();
+				Extender = new CastleExtender();
 			}
 			else
 			{

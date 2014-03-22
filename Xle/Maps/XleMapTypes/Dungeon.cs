@@ -62,7 +62,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			if (XleCore.Factory == null)
 			{
-				Extender = new NullDungeonExtender();
+				Extender = new DungeonExtender();
 			}
 			else
 			{

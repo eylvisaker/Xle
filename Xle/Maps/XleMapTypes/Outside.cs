@@ -1359,7 +1359,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			if (XleCore.Factory == null)
 			{
-				Extender = new NullOutsideExtender();
+				Extender = new OutsideExtender();
 			}
 			else
 			{

@@ -10,6 +10,7 @@ using AgateLib.Serialization.Xle;
 using System.ComponentModel;
 using ERY.Xle.XleEventTypes.Stores;
 using ERY.Xle.XleEventTypes.Stores.Extenders;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {

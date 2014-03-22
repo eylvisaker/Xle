@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Outside
 {
-	public class LobBaseOutside : NullOutsideExtender
+	public class LobBaseOutside : OutsideExtender
 	{
 		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{

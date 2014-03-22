@@ -1,6 +1,7 @@
 ﻿using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
+using ERY.Xle.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;

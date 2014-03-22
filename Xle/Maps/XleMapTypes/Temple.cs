@@ -14,7 +14,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			if (XleCore.Factory == null)
 			{
-				Extender = new NullTempleExtender();
+				Extender = new TempleExtender();
 			}
 			else
 			{

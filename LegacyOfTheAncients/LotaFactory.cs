@@ -94,7 +94,7 @@ namespace ERY.Xle.LotA
 		}
 		public override IMuseumExtender CreateMapExtender(Museum museum)
 		{
-			return new MuseumExtender();
+			return new LotaMuseumExtender();
 		}
 		public override ICastleExtender CreateMapExtender(Castle castle)
 		{

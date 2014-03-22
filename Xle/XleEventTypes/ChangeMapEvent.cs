@@ -9,6 +9,7 @@ using AgateLib.InputLib;
 using AgateLib.Serialization.Xle;
 using System.ComponentModel;
 using ERY.Xle.XleEventTypes.Extenders;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle.XleEventTypes
 {

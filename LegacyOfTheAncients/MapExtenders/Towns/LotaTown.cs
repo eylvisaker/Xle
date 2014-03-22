@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns
 {
-	class LotaTown : NullTownExtender
+	class LotaTown : TownExtender
 	{
 		ExtenderDictionary mExtenders = new ExtenderDictionary();
 

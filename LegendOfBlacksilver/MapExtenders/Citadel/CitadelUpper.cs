@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel
 {
-	class CitadelUpper  : NullCastleExtender
+	class CitadelUpper  : CastleExtender
 	{
 		CastleDamageCalculator cdc = new CastleDamageCalculator
 		{ v5 = 1.6, v6 = 5.5, v7 = 2.3 };

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
-	abstract class LotaDungeonExtenderBase : NullDungeonExtender
+	abstract class LotaDungeonExtenderBase : DungeonExtender
 	{
 		public LotaDungeonExtenderBase()
 		{

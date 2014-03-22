@@ -104,7 +104,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		protected override Extenders.IMapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
-				Extender = new NullMuseumExtender();
+				Extender = new MuseumExtender();
 			else
 				Extender = XleCore.Factory.CreateMapExtender(this);
 

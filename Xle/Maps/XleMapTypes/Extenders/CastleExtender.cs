@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
-	public class NullCastleExtender : NullTownExtender, ICastleExtender
+	public class CastleExtender : TownExtender, ICastleExtender
 	{
 		public new Castle TheMap { get { return (Castle)base.TheMap; } }
 

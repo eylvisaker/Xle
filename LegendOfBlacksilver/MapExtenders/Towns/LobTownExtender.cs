@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Towns
 {
-	class LobTownExtender : NullTownExtender
+	class LobTownExtender : TownExtender
 	{
 
 		public override void SetCommands(Commands.CommandList commands)

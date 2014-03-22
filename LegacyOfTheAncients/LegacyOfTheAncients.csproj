@@ -109,10 +109,9 @@
     <Compile Include="MapExtenders\Museum\MuseumDisplays\Thornberry.cs" />
     <Compile Include="MapExtenders\Museum\MuseumDisplays\Weaponry.cs" />
     <Compile Include="MapExtenders\Museum\MuseumDisplays\Welcome.cs" />
-    <Compile Include="MapExtenders\Museum\MuseumExtender.cs" />
+    <Compile Include="MapExtenders\Museum\LotaMuseumExtender.cs" />
     <Compile Include="MapExtenders\Outside\Flight.cs" />
     <Compile Include="MapExtenders\Outside\TarmalonExtender.cs" />
-    <Compile Include="MapExtenders\TownExtender.cs" />
     <Compile Include="MapExtenders\Towns\EagleHollow.cs" />
     <Compile Include="MapExtenders\Towns\LotaTown.cs" />
     <Compile Include="MapExtenders\Towns\Stores\EagleHollowHealer.cs" />

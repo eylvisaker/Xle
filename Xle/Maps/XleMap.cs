@@ -15,7 +15,7 @@ using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Commands;
 
-namespace ERY.Xle
+namespace ERY.Xle.Maps
 {
 	public abstract class XleMap : IXleSerializable
 	{
@@ -38,7 +38,7 @@ namespace ERY.Xle
 
 		public XleMap()
 		{
-			mBaseExtender = new NullMapExtender();
+			mBaseExtender = new MapExtender();
 			ColorScheme = new ColorScheme();
 		}
 
@@ -149,7 +149,7 @@ namespace ERY.Xle
 
 			return retval;
 		}
-
+		[Obsolete("seems to be unused")]
 		protected internal virtual void ConstructRenderTimeData()
 		{
 		}
@@ -178,7 +178,7 @@ namespace ERY.Xle
 		}
 		protected virtual IMapExtender CreateExtenderImpl()
 		{
-			return new NullMapExtender();
+			return new MapExtender();
 		}
 
 		protected virtual void CreateEventExtenders()
@@ -188,7 +188,6 @@ namespace ERY.Xle
 				evt.CreateExtender(this);
 			}
 		}
-
 
 		public T CreateEventExtender<T>(XleEvent evt) where T : IEventExtender, new()
 		{
@@ -202,19 +201,37 @@ namespace ERY.Xle
 				return (IEventExtender)Activator.CreateInstance(defaultExtender);
 		}
 
+		private void SetChestIDs()
+		{
+			int index = 0;
+			foreach (TreasureChestEvent chest in Events.OfType<TreasureChestEvent>())
+			{
+				chest.ChestID = index;
+				index++;
+			}
+		}
+
+		/// <summary>
+		/// Called after a map is loaded.
+		/// </summary>
+		/// <param name="player"></param>
+		public virtual void OnLoad(Player player)
+		{
+			mBaseExtender.OnLoad(GameState);
+			mBaseExtender.SetColorScheme(this.ColorScheme);
+
+			SetChestIDs();
+
+			foreach (var evt in Events)
+			{
+				evt.OnLoad(XleCore.GameState);
+			}
+		}
+
 		#endregion
 		#region --- Public Properties ---
 
-		GameState theState;
-
-		public GameState GameState
-		{
-			get { return theState; }
-			set
-			{
-				theState = value;
-			}
-		}
+		public string ExtenderName { get; set; }
 
 		[Browsable(false)]
 		public abstract int Width { get; }
@@ -318,6 +335,28 @@ namespace ERY.Xle
 		}
 
 
+		public bool HasRoofs
+		{
+			get { return mRoofs != null; }
+			set { mRoofs = new List<Roof>(); }
+		}
+		public bool HasGuards
+		{
+			get { return mGuards != null; }
+			set { mGuards = new GuardList(); }
+		}
+
+		public List<Roof> Roofs
+		{
+			get { return mRoofs; }
+			set { mRoofs = value; }
+		}
+		public GuardList Guards
+		{
+			get { return mGuards; }
+			set { mGuards = value; }
+		}
+
 
 		#endregion
 
@@ -341,28 +380,18 @@ namespace ERY.Xle
 		/// <param name="xx"></param>
 		/// <param name="yy"></param>
 		/// <returns></returns>
-		public virtual int DrawTile(int xx, int yy)
+		public virtual int TileToDraw(int xx, int yy)
 		{
 			return this[xx, yy];
 		}
 
 		/// <summary>
-		/// Default color for message.
+		/// Default color for text messages.
 		/// </summary>
+		[Obsolete("Move this to the color scheme class.")]
 		public virtual Color DefaultColor
 		{
 			get { return XleColor.White; }
-		}
-
-		public void AfterExecuteCommand(Player player, KeyCode cmd)
-		{
-			AfterExecuteCommandImpl(player, cmd);
-
-			mBaseExtender.AfterExecuteCommand(XleCore.GameState, cmd);
-		}
-
-		protected virtual void AfterExecuteCommandImpl(Player player, KeyCode cmd)
-		{
 		}
 
 		#endregion
@@ -430,119 +459,22 @@ namespace ERY.Xle
 			}
 		}
 
-		#endregion
-
-		#region --- Old stuff ---
-
-		void LoadMonsters()
+		public int PointInRoof(int ptx, int pty)
 		{
-			/*
-			DWORD error;
-			int ptr = 0;
-
-			HANDLE hMonst = LoadResource (g.hInstance(), 
-				FindResource (g.hInstance(), MAKEINTRESOURCE(dat_Monst1), TEXT("MONST")));
-
-			error = GetLastError();
-			_ASSERT(!FAILED(error));
-		
-
-			BYTE *data = (unsigned char*)LockResource (hMonst);
-
-			error = GetLastError();
-			_ASSERT(!FAILED(error));
-
-			for (int i = 0; i < 32; i++)
+			for (int i = 0; i < mRoofs.Count; i++)
 			{
-				Monster current;
-				string sTemp, sTemp2;
-				int j;
-
-				while(data[ptr] != 0x0D)
+				if (mRoofs[i].PointInRoof(ptx, pty, false))
 				{
-					if (data[ptr] != 0x0A)
-						sTemp += (char)data[ptr++];
+					if (mRoofs[i].Open)
+						return -1;
 					else
-						ptr++;
+						return i;
 				}
-				ptr++;
-
-				for (j = 0; j < len(sTemp) && sTemp[j] != 0x09; j++);
-				current.mName = ltrim(left(sTemp, j));
-				sTemp = mid(sTemp, j, len(sTemp));
-
-				if (current.mName == "Name" || current.mName == "")
-				{
-					i--;
-					continue;
-				}
-
-				current.mTerrain = ParseMonstValue(sTemp);
-				current.mHP = ParseMonstValue(sTemp);
-				current.mAttack = ParseMonstValue(sTemp);
-				current.mDefense = ParseMonstValue(sTemp);
-				current.mGold = ParseMonstValue(sTemp);
-				current.mFood = ParseMonstValue(sTemp);
-				current.mWeapon = ParseMonstValue(sTemp);
-				current.mImage = ParseMonstValue(sTemp);
-				current.mTalks = (ParseMonstValue(sTemp)) ? true : false;
-				current.mFriendly = ParseMonstValue(sTemp);
-
-				mMonst[i] = current;
 			}
 
-			FreeResource(hMonst);
-		*/
-
-		}
-		int ParseMonstValue(ref string sTemp)
-		{
-			int j;
-			for (j = 0; j < sTemp.Length && sTemp[j] != 0x09; j++) ;
-
-			sTemp = sTemp.Substring(j);
-
-			while (sTemp[0] == 0x09)
-			{
-				sTemp = sTemp.Substring(1);
-			}
-
-			return int.Parse(sTemp);
-
+			return -1;
 		}
 
-		/*
-		int CheckSpecial()
-		{
-			return CheckSpecial(g.player.X, g.player.Y);
-		}
-
-		int CheckSpecial(int x, int y)			// checks for special events at player coordinates
-		{
-
-			SpecialEvent se = GetSpecial(x, y);
-
-			if (se.type != 0)
-			{
-				return se.type;
-			}
-			else
-			{
-				return 0;
-			}
-
-		}
-
-		bool specialmarked(int i)
-		{
-			return spcMarked[i];
-		}
-
-		SpecialEvent GetSpecial()
-		{
-			return GetSpecial(g.player.X, g.player.Y);
-		}
-		*/
 		#endregion
 
 		#region --- Drawing ---
@@ -582,7 +514,7 @@ namespace ERY.Xle
 			{
 				for (i = startx; i < startx + width; i++)
 				{
-					tile = DrawTile(i, j);
+					tile = TileToDraw(i, j);
 
 					XleCore.Renderer.DrawTile(xx, yy, tile);
 
@@ -668,7 +600,14 @@ namespace ERY.Xle
 		public ColorScheme ColorScheme { get; private set; }
 
 		#endregion
+		#region --- Animation ---
 
+		public virtual bool AutoDrawPlayer
+		{
+			get { return true; }
+		}
+
+		#endregion
 		#region --- Events ---
 
 		public IEnumerable<XleEvent> EnabledEventsAt(Player player, int border)
@@ -735,9 +674,7 @@ namespace ERY.Xle
 		}
 
 		#endregion
-		#region --- Menu Stuff ---
 
-		#endregion
 		#region --- Player movement stuff ---
 
 		public TileSet TileSet { get { return mTileSet; } set { mTileSet = value; } }
@@ -1022,6 +959,17 @@ namespace ERY.Xle
 		#endregion
 		#region --- Player commands ---
 
+		public void AfterExecuteCommand(Player player, KeyCode cmd)
+		{
+			AfterExecuteCommandImpl(player, cmd);
+
+			mBaseExtender.AfterExecuteCommand(XleCore.GameState, cmd);
+		}
+
+		protected virtual void AfterExecuteCommandImpl(Player player, KeyCode cmd)
+		{
+		}
+
 		public bool PlayerSpeak(GameState state)
 		{
 			foreach (var evt in EnabledEventsAt(state.Player, 1))
@@ -1230,14 +1178,16 @@ namespace ERY.Xle
 		}
 
 		#endregion
-		#region --- Animation ---
 
-		public virtual bool AutoDrawPlayer
+		GameState theState;
+		public GameState GameState
 		{
-			get { return true; }
+			get { return theState; }
+			set
+			{
+				theState = value;
+			}
 		}
-
-		#endregion
 
 		public virtual void CheckSounds(Player player)
 		{
@@ -1256,56 +1206,6 @@ namespace ERY.Xle
 			XleCore.TextArea.PrintLine();
 		}
 
-		/// <summary>
-		/// Called after a map is loaded.
-		/// </summary>
-		/// <param name="player"></param>
-		public virtual void OnLoad(Player player)
-		{
-			mBaseExtender.OnLoad(GameState);
-			mBaseExtender.SetColorScheme(this.ColorScheme);
-
-			SetChestIDs();
-
-			foreach (var evt in Events)
-			{
-				evt.OnLoad(XleCore.GameState);
-			}
-		}
-
-		private void SetChestIDs()
-		{
-			int index = 0;
-			foreach (TreasureChestEvent chest in Events.OfType<TreasureChestEvent>())
-			{
-				chest.ChestID = index;
-				index++;
-			}
-		}
-
-
-		public bool HasRoofs
-		{
-			get { return mRoofs != null; }
-			set { mRoofs = new List<Roof>(); }
-		}
-		public bool HasGuards
-		{
-			get { return mGuards != null; }
-			set { mGuards = new GuardList(); }
-		}
-
-		public List<Roof> Roofs
-		{
-			get { return mRoofs; }
-			set { mRoofs = value; }
-		}
-		public GuardList Guards
-		{
-			get { return mGuards; }
-			set { mGuards = value; }
-		}
-
 		public static Direction DirectionFromPoint(Point point)
 		{
 			if (point.X < 0 && point.Y == 0) return Direction.West;
@@ -1314,24 +1214,6 @@ namespace ERY.Xle
 			if (point.X == 0 && point.Y > 0) return Direction.South;
 
 			throw new ArgumentException();
-		}
-
-		public string ExtenderName { get; set; }
-
-		public int PointInRoof(int ptx, int pty)
-		{
-			for (int i = 0; i < mRoofs.Count; i++)
-			{
-				if (mRoofs[i].PointInRoof(ptx, pty, false))
-				{
-					if (mRoofs[i].Open)
-						return -1;
-					else
-						return i;
-				}
-			}
-
-			return -1;
 		}
 
 		public void BeforeEntry(GameState state, ref int targetEntryPoint)
@@ -1378,12 +1260,10 @@ namespace ERY.Xle
 			}
 		}
 
-
 		public virtual void GuardAttackPlayer(Player player, Guard guard)
 		{
 			throw new NotImplementedException();
 		}
-
 
 		/// <summary>
 		/// Executes the movement of the player in a certain direction.
@@ -1404,229 +1284,8 @@ namespace ERY.Xle
 		}
 
 		public virtual bool UseFancyMagicPrompt { get { return true; } }
-	}
 
-	public class Roof : IXleSerializable
-	{
-		Rectangle mRect;
-		int[] mData;
-
-		private bool mOpen;
-
-
-		#region --- Construction and Serialization ---
-
-
-
-		public Roof()
-		{ }
-
-		void IXleSerializable.WriteData(XleSerializationInfo info)
-		{
-			info.Write("X", X);
-			info.Write("Y", Y);
-			info.Write("Width", Width);
-			info.Write("Height", Height);
-			info.Write("RoofData", mData, NumericEncoding.Csv);
-		}
-
-		void IXleSerializable.ReadData(XleSerializationInfo info)
-		{
-			mRect.X = info.ReadInt32("X");
-			mRect.Y = info.ReadInt32("Y");
-			mRect.Width = info.ReadInt32("Width");
-			mRect.Height = info.ReadInt32("Height");
-			mData = info.ReadInt32Array("RoofData");
-		}
-
-		#endregion
-
-		public Point Location
-		{
-			get { return mRect.Location; }
-			set { mRect.Location = value; }
-		}
-		public int X
-		{
-			get { return mRect.X; }
-			set { mRect.X = value; }
-		}
-		public int Y
-		{
-			get { return mRect.Y; }
-			set { mRect.Y = value; }
-		}
-
-		public bool Open
-		{
-			get { return mOpen; }
-			set { mOpen = value; }
-		}
-
-		public void SetSize(int width, int height)
-		{
-			int[] newData = new int[height * width];
-
-			// copy old data to new data
-			if (mData != null)
-			{
-				for (int i = 0; i < Math.Min(Width, width); i++)
-				{
-					for (int j = 0; j < Math.Min(Height, height); j++)
-					{
-						newData[i + j * width] = mData[i + j * Width];
-					}
-				}
-			}
-
-			mRect.Width = width;
-			mRect.Height = height;
-
-			mData = newData;
-		}
-		public int Width
-		{
-			get { return mRect.Width; }
-		}
-		public int Height
-		{
-			get { return mRect.Height; }
-		}
-
-		public int this[int x, int y]
-		{
-			get { return mData[x + y * Width]; }
-			set { mData[x + y * Width] = value; }
-		}
-
-
-		public Rectangle Rectangle
-		{
-			get
-			{
-				return new Rectangle(Location, new Size(Width, Height));
-			}
-		}
-
-		public bool CharIn(int ptx, int pty)
-		{
-			return CharIn(ptx, pty, false);
-		}
-		public bool CharIn(int ptx, int pty, bool ignoreTransparency)
-		{
-			if (PointInRoof(ptx, pty, ignoreTransparency))
-			{
-				return true;
-			}
-			else if (PointInRoof(ptx + 1, pty, ignoreTransparency))
-			{
-				return true;
-			}
-			else if (PointInRoof(ptx, pty + 1, ignoreTransparency))
-			{
-				return true;
-			}
-			else if (PointInRoof(ptx + 1, pty + 1, ignoreTransparency))
-			{
-				return true;
-			}
-			else
-				return false;
-		}
-		public bool CharIn(Point pt, bool ignoreTransparency)
-		{
-			return CharIn(pt.X, pt.Y, ignoreTransparency);
-		}
-		public bool CharIn(Point pt)
-		{
-			return CharIn(pt.X, pt.Y, false);
-		}
-
-		public bool PointInRoof(int ptx, int pty)
-		{
-			return PointInRoof(ptx, pty, false);
-		}
-		public bool PointInRoof(int ptx, int pty, bool ignoreTransparency)
-		{
-			if (Rectangle.Contains(ptx, pty))
-			{
-				if (ignoreTransparency == false && (this[ptx - X, pty - Y] == 127 || this[ptx - X, pty - Y] == 0))
-					return false;
-
-				return true;
-			}
-
-			return false;
-		}
 
 	}
 
-	[Serializable]
-	public class Guard : IXleSerializable
-	{
-		public Guard()
-		{
-			Name = "Guard";
-			Facing = Direction.South;
-			Color = XleColor.Yellow;
-		}
-
-		public Point Location
-		{
-			get { return new Point(X, Y); }
-			set
-			{
-				X = value.X;
-				Y = value.Y;
-			}
-		}
-		public int HP { get; set; }
-		public Direction Facing { get; set; }
-		public Color Color { get; set; }
-
-		public int Attack { get; set; }
-		public int Defense { get; set; }
-
-		public int X { get; set; }
-		public int Y { get; set; }
-
-		/// <summary>
-		/// Method called when attacked by the player.
-		/// Return true to cancel further processing of the attack.
-		/// </summary>
-		public Func<GameState, Guard, bool> OnPlayerAttack;
-		public Func<GameState, Guard, bool> OnGuardDead;
-
-		public bool SkipAttacking { get; set; }
-		public bool SkipMovement { get; set; }
-
-		#region IXleSerializable Members
-
-		void IXleSerializable.WriteData(XleSerializationInfo info)
-		{
-			info.Write("X", X);
-			info.Write("Y", Y);
-			info.Write("Color", Color.ToArgb());
-
-			info.Write("HP", HP);
-			info.Write("Attack", Attack);
-			info.Write("Defense", Defense);
-		}
-
-		void IXleSerializable.ReadData(XleSerializationInfo info)
-		{
-			X = info.ReadInt32("X");
-			Y = info.ReadInt32("Y");
-			Color = Color.FromArgb(info.ReadInt32("Color"));
-
-			HP = info.ReadInt32("HP");
-			Attack = info.ReadInt32("Attack");
-			Defense = info.ReadInt32("Defense");
-		}
-
-		#endregion
-
-		public string Name { get; set; }
-
-	}
 }

@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 {
-	class LabyrinthBase : NullCastleExtender
+	class LabyrinthBase : CastleExtender
 	{
 		CastleDamageCalculator cdc = new CastleDamageCalculator
 		{ v5 = 1.7, v6 = 18, v7 = 1.7 };

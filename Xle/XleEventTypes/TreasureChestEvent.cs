@@ -5,6 +5,7 @@ using System.Text;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.XleEventTypes.Extenders;
 using System.ComponentModel;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle.XleEventTypes
 {

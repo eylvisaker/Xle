@@ -1,4 +1,5 @@
 ﻿using AgateLib.Serialization.Xle;
+using ERY.Xle.Maps;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;

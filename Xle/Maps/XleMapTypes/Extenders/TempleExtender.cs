@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
-	public class NullTempleExtender : NullTownExtender, ITempleExtender 
+	public class TempleExtender : TownExtender, ITempleExtender 
 	{
 	}
 }

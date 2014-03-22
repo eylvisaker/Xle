@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives
 {
-	class LobArchiveExtenderBase : NullMuseumExtender
+	class LobArchiveExtenderBase : MuseumExtender
 	{
 		public override void SetCommands(Commands.CommandList commands)
 		{

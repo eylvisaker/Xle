@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {
-	class CastleGround : NullCastleExtender
+	class CastleGround : CastleExtender
 	{
 		public CastleGround()
 		{

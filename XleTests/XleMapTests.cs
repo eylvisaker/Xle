@@ -1,4 +1,5 @@
 ﻿using ERY.Xle;
+using ERY.Xle.Maps;
 using ERY.Xle.XleEventTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

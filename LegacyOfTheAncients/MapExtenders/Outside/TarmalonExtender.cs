@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Outside
 {
-	class TarmalonExtender : NullOutsideExtender
+	class TarmalonExtender : OutsideExtender
 	{
 		int banditAmbush;
 

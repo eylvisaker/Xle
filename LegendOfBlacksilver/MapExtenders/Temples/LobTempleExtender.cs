@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Temples
 {
-	class LobTempleExtender : NullTempleExtender
+	class LobTempleExtender : TempleExtender
 	{
 		public override void SetCommands(Commands.CommandList commands)
 		{

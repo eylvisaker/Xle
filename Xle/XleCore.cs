@@ -4,6 +4,7 @@ using AgateLib.Geometry;
 using AgateLib.InputLib;
 using ERY.Xle.Commands;
 using ERY.Xle.Data;
+using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using ERY.Xle.Rendering;

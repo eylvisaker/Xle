@@ -25,7 +25,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 			if (XleCore.Factory == null)
 			{
-				Extender = new NullTownExtender();
+				Extender = new TownExtender();
 			}
 			else
 			{
@@ -753,7 +753,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 
 
-		public override int DrawTile(int xx, int yy)
+		public override int TileToDraw(int xx, int yy)
 		{
 			int tile = this[xx, yy];
 

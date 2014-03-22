@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
-	public class NullTownExtender : NullMapExtender, ITownExtender
+	public class TownExtender : MapExtender, ITownExtender
 	{
 		public override void SetColorScheme(ColorScheme scheme)
 		{
