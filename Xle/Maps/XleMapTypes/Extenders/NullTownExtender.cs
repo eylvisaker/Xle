@@ -47,5 +47,11 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			return (int)Math.Round(damage);
 		}
+
+
+		public virtual bool UseFancyMagicPrompt
+		{
+			get { return true; }
+		}
 	}
 }

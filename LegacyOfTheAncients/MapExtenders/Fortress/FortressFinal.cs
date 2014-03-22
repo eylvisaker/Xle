@@ -62,10 +62,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Compendium attack - blow " + damage + " H.P.", XleColor.Green);
 
-			SoundMan.PlaySound(LotaSound.FireBolt);
-			XleCore.Wait(500);
-			SoundMan.StopSound(LotaSound.FireBolt);
-			SoundMan.PlaySound(LotaSound.MagicHit);
+			SoundMan.PlayMagicSound(LotaSound.FireBolt, LotaSound.MagicHit, 2);
 			XleCore.Wait(250, FlashBorder);
 			TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
@@ -111,11 +108,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
-			
-			SoundMan.PlaySound(LotaSound.MagicFlame);
-			XleCore.Wait(500);
-			SoundMan.StopSound(LotaSound.MagicFlame);
-			SoundMan.PlaySound(LotaSound.MagicHit);
+
+			SoundMan.PlayMagicSound(LotaSound.MagicFlame, LotaSound.MagicHit, 2);
 			XleCore.Wait(250, FlashBorder);
 			TheMap.ColorScheme.FrameColor = XleColor.Gray;
 

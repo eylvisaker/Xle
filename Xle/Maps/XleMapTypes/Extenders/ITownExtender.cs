@@ -17,5 +17,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		double ChanceToHitPlayer(Player player, Guard guard);
 		int RollDamageToPlayer(Player player, Guard guard);
+
+		bool UseFancyMagicPrompt { get; }
 	}
 }

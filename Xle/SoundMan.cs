@@ -151,6 +151,19 @@ namespace ERY.Xle
 				XleCore.Wait(50, redraw);
 		}
 
+		public static void PlayMagicSound(LotaSound sound, LotaSound endSound, int distance)
+		{
+			if (distance <= 0)
+				throw new ArgumentOutOfRangeException("distance", "Distance must be greater than zero.");
+
+			PlaySound(sound);
+			XleCore.Wait(250 * distance + 450 * (distance - 1));
+			StopSound(sound);
+
+			SetSoundVolume(endSound, Math.Pow(distance, -0.5));
+			PlaySound(endSound);
+		}
+
 		public static void FinishSounds()
 		{
 			while (IsAnyPlaying())

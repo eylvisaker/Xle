@@ -45,8 +45,8 @@ Castle:
 	D - Test doors.
 	Open chests which should be empty when player enters map.
 	Determine algorithm for refilling chests.
-	Implement Cassandra.
-	Implement second floor
+	D - Implement Cassandra.
+	D - Implement second floor
 	D - Test magic ice.
 	D - Make sure sceptor is available.
 	D - Make sure tulip is available.
@@ -82,7 +82,7 @@ Dungeons:
 	D - Implement traps.
 	D - Implement xamine.
 	D - Make sure climbing through floor/ceiling hole automatically reveals partner hole if hidden.
-	Monsters!
+	D - Monsters!
 	D - Chests.
 		Booby trap chests
 		Chests which give weapons

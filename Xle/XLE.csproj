@@ -243,7 +243,7 @@
     <Compile Include="MenuItemList.cs" />
     <Compile Include="Data\Monster.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="Sounds.cs" />
+    <Compile Include="SoundMan.cs" />
     <Compile Include="XleEventTypes\XleEvent.cs" />
     <Compile Include="SubMenu.cs" />
     <Compile Include="Maps\XleMapTypes\MuseumDisplays\Exhibit.cs" />

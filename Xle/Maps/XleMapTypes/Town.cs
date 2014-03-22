@@ -345,6 +345,13 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return -1;
 		}
 
+		public override bool UseFancyMagicPrompt
+		{
+			get
+			{
+				return Extender.UseFancyMagicPrompt;
+			}
+		}
 		/*
 
 		Point RoofAnchor(int r)

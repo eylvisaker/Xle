@@ -1140,7 +1140,12 @@ namespace ERY.Xle
 		{
 			var magics = mBaseExtender.ValidMagic.Where(x => state.Player.Items[x.ItemID] > 0).ToList();
 
-			var magic = MagicPrompt(state, magics.ToArray());
+			MagicSpell magic;
+
+			if (UseFancyMagicPrompt)
+				magic = MagicPrompt(state, magics.ToArray());
+			else
+				magic = MagicMenu(magics.ToArray());
 
 			if (magic == null)
 				return;
@@ -1200,36 +1205,28 @@ namespace ERY.Xle
 				XleCore.TextArea.PrintLine(" - select above", XleColor.White);
 				XleCore.TextArea.PrintLine();
 
-				menu = new MenuItemList("Nothing");
-
-				for(int i = otherStart; i < magics.Length; i++)
-				{
-					menu.Add(magics[i].Name);
-				}
-
-				choice = XleCore.SubMenu("Pick magic", 0, menu);
-
-				if (choice == 0)
-				{
-					XleCore.TextArea.PrintLine("Select no magic.", XleColor.White);
-					return null;
-				}
-
-				return magics[otherStart + choice - 1];
+				return MagicMenu(magics.Skip(otherStart).ToList());
 			}
 		}
 
-		protected void PlayMagicSound(LotaSound sound, LotaSound endSound, int distance)
+		private static MagicSpell MagicMenu(IList<MagicSpell> magics)
 		{
-			if (distance <= 0)
-				throw new ArgumentOutOfRangeException("distance", "Distance must be greater than zero.");
+			MenuItemList menu = new MenuItemList("Nothing");
 
-			SoundMan.PlaySound(sound);
-			XleCore.Wait(250 * distance);
-			SoundMan.StopSound(sound);
+			for (int i = 0; i < magics.Count; i++)
+			{
+				menu.Add(magics[i].Name);
+			}
 
-			SoundMan.SetSoundVolume(endSound, Math.Pow(distance, -0.5));
-			SoundMan.PlaySound(endSound);
+			int choice = XleCore.SubMenu("Pick magic", 0, menu);
+
+			if (choice == 0)
+			{
+				XleCore.TextArea.PrintLine("Select no magic.", XleColor.White);
+				return null;
+			}
+
+			return magics[choice - 1];
 		}
 
 		#endregion
@@ -1405,6 +1402,8 @@ namespace ERY.Xle
 
 			AfterPlayerStep(state.Player);
 		}
+
+		public virtual bool UseFancyMagicPrompt { get { return true; } }
 	}
 
 	public class Roof : IXleSerializable

@@ -178,7 +178,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 		public override bool RollSpellFizzle(GameState state, MagicSpell magic)
 		{
-			return XleCore.random.NextDouble() * 45 > state.Player.Attribute[Attributes.intelligence] || XleCore.random.NextDouble() < .5;
+			return XleCore.random.NextDouble() * 45 > state.Player.Attribute[Attributes.intelligence] || XleCore.random.NextDouble() < 0.05;
 		}
 		public override int RollSpellDamage(GameState state, MagicSpell magic, int distance)
 		{

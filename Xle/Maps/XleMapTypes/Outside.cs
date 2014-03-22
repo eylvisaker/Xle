@@ -445,6 +445,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 			}
 		}
+		/*
 		public override void PlayerMagic(GameState state)
 		{
 			var magics = Extender.ValidMagic.Where(x => state.Player.Items[x.ItemID] > 0).ToList();
@@ -465,7 +466,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			state.Player.Items[magic.ItemID]--;
 
-			switch (choice)
+			
+		}
+		*/
+		protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
+		{
+			switch (magic.ID)
 			{
 				case 1:
 				case 2:
@@ -484,17 +490,18 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 					XleCore.TextArea.PrintLine("Attack with " + magic.Name + ".");
 
-					var sound = (choice == 1) ? LotaSound.MagicFlame : LotaSound.FireBolt;
-					
+					var sound = (magic.ID == 1) ? 
+						LotaSound.MagicFlame : LotaSound.FireBolt;
+
 					if (Extender.RollSpellFizzle(state, magic))
 					{
-						PlayMagicSound(sound, LotaSound.MagicFizzle, 1);
+						SoundMan.PlayMagicSound(sound, LotaSound.MagicFizzle, 1);
 
 						XleCore.TextArea.PrintLine("Attack fizzles.", XleColor.Yellow);
 						return;
 					}
-					else 
-						PlayMagicSound(sound, LotaSound.MagicHit, 1);
+					else
+						SoundMan.PlayMagicSound(sound, LotaSound.MagicHit, 1);
 
 					int damage = Extender.RollSpellDamage(state, magic, 0);
 
@@ -507,6 +514,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 					Extender.CastSpell(state, magic);
 					break;
 			}
+		}
+		public override bool UseFancyMagicPrompt
+		{
+			get { return false; }
 		}
 
 		public override void PlayerCursorMovement(Player player, Direction dir)

@@ -325,7 +325,10 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 				if (monst != null)
 					break;
+				if (CanPlayerStepIntoImpl(player, loc.X, loc.Y) == false)
+					break;
 			}
+
 			return monst;
 		}
 		protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
@@ -349,20 +352,20 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			if (monst == null)
 			{
-				PlayMagicSound(magicSound, LotaSound.MagicHit, distance);
+				SoundMan.PlayMagicSound(magicSound, LotaSound.MagicHit, distance);
 				XleCore.TextArea.PrintLine("There is no effect.", XleColor.White);
 			}
 			else
 			{
 				if (Extender.RollSpellFizzle(state, magic))
 				{
-					PlayMagicSound(magicSound, LotaSound.MagicFizzle, distance);
+					SoundMan.PlayMagicSound(magicSound, LotaSound.MagicFizzle, distance);
 					XleCore.TextArea.PrintLine("Attack fizzles.", XleColor.White);
 					XleCore.Wait(500);
 				}
 				else
 				{
-					PlayMagicSound(magicSound, LotaSound.MagicHit, distance);
+					SoundMan.PlayMagicSound(magicSound, LotaSound.MagicHit, distance);
 					int damage = Extender.RollSpellDamage(state, magic, distance);
 
 					HitMonster(monst, damage, XleColor.White);
