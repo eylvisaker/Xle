@@ -57,10 +57,25 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 				XleCore.Data.DungeonMonsters[monsterID]);
 
 			monst.HP = (int)
-				((monsterID + 15 + 15 * XleCore.random.NextDouble()) * 2.4 * TheMap.MonsterHealthScale);
+				(TheMap.MonsterHealthScale * (.7 + .6 * XleCore.random.NextDouble()) * (1 + monsterID / 20.0));
 
 			return monst;
 		}
 
+		public override void CastSpell(GameState state, MagicSpell magic)
+		{
+			XleCore.TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
+
+			if (magic.ID == 5)
+				TheMap.ExecuteKillFlash(state);
+		}
+
+		public override IEnumerable<MagicSpell> ValidMagic
+		{
+			get
+			{
+				return XleCore.Data.MagicSpells.Values;
+			}
+		}
 	}
 }

@@ -491,7 +491,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 					XleCore.TextArea.PrintLine("Attack with " + magic.Name + ".");
 
 					var sound = (magic.ID == 1) ? 
-						LotaSound.MagicFlame : LotaSound.FireBolt;
+						LotaSound.MagicFlame : LotaSound.MagicBolt;
 
 					if (Extender.RollSpellFizzle(state, magic))
 					{
@@ -501,7 +501,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 						return;
 					}
 					else
-						SoundMan.PlayMagicSound(sound, LotaSound.MagicHit, 1);
+						SoundMan.PlayMagicSound(sound, LotaSound.MagicFlameHit, 1);
 
 					int damage = Extender.RollSpellDamage(state, magic, 0);
 

@@ -268,7 +268,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 
 			bool hit = Extender.RollToHitMonster(XleCore.GameState, monst);
-			
+
 			XleCore.TextArea.Print("Hit ");
 			XleCore.TextArea.Print(monst.Name, XleColor.White);
 			XleCore.TextArea.PrintLine(" with " + player.CurrentWeaponTypeName);
@@ -311,7 +311,12 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		private DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
+		public DungeonMonster MonsterInFrontOfPlayer(Player player)
+		{
+			int distance = 0;
+			return MonsterInFrontOfPlayer(player, ref distance);
+		}
+		public DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
 		{
 			Point fightDir = StepDirection(player.FaceDirection);
 			DungeonMonster monst = null;
@@ -333,11 +338,15 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 		protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
 		{
-			switch(magic.ID)
+			switch (magic.ID)
 			{
 				case 1:
 				case 2:
 					UseAttackMagic(state, magic);
+					break;
+
+				default:
+					Extender.CastSpell(state, magic);
 					break;
 			}
 		}
@@ -346,13 +355,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 			int distance = 0;
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Shoot " + magic.Name + ".", XleColor.White);
-			
+
 			DungeonMonster monst = MonsterInFrontOfPlayer(state.Player, ref distance);
-			var magicSound = magic.ID == 1 ? LotaSound.MagicFlame : LotaSound.FireBolt;
+			var magicSound = magic.ID == 1 ? LotaSound.MagicFlame : LotaSound.MagicBolt;
+			var hitSound = magic.ID == 1 ? LotaSound.MagicFlameHit : LotaSound.MagicBoltHit;
 
 			if (monst == null)
 			{
-				SoundMan.PlayMagicSound(magicSound, LotaSound.MagicHit, distance);
+				SoundMan.PlayMagicSound(magicSound, hitSound, distance);
 				XleCore.TextArea.PrintLine("There is no effect.", XleColor.White);
 			}
 			else
@@ -365,7 +375,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 				else
 				{
-					SoundMan.PlayMagicSound(magicSound, LotaSound.MagicHit, distance);
+					SoundMan.PlayMagicSound(magicSound, hitSound, distance);
 					int damage = Extender.RollSpellDamage(state, magic, distance);
 
 					HitMonster(monst, damage, XleColor.White);
@@ -437,7 +447,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 					if ("aeiou".Contains(foundMonster.Name[0]))
 						name = "n" + name;
 
-					XleCore.TextArea.PrintLine("A" + name + " is stalking you!!!", XleColor.White);
+					XleCore.TextArea.PrintLine("A" + name + " is stalking you!", XleColor.White);
 				}
 			}
 			else
@@ -933,5 +943,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 			SoundMan.PlaySound(LotaSound.WalkDungeon);
 		}
 
+
+		public void ExecuteKillFlash(Xle.GameState state)
+		{
+			SoundMan.PlaySoundSync(LotaSound.VeryBad);
+			
+			Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
+		}
+
+		
 	}
 }

@@ -24,6 +24,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 						DungeonLevel = 7,
 						Location = new Point(10, 0),
 						HP = 400,
+						KillFlashImmune = true,
 					};
 
 				TheMap.Monsters.Add(king);

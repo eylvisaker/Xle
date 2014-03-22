@@ -48,8 +48,9 @@ namespace ERY.Xle
 		Bad,
 		Teleporter,
 		MagicFlame,
-		FireBolt,
-		MagicHit,
+		MagicFlameHit,
+		MagicBolt,
+		MagicBoltHit,
 		MagicFizzle,
 	}
 
@@ -126,6 +127,9 @@ namespace ERY.Xle
 
 		public static void SetSoundVolume(LotaSound sound, double volume)
 		{
+			if (mSounds.ContainsKey(sound) == false)
+				return;
+
 			mSounds[sound].Volume = volume;
 		}
 

@@ -21,5 +21,7 @@ namespace ERY.Xle
 		public int HP { get; set; }
 
 		public string Name { get { return Data.Name; } }
+
+		public bool KillFlashImmune { get; set; }
 	}
 }

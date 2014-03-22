@@ -507,11 +507,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return true;
 		}
 		
-
 		public override bool AutoDrawPlayer
 		{
 			get { return false; }
 		}
 	}
-
 }

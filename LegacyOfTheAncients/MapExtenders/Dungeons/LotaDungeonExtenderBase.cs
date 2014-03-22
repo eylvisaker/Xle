@@ -186,5 +186,59 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 			return (int)dam;
 		}
+
+		public override void CastSpell(GameState state, MagicSpell magic)
+		{
+			XleCore.TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
+
+			if (magic.ID == 3)
+				CastBefuddle(state, magic);
+			if (magic.ID == 4)
+				CastPsychoStrength(state, magic);
+			if (magic.ID == 5)
+				CastKillFlash(state, magic);
+		}
+
+		private void CastKillFlash(GameState state, MagicSpell magic)
+		{
+			TheMap.ExecuteKillFlash(state);
+		}
+
+		private void CastPsychoStrength(GameState state, MagicSpell magic)
+		{
+			throw new NotImplementedException();
+		}
+
+		private void CastBefuddle(GameState state, MagicSpell magic)
+		{
+			if (state.Player.HP >= 250 && XleCore.random.NextDouble() < 0.07)
+			{
+				//Backfire!!!
+				Lota.Story.BackfiredBefuddleTurns = XleCore.random.Next(5, 10);
+			}
+			else
+			{
+				if (Lota.Story.BefuddleTurns > 0)
+					Lota.Story.BefuddleTurns /= 2;
+
+				Lota.Story.BefuddleTurns += XleCore.random.Next(25, 35);
+
+				var monst = TheMap.MonsterInFrontOfPlayer(state.Player);
+
+				if (monst != null)
+				{
+					XleCore.TextArea.PrintLine("The " + monst.Name + " looks confused.", XleColor.White);
+				}
+			}
+		}
+
+		public override void UpdateMonsters(GameState state, ref bool handled)
+		{
+			if (Lota.Story.BefuddleTurns > 0)
+			{
+				Lota.Story.BefuddleTurns--;
+				handled = true;
+			}
+		}
 	}
 }

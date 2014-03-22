@@ -167,7 +167,7 @@
     <None Include="LotA\Audio\EnemyMiss.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LotA\Audio\FireBolt.ogg">
+    <None Include="LotA\Audio\MagicBolt.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LotA\Audio\Good.ogg">
@@ -182,7 +182,10 @@
     <None Include="LotA\Audio\MagicFlame.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LotA\Audio\MagicHit.ogg">
+    <None Include="LotA\Audio\MagicBoltHit.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LotA\Audio\MagicFlameHit.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LotA\Audio\Medium.ogg">
@@ -397,7 +400,7 @@
     <Content Include="LotA\Audio\Source\BumpFirst.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Audio\Source\FireBolt.wav">
+    <Content Include="LotA\Audio\Source\MagicBolt.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Audio\Source\MagicFizzle.wav">
@@ -406,7 +409,7 @@
     <Content Include="LotA\Audio\Source\MagicFlame.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LotA\Audio\Source\MagicHit.wav">
+    <Content Include="LotA\Audio\Source\MagicFlameHit.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LotA\Audio\Source\WalkDesert.wav">
