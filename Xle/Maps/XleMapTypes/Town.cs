@@ -352,75 +352,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 				return Extender.UseFancyMagicPrompt;
 			}
 		}
-		/*
-
-		Point RoofAnchor(int r)
-		{
-			return new Point(0, 0);
-			//if (r == 39)
-			//{
-			//    int i = 0;
-			//}
-
-			//int off = RoofOffset(r);
-			//Point size;
-
-			//
-			//size.X = m[off] * 256 + m[off + 1];
-			//size.Y = m[off + 2] * 256 + m[off + 3];
-			//
-
-			//return size;
-		}
-
-		Point RoofAnchorTarget(int r)
-		{
-			int off = RoofOffset(r);
-			Point size;
-
-			size.X = m[off + 4] * 256 + m[off + 5];
-			size.Y = m[off + 6] * 256 + m[off + 7];
-
-			return size;
-		}
-
-		Point RoofSize(int r)
-		{
-			int off = RoofOffset(r);
-			Point size;
-
-			size.X = m[off + 8] * 256 + m[off + 9];
-			size.Y = m[off + 10] * 256 + m[off + 11];
-
-			return size;
-		}
-
-		int RoofIntOffset(int r)
-		{
-			Point lastSize;
-			int last;
-			int me;
-
-			if (r == 0)
-			{
-				return roofOffset;
-			}
-
-			last = RoofOffset(r - 1);
-			lastSize = RoofSize(r - 1);
-
-			me = last + 12 + lastSize.Y * lastSize.X;
-
-			return me;
-
-		}
-
-		int RoofOffset(int r)
-		{
-			return eachRoofOffset[r];
-		}
-		*/
-
+		
 		int RoofTile(int xx, int yy)
 		{
 			foreach (var r in Roofs)
@@ -457,7 +389,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return 0;
 		}
-
 
 		public override void GuardAttackPlayer(Player player, Guard guard)
 		{
