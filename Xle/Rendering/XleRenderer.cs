@@ -380,7 +380,6 @@ namespace ERY.Xle.Rendering
 				(vertLine + 16, 16, GameAreaSize.Width - 16, horizLine);
 
 			MapRenderer.Draw(player.Location, player.FaceDirection, mapRect);
-			map.Draw(player.X, player.Y, player.FaceDirection, mapRect);
 
 			i = 0;
 			int cursorPos = 0;

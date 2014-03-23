@@ -106,7 +106,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			SetMonsterImagePosition(state.Player);
 
 			// bandit icon is number 4.
-			TheMap.displayMonst = 4;
+			MapRenderer.DisplayMonsterID = 4;
 
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
@@ -128,7 +128,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			XleCore.TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
 
 			XleCore.Wait(1000);
-			TheMap.displayMonst = -1;
+			MapRenderer.DisplayMonsterID = -1;
 			XleCore.Wait(3000, RedrawUnconscious);
 
 			XleCore.TextArea.PrintLine();

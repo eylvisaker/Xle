@@ -97,6 +97,10 @@ namespace ERY.Xle.Maps
 			set { mData[x + y * Width] = value; }
 		}
 
+		public int TileAtMapCoords(int mapx, int mapy)
+		{
+			return this[mapx - Location.X, mapy - Location.Y];
+		}
 
 		public Rectangle Rectangle
 		{
@@ -156,6 +160,7 @@ namespace ERY.Xle.Maps
 
 			return false;
 		}
+
 
 	}
 }

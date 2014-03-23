@@ -119,6 +119,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return 0;
 		}
+
 		public override int TileToDraw(int xx, int yy)
 		{
 			int tile = this[xx, yy];
@@ -148,7 +149,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				Guard guard = Guards[i];
 
-				if (PointInRoof(guard.X, guard.Y) == -1)
+				if (ClosedRoofAt(guard.X, guard.Y) == null)
 				{
 					var facing = guard.Facing;
 

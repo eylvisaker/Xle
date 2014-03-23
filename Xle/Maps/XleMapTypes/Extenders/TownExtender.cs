@@ -117,7 +117,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			{
 				if (guard.SkipMovement)
 					continue;
-				if (TheMap.PointInRoof(guard.X, guard.Y) != -1)
+				if (TheMap.ClosedRoofAt(guard.X, guard.Y) != null)
 					continue;
 
 				bool badPt = false;

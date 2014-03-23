@@ -9,6 +9,8 @@ namespace ERY.Xle.Maps.Renderers
 {
 	public class Map2DRenderer : XleMapRenderer
 	{
+		Dictionary<int, int> mAnimatedTiles = new Dictionary<int, int>();
+
 		public override void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
 		{
 			Draw2D(playerPos.X, playerPos.Y, faceDirection, inRect);
@@ -60,6 +62,11 @@ namespace ERY.Xle.Maps.Renderers
 
 		protected virtual int TileToDraw(int x, int y)
 		{
+			if (y < 0 || y >= TheMap.Height || x < 0 || x >= TheMap.Width)
+			{
+				return Extender.GetOutsideTile(centerPoint, x, y);
+			}
+
 			return TheMap[x, y];
 		}
 

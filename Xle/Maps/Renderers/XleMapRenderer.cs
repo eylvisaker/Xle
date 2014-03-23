@@ -1,5 +1,6 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Maps;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace ERY.Xle.Maps.Renderers
 	public class XleMapRenderer
 	{
 		public virtual XleMap TheMap { get; set; }
+		public MapExtender Extender { get; set; }
 
 		public virtual void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
 		{

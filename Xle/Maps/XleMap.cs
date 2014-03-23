@@ -456,6 +456,7 @@ namespace ERY.Xle.Maps
 			}
 		}
 
+		[Obsolete("Use ClosedRoofAt instead.", true)]
 		public int PointInRoof(int ptx, int pty)
 		{
 			for (int i = 0; i < mRoofs.Count; i++)
@@ -470,6 +471,24 @@ namespace ERY.Xle.Maps
 			}
 
 			return -1;
+		}
+
+		public Roof ClosedRoofAt(int x, int y)
+		{
+			Roof retval = null;
+
+			foreach(var roof in Roofs)
+			{
+				if (roof.PointInRoof(x, y, false))
+				{
+					if (roof.Open)
+						return null;
+					else
+						retval = roof;
+				}
+			}
+
+			return retval;
 		}
 
 		#endregion

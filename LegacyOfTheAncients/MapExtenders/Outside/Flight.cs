@@ -66,7 +66,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
 					for (int j = 0; j < count; j++)
 					{
-						TheMap.ClearWaves();
+						MapRenderer.ClearWaves();
 						SetPosition(state, range.Item2+1, range.Item3);
 					}
 				}

@@ -92,7 +92,7 @@ namespace ERY.Xle.Maps
 
 			foreach(var guard in this)
 			{
-				if (TheMap.PointInRoof(guard.X, guard.Y) != -1)
+				if (TheMap.ClosedRoofAt(guard.X, guard.Y) != null)
 					continue;
 
 				badPt = false;

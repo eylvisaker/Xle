@@ -22,6 +22,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 				mTheMap = value;
 				MapRenderer = CreateMapRenderer();
 				MapRenderer.TheMap = TheMap;
+				MapRenderer.Extender = this;
 			}
 		}
 		public XleMapRenderer MapRenderer { get; set; }
@@ -33,7 +34,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		public virtual int GetOutsideTile(Point playerPoint, int x, int y)
 		{
-			return -1;
+			return TheMap.DefaultTile;
 		}
 
 		public virtual void OnLoad(GameState state)

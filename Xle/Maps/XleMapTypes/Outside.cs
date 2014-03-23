@@ -20,16 +20,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 		int mHeight;
 		int mWidth;
 
-		int[] waves;
-		Rectangle drawRect;
-
-		List<Monster> currentMonst = new List<Monster>();
-
-		public int displayMonst = -1;
-		Direction monstDir;
-		Point mDrawMonst;
-		int mWaterAnimLevel;
-
 		#region --- Construction and Serialization ---
 
 		public Outside()
@@ -51,7 +41,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 
 		#endregion
-
 
 		public TerrainType TerrainAt(int xx, int yy)
 		{
@@ -145,14 +134,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 				else
 					result = mData[xx + mWidth * yy];
 
-				if (result == 0 && waves != null)
-				{
-					int index = xx - drawRect.Left + (yy - drawRect.Top) * drawRect.Width;
-
-					if (index >= 0 && index < waves.Length)
-						return waves[index];
-				}
-
 				return result;
 			}
 			set
@@ -164,36 +145,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 				}
 				else
 				{
-					// mData[yy, xx] = value;
-					//mData[(yy + mapExtend) * (mapWidth + 2 * mapExtend) + (xx + mapExtend)] = (byte)val;
-
 					mData[xx + mWidth * yy] = value;
 				}
-
 			}
 		}
 		
-		int lastAnimate = 0;
-
-
-		[Obsolete("", true)]
-		protected override void AnimateTiles(Rectangle rectangle)
-		{
-			throw new NotImplementedException();
-			//Extender.MapRenderer.AnimateTiles(rectangle);
-		}
-
-		public void ClearWaves()
-		{
-			if (waves != null)
-				Array.Clear(waves, 0, waves.Length);
-
-			int now = (int)Timing.TotalMilliseconds;
-
-			// force an update.
-			lastAnimate = now - 500;
-		}
-
 		protected override Extenders.MapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
