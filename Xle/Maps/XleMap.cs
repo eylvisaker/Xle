@@ -142,16 +142,11 @@ namespace ERY.Xle.Maps
 			}
 
 			retval.MapID = id;
-			retval.ConstructRenderTimeData();
 			retval.mBaseExtender = retval.CreateExtender();
 			retval.CreateEventExtenders();
 			retval.GameState = XleCore.GameState;
 
 			return retval;
-		}
-		[Obsolete("seems to be unused")]
-		protected internal virtual void ConstructRenderTimeData()
-		{
 		}
 
 		public static void SaveMap(XleMap map, string filename)
