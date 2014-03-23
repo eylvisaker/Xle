@@ -9,7 +9,7 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
-			if (state.Map.PlayerClimb(state.Player) == false)
+			if (state.MapExtender.PlayerClimb(state) == false)
 			{
 				XleCore.TextArea.PrintLine("\n\nNothing to climb");
 			}

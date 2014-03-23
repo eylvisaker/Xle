@@ -10,7 +10,7 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
-			if (state.Map.PlayerDisembark(state))
+			if (state.MapExtender.PlayerDisembark(state))
 				return;
 
 			XleCore.TextArea.PrintLine("\nNothing to disembark.", XleColor.Yellow);

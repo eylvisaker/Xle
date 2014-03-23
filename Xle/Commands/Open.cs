@@ -9,7 +9,7 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
-			if (state.Map.PlayerOpen(state.Player) == false)
+			if (state.MapExtender.PlayerOpen(state) == false)
 			{
 				XleCore.TextArea.PrintLine("\n\nNothing opens.");
 

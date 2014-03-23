@@ -9,7 +9,7 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
-			state.Map.PlayerFight(state.Player);
+			state.MapExtender.PlayerFight(state);
 		}
 	}
 }

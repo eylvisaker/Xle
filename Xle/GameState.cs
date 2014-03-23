@@ -1,4 +1,5 @@
 ﻿using ERY.Xle.Maps;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace ERY.Xle
 
 		public Player Player { get; set; }
 		public XleMap Map { get; set; }
+		public MapExtender MapExtender { get { return Map.Extender; } }
 
 		public GameSpeed GameSpeed { get; set; }
 

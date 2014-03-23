@@ -9,7 +9,7 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
-			if (state.Map.PlayerRob(state) == false)
+			if (state.MapExtender.PlayerRob(state) == false)
 			{
 				XleCore.TextArea.PrintLine("\n\nNothing to rob.");
 			}

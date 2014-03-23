@@ -9,7 +9,7 @@ namespace ERY.Xle.Commands
 	{
 		public override void Execute(GameState state)
 		{
-			if (state.Map.PlayerSpeak(state) == false)
+			if (state.MapExtender.PlayerSpeak(state) == false)
 			{
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine();

@@ -28,7 +28,7 @@ namespace ERY.Xle.Commands
 					return;
 			}
 
-			state.Map.PlayerLeave(state.Player);
+			state.MapExtender.PlayerLeave(state);
 		}
 
 		public bool ConfirmPrompt { get; set; }
