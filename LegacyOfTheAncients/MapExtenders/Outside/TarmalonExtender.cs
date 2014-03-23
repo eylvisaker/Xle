@@ -13,6 +13,8 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
 		public override void OnLoad(GameState state)
 		{
+			base.OnLoad(state);
+
 			Lota.Story.Invisible = false;
 
 			XleCore.Renderer.PlayerColor = XleColor.White;
@@ -22,8 +24,8 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
 		public int WaterAnimLevel
 		{
-			get { return TheMap.WaterAnimLevel; }
-			set { TheMap.WaterAnimLevel = value; }
+			get { return MapRenderer.WaterAnimLevel; }
+			set { MapRenderer.WaterAnimLevel = value; }
 		}
 
 		public override void SetCommands(Commands.CommandList commands)
@@ -101,7 +103,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 				return false;
 
 			// set a random position for the appearance of the bandits.
-			TheMap.MonsterDirection(state.Player);
+			SetMonsterImagePosition(state.Player);
 
 			// bandit icon is number 4.
 			TheMap.displayMonst = 4;

@@ -169,6 +169,9 @@
     <Compile Include="Maps\Guard.cs" />
     <Compile Include="Maps\GuardList.cs" />
     <Compile Include="Maps\Map3DSurfaces.cs" />
+    <Compile Include="Maps\Renderers\Map2DRenderer.cs" />
+    <Compile Include="Maps\Renderers\OutsideRenderer.cs" />
+    <Compile Include="Maps\Renderers\TownRenderer.cs" />
     <Compile Include="Maps\Roof.cs" />
     <Compile Include="Maps\TileGroup.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\Map2DExtender.cs" />
@@ -181,6 +184,7 @@
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Commands\CommandList.cs" />
     <Compile Include="Data\Data.cs" />
+    <Compile Include="Maps\Renderers\XleMapRenderer.cs" />
     <Compile Include="Rendering\XleRenderer.cs" />
     <Compile Include="TextArea.cs" />
     <Compile Include="Maps\TileInfo.cs" />

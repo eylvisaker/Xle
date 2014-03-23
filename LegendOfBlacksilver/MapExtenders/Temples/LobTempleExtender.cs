@@ -25,5 +25,15 @@ namespace ERY.Xle.LoB.MapExtenders.Temples
 
 			scheme.FrameColor = XleColor.LightGray;
 		}
+
+
+		public override IEnumerable<MagicSpell> ValidMagic
+		{
+			get
+			{
+				yield return XleCore.Data.MagicSpells[3];
+				yield return XleCore.Data.MagicSpells[4];
+			}
+		}
 	}
 }

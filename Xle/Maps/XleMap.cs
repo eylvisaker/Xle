@@ -483,7 +483,8 @@ namespace ERY.Xle.Maps
 			DrawImpl(x, y, faceDirection, inRect);
 		}
 
-		protected abstract void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect);
+		protected virtual void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect)
+		{ }
 		protected void Draw2D(int x, int y, Direction faceDirction, Rectangle inRect)
 		{
 			int i, j;

@@ -132,5 +132,36 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		protected virtual void PlayerFight(GameState state, Direction fightDir)
 		{ }
+
+
+		public override bool PlayerXamine(GameState state)
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You are in " + TheMap.MapName + ".");
+			XleCore.TextArea.PrintLine("Look about to see more.");
+
+			return true;
+		}
+
+		public override bool PlayerLeave(GameState state)
+		{
+			if (TheMap.HasGuards && TheMap.Guards.IsAngry)
+			{
+				XleCore.TextArea.PrintLine("Walk out yourself.");
+				XleCore.Wait(200);
+			}
+			else
+			{
+				XleCore.TextArea.PrintLine("Leave " + TheMap.MapName);
+				XleCore.TextArea.PrintLine();
+
+				XleCore.Wait(200);
+
+				state.Player.ReturnToPreviousMap();
+			}
+
+			return true;
+		}
 	}
 }

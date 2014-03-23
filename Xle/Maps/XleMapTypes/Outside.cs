@@ -25,12 +25,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		List<Monster> currentMonst = new List<Monster>();
 
-		int stepCount;
 		public int displayMonst = -1;
 		Direction monstDir;
 		Point mDrawMonst;
-		int monstCount, initMonstCount;
-		bool isMonsterFriendly;
 		int mWaterAnimLevel;
 
 		#region --- Construction and Serialization ---
@@ -176,70 +173,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 		
-		/// <summary>
-		/// Gets or sets whether or not the player is in stormy water
-		/// </summary>
-		/// <returns></returns>
-		public int WaterAnimLevel
-		{
-			get { return mWaterAnimLevel; }
-			set
-			{
-				System.Diagnostics.Debug.Assert(value >= 0);
-
-				mWaterAnimLevel = value;
-			}
-		}
-
 		int lastAnimate = 0;
 
 
+		[Obsolete("", true)]
 		protected override void AnimateTiles(Rectangle rectangle)
 		{
-			int now = (int)Timing.TotalMilliseconds;
-
-			if (rectangle != drawRect)
-			{
-				ClearWaves();
-
-				drawRect = rectangle;
-			}
-			if (lastAnimate + 250 > now)
-				return;
-
-			if (waves == null || waves.Length != rectangle.Width * rectangle.Height)
-			{
-				waves = new int[rectangle.Width * rectangle.Height];
-			}
-
-			lastAnimate = now;
-
-			for (int j = 0; j < rectangle.Height; j++)
-			{
-				for (int i = 0; i < rectangle.Width; i++)
-				{
-					int x = i + rectangle.Left;
-					int y = j + rectangle.Top;
-					int index = j * rectangle.Width + i;
-
-					int tile = this[x, y];
-
-					if (tile == 0)
-					{
-						if (XleCore.random.Next(0, 1000) < 20 * (WaterAnimLevel + 1))
-						{
-							waves[index] = XleCore.random.Next(1, 3);
-						}
-					}
-					else if (tile == 1 || tile == 2)
-					{
-						if (XleCore.random.Next(0, 100) < 25)
-						{
-							waves[index] = 0;
-						}
-					}
-				}
-			}
+			throw new NotImplementedException();
+			//Extender.MapRenderer.AnimateTiles(rectangle);
 		}
 
 		public void ClearWaves()
@@ -251,44 +192,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			// force an update.
 			lastAnimate = now - 500;
-		}
-
-		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
-		{
-			Draw2D(x, y, facingDirection, inRect);
-
-			if (displayMonst > -1)
-			{
-				Point pt = new Point(mDrawMonst.X - x, mDrawMonst.Y - y);
-				pt.X *= 16;
-				pt.Y *= 16;
-
-				pt.X += XleCore.Renderer.CharRect.X;
-				pt.Y += XleCore.Renderer.CharRect.Y;
-
-				XleCore.Renderer.DrawMonster(pt.X, pt.Y, displayMonst);
-			}
-		}
-
-		[Obsolete("This function is weird and should be replaced with something else.")]
-		public string MonsterDirection(Player player)
-		{
-			string dirName;
-			mDrawMonst.X = player.X - 1;
-			mDrawMonst.Y = player.Y - 1;
-
-			monstDir = (Direction)XleCore.random.Next((int)Direction.East, (int)Direction.South + 1);
-
-			switch (monstDir)
-			{
-				case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
-				case Direction.North: dirName = "North"; mDrawMonst.Y -= 2; break;
-				case Direction.West: dirName = "West"; mDrawMonst.X -= 2; break;
-				case Direction.South: dirName = "South"; mDrawMonst.Y += 2; break;
-				default:
-					throw new Exception("Invalid direction.");
-			}
-			return dirName;
 		}
 
 		protected override Extenders.MapExtender CreateExtenderImpl()

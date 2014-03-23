@@ -1,5 +1,7 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Commands;
+using ERY.Xle.Maps.Renderers;
+using ERY.Xle.Rendering;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,24 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
 	public class MapExtender
 	{
-		public XleMap TheMap { get; set; }
+		XleMap mTheMap;
+
+		public XleMap TheMap
+		{
+			get { return mTheMap; }
+			set
+			{
+				mTheMap = value;
+				MapRenderer = CreateMapRenderer();
+				MapRenderer.TheMap = TheMap;
+			}
+		}
+		public XleMapRenderer MapRenderer { get; set; }
+
+		protected virtual XleMapRenderer CreateMapRenderer()
+		{
+			return new XleMapRenderer();
+		}
 
 		public virtual int GetOutsideTile(Point playerPoint, int x, int y)
 		{

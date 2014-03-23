@@ -2,6 +2,7 @@
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using ERY.Xle.Maps;
+using ERY.Xle.Maps.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +22,6 @@ namespace ERY.Xle.Rendering
 		bool mOverrideHPColor;
 		Color mHPColor;
 
-		/****************************************************************************
-		 *	void DrawBorder( LPDIRECTDRAWSURFACE7 pDDS, unsigned int boxColor)		*
-		 *																			*
-		 *  This function draws the border around the screen.						*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to, and the color to draw	*
-		 *  Returns:	void														*
-		 ****************************************************************************/
 		public void DrawFrame(Color boxColor)
 		{
 			DrawFrameLine(0, 0, 1, GameAreaSize.Width, boxColor);
@@ -36,16 +29,6 @@ namespace ERY.Xle.Rendering
 			DrawFrameLine(0, GameAreaSize.Height - 16, 1, GameAreaSize.Width, boxColor);
 			DrawFrameLine(GameAreaSize.Width - 12, 0, 0, GameAreaSize.Height - 2, boxColor);
 		}
-
-		/****************************************************************************
-		 *	void DrawInnerBorder( LPDIRECTDRAWSURFACE7 pDDS,						*
-		 *						  unsigned int innerColor)							*
-		 *																			*
-		 *  This function draws the colored lines inside the border					*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to, and the color to draw	*
-		 *  Returns:	void														*
-		 ****************************************************************************/
 		public void DrawFrameHighlight(Color innerColor)
 		{
 			DrawInnerFrameHighlight(0, 0, 1, GameAreaSize.Width, innerColor);
@@ -55,18 +38,14 @@ namespace ERY.Xle.Rendering
 
 		}
 
-		/****************************************************************************
-		 *	void DrawLine(LPDIRECTDRAWSURFACE7 pDDS, int left, int top,				*
-		 *				int direction, int length, unsigned int boxColor)			*
-		 *																			*
-		 *																			*
-		 *  This function draws a single colored line at the point specified.		*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to, the left and top		*
-		 *		coordinates, direction = 1 for drawing to the right, or 0 for down,	*
-		 *		the length of the line, and the color to draw.						*
-		 *  Returns:	void														*
-		 ****************************************************************************/
+		/// <summary>
+		/// This function draws a single colored line at the point specified.	
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="top"></param>
+		/// <param name="direction"></param>
+		/// <param name="length"></param>
+		/// <param name="boxColor"></param>
 		public void DrawFrameLine(int left, int top, int direction,
 					  int length, Color boxColor)
 		{
@@ -88,18 +67,6 @@ namespace ERY.Xle.Rendering
 			}
 		}
 
-		/****************************************************************************
-		 *	void DrawInnerLine(LPDIRECTDRAWSURFACE7 pDDS, int left, int top,		*
-		 *				int direction,  int length, unsigned int innerColor)		*
-		 *																			*
-		 *																			*
-		 *  This function draws the inner border at the location specified.			*
-		 *																			*
-		 *	Parameters:	the direct draw surface to draw to, the left and top		*
-		 *		coordinates, direction = 1 for drawing to the right, or 0 for down,	*
-		 *		the length of the line, and the color to draw.						*
-		 *  Returns:	void														*
-		 ****************************************************************************/
 		public void DrawInnerFrameHighlight(int left, int top, int direction,
 					  int length, Color innerColor)
 		{
@@ -131,15 +98,6 @@ namespace ERY.Xle.Rendering
 
 		}
 
-		/****************************************************************************
-		 *  void WriteText ( LPDIRECTDRAWSURFACE7 pDDS, int px, int py,				*
-		 *					 const char *theText, const unsigned int* coloring)		*
-		 *																			*
-		 *  This function is the message driver that writes to our direct draw surface	*
-		 *	the message we want at the x,y point given in our font.					*
-		 *	The color is is overloaded so an array of coloring can be passed, or	*
-		 *	just a single color.													*
-		 ****************************************************************************/
 		public void WriteText(int px, int py, string theText)
 		{
 			WriteText(px, py, theText, XleColor.White);
@@ -215,14 +173,6 @@ namespace ERY.Xle.Rendering
 			}
 		}
 
-		/****************************************************************************
-		 *  void DrawTile ( LPDIRECTDRAWSURFACE7 pDDS, int px, int py,				*
-		 *					 int tile)												*
-		 *																			*
-		 *  This function drives the tiles that are printed on the screen for the	*
-		 *	maps.  It takes an x and y coordinate and a tile number, then prints	*
-		 *	it on the screen.														*
-		 ****************************************************************************/
 		public void DrawTile(int px, int py, int tile)
 		{
 			int tx, ty;
@@ -238,12 +188,7 @@ namespace ERY.Xle.Rendering
 
 			Tiles.Draw(tileRect, destRect);
 		}
-
-		/****************************************************************************
-		 *  DrawMonster( LPDIRECTDRAWSURFACE7 pDDS, int px, int py, int monst)		*											*
-		 *																			*
-		 *  This function drives monsters when they are displayed					*
-		 ****************************************************************************/
+		
 		/// <summary>
 		/// Draws monsters on the outside maps.
 		/// </summary>
@@ -392,6 +337,8 @@ namespace ERY.Xle.Rendering
 
 		public Action ReplacementDrawMethod { get; set; }
 
+		public XleMapRenderer MapRenderer { get { return XleCore.GameState.MapExtender.MapRenderer; } }
+
 		public void Draw()
 		{
 			if (ReplacementDrawMethod != null)
@@ -432,6 +379,7 @@ namespace ERY.Xle.Rendering
 			Rectangle mapRect = Rectangle.FromLTRB
 				(vertLine + 16, 16, GameAreaSize.Width - 16, horizLine);
 
+			MapRenderer.Draw(player.Location, player.FaceDirection, mapRect);
 			map.Draw(player.X, player.Y, player.FaceDirection, mapRect);
 
 			i = 0;

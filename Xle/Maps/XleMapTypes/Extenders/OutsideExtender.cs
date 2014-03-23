@@ -1,5 +1,6 @@
 ﻿using AgateLib.Geometry;
 using AgateLib.InputLib;
+using ERY.Xle.Maps.Renderers;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders.Common;
@@ -13,22 +14,25 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
 	public class OutsideExtender : Map2DExtender
 	{
-		int[] waves;
-		Rectangle drawRect;
-
 		List<Monster> currentMonst = new List<Monster>();
 
-		int stepCount;
-		public int displayMonst = -1;
+		int stepCountToEncounter;
 		Direction monstDir;
-		Point mDrawMonst;
 		int monstCount, initMonstCount;
 		bool isMonsterFriendly;
-		int mWaterAnimLevel;
-
-		public new Outside TheMap { get { return (Outside)base.TheMap; } }
 
 		public EncounterState EncounterState { get; set; }
+
+		public new Outside TheMap { get { return (Outside)base.TheMap; } }
+		public new OutsideRenderer MapRenderer
+		{
+			get { return (OutsideRenderer)base.MapRenderer; }
+		}
+
+		protected override XleMapRenderer CreateMapRenderer()
+		{
+			return new OutsideRenderer();
+		}
 
 		public override void CheckSounds(GameState state)
 		{
@@ -244,7 +248,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 					food = 0;
 
 				EncounterState = 0;
-				displayMonst = -1;
+				MapRenderer.DisplayMonsterID = -1;
 			}
 
 			return finished;
@@ -427,7 +431,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			}
 
 			EncounterState = EncounterState.NoEncounter;
-			displayMonst = -1;
+			MapRenderer.DisplayMonsterID = -1;
 		}
 
 
@@ -440,14 +444,14 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			if (type < 10)
 			{
-				string dirName = MonsterDirection(player);
+				SetMonsterImagePosition(player);
 
 				EncounterState = EncounterState.UnknownCreatureApproaching;
 				SoundMan.PlaySound(LotaSound.Encounter);
 
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("An unknown creature is approaching ", XleColor.Cyan);
-				XleCore.TextArea.PrintLine("from the " + dirName + ".", XleColor.Cyan);
+				XleCore.TextArea.PrintLine("from the " + monstDir.ToString() + ".", XleColor.Cyan);
 
 				XleCore.Wait(1000);
 			}
@@ -457,19 +461,14 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 				//XleCore.wait(1000);
 			}
-			else
-			{
-				// TODO: figure out what I want to do with this, or eliminate this condition.
-			}
-
 		}
 
 		private void SetNextEncounterStepCount()
 		{
-			stepCount = XleCore.random.Next(1, 40);
+			stepCountToEncounter = XleCore.random.Next(1, 40);
 		}
 
-		private string MonsterAppearing(Player player)
+		private void MonsterAppearing(Player player)
 		{
 			if (XleCore.random.Next(100) < 55)
 				EncounterState = EncounterState.MonsterAppeared;
@@ -478,34 +477,17 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			SoundMan.PlaySound(LotaSound.Encounter);
 
-			displayMonst = SelectRandomMonster(TerrainAt(player.X, player.Y));
-
-			mDrawMonst.X = player.X - 1;
-			mDrawMonst.Y = player.Y - 1;
-
-			string dirName;
+			MapRenderer.DisplayMonsterID = SelectRandomMonster(TerrainAt(player.X, player.Y));
 
 			if (monstDir == Direction.None)
-				dirName = MonsterDirection(player);
-			else
-			{
-				switch (monstDir)
-				{
-					case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
-					case Direction.North: dirName = "North"; mDrawMonst.Y -= 2; break;
-					case Direction.West: dirName = "West"; mDrawMonst.X -= 2; break;
-					case Direction.South: dirName = "South"; mDrawMonst.Y += 2; break;
-					default:
-						throw new Exception("Invalid Direction");
-				}
-			}
+				SetMonsterImagePosition(player);
 
 			int max = 1;
 			initMonstCount = monstCount = 1 + XleCore.random.Next(max);
 
 			for (int i = 0; i < monstCount; i++)
 			{
-				var m = new Monster(XleCore.Data.Database.MonsterList[displayMonst]);
+				var m = new Monster(XleCore.Data.Database.MonsterList[MapRenderer.DisplayMonsterID]);
 
 				m.HP = (int)(m.HP * (XleCore.random.NextDouble() * 0.4 + 0.8));
 
@@ -518,7 +500,6 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 				isMonsterFriendly = false;
 
 			XleCore.Wait(500);
-			return dirName;
 		}
 
 		private void AvoidMonster(GameState state)
@@ -1124,16 +1105,16 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			if (handled)
 				return;
 
-			if (EncounterState == EncounterState.NoEncounter && stepCount <= 0)
+			if (EncounterState == EncounterState.NoEncounter && stepCountToEncounter <= 0)
 			{
 				SetNextEncounterStepCount();
 
 				StartEncounter(player);
 			}
-			else if (EncounterState == EncounterState.NoEncounter && stepCount > 0)
+			else if (EncounterState == EncounterState.NoEncounter && stepCountToEncounter > 0)
 			{
 				currentMonst.Clear();
-				stepCount--;
+				stepCountToEncounter--;
 			}
 			else if (EncounterState == EncounterState.UnknownCreatureApproaching)
 			{
@@ -1198,7 +1179,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 				else
 				{
 					EncounterState = EncounterState.JustDisengaged;
-					displayMonst = -1;
+					MapRenderer.DisplayMonsterID = -1;
 				}
 			}
 
@@ -1255,25 +1236,30 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			base.OnLoad(state);
 		}
 
-		[Obsolete("This function is weird and should be replaced with something else.")]
+		[Obsolete("Call SetMonsterImagePosition first, then use monstDir.ToString for the return value.", true)]
 		public string MonsterDirection(Player player)
 		{
-			string dirName;
-			mDrawMonst.X = player.X - 1;
-			mDrawMonst.Y = player.Y - 1;
+			SetMonsterImagePosition(player);
+
+			return monstDir.ToString();
+		}
+
+		protected void SetMonsterImagePosition(Player player)
+		{
+			MapRenderer.MonsterDrawPoint.X = player.X - 1;
+			MapRenderer.MonsterDrawPoint.Y = player.Y - 1;
 
 			monstDir = (Direction)XleCore.random.Next((int)Direction.East, (int)Direction.South + 1);
 
 			switch (monstDir)
 			{
-				case Direction.East: dirName = "East"; mDrawMonst.X += 2; break;
-				case Direction.North: dirName = "North"; mDrawMonst.Y -= 2; break;
-				case Direction.West: dirName = "West"; mDrawMonst.X -= 2; break;
-				case Direction.South: dirName = "South"; mDrawMonst.Y += 2; break;
+				case Direction.East: MapRenderer.MonsterDrawPoint.X += 2; break;
+				case Direction.North: MapRenderer.MonsterDrawPoint.Y -= 2; break;
+				case Direction.West: MapRenderer.MonsterDrawPoint.X -= 2; break;
+				case Direction.South: MapRenderer.MonsterDrawPoint.Y += 2; break;
 				default:
 					throw new Exception("Invalid direction.");
 			}
-			return dirName;
 		}
 
 

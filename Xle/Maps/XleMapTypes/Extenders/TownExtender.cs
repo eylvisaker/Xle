@@ -1,4 +1,5 @@
 ﻿using AgateLib.Geometry;
+using ERY.Xle.Maps.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	{
 		public new Town TheMap { get { return (Town)base.TheMap; } }
 
+		protected override Renderers.XleMapRenderer CreateMapRenderer()
+		{
+			return new TownRenderer();
+		}
 		public override void SetColorScheme(ColorScheme scheme)
 		{
 			scheme.TextColor = XleColor.White;
@@ -660,34 +665,5 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			return false;
 		}
 
-		public override bool PlayerXamine(GameState state)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("You are in " + TheMap.MapName + ".");
-			XleCore.TextArea.PrintLine("Look about to see more.");
-
-			return true;
-		}
-
-		public override bool PlayerLeave(GameState state)
-		{
-			if (IsAngry)
-			{
-				XleCore.TextArea.PrintLine("Walk out yourself.");
-				XleCore.Wait(200);
-			}
-			else
-			{
-				XleCore.TextArea.PrintLine("Leave " + TheMap.MapName);
-				XleCore.TextArea.PrintLine();
-
-				XleCore.Wait(200);
-
-				state.Player.ReturnToPreviousMap();
-			}
-
-			return true;
-		}
 	}
 }
