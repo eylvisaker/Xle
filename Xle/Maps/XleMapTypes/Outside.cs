@@ -1355,7 +1355,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return dirName;
 		}
 
-		protected override Extenders.IMapExtender CreateExtenderImpl()
+		protected override Extenders.MapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
 			{
@@ -1459,6 +1459,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		public IOutsideExtender Extender { get; private set; }
+		public OutsideExtender Extender { get; private set; }
 	}
 }

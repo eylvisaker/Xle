@@ -28,7 +28,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			Monsters = new List<DungeonMonster>();
 		}
 
-		IDungeonExtender Extender;
+		DungeonExtender Extender;
 
 		public List<DungeonMonster> Monsters { get; set; }
 
@@ -58,7 +58,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			info.Write("MonsterDamageScale", MonsterDamageScale);
 		}
 
-		protected override IMapExtender CreateExtenderImpl()
+		protected override MapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
 			{

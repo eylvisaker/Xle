@@ -24,7 +24,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		protected override IMapExtender CreateExtenderImpl()
+		protected override MapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
 			{
@@ -50,6 +50,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			// do nothing here
 		}
 
-		public new ICastleExtender Extender { get; set; }
+		public new CastleExtender Extender { get; set; }
 	}
 }

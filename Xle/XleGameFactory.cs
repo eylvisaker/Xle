@@ -29,32 +29,32 @@ namespace ERY.Xle
 			throw new NotImplementedException();
 		}
 
-		public virtual IDungeonExtender CreateMapExtender(Dungeon theMap)
+		public virtual DungeonExtender CreateMapExtender(Dungeon theMap)
 		{
 			return new DungeonExtender();
 		}
 
-		public virtual ICastleExtender CreateMapExtender(Castle castle)
+		public virtual CastleExtender CreateMapExtender(Castle castle)
 		{
 			return new CastleExtender();
 		}
 
-		public virtual ITempleExtender CreateMapExtender(Temple town)
+		public virtual TempleExtender CreateMapExtender(Temple town)
 		{
 			return new TempleExtender();
 		}
 
-		public virtual ITownExtender CreateMapExtender(Town town)
+		public virtual TownExtender CreateMapExtender(Town town)
 		{
 			return new TownExtender();
 		}
 
-		public virtual IOutsideExtender CreateMapExtender(Outside outside)
+		public virtual OutsideExtender CreateMapExtender(Outside outside)
 		{
 			return new OutsideExtender();
 		}
 
-		public virtual IMuseumExtender CreateMapExtender(Museum museum)
+		public virtual MuseumExtender CreateMapExtender(Museum museum)
 		{
 			return new MuseumExtender();
 		}

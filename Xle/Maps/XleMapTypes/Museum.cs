@@ -22,7 +22,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		int mHeight;
 		int mWidth;
 
-		IMuseumExtender Extender { get; set; }
+		MuseumExtender Extender { get; set; }
 
 		public Museum()
 		{
@@ -101,7 +101,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		protected override Extenders.IMapExtender CreateExtenderImpl()
+		protected override Extenders.MapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
 				Extender = new MuseumExtender();

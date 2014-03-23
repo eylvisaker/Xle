@@ -86,7 +86,7 @@ namespace ERY.Xle.LoB
 			else
 				return Lob3DSurfaces.DungeonBlue;
 		}
-		public override IMuseumExtender CreateMapExtender(Museum museum)
+		public override MuseumExtender CreateMapExtender(Museum museum)
 		{
 			if (museum.MapID == 53)
 				return new OwlArchive();
@@ -95,14 +95,14 @@ namespace ERY.Xle.LoB
 
 			return base.CreateMapExtender(museum);
 		}
-		public override IOutsideExtender CreateMapExtender(Outside outside)
+		public override OutsideExtender CreateMapExtender(Outside outside)
 		{
 			if (outside.MapID < 5)
 				return new Thalen();
 			else
 				return new Maelbane();
 		}
-		public override IDungeonExtender CreateMapExtender(Dungeon theMap)
+		public override DungeonExtender CreateMapExtender(Dungeon theMap)
 		{
 			switch(theMap.MapID)
 			{
@@ -115,20 +115,20 @@ namespace ERY.Xle.LoB
 				default: return base.CreateMapExtender(theMap);
 			}
 		}
-		public override ICastleExtender CreateMapExtender(Castle castle)
+		public override CastleExtender CreateMapExtender(Castle castle)
 		{
 			string ext = castle.ExtenderName.ToLowerInvariant();
 
 			if (mExtenders.ContainsKey(ext))
-				return (ICastleExtender)Activator.CreateInstance(mExtenders[ext]);
+				return (CastleExtender)Activator.CreateInstance(mExtenders[ext]);
 
 			return base.CreateMapExtender(castle);
 		}
-		public override ITempleExtender CreateMapExtender(Temple town)
+		public override TempleExtender CreateMapExtender(Temple town)
 		{
 			return new LobTempleExtender();
 		}
-		public override ITownExtender CreateMapExtender(Town town)
+		public override TownExtender CreateMapExtender(Town town)
 		{
 			if (town.MapID <= 20)
 				return new ThalenTownExtender();

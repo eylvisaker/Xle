@@ -8,9 +8,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Temple : Map2D
 	{
-		public ITempleExtender Extender { get; private set; }
+		public TempleExtender Extender { get; private set; }
 
-		protected override IMapExtender CreateExtenderImpl()
+		protected override MapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
 			{

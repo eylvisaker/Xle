@@ -19,9 +19,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		List<int> mMail = new List<int>();				// towns to carry mail to
 
-		public ITownExtender Extender { get; protected set; }
+		public TownExtender Extender { get; protected set; }
 
-		protected override IMapExtender CreateExtenderImpl()
+		protected override MapExtender CreateExtenderImpl()
 		{
 			if (XleCore.Factory == null)
 			{

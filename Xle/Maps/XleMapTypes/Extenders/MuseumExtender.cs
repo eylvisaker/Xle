@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
-	public class MuseumExtender : MapExtender, IMuseumExtender
+	public class MuseumExtender : MapExtender
 	{
 		public new Museum TheMap { get { return (Museum)base.TheMap;  } }
 

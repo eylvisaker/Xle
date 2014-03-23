@@ -29,7 +29,7 @@ namespace ERY.Xle.Maps
 		List<Roof> mRoofs;
 		GuardList mGuards;
 
-		protected IMapExtender mBaseExtender;
+		protected MapExtender mBaseExtender;
 
 		XleEventList mEvents = new XleEventList();
 		List<EntryPoint> mEntryPoints = new List<EntryPoint>();
@@ -168,7 +168,7 @@ namespace ERY.Xle.Maps
 			}
 		}
 
-		private IMapExtender CreateExtender()
+		private MapExtender CreateExtender()
 		{
 			var retval = CreateExtenderImpl();
 
@@ -176,7 +176,7 @@ namespace ERY.Xle.Maps
 
 			return retval;
 		}
-		protected virtual IMapExtender CreateExtenderImpl()
+		protected virtual MapExtender CreateExtenderImpl()
 		{
 			return new MapExtender();
 		}

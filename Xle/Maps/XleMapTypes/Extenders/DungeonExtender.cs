@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
-	public class DungeonExtender : MapExtender, IDungeonExtender
+	public class DungeonExtender : MapExtender
 	{
 		public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
 

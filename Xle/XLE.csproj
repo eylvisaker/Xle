@@ -170,7 +170,6 @@
     <Compile Include="Maps\Map3DSurfaces.cs" />
     <Compile Include="Maps\Roof.cs" />
     <Compile Include="Maps\TileGroup.cs" />
-    <Compile Include="Maps\XleMapTypes\Extenders\ITempleExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\TempleExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Map2D.cs" />
     <Compile Include="Maps\XleMapTypes\TerrainInfo.cs" />
@@ -211,12 +210,6 @@
     <Compile Include="XleEventTypes\Stores\StoreRaft.cs" />
     <Compile Include="XleEventTypes\Stores\StoreVault.cs" />
     <Compile Include="XleGameFactory.cs" />
-    <Compile Include="Maps\XleMapTypes\Extenders\ICastleExtender.cs" />
-    <Compile Include="Maps\XleMapTypes\Extenders\IDungeonExtender.cs" />
-    <Compile Include="Maps\XleMapTypes\Extenders\IMapExtender.cs" />
-    <Compile Include="Maps\XleMapTypes\Extenders\IMuseumExtender.cs" />
-    <Compile Include="Maps\XleMapTypes\Extenders\IOutsideExtender.cs" />
-    <Compile Include="Maps\XleMapTypes\Extenders\ITownExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\CastleExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\DungeonExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\MapExtender.cs" />
