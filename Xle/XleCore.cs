@@ -356,13 +356,15 @@ namespace ERY.Xle
 				}
 			}
 
-			if (map.CanPlayerStepIntoImpl(player, targetX + 2, targetY))
+			var ext = map.Extender;
+
+			if (ext.CanPlayerStepIntoImpl(player, targetX + 2, targetY))
 				targetX += 2;
-			else if (map.CanPlayerStepIntoImpl(player, targetX - 2, targetY))
+			else if (ext.CanPlayerStepIntoImpl(player, targetX - 2, targetY))
 				targetX -= 2;
-			else if (map.CanPlayerStepIntoImpl(player, targetX, targetY + 2))
+			else if (ext.CanPlayerStepIntoImpl(player, targetX, targetY + 2))
 				targetY += 2;
-			else if (map.CanPlayerStepIntoImpl(player, targetX, targetY - 2))
+			else if (ext.CanPlayerStepIntoImpl(player, targetX, targetY - 2))
 				targetY -= 2;
 
 			ChangeMap(player, map.MapID, new Point(targetX, targetY));
@@ -492,8 +494,8 @@ namespace ERY.Xle
 		{
 			GameState.Commands.Items.Clear();
 
-			GameState.Map.SetCommands(GameState.Commands);
-			GameState.Commands.ResetCommands();
+			GameState.MapExtender.SetCommands(GameState.Commands);
+			GameState.Commands.ResetCurrentCommand();
 
 			XleCore.LoadTiles(GameState.Map.TileImage);
 		}
@@ -775,7 +777,7 @@ namespace ERY.Xle
 
 		public static void KeepAlive()
 		{
-			XleCore.GameState.Map.CheckSounds(GameState.Player);
+			XleCore.GameState.MapExtender.CheckSounds(GameState);
 
 			Core.KeepAlive();
 
@@ -1392,7 +1394,7 @@ namespace ERY.Xle
 				}
 				else
 				{
-					GameState.Map.BeforeEntry(GameState, ref targetEntryPoint);
+					GameState.MapExtender.OnBeforeEntry(GameState, ref targetEntryPoint);
 
 					var ep = GameState.Map.EntryPoints[targetEntryPoint];
 
@@ -1405,8 +1407,6 @@ namespace ERY.Xle
 						player.FaceDirection = ep.Facing;
 					}
 				}
-
-				GameState.Map.GameState = GameState;
 
 				if (mMapID != 0)
 				{
@@ -1428,7 +1428,7 @@ namespace ERY.Xle
 				throw;
 			}
 
-			GameState.Map.OnAfterEntry(GameState);
+			GameState.MapExtender.OnAfterEntry(GameState);
 			GameState.Commands.Prompt();
 		}
 

@@ -53,7 +53,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 
-			if (TheMap.IsAngry)
+			if (IsAngry)
 			{
 				XleCore.TextArea.PrintLine("The guard ignores you.");
 			}

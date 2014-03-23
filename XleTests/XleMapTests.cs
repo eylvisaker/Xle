@@ -39,18 +39,6 @@ namespace ERY.XleTests
 		{
 			throw new NotImplementedException();
 		}
-		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
-		{
-			throw new NotImplementedException();
-		}
-		public override void PlayerCursorMovement(Player player, Direction dir)
-		{
-			throw new NotImplementedException();
-		}
-		public override bool PlayerFight(Player player)
-		{
-			throw new NotImplementedException();
-		}
 	}
 
 	[TestClass]

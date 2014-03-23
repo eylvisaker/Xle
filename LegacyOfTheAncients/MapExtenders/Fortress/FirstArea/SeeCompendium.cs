@@ -1,4 +1,6 @@
-﻿using ERY.Xle.Maps;
+﻿using AgateLib.Geometry;
+using ERY.Xle.Maps;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
@@ -146,7 +148,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 		{
 			warlord.X += dx;
 			warlord.Y += dy;
-			warlord.Facing = XleMap.DirectionFromPoint(new AgateLib.Geometry.Point(dx, dy));
+			warlord.Facing = new Point(dx, dy).ToDirection();
 
 			SoundMan.PlaySound(LotaSound.WalkOutside);
 			XleCore.Wait(750);

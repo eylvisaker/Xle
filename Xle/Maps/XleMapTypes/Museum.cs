@@ -40,10 +40,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			info.Write("Height", mHeight, true);
 			info.Write("Data", mData, NumericEncoding.Csv);
 		}
-		protected override void CommandTextForInvalidMovement(ref string command)
-		{
-			command = "Bump into wall";
-		}
+
 		public override IEnumerable<string> AvailableTileImages
 		{
 			get { yield return "DungeonTiles.png"; }
@@ -256,9 +253,5 @@ namespace ERY.Xle.Maps.XleMapTypes
 				offset = XleCore.random.Next((destOffset.Width - 16) / 4) * 4;
 		}
 
-		protected override void PlayPlayerMoveSound()
-		{
-			SoundMan.PlaySound(LotaSound.WalkMuseum);
-		}
 	}
 }

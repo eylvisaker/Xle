@@ -90,26 +90,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
-		{
-			int test = 0;
-
-			if (GuardInSpot(xx, yy))
-				return false;
-
-			for (int j = 0; j < 2; j++)
-			{
-				for (int i = 0; i < 2; i++)
-				{
-					test = this[xx + i, yy + j];
-
-					if (IsTileBlocked(test))
-						return false;
-				}
-			}
-
-			return true;
-		}
 
 		protected virtual bool GuardInSpot(int xx, int yy)
 		{
@@ -127,6 +107,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 		}
 
 
-		protected abstract void PlayerFight(Player player, Direction fightDir);
+		protected virtual void PlayerFight(Player player, Direction fightDir) { }
 	}
 }

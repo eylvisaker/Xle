@@ -155,6 +155,7 @@
     <Compile Include="CountdownTimer.cs" />
     <Compile Include="Data\XleData.cs" />
     <Compile Include="Direction.cs" />
+    <Compile Include="DirectionHelper.cs" />
     <Compile Include="MainWindowClosedException.cs" />
     <Compile Include="Maps\DungeonMonster.cs" />
     <Compile Include="Data\DungeonMonsterData.cs" />

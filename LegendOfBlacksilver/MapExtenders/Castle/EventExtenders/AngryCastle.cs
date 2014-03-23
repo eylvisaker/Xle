@@ -20,7 +20,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 		{
 			handled = true;
 
-			durekCastle.TheMap.IsAngry = durekCastle.StoredAngryFlag;
+			durekCastle.IsAngry = durekCastle.StoredAngryFlag;
 			durekCastle.InOrcArea = false;
 		}
 	}

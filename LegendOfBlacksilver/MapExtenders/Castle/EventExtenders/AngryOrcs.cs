@@ -22,9 +22,9 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 			if (durekCastle.InOrcArea == false)
 			{
-				durekCastle.StoredAngryFlag = durekCastle.TheMap.IsAngry;
+				durekCastle.StoredAngryFlag = durekCastle.IsAngry;
 
-				durekCastle.TheMap.IsAngry = true;
+				durekCastle.IsAngry = true;
 				durekCastle.InOrcArea = true;
 			}
 		}

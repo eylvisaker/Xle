@@ -71,9 +71,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 				return;
 			}
 
-			Point stepDir = StepDirection(faceDirection);
-			Point leftDir = LeftDirection(faceDirection);
-			Point rightDir = RightDirection(faceDirection);
+			Point stepDir = faceDirection.StepDirection();
+			Point leftDir = faceDirection.LeftDirection();
+			Point rightDir = faceDirection.RightDirection();
 
 			Surfaces.Backdrop.Draw(inRect);
 
@@ -432,17 +432,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 		}
 
-		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
-		{
-			if (IsMapSpaceBlocked(xx, yy))
-				return false;
-
-			if (IsSpaceOccupiedByMonster(player, xx, yy))
-				return false;
-
-			return true;
-		}
-
 		protected bool IsMapSpaceBlocked(int xx, int yy)
 		{
 			if (this[xx, yy] >= 0x40)
@@ -453,56 +442,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return false;
 		}
 
-		protected virtual bool IsSpaceOccupiedByMonster(Player player, int xx, int yy)
-		{
-			return false;
-		}
-
-		public override void PlayerCursorMovement(Player player, Direction dir)
-		{
-			string command;
-			Point stepDirection;
-
-			DrawCloseup = false;
-
-			_MoveDungeon(player, dir, ShowDirections(player), out command, out stepDirection);
-
-			if (stepDirection.IsEmpty == false)
-			{
-				if (CanPlayerStepIntoImpl(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
-				{
-					CommandTextForInvalidMovement(ref command);
-					XleCore.TextArea.PrintLine(command);
-					SoundMan.PlaySound(LotaSound.Bump);
-				}
-				else
-				{
-					XleCore.TextArea.PrintLine(command);
-
-					PlayPlayerMoveSound();
-					MovePlayer(XleCore.GameState, stepDirection);
-				}
-			}
-			else
-			{
-				// Turning in place
-				XleCore.TextArea.PrintLine(command);
-
-				PlayPlayerMoveSound();
-			}
-		}
-
-		protected virtual void CommandTextForInvalidMovement(ref string command)
-		{
-		}
-
-		protected abstract void PlayPlayerMoveSound();
-
-		protected virtual bool ShowDirections(Player player)
-		{
-			return true;
-		}
-		
 		public override bool AutoDrawPlayer
 		{
 			get { return false; }

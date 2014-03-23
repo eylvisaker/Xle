@@ -11,6 +11,19 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	{
 		public new Museum TheMap { get { return (Museum)base.TheMap;  } }
 
+		protected override void PlayPlayerMoveSound()
+		{
+			SoundMan.PlaySound(LotaSound.WalkMuseum);
+		}
+		protected override void OnBeforePlayerMove(GameState state, Direction dir)
+		{
+			TheMap.DrawCloseup = false;
+		}
+		protected override void CommandTextForInvalidMovement(ref string command)
+		{
+			command = "Bump into wall";
+		}
+
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			throw new NotImplementedException();
@@ -101,7 +114,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		private bool InteractWithDisplay(GameState state)
 		{
 			var player = state.Player;
-			Point stepDir = StepDirection(player.FaceDirection);
+			Point stepDir = player.FaceDirection.StepDirection();
 
 			MuseumDisplays.Exhibit ex = ExhibitAt(player.X + stepDir.X, player.Y + stepDir.Y);
 

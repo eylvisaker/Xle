@@ -1,5 +1,6 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Maps;
+using ERY.Xle.Maps.XleMapTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
@@ -58,7 +59,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 		{
 			guard.X += dx;
 			guard.Y += dy;
-			guard.Facing = XleMap.DirectionFromPoint(new Point(dx, dy));
+			guard.Facing = new Point(dx, dy).ToDirection();
 			
 			XleCore.Wait(150);
 		}

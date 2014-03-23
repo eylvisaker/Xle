@@ -9,7 +9,7 @@ namespace ERY.Xle.XleEventTypes
 	{
 		public override bool StepOn(GameState state)
 		{
-			state.Map.LeaveMap(state.Player);
+			state.MapExtender.LeaveMap(state.Player);
 
 			return true;
 		}

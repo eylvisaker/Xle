@@ -72,7 +72,7 @@ namespace ERY.Xle.Commands
 		{
 			Direction dir = mDirectionMap[cmd];
 
-			State.Map.PlayerCursorMovement(player, dir);
+			State.MapExtender.PlayerCursorMovement(State, dir);
 		}
 
 		bool IsCursorMovement(KeyCode cmd)
@@ -157,7 +157,7 @@ namespace ERY.Xle.Commands
 			AfterDoCommand(waitTime, cmd);
 		}
 
-		public void ResetCommands()
+		public void ResetCurrentCommand()
 		{
 			Items.Sort((x, y) => x.Name.CompareTo(y.Name));
 			CurrentCommand = Items.Find(x => x is Pass);
@@ -170,7 +170,7 @@ namespace ERY.Xle.Commands
 
 		private void AfterDoCommand(int waitTime, KeyCode cmd)
 		{
-			State.Map.AfterExecuteCommand(player, cmd);
+			State.MapExtender.AfterExecuteCommand(State, cmd);
 
 			XleCore.Wait(waitTime, false, XleCore.Redraw);
 

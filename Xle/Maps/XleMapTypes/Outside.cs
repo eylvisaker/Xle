@@ -193,94 +193,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		int lastAnimate = 0;
 
-		public override void CheckSounds(Player player)
-		{
-			if (player.IsOnRaft)
-			{
-				if (SoundMan.IsPlaying(LotaSound.Raft1) == false)
-					SoundMan.PlaySound(LotaSound.Raft1);
-
-				SoundMan.StopSound(LotaSound.Ocean1);
-				SoundMan.StopSound(LotaSound.Ocean2);
-			}
-			else
-			{
-				SoundMan.StopSound(LotaSound.Raft1);
-				int ocean = 0;
-
-
-				for (int i = -1; i <= 2 && ocean == 0; i++)
-				{
-					for (int j = -1; j <= 2 && ocean == 0; j++)
-					{
-						if (Math.Sqrt(Math.Pow(i, 2) + Math.Pow(j, 2)) <= 5)
-						{
-							if (this[player.X + i, player.Y + j] < 16)
-							{
-								ocean = 1;
-							}
-						}
-					}
-				}
-
-				//  If we're not near the ocean, fade the sound out
-				if (ocean == 0)
-				{
-					/*
-					if (LotaGetSoundStatus(LotaSound.Ocean1) & (DSBSTATUS_LOOPING | DSBSTATUS_PLAYING))
-					{
-						//SoundMan.PlaySound(LotaSound.Ocean1, 0, false);
-						LotaFadeSound(LotaSound.Ocean1, -2);
-					}
-					if (LotaGetSoundStatus(LotaSound.Ocean2) & (DSBSTATUS_LOOPING | DSBSTATUS_PLAYING))
-					{
-						//SoundMan.PlaySound(LotaSound.Ocean2, 0, false);
-						LotaFadeSound(LotaSound.Ocean2, -2);
-					}
-					*/
-				}
-				//  we are near the ocean, so check to see if we need to play the next
-				//  sound (at 1 second intervals)
-				else
-				{
-					/*
-					if (lastOceanSound + 1000 < Timing.TotalMilliseconds )
-					{
-						if (1 + Lota.random.Next(2) == 1)
-						{
-							SoundMan.PlaySound(LotaSound.Ocean1, 0, false);
-						}
-						else
-						{
-							SoundMan.PlaySound(LotaSound.Ocean2, 0, false);
-						}
-
-						lastOceanSound = clock();
-					}
-					 * */
-				}
-				/*
-				//  Play mountain sounds...
-				if (player.Terrain() == TerrainType.Mountain)
-				{
-					if (!(LotaGetSoundStatus(LotaSound.Mountains) & DSBSTATUS_PLAYING))
-					{
-						SoundMan.PlaySound(LotaSound.Mountains, DSBPLAY_LOOPING, true);
-						//LotaFadeSound(LotaSound.Mountains, 2, DSBPLAY_LOOPING);
-					}
-				}
-				else if (LotaGetSoundStatus(LotaSound.Mountains) & (DSBSTATUS_LOOPING | DSBSTATUS_PLAYING))
-				{
-					//if (LotaGetSoundStatus(LotaSound.Mountains) & DSBSTATUS_PLAYING)
-					{
-						LotaFadeSound(LotaSound.Mountains, -1, 0);
-						//LotaStopSound(LotaSound.Mountains);
-					}
-
-				}
-				*/
-			}
-		}
 
 		protected override void AnimateTiles(Rectangle rectangle)
 		{
@@ -393,10 +305,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return Extender;
 		}
 
-		public override void LeaveMap(Player player)
-		{
-			throw new InvalidOperationException();
-		}
 		public override int WaitTimeAfterStep
 		{
 			get

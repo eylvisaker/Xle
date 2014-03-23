@@ -40,16 +40,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return Extender;
 		}
 		
-
-		protected override void PlayOpenRoofSound(Roof roof)
-		{
-			// do nothing here
-		}
-		protected override void PlayCloseRoofSound(Roof roof)
-		{
-			// do nothing here
-		}
-
 		public new CastleExtender Extender { get; set; }
 	}
 }

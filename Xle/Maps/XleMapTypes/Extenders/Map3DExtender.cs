@@ -6,8 +6,59 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
-	public class Map3DExtender : MapExtender
+	public abstract class Map3DExtender : MapExtender
 	{
+		protected virtual bool ShowDirections(Player player)
+		{
+			return true;
+		}
+
+		protected abstract void PlayPlayerMoveSound();
+
+
+		protected virtual void CommandTextForInvalidMovement(ref string command)
+		{
+		}
+
+		public override void PlayerCursorMovement(GameState state, Direction dir)
+		{
+			var player = state.Player;
+			Point stepDirection;
+			string command;
+
+			OnBeforePlayerMove(state, dir);
+
+			_MoveDungeon(player, dir, ShowDirections(player), out command, out stepDirection);
+
+			if (stepDirection.IsEmpty == false)
+			{
+				if (CanPlayerStepIntoImpl(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
+				{
+					CommandTextForInvalidMovement(ref command);
+					XleCore.TextArea.PrintLine(command);
+					SoundMan.PlaySound(LotaSound.Bump);
+				}
+				else
+				{
+					XleCore.TextArea.PrintLine(command);
+
+					PlayPlayerMoveSound();
+					MovePlayer(XleCore.GameState, stepDirection);
+				}
+			}
+			else
+			{
+				// Turning in place
+				XleCore.TextArea.PrintLine(command);
+
+				PlayPlayerMoveSound();
+			}
+		}
+
+		protected virtual void OnBeforePlayerMove(GameState state, Direction dir)
+		{
+		}
+
 		protected void _MoveDungeon(Player player, Direction dir, bool haveCompass, out string command, out Point stepDirection)
 		{
 			Direction newDirection;
@@ -35,7 +86,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 				case Direction.North:
 					command = "Move Forward";
 
-					stepDirection = StepDirection(player.FaceDirection);
+					stepDirection = player.FaceDirection.StepDirection();
 
 					if (haveCompass)
 						command = "Walk " + player.FaceDirection.ToString();
@@ -98,43 +149,6 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 				return false;
 
 			return true;
-		}
-
-		public static Point StepDirection(Direction dir)
-		{
-			switch (dir)
-			{
-				case Direction.East: return new Point(1, 0);
-				case Direction.North: return new Point(0, -1);
-				case Direction.West: return new Point(-1, 0);
-				case Direction.South: return new Point(0, 1);
-
-				default: throw new ArgumentException("Invalid direction!");
-			}
-		}
-		public static Point LeftDirection(Direction dir)
-		{
-			switch (dir)
-			{
-				case Direction.East: return StepDirection(Direction.North);
-				case Direction.North: return StepDirection(Direction.West);
-				case Direction.West: return StepDirection(Direction.South);
-				case Direction.South: return StepDirection(Direction.East);
-
-				default: throw new ArgumentException("Invalid direction!");
-			}
-		}
-		public static Point RightDirection(Direction dir)
-		{
-			switch (dir)
-			{
-				case Direction.East: return StepDirection(Direction.South);
-				case Direction.North: return StepDirection(Direction.East);
-				case Direction.West: return StepDirection(Direction.North);
-				case Direction.South: return StepDirection(Direction.West);
-
-				default: throw new ArgumentException("Invalid direction!");
-			}
 		}
 
 		protected bool IsMapSpaceBlocked(int xx, int yy)

@@ -22,6 +22,29 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		{
 		}
 
+		public override void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
+		{
+			base.AfterExecuteCommand(state, cmd);
+
+			UpdateGuards(state.Player);
+		}
+
+		public override void OnAfterEntry(GameState state)
+		{
+			if (TheMap.MapID == state.Player.LastAttackedMapID)
+			{
+				IsAngry = true;
+
+				XleCore.TextArea.Clear(true);
+				XleCore.TextArea.PrintLine("\nWe remember you - slime!");
+
+				XleCore.Wait(2000);
+			}
+			else
+			{
+				state.Player.LastAttackedMapID = 0;
+			}
+		}
 
 
 		public virtual double ChanceToHitGuard(Player player, Guard guard, int distance)
@@ -31,7 +54,6 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			return (player.Attribute[Attributes.dexterity] + 16)
 				* (99 + weaponType * 8) / 7000.0 / guard.Defense * 99;
 		}
-
 
 		public virtual int RollDamageToGuard(Player player, Guard guard)
 		{

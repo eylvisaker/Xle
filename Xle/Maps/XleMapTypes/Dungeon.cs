@@ -130,15 +130,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 		public int MonsterHealthScale { get; set; }
 		public int MonsterDamageScale { get; set; }
 
-		public override void CheckSounds(Player player)
-		{
-			Extender.CheckSounds(XleCore.GameState);
-		}
-		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
-		{
-			return Extender.CanPlayerStepIntoImpl(player, xx, yy);
-		}
-
 		public int CurrentLevel { get; set; }
 
 		public override Color DefaultColor
@@ -180,15 +171,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		public override bool PlayerClimb(Player player)
-		{
-			return Extender.PlayerClimb(XleCore.GameState);
-
-		}
-		protected override bool ShowDirections(Player player)
-		{
-			return Extender.ShowDirection(player);
-		}
 		public override void OnLoad(Player player)
 		{
 			base.OnLoad(player);
@@ -196,59 +178,15 @@ namespace ERY.Xle.Maps.XleMapTypes
 			Extender.OnLoad(player);
 		}
 
-
-		public override bool PlayerFight(Player player)
-		{
-			return Extender.PlayerFight(XleCore.GameState);
-
-		}
-
 		private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
 		{
 			return Monsters.FirstOrDefault(m => m.DungeonLevel == dungeonLevel && m.Location == loc);
-		}
-
-		protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
-		{
-			throw new NotImplementedException();
-			//Extender.PlayerMagicImpl(state, magic);
-		}
-		
-
-		public override bool PlayerXamine(Player player)
-		{
-			return Extender.PlayerXamine(XleCore.GameState);
-			
-		}
-		public override bool PlayerOpen(Player player)
-		{
-			return Extender.PlayerOpen(XleCore.GameState);
-		}
-
-
-		protected override bool PlayerSpeakImpl(Player player)
-		{
-			return Extender.PlayerSpeak(XleCore.GameState);
-		}
-		protected override void AfterExecuteCommandImpl(Player player, KeyCode cmd)
-		{
-			Extender.AfterExecuteCommandImpl(XleCore.GameState);
-		}
-		protected override void AfterStepImpl(Player player, bool didEvent)
-		{
-			Extender.AfterPlayerStep(XleCore.GameState);
 		}
 
 		protected override void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
 		{
 			Extender.DrawMonsters(x, y, faceDirection, inRect, maxDistance);
 		}
-
-		protected override bool IsSpaceOccupiedByMonster(Player player, int xx, int yy)
-		{
-			return MonsterAt(player.DungeonLevel, new Point(xx, yy)) != null;
-		}
-
 
 		protected override Map3D.ExtraType GetExtraType(int val, int side)
 		{
@@ -299,11 +237,5 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 			return extraType;
 		}
-
-		protected override void PlayPlayerMoveSound()
-		{
-			Extender.PlayPlayerMoveSound();
-		}
-
 	}
 }

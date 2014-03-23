@@ -10,6 +10,11 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	{
 		public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
 
+		protected override void PlayPlayerMoveSound()
+		{
+			SoundMan.PlaySound(LotaSound.WalkDungeon);
+		}
+
 		public virtual void OnPlayerExitDungeon(Player player)
 		{
 		}
@@ -66,7 +71,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		}
 
 
-		public virtual void CheckSounds(GameState state)
+		public override void CheckSounds(GameState state)
 		{
 		}
 
@@ -284,9 +289,9 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 				monster.Location.X - state.Player.X,
 				monster.Location.Y - state.Player.Y);
 
-			var forward = StepDirection(state.Player.FaceDirection);
-			var right = RightDirection(state.Player.FaceDirection);
-			var left = LeftDirection(state.Player.FaceDirection);
+			var forward = state.Player.FaceDirection.StepDirection();
+			var right = state.Player.FaceDirection.RightDirection();
+			var left = state.Player.FaceDirection.LeftDirection();
 			bool allowEffect = false;
 
 			if (delta == forward)
@@ -389,7 +394,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 					XleCore.random.Next(1, 15),
 					XleCore.random.Next(1, 15));
 
-			} while (TheMap.CanPlayerStepIntoImpl(state.Player, monster.Location.X, monster.Location.Y) == false || monster.Location == state.Player.Location);
+			} while (CanPlayerStepIntoImpl(state.Player, monster.Location.X, monster.Location.Y) == false || monster.Location == state.Player.Location);
 
 			monster.DungeonLevel = state.Player.DungeonLevel;
 
@@ -523,8 +528,10 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			return false;
 		}
 
-		public virtual void AfterExecuteCommandImpl(GameState gameState)
+		public override void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
 		{
+			base.AfterExecuteCommand(state, cmd);
+		
 			XleCore.Wait(100);
 			UpdateMonsters(XleCore.GameState);
 		}
@@ -647,11 +654,6 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			return true;
 		}
 
-		public void PlayPlayerMoveSound()
-		{
-			SoundMan.PlaySound(LotaSound.WalkDungeon);
-		}
-
 		public void ExecuteKillFlash(Xle.GameState state)
 		{
 			SoundMan.PlaySoundSync(LotaSound.VeryBad);
@@ -716,7 +718,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		}
 		public DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
 		{
-			Point fightDir = StepDirection(player.FaceDirection);
+			Point fightDir = player.FaceDirection.StepDirection();
 			DungeonMonster monst = null;
 
 			for (int i = 1; i <= 5; i++)
@@ -816,7 +818,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		internal void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
 		{
-			Point stepDir = StepDirection(faceDirection);
+			Point stepDir = faceDirection.StepDirection();
 
 			for (int distance = 1; distance <= maxDistance; distance++)
 			{

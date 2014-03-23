@@ -56,7 +56,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 			CheckExhibitStatus(state);
 		}
 
-		public override void AfterEntry(GameState state)
+		public override void OnAfterEntry(GameState state)
 		{
 			CheckInformationMessage(state);
 		}
@@ -116,7 +116,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 			get { return (Information)GetExhibitByTile(0x50); }
 		}
 
-		public override void BeforeEntry(GameState state, ref int targetEntryPoint)
+		public override void OnBeforeEntry(GameState state, ref int targetEntryPoint)
 		{
 			if (targetEntryPoint < 3)
 				targetEntryPoint = Lota.Story.MuseumEntryPoint;
@@ -149,7 +149,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		}
 		private void UseGoldArmband(GameState state)
 		{
-			Point faceDir = Map3D.StepDirection(state.Player.FaceDirection);
+			Point faceDir = state.Player.FaceDirection.StepDirection();
 			Point test = new Point(state.Player.X + faceDir.X, state.Player.Y + faceDir.Y);
 
 			// door value
@@ -165,8 +165,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 					}
 				}
 
-				TheMap.LeaveMap(state.Player);
-
+				LeaveMap(state.Player);
 			}
 			else
 			{

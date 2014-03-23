@@ -40,7 +40,7 @@ namespace ERY.Xle.Commands
 			}
 			else
 			{
-				noEffect = !state.Map.PlayerUse(state.Player, state.Player.Hold);
+				noEffect = !state.MapExtender.PlayerUse(state, state.Player.Hold);
 			}
 
 			if (noEffect == true)

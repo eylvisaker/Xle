@@ -19,7 +19,8 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		public virtual void OnLoad(GameState state)
 		{ }
-
+		public virtual void OnAfterEntry(GameState state)
+		{ }
 
 		public virtual void AfterPlayerStep(GameState state)
 		{
@@ -57,15 +58,9 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		}
 
 
-		public virtual void BeforeEntry(GameState state, ref int targetEntryPoint)
+		public virtual void OnBeforeEntry(GameState state, ref int targetEntryPoint)
 		{
 		}
-
-
-		public virtual void AfterEntry(GameState state)
-		{
-		}
-
 
 		public virtual void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
 		{
@@ -165,12 +160,24 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		{
 			return false;
 		}
-
+		/// <summary>
+		/// Function called when the player executes the Climb command.
+		/// Returns true if the command was handled by this function, false
+		/// if the caller should display a "Nothing to Climb" type message.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <returns></returns>
 		public virtual bool PlayerClimb(GameState state)
 		{
 			throw new NotImplementedException();
 		}
-
+		/// <summary>
+		/// Function called when the player executes the Xamine command.
+		/// Returns true if the command was handled by this function, false
+		/// if the caller should display a "Nothing to Xamine" type message.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <returns></returns>
 		public virtual bool PlayerXamine(GameState state)
 		{
 			throw new NotImplementedException();
@@ -202,7 +209,12 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			return false;
 		}
-
+		/// <summary>
+		/// Returns true if there was an effect of using the item.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="item"></param>
+		/// <returns></returns>
 		public virtual bool PlayerUse(GameState state, int item)
 		{
 			bool handled = false;
@@ -383,6 +395,10 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		public virtual void PlayerCursorMovement(GameState state, Direction dir)
 		{
 
+		}
+
+		public virtual void CheckSounds(GameState state)
+		{
 		}
 	}
 }
