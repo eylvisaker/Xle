@@ -170,6 +170,7 @@
     <Compile Include="Maps\Map3DSurfaces.cs" />
     <Compile Include="Maps\Roof.cs" />
     <Compile Include="Maps\TileGroup.cs" />
+    <Compile Include="Maps\XleMapTypes\Extenders\Map3DExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Extenders\TempleExtender.cs" />
     <Compile Include="Maps\XleMapTypes\Map2D.cs" />
     <Compile Include="Maps\XleMapTypes\TerrainInfo.cs" />

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
-	public class MapExtender 
+	public  class MapExtender 
 	{
 		public XleMap TheMap { get; set; }
 
@@ -110,5 +110,10 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		{
 			return (int)((magic.ID + 0.5) * 15 * (XleCore.random.NextDouble() + 1));
 		}
+		public virtual bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
+		{
+			return true;
+		}
+		
 	}
 }

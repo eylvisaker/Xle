@@ -733,7 +733,10 @@ namespace ERY.Xle.Maps
 
 		}
 
-		public abstract bool CanPlayerStepIntoImpl(Player player, int xx, int yy);
+		public virtual bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
+		{
+			return mBaseExtender.CanPlayerStepIntoImpl(player, xx, yy);
+		}
 
 		public abstract void PlayerCursorMovement(Player player, Direction dir);
 

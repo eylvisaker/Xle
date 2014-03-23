@@ -54,12 +54,15 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 				return true;
 		}
 
-		public override void UpdateMonsters(GameState state, ref bool handled)
+		public override void UpdateMonsters(GameState state)
 		{
 			// disable normal monster processing if we see the king.
 			if (state.Player.DungeonLevel == 7)
-				handled = true;
+				return;
+
+			base.UpdateMonsters(state);
 		}
+
 		public override void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
 		{
 			if (foundMonster.Data.Name == "king")
@@ -69,13 +72,11 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			}
 		}
 
-		public override void PlayerSpeak(GameState state, ref bool handled)
+		public override bool PlayerSpeak(GameState state)
 		{
-			if (state.Player.DungeonLevel != 7) return;
-			if (king == null) return;
-			if (king.HP <= 0) return;
-
-			handled = true;
+			if (state.Player.DungeonLevel != 7) return false;
+			if (king == null) return false;
+			if (king.HP <= 0) return false;
 
 			if (Lob.Story.MarthbaneOfferedHelpToKing == false)
 			{
@@ -89,7 +90,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 				if (XleCore.QuickMenuYesNo() == 1)
 				{
 					DoomedMessage();
-					return;
+					return true;
 				}
 
 				Lob.Story.MarthbaneOfferedHelpToKing = true;
@@ -110,7 +111,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			if (XleCore.QuickMenuYesNo() == 1)
 			{
 				DoomedMessage();
-				return;
+				return true;
 			}
 
 			state.Player.Items[LobItem.SignetRing] = 0;
@@ -131,6 +132,8 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			TheMap.Monsters.Remove(king);
 
 			OpenEscapeRoute(state);
+
+			return true;
 		}
 
 		private void OpenEscapeRoute(GameState state)

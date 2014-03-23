@@ -201,7 +201,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 		private void CastKillFlash(GameState state, MagicSpell magic)
 		{
-			TheMap.ExecuteKillFlash(state);
+			ExecuteKillFlash(state);
 		}
 
 		private void CastPsychoStrength(GameState state, MagicSpell magic)
@@ -232,13 +232,14 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			}
 		}
 
-		public override void UpdateMonsters(GameState state, ref bool handled)
+		public override void UpdateMonsters(GameState state)
 		{
 			if (Lota.Story.BefuddleTurns > 0)
 			{
 				Lota.Story.BefuddleTurns--;
-				handled = true;
 			}
+			else
+				base.UpdateMonsters(state);
 		}
 	}
 }

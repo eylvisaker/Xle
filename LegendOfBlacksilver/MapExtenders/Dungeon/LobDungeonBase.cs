@@ -67,7 +67,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			XleCore.TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
 
 			if (magic.ID == 5)
-				TheMap.ExecuteKillFlash(state);
+				ExecuteKillFlash(state);
 		}
 
 		public override IEnumerable<MagicSpell> ValidMagic
