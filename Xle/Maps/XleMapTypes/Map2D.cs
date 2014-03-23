@@ -90,23 +90,5 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-
-		protected virtual bool GuardInSpot(int xx, int yy)
-		{
-			return false;
-		}
-
-		protected virtual bool IsTileBlocked(int tile)
-		{
-			return TileSet[tile] == TileInfo.Blocked;
-		}
-
-		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
-		{
-			Draw2D(x, y, facingDirection, inRect);
-		}
-
-
-		protected virtual void PlayerFight(Player player, Direction fightDir) { }
 	}
 }

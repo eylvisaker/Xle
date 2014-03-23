@@ -27,8 +27,8 @@ namespace ERY.Xle.Maps.Renderers
 
 			centerPoint = new Point(x, y);
 
-			int xx = initialxx;
-			int yy = 16;
+			int drawx = initialxx;
+			int drawy = 16;
 
 			topLeftPoint = new Point(x - 11, y - 7);
 
@@ -43,13 +43,13 @@ namespace ERY.Xle.Maps.Renderers
 				{
 					tile = TileToDraw(i, j);
 
-					XleCore.Renderer.DrawTile(xx, yy, tile);
+					XleCore.Renderer.DrawTile(drawx, drawy, tile);
 
-					xx += 16;
+					drawx += 16;
 				}
 
-				yy += 16;
-				xx = initialxx;
+				drawy += 16;
+				drawx = initialxx;
 			}
 		}
 

@@ -504,45 +504,6 @@ namespace ERY.Xle.Maps
 
 		protected virtual void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect)
 		{ }
-		protected void Draw2D(int x, int y, Direction faceDirction, Rectangle inRect)
-		{
-			int i, j;
-			int initialxx = inRect.X;
-			int width = inRect.Width / 16;
-			int height = inRect.Height / 16;
-			int tile;
-
-			centerPoint = new Point(x, y);
-
-			int xx = initialxx;
-			int yy = 16;
-
-			int startx = x - 11;
-			int starty = y - 7;
-
-			Rectangle tileRect = new Rectangle(startx, starty, width, height);
-
-			if (HasGuards)
-				Guards.AnimateGuards();
-
-			AnimateTiles(tileRect);
-
-			for (j = starty; j < starty + height; j++)
-			{
-				for (i = startx; i < startx + width; i++)
-				{
-					tile = TileToDraw(i, j);
-
-					XleCore.Renderer.DrawTile(xx, yy, tile);
-
-					xx += 16;
-				}
-
-				yy += 16;
-				xx = initialxx;
-			}
-		}
-
 
 		private IEnumerable<TileGroup> GetGroupsToAnimate()
 		{

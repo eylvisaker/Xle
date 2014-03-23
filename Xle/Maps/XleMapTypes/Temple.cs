@@ -23,10 +23,5 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 			return Extender;
 		}
-
-		protected override void PlayerFight(Player player, Direction fightDir)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

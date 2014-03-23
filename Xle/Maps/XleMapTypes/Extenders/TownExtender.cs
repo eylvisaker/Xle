@@ -81,17 +81,12 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		protected override bool GuardInSpot(int x, int y)
 		{
-			for (int i = 0; i < TheMap.Guards.Count; i++)
+			foreach (Guard g in TheMap.Guards)
 			{
-				Guard g = TheMap.Guards[i];
-
-				if (g.X != 0 && g.Y != 0)
+				if ((g.X == x - 1 || g.X == x || g.X == x + 1) &&
+					(g.Y == y - 1 || g.Y == y || g.Y == y + 1))
 				{
-					if ((g.X == x - 1 || g.X == x || g.X == x + 1) &&
-						(g.Y == y - 1 || g.Y == y || g.Y == y + 1))
-					{
-						return true;
-					}
+					return true;
 				}
 			}
 
