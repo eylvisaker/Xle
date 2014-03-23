@@ -97,13 +97,14 @@ namespace ERY.Xle
 			XleCore.ChangeMap(XleCore.GameState.Player, 1, -1);
 
 			TerrainType t;
+			Outside map = (Outside)XleCore.GameState.Map;
 
 			do
 			{
 				player.X = XleCore.random.Next(state.Map.Width);
 				player.Y = XleCore.random.Next(state.Map.Height);
 
-				t = XleCore.GameState.Map.TerrainAt(player.X, player.Y);
+				t = map.TerrainAt(player.X, player.Y);
 
 			} while (t != TerrainType.Grass && t != TerrainType.Forest);
 

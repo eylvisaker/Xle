@@ -352,6 +352,7 @@ namespace ERY.Xle.Maps
 			set { mGuards = value; }
 		}
 
+		public TileSet TileSet { get { return mTileSet; } set { mTileSet = value; } }
 
 		#endregion
 
@@ -671,67 +672,6 @@ namespace ERY.Xle.Maps
 		#endregion
 
 		#region --- Player movement stuff ---
-
-		public TileSet TileSet { get { return mTileSet; } set { mTileSet = value; } }
-
-		public TerrainType TerrainAt(int xx, int yy)
-		{
-			int[,] t = new int[2, 2] { { 0, 0 }, { 0, 0 } };
-			int[] tc = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
-
-			for (int j = 0; j < 2; j++)
-			{
-				for (int i = 0; i < 2; i++)
-				{
-					t[j, i] = this[xx + i, yy + j];
-				}
-			}
-
-			for (int j = 0; j < 2; j++)
-			{
-				for (int i = 0; i < 2; i++)
-				{
-					tc[t[j, i] / 32]++;
-
-					if (t[j, i] % 32 <= 1)
-						tc[t[j, i] / 32] += 1;
-				}
-			}
-
-			if (tc[(int)TerrainType.Mountain] > 4)
-			{
-				return TerrainType.Mountain;
-			}
-
-			if (tc[(int)TerrainType.Mountain] > 0)
-			{
-				return TerrainType.Foothills;
-			}
-
-			if (tc[(int)TerrainType.Desert] >= 1)
-			{
-				return TerrainType.Desert;
-			}
-
-			if (tc[(int)TerrainType.Swamp] > 1)
-			{
-				return TerrainType.Swamp;
-			}
-
-			for (int i = 0; i < 8; i++)
-			{
-				if (tc[i] > 3)
-				{
-					return (TerrainType)i;
-				}
-				else if (tc[i] == 2 && i != 1)
-				{
-					return TerrainType.Mixed;
-				}
-			}
-
-			return (TerrainType)2;
-		}
 
 		public bool CanPlayerStep(Player player, Point stepDirection)
 		{
