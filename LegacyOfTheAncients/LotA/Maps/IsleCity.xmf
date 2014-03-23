@@ -128,7 +128,7 @@
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>
-  <Roofs array="true" type="ERY.Xle.Roof">
+  <Roofs array="true" type="ERY.Xle.Maps.Roof">
     <Item>
       <X>73</X>
       <Y>1</Y>
@@ -177,7 +177,7 @@
     <GuardDefaultDefense>89</GuardDefaultDefense>
     <GuardDefaultHP>30</GuardDefaultHP>
     <GuardDefaultColor>-3418267</GuardDefaultColor>
-    <Guards array="true" type="ERY.Xle.Guard">
+    <Guards array="true" type="ERY.Xle.Maps.Guard">
       <Item>
         <X>61</X>
         <Y>14</Y>

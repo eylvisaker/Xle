@@ -154,7 +154,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			get { return true; }
 		}
 
-		internal bool PlayerClimb(GameState state)
+		public override bool PlayerClimb(GameState state)
 		{
 			var player = state.Player;
 
@@ -396,7 +396,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			TheMap.Monsters.Add(monster);
 		}
 
-		internal bool PlayerOpen(GameState state)
+		public override bool PlayerOpen(GameState state)
 		{
 			var player = state.Player;
 
@@ -518,7 +518,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			}
 		}
 
-		public virtual bool PlayerSpeak(GameState state)
+		public override bool PlayerSpeak(GameState state)
 		{
 			return false;
 		}
@@ -529,7 +529,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			UpdateMonsters(XleCore.GameState);
 		}
 
-		public virtual bool PlayerXamine(GameState state)
+		public override bool PlayerXamine(GameState state)
 		{
 			var player = state.Player;
 
@@ -692,8 +692,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			}
 		}
 
-
-		public void PlayerMagicImpl(GameState state, MagicSpell magic)
+		protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
 		{
 			switch (magic.ID)
 			{
@@ -765,7 +764,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		}
 
 
-		internal bool PlayerFight(GameState state)
+		public override bool PlayerFight(GameState state)
 		{
 			var player = state.Player;
 
@@ -813,6 +812,35 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			}
 
 			return true;
+		}
+
+		internal void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
+		{
+			Point stepDir = StepDirection(faceDirection);
+
+			for (int distance = 1; distance <= maxDistance; distance++)
+			{
+				Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
+
+				var monster = MonsterAt(XleCore.GameState.Player.DungeonLevel, loc);
+
+				if (monster == null)
+					continue;
+
+				var data = XleCore.Data.DungeonMonsters[monster.MonsterID];
+				int image = distance - 1;
+				var imageInfo = data.Images[image];
+
+				var drawPoint = imageInfo.DrawPoint;
+				drawPoint.X += inRect.X;
+				drawPoint.Y += inRect.Y;
+
+				var srcRect = imageInfo.SourceRects[0];
+
+				data.Surface.Draw(srcRect, drawPoint);
+
+				break;
+			}
 		}
 	}
 }

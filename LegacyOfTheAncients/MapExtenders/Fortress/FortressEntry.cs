@@ -48,12 +48,10 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 			XleCore.Renderer.PlayerColor = XleColor.White;
 		}
 
-		public override void SpeakToGuard(GameState state, ref bool handled)
+		public override void SpeakToGuard(GameState state)
 		{
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
-
-			handled = true;
 
 			if (TheMap.IsAngry)
 			{

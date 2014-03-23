@@ -17,12 +17,19 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			scheme.FrameHighlightColor = XleColor.Yellow;
 		}
 
-		public override void SpeakToGuard(GameState state, ref bool handled)
+		public override void SpeakToGuard(GameState state)
 		{
 			XleCore.TextArea.PrintLine("\n\nThe guard ignores you.");
-
-			handled = true;
 		}
 
+
+		public override void PlayOpenRoofSound(Roof roof)
+		{
+			// do nothing here
+		}
+		public override void PlayCloseRoofSound(Roof roof)
+		{
+			// do nothing here
+		}
 	}
 }

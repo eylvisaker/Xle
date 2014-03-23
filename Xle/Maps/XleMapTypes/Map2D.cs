@@ -121,64 +121,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return TileSet[tile] == TileInfo.Blocked;
 		}
 
-		public override void PlayerCursorMovement(Player player, Direction dir)
-		{
-			string command;
-			Point stepDirection;
-
-			_Move2D(player, dir, "Move", out command, out stepDirection);
-
-			if (CanPlayerStep(player, stepDirection))
-			{
-				XleCore.TextArea.PrintLine(command);
-
-				MovePlayer(XleCore.GameState, stepDirection);
-				SoundMan.PlaySound(LotaSound.WalkTown);
-
-				player.TimeQuality += 0.03;
-			}
-			else
-			{
-				SoundMan.PlaySound(LotaSound.Invalid);
-
-				//Commands.CommandList.UpdateCommand("Move Nowhere");
-				XleCore.TextArea.PrintLine("Move nowhere");
-			}
-		}
-
 		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
 		{
 			Draw2D(x, y, facingDirection, inRect);
 		}
 
-		public override bool PlayerFight(Player player)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-
-			XleCore.TextArea.PrintLine("Fight with " + player.CurrentWeaponTypeName);
-			XleCore.TextArea.Print("Enter direction: ");
-
-			KeyCode key = XleCore.WaitForKey(KeyCode.Up, KeyCode.Down, KeyCode.Left, KeyCode.Right);
-
-			Direction fightDir;
-
-			switch (key)
-			{
-				case KeyCode.Right: fightDir = Direction.East; break;
-				case KeyCode.Up: fightDir = Direction.North; break;
-				case KeyCode.Left: fightDir = Direction.West; break;
-				case KeyCode.Down: fightDir = Direction.South; break;
-				default:
-					throw new InvalidOperationException();
-			}
-
-			XleCore.TextArea.PrintLine(fightDir.ToString());
-
-			PlayerFight(player, fightDir);
-
-			return true;
-		}
 
 		protected abstract void PlayerFight(Player player, Direction fightDir);
 	}

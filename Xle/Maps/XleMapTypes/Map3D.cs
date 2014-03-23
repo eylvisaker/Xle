@@ -124,7 +124,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		{
 		}
 
-		protected bool DrawCloseup { get; set; }
+		public bool DrawCloseup { get; set; }
 		protected virtual void DrawCloseupImpl(Rectangle inRect)
 		{
 			throw new NotImplementedException();
@@ -498,10 +498,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		protected abstract void PlayPlayerMoveSound();
 
-		protected override void AfterStepImpl(Player player, bool didEvent)
-		{
-			base.AfterStepImpl(player, didEvent);
-		}
 		protected virtual bool ShowDirections(Player player)
 		{
 			return true;

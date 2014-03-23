@@ -22,7 +22,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 		int mHeight;
 		int mWidth;
 
-		MuseumExtender Extender { get; set; }
+		public new MuseumExtender Extender { get; set; }
 
 		public Museum()
 		{
@@ -93,7 +93,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		protected override double StepQuality
+		public override double StepQuality
 		{
 			get
 			{
@@ -111,17 +111,9 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return Extender;
 		}
 
-		public override void OnLoad(Player player)
-		{
-			base.OnLoad(player);
-
-			CheckExhibitStatus(player);
-
-		}
-
 		protected override Color ExtraColor(Point location)
 		{
-			var ex = ExhibitAt(location.X, location.Y);
+			var ex = Extender.ExhibitAt(location.X, location.Y);
 
 			if (ex == null)
 				return base.ExtraColor(location);
@@ -165,8 +157,8 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		#region --- Museum Exhibits ---
 
-		MuseumDisplays.Exhibit mCloseup;
-		bool mDrawStatic;
+		public MuseumDisplays.Exhibit mCloseup;
+		public bool mDrawStatic;
 
 		protected override void DrawCloseupImpl(Rectangle inRect)
 		{
@@ -183,138 +175,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		private MuseumDisplays.Exhibit ExhibitAt(int x, int y)
-		{
-			int tileAt = this[x, y];
-
-			return Extender.GetExhibitByTile(tileAt);
-		}
-
-		private bool InteractWithDisplay(Player player)
-		{
-			Point stepDir = StepDirection(player.FaceDirection);
-
-			MuseumDisplays.Exhibit ex = ExhibitAt(player.X + stepDir.X, player.Y + stepDir.Y);
-
-			if (ex == null)
-				return false;
-
-			DrawCloseup = true;
-			mCloseup = ex;
-			mDrawStatic = ex.StaticBeforeCoin;
-
-			XleCore.TextArea.PrintLine(ex.IntroductionText);
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLineCentered(ex.LongName + " ", ex.TitleColor);
-
-			XleCore.PromptToContinueOnWait = true;
-
-			if (ex.IsClosed(player))
-			{
-				XleCore.TextArea.PrintLineCentered(" - Exhibit closed - ", ex.TitleColor);
-				XleCore.TextArea.PrintLine();
-				XleCore.WaitForKey();
-
-				return true;
-			}
-
-			XleCore.TextArea.PrintLineCentered(ex.InsertCoinText + " ", ex.TitleColor);
-			XleCore.TextArea.PrintLine();
-			XleCore.WaitForKey();
-
-			if (ex.RequiresCoin(player) == false)
-			{
-				mDrawStatic = false;
-				RunExhibit(player, ex);
-			}
-			else
-			{
-				if (ex.HasBeenVisited(player) == false)
-					XleCore.TextArea.PrintLine("You haven't used this exhibit.");
-				else
-					XleCore.TextArea.PrintLine();
-
-				if (ex.PlayerHasCoin(player) == false)
-				{
-					Extender.NeedsCoinMessage(player, ex);
-					XleCore.Wait(500);
-
-					return true;
-				}
-				else
-				{
-					XleCore.TextArea.PrintLine(ex.UseCoinMessage);
-					XleCore.TextArea.PrintLine();
-
-					int choice = XleCore.QuickMenu(new MenuItemList("Yes", "no"), 3);
-
-					if (choice == 1)
-						return true;
-
-					ex.UseCoin(player);
-
-					mDrawStatic = false;
-					RunExhibit(player, ex);
-				}
-			}
-
-			return true;
-		}
-
-		private void RunExhibit(Player player, MuseumDisplays.Exhibit ex)
-		{
-			ex.RunExhibit(player);
-
-			CheckExhibitStatus(player);
-		}
-
-		private void CheckExhibitStatus(Player player)
-		{
-			Extender.CheckExhibitStatus(GameState);
-		}
-
-
 		#endregion
-
-		public override bool PlayerXamine(Player player)
-		{
-			XleCore.TextArea.PrintLine();
-
-			if (InteractWithDisplay(player))
-				return true;
-
-			XleCore.TextArea.PrintLine("You are in an ancient museum.");
-
-			return true;
-		}
-		public override bool PlayerFight(Player player)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("There is nothing to fight.");
-
-			return true;
-		}
-		public override bool PlayerRob(GameState state)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("There is nothing to rob.");
-
-			return true;
-		}
-		protected override bool PlayerSpeakImpl(Player player)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("There is no reply.");
-
-			return true;
-		}
-		public override bool PlayerTake(Player player)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("There is nothing to take.");
-
-			return true;
-		}
 
 		protected override void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
 		{

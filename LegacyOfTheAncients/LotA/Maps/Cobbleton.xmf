@@ -127,7 +127,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>
-  <Roofs array="true" type="ERY.Xle.Roof">
+  <Roofs array="true" type="ERY.Xle.Maps.Roof">
     <Item>
       <X>54</X>
       <Y>4</Y>
@@ -183,7 +183,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
     <GuardDefaultDefense>139</GuardDefaultDefense>
     <GuardDefaultHP>18</GuardDefaultHP>
     <GuardDefaultColor>-3418267</GuardDefaultColor>
-    <Guards array="true" type="ERY.Xle.Guard">
+    <Guards array="true" type="ERY.Xle.Maps.Guard">
       <Item>
         <X>62</X>
         <Y>36</Y>

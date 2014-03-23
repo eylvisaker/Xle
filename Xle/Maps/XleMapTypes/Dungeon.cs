@@ -27,7 +27,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			Monsters = new List<DungeonMonster>();
 		}
 
-		DungeonExtender Extender;
+		public new DungeonExtender Extender { get; private set; }
 
 		public List<DungeonMonster> Monsters { get; set; }
 
@@ -203,59 +203,15 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		}
 
-		private void HitMonster(DungeonMonster monst, int damage, Color clr)
-		{
-			XleCore.TextArea.Print("Enemy hit by blow of ", clr);
-			XleCore.TextArea.Print(damage.ToString(), XleColor.White);
-			XleCore.TextArea.PrintLine("!");
-
-			monst.HP -= damage;
-			XleCore.Wait(1000);
-
-			if (monst.HP <= 0)
-			{
-				Monsters.Remove(monst);
-				XleCore.TextArea.PrintLine(monst.Name + " dies!!");
-
-				SoundMan.PlaySound(LotaSound.EnemyDie);
-
-				XleCore.Wait(500);
-			}
-		}
-
 		private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
 		{
 			return Monsters.FirstOrDefault(m => m.DungeonLevel == dungeonLevel && m.Location == loc);
 		}
 
-		public DungeonMonster MonsterInFrontOfPlayer(Player player)
-		{
-			int distance = 0;
-			return MonsterInFrontOfPlayer(player, ref distance);
-		}
-		public DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
-		{
-			Point fightDir = StepDirection(player.FaceDirection);
-			DungeonMonster monst = null;
-
-			for (int i = 1; i <= 5; i++)
-			{
-				Point loc = new Point(player.X + fightDir.X * i, player.Y + fightDir.Y * i);
-
-				distance = i;
-				monst = MonsterAt(player.DungeonLevel, loc);
-
-				if (monst != null)
-					break;
-				if (CanPlayerStepIntoImpl(player, loc.X, loc.Y) == false)
-					break;
-			}
-
-			return monst;
-		}
 		protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
 		{
-			Extender.PlayerMagicImpl(state, magic);
+			throw new NotImplementedException();
+			//Extender.PlayerMagicImpl(state, magic);
 		}
 		
 
@@ -285,31 +241,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		protected override void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
 		{
-			Point stepDir = StepDirection(faceDirection);
-
-			for (int distance = 1; distance <= maxDistance; distance++)
-			{
-				Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
-
-				var monster = MonsterAt(XleCore.GameState.Player.DungeonLevel, loc);
-
-				if (monster == null)
-					continue;
-
-				var data = XleCore.Data.DungeonMonsters[monster.MonsterID];
-				int image = distance - 1;
-				var imageInfo = data.Images[image];
-
-				var drawPoint = imageInfo.DrawPoint;
-				drawPoint.X += inRect.X;
-				drawPoint.Y += inRect.Y;
-
-				var srcRect = imageInfo.SourceRects[0];
-
-				data.Surface.Draw(srcRect, drawPoint);
-
-				break;
-			}
+			Extender.DrawMonsters(x, y, faceDirection, inRect, maxDistance);
 		}
 
 		protected override bool IsSpaceOccupiedByMonster(Player player, int xx, int yy)

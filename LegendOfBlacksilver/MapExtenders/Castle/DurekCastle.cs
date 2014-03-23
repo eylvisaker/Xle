@@ -137,7 +137,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			door.RemoveDoor(state);
 		}
 
-		public override void SpeakToGuard(GameState state, ref bool handled)
+		public override void SpeakToGuard(GameState state)
 		{
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
@@ -152,8 +152,6 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			{
 				XleCore.TextArea.PrintLine("I should not converse, sir.");
 			}
-
-			handled = true;
 		}
 
 		public override void PlayerUse(GameState state, int item, ref bool handled)

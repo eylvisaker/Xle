@@ -155,12 +155,6 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			AgateLib.DisplayLib.Display.EndFrame();
 		}
 
-		public override void AfterPlayerStep(GameState state)
-		{
-
-		}
-
-
 		/// <summary>
 		/// Returns true if the player drowns.
 		/// </summary>
@@ -271,7 +265,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 				SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
 				XleCore.ChangeMap(state.Player, 1, 0);
-				TheMap.EncounterState = 0;
+				EncounterState = 0;
 			}
 		}
 

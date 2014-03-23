@@ -223,7 +223,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 				Lota.Story.BefuddleTurns += XleCore.random.Next(25, 35);
 
-				var monst = TheMap.MonsterInFrontOfPlayer(state.Player);
+				var monst = MonsterInFrontOfPlayer(state.Player);
 
 				if (monst != null)
 				{

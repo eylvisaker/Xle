@@ -59,29 +59,29 @@ namespace ERY.Xle.Commands
 
 			theList.Add("Nothing");
 
-			foreach (int i in XleCore.Data.ItemList.Keys)
+			foreach (int i in from kvp in XleCore.Data.ItemList
+							  where state.Player.Items[kvp.Key] > 0 &&
+							  XleCore.Data.MagicSpells.Values.All(
+								  x => x.ItemID != kvp.Key)
+							  select kvp.Key)
 			{
-				if (state.Player.Items[i] > 0)
+				string itemName = XleCore.Data.ItemList[i].Name;
+
+				if (itemName.Contains("coin"))
+					continue;
+
+				/*
+				if (i == 9)			// mail
 				{
-					string itemName = XleCore.Data.ItemList[i].Name;
+					itemName = XleCore.GetMapName(state.Player.mailTown) + " " + itemName;
+				}*/
 
-					if (itemName.Contains("coin"))
-						continue;
-
-					/*
-					if (i == 9)			// mail
-					{
-						itemName = XleCore.GetMapName(state.Player.mailTown) + " " + itemName;
-					}*/
-
-					if (i <= state.Player.Hold)
-					{
-						value++;
-					}
-
-					theList.Add(itemName);
+				if (i <= state.Player.Hold)
+				{
+					value++;
 				}
 
+				theList.Add(itemName);
 			}
 
 			state.Player.HoldMenu(XleCore.SubMenu("Hold Item", value, theList));

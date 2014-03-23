@@ -16,17 +16,8 @@ namespace ERY.Xle.Maps
 		{
 			Assembly ass = Assembly.GetExecutingAssembly();
 
-			foreach (var type in ass.GetTypes())
-			{
-				if (typeof(XleMap).IsAssignableFrom(type))
-				{
-					typemap.Add("ERY.Xle.XleMapTypes." + type.Name, type);
-				}
-				else if (typeof(Store).IsAssignableFrom(type))
-				{
-					typemap.Add("ERY.Xle.XleEventTypes." + type.Name, type);
-				}
-			}
+			typemap.Add("ERY.Xle.Roof", typeof(Roof));
+			typemap.Add("ERY.Xle.Guard", typeof(Guard));
 		}
 
 		public XleTypeBinder(AgateLib.Serialization.Xle.ITypeBinder typeBinder)

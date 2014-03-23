@@ -8,7 +8,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 {
 	public class Temple : Map2D
 	{
-		public TempleExtender Extender { get; private set; }
+		public new TempleExtender Extender { get; private set; }
 
 		protected override MapExtender CreateExtenderImpl()
 		{
@@ -26,10 +26,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		protected override void PlayerFight(Player player, Direction fightDir)
 		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Nothing much hit.");
-
-			SoundMan.PlaySound(LotaSound.Bump);
+			throw new NotImplementedException();
 		}
 	}
 }

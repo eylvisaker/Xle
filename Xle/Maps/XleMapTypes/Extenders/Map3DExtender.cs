@@ -8,6 +8,90 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 {
 	public class Map3DExtender : MapExtender
 	{
+		protected void _MoveDungeon(Player player, Direction dir, bool haveCompass, out string command, out Point stepDirection)
+		{
+			Direction newDirection;
+			command = "";
+			stepDirection = Point.Empty;
+
+			switch (dir)
+			{
+				case Direction.East:
+					command = "Turn Right";
+
+					newDirection = player.FaceDirection - 1;
+
+					if (newDirection < Direction.East)
+						newDirection = Direction.South;
+
+
+					player.FaceDirection = (Direction)newDirection;
+
+					if (haveCompass)
+						command = "Turn " + player.FaceDirection.ToString();
+
+					break;
+
+				case Direction.North:
+					command = "Move Forward";
+
+					stepDirection = StepDirection(player.FaceDirection);
+
+					if (haveCompass)
+						command = "Walk " + player.FaceDirection.ToString();
+
+					player.TimeQuality += TheMap.StepQuality;
+
+					break;
+
+				case Direction.West:
+					command = "Turn Left";
+
+					newDirection = player.FaceDirection + 1;
+
+
+					if (newDirection > Direction.South)
+						newDirection = Direction.East;
+
+					player.FaceDirection = (Direction)newDirection;
+
+					if (haveCompass)
+						command = "Turn " + player.FaceDirection.ToString();
+
+					break;
+
+				case Direction.South:
+					command = "Move Backward";
+
+					if (player.FaceDirection == Direction.East)
+						stepDirection = new Point(-1, 0);
+					if (player.FaceDirection == Direction.North)
+						stepDirection = new Point(0, 1);
+					if (player.FaceDirection == Direction.West)
+						stepDirection = new Point(1, 0);
+					if (player.FaceDirection == Direction.South)
+						stepDirection = new Point(0, -1);
+
+					if (haveCompass)
+					{
+						// we're walking backwards here, so make the text work right!
+						command = "Walk ";
+						switch (player.FaceDirection)
+						{
+							case Direction.East: command += "West"; break;
+							case Direction.West: command += "East"; break;
+							case Direction.North: command += "South"; break;
+							case Direction.South: command += "North"; break;
+						}
+					}
+
+					player.TimeQuality += TheMap.StepQuality;
+
+
+					break;
+			}
+		}
+
 		public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
 		{
 			if (IsMapSpaceBlocked(xx, yy))

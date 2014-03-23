@@ -226,6 +226,8 @@ namespace ERY.Xle.Maps
 		#endregion
 		#region --- Public Properties ---
 
+		public MapExtender Extender { get { return mBaseExtender; } }
+
 		public string ExtenderName { get; set; }
 
 		[Browsable(false)]
@@ -617,7 +619,7 @@ namespace ERY.Xle.Maps
 
 			return EventsAt(px, py, border);
 		}
-		private IEnumerable<XleEvent> EventsAt(int px, int py, int border)
+		public IEnumerable<XleEvent> EventsAt(int px, int py, int border)
 		{
 			foreach (var e in mEvents)
 			{
@@ -688,41 +690,19 @@ namespace ERY.Xle.Maps
 		/// <returns></returns>
 		public bool CanPlayerStep(Player player, int dx, int dy)
 		{
-			XleEvent evt = GetEvent(player.X + dx, player.Y + dy, 0);
-
-			if (evt != null)
-			{
-				bool allowStep;
-
-				evt.TryToStepOn(GameState, dx, dy, out allowStep);
-
-				if (allowStep == false)
-					return false;
-			}
-
-			return CanPlayerStepIntoImpl(player, player.X + dx, player.Y + dy);
+			throw new NotImplementedException();
+			//return mBaseExtender.CanPlayerStep(XleCore.GameState, dx, dy);
 		}
 
 		public void BeforeStepOn(Player player, int x, int y)
 		{
-			foreach (var evt in EventsAt(x, y, 0))
-			{
-				evt.BeforeStepOn(GameState);
-			}
+			mBaseExtender.BeforeStepOn(XleCore.GameState, x, y);
 		}
 		public void AfterPlayerStep(Player player)
 		{
-			bool didEvent = false;
-
-			foreach (var evt in EventsAt(player.X, player.Y, 0))
-			{
-				evt.StepOn(GameState);
-				didEvent = true;
-			}
-
-			AfterStepImpl(player, didEvent);
-			mBaseExtender.AfterPlayerStep(GameState);
+			mBaseExtender.AfterPlayerStep(XleCore.GameState);
 		}
+
 		/// <summary>
 		/// Called after the player steps.
 		/// </summary>
@@ -738,7 +718,10 @@ namespace ERY.Xle.Maps
 			return mBaseExtender.CanPlayerStepIntoImpl(player, xx, yy);
 		}
 
-		public abstract void PlayerCursorMovement(Player player, Direction dir);
+		public virtual void PlayerCursorMovement(Player player, Direction dir)
+		{
+			mBaseExtender.PlayerCursorMovement(XleCore.GameState, dir);
+		}
 
 		protected void _Move2D(Player player, Direction dir, string textStart, out string command, out Point stepDirection)
 		{
@@ -855,7 +838,7 @@ namespace ERY.Xle.Maps
 			}
 		}
 
-		protected virtual double StepQuality { get { return 1; } }
+		public virtual double StepQuality { get { return 1; } }
 
 		public static Point StepDirection(Direction dir)
 		{
@@ -910,37 +893,32 @@ namespace ERY.Xle.Maps
 
 		public bool PlayerSpeak(GameState state)
 		{
-			foreach (var evt in EnabledEventsAt(state.Player, 1))
-			{
-				bool handled = evt.Speak(state);
-
-				if (handled)
-					return handled;
-			}
-
-			return PlayerSpeakImpl(state.Player);
+			return mBaseExtender.PlayerSpeak(XleCore.GameState);
 		}
 
 		public virtual bool PlayerRob(GameState state)
 		{
-			return PlayerRobImpl(state);
+			return mBaseExtender.PlayerRob(XleCore.GameState);
 		}
 
 		protected virtual bool PlayerRobImpl(Xle.GameState state)
 		{
-			return false;
+			return mBaseExtender.PlayerRob(XleCore.GameState);
 		}
 
 		protected virtual bool PlayerSpeakImpl(Player player)
 		{
-			return false;
+			return mBaseExtender.PlayerSpeak(XleCore.GameState);
 		}
 		protected virtual bool PlayerRobImpl(Player player)
 		{
-			return false;
+			return mBaseExtender.PlayerRob(XleCore.GameState);
 		}
 
-		public abstract bool PlayerFight(Player player);
+		public virtual bool PlayerFight(Player player)
+		{
+			return mBaseExtender.PlayerFight(XleCore.GameState);
+		}
 
 		/// <summary>
 		/// Function called when the player executes the Climb command.
@@ -951,7 +929,7 @@ namespace ERY.Xle.Maps
 		/// <returns></returns>
 		public virtual bool PlayerClimb(Player player)
 		{
-			return false;
+			return mBaseExtender.PlayerClimb(XleCore.GameState);
 		}
 		/// <summary>
 		/// Function called when the player executes the Xamine command.
@@ -962,34 +940,22 @@ namespace ERY.Xle.Maps
 		/// <returns></returns>
 		public virtual bool PlayerXamine(Player player)
 		{
-			return false;
+			return mBaseExtender.PlayerXamine(XleCore.GameState);
 		}
 
 		public virtual bool PlayerLeave(Player player)
 		{
-			return false;
+			return mBaseExtender.PlayerLeave(XleCore.GameState);
 		}
 
 		public virtual bool PlayerTake(Player player)
 		{
-			foreach (var evt in EnabledEventsAt(player, 1))
-			{
-				if (evt.Take(GameState))
-					return true;
-			}
-
-			return false;
+			return mBaseExtender.PlayerTake(XleCore.GameState);
 		}
 
 		public virtual bool PlayerOpen(Player player)
 		{
-			foreach (var evt in EnabledEventsAt(player, 1))
-			{
-				if (evt.Open(GameState))
-					return true;
-			}
-
-			return false;
+			return mBaseExtender.PlayerOpen(XleCore.GameState);
 		}
 
 		/// <summary>
@@ -1000,120 +966,25 @@ namespace ERY.Xle.Maps
 		/// <returns></returns>
 		public virtual bool PlayerUse(Player player, int item)
 		{
-			var state = GameState;
-			bool handled = false;
+			return mBaseExtender.PlayerUse(XleCore.GameState, item);
 
-			foreach (var evt in EventsAt(player, 1))
-			{
-				handled = evt.Use(state, item);
-
-				if (handled)
-					return handled;
-			}
-
-			mBaseExtender.PlayerUse(state, item, ref handled);
-
-			return handled;
 		}
 
 
 		public virtual bool PlayerDisembark(Xle.GameState state)
 		{
-			return false;
+			return mBaseExtender.PlayerDisembark(state);
 		}
 
 		public virtual void PlayerMagic(GameState state)
 		{
-			var magics = mBaseExtender.ValidMagic.Where(x => state.Player.Items[x.ItemID] > 0).ToList();
-
-			MagicSpell magic;
-
-			if (UseFancyMagicPrompt)
-				magic = MagicPrompt(state, magics.ToArray());
-			else
-				magic = MagicMenu(magics.ToArray());
-
-			if (magic == null)
-				return;
-
-			if (state.Player.Items[magic.ItemID] <= 0)
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("You have no " + magic.PluralName + ".", XleColor.White);
-				return;
-			}
-
-			state.Player.Items[magic.ItemID]--;
-
-			PlayerMagicImpl(state, magic);
+			mBaseExtender.PlayerMagic(state);
 		}
 
 		protected virtual void PlayerMagicImpl(GameState state, MagicSpell magic)
 		{
 		}
 
-		protected virtual MagicSpell MagicPrompt(GameState state, MagicSpell[] magics)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Use which magic?", XleColor.Purple);
-			XleCore.TextArea.PrintLine();
-
-			bool hasFlames = magics.Contains(XleCore.Data.MagicSpells[1]);
-			bool hasBolts = magics.Contains(XleCore.Data.MagicSpells[2]);
-
-			int defaultValue = 0;
-			int otherStart = 2 - (hasBolts ? 0 : 1) - (hasFlames ? 0 : 1);
-			bool anyOthers = otherStart < magics.Length;
-
-			if (hasFlames == false)
-			{
-				defaultValue = 1;
-
-				if (hasBolts == false)
-					defaultValue = 2;
-			}
-
-			var menu = new MenuItemList("Flame", "Bolt", anyOthers? "Other" : "Nothing");
-
-			int choice = XleCore.QuickMenu(menu, 2, defaultValue,
-				XleColor.Purple, XleColor.White);
-
-			if (choice == 0)
-				return XleCore.Data.MagicSpells[1];
-			else if (choice == 1)
-				return XleCore.Data.MagicSpells[2];
-			else
-			{
-				if (anyOthers == false)
-					return null;
-
-				XleCore.TextArea.PrintLine(" - select above", XleColor.White);
-				XleCore.TextArea.PrintLine();
-
-				return MagicMenu(magics.Skip(otherStart).ToList());
-			}
-		}
-
-		private static MagicSpell MagicMenu(IList<MagicSpell> magics)
-		{
-			MenuItemList menu = new MenuItemList("Nothing");
-
-			for (int i = 0; i < magics.Count; i++)
-			{
-				menu.Add(magics[i].Name);
-			}
-
-			int choice = XleCore.SubMenu("Pick magic", 0, menu);
-
-			if (choice == 0)
-			{
-				XleCore.TextArea.PrintLine("Select no magic.", XleColor.White);
-				return null;
-			}
-
-			return magics[choice - 1];
-		}
 
 		#endregion
 
@@ -1212,18 +1083,7 @@ namespace ERY.Xle.Maps
 		/// <param name="stepDirection"></param>
 		protected virtual void MovePlayer(GameState state, Point stepDirection)
 		{
-			Point newPoint = new Point(state.Player.X + stepDirection.X, state.Player.Y + stepDirection.Y);
-
-			BeforeStepOn(state.Player, newPoint.X, newPoint.Y);
-
-			state.Player.Location = newPoint;
-
-			AfterPlayerStep(state.Player);
+			mBaseExtender.MovePlayer(state, stepDirection);
 		}
-
-		public virtual bool UseFancyMagicPrompt { get { return true; } }
-
-
 	}
-
 }
