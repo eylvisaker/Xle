@@ -1,4 +1,5 @@
 ﻿using AgateLib.Geometry;
+using ERY.Xle.Maps.Renderers;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,19 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	public class MuseumExtender : Map3DExtender
 	{
 		public new Museum TheMap { get { return (Museum)base.TheMap;  } }
+		public new MuseumRenderer MapRenderer { get { return (MuseumRenderer)base.MapRenderer; } }
 
+		protected override Renderers.XleMapRenderer CreateMapRenderer()
+		{
+			return new MuseumRenderer();
+		}
 		protected override void PlayPlayerMoveSound()
 		{
 			SoundMan.PlaySound(LotaSound.WalkMuseum);
 		}
 		protected override void OnBeforePlayerMove(GameState state, Direction dir)
 		{
-			TheMap.DrawCloseup = false;
+			MapRenderer.DrawCloseup = false;
 		}
 		protected override void CommandTextForInvalidMovement(ref string command)
 		{
@@ -121,9 +127,9 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			if (ex == null)
 				return false;
 
-			TheMap.DrawCloseup = true;
-			TheMap.mCloseup = ex;
-			TheMap.mDrawStatic = ex.StaticBeforeCoin;
+			MapRenderer.DrawCloseup = true;
+			MapRenderer.mCloseup = ex;
+			MapRenderer.mDrawStatic = ex.StaticBeforeCoin;
 
 			XleCore.TextArea.PrintLine(ex.IntroductionText);
 			XleCore.TextArea.PrintLine();
@@ -146,7 +152,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 			if (ex.RequiresCoin(player) == false)
 			{
-				TheMap.mDrawStatic = false;
+				MapRenderer.mDrawStatic = false;
 				RunExhibit(state, ex);
 			}
 			else
@@ -175,7 +181,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 					ex.UseCoin(player);
 
-					TheMap.mDrawStatic = false;
+					MapRenderer.mDrawStatic = false;
 					RunExhibit(state, ex);
 				}
 			}

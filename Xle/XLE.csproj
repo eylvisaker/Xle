@@ -169,7 +169,10 @@
     <Compile Include="Maps\Guard.cs" />
     <Compile Include="Maps\GuardList.cs" />
     <Compile Include="Maps\Map3DSurfaces.cs" />
+    <Compile Include="Maps\Renderers\DungeonRenderer.cs" />
     <Compile Include="Maps\Renderers\Map2DRenderer.cs" />
+    <Compile Include="Maps\Renderers\Map3DRenderer.cs" />
+    <Compile Include="Maps\Renderers\MuseumRenderer.cs" />
     <Compile Include="Maps\Renderers\OutsideRenderer.cs" />
     <Compile Include="Maps\Renderers\TownRenderer.cs" />
     <Compile Include="Maps\Roof.cs" />

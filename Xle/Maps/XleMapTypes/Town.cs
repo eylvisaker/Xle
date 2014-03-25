@@ -101,17 +101,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return 0;
 		}
 
-		public override int TileToDraw(int xx, int yy)
-		{
-			int tile = this[xx, yy];
-
-			int roof = RoofTile(xx, yy);
-
-			if (roof != 127 && roof != 0)
-				return roof;
-			else
-				return tile;
-		}
 		protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
 		{
 			base.DrawImpl(x, y, facingDirection, inRect);

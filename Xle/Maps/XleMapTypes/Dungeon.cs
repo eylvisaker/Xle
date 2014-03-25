@@ -132,13 +132,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public int CurrentLevel { get; set; }
 
-		public override Color DefaultColor
-		{
-			get
-			{
-				return XleColor.Cyan;
-			}
-		}
 		public override int this[int xx, int yy]
 		{
 			get { return this[xx, yy, CurrentLevel]; }
@@ -178,7 +171,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			Extender.OnLoad(player);
 		}
 
-		private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
+		public DungeonMonster MonsterAt(int dungeonLevel, Point loc)
 		{
 			return Monsters.FirstOrDefault(m => m.DungeonLevel == dungeonLevel && m.Location == loc);
 		}

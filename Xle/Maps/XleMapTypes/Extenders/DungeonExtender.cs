@@ -1,4 +1,5 @@
 ﻿using AgateLib.Geometry;
+using ERY.Xle.Maps.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,12 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 	public class DungeonExtender : Map3DExtender
 	{
 		public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
+		public new DungeonRenderer MapRenderer { get { return (DungeonRenderer)base.MapRenderer; } }
 
+		protected override Renderers.XleMapRenderer CreateMapRenderer()
+		{
+			return new DungeonRenderer();
+		}
 		protected override void PlayPlayerMoveSound()
 		{
 			SoundMan.PlaySound(LotaSound.WalkDungeon);
@@ -379,7 +385,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 
 		private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
 		{
-			return TheMap.Monsters.FirstOrDefault(m => m.DungeonLevel == dungeonLevel && m.Location == loc);
+			return TheMap.MonsterAt(dungeonLevel, loc);
 		}
 		private void SpawnMonster(Xle.GameState state)
 		{

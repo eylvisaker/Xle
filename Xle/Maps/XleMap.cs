@@ -371,18 +371,6 @@ namespace ERY.Xle.Maps
 		#region --- Virtual functions ---
 
 		/// <summary>
-		/// Returns what tile should be drawn at xx, yy.  Not used for collision
-		/// detection.
-		/// </summary>
-		/// <param name="xx"></param>
-		/// <param name="yy"></param>
-		/// <returns></returns>
-		public virtual int TileToDraw(int xx, int yy)
-		{
-			return this[xx, yy];
-		}
-
-		/// <summary>
 		/// Default color for text messages.
 		/// </summary>
 		[Obsolete("Move this to the color scheme class.")]

@@ -871,7 +871,7 @@ namespace ERY.Xle
 			string thestring;
 			int xx, yy, i = 0, height;
 			string buffer;
-			Color fontColor = GameState.Map.DefaultColor;
+			Color fontColor = GameState.Map.ColorScheme.TextColor;
 
 			xx = 624 - menu.width * 16;
 			yy = 16;
