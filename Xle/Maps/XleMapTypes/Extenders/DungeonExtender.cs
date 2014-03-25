@@ -33,10 +33,9 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 		{
 		}
 
-		public virtual void OnLoad(Player player)
+		public override void OnLoad(GameState state)
 		{
-
-			CurrentLevel = player.DungeonLevel;
+			CurrentLevel = state.Player.DungeonLevel;
 		}
 
 		public virtual string TrapName(int val)

@@ -43,7 +43,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 		protected abstract int StrengthBoost { get; }
 		protected abstract bool IsCompleted { get; set; }
 
-		public override void OnLoad(Player player)
+		public override void OnLoad(GameState state)
 		{
 			Lota.Story.BeenInDungeon = true;
 		}
