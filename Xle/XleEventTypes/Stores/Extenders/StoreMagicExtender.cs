@@ -24,14 +24,14 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			return TheEvent.MagicPrice(XleCore.Data.MagicSpells[id]);
 		}
 
-		public virtual IEnumerable<StoreFrontWindow> CreateStoreWindows()
+		public virtual IEnumerable<TextWindow> CreateStoreWindows()
 		{
 			yield return CreateWindow();
 		}
 
-		private StoreFrontWindow CreateWindow()
+		private TextWindow CreateWindow()
 		{
-			StoreFrontWindow window = new StoreFrontWindow();
+			TextWindow window = new TextWindow();
 
 			window.Location = new AgateLib.Geometry.Point(8, 2);
 

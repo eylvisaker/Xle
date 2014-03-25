@@ -4,21 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace ERY.Xle
 {
-	public class StoreFrontWindow
+	public class TextWindow
 	{
 		ColorStringBuilder csb = new ColorStringBuilder();
 
-		public StoreFrontWindow()
+		public TextWindow()
 		{
 			DefaultTextColor = XleColor.White;
 		}
 
 		public Point Location { get; set; }
 
-		public ColorStringBuilder Csb { get { return csb; } }
-
+		public void SetColor(Color color)
+		{
+			for (int i = 0; i < csb.Text.Length; i++)
+				csb.SetColor(i, color);
+		}
 		public void Draw()
 		{
 			var renderer = XleCore.Renderer;
@@ -45,6 +48,20 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			Write(text, color);
 			Write("\n");
+		}
+
+		public string Text
+		{
+			get { return csb.Text; }
+			set
+			{
+				csb.Text = value;
+			}
+		}
+
+		public void Clear()
+		{
+			csb.Clear();
 		}
 	}
 }

@@ -31,6 +31,19 @@ namespace ERY.Xle
 		public string Text
 		{
 			get { return text; }
+			set
+			{
+				text = value;
+
+				while (colors.Count < text.Length)
+				{
+					colors.Add(XleColor.White);
+				}
+				while (colors.Count > text.Length)
+				{
+					colors.RemoveAt(colors.Count - 1);
+				}
+			}
 		}
 		/// <summary>
 		/// Read only copy of the colors.

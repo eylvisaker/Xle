@@ -12,6 +12,8 @@ namespace ERY.Xle.LotA.TitleScreen
 {
 	public class LotaTitleScreen : ERY.Xle.IXleTitleScreen
 	{
+		TitleState state = new Splash();
+
 		public enum TitleScreenState
 		{
 			NoState = 0,
@@ -114,6 +116,16 @@ namespace ERY.Xle.LotA.TitleScreen
 		}
 		void DisplayTitleScreen()
 		{
+			XleCore.Renderer.ReplacementDrawMethod = state.Draw;
+			
+			state.Update();
+
+			Display.BeginFrame();
+			state.Draw();
+			Display.EndFrame();
+
+			return;
+
 			Display.BeginFrame();
 			XleCore.SetOrthoProjection(StateBorderColor);
 			Display.FillRect(new Rectangle(0, 0, 640, 400), bgColor);
@@ -124,57 +136,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			// draw borders & stuff	
 			switch (titleState)
 			{
-				case TitleScreenState.NoState:
-
-					titleScreenSurface.Draw();
-
-					break;
-
-				case TitleScreenState.Menu1:
-					frameColor = XleColor.Blue;
-					lineColor = XleColor.White;
-
-					
-					renderer.DrawFrame(frameColor);
-
-					renderer.DrawFrameLine(0, 20 * 16, 1, XleCore.myWindowWidth, frameColor);
-					//renderer.DrawFrameLine(3 * 16 + 8, 0, 0, 7 * 16, frameColor);
-					//renderer.DrawFrameLine(35 * 16 + 8, 0, 0, 7 * 16, frameColor);
-					//renderer.DrawFrameLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, frameColor);
-
-					renderer.DrawFrameHighlight(lineColor);
-
-					renderer.DrawInnerFrameHighlight(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
-					//renderer.DrawInnerFrameHighlight(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					//renderer.DrawInnerFrameHighlight(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					//renderer.DrawInnerFrameHighlight(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
-
-					DrawTitleHeader(frameColor, lineColor);
-
-					break;
-
-				case TitleScreenState.Menu2:
-					frameColor = XleColor.Brown;
-					lineColor = XleColor.Yellow;
-
-					renderer.DrawFrame(frameColor);
-
-					//renderer.DrawFrameLine(0, 20 * 16, 1, XleCore.myWindowWidth, frameColor);
-					//renderer.DrawFrameLine(3 * 16 + 8, 0, 0, 7 * 16, frameColor);
-					//renderer.DrawFrameLine(35 * 16 + 8, 0, 0, 7 * 16, frameColor);
-					renderer.DrawFrameLine(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 4, frameColor);
-
-					renderer.DrawFrameHighlight(lineColor);
-
-					//renderer.DrawInnerFrameHighlight(0, 20 * 16, 1, XleCore.myWindowWidth, lineColor);
-					//renderer.DrawInnerFrameHighlight(3 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					//renderer.DrawInnerFrameHighlight(35 * 16 + 8, 0, 0, 7 * 16, lineColor);
-					renderer.DrawInnerFrameHighlight(3 * 16 + 8, 6 * 16 + 4, 1, (35 - 3 + 1) * 16 - 2, lineColor);
-
-					DrawTitleHeader(frameColor, lineColor);
-
-					break;
-
+				
 				case TitleScreenState.NewGame:
 
 					frameColor = XleColor.LightGray;
@@ -242,13 +204,13 @@ namespace ERY.Xle.LotA.TitleScreen
 					case TitleScreenState.Menu2: return XleColor.DarkGray;
 
 					case TitleScreenState.NewGameMusic:
-					case TitleScreenState.NewGame: 
+					case TitleScreenState.NewGame:
 						return XleColor.LightGreen;
 
 					case TitleScreenState.NewGameText:
 						return XleColor.Blue;
 
-					case TitleScreenState.LoadGame: 
+					case TitleScreenState.LoadGame:
 						return XleColor.Red;
 
 					default:
@@ -301,273 +263,289 @@ namespace ERY.Xle.LotA.TitleScreen
 				UpdateTitleScreen();
 				DisplayTitleScreen();
 
+				if (state.ThePlayer != null)
+				{
+					player = state.ThePlayer;
+					break;
+				}
+
 				Core.KeepAlive();
 			}
 
+			XleCore.Renderer.ReplacementDrawMethod = null;
+			
 			Keyboard.KeyDown -= Keyboard_KeyDown;
 		}
 
 
 		void Keyboard_KeyDown(InputEventArgs e)
 		{
-			const int stdWait = 100;
 			KeyCode keyCode = e.KeyCode;
 
 			if (lastTime + waitTime > Timing.TotalMilliseconds)
 				return;
 
 			lastTime = Timing.TotalMilliseconds;
-			waitTime = 0;
+			waitTime = 100;
 
-			switch (titleState)
-			{
-				case TitleScreenState.NoState:
+			state.SkipWait = false;
+			state.KeyDown(e.KeyCode, e.KeyString);
 
-					if (keyCode != KeyCode.None)
-					{
-						SetMenu1();
-						Keyboard.ReleaseAllKeys();
-					}
+			if (state.SkipWait)
+				waitTime = 0;
 
-					break;
+			if (state.NewState != null)
+				state = state.NewState;
 
-				case TitleScreenState.Menu1:
-				case TitleScreenState.Menu2:
+			//switch (titleState)
+			//{
+			//	case TitleScreenState.NoState:
 
-					if (keyCode == KeyCode.Down)
-					{
-						titleMenu++;
+			//		if (keyCode != KeyCode.None)
+			//		{
+			//			SetMenu1();
+			//			Keyboard.ReleaseAllKeys();
+			//		}
 
-						if (titleMenu > 4)
-							titleMenu = 4;
+			//		break;
 
-						waitTime = stdWait;
-					}
-					else if (keyCode == KeyCode.Up)
-					{
-						titleMenu--;
+			//	case TitleScreenState.Menu1:
+			//	case TitleScreenState.Menu2:
 
-						if (titleMenu < 1)
-							titleMenu = 1;
+			//		if (keyCode == KeyCode.Down)
+			//		{
+			//			titleMenu++;
 
-						waitTime = stdWait;
-					}
-					else if (keyCode >= KeyCode.D1 && keyCode <= KeyCode.D4)
-					{
-						titleMenu = keyCode - KeyCode.D0;
+			//			if (titleMenu > 4)
+			//				titleMenu = 4;
 
-						keyCode = KeyCode.Return;
+			//			waitTime = stdWait;
+			//		}
+			//		else if (keyCode == KeyCode.Up)
+			//		{
+			//			titleMenu--;
 
-						waitTime = stdWait;
-					}
+			//			if (titleMenu < 1)
+			//				titleMenu = 1;
 
-					if (keyCode == KeyCode.Return)
-					{
-						Keyboard.ReleaseAllKeys();
+			//			waitTime = stdWait;
+			//		}
+			//		else if (keyCode >= KeyCode.D1 && keyCode <= KeyCode.D4)
+			//		{
+			//			titleMenu = keyCode - KeyCode.D0;
 
-						if (titleState == TitleScreenState.Menu1)
-						{
-							if (titleMenu == 1)
-							{
-								SetMenu2();
-							}
-							else if (titleMenu == 2) { }
-							else if (titleMenu == 3) { }
-							else if (titleMenu == 4) { }
+			//			keyCode = KeyCode.Return;
 
-						}
-						else if (titleState == TitleScreenState.Menu2)
-						{
-							if (titleMenu == 1) // return to first menu
-							{
-								SetMenu1();
-							}
-							else if (titleMenu == 2)
-							{
-								SetNewGame();
-							}
-							else if (titleMenu == 3)
-							{
-								page = 0;
-								SetRestoreGame();
-							}
-							else if (titleMenu == 4)
-							{
-								SetEraseGame();
-							}
-						}
-					}
+			//			waitTime = stdWait;
+			//		}
 
-					break;
+			//		if (keyCode == KeyCode.Return)
+			//		{
+			//			Keyboard.ReleaseAllKeys();
 
-				case TitleScreenState.NewGame:
+			//			if (titleState == TitleScreenState.Menu1)
+			//			{
+			//				if (titleMenu == 1)
+			//				{
+			//					SetMenu2();
+			//				}
+			//				else if (titleMenu == 2) { }
+			//				else if (titleMenu == 3) { }
+			//				else if (titleMenu == 4) { }
 
-					if ((keyCode >= KeyCode.A && keyCode <= KeyCode.Z) || keyCode == KeyCode.Space ||
-						(keyCode >= KeyCode.D0 && keyCode <= KeyCode.D9))
-					{
+			//			}
+			//			else if (titleState == TitleScreenState.Menu2)
+			//			{
+			//				if (titleMenu == 1) // return to first menu
+			//				{
+			//					SetMenu1();
+			//				}
+			//				else if (titleMenu == 2)
+			//				{
+			//					SetNewGame();
+			//				}
+			//				else if (titleMenu == 3)
+			//				{
+			//					page = 0;
+			//					SetRestoreGame();
+			//				}
+			//				else if (titleMenu == 4)
+			//				{
+			//					SetEraseGame();
+			//				}
+			//			}
+			//		}
 
-						if (tempName.Length < 14)
-						{
-							tempName += e.KeyString;
-						}
+			//		break;
 
-					}
-					else if (keyCode == KeyCode.BackSpace || keyCode == KeyCode.Delete)
-					{
-						if (tempName.Length > 0)
-							tempName = tempName.Substring(0, tempName.Length - 1);
-					}
-					else if (keyCode == KeyCode.Escape || keyCode == KeyCode.F1)
-					{
-						SetMenu2();
-					}
-					else if (keyCode == KeyCode.Enter && tempName.Length > 0)
-					{
-						if (System.IO.File.Exists(@"Saved\" + tempName + ".chr"))
-						{
-							SoundMan.PlaySound(LotaSound.Medium);
+			//	case TitleScreenState.NewGame:
 
-							for (int i = 13; i < 25; i++)
-							{
-								wnd[i] = "";
-							}
+			//		if ((keyCode >= KeyCode.A && keyCode <= KeyCode.Z) || keyCode == KeyCode.Space ||
+			//			(keyCode >= KeyCode.D0 && keyCode <= KeyCode.D9))
+			//		{
 
-							wnd[16] = "    " + tempName + " has already begun.";
+			//			if (tempName.Length < 14)
+			//			{
+			//				tempName += e.KeyString;
+			//			}
 
-							Wait(2000);
+			//		}
+			//		else if (keyCode == KeyCode.BackSpace || keyCode == KeyCode.Delete)
+			//		{
+			//			if (tempName.Length > 0)
+			//				tempName = tempName.Substring(0, tempName.Length - 1);
+			//		}
+			//		else if (keyCode == KeyCode.Escape || keyCode == KeyCode.F1)
+			//		{
+			//			SetMenu2();
+			//		}
+			//		else if (keyCode == KeyCode.Enter && tempName.Length > 0)
+			//		{
+			//			if (System.IO.File.Exists(@"Saved\" + tempName + ".chr"))
+			//			{
+			//				SoundMan.PlaySound(LotaSound.Medium);
 
-							SetNewGame();
-						}
-						else
-						{
-							SoundMan.PlaySound(LotaSound.VeryGood);
-							titleState = TitleScreenState.NewGameMusic;
+			//				for (int i = 13; i < 25; i++)
+			//				{
+			//					wnd[i] = "";
+			//				}
 
-							for (int i = 13; i < 25; i++)
-							{
-								wnd[i] = "";
-							}
+			//				wnd[16] = "    " + tempName + " has already begun.";
 
-							wnd[16] = "    " + tempName + "'s adventures begin";
+			//				Wait(2000);
 
-							player = new Player(tempName);
-							player.MapID = 5;
-							player.Location = new Point(3, 1);
-							player.FaceDirection = Direction.West; 
+			//				SetNewGame();
+			//			}
+			//			else
+			//			{
+			//				SoundMan.PlaySound(LotaSound.VeryGood);
+			//				titleState = TitleScreenState.NewGameMusic;
 
-							player.Items[LotaItem.GoldArmband] = 1;
-							player.Items[LotaItem.Compendium] = 1;
-							player.Items[LotaItem.JadeCoin] = 2;
+			//				for (int i = 13; i < 25; i++)
+			//				{
+			//					wnd[i] = "";
+			//				}
 
-							player.AddArmor(1, 0);
-							player.CurrentArmorIndex = 1;
+			//				wnd[16] = "    " + tempName + "'s adventures begin";
 
-							player.StoryData = new LotaStory();
-							player.SavePlayer();
-						}
-					}
+			//				player = new Player(tempName);
+			//				player.MapID = 5;
+			//				player.Location = new Point(3, 1);
+			//				player.FaceDirection = Direction.West; 
 
-					break;
+			//				player.Items[LotaItem.GoldArmband] = 1;
+			//				player.Items[LotaItem.Compendium] = 1;
+			//				player.Items[LotaItem.JadeCoin] = 2;
 
-				case TitleScreenState.LoadGame:
-					if (keyCode == KeyCode.Down)
-					{
-						titleMenu++;
+			//				player.AddArmor(1, 0);
+			//				player.CurrentArmorIndex = 1;
 
-						if (titleMenu >= 9)
-							titleMenu = 9;
-						else if (files[titleMenu - 1] == "")
-						{
-							titleMenu = 9;
-						}
+			//				player.StoryData = new LotaStory();
+			//				player.SavePlayer();
+			//			}
+			//		}
 
-						waitTime = stdWait;
-					}
-					else if (keyCode == KeyCode.Up)
-					{
-						do
-						{
-							titleMenu--;
+			//		break;
 
-							if (titleMenu <= 0)
-								break;
+			//	case TitleScreenState.LoadGame:
+			//		if (keyCode == KeyCode.Down)
+			//		{
+			//			titleMenu++;
 
-						} while (titleMenu > 0 && files[titleMenu - 1] == "");
+			//			if (titleMenu >= 9)
+			//				titleMenu = 9;
+			//			else if (files[titleMenu - 1] == "")
+			//			{
+			//				titleMenu = 9;
+			//			}
 
-						if (titleMenu < 0)
-							titleMenu = 0;
+			//			waitTime = stdWait;
+			//		}
+			//		else if (keyCode == KeyCode.Up)
+			//		{
+			//			do
+			//			{
+			//				titleMenu--;
 
-						waitTime = stdWait;
-					}
-					else if (keyCode >= KeyCode.D1 && keyCode <= KeyCode.D9)
-					{
-						titleMenu = keyCode - KeyCode.D0;
+			//				if (titleMenu <= 0)
+			//					break;
 
-						keyCode = KeyCode.Return;
+			//			} while (titleMenu > 0 && files[titleMenu - 1] == "");
 
-						waitTime = stdWait;
-					}
+			//			if (titleMenu < 0)
+			//				titleMenu = 0;
 
-					if (titleMenu == 9 && page == maxPages)
-					{
-						titleMenu = 8;
+			//			waitTime = stdWait;
+			//		}
+			//		else if (keyCode >= KeyCode.D1 && keyCode <= KeyCode.D9)
+			//		{
+			//			titleMenu = keyCode - KeyCode.D0;
 
-						do
-						{
-							titleMenu--;
+			//			keyCode = KeyCode.Return;
 
-							if (titleMenu <= 0)
-								break;
+			//			waitTime = stdWait;
+			//		}
 
-						} while (titleMenu > 0 && files[titleMenu - 1] == "");
+			//		if (titleMenu == 9 && page == maxPages)
+			//		{
+			//			titleMenu = 8;
 
-					}
+			//			do
+			//			{
+			//				titleMenu--;
 
-					if (keyCode == KeyCode.Return)
-					{
-						waitTime = 1000;
-						Wait(500);
+			//				if (titleMenu <= 0)
+			//					break;
 
-						waitTime = stdWait;
+			//			} while (titleMenu > 0 && files[titleMenu - 1] == "");
 
-						if (titleMenu == 0)
-						{
-							if (page > 0)
-							{
-								page--;
+			//		}
 
-								SetRestoreGame();
-							}
-							else
-							{
-								SetMenu2();
-							}
-						}
-						else if (titleMenu == 9)
-						{
-							page++;
+			//		if (keyCode == KeyCode.Return)
+			//		{
+			//			waitTime = 1000;
+			//			Wait(500);
 
-							if (page > maxPages)
-								page = maxPages;
+			//			waitTime = stdWait;
 
-							SetRestoreGame();
-						}
-						else
-						{
-							string file = files[titleMenu-1];
-						
-							if (string.IsNullOrEmpty(file) == false)
-							{
-								player = Player.LoadPlayer(file);
-								titleDone = true;
-							}
-						}
+			//			if (titleMenu == 0)
+			//			{
+			//				if (page > 0)
+			//				{
+			//					page--;
 
-					}
+			//					SetRestoreGame();
+			//				}
+			//				else
+			//				{
+			//					SetMenu2();
+			//				}
+			//			}
+			//			else if (titleMenu == 9)
+			//			{
+			//				page++;
 
-					break;
+			//				if (page > maxPages)
+			//					page = maxPages;
 
-			}
+			//				SetRestoreGame();
+			//			}
+			//			else
+			//			{
+			//				string file = files[titleMenu-1];
+
+			//				if (string.IsNullOrEmpty(file) == false)
+			//				{
+			//					player = Player.LoadPlayer(file);
+			//					titleDone = true;
+			//				}
+			//			}
+
+			//		}
+
+			//		break;
+
+			//}
 
 
 		}

@@ -21,11 +21,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 		ColorScheme mColorScheme = new ColorScheme();
 		
 		public new StoreFrontExtender Extender { get; protected set; }
-		public List<StoreFrontWindow> Windows { get; private set; }
+		public List<TextWindow> Windows { get; private set; }
 
 		public StoreFront()
 		{
-			Windows = new List<StoreFrontWindow>();
+			Windows = new List<TextWindow>();
 
 			LeftOffset = 2;
 

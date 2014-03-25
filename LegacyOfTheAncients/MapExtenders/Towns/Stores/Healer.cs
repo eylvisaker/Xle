@@ -43,7 +43,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			// display ready message
 			if (Lota.Story.EatenJutonFruit && Lota.Story.PurchasedHerbs == false)
 			{
-				StoreFrontWindow wind = new StoreFrontWindow();
+				TextWindow wind = new TextWindow();
 				wind.Location = new Point(3, 15);
 
 				wind.WriteLine("You're ready for herbs!", XleColor.Blue);
@@ -131,7 +131,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 
 		private void SetOptionsText(int woundPrice, int herbsPrice)
 		{
-			StoreFrontWindow window = new StoreFrontWindow();
+			TextWindow window = new TextWindow();
 			window.Location = new Point(3, 9);
 
 			window.Write("1. Wound Care  -  ");
@@ -151,7 +151,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 
 		private void SetDescriptionText()
 		{
-			StoreFrontWindow window = new StoreFrontWindow();
+			TextWindow window = new TextWindow();
 
 			window.Location = new AgateLib.Geometry.Point(7, 3);
 			window.WriteLine("Our sect offers restorative");

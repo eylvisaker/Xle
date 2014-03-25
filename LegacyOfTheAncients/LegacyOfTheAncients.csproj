@@ -119,7 +119,15 @@
     <Compile Include="MapExtenders\Towns\Stores\Magic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Lota3DSurfaces.cs" />
+    <Compile Include="TitleScreen\EraseGame.cs" />
+    <Compile Include="TitleScreen\FirstMainMenu.cs" />
+    <Compile Include="TitleScreen\LoadGame.cs" />
+    <Compile Include="TitleScreen\MainMenuBase.cs" />
     <Compile Include="TitleScreen\LotaTitleScreen.cs" />
+    <Compile Include="TitleScreen\NewGame.cs" />
+    <Compile Include="TitleScreen\SecondMainMenu.cs" />
+    <Compile Include="TitleScreen\Splash.cs" />
+    <Compile Include="TitleScreen\TitleState.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

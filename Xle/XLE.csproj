@@ -211,7 +211,7 @@
     <Compile Include="XleEventTypes\Stores\StoreFood.cs" />
     <Compile Include="XleEventTypes\Stores\StoreFortune.cs" />
     <Compile Include="XleEventTypes\Stores\StoreFront.cs" />
-    <Compile Include="XleEventTypes\Stores\StoreFrontWindow.cs" />
+    <Compile Include="TextWindow.cs" />
     <Compile Include="XleEventTypes\Stores\StoreHealer.cs" />
     <Compile Include="XleEventTypes\Stores\StoreJail.cs" />
     <Compile Include="XleEventTypes\Stores\StoreLending.cs" />
