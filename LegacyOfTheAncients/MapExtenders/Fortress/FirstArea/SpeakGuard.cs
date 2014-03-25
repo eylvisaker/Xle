@@ -1,6 +1,6 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes.Extenders;
+using ERY.Xle.Maps.Extenders;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;

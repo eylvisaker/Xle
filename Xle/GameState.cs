@@ -1,5 +1,5 @@
 ﻿using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes.Extenders;
+using ERY.Xle.Maps.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,11 +1,12 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Maps.Renderers;
+using ERY.Xle.Maps.XleMapTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.Maps.XleMapTypes.Extenders
+namespace ERY.Xle.Maps.Extenders
 {
 	public class TownExtender : Map2DExtender
 	{

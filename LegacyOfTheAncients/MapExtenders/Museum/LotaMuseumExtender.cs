@@ -1,7 +1,7 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
 using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Maps.XleMapTypes.Extenders;
+using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;

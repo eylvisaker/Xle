@@ -1,5 +1,5 @@
 ﻿using AgateLib;
-using ERY.Xle.Maps.XleMapTypes.Extenders;
+using ERY.Xle.Maps.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

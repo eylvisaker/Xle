@@ -1,12 +1,13 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Maps.Renderers;
+using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.Maps.XleMapTypes.Extenders
+namespace ERY.Xle.Maps.Extenders
 {
 	public class MuseumExtender : Map3DExtender
 	{
@@ -110,7 +111,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			return true;
 		}
 
-		public MuseumDisplays.Exhibit ExhibitAt(int x, int y)
+		public Exhibit ExhibitAt(int x, int y)
 		{
 			int tileAt = TheMap[x, y];
 
@@ -122,7 +123,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			var player = state.Player;
 			Point stepDir = player.FaceDirection.StepDirection();
 
-			MuseumDisplays.Exhibit ex = ExhibitAt(player.X + stepDir.X, player.Y + stepDir.Y);
+			Exhibit ex = ExhibitAt(player.X + stepDir.X, player.Y + stepDir.Y);
 
 			if (ex == null)
 				return false;
@@ -189,7 +190,7 @@ namespace ERY.Xle.Maps.XleMapTypes.Extenders
 			return true;
 		}
 
-		private void RunExhibit(GameState state, MuseumDisplays.Exhibit ex)
+		private void RunExhibit(GameState state, Exhibit ex)
 		{
 			ex.RunExhibit(state.Player);
 

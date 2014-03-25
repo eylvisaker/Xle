@@ -11,7 +11,7 @@ using ERY.Xle.LotA.MapExtenders.Towns;
 using ERY.Xle.LotA.TitleScreen;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Maps.XleMapTypes.Extenders;
+using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,7 @@
 ﻿using AgateLib.Geometry;
 using AgateLib.InputLib;
 using ERY.Xle.Maps.Renderers;
+using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders.Common;
@@ -10,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.Maps.XleMapTypes.Extenders
+namespace ERY.Xle.Maps.Extenders
 {
 	public class OutsideExtender : Map2DExtender
 	{
