@@ -286,7 +286,7 @@ namespace ERY.Xle.LotA.TitleScreen
 				return;
 
 			lastTime = Timing.TotalMilliseconds;
-			waitTime = 100;
+			waitTime = 50;
 
 			state.SkipWait = false;
 			state.KeyDown(e.KeyCode, e.KeyString);

@@ -51,7 +51,7 @@ namespace ERY.Xle.LotA.TitleScreen
 				if (titleMenu > 3)
 					titleMenu = 3;
 
-				SoundMan.PlaySound(LotaSound.Xamine);
+				SoundMan.PlaySound(LotaSound.TitleCursor);
 			}
 			else if (keyCode == KeyCode.Up)
 			{
@@ -60,7 +60,7 @@ namespace ERY.Xle.LotA.TitleScreen
 				if (titleMenu < 0)
 					titleMenu = 0;
 
-				SoundMan.PlaySound(LotaSound.Xamine);
+				SoundMan.PlaySound(LotaSound.TitleCursor);
 			}
 			else if (keyCode >= KeyCode.D1 && keyCode <= KeyCode.D4)
 			{
@@ -72,7 +72,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			if (keyCode == KeyCode.Return)
 			{
 				SkipWait = true; 
-				SoundMan.PlaySound(LotaSound.XamineDetected);
+				SoundMan.PlaySound(LotaSound.TitleAccept);
 
 				Keyboard.ReleaseAllKeys();
 

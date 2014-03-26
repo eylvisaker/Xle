@@ -26,6 +26,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
 		protected void Wait(int time)
 		{
+			XleCore.Wait(time);
 		}
 
 		protected ColorScheme Colors { get; set; }
@@ -42,6 +43,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			DrawBackgrounds();
 			DrawWindows();
 			DrawTitle();
+			DrawPrompt();
 		}
 
 		protected virtual void DrawTitle()
@@ -49,11 +51,23 @@ namespace ERY.Xle.LotA.TitleScreen
 			if (string.IsNullOrEmpty(Title))
 				return;
 
-			int destx= 20 - Title.Length / 2;
+			DrawCenteredText(0, Title, Colors.BackColor, Colors.TextColor);
+		}
+		private void DrawPrompt()
+		{
+			if (string.IsNullOrEmpty(Prompt))
+				return;
 
-			Display.FillRect(new Rectangle(destx*16, 0, Title.Length * 16, 16), XleColor.White);
+			DrawCenteredText(24, Prompt, XleColor.Yellow, Colors.BackColor);
+		}
 
-			XleCore.Renderer.WriteText(destx*16, 0, Title, Colors.BackColor);
+		private void DrawCenteredText(int y, string text, Color textColor, Color backColor)
+		{
+			int destx = 20 - text.Length / 2;
+
+			Display.FillRect(new Rectangle(destx * 16, y*16, text.Length * 16, 16), backColor);
+
+			XleCore.Renderer.WriteText(destx * 16, y*16, text, textColor);
 		}
 
 		protected virtual void DrawWindows()
@@ -64,7 +78,8 @@ namespace ERY.Xle.LotA.TitleScreen
 			}
 		}
 
-		public string Title;
+		public string Title { get; set; }
+		public string Prompt { get; set; }
 
 		protected virtual void DrawBackgrounds()
 		{

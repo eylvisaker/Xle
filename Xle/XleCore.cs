@@ -777,7 +777,10 @@ namespace ERY.Xle
 
 		public static void KeepAlive()
 		{
-			XleCore.GameState.MapExtender.CheckSounds(GameState);
+			if (GameState != null)
+			{
+				XleCore.GameState.MapExtender.CheckSounds(GameState);
+			}
 
 			Core.KeepAlive();
 

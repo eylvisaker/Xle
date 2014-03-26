@@ -106,6 +106,8 @@ namespace ERY.Xle.LotA.TitleScreen
 				{
 					menuSelection = 9;
 				}
+
+				SoundMan.PlaySound(LotaSound.TitleCursor);
 			}
 			else if (keyCode == KeyCode.Up)
 			{
@@ -121,8 +123,10 @@ namespace ERY.Xle.LotA.TitleScreen
 
 				if (menuSelection < 0)
 					menuSelection = 0;
+
+				SoundMan.PlaySound(LotaSound.TitleCursor);
 			}
-			else if (keyCode >= KeyCode.D1 && keyCode <= KeyCode.D9)
+			else if (keyCode >= KeyCode.D0 && keyCode <= KeyCode.D9)
 			{
 				menuSelection = keyCode - KeyCode.D0;
 
@@ -146,6 +150,8 @@ namespace ERY.Xle.LotA.TitleScreen
 
 			if (keyCode == KeyCode.Return)
 			{
+				SoundMan.PlaySound(LotaSound.TitleAccept);
+
 				Wait(500);
 
 				if (menuSelection == 0)
@@ -177,11 +183,6 @@ namespace ERY.Xle.LotA.TitleScreen
 					}
 				}
 			}
-		}
-
-		private void SetRestoreGame()
-		{
-			throw new NotImplementedException();
 		}
 
 		protected override void DrawFrame()

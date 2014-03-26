@@ -52,6 +52,9 @@ namespace ERY.Xle
 		MagicBolt,
 		MagicBoltHit,
 		MagicFizzle,
+		TitleCursor,
+		TitleAccept,
+		TitleKeypress,
 	}
 
 	public static class SoundMan
