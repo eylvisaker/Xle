@@ -5,10 +5,10 @@ D - Resample sounds and do a good job this time.
 
 Title Screen:
 	Animation of flags.
-	Title Text within menus.
+	D - Title Text within menus.
 	Figure out what to do with first three options on first menu.
-		Color test -> quit.
-	Fix bugs in and refactor introductory text to data driven solution.
+		D - Color test -> quit.
+	D - Fix bugs in and refactor introductory text to data driven solution.
 
 Outdoors:
 	Bugs in monsters:
@@ -43,8 +43,8 @@ Castle:
 	D - Fix events in castle.
 	D - Fix chests.
 	D - Test doors.
-	Open chests which should be empty when player enters map.
-	Determine algorithm for refilling chests.
+	D - Open chests which should be empty when player enters map.
+	D - Determine algorithm for refilling chests. - Happens when you die.
 	D - Implement Cassandra.
 	D - Implement second floor
 	D - Test magic ice.

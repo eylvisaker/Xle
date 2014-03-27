@@ -24,6 +24,11 @@ namespace ERY.Xle.LotA.TitleScreen
 			Instruction.SetColor(XleColor.Blue);
 		}
 
+		public override void KeyDown(AgateLib.InputLib.KeyCode keyCode, string keyString)
+		{
+			SoundMan.StopSound(LotaSound.Music);
+			base.KeyDown(keyCode, keyString);
+		}
 		
 		protected override void ExecuteMenuItem(int item)
 		{
