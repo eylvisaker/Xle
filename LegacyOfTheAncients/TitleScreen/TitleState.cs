@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-	abstract class TitleState
+	public abstract class TitleState
 	{
 		public TitleState()
 		{

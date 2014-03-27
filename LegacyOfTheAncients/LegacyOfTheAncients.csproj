@@ -122,6 +122,7 @@
     <Compile Include="TitleScreen\EraseGame.cs" />
     <Compile Include="TitleScreen\FirstMainMenu.cs" />
     <Compile Include="TitleScreen\Introduction.cs" />
+    <Compile Include="TitleScreen\FileMenu.cs" />
     <Compile Include="TitleScreen\LoadGame.cs" />
     <Compile Include="TitleScreen\MainMenuBase.cs" />
     <Compile Include="TitleScreen\LotaTitleScreen.cs" />
@@ -236,6 +237,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LotA\Audio\TitleCursor.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LotA\Audio\TitleErasePrompt.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LotA\Audio\TitleKeypress.ogg">

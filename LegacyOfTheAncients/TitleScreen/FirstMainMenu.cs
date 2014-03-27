@@ -32,7 +32,10 @@ namespace ERY.Xle.LotA.TitleScreen
 				NewState = new SecondMainMenu();
 			}
 			else if (item == 3)
+			{
+				Wait(500);
 				throw new MainWindowClosedException();
+			}
 		}
 
 	}

@@ -55,6 +55,8 @@ namespace ERY.Xle
 		TitleCursor,
 		TitleAccept,
 		TitleKeypress,
+		TitlePrompt,
+		TitleErasePrompt,
 	}
 
 	public static class SoundMan
