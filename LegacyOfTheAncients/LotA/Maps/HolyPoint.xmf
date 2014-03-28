@@ -29,7 +29,7 @@
       <BuyRaftX>168</BuyRaftX>
       <BuyRaftY>12</BuyRaftY>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>56</X>
       <Y>9</Y>
       <Width>3</Width>
@@ -38,17 +38,16 @@
       <ShopName>Food for Thought</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBuyback">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>21</X>
       <Y>9</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBuyback</ExtenderName>
       <ShopName>Bizarre Bazaar Buy-Back Shop</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreLending">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>20</X>
       <Y>3</Y>
       <Width>5</Width>
@@ -57,7 +56,7 @@
       <ShopName>Friendly</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFlipFlop">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>3</X>
       <Y>3</Y>
       <Width>2</Width>
@@ -66,7 +65,7 @@
       <ShopName>Ye Holy Rollers</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFortune">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>4</X>
       <Y>34</Y>
       <Width>5</Width>
@@ -75,7 +74,7 @@
       <ShopName>Prophet for Profit</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>15</X>
       <Y>30</Y>
       <Width>4</Width>
@@ -84,7 +83,7 @@
       <ShopName>Miracle Magic</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>70</X>
       <Y>25</Y>
       <Width>5</Width>
@@ -94,7 +93,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAALAAAADgAAABAAAAATAAAAFAAAABcAAAAdAAAAIgAAACYAAAAnAAAAKgAAACwAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>70</X>
       <Y>32</Y>
       <Width>5</Width>
@@ -104,7 +103,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAANAAAADgAAABMAAAAWAAAAGAAAABoAAAAdAAAA</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreVault">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>33</X>
       <Y>4</Y>
       <Width>2</Width>
@@ -114,7 +113,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreHealer">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>4</X>
       <Y>25</Y>
       <Width>3</Width>

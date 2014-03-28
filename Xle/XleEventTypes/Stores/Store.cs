@@ -14,7 +14,7 @@ using ERY.Xle.Maps;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-	public abstract class Store : XleEvent
+	public class Store : XleEvent
 	{
 		private double mCostFactor = 1.0;
 		private bool mRobbed = false;
@@ -43,8 +43,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		protected override XleEventTypes.Extenders.EventExtender CreateExtenderImpl(XleMap map)
 		{
-			Extender = map.CreateEventExtender<StoreExtender>(this);
-			return Extender;
+			return map.CreateEventExtender<StoreExtender>(this);
 		}
 
 		[Browsable(false)]
@@ -225,7 +224,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			return 0;
 		}
 
-		public StoreExtender Extender { get; protected set; }
+		public new StoreExtender Extender { get { return (StoreExtender)base.Extender; } }
 	}
 
 }

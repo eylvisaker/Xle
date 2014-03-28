@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreHealer">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>13</X>
       <Y>30</Y>
       <Width>5</Width>
@@ -26,7 +26,7 @@
       <ShopName>The Surgery</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>6</X>
       <Y>5</Y>
       <Width>3</Width>
@@ -35,7 +35,7 @@
       <ShopName>Deadly's</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>47</X>
       <Y>20</Y>
       <Width>4</Width>
@@ -44,7 +44,7 @@
       <ShopName>Last Chance</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>61</X>
       <Y>23</Y>
       <Width>3</Width>
@@ -53,7 +53,7 @@
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>69</X>
       <Y>25</Y>
       <Width>5</Width>
@@ -75,7 +75,7 @@
       <BuyRaftX>112</BuyRaftX>
       <BuyRaftY>4</BuyRaftY>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>46</X>
       <Y>3</Y>
       <Width>3</Width>

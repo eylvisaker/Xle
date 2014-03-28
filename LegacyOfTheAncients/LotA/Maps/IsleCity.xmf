@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>76</X>
       <Y>2</Y>
       <Width>3</Width>
@@ -26,7 +26,7 @@
       <ShopName>Water Snacks</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>46</X>
       <Y>2</Y>
       <Width>3</Width>
@@ -36,7 +36,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAgAAAAMAAAAEgAAABQAAAAcAAAAHwAAACYAAAApAAAA</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>4</X>
       <Y>4</Y>
       <Width>3</Width>
@@ -45,7 +45,7 @@
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>3</X>
       <Y>28</Y>
       <Width>5</Width>
@@ -54,7 +54,7 @@
       <ShopName>Liquid Illusions</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>8</X>
       <Y>32</Y>
       <Width>5</Width>
@@ -63,7 +63,7 @@
       <ShopName>Liquid Illusions</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>37</X>
       <Y>25</Y>
       <Width>4</Width>
@@ -73,17 +73,16 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAkAAAAMAAAAEwAAABUAAAAcAAAA</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBuyback">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>37</X>
       <Y>20</Y>
       <Width>3</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBuyback</ExtenderName>
       <ShopName>Captain Greed's Buy-Back Shop</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreLending">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>66</X>
       <Y>27</Y>
       <Width>3</Width>

@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>67</X>
       <Y>13</Y>
       <Width>7</Width>
@@ -26,7 +26,7 @@
       <ShopName>Ern's Fairly Decent Grocery</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>45</X>
       <Y>5</Y>
       <Width>3</Width>
@@ -36,7 +36,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAKAAAADgAAABAAAAAVAAAAGwAAAB8AAAAhAAAAKQAAACsAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>53</X>
       <Y>5</Y>
       <Width>4</Width>
@@ -46,7 +46,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAAKAAAACwAAABIAAAAVAAAAFgAAABwAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>7</X>
       <Y>7</Y>
       <Width>3</Width>
@@ -55,7 +55,7 @@
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreHealer">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>47</X>
       <Y>22</Y>
       <Width>2</Width>
@@ -65,7 +65,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeaponTraining">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>43</X>
       <Y>29</Y>
       <Width>2</Width>

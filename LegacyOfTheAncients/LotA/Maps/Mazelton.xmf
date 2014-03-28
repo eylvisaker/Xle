@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>12</X>
       <Y>18</Y>
       <Width>3</Width>
@@ -27,7 +27,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAALAAAADQAAABEAAAAXAAAAGQAAACEAAAAlAAAAKAAAACoAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFortune">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>24</X>
       <Y>1</Y>
       <Width>5</Width>
@@ -36,7 +36,7 @@
       <ShopName>Sincere Secrets</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>32</X>
       <Y>3</Y>
       <Width>4</Width>
@@ -45,7 +45,7 @@
       <ShopName>Razzle Dazzle</ShopName>
       <CostFactor>0.60613810741688</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreHealer">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>33</X>
       <Y>16</Y>
       <Width>4</Width>
@@ -54,7 +54,7 @@
       <ShopName>Feels so good</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>55</X>
       <Y>31</Y>
       <Width>3</Width>
@@ -63,7 +63,7 @@
       <ShopName>Nibbles &amp; Bits</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>70</X>
       <Y>7</Y>
       <Width>5</Width>
@@ -73,7 +73,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAgAAAANAAAAEAAAABcAAAAaAAAA</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreLending">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>75</X>
       <Y>2</Y>
       <Width>3</Width>

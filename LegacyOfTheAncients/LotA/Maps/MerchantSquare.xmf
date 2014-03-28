@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>42</X>
       <Y>15</Y>
       <Width>2</Width>
@@ -28,7 +28,7 @@
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAYAAAAIAAAADAAAAA0AAAAPAAAAEgAAABQAAAAYAAAAGgAAABwAAAAfAAAAIAAAACQAAAAm
 AAAAKQAAACoAAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>45</X>
       <Y>15</Y>
       <Width>2</Width>
@@ -37,7 +37,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <ShopName>Union Foods</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBlackjack">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>62</X>
       <Y>21</Y>
       <Width>3</Width>
@@ -46,7 +46,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <ShopName>Trick or Treat</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>61</X>
       <Y>16</Y>
       <Width>3</Width>
@@ -55,7 +55,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <ShopName>Wicked Spells</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>62</X>
       <Y>13</Y>
       <Width>3</Width>
@@ -65,7 +65,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAgAAAAJAAAADAAAAA4AAAARAAAAEwAAABQAAAAVAAAAHAAAAB0AAAA=</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFortune">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>54</X>
       <Y>17</Y>
       <Width>3</Width>

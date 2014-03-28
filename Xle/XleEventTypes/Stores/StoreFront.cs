@@ -19,8 +19,8 @@ namespace ERY.Xle.XleEventTypes.Stores
 		protected Color[][] theWindowColor = new Color[20][];
 
 		ColorScheme mColorScheme = new ColorScheme();
-		
-		public new StoreFrontExtender Extender { get; protected set; }
+
+		public new StoreFrontExtender Extender { get { return (StoreFrontExtender)base.Extender; } }
 		public List<TextWindow> Windows { get; private set; }
 
 		public StoreFront()
@@ -44,10 +44,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		protected override XleEventTypes.Extenders.EventExtender CreateExtenderImpl(XleMap map)
 		{
-			Extender = map.CreateEventExtender<StoreFrontExtender>(this);
-			base.Extender = Extender;
-
-			return Extender;
+			return map.CreateEventExtender<StoreFrontExtender>(this);
 		}
 
 		protected void ClearWindow()
@@ -74,7 +71,9 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		protected int LeftOffset { get; set; }
 
-		protected abstract void SetColorScheme(ColorScheme cs);
+		[Obsolete]
+		protected virtual void SetColorScheme(ColorScheme cs)
+		{ }
 
 		protected internal void RedrawStore()
 		{

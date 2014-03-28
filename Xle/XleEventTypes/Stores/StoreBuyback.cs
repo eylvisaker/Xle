@@ -7,6 +7,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 {
 	public class StoreBuyback : StoreFront
 	{
+		protected override void AfterReadData()
+		{
+			ExtenderName = "StoreBuyback";
+		}
+
 		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.Pink;

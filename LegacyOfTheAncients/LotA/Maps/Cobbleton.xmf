@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>14</X>
       <Y>27</Y>
       <Width>5</Width>
@@ -26,7 +26,7 @@
       <ShopName>Convenience</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreHealer">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>56</X>
       <Y>34</Y>
       <Width>2</Width>
@@ -35,7 +35,7 @@
       <ShopName>The Gentle Touch</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>65</X>
       <Y>25</Y>
       <Width>3</Width>
@@ -44,7 +44,7 @@
       <ShopName>Urban Crunch</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>59</X>
       <Y>5</Y>
       <Width>4</Width>
@@ -55,7 +55,7 @@
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAIAAAACQAAAAsAAAAMAAAADwAAABEAAAASAAAAFAAAABgAAAAbAAAAHAAAAB8AAAAg
 AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreLending">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>66</X>
       <Y>8</Y>
       <Width>3</Width>
@@ -64,17 +64,16 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <ShopName>Lending Association</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBuyback">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>33</X>
       <Y>14</Y>
       <Width>6</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBuyback</ExtenderName>
       <ShopName>Honest Abe's</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>44</X>
       <Y>24</Y>
       <Width>3</Width>
@@ -84,7 +83,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAcAAAAJAAAADAAAAA4AAAAPAAAAEgAAABMAAAAUAAAAFQAAABoAAAAbAAAAHAAAAA==</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBlackjack">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>17</X>
       <Y>10</Y>
       <Width>4</Width>
@@ -93,7 +92,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <ShopName>Den O' Delight</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFlipFlop">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>36</X>
       <Y>26</Y>
       <Width>5</Width>
@@ -102,7 +101,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <ShopName>Den O' Delight</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFortune">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>17</X>
       <Y>5</Y>
       <Width>4</Width>

@@ -15,14 +15,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 			ExtenderName = "StoreMagic";
 		}
 
-		protected new StoreMagicExtender Extender { get; set; }
+		protected new StoreMagicExtender Extender { get { return (StoreMagicExtender)base.Extender; } }
 
 		protected override XleEventTypes.Extenders.EventExtender CreateExtenderImpl(XleMap map)
 		{
-			Extender = map.CreateEventExtender<StoreMagicExtender>(this);
-			base.Extender = Extender;
-
-			return Extender;
+			return map.CreateEventExtender<StoreMagicExtender>(this);
 		}
 		protected override void SetColorScheme(ColorScheme cs)
 		{

@@ -201,7 +201,8 @@
     <Compile Include="XleEventTypes\Script.cs" />
     <Compile Include="XleEventTypes\SpeakToPerson.cs" />
     <Compile Include="XleEventTypes\Extenders\TreasureChestExtender.cs" />
-    <Compile Include="XleEventTypes\Stores\Buyback.cs" />
+    <Compile Include="XleEventTypes\Stores\StoreBuyback.cs" />
+    <Compile Include="XleEventTypes\Stores\Extenders\StoreEquipmentExtender.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreExtender.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreFrontExtender.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreMagicExtender.cs" />

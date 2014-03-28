@@ -16,8 +16,30 @@ namespace ERY.Xle.Maps
 		{
 			Assembly ass = Assembly.GetExecutingAssembly();
 
-			typemap.Add("ERY.Xle.Roof", typeof(Roof));
-			typemap.Add("ERY.Xle.Guard", typeof(Guard));
+			MapSpecificStoreToGenericStore("Bank");
+			MapSpecificStoreToGenericStore("Blackjack");
+			MapSpecificStoreToGenericStore("FlipFlop");
+			MapSpecificStoreToGenericStore("Buyback");
+			MapSpecificStore("Armor", typeof(StoreEquipment));
+			MapSpecificStore("Weapon", typeof(StoreEquipment));
+			MapSpecificStoreToGenericStore("ArmorTraining");
+			MapSpecificStoreToGenericStore("WeaponTraining");
+			MapSpecificStoreToGenericStore("Food");
+			MapSpecificStoreToGenericStore("Lending");
+			MapSpecificStoreToGenericStore("Jail");
+			MapSpecificStoreToGenericStore("Fortune");
+			MapSpecificStoreToGenericStore("Magic");
+			MapSpecificStoreToGenericStore("Vault");
+			MapSpecificStoreToGenericStore("Healer");
+		}
+
+		private void MapSpecificStore(string p, Type targetType)
+		{
+			typemap.Add("ERY.Xle.XleEventTypes.Stores.Store" + p, targetType);
+		}
+		private void MapSpecificStoreToGenericStore(string p)
+		{
+			MapSpecificStore(p, typeof(Store));
 		}
 
 		public XleTypeBinder(AgateLib.Serialization.Xle.ITypeBinder typeBinder)

@@ -17,7 +17,7 @@
   <TileImage>LotaTown</TileImage>
   <DefaultTile>0</DefaultTile>
   <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreFood">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>4</X>
       <Y>24</Y>
       <Width>4</Width>
@@ -26,7 +26,7 @@
       <ShopName>Country Fresh</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBlackjack">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>16</X>
       <Y>1</Y>
       <Width>8</Width>
@@ -35,17 +35,16 @@
       <ShopName>The Huckster</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBuyback">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>27</X>
       <Y>22</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBuyback</ExtenderName>
       <ShopName>Easy Al's Buy-Back Shop</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmorTraining">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>37</X>
       <Y>35</Y>
       <Width>8</Width>
@@ -54,7 +53,7 @@
       <ShopName>The One Room School</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmorTraining">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>41</X>
       <Y>32</Y>
       <Width>4</Width>
@@ -63,7 +62,7 @@
       <ShopName>The One Room School</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreMagic">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>51</X>
       <Y>3</Y>
       <Width>6</Width>
@@ -72,7 +71,7 @@
       <ShopName>Backwoods Spells</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreBank">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
       <X>69</X>
       <Y>18</Y>
       <Width>4</Width>
@@ -81,7 +80,7 @@
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreWeapon">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>61</X>
       <Y>27</Y>
       <Width>5</Width>
@@ -91,7 +90,7 @@
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAYAAAAKAAAACwAAABMAAAAWAAAAGgAAACAAAAAkAAAAKAAAAA==</AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreArmor">
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
       <X>60</X>
       <Y>35</Y>
       <Width>9</Width>
