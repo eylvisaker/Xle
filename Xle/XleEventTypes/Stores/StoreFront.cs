@@ -42,7 +42,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			mColorScheme.BackColor = XleColor.Green;
 		}
 
-		protected override XleEventTypes.Extenders.IEventExtender CreateExtenderImpl(XleMap map)
+		protected override XleEventTypes.Extenders.EventExtender CreateExtenderImpl(XleMap map)
 		{
 			Extender = map.CreateEventExtender<StoreFrontExtender>(this);
 			base.Extender = Extender;

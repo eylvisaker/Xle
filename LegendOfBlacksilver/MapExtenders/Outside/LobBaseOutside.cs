@@ -11,7 +11,7 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 {
 	public class LobBaseOutside : OutsideExtender
 	{
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			if (evt is ChangeMapEvent)
 			{

@@ -35,7 +35,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 			scheme.FrameColor = XleColor.Gray;
 			scheme.FrameHighlightColor = XleColor.Yellow;
 		}
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			return extenders.Find(evt.ExtenderName) ??
 					base.CreateEventExtender(evt, defaultExtender);

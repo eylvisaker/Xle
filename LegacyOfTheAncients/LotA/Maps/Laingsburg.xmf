@@ -22,8 +22,7 @@
       <Y>13</Y>
       <Width>7</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Ern's Fairly Decent Grocery</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -32,8 +31,7 @@
       <Y>5</Y>
       <Width>3</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>General Weapons</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAKAAAADgAAABAAAAAVAAAAGwAAAB8AAAAhAAAAKQAAACsAAAA=</AllowedItemTypes>
@@ -43,8 +41,7 @@
       <Y>5</Y>
       <Width>4</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Refurbished Armor</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAAKAAAACwAAABIAAAAVAAAAFgAAABwAAAA=</AllowedItemTypes>
@@ -54,8 +51,7 @@
       <Y>7</Y>
       <Width>3</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBank</ExtenderName>
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -64,7 +60,7 @@
       <Y>22</Y>
       <Width>2</Width>
       <Height>2</Height>
-      <ExtenderName>Healer</ExtenderName>
+      <ExtenderName>StoreHealer</ExtenderName>
       <ShopName>
       </ShopName>
       <CostFactor>1</CostFactor>
@@ -74,8 +70,7 @@
       <Y>29</Y>
       <Width>2</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeaponTraining</ExtenderName>
       <ShopName>Prarie School</ShopName>
       <CostFactor>1</CostFactor>
     </Item>

@@ -8,6 +8,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 {
 	public class StoreBank : StoreFront
 	{
+		protected override void AfterReadData()
+		{
+			ExtenderName = "StoreBank";
+		}
+
 		public override int RobValue()
 		{
 			return XleCore.random.Next(180, 231);

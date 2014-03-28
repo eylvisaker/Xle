@@ -22,8 +22,7 @@
       <Y>18</Y>
       <Width>3</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Man O' Steel</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAALAAAADQAAABEAAAAXAAAAGQAAACEAAAAlAAAAKAAAACoAAAA=</AllowedItemTypes>
@@ -33,8 +32,7 @@
       <Y>1</Y>
       <Width>5</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFortune</ExtenderName>
       <ShopName>Sincere Secrets</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -43,8 +41,7 @@
       <Y>3</Y>
       <Width>4</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreMagic</ExtenderName>
       <ShopName>Razzle Dazzle</ShopName>
       <CostFactor>0.60613810741688</CostFactor>
     </Item>
@@ -53,7 +50,7 @@
       <Y>16</Y>
       <Width>4</Width>
       <Height>6</Height>
-      <ExtenderName>Healer</ExtenderName>
+      <ExtenderName>StoreHealer</ExtenderName>
       <ShopName>Feels so good</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -62,8 +59,7 @@
       <Y>31</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Nibbles &amp; Bits</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -72,8 +68,7 @@
       <Y>7</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>The Body Shop</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAgAAAANAAAAEAAAABcAAAAaAAAA</AllowedItemTypes>
@@ -83,8 +78,7 @@
       <Y>2</Y>
       <Width>3</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreLending</ExtenderName>
       <ShopName>Friendly</ShopName>
       <CostFactor>1</CostFactor>
     </Item>

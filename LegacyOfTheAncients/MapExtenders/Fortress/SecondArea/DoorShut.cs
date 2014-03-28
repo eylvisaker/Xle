@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
-	class DoorShut : NullEventExtender
+	class DoorShut : EventExtender
 	{
 		int replacementTile = 40;
 

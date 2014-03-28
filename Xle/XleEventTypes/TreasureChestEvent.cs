@@ -11,6 +11,12 @@ namespace ERY.Xle.XleEventTypes
 {
 	public class TreasureChestEvent : XleEvent
 	{
+		protected override void AfterReadData()
+		{
+			if (string.IsNullOrEmpty(ExtenderName))
+				ExtenderName = "TreasureChest";
+		}
+
 		private bool mClosed = true;
 		private bool mContainsItem = false;
 
@@ -46,7 +52,7 @@ namespace ERY.Xle.XleEventTypes
 				return typeof(TreasureChestExtender);
 			}
 		}
-		protected override IEventExtender CreateExtenderImpl(XleMap map)
+		protected override EventExtender CreateExtenderImpl(XleMap map)
 		{
 			Extender = (TreasureChestExtender)base.CreateExtenderImpl(map);
 

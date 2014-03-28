@@ -92,8 +92,7 @@
       <Y>4</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>40</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>
@@ -105,8 +104,7 @@
       <Y>10</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>True</ContainsItem>
       <Contents>25</Contents>
     </Item>
@@ -115,8 +113,7 @@
       <Y>25</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>True</ContainsItem>
       <Contents>18</Contents>
     </Item>
@@ -125,8 +122,7 @@
       <Y>25</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>True</ContainsItem>
       <Contents>18</Contents>
     </Item>
@@ -135,8 +131,7 @@
       <Y>29</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>165</Contents>
     </Item>
@@ -145,8 +140,7 @@
       <Y>30</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>430</Contents>
     </Item>
@@ -155,8 +149,7 @@
       <Y>32</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>230</Contents>
     </Item>
@@ -165,8 +158,7 @@
       <Y>34</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>250</Contents>
     </Item>
@@ -175,8 +167,7 @@
       <Y>37</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>155</Contents>
     </Item>
@@ -185,8 +176,7 @@
       <Y>38</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>True</ContainsItem>
       <Contents>18</Contents>
     </Item>
@@ -195,8 +185,7 @@
       <Y>41</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>165</Contents>
     </Item>
@@ -205,8 +194,7 @@
       <Y>44</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>500</Contents>
     </Item>
@@ -215,8 +203,7 @@
       <Y>45</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>330</Contents>
     </Item>
@@ -225,8 +212,7 @@
       <Y>50</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>155</Contents>
     </Item>
@@ -235,8 +221,7 @@
       <Y>51</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>True</ContainsItem>
       <Contents>18</Contents>
     </Item>
@@ -245,8 +230,7 @@
       <Y>51</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>200</Contents>
     </Item>
@@ -255,8 +239,7 @@
       <Y>55</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>410</Contents>
     </Item>
@@ -265,8 +248,7 @@
       <Y>56</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>210</Contents>
     </Item>
@@ -275,8 +257,7 @@
       <Y>57</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>190</Contents>
     </Item>
@@ -285,8 +266,7 @@
       <Y>63</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>195</Contents>
     </Item>
@@ -295,8 +275,7 @@
       <Y>72</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>260</Contents>
     </Item>
@@ -305,8 +284,7 @@
       <Y>75</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>450</Contents>
     </Item>
@@ -315,8 +293,7 @@
       <Y>76</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>300</Contents>
     </Item>
@@ -325,8 +302,7 @@
       <Y>76</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>True</ContainsItem>
       <Contents>18</Contents>
     </Item>
@@ -335,8 +311,7 @@
       <Y>81</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>310</Contents>
     </Item>
@@ -345,8 +320,7 @@
       <Y>83</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>950</Contents>
     </Item>
@@ -355,8 +329,7 @@
       <Y>83</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>200</Contents>
     </Item>
@@ -365,8 +338,7 @@
       <Y>93</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>True</ContainsItem>
       <Contents>10</Contents>
     </Item>
@@ -375,8 +347,7 @@
       <Y>255</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>TreasureChest</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>1040</Contents>
     </Item>
@@ -385,8 +356,7 @@
       <Y>74</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>Door</ExtenderName>
       <RequiredItem>10</RequiredItem>
       <ReplacementTile>21</ReplacementTile>
     </Item>
@@ -395,8 +365,7 @@
       <Y>74</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>Door</ExtenderName>
       <RequiredItem>9</RequiredItem>
       <ReplacementTile>20</ReplacementTile>
     </Item>
@@ -405,8 +374,7 @@
       <Y>81</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>Door</ExtenderName>
       <RequiredItem>9</RequiredItem>
       <ReplacementTile>18</ReplacementTile>
     </Item>
@@ -415,8 +383,7 @@
       <Y>7</Y>
       <Width>1</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>Door</ExtenderName>
       <RequiredItem>10</RequiredItem>
       <ReplacementTile>20</ReplacementTile>
     </Item>

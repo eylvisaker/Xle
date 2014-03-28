@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
-	class GuardWarning : NullEventExtender
+	class GuardWarning : EventExtender
 	{
 		public override void StepOn(GameState state, ref bool handled)
 		{

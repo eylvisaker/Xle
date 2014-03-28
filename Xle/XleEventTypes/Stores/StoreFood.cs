@@ -9,6 +9,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 {
 	public class StoreFood : StoreFront
 	{
+		protected override void AfterReadData()
+		{
+			ExtenderName = "StoreFood";
+		}
+
 		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.DarkGray;

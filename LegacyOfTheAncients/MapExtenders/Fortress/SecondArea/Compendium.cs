@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
-	class Compendium : NullEventExtender
+	class Compendium : EventExtender
 	{
 		private FortressFinal fortressFinal;
 

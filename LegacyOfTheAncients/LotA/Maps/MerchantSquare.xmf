@@ -22,8 +22,7 @@
       <Y>15</Y>
       <Width>2</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Whips &amp; Chains</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAYAAAAIAAAADAAAAA0AAAAPAAAAEgAAABQAAAAYAAAAGgAAABwAAAAfAAAAIAAAACQAAAAm
@@ -34,8 +33,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <Y>15</Y>
       <Width>2</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Union Foods</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -44,8 +42,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <Y>21</Y>
       <Width>3</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBlackjack</ExtenderName>
       <ShopName>Trick or Treat</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -54,8 +51,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <Y>16</Y>
       <Width>3</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreMagic</ExtenderName>
       <ShopName>Wicked Spells</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -64,8 +60,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <Y>13</Y>
       <Width>3</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Lacy's Leather</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAgAAAAJAAAADAAAAA4AAAARAAAAEwAAABQAAAAVAAAAHAAAAB0AAAA=</AllowedItemTypes>
@@ -75,8 +70,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <Y>17</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFortune</ExtenderName>
       <ShopName>Sadie's Sooth House</ShopName>
       <CostFactor>1</CostFactor>
     </Item>

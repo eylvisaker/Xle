@@ -61,9 +61,9 @@ namespace ERY.Xle.Maps.Extenders
 		}
 
 
-		public virtual IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public virtual EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
-			return (IEventExtender)Activator.CreateInstance(defaultExtender);
+			return (EventExtender)Activator.CreateInstance(defaultExtender);
 		}
 
 

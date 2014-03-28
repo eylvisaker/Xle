@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Extenders
 {
-	public class DoorExtender : NullEventExtender
+	public class DoorExtender : EventExtender
 	{
 		public new Door TheEvent { get { return (Door)base.TheEvent; } }
 

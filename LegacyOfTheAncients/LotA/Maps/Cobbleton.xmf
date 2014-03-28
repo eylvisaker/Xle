@@ -22,8 +22,7 @@
       <Y>27</Y>
       <Width>5</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBank</ExtenderName>
       <ShopName>Convenience</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -32,7 +31,7 @@
       <Y>34</Y>
       <Width>2</Width>
       <Height>2</Height>
-      <ExtenderName>Healer</ExtenderName>
+      <ExtenderName>StoreHealer</ExtenderName>
       <ShopName>The Gentle Touch</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -41,8 +40,7 @@
       <Y>25</Y>
       <Width>3</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Urban Crunch</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -51,8 +49,7 @@
       <Y>5</Y>
       <Width>4</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Street Shop</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAIAAAACQAAAAsAAAAMAAAADwAAABEAAAASAAAAFAAAABgAAAAbAAAAHAAAAB8AAAAg
@@ -63,8 +60,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <Y>8</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreLending</ExtenderName>
       <ShopName>Lending Association</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -83,8 +79,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <Y>24</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>City Steel</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAcAAAAJAAAADAAAAA4AAAAPAAAAEgAAABMAAAAUAAAAFQAAABoAAAAbAAAAHAAAAA==</AllowedItemTypes>
@@ -94,8 +89,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <Y>10</Y>
       <Width>4</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBlackjack</ExtenderName>
       <ShopName>Den O' Delight</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -104,8 +98,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <Y>26</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFlipFlop</ExtenderName>
       <ShopName>Den O' Delight</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -114,8 +107,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <Y>5</Y>
       <Width>4</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFortune</ExtenderName>
       <ShopName>Shady Sarah's</ShopName>
       <CostFactor>1</CostFactor>
     </Item>

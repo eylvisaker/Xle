@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
-	class Elf : NullEventExtender
+	class Elf : EventExtender
 	{
 	}
 }

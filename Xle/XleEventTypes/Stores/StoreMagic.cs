@@ -10,9 +10,14 @@ namespace ERY.Xle.XleEventTypes.Stores
 {
 	public class StoreMagic : StoreFront
 	{
+		protected override void AfterReadData()
+		{
+			ExtenderName = "StoreMagic";
+		}
+
 		protected new StoreMagicExtender Extender { get; set; }
 
-		protected override XleEventTypes.Extenders.IEventExtender CreateExtenderImpl(XleMap map)
+		protected override XleEventTypes.Extenders.EventExtender CreateExtenderImpl(XleMap map)
 		{
 			Extender = map.CreateEventExtender<StoreMagicExtender>(this);
 			base.Extender = Extender;

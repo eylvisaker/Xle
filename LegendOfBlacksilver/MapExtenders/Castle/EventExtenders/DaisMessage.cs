@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class DaisMessage : NullEventExtender
+	class DaisMessage : EventExtender
 	{
 		bool givenMessage = false;
 		public override void BeforeStepOn(GameState state)

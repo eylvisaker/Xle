@@ -15,8 +15,7 @@
       <Y>12</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>80</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>

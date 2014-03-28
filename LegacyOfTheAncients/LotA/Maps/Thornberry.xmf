@@ -22,8 +22,7 @@
       <Y>16</Y>
       <Width>4</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreRaft</ExtenderName>
       <ShopName>Earl's Used Boats Shop</ShopName>
       <CostFactor>0.655</CostFactor>
       <BuyRaftMap>1</BuyRaftMap>
@@ -35,8 +34,7 @@
       <Y>26</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBank</ExtenderName>
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -45,8 +43,7 @@
       <Y>5</Y>
       <Width>3</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>The Weapons Club</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">CAAAAA4AAAASAAAAGAAAABwAAAAiAAAAJgAAACwAAAA=</AllowedItemTypes>
@@ -56,8 +53,7 @@
       <Y>27</Y>
       <Width>2</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Poor Man's Armor</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAsAAAAPAAAAFQAAABkAAAA=</AllowedItemTypes>
@@ -67,8 +63,7 @@
       <Y>27</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Soup Kitchen</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -77,8 +72,7 @@
       <Y>7</Y>
       <Width>3</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreLending</ExtenderName>
       <ShopName>Friendly</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -97,8 +91,7 @@
       <Y>33</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFlipFlop</ExtenderName>
       <ShopName>The Lucky Winner</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -107,8 +100,7 @@
       <Y>28</Y>
       <Width>4</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBlackjack</ExtenderName>
       <ShopName>The Lucky Winner</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -117,8 +109,7 @@
       <Y>29</Y>
       <Width>5</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFortune</ExtenderName>
       <ShopName>The Cloudy Crystal</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -127,8 +118,7 @@
       <Y>27</Y>
       <Width>1</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreVault</ExtenderName>
       <ShopName>
       </ShopName>
       <CostFactor>1</CostFactor>

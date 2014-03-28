@@ -15,8 +15,7 @@
       <Y>56</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>11</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -28,8 +27,7 @@
       <Y>78</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>12</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -41,8 +39,7 @@
       <Y>8</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>10</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -54,8 +51,7 @@
       <Y>32</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>17</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -67,8 +63,7 @@
       <Y>108</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>16</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -80,8 +75,7 @@
       <Y>106</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>15</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -93,8 +87,7 @@
       <Y>72</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>51</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -106,8 +99,7 @@
       <Y>110</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>14</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -119,8 +111,7 @@
       <Y>58</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>13</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -132,8 +123,7 @@
       <Y>42</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>18</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -145,8 +135,7 @@
       <Y>22</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>19</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -158,8 +147,7 @@
       <Y>42</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>5</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -171,8 +159,7 @@
       <Y>6</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>ChangeMap</ExtenderName>
       <MapID>20</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>

@@ -10,15 +10,9 @@ namespace ERY.Xle.XleEventTypes.Stores
 	{
 		bool buyHerbs = false;
 
-		public StoreHealer()
+		protected override void AfterReadData()
 		{
-			ExtenderName = "Healer";
-		}
-
-		protected override void ReadData(AgateLib.Serialization.Xle.XleSerializationInfo info)
-		{
-			base.ReadData(info);
-			ExtenderName = "Healer";
+			ExtenderName = "StoreHealer";
 		}
 
 		protected override void SetColorScheme(ColorScheme cs)

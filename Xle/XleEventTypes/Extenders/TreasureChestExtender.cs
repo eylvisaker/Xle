@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Extenders
 {
-	public class TreasureChestExtender : NullEventExtender
+	public class TreasureChestExtender : EventExtender
 	{
 		public new TreasureChestEvent TheEvent { get { return (TreasureChestEvent)base.TheEvent; } }
 

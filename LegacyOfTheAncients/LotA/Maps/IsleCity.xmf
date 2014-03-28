@@ -22,8 +22,7 @@
       <Y>2</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Water Snacks</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -32,8 +31,7 @@
       <Y>2</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Fluid Motion</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAgAAAAMAAAAEgAAABQAAAAcAAAAHwAAACYAAAApAAAA</AllowedItemTypes>
@@ -43,8 +41,7 @@
       <Y>4</Y>
       <Width>3</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBank</ExtenderName>
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -53,8 +50,7 @@
       <Y>28</Y>
       <Width>5</Width>
       <Height>7</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreMagic</ExtenderName>
       <ShopName>Liquid Illusions</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -63,8 +59,7 @@
       <Y>32</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreMagic</ExtenderName>
       <ShopName>Liquid Illusions</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -73,8 +68,7 @@
       <Y>25</Y>
       <Width>4</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Ice Tough</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAkAAAAMAAAAEwAAABUAAAAcAAAA</AllowedItemTypes>
@@ -94,8 +88,7 @@
       <Y>27</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreLending</ExtenderName>
       <ShopName>Friendly</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -104,8 +97,7 @@
       <Y>33</Y>
       <Width>7</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreRaft</ExtenderName>
       <ShopName>Sail Away Shop</ShopName>
       <CostFactor>0.655</CostFactor>
       <BuyRaftMap>1</BuyRaftMap>
@@ -117,8 +109,7 @@
       <Y>15</Y>
       <Width>6</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>LeaveMap</ExtenderName>
     </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">

@@ -14,8 +14,7 @@
       <Y>35</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreRaft</ExtenderName>
       <ShopName>
       </ShopName>
       <CostFactor>1</CostFactor>

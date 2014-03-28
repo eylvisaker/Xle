@@ -14,7 +14,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 			CastleLevel = 2;
 		}
-		public override IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			var name = evt.ExtenderName.ToLowerInvariant();
 

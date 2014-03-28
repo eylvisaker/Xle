@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
-	class Mantrek : NullEventExtender
+	class Mantrek : EventExtender
 	{
 		public override void Speak(GameState state, ref bool handled)
 		{

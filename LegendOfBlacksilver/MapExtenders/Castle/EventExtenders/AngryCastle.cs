@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class AngryCastle : NullEventExtender
+	class AngryCastle : EventExtender
 	{
 		private DurekCastle durekCastle;
 

@@ -183,16 +183,16 @@ namespace ERY.Xle.Maps
 			}
 		}
 
-		public T CreateEventExtender<T>(XleEvent evt) where T : IEventExtender, new()
+		public T CreateEventExtender<T>(XleEvent evt) where T : EventExtender, new()
 		{
 			return (T)CreateEventExtender(evt, typeof(T));
 		}
-		public IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			if (mBaseExtender != null)
 				return mBaseExtender.CreateEventExtender(evt, defaultExtender);
 			else
-				return (IEventExtender)Activator.CreateInstance(defaultExtender);
+				return (EventExtender)Activator.CreateInstance(defaultExtender);
 		}
 
 		private void SetChestIDs()

@@ -22,8 +22,7 @@
       <Y>8</Y>
       <Width>4</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreRaft</ExtenderName>
       <ShopName>Sail Sales Shop</ShopName>
       <CostFactor>0.56</CostFactor>
       <BuyRaftMap>1</BuyRaftMap>
@@ -35,8 +34,7 @@
       <Y>9</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Food for Thought</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -55,8 +53,7 @@
       <Y>3</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreLending</ExtenderName>
       <ShopName>Friendly</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -65,8 +62,7 @@
       <Y>3</Y>
       <Width>2</Width>
       <Height>7</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFlipFlop</ExtenderName>
       <ShopName>Ye Holy Rollers</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -75,8 +71,7 @@
       <Y>34</Y>
       <Width>5</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFortune</ExtenderName>
       <ShopName>Prophet for Profit</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -85,8 +80,7 @@
       <Y>30</Y>
       <Width>4</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreMagic</ExtenderName>
       <ShopName>Miracle Magic</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -95,8 +89,7 @@
       <Y>25</Y>
       <Width>5</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Saintly Swords</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAALAAAADgAAABAAAAATAAAAFAAAABcAAAAdAAAAIgAAACYAAAAnAAAAKgAAACwAAAA=</AllowedItemTypes>
@@ -106,8 +99,7 @@
       <Y>32</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Armageddon Armor</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAANAAAADgAAABMAAAAWAAAAGAAAABoAAAAdAAAA</AllowedItemTypes>
@@ -117,8 +109,7 @@
       <Y>4</Y>
       <Width>2</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreVault</ExtenderName>
       <ShopName>
       </ShopName>
       <CostFactor>1</CostFactor>
@@ -128,7 +119,7 @@
       <Y>25</Y>
       <Width>3</Width>
       <Height>5</Height>
-      <ExtenderName>Healer</ExtenderName>
+      <ExtenderName>StoreHealer</ExtenderName>
       <ShopName>Holy Healers</ShopName>
       <CostFactor>0.943</CostFactor>
     </Item>

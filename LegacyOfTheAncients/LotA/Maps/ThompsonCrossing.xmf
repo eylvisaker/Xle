@@ -22,8 +22,7 @@
       <Y>30</Y>
       <Width>12</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBank</ExtenderName>
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -32,8 +31,7 @@
       <Y>5</Y>
       <Width>6</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBlackjack</ExtenderName>
       <ShopName>Johnny's Jubilee</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -42,8 +40,7 @@
       <Y>11</Y>
       <Width>3</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFlipFlop</ExtenderName>
       <ShopName>Johnny's Jubilee</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -62,8 +59,7 @@
       <Y>27</Y>
       <Width>7</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Hit Me Hurt Me</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAALAAAADAAAABEAAAATAAAAFgAAAB0AAAAeAAAAIgAAACcAAAArAAAA</AllowedItemTypes>
@@ -73,8 +69,7 @@
       <Y>27</Y>
       <Width>6</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Heavy Metal</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAcAAAAKAAAAEwAAABcAAAAYAAAAGwAAABwAAAAdAAAA</AllowedItemTypes>
@@ -84,8 +79,7 @@
       <Y>32</Y>
       <Width>10</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Combatorium</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">
@@ -96,8 +90,7 @@
       <Y>6</Y>
       <Width>4</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Tasy Treat</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -106,8 +99,7 @@
       <Y>4</Y>
       <Width>13</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreLending</ExtenderName>
       <ShopName>Friendly</ShopName>
       <CostFactor>1</CostFactor>
     </Item>

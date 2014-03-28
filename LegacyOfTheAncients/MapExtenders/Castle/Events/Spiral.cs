@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {
-	public class Spiral : NullEventExtender
+	public class Spiral : EventExtender
 	{
 		public override void StepOn(GameState state, ref bool handled)
 		{

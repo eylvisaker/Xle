@@ -22,7 +22,7 @@
       <Y>30</Y>
       <Width>5</Width>
       <Height>3</Height>
-      <ExtenderName>Healer</ExtenderName>
+      <ExtenderName>StoreHealer</ExtenderName>
       <ShopName>The Surgery</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -31,8 +31,7 @@
       <Y>5</Y>
       <Width>3</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreMagic</ExtenderName>
       <ShopName>Deadly's</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -41,8 +40,7 @@
       <Y>20</Y>
       <Width>4</Width>
       <Height>8</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Last Chance</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -51,8 +49,7 @@
       <Y>23</Y>
       <Width>3</Width>
       <Height>6</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBank</ExtenderName>
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -61,8 +58,7 @@
       <Y>25</Y>
       <Width>5</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Captain's Shop</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">CQAAAA4AAAATAAAAFwAAABgAAAAcAAAAHQAAAA==</AllowedItemTypes>
@@ -72,8 +68,7 @@
       <Y>3</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreRaft</ExtenderName>
       <ShopName>Treasure Cove Shop</ShopName>
       <CostFactor>0.895</CostFactor>
       <BuyRaftMap>2</BuyRaftMap>
@@ -85,8 +80,7 @@
       <Y>3</Y>
       <Width>3</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Pirate's Treasure</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">CQAAAA4AAAATAAAAGAAAAB0AAAAiAAAAJgAAACcAAAArAAAALAAAAA==</AllowedItemTypes>

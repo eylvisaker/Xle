@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
-	class SpeakGuard : NullEventExtender
+	class SpeakGuard : EventExtender
 	{
 		public override void Speak(GameState state, ref bool handled)
 		{

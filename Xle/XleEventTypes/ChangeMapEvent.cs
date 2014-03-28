@@ -22,6 +22,12 @@ namespace ERY.Xle.XleEventTypes
 		private string mCommandText = "";
 		ChangeMapExtender mExtender;
 
+		protected override void AfterReadData()
+		{
+			if (string.IsNullOrEmpty(ExtenderName))
+				ExtenderName = "ChangeMap";
+		}
+
 		protected override Type ExtenderType
 		{
 			get
@@ -29,7 +35,7 @@ namespace ERY.Xle.XleEventTypes
 				return typeof(ChangeMapExtender);
 			}
 		}
-		protected override IEventExtender CreateExtenderImpl(XleMap map)
+		protected override EventExtender CreateExtenderImpl(XleMap map)
 		{
 			mExtender = (ChangeMapExtender)base.CreateExtenderImpl(map);
 

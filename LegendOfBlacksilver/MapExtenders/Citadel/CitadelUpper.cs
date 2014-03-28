@@ -55,7 +55,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 			return TheMap.OutsideTile;
 		}
 
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			string name = evt.ExtenderName.ToLowerInvariant();
 

@@ -211,6 +211,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 	}
 	public class StoreWeapon : StoreEquipment
 	{
+		protected override void AfterReadData()
+		{
+			ExtenderName = "StoreWeapon";
+		}
+
 		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.Brown;
@@ -251,6 +256,12 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 	public class StoreArmor : StoreEquipment
 	{
+
+		protected override void AfterReadData()
+		{
+			ExtenderName = "StoreArmor";
+		}
+
 		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.Purple;

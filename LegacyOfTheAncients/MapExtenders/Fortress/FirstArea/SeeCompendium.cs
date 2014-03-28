@@ -10,7 +10,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
-	class SeeCompendium : NullEventExtender
+	class SeeCompendium : EventExtender
 	{
 		bool paralyzed = false;
 
@@ -60,8 +60,9 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			evt.SetOpenTilesOnMap(state.Map);
 		}
 
-		public override void TryToStepOn(GameState state, int dx, int dy, ref bool allowStep)
+		public override void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
 		{
+			allowStep = true;
 			if (state.Player.HP > 30 && paralyzed)
 			{
 				paralyzed = false;

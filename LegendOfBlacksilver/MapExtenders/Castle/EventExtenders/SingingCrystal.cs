@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class SingingCrystal : NullEventExtender
+	class SingingCrystal : EventExtender
 	{
 		public override void Use(GameState state, int item, ref bool handled)
 		{

@@ -17,7 +17,7 @@ namespace ERY.Xle
 	public abstract class XleEvent : IXleSerializable
 	{
 		private Rectangle rect;
-		IEventExtender extender;
+		EventExtender mExtender;
 
 		public XleEvent()
 		{
@@ -56,18 +56,7 @@ namespace ERY.Xle
 			get { return rect.Height; }
 			set { rect.Height = value; }
 		}
-
-		/// <summary>
-		/// Gets whether or not this type of event can be placed on
-		/// the specified map type.
-		/// </summary>
-		/// <param name="type"></param>
-		/// <returns></returns>
-		public virtual bool AllowedOnMapType(XleMap type)
-		{
-			return true;
-		}
-
+		
 		/// <summary>
 		/// Gets whether or not this type of event allows the player
 		/// to rob it when the town isn't angry at him.
@@ -109,6 +98,12 @@ namespace ERY.Xle
 			ExtenderName = info.ReadString("ExtenderName", "");
 
 			ReadData(info);
+
+			AfterReadData();
+		}
+
+		protected virtual void AfterReadData()
+		{
 		}
 
 		/// <summary>
@@ -128,14 +123,17 @@ namespace ERY.Xle
 
 		#endregion
 
-		protected virtual Type ExtenderType { get { return typeof(NullEventExtender); } }
+		public bool Enabled { get; set; }
+
+		public EventExtender Extender { get { return mExtender; } }
+		protected virtual Type ExtenderType { get { return typeof(EventExtender); } }
 		public void CreateExtender(XleMap map)
 		{
-			extender = CreateExtenderImpl(map);
-			extender.TheEvent = this;
+			mExtender = CreateExtenderImpl(map);
+			mExtender.TheEvent = this;
 		}
 
-		protected virtual IEventExtender CreateExtenderImpl(XleMap map)
+		protected virtual EventExtender CreateExtenderImpl(XleMap map)
 		{
 			return map.CreateEventExtender(this, ExtenderType);
 		}
@@ -151,7 +149,7 @@ namespace ERY.Xle
 		public virtual bool Speak(GameState state)
 		{
 			bool handled = false;
-			extender.Speak(state, ref handled);
+			mExtender.Speak(state, ref handled);
 
 			return handled;
 		}
@@ -166,7 +164,7 @@ namespace ERY.Xle
 		public virtual bool Rob(GameState state)
 		{
 			bool handled = false;
-			extender.Rob(state, ref handled);
+			mExtender.Rob(state, ref handled);
 
 			return handled;
 		}
@@ -181,7 +179,7 @@ namespace ERY.Xle
 		public virtual bool Open(GameState state)
 		{
 			bool handled = false;
-			extender.Open(state, ref handled);
+			mExtender.Open(state, ref handled);
 
 			return handled;
 		}
@@ -196,7 +194,7 @@ namespace ERY.Xle
 		public virtual bool Take(GameState state)
 		{
 			bool handled = false;
-			extender.Take(state, ref handled);
+			mExtender.Take(state, ref handled);
 
 			return handled;
 		}
@@ -211,7 +209,7 @@ namespace ERY.Xle
 		public virtual bool StepOn(GameState state)
 		{
 			bool handled = false;
-			extender.StepOn(state, ref handled);
+			mExtender.StepOn(state, ref handled);
 
 			return handled;
 		}
@@ -229,8 +227,7 @@ namespace ERY.Xle
 		/// <returns></returns>
 		public virtual void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
 		{
-			allowStep = true;
-			extender.TryToStepOn(state, dx, dy, ref allowStep);
+			mExtender.TryToStepOn(state, dx, dy, out allowStep);
 		}
 		/// <summary>
 		/// Function called when the player uses an item
@@ -244,7 +241,7 @@ namespace ERY.Xle
 		public virtual bool Use(GameState state, int item)
 		{
 			bool handled = false;
-			extender.Use(state, item, ref handled);
+			mExtender.Use(state, item, ref handled);
 
 			return handled;
 		}
@@ -259,7 +256,7 @@ namespace ERY.Xle
 		public virtual bool Xamine(GameState state)
 		{
 			bool handled = false;
-			extender.Xamine(state, ref handled);
+			mExtender.Xamine(state, ref handled);
 
 			return handled;
 		}
@@ -267,14 +264,14 @@ namespace ERY.Xle
 
 		public virtual void BeforeStepOn(GameState state)
 		{
-			extender.BeforeStepOn(state);
+			mExtender.BeforeStepOn(state);
 		}
 
-		public bool Enabled { get; set; }
 
+		[Obsolete]
 		public virtual void OnLoad(GameState state)
 		{
-			extender.OnLoad(state);
+			mExtender.OnLoad(state);
 		}
 	}
 }

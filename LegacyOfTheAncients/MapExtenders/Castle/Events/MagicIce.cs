@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {
-	class MagicIce : NullEventExtender
+	class MagicIce : EventExtender
 	{
 		public override void Use(GameState state, int item, ref bool handled)
 		{

@@ -22,8 +22,7 @@
       <Y>29</Y>
       <Width>8</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Anthony's Armor</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BgAAAAkAAAAMAAAAEgAAABYAAAAdAAAA</AllowedItemTypes>
@@ -33,8 +32,7 @@
       <Y>32</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Al's Arms</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAkAAAANAAAAEgAAABUAAAAYAAAAGwAAAB8AAAAnAAAALAAAAA==</AllowedItemTypes>
@@ -44,8 +42,7 @@
       <Y>6</Y>
       <Width>3</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Bertha's Buns</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -54,8 +51,7 @@
       <Y>14</Y>
       <Width>3</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreRaft</ExtenderName>
       <ShopName>Floyd's Floataway Shop</ShopName>
       <CostFactor>0.495</CostFactor>
       <BuyRaftMap>1</BuyRaftMap>
@@ -67,8 +63,7 @@
       <Y>36</Y>
       <Width>5</Width>
       <Height>2</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFortune</ExtenderName>
       <ShopName>Felicia's Fortunes</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -77,8 +72,7 @@
       <Y>35</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreMagic</ExtenderName>
       <ShopName>Hubert's House of Hex</ShopName>
       <CostFactor>1</CostFactor>
     </Item>

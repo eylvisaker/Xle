@@ -29,7 +29,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			commands.Items.Add(new Commands.Take());
 			commands.Items.Add(new Commands.Speak());
 		}
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			string name = evt.ExtenderName.ToLowerInvariant();
 

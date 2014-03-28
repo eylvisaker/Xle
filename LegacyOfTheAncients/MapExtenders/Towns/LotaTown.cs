@@ -50,7 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 			commands.Items.Add(new Commands.Speak());
 		}
 
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			return mExtenders.Find(evt.ExtenderName) ?? base.CreateEventExtender(evt, defaultExtender);
 		}

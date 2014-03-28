@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
-	class GasTrap : NullEventExtender
+	class GasTrap : EventExtender
 	{
 		public override void StepOn(GameState state, ref bool handled)
 		{

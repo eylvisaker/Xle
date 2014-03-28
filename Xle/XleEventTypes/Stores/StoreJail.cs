@@ -8,5 +8,10 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 	public class StoreJail : Store
 	{
+		protected override void AfterReadData()
+		{
+			ExtenderName = "Jail";
+		}
+
 	}
 }

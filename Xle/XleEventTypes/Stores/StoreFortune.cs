@@ -8,6 +8,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 	public class StoreFortune : Store
 	{
+		protected override void AfterReadData()
+		{
+			ExtenderName = "StoreFortune";
+		}
+
 		public override bool Speak(GameState state)
 		{
 			var player = state.Player;

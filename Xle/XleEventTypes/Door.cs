@@ -13,7 +13,13 @@ namespace ERY.Xle.XleEventTypes
 	{
 		DoorExtender mExtender;
 
-		protected override Extenders.IEventExtender CreateExtenderImpl(XleMap map)
+		protected override void AfterReadData()
+		{
+			if (string.IsNullOrEmpty(ExtenderName))
+				ExtenderName = "Door";
+		}
+
+		protected override Extenders.EventExtender CreateExtenderImpl(XleMap map)
 		{
 			return mExtender = map.CreateEventExtender<DoorExtender>(this);
 		}

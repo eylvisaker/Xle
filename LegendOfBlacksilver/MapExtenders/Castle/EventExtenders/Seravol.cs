@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class Seravol : NullEventExtender
+	class Seravol : EventExtender
 	{
 		public override void Speak(GameState state, ref bool handled)
 		{

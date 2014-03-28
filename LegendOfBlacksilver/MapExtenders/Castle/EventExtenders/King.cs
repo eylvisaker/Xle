@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class King : NullEventExtender
+	class King : EventExtender
 	{
 		bool asked;
 

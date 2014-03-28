@@ -196,7 +196,6 @@
     <Compile Include="XleEventTypes\Extenders\ChangeMapExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\Common\ChangeMapQuestion.cs" />
     <Compile Include="XleEventTypes\Extenders\DoorExtender.cs" />
-    <Compile Include="XleEventTypes\Extenders\IEventExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\NullEventExtender.cs" />
     <Compile Include="XleEventTypes\LeaveEvent.cs" />
     <Compile Include="XleEventTypes\Script.cs" />
@@ -206,6 +205,7 @@
     <Compile Include="XleEventTypes\Stores\Extenders\StoreExtender.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreFrontExtender.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreMagicExtender.cs" />
+    <Compile Include="XleEventTypes\Stores\Extenders\StoreRaftExtender.cs" />
     <Compile Include="XleEventTypes\Stores\StoreBank.cs" />
     <Compile Include="XleEventTypes\Stores\StoreEquipment.cs" />
     <Compile Include="XleEventTypes\Stores\StoreFood.cs" />

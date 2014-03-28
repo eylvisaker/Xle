@@ -41,7 +41,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			mCostFactor = info.ReadDouble("CostFactor");
 		}
 
-		protected override XleEventTypes.Extenders.IEventExtender CreateExtenderImpl(XleMap map)
+		protected override XleEventTypes.Extenders.EventExtender CreateExtenderImpl(XleMap map)
 		{
 			Extender = map.CreateEventExtender<StoreExtender>(this);
 			return Extender;

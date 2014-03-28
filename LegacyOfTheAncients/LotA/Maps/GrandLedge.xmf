@@ -22,8 +22,7 @@
       <Y>24</Y>
       <Width>4</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreFood</ExtenderName>
       <ShopName>Country Fresh</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -32,8 +31,7 @@
       <Y>1</Y>
       <Width>8</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBlackjack</ExtenderName>
       <ShopName>The Huckster</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -52,8 +50,7 @@
       <Y>35</Y>
       <Width>8</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmorTraining</ExtenderName>
       <ShopName>The One Room School</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -62,8 +59,7 @@
       <Y>32</Y>
       <Width>4</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmorTraining</ExtenderName>
       <ShopName>The One Room School</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -72,8 +68,7 @@
       <Y>3</Y>
       <Width>6</Width>
       <Height>5</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreMagic</ExtenderName>
       <ShopName>Backwoods Spells</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -82,8 +77,7 @@
       <Y>18</Y>
       <Width>4</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreBank</ExtenderName>
       <ShopName>Convenience Bank</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
@@ -92,8 +86,7 @@
       <Y>27</Y>
       <Width>5</Width>
       <Height>4</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreWeapon</ExtenderName>
       <ShopName>Family Arms</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BQAAAAYAAAAKAAAACwAAABMAAAAWAAAAGgAAACAAAAAkAAAAKAAAAA==</AllowedItemTypes>
@@ -103,8 +96,7 @@
       <Y>35</Y>
       <Width>9</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>StoreArmor</ExtenderName>
       <ShopName>Home Made</ShopName>
       <CostFactor>1</CostFactor>
       <AllowedItemTypes array="true" encoding="Base64">BwAAAAkAAAALAAAAEQAAABUAAAAcAAAA</AllowedItemTypes>

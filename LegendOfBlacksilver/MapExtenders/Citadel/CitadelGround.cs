@@ -58,7 +58,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 				return 23;
 		}
 
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			if (evt is Door)
 				return new CitadelDoor();

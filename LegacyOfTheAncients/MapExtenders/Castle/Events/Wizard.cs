@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {
-	class Wizard : NullEventExtender
+	class Wizard : EventExtender
 	{
 		public override void Speak(GameState state, ref bool handled)
 		{

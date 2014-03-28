@@ -32,7 +32,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			return cdc.RollDamageToPlayer(player);
 		}
 
-		public override XleEventTypes.Extenders.IEventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			if (evt is TreasureChestEvent)
 				return new Chest { ChestArrayIndex = 0 };

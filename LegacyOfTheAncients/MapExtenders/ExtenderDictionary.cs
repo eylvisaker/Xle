@@ -9,7 +9,7 @@ namespace ERY.Xle.LotA.MapExtenders
 {
 	class ExtenderDictionary
 	{
-		Dictionary<string, IEventExtender> extenders = new Dictionary<string,IEventExtender>();
+		Dictionary<string, EventExtender> extenders = new Dictionary<string,EventExtender>();
 
 		class StringComparer : IComparer<string>
 		{
@@ -20,12 +20,12 @@ namespace ERY.Xle.LotA.MapExtenders
 		}
 		public bool ThrowExceptionIfNotFound { get;set;}
 
-		public void Add(string key, IEventExtender value)
+		public void Add(string key, EventExtender value)
 		{
 			extenders.Add(key, value);
 		}
 
-		public IEventExtender Find(string key)
+		public EventExtender Find(string key)
 		{
 			if (string.IsNullOrWhiteSpace(key))
 				return null;
