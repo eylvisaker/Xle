@@ -61,13 +61,14 @@ namespace ERY.Xle
 		/// Gets whether or not this type of event allows the player
 		/// to rob it when the town isn't angry at him.
 		/// </summary>
-		[Browsable(false)]
+		[Obsolete]
 		public virtual bool AllowRobWhenNotAngry { get { return false; } }
 
 		/// <summary>
 		/// Method called when the player attempts to rob and should get the 
 		/// message "the merchant won't let you rob."
 		/// </summary>
+		[Obsolete]
 		public virtual void RobFail()
 		{
 			XleCore.TextArea.PrintLine();
@@ -146,12 +147,9 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Speak(GameState state)
+		public bool Speak(GameState state)
 		{
-			bool handled = false;
-			mExtender.Speak(state, ref handled);
-
-			return handled;
+			return mExtender.Speak(state);
 		}
 		/// <summary>
 		/// Function called when player executes Rob in a square inside or next
@@ -161,12 +159,9 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Rob(GameState state)
+		public bool Rob(GameState state)
 		{
-			bool handled = false;
-			mExtender.Rob(state, ref handled);
-
-			return handled;
+			return mExtender.Rob(state);
 		}
 		/// <summary>
 		/// Function called when the player executes the Open command inside
@@ -176,12 +171,9 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Open(GameState state)
+		public bool Open(GameState state)
 		{
-			bool handled = false;
-			mExtender.Open(state, ref handled);
-
-			return handled;
+			return mExtender.Open(state);
 		}
 		/// <summary>
 		/// Function called when the player executes the Take command inside
@@ -191,12 +183,9 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Take(GameState state)
+		public bool Take(GameState state)
 		{
-			bool handled = false;
-			mExtender.Take(state, ref handled);
-
-			return handled;
+			return mExtender.Take(state);
 		}
 		/// <summary>
 		/// Function called when the player walks inside
@@ -206,12 +195,9 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool StepOn(GameState state)
+		public bool StepOn(GameState state)
 		{
-			bool handled = false;
-			mExtender.StepOn(state, ref handled);
-
-			return handled;
+			return mExtender.StepOn(state);
 		}
 		/// <summary>
 		/// Function called when the player tries to walk inside
@@ -225,7 +211,7 @@ namespace ERY.Xle
 		/// <param name="dx"></param>
 		/// <param name="dy"></param>
 		/// <returns></returns>
-		public virtual void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
+		public void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
 		{
 			mExtender.TryToStepOn(state, dx, dy, out allowStep);
 		}
@@ -238,12 +224,9 @@ namespace ERY.Xle
 		/// <param name="player"></param>
 		/// <param name="item"></param>
 		/// <returns></returns>
-		public virtual bool Use(GameState state, int item)
+		public bool Use(GameState state, int item)
 		{
-			bool handled = false;
-			mExtender.Use(state, item, ref handled);
-
-			return handled;
+			return mExtender.Use(state, item);
 		}
 		/// <summary>
 		/// Function called when the player eXamines next
@@ -253,12 +236,9 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public virtual bool Xamine(GameState state)
+		public bool Xamine(GameState state)
 		{
-			bool handled = false;
-			mExtender.Xamine(state, ref handled);
-
-			return handled;
+			return mExtender.Xamine(state);
 		}
 
 

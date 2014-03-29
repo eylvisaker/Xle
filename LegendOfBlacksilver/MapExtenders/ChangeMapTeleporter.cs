@@ -10,9 +10,10 @@ namespace ERY.Xle.LoB.MapExtenders
 {
 	class ChangeMapTeleporter : ChangeMapExtender
 	{
-		public override void OnStepOn(GameState state, ref bool cancel)
+		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
 		{
 			TeleportAnimation();
+			return true;
 		}
 
 		protected void TeleportAnimation()

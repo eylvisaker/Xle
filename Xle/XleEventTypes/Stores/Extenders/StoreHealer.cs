@@ -4,16 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreHealer : StoreFront
+	public class StoreHealer : StoreFrontExtender
 	{
 		bool buyHerbs = false;
-
-		protected override void AfterReadData()
-		{
-			ExtenderName = "StoreHealer";
-		}
 
 		protected override void SetColorScheme(ColorScheme cs)
 		{

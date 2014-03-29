@@ -9,21 +9,23 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class PasswordDoor : CastleDoor
 	{
-		public override void ItemUnlocksDoor(GameState state, int item, ref bool itemUnlocksDoor)
+		public override bool ItemUnlocksDoor(GameState state, int item)
 		{
-			itemUnlocksDoor = false;
+			return false ;
 		}
 
-		public override void Speak(GameState state, ref bool handled)
+		public override bool Speak(GameState state)
 		{
 			if (Lota.Story.HasGuardianPassword)
 			{
 				XleCore.TextArea.PrintLine(" password.");
 				SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-				((Door)TheEvent).RemoveDoor(state);
-				handled = true;
+				RemoveDoor(state);
+				return true;
 			}
+			else
+				return false;
 		}
 	}
 }

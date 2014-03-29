@@ -13,12 +13,6 @@ namespace ERY.Xle.XleEventTypes
 	{
 		DoorExtender mExtender;
 
-		protected override void AfterReadData()
-		{
-			if (string.IsNullOrEmpty(ExtenderName))
-				ExtenderName = "Door";
-		}
-
 		protected override Extenders.EventExtender CreateExtenderImpl(XleMap map)
 		{
 			return mExtender = map.CreateEventExtender<DoorExtender>(this);
@@ -37,80 +31,10 @@ namespace ERY.Xle.XleEventTypes
 		public int RequiredItem { get; set; }
 		public int ReplacementTile { get; set; }
 
-		public override bool Use(GameState state, int item)
-		{
-			if (XleCore.Data.ItemList.IsKey(item) == false)
-				return false;
 
-			bool itemUnlocksDoor = item == RequiredItem;
-			mExtender.ItemUnlocksDoor(state, item, ref itemUnlocksDoor);
-
-			if (itemUnlocksDoor)
-			{
-				UnlockDoor(state, item);
-			}
-			else
-			{
-				UnlockFailureText(state, item);
-			}
-
-			return true;
-		}
-
-		private void UnlockFailureText(GameState state, int item)
-		{
-			bool handled = false;
-
-			mExtender.PrintUnlockFailureText(state, item, ref handled);
-			if (handled)
-				return;
-				
-			XleCore.TextArea.PrintLine();
-			XleCore.Wait(300 + 200 * state.Player.Gamespeed);
-			XleCore.TextArea.PrintLine("It doesn't fit this door.");
-		}
-
-		private void UnlockDoor(GameState state, int item)
-		{
-			bool handled = false;
-			
-			mExtender.PrintUnlockText(state, item, ref handled);
-			
-			if (handled == false)
-				XleCore.TextArea.PrintLine("Unlock door.");
-
-			PlayRemoveSound();
-			RemoveDoor(state);
-		}
-
-		public void PlayRemoveSound()
-		{
-			bool handled = false;
-
-			mExtender.PlayRemoveSound(ref handled);
-
-			if (handled)
-				return;
-
-			SoundMan.PlaySound(LotaSound.UnlockDoor);
-			XleCore.Wait(250);
-		}
 		public void RemoveDoor(GameState state)
 		{
-			bool handled = false;
-
-			mExtender.RemoveDoor(state, ref handled);
-			if (handled)
-				return;
-
-			for (int j = Rectangle.Y; j < Rectangle.Bottom; j++)
-			{
-				for (int i = Rectangle.X; i < Rectangle.Right; i++)
-				{
-					state.Map[i, j] = ReplacementTile;
-				}
-			}
-
+			mExtender.RemoveDoor(state);
 		}
 	}
 }

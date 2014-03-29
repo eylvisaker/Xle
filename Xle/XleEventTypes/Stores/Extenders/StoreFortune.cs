@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-
-	public class StoreFortune : Store
+	public class StoreFortune : StoreExtender
 	{
-		protected override void AfterReadData()
-		{
-			ExtenderName = "StoreFortune";
-		}
-
 		public override bool Speak(GameState state)
 		{
 			var player = state.Player;
@@ -24,9 +18,10 @@ namespace ERY.Xle.XleEventTypes.Stores
 			int choice;
 
 			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine(this.ShopName, XleColor.Green);
+			XleCore.TextArea.PrintLine(TheEvent.ShopName, XleColor.Green);
 			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Read your fortune for " + (int)(6 * CostFactor) + " gold?");
+			XleCore.TextArea.PrintLine("Read your fortune for " + 
+				(int)(6 * TheEvent.CostFactor) + " gold?");
 
 			choice = XleCore.QuickMenu(theList, 3, 1);
 

@@ -5,15 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreFood : StoreFront
+	public class StoreFood : StoreFrontExtender
 	{
-		protected override void AfterReadData()
-		{
-			ExtenderName = "StoreFood";
-		}
-
 		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.DarkGray;
@@ -205,7 +200,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 		private int SetTitle()
 		{
 			int i = 0;
-			theWindow[0] = ShopName;
+			theWindow[0] = TheEvent.ShopName;
 			return i;
 		}
 		private void PayForMail(Player player)

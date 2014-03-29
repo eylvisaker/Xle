@@ -159,19 +159,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 			else
 				return false;
 		}
-		public override bool Speak(GameState state)
-		{
-			player = state.Player;
-			
-			bool handled = false;
 
-			Extender.Speak(state, ref handled);
-
-			if (handled)
-				return true;
-
-			return StoreNotImplementedMessage();
-		}
 
 		protected bool StoreNotImplementedMessage()
 		{
@@ -186,35 +174,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 			XleCore.TextArea.PrintLine();
 
 			XleCore.Wait(1000);
-
-			return true;
-		}
-
-		public override bool Rob(GameState state)
-		{
-			if (Robbed)
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("No items within reach here.");
-				XleCore.Wait(1000);
-				return true;
-			}
-
-			int value = RobValue();
-
-			if (value == 0)
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("There's nothing to really carry here.");
-				XleCore.Wait(1000);
-				return true;
-			}
-
-			state.Player.Gold += value;
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("You get " + value.ToString() + " gold.", XleColor.Yellow);
-			XleCore.Wait(1000);
-			Robbed = true;
 
 			return true;
 		}

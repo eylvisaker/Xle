@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	class StoreRaftExtender : StoreExtender
+	public class StoreRaftExtender : StoreExtender
 	{
 		public new StoreRaft TheEvent { get { return (StoreRaft)base.TheEvent; } }
 

@@ -9,7 +9,7 @@ namespace ERY.Xle.LoB.MapExtenders.Outside.Events
 {
 	class Drawbridge : ChangeMapExtender
 	{
-		public override void OnStepOn(GameState state, ref bool cancel)
+		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
 		{
 			XleCore.TextArea.PrintLine();
 
@@ -28,18 +28,20 @@ namespace ERY.Xle.LoB.MapExtenders.Outside.Events
 
 			XleCore.Wait(1000);
 
-			cancel = true;
+			return true;
 		}
 
-		public override void Use(GameState state, int item, ref bool handled)
+		public override bool Use(GameState state, int item)
 		{
 			if (item == (int)LobItem.RopeAndPulley)
 			{
-				handled = true;
+				return true;
 
 				XleCore.Wait(1000);
 				TheEvent.ExecuteMapChange(state.Player);
 			}
+			else
+				return false;
 		}
 	}
 }

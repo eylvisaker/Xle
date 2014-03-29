@@ -109,51 +109,9 @@ namespace ERY.Xle.XleEventTypes
 			TargetEntryPoint = info.ReadInt32("TargetEntryPoint");
 			mCommandText = info.ReadString("CommandText", "");
 		}
-
-		public override bool StepOn(GameState state)
-		{
-			var player = state.Player;
-
-			if (player.X < X) return false;
-			if (player.Y < Y) return false;
-			if (player.X >= X + Width) return false;
-			if (player.Y >= Y + Height) return false;
-
-			if (MapID != 0 && VerifyMapExistence() == false)
-				return false;
-
-			bool cancel = false;
-
-			mExtender.OnStepOn(state, ref cancel);
-
-			if (cancel)
-				return false;
-
-			ExecuteMapChange(player);
-
-			return true;
-		}
-
 		public void ExecuteMapChange(Player player)
 		{
-			try
-			{
-				XleCore.ChangeMap(player, mMapID, TargetEntryPoint);
-			}
-			catch (Exception e)
-			{
-				System.Diagnostics.Debug.WriteLine(e.Message);
-
-				SoundMan.PlaySound(LotaSound.Bad);
-
-				XleCore.TextArea.Print("Failed to load ", XleColor.White);
-				XleCore.TextArea.Print(GetMapName(), XleColor.Red);
-				XleCore.TextArea.Print(".", XleColor.White);
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-
-				XleCore.Wait(1500);
-			}
+			mExtender.ExecuteMapChange(player);
 		}
 
 		public string GetMapName()

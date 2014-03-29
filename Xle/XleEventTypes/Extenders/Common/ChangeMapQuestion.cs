@@ -7,11 +7,9 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
 {
 	public class ChangeMapQuestion : ChangeMapExtender
 	{
-		ChangeMapEvent ChangeMap { get { return (ChangeMapEvent)TheEvent; } }
-
-		public override void OnStepOn(GameState state, ref bool cancel)
+		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
 		{
-			string newMapName = ChangeMap.GetMapName();
+			string newMapName = GetMapName();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Enter " + newMapName + "?");
 
@@ -19,11 +17,11 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
 
 			int choice = XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3);
 
-			if (string.IsNullOrEmpty(ChangeMap.CommandText) == false)
+			if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
 			{
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine(
-					string.Format(ChangeMap.CommandText, 
+					string.Format(TheEvent.CommandText, 
 					state.Map.MapName, newMapName));
 
 				XleCore.TextArea.PrintLine();
@@ -33,7 +31,9 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
 			}
 
 			if (choice == 1)
-				cancel = true;
+				return false;
+			else
+				return base.OnStepOnImpl(state, ref cancel);
 		}
 	}
 }

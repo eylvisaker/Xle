@@ -11,17 +11,23 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 	{
 		Player player;
 		int LeftOffset;
-		void ClearWindow() { }
-		string[] theWindow;
+		
+		TextWindow titlePrompt = new TextWindow();
+		TextWindow itemsPrompt = new TextWindow();
+		TextWindow inventoryDisplay = new TextWindow();
+
+		public new StoreEquipment TheEvent { get { return (StoreEquipment)base.TheEvent; } }
 
 		public StoreEquipmentExtender()
 		{
-			AllowedItemTypes = new List<int>();
+			Windows.Add(titlePrompt);
+			Windows.Add(itemsPrompt);
+			Windows.Add(inventoryDisplay);
 		}
 
 		protected abstract string StoreType { get; }
 
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
 
@@ -29,52 +35,44 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				return true;
 
 			MenuItemList theList = new MenuItemList("Buy", "Sell", "Neither");
-			int i = 0, j = 0;
-			int max = 200 * player.Level;
-			int choice;
+
+			this.player = player;
+
+			Title = TheEvent.ShopName;
+
+			InitializeWindows();
+
 			int[] itemList = new int[16];
 			int[] qualList = new int[16];
 			int[] priceList = new int[16];
 
-			this.LeftOffset = 4;
-			this.player = player;
-
-			ClearWindow();
-			theWindow[i++] = TheEvent.ShopName;
-			theWindow[i++] = "";
-			theWindow[i++] = "            " + StoreType;
-
 			FillItems(player.TimeQuality, itemList, qualList, priceList);
 
 			XleCore.TextArea.Clear();
-			choice = QuickMenu(theList, 2, 0);
+			int choice = QuickMenu(theList, 2, 0);
 			Wait(1);
 
 			if (choice == 0)
 			{
-				theWindow[4] = "   Items               Prices";
+				itemsPrompt.Text = "Items               Prices";
 
 				StoreSound(LotaSound.Sale);
 
-				for (i = 1; i < 16 && itemList[i] > 0; i++)
+				int count = 0;
+
+				for (int i = 1; i < 16 && itemList[i] > 0; i++)
 				{
-					j = i + 5;
+					count = i+1;
 					var name = ItemName(itemList[i], qualList[i]);
+					var price = priceList[i];
 
-					theWindow[j] = "";
-					theWindow[j] += i;
-					theWindow[j] += ". ";
-					theWindow[j] += name;
-
-					theWindow[j] += new string(' ', 22 - name.Length);
-
-					theWindow[j] += priceList[i];
+					AddItemToDisplay(i, name, price);
 					Wait(1);
 				}
 
 				MenuItemList theList2 = new MenuItemList();
 
-				for (int k = 0; k < i; k++)
+				for (int k = 0; k < count; k++)
 				{
 					theList2.Add(k.ToString());
 				}
@@ -106,7 +104,11 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 					else
 					{
 						player.Gold += priceList[choice];
-						XleCore.TextArea.PrintLine("No room in inventory");
+						XleCore.TextArea.PrintLine();
+						XleCore.TextArea.PrintLine();
+						XleCore.TextArea.PrintLine();
+						XleCore.TextArea.PrintLine("No purchase.  You're");
+						XleCore.TextArea.PrintLine("carrying too much.");
 					}
 
 				}
@@ -116,7 +118,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 					StoreSound(LotaSound.Medium);
 				}
 			}
-			else if (choice == 1)		// sell weapon
+			else if (choice == 1)		// sell item
 			{
 
 			}
@@ -124,9 +126,29 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			return true;
 		}
 
+		private void AddItemToDisplay(int index, string name, int price)
+		{
+			inventoryDisplay.WriteLine(string.Format(
+				"{0}. {1}{2}{3}", index, name, new string(' ', 22 - name.Length), price));
+		}
+
+		private void InitializeWindows()
+		{
+			titlePrompt.Clear();
+			itemsPrompt.Clear();
+			inventoryDisplay.Clear();
+
+			titlePrompt.Location = new Point(17, 2);
+			titlePrompt.WriteLine(StoreType);
+
+			itemsPrompt.Location = new Point(7, 4);
+
+			inventoryDisplay.Location = new Point(4, 6);
+		}
+
 		protected abstract bool AddItem(Player player, int itemIndex, int qualityIndex);
 
-		public List<int> AllowedItemTypes { get; set; }
+		public List<int> AllowedItemTypes { get { return TheEvent.AllowedItemTypes; } }
 		protected List<int> ItemStockThisTime { get; set; }
 
 		protected List<int> DetermineCurrentStock(List<int> stock)
@@ -200,7 +222,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 	public class StoreWeapon : StoreEquipmentExtender
 	{
-		public override void SetColorScheme(ColorScheme cs)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.Brown;
 			cs.FrameColor = XleColor.Orange;
@@ -239,7 +261,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 	}
 	public class StoreArmor : StoreEquipmentExtender
 	{
-		public override void SetColorScheme(ColorScheme cs)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.Purple;
 			cs.FrameColor = XleColor.Blue;

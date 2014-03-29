@@ -43,7 +43,7 @@ namespace ERY.Xle.XleEventTypes
 		[Browsable(false)]
 		public int ChestID { get; internal set; }
 
-		TreasureChestExtender Extender { get; set; }
+		public new TreasureChestExtender Extender { get; set; }
 
 		protected override Type ExtenderType
 		{
@@ -57,31 +57,6 @@ namespace ERY.Xle.XleEventTypes
 			Extender = (TreasureChestExtender)base.CreateExtenderImpl(map);
 
 			return Extender;
-		}
-
-		public override bool Open(GameState state)
-		{
-			bool handled = false;
-
-			Extender.Open(state, ref handled);
-
-			if (handled)
-				return true;
-
-			return OpenImpl(state);
-		}
-		public override bool Take(GameState state)
-		{
-			bool handled = false;
-
-			Extender.Take(state, ref handled);
-
-			if (handled)
-				return true;
-
-			XleCore.TextArea.PrintLine("\n\n" + Extender.TakeFailMessage);
-
-			return true;
 		}
 
 		public bool OpenImpl(GameState state)
@@ -182,10 +157,6 @@ namespace ERY.Xle.XleEventTypes
 			XleCore.TextArea.PrintLine(Extender.AlreadyOpenMessage);
 		}
 
-		public override void OnLoad(GameState state)
-		{
-			OpenIfMarked(state);
-		}
 
 		public void OpenIfMarked(GameState state)
 		{

@@ -1,36 +1,19 @@
-﻿using AgateLib.Geometry;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreBank : StoreFront
+	public class StoreBuyback : StoreFrontExtender
 	{
-		protected override void AfterReadData()
-		{
-			ExtenderName = "StoreBank";
-		}
-
-		public override int RobValue()
-		{
-			return XleCore.random.Next(180, 231);
-		}
-		public override bool AllowRobWhenNotAngry
-		{
-			get
-			{
-				return true;
-			}
-		}
 		protected override void SetColorScheme(ColorScheme cs)
 		{
-			cs.BackColor = XleColor.DarkGray;
-			cs.FrameColor = XleColor.Green;
+			cs.BackColor = XleColor.Pink;
+			cs.FrameColor = XleColor.Yellow;
 			cs.FrameHighlightColor = XleColor.Yellow;
-			cs.TitleColor = XleColor.Yellow;
-			cs.BorderColor = XleColor.Gray;
+			cs.TextAreaBackColor = XleColor.Brown;
+			cs.BorderColor = XleColor.Red;
 		}
 		protected override bool SpeakImpl(GameState state)
 		{
@@ -43,25 +26,25 @@ namespace ERY.Xle.XleEventTypes.Stores
 			this.player = player;
 			robbing = false;
 
-			theWindow[i++] = "Convenience Bank";
+			theWindow[i++] = TheEvent.ShopName;
 			theWindow[i++] = "";
 			theWindow[i++] = "";
-			theWindow[i++] = "Our services   ";
-			theWindow[i++] = "---------------";
+			theWindow[i++] = "I will happily purchase";
+			theWindow[i++] = "your used arms and armor";
 			theWindow[i++] = "";
 			theWindow[i++] = "";
-			theWindow[i++] = "1.  Deposit Funds   ";
 			theWindow[i++] = "";
-			theWindow[i++] = "2.  Withdraw Funds  ";
+			theWindow[i++] = "Choose items to sell:";
 			theWindow[i++] = "";
-			theWindow[i++] = "3.  Balance Inquiry  ";
+			theWindow[i++] = " 1.  Weapons";
+			theWindow[i++] = " 2.  Armor";
 
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Make choice (Hit 0 to cancel)");
+			XleCore.TextArea.PrintLine("Select (Hit 0 to cancel)");
 			XleCore.TextArea.PrintLine();
 
-			MenuItemList theList = new MenuItemList("0", "1", "2", "3");
+			MenuItemList theList = new MenuItemList("0", "1", "2");
 			choice = QuickMenu(theList, 2, 0);
 
 			switch (choice)
@@ -113,4 +96,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 			return true;
 		}
 	}
+
+
 }

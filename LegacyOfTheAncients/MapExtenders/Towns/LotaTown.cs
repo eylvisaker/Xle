@@ -1,6 +1,7 @@
 ﻿using ERY.Xle.LotA.MapExtenders.Towns.Stores;
 using ERY.Xle.Maps.Extenders;
 using ERY.Xle.XleEventTypes.Stores;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,21 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 		public LotaTown()
 		{
 			mExtenders.Add("Healer", new Healer());
+			mExtenders.Add("StoreHealer", new Healer());
+			mExtenders.Add("StoreFortune", new StoreFortune());
+			mExtenders.Add("StoreFood", new StoreFood());
+			mExtenders.Add("StoreWeaponTraining", new StoreWeaponTraining());
+			mExtenders.Add("StoreArmorTraining", new StoreArmorTraining());
+			mExtenders.Add("StoreMagic", new StoreMagic());
+			mExtenders.Add("StoreLending", new StoreLending());
+			mExtenders.Add("StoreFlipFlop", new StoreFlipFlop());
+			mExtenders.Add("StoreBlackjack", new StoreBlackjack());
+			mExtenders.Add("StoreArmor", new StoreArmor());
+			mExtenders.Add("StoreWeapon", new StoreWeapon());
+			mExtenders.Add("StoreRaft", new StoreRaftExtender());
+			mExtenders.Add("StoreBank", new StoreBank());
+			mExtenders.Add("StoreVault", new StoreVault());
+			mExtenders.Add("StoreBuyback", new StoreBuyback());
 		}
 
 		public override void OnLoad(GameState state)
@@ -28,7 +44,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 
 		static void CheckLoan(GameState state)
 		{
-			if (state.Map.Events.Any(x => x is StoreLending))
+			if (state.Map.Events.Any(x => x is Store && x.ExtenderName == "StoreLender"))
 			{
 				if (state.Player.loan > 0 && state.Player.dueDate - state.Player.TimeDays <= 0)
 				{
@@ -52,7 +68,17 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 
 		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
-			return mExtenders.Find(evt.ExtenderName) ?? base.CreateEventExtender(evt, defaultExtender);
+			return mExtenders.Find(evt.ExtenderName) ?? DefaultEvent(evt, defaultExtender);
+		}
+
+		private XleEventTypes.Extenders.EventExtender DefaultEvent(XleEvent evt, Type defaultExtender)
+		{
+			if (evt.ExtenderName.StartsWith("Store"))
+			{
+				System.Diagnostics.Debug.Print(evt.ExtenderName + " not implemented.");
+			}
+
+			return base.CreateEventExtender(evt, defaultExtender);
 		}
 	}
 }

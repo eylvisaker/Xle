@@ -9,15 +9,14 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth.EventExtenders
 {
 	class LabyrinthDoor : DoorExtender
 	{
-		public override void ItemUnlocksDoor(GameState state, int item, ref bool itemUnlocksDoor)
+		public override bool ItemUnlocksDoor(GameState state, int item)
 		{
 			if (item == (int)LobItem.SkeletonKey)
 			{
-				itemUnlocksDoor = true;
-				return;
+				return true;
 			}
 
-			base.ItemUnlocksDoor(state, item, ref itemUnlocksDoor);
+			return base.ItemUnlocksDoor(state, item);
 		}
 	}
 }

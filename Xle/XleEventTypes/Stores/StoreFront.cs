@@ -92,7 +92,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 			var renderer = XleCore.Renderer;
 
 			SetColorScheme(mColorScheme);
-			Extender.SetColorScheme(mColorScheme);
 			XleCore.SetProjectionAndBackColors(mColorScheme);
 
 			// Draw the borders
@@ -197,19 +196,6 @@ namespace ERY.Xle.XleEventTypes.Stores
 
 		public string Title { get; set; }
 
-		public override bool Speak(GameState state)
-		{
-			try
-			{
-				XleCore.Renderer.ReplacementDrawMethod = DrawStore;
-
-				return SpeakImpl(state);
-			}
-			finally
-			{
-				XleCore.Renderer.ReplacementDrawMethod = null;
-			}
-		}
 		protected virtual bool SpeakImpl(GameState state)
 		{
 			player = state.Player;

@@ -4,15 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreLending : StoreFront
+	public class StoreLending : StoreFrontExtender
 	{
-		protected override void AfterReadData()
-		{
-			ExtenderName = "StoreLending";
-		}
-
 		public override int RobValue()
 		{
 			return XleCore.random.Next(180, 231);

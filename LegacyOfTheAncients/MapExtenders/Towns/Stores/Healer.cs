@@ -13,7 +13,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 	{
 		bool buyingHerbs = false;
 
-		public override void SetColorScheme(ColorScheme cs)
+		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = buyingHerbs ? XleColor.LightBlue : XleColor.Green;
 			cs.FrameColor = XleColor.LightGreen;
@@ -21,20 +21,19 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			cs.BorderColor = XleColor.Gray;
 		}
 
-		public override void Speak(GameState state, ref bool handled)
+		protected override bool SpeakImpl(GameState state)
 		{
-			handled = true;
 			var player = state.Player;
 
 			if (TheEvent.IsLoanOverdue(state, true))
-				return;
+				return true;
 
 			buyingHerbs = false;
 
 			int woundPrice = (int)((player.MaxHP - player.HP) * 0.75);
 			int herbsPrice = (int)(player.Level * 300 * TheEvent.CostFactor);
 
-			TheEvent.Windows.Clear();
+			Windows.Clear();
 			SetDescriptionText();
 			SetOptionsText(woundPrice, herbsPrice);
 
@@ -117,6 +116,8 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			}
 
 			AfterSpeak(state);
+
+			return true;
 		}
 
 		protected virtual void AfterSpeak(GameState state)
@@ -146,7 +147,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 
 			window.WriteLine("2. Healing Herbs -  " + herbsPrice.ToString() + " apiece");
 
-			TheEvent.Windows.Add(window);
+			Windows.Add(window);
 		}
 
 		private void SetDescriptionText()
@@ -157,7 +158,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			window.WriteLine("Our sect offers restorative");
 			window.WriteLine("    cures for your wounds.");
 
-			TheEvent.Windows.Add(window);
+			Windows.Add(window);
 		}
 	}
 }

@@ -132,7 +132,6 @@ namespace ERY.Xle.XleEventTypes.Extenders
 			return handled;
 		}
 
-		[Obsolete]
 		public virtual void BeforeStepOn(GameState state)
 		{
 

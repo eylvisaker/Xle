@@ -8,6 +8,25 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreExtender : EventExtender
 	{
+		private bool mRobbed = false;
+
+		public bool Robbed
+		{
+			get { return mRobbed; }
+			set { mRobbed = value; }
+		}
+
+		/// <summary>
+		/// Stores the player object for use when redrawing.
+		/// </summary>
+		protected Player player;
+		/// <summary>
+		/// Bool indicating whether or not we are robbing this store.
+		/// </summary>
+		protected bool robbing;
+
+		public new Store TheEvent { get { return (Store)base.TheEvent; } }
+
 		/// <summary>
 		/// Returns true if the loan for the player is over due and stores should not
 		/// speak with him and optionally displays a message to the player.  
@@ -43,8 +62,80 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				return false;
 		}
 
-		[Obsolete]
-		bool robbing = false;
+		public override bool Speak(GameState state)
+		{
+			return StoreNotImplementedMessage();
+		}
+
+		protected bool StoreNotImplementedMessage()
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine(TheEvent.ShopName, XleColor.Yellow);
+			XleCore.TextArea.PrintLine("");
+			XleCore.TextArea.PrintLine("A Sign Says, ");
+			XleCore.TextArea.PrintLine("Closed for remodelling.");
+
+			SoundMan.PlaySound(LotaSound.Medium);
+
+			XleCore.TextArea.PrintLine();
+
+			XleCore.Wait(1000);
+
+			return true;
+		}
+
+		public override bool Rob(GameState state)
+		{
+			if (Robbed)
+			{
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("No items within reach here.");
+				XleCore.Wait(1000);
+				return true;
+			}
+
+			int value = RobValue();
+
+			if (value == 0)
+			{
+				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine("There's nothing to really carry here.");
+				XleCore.Wait(1000);
+				return true;
+			}
+
+			state.Player.Gold += value;
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You get " + value.ToString() + " gold.", XleColor.Yellow);
+			XleCore.Wait(1000);
+			Robbed = true;
+
+			return true;
+		}
+
+		public virtual int RobValue()
+		{
+			return 0;
+		}
+
+		/// <summary>
+		/// Method called when the player attempts to rob and should get the 
+		/// message "the merchant won't let you rob."
+		/// </summary>
+		public virtual void RobFail()
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("The merchant won't let you rob.");
+
+			XleCore.Wait(1000);
+		}
+
+		/// <summary>
+		/// Gets whether or not this type of event allows the player
+		/// to rob it when the town isn't angry at him.
+		/// </summary>
+		public virtual bool AllowRobWhenNotAngry { get { return false; } }
 
 		public virtual void CheckOfferMuseumCoin(Player player)
 		{

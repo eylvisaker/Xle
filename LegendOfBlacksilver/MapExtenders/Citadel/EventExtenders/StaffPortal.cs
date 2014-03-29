@@ -8,20 +8,21 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
 	class StaffPortal : ChangeMapTeleporter
 	{
-		public override void OnStepOn(GameState state, ref bool cancel)
+		public override bool StepOn(GameState state)
 		{
-			cancel = true;
+			return true;
 		}
 
-		public override void Use(GameState state, int item, ref bool handled)
+		public override bool Use(GameState state, int item)
 		{
 			if (item != (int)LobItem.Staff)
-				return;
+				return false;
 
-			handled = true;
 			TeleportAnimation();
 
 			TheEvent.ExecuteMapChange(state.Player);
+
+			return true;			
 		}
 	}
 }

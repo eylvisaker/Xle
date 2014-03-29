@@ -1,4 +1,5 @@
-﻿using ERY.Xle.XleEventTypes.Stores.Extenders;
+﻿using ERY.Xle.XleEventTypes.Stores;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
-	class Magic : StoreMagicExtender
+	class Magic : StoreMagic
 	{
 		public override int GetItemValue(int choice)
 		{
