@@ -31,10 +31,10 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 		{
 		}
 
-		public override void Take(GameState state, ref bool handled)
+		public override bool Take(GameState state)
 		{
-			TheEvent.OpenImpl(state);
-			handled = true;
+			Open(state);
+			return true;
 		}
 
 		public override string AlreadyOpenMessage

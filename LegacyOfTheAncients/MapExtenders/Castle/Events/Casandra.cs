@@ -8,10 +8,8 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class Casandra : EventExtender
 	{
-		public override void Speak(GameState state, ref bool handled)
+		public override bool Speak(GameState state)
 		{
-			handled = true;
-
 			SoundMan.PlaySound(LotaSound.VeryGood);
 			
 			XleCore.TextArea.Clear(true);
@@ -31,6 +29,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			}
 
 			XleCore.Wait(5000);
+			return true;
 		}
 
 		private void BegoneMessage(GameState state)

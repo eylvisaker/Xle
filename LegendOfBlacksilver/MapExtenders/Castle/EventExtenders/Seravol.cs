@@ -9,10 +9,10 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
 	class Seravol : EventExtender
 	{
-		public override void Speak(GameState state, ref bool handled)
+		public override bool Speak(GameState state)
 		{
-
 			Greetings();
+			bool handled = false;
 
 			if (state.Player.Level > 1)
 			{
@@ -37,8 +37,9 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 			if (handled == false)
 			{
 				NothingToTellMessage(state);
-				handled = true;
 			}
+
+			return true;
 		}
 
 		private void NothingToTellMessage(GameState state)

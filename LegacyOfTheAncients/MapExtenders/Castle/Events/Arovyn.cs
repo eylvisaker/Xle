@@ -8,7 +8,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class Arovyn : EventExtender
 	{
-		public override void Speak(GameState state, ref bool handled)
+		public override bool Speak(GameState state)
 		{
 			if (state.Player.Attribute[Attributes.strength] <= 25)
 			{
@@ -19,7 +19,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 				GiveMark(state);
 			}
 
-			handled = true;
+			return true;
 		}
 
 		private void TooWeakMessage(GameState state)

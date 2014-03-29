@@ -16,10 +16,8 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 			this.durekCastle = durekCastle;
 		}
 
-		public override void StepOn(GameState state, ref bool handled)
+		public override bool StepOn(GameState state)
 		{
-			handled = true;
-
 			if (durekCastle.InOrcArea == false)
 			{
 				durekCastle.StoredAngryFlag = durekCastle.IsAngry;
@@ -27,6 +25,8 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 				durekCastle.IsAngry = true;
 				durekCastle.InOrcArea = true;
 			}
+
+			return true;
 		}
 	}
 }

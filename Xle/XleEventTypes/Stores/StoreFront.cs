@@ -167,48 +167,9 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			XleCore.Wait(howLong, RedrawStore);
 		}
-		protected void WaitForKey(params KeyCode[] keys)
-		{
-			XleCore.WaitForKey(RedrawStore, keys);
-		}
 
-		protected int QuickMenu(MenuItemList menu, int spaces)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value, clrInit);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit, Color clrChanged)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value, clrInit, clrChanged);
-		}
-
-		protected int ChooseNumber(int max)
-		{
-			return XleCore.ChooseNumber(RedrawStore, max);
-		}
 
 		public string Title { get; set; }
 
-		protected virtual bool SpeakImpl(GameState state)
-		{
-			player = state.Player;
-			Title = ShopName;
-
-			bool handled = false;
-
-			Extender.Speak(state, ref handled);
-
-			if (handled)
-				return true;
-
-			return StoreNotImplementedMessage();
-		}
 	}
 }

@@ -9,9 +9,8 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
 	class Arman : EventExtender
 	{
-		public override void Speak(GameState state, ref bool handled)
+		public override bool Speak(GameState state)
 		{
-			handled = true;
 			var ta = XleCore.TextArea;
 
 			ta.PrintLine();
@@ -62,6 +61,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 			}
 
 			XleCore.WaitForKey();
+			return true;
 		}
 	}
 }

@@ -78,11 +78,6 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 				return true;
 			}
-			bool handled = false;
-
-			Open(state, ref handled);
-			if (handled)
-				return true;
 
 			PlayOpenChestSound();
 

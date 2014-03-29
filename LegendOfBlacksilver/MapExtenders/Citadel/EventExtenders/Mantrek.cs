@@ -10,13 +10,13 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
 	class Mantrek : EventExtender
 	{
-		public override void Speak(GameState state, ref bool handled)
+		public override bool Speak(GameState state)
 		{
 			if (Lob.Story.MantrekKilled)
-				return;
+				return false;
 
-			handled = true;
 			BegForLife(state);
+			return true;
 		}
 
 		private void BegForLife(GameState state)

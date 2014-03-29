@@ -8,10 +8,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
 	class Elevator : EventExtender
 	{
-		public override void StepOn(GameState state, ref bool handled)
+		public override bool StepOn(GameState state)
 		{
-			handled = true;
-
 			int ystart = state.Player.Y;
 
 			while (state.Player.X < TheEvent.Rectangle.Right)
@@ -36,6 +34,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 					state.Player.X = 25;
 				}
 			}
+
+			return true;
 		}
 
 		private static void AdvancePlayer(GameState state)

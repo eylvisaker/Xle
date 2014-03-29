@@ -8,9 +8,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
 	class GuardWarning : EventExtender
 	{
-		public override void StepOn(GameState state, ref bool handled)
+		public override bool StepOn(GameState state)
 		{
-			handled = true;
 			TheEvent.Enabled = false;
 
 			XleCore.TextArea.PrintLine();
@@ -18,6 +17,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			XleCore.TextArea.PrintLine("The guards eye you warily", XleColor.Yellow);
 
 			SoundMan.PlaySoundSync(LotaSound.VeryBad);
+
+			return true;
 		}
 	}
 }

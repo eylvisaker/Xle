@@ -9,12 +9,11 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
 	class GasTrap : EventExtender
 	{
-		public override void StepOn(GameState state, ref bool handled)
+		public override bool StepOn(GameState state)
 		{
 			if (state.Player.Y > TheEvent.Y + 2)
-				return;
+				return false;
 
-			handled = true;
 			TheEvent.Enabled = false;
 
 			MapData data = state.Map.ReadMapData(TheEvent.Rectangle);
@@ -50,6 +49,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			XleCore.Wait(3500);
 
 			state.Map.WriteMapData(data, TheEvent.Rectangle.Location);
+
+			return true;
 		}
 
 		private void RemoveWeaponsAndArmor(GameState state)

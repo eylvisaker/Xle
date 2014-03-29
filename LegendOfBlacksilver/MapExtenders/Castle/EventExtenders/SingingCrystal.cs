@@ -11,12 +11,10 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
 	class SingingCrystal : EventExtender
 	{
-		public override void Use(GameState state, int item, ref bool handled)
+		public override bool Use(GameState state, int item)
 		{
 			if (item != (int)LobItem.SingingCrystal)
-				return;
-
-			handled = true;
+				return false;
 
 			Rectangle area = new Rectangle(state.Player.X - 2, state.Player.Y - 3, 6, 8);
 
@@ -33,6 +31,8 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 				Lob.Story.ClearedRockSlide = true;
 			}
+
+			return true;
 		}
 
 		public static void RemoveRockSlide(XleMap map, Rectangle area)

@@ -17,11 +17,13 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 			this.fortressFinal = fortressFinal;
 		}
 
-		public override void Use(GameState state, int item, ref bool handled)
+		public override bool Use(GameState state, int item)
 		{
-			base.Use(state, item, ref handled);
+			base.Use(state, item);
 
 			fortressFinal.CompendiumAttacking = true;
+
+			return true;
 		}
 	}
 }

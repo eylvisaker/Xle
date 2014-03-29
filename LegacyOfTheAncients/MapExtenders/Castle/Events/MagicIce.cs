@@ -9,17 +9,19 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	class MagicIce : EventExtender
 	{
-		public override void Use(GameState state, int item, ref bool handled)
+		public override bool Use(GameState state, int item)
 		{
 			if (item != (int)LotaItem.MagicIce)
-				return;
+				return false;
 
 			var iceGroup = state.Map.TileSet.TileGroups.FirstOrDefault(x => x.GroupType == Maps.GroupType.Special1);
 			var waterGroup = state.Map.TileSet.TileGroups.FirstOrDefault(x => x.GroupType == Maps.GroupType.Water);
 
 			if (iceGroup == null || iceGroup.Tiles.Count == 0 ||
 				waterGroup == null || waterGroup.Tiles.Count == 0)
-				return;
+			{
+				return false;
+			}
 
 			XleCore.Wait(250);
 
@@ -36,7 +38,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 				}
 			}
 
-			handled = true;
+			return true;
 		}
 	}
 }

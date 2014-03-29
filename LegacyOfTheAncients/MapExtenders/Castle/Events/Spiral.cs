@@ -9,7 +9,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 {
 	public class Spiral : EventExtender
 	{
-		public override void StepOn(GameState state, ref bool handled)
+		public override bool StepOn(GameState state)
 		{
 			if (AnyBad(state))
 			{
@@ -18,9 +18,10 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 				ClearSpiral(state);
 				RemoveSpiralEvents(state);
 
-				handled = true;
+				return true;
 			}
-
+			else
+				return false;
 		}
 
 		protected void RemoveSpiralEvents(GameState state)
@@ -62,10 +63,10 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 	public class SpiralSuccess : Spiral
 	{
-		public override void StepOn(GameState state, ref bool handled)
+		public override bool StepOn(GameState state)
 		{
 			if (AnyBad(state))
-				return;
+				return false;
 
 			SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
@@ -79,6 +80,8 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 					state.Map[x, y] = 0;
 				}
 			}
+
+			return true;
 		}
 	}
 }

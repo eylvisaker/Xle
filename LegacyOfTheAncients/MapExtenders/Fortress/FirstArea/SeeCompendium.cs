@@ -14,16 +14,14 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 	{
 		bool paralyzed = false;
 
-		public override void StepOn(GameState state, ref bool handled)
+		public override bool StepOn(GameState state)
 		{
+			if (paralyzed)
+				return false;
+
 			// make sure the player is entirely contained by the event.
 			if (state.Player.X != TheEvent.Location.X)
-				return;
-
-			handled = true;
-
-			if (paralyzed)
-				return;
+				return false;
 
 			XleCore.TextArea.PrintLine();
 
@@ -49,6 +47,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			MoveWarlordOut(warlord);
 
 			state.Map.Guards.Remove(warlord);
+
+			return true;
 		}
 
 		private void RemoveCompendium(GameState state)

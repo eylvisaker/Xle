@@ -196,7 +196,7 @@
     <Compile Include="XleEventTypes\Extenders\ChangeMapExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\Common\ChangeMapQuestion.cs" />
     <Compile Include="XleEventTypes\Extenders\DoorExtender.cs" />
-    <Compile Include="XleEventTypes\Extenders\NullEventExtender.cs" />
+    <Compile Include="XleEventTypes\Extenders\EventExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\LeaveEvent.cs" />
     <Compile Include="XleEventTypes\Script.cs" />
     <Compile Include="XleEventTypes\SpeakToPerson.cs" />

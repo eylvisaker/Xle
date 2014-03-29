@@ -16,12 +16,12 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 			this.fortressFinal = fortressFinal;
 		}
 
-		public override void Use(GameState state, int item, ref bool handled)
+		public override bool Use(GameState state, int item)
 		{
 			if (item != (int)LotaItem.GuardJewel)
-				return;
+				return false;
 			if (this.fortressFinal.CompendiumAttacking == false)
-				return;
+				return false;
 
 			//SoundMan.PlaySound("SonicMagic");
 			XleCore.Wait(2000);
@@ -29,14 +29,13 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("The attack stops.");
 
-			handled = true;
 			this.fortressFinal.CompendiumAttacking = false;
+
+			return true;
 		}
 
-		public override void Take(GameState state, ref bool handled)
+		public override bool Take(GameState state)
 		{
-			handled = true;
-
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 
@@ -59,6 +58,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 
 				fortressFinal.CreateWarlord(state);
 			}
+
+			return true;
 		}
 
 		private void CloseExit(GameState state)

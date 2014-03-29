@@ -9,10 +9,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
 	class ArmorBox : TreasureChestExtender
 	{
-		public override void Open(GameState state, ref bool handled)
+		public override bool Open(GameState state)
 		{
-			handled = true;
-
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 
@@ -30,12 +28,12 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			{
 				XleCore.TextArea.PrintLine("box open already.");
 			}
+
+			return true;
 		}
 
-		public override void Take(GameState state, ref bool handled)
+		public override bool Take(GameState state)
 		{
-			handled = true;
-
 			state.Map.Guards.IsAngry = false;
 
 			XleCore.Renderer.PlayerColor = XleColor.Yellow;
@@ -45,6 +43,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 			XleCore.TextArea.PrintLine("you put on armor.");
 
 			XleCore.Wait(1000);
+
+			return true;
 		}
 	}
 }

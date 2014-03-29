@@ -11,7 +11,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 	{
 		bool asked;
 
-		public override void Speak(GameState state, ref bool handled)
+		public override bool Speak(GameState state)
 		{
 			XleCore.TextArea.PrintLine(" to the " + Name(state) + ".");
 			XleCore.TextArea.PrintLine();
@@ -33,7 +33,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
 			XleCore.Wait(2000);
 
-			handled = true;
+			return true;
 		}
 
 		private void NothingToTell()

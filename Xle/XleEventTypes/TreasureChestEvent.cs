@@ -59,64 +59,6 @@ namespace ERY.Xle.XleEventTypes
 			return Extender;
 		}
 
-		public bool OpenImpl(GameState state)
-		{
-			UpdateCommand();
-
-			XleCore.TextArea.PrintLine();
-
-			if (Closed == false)
-			{
-				PrintAlreadyOpenMessage();
-
-				return true;
-			}
-			bool handled = false;
-			
-			Extender.Open(state, ref handled);
-			if (handled)
-				return true;
-
-			Extender.PlayOpenChestSound();
-
-			XleCore.Wait(state.GameSpeed.CastleOpenChestSoundTime);
-
-			SetOpenTilesOnMap(state.Map);
-
-			if (Extender.MakesGuardsAngry)
-				Extender.SetAngry(state);
-
-			if (ContainsItem)
-			{
-				int count = 1;
-				int item = Contents;
-
-				Extender.BeforeGiveItem(state, ref item, ref count);
-
-				state.Player.Items[item] += count;
-
-				Extender.PrintObtainItemMessage(state, item, count);
-				Extender.PlayObtainItemSound(state, item, count);
-			}
-			else
-			{
-				int gd = mContents;
-
-				XleCore.TextArea.PrintLine("You find " + gd.ToString() + " gold.");
-
-				state.Player.Gold += gd;
-				SoundMan.PlaySound(LotaSound.Sale);
-			}
-
-			mClosed = false;
-
-			XleCore.Wait(state.GameSpeed.CastleOpenChestTime);
-
-			Extender.MarkChestAsOpen(state);
-
-			return true;
-		}
-
 		public void SetOpenTilesOnMap(XleMap map)
 		{
 			var firstTile = map[X, Y];
