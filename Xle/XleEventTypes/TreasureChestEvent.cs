@@ -89,17 +89,6 @@ namespace ERY.Xle.XleEventTypes
 			}
 		}
 
-		private static void UpdateCommand()
-		{
-			XleCore.TextArea.PrintLine(" chest");
-		}
-
-		private void PrintAlreadyOpenMessage()
-		{
-			XleCore.TextArea.PrintLine(Extender.AlreadyOpenMessage);
-		}
-
-
 		public void OpenIfMarked(GameState state)
 		{
 			Extender.OpenIfMarked(state);

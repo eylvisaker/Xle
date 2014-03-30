@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreBank : StoreFrontExtender
+	public class StoreBank : StoreFront
 	{
 
 		public override int RobValue()

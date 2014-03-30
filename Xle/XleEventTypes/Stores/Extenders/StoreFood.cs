@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreFood : StoreFrontExtender
+	public class StoreFood : StoreFront
 	{
 		protected override void SetColorScheme(ColorScheme cs)
 		{

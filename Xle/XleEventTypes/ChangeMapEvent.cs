@@ -22,12 +22,6 @@ namespace ERY.Xle.XleEventTypes
 		private string mCommandText = "";
 		ChangeMapExtender mExtender;
 
-		protected override void AfterReadData()
-		{
-			if (string.IsNullOrEmpty(ExtenderName))
-				ExtenderName = "ChangeMap";
-		}
-
 		protected override Type ExtenderType
 		{
 			get
@@ -61,28 +55,8 @@ namespace ERY.Xle.XleEventTypes
 			get { return mAsk; }
 			set { mAsk = value; }
 		}
-		/// <summary>
-		/// What point on the new map to go to
-		/// </summary>
-		[Browsable(false)]
-		public Point TargetLocation
-		{
-			get { return mLocation; }
-			set { mLocation = value; }
-		}
 
 		public int TargetEntryPoint { get; set; }
-
-		public int TargetX
-		{
-			get { return mLocation.X; }
-			set { mLocation.X = value; }
-		}
-		public int TargetY
-		{
-			get { return mLocation.Y; }
-			set { mLocation.Y = value; }
-		}
 
 		/// <summary>
 		/// What map ID to go to.
@@ -113,34 +87,5 @@ namespace ERY.Xle.XleEventTypes
 		{
 			mExtender.ExecuteMapChange(player);
 		}
-
-		public string GetMapName()
-		{
-			return XleCore.Data.MapList[mMapID].Name;
-		}
-
-		private bool VerifyMapExistence()
-		{
-			try
-			{
-				string mapName = GetMapName();
-			}
-			catch
-			{
-				SoundMan.PlaySound(LotaSound.Medium);
-
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Map ID " + mMapID + " not found.");
-				XleCore.TextArea.PrintLine();
-
-				XleCore.Wait(1500);
-
-				return false;
-			}
-
-			return true;
-		}
-
 	}
-
 }

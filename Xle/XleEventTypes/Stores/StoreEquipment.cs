@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-	public class StoreEquipment : StoreFront
+	public class StoreEquipment : Store
 	{
 		public StoreEquipment()
 		{
@@ -28,10 +28,5 @@ namespace ERY.Xle.XleEventTypes.Stores
 		}
 
 		public List<int> AllowedItemTypes { get; set; }
-
-		protected override void SetColorScheme(ColorScheme cs)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public abstract class StoreEquipmentExtender : StoreFrontExtender
+	public abstract class StoreEquipmentExtender : StoreFront
 	{
 		Player player;
 		int LeftOffset;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreBuyback : StoreFrontExtender
+	public class StoreBuyback : StoreFront
 	{
 		protected override void SetColorScheme(ColorScheme cs)
 		{

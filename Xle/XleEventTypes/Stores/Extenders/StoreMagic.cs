@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-	public class StoreMagic : StoreFrontExtender
+	public class StoreMagic : StoreFront
 	{
 		public virtual int GetItemValue(int choice)
 		{

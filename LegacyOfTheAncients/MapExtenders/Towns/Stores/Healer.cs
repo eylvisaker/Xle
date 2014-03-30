@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
-	class Healer : StoreFrontExtender
+	class Healer : StoreFront
 	{
 		bool buyingHerbs = false;
 

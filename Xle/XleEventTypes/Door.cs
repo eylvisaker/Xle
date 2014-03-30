@@ -31,7 +31,6 @@ namespace ERY.Xle.XleEventTypes
 		public int RequiredItem { get; set; }
 		public int ReplacementTile { get; set; }
 
-
 		public void RemoveDoor(GameState state)
 		{
 			mExtender.RemoveDoor(state);

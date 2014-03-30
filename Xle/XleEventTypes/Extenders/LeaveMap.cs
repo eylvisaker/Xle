@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Extenders
 {
-	public class LeaveEvent : EventExtender 
+	public class LeaveMap : EventExtender 
 	{
 		public override bool StepOn(GameState state)
 		{

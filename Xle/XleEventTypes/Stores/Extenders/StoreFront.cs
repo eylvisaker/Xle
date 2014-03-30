@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreFrontExtender : StoreExtender
+	public class StoreFront : StoreExtender
 	{
 		[Obsolete]
 		protected string[] theWindow = new string[20];
@@ -19,7 +19,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		public List<TextWindow> Windows { get; private set; }
 
-		public StoreFrontExtender()
+		public StoreFront()
 		{
 			Windows = new List<TextWindow>();
 

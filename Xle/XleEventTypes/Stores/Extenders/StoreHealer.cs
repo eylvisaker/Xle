@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreHealer : StoreFrontExtender
+	public class StoreHealer : StoreFront
 	{
 		bool buyHerbs = false;
 
