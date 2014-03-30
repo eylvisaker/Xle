@@ -6,6 +6,7 @@ using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders.Common;
 using ERY.Xle.XleEventTypes.Stores;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -359,7 +360,7 @@ namespace ERY.Xle.Maps.Extenders
 
 					break;
 				case 5:			// buy museum coin
-					Store.OfferMuseumCoin(player);
+					StoreExtender.OfferMuseumCoin(player);
 
 					break;
 

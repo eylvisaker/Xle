@@ -7,6 +7,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreBuyback : StoreFront
 	{
+		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
+
 		protected override void SetColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.Pink;
@@ -26,22 +28,28 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			this.player = player;
 			robbing = false;
 
-			theWindow[i++] = TheEvent.ShopName;
-			theWindow[i++] = "";
-			theWindow[i++] = "";
-			theWindow[i++] = "I will happily purchase";
-			theWindow[i++] = "your used arms and armor";
-			theWindow[i++] = "";
-			theWindow[i++] = "";
-			theWindow[i++] = "";
-			theWindow[i++] = "Choose items to sell:";
-			theWindow[i++] = "";
-			theWindow[i++] = " 1.  Weapons";
-			theWindow[i++] = " 2.  Armor";
+			ClearWindow();
+			Title = TheEvent.ShopName;
+
+			var wind = new TextWindow();
+			wind.Location = new AgateLib.Geometry.Point(9, 4);
+			Windows.Add(wind);
+
+			wind.WriteLine("I will happily purchase");
+			wind.WriteLine("your used arms and armor");
+			wind.WriteLine();
+			wind.WriteLine();
+			wind.WriteLine();
+			wind.WriteLine("Choose items to sell:");
+			wind.WriteLine();
+			wind.WriteLine(" 1.  Weapons");
+			wind.WriteLine(" 2.  Armor");
+
+			wind.SetColor(XleColor.Red);
 
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Select (Hit 0 to cancel)");
+			XleCore.TextArea.PrintLine("Select (0 to cancel)");
 			XleCore.TextArea.PrintLine();
 
 			MenuItemList theList = new MenuItemList("0", "1", "2");

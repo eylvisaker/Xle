@@ -18,11 +18,14 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 	public class StoreBlackjack : StoreExtender
 	{
+		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
 	}
 
 
 	public class StoreFlipFlop : StoreExtender
 	{
+		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
+
 	}
 }

@@ -9,7 +9,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 	{
 		public new StoreRaft TheEvent { get { return (StoreRaft)base.TheEvent; } }
 
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
 
@@ -20,9 +20,11 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			bool skipRaft = false;
 			bool offerCoin = false;
 
-			if (IsLoanOverdue(state, true))
+			if (IsLoanOverdue(state))
+			{
+				StoreDeclinePlayer(state);
 				return true;
-
+			}
 			// check to see if there are any rafts near the raft drop point
 			skipRaft = CheckForNearbyRaft(player, skipRaft);
 

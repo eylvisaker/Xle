@@ -67,12 +67,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			var player = state.Player;
 
-			if (IsLoanOverdue(state, true))
-				return true;
-
 			this.player = player;
-
-			LeftOffset = 7;
 
 			Windows.Clear();
 			Windows.AddRange(CreateStoreWindows());

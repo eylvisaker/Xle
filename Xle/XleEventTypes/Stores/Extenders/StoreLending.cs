@@ -8,6 +8,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreLending : StoreFront
 	{
+		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
+
 		public override int RobValue()
 		{
 			return XleCore.random.Next(180, 231);
@@ -31,31 +33,33 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			robbing = false;
 
 			ClearWindow();
-			LeftOffset = 6;
 
-			theWindow[i++] = "Friendly";
-			theWindow[i++] = "";
-			theWindow[i++] = "   Lending Association";
-			theWindow[i++] = "";
-			theWindow[i++] = "";
-			theWindow[i++] = "";
-			theWindow[i++] = "";
+			Title = "Friendly";
+
+			var window1 = new TextWindow { Location = new Point(10, 2), Text = "Lending Association" };
+
+			Windows.Add(window1);
 
 			XleCore.TextArea.PrintLine();
 
 			if (player.loan == 0)
 			{
-				theWindow[i++] = " We'd be happy to loan you";
-				theWindow[i++] = " money at 'friendly' rates";
-				theWindow[i++] = "";
-				theWindow[i++] = "";
-				theWindow[i++] = "";
-				theWindow[i] = "You may borrow up to ";
-				theWindow[i] += max;
-				theWindow[i++] += " gold";
+				var window2 = new TextWindow { Location = new Point(8, 7) };
+
+				window2.WriteLine("We'd be happy to loan you");
+				window2.WriteLine("money at 'friendly' rates");
+
+				var window3 = new TextWindow { Location = new Point(7, 11) };
+
+				window3.Write("You may borrow up to ");
+				window3.Write(max.ToString());
+				window3.WriteLine(" gold");
 
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("Borrow how much?");
+
+				Windows.Add(window2);
+				Windows.Add(window3);
 
 				choice = ChooseNumber(max);
 
@@ -84,22 +88,33 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				String DueDate;
 				max = Math.Max(player.Gold, player.loan);
 				int min;
+				int timeLeft = (int)(player.dueDate - player.TimeDays + 0.02);
 
-				if (player.dueDate - player.TimeDays > 0)
+				if (timeLeft > 0)
 				{
-					DueDate = ((int)(player.dueDate - player.TimeDays + 0.02)).ToString() + " days ";
+					DueDate = timeLeft.ToString() + " days ";
 					min = 0;
 				}
 				else
 				{
-					DueDate = "NOW!!   ";
-					min = player.loan / 3;
+					DueDate = "NOW!!";
+					min = (int)(player.loan * .3 + 0.5);
+					if (min > player.Gold)
+					{
+						min = player.Gold;
+						if (player.Gold > 30)
+							min -= 10;
+					}
 				}
 
-				theWindow[i++] = "You owe: " + player.loan.ToString() + " gold!";
-				theWindow[i++] = "";
-				theWindow[i++] = "";
-				theWindow[i++] = "Due Date: " + DueDate;
+				var window2 = new TextWindow { Location = new Point(11, 7) };
+
+				window2.WriteLine("You owe:  " + player.loan.ToString() + " gold!");
+				window2.WriteLine();
+				window2.WriteLine();
+				window2.WriteLine("Due Date: " + DueDate);
+
+				Windows.Add(window2);
 
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.Print("Pay how much? ");
@@ -123,36 +138,37 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				{
 					XleCore.TextArea.PrintLine("Loan Repaid.");
 
-					SoundMan.PlaySound(LotaSound.Sale);
+					StoreSound(LotaSound.Sale);
 				}
 				else if (min == 0)
 				{
 					XleCore.TextArea.PrintLine("You Owe " + player.loan.ToString() + " gold.");
-					XleCore.TextArea.PrintLine("Take your time.");
 
-					SoundMan.PlaySound(LotaSound.Sale);
+					if (timeLeft > 15)
+						XleCore.TextArea.PrintLine("Take your time.");
+
+					StoreSound(LotaSound.Sale);
 				}
 				else if (choice >= min)
 				{
 					XleCore.TextArea.PrintLine("You have 14 days to pay the rest!");
 					player.dueDate = (int)player.TimeDays + 14;
 
-					SoundMan.PlaySound(LotaSound.Sale);
+					StoreSound(LotaSound.Sale);
 				}
 				else
 				{
 					XleCore.TextArea.PrintLine("Better pay up!");
-
-					//LotaPlaySound(snd_Bad);
-
+					StoreSound(LotaSound.Bad);
 				}
 
 
 			}
 
-			Wait(500);
 			return true;
 
 		}
+
+		
 	}
 }

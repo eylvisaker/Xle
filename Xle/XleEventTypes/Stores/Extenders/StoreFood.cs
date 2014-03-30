@@ -23,9 +23,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		{
 			var player = state.Player;
 
-			if (IsLoanOverdue(state, true))
-				return true;
-
 			string tempString;
 			double cost = ((int)(13 - player.Attribute[Attributes.charm] / 7)) / 10.0;
 			
@@ -33,6 +30,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				cost = 0.1;
 			
 			int max = (int)(player.Gold / cost);
+			if (max > 5000) max = 5000;
 
 			SetTitle();
 
@@ -167,41 +165,38 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		}
 		private void SetWindow(double cost)
 		{
-			LeftOffset = 9;
+			ClearWindow();
 
-			int i = 1;
-			theWindow[i++] = "";
-			theWindow[i++] = "";
-			theWindow[i++] = "";
-			theWindow[i++] = "    Food & water";
-			theWindow[i++] = "";
-			theWindow[i++] = "";
-			theWindow[i++] = "We sell food for travel.";
-			theWindow[i++] = "Each 'day' of food will ";
-			theWindow[i++] = "keep you fed for one day";
-			theWindow[i++] = "of travel (on foot).    ";
-			theWindow[i++] = "";
-			theWindow[i++] = "";
+			var promptWindow = new TextWindow();
+			promptWindow.Location = new Point(9, 4);
+
+			promptWindow.WriteLine("    Food & water");
+			promptWindow.WriteLine();
+			promptWindow.WriteLine();
+			promptWindow.WriteLine("We sell food for travel.");
+			promptWindow.WriteLine("Each 'day' of food will ");
+			promptWindow.WriteLine("keep you fed for one day");
+			promptWindow.WriteLine("of travel (on foot).    ");
+			promptWindow.WriteLine();
+			promptWindow.WriteLine();
 
 			if (robbing == false)
 			{
-				theWindow[i] = "Cost is ";
-				theWindow[i] += cost;
-				theWindow[i++] += " gold per 'day'";
+				promptWindow.Write("Cost is ");
+				promptWindow.Write(cost.ToString());
+				promptWindow.WriteLine(" gold per 'day'");
 			}
 			else
-				theWindow[i] = "Robbery in progress";
+				promptWindow.WriteLine("Robbery in progress");
 
-			for (i = 1; i < theWindowColor.Length; i++)
-				SetColor(i, XleColor.Yellow);
+			promptWindow.SetColor(XleColor.Yellow);
 
+			Windows.Add(promptWindow);
 		}
 
-		private int SetTitle()
+		private void SetTitle()
 		{
-			int i = 0;
-			theWindow[0] = TheEvent.ShopName;
-			return i;
+			Title = TheEvent.ShopName;
 		}
 		private void PayForMail(Player player)
 		{

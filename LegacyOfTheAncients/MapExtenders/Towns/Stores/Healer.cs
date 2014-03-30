@@ -25,9 +25,6 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 		{
 			var player = state.Player;
 
-			if (TheEvent.IsLoanOverdue(state, true))
-				return true;
-
 			buyingHerbs = false;
 
 			int woundPrice = (int)((player.MaxHP - player.HP) * 0.75);

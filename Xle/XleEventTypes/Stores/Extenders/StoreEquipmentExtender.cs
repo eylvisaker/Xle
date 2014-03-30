@@ -31,9 +31,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		{
 			var player = state.Player;
 
-			if (IsLoanOverdue(state, true))
-				return true;
-
 			MenuItemList theList = new MenuItemList("Buy", "Sell", "Neither");
 
 			this.player = player;

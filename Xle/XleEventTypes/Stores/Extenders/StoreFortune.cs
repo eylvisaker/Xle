@@ -7,12 +7,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreFortune : StoreExtender
 	{
-		public override bool Speak(GameState state)
+		protected override bool SpeakImpl(GameState state)
 		{
 			var player = state.Player;
-
-			if (IsLoanOverdue(state, true))
-				return true;
 
 			MenuItemList theList = new MenuItemList("Yes", "No");
 			int choice;

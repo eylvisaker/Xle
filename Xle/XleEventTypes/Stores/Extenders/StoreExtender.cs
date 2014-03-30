@@ -27,6 +27,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		public new Store TheEvent { get { return (Store)base.TheEvent; } }
 
+		public virtual bool AllowInteractionWhenLoanOverdue { get { return false; } }
+
 		/// <summary>
 		/// Returns true if the loan for the player is over due and stores should not
 		/// speak with him and optionally displays a message to the player.  
@@ -40,29 +42,49 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		/// speak with him and optionally displays a message to the player.  
 		/// Returns false if the current map has no lending association
 		/// regardless of whether the player has an overdue loan.</returns>
-		public bool IsLoanOverdue(GameState state, bool displayMessage)
+		public bool IsLoanOverdue(GameState state)
 		{
-			if (state.Map.Events.Any(x => x is StoreLending) == false)
-				return false;
-
-			var player = state.Player;
-
-			if (player.loan > 0 && player.dueDate - player.TimeDays <= 0)
+			if (state.Map.Events.Any(x => x is Store && x.ExtenderName == "StoreLending") == false)
 			{
-				if (displayMessage)
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("Sorry.  I can't talk to you.");
-					XleCore.Wait(500);
-				}
+				return false;
+			}
 
+			if (state.Player.loan > 0 && state.Player.dueDate - state.Player.TimeDays <= 0)
+			{
 				return true;
 			}
 			else
 				return false;
 		}
+		protected void StoreDeclinePlayer(GameState state)
+		{
+			var player = state.Player;
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("Sorry.  I can't talk to you.");
+			XleCore.Wait(500);
+		}
+		protected virtual void DisplayLoanOverdueMessage()
+		{
+			throw new NotImplementedException();
+		}
 
 		public override bool Speak(GameState state)
+		{
+			if (AllowInteractionWhenLoanOverdue == false)
+			{
+				if (IsLoanOverdue(state))
+				{
+					StoreDeclinePlayer(state);
+					return true;
+				}
+			}
+
+			return SpeakImpl(state);
+		}
+
+		protected virtual bool SpeakImpl(GameState state)
 		{
 			return StoreNotImplementedMessage();
 		}

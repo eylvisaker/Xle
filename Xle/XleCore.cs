@@ -1411,12 +1411,13 @@ namespace ERY.Xle
 					}
 				}
 
+				SetTilesAndCommands();
+
 				if (mMapID != 0)
 				{
 					GameState.Map.OnLoad(player);
 				}
 
-				SetTilesAndCommands();
 			}
 			catch (Exception e)
 			{

@@ -10,28 +10,14 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreFront : StoreExtender
 	{
-		[Obsolete]
-		protected string[] theWindow = new string[20];
-		[Obsolete]
-		protected Color[][] theWindowColor = new Color[20][];
-
 		ColorScheme mColorScheme = new ColorScheme();
 
 		public List<TextWindow> Windows { get; private set; }
+		public new Store TheEvent { get { return (Store)base.TheEvent; } }
 
 		public StoreFront()
 		{
 			Windows = new List<TextWindow>();
-
-			LeftOffset = 2;
-
-			for (int i = 0; i < theWindowColor.Length; i++)
-			{
-				for (int j = 0; j < 40; j++)
-				{
-					theWindowColor[i] = new Color[40];
-				}
-			}
 
 			ClearWindow();
 
@@ -41,28 +27,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		protected void ClearWindow()
 		{
 			Windows.Clear();
-			for (int i = 0; i < theWindow.Length; i++)
-			{
-				theWindow[i] = string.Empty;
-
-				for (int j = 0; j < theWindowColor[i].Length; j++)
-					theWindowColor[i][j] = XleColor.White;
-			}
 		}
 
-		protected void SetColor(int rowNumber, Color color)
-		{
-			SetColor(rowNumber, 0, 40, color);
-		}
-		protected void SetColor(int rowNumber, int start, int length, Color color)
-		{
-			for (int i = 0; i < length; i++)
-				theWindowColor[rowNumber][start + i] = color;
-		}
-
-		protected int LeftOffset { get; set; }
-
-		[Obsolete]
 		protected virtual void SetColorScheme(ColorScheme cs)
 		{ }
 
@@ -78,7 +44,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		protected void DrawStore()
 		{
-			string tempString;
 			var player = XleCore.GameState.Player;
 
 			var renderer = XleCore.Renderer;
@@ -94,49 +59,31 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			renderer.DrawInnerFrameHighlight(0, 288, 1, 640, mColorScheme.FrameHighlightColor);
 
 			// Draw the title
-			if (string.IsNullOrEmpty(Title))
+			DrawTitle(Title);
+
+			foreach (var window in Windows)
 			{
-				DrawTitle(theWindow[0]);
-			}
-			else
-			{
-				DrawTitle(Title);
+				window.Draw();
 			}
 
-			if (Windows.Count == 0)
-			{
-				for (int i = 1; i < 18; i++)
-				{
-					if (string.IsNullOrEmpty(theWindow[i]))
-						continue;
-
-					renderer.WriteText((LeftOffset + 1) * 16, i * 16, theWindow[i], theWindowColor[i]);
-				}
-			}
-			else
-			{
-				foreach (var window in Windows)
-				{
-					window.Draw();
-				}
-			}
+			string goldText;
 			if (robbing == false)
 			{
 				// Draw Gold
-				tempString = " Gold: ";
-				tempString += player.Gold;
-				tempString += " ";
+				goldText = " Gold: ";
+				goldText += player.Gold;
+				goldText += " ";
 			}
 			else
 			{
 				// don't need gold if we're robbing it!
-				tempString = " Robbery in progress ";
+				goldText = " Robbery in progress ";
 			}
 
-			Display.FillRect(320 - (tempString.Length / 2) * 16, 18 * 16, tempString.Length * 16, 14,
+			Display.FillRect(320 - (goldText.Length / 2) * 16, 18 * 16, goldText.Length * 16, 14,
 				mColorScheme.BackColor);
 
-			renderer.WriteText(320 - (tempString.Length / 2) * 16, 18 * 16, tempString, XleColor.White);
+			renderer.WriteText(320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
 
 			XleCore.TextArea.Draw();
 
@@ -190,6 +137,15 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		public override bool Speak(GameState state)
 		{
+			if (AllowInteractionWhenLoanOverdue == false)
+			{
+				if (IsLoanOverdue(state))
+				{
+					StoreDeclinePlayer(state);
+					return true;
+				}
+			}
+
 			try
 			{
 				XleCore.Renderer.ReplacementDrawMethod = DrawStore;
@@ -201,12 +157,11 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				XleCore.Renderer.ReplacementDrawMethod = null;
 			}
 		}
+
 		protected virtual bool SpeakImpl(GameState state)
 		{
 			return StoreNotImplementedMessage();
 		}
-
-		public new Store TheEvent { get { return (Store)base.TheEvent; } }
 
 	}
 }

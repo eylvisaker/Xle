@@ -44,12 +44,13 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 
 		static void CheckLoan(GameState state)
 		{
-			if (state.Map.Events.Any(x => x is Store && x.ExtenderName == "StoreLender"))
+			if (state.Map.Events.Any(x => x is Store && x.ExtenderName == "StoreLending"))
 			{
-				if (state.Player.loan > 0 && state.Player.dueDate - state.Player.TimeDays <= 0)
+				if (state.Player.loan > 0 && state.Player.dueDate <= state.Player.TimeDays)
 				{
 					XleCore.TextArea.PrintLine("This is your friendly lender.");
 					XleCore.TextArea.PrintLine("You owe me money!");
+					SoundMan.PlaySound(LotaSound.Bad);
 
 					XleCore.Wait(1000);
 				}
