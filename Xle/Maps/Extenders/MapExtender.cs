@@ -135,6 +135,10 @@ namespace ERY.Xle.Maps.Extenders
 		{
 			return (int)((magic.ID + 0.5) * 15 * (XleCore.random.NextDouble() + 1));
 		}
+		public virtual bool CanPlayerStepInto(GameState state, Point pt)
+		{
+			return CanPlayerStepIntoImpl(state.Player, pt.X, pt.Y);
+		}
 		public virtual bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
 		{
 			return true;
