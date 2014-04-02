@@ -47,5 +47,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 				GivePermanentStrengthBoost(player);
 			}
 		}
+
+		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		{
+			return Lota3DSurfaces.DungeonBlue;
+		}
 	}
 }

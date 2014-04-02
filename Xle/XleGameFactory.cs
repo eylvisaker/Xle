@@ -31,7 +31,7 @@ namespace ERY.Xle
 
 		public virtual DungeonExtender CreateMapExtender(Dungeon theMap)
 		{
-			return new DungeonExtender();
+			throw new NotImplementedException();
 		}
 
 		public virtual CastleExtender CreateMapExtender(Castle castle)
@@ -56,7 +56,7 @@ namespace ERY.Xle
 
 		public virtual MuseumExtender CreateMapExtender(Museum museum)
 		{
-			return new MuseumExtender();
+			throw new NotImplementedException();
 		}
 
 		public abstract Maps.Map3DSurfaces GetMap3DSurfaces(Map3D map3D);

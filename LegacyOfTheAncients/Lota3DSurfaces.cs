@@ -12,26 +12,22 @@ namespace ERY.Xle.LotA
 	{
 		public static Map3DSurfaces Museum = new Map3DSurfaces();
 		public static Map3DSurfaces DungeonBlue = new Map3DSurfaces();
-		public static Map3DSurfaces DungeonRed = new Map3DSurfaces();
-
+		public static Map3DSurfaces DungeonBrown = new Map3DSurfaces();
 
 		internal static void LoadSurfaces()
 		{
-			Museum.Backdrop = new Surface("Museum/MuseumBackdrop.png");
-			Museum.Wall = new Surface("Museum/MuseumWall.png");
 			Museum.Door = new Surface("Museum/MuseumDoor.png");
-			Museum.SidePassages = new Surface("Museum/MuseumSidePassage.png");
 			Museum.MuseumExhibitFrame = new Surface("Museum/ExhibitFrame.png");
 			Museum.MuseumExhibitStatic = new Surface("Museum/ExhibitStatic.png");
 			Museum.MuseumExhibitCloseup = new Surface("Museum/MuseumCloseup.png");
 			Museum.Extras = new Surface("Museum/MuseumExtras.png");
+			Museum.Walls = new Surface("Museum/walls.png");
 
-			DungeonBlue.Backdrop = new Surface("Dungeon/Blue/DungeonBackdrop.png");
-			DungeonBlue.SidePassages = new Surface("Dungeon/Blue/DungeonSidePassage.png");
-			DungeonBlue.Wall = new Surface("Dungeon/Blue/DungeonWall.png");
 			DungeonBlue.Extras = new Surface("Dungeon/Blue/DungeonExtras.png");
+			DungeonBlue.Walls = new Surface("Dungeon/PiratesLair/walls.png");
 
-			DungeonRed = DungeonBlue;
+			DungeonBrown.Extras = new Surface("Dungeon/Blue/DungeonExtras.png");
+			DungeonBrown.Walls = new Surface("Dungeon/Armak/walls.png");
 		}
 	}
 }

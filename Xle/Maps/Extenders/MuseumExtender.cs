@@ -31,6 +31,11 @@ namespace ERY.Xle.Maps.Extenders
 			command = "Bump into wall";
 		}
 
+		public override Map3DSurfaces Surfaces(GameState state)
+		{
+			return null;
+		}
+
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			throw new NotImplementedException();

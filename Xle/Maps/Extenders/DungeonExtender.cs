@@ -22,6 +22,11 @@ namespace ERY.Xle.Maps.Extenders
 			SoundMan.PlaySound(LotaSound.WalkDungeon);
 		}
 
+		public override Map3DSurfaces Surfaces(GameState state)
+		{
+			return null;
+		}
+
 		public virtual void OnPlayerExitDungeon(Player player)
 		{
 		}

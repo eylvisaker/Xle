@@ -71,6 +71,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			return Extender;
 		}
 
+
 		public override bool IsMultiLevelMap
 		{
 			get { return true; }

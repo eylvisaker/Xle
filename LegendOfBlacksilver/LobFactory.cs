@@ -84,7 +84,7 @@ namespace ERY.Xle.LoB
 			if (map3D is Museum)
 				return Lob3DSurfaces.Archives;
 			else
-				return Lob3DSurfaces.DungeonBlue;
+				return Lob3DSurfaces.IslandCaverns;
 		}
 		public override MuseumExtender CreateMapExtender(Museum museum)
 		{

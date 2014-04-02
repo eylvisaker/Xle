@@ -22,5 +22,10 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			else
 				return 0;
 		}
+
+		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		{
+			return Lob3DSurfaces.IslandCaverns;
+		}
 	}
 }

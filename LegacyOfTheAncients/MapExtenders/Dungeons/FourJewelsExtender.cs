@@ -7,6 +7,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
 	class FourJewelsExtender : LotaDungeonExtenderBase
 	{
+		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		{
+			return Lota3DSurfaces.DungeonBlue;
+		}
 		protected override bool IsCompleted
 		{
 			get { return Lota.Story.FourJewelsComplete; }

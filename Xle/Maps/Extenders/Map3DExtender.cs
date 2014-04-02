@@ -16,6 +16,9 @@ namespace ERY.Xle.Maps.Extenders
 		protected abstract void PlayPlayerMoveSound();
 
 
+
+		public abstract Map3DSurfaces Surfaces(GameState state);
+
 		protected virtual void CommandTextForInvalidMovement(ref string command)
 		{
 		}

@@ -18,5 +18,10 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 			commands.Items.Add(new Commands.Rob());
 			commands.Items.Add(new Commands.Take());
 		}
+
+		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		{
+			return Lob3DSurfaces.Archives;
+		}
 	}
 }

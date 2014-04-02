@@ -5,11 +5,14 @@ using System.Text;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using ERY.Xle.Maps;
+using ERY.Xle.Maps.Extenders;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
 	public abstract class Map3D : XleMap
 	{
+		public new Map3DExtender Extender { get { return (Map3DExtender)base.Extender; } }
+
 		enum SidePassageType
 		{
 			Standard,

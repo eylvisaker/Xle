@@ -151,5 +151,10 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			XleCore.TextArea.PrintLine("Then I fear we are both doomed.", XleColor.White);
 			XleCore.TextArea.PrintLine();
 		}
+
+		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		{
+			return Lob3DSurfaces.MarthbaneTunnels;
+		}
 	}
 }

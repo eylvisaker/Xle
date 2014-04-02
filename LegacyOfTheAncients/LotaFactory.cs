@@ -59,7 +59,7 @@ namespace ERY.Xle.LotA
 			if (map.MapID == 71 || map.MapID == 73)
 				return Lota3DSurfaces.DungeonBlue;
 			else
-				return Lota3DSurfaces.DungeonRed;
+				return Lota3DSurfaces.DungeonBrown;
 		}
 
 		public override IXleTitleScreen CreateTitleScreen()

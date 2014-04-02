@@ -15,5 +15,10 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 
 			return 2;
 		}
+
+		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		{
+			return Lob3DSurfaces.DeathspireChasm;
+		}
 	}
 }

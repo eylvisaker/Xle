@@ -1,5 +1,6 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Geometry;
+using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,15 @@ namespace ERY.Xle.Maps.Renderers
 {
 	public abstract class Map3DRenderer : XleMapRenderer
 	{
+		public new Map3D TheMap { get { return (Map3D)base.TheMap; } }
+		public new Map3DExtender Extender { get { return (Map3DExtender)base.Extender; } }
+
 		enum SidePassageType
 		{
-			Standard,
-			Parallel,
 			Wall,
+			Parallel,
+			Corner,
+			Corridor,
 		}
 
 		protected enum ExtraType
@@ -37,24 +42,16 @@ namespace ERY.Xle.Maps.Renderers
 
 		readonly Size imageSize = new Size(368, 272);
 
-		public override XleMap TheMap
+		protected override void OnExtenderSet()
 		{
-			get
-			{
-				return base.TheMap;
-			}
-			set
-			{
-				base.TheMap = value;
-				LoadImages();
-			}
+			LoadImages();
 		}
 		public void LoadImages()
 		{
 			if (XleCore.Factory == null)
 				return;
 
-			Surfaces = XleCore.Factory.GetMap3DSurfaces((Map3D)TheMap);
+			Surfaces = Extender.Surfaces(XleCore.GameState);
 		}
 
 		public Map3DSurfaces Surfaces { get; set; }
@@ -77,13 +74,14 @@ namespace ERY.Xle.Maps.Renderers
 			Point leftDir = faceDirection.LeftDirection();
 			Point rightDir = faceDirection.RightDirection();
 
-			Surfaces.Backdrop.Draw(inRect);
+			// Draw the backdrop
+			Surfaces.Walls.Draw(new Rectangle(Point.Empty, screenSize), inRect);
 
 			Point loc = new Point(x, y);
 
 			int maxDistance = 0;
 
-			// draw up to terminal wall
+			// draw from terminal wall back
 			for (int distance = 0; distance < 6; distance++)
 			{
 				loc.X = x + distance * stepDir.X;
@@ -91,15 +89,27 @@ namespace ERY.Xle.Maps.Renderers
 
 				int val = TheMap[loc.X, loc.Y];
 
-				DrawSidePassages(loc, stepDir, leftDir, rightDir, distance, inRect);
 				maxDistance = distance;
 
 				if (IsPassable(val) == false)
 				{
-					DrawWall(distance, inRect);
-					DrawWallOverlay(distance, inRect, val);
-
 					break;
+				}
+			}
+
+			for (int distance = maxDistance; distance >= 0; distance--)
+			{
+				loc.X = x + distance * stepDir.X;
+				loc.Y = y + distance * stepDir.Y;
+
+				int val = TheMap[loc.X, loc.Y];
+
+				DrawSidePassages(loc, stepDir, leftDir, rightDir, distance, inRect);
+
+				if (distance == maxDistance && IsPassable(val) == false)
+				{
+					DrawWall(maxDistance, inRect);
+					DrawWallOverlay(maxDistance, inRect, val);
 				}
 			}
 
@@ -140,114 +150,114 @@ namespace ERY.Xle.Maps.Renderers
 				return false;
 		}
 
+		private SidePassageType GetSidePassageType(int distance, int sideVal, int sideForwardVal, int forwardVal)
+		{
+			SidePassageType sideType;
+
+			if (IsPassable(sideVal) == false)
+			{
+				return SidePassageType.Wall;
+			}
+			else if (IsPassable(forwardVal))
+				sideType = SidePassageType.Corridor;
+			else if (IsPassable(sideForwardVal))
+				sideType = SidePassageType.Parallel;
+			else
+				sideType = SidePassageType.Corner;
+
+			return sideType;
+		}
+
 		private void DrawSidePassages(Point loc, Point lookDir, Point leftDir, Point rightDir, int distance, Rectangle maindestRect)
 		{
-			int leftValue = TheMap[loc.X + leftDir.X, loc.Y + leftDir.Y];
-			int rightValue = TheMap[loc.X + rightDir.X, loc.Y + rightDir.Y];
+			Point forwardPt = new Point(loc.X + lookDir.X, loc.Y + lookDir.Y);
+			Point leftPt = new Point(loc.X + leftDir.X, loc.Y + leftDir.Y);
+			Point rightPt = new Point(loc.X + rightDir.X, loc.Y + rightDir.Y);
+			Point leftForwardPt = new Point(leftPt.X + lookDir.X, leftPt.Y + lookDir.Y);
+			Point rightForwardPt = new Point(rightPt.X + lookDir.X, rightPt.Y + lookDir.Y);
 
-			bool drawLeft = IsPassable(leftValue);
-			bool drawRight = IsPassable(rightValue);
-			SidePassageType type;
+			int forwardValue = MapValueAt(forwardPt);
+			int leftValue = MapValueAt(leftPt);
+			int rightValue = MapValueAt(rightPt);
+			int leftForwardValue = MapValueAt(leftForwardPt);
+			int rightForwardValue = MapValueAt(rightForwardPt);
+
+			SidePassageType leftType = GetSidePassageType(distance, leftValue, leftForwardValue, forwardValue);
+			SidePassageType rightType = GetSidePassageType(distance, rightValue, rightForwardValue, forwardValue);
 
 			Rectangle srcRect, destRect;
 
-			if (drawLeft)
-			{
-				type = SidePassageType.Standard;
+			srcRect = GetSidePassageSrcRect(distance, false, leftType);
+			destRect = GetSidePassageDestRect(distance, false, maindestRect);
+			Surfaces.Walls.Draw(srcRect, destRect);
 
-				if (IsPassable(TheMap[loc.X + lookDir.X, loc.Y + lookDir.Y]) == false)
-				{
-					if (IsPassable(TheMap[loc.X + lookDir.X + leftDir.X, loc.Y + lookDir.Y + leftDir.Y]))
-					{
-						type = SidePassageType.Parallel;
-					}
-					else
-						type = SidePassageType.Wall;
-				}
-
-				srcRect = GetSidePassageSrcRect(distance, false, type);
-				destRect = GetSidePassageDestRect(distance, false);
-
-				destRect.X += maindestRect.X;
-				destRect.Y += maindestRect.Y;
-
-				Surfaces.SidePassages.Draw(srcRect, destRect);
-			}
-			if (drawRight)
-			{
-				type = SidePassageType.Standard;
-
-				if (IsPassable(TheMap[loc.X + lookDir.X, loc.Y + lookDir.Y]) == false)
-				{
-					if (IsPassable(TheMap[loc.X + lookDir.X + rightDir.X, loc.Y + lookDir.Y + rightDir.Y]))
-					{
-						type = SidePassageType.Parallel;
-					}
-					else
-						type = SidePassageType.Wall;
-				}
-
-				srcRect = GetSidePassageSrcRect(distance, true, type);
-				destRect = GetSidePassageDestRect(distance, true);
-
-				destRect.X += maindestRect.X;
-				destRect.Y += maindestRect.Y;
-
-				Surfaces.SidePassages.Draw(srcRect, destRect);
-			}
+			srcRect = GetSidePassageSrcRect(distance, true, rightType);
+			destRect = GetSidePassageDestRect(distance, true, maindestRect);
+			Surfaces.Walls.Draw(srcRect, destRect);
 
 		}
+
+		private int MapValueAt(Point leftPt)
+		{
+			return TheMap[leftPt.X, leftPt.Y];
+		}
+
+		readonly int[] sideWidth = new int[] { 3, 3, 2, 1, 1, 1, 1 };
+
 		private Rectangle GetSidePassageSrcRect(int distance, bool rightSide, SidePassageType type)
 		{
 			Rectangle retval = new Rectangle();
 
-			switch (distance)
+			retval.Width = sideWidth[distance];// +sideWidth[distance + 1];
+
+			for (int i = 0; i < distance; i++)
 			{
-				case 0: retval = new Rectangle(0, 0, 24, 112); break;
-				case 1: retval = new Rectangle(24, 0, 24, 80); break;
-				case 2: retval = new Rectangle(48, 0, 16, 64); break;
-				case 3: retval = new Rectangle(64, 0, 8, 48); break;
-				case 4: retval = new Rectangle(72, 0, 8, 40); break;
+				retval.X += sideWidth[i];
 			}
 
-			switch (type)
-			{
-				case SidePassageType.Parallel: retval.Y += 112; break;
-				case SidePassageType.Wall: retval.Y += 224; break;
-			}
+			retval.X *= 16;
+			retval.Y *= 16;
+			retval.Width *= 16;
+			retval.Height *= 16;
+
+			retval.Y += imageSize.Height * (int)type;
+			retval.Height = imageSize.Height;
 
 			if (rightSide)
-				retval.X += 80;
+			{
+				retval.X = imageSize.Width - retval.X - retval.Width;
+			}
 
-			retval.X *= 2;
-			retval.Y *= 2;
-			retval.Width *= 2;
-			retval.Height *= 2;
+			if (distance % 2 == 1)
+				retval.X += imageSize.Width;
 
 			return retval;
 		}
-		private Rectangle GetSidePassageDestRect(int distance, bool rightSide)
+		private Rectangle GetSidePassageDestRect(int distance, bool rightSide, Rectangle inRect)
 		{
 			Rectangle retval = new Rectangle();
 
-			switch (distance)
+			for (int i = 0; i < distance; i++)
 			{
-				case 0: retval = new Rectangle(0, 24, 24, 112); break;
-				case 1: retval = new Rectangle(24, 40, 24, 80); break;
-				case 2: retval = new Rectangle(48, 48, 16, 64); break;
-				case 3: retval = new Rectangle(64, 56, 8, 48); break;
-				case 4: retval = new Rectangle(72, 56, 8, 40); break;
+				retval.X += sideWidth[i];
 			}
+
+			retval.Width = sideWidth[distance];// +sideWidth[distance + 1];
+
+			retval.X *= 16;
+			retval.Y *= 16;
+			retval.Width *= 16;
+			retval.Height *= 16;
+
+			retval.Height = imageSize.Height;
 
 			if (rightSide)
 			{
-				retval.X = 184 - retval.X - retval.Width;
+				retval.X = imageSize.Width - retval.X - retval.Width;
 			}
 
-			retval.X *= 2;
-			retval.Y *= 2;
-			retval.Width *= 2;
-			retval.Height *= 2;
+			retval.X += inRect.X;
+			retval.Y += inRect.Y;
 
 			return retval;
 		}
@@ -350,56 +360,18 @@ namespace ERY.Xle.Maps.Renderers
 
 		protected abstract ExtraType GetExtraType(int val, int side);
 
+		readonly Size screenSize = new Size(23 * 16, 17 * 16);
+
 		private void DrawWall(int distance, Rectangle main_destRect)
 		{
-			Rectangle srcRect = GetWallSrcRect(distance);
-			Rectangle destRect = GetWallDestRect(distance);
+			Surfaces.Walls.Draw(
+				new Rectangle(
+					screenSize.Width * 2, 
+					(distance - 1) * screenSize.Height, 
+					screenSize.Width, 
+					screenSize.Height),
+				main_destRect);
 
-			destRect.X += main_destRect.X;
-			destRect.Y += main_destRect.Y;
-
-			Surfaces.Wall.Draw(srcRect, destRect);
-		}
-
-		private Rectangle GetWallSrcRect(int distance)
-		{
-			Rectangle retval = new Rectangle();
-
-			switch (distance)
-			{
-				case 1: retval = new Rectangle(0, 0, 136, 112); break;
-				case 2: retval = new Rectangle(136, 0, 88, 80); break;
-				case 3: retval = new Rectangle(224, 0, 56, 64); break;
-				case 4: retval = new Rectangle(280, 0, 40, 48); break;
-				case 5: retval = new Rectangle(320, 0, 24, 40); break;
-			}
-
-			retval.X *= 2;
-			retval.Y *= 2;
-			retval.Width *= 2;
-			retval.Height *= 2;
-
-			return retval;
-		}
-		private Rectangle GetWallDestRect(int distance)
-		{
-			Rectangle retval = new Rectangle();
-
-			switch (distance)
-			{
-				case 1: retval = new Rectangle(24, 8, 136, 112); break;
-				case 2: retval = new Rectangle(48, 32, 88, 80); break;
-				case 3: retval = new Rectangle(64, 40, 56, 64); break;
-				case 4: retval = new Rectangle(72, 48, 40, 48); break;
-				case 5: retval = new Rectangle(80, 56, 24, 40); break;
-			}
-
-			retval.X *= 2;
-			retval.Y *= 2;
-			retval.Width *= 2;
-			retval.Height *= 2;
-
-			return retval;
 		}
 
 		private void DrawWallOverlay(int distance, Rectangle destRect, int val)
