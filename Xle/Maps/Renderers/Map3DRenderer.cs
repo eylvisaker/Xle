@@ -32,6 +32,7 @@ namespace ERY.Xle.Maps.Renderers
 			Needle,
 			Slime,
 			TripWire,
+			GasVent,
 			DisplayCaseLeft,
 			DisplayCaseRight,
 			TorchLeft,

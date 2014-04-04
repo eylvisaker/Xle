@@ -33,6 +33,9 @@ namespace ERY.Xle.Maps.Renderers
 				case 0x15:
 					extraType = ExtraType.TripWire;
 					break;
+				case 0x16:
+					extraType = ExtraType.GasVent;
+					break;
 				case 0x1e:
 					extraType = ExtraType.Box;
 					break;
