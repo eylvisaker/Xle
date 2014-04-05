@@ -11,6 +11,7 @@ namespace ERY.Xle.LotA
 	public static class Lota3DSurfaces
 	{
 		public static Map3DSurfaces Museum = new Map3DSurfaces();
+		public static Map3DSurfaces MuseumDark = new Map3DSurfaces();
 		public static Map3DSurfaces DungeonBlue = new Map3DSurfaces();
 		public static Map3DSurfaces DungeonBrown = new Map3DSurfaces();
 
@@ -22,6 +23,9 @@ namespace ERY.Xle.LotA
 			Museum.MuseumExhibitCloseup = new Surface("Museum/MuseumCloseup.png");
 			Museum.Extras = new Surface("Museum/MuseumExtras.png");
 			Museum.Walls = new Surface("Museum/walls.png");
+			Museum.Torches = new Surface("Museum/torches.png");
+
+			MuseumDark.Walls = new Surface("MuseumDark/walls.png");
 
 			DungeonBlue.Extras = new Surface("Dungeon/Blue/DungeonExtras.png");
 			DungeonBlue.Walls = new Surface("Dungeon/PiratesLair/walls.png");

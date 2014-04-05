@@ -34,6 +34,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 			mExhibits.Add(0x5E, new MuseumDisplays.Pegasus());
 			mExhibits.Add(0x5F, new MuseumDisplays.AncientArtifact());
 		}
+
 		public override void SetCommands(Commands.CommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
@@ -189,7 +190,16 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 
 		public override Maps.Map3DSurfaces Surfaces(GameState state)
 		{
-			return Lota3DSurfaces.Museum;
+			var step = state.Player.FaceDirection.StepDirection();
+			var first = new Point(
+				state.Player.Location.X + step.X, 
+				state.Player.Location.Y + step.Y);
+
+			if (TheMap[state.Player.Location.X, state.Player.Location.Y] == 31 ||
+				TheMap[first.X, first.Y] == 31)
+				return Lota3DSurfaces.MuseumDark;
+			else
+				return Lota3DSurfaces.Museum;
 		}
 	}
 }

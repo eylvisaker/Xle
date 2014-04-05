@@ -11,6 +11,41 @@ namespace ERY.Xle.Maps.Renderers
 {
 	public abstract class Map3DRenderer : XleMapRenderer
 	{
+		class TorchAnim
+		{
+			public TorchAnim()
+			{
+				SetNextAnimTime();
+				AdvanceFrame();
+			}
+
+			public void AdvanceFrame()
+			{
+				if (CurrentFrame == 3 || CurrentFrame == 4)
+				{
+					CurrentFrame++;
+				}
+				else
+				{
+					int newFrame = CurrentFrame;
+
+					while (newFrame == CurrentFrame)
+						newFrame = XleCore.random.Next(77) / 25;
+
+					CurrentFrame = newFrame;
+				}
+			}
+			public void SetNextAnimTime()
+			{
+				NextAnimTime = XleCore.random.Next(100, 125);
+			}
+
+			public double NextAnimTime;
+			public int CurrentFrame;
+		}
+
+		Dictionary<int, TorchAnim> torchAnims = new Dictionary<int, TorchAnim>();
+
 		public new Map3D TheMap { get { return (Map3D)base.TheMap; } }
 		public new Map3DExtender Extender { get { return (Map3DExtender)base.Extender; } }
 
@@ -51,8 +86,6 @@ namespace ERY.Xle.Maps.Renderers
 		{
 			if (XleCore.Factory == null)
 				return;
-
-			Surfaces = Extender.Surfaces(XleCore.GameState);
 		}
 
 		public Map3DSurfaces Surfaces { get; set; }
@@ -60,11 +93,29 @@ namespace ERY.Xle.Maps.Renderers
 
 		public override void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
 		{
+			Surfaces = Extender.Surfaces(XleCore.GameState);
+
 			DrawImpl(playerPos.X, playerPos.Y, faceDirection, inRect);
+		}
+
+		void AnimateTorches()
+		{
+			foreach(var ta in torchAnims.Values)
+			{
+				ta.NextAnimTime -= Display.DeltaTime;
+
+				if (ta.NextAnimTime < 0)
+				{
+					ta.SetNextAnimTime();
+					ta.AdvanceFrame();
+				}
+			}
 		}
 
 		void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect)
 		{
+			AnimateTorches();
+
 			if (DrawCloseup)
 			{
 				DrawCloseupImpl(inRect);
@@ -113,7 +164,6 @@ namespace ERY.Xle.Maps.Renderers
 					DrawWallOverlay(maxDistance, inRect, val);
 				}
 			}
-
 			for (int distance = 0; distance < maxDistance; distance++)
 			{
 				for (int dir = -1; dir <= 1; dir++)
@@ -121,16 +171,91 @@ namespace ERY.Xle.Maps.Renderers
 					loc.X = x + distance * stepDir.X + dir * rightDir.X;
 					loc.Y = y + distance * stepDir.Y + dir * rightDir.Y;
 
+					if (dir == 0)
+					{
+						loc.X += stepDir.X;
+						loc.Y += stepDir.Y;
+					}
+
 					int val = TheMap[loc.X, loc.Y];
 
 					if (val == 0) continue;
 					if (val == 0x10) continue;
+					if (val == 0x01)
+					{
+						DrawTorch(dir, distance, inRect);
+
+						continue;
+					}
 
 					DrawExtras(val, dir, loc, distance, inRect);
 				}
 			}
 
 			DrawMonsters(x, y, faceDirection, inRect, maxDistance);
+		}
+
+		/// <summary>
+		/// Draws a torch
+		/// </summary>
+		/// <param name="side">-1 for left, 0 for center, 1 for right</param>
+		/// <param name="distance"></param>
+		/// <param name="mainDestRect"></param>
+		private void DrawTorch(int side, int distance, Rectangle mainDestRect)
+		{
+			int taHash = distance * 3 + side;
+			TorchAnim anim;
+
+			if (torchAnims.ContainsKey(taHash) == false)
+				torchAnims[taHash] = new TorchAnim();
+			
+			anim = torchAnims[taHash];
+
+			Size torchSize = new Size(60, 84);
+
+			Dictionary<int, List<Point>> destPositions = new Dictionary<int, List<Point>>();
+
+			FillTorchDestPositions(destPositions);
+
+			Rectangle srcRect = new Rectangle(
+				anim.CurrentFrame * torchSize.Width, 
+				torchSize.Height * (side + 1 + 3 * distance),
+				torchSize.Width,
+				torchSize.Height);
+
+			Point pos = destPositions[side][distance];
+			pos.X += mainDestRect.X;
+			pos.Y += mainDestRect.Y;
+
+			Surfaces.Torches.Draw(srcRect, pos);
+		}
+
+		private void FillTorchDestPositions(Dictionary<int, List<Point>> destPositions)
+		{
+			destPositions[-1] = new List<Point>();
+			destPositions[0] = new List<Point>();
+			destPositions[1] = new List<Point>();
+
+			int x = -1;
+			destPositions[x].Add(new Point(2 * -3, 2 * 30));
+			destPositions[x].Add(new Point(2 * 29, 2 * 36));
+			destPositions[x].Add(new Point(2 * 50, 2 * 41));
+			destPositions[x].Add(new Point(2 * 63, 2 * 44));
+			destPositions[x].Add(new Point(2 * 69, 2 * 48));
+
+			x = 1;
+			destPositions[x].Add(new Point(2 * 157, 2 * 30));
+			destPositions[x].Add(new Point(2 * 127, 2 * 36));
+			destPositions[x].Add(new Point(2 * 109, 2 * 41));
+			destPositions[x].Add(new Point(2 * 97, 2 * 44));
+			destPositions[x].Add(new Point(2 * 89, 2 * 47));
+
+			x = 0;
+			destPositions[x].Add(new Point(2 * 79, 2 * 31));
+			destPositions[x].Add(new Point(2 * 79, 2 * 37));
+			destPositions[x].Add(new Point(2 * 79, 2 * 41));
+			destPositions[x].Add(new Point(2 * 79, 2 * 44));
+			destPositions[x].Add(new Point(2 * 79, 2 * 48));
 		}
 
 		protected virtual void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
@@ -270,6 +395,11 @@ namespace ERY.Xle.Maps.Renderers
 			if (extraType == ExtraType.None)
 				return;
 
+			if (extraType == ExtraType.TorchLeft || extraType == ExtraType.TorchRight)
+			{
+				return;
+			}
+
 			Map3DExtraInfo info = XleCore.Data.Map3DExtraInfo[(int)extraType];
 
 			if (info.Images.ContainsKey(distance) == false)
@@ -291,6 +421,7 @@ namespace ERY.Xle.Maps.Renderers
 
 			AnimateExtra(extraType, loc, distance, destRect.Location);
 		}
+
 
 		private void AnimateExtra(ExtraType extraType, Point loc, int distance, Point extraDestRect)
 		{
@@ -367,9 +498,9 @@ namespace ERY.Xle.Maps.Renderers
 		{
 			Surfaces.Walls.Draw(
 				new Rectangle(
-					screenSize.Width * 2, 
-					(distance - 1) * screenSize.Height, 
-					screenSize.Width, 
+					screenSize.Width * 2,
+					(distance - 1) * screenSize.Height,
+					screenSize.Width,
 					screenSize.Height),
 				main_destRect);
 

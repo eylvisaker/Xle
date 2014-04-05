@@ -15,5 +15,7 @@ namespace ERY.Xle.Maps
 		public Surface MuseumExhibitFrame { get; set; }
 		public Surface MuseumExhibitStatic { get; set; }
 		public Surface MuseumExhibitCloseup { get; set; }
+
+		public Surface Torches { get; set; }
 	}
 }

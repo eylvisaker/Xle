@@ -11,6 +11,8 @@ namespace ERY.Xle.Maps.Extenders
 {
 	public class MuseumExtender : Map3DExtender
 	{
+		int doorVal = 2;
+
 		public new Museum TheMap { get { return (Museum)base.TheMap;  } }
 		public new MuseumRenderer MapRenderer { get { return (MuseumRenderer)base.MapRenderer; } }
 
@@ -79,6 +81,7 @@ namespace ERY.Xle.Maps.Extenders
 		public override bool PlayerXamine(GameState state)
 		{
 			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 
 			if (InteractWithDisplay(state))
 				return true;
@@ -90,19 +93,52 @@ namespace ERY.Xle.Maps.Extenders
 		public override bool PlayerFight(GameState state)
 		{
 			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("There is nothing to fight.");
+			XleCore.TextArea.PrintLine();
+			
+			Point lookingAt = state.Player.Location;
+			lookingAt.X += state.Player.FaceDirection.StepDirection().X;
+			lookingAt.Y += state.Player.FaceDirection.StepDirection().Y;
+
+			if (ExhibitAt(state.Player.Location) != null)
+			{
+				PrintExhibitStopsActionMessage();
+			}
+			else if (TheMap[lookingAt] == doorVal)
+			{
+				SoundMan.PlaySound(LotaSound.PlayerHit);
+
+				XleCore.TextArea.PrintLine("The door does not budge.");
+			}
+			else
+				XleCore.TextArea.PrintLine("There is nothing to fight.");
 
 			return true;
+		}
+
+		private static void PrintExhibitStopsActionMessage()
+		{
+			XleCore.TextArea.PrintLine("The display case");
+			XleCore.TextArea.PrintLine("force field stops you.");
 		}
 		public override bool PlayerRob(GameState state)
 		{
 			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("There is nothing to rob.");
+			XleCore.TextArea.PrintLine();
+
+			if (ExhibitAt(state.Player.Location) != null)
+			{
+				PrintExhibitStopsActionMessage();
+			}
+			else
+			{
+				XleCore.TextArea.PrintLine("There is nothing to rob.");
+			}
 
 			return true;
 		}
 		protected override bool PlayerSpeakImpl(GameState state)
 		{
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("There is no reply.");
 
@@ -116,6 +152,10 @@ namespace ERY.Xle.Maps.Extenders
 			return true;
 		}
 
+		public Exhibit ExhibitAt(Point location)
+		{
+			return ExhibitAt(location.X, location.Y);
+		}
 		public Exhibit ExhibitAt(int x, int y)
 		{
 			int tileAt = TheMap[x, y];

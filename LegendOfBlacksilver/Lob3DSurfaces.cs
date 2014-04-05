@@ -26,6 +26,7 @@ namespace ERY.Xle.LoB
 			Archives.MuseumExhibitCloseup = new Surface("Museum/MuseumCloseup.png");
 			Archives.Extras = new Surface("Museum/MuseumExtras.png");
 			Archives.Walls = new Surface("Museum/walls.png");
+			Archives.Torches = new Surface("Museum/torches.png");
 
 			IslandCaverns.Extras = new Surface("Dungeon/Blue/DungeonExtras.png");
 			IslandCaverns.Walls = new Surface("Dungeon/IslandCavern/walls.png");

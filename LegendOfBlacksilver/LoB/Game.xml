@@ -450,7 +450,7 @@
       <Image distance="3" srcRect="288,128,48,16" destRect="160,192,48,16" />
       <Image distance="4" srcRect="336,128,16,16" destRect="176,176,16,16" />
     </Extra>
-    <Extra ID="8" Name="DisplayCaseLeft">
+    <Extra ID="9" Name="DisplayCaseLeft">
       <Image distance="0" srcRect="0,0,48,144" destRect="0,80,48,144">
         <Animation frameTime="120">
           <Frame srcRect="160,0,32,112" destRect="0,16,32,112" />
@@ -479,7 +479,7 @@
         </Animation>
       </Image>
     </Extra>
-    <Extra ID="9" Name="DisplayCaseRight">
+    <Extra ID="10" Name="DisplayCaseRight">
       <Image distance="0" srcRect="0,144,48,144" destRect="320,80,48,144">
         <Animation frameTime="120">
           <Frame srcRect="256,0,32,112" destRect="16,16,32,112" />
@@ -500,7 +500,7 @@
 
       </Image>
     </Extra>
-    <Extra ID="10" Name="TorchLeft">
+    <Extra ID="11" Name="TorchLeft">
       <Image distance="0" srcRect="0,0,0,0" destRect="0,64,0,0" >
         <Animation>
           <Frame srcRect="0,288,48,80" destRect="0,0,48,80" />
@@ -527,7 +527,7 @@
         </Animation>
       </Image>
     </Extra>
-    <Extra ID="11" Name="TorchRight">
+    <Extra ID="12" Name="TorchRight">
       <Image distance="0" srcRect="0,0,0,0" destRect="320,64,0,0" >
         <Animation>
           <Frame srcRect="192,160,48,80" destRect="0,0,48,80" />
@@ -554,9 +554,9 @@
         </Animation>
       </Image>
     </Extra>
-    <Extra ID="12" Name="DoorLeft">
+    <Extra ID="13" Name="DoorLeft">
     </Extra>
-    <Extra ID="13" Name="DoorRight">
+    <Extra ID="14" Name="DoorRight">
     </Extra>
   </DungeonExtras>
   <DungeonMonsters>

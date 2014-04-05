@@ -365,7 +365,13 @@ namespace ERY.Xle.Maps
 		/// <param name="xx"></param>
 		/// <param name="yy"></param>
 		/// <returns></returns>
-		public abstract int this[int xx, int yy] { get; set; }
+		public abstract int this[int x, int y] { get; set; }
+
+		public int this[Point location]
+		{
+			get { return this[location.X, location.Y]; }
+			set { this[location.X, location.Y] = value; }
+		}
 
 		#endregion
 		#region --- Virtual functions ---
