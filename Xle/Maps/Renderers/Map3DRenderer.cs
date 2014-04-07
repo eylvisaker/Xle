@@ -49,12 +49,14 @@ namespace ERY.Xle.Maps.Renderers
 		public new Map3D TheMap { get { return (Map3D)base.TheMap; } }
 		public new Map3DExtender Extender { get { return (Map3DExtender)base.Extender; } }
 
-		enum SidePassageType
+		enum SideWallType
 		{
 			Wall,
 			Parallel,
 			Corner,
 			Corridor,
+			Door,
+			Exhibit
 		}
 
 		protected enum ExtraType
@@ -160,8 +162,8 @@ namespace ERY.Xle.Maps.Renderers
 
 				if (distance == maxDistance && IsPassable(val) == false)
 				{
-					DrawWall(maxDistance, inRect);
-					DrawWallOverlay(maxDistance, inRect, val);
+					DrawTerminalWall(val, maxDistance, inRect);
+					//DrawWallOverlay(maxDistance, inRect, val);
 				}
 			}
 			for (int distance = 0; distance < maxDistance; distance++)
@@ -188,7 +190,7 @@ namespace ERY.Xle.Maps.Renderers
 						continue;
 					}
 
-					DrawExtras(val, dir, loc, distance, inRect);
+					//DrawExtras(val, dir, loc, distance, inRect);
 				}
 			}
 
@@ -276,22 +278,25 @@ namespace ERY.Xle.Maps.Renderers
 				return false;
 		}
 
-		private SidePassageType GetSidePassageType(int distance, int sideVal, int sideForwardVal, int forwardVal)
+		private SideWallType GetSideWallType(int distance, int sideVal, int sideForwardVal, int forwardVal)
 		{
-			SidePassageType sideType;
+			SideWallType sideType;
+
+			if (sideVal == 2)
+				return SideWallType.Door;
+			if (sideVal >= 0x50 && sideVal <= 0x5f)
+				return SideWallType.Exhibit;
 
 			if (IsPassable(sideVal) == false)
 			{
-				return SidePassageType.Wall;
+				return SideWallType.Wall;
 			}
 			else if (IsPassable(forwardVal))
-				sideType = SidePassageType.Corridor;
+				return SideWallType.Corridor;
 			else if (IsPassable(sideForwardVal))
-				sideType = SidePassageType.Parallel;
+				return SideWallType.Parallel;
 			else
-				sideType = SidePassageType.Corner;
-
-			return sideType;
+				return SideWallType.Corner;
 		}
 
 		private void DrawSidePassages(Point loc, Point lookDir, Point leftDir, Point rightDir, int distance, Rectangle maindestRect)
@@ -308,17 +313,17 @@ namespace ERY.Xle.Maps.Renderers
 			int leftForwardValue = MapValueAt(leftForwardPt);
 			int rightForwardValue = MapValueAt(rightForwardPt);
 
-			SidePassageType leftType = GetSidePassageType(distance, leftValue, leftForwardValue, forwardValue);
-			SidePassageType rightType = GetSidePassageType(distance, rightValue, rightForwardValue, forwardValue);
+			SideWallType leftType = GetSideWallType(distance, leftValue, leftForwardValue, forwardValue);
+			SideWallType rightType = GetSideWallType(distance, rightValue, rightForwardValue, forwardValue);
 
 			Rectangle srcRect, destRect;
 
 			srcRect = GetSidePassageSrcRect(distance, false, leftType);
-			destRect = GetSidePassageDestRect(distance, false, maindestRect);
+			destRect = GetSidePassageDestRect(distance, false, leftType, maindestRect);
 			Surfaces.Walls.Draw(srcRect, destRect);
 
 			srcRect = GetSidePassageSrcRect(distance, true, rightType);
-			destRect = GetSidePassageDestRect(distance, true, maindestRect);
+			destRect = GetSidePassageDestRect(distance, true, rightType, maindestRect);
 			Surfaces.Walls.Draw(srcRect, destRect);
 
 		}
@@ -330,11 +335,20 @@ namespace ERY.Xle.Maps.Renderers
 
 		readonly int[] sideWidth = new int[] { 3, 3, 2, 1, 1, 1, 1 };
 
-		private Rectangle GetSidePassageSrcRect(int distance, bool rightSide, SidePassageType type)
+		private Rectangle GetSidePassageSrcRect(int distance, bool rightSide, SideWallType type)
 		{
 			Rectangle retval = new Rectangle();
 
 			retval.Width = sideWidth[distance];// +sideWidth[distance + 1];
+
+			//switch (type)
+			//{
+			//	case SideWallType.Corner:
+			//	case SideWallType.Corridor:
+			//	case SideWallType.Parallel:
+			//		retval.Width += sideWidth[distance + 1];
+			//		break;
+			//}
 
 			for (int i = 0; i < distance; i++)
 			{
@@ -359,7 +373,7 @@ namespace ERY.Xle.Maps.Renderers
 
 			return retval;
 		}
-		private Rectangle GetSidePassageDestRect(int distance, bool rightSide, Rectangle inRect)
+		private Rectangle GetSidePassageDestRect(int distance, bool rightSide, SideWallType type, Rectangle inRect)
 		{
 			Rectangle retval = new Rectangle();
 
@@ -370,6 +384,16 @@ namespace ERY.Xle.Maps.Renderers
 
 			retval.Width = sideWidth[distance];// +sideWidth[distance + 1];
 
+			//switch (type)
+			//{
+			//	case SideWallType.Corner:
+			//	case SideWallType.Corridor:
+			//	case SideWallType.Parallel:
+			//		retval.Width += sideWidth[distance + 1];
+			//		break;
+			//}
+
+			
 			retval.X *= 16;
 			retval.Y *= 16;
 			retval.Width *= 16;
@@ -494,14 +518,21 @@ namespace ERY.Xle.Maps.Renderers
 
 		readonly Size screenSize = new Size(23 * 16, 17 * 16);
 
-		private void DrawWall(int distance, Rectangle main_destRect)
+		private void DrawTerminalWall(int val, int distance, Rectangle main_destRect)
 		{
-			Surfaces.Walls.Draw(
-				new Rectangle(
+			var srcRect = new Rectangle(
 					screenSize.Width * 2,
 					(distance - 1) * screenSize.Height,
 					screenSize.Width,
-					screenSize.Height),
+					screenSize.Height);
+
+			if (val == 2)
+				srcRect.X += screenSize.Width;
+			if (val >= 0x50 && val <= 0x5f)
+				srcRect.X += screenSize.Width * 2;
+
+			Surfaces.Walls.Draw(
+				srcRect,
 				main_destRect);
 
 		}
