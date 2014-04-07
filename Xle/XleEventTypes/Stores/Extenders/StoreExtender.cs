@@ -106,10 +106,24 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			return true;
 		}
 
-		public override bool Rob(GameState state)
+		public sealed override bool Rob(GameState state)
+		{
+			if (AllowRobWhenNotAngry == false && state.Map.Guards.IsAngry == false)
+			{
+				RobFail();
+				return true;
+			}
+
+			state.MapExtender.IsAngry = true;
+
+			return RobImpl(state);			
+		}
+
+		protected virtual bool RobImpl(GameState state)
 		{
 			if (Robbed)
 			{
+				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("No items within reach here.");
 				XleCore.Wait(1000);
@@ -121,12 +135,14 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			if (value == 0)
 			{
 				XleCore.TextArea.PrintLine();
+				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine("There's nothing to really carry here.");
 				XleCore.Wait(1000);
 				return true;
 			}
 
 			state.Player.Gold += value;
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("You get " + value.ToString() + " gold.", XleColor.Yellow);
 			XleCore.Wait(1000);

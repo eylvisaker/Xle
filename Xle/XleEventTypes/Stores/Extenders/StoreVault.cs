@@ -13,6 +13,15 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		{
 			return false;
 		}
+
+
+		public override bool AllowRobWhenNotAngry
+		{
+			get
+			{
+				return true;
+			}
+		}
 	}
 
 }

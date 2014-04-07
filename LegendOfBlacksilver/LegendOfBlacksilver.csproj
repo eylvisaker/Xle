@@ -394,7 +394,7 @@
     <None Include="Support\lob-dungeon.c64bas" />
     <None Include="Support\lob-intro.c64bas" />
     <None Include="Support\lob-king.c64bas" />
-    <None Include="Support\lob-labrynth-speak.c64bas" />
+    <None Include="Support\lob-labryinth-speak.c64bas" />
     <None Include="Support\lob-outside.c64bas" />
     <None Include="Support\lob-seravol.c64bas" />
     <None Include="Support\lob-temple.c64bas" />

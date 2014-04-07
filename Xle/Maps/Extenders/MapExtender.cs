@@ -27,6 +27,21 @@ namespace ERY.Xle.Maps.Extenders
 		}
 		public XleMapRenderer MapRenderer { get; set; }
 
+		public bool IsAngry
+		{
+			get { return TheMap.Guards.IsAngry; }
+			set
+			{
+				TheMap.Guards.IsAngry = value;
+
+				OnSetAngry(value);
+			}
+		}
+
+		protected virtual void OnSetAngry(bool value)
+		{
+		}
+
 		protected virtual XleMapRenderer CreateMapRenderer()
 		{
 			return new XleMapRenderer();

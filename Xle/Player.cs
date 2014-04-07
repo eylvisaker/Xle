@@ -101,7 +101,7 @@ namespace ERY.Xle
 
 		public int RaftImage { get; set; }
 	}
-	
+
 	public class Player : IXleSerializable
 	{
 		AttributeContainer mAttributes = new AttributeContainer();
@@ -136,7 +136,6 @@ namespace ERY.Xle
 
 		int hold;
 		int lastAttacked;
-		int vaultGold;
 
 		int[] chests = new int[50];
 
@@ -179,8 +178,6 @@ namespace ERY.Xle
 
 			hp = 200;
 			level = 1;
-
-			vaultGold = 17;
 
 			ClearRafts();
 
@@ -225,7 +222,7 @@ namespace ERY.Xle
 			info.Write("Hold", hold);
 
 			info.Write("LastAttacked", lastAttacked);
-			info.Write("VaultGold", vaultGold);
+			info.Write("VaultGold", VaultGold);
 
 			info.Write("Chests", chests);
 
@@ -244,7 +241,7 @@ namespace ERY.Xle
 			gold = info.ReadInt32("Gold");
 			goldBank = info.ReadInt32("GoldInBank");
 			timedays = info.ReadDouble("TimeDays");
-				timequality = info.ReadDouble("TimeQuality");
+			timequality = info.ReadDouble("TimeQuality");
 
 			onRaft = info.ReadInt32("OnRaft");
 			rafts = info.ReadList<RaftData>("Rafts");
@@ -274,7 +271,7 @@ namespace ERY.Xle
 			hold = info.ReadInt32("Hold");
 
 			lastAttacked = info.ReadInt32("LastAttacked");
-			vaultGold = info.ReadInt32("VaultGold");
+			VaultGold = info.ReadInt32("VaultGold");
 
 			chests = info.ReadInt32Array("Chests");
 
@@ -619,15 +616,7 @@ namespace ERY.Xle
 			}
 		}
 
-		public int VaultGold
-		{
-			get { return vaultGold; }
-			set
-			{
-				System.Diagnostics.Debug.Assert(value > 0 && value < 20);
-				vaultGold = value;
-			}
-		}
+		public int VaultGold { get; set; }
 
 		/// <summary>
 		/// Gets whether or not the player is on a raft. If you want to have the player

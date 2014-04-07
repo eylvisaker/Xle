@@ -96,7 +96,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			}
 		}
 
-		public override void OnSetAngry(bool value)
+		protected override void OnSetAngry(bool value)
 		{
 			var state = XleCore.GameState;
 

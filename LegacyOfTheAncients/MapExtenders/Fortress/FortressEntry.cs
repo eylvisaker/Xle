@@ -41,7 +41,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 					base.CreateEventExtender(evt, defaultExtender);
 		}
 
-		public override void OnSetAngry(bool value)
+		protected override void OnSetAngry(bool value)
 		{
 			base.OnSetAngry(value);
 

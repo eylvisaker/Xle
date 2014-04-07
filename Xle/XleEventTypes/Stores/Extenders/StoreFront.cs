@@ -91,6 +91,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		private void DrawTitle(string title)
 		{
+			if (string.IsNullOrEmpty(title))
+				return;
+
 			Display.FillRect(320 - (title.Length + 2) / 2 * 16, 0,
 						 (title.Length + 2) * 16, 16, mColorScheme.BackColor);
 

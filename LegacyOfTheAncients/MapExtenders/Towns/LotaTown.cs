@@ -30,7 +30,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 			mExtenders.Add("StoreWeapon", new StoreWeapon());
 			mExtenders.Add("StoreRaft", new StoreRaftExtender());
 			mExtenders.Add("StoreBank", new StoreBank());
-			mExtenders.Add("StoreVault", new StoreVault());
+			mExtenders.Add("StoreVault", new Vault());
 			mExtenders.Add("StoreBuyback", new StoreBuyback());
 		}
 

@@ -86,6 +86,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
 			player.AddArmor(1, 0);
 			player.CurrentArmorIndex = 1;
+			player.VaultGold = 1500;
 
 			player.StoryData = new LotaStory();
 			player.SavePlayer();

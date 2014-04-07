@@ -24,10 +24,6 @@ namespace ERY.Xle.Maps.Extenders
 			scheme.FrameHighlightColor = XleColor.Yellow;
 		}
 
-		public virtual void OnSetAngry(bool value)
-		{
-		}
-
 		public override void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
 		{
 			base.AfterExecuteCommand(state, cmd);
@@ -92,16 +88,6 @@ namespace ERY.Xle.Maps.Extenders
 			}
 
 			return false;
-		}
-		public bool IsAngry
-		{
-			get { return TheMap.Guards.IsAngry; }
-			set
-			{
-				TheMap.Guards.IsAngry = value;
-
-				OnSetAngry(value);
-			}
 		}
 
 		public void UpdateGuards(Player player)
@@ -575,19 +561,12 @@ namespace ERY.Xle.Maps.Extenders
 		{
 			foreach (var evt in TheMap.EventsAt(state.Player, 1))
 			{
-				bool handled = false;
-
-				if (evt.AllowRobWhenNotAngry == false && this.IsAngry == false)
-				{
-					evt.RobFail();
-					return true;
-				}
-
-				handled = evt.Rob(state);
-				IsAngry = true;
+				bool handled = evt.Extender.Rob(state);
 
 				if (handled)
+				{
 					return handled;
+				}
 			}
 
 			return PlayerRobImpl(state.Player);
@@ -595,7 +574,7 @@ namespace ERY.Xle.Maps.Extenders
 		protected virtual bool PlayerRobImpl(Player player)
 		{
 			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Nothing to rob");
+			XleCore.TextArea.PrintLine("Nothing to rob.");
 			XleCore.Wait(500);
 
 			return true;

@@ -226,7 +226,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		int robCount;
 
-		public override bool Rob(GameState state)
+		protected override bool RobImpl(GameState state)
 		{
 			this.player = state.Player;
 
