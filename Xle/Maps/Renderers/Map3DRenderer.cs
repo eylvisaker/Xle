@@ -45,6 +45,9 @@ namespace ERY.Xle.Maps.Renderers
 		}
 
 		Dictionary<int, TorchAnim> torchAnims = new Dictionary<int, TorchAnim>();
+		int exhibitFrame;
+		double exhibitAnimTime;
+		const double exhibitFrameTime = 60;
 
 		public new Map3D TheMap { get { return (Map3D)base.TheMap; } }
 		public new Map3DExtender Extender { get { return (Map3DExtender)base.Extender; } }
@@ -100,9 +103,23 @@ namespace ERY.Xle.Maps.Renderers
 			DrawImpl(playerPos.X, playerPos.Y, faceDirection, inRect);
 		}
 
+		private void AdvanceAnimation()
+		{
+			exhibitAnimTime += Display.DeltaTime;
+
+			if (exhibitAnimTime > exhibitFrameTime)
+			{
+				exhibitAnimTime %= exhibitFrameTime;
+				exhibitFrame++;
+				exhibitFrame %= 3;
+			}
+
+			AnimateTorches();
+		}
+
 		void AnimateTorches()
 		{
-			foreach(var ta in torchAnims.Values)
+			foreach (var ta in torchAnims.Values)
 			{
 				ta.NextAnimTime -= Display.DeltaTime;
 
@@ -116,7 +133,7 @@ namespace ERY.Xle.Maps.Renderers
 
 		void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect)
 		{
-			AnimateTorches();
+			AdvanceAnimation();
 
 			if (DrawCloseup)
 			{
@@ -210,7 +227,7 @@ namespace ERY.Xle.Maps.Renderers
 
 			if (torchAnims.ContainsKey(taHash) == false)
 				torchAnims[taHash] = new TorchAnim();
-			
+
 			anim = torchAnims[taHash];
 
 			Size torchSize = new Size(60, 84);
@@ -220,7 +237,7 @@ namespace ERY.Xle.Maps.Renderers
 			FillTorchDestPositions(destPositions);
 
 			Rectangle srcRect = new Rectangle(
-				anim.CurrentFrame * torchSize.Width, 
+				anim.CurrentFrame * torchSize.Width,
 				torchSize.Height * (side + 1 + 3 * distance),
 				torchSize.Width,
 				torchSize.Height);
@@ -322,10 +339,37 @@ namespace ERY.Xle.Maps.Renderers
 			destRect = GetSidePassageDestRect(distance, false, leftType, maindestRect);
 			Surfaces.Walls.Draw(srcRect, destRect);
 
+			if (leftType == SideWallType.Exhibit && AnimateExhibits)
+			{
+				if (distance % 2 == 0)
+					srcRect.X += imageSize.Width;
+
+				if (distance <= 2)
+					Surfaces.Walls.Color = ExhibitColor(leftValue);
+
+				srcRect.X += imageSize.Width * (1 + exhibitFrame);
+				Surfaces.Walls.Draw(srcRect, destRect);
+
+				Surfaces.Walls.Color = Color.White;
+			}
+
 			srcRect = GetSidePassageSrcRect(distance, true, rightType);
 			destRect = GetSidePassageDestRect(distance, true, rightType, maindestRect);
 			Surfaces.Walls.Draw(srcRect, destRect);
 
+			if (rightType == SideWallType.Exhibit && AnimateExhibits)
+			{
+				if (distance % 2 == 0)
+					srcRect.X += imageSize.Width;
+
+				if (distance <= 2)
+					Surfaces.Walls.Color = ExhibitColor(rightValue);
+
+				srcRect.X += imageSize.Width * (1 + exhibitFrame);
+				Surfaces.Walls.Draw(srcRect, destRect);
+
+				Surfaces.Walls.Color = Color.White;
+			}
 		}
 
 		private int MapValueAt(Point leftPt)
@@ -393,7 +437,7 @@ namespace ERY.Xle.Maps.Renderers
 			//		break;
 			//}
 
-			
+
 			retval.X *= 16;
 			retval.Y *= 16;
 			retval.Width *= 16;
@@ -528,12 +572,19 @@ namespace ERY.Xle.Maps.Renderers
 
 			if (val == 2)
 				srcRect.X += screenSize.Width;
-			if (val >= 0x50 && val <= 0x5f)
-				srcRect.X += screenSize.Width * 2;
 
 			Surfaces.Walls.Draw(
 				srcRect,
 				main_destRect);
+
+			if (val >= 0x50 && val <= 0x5f)
+			{
+				srcRect.X += screenSize.Width * 2;
+
+				Surfaces.Walls.Draw(
+					srcRect,
+					main_destRect);
+			}
 
 		}
 
@@ -568,5 +619,9 @@ namespace ERY.Xle.Maps.Renderers
 		protected virtual void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
 		{
 		}
+
+		protected virtual Color ExhibitColor(int val) { return XleColor.White; }
+
+		public bool AnimateExhibits { get; set; }
 	}
 }

@@ -55,6 +55,16 @@ namespace ERY.Xle.Maps.Renderers
 
 		#endregion
 
+		protected override Color ExhibitColor(int val)
+		{
+			var exhibit = ((MuseumExtender)TheMap.Extender).GetExhibitByTile(val);
+
+			if (exhibit == null)
+				return base.ExhibitColor(val);
+
+			return exhibit.ExhibitColor;
+		}
+		
 		protected override void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
 		{
 			var exhibit = ((MuseumExtender)TheMap.Extender).GetExhibitByTile(val);

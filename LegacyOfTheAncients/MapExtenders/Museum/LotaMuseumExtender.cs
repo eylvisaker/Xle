@@ -55,6 +55,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		public override void OnLoad(GameState state)
 		{
 			CheckExhibitStatus(state);
+			MapRenderer.AnimateExhibits = true;
 		}
 
 		public override void OnAfterEntry(GameState state)
