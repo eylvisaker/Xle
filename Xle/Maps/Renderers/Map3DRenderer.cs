@@ -47,7 +47,7 @@ namespace ERY.Xle.Maps.Renderers
 		Dictionary<int, TorchAnim> torchAnims = new Dictionary<int, TorchAnim>();
 		int exhibitFrame;
 		double exhibitAnimTime;
-		const double exhibitFrameTime = 60;
+		const double exhibitFrameTime = 50;
 
 		public new Map3D TheMap { get { return (Map3D)base.TheMap; } }
 		public new Map3DExtender Extender { get { return (Map3DExtender)base.Extender; } }
@@ -180,7 +180,7 @@ namespace ERY.Xle.Maps.Renderers
 				if (distance == maxDistance && IsPassable(val) == false)
 				{
 					DrawTerminalWall(val, maxDistance, inRect);
-					//DrawWallOverlay(maxDistance, inRect, val);
+					DrawWallOverlay(maxDistance, inRect, val);
 				}
 			}
 			for (int distance = 0; distance < maxDistance; distance++)
@@ -577,43 +577,46 @@ namespace ERY.Xle.Maps.Renderers
 				srcRect,
 				main_destRect);
 
-			if (val >= 0x50 && val <= 0x5f)
+			if (val >= 0x50 && val <= 0x5f && 0 < distance && distance <= 2)
 			{
 				srcRect.X += screenSize.Width * 2;
 
 				Surfaces.Walls.Draw(
 					srcRect,
 					main_destRect);
+
+				Rectangle staticRect = new Rectangle(96, 96, 160, 96);
+
+				if (distance == 2)
+					staticRect = new Rectangle(128, 112, 112, 64);
+
+				DrawExhibitStatic(main_destRect, staticRect, ExhibitColor(val));
 			}
 
 		}
 
+		private void DrawExhibitStatic(Rectangle main_destRect, Rectangle staticRect, Color color)
+		{
+			Rectangle srcRect = new Rectangle(
+				imageSize.Width * 4,
+				imageSize.Height * (2 + exhibitFrame),
+				staticRect.Width, staticRect.Height);
+
+			staticRect.X += main_destRect.X;
+			staticRect.Y += main_destRect.Y;
+
+			Surfaces.Walls.Color = color;
+			Surfaces.Walls.Draw(srcRect, staticRect);
+
+			Surfaces.Walls.Color = Color.White;
+		}
+
 		private void DrawWallOverlay(int distance, Rectangle destRect, int val)
 		{
-			Surface source = null;
-
-			if (val == 0x01)
+			if (val >= 0x50 && val <= 0x5f)
 			{
-				// torch
-			}
-			else if (val == 0x02)
-			{
-				// door
-				source = Surfaces.Door;
-			}
-			else if (val >= 0x50 && val <= 0x5f)
-			{
-				source = Surfaces.MuseumExhibitFrame;
-
 				DrawMuseumExhibit(distance, destRect, val);
 			}
-
-			if (source == null)
-				return;
-
-			Rectangle srcRect = new Rectangle(0, (distance - 1) * imageSize.Height, imageSize.Width, imageSize.Height);
-
-			source.Draw(srcRect, destRect);
 		}
 
 		protected virtual void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
@@ -621,7 +624,7 @@ namespace ERY.Xle.Maps.Renderers
 		}
 
 		protected virtual Color ExhibitColor(int val) { return XleColor.White; }
-
+		
 		public bool AnimateExhibits { get; set; }
 	}
 }

@@ -17,5 +17,13 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				return "The lost displays";
 			}
 		}
+
+		public override AgateLib.Geometry.Color TitleColor
+		{
+			get
+			{
+				return XleColor.Cyan;
+			}
+		}
 	}
 }

@@ -38,5 +38,10 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			get { return false; }
 		}
+
+		public override AgateLib.Geometry.Color TitleColor
+		{
+			get { return XleColor.Cyan; }
+		}
 	}
 }

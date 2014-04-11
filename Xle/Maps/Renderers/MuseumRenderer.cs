@@ -68,14 +68,9 @@ namespace ERY.Xle.Maps.Renderers
 		protected override void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
 		{
 			var exhibit = ((MuseumExtender)TheMap.Extender).GetExhibitByTile(val);
-			Color clr = exhibit.ExhibitColor;
-
-			DrawExhibitStatic(destRect, clr, distance);
 
 			if (distance == 1)
-			{
 				DrawExhibitText(destRect, exhibit);
-			}
 		}
 
 		private static void DrawExhibitText(Rectangle destRect, Exhibit exhibit)
