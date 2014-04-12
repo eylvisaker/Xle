@@ -45,7 +45,7 @@ namespace ERY.Xle.Maps.Renderers
 		}
 
 		Dictionary<int, TorchAnim> torchAnims = new Dictionary<int, TorchAnim>();
-		int exhibitFrame;
+		protected int exhibitFrame { get; private set; }
 		double exhibitAnimTime;
 		const double exhibitFrameTime = 50;
 

@@ -7,7 +7,7 @@
     <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
   </TileSet>
   <TileImage>LobMaelbane</TileImage>
-  <DefaultTile>0</DefaultTile>
+  <OutsideTile>0</OutsideTile>
   <Events array="true" type="ERY.Xle.XleEvent" />
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>

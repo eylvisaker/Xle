@@ -49,7 +49,7 @@ namespace ERY.Xle.Maps.Extenders
 
 		public virtual int GetOutsideTile(Point playerPoint, int x, int y)
 		{
-			return TheMap.DefaultTile;
+			return TheMap.OutsideTile;
 		}
 
 		public virtual void OnLoad(GameState state)

@@ -21,7 +21,7 @@ namespace ERY.Xle.Maps
 	{
 		string mMapName;
 		int mMapID;
-		int mDefaultTile;
+		int mOutsideTile;
 
 		string mTileImage;
 		TileSet mTileSet;
@@ -66,7 +66,7 @@ namespace ERY.Xle.Maps
 			info.Write("MapID", mMapID);
 			info.Write("TileSet", mTileSet);
 			info.Write("TileImage", mTileImage);
-			info.Write("DefaultTile", mDefaultTile);
+			info.Write("OutsideTile", mOutsideTile);
 			info.Write("Events", mEvents.ToArray());
 			info.Write("EntryPoints", EntryPoints);
 
@@ -96,7 +96,12 @@ namespace ERY.Xle.Maps
 				mTileSet = info.ReadObject<TileSet>("TileSet");
 			}
 
-			mDefaultTile = info.ReadInt32("DefaultTile");
+			var defaultTile = info.ReadInt32("DefaultTile", 0);
+			mOutsideTile = info.ReadInt32("OutsideTile", 0);
+
+			if (mOutsideTile == 0)
+				mOutsideTile = defaultTile;
+
 			mEvents.AddRange(info.ReadArray<XleEvent>("Events"));
 
 			if (info.ContainsKey("Roofs")) Roofs = info.ReadList<Roof>("Roofs");
@@ -238,10 +243,10 @@ namespace ERY.Xle.Maps
 		/// Gets or sets the default tile used in the map editor.
 		/// </summary>
 		[Browsable(false)]
-		public int DefaultTile
+		public int OutsideTile
 		{
-			get { return mDefaultTile; }
-			set { mDefaultTile = value; }
+			get { return mOutsideTile; }
+			set { mOutsideTile = value; }
 		}
 
 		/// <summary>

@@ -9,9 +9,13 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 {
 	public class ExhibitInfo
 	{
+		int animFrame;
+		double animTime;
+
 		public ExhibitInfo()
 		{
 			Text = new Dictionary<int, string>();
+			FrameTime = 100;
 		}
 
 		public Dictionary<int, string> Text { get; private set; }
@@ -27,9 +31,21 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 			Image = new Surface("Museum/Exhibits/" + ImageFile);
 		}
 
+		public int FrameTime { get; set; }
+		public int Frames { get { return Image.SurfaceWidth / 240; } }
+
 		public void DrawImage(Rectangle destRect, int id)
 		{
-			Rectangle srcRect = new Rectangle(0, 128 * id, 240, 128);
+			animTime += Display.DeltaTime;
+			if (animTime > FrameTime)
+			{
+				animTime %= FrameTime;
+				animFrame++;
+				if (animFrame >= Frames)
+					animFrame = 0;
+			}
+
+			Rectangle srcRect = new Rectangle(animFrame * 240, 128 * id, 240, 128);
 
 			if (Image != null)
 			{
