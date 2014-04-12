@@ -17,13 +17,10 @@ namespace ERY.Xle.LotA
 
 		internal static void LoadSurfaces()
 		{
-			Museum.Door = new Surface("Museum/MuseumDoor.png");
-			Museum.MuseumExhibitFrame = new Surface("Museum/ExhibitFrame.png");
-			Museum.MuseumExhibitStatic = new Surface("Museum/ExhibitStatic.png");
-			Museum.MuseumExhibitCloseup = new Surface("Museum/MuseumCloseup.png");
-			Museum.Extras = new Surface("Museum/MuseumExtras.png");
 			Museum.Walls = new Surface("Museum/walls.png");
 			Museum.Torches = new Surface("Museum/torches.png");
+			Museum.ExhibitOpen = new Surface("Museum/Exhibits/exopen.png");
+			Museum.ExhibitClosed = new Surface("Museum/Exhibits/exopen.png");
 
 			MuseumDark.Walls = new Surface("MuseumDark/walls.png");
 

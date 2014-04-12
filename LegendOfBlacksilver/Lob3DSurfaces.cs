@@ -20,11 +20,8 @@ namespace ERY.Xle.LoB
 
 		internal static void LoadSurfaces()
 		{
-			Archives.Door = new Surface("Museum/MuseumDoor.png");
-			Archives.MuseumExhibitFrame = new Surface("Museum/ExhibitFrame.png");
-			Archives.MuseumExhibitStatic = new Surface("Museum/ExhibitStatic.png");
-			Archives.MuseumExhibitCloseup = new Surface("Museum/MuseumCloseup.png");
-			Archives.Extras = new Surface("Museum/MuseumExtras.png");
+			Archives.ExhibitOpen = new Surface("Museum/Exhibits/exopen.png");
+			Archives.ExhibitClosed = new Surface("Museum/Exhibits/exclosed.png");
 			Archives.Walls = new Surface("Museum/walls.png");
 			Archives.Torches = new Surface("Museum/torches.png");
 

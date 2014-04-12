@@ -40,17 +40,29 @@ namespace ERY.Xle.Maps.Renderers
 
 		protected override void DrawCloseupImpl(Rectangle inRect)
 		{
-			Rectangle displayRect = new Rectangle(inRect.X + 64, inRect.Y + 64, 240, 128);
-
-			Surfaces.MuseumExhibitStatic.Draw(displayRect);
-			Surfaces.MuseumExhibitCloseup.Draw(inRect);
-
-			DrawExhibitText(inRect, mCloseup);
+			Rectangle displayRect = new Rectangle(64, 64, 240, 128);
+			Rectangle screenDisplayRect = displayRect;
+			
+			screenDisplayRect.X += inRect.X;
+			screenDisplayRect.Y += inRect.Y;
 
 			if (mDrawStatic == false)
 			{
-				mCloseup.Draw(displayRect);
+				Surfaces.ExhibitOpen.Draw(inRect);
+
+				mCloseup.Draw(screenDisplayRect);
 			}
+			else
+			{
+				Surfaces.ExhibitClosed.Draw(inRect);
+
+				AgateLib.DisplayLib.Display.FillRect(screenDisplayRect, XleColor.DarkGray);
+				DrawExhibitStatic(inRect, displayRect, mCloseup.ExhibitColor);
+			}
+
+
+			DrawExhibitText(inRect, mCloseup);
+
 		}
 
 		#endregion
@@ -89,54 +101,6 @@ namespace ERY.Xle.Maps.Renderers
 
 			Color clr = exhibit.TitleColor;
 			XleCore.Renderer.WriteText(px, py, exhibit.Name, clr);
-		}
-
-		int anim;
-		int offset = 0;
-
-		private void DrawExhibitStatic(Rectangle destRect, Color clr, int distance)
-		{
-			Rectangle destOffset = new Rectangle(96, 96, 160, 96);
-
-			if (distance == 2)
-			{
-				destOffset.X = 128;
-				destOffset.Y = 112;
-				destOffset.Width = 112;
-				destOffset.Height = 64;
-			}
-
-			Rectangle srcRect = new Rectangle(0, 0, destOffset.Width, destOffset.Height);
-			Rectangle oldDest = destRect;
-
-			oldDest.X += destOffset.X;
-			oldDest.Y += destOffset.Y;
-			oldDest.Width = srcRect.Width;
-			oldDest.Height = srcRect.Height;
-
-			int freq = 5;
-
-			srcRect.X = offset;
-			srcRect.Width -= srcRect.X;
-
-			destRect.X += destOffset.X;
-			destRect.Y += destOffset.Y;
-			destRect.Width = srcRect.Width;
-			destRect.Height = srcRect.Height;
-
-			Surfaces.MuseumExhibitStatic.Color = clr;
-			Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
-
-			destRect = Rectangle.FromLTRB(destRect.Right, destRect.Top, oldDest.Right, destRect.Bottom);
-			srcRect.X = 0;
-			srcRect.Width = destRect.Width;
-
-			Surfaces.MuseumExhibitStatic.Draw(srcRect, destRect);
-
-
-			anim++;
-			if (anim % freq == 0)
-				offset = XleCore.random.Next((destOffset.Width - 16) / 4) * 4;
 		}
 
 	}

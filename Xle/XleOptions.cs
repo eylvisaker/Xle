@@ -12,5 +12,7 @@ namespace ERY.Xle
 		public bool EnhancedGameplay { get; set; }
 
 		public bool DisableOutsideEncounters { get; set; }
+
+		public bool DisableExhibitsRequireCoins { get; set; }
 	}
 }

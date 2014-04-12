@@ -8,14 +8,12 @@ namespace ERY.Xle.Maps
 {
 	public class Map3DSurfaces
 	{
-		public Surface Door { get; set; }
-		public Surface Extras { get; set; }
 		public Surface Walls { get; set; }
-
-		public Surface MuseumExhibitFrame { get; set; }
-		public Surface MuseumExhibitStatic { get; set; }
-		public Surface MuseumExhibitCloseup { get; set; }
-
 		public Surface Torches { get; set; }
+
+		public Surface Extras { get; set; }
+
+		public Surface ExhibitOpen { get; set; }
+		public Surface ExhibitClosed { get; set; }
 	}
 }

@@ -595,7 +595,7 @@ namespace ERY.Xle.Maps.Renderers
 
 		}
 
-		private void DrawExhibitStatic(Rectangle main_destRect, Rectangle staticRect, Color color)
+		protected void DrawExhibitStatic(Rectangle main_destRect, Rectangle staticRect, Color color)
 		{
 			Rectangle srcRect = new Rectangle(
 				imageSize.Width * 4,

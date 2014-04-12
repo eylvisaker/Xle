@@ -173,6 +173,7 @@ namespace ERY.Xle
 			AgateConsole.Commands.Add("godmode", new Action(CheatGod));
 			AgateConsole.Commands.Add("killall", new Action(CheatKillAll));
 			AgateConsole.Commands.Add("encounters", new Action<string>(CheatEncounters));
+			AgateConsole.Commands.Add("coins", new Action<string>(CheatCoins));
 		}
 
 		[Description("Turns encounters on or off.\nUsage: encounters [on|off]")]
@@ -185,12 +186,33 @@ namespace ERY.Xle
 				XleCore.Options.DisableOutsideEncounters = false;
 			else if (action == "off")
 				XleCore.Options.DisableOutsideEncounters = true;
-			else
+			else if (string.IsNullOrEmpty(action))
+				XleCore.Options.DisableOutsideEncounters = !XleCore.Options.DisableOutsideEncounters;
+			else 
 				throw new ArgumentException("Could not understand '" + action + "'");
 			
 			AgateConsole.WriteLine("Outside encounters are now " + (
 				XleCore.Options.DisableOutsideEncounters ? "off." : "on."));
 		}
+
+		[Description("Turns on or off whether exhibits require coins.\nUsage: coins [on|off].")]
+		private static void CheatCoins(string action)
+		{
+			if (action != null)
+				action = action.ToLowerInvariant();
+
+			if (action == "on")
+				XleCore.Options.DisableExhibitsRequireCoins = false;
+			else if (action == "off")
+				XleCore.Options.DisableExhibitsRequireCoins = true;
+			else
+				throw new ArgumentException("Could not understand '" + action + "'");
+			
+			AgateConsole.WriteLine("Exhibits now " + (
+				XleCore.Options.DisableExhibitsRequireCoins ? "do not " : "") +
+				"require coins.");
+		}
+
 
 		[Description("Kills all the guards or monsters on the map.")]
 		private void CheatKillAll()
