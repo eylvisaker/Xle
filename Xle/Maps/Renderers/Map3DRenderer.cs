@@ -168,6 +168,8 @@ namespace ERY.Xle.Maps.Renderers
 				}
 			}
 
+			int terminalVal = -1;
+
 			for (int distance = maxDistance; distance >= 0; distance--)
 			{
 				loc.X = x + distance * stepDir.X;
@@ -180,8 +182,13 @@ namespace ERY.Xle.Maps.Renderers
 				if (distance == maxDistance && IsPassable(val) == false)
 				{
 					DrawTerminalWall(val, maxDistance, inRect);
-					DrawWallOverlay(maxDistance, inRect, val);
+					terminalVal = val;
 				}
+			}
+
+			if (terminalVal >= 0)
+			{
+				DrawWallOverlay(maxDistance, inRect, terminalVal);
 			}
 			for (int distance = 0; distance < maxDistance; distance++)
 			{
@@ -383,16 +390,16 @@ namespace ERY.Xle.Maps.Renderers
 		{
 			Rectangle retval = new Rectangle();
 
-			retval.Width = sideWidth[distance];// +sideWidth[distance + 1];
+			retval.Width = sideWidth[distance];
 
-			//switch (type)
-			//{
-			//	case SideWallType.Corner:
-			//	case SideWallType.Corridor:
-			//	case SideWallType.Parallel:
-			//		retval.Width += sideWidth[distance + 1];
-			//		break;
-			//}
+			switch (type)
+			{
+				case SideWallType.Corner:
+				case SideWallType.Corridor:
+				case SideWallType.Parallel:
+					retval.Width += sideWidth[distance + 1];
+					break;
+			}
 
 			for (int i = 0; i < distance; i++)
 			{
@@ -426,16 +433,16 @@ namespace ERY.Xle.Maps.Renderers
 				retval.X += sideWidth[i];
 			}
 
-			retval.Width = sideWidth[distance];// +sideWidth[distance + 1];
+			retval.Width = sideWidth[distance];
 
-			//switch (type)
-			//{
-			//	case SideWallType.Corner:
-			//	case SideWallType.Corridor:
-			//	case SideWallType.Parallel:
-			//		retval.Width += sideWidth[distance + 1];
-			//		break;
-			//}
+			switch (type)
+			{
+				case SideWallType.Corner:
+				case SideWallType.Corridor:
+				case SideWallType.Parallel:
+					retval.Width += sideWidth[distance + 1];
+					break;
+			}
 
 
 			retval.X *= 16;
@@ -577,22 +584,7 @@ namespace ERY.Xle.Maps.Renderers
 				srcRect,
 				main_destRect);
 
-			if (val >= 0x50 && val <= 0x5f && 0 < distance && distance <= 2)
-			{
-				srcRect.X += screenSize.Width * 2;
-
-				Surfaces.Walls.Draw(
-					srcRect,
-					main_destRect);
-
-				Rectangle staticRect = new Rectangle(96, 96, 160, 96);
-
-				if (distance == 2)
-					staticRect = new Rectangle(128, 112, 112, 64);
-
-				DrawExhibitStatic(main_destRect, staticRect, ExhibitColor(val));
-			}
-
+			
 		}
 
 		protected void DrawExhibitStatic(Rectangle main_destRect, Rectangle staticRect, Color color)
@@ -613,8 +605,26 @@ namespace ERY.Xle.Maps.Renderers
 
 		private void DrawWallOverlay(int distance, Rectangle destRect, int val)
 		{
-			if (val >= 0x50 && val <= 0x5f)
+			if (val >= 0x50 && val <= 0x5f && 0 < distance && distance <= 2)
 			{
+				var srcRect = new Rectangle(
+						screenSize.Width * 2,
+						(distance - 1) * screenSize.Height,
+						screenSize.Width,
+						screenSize.Height);
+
+				srcRect.X += screenSize.Width * 2;
+
+				Surfaces.Walls.Draw(
+					srcRect,
+					destRect);
+
+				Rectangle staticRect = new Rectangle(96, 96, 160, 96);
+
+				if (distance == 2)
+					staticRect = new Rectangle(128, 112, 112, 64);
+
+				DrawExhibitStatic(destRect, staticRect, ExhibitColor(val));
 				DrawMuseumExhibit(distance, destRect, val);
 			}
 		}
