@@ -8,6 +8,19 @@ namespace ERY.Xle
 {
 	public static class DirectionHelper
 	{
+		public static Point ToPoint(this Direction dir)
+		{
+			switch(dir)
+			{
+				case Direction.West: return new Point(-1, 0);
+				case Direction.East: return new Point(1, 0);
+				case Direction.North: return new Point(0, -1);
+				case Direction.South: return new Point(0, 1);
+
+				default:
+					return Point.Empty;
+			}
+		}
 		public static Direction ToDirection(this Point point)
 		{
 			if (point.X < 0 && point.Y == 0) return Direction.West;

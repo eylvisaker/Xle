@@ -16,7 +16,7 @@ namespace ERY.Xle.Maps.Renderers
 		int lastAnimate = 0;
 
 		public int DisplayMonsterID = -1;
-		public Point MonsterDrawPoint;
+		public Direction MonsterDrawDirection;
 
 		/// <summary>
 		/// Gets or sets whether or not the player is in stormy water
@@ -42,14 +42,22 @@ namespace ERY.Xle.Maps.Renderers
 
 			if (DisplayMonsterID > -1)
 			{
-				Point pt = new Point(MonsterDrawPoint.X - x, MonsterDrawPoint.Y - y);
-				pt.X *= 16;
-				pt.Y *= 16;
+				Point dir = MonsterDrawDirection.ToPoint();
+				Point pos = XleCore.Renderer.PlayerDrawPoint;
 
-				pt.X += XleCore.Renderer.CharRect.X;
-				pt.Y += XleCore.Renderer.CharRect.Y;
+				pos.X -= 15;
+				pos.Y -= 9;
 
-				XleCore.Renderer.DrawMonster(pt.X, pt.Y, DisplayMonsterID);
+				if (dir.X < 0)
+					pos.X -= XleCore.Data.OverworldMonsterSize.Width;
+				else if (dir.X > 0)
+					pos.X += 35;
+				if (dir.Y < 0)
+					pos.Y -= XleCore.Data.OverworldMonsterSize.Height;
+				else if (dir.Y > 0)
+					pos.Y += 35;
+
+				XleCore.Renderer.DrawMonster(pos.X, pos.Y, DisplayMonsterID);
 			}
 		}
 		protected override int TileToDraw(int x, int y)

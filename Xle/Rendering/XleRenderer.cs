@@ -192,8 +192,8 @@ namespace ERY.Xle.Rendering
 		/// <summary>
 		/// Draws monsters on the outside maps.
 		/// </summary>
-		/// <param name="px">The x position of the monster, in screen coordinates.</param>
-		/// <param name="py">The y position of the monster, in screen coordinates.</param>
+		/// <param name="px">The x position of the monster, in screen pixels.</param>
+		/// <param name="py">The y position of the monster, in screen pixels.</param>
 		/// <param name="monst"></param>
 		public void DrawMonster(int px, int py, int monst)
 		{
@@ -201,19 +201,22 @@ namespace ERY.Xle.Rendering
 
 			Rectangle monstRect;
 			Rectangle destRect;
+			var size = XleCore.Data.OverworldMonsterSize;
 
-			tx = (monst % 8) * 64;
-			ty = (monst / 8) * 64;
+			tx = (monst % 8) * size.Width;
+			ty = (monst / 8) * size.Height;
 
-			monstRect = new Rectangle(tx, ty, 64, 64);
-			destRect = new Rectangle(px, py, 64, 64);
+			monstRect = new Rectangle(tx, ty, size.Width, size.Height);
+			destRect = new Rectangle(px, py, size.Width, size.Height);
 
 			if (XleCore.Factory.Monsters != null)
 				XleCore.Factory.Monsters.Draw(monstRect, destRect);
 
 		}
 
+		public Point PlayerDrawPoint { get; set; }
 		public Color PlayerColor { get; set; }
+
 		/// <summary>
 		/// Draws the player character.
 		/// </summary>
@@ -230,6 +233,7 @@ namespace ERY.Xle.Rendering
 			int width = (624 - px) / 16;
 
 			px += 11 * 16;
+			PlayerDrawPoint = new Point(px, py);
 
 			DrawCharacterSprite(px, py, XleCore.GameState.Player.FaceDirection, animating, animFrame, true, clr);
 

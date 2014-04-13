@@ -133,7 +133,72 @@
     <MagicSpell ID="8" ItemID="47" MaxCarry="50" Name="Light Spell" BasePrice="51" />
     <MagicSpell ID="9" ItemID="48" MaxCarry="50" Name="Teleport" BasePrice="51" />
   </MagicSpells>
-  <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64" Data="OverworldMonsters.adb" />
+  <OutsideMonsters Image="OverworldMonsters.png" TileSize="50,50">
+    <Monster ID="0" Name="peasant" HP="18" Attack="30" Defense="20" Gold="3" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
+    <Monster ID="1" Name="trapper" HP="25" Attack="40" Defense="30" Gold="6" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
+    <Monster ID="2" Name="amazar" HP="20" Attack="30" Defense="35" Gold="3" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
+    <Monster ID="3" Name="enzod warrior" HP="22" Attack="35" Defense="40" Gold="12" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="50" />
+    <Monster ID="4" Name="slome" HP="28" Attack="45" Defense="30" Gold="16" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="50" />
+    <Monster ID="5" Name="trilp" HP="20" Attack="25" Defense="35" Gold="8" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="50" />
+    <Monster ID="6" Name="ragyn knight" HP="16" Attack="35" Defense="40" Gold="10" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="50" />
+    <Monster ID="7" Name="flemmix" HP="60" Attack="110" Defense="55" Gold="35" Food="10" Terrain="0" Intelligent="true" IntimidateChance="15" />
+    <Monster ID="8" Name="chipper" HP="40" Attack="100" Defense="40" Gold="20" Food="12" Terrain="0" IntimidateChance="15" />
+    <Monster ID="9" Name="rammer" HP="100" Attack="130" Defense="35" Gold="45" Food="14" Terrain="0" IntimidateChance="15" />
+    <Monster ID="10" Name="night howl" HP="50" Attack="160" Defense="40" Gold="35" Food="20" Terrain="0" IntimidateChance="15" />
+    <Monster ID="11" Name="krakyl" HP="22" Attack="20" Defense="30" Gold="7" Food="0" Terrain="2" Intelligent="true" IntimidateChance="35" />
+    <Monster ID="12" Name="lypnopod" HP="18" Attack="30" Defense="25" Gold="10" Food="10" Terrain="2" Toxic="true" IntimidateChance="20" />
+    <Monster ID="13" Name="quasit hound" HP="30" Attack="35" Defense="25" Gold="16" Food="10" Terrain="2" IntimidateChance="20" />
+    <Monster ID="14" Name="squeezer" HP="22" Attack="30" Defense="25" Gold="10" Food="8" Terrain="2" IntimidateChance="20" />
+    <Monster ID="15" Name="snap fiend" HP="25" Attack="45" Defense="30" Gold="23" Food="6" Terrain="2" IntimidateChance="20" />
+    <Monster ID="16" Name="tingler" HP="16" Attack="40" Defense="35" Gold="10" Food="21" Terrain="2" IntimidateChance="20" />
+    <Monster ID="17" Name="brain spate" HP="25" Attack="50" Defense="40" Gold="14" Food="0" Terrain="3" Intelligent="true" IntimidateChance="20" />
+    <Monster ID="18" Name="fetid wheeze" HP="35" Attack="60" Defense="30" Gold="25" Food="15" Terrain="3" Toxic="true" IntimidateChance="20" />
+    <Monster ID="19" Name="blood pup" HP="25" Attack="50" Defense="35" Gold="20" Food="8" Terrain="3" IntimidateChance="20" />
+    <Monster ID="20" Name="bone worm" HP="30" Attack="40" Defense="30" Gold="16" Food="10" Terrain="3" IntimidateChance="20" />
+    <Monster ID="21" Name="bantog" HP="25" Attack="70" Defense="35" Gold="22" Food="0" Terrain="5" Intelligent="true" IntimidateChance="30" />
+    <Monster ID="22" Name="stench creep" HP="40" Attack="80" Defense="30" Gold="40" Food="16" Terrain="5" Toxic="true" IntimidateChance="15" />
+    <Monster ID="23" Name="bowel root" HP="30" Attack="60" Defense="40" Gold="29" Food="12" Terrain="5" Toxic="true" IntimidateChance="15" />
+    <Monster ID="24" Name="spine quiver" HP="35" Attack="70" Defense="40" Gold="32" Food="25" Terrain="5" IntimidateChance="15" />
+    <Monster ID="25" Name="themeron" HP="30" Attack="80" Defense="40" Gold="25" Food="0" Terrain="4" Intelligent="true" IntimidateChance="20" />
+    <Monster ID="26" Name="mammoth gulp" HP="30" Attack="100" Defense="50" Gold="40" Food="12" Terrain="4" IntimidateChance="20" />
+    <Monster ID="27" Name="sand sweep" HP="45" Attack="75" Defense="45" Gold="33" Food="10" Terrain="4" IntimidateChance="20" />
+    <Monster ID="28" Name="flume" HP="80" Attack="90" Defense="40" Gold="65" Food="0" Terrain="1" Intelligent="true" IntimidateChance="35" />
+    <Monster ID="29" Name="sniffler" HP="35" Attack="120" Defense="50" Gold="45" Food="30" Terrain="1" IntimidateChance="15" />
+    <Monster ID="30" Name="wild tench" HP="25" Attack="70" Defense="45" Gold="35" Food="10" Terrain="1" IntimidateChance="15" />
+    <Monster ID="31" Name="screaming nug" HP="35" Attack="90" Defense="45" Gold="35" Food="10" Terrain="1" Toxic="true" IntimidateChance="15" />
+    <Monster ID="32" Name="hooded monk" HP="72" Attack="150" Defense="34" Gold="5" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
+    <Monster ID="33" Name="brandyx" HP="100" Attack="200" Defense="51" Gold="10" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
+    <Monster ID="34" Name="sylvan trader" HP="80" Attack="150" Defense="59" Gold="5" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
+    <Monster ID="35" Name="apparition" HP="88" Attack="175" Defense="68" Gold="20" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="50" />
+    <Monster ID="36" Name="worlan fighter" HP="112" Attack="225" Defense="51" Gold="27" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="50" />
+    <Monster ID="37" Name="bandit" HP="80" Attack="125" Defense="59" Gold="13" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="50" />
+    <Monster ID="38" Name="spell binder" HP="64" Attack="175" Defense="68" Gold="17" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="50" />
+    <Monster ID="39" Name="hypnofiend" HP="60" Attack="110" Defense="55" Gold="35" Food="10" Terrain="0" Intelligent="true" IntimidateChance="15" />
+    <Monster ID="40" Name="gas drone" HP="40" Attack="100" Defense="40" Gold="20" Food="12" Terrain="0" IntimidateChance="15" />
+    <Monster ID="41" Name="tendro piercer" HP="100" Attack="130" Defense="35" Gold="45" Food="14" Terrain="0" IntimidateChance="15" />
+    <Monster ID="42" Name="wave thrasher" HP="200" Attack="800" Defense="68" Gold="59" Food="20" Terrain="0" IntimidateChance="15" />
+    <Monster ID="43" Name="gervin" HP="88" Attack="100" Defense="51" Gold="11" Food="0" Terrain="2" Intelligent="true" IntimidateChance="35" />
+    <Monster ID="44" Name="stilted ryke" HP="72" Attack="150" Defense="42" Gold="17" Food="10" Terrain="2" Toxic="true" IntimidateChance="20" />
+    <Monster ID="45" Name="stun flower" HP="120" Attack="175" Defense="42" Gold="27" Food="10" Terrain="2" IntimidateChance="20" />
+    <Monster ID="46" Name="carrion crawler" HP="88" Attack="150" Defense="42" Gold="17" Food="8" Terrain="2" IntimidateChance="20" />
+    <Monster ID="47" Name="incubal" HP="100" Attack="225" Defense="51" Gold="39" Food="6" Terrain="2" IntimidateChance="20" />
+    <Monster ID="48" Name="snitewake" HP="64" Attack="200" Defense="59" Gold="17" Food="21" Terrain="2" IntimidateChance="20" />
+    <Monster ID="49" Name="shadow puff" HP="100" Attack="250" Defense="68" Gold="23" Food="0" Terrain="3" Intelligent="true" IntimidateChance="20" />
+    <Monster ID="50" Name="wynsel" HP="140" Attack="300" Defense="51" Gold="42" Food="15" Terrain="3" Toxic="true" IntimidateChance="20" />
+    <Monster ID="51" Name="blood leaker" HP="100" Attack="250" Defense="59" Gold="34" Food="8" Terrain="3" IntimidateChance="20" />
+    <Monster ID="52" Name="centigrub" HP="120" Attack="200" Defense="51" Gold="27" Food="10" Terrain="3" IntimidateChance="20" />
+    <Monster ID="53" Name="mud walker" HP="100" Attack="350" Defense="59" Gold="37" Food="0" Terrain="5" Intelligent="true" IntimidateChance="30" />
+    <Monster ID="54" Name="rock wart" HP="160" Attack="400" Defense="51" Gold="68" Food="16" Terrain="5" Toxic="true" IntimidateChance="15" />
+    <Monster ID="55" Name="clownweed" HP="120" Attack="300" Defense="68" Gold="49" Food="12" Terrain="5" Toxic="true" IntimidateChance="15" />
+    <Monster ID="56" Name="chrondile" HP="140" Attack="350" Defense="68" Gold="54" Food="25" Terrain="5" IntimidateChance="15" />
+    <Monster ID="57" Name="furred clevort" HP="120" Attack="400" Defense="68" Gold="42" Food="0" Terrain="4" Intelligent="true" IntimidateChance="20" />
+    <Monster ID="58" Name="stencheon" HP="120" Attack="500" Defense="85" Gold="68" Food="12" Terrain="4" IntimidateChance="20" />
+    <Monster ID="59" Name="boar weasel" HP="180" Attack="375" Defense="76" Gold="56" Food="10" Terrain="4" IntimidateChance="20" />
+    <Monster ID="60" Name="ice monger" HP="320" Attack="450" Defense="68" Gold="110" Food="0" Terrain="1" Intelligent="true" IntimidateChance="35" />
+    <Monster ID="61" Name="nimbus climber" HP="140" Attack="600" Defense="85" Gold="76" Food="30" Terrain="1" IntimidateChance="15" />
+    <Monster ID="62" Name="babbler" HP="100" Attack="350" Defense="76" Gold="59" Food="10" Terrain="1" IntimidateChance="15" />
+    <Monster ID="63" Name="wind widow" HP="140" Attack="450" Defense="76" Gold="59" Food="10" Terrain="1" Toxic="true" IntimidateChance="15" />
+  </OutsideMonsters>
   <Exhibits>
     <Exhibit ID="0" Image="Metalwork.png">
       <Text ID="1">

@@ -91,39 +91,39 @@
     <MagicSpell ID="5" ItemID="28" BasePrice="379"  MaxCarry="20" Name="Kill Flash" />
     <MagicSpell ID="6" ItemID="29" BasePrice="51"  MaxCarry="100" Name="Seek Spell" />
   </MagicSpells>
-  <OutsideMonsters Image="OverworldMonsters.png" TileSize="64,64">
-    <Monster ID="00" Name="pixie" HP="20" Attack="30" Defense="30" Gold="4" Food="0" />
-    <Monster ID="01" Name="strider" HP="25" Attack="40" Defense="35" Gold="6" Food="0" />
-    <Monster ID="02" Name="farmer" HP="20" Attack="45" Defense="20" Gold="3" Food="0" />
-    <Monster ID="03" Name="eaton warrior" HP="25" Attack="30" Defense="25" Gold="10" Food="0" />
-    <Monster ID="04" Name="bandit" HP="16" Attack="20" Defense="35" Gold="15" Food="0" />
-    <Monster ID="05" Name="shadow wisp" HP="20" Attack="40" Defense="40" Gold="18" Food="0" />
-    <Monster ID="06" Name="huggyn" HP="28" Attack="30" Defense="25" Gold="12" Food="0" />
-    <Monster ID="07" Name="sprayfish" HP="60" Attack="160" Defense="55" Gold="75" Food="12" Terrain="0"/>
-    <Monster ID="08" Name="wave skimmer" HP="50" Attack="140" Defense="40" Gold="65" Food="8"  Terrain="0"/>
-    <Monster ID="09" Name="sea swallow" HP="140" Vulnerability="4" Attack="130" Defense="35" Gold="60" Food="25" Toxic="true"  Terrain="0"/>
-    <Monster ID="10" Name="giant mantray" HP="40" Attack="110" Defense="40" Gold="50" Food="6"  Terrain="0"/>
-    <Monster ID="11" Name="wind stalker" HP="18" Attack="15" Defense="30" Gold="8" Food="4"  Terrain="2"/>
-    <Monster ID="12" Name="scorpod" HP="22" Attack="25" Defense="30" Gold="12" Food="10"  Terrain="2"/>
-    <Monster ID="13" Name="bone dweller" HP="30" Attack="35" Defense="25" Gold="16" Food="7"  Terrain="2"/>
-    <Monster ID="14" Name="practon piercer" HP="20" Attack="30" Defense="25" Gold="10" Food="6" Terrain="2"/>
-    <Monster ID="15" Name="carrion mangler" HP="22" Attack="40" Defense="30" Gold="14" Food="9" Toxic="true" Terrain="2"/>
-    <Monster ID="16" Name="ventro flailer" HP="18" Attack="45" Defense="30" Gold="17" Food="7" Terrain="2"/>
-    <Monster ID="17" Name="stinging rakish" HP="25" Attack="50" Defense="35" Gold="14" Food="4" Terrain="3"/>
-    <Monster ID="18" Name="blistopod" HP="45" Attack="40" Defense="35" Gold="22" Food="20" Terrain="3"/>
-    <Monster ID="19" Name="pit striker" HP="25" Attack="60" Defense="40" Gold="20" Food="6" Terrain="3"/>
-    <Monster ID="20" Name="slash nettle" HP="25" Vulnerability="2" Attack="55" Defense="30" Gold="20" Food="9" Toxic="true" Terrain="3"/>
-    <Monster ID="21" Name="venom floater" HP="40" Attack="80" Defense="35" Gold="35" Food="12" Toxic="true" Terrain="5"/>
-    <Monster ID="22" Name="pulp crawler" HP="35" Attack="65" Defense="40" Gold="25" Food="10" Toxic="true" Terrain="5"/>
-    <Monster ID="23" Name="thrust creeper" HP="35" Vulnerability="1" Attack="60" Defense="40" Gold="32" Food="8" Terrain="5"/>
-    <Monster ID="24" Name="slime weird" HP="30" Attack="60" Defense="35" Gold="25" Food="5" Terrain="5"/>
-    <Monster ID="25" Name="scrabbler" HP="50" Attack="100" Defense="45" Gold="40" Food="15" Terrain="4"/>
-    <Monster ID="26" Name="neural cloud" HP="30" Vulnerability="3" Attack="60" Defense="50" Gold="25" Food="0" Terrain="4"/>
-    <Monster ID="27" Name="churler" HP="45" Attack="75" Defense="40" Gold="35" Food="12" Terrain="4"/>
-    <Monster ID="28" Name="rock beetle" HP="45" Attack="90" Defense="40" Gold="40" Food="6" Terrain="1"/>
-    <Monster ID="29" Name="mammoth screecher" HP="200" Attack="200" Defense="50" Gold="255" Food="30" Terrain="1"/>
-    <Monster ID="30" Name="mime ghoul" HP="35" Attack="70" Defense="45" Gold="35" Food="10" Toxic="true" Terrain="1"/>
-    <Monster ID="31" Name="maston leaper" HP="35" Vulnerability="3" Attack="90" Defense="45" Gold="40" Food="12" Terrain="1"/>
+  <OutsideMonsters Image="OverworldMonsters.png" TileSize="50,50">
+    <Monster ID="0" Name="pixie" HP="20" Attack="30" Defense="30" Gold="4" Food="0" Terrain="-1" Intelligent="true" />
+    <Monster ID="1" Name="strider" HP="25" Attack="40" Defense="35" Gold="6" Food="0" Terrain="-1" Intelligent="true" />
+    <Monster ID="2" Name="farmer" HP="20" Attack="45" Defense="20" Gold="3" Food="0" Terrain="-1" Intelligent="true" />
+    <Monster ID="3" Name="eaton warrior" HP="25" Attack="30" Defense="25" Gold="10" Food="0" Terrain="-1" Intelligent="true" />
+    <Monster ID="4" Name="bandit" HP="16" Attack="20" Defense="35" Gold="15" Food="0" Terrain="-1" Intelligent="true" />
+    <Monster ID="5" Name="shadow wisp" HP="20" Attack="40" Defense="40" Gold="18" Food="0" Terrain="-1" Intelligent="true" />
+    <Monster ID="6" Name="huggyn" HP="28" Attack="30" Defense="25" Gold="12" Food="0" Terrain="-1" Intelligent="true" />
+    <Monster ID="7" Name="sprayfish" HP="60" Attack="160" Defense="55" Gold="75" Food="12" Terrain="0" />
+    <Monster ID="8" Name="wave skimmer" HP="50" Attack="140" Defense="40" Gold="65" Food="8" Terrain="0" />
+    <Monster ID="9" Name="sea swallow" HP="140" Attack="130" Defense="35" Gold="60" Food="25" Terrain="0" Toxic="true" Vulnerability="4" />
+    <Monster ID="10" Name="giant mantray" HP="40" Attack="110" Defense="40" Gold="50" Food="6" Terrain="0" />
+    <Monster ID="11" Name="wind stalker" HP="18" Attack="15" Defense="30" Gold="8" Food="4" Terrain="2" />
+    <Monster ID="12" Name="scorpod" HP="22" Attack="25" Defense="30" Gold="12" Food="10" Terrain="2" />
+    <Monster ID="13" Name="bone dweller" HP="30" Attack="35" Defense="25" Gold="16" Food="7" Terrain="2" />
+    <Monster ID="14" Name="practon piercer" HP="20" Attack="30" Defense="25" Gold="10" Food="6" Terrain="2" />
+    <Monster ID="15" Name="carrion mangler" HP="22" Attack="40" Defense="30" Gold="14" Food="9" Terrain="2" Toxic="true" />
+    <Monster ID="16" Name="ventro flailer" HP="18" Attack="45" Defense="30" Gold="17" Food="7" Terrain="2" />
+    <Monster ID="17" Name="stinging rakish" HP="25" Attack="50" Defense="35" Gold="14" Food="4" Terrain="3" />
+    <Monster ID="18" Name="blistopod" HP="45" Attack="40" Defense="35" Gold="22" Food="20" Terrain="3" />
+    <Monster ID="19" Name="pit striker" HP="25" Attack="60" Defense="40" Gold="20" Food="6" Terrain="3" />
+    <Monster ID="20" Name="slash nettle" HP="25" Attack="55" Defense="30" Gold="20" Food="9" Terrain="3" Toxic="true" Vulnerability="2" />
+    <Monster ID="21" Name="venom floater" HP="40" Attack="80" Defense="35" Gold="35" Food="12" Terrain="5" Toxic="true" />
+    <Monster ID="22" Name="pulp crawler" HP="35" Attack="65" Defense="40" Gold="25" Food="10" Terrain="5" Toxic="true" />
+    <Monster ID="23" Name="thrust creeper" HP="35" Attack="60" Defense="40" Gold="32" Food="8" Terrain="5" Vulnerability="1" />
+    <Monster ID="24" Name="slime weird" HP="30" Attack="60" Defense="35" Gold="25" Food="5" Terrain="5" />
+    <Monster ID="25" Name="scrabbler" HP="50" Attack="100" Defense="45" Gold="40" Food="15" Terrain="4" />
+    <Monster ID="26" Name="neural cloud" HP="30" Attack="60" Defense="50" Gold="25" Food="0" Terrain="4" Vulnerability="3" />
+    <Monster ID="27" Name="churler" HP="45" Attack="75" Defense="40" Gold="35" Food="12" Terrain="4" />
+    <Monster ID="28" Name="rock beetle" HP="45" Attack="90" Defense="40" Gold="40" Food="6" Terrain="1" />
+    <Monster ID="29" Name="mammoth screecher" HP="200" Attack="200" Defense="50" Gold="255" Food="31" Terrain="1" />
+    <Monster ID="30" Name="mime ghoul" HP="35" Attack="70" Defense="45" Gold="35" Food="10" Terrain="1" Toxic="true" />
+    <Monster ID="31" Name="maston leaper" HP="35" Attack="90" Defense="45" Gold="40" Food="12" Terrain="1" Vulnerability="3" />
   </OutsideMonsters>
   <Exhibits>
     <Exhibit ID="0" Image="Information.png">

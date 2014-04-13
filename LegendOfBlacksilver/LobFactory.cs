@@ -58,6 +58,7 @@ namespace ERY.Xle.LoB
 			Font.StringTransformer = StringTransformer.ToUpper;
 
 			Character = new Surface("character.png");
+			Monsters = new Surface("OverworldMonsters.png");
 
 			Lob3DSurfaces.LoadSurfaces();
 

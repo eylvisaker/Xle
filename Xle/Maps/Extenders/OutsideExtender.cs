@@ -600,10 +600,11 @@ namespace ERY.Xle.Maps.Extenders
 		private static int SelectRandomMonster(TerrainType terrain)
 		{
 			int mCount = 0;
+			var monsters = XleCore.Data.MonsterInfoList.Where(x => x.Terrain == terrain || x.Terrain == TerrainType.All);
 
-			mCount = XleCore.Data.MonsterInfoList.Count(x => x.Terrain == terrain || x.Terrain == TerrainType.All);
+			mCount = monsters.Count();
 
-			return XleCore.random.Next(mCount);
+			return (monsters.Skip(XleCore.random.Next(mCount)).First()).ID;
 		}
 
 
@@ -1214,20 +1215,8 @@ namespace ERY.Xle.Maps.Extenders
 
 		protected void SetMonsterImagePosition(Player player)
 		{
-			MapRenderer.MonsterDrawPoint.X = player.X - 1;
-			MapRenderer.MonsterDrawPoint.Y = player.Y - 1;
-
 			monstDir = (Direction)XleCore.random.Next((int)Direction.East, (int)Direction.South + 1);
-
-			switch (monstDir)
-			{
-				case Direction.East: MapRenderer.MonsterDrawPoint.X += 2; break;
-				case Direction.North: MapRenderer.MonsterDrawPoint.Y -= 2; break;
-				case Direction.West: MapRenderer.MonsterDrawPoint.X -= 2; break;
-				case Direction.South: MapRenderer.MonsterDrawPoint.Y += 2; break;
-				default:
-					throw new Exception("Invalid direction.");
-			}
+			MapRenderer.MonsterDrawDirection = monstDir;
 		}
 
 

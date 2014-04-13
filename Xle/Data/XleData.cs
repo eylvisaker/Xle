@@ -23,6 +23,8 @@ namespace ERY.Xle.Data
 		private Dictionary<int, DungeonMonsterData> mDungeonMonsters = new Dictionary<int, DungeonMonsterData>();
 		private List<MonsterInfo> mMonsterInfo = new List<MonsterInfo>();
 
+		public Size OverworldMonsterSize { get; private set; }
+
 		public void LoadGameFile(string filename)
 		{
 			XDocument doc = XDocument.Load(filename);
@@ -42,6 +44,8 @@ namespace ERY.Xle.Data
 
 		private void LoadMonsterInfo(XElement parent)
 		{
+			OverworldMonsterSize = Size.FromString(parent.Attribute("TileSize").Value);
+
 			foreach(var node in parent.Elements())
 			{
 				MonsterInfo info = new MonsterInfo();
@@ -56,6 +60,8 @@ namespace ERY.Xle.Data
 				info.Terrain = (TerrainType)node.GetOptionalAttribute("Terrain", -1);
 				info.Vulnerability = node.GetOptionalAttribute("Vulnerability", 0);
 				info.Toxic = node.GetOptionalAttribute("Toxic", false);
+				info.IntimidateChance = node.GetOptionalAttribute("IntimidateChance", 0);
+				info.Intelligent = node.GetOptionalAttribute("Intelligent", false);
 
 				mMonsterInfo.Add(info);
 
