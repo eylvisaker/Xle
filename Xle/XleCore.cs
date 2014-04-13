@@ -78,7 +78,6 @@ namespace ERY.Xle
 				AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
 				LoadGameFile();
-				mData.LoadDatabase();
 
 				InitializeConsole();
 

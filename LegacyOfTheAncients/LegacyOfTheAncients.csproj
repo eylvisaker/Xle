@@ -285,9 +285,6 @@
     <None Include="LotA\equipmentCosts.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LotA\Lota.adb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="LotA\Maps\Alanville.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -4,7 +4,6 @@ using System.Text;
 
 namespace ERY.Xle
 {
-	[Serializable]
 	public class Monster
 	{
 		public string Name { get { return mData.Name; } }
@@ -14,15 +13,16 @@ namespace ERY.Xle
 		public int Defense { get { return mData.Defense; } }
 		public int Gold { get { return mData.Gold; } }
 		public int Food { get { return mData.Food; } }
-		public int Weapon { get { return mData.Weapon; } }
-		public int Image { get { return mData.Image; } }
-		public bool Talks { get { return mData.Talks; } }
-		public int Friendly { get { return mData.Friendly; } }
-		private Data.Monster mData;
+		public int Weapon { get { return mData.Vulnerability; } }
+		public int Image { get { return mData.ID; } }
+		public bool Talks { get { return mData.ID < 6; } }
+		public int Friendly { get { return 255; } }
+
+		private Data.MonsterInfo mData;
 
 		public Monster(Monster m) { copyFrom(m); }
 
-		public Monster(Data.Monster monster)
+		public Monster(Data.MonsterInfo monster)
 		{
 			this.mData = monster;
 

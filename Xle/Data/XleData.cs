@@ -21,20 +21,7 @@ namespace ERY.Xle.Data
 		private Dictionary<int, Map3DExtraInfo> mMap3DExtraInfo = new Dictionary<int, Map3DExtraInfo>();
 		private Dictionary<int, MagicSpell> mMagicSpells = new Dictionary<int, MagicSpell>();
 		private Dictionary<int, DungeonMonsterData> mDungeonMonsters = new Dictionary<int, DungeonMonsterData>();
-
-		private Data.AgateDataImport mDatabase;
-
-		public Data.AgateDataImport Database
-		{
-			get { return mDatabase; }
-		}
-
-		public void LoadDatabase()
-		{
-			AgateLib.Data.AgateDatabase _db = AgateLib.Data.AgateDatabase.FromFile("Lota.adb");
-
-			mDatabase = new Data.AgateDataImport(_db);
-		}
+		private List<MonsterInfo> mMonsterInfo = new List<MonsterInfo>();
 
 		public void LoadGameFile(string filename)
 		{
@@ -50,6 +37,29 @@ namespace ERY.Xle.Data
 			LoadExhibitInfo(root.Element("Exhibits"));
 			Load3DExtraInfo(root.Element("DungeonExtras"));
 			LoadDungeonMonsters(root.Element("DungeonMonsters"));
+			LoadMonsterInfo(root.Element("OutsideMonsters"));
+		}
+
+		private void LoadMonsterInfo(XElement parent)
+		{
+			foreach(var node in parent.Elements())
+			{
+				MonsterInfo info = new MonsterInfo();
+
+				info.ID = int.Parse(node.Attribute("ID").Value);
+				info.Name = node.Attribute("Name").Value;
+				info.HP = int.Parse(node.Attribute("HP").Value);
+				info.Attack = int.Parse(node.Attribute("Attack").Value);
+				info.Defense = int.Parse(node.Attribute("Defense").Value);
+				info.Gold = int.Parse(node.Attribute("Gold").Value);
+				info.Food = int.Parse(node.Attribute("Food").Value);
+				info.Terrain = (TerrainType)node.GetOptionalAttribute("Terrain", -1);
+				info.Vulnerability = node.GetOptionalAttribute("Vulnerability", 0);
+				info.Toxic = node.GetOptionalAttribute("Toxic", false);
+
+				mMonsterInfo.Add(info);
+
+			}
 		}
 
 		private void LoadQualityInfo(XElement element)
@@ -309,6 +319,7 @@ namespace ERY.Xle.Data
 		public Dictionary<int, Map3DExtraInfo> Map3DExtraInfo { get { return mMap3DExtraInfo; } }
 		public Dictionary<int, MagicSpell> MagicSpells { get { return mMagicSpells; } }
 		public Dictionary<int, DungeonMonsterData> DungeonMonsters { get { return mDungeonMonsters; } }
+		public List<MonsterInfo> MonsterInfoList { get { return mMonsterInfo; } }
 
 		private Rectangle ParseRectangle(string p)
 		{

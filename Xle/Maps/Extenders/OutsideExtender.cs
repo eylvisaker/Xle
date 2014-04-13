@@ -489,7 +489,7 @@ namespace ERY.Xle.Maps.Extenders
 
 			for (int i = 0; i < monstCount; i++)
 			{
-				var m = new Monster(XleCore.Data.Database.MonsterList[MapRenderer.DisplayMonsterID]);
+				var m = new Monster(XleCore.Data.MonsterInfoList.First(x => x.ID == MapRenderer.DisplayMonsterID));
 
 				m.HP = (int)(m.HP * (XleCore.random.NextDouble() * 0.4 + 0.8));
 
@@ -600,44 +600,10 @@ namespace ERY.Xle.Maps.Extenders
 		private static int SelectRandomMonster(TerrainType terrain)
 		{
 			int mCount = 0;
-			int val, sel = -1;
 
-			for (int i = 0; i < XleCore.Data.Database.MonsterList.Count; i++)
-			{
-				if ((TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == TerrainType.All && terrain != 0)
-					mCount++;
+			mCount = XleCore.Data.MonsterInfoList.Count(x => x.Terrain == terrain || x.Terrain == TerrainType.All);
 
-				if ((TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == terrain)
-					mCount += 3;
-
-				if (terrain == TerrainType.Foothills &&
-					(TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == TerrainType.Mountain)
-					mCount += 3;
-			}
-
-			val = 1 + XleCore.random.Next(mCount);
-
-			for (int i = 0; i < XleCore.Data.Database.MonsterList.Count; i++)
-			{
-				if ((TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == TerrainType.All && terrain != 0)
-					val--;
-
-				if ((TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == terrain)
-					val -= 3;
-
-				if (terrain == TerrainType.Foothills &&
-					(TerrainType)XleCore.Data.Database.MonsterList[i].Terrain == TerrainType.Mountain)
-					val -= 3;
-
-				if (val == 0 || val == -1 || val == -2)
-				{
-					sel = i;
-					break;
-				}
-			}
-
-			System.Diagnostics.Debug.Assert(sel > -1);
-			return sel;
+			return XleCore.random.Next(mCount);
 		}
 
 
@@ -1094,7 +1060,7 @@ namespace ERY.Xle.Maps.Extenders
 		}
 		private void StepEncounter(Player player)
 		{
-			if (XleCore.Data.Database.MonsterList.Count == 0) return;
+			if (XleCore.Data.MonsterInfoList.Count == 0) return;
 			if (XleCore.Options.DisableOutsideEncounters) return;
 
 			// bail out if the player entered another map on this step.
