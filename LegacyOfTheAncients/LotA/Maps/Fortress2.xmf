@@ -78,7 +78,7 @@
     </TileGroups>
   </TileSet>
   <TileImage>LotaFortress</TileImage>
-  <OutsideTile>0</OutsideTile>
+  <OutsideTile>11</OutsideTile>
   <Events array="true" type="ERY.Xle.XleEvent">
     <Item type="ERY.Xle.XleEventTypes.Script">
       <X>12</X>
@@ -128,511 +128,511 @@
   <Guards type="ERY.Xle.Maps.GuardList">
     <GuardDefaultAttack>99</GuardDefaultAttack>
     <GuardDefaultDefense>0</GuardDefaultDefense>
-    <GuardDefaultHP>112</GuardDefaultHP>
+    <GuardDefaultHP>130</GuardDefaultHP>
     <GuardDefaultColor>-3418267</GuardDefaultColor>
     <Guards array="true" type="ERY.Xle.Maps.Guard">
       <Item>
         <X>33</X>
         <Y>8</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>33</X>
         <Y>6</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>36</X>
         <Y>2</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>36</X>
         <Y>4</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>36</X>
         <Y>6</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>36</X>
         <Y>8</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>39</X>
         <Y>19</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>36</X>
         <Y>19</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>34</X>
         <Y>19</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>12</X>
         <Y>19</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>40</X>
         <Y>21</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>39</X>
         <Y>23</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>14</X>
         <Y>19</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>5</X>
         <Y>31</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>3</X>
         <Y>26</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>5</X>
         <Y>27</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>7</X>
         <Y>26</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>7</X>
         <Y>28</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>3</X>
         <Y>28</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>5</X>
         <Y>29</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>7</X>
         <Y>30</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>3</X>
         <Y>30</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>28</X>
         <Y>67</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>30</X>
         <Y>67</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>30</X>
         <Y>63</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>35</X>
         <Y>68</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>28</X>
         <Y>63</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>35</X>
         <Y>62</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>93</X>
         <Y>39</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>83</X>
         <Y>57</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>32</X>
         <Y>34</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>34</X>
         <Y>32</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>35</X>
         <Y>35</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>44</X>
         <Y>34</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>46</X>
         <Y>34</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>57</X>
         <Y>32</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>57</X>
         <Y>35</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>59</X>
         <Y>39</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>61</X>
         <Y>39</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>76</X>
         <Y>22</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>78</X>
         <Y>22</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>103</X>
         <Y>15</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>91</X>
         <Y>16</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>101</X>
         <Y>16</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>95</X>
         <Y>39</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>95</X>
         <Y>42</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>84</X>
         <Y>40</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>108</X>
         <Y>46</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>107</X>
         <Y>44</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>69</X>
         <Y>60</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>84</X>
         <Y>55</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>83</X>
         <Y>53</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>84</X>
         <Y>51</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>81</X>
         <Y>53</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>71</X>
         <Y>54</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>73</X>
         <Y>56</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>69</X>
         <Y>55</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>67</X>
         <Y>54</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>71</X>
         <Y>56</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>65</X>
         <Y>59</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>65</X>
         <Y>55</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>67</X>
         <Y>60</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
       <Item>
         <X>65</X>
         <Y>57</Y>
         <Color>-3418267</Color>
-        <HP>112</HP>
-        <Attack>99</Attack>
+        <HP>130</HP>
+        <Attack>0</Attack>
         <Defense>0</Defense>
       </Item>
     </Guards>
