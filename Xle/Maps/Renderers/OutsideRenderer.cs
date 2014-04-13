@@ -49,11 +49,11 @@ namespace ERY.Xle.Maps.Renderers
 				pos.Y -= 9;
 
 				if (dir.X < 0)
-					pos.X -= XleCore.Data.OverworldMonsterSize.Width;
+					pos.X -= 35;
 				else if (dir.X > 0)
 					pos.X += 35;
 				if (dir.Y < 0)
-					pos.Y -= XleCore.Data.OverworldMonsterSize.Height;
+					pos.Y -= 35;
 				else if (dir.Y > 0)
 					pos.Y += 35;
 

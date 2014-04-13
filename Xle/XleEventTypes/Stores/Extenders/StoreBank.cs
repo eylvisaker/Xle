@@ -74,8 +74,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			{
 				case 1:
 					MakeDeposit(player);
-
 					break;
+
 				case 2:
 					MakeWithdrawal(player, choice);
 					break;
@@ -85,6 +85,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 					break;
 			}
 
+					
 			return true;
 		}
 
@@ -114,6 +115,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 			}
 
+			XleCore.TextArea.PrintLine();
+			PrintBalance(player);
+
 			StoreSound(LotaSound.Sale);
 		}
 
@@ -125,6 +129,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 			player.Spend(amount);
 			player.GoldInBank += amount;
+
+			XleCore.TextArea.PrintLine();
+			PrintBalance(player);
 
 			StoreSound(LotaSound.Sale);
 		}
