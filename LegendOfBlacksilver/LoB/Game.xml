@@ -266,7 +266,7 @@
         |night, few places are inpenetrable.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="5" Image="TheWealthy.png">
+    <Exhibit ID="5" Image="ForTheWealthy.png">
       <Text ID="1">
         |Although we prefer to remain quiet
         |about this accomplishment, this
@@ -291,7 +291,7 @@
         |renders the ranges passible.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="7" Image="MagicEtherium.png">
+    <Exhibit ID="7" Image="Etherium.png">
       <Text ID="1">
         |With the dispersal of blacksilver,
         |there are no longer any true wizards

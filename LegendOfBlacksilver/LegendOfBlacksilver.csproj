@@ -713,6 +713,9 @@
     <Content Include="LoB\Images\Museum\Exhibits\UnderwaterPort.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="LoB\Images\Museum\Exhibits\VaseOfSouls.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="LoB\Images\Museum\MuseumBackdrop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
