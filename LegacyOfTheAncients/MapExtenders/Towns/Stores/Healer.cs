@@ -31,6 +31,9 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			int herbsPrice = (int)(player.Level * 300 * TheEvent.CostFactor);
 
 			Windows.Clear();
+
+			Title = TheEvent.ShopName;
+
 			SetDescriptionText();
 			SetOptionsText(woundPrice, herbsPrice);
 

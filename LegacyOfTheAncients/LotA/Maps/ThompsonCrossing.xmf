@@ -90,7 +90,7 @@
       <Width>4</Width>
       <Height>6</Height>
       <ExtenderName>StoreFood</ExtenderName>
-      <ShopName>Tasy Treat</ShopName>
+      <ShopName>Tasty Treat</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Stores.Store">

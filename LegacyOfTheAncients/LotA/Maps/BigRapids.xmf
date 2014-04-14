@@ -73,7 +73,7 @@
       <Width>3</Width>
       <Height>3</Height>
       <ExtenderName>StoreMagic</ExtenderName>
-      <ShopName>Hubert's House of Hex</ShopName>
+      <ShopName>Hubert's House Of Hex</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
   </Events>

@@ -51,7 +51,7 @@
       <Width>4</Width>
       <Height>6</Height>
       <ExtenderName>StoreHealer</ExtenderName>
-      <ShopName>Feels so good</ShopName>
+      <ShopName>Feels So Good</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Stores.Store">

@@ -70,7 +70,7 @@ AAAAJAAAACYAAAApAAAALAAAAA==</AllowedItemTypes>
       <Width>6</Width>
       <Height>3</Height>
       <ExtenderName>StoreBuyback</ExtenderName>
-      <ShopName>Honest Abe's</ShopName>
+      <ShopName>Honest Abe's Buy-Back Shop</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">

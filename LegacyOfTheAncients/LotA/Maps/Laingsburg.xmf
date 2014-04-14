@@ -61,8 +61,7 @@
       <Width>2</Width>
       <Height>2</Height>
       <ExtenderName>StoreHealer</ExtenderName>
-      <ShopName>
-      </ShopName>
+      <ShopName>Barber's Bloodletting</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Stores.Store">
@@ -71,7 +70,7 @@
       <Width>2</Width>
       <Height>3</Height>
       <ExtenderName>StoreWeaponTraining</ExtenderName>
-      <ShopName>Prarie School</ShopName>
+      <ShopName>Prairie School</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
   </Events>

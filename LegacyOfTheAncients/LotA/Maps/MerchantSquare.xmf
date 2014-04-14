@@ -43,7 +43,7 @@ AAAAKQAAACoAAAA=</AllowedItemTypes>
       <Width>3</Width>
       <Height>4</Height>
       <ExtenderName>StoreBlackjack</ExtenderName>
-      <ShopName>Trick or Treat</ShopName>
+      <ShopName>Trick Or Treat</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
     <Item type="ERY.Xle.XleEventTypes.Stores.Store">
