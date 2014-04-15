@@ -143,7 +143,9 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			double damage = state.Player.Attribute[Attributes.strength] + 30;
 			damage /= 45;
 
-			double vd = state.Player.CurrentWeaponType + 1 + state.Player.CurrentWeaponQuality / 2.8;
+			var weapon = state.Player.CurrentWeapon;
+
+			double vd = weapon.ID + 1 + weapon.Quality / 2.8;
 
 			damage *= vd + 4;
 
@@ -169,7 +171,8 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 		public override int RollDamageToPlayer(GameState state, DungeonMonster monster)
 		{
-			double vc = state.Player.CurrentArmorType + state.Player.CurrentArmorQuality / 3.5;
+			var armor = state.Player.CurrentArmor;
+			double vc = armor.ID + armor.Quality / 3.5;
 
 			double damage = 10 * TheMap.MonsterDamageScale / (vc + 3) * (state.Player.DungeonLevel + 7);
 

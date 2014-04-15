@@ -50,7 +50,7 @@ namespace ERY.Xle
 
 		private XleGameFactory mFactory;
 
-		XleData mData ;
+		XleData mData;
 
 		public static TextArea TextArea { get; private set; }
 
@@ -136,11 +136,11 @@ namespace ERY.Xle
 		public static void SetOrthoProjection(Color clearColor)
 		{
 			AgateLib.DisplayLib.Shaders.Basic2DShader shader = new AgateLib.DisplayLib.Shaders.Basic2DShader();
-			
+
 			shader.CoordinateSystem = new Rectangle(
-				-windowBorderSize.Width, 
-				-windowBorderSize.Height, 
-				640 + windowBorderSize.Width * 2, 
+				-windowBorderSize.Width,
+				-windowBorderSize.Height,
+				640 + windowBorderSize.Width * 2,
 				400 + windowBorderSize.Height * 2);
 
 			shader.Activate();
@@ -150,7 +150,7 @@ namespace ERY.Xle
 		public static void SetProjectionAndBackColors(ColorScheme cs)
 		{
 			SetOrthoProjection(cs.BorderColor);
-			
+
 			Display.FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
 			Display.FillRect(0, 296, 640, 104, cs.TextAreaBackColor);
 		}
@@ -187,9 +187,9 @@ namespace ERY.Xle
 				XleCore.Options.DisableOutsideEncounters = true;
 			else if (string.IsNullOrEmpty(action))
 				XleCore.Options.DisableOutsideEncounters = !XleCore.Options.DisableOutsideEncounters;
-			else 
+			else
 				throw new ArgumentException("Could not understand '" + action + "'");
-			
+
 			AgateConsole.WriteLine("Outside encounters are now " + (
 				XleCore.Options.DisableOutsideEncounters ? "off." : "on."));
 		}
@@ -206,7 +206,7 @@ namespace ERY.Xle
 				XleCore.Options.DisableExhibitsRequireCoins = true;
 			else
 				throw new ArgumentException("Could not understand '" + action + "'");
-			
+
 			AgateConsole.WriteLine("Exhibits now " + (
 				XleCore.Options.DisableExhibitsRequireCoins ? "do not " : "") +
 				"require coins.");
@@ -433,7 +433,7 @@ namespace ERY.Xle
 			player.Attribute[Attributes.charm] = 300;
 			player.Attribute[Attributes.endurance] = 300;
 
-			foreach(var spell in Data.MagicSpells.Values)
+			foreach (var spell in Data.MagicSpells.Values)
 			{
 				player.Items[spell.ItemID] = spell.MaxCarry;
 			}
@@ -581,7 +581,7 @@ namespace ERY.Xle
 			}
 		}
 
-		
+
 		public static void FlashHPWhileSound(Color clr)
 		{
 			FlashHPWhileSound(clr, Renderer.FontColor);
@@ -596,7 +596,7 @@ namespace ERY.Xle
 			Renderer.FlashHPWhile(clr, clr2, pred);
 
 		}
-		
+
 
 		/****************************************************************************
 		 *	void ChangeScreenMode()													*
@@ -711,11 +711,17 @@ namespace ERY.Xle
 		/// <returns>The choice the user made.</returns>
 		public static int SubMenu(string title, int choice, MenuItemList items)
 		{
+			return SubMenu(title, choice, items, XleColor.Black);
+		}
+
+		private static int SubMenu(string title, int choice, MenuItemList items, Color backColor)
+		{
 			SubMenu menu = new SubMenu();
 
 			menu.title = title;
 			menu.value = choice;
 			menu.theList = items;
+			menu.BackColor = backColor;
 
 			return RunSubMenu(menu);
 		}
@@ -909,7 +915,7 @@ namespace ERY.Xle
 				i = 1;
 			}
 
-			Display.FillRect(xx, yy, 624 - xx, height, XleColor.Black);
+			Display.FillRect(xx, yy, 624 - xx, height, menu.BackColor);
 
 
 			if (i == 0)
@@ -956,10 +962,11 @@ namespace ERY.Xle
 		/// Gives the player a yes/no choice, returning 0 if the player chose yes and
 		/// 1 if the player chose no.
 		/// </summary>
+		/// <param name="defaultAtNo">Pass true to have the cursor start at no.</param>
 		/// <returns>Returns 0 if the player chose yes, 1 if the player chose no.</returns>
-		public static int QuickMenuYesNo()
+		public static int QuickMenuYesNo(bool defaultAtNo = false)
 		{
-			return XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3);
+			return XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3, defaultAtNo ? 1 : 0);
 		}
 		/// <summary>
 		/// This function creates a quick menu at the bottow of the screen,
@@ -1112,6 +1119,45 @@ namespace ERY.Xle
 		//static int buttonHeld = 0;		// are they holding the button down?
 		//static int lastMove = 0;
 
+		public static ArmorItem PickArmor(ArmorItem defaultItem)
+		{
+			return PickArmor(GameState, defaultItem);
+		}
+		public static ArmorItem PickArmor(GameState state, ArmorItem defaultItem, Color? backColor = null)
+		{
+			MenuItemList theList = new MenuItemList();
+
+			theList.Add("Nothing");
+			theList.AddRange(state.Player.Armor.Select(x => x.NameWithQuality));
+
+			int sel = XleCore.SubMenu("Pick Armor", state.Player.Armor.IndexOf(defaultItem) + 1, 
+				theList, backColor ?? XleColor.Black);
+
+			if (sel == 0)
+				return null;
+			else
+				return state.Player.Armor[sel - 1];
+		}
+
+		public static WeaponItem PickWeapon(WeaponItem defaultItem)
+		{
+			return PickWeapon(GameState, defaultItem);
+		}
+		public static WeaponItem PickWeapon(GameState state, WeaponItem defaultItem, Color? backColor = null)
+		{
+			MenuItemList theList = new MenuItemList();
+			
+			theList.Add("Nothing");
+			theList.AddRange(state.Player.Weapons.Select(x => x.NameWithQuality));
+
+			int sel = XleCore.SubMenu("Pick Weapon", state.Player.Weapons.IndexOf(defaultItem) + 1, 
+				theList, backColor ?? XleColor.Black);
+
+			if (sel == 0)
+				return null;
+			else
+				return state.Player.Weapons[sel - 1];
+		}
 		static void CheckJoystick()
 		{
 			return;
@@ -1349,7 +1395,7 @@ namespace ERY.Xle
 
 					if (amount < 0)
 						amount = 0;
-					
+
 					XleCore.TextArea.RewriteLine(4, "                          - " + amount.ToString() + " -");
 				}
 
@@ -1459,9 +1505,9 @@ namespace ERY.Xle
 
 		public void ProcessArguments(string[] args)
 		{
-			for(int i = 0; i < args.Length; i++)
+			for (int i = 0; i < args.Length; i++)
 			{
-				switch(args[i])
+				switch (args[i])
 				{
 					case "-debug":
 						EnableDebugMode = true;

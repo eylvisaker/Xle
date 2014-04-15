@@ -13,7 +13,7 @@ namespace ERY.Xle
 		public int Defense { get { return mData.Defense; } }
 		public int Gold { get { return mData.Gold; } }
 		public int Food { get { return mData.Food; } }
-		public int Weapon { get { return mData.Vulnerability; } }
+		public int Vulnerability { get { return mData.Vulnerability; } }
 		public int Image { get { return mData.ID; } }
 		public bool Talks { get { return mData.ID < 6; } }
 		public int Friendly { get { return 255; } }

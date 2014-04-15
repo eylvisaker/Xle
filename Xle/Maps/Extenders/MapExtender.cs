@@ -116,7 +116,7 @@ namespace ERY.Xle.Maps.Extenders
 
 		public virtual int RollDamageToPlayer(Player player, Guard guard)
 		{
-			int armorType = player.CurrentArmorType;
+			int armorType = player.CurrentArmor.ID;
 
 			double damage = guard.Attack / 99.0 *
 							   (120 + XleCore.random.NextDouble() * 250) /

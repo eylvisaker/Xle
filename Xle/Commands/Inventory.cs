@@ -103,48 +103,29 @@ namespace ERY.Xle.Commands
 					int yy = 11;
 					Color tempcolor;
 
-					for (int i = 1; i <= 5; i++)
+					foreach (var weapon in player.Weapons)
 					{
-						if (player.WeaponType(i) > 0)
-						{
+						var clr = fontcolor;
 
-							if (player.CurrentWeaponIndex == i)
-							{
-								tempcolor = XleColor.White;
-							}
-							else
-							{
-								tempcolor = fontcolor;
-							}
+						if (player.CurrentWeapon == weapon)
+							clr = XleColor.White;
 
-							renderer.WriteText(128, ++yy * 16, XleCore.Data.WeaponList[player.WeaponType(i)].Name, tempcolor);
-							renderer.WriteText(416, yy * 16, XleCore.Data.QualityList[player.WeaponQuality(i)], tempcolor);
-						}
-
+						renderer.WriteText(128, ++yy * 16, weapon.BaseName, clr);
+						renderer.WriteText(416, yy * 16, weapon.QualityName, clr);
 					}
 
 					yy++;
 
-					for (int i = 1; i <= 3; i++)
+					foreach (var armor in player.Armor)
 					{
-						if (player.ArmorType(i) > 0)
-						{
+						var clr = fontcolor;
 
-							if (player.CurrentArmorIndex == i)
-							{
-								tempcolor = XleColor.White;
-							}
-							else
-							{
-								tempcolor = fontcolor;
-							}
+						if (player.CurrentArmor == armor)
+							clr = XleColor.White;
 
-							renderer.WriteText(128, ++yy * 16, XleCore.Data.ArmorList[player.ArmorType(i)].Name, tempcolor);
-							renderer.WriteText(416, yy * 16, XleCore.Data.QualityList[player.ArmorQuality(i)], tempcolor);
-						}
-
+						renderer.WriteText(128, ++yy * 16, armor.BaseName, clr);
+						renderer.WriteText(416, yy * 16, armor.QualityName, clr);
 					}
-
 				}
 				else if (inventoryScreen == 1)
 				{

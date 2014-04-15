@@ -195,9 +195,9 @@ namespace ERY.Xle.Maps.Extenders
 		{
 			int damage = player.Hit(currentMonst[monstCount - 1].Defense);
 
-			if (currentMonst[monstCount - 1].Weapon > 0)
+			if (currentMonst[monstCount - 1].Vulnerability > 0)
 			{
-				if (player.WeaponType(player.CurrentWeaponIndex) == currentMonst[monstCount - 1].Weapon)
+				if (player.CurrentWeapon.ID == currentMonst[monstCount - 1].Vulnerability)
 				{
 					damage += XleCore.random.Next(11) + 20;
 				}

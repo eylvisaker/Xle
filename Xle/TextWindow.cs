@@ -13,6 +13,7 @@ namespace ERY.Xle
 		public TextWindow()
 		{
 			DefaultTextColor = XleColor.White;
+			Visible = true;
 		}
 
 		public Point Location { get; set; }
@@ -24,6 +25,9 @@ namespace ERY.Xle
 		}
 		public void Draw()
 		{
+			if (Visible == false)
+				return;
+
 			var renderer = XleCore.Renderer;
 
 			renderer.WriteText(Location.X * 16, Location.Y * 16, csb.Text, csb.Colors);
@@ -63,5 +67,7 @@ namespace ERY.Xle
 		{
 			csb.Clear();
 		}
+
+		public bool Visible { get; set; }
 	}
 }

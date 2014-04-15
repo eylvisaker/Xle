@@ -110,7 +110,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		public override double ChanceToHitGuard(Player player, Guard guard, int distance)
 		{
-			int weaponType = player.CurrentWeaponType;
+			int weaponType = player.CurrentWeapon.ID;
 			double GuardDefense = 1;
 
 			if (WhichCastle == 2)
@@ -123,7 +123,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		public override int RollDamageToGuard(Player player, Guard guard)
 		{
-			int weaponType = player.CurrentWeaponType;
+			int weaponType = player.CurrentWeapon.ID;
 
 			double damage = player.Attribute[Attributes.strength] *
 					   (weaponType / 2 + 1) / 7;
@@ -142,7 +142,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
 		public override int RollDamageToPlayer(Player player, Guard guard)
 		{
-			int armorType = player.CurrentArmorType;
+			int armorType = player.CurrentArmor.ID;
 
 			double damage =
 				Math.Pow(CastleLevel, 1.8) * GuardAttack * (300 + XleCore.random.NextDouble() * 600) /

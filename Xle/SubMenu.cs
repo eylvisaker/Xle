@@ -11,5 +11,7 @@ namespace ERY.Xle
 		public string title;					// title of menu
 		public int value;					// value of menu
 		public int width;					// width in CHARACTERS!!!
+
+		public AgateLib.Geometry.Color BackColor { get; set; }
 	}
 }

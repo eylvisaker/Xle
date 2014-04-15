@@ -51,7 +51,7 @@ namespace ERY.Xle.Maps.Extenders
 
 		public virtual double ChanceToHitGuard(Player player, Guard guard, int distance)
 		{
-			int weaponType = player.CurrentWeaponType;
+			int weaponType = player.CurrentWeapon.ID;
 
 			return (player.Attribute[Attributes.dexterity] + 16)
 				* (99 + weaponType * 8) / 7000.0 / guard.Defense * 99;
@@ -59,7 +59,7 @@ namespace ERY.Xle.Maps.Extenders
 
 		public virtual int RollDamageToGuard(Player player, Guard guard)
 		{
-			int weaponType = player.CurrentWeaponType;
+			int weaponType = player.CurrentWeapon.ID;
 
 			double damage = 1 + player.Attribute[Attributes.strength] *
 					   (weaponType / 2 + 1) / 4;
@@ -360,8 +360,6 @@ namespace ERY.Xle.Maps.Extenders
 			}
 			else
 			{
-				int armorType = player.CurrentArmorType;
-
 				int dam = RollDamageToPlayer(player, guard);
 
 				XleCore.TextArea.Print("Blow ", XleColor.Yellow);
@@ -388,7 +386,7 @@ namespace ERY.Xle.Maps.Extenders
 			int tile = 0, tile1;
 			int hit = 0;
 
-			if (XleCore.Data.WeaponList[player.CurrentWeaponType].Ranged)
+			if (player.CurrentWeapon.Info.Ranged)
 			{
 				maxXdist = 12;
 				maxYdist = 8;

@@ -55,8 +55,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
 		private void RemoveWeaponsAndArmor(GameState state)
 		{
-			while (state.Player.RemoveArmor(1)) ;
-			while (state.Player.RemoveWeapon(1));
+			state.Player.Weapons.Clear();
+			state.Player.Armor.Clear();
 		}
 
 		private void DrawBlankScreen()

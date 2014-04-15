@@ -133,7 +133,7 @@
   -->
   <ItemGroup>
     <Compile Include="ColorScheme.cs" />
-    <Compile Include="Commands\Armor.cs" />
+    <Compile Include="Commands\ArmorCommand.cs" />
     <Compile Include="Commands\Climb.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\Disembark.cs" />
@@ -150,13 +150,14 @@
     <Compile Include="Commands\Speak.cs" />
     <Compile Include="Commands\Take.cs" />
     <Compile Include="Commands\Use.cs" />
-    <Compile Include="Commands\Weapon.cs" />
+    <Compile Include="Commands\WeaponCommand.cs" />
     <Compile Include="Commands\Xamine.cs" />
     <Compile Include="CountdownTimer.cs" />
     <Compile Include="Data\MonsterInfo.cs" />
     <Compile Include="Data\XleData.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="DirectionHelper.cs" />
+    <Compile Include="Equipment.cs" />
     <Compile Include="MainWindowClosedException.cs" />
     <Compile Include="Maps\DungeonMonster.cs" />
     <Compile Include="Data\DungeonMonsterData.cs" />
@@ -211,7 +212,6 @@
     <Compile Include="XleEventTypes\Stores\Extenders\StoreFood.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreFortune.cs" />
     <Compile Include="TextWindow.cs" />
-    <Compile Include="XleEventTypes\Stores\Extenders\StoreHealer.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreJail.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreLending.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreMagic.cs" />

@@ -786,7 +786,7 @@ namespace ERY.Xle.Maps.Extenders
 
 			int distance = 0;
 			int maxDistance = 1;
-			if (XleCore.Data.WeaponList[player.CurrentWeaponType].Ranged)
+			if (player.CurrentWeapon.Info.Ranged)
 				maxDistance = 5;
 
 			DungeonMonster monst = MonsterInFrontOfPlayer(player, ref distance);

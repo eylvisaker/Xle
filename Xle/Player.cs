@@ -125,12 +125,14 @@ namespace ERY.Xle
 		int dungeonLevel;
 		Direction faceDirection = Direction.East;
 
-		int currentArmor;
-		int currentWeapon;
-		int[] weapon = new int[6];
-		int[] armor = new int[4];
-		int[] weaponQuality = new int[6];
-		int[] armorQuality = new int[4];
+		int currentArmorIndex = -1;
+		int currentWeaponIndex = -1;
+
+		WeaponItem bareHands = new WeaponItem();
+		ArmorItem bareArmor = new ArmorItem();
+
+		List<WeaponItem> weapons = new List<WeaponItem>();
+		List<ArmorItem> armor = new List<ArmorItem>();
 
 		ItemContainer mItems = new ItemContainer();
 
@@ -212,12 +214,11 @@ namespace ERY.Xle
 			info.Write("DungeonLevel", dungeonLevel);
 			info.Write("Facing", (int)faceDirection);
 
-			info.Write("CurrentArmor", currentArmor);
-			info.Write("CurrentWeapon", currentWeapon);
-			info.Write("Weapon", weapon);
-			info.Write("Armor", armor);
-			info.Write("WeaponQuality", weaponQuality);
-			info.Write("ArmorQuality", armorQuality);
+			info.Write("CurrentArmorIndex", currentArmorIndex);
+			info.Write("CurrentWeaponIndex", currentWeaponIndex);
+			info.Write("Weapons", Weapons);
+			info.Write("Armor", Armor);
+
 			info.Write("Item", Items);
 			info.Write("Hold", hold);
 
@@ -261,12 +262,42 @@ namespace ERY.Xle
 			dungeonLevel = info.ReadInt32("DungeonLevel");
 			faceDirection = (Direction)info.ReadInt32("Facing");
 
-			currentArmor = info.ReadInt32("CurrentArmor");
-			currentWeapon = info.ReadInt32("CurrentWeapon");
-			weapon = info.ReadInt32Array("Weapon");
-			armor = info.ReadInt32Array("Armor");
-			weaponQuality = info.ReadInt32Array("WeaponQuality");
-			armorQuality = info.ReadInt32Array("ArmorQuality");
+			if (info.ContainsKey("Weapon"))
+			{
+				int[] weapon = info.ReadInt32Array("Weapon");
+				int[] armor = info.ReadInt32Array("Armor");
+				int[] weaponQuality = info.ReadInt32Array("WeaponQuality");
+				int[] armorQuality = info.ReadInt32Array("ArmorQuality");
+
+				for(int i = 0; i < weapon.Length; i++)
+				{
+					if (weapon[i] == 0)
+						continue;
+
+					Weapons.Add(new WeaponItem { ID = weapon[i], Quality = weaponQuality[i] });
+				}
+				for(int i = 0; i < armor.Length; i++)
+				{
+					if (armor[i] == 0)
+						continue;
+					Armor.Add(new ArmorItem { ID = armor[i], Quality = armorQuality[i] });
+				}
+
+				SortEquipment();
+
+				currentArmorIndex = Armor.Count - 1;
+				currentWeaponIndex = Weapons.Count - 1;
+
+			}
+			else
+			{
+				weapons = info.ReadList<WeaponItem>("Weapons");
+				armor = info.ReadList<ArmorItem>("Armor");
+
+				currentArmorIndex = info.ReadInt32("CurrentArmorIndex");
+				currentWeaponIndex = info.ReadInt32("CurrentWeaponIndex");
+			}
+
 			mItems = info.ReadObject<ItemContainer>("Item");
 			hold = info.ReadInt32("Hold");
 
@@ -706,12 +737,10 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
+		[Obsolete]
 		public int ArmorType(int index)
 		{
-			if (index <= 0 || index > 3)
-				return 0;
-
-			return armor[index];
+			return Armor[index].Quality;
 
 		}
 		/// <summary>
@@ -719,25 +748,20 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
+		[Obsolete]
 		public int WeaponType(int index)
 		{
-			if (index <= 0 || index > 5)
-				return 0;
-
-			return weapon[index];
-
+			return Weapons[index].ID;
 		}
 		/// <summary>
 		/// returns the armor quality
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
+		[Obsolete]
 		public int ArmorQuality(int index)
 		{
-			if (index <= 0 || index > 3)
-				return 0;
-
-			return armorQuality[index];
+			return Armor[index].Quality;
 
 		}
 		/// <summary>
@@ -745,115 +769,76 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
+		[Obsolete]
 		public int WeaponQuality(int index)
 		{
-			if (index <= 0 || index > 5)
-				return 0;
-
-			return weaponQuality[index];
+			return Weapons[index].Quality;
 		}
 
 		/// sets or returns the armor currently worn
+		[Obsolete("", true)]
 		public int CurrentArmorIndex
 		{
 			get
 			{
-				return currentArmor;
+				return currentArmorIndex + 1;
 			}
 			set
 			{
-				if (value == 0)
-				{
-					currentArmor = value;
-				}
-				else
-				{
-					for (int j = 1; j <= value; j++)
-					{
-						if (armor[j] == 0)
-							value++;
-					}
-
-					currentArmor = value;
-				}
+				currentArmorIndex = value - 1;
 			}
 		}
 		/// sets or returns the weapon currently equiped
+		[Obsolete("", true)]
 		public int CurrentWeaponIndex
 		{
-			get { return currentWeapon; }
+			get { return currentWeaponIndex + 1; }
 			set
 			{
-				if (value == 0)
-				{
-					currentWeapon = value;
-				}
-				else
-				{
-					currentWeapon = 0;
-
-					for (int j = 1; j <= value; j++)
-					{
-						if (weapon[j] == 0)
-							value++;
-					}
-
-					currentWeapon = value;
-				}
+				currentWeaponIndex = value - 1;
 			}
 		}
-
-		public int CurrentArmorType
+		public WeaponItem CurrentWeapon
 		{
 			get
 			{
-				if (currentArmor == 0)
-					return 0;
+				if (currentWeaponIndex == -1)
+					return bareHands;
 
-				return armor[currentArmor];
+				return weapons[currentWeaponIndex];
+			}
+			set
+			{
+				currentWeaponIndex = weapons.IndexOf(value);
 			}
 		}
-		public int CurrentWeaponType
+		public ArmorItem CurrentArmor
 		{
 			get
 			{
-				if (currentWeapon == 0)
-					return 0;
+				if (currentArmorIndex == -1)
+					return bareArmor;
 
-				return weapon[currentWeapon];
+				return armor[currentArmorIndex];
 			}
-		}
-		public double CurrentArmorQuality
-		{
-			get
+			set
 			{
-				if (currentArmor == 0)
-					return 0;
-
-				return armorQuality[currentArmor];
+				currentArmorIndex = armor.IndexOf(value);
 			}
 		}
-		public double CurrentWeaponQuality
+		public int _CurrentWeaponIndex
 		{
-			get
-			{
-				if (currentWeapon == 0)
-					return 0;
-
-				return weaponQuality[currentWeapon];
-			}
+			get { return currentWeaponIndex; }
+			set { currentWeaponIndex = value; }
 		}
-
-		public string CurrentArmorTypeName
+		public int _CurrentArmorIndex
 		{
-			get
-			{
-				if (currentArmor == 0)
-					return "Nothing";
-
-				return XleCore.Data.ArmorList[armor[currentArmor]].Name;
-			}
+			get { return currentArmorIndex; }
+			set { currentArmorIndex = value; }
 		}
+
+		public List<ArmorItem> Armor { get { return armor; } }
+		public List<WeaponItem> Weapons { get { return weapons; } }
 
 		/// <summary>
 		/// Gives the name of the current weapon being used. Does not include the
@@ -863,10 +848,10 @@ namespace ERY.Xle
 		{
 			get
 			{
-				if (currentWeapon == 0)
+				if (currentWeaponIndex == 0)
 					return "Bare Hands";
 
-				return XleCore.Data.WeaponList[weapon[currentWeapon]].Name;
+				return CurrentWeapon.BaseName;
 			}
 		}
 
@@ -880,202 +865,45 @@ namespace ERY.Xle
 		/// <returns></returns>
 		public bool AddWeapon(int w, int q)
 		{
-			int i;
+			if (Weapons.Count >= 5)
+				return false;
 
-			for (i = 1; i <= 5; i++)
-			{
-				if (weapon[i] == 0)
-				{
-					weapon[i] = w;
-					weaponQuality[i] = q;
+			Weapons.Add(new WeaponItem { ID = w, Quality = q });
+			SortEquipment();
 
-					SortEquipment();
-
-					return true;
-				}
-			}
-
-			return false;
+			return true;
 		}
-		///
 		public bool AddArmor(int a, int q)
 		{
-			int i;
-
-			for (i = 1; i <= 3; i++)
-			{
-				if (ArmorType(i) == 0)
-				{
-					armor[i] = a;
-					armorQuality[i] = q;
-
-					SortEquipment();
-
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		public bool RemoveWeapon(int index)
-		{
-			if (index < 1 || index > 5) throw new ArgumentOutOfRangeException();
-
-			if (weapon[index] == 0)
+			if (Armor.Count >= 3)
 				return false;
 
-			for (int i = index; i < 5; i++)
-			{
-				weapon[i] = weapon[i + 1];
-				weaponQuality[i] = weaponQuality[i + 1];
-			}
-
-			weapon[5] = 0;
-			weaponQuality[5] = 0;
+			Armor.Add(new ArmorItem { ID = a, Quality = q });
+			SortEquipment();
 
 			return true;
 		}
 
-		public bool RemoveArmor(int index)
+		public void RemoveWeapon(int index)
 		{
-			if (index < 1 || index > 3) throw new ArgumentOutOfRangeException();
-
-			if (armor[index] == 0)
-				return false;
-
-			for (int i = index; i < 3; i++)
-			{
-				armor[i] = armor[i + 1];
-				armorQuality[i] = armorQuality[i + 1];
-			}
-
-			armor[3] = 0;
-			armorQuality[3] = 0;
-
-			return true;
+			Weapons.RemoveAt(index);
+		}
+		public void RemoveArmor(int index)
+		{
+			Armor.RemoveAt(index);
 		}
 		/// <summary>
 		/// Sorts weapons and armor
 		/// </summary>	
 		public void SortEquipment()
 		{
-			int i = 0;
-			int tempItem;
-			int tempQuality;
+			Weapons.Sort(Equipment.Sorter);
+			Armor.Sort(Equipment.Sorter);
 
-			do
-			{
-
-				i++;
-
-				if (weapon[i + 1] < weapon[i])
-				{
-					tempItem = weapon[i];
-					tempQuality = weaponQuality[i];
-
-					weapon[i] = weapon[i + 1];
-					weaponQuality[i] = weaponQuality[i + 1];
-
-					weapon[i + 1] = tempItem;
-					weaponQuality[i + 1] = tempQuality;
-
-
-					if (currentWeapon == i)
-					{
-						currentWeapon = i + 1;
-					}
-					else if (currentWeapon == i + 1)
-					{
-						currentWeapon = i;
-					}
-
-					i = 0;
-
-				}
-				else if (weapon[i + 1] == weapon[i] && weaponQuality[i + 1] < weaponQuality[i])
-				{
-
-					tempItem = weapon[i];
-					tempQuality = weaponQuality[i];
-
-					weapon[i] = weapon[i + 1];
-					weaponQuality[i] = weaponQuality[i + 1];
-
-					weapon[i + 1] = tempItem;
-					weaponQuality[i + 1] = tempQuality;
-
-
-					if (currentWeapon == i)
-					{
-						currentWeapon = i + 1;
-					}
-					else if (currentWeapon == i + 1)
-					{
-						currentWeapon = i;
-					}
-
-					i = 0;
-				}
-
-			} while (i < 4);
-
-			i = 0;
-
-			do
-			{
-
-				i++;
-
-				if (armor[i + 1] < armor[i])
-				{
-					tempItem = armor[i];
-					tempQuality = armorQuality[i];
-
-					armor[i] = armor[i + 1];
-					armorQuality[i] = armorQuality[i + 1];
-
-					armor[i + 1] = tempItem;
-					armorQuality[i + 1] = tempQuality;
-
-
-					if (currentArmor == i)
-					{
-						currentArmor = i + 1;
-					}
-					else if (currentArmor == i + 1)
-					{
-						currentArmor = i;
-					}
-
-					i = 0;
-
-				}
-				else if (armor[i + 1] == armor[i] && armorQuality[i + 1] < armorQuality[i])
-				{
-					tempItem = armor[i];
-					tempQuality = armorQuality[i];
-
-					armor[i] = armor[i + 1];
-					armorQuality[i] = armorQuality[i + 1];
-
-					armor[i + 1] = tempItem;
-					armorQuality[i + 1] = tempQuality;
-
-
-					if (currentArmor == i)
-					{
-						currentArmor = i + 1;
-					}
-					else if (currentArmor == i + 1)
-					{
-						currentArmor = i;
-					}
-
-					i = 0;
-				}
-
-			} while (i < 2);
+			while (currentWeaponIndex >= weapons.Count)
+				currentWeaponIndex--;
+			while (currentArmorIndex >= armor.Count)
+				currentArmorIndex--;
 		}
 
 		/// <summary>
@@ -1084,10 +912,11 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="defense"></param>
 		/// <returns></returns>
+		[Obsolete]
 		public int Hit(int defense)
 		{
-			int wt = WeaponType(CurrentWeaponIndex);
-			int qt = WeaponQuality(CurrentWeaponIndex);
+			int wt = CurrentWeapon.ID;
+			int qt = CurrentWeapon.Quality;
 
 			int dam = Attribute[Attributes.strength] - 12;
 			dam += (int)(wt * (qt + 2)) / 2;
@@ -1116,15 +945,15 @@ namespace ERY.Xle
 		/// </summary>
 		/// <param name="attack"></param>
 		/// <returns></returns>	
+		[Obsolete]
 		public int Damage(int attack)
 		{
-			int dam = (int)(attack - (Attribute[Attributes.endurance]
-				+ ArmorType(CurrentArmorIndex) * 4) * 0.8);
+			int dam = (int)(attack - (Attribute[Attributes.endurance]	+ CurrentArmor.ID) * 0.8);
 
 			dam += (int)(dam * XleCore.random.Next(-50, 100) / 100 + 0.5);
 
 			if (dam < 0 || 1 + XleCore.random.Next(60) + attack / 15
-							< Attribute[Attributes.dexterity] + ArmorQuality(CurrentArmorIndex))
+							< Attribute[Attributes.dexterity] + CurrentArmor.Quality)
 			{
 				dam = 0;
 			}

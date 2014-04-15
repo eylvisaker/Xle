@@ -32,7 +32,7 @@ namespace ERY.Xle.Commands
 
 			Items = new List<Command>();
 
-			Items.Add(new Armor());
+			Items.Add(new ArmorCommand());
 			Items.Add(new Climb());
 			Items.Add(new Disembark());
 			Items.Add(new End());
@@ -48,7 +48,7 @@ namespace ERY.Xle.Commands
 			Items.Add(new Speak());
 			Items.Add(new Take());
 			Items.Add(new Use { ShowItemMenu = false });
-			Items.Add(new Weapon());
+			Items.Add(new WeaponCommand());
 			Items.Add(new Xamine());
 		}
 

@@ -26,14 +26,14 @@ namespace ERY.Xle.LotA
 		{
 			get
 			{
-				yield return new Commands.Armor();
+				yield return new Commands.ArmorCommand();
 				yield return new Commands.Fight();
 				yield return new Commands.Gamespeed();
 				yield return new Commands.Hold();
 				yield return new Commands.Inventory();
 				yield return new Commands.Pass();
 				yield return new Commands.Use { ShowItemMenu = false };
-				yield return new Commands.Weapon();
+				yield return new Commands.WeaponCommand();
 				yield return new Commands.Xamine();
 			}
 		}
