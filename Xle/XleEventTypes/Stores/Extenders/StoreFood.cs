@@ -9,7 +9,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreFood : StoreFront
 	{
-		protected override void SetColorScheme(ColorScheme cs)
+		protected override void InitializeColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.DarkGray;
 			cs.FrameColor = XleColor.Green;

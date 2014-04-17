@@ -891,5 +891,11 @@ namespace ERY.Xle
 		public int ArmorEnchantTurnsRemaining { get; set; }
 
 		public Direction RaftFaceDirection { get; private set; }
+
+		public void RemoveEquipment(Equipment item)
+		{
+			Weapons.Remove(item as WeaponItem);
+			Armor.Remove(item as ArmorItem);
+		}
 	}
 }

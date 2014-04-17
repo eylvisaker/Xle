@@ -288,7 +288,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 	public class StoreWeapon : StoreEquipmentExtender
 	{
-		protected override void SetColorScheme(ColorScheme cs)
+		protected override void InitializeColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.Brown;
 			cs.FrameColor = XleColor.Orange;
@@ -331,7 +331,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 	}
 	public class StoreArmor : StoreEquipmentExtender
 	{
-		protected override void SetColorScheme(ColorScheme cs)
+		protected override void InitializeColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.Purple;
 			cs.FrameColor = XleColor.Blue;

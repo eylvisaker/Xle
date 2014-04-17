@@ -52,7 +52,7 @@ namespace ERY.Xle.XleEventTypes.Stores
 		{
 			get { return XleCore.Data.MagicSpells.Values; }
 		}
-		protected override void SetColorScheme(ColorScheme cs)
+		protected override void InitializeColorScheme(ColorScheme cs)
 		{
 			cs.BorderColor = XleColor.Purple;
 			cs.BackColor = XleColor.LightBlue;

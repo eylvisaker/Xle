@@ -150,9 +150,10 @@ namespace ERY.Xle
 		public static void SetProjectionAndBackColors(ColorScheme cs)
 		{
 			SetOrthoProjection(cs.BorderColor);
+			int hp = cs.HorizontalLinePosition * 16 + 8;
 
 			Display.FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
-			Display.FillRect(0, 296, 640, 104, cs.TextAreaBackColor);
+			Display.FillRect(0, hp, 640, 400 - hp, cs.TextAreaBackColor);
 		}
 
 		#region --- Console Commands ---

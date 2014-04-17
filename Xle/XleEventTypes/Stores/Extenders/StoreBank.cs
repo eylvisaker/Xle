@@ -23,7 +23,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		
 		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
-		protected override void SetColorScheme(ColorScheme cs)
+		protected override void InitializeColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.DarkGray;
 			cs.FrameColor = XleColor.Green;

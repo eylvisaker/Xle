@@ -10,18 +10,32 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreFront : StoreExtender
 	{
-		ColorScheme mColorScheme = new ColorScheme();
+		ColorScheme mColorScheme;
 
 		public List<TextWindow> Windows { get; private set; }
 		public new Store TheEvent { get { return (Store)base.TheEvent; } }
 
+		protected ColorScheme ColorScheme { get { return mColorScheme; } }
+		protected bool ShowGoldText { get; set; }
+
 		public StoreFront()
 		{
+			PrivateInitializeColorScheme();
+
 			Windows = new List<TextWindow>();
 
 			ClearWindow();
 
+		}
+
+		private void PrivateInitializeColorScheme()
+		{
+			mColorScheme = new Xle.ColorScheme();
 			mColorScheme.BackColor = XleColor.Green;
+			
+			ShowGoldText = true;
+
+			InitializeColorScheme(mColorScheme);
 		}
 
 		protected void ClearWindow()
@@ -29,7 +43,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			Windows.Clear();
 		}
 
-		protected virtual void SetColorScheme(ColorScheme cs)
+		protected virtual void InitializeColorScheme(ColorScheme cs)
 		{ }
 
 		protected internal void RedrawStore()
@@ -48,15 +62,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 			var renderer = XleCore.Renderer;
 
-			SetColorScheme(mColorScheme);
-			XleCore.SetProjectionAndBackColors(mColorScheme);
-
-			// Draw the borders
-			renderer.DrawFrame(mColorScheme.FrameColor);
-			renderer.DrawFrameLine(0, 288, 1, 640, mColorScheme.FrameColor);
-
-			renderer.DrawFrameHighlight(mColorScheme.FrameHighlightColor);
-			renderer.DrawInnerFrameHighlight(0, 288, 1, 640, mColorScheme.FrameHighlightColor);
+			mColorScheme.Draw();
 
 			// Draw the title
 			DrawTitle(Title);
@@ -65,6 +71,16 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			{
 				window.Draw();
 			}
+
+			DrawGoldText(player);
+
+			XleCore.TextArea.Draw();
+		}
+
+		private void DrawGoldText(Player player)
+		{
+			if (ShowGoldText == false)
+				return;
 
 			string goldText;
 			if (robbing == false)
@@ -80,12 +96,14 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				goldText = " Robbery in progress ";
 			}
 
-			Display.FillRect(320 - (goldText.Length / 2) * 16, 18 * 16, goldText.Length * 16, 14,
+			Display.FillRect(
+				320 - (goldText.Length / 2) * 16, 
+				ColorScheme.HorizontalLinePosition * 16, 
+				goldText.Length * 16, 
+				14,
 				mColorScheme.BackColor);
 
-			renderer.WriteText(320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
-
-			XleCore.TextArea.Draw();
+			XleCore.Renderer.WriteText(320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
 
 		}
 
@@ -140,6 +158,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		public override bool Speak(GameState state)
 		{
+			PrivateInitializeColorScheme();
+
 			if (AllowInteractionWhenLoanOverdue == false)
 			{
 				if (IsLoanOverdue(state))

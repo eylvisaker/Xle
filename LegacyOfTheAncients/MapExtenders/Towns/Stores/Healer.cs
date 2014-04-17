@@ -13,7 +13,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 	{
 		bool buyingHerbs = false;
 
-		protected override void SetColorScheme(ColorScheme cs)
+		protected override void InitializeColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = buyingHerbs ? XleColor.LightBlue : XleColor.Green;
 			cs.FrameColor = XleColor.LightGreen;

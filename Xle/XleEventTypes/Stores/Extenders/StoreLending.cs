@@ -14,7 +14,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		{
 			return XleCore.random.Next(180, 231);
 		}
-		protected override void SetColorScheme(ColorScheme cs)
+		protected override void InitializeColorScheme(ColorScheme cs)
 		{
 			cs.BackColor = XleColor.DarkGray;
 			cs.FrameColor = XleColor.Gray;

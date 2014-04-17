@@ -19,6 +19,8 @@ namespace ERY.Xle
 			BorderColor = XleColor.DarkGray;
 
 			MapAreaWidth = 25;
+
+			HorizontalLinePosition = 18;
 		}
 
 		public Color TextColor { get; set; }
@@ -48,5 +50,22 @@ namespace ERY.Xle
 		public Color TextAreaBackColor { get; set; }
 
 		public Color BorderColor { get; set; }
+
+		public int HorizontalLinePosition { get; set; }
+
+		public void Draw()
+		{
+			var renderer = XleCore.Renderer;
+
+			XleCore.SetProjectionAndBackColors(this);
+
+			// Draw the borders
+			renderer.DrawFrame(FrameColor);
+			renderer.DrawFrameLine(0, HorizontalLinePosition * 16, 1, 640, FrameColor);
+
+			renderer.DrawFrameHighlight(FrameHighlightColor);
+			renderer.DrawInnerFrameHighlight(0, HorizontalLinePosition * 16, 1, 640, FrameHighlightColor);
+
+		}
 	}
 }
