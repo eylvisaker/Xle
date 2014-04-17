@@ -85,7 +85,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			player.Items[LotaItem.JadeCoin] = 2;
 
 			player.AddArmor(1, 0);
-			player._CurrentArmorIndex = 0;
+			player.CurrentArmor = player.Armor[0];
 			player.VaultGold = 1500;
 
 			player.StoryData = new LotaStory();

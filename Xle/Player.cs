@@ -262,41 +262,11 @@ namespace ERY.Xle
 			dungeonLevel = info.ReadInt32("DungeonLevel");
 			faceDirection = (Direction)info.ReadInt32("Facing");
 
-			if (info.ContainsKey("Weapon"))
-			{
-				int[] weapon = info.ReadInt32Array("Weapon");
-				int[] armor = info.ReadInt32Array("Armor");
-				int[] weaponQuality = info.ReadInt32Array("WeaponQuality");
-				int[] armorQuality = info.ReadInt32Array("ArmorQuality");
+			weapons = info.ReadList<WeaponItem>("Weapons");
+			armor = info.ReadList<ArmorItem>("Armor");
 
-				for(int i = 0; i < weapon.Length; i++)
-				{
-					if (weapon[i] == 0)
-						continue;
-
-					Weapons.Add(new WeaponItem { ID = weapon[i], Quality = weaponQuality[i] });
-				}
-				for(int i = 0; i < armor.Length; i++)
-				{
-					if (armor[i] == 0)
-						continue;
-					Armor.Add(new ArmorItem { ID = armor[i], Quality = armorQuality[i] });
-				}
-
-				SortEquipment();
-
-				currentArmorIndex = Armor.Count - 1;
-				currentWeaponIndex = Weapons.Count - 1;
-
-			}
-			else
-			{
-				weapons = info.ReadList<WeaponItem>("Weapons");
-				armor = info.ReadList<ArmorItem>("Armor");
-
-				currentArmorIndex = info.ReadInt32("CurrentArmorIndex");
-				currentWeaponIndex = info.ReadInt32("CurrentWeaponIndex");
-			}
+			currentArmorIndex = info.ReadInt32("CurrentArmorIndex");
+			currentWeaponIndex = info.ReadInt32("CurrentWeaponIndex");
 
 			mItems = info.ReadObject<ItemContainer>("Item");
 			hold = info.ReadInt32("Hold");
@@ -732,72 +702,7 @@ namespace ERY.Xle
 			return hold;
 
 		}
-		/// <summary>
-		/// Returns the armor that the player is carrying in the specified slot
-		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
-		[Obsolete]
-		public int ArmorType(int index)
-		{
-			return Armor[index].Quality;
 
-		}
-		/// <summary>
-		/// returns the weapon that the player is carrying in the specified slot
-		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
-		[Obsolete]
-		public int WeaponType(int index)
-		{
-			return Weapons[index].ID;
-		}
-		/// <summary>
-		/// returns the armor quality
-		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
-		[Obsolete]
-		public int ArmorQuality(int index)
-		{
-			return Armor[index].Quality;
-
-		}
-		/// <summary>
-		/// returns the weapon quality
-		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
-		[Obsolete]
-		public int WeaponQuality(int index)
-		{
-			return Weapons[index].Quality;
-		}
-
-		/// sets or returns the armor currently worn
-		[Obsolete("", true)]
-		public int CurrentArmorIndex
-		{
-			get
-			{
-				return currentArmorIndex + 1;
-			}
-			set
-			{
-				currentArmorIndex = value - 1;
-			}
-		}
-		/// sets or returns the weapon currently equiped
-		[Obsolete("", true)]
-		public int CurrentWeaponIndex
-		{
-			get { return currentWeaponIndex + 1; }
-			set
-			{
-				currentWeaponIndex = value - 1;
-			}
-		}
 		public WeaponItem CurrentWeapon
 		{
 			get
@@ -809,7 +714,17 @@ namespace ERY.Xle
 			}
 			set
 			{
-				currentWeaponIndex = weapons.IndexOf(value);
+				if (value == null)
+					currentWeaponIndex = -1;
+				else
+				{
+					int index = weapons.IndexOf(value);
+
+					if (index == -1)
+						throw new InvalidOperationException("Weapon not found.");
+
+					currentWeaponIndex = weapons.IndexOf(value);
+				}
 			}
 		}
 		public ArmorItem CurrentArmor
@@ -825,16 +740,6 @@ namespace ERY.Xle
 			{
 				currentArmorIndex = armor.IndexOf(value);
 			}
-		}
-		public int _CurrentWeaponIndex
-		{
-			get { return currentWeaponIndex; }
-			set { currentWeaponIndex = value; }
-		}
-		public int _CurrentArmorIndex
-		{
-			get { return currentArmorIndex; }
-			set { currentArmorIndex = value; }
 		}
 
 		public List<ArmorItem> Armor { get { return armor; } }
@@ -948,7 +853,7 @@ namespace ERY.Xle
 		[Obsolete]
 		public int Damage(int attack)
 		{
-			int dam = (int)(attack - (Attribute[Attributes.endurance]	+ CurrentArmor.ID) * 0.8);
+			int dam = (int)(attack - (Attribute[Attributes.endurance] + CurrentArmor.ID) * 0.8);
 
 			dam += (int)(dam * XleCore.random.Next(-50, 100) / 100 + 0.5);
 
