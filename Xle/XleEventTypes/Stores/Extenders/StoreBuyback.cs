@@ -218,6 +218,12 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 					if (ask - offer < 3)
 						finalOffer = true;
+
+					if (offer <= 0)
+					{
+						ComeBackWhenSerious();
+						return;
+					}
 				}
 
 			} while (true);
