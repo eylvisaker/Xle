@@ -8,7 +8,75 @@
   </TileSet>
   <TileImage>LobTown</TileImage>
   <OutsideTile>9</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEvent" />
+  <Events array="true" type="ERY.Xle.XleEvent">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>55</X>
+      <Y>1</Y>
+      <Width>6</Width>
+      <Height>3</Height>
+      <ExtenderName>Buyback</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>43</X>
+      <Y>1</Y>
+      <Width>3</Width>
+      <Height>3</Height>
+      <ExtenderName>Food</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>70</X>
+      <Y>1</Y>
+      <Width>3</Width>
+      <Height>3</Height>
+      <ExtenderName>Bank</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreIndustry">
+      <X>29</X>
+      <Y>31</Y>
+      <Width>3</Width>
+      <Height>4</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <Product>
+      </Product>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+      <X>3</X>
+      <Y>27</Y>
+      <Width>4</Width>
+      <Height>3</Height>
+      <ExtenderName>Armor</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+      <X>1</X>
+      <Y>5</Y>
+      <Width>6</Width>
+      <Height>3</Height>
+      <ExtenderName>Weapon</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
+    </Item>
+  </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>
       <Facing>None</Facing>

@@ -8,7 +8,112 @@
   </TileSet>
   <TileImage>LobTown</TileImage>
   <OutsideTile>338</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEvent" />
+  <Events array="true" type="ERY.Xle.XleEvent">
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>1</X>
+      <Y>3</Y>
+      <Width>6</Width>
+      <Height>4</Height>
+      <ExtenderName>Food</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+      <X>30</X>
+      <Y>6</Y>
+      <Width>4</Width>
+      <Height>3</Height>
+      <ExtenderName>Armor</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+      <X>38</X>
+      <Y>9</Y>
+      <Width>3</Width>
+      <Height>3</Height>
+      <ExtenderName>Weapon</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+      <X>40</X>
+      <Y>12</Y>
+      <Width>1</Width>
+      <Height>1</Height>
+      <ExtenderName>Weapon</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>7</X>
+      <Y>27</Y>
+      <Width>7</Width>
+      <Height>3</Height>
+      <ExtenderName>Bank</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>6</X>
+      <Y>33</Y>
+      <Width>2</Width>
+      <Height>2</Height>
+      <ExtenderName>HeighLoagh</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreRaft">
+      <X>53</X>
+      <Y>32</Y>
+      <Width>3</Width>
+      <Height>4</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <BuyRaftMap>0</BuyRaftMap>
+      <BuyRaftX>0</BuyRaftX>
+      <BuyRaftY>0</BuyRaftY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreRaft">
+      <X>50</X>
+      <Y>35</Y>
+      <Width>3</Width>
+      <Height>3</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <BuyRaftMap>0</BuyRaftMap>
+      <BuyRaftX>0</BuyRaftX>
+      <BuyRaftY>0</BuyRaftY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>55</X>
+      <Y>6</Y>
+      <Width>6</Width>
+      <Height>3</Height>
+      <ExtenderName>DungeonMagic</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+  </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>

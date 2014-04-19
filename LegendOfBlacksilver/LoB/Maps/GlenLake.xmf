@@ -22,6 +22,91 @@
       <BuyRaftX>186</BuyRaftX>
       <BuyRaftY>152</BuyRaftY>
     </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>5</X>
+      <Y>7</Y>
+      <Width>5</Width>
+      <Height>3</Height>
+      <ExtenderName>Jailer</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>12</X>
+      <Y>5</Y>
+      <Width>3</Width>
+      <Height>3</Height>
+      <ExtenderName>Prisoner</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>74</X>
+      <Y>3</Y>
+      <Width>3</Width>
+      <Height>5</Height>
+      <ExtenderName>Food</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+      <X>45</X>
+      <Y>1</Y>
+      <Width>5</Width>
+      <Height>3</Height>
+      <ExtenderName>Armor</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>34</X>
+      <Y>1</Y>
+      <Width>6</Width>
+      <Height>3</Height>
+      <ExtenderName>Weapon</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>5</X>
+      <Y>31</Y>
+      <Width>7</Width>
+      <Height>5</Height>
+      <ExtenderName>Blackjack</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreIndustry">
+      <X>38</X>
+      <Y>35</Y>
+      <Width>5</Width>
+      <Height>3</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <Product>
+      </Product>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>70</X>
+      <Y>32</Y>
+      <Width>3</Width>
+      <Height>4</Height>
+      <ExtenderName>Bank</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>

@@ -10,17 +10,104 @@
   <OutsideTile>382</OutsideTile>
   <Events array="true" type="ERY.Xle.XleEvent">
     <Item type="ERY.Xle.XleEventTypes.Stores.StoreRaft">
-      <X>52</X>
-      <Y>21</Y>
-      <Width>4</Width>
-      <Height>6</Height>
-      <ExtenderName>StoreRaft</ExtenderName>
+      <X>50</X>
+      <Y>20</Y>
+      <Width>10</Width>
+      <Height>7</Height>
+      <ExtenderName>Marina</ExtenderName>
       <ShopName>
       </ShopName>
       <CostFactor>1</CostFactor>
       <BuyRaftMap>0</BuyRaftMap>
       <BuyRaftX>0</BuyRaftX>
       <BuyRaftY>0</BuyRaftY>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>75</X>
+      <Y>12</Y>
+      <Width>3</Width>
+      <Height>5</Height>
+      <ExtenderName>Food</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+      <X>46</X>
+      <Y>1</Y>
+      <Width>8</Width>
+      <Height>3</Height>
+      <ExtenderName>Armor</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreIndustry">
+      <X>46</X>
+      <Y>7</Y>
+      <Width>3</Width>
+      <Height>3</Height>
+      <ExtenderName>
+      </ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <Product>
+      </Product>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+      <X>12</X>
+      <Y>28</Y>
+      <Width>3</Width>
+      <Height>5</Height>
+      <ExtenderName>Weapon</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+      <AllowedItemTypes array="true" encoding="Base64">
+      </AllowedItemTypes>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>23</X>
+      <Y>29</Y>
+      <Width>5</Width>
+      <Height>3</Height>
+      <ExtenderName>HeighLoagh</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>6</X>
+      <Y>14</Y>
+      <Width>4</Width>
+      <Height>3</Height>
+      <ExtenderName>Jailer</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>11</X>
+      <Y>9</Y>
+      <Width>2</Width>
+      <Height>3</Height>
+      <ExtenderName>Prisoner</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
+    </Item>
+    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+      <X>16</X>
+      <Y>9</Y>
+      <Width>2</Width>
+      <Height>3</Height>
+      <ExtenderName>Prisoner</ExtenderName>
+      <ShopName>
+      </ShopName>
+      <CostFactor>1</CostFactor>
     </Item>
   </Events>
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
