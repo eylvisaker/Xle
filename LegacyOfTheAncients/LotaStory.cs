@@ -61,5 +61,7 @@ namespace ERY.Xle.LotA
 		public int BefuddleTurns { get; set; }
 
 		public int BackfiredBefuddleTurns { get; set; }
+
+		public int NextFortune { get; set; }
 	}
 }

@@ -22,6 +22,7 @@ namespace ERY.Xle.Data
 		private Dictionary<int, MagicSpell> mMagicSpells = new Dictionary<int, MagicSpell>();
 		private Dictionary<int, DungeonMonsterData> mDungeonMonsters = new Dictionary<int, DungeonMonsterData>();
 		private List<MonsterInfo> mMonsterInfo = new List<MonsterInfo>();
+		private List<string> mFortunes = new List<string>();
 
 		public Size OverworldMonsterSize { get; private set; }
 
@@ -40,8 +41,16 @@ namespace ERY.Xle.Data
 			Load3DExtraInfo(root.Element("DungeonExtras"));
 			LoadDungeonMonsters(root.Element("DungeonMonsters"));
 			LoadMonsterInfo(root.Element("OutsideMonsters"));
+			LoadFortunes(root.Element("Fortunes"));
 		}
 
+		private void LoadFortunes(XElement xElement)
+		{
+			foreach (var node in xElement.Elements("Fortune"))
+			{
+				mFortunes.Add(node.Value.Trim().Replace("\\n", "\n"));
+			}
+		}
 		private void LoadMonsterInfo(XElement parent)
 		{
 			OverworldMonsterSize = Size.FromString(parent.Attribute("TileSize").Value);
@@ -67,7 +76,6 @@ namespace ERY.Xle.Data
 
 			}
 		}
-
 		private void LoadQualityInfo(XElement element)
 		{
 			foreach (var node in element.Elements())
@@ -326,6 +334,7 @@ namespace ERY.Xle.Data
 		public Dictionary<int, MagicSpell> MagicSpells { get { return mMagicSpells; } }
 		public Dictionary<int, DungeonMonsterData> DungeonMonsters { get { return mDungeonMonsters; } }
 		public List<MonsterInfo> MonsterInfoList { get { return mMonsterInfo; } }
+		public IList<string> Fortunes { get { return mFortunes; } }
 
 		private Rectangle ParseRectangle(string p)
 		{

@@ -550,6 +550,8 @@ namespace ERY.Xle
 		{
 			if (AcceptKey == false)
 				return;
+			if (GameState == null)
+				return;
 
 			try
 			{

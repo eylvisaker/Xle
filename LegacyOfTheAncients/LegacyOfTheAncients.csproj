@@ -117,6 +117,7 @@
     <Compile Include="MapExtenders\Towns\Stores\EagleHollowHealer.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Healer.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Magic.cs" />
+    <Compile Include="MapExtenders\Towns\Stores\Fortune.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Vault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Lota3DSurfaces.cs" />
@@ -354,9 +355,6 @@
     <None Include="LotA\Maps\ThreeSisters.xmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LotA\Saved\davey.chr">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -401,6 +399,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="LotA\Saved\" />
     <Folder Include="Support\OldMaps\" />
   </ItemGroup>
   <ItemGroup>

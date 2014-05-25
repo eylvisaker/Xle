@@ -157,11 +157,16 @@ namespace ERY.Xle.LotA.TitleScreen
 				}
 				else
 				{
-					string file = files[FileStartIndex + menuSelection - 1];
+					int index = FileStartIndex + menuSelection - 1;
 
-					if (string.IsNullOrEmpty(file) == false)
+					if (index < files.Count)
 					{
-						UserSelectedFile(file);
+						string file = files[index];
+
+						if (string.IsNullOrEmpty(file) == false)
+						{
+							UserSelectedFile(file);
+						}
 					}
 				}
 			}
