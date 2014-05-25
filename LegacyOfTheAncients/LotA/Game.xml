@@ -81,7 +81,7 @@
     <Item ID="26" Name="Befuddle Spell" />
     <Item ID="27" Name="Psycho Strength" />
     <Item ID="28" Name="Kill Flash" />
-    <Item ID="29" Name="Seek Spell" />    
+    <Item ID="29" Name="Seek Spell" />
   </Items>
   <MagicSpells>
     <MagicSpell ID="1" ItemID="24" BasePrice="32" MaxCarry="100" Name="Magic Flame" />
@@ -872,44 +872,41 @@
     </Monster>
   </DungeonMonsters>
   <Fortunes>
-    <Fortune Level="1">
-      Buyback shops pay nicely once you learn to negotiate.
-      I see you playing flip--flop and winning a fortune!
-      The lender will give you money at good rates.
-      Healers can help you after you find the Juton bush.
-      Carry gold -- merchants might sell you museum coins.
-      Carry climbing gear. It will prove handy.
-      The path to greatness lies through the museum.
-      The warlord's agents are everywhere.  Watch out!
-      Learn to lie -- so you'll master the Stones of Wisdom.
-      The pirate's cave is west of Eagle Hollow.
-      Only the 4 jewels can thwart the evil compendium.
-      You need herbs to succeed in dungeons.
-      It works best to club the slash nettle to death.
-      Keep money in the bank in case of death.
-      Castle doors require four different keys.
-      Visit ALL the museum displays. They will help more than you know.
-      Behind the castle gardens lies a special flower.
-      In the right places, magic seeds make you invisible.
-      Hidden passageways line the castle! LOOK CAREFULLY!!!
-      Many guards protect the mints. It's worth the fight.
-      An evil warlord's man was here asking about you.
-      Healers are more than they seem. Bide your time.
-      The Maston Leaper fears only a bladed staff.
-      You must master the spiral room.
-      Use the bladed staff to neutralize the Neural Cloud.
-      Go back to school. You can learn more.
-      Speak to the temptress in the castle.
-      The castle wizards know many answers.
-      There's a path around the castle gas trap.
-      You can't climb up the knight's dungeon.  STAY AWAY!
-      You can flail the sea swallow to death.
-      Have you visited each museum display?
-      Watch out.  The agents may be after you.
-      One day you will travel high above the sea.
-      Talk to the guardians of the scroll.
-      Learn the password to the castle wizard's quarters.
-      You can trust the winged horse.
-    </Fortune>
+    <Fortune>Buyback shops pay nicely once \nyou learn to negotiate.</Fortune>
+    <Fortune>I see you playing flip--flop \nand winning a fortune!</Fortune>
+    <Fortune>The lender will give \nyou money at good rates.</Fortune>
+    <Fortune>Healers can help you \nafter you find the Juton bush.</Fortune>
+    <Fortune>Carry gold - merchants might \nsell you museum coins.</Fortune>
+    <Fortune>Carry climbing gear. \nIt will prove handy.</Fortune>
+    <Fortune>The path to greatness lies \nthrough the museum.</Fortune>
+    <Fortune>The warlord's agents \nare everywhere.  Watch out!</Fortune>
+    <Fortune>Learn to lie - so you'll \nmaster the Stones of Wisdom.</Fortune>
+    <Fortune>The pirate's cave is \nwest of Eagle Hollow.</Fortune>
+    <Fortune>Only the 4 jewels can \nthwart the evil compendium.</Fortune>
+    <Fortune>You need herbs to \nsucceed in dungeons.</Fortune>
+    <Fortune>It works best to club the \nslash nettle to death.</Fortune>
+    <Fortune>Keep money in the \nbank in case of death.</Fortune>
+    <Fortune>Castle doors require \nfour different keys.</Fortune>
+    <Fortune>Behind the castle gardens \nlies a special flower.</Fortune>
+    <Fortune>In the right places, magic \nseeds make you invisible.</Fortune>
+    <Fortune>Hidden passageways line the castle! \nLook carefully!!!</Fortune>
+    <Fortune>Many guards protect the mints. \nIt's worth the fight.</Fortune>
+    <Fortune>An evil warlord's man \nwas here asking about you.</Fortune>
+    <Fortune>The winged horse can \nfly across the sea.</Fortune>
+    <Fortune>Healers are more than they seem. \nBide your time.</Fortune>
+    <Fortune>The Maston Leaper fears \nonly a bladed staff.</Fortune>
+    <Fortune>You must master the spiral room.\n    </Fortune>
+    <Fortune>Use the bladed staff to \nneutralize the Neural Cloud.</Fortune>
+    <Fortune>Go back to school. \nYou can learn more.</Fortune>
+    <Fortune>Speak to the temptress \nin the castle.</Fortune>
+    <Fortune>The castle wizards know many answers.\n</Fortune>
+    <Fortune>There's a path around \nthe castle gas trap.</Fortune>
+    <Fortune>You can't climb up the \nknight's dungeon.  Stay away!</Fortune>
+    <Fortune>You can flail the \nsea swallow to death.</Fortune>
+    <Fortune>Watch out.  The agents \nmay be after you.</Fortune>
+    <Fortune>One day you will travel \nhigh above the sea.</Fortune>
+    <Fortune>Talk to the guardians of the scroll.\n</Fortune>
+    <Fortune>Learn the password to the \ncastle wizard's quarters.</Fortune>
+    <Fortune>You can trust the winged horse.\n</Fortune>
   </Fortunes>
 </LotaGame>
