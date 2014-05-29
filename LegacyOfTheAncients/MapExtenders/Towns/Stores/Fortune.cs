@@ -30,14 +30,22 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 
 			if (timesUsed == 3)
 			{
-				XleCore.TextArea.PrintLine("I know no more.");
+				XleCore.TextArea.PrintLine("\n\nI know no more.");
 				return true;
 			}
-			else if (cost > state.Player.Gold)
+
+			timesUsed++; 
+
+			if (cost > state.Player.Gold)
 			{
-				XleCore.TextArea.PrintLine("Come back when you have more gold.");
+				XleCore.TextArea.PrintLine("You're short on gold.");
+				SoundMan.PlaySoundSync(LotaSound.Medium);
+
 				return true;
 			}
+
+			XleCore.TextArea.Clear(true);
+			XleCore.TextArea.PrintLine("\n\n");
 
 			state.Player.Gold -= cost;
 
@@ -48,7 +56,6 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 			XleCore.TextArea.PrintLineSlow(fortune);
 			
 			Lota.Story.NextFortune++;
-			timesUsed++;
 
 			XleCore.Wait(1500);
 
