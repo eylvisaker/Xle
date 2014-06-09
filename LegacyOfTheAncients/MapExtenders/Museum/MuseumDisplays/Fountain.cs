@@ -43,10 +43,14 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			Lota.Story.ReturnedTulip = true;
 
 			ReadRawText(ExhibitInfo.Text[3]);
+
+			XleCore.TextArea.Clear();
 		}
 
 		private void OfferTulipQuest(Player player)
 		{
+			bool firstVisit = HasBeenVisited(player);
+
 			base.RunExhibit(player);
 			XleCore.TextArea.PrintLine();
 
@@ -62,7 +66,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				ReadRawText(ExhibitInfo.Text[2]);
 				int amount = 100;
 				
-				if (HasBeenVisited(player) || HasBeenVisited(player, ExhibitIdentifier.Thornberry))
+				if (firstVisit || HasBeenVisited(player, ExhibitIdentifier.Thornberry))
 				{
 					amount += 200;
 				}
