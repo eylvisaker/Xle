@@ -6,16 +6,13 @@ using ERY.Xle.Commands;
 using ERY.Xle.Data;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using ERY.Xle.Rendering;
 using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Stores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Xml;
 
 namespace ERY.Xle
 {
@@ -354,6 +351,9 @@ namespace ERY.Xle
 				return;
 
 			ChangeMap(GameState.Player, mapInfo.ID, entryPoint);
+
+			TextArea.Clear();
+			GameState.Commands.Prompt();
 		}
 		public static void CheatGoto(string mapName)
 		{
@@ -390,6 +390,9 @@ namespace ERY.Xle
 				targetY -= 2;
 
 			ChangeMap(player, map.MapID, new Point(targetX, targetY));
+
+			TextArea.Clear();
+			GameState.Commands.Prompt();
 		}
 
 		private static MapInfo FindMapByPartialName(string mapName)
@@ -490,6 +493,8 @@ namespace ERY.Xle
 			if (thePlayer == null)
 				return;
 
+			TextArea.Clear();
+
 			GameState = new Xle.GameState();
 
 			GameState.Player = thePlayer;
@@ -501,6 +506,9 @@ namespace ERY.Xle
 			Factory.SetGameSpeed(GameState, thePlayer.Gamespeed);
 
 			SetTilesAndCommands();
+
+			XleCore.Renderer.FontColor = GameState.Map.ColorScheme.TextColor;
+			GameState.Commands.Prompt();
 
 			Keyboard.KeyDown += new InputEventHandler(Keyboard_KeyDown);
 
@@ -1503,7 +1511,6 @@ namespace ERY.Xle
 			}
 
 			GameState.MapExtender.OnAfterEntry(GameState);
-			GameState.Commands.Prompt();
 		}
 
 		public void ProcessArguments(string[] args)

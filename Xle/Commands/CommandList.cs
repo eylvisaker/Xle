@@ -125,8 +125,12 @@ namespace ERY.Xle.Commands
 
 		private Command FindCommand(KeyCode cmd)
 		{
-			var command = Items.Find(x => x.Name.StartsWith(AgateLib.InputLib.Keyboard.GetKeyString(cmd,
-				new KeyModifiers()), StringComparison.InvariantCultureIgnoreCase));
+			var keystring = AgateLib.InputLib.Keyboard.GetKeyString(cmd, new KeyModifiers());
+
+			if (string.IsNullOrWhiteSpace(keystring))
+				return null;
+
+			var command = Items.Find(x => x.Name.StartsWith(keystring, StringComparison.InvariantCultureIgnoreCase));
 
 			return command;
 

@@ -24,7 +24,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			var player = state.Player;
 
 			string tempString;
-			double cost = ((int)(13 - player.Attribute[Attributes.charm] / 7)) / 10.0;
+			double cost = ((int)(13 - player.Attribute[Attributes.charm] / 7.0)) / 10.0;
 			
 			if (cost < 0.1)
 				cost = 0.1;

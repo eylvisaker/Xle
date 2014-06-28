@@ -42,16 +42,17 @@ namespace ERY.Xle
 				}
 				else
 				{
-					WriteColors(x, t.Length, XleCore.Renderer.FontColor);
+					WriteColors(x, t.Length, DefaultColor);
 				}
 			}
+
 			public void WriteText(int x, string t, Color? color)
 			{
 				SetTextLength(x);
 
 				Text += t;
 
-				WriteColors(x, t.Length, color ?? XleCore.Renderer.FontColor);
+				WriteColors(x, t.Length, color ?? DefaultColor);
 			}
 
 			private void WriteColors(int x, int length, Color newColor)
@@ -85,6 +86,11 @@ namespace ERY.Xle
 		}
 
 		public int Margin { get { return margin; } set { margin = value; } }
+
+		private static Color DefaultColor
+		{
+			get { return XleCore.GameState.Map.ColorScheme.TextColor; }
+		}
 
 		public void Draw()
 		{
@@ -199,7 +205,7 @@ namespace ERY.Xle
 
 			for (int i = 0; i < tempColors.Length; i++)
 			{
-				tempColors[i] = color ?? XleCore.Renderer.FontColor;
+				tempColors[i] = color ?? DefaultColor;
 			}
 
 			PrintImpl(text, tempColors);

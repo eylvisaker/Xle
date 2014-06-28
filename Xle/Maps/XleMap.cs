@@ -223,7 +223,7 @@ namespace ERY.Xle.Maps
 
 			foreach (var evt in Events)
 			{
-				evt.OnLoad(XleCore.GameState);
+				evt.Extender.OnLoad(XleCore.GameState);
 			}
 		}
 
@@ -376,18 +376,6 @@ namespace ERY.Xle.Maps
 		{
 			get { return this[location.X, location.Y]; }
 			set { this[location.X, location.Y] = value; }
-		}
-
-		#endregion
-		#region --- Virtual functions ---
-
-		/// <summary>
-		/// Default color for text messages.
-		/// </summary>
-		[Obsolete("Move this to the color scheme class.")]
-		public virtual Color DefaultColor
-		{
-			get { return XleColor.White; }
 		}
 
 		#endregion
