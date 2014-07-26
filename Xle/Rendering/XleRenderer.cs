@@ -1,6 +1,7 @@
 ﻿using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
+using AgateLib.Platform;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.Renderers;
 using System;
@@ -498,7 +499,7 @@ namespace ERY.Xle.Rendering
 		}
 
 		// character functions
-		static Timing.StopWatch animWatch = new Timing.StopWatch();
+		static IStopwatch animWatch = AgateLib.Platform.Timing.CreateStopWatch();
 		const int frameTime = 150;
 
 		static int animFrame;

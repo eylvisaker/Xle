@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using AgateLib.Platform;
 using ERY.Xle.Maps.Extenders;
 using System;
 using System.Collections.Generic;

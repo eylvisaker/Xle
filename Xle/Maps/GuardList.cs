@@ -1,5 +1,6 @@
 ﻿using AgateLib;
 using AgateLib.Geometry;
+using AgateLib.Platform;
 using AgateLib.Serialization.Xle;
 using System;
 using System.Collections.Generic;

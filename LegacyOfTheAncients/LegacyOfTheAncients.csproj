@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ERY.Xle.LotA</RootNamespace>
     <AssemblyName>LegacyOfTheAncients</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -381,17 +382,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Agate\trunk\AgateLib.Platform.WindowsForms\AgateLib.Platform.WindowsForms.csproj">
+      <Project>{4b12561e-d37b-48a1-b6db-218e94906c22}</Project>
+      <Name>AgateLib.Platform.WindowsForms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Agate\trunk\AgateLib\AgateLib.csproj">
       <Project>{9490b719-829e-43a7-a5fe-8001f8a81759}</Project>
       <Name>AgateLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Agate\trunk\Drivers\AgateOTK\AgateOTK.csproj">
-      <Project>{9e095f03-ba3f-4ead-a905-2a2647ce4405}</Project>
-      <Name>AgateOTK</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Agate\trunk\Drivers\AgateSDL\AgateSDL.csproj">
-      <Project>{00c7fa95-98f4-43d9-9b63-34122b1db003}</Project>
-      <Name>AgateSDL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Xle\XLE.csproj">
       <Project>{fde0a61f-558b-4964-8292-b7a212a3ab45}</Project>

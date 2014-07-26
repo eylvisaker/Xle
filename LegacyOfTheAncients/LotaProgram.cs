@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AgateLib.Platform.WindowsForms;
+using AgateLib.Platform.WindowsForms.ApplicationModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,12 +16,18 @@ namespace ERY.Xle.LotA
 		[STAThread]
 		static void Main(string[] args)
 		{
-			XleCore core = new XleCore();
-			core.ProcessArguments(args);
+			PassiveModel.Run(() =>
+			{
+				XleCore core = new XleCore();
+				core.ProcessArguments(args);
 
-			System.IO.Directory.SetCurrentDirectory("LotA");
+				System.IO.Directory.SetCurrentDirectory("LotA");
 
-			core.Run(new LotaFactory());
+				Configuration.Images.AddPath("Images");
+				Configuration.Sounds.AddPath("Audio");
+
+				core.Run(new LotaFactory());
+			});
 		}
 
 		public static IEnumerable<Commands.Command> CommonLotaCommands

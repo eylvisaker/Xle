@@ -7,6 +7,7 @@ using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
+using AgateLib.Platform;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -553,7 +554,7 @@ namespace ERY.Xle.LotA.TitleScreen
 		private void Wait(int milliseconds)
 		{
 			Keyboard.KeyDown -= Keyboard_KeyDown;
-			Timing.StopWatch watch = new Timing.StopWatch();
+			IStopwatch watch = Timing.CreateStopWatch();
 
 			while (watch.TotalMilliseconds < milliseconds)
 			{

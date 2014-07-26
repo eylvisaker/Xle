@@ -1,7 +1,9 @@
 using AgateLib;
+using AgateLib.Diagnostics;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
+using AgateLib.Platform;
 using ERY.Xle.Commands;
 using ERY.Xle.Data;
 using ERY.Xle.Maps;
@@ -70,59 +72,50 @@ namespace ERY.Xle
 
 				mFactory = factory;
 
-				AgateLib.AgateFileProvider.Images.AddPath("Images");
-				AgateLib.AgateFileProvider.Sounds.AddPath("Audio");
 				AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
 				LoadGameFile();
 
 				InitializeConsole();
 
-				using (AgateSetup setup = new AgateSetup())
+				DisplayWindow wind;
+
+				if (EnableDebugMode)
 				{
-					setup.InitializeAll();
-					if (setup.WasCanceled)
-						return;
+					Size windowSize = new Size(
+						640 + windowBorderSize.Width * 2,
+						400 + windowBorderSize.Height * 2);
 
-					DisplayWindow wind;
-
-					if (EnableDebugMode)
-					{
-						Size windowSize = new Size(
-							640 + windowBorderSize.Width * 2,
-							400 + windowBorderSize.Height * 2);
-
-						wind = DisplayWindow.CreateWindowed(
-							mFactory.GameTitle, windowSize.Width, windowSize.Height);
-					}
-					else
-					{
-						windowBorderSize.Width = 80;
-						windowBorderSize.Height = 100;
-
-						wind = DisplayWindow.CreateFullScreen(
-							mFactory.GameTitle, 800, 600);
-					}
-
-					SoundMan.Load();
-
-					mFactory.LoadSurfaces();
-					mData.LoadDungeonMonsterSurfaces();
-
-					IXleTitleScreen titleScreen;
-
-					do
-					{
-						GameState = null;
-
-						titleScreen = mFactory.CreateTitleScreen();
-						titleScreen.Run();
-						returnToTitle = false;
-
-						RunGame(titleScreen.Player);
-
-					} while (titleScreen.Player != null);
+					wind = DisplayWindow.CreateWindowed(
+						mFactory.GameTitle, windowSize.Width, windowSize.Height);
 				}
+				else
+				{
+					windowBorderSize.Width = 80;
+					windowBorderSize.Height = 100;
+
+					wind = DisplayWindow.CreateFullScreen(
+						mFactory.GameTitle, 800, 600);
+				}
+
+				SoundMan.Load();
+
+				mFactory.LoadSurfaces();
+				mData.LoadDungeonMonsterSurfaces();
+
+				IXleTitleScreen titleScreen;
+
+				do
+				{
+					GameState = null;
+
+					titleScreen = mFactory.CreateTitleScreen();
+					titleScreen.Run();
+					returnToTitle = false;
+
+					RunGame(titleScreen.Player);
+
+				} while (titleScreen.Player != null);
 			}
 			catch (MainWindowClosedException)
 			{ }
@@ -697,7 +690,7 @@ namespace ERY.Xle
 		}
 		public static void Wait(int howLong, bool keyBreak, Action redraw)
 		{
-			Timing.StopWatch watch = new Timing.StopWatch();
+			IStopwatch watch = Timing.CreateStopWatch();
 
 			do
 			{
@@ -1141,7 +1134,7 @@ namespace ERY.Xle
 			theList.Add("Nothing");
 			theList.AddRange(state.Player.Armor.Select(x => x.NameWithQuality));
 
-			int sel = XleCore.SubMenu("Pick Armor", state.Player.Armor.IndexOf(defaultItem) + 1, 
+			int sel = XleCore.SubMenu("Pick Armor", state.Player.Armor.IndexOf(defaultItem) + 1,
 				theList, backColor ?? XleColor.Black);
 
 			if (sel == 0)
@@ -1157,11 +1150,11 @@ namespace ERY.Xle
 		public static WeaponItem PickWeapon(GameState state, WeaponItem defaultItem, Color? backColor = null)
 		{
 			MenuItemList theList = new MenuItemList();
-			
+
 			theList.Add("Nothing");
 			theList.AddRange(state.Player.Weapons.Select(x => x.NameWithQuality));
 
-			int sel = XleCore.SubMenu("Pick Weapon", state.Player.Weapons.IndexOf(defaultItem) + 1, 
+			int sel = XleCore.SubMenu("Pick Weapon", state.Player.Weapons.IndexOf(defaultItem) + 1,
 				theList, backColor ?? XleColor.Black);
 
 			if (sel == 0)

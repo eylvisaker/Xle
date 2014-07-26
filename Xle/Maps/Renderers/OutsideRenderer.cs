@@ -1,5 +1,6 @@
 ﻿using AgateLib;
 using AgateLib.Geometry;
+using AgateLib.Platform;
 using ERY.Xle.Rendering;
 using System;
 using System.Collections.Generic;

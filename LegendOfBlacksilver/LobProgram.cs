@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AgateLib.Platform.WindowsForms;
+using AgateLib.Platform.WindowsForms.ApplicationModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,12 +15,18 @@ namespace ERY.Xle.LoB
 		[STAThread]
 		static void Main(string[] args)
 		{
-			XleCore core = new XleCore();
-			core.ProcessArguments(args);
+			PassiveModel.Run(args, () =>
+			{
+				XleCore core = new XleCore();
+				core.ProcessArguments(args);
 
-			System.IO.Directory.SetCurrentDirectory("LoB");
+				System.IO.Directory.SetCurrentDirectory("LoB");
 
-			core.Run(new LobFactory());
+				Configuration.Images.AddPath("Images");
+				Configuration.Sounds.AddPath("Audio");
+
+				core.Run(new LobFactory());
+			});
 		}
 
 		public static IEnumerable<Commands.Command> CommonLobCommands
