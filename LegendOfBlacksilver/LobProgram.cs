@@ -15,7 +15,7 @@ namespace ERY.Xle.LoB
 		[STAThread]
 		static void Main(string[] args)
 		{
-			PassiveModel.Run(args, () =>
+			new PassiveModel(args).Run(() =>
 			{
 				XleCore core = new XleCore();
 				core.ProcessArguments(args);

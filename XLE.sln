@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLE", "Xle\XLE.csproj", "{FDE0A61F-558B-4964-8292-B7A212A3AB45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib", "..\..\Agate\trunk\AgateLib\AgateLib.csproj", "{9490B719-829E-43A7-A5FE-8001F8A81759}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XleTests", "XleTests\XleTests.csproj", "{D15F14F4-D946-4231-842A-FAB5FB0107C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4522371-10CA-4972-8DE2-F10087A2C795}"
@@ -18,15 +16,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyOfTheAncients", "Lega
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendOfBlacksilver", "LegendOfBlacksilver\LegendOfBlacksilver.csproj", "{9EF5E01A-90B0-4CC4-AC37-5B7307872EBE}"
 EndProject
-<<<<<<< HEAD
-=======
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonImageImporter", "DungeonImageImporter\DungeonImageImporter.csproj", "{4D3866C6-06C9-406C-9B01-AA6486B77E5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib", "Agate\AgateLib\AgateLib.csproj", "{9490B719-829E-43A7-A5FE-8001F8A81759}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.GL", "..\..\Agate\trunk\AgateLib.GL\AgateLib.GL.csproj", "{94734E5A-0344-43E8-BB30-E32E3F57F611}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.GL", "Agate\AgateLib.GL\AgateLib.GL.csproj", "{94734E5A-0344-43E8-BB30-E32E3F57F611}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.Platform.WindowsForms", "..\..\Agate\trunk\AgateLib.Platform.WindowsForms\AgateLib.Platform.WindowsForms.csproj", "{4B12561E-D37B-48A1-B6DB-218E94906C22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.Platform.WindowsForms", "Agate\AgateLib.Platform.WindowsForms\AgateLib.Platform.WindowsForms.csproj", "{4B12561E-D37B-48A1-B6DB-218E94906C22}"
 EndProject
->>>>>>> 815f47e5c... Fix XLE to work with new AgateLib model.
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,14 +46,6 @@ Global
 		{E6A48D1C-D8E3-4FE4-A65A-6D550580938B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E6A48D1C-D8E3-4FE4-A65A-6D550580938B}.Release|x86.ActiveCfg = Release|x86
 		{E6A48D1C-D8E3-4FE4-A65A-6D550580938B}.Release|x86.Build.0 = Release|x86
-		{9490B719-829E-43A7-A5FE-8001F8A81759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9490B719-829E-43A7-A5FE-8001F8A81759}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9490B719-829E-43A7-A5FE-8001F8A81759}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9490B719-829E-43A7-A5FE-8001F8A81759}.Debug|x86.Build.0 = Debug|Any CPU
-		{9490B719-829E-43A7-A5FE-8001F8A81759}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9490B719-829E-43A7-A5FE-8001F8A81759}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9490B719-829E-43A7-A5FE-8001F8A81759}.Release|x86.ActiveCfg = Release|x86
-		{9490B719-829E-43A7-A5FE-8001F8A81759}.Release|x86.Build.0 = Release|x86
 		{D15F14F4-D946-4231-842A-FAB5FB0107C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D15F14F4-D946-4231-842A-FAB5FB0107C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D15F14F4-D946-4231-842A-FAB5FB0107C9}.Debug|x86.ActiveCfg = Debug|x86
@@ -83,6 +70,14 @@ Global
 		{9EF5E01A-90B0-4CC4-AC37-5B7307872EBE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9EF5E01A-90B0-4CC4-AC37-5B7307872EBE}.Release|x86.ActiveCfg = Release|x86
 		{9EF5E01A-90B0-4CC4-AC37-5B7307872EBE}.Release|x86.Build.0 = Release|x86
+		{9490B719-829E-43A7-A5FE-8001F8A81759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9490B719-829E-43A7-A5FE-8001F8A81759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9490B719-829E-43A7-A5FE-8001F8A81759}.Debug|x86.ActiveCfg = Debug|x86
+		{9490B719-829E-43A7-A5FE-8001F8A81759}.Debug|x86.Build.0 = Debug|x86
+		{9490B719-829E-43A7-A5FE-8001F8A81759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9490B719-829E-43A7-A5FE-8001F8A81759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9490B719-829E-43A7-A5FE-8001F8A81759}.Release|x86.ActiveCfg = Release|x86
+		{9490B719-829E-43A7-A5FE-8001F8A81759}.Release|x86.Build.0 = Release|x86
 		{94734E5A-0344-43E8-BB30-E32E3F57F611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94734E5A-0344-43E8-BB30-E32E3F57F611}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94734E5A-0344-43E8-BB30-E32E3F57F611}.Debug|x86.ActiveCfg = Debug|x86

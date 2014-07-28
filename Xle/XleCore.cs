@@ -3,6 +3,7 @@ using AgateLib.Diagnostics;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
+using AgateLib.InputLib.Legacy;
 using AgateLib.Platform;
 using ERY.Xle.Commands;
 using ERY.Xle.Data;
@@ -91,11 +92,15 @@ namespace ERY.Xle
 				}
 				else
 				{
-					windowBorderSize.Width = 80;
-					windowBorderSize.Height = 100;
-
+					//wind = DisplayWindow.CreateFullScreen(
+					//	mFactory.GameTitle, 800, 600);
 					wind = DisplayWindow.CreateFullScreen(
-						mFactory.GameTitle, 800, 600);
+						mFactory.GameTitle, Display.Caps.NativeScreenResolution);
+
+					int height = wind.Height - windowBorderSize.Height * 2;
+					int width = (int)(320 / 200.0 * height);
+
+					windowBorderSize.Width = (wind.Width - width) / 2;
 				}
 
 				SoundMan.Load();

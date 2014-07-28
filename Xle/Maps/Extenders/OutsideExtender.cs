@@ -1,5 +1,6 @@
 ﻿using AgateLib.Geometry;
 using AgateLib.InputLib;
+using AgateLib.InputLib.Legacy;
 using ERY.Xle.Maps.Renderers;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.XleEventTypes;

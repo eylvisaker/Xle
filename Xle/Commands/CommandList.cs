@@ -125,7 +125,7 @@ namespace ERY.Xle.Commands
 
 		private Command FindCommand(KeyCode cmd)
 		{
-			var keystring = AgateLib.InputLib.Keyboard.GetKeyString(cmd, new KeyModifiers());
+			var keystring = AgateLib.InputLib.Legacy.Keyboard.GetKeyString(cmd, new KeyModifiers());
 
 			if (string.IsNullOrWhiteSpace(keystring))
 				return null;

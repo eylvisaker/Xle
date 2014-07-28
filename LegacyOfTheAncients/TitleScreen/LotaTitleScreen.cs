@@ -8,6 +8,7 @@ using AgateLib.DisplayLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Platform;
+using AgateLib.InputLib.Legacy;
 
 namespace ERY.Xle.LotA.TitleScreen
 {

@@ -144,7 +144,7 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 
 						if (punctuation.Contains(rawtext[ip]))
 							XleCore.Wait(350 * (1+punctuation.IndexOf(rawtext[ip])));
-						else if (AgateLib.InputLib.Keyboard.AnyKeyPressed)
+						else if (AgateLib.InputLib.Legacy.Keyboard.AnyKeyPressed)
 							XleCore.Wait(1);
 						else
 							XleCore.Wait(30);
