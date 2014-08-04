@@ -16,6 +16,11 @@ namespace ERY.Xle.LotA
 		[STAThread]
 		static void Main(string[] args)
 		{
+			RunGame(args);
+		}
+
+		private static void RunGame(string[] args)
+		{
 			new PassiveModel(args).Run(() =>
 			{
 				XleCore core = new XleCore();
@@ -25,6 +30,7 @@ namespace ERY.Xle.LotA
 
 				Configuration.Images.AddPath("Images");
 				Configuration.Sounds.AddPath("Audio");
+				AgateLib.IO.FileProvider.MusicAssets = new AgateLib.IO.SubdirectoryProvider(AgateLib.IO.FileProvider.Assets, "Audio");
 
 				core.Run(new LotaFactory());
 			});

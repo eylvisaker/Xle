@@ -346,6 +346,9 @@ namespace ERY.Xle.Rendering
 
 		public void Draw()
 		{
+			if (XleCore.GameState == null)
+				return;
+
 			if (ReplacementDrawMethod != null)
 			{
 				ReplacementDrawMethod();

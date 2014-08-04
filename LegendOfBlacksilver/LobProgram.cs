@@ -24,6 +24,7 @@ namespace ERY.Xle.LoB
 
 				Configuration.Images.AddPath("Images");
 				Configuration.Sounds.AddPath("Audio");
+				AgateLib.IO.FileProvider.MusicAssets = new AgateLib.IO.SubdirectoryProvider(AgateLib.IO.FileProvider.Assets, "Audio");
 
 				core.Run(new LobFactory());
 			});
