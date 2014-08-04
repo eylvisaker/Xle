@@ -1,5 +1,6 @@
 ﻿using AgateLib.Platform.WindowsForms;
 using AgateLib.Platform.WindowsForms.ApplicationModels;
+using AgateLib.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,16 +22,19 @@ namespace ERY.Xle.LotA
 
 		private static void RunGame(string[] args)
 		{
+			System.IO.Directory.SetCurrentDirectory("LotA");
+
 			new PassiveModel(args).Run(() =>
 			{
+				AgateLib.IO.FileProvider.MusicAssets = new AgateLib.IO.SubdirectoryProvider(AgateLib.IO.FileProvider.Assets, "Audio");
+				AgateLib.IO.FileProvider.SoundAssets = new AgateLib.IO.SubdirectoryProvider(AgateLib.IO.FileProvider.Assets, "Audio");
+
 				XleCore core = new XleCore();
 				core.ProcessArguments(args);
 
-				System.IO.Directory.SetCurrentDirectory("LotA");
 
 				Configuration.Images.AddPath("Images");
 				Configuration.Sounds.AddPath("Audio");
-				AgateLib.IO.FileProvider.MusicAssets = new AgateLib.IO.SubdirectoryProvider(AgateLib.IO.FileProvider.Assets, "Audio");
 
 				core.Run(new LotaFactory());
 			});
