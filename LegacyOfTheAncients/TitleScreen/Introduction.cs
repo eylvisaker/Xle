@@ -80,6 +80,10 @@ namespace ERY.Xle.LotA.TitleScreen
 			player.Location = new Point(3, 1);
 			player.FaceDirection = Direction.West;
 
+			player.returnX = 114;
+			player.returnY = 42;
+			player.returnMap = 1;
+
 			player.Items[LotaItem.GoldArmband] = 1;
 			player.Items[LotaItem.Compendium] = 1;
 			player.Items[LotaItem.JadeCoin] = 2;

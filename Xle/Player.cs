@@ -120,7 +120,7 @@ namespace ERY.Xle
 		int hp;
 		int level;
 		public int returnX, returnY, returnMap;
-		Direction returnFacing;
+		Direction returnFacing = Direction.East;
 		int x, y;
 		int dungeonLevel;
 		Direction faceDirection = Direction.East;
@@ -172,6 +172,7 @@ namespace ERY.Xle
 			mName = newName;
 
 			RaftFaceDirection = Direction.West;
+			faceDirection = Direction.East;
 
 			food = 40;
 			gold = 20;
@@ -564,6 +565,9 @@ namespace ERY.Xle
 			get { return faceDirection; }
 			set
 			{
+				if (value == Direction.None)
+					throw new ArgumentException();
+
 				System.Diagnostics.Debug.Assert(
 					value == Direction.East ||
 					value == Direction.West ||
@@ -872,7 +876,7 @@ namespace ERY.Xle
 		{
 			XleCore.ChangeMap(this, returnMap, new Point(returnX, returnY));
 
-			faceDirection = returnFacing;
+			FaceDirection = returnFacing;
 		}
 
 		public void SetReturnLocation(int map, int x, int y)

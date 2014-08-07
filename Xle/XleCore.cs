@@ -79,35 +79,18 @@ namespace ERY.Xle
 
 				InitializeConsole();
 
-				DisplayWindow wind;
+				var wind = Display.CurrentWindow;
+				int height = wind.FrameBuffer.CoordinateSystem.Height - windowBorderSize.Height * 2;
+				int width = (int)(320 / 200.0 * height);
 
-				if (EnableDebugMode)
-				{
-					Size windowSize = new Size(
-						640 + windowBorderSize.Width * 2,
-						400 + windowBorderSize.Height * 2);
-
-					wind = DisplayWindow.CreateWindowed(
-						mFactory.GameTitle, windowSize.Width, windowSize.Height);
-				}
-				else
-				{
-					//wind = DisplayWindow.CreateFullScreen(
-					//	mFactory.GameTitle, 800, 600);
-					wind = DisplayWindow.CreateFullScreen(
-						mFactory.GameTitle, Display.Caps.NativeScreenResolution);
-
-					int height = wind.Height - windowBorderSize.Height * 2;
-					int width = (int)(320 / 200.0 * height);
-
-					windowBorderSize.Width = (wind.Width - width) / 2;
-				}
+				windowBorderSize.Width = (wind.FrameBuffer.CoordinateSystem.Width - width) / 2;
 
 				SoundMan.Load();
 
 				mFactory.LoadSurfaces();
 				mData.LoadDungeonMonsterSurfaces();
 
+				mFactory.Font.InterpolationHint = InterpolationMode.Fastest;
 				IXleTitleScreen titleScreen;
 
 				do
@@ -128,18 +111,9 @@ namespace ERY.Xle
 
 		static Size windowBorderSize = new Size(20, 20);
 
+		[Obsolete("Call Display.Clear(clearColor) instead.")]
 		public static void SetOrthoProjection(Color clearColor)
 		{
-			AgateLib.DisplayLib.Shaders.Basic2DShader shader = new AgateLib.DisplayLib.Shaders.Basic2DShader();
-
-			shader.CoordinateSystem = new Rectangle(
-				-windowBorderSize.Width,
-				-windowBorderSize.Height,
-				640 + windowBorderSize.Width * 2,
-				400 + windowBorderSize.Height * 2);
-
-			shader.Activate();
-
 			Display.Clear(clearColor);
 		}
 		public static void SetProjectionAndBackColors(ColorScheme cs)
@@ -1061,6 +1035,7 @@ namespace ERY.Xle
 			tempLine = new string(' ', spacing[value]) + "`";
 
 			XleCore.TextArea.RewriteLine(lineIndex + 1, tempLine, clrInit);
+			PromptToContinueOnWait = false;
 
 			KeyCode key;
 
@@ -1423,6 +1398,7 @@ namespace ERY.Xle
 				tileset += ".png";
 
 			Renderer.Tiles = new Surface(tileset);
+			Renderer.Tiles.InterpolationHint = InterpolationMode.Fastest;
 		}
 
 		public static void ChangeMap(Player player, int mMapID, int targetEntryPoint)

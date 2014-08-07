@@ -131,6 +131,9 @@ namespace ERY.Xle.LotA.TitleScreen
 
 		private void DrawTitleHeader(Color frameColor, Color lineColor)
 		{
+			titleHeader1.InterpolationHint = InterpolationMode.Fastest;
+			titleHeader2.InterpolationHint = InterpolationMode.Fastest;
+
 			titleHeader1.Color = frameColor;
 			titleHeader2.Color = lineColor;
 

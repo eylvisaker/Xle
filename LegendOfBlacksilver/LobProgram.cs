@@ -1,4 +1,6 @@
-﻿using AgateLib.Platform.WindowsForms;
+﻿using AgateLib.ApplicationModels.CoordinateSystems;
+using AgateLib.Geometry;
+using AgateLib.Platform.WindowsForms;
 using AgateLib.Platform.WindowsForms.ApplicationModels;
 using System;
 using System.Collections.Generic;
@@ -15,16 +17,26 @@ namespace ERY.Xle.LoB
 		[STAThread]
 		static void Main(string[] args)
 		{
-			new PassiveModel(args).Run(() =>
+			var parameters = new SerialModelParameters(args);
+
+			parameters.AssetPath = "LoB";
+			parameters.AssetLocations.Sound = "Audio";
+			parameters.AssetLocations.Surfaces = "Images";
+			parameters.CoordinateSystem = new FixedAreaCoordinates
+			{
+				MinHeight = 440,
+				MaxHeight = 440,
+				MinWidth = 680,
+				MaxWidth = 680,
+				Origin = new Point(-20, -20),
+			};
+
+			var model = new SerialModel(parameters);
+
+			model.Run(() =>
 			{
 				XleCore core = new XleCore();
 				core.ProcessArguments(args);
-
-				System.IO.Directory.SetCurrentDirectory("LoB");
-
-				Configuration.Images.AddPath("Images");
-				Configuration.Sounds.AddPath("Audio");
-				AgateLib.IO.FileProvider.MusicAssets = new AgateLib.IO.SubdirectoryProvider(AgateLib.IO.FileProvider.Assets, "Audio");
 
 				core.Run(new LobFactory());
 			});

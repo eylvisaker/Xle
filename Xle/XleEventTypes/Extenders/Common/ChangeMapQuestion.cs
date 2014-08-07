@@ -17,7 +17,9 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
 
 			int choice = XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3);
 
-			if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
+			if (choice == 1)
+				return false;
+			else if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
 			{
 				XleCore.TextArea.PrintLine();
 				XleCore.TextArea.PrintLine(
@@ -26,14 +28,9 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
 
 				XleCore.TextArea.PrintLine();
 				XleCore.Wait(500);
-
-				choice = 0;
 			}
-
-			if (choice == 1)
-				return false;
-			else
-				return base.OnStepOnImpl(state, ref cancel);
+		
+			return base.OnStepOnImpl(state, ref cancel);
 		}
 	}
 }
