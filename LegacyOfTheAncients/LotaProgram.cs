@@ -30,12 +30,13 @@ namespace ERY.Xle.LotA
 			parameters.AssetPath = "LotA";
 			parameters.AssetLocations.Sound = "Audio";
 			parameters.AssetLocations.Surfaces = "Images";
-			parameters.CoordinateSystem = new FixedAreaCoordinates
+			parameters.CoordinateSystem = new FixedAspectRatioCoordinates
 			{
 				MinHeight = 440,
 				MaxHeight = 440,
 				MinWidth = 680,
 				MaxWidth = 680,
+				AspectRatio = 680.0/440.0,
 				Origin = new Point(-20, -20),
 			};
 
