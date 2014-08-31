@@ -80,10 +80,11 @@ namespace ERY.Xle
 				InitializeConsole();
 
 				var wind = Display.CurrentWindow;
-				int height = wind.FrameBuffer.CoordinateSystem.Height - windowBorderSize.Height * 2;
+				var coords = wind.FrameBuffer.CoordinateSystem.DetermineCoordinateSystem(wind.Size);
+				int height = coords.Height - windowBorderSize.Height * 2;
 				int width = (int)(320 / 200.0 * height);
 
-				windowBorderSize.Width = (wind.FrameBuffer.CoordinateSystem.Width - width) / 2;
+				windowBorderSize.Width = (coords.Width - width) / 2;
 
 				SoundMan.Load();
 

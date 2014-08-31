@@ -1,8 +1,8 @@
 ﻿using AgateLib.ApplicationModels;
-using AgateLib.ApplicationModels.CoordinateSystems;
 using AgateLib.Geometry;
-using AgateLib.Platform.WindowsForms;
-using AgateLib.Platform.WindowsForms.ApplicationModels;
+using AgateLib.Geometry.CoordinateSystems;
+using AgateLib.Platform.WinForms;
+using AgateLib.Platform.WinForms.ApplicationModels;
 using AgateLib.Utility;
 using System;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace ERY.Xle.LotA
 		{
 			var parameters = new SerialModelParameters(args);
 
-			parameters.AssetPath = "LotA";
+			parameters.AssetLocations.Path = "LotA";
 			parameters.AssetLocations.Sound = "Audio";
 			parameters.AssetLocations.Surfaces = "Images";
 			parameters.CoordinateSystem = new FixedAspectRatioCoordinates

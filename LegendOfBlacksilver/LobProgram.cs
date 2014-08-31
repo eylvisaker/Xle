@@ -1,7 +1,8 @@
-﻿using AgateLib.ApplicationModels.CoordinateSystems;
+﻿using AgateLib.ApplicationModels;
 using AgateLib.Geometry;
-using AgateLib.Platform.WindowsForms;
-using AgateLib.Platform.WindowsForms.ApplicationModels;
+using AgateLib.Geometry.CoordinateSystems;
+using AgateLib.Platform.WinForms;
+using AgateLib.Platform.WinForms.ApplicationModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace ERY.Xle.LoB
 		{
 			var parameters = new SerialModelParameters(args);
 
-			parameters.AssetPath = "LoB";
+			parameters.AssetLocations.Path = "LoB";
 			parameters.AssetLocations.Sound = "Audio";
 			parameters.AssetLocations.Surfaces = "Images";
 			parameters.CoordinateSystem = new FixedAspectRatioCoordinates
