@@ -80,7 +80,7 @@ namespace ERY.Xle
 				InitializeConsole();
 
 				var wind = Display.CurrentWindow;
-				var coords = wind.FrameBuffer.CoordinateSystem.DetermineCoordinateSystem(wind.Size);
+				var coords = Display.Coordinates;
 				int height = coords.Height - windowBorderSize.Height * 2;
 				int width = (int)(320 / 200.0 * height);
 
