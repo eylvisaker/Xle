@@ -456,7 +456,7 @@ namespace ERY.Xle
 
 		public static XleMap LoadMap(int mapID)
 		{
-			string file = System.IO.Path.Combine("Maps", Data.MapList[mapID].Filename);
+			string file = "Maps/" + Data.MapList[mapID].Filename;
 
 			return XleMap.LoadMap(file, mapID);
 		}

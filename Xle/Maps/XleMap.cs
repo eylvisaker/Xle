@@ -14,6 +14,7 @@ using ERY.Xle.Maps.Extenders;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Commands;
+using AgateLib.IO;
 
 namespace ERY.Xle.Maps
 {
@@ -140,8 +141,7 @@ namespace ERY.Xle.Maps
 
 			XleMap retval;
 
-			using (System.IO.Stream file = System.IO.File.Open(filename,
-				System.IO.FileMode.Open, System.IO.FileAccess.Read))
+			using (var file = FileProvider.Assets.OpenRead(filename))
 			{
 				retval = (XleMap)ser.Deserialize(file);
 			}
