@@ -1419,22 +1419,32 @@ namespace ERY.Xle
 				player.MapID = mMapID;
 				return;
 			}
+			
+			var saveMap = GameState.Map;
+			var saveX = player.X;
+			var saveY = player.Y;
 
 			if (GameState.Map is Outside)
 			{
 				player.SetReturnLocation(player.MapID, player.X, player.Y, Direction.South);
 			}
 
-			var saveMap = GameState.Map;
-			var saveX = player.X;
-			var saveY = player.Y;
-
+			bool actualChangeMap = saveMap.MapID != mMapID;
+			
+			if (mMapID == 0)
+				actualChangeMap = false;
+			
 			try
 			{
-				if (mMapID != 0 && saveMap != null && mMapID != saveMap.MapID)
+				if (actualChangeMap)
 				{
 					GameState.Map = LoadMap(mMapID);
 					player.MapID = mMapID;
+
+					if (GameState.Map.GetType() == saveMap.GetType())
+					{
+						GameState.Map.Guards.IsAngry = saveMap.Guards.IsAngry;
+					}
 
 					TextArea.Clear();
 				}
@@ -1452,7 +1462,8 @@ namespace ERY.Xle
 				}
 				else
 				{
-					GameState.MapExtender.OnBeforeEntry(GameState, ref targetEntryPoint);
+					if (actualChangeMap)
+						GameState.MapExtender.OnBeforeEntry(GameState, ref targetEntryPoint);
 
 					var ep = GameState.Map.EntryPoints[targetEntryPoint];
 
@@ -1468,7 +1479,7 @@ namespace ERY.Xle
 
 				SetTilesAndCommands();
 
-				if (mMapID != 0)
+				if (actualChangeMap)
 				{
 					GameState.Map.OnLoad(player);
 				}
@@ -1487,7 +1498,8 @@ namespace ERY.Xle
 				throw;
 			}
 
-			GameState.MapExtender.OnAfterEntry(GameState);
+			if (actualChangeMap)
+				GameState.MapExtender.OnAfterEntry(GameState);
 		}
 
 		public void ProcessArguments(string[] args)

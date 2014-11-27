@@ -56,6 +56,8 @@ namespace ERY.Xle.LoB
 		public bool MarthbaneOfferedHelpToKing { get; set; }
 
 		public bool RescuedKing { get; set; }
+
+		public bool CitadelPassword { get; set; }
 	}
 
 	public static class LobStoryExtensions

@@ -167,17 +167,28 @@ namespace ERY.Xle.Maps.Extenders
 			return true;
 		}
 
+		[Obsolete("Use LeaveMap(GameState) overload instead.")]
 		public virtual void LeaveMap(Player player)
 		{
 			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Leave " + TheMap.MapName);
 			XleCore.TextArea.PrintLine();
 
-			XleCore.Wait(2000);
+			XleCore.Wait(XleCore.GameState.GameSpeed.LeaveMapTime);
 
 			player.ReturnToPreviousMap();
 
 			XleCore.TextArea.PrintLine();
+		}
+
+		protected virtual void LeaveMap(GameState state)
+		{
+			XleCore.TextArea.PrintLine("Leave " + TheMap.MapName);
+			XleCore.TextArea.PrintLine();
+
+			XleCore.Wait(state.GameSpeed.LeaveMapTime);
+
+			state.Player.ReturnToPreviousMap();
 		}
 
 		public virtual bool PlayerFight(GameState state)

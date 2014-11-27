@@ -37,17 +37,22 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 			}
 		}
 
-		public static LobItem ItemFromCoin(Coin c)
+		public static LobItem ItemFromCoin(Coin coin)
 		{
-			int idx = (int)c - (int)Coin.BlueGem;
+			switch (coin)
+			{
+				case Coin.AmethystGem: return LobItem.AmethystGem;
+				case Coin.BlackOpal: return LobItem.Opal;
+				case Coin.BlueGem: return LobItem.BlueGem;
+				case Coin.Emerald: return LobItem.Emerald;
+				case Coin.RedGarnet: return LobItem.RedGarnet;
+				case Coin.WhiteDiamond: return LobItem.WhiteDiamond;
+				case Coin.YellowDiamond: return LobItem.YellowDiamond;
 
-			return (LobItem)((int)LobItem.BlueGem + idx);
-		}
-		public static Coin CoinFromItem(LobItem it)
-		{
-			int idx = (int)it - (int)LobItem.BlueGem;
-
-			return (Coin)((int)Coin.BlueGem + idx);
+				case Coin.None:
+				default:
+					return 0;
+			}
 		}
 		protected void ReturnGem(Player player)
 		{
@@ -68,7 +73,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override string InsertCoinText
 		{
-			get { return "";}
+			get { return ""; }
 		}
 		public override Color ExhibitColor
 		{
@@ -93,7 +98,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public abstract ExhibitIdentifier ExhibitIdentifier { get; }
 
-		
+
 		public override int ExhibitID
 		{
 			get
@@ -143,10 +148,15 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool PlayerHasCoin(Player player)
 		{
-			return true;
+			return player.Items[ItemFromCoin(Coin)] > 0;
 		}
 		public override void UseCoin(Player player)
 		{
+			if (player.Items[ItemFromCoin(Coin)] <= 0)
+				throw new InvalidOperationException("Cannot use a coin the player does not have!");
+
+			player.Items[ItemFromCoin(Coin)]--;
 		}
+
 	}
 }

@@ -28,5 +28,41 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 		{
 			return new ArchiveRenderer();
 		}
+
+		public override bool PlayerXamine(GameState state)
+		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine("You are in ancient archives.");
+
+			return true; 
+		}
+		public override bool PlayerOpen(GameState state)
+		{
+			if (IsFacingDoor(state))
+			{
+				XleCore.TextArea.PrintLine(" door");
+				XleCore.TextArea.PrintLine();
+
+				LeaveMap(state);
+
+				return true;
+			}
+
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
+
+			if (InteractWithDisplay(state))
+				return true;
+
+			return false;
+		}
+
+		public override bool PlayerLeave(GameState state)
+		{
+			LeaveMap(state);
+
+			return true;
+		}
 	}
 }

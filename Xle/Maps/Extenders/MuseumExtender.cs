@@ -38,6 +38,16 @@ namespace ERY.Xle.Maps.Extenders
 			return null;
 		}
 
+		protected bool IsFacingDoor(GameState state)
+		{
+			Point faceDir = state.Player.FaceDirection.StepDirection();
+			Point test = new Point(state.Player.X + faceDir.X, state.Player.Y + faceDir.Y);
+			bool facingDoor = TheMap[test.X, test.Y] == 0x02;
+
+			return facingDoor;
+		}
+
+
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			throw new NotImplementedException();
@@ -163,7 +173,7 @@ namespace ERY.Xle.Maps.Extenders
 			return GetExhibitByTile(tileAt);
 		}
 
-		private bool InteractWithDisplay(GameState state)
+		protected bool InteractWithDisplay(GameState state)
 		{
 			var player = state.Player;
 			Point stepDir = player.FaceDirection.StepDirection();

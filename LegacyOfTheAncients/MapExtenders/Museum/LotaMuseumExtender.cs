@@ -151,11 +151,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		}
 		private void UseGoldArmband(GameState state)
 		{
-			Point faceDir = state.Player.FaceDirection.StepDirection();
-			Point test = new Point(state.Player.X + faceDir.X, state.Player.Y + faceDir.Y);
+			bool facingDoor = IsFacingDoor(state);
 
-			// door value
-			if (TheMap[test.X, test.Y] == 0x02)
+			if (facingDoor)
 			{
 				XleCore.Wait(1000);
 

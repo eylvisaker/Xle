@@ -61,11 +61,11 @@ namespace ERY.Xle.XleEventTypes.Extenders
 			return XleCore.Data.MapList[TheEvent.MapID].Name;
 		}
 
-		public void ExecuteMapChange(Player player)
+		public void ExecuteMapChange(GameState state)
 		{
 			try
 			{
-				XleCore.ChangeMap(player, TheEvent.MapID, TheEvent.TargetEntryPoint);
+				XleCore.ChangeMap(state.Player, TheEvent.MapID, TheEvent.TargetEntryPoint);
 			}
 			catch (Exception e)
 			{
@@ -81,6 +81,11 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 				XleCore.Wait(1500);
 			}
+		}
+		[Obsolete("Use GameState overload instead.")]
+		public void ExecuteMapChange(Player player)
+		{
+			ExecuteMapChange(XleCore.GameState);
 		}
 
 	}

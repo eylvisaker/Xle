@@ -12,7 +12,14 @@ namespace ERY.Xle.LoB.MapExtenders
 	{
 		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
 		{
+			return ExecuteTeleportation(state);
+		}
+
+		protected bool ExecuteTeleportation(GameState state)
+		{
 			TeleportAnimation();
+			ExecuteMapChange(state);
+
 			return true;
 		}
 

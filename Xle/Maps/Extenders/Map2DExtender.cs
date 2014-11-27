@@ -153,15 +153,11 @@ namespace ERY.Xle.Maps.Extenders
 			}
 			else
 			{
-				XleCore.TextArea.PrintLine("Leave " + TheMap.MapName);
-				XleCore.TextArea.PrintLine();
-
-				XleCore.Wait(200);
-
-				state.Player.ReturnToPreviousMap();
+				LeaveMap(state);
 			}
 
 			return true;
 		}
+
 	}
 }

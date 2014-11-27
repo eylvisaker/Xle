@@ -12,8 +12,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 {
 	class CitadelGround : CastleExtender
 	{
-		CastleDamageCalculator cdc = new CastleDamageCalculator 
-		{ v5 = 1.3, v6 = 1.5, v7 = 1.5 };
+		CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 1.3, v6 = 1.5, v7 = 1.5 };
 
 		public override void SetColorScheme(ColorScheme scheme)
 		{
@@ -63,7 +62,18 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 			if (evt is Door)
 				return new CitadelDoor();
 
-			return base.CreateEventExtender(evt, defaultExtender);
+			if (evt is ChangeMapEvent)
+				return new PasswordTeleporter();
+
+			string name = evt.ExtenderName.ToLowerInvariant();
+
+			switch (name)
+			{
+				case "wizard": return new Wizard();
+				case "jester": return new Jester();
+				default:
+					return base.CreateEventExtender(evt, defaultExtender);
+			}
 		}
 	}
 }
