@@ -90,6 +90,7 @@ namespace ERY.Xle.Maps.Extenders
 
 		public virtual void PlayerUse(GameState state, int item, ref bool handled)
 		{
+			handled = CommandNotImplemented();
 		}
 
 
@@ -174,12 +175,12 @@ namespace ERY.Xle.Maps.Extenders
 
 		public virtual bool PlayerFight(GameState state)
 		{
-			throw new NotImplementedException();
+			return CommandNotImplemented();
 		}
 
 		public virtual bool PlayerRob(GameState state)
 		{
-			throw new NotImplementedException();
+			return CommandNotImplemented();
 		}
 
 		public virtual bool PlayerSpeak(GameState state)
@@ -208,7 +209,7 @@ namespace ERY.Xle.Maps.Extenders
 		/// <returns></returns>
 		public virtual bool PlayerClimb(GameState state)
 		{
-			throw new NotImplementedException();
+			return CommandNotImplemented();
 		}
 		/// <summary>
 		/// Function called when the player executes the Xamine command.
@@ -219,12 +220,24 @@ namespace ERY.Xle.Maps.Extenders
 		/// <returns></returns>
 		public virtual bool PlayerXamine(GameState state)
 		{
-			throw new NotImplementedException();
+
+			return CommandNotImplemented();
 		}
 
 		public virtual bool PlayerLeave(GameState state)
 		{
-			throw new NotImplementedException();
+			return CommandNotImplemented();
+		}
+
+		protected static bool CommandNotImplemented()
+		{
+
+			XleCore.TextArea.PrintLine("This command is not implemented.", Color.Red);
+			XleCore.TextArea.PrintLine();
+
+			SoundMan.PlaySoundSync(LotaSound.Medium);
+
+			return false;
 		}
 
 		public virtual bool PlayerTake(GameState state)
