@@ -166,21 +166,23 @@ namespace ERY.Xle
 		}
 
 		[Description("Turns on or off whether exhibits require coins.\nUsage: coins [on|off].")]
-		private static void CheatCoins(string action)
+		private static void CheatCoins(string action = null)
 		{
-			if (action != null)
-				action = action.ToLowerInvariant();
+			if (action == null)
+				action = "";
+
+			action = action.ToLowerInvariant();
 
 			if (action == "on")
 				XleCore.Options.DisableExhibitsRequireCoins = false;
 			else if (action == "off")
 				XleCore.Options.DisableExhibitsRequireCoins = true;
-			else
+			else if (action != "")
 				throw new ArgumentException("Could not understand '" + action + "'");
 
-			AgateConsole.WriteLine("Exhibits now " + (
-				XleCore.Options.DisableExhibitsRequireCoins ? "do not " : "") +
-				"require coins.");
+			AgateConsole.WriteLine("Exhibits {0}{1}require coins. ",
+				(action != "") ? "now " : "",
+				XleCore.Options.DisableExhibitsRequireCoins ? "do not " : "");
 		}
 
 
