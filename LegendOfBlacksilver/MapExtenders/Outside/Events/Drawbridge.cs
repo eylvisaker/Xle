@@ -35,10 +35,10 @@ namespace ERY.Xle.LoB.MapExtenders.Outside.Events
 		{
 			if (item == (int)LobItem.RopeAndPulley)
 			{
-				return true;
-
 				XleCore.Wait(1000);
 				TheEvent.ExecuteMapChange(state.Player);
+
+				return true;
 			}
 			else
 				return false;
