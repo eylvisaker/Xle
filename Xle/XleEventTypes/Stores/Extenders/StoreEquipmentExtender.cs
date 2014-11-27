@@ -89,10 +89,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			XleCore.TextArea.PrintLine("It's a deal!");
 			XleCore.TextArea.PrintLine(eq.BaseName + " sold for " + sellPrice + " gold.");
 
-			player.Weapons.Remove(eq as WeaponItem);
-			player.Armor.Remove(eq as ArmorItem);
-			player.SortEquipment();
-
+			player.RemoveEquipment(eq);
+			
 			player.Gold += sellPrice;
 
 			StoreSound(LotaSound.Sale);

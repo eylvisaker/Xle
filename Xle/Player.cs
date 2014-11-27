@@ -900,6 +900,7 @@ namespace ERY.Xle
 		{
 			Weapons.Remove(item as WeaponItem);
 			Armor.Remove(item as ArmorItem);
+			SortEquipment();
 		}
 	}
 }
