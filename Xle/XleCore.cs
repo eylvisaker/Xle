@@ -401,9 +401,9 @@ namespace ERY.Xle
 		{
 			Player player = GameState.Player;
 
-			player.Gold = 99999;
-			player.GoldInBank = 999999;
-			player.Food = 99999;
+			player.Gold = 9999;
+			player.GoldInBank = 99999;
+			player.Food = 5000;
 			player.Attribute[Attributes.strength] = 300;
 			player.Attribute[Attributes.dexterity] = 300;
 			player.Attribute[Attributes.intelligence] = 300;

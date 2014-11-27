@@ -20,6 +20,7 @@ namespace ERY.Xle.LoB
 		{
 			var parameters = new SerialModelParameters(args);
 
+			parameters.ApplicationName = "Legend of Blacksilver";
 			parameters.AssetLocations.Path = "LoB";
 			parameters.AssetLocations.Sound = "Audio";
 			parameters.AssetLocations.Surfaces = "Images";

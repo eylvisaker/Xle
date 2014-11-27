@@ -27,6 +27,7 @@ namespace ERY.Xle.LotA
 		{
 			var parameters = new SerialModelParameters(args);
 
+			parameters.ApplicationName = "Legacy of the Ancients";
 			parameters.AssetLocations.Path = "LotA";
 			parameters.AssetLocations.Sound = "Audio";
 			parameters.AssetLocations.Surfaces = "Images";
