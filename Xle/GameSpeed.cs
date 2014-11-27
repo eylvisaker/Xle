@@ -11,7 +11,7 @@ namespace ERY.Xle
 		{
 			AfterExecuteCommandTime = 200;
 			LeaveMapTime = 2000;
-
+			AfterSpeakTime = 2000;
 		}
 		public int CastleOpenChestTime { get; set; }
 
@@ -30,5 +30,7 @@ namespace ERY.Xle
 		public int AfterExecuteCommandTime { get; set; }
 
 		public int LeaveMapTime { get; set; }
+
+		public int AfterSpeakTime { get; set; }
 	}
 }
