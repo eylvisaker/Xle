@@ -37,6 +37,11 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			return true;
 		}
 
+		protected override void UpdateCommand()
+		{
+			XleCore.TextArea.PrintLine();
+		}
+
 		public override string AlreadyOpenMessage
 		{
 			get
