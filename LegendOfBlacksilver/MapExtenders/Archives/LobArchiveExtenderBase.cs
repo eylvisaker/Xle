@@ -23,5 +23,10 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 		{
 			return Lob3DSurfaces.Archives;
 		}
+
+		protected override Maps.Renderers.XleMapRenderer CreateMapRenderer()
+		{
+			return new ArchiveRenderer();
+		}
 	}
 }

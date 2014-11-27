@@ -23,8 +23,15 @@ namespace ERY.Xle.Maps.Extenders
 				MapRenderer = CreateMapRenderer();
 				MapRenderer.TheMap = TheMap;
 				MapRenderer.Extender = this;
+
+				InitializeMapRenderer();
 			}
 		}
+
+		protected virtual void InitializeMapRenderer()
+		{
+		}
+
 		public XleMapRenderer MapRenderer { get; set; }
 
 		public bool IsAngry

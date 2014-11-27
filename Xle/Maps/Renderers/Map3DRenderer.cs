@@ -583,8 +583,6 @@ namespace ERY.Xle.Maps.Renderers
 			Surfaces.Walls.Draw(
 				srcRect,
 				main_destRect);
-
-			
 		}
 
 		protected void DrawExhibitStatic(Rectangle main_destRect, Rectangle staticRect, Color color)
@@ -624,7 +622,9 @@ namespace ERY.Xle.Maps.Renderers
 				if (distance == 2)
 					staticRect = new Rectangle(128, 112, 112, 64);
 
-				DrawExhibitStatic(destRect, staticRect, ExhibitColor(val));
+				if (AnimateExhibits)
+					DrawExhibitStatic(destRect, staticRect, ExhibitColor(val));
+
 				DrawMuseumExhibit(distance, destRect, val);
 			}
 		}

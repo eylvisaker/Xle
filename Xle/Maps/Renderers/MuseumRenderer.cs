@@ -40,7 +40,7 @@ namespace ERY.Xle.Maps.Renderers
 
 		protected override void DrawCloseupImpl(Rectangle inRect)
 		{
-			Rectangle displayRect = new Rectangle(64, 64, 240, 128);
+			Rectangle displayRect = ExhibitCloseupRect;
 			Rectangle screenDisplayRect = displayRect;
 			
 			screenDisplayRect.X += inRect.X;
@@ -56,13 +56,21 @@ namespace ERY.Xle.Maps.Renderers
 			{
 				Surfaces.ExhibitClosed.Draw(inRect);
 
-				AgateLib.DisplayLib.Display.FillRect(screenDisplayRect, XleColor.DarkGray);
-				DrawExhibitStatic(inRect, displayRect, mCloseup.ExhibitColor);
+				if (AnimateExhibits)
+				{
+					AgateLib.DisplayLib.Display.FillRect(screenDisplayRect, XleColor.DarkGray);
+					DrawExhibitStatic(inRect, displayRect, mCloseup.ExhibitColor);
+				}
 			}
 
 
 			DrawExhibitText(inRect, mCloseup);
 
+		}
+
+		protected virtual Rectangle ExhibitCloseupRect
+		{
+			get { return new Rectangle(64, 64, 240, 128); }
 		}
 
 		#endregion
