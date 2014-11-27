@@ -515,7 +515,7 @@ namespace ERY.Xle
 		}
 		private void RedrawImpl()
 		{
-			Renderer.UpdateAnim();
+			Update();
 
 			Display.BeginFrame();
 
@@ -528,6 +528,12 @@ namespace ERY.Xle
 			{
 				CheckArrowKeys();
 			}
+		}
+
+		private void Update()
+		{
+			Renderer.UpdateAnim();
+			GameState.Map.OnUpdate(GameState, Display.DeltaTime / 1000.0);
 		}
 		private void CheckArrowKeys()
 		{

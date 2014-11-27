@@ -118,5 +118,9 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 		public virtual void OnLoad(GameState state)
 		{ }
+
+		public virtual void OnUpdate(GameState state, double deltaTime)
+		{
+		}
 	}
 }

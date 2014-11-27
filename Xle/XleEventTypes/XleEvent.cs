@@ -253,6 +253,11 @@ namespace ERY.Xle
 		{
 			mExtender.OnLoad(state);
 		}
+
+		public virtual void OnUpdate(GameState state, double deltaTime)
+		{
+			mExtender.OnUpdate(state, deltaTime);
+		}
 	}
 }
 

@@ -87,6 +87,7 @@
     <Compile Include="MapExtenders\Citadel\EventExtenders\Elf.cs" />
     <Compile Include="MapExtenders\Citadel\EventExtenders\Jester.cs" />
     <Compile Include="MapExtenders\Citadel\EventExtenders\Mantrek.cs" />
+    <Compile Include="MapExtenders\Citadel\EventExtenders\FloorPuzzle.cs" />
     <Compile Include="MapExtenders\Citadel\EventExtenders\StaffPortal.cs" />
     <Compile Include="MapExtenders\Citadel\EventExtenders\Tattoo.cs" />
     <Compile Include="MapExtenders\Citadel\EventExtenders\PasswordTeleporter.cs" />

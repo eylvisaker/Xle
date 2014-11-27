@@ -71,6 +71,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 			{
 				case "wizard": return new Wizard();
 				case "jester": return new Jester();
+				case "floorpuzzle": return new FloorPuzzle();
 				default:
 					return base.CreateEventExtender(evt, defaultExtender);
 			}

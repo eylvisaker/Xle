@@ -693,5 +693,13 @@ namespace ERY.Xle.Maps
 		{
 			mBaseExtender.MovePlayer(state, stepDirection);
 		}
+
+		public void OnUpdate(GameState state, double deltaTime)
+		{
+			foreach(var evt in Events)
+			{
+				evt.OnUpdate(state, deltaTime);
+			}
+		}
 	}
 }
