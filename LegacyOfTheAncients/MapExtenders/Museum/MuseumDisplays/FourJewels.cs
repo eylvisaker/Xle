@@ -38,7 +38,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				Direction facing = player.FaceDirection;
 
 				player.DungeonLevel = 0;
-				//player.SetMap(73, 0, 1);
+				
 				XleCore.ChangeMap(player, 73, 0);
 				player.SetReturnLocation(map, x, y, facing);
 			}

@@ -15,6 +15,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		{
 			Coin = c;
 		}
+
+		protected int StoryVariable
+		{
+			get { return Lota.Story.Museum[ExhibitID]; }
+			set { Lota.Story.Museum[ExhibitID] = value; }
+		}
 		
 		public Coin Coin { get; private set; }
 
@@ -25,16 +31,16 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		
 		protected override void MarkAsVisited(Player player)
 		{
-			if (Lota.Story.Museum[ExhibitID] == 0)
-				Lota.Story.Museum[ExhibitID] = 1;
+			if (StoryVariable == 0)
+				StoryVariable = 1;
 		}
 		public override bool HasBeenVisited(Player player)
 		{
-			return Lota.Story.Museum[ExhibitID] != 0;
+			return StoryVariable != 0;
 		}
 		public bool HasBeenVisited(Player player, ExhibitIdentifier exhibit)
 		{
-			return Lota.Story.Museum[(int)exhibit] != 0;
+			return StoryVariable != 0;
 		}		
 		public override string InsertCoinText
 		{
@@ -78,7 +84,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		}
 
 		public abstract ExhibitIdentifier ExhibitIdentifier { get; }
-
+		
 		public override int ExhibitID
 		{
 			get
