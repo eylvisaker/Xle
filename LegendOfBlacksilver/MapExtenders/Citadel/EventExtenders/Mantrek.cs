@@ -21,6 +21,8 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 
 		private void BegForLife(GameState state)
 		{
+			XleCore.TextArea.PrintLine();
+			XleCore.TextArea.PrintLine();
 			XleCore.TextArea.PrintLine("Spare me and I shall");
 			XleCore.TextArea.PrintLine("give you the staff.");
 			XleCore.TextArea.PrintLine();
