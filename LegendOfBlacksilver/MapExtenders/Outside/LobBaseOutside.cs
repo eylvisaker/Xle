@@ -46,5 +46,15 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 
 			base.AfterPlayerStep(state);
 		}
+
+		public override void PlayerUse(GameState state, int item, ref bool handled)
+		{
+			switch((LobItem)item)
+			{
+				case LobItem.ClimbingGear:
+					handled = true;
+					break;
+			}
+		}
 	}
 }
