@@ -34,6 +34,9 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 
 		private void StepOn(GameState state, int x, int y)
 		{
+			if (y > tiles.GetUpperBound(1))
+				return;
+
 			int tileSteppedOn = tiles[x, y];
 
 			if (tileSteppedOn <= 0)
@@ -97,6 +100,8 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 					tiles[i / 2, j / 2] = state.Map[loc];
 				}
 			}
+
+			tiles[4, 5] = -1;
 		}
 
 		public override void OnUpdate(GameState state, double deltaTime)
