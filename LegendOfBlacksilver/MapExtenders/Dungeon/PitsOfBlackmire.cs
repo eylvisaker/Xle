@@ -12,7 +12,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 		{
 			if (chestID == 3)
 			{
-				switch(dungeonLevel)
+				switch (dungeonLevel)
 				{
 					case 2: return -1;
 					case 3: return (int)LobItem.RustyKey;
@@ -20,8 +20,18 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 					case 10: return (int)LobItem.Blacksilver;
 				}
 			}
+
 			if (chestID == 2)
-				return (int)LobItem.BlackWand;
+			{
+				switch (dungeonLevel)
+				{
+					case 2:
+						return (int)LobItem.BlackWand;
+
+					default:
+						return (int)LobItem.WhiteDiamond;
+				}
+			}
 
 			return base.GetTreasure(state, dungeonLevel, chestID);
 		}
@@ -57,6 +67,37 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			base.PlayerUse(state, item, ref handled);
 		}
 
+		public override void PlayerMagic(GameState state)
+		{
+			base.PlayerMagic(state);
+
+			if (state.Player.DungeonLevel >= 6 && Lob.Story.Illusion == false)
+			{
+				// turn off the display.
+			}
+		}
+		public override bool PlayerClimb(GameState state)
+		{
+			var retval = base.PlayerClimb(state);
+
+			if (state.Player.DungeonLevel == 4 && Lob.Story.RotlungContracted == false)
+			{
+				SoundMan.PlaySound(LotaSound.VeryBad);
+
+				XleCore.TextArea.PrintLineSlow("You have contracted rotlung.");
+				XleCore.TextArea.PrintLine("Endurance  - 10");
+
+				Lob.Story.RotlungContracted = true;
+				state.Player.Attribute[Attributes.endurance] -= 10;
+			}
+
+			if (state.Player.DungeonLevel == 6 && Lob.Story.Illusion == false)
+			{
+				// turn off the display.
+			}
+
+			return retval;
+		}
 		protected override int MonsterGroup(int dungeonLevel)
 		{
 			if (dungeonLevel <= 2) return 0;

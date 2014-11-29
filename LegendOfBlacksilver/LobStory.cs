@@ -62,6 +62,14 @@ namespace ERY.Xle.LoB
 		public bool BoughtStrengthFromWizard { get; set; }
 
 		public bool BoughtOrb { get; set; }
+
+		public bool ElfPaid { get; set; }
+
+		public bool ElfSolvedPuzzle { get; set; }
+
+		public bool RotlungContracted { get; set; }
+
+		public bool Illusion { get; set; }
 	}
 
 	public static class LobStoryExtensions

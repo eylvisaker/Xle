@@ -533,7 +533,11 @@ namespace ERY.Xle
 		private void Update()
 		{
 			Renderer.UpdateAnim();
-			GameState.Map.OnUpdate(GameState, Display.DeltaTime / 1000.0);
+		
+			if (GameState != null && GameState.Map != null)
+			{
+				GameState.Map.OnUpdate(GameState, Display.DeltaTime / 1000.0);
+			}
 		}
 		private void CheckArrowKeys()
 		{
@@ -1447,7 +1451,8 @@ namespace ERY.Xle
 					GameState.Map = LoadMap(mMapID);
 					player.MapID = mMapID;
 
-					if (GameState.Map.GetType() == saveMap.GetType())
+					if (GameState.Map.GetType() == saveMap.GetType() &&
+						GameState.Map.Guards != null)
 					{
 						GameState.Map.Guards.IsAngry = saveMap.Guards.IsAngry;
 					}
