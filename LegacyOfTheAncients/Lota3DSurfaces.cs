@@ -24,10 +24,10 @@ namespace ERY.Xle.LotA
 
 			MuseumDark.Walls = new Surface("MuseumDark/walls.png");
 
-			DungeonBlue.Extras = new Surface("Dungeon/Blue/DungeonExtras.png");
+			DungeonBlue.Traps = new Surface("Dungeon/PiratesLair/traps.png");
 			DungeonBlue.Walls = new Surface("Dungeon/PiratesLair/walls.png");
 
-			DungeonBrown.Extras = new Surface("Dungeon/Blue/DungeonExtras.png");
+			DungeonBrown.Traps = new Surface("Dungeon/Armak/traps.png");
 			DungeonBrown.Walls = new Surface("Dungeon/Armak/walls.png");
 		}
 	}

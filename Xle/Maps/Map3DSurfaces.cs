@@ -11,7 +11,7 @@ namespace ERY.Xle.Maps
 		public Surface Walls { get; set; }
 		public Surface Torches { get; set; }
 
-		public Surface Extras { get; set; }
+		public Surface Traps { get; set; }
 
 		public Surface ExhibitOpen { get; set; }
 		public Surface ExhibitClosed { get; set; }

@@ -79,6 +79,7 @@ namespace ERY.Xle.Maps.Renderers
 			TorchRight,
 			DoorLeft,
 			DoorRight,
+			Urn,
 		}
 
 		readonly Size imageSize = new Size(368, 272);
@@ -197,24 +198,26 @@ namespace ERY.Xle.Maps.Renderers
 					loc.X = x + distance * stepDir.X + dir * rightDir.X;
 					loc.Y = y + distance * stepDir.Y + dir * rightDir.Y;
 
+					int val = TheMap[loc.X, loc.Y];
+
+					DrawTraps(val, dir, loc, distance, inRect);
+
 					if (dir == 0)
 					{
 						loc.X += stepDir.X;
-						loc.Y += stepDir.Y;
+						loc.Y += stepDir.Y; 
+						val = TheMap[loc.X, loc.Y];
 					}
-
-					int val = TheMap[loc.X, loc.Y];
 
 					if (val == 0) continue;
 					if (val == 0x10) continue;
+
 					if (val == 0x01)
 					{
 						DrawTorch(dir, distance, inRect);
 
 						continue;
 					}
-
-					//DrawExtras(val, dir, loc, distance, inRect);
 				}
 			}
 
@@ -463,7 +466,7 @@ namespace ERY.Xle.Maps.Renderers
 			return retval;
 		}
 
-		private void DrawExtras(int val, int side, Point loc, int distance, Rectangle mainDestRect)
+		private void DrawTraps(int val, int side, Point loc, int distance, Rectangle mainDestRect)
 		{
 			ExtraType extraType = GetExtraType(val, side);
 
@@ -475,89 +478,74 @@ namespace ERY.Xle.Maps.Renderers
 				return;
 			}
 
-			Map3DExtraInfo info = XleCore.Data.Map3DExtraInfo[(int)extraType];
-
-			if (info.Images.ContainsKey(distance) == false)
+			if (IsTrap(extraType) == false)
 				return;
 
-			Rectangle srcRect = info.Images[distance].SrcRect;
-			Rectangle destRect = info.Images[distance].DestRect;
+				Size boxSize = new Size(192, 240);
+				Rectangle srcRect = new Rectangle(0, 192, 192, 48);
+				int index = -1;
+				bool above = false;
 
-			if (ExtraScale)
-			{
-				srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
-			}
+				switch (extraType)
+				{
+					case ExtraType.Chest: index = 0; break;
+					case ExtraType.Box: index = 1; break;
+					case ExtraType.Urn: index = 2; break;
+					case ExtraType.GoUp: index = 4; above = true; break;
+					case ExtraType.GoDown: index = 5; break;
+					case ExtraType.Needle: index = 6; break;
+					case ExtraType.Slime: index = 7; break;
+					case ExtraType.TripWire: index = 8; break;
+					case ExtraType.GasVent: index = 9; above = true; break;
+				}
 
-			destRect.X += mainDestRect.X;
-			destRect.Y += mainDestRect.Y;
+				srcRect.X += (index % 4) * boxSize.Width;
+				srcRect.Y += (index / 4) * boxSize.Height;
+				srcRect.Y -= distance * 48;
 
-			if (srcRect.Width != 0 && srcRect.Height != 0)
-				Surfaces.Extras.Draw(srcRect, destRect);
+				Rectangle destRect = srcRect;
 
-			AnimateExtra(extraType, loc, distance, destRect.Location);
+				destRect.X = 96;
+				if (above)
+				{
+					destRect.Y = -16;
+
+					destRect.Y += 16 * distance;
+					destRect.Y += (distance >= 1) ? 16 : 0;
+					destRect.Y += (distance >= 2) ? 16 : 0;
+				}
+				else
+				{
+					destRect.Y = 224;
+
+					destRect.Y -= 16 * distance;
+					destRect.Y -= (distance >= 1) ? 16 : 0;
+				}
+
+				destRect.X += mainDestRect.X;
+				destRect.Y += mainDestRect.Y;
+
+				if (srcRect.Width != 0 && srcRect.Height != 0)
+					Surfaces.Traps.Draw(srcRect, destRect);
+
 		}
 
 
-		private void AnimateExtra(ExtraType extraType, Point loc, int distance, Point extraDestRect)
+		private bool IsTrap(ExtraType extraType)
 		{
-			Map3DExtraInfo info = XleCore.Data.Map3DExtraInfo[(int)extraType];
-			if (info.Images.ContainsKey(distance) == false)
-				return;
-
-			var img = info.Images[distance];
-
-			if (img.Animations.Count == 0)
-				return;
-
-			Color clr = ExtraColor(loc);
-			var anim = img.Animations[img.CurrentAnimation];
-
-			if (anim.FrameTime > 0)
+			switch(extraType)
 			{
-				anim.TimeToNextFrame -= Display.DeltaTime;
-				if (anim.TimeToNextFrame < 0)
-				{
-					anim.CurrentFrame++;
-					anim.TimeToNextFrame += anim.FrameTime;
+				case ExtraType.TorchLeft: 
+				case ExtraType.TorchRight:
+				case ExtraType.DisplayCaseLeft:
+				case ExtraType.DisplayCaseRight:
+				case ExtraType.DoorLeft:
+				case ExtraType.DoorRight:
+					return false;
 
-					if (anim.TimeToNextFrame < 0) anim.TimeToNextFrame = 0;
-
-					if (anim.CurrentFrame >= anim.Images.Count)
-					{
-						if (img.Animations.Count > 1)
-						{
-							int lastAnim = img.CurrentAnimation;
-
-							img.CurrentAnimation = XleCore.random.Next(img.Animations.Count - 1);
-							if (img.CurrentAnimation == lastAnim)
-								img.CurrentAnimation++;
-
-							anim = img.Animations[img.CurrentAnimation];
-							anim.CurrentFrame = 0;
-						}
-						else
-							anim.CurrentFrame = 0;
-					}
-				}
+				default:
+					return true;
 			}
-
-			int currentFrame = anim.CurrentFrame;
-
-			Rectangle srcRect = anim.Images[currentFrame].SrcRect;
-			Rectangle destRect = anim.Images[currentFrame].DestRect;
-
-			if (ExtraScale)
-			{
-				srcRect.X /= 2; srcRect.Y /= 2; srcRect.Width /= 2; srcRect.Height /= 2;
-				Surfaces.Extras.InterpolationHint = InterpolationMode.Fastest;
-			}
-
-			destRect.X += extraDestRect.X;
-			destRect.Y += extraDestRect.Y;
-
-			Surfaces.Extras.Color = clr;
-			Surfaces.Extras.Draw(srcRect, destRect);
-			Surfaces.Extras.Color = XleColor.White;
 		}
 
 		protected virtual Color ExtraColor(Point location)
@@ -634,7 +622,7 @@ namespace ERY.Xle.Maps.Renderers
 		}
 
 		protected virtual Color ExhibitColor(int val) { return XleColor.White; }
-		
+
 		public bool AnimateExhibits { get; set; }
 	}
 }

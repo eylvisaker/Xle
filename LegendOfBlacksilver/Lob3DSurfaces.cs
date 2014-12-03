@@ -25,18 +25,17 @@ namespace ERY.Xle.LoB
 			Archives.Walls = new Surface("Museum/walls.png");
 			Archives.Torches = new Surface("Museum/torches.png");
 
-			IslandCaverns.Extras = new Surface("Dungeon/Blue/DungeonExtras.png");
-			IslandCaverns.Walls = new Surface("Dungeon/IslandCavern/walls.png");
+			SetDungeon(IslandCaverns, "IslandCavern");
+			SetDungeon(TaragasMines, "TaragasMines");
+			SetDungeon(MarthbaneTunnels, "Marthbane");
+			SetDungeon(PitsOfBlackmire, "Blackmire");
+			SetDungeon(DeathspireChasm, "Deathspire");
+		}
 
-			TaragasMines.Extras = IslandCaverns.Extras;
-			MarthbaneTunnels.Extras = IslandCaverns.Extras;
-			PitsOfBlackmire.Extras = IslandCaverns.Extras;
-			DeathspireChasm.Extras = IslandCaverns.Extras;
-
-			TaragasMines.Walls = new Surface("Dungeon/TaragasMines/walls.png");
-			MarthbaneTunnels.Walls = new Surface("Dungeon/Marthbane/walls.png");
-			PitsOfBlackmire.Walls = new Surface("Dungeon/Blackmire/walls.png");
-			DeathspireChasm.Walls = new Surface("Dungeon/Deathspire/walls.png");
+		private static void SetDungeon(Map3DSurfaces surfs, string name)
+		{
+			surfs.Walls = new Surface("Dungeon/" + name + "/walls.png");
+			surfs.Traps = new Surface("Dungeon/" + name + "/traps.png");
 		}
 	}
 }
