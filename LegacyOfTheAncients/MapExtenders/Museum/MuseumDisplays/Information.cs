@@ -41,16 +41,16 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		}
 		private bool[] GetBitStatus(int value)
 		{
-			bool[] retval = new bool[32];
+			bool[] result = new bool[32];
 
 			for (int i = 0; i < 32; i++)
 			{
 				int test = 1 << i;
 
-				retval[i] = (value & test) != 0;
+				result[i] = (value & test) != 0;
 			}
 
-			return retval;
+			return result;
 		}
 
 

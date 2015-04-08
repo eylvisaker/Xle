@@ -391,79 +391,79 @@ namespace ERY.Xle.Maps.Renderers
 
 		private Rectangle GetSidePassageSrcRect(int distance, bool rightSide, SideWallType type)
 		{
-			Rectangle retval = new Rectangle();
+			Rectangle result = new Rectangle();
 
-			retval.Width = sideWidth[distance];
+			result.Width = sideWidth[distance];
 
 			switch (type)
 			{
 				case SideWallType.Corner:
 				case SideWallType.Corridor:
 				case SideWallType.Parallel:
-					retval.Width += sideWidth[distance + 1];
+					result.Width += sideWidth[distance + 1];
 					break;
 			}
 
 			for (int i = 0; i < distance; i++)
 			{
-				retval.X += sideWidth[i];
+				result.X += sideWidth[i];
 			}
 
-			retval.X *= 16;
-			retval.Y *= 16;
-			retval.Width *= 16;
-			retval.Height *= 16;
+			result.X *= 16;
+			result.Y *= 16;
+			result.Width *= 16;
+			result.Height *= 16;
 
-			retval.Y += imageSize.Height * (int)type;
-			retval.Height = imageSize.Height;
+			result.Y += imageSize.Height * (int)type;
+			result.Height = imageSize.Height;
 
 			if (rightSide)
 			{
-				retval.X = imageSize.Width - retval.X - retval.Width;
+				result.X = imageSize.Width - result.X - result.Width;
 			}
 
 			if (distance % 2 == 1)
-				retval.X += imageSize.Width;
+				result.X += imageSize.Width;
 
-			return retval;
+			return result;
 		}
 		private Rectangle GetSidePassageDestRect(int distance, bool rightSide, SideWallType type, Rectangle inRect)
 		{
-			Rectangle retval = new Rectangle();
+			Rectangle result = new Rectangle();
 
 			for (int i = 0; i < distance; i++)
 			{
-				retval.X += sideWidth[i];
+				result.X += sideWidth[i];
 			}
 
-			retval.Width = sideWidth[distance];
+			result.Width = sideWidth[distance];
 
 			switch (type)
 			{
 				case SideWallType.Corner:
 				case SideWallType.Corridor:
 				case SideWallType.Parallel:
-					retval.Width += sideWidth[distance + 1];
+					result.Width += sideWidth[distance + 1];
 					break;
 			}
 
 
-			retval.X *= 16;
-			retval.Y *= 16;
-			retval.Width *= 16;
-			retval.Height *= 16;
+			result.X *= 16;
+			result.Y *= 16;
+			result.Width *= 16;
+			result.Height *= 16;
 
-			retval.Height = imageSize.Height;
+			result.Height = imageSize.Height;
 
 			if (rightSide)
 			{
-				retval.X = imageSize.Width - retval.X - retval.Width;
+				result.X = imageSize.Width - result.X - result.Width;
 			}
 
-			retval.X += inRect.X;
-			retval.Y += inRect.Y;
+			result.X += inRect.X;
+			result.Y += inRect.Y;
 
-			return retval;
+			return result;
 		}
 
 		private void DrawTraps(int val, int side, Point loc, int distance, Rectangle mainDestRect)

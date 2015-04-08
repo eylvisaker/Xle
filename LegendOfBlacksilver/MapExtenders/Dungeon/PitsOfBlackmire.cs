@@ -78,7 +78,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 		}
 		public override bool PlayerClimb(GameState state)
 		{
-			var retval = base.PlayerClimb(state);
+			var result = base.PlayerClimb(state);
 
 			if (state.Player.DungeonLevel == 4 && Lob.Story.RotlungContracted == false)
 			{
@@ -96,7 +96,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 				// turn off the display.
 			}
 
-			return retval;
+			return result;
 		}
 		protected override int MonsterGroup(int dungeonLevel)
 		{

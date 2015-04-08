@@ -111,10 +111,10 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			double factor = Math.Pow(player.Attribute[Attributes.charm], .7) / 11;
 			if (factor > 1) factor = 1;
 
-			int retval = (int)(retailPrice * factor);
-			retval = (int)(.8 * retval);
+			int result = (int)(retailPrice * factor);
+			result = (int)(.8 * result);
 
-			return retval;
+			return result;
 		}
 
 		private void BuyItem()
@@ -217,19 +217,19 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		protected List<int> DetermineCurrentStock(List<int> stock)
 		{
-			var retval = new List<int>();
+			var result = new List<int>();
 
 			foreach (var it in stock)
 			{
-				if (XleCore.random.Next(256) >= 191 && retval.Count > 0)
+				if (XleCore.random.Next(256) >= 191 && result.Count > 0)
 				{
 					continue;
 				}
 
-				retval.Add(it);
+				result.Add(it);
 			}
 
-			return retval;
+			return result;
 		}
 
 
@@ -261,21 +261,21 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		protected List<int> DetermineStockFromTQ(List<int> stock, int maxItem)
 		{
-			List<int> retval = new List<int>();
+			List<int> result = new List<int>();
 
 			foreach (var item in stock)
 			{
 				if (item > maxItem)
 					break;
 
-				retval.Add(item);
+				result.Add(item);
 			}
 
 			// add the bottom item if there are none.
-			if (retval.Count == 0)
-				retval.Add(stock.Min());
+			if (result.Count == 0)
+				result.Add(stock.Min());
 
-			return retval;
+			return result;
 		}
 		protected abstract int MaxItem(double timeQuality);
 
@@ -310,11 +310,11 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		protected override int MaxItem(double timeQuality)
 		{
-			double retval = 10 + timeQuality / 600;
+			double result = 10 + timeQuality / 600;
 
-			if (retval > 44) retval = 44;
+			if (result > 44) result = 44;
 
-			return (int)retval;
+			return (int)result;
 		}
 
 		protected override string ItemName(int itemIndex, int qualityIndex)
@@ -353,11 +353,11 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 		protected override int MaxItem(double timeQuality)
 		{
-			double retval = 6 + timeQuality / 1133;
+			double result = 6 + timeQuality / 1133;
 
-			if (retval > 24) retval = 24;
+			if (result > 24) result = 24;
 
-			return (int)retval;
+			return (int)result;
 		}
 
 		protected override string ItemName(int itemIndex, int qualityIndex)

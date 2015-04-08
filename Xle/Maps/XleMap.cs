@@ -139,18 +139,18 @@ namespace ERY.Xle.Maps
 			XleSerializer ser = new XleSerializer(typeof(XleMap));
 			ser.Binder = new XleTypeBinder(ser.Binder);
 
-			XleMap retval;
+			XleMap result;
 
 			using (var file = FileProvider.Assets.OpenRead(filename))
 			{
-				retval = (XleMap)ser.Deserialize(file);
+				result = (XleMap)ser.Deserialize(file);
 			}
 
-			retval.MapID = id;
-			retval.mBaseExtender = retval.CreateExtender();
-			retval.CreateEventExtenders();
+			result.MapID = id;
+			result.mBaseExtender = result.CreateExtender();
+			result.CreateEventExtenders();
 
-			return retval;
+			return result;
 		}
 
 		public static void SaveMap(XleMap map, string filename)
@@ -169,11 +169,11 @@ namespace ERY.Xle.Maps
 
 		private MapExtender CreateExtender()
 		{
-			var retval = CreateExtenderImpl();
+			var result = CreateExtenderImpl();
 
-			retval.TheMap = this;
+			result.TheMap = this;
 
-			return retval;
+			return result;
 		}
 		protected virtual MapExtender CreateExtenderImpl()
 		{
@@ -408,17 +408,17 @@ namespace ERY.Xle.Maps
 			if (rect.Right >= this.Width) throw new ArgumentOutOfRangeException();
 			if (rect.Bottom >= this.Height) throw new ArgumentOutOfRangeException();
 
-			MapData retval = new MapData(rect.Width, rect.Height);
+			MapData result = new MapData(rect.Width, rect.Height);
 
 			for (int j = 0; j < rect.Height; j++)
 			{
 				for (int i = 0; i < rect.Width; i++)
 				{
-					retval[i, j] = this[rect.X + i, rect.Y + j];
+					result[i, j] = this[rect.X + i, rect.Y + j];
 				}
 			}
 
-			return retval;
+			return result;
 		}
 
 		public void WriteMapData(MapData data, int x, int y)
@@ -462,7 +462,7 @@ namespace ERY.Xle.Maps
 
 		public Roof ClosedRoofAt(int x, int y)
 		{
-			Roof retval = null;
+			Roof result = null;
 
 			foreach(var roof in Roofs)
 			{
@@ -471,11 +471,11 @@ namespace ERY.Xle.Maps
 					if (roof.Open)
 						return null;
 					else
-						retval = roof;
+						result = roof;
 				}
 			}
 
-			return retval;
+			return result;
 		}
 
 		#endregion

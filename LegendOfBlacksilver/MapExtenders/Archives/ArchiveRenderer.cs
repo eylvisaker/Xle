@@ -13,11 +13,11 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 		{
 			get
 			{
-				var retval = base.ExhibitCloseupRect;
+				var result = base.ExhibitCloseupRect;
 
-				retval.Y -= 16;
+				result.Y -= 16;
 
-				return retval;
+				return result;
 			}
 		}
 	}

@@ -16,12 +16,12 @@ namespace ERY.Xle
 
 		public static MenuItemList Numbers(int start, int end)
 		{
-			MenuItemList retval = new MenuItemList();
+			MenuItemList result = new MenuItemList();
 
 			for (int i = start; i <= end; i++)
-				retval.Add(i.ToString());
+				result.Add(i.ToString());
 
-			return retval;
+			return result;
 		}
 	}
 }
