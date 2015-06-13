@@ -187,6 +187,12 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				SetOfferText(offerText, offer, lastAsk);
 				ask = GetAskingPrice();
 
+                if (ask == 0)
+                {
+                    MaybeDealLater();
+                    return;
+                }
+
 				if (ask == lastAsk || 
 					(ask > lastAsk && XleCore.random.NextDouble() < 0.5))
 				{
