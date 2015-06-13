@@ -51,6 +51,8 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				XleCore.ChangeMap(player, 11, 0);
 				player.SetReturnLocation(1, 18, 56);
 			}
+
+            MarkAsVisited(player);
 		}
 	}
 }

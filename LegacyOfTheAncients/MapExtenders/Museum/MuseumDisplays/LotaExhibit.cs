@@ -40,7 +40,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 		}
 		public bool HasBeenVisited(Player player, ExhibitIdentifier exhibit)
 		{
-			return StoryVariable != 0;
+            return Lota.Story.Museum[(int)exhibit] != 0;
 		}		
 		public override string InsertCoinText
 		{

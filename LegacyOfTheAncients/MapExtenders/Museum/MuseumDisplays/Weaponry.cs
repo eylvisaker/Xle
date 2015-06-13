@@ -22,8 +22,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		public override void RunExhibit(Player player)
 		{
-			if (StoryVariable == 0 && 
-				Lota.Story.Museum[(int)ExhibitIdentifier.Thornberry] != 0)
+			if (StoryVariable == 0 && HasBeenVisited(player, MuseumDisplays.ExhibitIdentifier.Thornberry))
 			{
 				StoryVariable = 1;
 			}
