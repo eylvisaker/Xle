@@ -8,7 +8,7 @@ namespace ERY.Xle.Maps.Extenders
 {
 	public class CastleExtender : TownExtender
 	{
-		public new Castle TheMap { get { return (Castle)base.TheMap; } }
+		public new CastleMap TheMap { get { return (CastleMap)base.TheMap; } }
 
 		public override void SetColorScheme(ColorScheme scheme)
 		{

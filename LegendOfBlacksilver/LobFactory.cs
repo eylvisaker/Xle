@@ -116,7 +116,7 @@ namespace ERY.Xle.LoB
 				default: return base.CreateMapExtender(theMap);
 			}
 		}
-		public override CastleExtender CreateMapExtender(Castle castle)
+		public override CastleExtender CreateMapExtender(CastleMap castle)
 		{
 			string ext = castle.ExtenderName.ToLowerInvariant();
 

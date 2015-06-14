@@ -96,7 +96,7 @@ namespace ERY.Xle.LotA
 		{
 			return new LotaMuseumExtender();
 		}
-		public override CastleExtender CreateMapExtender(Castle castle)
+		public override CastleExtender CreateMapExtender(CastleMap castle)
 		{
 			if (castle.ExtenderName.ToLowerInvariant() == "castle1")
 				return new CastleGround();

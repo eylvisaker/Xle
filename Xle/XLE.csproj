@@ -78,6 +78,8 @@
     <Compile Include="Direction.cs" />
     <Compile Include="DirectionHelper.cs" />
     <Compile Include="Equipment.cs" />
+    <Compile Include="IXleCore.cs" />
+    <Compile Include="IXleService.cs" />
     <Compile Include="MainWindowClosedException.cs" />
     <Compile Include="Maps\DungeonMonster.cs" />
     <Compile Include="Data\DungeonMonsterData.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="TextArea.cs" />
     <Compile Include="Maps\TileInfo.cs" />
     <Compile Include="Maps\TileSet.cs" />
+    <Compile Include="XleCoreImpl.cs" />
     <Compile Include="XleEventTypes\Door.cs" />
     <Compile Include="XleEventTypes\Extenders\ChangeMapExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\Common\ChangeMapQuestion.cs" />
@@ -155,7 +158,7 @@
     <Compile Include="XleEventTypes\ChangeMapEvent.cs" />
     <Compile Include="XleEventTypes\TreasureChestEvent.cs" />
     <Compile Include="XleEventTypes\Stores\Store.cs" />
-    <Compile Include="Maps\XleMapTypes\Castle.cs" />
+    <Compile Include="Maps\XleMapTypes\CastleMap.cs" />
     <Compile Include="Maps\XleMapTypes\Dungeon.cs" />
     <Compile Include="Maps\XleMapTypes\EncounterState.cs" />
     <Compile Include="Maps\XleMapTypes\Map3D.cs" />

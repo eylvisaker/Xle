@@ -34,7 +34,7 @@ namespace ERY.Xle
 			throw new NotImplementedException();
 		}
 
-		public virtual CastleExtender CreateMapExtender(Castle castle)
+		public virtual CastleExtender CreateMapExtender(CastleMap castle)
 		{
 			return new CastleExtender();
 		}
