@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.TitleScreen
 {
-	class LobTitleScreen : IXleTitleScreen
+	public class LobTitleScreen : IXleTitleScreen
 	{
 		static bool firstRun = false;
 

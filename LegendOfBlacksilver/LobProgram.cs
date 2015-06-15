@@ -3,6 +3,7 @@ using AgateLib.Geometry;
 using AgateLib.Geometry.CoordinateSystems;
 using AgateLib.Platform.WinForms;
 using AgateLib.Platform.WinForms.ApplicationModels;
+using ERY.Xle.Bootstrap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,10 +39,13 @@ namespace ERY.Xle.LoB
 
 			model.Run(() =>
 			{
-				XleCore core = new XleCore();
-				core.ProcessArguments(args);
+                var initializer = new WindsorInitializer();
+                var container = initializer.BootstrapContainer(typeof(LobProgram).Assembly);
 
-				core.Run(new LobFactory());
+                IXleStartup core = container.Resolve<IXleStartup>();
+                core.ProcessArguments(args);
+
+                core.Run();
 			});
 		}
 

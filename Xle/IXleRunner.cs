@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle
 {
-    public interface IXleCore : IXleService
+    public interface IXleRunner : IXleService
     {
-        void ProcessArguments(string[] args);
-
-        void Run(XleGameFactory xleFactory);
+        void Run(IXleGameFactory gameFactory);
     }
 }

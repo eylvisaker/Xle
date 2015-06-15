@@ -19,7 +19,7 @@ using System.Text;
 
 namespace ERY.Xle
 {
-	public class XleCore
+	public class XleCore : IXleService
 	{
 		#region --- Static Members ---
 
@@ -33,9 +33,8 @@ namespace ERY.Xle
 
 		private static XleCore inst;
 
-		private static bool returnToTitle = false;
-
-		public static XleGameFactory Factory
+        [Obsolete("Use systemState.Factory instead.")]
+        public static XleGameFactory Factory
 		{
 			get
 			{
@@ -48,66 +47,28 @@ namespace ERY.Xle
 
 		#endregion
 
-		private XleGameFactory mFactory;
+        [Obsolete("Use systemState.Factory instead.")]
+        private XleGameFactory mFactory { get { return (XleGameFactory)systemState.Factory; } }
 
-		XleData mData;
+        XleData mData
+        {
+            get { return systemState.Data; }
+            set { systemState.Data = value; }
+        }
 
 		public static TextArea TextArea { get; private set; }
+        XleSystemState systemState;
 
-		public XleCore()
+		public XleCore(XleSystemState systemState)
 		{
 			inst = this;
+            this.systemState = systemState;
 
 			Renderer = new XleRenderer();
 			Renderer.PlayerColor = XleColor.White;
 
 			TextArea = new TextArea();
 			Options = new XleOptions();
-		}
-
-		public void Run(XleGameFactory factory)
-		{
-			try
-			{
-				if (factory == null) throw new ArgumentNullException();
-
-				mFactory = factory;
-
-				AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
-
-				LoadGameFile();
-
-				InitializeConsole();
-
-				var wind = Display.CurrentWindow;
-				var coords = Display.Coordinates;
-				int height = coords.Height - windowBorderSize.Height * 2;
-				int width = (int)(320 / 200.0 * height);
-
-				windowBorderSize.Width = (coords.Width - width) / 2;
-
-				SoundMan.Load();
-
-				mFactory.LoadSurfaces();
-				mData.LoadDungeonMonsterSurfaces();
-
-				mFactory.Font.InterpolationHint = InterpolationMode.Fastest;
-				IXleTitleScreen titleScreen;
-
-				do
-				{
-					GameState = null;
-
-					titleScreen = mFactory.CreateTitleScreen();
-					titleScreen.Run();
-					returnToTitle = false;
-
-					RunGame(titleScreen.Player);
-
-				} while (titleScreen.Player != null);
-			}
-			catch (MainWindowClosedException)
-			{ }
 		}
 
 		static Size windowBorderSize = new Size(20, 20);
@@ -128,7 +89,7 @@ namespace ERY.Xle
 
 		#region --- Console Commands ---
 
-		private void InitializeConsole()
+		public void InitializeConsole()
 		{
 			AgateConsole.Initialize();
 
@@ -420,12 +381,14 @@ namespace ERY.Xle
 
 		#endregion
 
+        [Obsolete("Use SystemState.ReturnToTitle instead")]
 		public static bool ReturnToTitle
 		{
-			get { return XleCore.returnToTitle; }
-			set { XleCore.returnToTitle = value; }
+            get { return XleCore.inst.systemState.ReturnToTitle; }
+			set { XleCore.inst.systemState.ReturnToTitle = value; }
 		}
 
+        [Obsolete("Don't use this", true)]
 		private void LoadGameFile()
 		{
 			mData = new XleData();
@@ -487,7 +450,7 @@ namespace ERY.Xle
 
 			Keyboard.KeyDown += new InputEventHandler(Keyboard_KeyDown);
 
-			while (Display.CurrentWindow.IsClosed == false && returnToTitle == false)
+			while (Display.CurrentWindow.IsClosed == false && ReturnToTitle == false)
 			{
 				Redraw();
 			}
@@ -495,7 +458,7 @@ namespace ERY.Xle
 			Keyboard.KeyDown -= Keyboard_KeyDown;
 		}
 
-		private static void SetTilesAndCommands()
+		public static void SetTilesAndCommands()
 		{
 			GameState.Commands.Items.Clear();
 
@@ -561,7 +524,7 @@ namespace ERY.Xle
 			}
 		}
 
-		void Keyboard_KeyDown(InputEventArgs e)
+		public void Keyboard_KeyDown(InputEventArgs e)
 		{
 			if (AcceptKey == false)
 				return;

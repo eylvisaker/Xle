@@ -9,7 +9,7 @@ using System.Text;
 
 namespace ERY.Xle
 {
-	public abstract class XleGameFactory
+	public abstract class XleGameFactory : IXleGameFactory
 	{
 		public abstract string GameTitle { get; }
 

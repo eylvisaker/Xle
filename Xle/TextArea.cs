@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ERY.Xle
 {
-	public class TextArea
+	public class TextArea : ITextArea
 	{
 		class TextLine
 		{

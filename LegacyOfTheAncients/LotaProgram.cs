@@ -6,6 +6,7 @@ using AgateLib.Platform.WinForms.ApplicationModels;
 using AgateLib.Utility;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using ERY.Xle.Bootstrap;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,22 +48,14 @@ namespace ERY.Xle.LotA
 
             model.Run(() =>
             {
-                var container = BootstrapContainer();
+                var initializer = new WindsorInitializer();
+                var container = initializer.BootstrapContainer(typeof(LotaProgram).Assembly);
 
-                IXleCore core = container.Resolve<IXleCore>();
+                IXleStartup core = container.Resolve<IXleStartup>();
                 core.ProcessArguments(args);
 
-                core.Run(new LotaFactory());
+                core.Run();
             });
-        }
-
-        private static WindsorContainer BootstrapContainer()
-        {
-            var result = new WindsorContainer();
-
-            result.Install(FromAssembly.This());
-
-            return result;
         }
 
         public static IEnumerable<Commands.Command> CommonLotaCommands

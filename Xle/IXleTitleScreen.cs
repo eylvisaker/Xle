@@ -2,7 +2,7 @@
 
 namespace ERY.Xle
 {
-	public interface IXleTitleScreen
+	public interface IXleTitleScreen : IXleService
 	{
 		Player Player { get; }
 		void Run();
