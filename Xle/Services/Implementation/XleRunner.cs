@@ -2,6 +2,7 @@
 using AgateLib.DisplayLib;
 using AgateLib.InputLib.Legacy;
 using ERY.Xle.Commands;
+using ERY.Xle.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,62 +17,65 @@ namespace ERY.Xle
         private IXleLegacyCore legacyCore;
         private ITitleScreenFactory titleScreenFactory;
         private ITextArea textArea;
+        private IXleInput input;
 
         public XleRunner(
-            IXleLegacyCore legacyCore, 
-            XleSystemState systemState, 
+            IXleLegacyCore legacyCore,
+            XleSystemState systemState,
             ITitleScreenFactory titleScreenFactory,
-            ITextArea textArea)
+            ITextArea textArea,
+            IXleInput input)
         {
             this.legacyCore = legacyCore;
             this.systemState = systemState;
             this.titleScreenFactory = titleScreenFactory;
             this.textArea = textArea;
+            this.input = input;
         }
 
         public void Run(IXleGameFactory factory)
         {
-			try
-			{
-				if (factory == null) throw new ArgumentNullException();
+            try
+            {
+                if (factory == null) throw new ArgumentNullException();
 
-				systemState.Factory = factory;
+                systemState.Factory = factory;
 
-				AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
+                AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
-				InitializeConsole();
+                InitializeConsole();
 
-				var wind = Display.CurrentWindow;
-				var coords = Display.Coordinates;
-				int height = coords.Height - systemState.WindowBorderSize.Height * 2;
-				int width = (int)(320 / 200.0 * height);
+                var wind = Display.CurrentWindow;
+                var coords = Display.Coordinates;
+                int height = coords.Height - systemState.WindowBorderSize.Height * 2;
+                int width = (int)(320 / 200.0 * height);
 
                 systemState.WindowBorderSize = new AgateLib.Geometry.Size((coords.Width - width) / 2,
                     systemState.WindowBorderSize.Height);
 
-				SoundMan.Load();
+                SoundMan.Load();
 
-				systemState.Factory.LoadSurfaces();
-				legacyCore.Data.LoadDungeonMonsterSurfaces();
+                systemState.Factory.LoadSurfaces();
+                legacyCore.Data.LoadDungeonMonsterSurfaces();
 
-				systemState.Factory.Font.InterpolationHint = InterpolationMode.Fastest;
-				IXleTitleScreen titleScreen;
+                systemState.Factory.Font.InterpolationHint = InterpolationMode.Fastest;
+                IXleTitleScreen titleScreen;
 
-				do
-				{
-					legacyCore.GameState = null;
+                do
+                {
+                    legacyCore.GameState = null;
 
-					titleScreen = titleScreenFactory.CreateTitleScreen();
-					titleScreen.Run();
-					systemState.ReturnToTitle = false;
+                    titleScreen = titleScreenFactory.CreateTitleScreen();
+                    titleScreen.Run();
+                    systemState.ReturnToTitle = false;
 
-					RunGame(titleScreen.Player);
+                    RunGame(titleScreen.Player);
 
-				} while (titleScreen.Player != null);
-			}
-			catch (MainWindowClosedException)
-			{ }
-		}
+                } while (titleScreen.Player != null);
+            }
+            catch (MainWindowClosedException)
+            { }
+        }
 
         GameState GameState
         {
@@ -100,20 +104,13 @@ namespace ERY.Xle
 
             XleCore.Renderer.FontColor = GameState.Map.ColorScheme.TextColor;
             GameState.Commands.Prompt();
-
-            Keyboard.KeyDown += new InputEventHandler(Keyboard_KeyDown);
+            input.AcceptKey = true;
 
             while (Display.CurrentWindow.IsClosed == false && systemState.ReturnToTitle == false)
             {
                 Redraw();
             }
 
-            Keyboard.KeyDown -= Keyboard_KeyDown;
-        }
-
-        private void Keyboard_KeyDown(InputEventArgs e)
-        {
-            legacyCore.Keyboard_KeyDown(e);
         }
 
         private void Redraw()

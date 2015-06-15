@@ -29,13 +29,6 @@ namespace ERY.Xle
             legacyCore.InitializeConsole();
         }
 
-
-        public void Keyboard_KeyDown(AgateLib.InputLib.Legacy.InputEventArgs e)
-        {
-            legacyCore.Keyboard_KeyDown(e);
-        }
-
-
         public void Redraw()
         {
             XleCore.Redraw();

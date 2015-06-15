@@ -81,21 +81,23 @@
     <Compile Include="Direction.cs" />
     <Compile Include="DirectionHelper.cs" />
     <Compile Include="Equipment.cs" />
-    <Compile Include="ITextArea.cs" />
-    <Compile Include="ITitleScreenFactory.cs" />
-    <Compile Include="IXleFactory.cs" />
-    <Compile Include="IXleGameFactory.cs" />
-    <Compile Include="IXleLegacyCore.cs" />
-    <Compile Include="IXleRunner.cs" />
-    <Compile Include="IXleService.cs" />
-    <Compile Include="IXleStartup.cs" />
+    <Compile Include="Services\Implementation\XleInput.cs" />
+    <Compile Include="Services\ITextArea.cs" />
+    <Compile Include="Services\ITitleScreenFactory.cs" />
+    <Compile Include="Services\IXleFactory.cs" />
+    <Compile Include="Services\IXleGameFactory.cs" />
+    <Compile Include="Services\IXleInput.cs" />
+    <Compile Include="Services\IXleLegacyCore.cs" />
+    <Compile Include="Services\IXleRunner.cs" />
+    <Compile Include="Services\IXleService.cs" />
+    <Compile Include="Services\IXleStartup.cs" />
     <Compile Include="MainWindowClosedException.cs" />
     <Compile Include="Maps\DungeonMonster.cs" />
     <Compile Include="Data\DungeonMonsterData.cs" />
     <Compile Include="GameSpeed.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="ItemContainer.cs" />
-    <Compile Include="IXleTitleScreen.cs" />
+    <Compile Include="Services\IXleTitleScreen.cs" />
     <Compile Include="Maps\AnimationType.cs" />
     <Compile Include="Maps\EntryPoint.cs" />
     <Compile Include="Maps\GroupType.cs" />
@@ -121,7 +123,7 @@
     <Compile Include="Commands\CommandList.cs" />
     <Compile Include="Maps\Renderers\XleMapRenderer.cs" />
     <Compile Include="Rendering\XleRenderer.cs" />
-    <Compile Include="TextArea.cs" />
+    <Compile Include="Services\Implementation\TextArea.cs" />
     <Compile Include="Maps\TileInfo.cs" />
     <Compile Include="Maps\TileSet.cs" />
     <Compile Include="XleEventTypes\Door.cs" />
@@ -172,7 +174,7 @@
     <Compile Include="Maps\XleMapTypes\Map3D.cs" />
     <Compile Include="Maps\XleMapTypes\Museum.cs" />
     <Compile Include="XleColor.cs" />
-    <Compile Include="XleCore.cs" />
+    <Compile Include="Services\Implementation\XleCore.cs" />
     <Compile Include="XleBaseTypeFactory.cs" />
     <Compile Include="Maps\XleMap.cs" />
     <Compile Include="Maps\MapList.cs" />
@@ -188,11 +190,11 @@
     <Compile Include="Maps\XleMapTypes\Temple.cs" />
     <Compile Include="Maps\XleMapTypes\Town.cs" />
     <Compile Include="Data\MagicSpell.cs" />
-    <Compile Include="XleLegacyCoreProxy.cs" />
+    <Compile Include="Services\Implementation\XleLegacyCoreProxy.cs" />
     <Compile Include="XleOptions.cs" />
-    <Compile Include="XleRunner.cs" />
-    <Compile Include="XleStartup.cs" />
-    <Compile Include="XleSystemState.cs" />
+    <Compile Include="Services\Implementation\XleRunner.cs" />
+    <Compile Include="Services\Implementation\XleStartup.cs" />
+    <Compile Include="Services\XleSystemState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">

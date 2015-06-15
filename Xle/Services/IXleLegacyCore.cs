@@ -13,8 +13,6 @@ namespace ERY.Xle
 
         void InitializeConsole();
 
-        void Keyboard_KeyDown(AgateLib.InputLib.Legacy.InputEventArgs e);
-
         void Redraw();
 
         void SetTilesAndCommands();
