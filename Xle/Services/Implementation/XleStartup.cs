@@ -1,4 +1,5 @@
 ﻿using ERY.Xle.Data;
+using ERY.Xle.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace ERY.Xle
         IXleGameFactory gameFactory;
         XleSystemState systemState;
 
-        public XleStartup(IXleRunner runner, IXleGameFactory xleGameFactory, XleSystemState systemState)
+        public XleStartup(IXleRunner runner, IXleGameFactory xleGameFactory, XleSystemState systemState, IXleConsole console)
         {
             this.runner = runner;
             this.gameFactory = xleGameFactory;

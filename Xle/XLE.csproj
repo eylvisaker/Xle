@@ -81,9 +81,11 @@
     <Compile Include="Direction.cs" />
     <Compile Include="DirectionHelper.cs" />
     <Compile Include="Equipment.cs" />
+    <Compile Include="Services\Implementation\XleConsole.cs" />
     <Compile Include="Services\Implementation\XleInput.cs" />
     <Compile Include="Services\ITextArea.cs" />
     <Compile Include="Services\ITitleScreenFactory.cs" />
+    <Compile Include="Services\IXleConsole.cs" />
     <Compile Include="Services\IXleFactory.cs" />
     <Compile Include="Services\IXleGameFactory.cs" />
     <Compile Include="Services\IXleInput.cs" />

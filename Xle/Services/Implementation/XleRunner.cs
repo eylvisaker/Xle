@@ -18,19 +18,22 @@ namespace ERY.Xle
         private ITitleScreenFactory titleScreenFactory;
         private ITextArea textArea;
         private IXleInput input;
+        private GameState gameState;
 
         public XleRunner(
             IXleLegacyCore legacyCore,
             XleSystemState systemState,
             ITitleScreenFactory titleScreenFactory,
             ITextArea textArea,
-            IXleInput input)
+            IXleInput input,
+            GameState gameState)
         {
             this.legacyCore = legacyCore;
             this.systemState = systemState;
             this.titleScreenFactory = titleScreenFactory;
             this.textArea = textArea;
             this.input = input;
+            this.gameState = gameState;
         }
 
         public void Run(IXleGameFactory factory)
@@ -42,8 +45,6 @@ namespace ERY.Xle
                 systemState.Factory = factory;
 
                 AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
-
-                InitializeConsole();
 
                 var wind = Display.CurrentWindow;
                 var coords = Display.Coordinates;
@@ -63,7 +64,7 @@ namespace ERY.Xle
 
                 do
                 {
-                    legacyCore.GameState = null;
+                    gameState.Initialize();
 
                     titleScreen = titleScreenFactory.CreateTitleScreen();
                     titleScreen.Run();
@@ -77,12 +78,6 @@ namespace ERY.Xle
             { }
         }
 
-        GameState GameState
-        {
-            get { return legacyCore.GameState; }
-            set { legacyCore.GameState = value; }
-        }
-
         private void RunGame(Player thePlayer)
         {
             if (thePlayer == null)
@@ -90,20 +85,20 @@ namespace ERY.Xle
 
             textArea.Clear();
 
-            GameState = new Xle.GameState();
+            gameState.Initialize();
 
-            GameState.Player = thePlayer;
-            GameState.Commands = new CommandList(GameState);
+            gameState.Player = thePlayer;
+            gameState.Commands = new CommandList(gameState);
 
-            GameState.Map = LoadMap(GameState.Player.MapID);
-            GameState.Map.OnLoad(GameState.Player);
+            gameState.Map = LoadMap(gameState.Player.MapID);
+            gameState.Map.OnLoad(gameState.Player);
 
-            systemState.Factory.SetGameSpeed(GameState, thePlayer.Gamespeed);
+            systemState.Factory.SetGameSpeed(gameState, thePlayer.Gamespeed);
 
             SetTilesAndCommands();
 
-            XleCore.Renderer.FontColor = GameState.Map.ColorScheme.TextColor;
-            GameState.Commands.Prompt();
+            XleCore.Renderer.FontColor = gameState.Map.ColorScheme.TextColor;
+            gameState.Commands.Prompt();
             input.AcceptKey = true;
 
             while (Display.CurrentWindow.IsClosed == false && systemState.ReturnToTitle == false)
@@ -126,11 +121,6 @@ namespace ERY.Xle
         private Maps.XleMap LoadMap(int p)
         {
             return legacyCore.LoadMap(p);
-        }
-
-        private void InitializeConsole()
-        {
-            legacyCore.InitializeConsole();
         }
 
     }

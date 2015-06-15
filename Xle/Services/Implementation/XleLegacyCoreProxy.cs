@@ -11,23 +11,13 @@ namespace ERY.Xle
     {
         XleCore legacyCore;
 
-        public XleLegacyCoreProxy(XleCore legacyCore)
+        public XleLegacyCoreProxy(XleCore legacyCore, GameState gameState)
         {
             this.legacyCore = legacyCore;
+            XleCore.GameState = gameState;
         }
 
         public XleData Data { get { return XleCore.Data; } }
-        public GameState GameState
-        {
-            get { return XleCore.GameState; }
-            set { XleCore.GameState = value; }
-        }
-
-
-        public void InitializeConsole()
-        {
-            legacyCore.InitializeConsole();
-        }
 
         public void Redraw()
         {

@@ -7,19 +7,37 @@ using System.Text;
 
 namespace ERY.Xle
 {
-	public class GameState
-	{
-		public GameState()
-		{
-			GameSpeed = new GameSpeed();
-		}
+    public class GameState : IXleService
+    {
+        public GameState()
+        {
+            Initialize();
+        }
 
-		public Player Player { get; set; }
-		public XleMap Map { get; set; }
-		public MapExtender MapExtender { get { return Map.Extender; } }
+        public void Initialize()
+        {
+            GameSpeed = new GameSpeed();
+            Player = null;
+            Map = null;
+            Commands = null;
+        }
 
-		public GameSpeed GameSpeed { get; set; }
+        public Player Player { get; set; }
+        public XleMap Map { get; set; }
+        public MapExtender MapExtender
+        {
+            get
+            {
+                if (Map == null) 
+                    return null; 
+                
+                return Map.Extender;
+            }
+        }
 
-		public  ERY.Xle.Commands.CommandList Commands;
-	}
+        public GameSpeed GameSpeed { get; set; }
+
+        public ERY.Xle.Commands.CommandList Commands;
+
+    }
 }

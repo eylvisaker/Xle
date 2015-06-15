@@ -12,5 +12,7 @@ namespace ERY.Xle
         FontSurface Font { get; }
 
         void SetGameSpeed(GameState GameState, int p);
+
+        void CheatLevel(Player player, int level);
     }
 }

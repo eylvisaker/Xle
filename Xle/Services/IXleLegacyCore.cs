@@ -1,4 +1,5 @@
 ﻿using ERY.Xle.Data;
+using ERY.Xle.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,11 @@ namespace ERY.Xle
     public interface IXleLegacyCore : IXleService
     {
         XleData Data { get; }
-        GameState GameState { get; set; }
-
-        void InitializeConsole();
 
         void Redraw();
 
         void SetTilesAndCommands();
 
-        Maps.XleMap LoadMap(int p);
+        XleMap LoadMap(int mapId);
     }
 }
