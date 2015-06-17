@@ -1,5 +1,6 @@
 ﻿using AgateLib.Diagnostics;
 using AgateLib.Geometry;
+
 using ERY.Xle.Data;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
@@ -17,12 +18,16 @@ namespace ERY.Xle.Services.Implementation
     {
         private GameState GameState;
         private ITextArea TextArea;
+        private XleData Data;
+        private ICommandList commands;
 
-        public XleConsole(GameState gameState, ITextArea textArea, XleSystemState systemState)
+        public XleConsole(GameState gameState, ITextArea textArea, ICommandList commands, XleSystemState systemState, XleData data)
         {
             this.GameState = gameState;
             this.TextArea = textArea;
+            this.commands = commands;
             this.systemState = systemState;
+            this.Data = data;
 
             AgateConsole.Initialize();
 
@@ -39,8 +44,6 @@ namespace ERY.Xle.Services.Implementation
             AgateConsole.Commands.Add("encounters", new Action<string>(CheatEncounters));
             AgateConsole.Commands.Add("coins", new Action<string>(CheatCoins));
         }
-
-        XleData Data { get { return systemState.Data; } }
 
         [Description("Turns encounters on or off.\nUsage: encounters [on|off]")]
         private void CheatEncounters(string action)
@@ -224,7 +227,7 @@ namespace ERY.Xle.Services.Implementation
             ChangeMap(GameState.Player, mapInfo.ID, entryPoint);
 
             TextArea.Clear();
-            GameState.Commands.Prompt();
+            commands.Prompt();
         }
 
         private void ChangeMap(Player player, int mapId, int entryPoint)
@@ -269,7 +272,7 @@ namespace ERY.Xle.Services.Implementation
             ChangeMap(player, map.MapID, new Point(targetX, targetY));
 
             TextArea.Clear();
-            GameState.Commands.Prompt();
+            commands.Prompt();
         }
 
         private void ChangeMap(Player player, int mapId, Point targetPoint)

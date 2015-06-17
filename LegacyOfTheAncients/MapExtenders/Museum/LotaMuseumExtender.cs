@@ -9,7 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum
 {
@@ -37,13 +39,13 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 			mExhibits.Add(0x5F, new MuseumDisplays.AncientArtifact());
 		}
 
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-			commands.Items.Add(new Commands.Rob());
-			commands.Items.Add(new Commands.Take());
-			commands.Items.Add(new Commands.Speak());
+			commands.Items.Add(new Rob());
+			commands.Items.Add(new Take());
+			commands.Items.Add(new Speak());
 		}
 
 		public override Exhibit GetExhibitByTile(int tile)

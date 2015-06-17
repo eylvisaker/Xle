@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using ERY.Xle.Services;
+using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LoB
 {
@@ -51,18 +52,18 @@ namespace ERY.Xle.LoB
 			});
 		}
 
-		public static IEnumerable<Commands.Command> CommonLobCommands
+		public static IEnumerable<Command> CommonLobCommands
 		{
 			get
 			{
-				yield return new Commands.ArmorCommand();
-				yield return new Commands.Fight();
-				yield return new Commands.Gamespeed();
-				yield return new Commands.Inventory();
-				yield return new Commands.Pass();
-				yield return new Commands.Use();
-				yield return new Commands.WeaponCommand();
-				yield return new Commands.Xamine();
+				yield return new ArmorCommand();
+				yield return new Fight();
+				yield return new Gamespeed();
+				yield return new Inventory();
+				yield return new Pass();
+				yield return new Use();
+				yield return new WeaponCommand();
+				yield return new Xamine();
 			}
 		}
 	}

@@ -7,12 +7,15 @@ namespace ERY.Xle.Services.Implementation
         IXleRunner runner;
         IXleGameFactory gameFactory;
         XleSystemState systemState;
+        XleData data;
 
-        public XleStartup(IXleRunner runner, IXleGameFactory xleGameFactory, XleSystemState systemState, IXleConsole console)
+        public XleStartup(IXleRunner runner, IXleGameFactory xleGameFactory, XleSystemState systemState, IXleConsole console, XleData data)
         {
             this.runner = runner;
             this.gameFactory = xleGameFactory;
             this.systemState = systemState;
+            this.data = data;
+            systemState.Data = data;
         }
 
         public void ProcessArguments(string[] args)
@@ -30,8 +33,7 @@ namespace ERY.Xle.Services.Implementation
 
         private void LoadGameFile()
         {
-            systemState.Data = new XleData();
-            systemState.Data.LoadGameFile("Game.xml");
+            data.LoadGameFile("Game.xml");
         }
 
         public void Run()

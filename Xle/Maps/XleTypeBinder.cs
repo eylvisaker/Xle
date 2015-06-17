@@ -1,4 +1,5 @@
-﻿using ERY.Xle.XleEventTypes;
+﻿using ERY.Xle.Maps.XleMapTypes;
+using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Stores;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace ERY.Xle.Maps
 			MapSpecificStoreToGenericStore("Healer");
 
 			typemap.Add("ERY.Xle.XleEventTypes.LeaveEvent", typeof(Script));
+            typemap.Add("ERY.Xle.XleEvent", typeof(XleEvent));
+            typemap.Add("ERY.Xle.TileSet", typeof(TileSet));
+            typemap.Add("ERY.Xle.Maps.XleMapTypes.Castle", typeof(CastleMap));
 		}
 
 		private void MapSpecificStore(string p, Type targetType)

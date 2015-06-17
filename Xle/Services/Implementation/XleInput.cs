@@ -9,9 +9,13 @@ namespace ERY.Xle.Services.Implementation
 {
     public class XleInput : IXleInput
     {
-        public XleInput()
+        ICommandList commands;
+
+        public XleInput(ICommandList commands)
         {
-            Keyboard.KeyDown += new InputEventHandler(Keyboard_KeyDown);
+            this.commands = commands;
+
+            Keyboard.KeyDown += Keyboard_KeyDown;
         }
 
         private void Keyboard_KeyDown(InputEventArgs e)
@@ -22,7 +26,7 @@ namespace ERY.Xle.Services.Implementation
             try
             {
                 AcceptKey = false;
-                XleCore.GameState.Commands.DoCommand(e.KeyCode);
+                commands.DoCommand(e.KeyCode);
             }
             finally
             {

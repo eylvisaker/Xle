@@ -1,9 +1,11 @@
 ﻿using AgateLib.Geometry;
-using ERY.Xle.Commands;
+
 using ERY.Xle.Data;
 using ERY.Xle.Maps.Renderers;
 using ERY.Xle.Rendering;
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Implementation.Commands;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
@@ -113,7 +115,7 @@ namespace ERY.Xle.Maps.Extenders
 		}
 
 
-		public virtual void SetCommands(CommandList commands)
+		public virtual void SetCommands(ICommandList commands)
 		{
 
 		}

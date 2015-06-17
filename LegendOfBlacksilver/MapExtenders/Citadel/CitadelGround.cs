@@ -1,4 +1,6 @@
 ﻿using ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders;
+using ERY.Xle.Services;
+using ERY.Xle.Services.Implementation.Commands;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Maps.Extenders;
 using System;
@@ -22,14 +24,14 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 			scheme.FrameHighlightColor = XleColor.Yellow;
 		}
 
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Commands.Open());
-			commands.Items.Add(new Commands.Magic());
-			commands.Items.Add(new Commands.Take());
-			commands.Items.Add(new Commands.Speak());
+			commands.Items.Add(new Open());
+			commands.Items.Add(new Magic());
+			commands.Items.Add(new Take());
+			commands.Items.Add(new Speak());
 		}
 
 		public override double ChanceToHitGuard(Player player, Guard guard, int distance)

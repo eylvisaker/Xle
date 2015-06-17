@@ -1,6 +1,8 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.LoB.MapExtenders.Castle.EventExtenders;
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Implementation.Commands;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Maps.Extenders;
 using System;
@@ -73,15 +75,15 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 			return 32;
 		}
 
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Commands.Leave());
-			commands.Items.Add(new Commands.Open());
-			commands.Items.Add(new Commands.Magic());
-			commands.Items.Add(new Commands.Take());
-			commands.Items.Add(new Commands.Speak());
+			commands.Items.Add(new Leave());
+			commands.Items.Add(new Open());
+			commands.Items.Add(new Magic());
+			commands.Items.Add(new Take());
+			commands.Items.Add(new Speak());
 		}
 
 		public override void SetColorScheme(ColorScheme scheme)

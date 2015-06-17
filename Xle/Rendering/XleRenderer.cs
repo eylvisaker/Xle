@@ -9,13 +9,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.Rendering
 {
-	public class XleRenderer
+	public class XleRenderer : IXleRenderer
 	{
+	    public XleRenderer(ICommandList commands)
+	    {
+	        this.commands = commands;
+	    }
+
 		public Size WindowSize { get; set; }
+        public Rectangle Coordinates { get { return Display.Coordinates; } }
 
 		Size GameAreaSize { get { return new Size(640, 400); } }
 
@@ -371,7 +378,7 @@ namespace ERY.Xle.Rendering
 			FontColor = map.ColorScheme.TextColor;
 			Color menuColor = map.ColorScheme.TextColor;
 
-			if (XleCore.GameState.Commands.IsLeftMenuActive)
+			if (commands.IsLeftMenuActive)
 			{
 				menuColor = XleColor.Yellow;
 			}
@@ -393,11 +400,11 @@ namespace ERY.Xle.Rendering
 
 			i = 0;
 			int cursorPos = 0;
-			foreach (var cmd in XleCore.GameState.Commands.Items)
+			foreach (var cmd in commands.Items)
 			{
 				WriteText(48, 16 * (i + 1), cmd.Name, menuColor);
 
-				if (cmd == XleCore.GameState.Commands.CurrentCommand)
+				if (cmd == commands.CurrentCommand)
 					cursorPos = i;
 
 				i++;
@@ -562,6 +569,7 @@ namespace ERY.Xle.Rendering
 		// TODO: Which of these are obsolete?
 		//static bool updating = false;
 		static double lastRaftAnim = 0;
+        private ICommandList commands;
 		//static double lastCharAnim = 0;
 		//static int lastOceanSound = 0;
 		//static double timer;

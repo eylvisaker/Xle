@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Windows.Input;
 
 using AgateLib;
 using AgateLib.DisplayLib;
+using AgateLib.Geometry;
 
-using ERY.Xle.Commands;
+using ERY.Xle.Rendering;
+using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.Services.Implementation
 {
@@ -14,7 +17,9 @@ namespace ERY.Xle.Services.Implementation
         private ITitleScreenFactory titleScreenFactory;
         private ITextArea textArea;
         private IXleInput input;
+        private IXleRenderer renderer;
         private GameState gameState;
+        private ICommandList commands;
 
         public XleRunner(
             IXleLegacyCore legacyCore,
@@ -22,6 +27,8 @@ namespace ERY.Xle.Services.Implementation
             ITitleScreenFactory titleScreenFactory,
             ITextArea textArea,
             IXleInput input,
+            IXleRenderer renderer,
+            ICommandList commands,
             GameState gameState)
         {
             this.legacyCore = legacyCore;
@@ -29,6 +36,8 @@ namespace ERY.Xle.Services.Implementation
             this.titleScreenFactory = titleScreenFactory;
             this.textArea = textArea;
             this.input = input;
+            this.renderer = renderer;
+            this.commands = commands;
             this.gameState = gameState;
         }
 
@@ -42,12 +51,12 @@ namespace ERY.Xle.Services.Implementation
 
                 AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
-                var wind = Display.CurrentWindow;
-                var coords = Display.Coordinates;
+                Rectangle coords = renderer.Coordinates;
                 int height = coords.Height - systemState.WindowBorderSize.Height * 2;
                 int width = (int)(320 / 200.0 * height);
 
-                systemState.WindowBorderSize = new AgateLib.Geometry.Size((coords.Width - width) / 2,
+                systemState.WindowBorderSize = new Size(
+                    (coords.Width - width) / 2,
                     systemState.WindowBorderSize.Height);
 
                 SoundMan.Load();
@@ -84,7 +93,6 @@ namespace ERY.Xle.Services.Implementation
             gameState.Initialize();
 
             gameState.Player = thePlayer;
-            gameState.Commands = new CommandList(gameState);
 
             gameState.Map = LoadMap(gameState.Player.MapID);
             gameState.Map.OnLoad(gameState.Player);
@@ -93,8 +101,8 @@ namespace ERY.Xle.Services.Implementation
 
             SetTilesAndCommands();
 
-            XleCore.Renderer.FontColor = gameState.Map.ColorScheme.TextColor;
-            gameState.Commands.Prompt();
+            renderer.FontColor = gameState.Map.ColorScheme.TextColor;
+            commands.Prompt();
             input.AcceptKey = true;
 
             while (Display.CurrentWindow.IsClosed == false && systemState.ReturnToTitle == false)

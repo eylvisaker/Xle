@@ -1,4 +1,6 @@
-﻿using AgateLib.Geometry;
+﻿using System;
+
+using AgateLib.Geometry;
 
 namespace ERY.Xle.Services
 {
@@ -9,6 +11,7 @@ namespace ERY.Xle.Services
 
         public bool ReturnToTitle { get; set; }
 
+        [Obsolete("Use XleData as a service instead.")]
         public Data.XleData Data { get; set; }
     }
 }

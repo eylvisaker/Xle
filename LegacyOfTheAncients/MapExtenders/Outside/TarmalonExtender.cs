@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LotA.MapExtenders.Outside
 {
@@ -31,14 +33,14 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			set { MapRenderer.WaterAnimLevel = value; }
 		}
 
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-			commands.Items.Add(new Commands.Disembark());
-			commands.Items.Add(new Commands.End());
-			commands.Items.Add(new Commands.Magic());
-			commands.Items.Add(new Commands.Speak());
+			commands.Items.Add(new Disembark());
+			commands.Items.Add(new End());
+			commands.Items.Add(new Magic());
+			commands.Items.Add(new Speak());
 		}
 
 		public override void SetColorScheme(ColorScheme scheme)

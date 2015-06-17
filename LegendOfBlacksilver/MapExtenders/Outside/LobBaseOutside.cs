@@ -1,4 +1,6 @@
 ﻿using ERY.Xle.LoB.MapExtenders.Outside.Events;
+using ERY.Xle.Services;
+using ERY.Xle.Services.Implementation.Commands;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Maps.Extenders;
 using System;
@@ -24,15 +26,15 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 			}
 			return base.CreateEventExtender(evt, defaultExtender);
 		}
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Commands.Disembark());
-			commands.Items.Add(new Commands.End());
-			commands.Items.Add(new Commands.Magic());
-			commands.Items.Add(new Commands.Rob());
-			commands.Items.Add(new Commands.Speak());
+			commands.Items.Add(new Disembark());
+			commands.Items.Add(new End());
+			commands.Items.Add(new Magic());
+			commands.Items.Add(new Rob());
+			commands.Items.Add(new Speak());
 		}
 		public override int StepSize
 		{

@@ -1,5 +1,7 @@
 ﻿using ERY.Xle.LotA.MapExtenders.Castle.Events;
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Implementation.Commands;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Maps.Extenders;
 using System;
@@ -22,14 +24,14 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 			Lota.SetMuseumCoinOffers(state);
 		}
 
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-			commands.Items.Add(new Commands.Magic());
-			commands.Items.Add(new Commands.Open());
-			commands.Items.Add(new Commands.Take());
-			commands.Items.Add(new Commands.Speak());
+			commands.Items.Add(new Magic());
+			commands.Items.Add(new Open());
+			commands.Items.Add(new Take());
+			commands.Items.Add(new Speak());
 		}
 		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{

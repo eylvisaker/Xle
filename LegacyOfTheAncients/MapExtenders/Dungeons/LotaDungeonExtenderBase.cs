@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
@@ -36,14 +38,14 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			get { return XleCore.Options.EnhancedGameplay; }
 		}
 
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-			commands.Items.Add(new Commands.Climb());
-			commands.Items.Add(new Commands.End());
-			commands.Items.Add(new Commands.Magic());
-			commands.Items.Add(new Commands.Open());
+			commands.Items.Add(new Climb());
+			commands.Items.Add(new End());
+			commands.Items.Add(new Magic());
+			commands.Items.Add(new Open());
 		}
 
 		protected abstract int StrengthBoost { get; }

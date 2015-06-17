@@ -14,7 +14,7 @@ using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes;
-using ERY.Xle.Commands;
+
 using AgateLib.IO;
 
 namespace ERY.Xle.Maps

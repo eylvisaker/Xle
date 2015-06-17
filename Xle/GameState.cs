@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services;
+using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle
 {
@@ -21,7 +22,6 @@ namespace ERY.Xle
             GameSpeed = new GameSpeed();
             Player = null;
             Map = null;
-            Commands = null;
         }
 
         public Player Player { get; set; }
@@ -39,7 +39,8 @@ namespace ERY.Xle
 
         public GameSpeed GameSpeed { get; set; }
 
-        public ERY.Xle.Commands.CommandList Commands;
+        [Obsolete("Use ICommandList as a service instead.", true)]
+        public CommandList Commands;
 
     }
 }

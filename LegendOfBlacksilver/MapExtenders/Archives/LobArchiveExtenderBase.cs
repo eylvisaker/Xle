@@ -5,20 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives
 {
 	class LobArchiveExtenderBase : MuseumExtender
 	{
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Commands.Leave { PromptText = "Leave the archives?" });
-			commands.Items.Add(new Commands.Open());
-			commands.Items.Add(new Commands.Rob());
-			commands.Items.Add(new Commands.Take());
+			commands.Items.Add(new Leave { PromptText = "Leave the archives?" });
+			commands.Items.Add(new Open());
+			commands.Items.Add(new Rob());
+			commands.Items.Add(new Take());
 		}
 
 		public override Maps.Map3DSurfaces Surfaces(GameState state)

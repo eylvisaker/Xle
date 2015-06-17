@@ -7,21 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
 	abstract class LobDungeonBase : DungeonExtender
 	{
-		public override void SetCommands(Commands.CommandList commands)
+		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Commands.Climb());
-			commands.Items.Add(new Commands.End());
-			commands.Items.Add(new Commands.Magic());
-			commands.Items.Add(new Commands.Open());
-			commands.Items.Add(new Commands.Speak());
+			commands.Items.Add(new Climb());
+			commands.Items.Add(new End());
+			commands.Items.Add(new Magic());
+			commands.Items.Add(new Open());
+			commands.Items.Add(new Speak());
 		}
 
 		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
