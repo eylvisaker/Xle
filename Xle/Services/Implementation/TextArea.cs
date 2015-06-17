@@ -1,11 +1,9 @@
-﻿using AgateLib.Geometry;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
-namespace ERY.Xle
+using AgateLib.Geometry;
+
+namespace ERY.Xle.Services.Implementation
 {
 	public class TextArea : ITextArea
 	{

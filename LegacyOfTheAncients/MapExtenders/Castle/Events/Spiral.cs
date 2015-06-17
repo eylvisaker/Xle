@@ -1,11 +1,10 @@
-﻿using ERY.Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle
+using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleEventTypes.Extenders;
+
+namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
 	public class Spiral : EventExtender
 	{

@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ERY.Xle
+namespace ERY.Xle.Data
 {
 	public class Monster
 	{

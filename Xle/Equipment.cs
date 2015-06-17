@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Data;
+using ERY.Xle.Services.Implementation;
+
 namespace ERY.Xle
 {
 	public abstract class Equipment : IXleSerializable

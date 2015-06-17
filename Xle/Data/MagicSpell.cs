@@ -1,6 +1,4 @@
-using System;
-
-namespace ERY.Xle
+namespace ERY.Xle.Data
 {
 	public class MagicSpell
 	{

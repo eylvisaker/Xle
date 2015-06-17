@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 using AgateLib;
 using AgateLib.Diagnostics;
 using AgateLib.DisplayLib;
@@ -5,20 +8,13 @@ using AgateLib.Geometry;
 using AgateLib.InputLib;
 using AgateLib.InputLib.Legacy;
 using AgateLib.Platform;
-using ERY.Xle.Commands;
+
 using ERY.Xle.Data;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Rendering;
-using ERY.Xle.Services;
-using ERY.Xle.XleEventTypes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
-namespace ERY.Xle
+namespace ERY.Xle.Services.Implementation
 {
 	public class XleCore : IXleService
 	{

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.LotA.MapExtenders.Castle.Events;
+
 namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
 	class FinalMagicIce : MagicIce

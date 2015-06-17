@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AgateLib.Serialization.Xle;
+﻿using AgateLib.Serialization.Xle;
 
-namespace ERY.Xle
+namespace ERY.Xle.Maps
 {
 	public class MapData : IXleSerializable
 	{

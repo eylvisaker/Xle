@@ -1,10 +1,8 @@
 ﻿using AgateLib.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace ERY.Xle
+using ERY.Xle.Data;
+
+namespace ERY.Xle.Maps
 {
 	public class DungeonMonster
 	{

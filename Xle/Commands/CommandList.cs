@@ -6,6 +6,7 @@ using AgateLib.DisplayLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using ERY.Xle.Commands;
+using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.Commands
 {

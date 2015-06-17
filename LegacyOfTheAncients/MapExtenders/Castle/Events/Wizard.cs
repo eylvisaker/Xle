@@ -1,10 +1,7 @@
-﻿using ERY.Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ERY.Xle.Services.Implementation;
+using ERY.Xle.XleEventTypes.Extenders;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle
+namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
 	class Wizard : EventExtender
 	{

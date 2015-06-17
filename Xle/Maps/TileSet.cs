@@ -1,11 +1,12 @@
-﻿using AgateLib.Serialization.Xle;
-using ERY.Xle.Maps;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace ERY.Xle
+using AgateLib.Serialization.Xle;
+
+using ERY.Xle.Services.Implementation;
+
+namespace ERY.Xle.Maps
 {
 	public class TileSet : IXleSerializable, IEnumerable<KeyValuePair<int, TileInfo>>
 	{

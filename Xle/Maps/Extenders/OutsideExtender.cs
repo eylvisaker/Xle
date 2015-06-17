@@ -1,8 +1,11 @@
 ﻿using AgateLib.Geometry;
 using AgateLib.InputLib;
 using AgateLib.InputLib.Legacy;
+
+using ERY.Xle.Data;
 using ERY.Xle.Maps.Renderers;
 using ERY.Xle.Maps.XleMapTypes;
+using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders.Common;

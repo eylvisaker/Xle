@@ -10,9 +10,12 @@ using AgateLib.Geometry;
 using AgateLib.Platform;
 using AgateLib.InputLib.Legacy;
 
+using ERY.Xle.Services;
+using ERY.Xle.Services.Implementation;
+
 namespace ERY.Xle.LotA.TitleScreen
 {
-	public class LotaTitleScreen : ERY.Xle.IXleTitleScreen
+	public class LotaTitleScreen : IXleTitleScreen
 	{
 		TitleState state = new Splash();
 

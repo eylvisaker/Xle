@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Services.Implementation;
+
 namespace ERY.Xle.LotA.TitleScreen
 {
 	public abstract class FileMenu : TitleState

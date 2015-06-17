@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ERY.Xle
+﻿namespace ERY.Xle.Services
 {
 	public interface IXleTitleScreen : IXleService
 	{

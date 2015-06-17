@@ -13,6 +13,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services;
+
 namespace ERY.Xle.LotA
 {
     static class LotaProgram

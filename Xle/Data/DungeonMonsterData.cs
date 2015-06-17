@@ -1,11 +1,9 @@
-﻿using AgateLib.DisplayLib;
-using AgateLib.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace ERY.Xle
+using AgateLib.DisplayLib;
+using AgateLib.Geometry;
+
+namespace ERY.Xle.Data
 {
 	public class DungeonMonsterData
 	{

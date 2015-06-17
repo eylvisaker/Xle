@@ -1,11 +1,6 @@
 ﻿using ERY.Xle.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ERY.Xle
+namespace ERY.Xle.Services.Implementation
 {
     public class XleLegacyCoreProxy : IXleLegacyCore
     {

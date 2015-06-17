@@ -1,5 +1,7 @@
 ﻿using ERY.Xle.LotA.MapExtenders.Towns.Stores;
 using ERY.Xle.Maps.Extenders;
+using ERY.Xle.Services.Implementation;
+using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Stores;
 using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;

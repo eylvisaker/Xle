@@ -6,6 +6,7 @@ using AgateLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.Maps.XleMapTypes;
+using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle
 {

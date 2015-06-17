@@ -1,4 +1,5 @@
-﻿using ERY.Xle.XleEventTypes.Stores.Extenders;
+﻿using ERY.Xle.Services.Implementation;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

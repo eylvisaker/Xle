@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.XleEventTypes;
+
 namespace ERY.Xle.LotA.MapExtenders.Towns
 {
 	class EagleHollow : LotaTown

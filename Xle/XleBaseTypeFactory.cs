@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
+using ERY.Xle.XleEventTypes;
+
 namespace ERY.Xle
 {
 	public static class XleBaseTypeFactory

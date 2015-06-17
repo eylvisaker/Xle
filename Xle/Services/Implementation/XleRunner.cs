@@ -1,15 +1,11 @@
-﻿using AgateLib;
-using AgateLib.DisplayLib;
-using AgateLib.InputLib.Legacy;
-using ERY.Xle.Commands;
-using ERY.Xle.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
-namespace ERY.Xle
+using AgateLib;
+using AgateLib.DisplayLib;
+
+using ERY.Xle.Commands;
+
+namespace ERY.Xle.Services.Implementation
 {
     public class XleRunner : IXleRunner
     {

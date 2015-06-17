@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services;
+
 namespace ERY.Xle.LoB
 {
 	static class LobProgram

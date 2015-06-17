@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using AgateLib.Geometry;
 
+using ERY.Xle.Services.Implementation;
+
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreBuyback : StoreFront

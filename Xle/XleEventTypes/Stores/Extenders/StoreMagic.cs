@@ -1,12 +1,11 @@
-﻿using AgateLib.Geometry;
-using ERY.Xle.Maps;
-using ERY.Xle.XleEventTypes.Stores.Extenders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+using ERY.Xle.Data;
+using ERY.Xle.Services.Implementation;
+
+namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
 	public class StoreMagic : StoreFront
 	{

@@ -7,6 +7,8 @@ using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using System.Diagnostics;
 
+using ERY.Xle.Services.Implementation;
+
 namespace ERY.Xle
 {
 	public enum LotaSound

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services.Implementation;
+
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
 	public abstract class LotaExhibit : Exhibit

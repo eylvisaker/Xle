@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Services.Implementation;
+
 namespace ERY.Xle.Maps.Extenders
 {
 	public class TempleExtender : Map2DExtender

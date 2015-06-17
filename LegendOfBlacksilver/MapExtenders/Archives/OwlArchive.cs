@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services.Implementation;
+
 namespace ERY.Xle.LoB.MapExtenders.Archives
 {
 	class OwlArchive : LobArchiveExtenderBase 

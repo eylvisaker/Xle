@@ -8,6 +8,8 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
+
+using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Stores;
 using ERY.Xle.Maps.Extenders;
 

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Services;
+
 namespace ERY.Xle.LotA.Bootstrap
 {
     public class XleInstaller : IWindsorInstaller
