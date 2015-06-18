@@ -4,7 +4,7 @@ using AgateLib.Geometry;
 
 namespace ERY.Xle.Services
 {
-    public class XleSystemState :IXleService
+    public class XleSystemState : IXleService
     {
         public IXleGameFactory Factory { get; set; }
         public Size WindowBorderSize { get; set; }

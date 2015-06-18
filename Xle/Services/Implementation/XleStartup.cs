@@ -1,4 +1,7 @@
-﻿using ERY.Xle.Data;
+﻿using AgateLib;
+using AgateLib.DisplayLib;
+
+using ERY.Xle.Data;
 
 namespace ERY.Xle.Services.Implementation
 {
@@ -6,16 +9,32 @@ namespace ERY.Xle.Services.Implementation
     {
         IXleRunner runner;
         IXleGameFactory gameFactory;
-        XleSystemState systemState;
         XleData data;
 
-        public XleStartup(IXleRunner runner, IXleGameFactory xleGameFactory, XleSystemState systemState, IXleConsole console, XleData data)
+        public XleStartup(
+            IXleRunner runner, 
+            IXleGameFactory xleGameFactory, 
+            XleSystemState systemState, 
+            IXleConsole console, 
+            XleData data,
+            ISoundMan soundMan)
         {
             this.runner = runner;
             this.gameFactory = xleGameFactory;
-            this.systemState = systemState;
             this.data = data;
             systemState.Data = data;
+
+            systemState.Factory = xleGameFactory;
+
+            systemState.Factory.LoadSurfaces();
+            data.LoadDungeonMonsterSurfaces();
+
+            systemState.Factory.Font.InterpolationHint = InterpolationMode.Fastest;
+             
+            AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
+
+            soundMan.Load();
+
         }
 
         public void ProcessArguments(string[] args)

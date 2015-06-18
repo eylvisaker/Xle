@@ -20,9 +20,17 @@ namespace ERY.Xle.Services.Implementation
         private ITextArea TextArea;
         private XleData Data;
         private ICommandList commands;
+        private IMapLoader mapLoader;
 
-        public XleConsole(GameState gameState, ITextArea textArea, ICommandList commands, XleSystemState systemState, XleData data)
+        public XleConsole(
+            GameState gameState, 
+            ITextArea textArea, 
+            ICommandList commands, 
+            IMapLoader mapLoader,
+            XleSystemState systemState, 
+            XleData data)
         {
+            this.mapLoader = mapLoader;
             this.GameState = gameState;
             this.TextArea = textArea;
             this.commands = commands;
@@ -232,7 +240,7 @@ namespace ERY.Xle.Services.Implementation
 
         private void ChangeMap(Player player, int mapId, int entryPoint)
         {
-            XleCore.ChangeMap(player, mapId, entryPoint);
+            mapLoader.ChangeMap(player, mapId, entryPoint);
         }
 
         public void CheatGoto(string mapName)

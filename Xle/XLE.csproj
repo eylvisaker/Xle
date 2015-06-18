@@ -58,6 +58,7 @@
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
     <Compile Include="Services\ICommandFactory.cs" />
+    <Compile Include="Services\IMapLoader.cs" />
     <Compile Include="Services\Implementation\Commands\ArmorCommand.cs" />
     <Compile Include="Services\Implementation\Commands\Climb.cs" />
     <Compile Include="Services\Implementation\Commands\Command.cs" />
@@ -86,8 +87,12 @@
     <Compile Include="DirectionHelper.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Rendering\IXleRenderer.cs" />
+    <Compile Include="Services\Implementation\IXleScreen.cs" />
+    <Compile Include="Services\Implementation\MapLoader.cs" />
+    <Compile Include="Services\Implementation\SoundManProxy.cs" />
     <Compile Include="Services\Implementation\XleConsole.cs" />
     <Compile Include="Services\Implementation\XleInput.cs" />
+    <Compile Include="Services\ISoundMan.cs" />
     <Compile Include="Services\ITextArea.cs" />
     <Compile Include="Services\ITitleScreenFactory.cs" />
     <Compile Include="Services\IXleConsole.cs" />
@@ -133,6 +138,7 @@
     <Compile Include="Services\Implementation\TextArea.cs" />
     <Compile Include="Maps\TileInfo.cs" />
     <Compile Include="Maps\TileSet.cs" />
+    <Compile Include="Services\XleScreen.cs" />
     <Compile Include="XleEventTypes\Door.cs" />
     <Compile Include="XleEventTypes\Extenders\ChangeMapExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\Common\ChangeMapQuestion.cs" />

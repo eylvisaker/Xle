@@ -61,7 +61,13 @@ namespace ERY.Xle.Services.Implementation
 		public static TextArea TextArea { get; private set; }
         XleSystemState systemState;
 
-		public XleCore(XleSystemState systemState, IXleInput input, ICommandList commands, IXleRenderer renderer, GameState gameState)
+		public XleCore(
+            XleSystemState systemState, 
+            IXleInput input, 
+            ICommandList commands, 
+            IXleRenderer renderer, 
+            ITextArea textArea,
+            GameState gameState)
 		{
 			inst = this;
             this.systemState = systemState;
@@ -71,7 +77,7 @@ namespace ERY.Xle.Services.Implementation
 			Renderer = (XleRenderer)renderer;
 			Renderer.PlayerColor = XleColor.White;
 
-			TextArea = new TextArea();
+		    TextArea = (TextArea)textArea;
 			Options = new XleOptions();
 
             GameState = gameState;
@@ -106,6 +112,7 @@ namespace ERY.Xle.Services.Implementation
         [Obsolete("Use IXleRenderer as a service instead.")]
 		public static XleRenderer Renderer { get; set; }
 		public static XleOptions Options { get; set; }
+        [Obsolete("Use XleData as a service instead.")]
 		public static XleData Data { get { return inst.mData; } }
 
 		public static string GetWeaponName(int weaponID, int qualityID)

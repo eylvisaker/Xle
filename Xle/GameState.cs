@@ -17,10 +17,10 @@ namespace ERY.Xle
             Initialize();
         }
 
-        public void Initialize()
+        public void Initialize(Player thePlayer = null)
         {
             GameSpeed = new GameSpeed();
-            Player = null;
+            Player = thePlayer;
             Map = null;
         }
 
@@ -38,9 +38,6 @@ namespace ERY.Xle
         }
 
         public GameSpeed GameSpeed { get; set; }
-
-        [Obsolete("Use ICommandList as a service instead.", true)]
-        public CommandList Commands;
 
     }
 }
