@@ -3,3 +3,5 @@
 out/
 XLE.sln.ide/
 packages/
+*.user
+*.suo

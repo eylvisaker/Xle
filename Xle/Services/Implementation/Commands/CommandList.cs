@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 using AgateLib.InputLib;
 
@@ -12,7 +13,7 @@ namespace ERY.Xle.Services.Implementation.Commands
 
 		Dictionary<KeyCode, Direction> mDirectionMap = new Dictionary<KeyCode, Direction>();
 
-		public CommandList(GameState state)
+		public CommandList(GameState state, ICommandFactory factory)
 		{
 			State = state;
 
@@ -28,24 +29,24 @@ namespace ERY.Xle.Services.Implementation.Commands
 
 			Items = new List<Command>();
 
-			Items.Add(new ArmorCommand());
-			Items.Add(new Climb());
-			Items.Add(new Disembark());
-			Items.Add(new End());
-			Items.Add(new Fight());
-			Items.Add(new Gamespeed());
-			Items.Add(new Hold());
-			Items.Add(new Inventory());
-			Items.Add(new Leave { ConfirmPrompt = false });
-			Items.Add(new Magic());
-			Items.Add(new Open());
-			Items.Add(new Pass());
-			Items.Add(new Rob());
-			Items.Add(new Speak());
-			Items.Add(new Take());
-			Items.Add(new Use { ShowItemMenu = false });
-			Items.Add(new WeaponCommand());
-			Items.Add(new Xamine());
+			Items.Add(factory.Armor());
+			Items.Add(factory.Climb());
+            Items.Add(factory.Disembark());
+            Items.Add(factory.End());
+            Items.Add(factory.Fight());
+            Items.Add(factory.Gamespeed());
+            Items.Add(factory.Hold());
+            Items.Add(factory.Inventory());
+		    Items.Add(factory.Leave(confirmPrompt: false));
+			Items.Add(factory.Magic());
+			Items.Add(factory.Open());
+			Items.Add(factory.Pass());
+			Items.Add(factory.Rob());
+			Items.Add(factory.Speak());
+			Items.Add(factory.Take());
+		    Items.Add(factory.Use(showItemNenu: false));
+			Items.Add(factory.Weapon());
+			Items.Add(factory.Xamine());
 		}
 
 		public void Prompt()

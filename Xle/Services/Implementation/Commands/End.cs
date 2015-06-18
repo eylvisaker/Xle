@@ -2,7 +2,11 @@
 {
 	public class End : Command
 	{
-		public override void Execute(GameState state)
+	    public End()
+	    {
+	    }
+
+	    public override void Execute(GameState state)
 		{
 			var player = state.Player;
 

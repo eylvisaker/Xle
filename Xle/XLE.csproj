@@ -52,10 +52,12 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="Bootstrap\CommandInstaller.cs" />
     <Compile Include="Bootstrap\FactoryInstaller.cs" />
     <Compile Include="Bootstrap\ServiceInstaller.cs" />
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
+    <Compile Include="Services\ICommandFactory.cs" />
     <Compile Include="Services\Implementation\Commands\ArmorCommand.cs" />
     <Compile Include="Services\Implementation\Commands\Climb.cs" />
     <Compile Include="Services\Implementation\Commands\Command.cs" />
