@@ -18,8 +18,6 @@ namespace ERY.Xle
 
 		public abstract void LoadSurfaces();
 
-		public abstract IXleTitleScreen CreateTitleScreen();
-
 		public abstract IXleSerializable CreateStoryData();
 
 		// Surfaces

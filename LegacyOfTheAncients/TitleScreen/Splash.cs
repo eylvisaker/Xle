@@ -10,7 +10,7 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-    class Splash : TitleState
+    public class Splash : TitleState
     {
         Surface titleScreenSurface;			// stores the image of the title screen.
         int frame;
@@ -18,14 +18,9 @@ namespace ERY.Xle.LotA.TitleScreen
         const int animTime = 75;
         double timeUntilMusicRestarts;
 
-        public Splash()
-        {
-            StartMusic();
-        }
-
         public override void KeyDown(AgateLib.InputLib.KeyCode keyCode, string keyString)
         {
-            NewState = new FirstMainMenu();
+            NewState = Factory.CreateFirstMainMenu();
             titleScreenSurface.Dispose();
         }
 

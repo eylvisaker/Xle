@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Services;
+
 namespace ERY.Xle.LotA
 {
-	public class LotaStory : IXleSerializable
+	public class LotaStory : IXleSerializable, IXleService
 	{
 		public LotaStory()
 		{

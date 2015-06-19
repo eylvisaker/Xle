@@ -1,7 +1,12 @@
-﻿namespace ERY.Xle.Services
+﻿using AgateLib.Geometry;
+
+namespace ERY.Xle.Services
 {
     public interface ITextArea : IXleService
     {
         void Clear(bool setCursorAtTop = false);
+
+        void PrintLine(string text, Color color);
+        void PrintLine(string text = "", Color[] colors = null);
     }
 }

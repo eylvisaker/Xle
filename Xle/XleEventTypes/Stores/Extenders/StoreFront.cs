@@ -71,7 +71,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 			foreach (var window in Windows)
 			{
-				window.Draw();
+			    renderer.DrawObject(window);
 			}
 
 			DrawGoldText(player);

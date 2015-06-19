@@ -58,6 +58,7 @@
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
     <Compile Include="Services\ICommandFactory.cs" />
+    <Compile Include="Services\IMapChanger.cs" />
     <Compile Include="Services\IMapLoader.cs" />
     <Compile Include="Services\Implementation\Commands\ArmorCommand.cs" />
     <Compile Include="Services\Implementation\Commands\Climb.cs" />
@@ -87,7 +88,9 @@
     <Compile Include="DirectionHelper.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Rendering\IXleRenderer.cs" />
-    <Compile Include="Services\Implementation\IXleScreen.cs" />
+    <Compile Include="Services\Implementation\MapChanger.cs" />
+    <Compile Include="Services\Implementation\XleGameControl.cs" />
+    <Compile Include="Services\IXleScreen.cs" />
     <Compile Include="Services\Implementation\MapLoader.cs" />
     <Compile Include="Services\Implementation\SoundManProxy.cs" />
     <Compile Include="Services\Implementation\XleConsole.cs" />
@@ -99,7 +102,6 @@
     <Compile Include="Services\IXleFactory.cs" />
     <Compile Include="Services\IXleGameFactory.cs" />
     <Compile Include="Services\IXleInput.cs" />
-    <Compile Include="Services\IXleLegacyCore.cs" />
     <Compile Include="Services\IXleRunner.cs" />
     <Compile Include="Services\IXleService.cs" />
     <Compile Include="Services\IXleStartup.cs" />
@@ -138,7 +140,8 @@
     <Compile Include="Services\Implementation\TextArea.cs" />
     <Compile Include="Maps\TileInfo.cs" />
     <Compile Include="Maps\TileSet.cs" />
-    <Compile Include="Services\XleScreen.cs" />
+    <Compile Include="Services\Implementation\XleScreen.cs" />
+    <Compile Include="Services\IXleGameControl.cs" />
     <Compile Include="XleEventTypes\Door.cs" />
     <Compile Include="XleEventTypes\Extenders\ChangeMapExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\Common\ChangeMapQuestion.cs" />
@@ -203,7 +206,6 @@
     <Compile Include="Maps\XleMapTypes\Temple.cs" />
     <Compile Include="Maps\XleMapTypes\Town.cs" />
     <Compile Include="Data\MagicSpell.cs" />
-    <Compile Include="Services\Implementation\XleLegacyCoreProxy.cs" />
     <Compile Include="XleOptions.cs" />
     <Compile Include="Services\Implementation\XleRunner.cs" />
     <Compile Include="Services\Implementation\XleStartup.cs" />

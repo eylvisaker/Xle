@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-	class SecondMainMenu : MainMenuBase
+    public class SecondMainMenu : MainMenuScreen
 	{
 		public SecondMainMenu()
 		{
@@ -28,13 +28,13 @@ namespace ERY.Xle.LotA.TitleScreen
 		protected override void ExecuteMenuItem(int item)
 		{
 			if (item == 0)
-				NewState = new FirstMainMenu();
+				NewState = Factory.CreateFirstMainMenu();
 			else if (item == 1)
-				NewState = new NewGame();
+				NewState = Factory.CreateNewGame();
 			else if (item == 2)
-				NewState = new LoadGame();
+				NewState = Factory.CreateLoadGame();
 			else if (item == 3)
-				NewState = new EraseGame();
+				NewState = Factory.CreateEraseGame();
 		}
 	}
 }

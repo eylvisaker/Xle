@@ -22,6 +22,8 @@ namespace ERY.Xle.Services.Implementation
         private ICommandList commands;
         private IMapLoader mapLoader;
         private IXleScreen screen;
+        private IXleGameControl gameControl;
+        private IMapChanger mapChanger;
 
         public XleRunner(
             XleSystemState systemState,
@@ -31,6 +33,8 @@ namespace ERY.Xle.Services.Implementation
             IXleScreen screen,
             ICommandList commands,
             IMapLoader mapLoader,
+            IXleGameControl gameControl,
+            IMapChanger mapChanger,
             GameState gameState)
         {
             this.screen = screen;
@@ -40,6 +44,8 @@ namespace ERY.Xle.Services.Implementation
             this.input = input;
             this.commands = commands;
             this.mapLoader = mapLoader;
+            this.gameControl = gameControl;
+            this.mapChanger = mapChanger;
             this.gameState = gameState;
         }
 
@@ -75,14 +81,15 @@ namespace ERY.Xle.Services.Implementation
             gameState.Initialize(thePlayer);
             systemState.Factory.SetGameSpeed(gameState, thePlayer.Gamespeed);
 
-            mapLoader.LoadMap(gameState.Player.MapID);
+            var map = mapLoader.LoadMap(gameState.Player.MapID);
+            mapChanger.SetMap(map);
 
             input.AcceptKey = true;
 
             textArea.Clear();
             commands.Prompt();
 
-            screen.RunRedrawLoop();
+            gameControl.RunRedrawLoop();
         }
 
     }

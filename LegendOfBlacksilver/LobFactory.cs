@@ -78,11 +78,6 @@ namespace ERY.Xle.LoB
 			}
 		}
 
-		public override IXleTitleScreen CreateTitleScreen()
-		{
-			return new LobTitleScreen();
-		}
-
 		public override Maps.Map3DSurfaces GetMap3DSurfaces(Map3D map3D)
 		{
 			if (map3D is Museum)

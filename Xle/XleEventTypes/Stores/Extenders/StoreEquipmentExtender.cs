@@ -17,7 +17,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 		TextWindow titlePrompt = new TextWindow();
 		TextWindow itemsPrompt = new TextWindow();
 		TextWindow inventoryDisplay = new TextWindow();
-
+        
 		public new StoreEquipment TheEvent { get { return (StoreEquipment)base.TheEvent; } }
 
 		public StoreEquipmentExtender()

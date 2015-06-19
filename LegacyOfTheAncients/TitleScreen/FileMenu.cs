@@ -51,7 +51,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			pt.X -= 2;
 			pt.Y += menuSelection;
 
-			XleCore.Renderer.WriteText(pt.X * 16, pt.Y * 16, "`");
+			Renderer.WriteText(pt.X * 16, pt.Y * 16, "`");
 		}
 		public override void Update()
 		{

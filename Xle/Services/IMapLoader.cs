@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps;
+
 namespace ERY.Xle.Services
 {
     public interface IMapLoader : IXleService
     {
-        void LoadMap(int mapId);
-
-        void ChangeMap(Player player, int mapId, int entryPoint);
+        XleMap LoadMap(int mapId);
     }
 }

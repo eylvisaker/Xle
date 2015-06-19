@@ -1,30 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using AgateLib.Diagnostics;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 
 using ERY.Xle.Rendering;
-using ERY.Xle.Services.Implementation;
 
-namespace ERY.Xle.Services
+namespace ERY.Xle.Services.Implementation
 {
     public class XleScreen : IXleScreen
     {
         private IXleRenderer renderer;
         private XleSystemState systemState;
-        private IXleLegacyCore legacyCore;
+        private GameState gameState;
+        private IXleInput input;
 
         public XleScreen(
-            IXleLegacyCore legacyCore,
             IXleRenderer renderer,
+            IXleInput input,
+            GameState gameState,
             XleSystemState systemState)
         {
-            this.legacyCore = legacyCore;
             this.renderer = renderer;
+            this.input = input;
+            this.gameState = gameState;
             this.systemState = systemState;
 
             InitializeScreenSize();
@@ -41,17 +39,19 @@ namespace ERY.Xle.Services
                 systemState.WindowBorderSize.Height);
         }
 
-        public void RunRedrawLoop()
+
+        public void Redraw()
         {
-            while (Display.CurrentWindow.IsClosed == false && systemState.ReturnToTitle == false)
-            {
-                Redraw();
-            }
+            Display.BeginFrame();
+
+            renderer.Draw();
+
+            Display.EndFrame();
         }
 
-        private void Redraw()
+        public bool CurrentWindowClosed
         {
-            legacyCore.Redraw();
+            get { return Display.CurrentWindow.IsClosed; }
         }
     }
 }

@@ -3,41 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
+using AgateLib.DisplayLib;
+using AgateLib.Geometry;
+
+using ERY.Xle.Data;
+using ERY.Xle.Maps;
 using ERY.Xle.Rendering;
 
 namespace ERY.Xle.Services.Implementation
 {
     public class MapLoader : IMapLoader
     {
-        private GameState gameState;
-        private IXleLegacyCore legacyCore;
-        private IXleRenderer renderer;
+        private XleData data;
 
-        public MapLoader(
-            IXleLegacyCore legacyCore, 
-            IXleRenderer renderer,
-            GameState gameState)
+        public MapLoader(XleData data)
         {
-            this.legacyCore = legacyCore;
-            this.renderer = renderer;
-            this.gameState = gameState;
+            this.data = data;
         }
 
-        public void LoadMap(int mapId)
+        public XleMap LoadMap(int mapId)
         {
-            gameState.Map = legacyCore.LoadMap(gameState.Player.MapID);
-            gameState.Map.OnLoad(gameState.Player);
+            string file = "Maps/" + data.MapList[mapId].Filename;
 
-            legacyCore.SetTilesAndCommands();
-
-            renderer.FontColor = gameState.Map.ColorScheme.TextColor;
-        }
-
-
-        public void ChangeMap(Player player, int mapId, int entryPoint)
-        {
-            XleCore.ChangeMap(player, mapId, entryPoint);
+            return XleMap.LoadMap(file, mapId);
         }
     }
 }

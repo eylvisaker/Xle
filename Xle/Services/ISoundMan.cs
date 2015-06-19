@@ -9,5 +9,13 @@ namespace ERY.Xle.Services
     public interface ISoundMan : IXleService
     {
         void Load();
+
+        bool IsPlaying(LotaSound lotaSound);
+
+        void StopSound(LotaSound lotaSound);
+
+        void PlaySound(LotaSound lotaSound);
+
+        void PlaySoundSync(LotaSound lotaSound);
     }
 }

@@ -115,12 +115,14 @@
     <Compile Include="TitleScreen\FirstMainMenu.cs" />
     <Compile Include="TitleScreen\Introduction.cs" />
     <Compile Include="TitleScreen\FileMenu.cs" />
+    <Compile Include="TitleScreen\ILotaTitleScreenFactory.cs" />
     <Compile Include="TitleScreen\LoadGame.cs" />
-    <Compile Include="TitleScreen\MainMenuBase.cs" />
+    <Compile Include="TitleScreen\MainMenuScreen.cs" />
     <Compile Include="TitleScreen\LotaTitleScreen.cs" />
     <Compile Include="TitleScreen\NewGame.cs" />
     <Compile Include="TitleScreen\SecondMainMenu.cs" />
     <Compile Include="TitleScreen\Splash.cs" />
+    <Compile Include="TitleScreen\TitleScreenState.cs" />
     <Compile Include="TitleScreen\TitleState.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

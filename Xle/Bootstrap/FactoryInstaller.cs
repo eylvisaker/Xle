@@ -21,6 +21,11 @@ namespace ERY.Xle.Bootstrap
             container.Register(Types.FromAssemblyContaining<IXleFactory>()
                 .BasedOn<IXleFactory>()
                 .Configure(x => x.AsFactory()));
+
+            container.Register(Types.FromAssembly(WindsorInitializer.MasterAssembly)
+                .BasedOn<IXleFactory>()
+                .Configure(x => x.AsFactory()));
+
         }
     }
 }

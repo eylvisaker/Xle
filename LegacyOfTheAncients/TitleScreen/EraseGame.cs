@@ -42,7 +42,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
 		protected override void UserSelectedCancel()
 		{
-			NewState = new SecondMainMenu();
+		    NewState = Factory.CreateSecondMainMenu();
 		}
 
 		public override void KeyDown(KeyCode keyCode, string keyString)
@@ -72,7 +72,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
 			if (keyCode == KeyCode.Enter)
 			{
-				NewState = new SecondMainMenu();
+			    NewState = Factory.CreateSecondMainMenu();
 
 				if (selection == 0)
 				{

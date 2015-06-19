@@ -10,18 +10,25 @@ namespace ERY.Xle.Services.Implementation
         IXleRunner runner;
         IXleGameFactory gameFactory;
         XleData data;
+        private XleOptions options;
 
         public XleStartup(
             IXleRunner runner, 
             IXleGameFactory xleGameFactory, 
             XleSystemState systemState, 
             IXleConsole console, 
+            XleOptions options,
             XleData data,
+            XleCore core,
             ISoundMan soundMan)
         {
             this.runner = runner;
             this.gameFactory = xleGameFactory;
             this.data = data;
+            this.options = options;
+
+            console.Initialize();
+
             systemState.Data = data;
 
             systemState.Factory = xleGameFactory;
@@ -44,7 +51,7 @@ namespace ERY.Xle.Services.Implementation
                 switch (args[i])
                 {
                     case "-debug":
-                        XleCore.EnableDebugMode = true;
+                        options.EnableDebugMode = true;
                         break;
                 }
             }

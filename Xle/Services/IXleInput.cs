@@ -9,5 +9,7 @@ namespace ERY.Xle.Services
     public interface IXleInput : IXleService
     {
         bool AcceptKey { get; set; }
+
+        void CheckArrowKeys();
     }
 }

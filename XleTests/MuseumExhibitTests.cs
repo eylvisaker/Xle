@@ -93,7 +93,7 @@ namespace ERY.XleTests
 			player.StoryData = new LotaStory();
 			XleCore.GameState = new GameState { Player = player };
 
-			LotaFactory factory = new LotaFactory();
+		    LotaFactory factory = null;//new LotaFactory();
 			
 			Information information = new Information();
 

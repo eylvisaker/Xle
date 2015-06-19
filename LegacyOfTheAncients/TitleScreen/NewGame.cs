@@ -9,7 +9,7 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-	class NewGame : TitleState
+    public class NewGame : TitleState
 	{
 		string enteredName = "";
 		TextWindow upperWindow = new TextWindow();
@@ -91,7 +91,7 @@ namespace ERY.Xle.LotA.TitleScreen
 			else if (keyCode == KeyCode.Escape || keyCode == KeyCode.F1)
 			{
 				SoundMan.PlaySound(LotaSound.TitleAccept);
-				NewState = new SecondMainMenu();
+				NewState = Factory.CreateSecondMainMenu();
 			}
 			else if (keyCode == KeyCode.Enter && enteredName.Length > 0)
 			{
@@ -117,7 +117,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
 					SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-					NewState = new Introduction(enteredName);
+					NewState = Factory.CreateIntroduction(enteredName);
 				}
 			}
 
@@ -128,22 +128,20 @@ namespace ERY.Xle.LotA.TitleScreen
 		protected override void DrawFrame()
 		{
 			base.DrawFrame();
-			var renderer = XleCore.Renderer;
 
-			renderer.DrawFrameLine(11 * 16, 10 * 16, 1, 18 * 16 - 4, Colors.FrameColor);  // top
-			renderer.DrawFrameLine(11 * 16, 12 * 16, 1, 18 * 16 - 4, Colors.FrameColor);  // bottom
-			renderer.DrawFrameLine(11 * 16, 10 * 16, 0, 3 * 16 - 4, Colors.FrameColor);   // left
-			renderer.DrawFrameLine(28 * 16, 10 * 16, 0, 3 * 16 - 4, Colors.FrameColor);   // right
+			Renderer.DrawFrameLine(11 * 16, 10 * 16, 1, 18 * 16 - 4, Colors.FrameColor);  // top
+			Renderer.DrawFrameLine(11 * 16, 12 * 16, 1, 18 * 16 - 4, Colors.FrameColor);  // bottom
+			Renderer.DrawFrameLine(11 * 16, 10 * 16, 0, 3 * 16 - 4, Colors.FrameColor);   // left
+			Renderer.DrawFrameLine(28 * 16, 10 * 16, 0, 3 * 16 - 4, Colors.FrameColor);   // right
 		}
 		protected override void DrawFrameHighlight()
 		{
 			base.DrawFrameHighlight();
-			var renderer = XleCore.Renderer;
 
-			renderer.DrawInnerFrameHighlight(11 * 16, 10 * 16, 1, 18 * 16 - 4, XleColor.White);
-			renderer.DrawInnerFrameHighlight(11 * 16, 12 * 16, 1, 18 * 16 - 2, XleColor.White);
-			renderer.DrawInnerFrameHighlight(11 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
-			renderer.DrawInnerFrameHighlight(28 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
+			Renderer.DrawInnerFrameHighlight(11 * 16, 10 * 16, 1, 18 * 16 - 4, XleColor.White);
+			Renderer.DrawInnerFrameHighlight(11 * 16, 12 * 16, 1, 18 * 16 - 2, XleColor.White);
+			Renderer.DrawInnerFrameHighlight(11 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
+			Renderer.DrawInnerFrameHighlight(28 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
 		}
 	}
 }

@@ -12,5 +12,25 @@ namespace ERY.Xle.Services.Implementation
         {
             SoundMan.Load();
         }
+
+        public bool IsPlaying(LotaSound lotaSound)
+        {
+            return SoundMan.IsPlaying(lotaSound);
+        }
+
+        public void StopSound(LotaSound lotaSound)
+        {
+            SoundMan.StopSound(lotaSound);
+        }
+
+        public void PlaySound(LotaSound lotaSound)
+        {
+            SoundMan.PlaySound(lotaSound);
+        }
+
+        public void PlaySoundSync(LotaSound lotaSound)
+        {
+            SoundMan.PlaySoundSync(lotaSound);
+        }
     }
 }

@@ -7,99 +7,107 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Rendering;
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-	public abstract class TitleState
-	{
-		public TitleState()
-		{
-			Colors = new ColorScheme();
-			Windows = new List<TextWindow>();
-		}
+    public abstract class TitleState
+    {
+        public TitleState()
+        {
+            Colors = new ColorScheme();
+            Windows = new List<TextWindow>();
+        }
 
-		public abstract void KeyDown(KeyCode keyCode, string keyString);
+        public IXleRenderer Renderer { get; set; }
+        public ILotaTitleScreenFactory Factory { get; set; }
+        public ISoundMan SoundMan { get; set; }
+        public IXleGameControl GameControl { get; set; }
 
-		public bool SkipWait { get; set; }
+        public abstract void KeyDown(KeyCode keyCode, string keyString);
 
-		public TitleState NewState { get; set; }
+        public bool SkipWait { get; set; }
+
+        public TitleState NewState { get; set; }
 
 
-		protected void Wait(int time)
-		{
-			XleCore.Wait(time);
-		}
+        protected void Wait(int time)
+        {
+            GameControl.Wait(time);
+        }
 
-		protected ColorScheme Colors { get; set; }
+        protected ColorScheme Colors { get; set; }
 
-		public virtual void Update()
-		{
-		}
+        public string Title { get; set; }
+        public string Prompt { get; set; }
 
-		public virtual void Draw()
-		{
-			XleCore.SetOrthoProjection(Colors.BorderColor);
-			Display.FillRect(new Rectangle(0, 0, 640, 400), Colors.BackColor);
+        protected List<TextWindow> Windows { get; set; }
 
-			DrawBackgrounds();
-			DrawWindows();
-			DrawTitle();
-			DrawPrompt();
-		}
+        public Player ThePlayer { get; protected set; }
 
-		protected virtual void DrawTitle()
-		{
-			if (string.IsNullOrEmpty(Title))
-				return;
+        public virtual void Update()
+        {
+        }
 
-			DrawCenteredText(0, Title, Colors.BackColor, Colors.TextColor);
-		}
-		private void DrawPrompt()
-		{
-			if (string.IsNullOrEmpty(Prompt))
-				return;
+        public virtual void Draw()
+        {
+            Display.Clear(Colors.BorderColor);
+            Display.FillRect(new Rectangle(0, 0, 640, 400), Colors.BackColor);
 
-			DrawCenteredText(24, Prompt, XleColor.Yellow, Colors.BackColor);
-		}
+            DrawBackgrounds();
+            DrawWindows();
+            DrawTitle();
+            DrawPrompt();
+        }
 
-		private void DrawCenteredText(int y, string text, Color textColor, Color backColor)
-		{
-			int destx = 20 - text.Length / 2;
+        protected virtual void DrawTitle()
+        {
+            if (string.IsNullOrEmpty(Title))
+                return;
 
-			Display.FillRect(new Rectangle(destx * 16, y*16, text.Length * 16, 16), backColor);
+            DrawCenteredText(0, Title, Colors.BackColor, Colors.TextColor);
+        }
+        private void DrawPrompt()
+        {
+            if (string.IsNullOrEmpty(Prompt))
+                return;
 
-			XleCore.Renderer.WriteText(destx * 16, y*16, text, textColor);
-		}
+            DrawCenteredText(24, Prompt, XleColor.Yellow, Colors.BackColor);
+        }
 
-		protected virtual void DrawWindows()
-		{
-			foreach(var wind in Windows)
-			{
-				wind.Draw();
-			}
-		}
+        private void DrawCenteredText(int y, string text, Color textColor, Color backColor)
+        {
+            int destx = 20 - text.Length / 2;
 
-		public string Title { get; set; }
-		public string Prompt { get; set; }
+            Display.FillRect(new Rectangle(destx * 16, y * 16, text.Length * 16, 16), backColor);
 
-		protected virtual void DrawBackgrounds()
-		{
-			DrawFrame();
-			DrawFrameHighlight();
-		}
+            Renderer.WriteText(destx * 16, y * 16, text, textColor);
+        }
 
-		protected virtual void DrawFrame()
-		{
-			XleCore.Renderer.DrawFrame(Colors.FrameColor);			
-		}
-		protected virtual void DrawFrameHighlight()
-		{
-			XleCore.Renderer.DrawFrameHighlight(Colors.FrameHighlightColor);
-		}
+        protected virtual void DrawWindows()
+        {
+            foreach (var wind in Windows)
+            {
+                Renderer.DrawObject(wind);
+            }
+        }
 
-		protected List<TextWindow> Windows { get; set; }
+        protected virtual void DrawBackgrounds()
+        {
+            DrawFrame();
+            DrawFrameHighlight();
+        }
 
-		public Player ThePlayer { get; protected set; }
-	}
+        protected virtual void DrawFrame()
+        {
+            Renderer.DrawFrame(Colors.FrameColor);
+        }
+        protected virtual void DrawFrameHighlight()
+        {
+            Renderer.DrawFrameHighlight(Colors.FrameHighlightColor);
+        }
+
+    }
 }

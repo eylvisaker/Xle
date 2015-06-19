@@ -21,21 +21,30 @@ namespace ERY.Xle.Services.Implementation
         private XleData Data;
         private ICommandList commands;
         private IMapLoader mapLoader;
+        private XleOptions options;
+        private IXleGameControl gameControl;
+        private IMapChanger mapChanger;
 
         public XleConsole(
             GameState gameState, 
             ITextArea textArea, 
             ICommandList commands, 
             IMapLoader mapLoader,
+            IXleGameControl gameControl,
+            IMapChanger mapChanger,
             XleSystemState systemState, 
+            XleOptions options,
             XleData data)
         {
             this.mapLoader = mapLoader;
             this.GameState = gameState;
             this.TextArea = textArea;
             this.commands = commands;
+            this.gameControl = gameControl;
             this.systemState = systemState;
+            this.options = options;
             this.Data = data;
+            this.mapChanger = mapChanger;
 
             AgateConsole.Initialize();
 
@@ -53,6 +62,11 @@ namespace ERY.Xle.Services.Implementation
             AgateConsole.Commands.Add("coins", new Action<string>(CheatCoins));
         }
 
+        public void Initialize()
+        {
+            
+        }
+
         [Description("Turns encounters on or off.\nUsage: encounters [on|off]")]
         private void CheatEncounters(string action)
         {
@@ -60,20 +74,20 @@ namespace ERY.Xle.Services.Implementation
                 action = action.ToLowerInvariant();
 
             if (action == "on")
-                XleCore.Options.DisableOutsideEncounters = false;
+                options.DisableOutsideEncounters = false;
             else if (action == "off")
-                XleCore.Options.DisableOutsideEncounters = true;
+                options.DisableOutsideEncounters = true;
             else if (string.IsNullOrEmpty(action))
-                XleCore.Options.DisableOutsideEncounters = !XleCore.Options.DisableOutsideEncounters;
+                options.DisableOutsideEncounters = !options.DisableOutsideEncounters;
             else
                 throw new ArgumentException("Could not understand '" + action + "'");
 
             AgateConsole.WriteLine("Outside encounters are now " + (
-                XleCore.Options.DisableOutsideEncounters ? "off." : "on."));
+                options.DisableOutsideEncounters ? "off." : "on."));
         }
 
         [Description("Turns on or off whether exhibits require coins.\nUsage: coins [on|off].")]
-        private static void CheatCoins(string action = null)
+        private void CheatCoins(string action = null)
         {
             if (action == null)
                 action = "";
@@ -81,15 +95,15 @@ namespace ERY.Xle.Services.Implementation
             action = action.ToLowerInvariant();
 
             if (action == "on")
-                XleCore.Options.DisableExhibitsRequireCoins = false;
+                options.DisableExhibitsRequireCoins = false;
             else if (action == "off")
-                XleCore.Options.DisableExhibitsRequireCoins = true;
+                options.DisableExhibitsRequireCoins = true;
             else if (action != "")
                 throw new ArgumentException("Could not understand '" + action + "'");
 
             AgateConsole.WriteLine("Exhibits {0}{1}require coins. ",
                 (action != "") ? "now " : "",
-                XleCore.Options.DisableExhibitsRequireCoins ? "do not " : "");
+                options.DisableExhibitsRequireCoins ? "do not " : "");
         }
 
 
@@ -240,7 +254,7 @@ namespace ERY.Xle.Services.Implementation
 
         private void ChangeMap(Player player, int mapId, int entryPoint)
         {
-            mapLoader.ChangeMap(player, mapId, entryPoint);
+            mapChanger.ChangeMap(player, mapId, entryPoint);
         }
 
         public void CheatGoto(string mapName)
@@ -252,7 +266,7 @@ namespace ERY.Xle.Services.Implementation
             if (mapInfo == null)
                 return;
 
-            var map = LoadMap(mapInfo.ParentMapID);
+            var map = mapLoader.LoadMap(mapInfo.ParentMapID);
             int targetX = 0, targetY = 0;
 
             foreach (ChangeMapEvent evt in from evt in map.Events
@@ -285,12 +299,7 @@ namespace ERY.Xle.Services.Implementation
 
         private void ChangeMap(Player player, int mapId, Point targetPoint)
         {
-            XleCore.ChangeMap(player, mapId, targetPoint);
-        }
-
-        private XleMap LoadMap(int mapId)
-        {
-            return XleCore.LoadMap(mapId);
+            mapChanger.ChangeMap(player, mapId, targetPoint);
         }
 
         private MapInfo FindMapByPartialName(string mapName)

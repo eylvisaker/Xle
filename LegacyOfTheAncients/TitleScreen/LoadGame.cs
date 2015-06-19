@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-	class LoadGame : FileMenu
+    public class LoadGame : FileMenu
 	{
 		public LoadGame()
 		{

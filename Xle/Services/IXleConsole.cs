@@ -8,5 +8,6 @@ namespace ERY.Xle.Services
 {
     public interface IXleConsole : IXleService
     {
+        void Initialize();
     }
 }
