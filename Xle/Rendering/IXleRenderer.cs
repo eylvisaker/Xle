@@ -37,5 +37,7 @@ namespace ERY.Xle.Rendering
         void DrawFrameLine(int p1, int p2, int p3, int p4, Color color);
 
         void DrawObject(TextWindow wind);
+
+        void SetProjectionAndBackColors(ColorScheme colorScheme);
     }
 }

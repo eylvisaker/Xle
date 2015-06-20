@@ -371,7 +371,7 @@ namespace ERY.Xle.Rendering
                 return;
             }
 
-            XleCore.SetProjectionAndBackColors(XleCore.GameState.Map.ColorScheme);
+            SetProjectionAndBackColors(XleCore.GameState.Map.ColorScheme);
 
             Player player = XleCore.GameState.Player;
             XleMap map = XleCore.GameState.Map;
@@ -594,5 +594,15 @@ namespace ERY.Xle.Rendering
         {
             RaftAnim();
         }
+
+        public void SetProjectionAndBackColors(ColorScheme cs)
+        {
+            Display.Clear(cs.BorderColor);
+            int hp = cs.HorizontalLinePosition * 16 + 8;
+
+            Display.FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
+            Display.FillRect(0, hp, 640, 400 - hp, cs.TextAreaBackColor);
+        }
+
     }
 }

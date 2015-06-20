@@ -15,11 +15,13 @@ using System.Threading.Tasks;
 
 using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LotA
 {
     static class LotaProgram
     {
+        private static ICommandFactory commandFactory;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -56,6 +58,7 @@ namespace ERY.Xle.LotA
 
                 IXleStartup core = container.Resolve<IXleStartup>();
                 core.ProcessArguments(args);
+                commandFactory = container.Resolve<ICommandFactory>();
 
                 core.Run();
             });
@@ -65,15 +68,15 @@ namespace ERY.Xle.LotA
         {
             get
             {
-                yield return new ArmorCommand();
-                yield return new Fight();
-                yield return new Gamespeed();
-                yield return new Hold();
-                yield return new Inventory();
-                yield return new Pass();
-                yield return new Use { ShowItemMenu = false };
-                yield return new WeaponCommand();
-                yield return new Xamine();
+                yield return commandFactory.Armor();
+                yield return commandFactory.Fight();
+                yield return commandFactory.Gamespeed();
+                yield return commandFactory.Hold();
+                yield return commandFactory.Inventory();
+                yield return commandFactory.Pass();
+                yield return commandFactory.Use(showItemNenu:false);
+                yield return commandFactory.Weapon();
+                yield return commandFactory.Xamine();
             }
         }
     }

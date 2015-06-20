@@ -92,6 +92,7 @@ namespace ERY.Xle.Services.Implementation
         {
             Display.Clear(clearColor);
         }
+        [Obsolete("Use Renderer.SetProjectionAndBackColors instead")]
         public static void SetProjectionAndBackColors(ColorScheme cs)
         {
             SetOrthoProjection(cs.BorderColor);
@@ -335,11 +336,13 @@ namespace ERY.Xle.Services.Implementation
         /// <param name="choice"></param>
         /// <param name="items">A MenuItemList collection of menu items</param>
         /// <returns>The choice the user made.</returns>
+        [Obsolete("Use IXleMenu service instead")]
         public static int SubMenu(string title, int choice, MenuItemList items)
         {
             return SubMenu(title, choice, items, XleColor.Black);
         }
 
+        [Obsolete("Use IXleMenu service instead")]
         private static int SubMenu(string title, int choice, MenuItemList items, Color backColor)
         {
             SubMenu menu = new SubMenu();
@@ -352,6 +355,7 @@ namespace ERY.Xle.Services.Implementation
             return RunSubMenu(menu);
         }
 
+        [Obsolete("Use IXleMenu service instead")]
         private static int RunSubMenu(SubMenu menu)
         {
             for (int i = 0; i < menu.theList.Count; i++)
@@ -452,6 +456,7 @@ namespace ERY.Xle.Services.Implementation
         {
             return WaitForKey(Redraw, keys);
         }
+     
         /// <summary>
         /// Waits for one of the specified keys, while calling the delegate
         /// to redraw the screen.
@@ -523,6 +528,7 @@ namespace ERY.Xle.Services.Implementation
         /// Draws the submenu created by SubMenu.
         /// </summary>
         /// <param name="menu"></param>
+        [Obsolete("Use IMenuRenderer service instead.")]
         static void DrawMenu(SubMenu menu)
         {
             string thestring;
@@ -578,12 +584,9 @@ namespace ERY.Xle.Services.Implementation
                     xx1 = xx + thestring.Length * 16;
                     Renderer.WriteText(xx1, yy, "`");
                 }
-
-
             }
-
-
         }
+
 
         /// <summary>
         /// Gives the player a yes/no choice, returning 0 if the player chose yes and
@@ -747,10 +750,12 @@ namespace ERY.Xle.Services.Implementation
         //static int buttonHeld = 0;		// are they holding the button down?
         //static int lastMove = 0;
 
+        [Obsolete("Use IEquipmentPicker service instead.")]
         public static ArmorItem PickArmor(ArmorItem defaultItem)
         {
             return PickArmor(GameState, defaultItem);
         }
+        [Obsolete("Use IEquipmentPicker service instead.")]
         public static ArmorItem PickArmor(GameState state, ArmorItem defaultItem, Color? backColor = null)
         {
             MenuItemList theList = new MenuItemList();
@@ -767,10 +772,12 @@ namespace ERY.Xle.Services.Implementation
                 return state.Player.Armor[sel - 1];
         }
 
+        [Obsolete("Use IEquipmentPicker service instead.")]
         public static WeaponItem PickWeapon(WeaponItem defaultItem)
         {
             return PickWeapon(GameState, defaultItem);
         }
+        [Obsolete("Use IEquipmentPicker service instead.")]
         public static WeaponItem PickWeapon(GameState state, WeaponItem defaultItem, Color? backColor = null)
         {
             MenuItemList theList = new MenuItemList();
@@ -786,6 +793,7 @@ namespace ERY.Xle.Services.Implementation
             else
                 return state.Player.Weapons[sel - 1];
         }
+
         static void CheckJoystick()
         {
             return;

@@ -12,12 +12,15 @@ namespace ERY.Xle.Services.Implementation
     {
         ICommandList commands;
         private GameState gameState;
+        private IXleScreen screen;
 
         public XleInput(
             ICommandList commands,
+            IXleScreen screen,
             GameState gameState)
         {
             this.commands = commands;
+            this.screen = screen;
             this.gameState = gameState;
 
             Keyboard.KeyDown += Keyboard_KeyDown;
@@ -61,6 +64,87 @@ namespace ERY.Xle.Services.Implementation
             {
                 AcceptKey = true;
             }
+        }
+
+
+        /// <summary>
+        /// Waits for one of the specified keys, while redrawing the screen.
+        /// </summary>
+        /// <param name="keys">A list of keys which will break out of the wait. 
+        /// Pass none for any key to break out.</param>
+        /// <returns></returns>
+        public KeyCode WaitForKey(params KeyCode[] keys)
+        {
+            return WaitForKey(screen.Redraw, keys);
+        }
+
+        /// <summary>
+        /// Waits for one of the specified keys, while calling the delegate
+        /// to redraw the screen.
+        /// </summary>
+        /// <param name="redraw"></param>
+        /// <param name="keys">A list of keys which will break out of the wait. 
+        /// Pass none for any key to break out.</param>
+        /// <returns></returns>
+        public KeyCode WaitForKey(Action redraw, params KeyCode[] keys)
+        {
+            KeyCode key = KeyCode.None;
+            bool done = false;
+
+            InputEventHandler keyhandler = e => key = e.KeyCode;
+
+            PromptToContinue = PromptToContinueOnWait;
+
+            Keyboard.ReleaseAllKeys();
+            Keyboard.KeyDown += keyhandler;
+
+            do
+            {
+                redraw();
+
+                if (screen.CurrentWindowClosed == true)
+                {
+                    if (keys.Length > 0)
+                        key = keys[0];
+                    else
+                        key = KeyCode.Escape;
+
+                    break;
+                }
+
+                if ((keys == null || keys.Length == 0) && key != KeyCode.None)
+                    break;
+
+                for (int i = 0; i < keys.Length; i++)
+                {
+                    if (keys[i] == key)
+                    {
+                        done = true;
+                        break;
+                    }
+                }
+
+            } while (!done && screen.CurrentWindowClosed == false);
+
+            Keyboard.KeyDown -= keyhandler;
+
+            PromptToContinue = false;
+            PromptToContinueOnWait = true;
+
+            return key;
+        }
+
+
+        public bool PromptToContinueOnWait
+        {
+            get { return XleCore.PromptToContinueOnWait; }
+            set { XleCore.PromptToContinueOnWait = value; }
+        }
+
+        public bool PromptToContinue
+        {
+            get { return XleCore.PromptToContinue; }
+            set { XleCore.PromptToContinue = value; }
         }
     }
 }

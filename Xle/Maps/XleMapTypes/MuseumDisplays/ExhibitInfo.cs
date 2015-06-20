@@ -32,7 +32,7 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 		}
 
 		public int FrameTime { get; set; }
-		public int Frames { get { return Image.SurfaceWidth / 240; } }
+		public int Frames { get {  return Image.SurfaceWidth / 240; } }
 
 		public void DrawImage(Rectangle destRect, int id)
 		{

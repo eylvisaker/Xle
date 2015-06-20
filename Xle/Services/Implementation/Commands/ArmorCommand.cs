@@ -1,16 +1,27 @@
 ﻿namespace ERY.Xle.Services.Implementation.Commands
 {
-	public class ArmorCommand : Command
-	{
-		public override string Name
-		{
-			get { return "Armor"; }
-		}
-		public override void Execute(GameState state)
-		{
-			XleCore.TextArea.PrintLine("-choose above", XleColor.Cyan);
+    public class ArmorCommand : Command
+    {
+        private ITextArea textArea;
+        private IEquipmentPicker equipmentPicker;
 
-			state.Player.CurrentArmor = XleCore.PickArmor(state.Player.CurrentArmor);
-		}
-	}
+        public ArmorCommand(
+            ITextArea textArea,
+            IEquipmentPicker equipmentPicker)
+        {
+            this.textArea = textArea;
+            this.equipmentPicker = equipmentPicker;
+        }
+
+        public override string Name
+        {
+            get { return "Armor"; }
+        }
+        public override void Execute(GameState state)
+        {
+            textArea.PrintLine("-choose above", XleColor.Cyan);
+
+            state.Player.CurrentArmor = equipmentPicker.PickArmor(state.Player.CurrentArmor);
+        }
+    }
 }

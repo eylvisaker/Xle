@@ -31,6 +31,8 @@ namespace ERY.Xle.Services.Implementation
 
             systemState.Data = data;
 
+            LoadGameFile();
+
             systemState.Factory = xleGameFactory;
 
             systemState.Factory.LoadSurfaces();
@@ -64,8 +66,6 @@ namespace ERY.Xle.Services.Implementation
 
         public void Run()
         {
-            LoadGameFile();
-
             runner.Run(gameFactory);
         }
     }

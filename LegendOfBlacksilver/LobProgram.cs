@@ -11,11 +11,13 @@ using System.Threading.Tasks;
 
 using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB
 {
 	static class LobProgram
 	{
+        private static ICommandFactory commandFactory;
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -47,6 +49,7 @@ namespace ERY.Xle.LoB
 
                 IXleStartup core = container.Resolve<IXleStartup>();
                 core.ProcessArguments(args);
+                commandFactory = container.Resolve<ICommandFactory>();
 
                 core.Run();
 			});
@@ -56,14 +59,14 @@ namespace ERY.Xle.LoB
 		{
 			get
 			{
-				yield return new ArmorCommand();
-				yield return new Fight();
-				yield return new Gamespeed();
-				yield return new Inventory();
-				yield return new Pass();
-				yield return new Use();
-				yield return new WeaponCommand();
-				yield return new Xamine();
+                yield return commandFactory.Armor();
+                yield return commandFactory.Fight();
+				yield return commandFactory.Gamespeed();
+				yield return commandFactory.Inventory();
+				yield return commandFactory.Pass();
+				yield return commandFactory.Use();
+				yield return commandFactory.Weapon();
+				yield return commandFactory.Xamine();
 			}
 		}
 	}

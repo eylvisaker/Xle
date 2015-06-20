@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib.InputLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,8 @@ namespace ERY.Xle.Services
         bool AcceptKey { get; set; }
 
         void CheckArrowKeys();
+
+        KeyCode WaitForKey(params KeyCode[] keys);
+        KeyCode WaitForKey(Action redraw, params KeyCode[] keys);
     }
 }

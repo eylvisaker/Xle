@@ -12,16 +12,13 @@ namespace ERY.Xle.Services.Implementation
         private IXleRenderer renderer;
         private XleSystemState systemState;
         private GameState gameState;
-        private IXleInput input;
 
         public XleScreen(
             IXleRenderer renderer,
-            IXleInput input,
             GameState gameState,
             XleSystemState systemState)
         {
             this.renderer = renderer;
-            this.input = input;
             this.gameState = gameState;
             this.systemState = systemState;
 

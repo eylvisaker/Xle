@@ -58,8 +58,10 @@
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
     <Compile Include="Services\ICommandFactory.cs" />
+    <Compile Include="Services\IEquipmentPicker.cs" />
     <Compile Include="Services\IMapChanger.cs" />
     <Compile Include="Services\IMapLoader.cs" />
+    <Compile Include="Services\IMenuRenderer.cs" />
     <Compile Include="Services\Implementation\Commands\ArmorCommand.cs" />
     <Compile Include="Services\Implementation\Commands\Climb.cs" />
     <Compile Include="Services\Implementation\Commands\Command.cs" />
@@ -88,8 +90,12 @@
     <Compile Include="DirectionHelper.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Rendering\IXleRenderer.cs" />
+    <Compile Include="Services\Implementation\EquipmentPicker.cs" />
     <Compile Include="Services\Implementation\MapChanger.cs" />
+    <Compile Include="Services\Implementation\MenuRenderer.cs" />
     <Compile Include="Services\Implementation\XleGameControl.cs" />
+    <Compile Include="Services\Implementation\XleMenu.cs" />
+    <Compile Include="Services\IXleMenu.cs" />
     <Compile Include="Services\IXleScreen.cs" />
     <Compile Include="Services\Implementation\MapLoader.cs" />
     <Compile Include="Services\Implementation\SoundManProxy.cs" />

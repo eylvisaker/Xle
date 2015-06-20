@@ -42,7 +42,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
 		protected override void UserSelectedCancel()
 		{
-			NewState = new SecondMainMenu();
+			NewState = Factory.CreateSecondMainMenu();
 		}
 	}
 }

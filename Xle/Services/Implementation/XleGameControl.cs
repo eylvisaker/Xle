@@ -84,6 +84,7 @@ namespace ERY.Xle.Services.Implementation
         public void Redraw()
         {
             Update();
+            screen.Redraw();
 
             KeepAlive();
 
