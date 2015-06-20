@@ -40,7 +40,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
         {
             state.Map.Guards.IsAngry = false;
 
-            Renderer.PlayerColor = XleColor.Yellow;
+            Player.RenderColor = XleColor.Yellow;
 
             TextArea.PrintLine();
             TextArea.PrintLine();

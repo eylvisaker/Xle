@@ -115,13 +115,13 @@ namespace ERY.Xle.LotA.TitleScreen
         {
             base.DrawFrame();
             Renderer.DrawFrameLine(0, 20 * 16, 1, 
-                XleCore.myWindowWidth, Colors.FrameColor);
+                XleOptions.myWindowWidth, Colors.FrameColor);
         }
         protected override void DrawFrameHighlight()
         {
             base.DrawFrameHighlight();
-            Renderer.DrawInnerFrameHighlight(0, 20 * 16, 1, 
-                XleCore.myWindowWidth, Colors.FrameHighlightColor);
+            Renderer.DrawInnerFrameHighlight(0, 20 * 16, 1,
+                XleOptions.myWindowWidth, Colors.FrameHighlightColor);
         }
 
         protected override void DrawWindows()

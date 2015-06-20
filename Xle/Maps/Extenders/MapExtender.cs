@@ -43,6 +43,10 @@ namespace ERY.Xle.Maps.Extenders
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
         public GameState GameState { get; set; }
+        public Random Random { get; set; }
+        public XleData Data { get; set; }
+        public ISoundMan SoundMan { get; set; }
+        public IXleInput Input { get; set; }
 
         public Player Player { get { return GameState.Player; } }
 
@@ -273,11 +277,10 @@ namespace ERY.Xle.Maps.Extenders
             return CommandNotImplemented();
         }
 
-        protected static bool CommandNotImplemented()
+        protected bool CommandNotImplemented()
         {
-
-            XleCore.TextArea.PrintLine("This command is not implemented.", Color.Red);
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine("This command is not implemented.", Color.Red);
+            TextArea.PrintLine();
 
             SoundMan.PlaySoundSync(LotaSound.Medium);
 

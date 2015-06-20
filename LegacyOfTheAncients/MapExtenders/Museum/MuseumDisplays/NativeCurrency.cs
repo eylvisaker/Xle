@@ -5,31 +5,36 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Rendering;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class NativeCurrency : LotaExhibit
-	{
-		public NativeCurrency() : base("Native Currency", Coin.Topaz) { }
-		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.NativeCurrency; } }
+    public class NativeCurrency : LotaExhibit
+    {
+        public NativeCurrency() : base("Native Currency", Coin.Topaz) { }
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public Random Random { get; set; }
+        public IXleRenderer Renderer { get; set; }
 
-			int gold = (int)(350 * (1 + player.Level) 
-				* (1 + XleCore.random.NextDouble()));
+        public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.NativeCurrency; } }
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("             Gold:  + " + gold.ToString(), XleColor.Yellow);
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-			player.Gold += gold;
+            int gold = (int)(350 * (1 + Player.Level)
+                * (1 + Random.NextDouble()));
 
-			SoundMan.PlaySound(LotaSound.VeryGood);
-			XleCore.FlashHPWhileSound(XleColor.Yellow);
-		}
-	}
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("             Gold:  + " + gold.ToString(), XleColor.Yellow);
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+
+            Player.Gold += gold;
+
+            SoundMan.PlaySound(LotaSound.VeryGood);
+            Renderer.FlashHPWhileSound(XleColor.Yellow);
+        }
+    }
 }

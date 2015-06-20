@@ -8,38 +8,33 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class HerbOfLife : LotaExhibit
-	{
-		public HerbOfLife() : base("Herb of life", Coin.Topaz) { }
-		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.HerbOfLife; } }
-		public override string LongName
-		{
-			get
-			{
-				return "The herb of life";
-			}
-		}
+    public class HerbOfLife : LotaExhibit
+    {
+        public HerbOfLife() : base("Herb of life", Coin.Topaz) { }
+        public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.HerbOfLife; } }
+        public override string LongName
+        {
+            get
+            {
+                return "The herb of life";
+            }
+        }
 
-		public override void RunExhibit(Player player)
-		{
-			ReadRawText(RawText);
+        public override void RunExhibit(Player player)
+        {
+            ReadRawText(RawText);
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want to eat the fruit?");
-			XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Do you want to eat the fruit?");
+            TextArea.PrintLine();
 
-			if (XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
-			{
-				SoundMan.PlaySound(LotaSound.Good);
-				XleCore.TextArea.PrintLine("You feel a tingling sensation.", XleColor.Green);
+            if (QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
+            {
+                TextArea.PrintLine("You feel a tingling sensation.", XleColor.Green);
+                SoundMan.PlaySoundSync(LotaSound.Good);
 
-				while (SoundMan.IsPlaying(LotaSound.Good))
-				{
-					XleCore.Wait(10);
-				}
-
-				Lota.Story.EatenJutonFruit = true;
-			}
-		}
-	}
+                Story.EatenJutonFruit = true;
+            }
+        }
+    }
 }

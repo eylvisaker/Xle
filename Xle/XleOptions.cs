@@ -18,5 +18,9 @@ namespace ERY.Xle
         public bool DisableExhibitsRequireCoins { get; set; }
 
         public bool EnableDebugMode { get; set; }
+
+
+        public const int myWindowWidth = 640;
+        public const int myWindowHeight = 400;
     }
 }

@@ -19,24 +19,29 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
     {
         Dictionary<int, Exhibit> mExhibits = new Dictionary<int, Exhibit>();
 
-        public LotaMuseum()
+        public LotaMuseum(IExhibitFactory factory)
         {
-            mExhibits.Add(0x50, new MuseumDisplays.Information());
-            mExhibits.Add(0x51, new MuseumDisplays.Welcome());
-            mExhibits.Add(0x52, new MuseumDisplays.Weaponry());
-            mExhibits.Add(0x53, new MuseumDisplays.Thornberry());
-            mExhibits.Add(0x54, new MuseumDisplays.Fountain());
-            mExhibits.Add(0x55, new MuseumDisplays.PirateTreasure());
-            mExhibits.Add(0x56, new MuseumDisplays.HerbOfLife());
-            mExhibits.Add(0x57, new MuseumDisplays.NativeCurrency());
-            mExhibits.Add(0x58, new MuseumDisplays.StonesWisdom());
-            mExhibits.Add(0x59, new MuseumDisplays.Tapestry());
-            mExhibits.Add(0x5A, new MuseumDisplays.LostDisplays());
-            mExhibits.Add(0x5B, new MuseumDisplays.KnightsTest());
-            mExhibits.Add(0x5C, new MuseumDisplays.FourJewels());
-            mExhibits.Add(0x5D, new MuseumDisplays.Guardian());
-            mExhibits.Add(0x5E, new MuseumDisplays.Pegasus());
-            mExhibits.Add(0x5F, new MuseumDisplays.AncientArtifact());
+            mExhibits.Add(0x50, factory.Information());
+            mExhibits.Add(0x51, factory.Welcome());
+            mExhibits.Add(0x52, factory.Weaponry());
+            mExhibits.Add(0x53, factory.Thornberry());
+            mExhibits.Add(0x54, factory.Fountain());
+            mExhibits.Add(0x55, factory.PirateTreasure());
+            mExhibits.Add(0x56, factory.HerbOfLife());
+            mExhibits.Add(0x57, factory.NativeCurrency());
+            mExhibits.Add(0x58, factory.StonesWisdom());
+            mExhibits.Add(0x59, factory.Tapestry());
+            mExhibits.Add(0x5A, factory.LostDisplays());
+            mExhibits.Add(0x5B, factory.KnightsTest());
+            mExhibits.Add(0x5C, factory.FourJewels());
+            mExhibits.Add(0x5D, factory.Guardian());
+            mExhibits.Add(0x5E, factory.Pegasus());
+            mExhibits.Add(0x5F, factory.AncientArtifact());
+        }
+
+        public LotaStory Story
+        {
+            get { return GameState.Story(); }
         }
 
         public override void SetCommands(ICommandList commands)
@@ -71,7 +76,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
         public override void CheckExhibitStatus(GameState state)
         {
             // lost displays
-            if (Lota.Story.Museum[0xa] > 0)
+            if (Story.Museum[0xa] > 0)
             {
                 for (int i = 0; i < state.Map.Width; i++)
                 {
@@ -84,12 +89,12 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
             }
 
             // welcome exhibit
-            if (Lota.Story.Museum[1] == 0)
+            if (Story.Museum[1] == 0)
             {
                 state.Map[4, 1] = 0;
                 state.Map[3, 10] = 0;
             }
-            else if (Lota.Story.Museum[1] == 1)
+            else if (Story.Museum[1] == 1)
             {
                 state.Map[4, 1] = 0;
                 state.Map[3, 10] = 16;
@@ -108,13 +113,10 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 
             if (info.ShouldLevelUp(state.Player))
             {
-                XleCore.TextArea.Clear();
-                XleCore.TextArea.PrintLine("The caretaker wants to see you!");
+                TextArea.Clear();
+                TextArea.PrintLine("The caretaker wants to see you!");
 
-                SoundMan.PlaySound(LotaSound.Good);
-
-                while (SoundMan.IsPlaying(LotaSound.Good))
-                    XleCore.Wait(50);
+                SoundMan.PlaySoundSync(LotaSound.Good);
             }
         }
 
@@ -144,11 +146,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
         {
             if (state.Player.X == 12 && state.Player.Y == 13)
             {
-                if (Lota.Story.Museum[1] < 3)
+                if (Story.Museum[1] < 3)
                 {
                     var welcome = (Welcome)GetExhibitByTile(0x51);
                     welcome.PlayGoldArmbandMessage(state.Player);
-                    Lota.Story.Museum[1] = 3;
+                    Story.Museum[1] = 3;
 
                     CheckExhibitStatus(state);
                 }
@@ -160,7 +162,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 
             if (facingDoor)
             {
-                XleCore.Wait(1000);
+                GameControl.Wait(1000);
 
                 foreach (var entry in state.Map.EntryPoints)
                 {
@@ -170,11 +172,11 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
                     }
                 }
 
-                LeaveMap(state.Player);
+                LeaveMap();
             }
             else
             {
-                XleCore.TextArea.PrintLine("The gold armband hums softly.");
+                TextArea.PrintLine("The gold armband hums softly.");
             }
         }
 
@@ -182,14 +184,14 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
         {
             var lotaex = (LotaExhibit)ex;
 
-            XleCore.TextArea.PrintLine("You'll need a " + lotaex.Coin.ToString() + " coin.");
+            TextArea.PrintLine("You'll need a " + lotaex.Coin.ToString() + " coin.");
         }
 
         public override void PrintUseCoinMessage(Player player, Exhibit ex)
         {
             var lotaex = (LotaExhibit)ex;
 
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
         }
 
         public override Maps.Map3DSurfaces Surfaces(GameState state)

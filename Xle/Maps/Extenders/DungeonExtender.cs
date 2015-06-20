@@ -9,11 +9,14 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Rendering;
 
 namespace ERY.Xle.Maps.Extenders
 {
 	public class DungeonExtender : Map3DExtender
 	{
+        public IXleRenderer Renderer { get; set; }
+
 		public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
 		public new DungeonRenderer MapRenderer { get { return (DungeonRenderer)base.MapRenderer; } }
 
@@ -183,7 +186,7 @@ namespace ERY.Xle.Maps.Extenders
 				case 0x11:
 					if (player.DungeonLevel == 0)
 					{
-						XleCore.TextArea.PrintLine("\n\nYou climb out of the dungeon.");
+						TextArea.PrintLine("\n\nYou climb out of the dungeon.");
 
 						OnPlayerExitDungeon(player);
 
@@ -222,7 +225,7 @@ namespace ERY.Xle.Maps.Extenders
 			if (TheMap[player.X, player.Y] == 0x21) TheMap[player.X, player.Y] = 0x11;
 			if (TheMap[player.X, player.Y] == 0x22) TheMap[player.X, player.Y] = 0x12;
 
-			XleCore.TextArea.PrintLine("\n\nYou are now at level " + (player.DungeonLevel + 1).ToString() + ".", XleColor.White);
+			TextArea.PrintLine("\n\nYou are now at level " + (player.DungeonLevel + 1).ToString() + ".", XleColor.White);
 		}
 
 
@@ -240,8 +243,8 @@ namespace ERY.Xle.Maps.Extenders
 
 			//string name = TrapName(this[x, y]);
 
-			//XleCore.TextArea.PrintLine();
-			//XleCore.TextArea.PrintLine("You avoid the " + name + ".");
+			//TextArea.PrintLine();
+			//TextArea.PrintLine("You avoid the " + name + ".");
 			//XleCore.wait(150);
 		}
 		private void OnPlayerTriggerTrap(Player player, int x, int y)
@@ -251,20 +254,20 @@ namespace ERY.Xle.Maps.Extenders
 
 			TheMap[x, y] -= 0x10;
 			int damage = 31;
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
 
 			if (TheMap[x, y] == 0x12)
 			{
-				XleCore.TextArea.PrintLine("You fall through a hidden hole.", XleColor.White);
+				TextArea.PrintLine("You fall through a hidden hole.", XleColor.White);
 			}
 			else
 			{
-				XleCore.TextArea.PrintLine("You're ambushed by a " + 
+				TextArea.PrintLine("You're ambushed by a " + 
 					TrapName(TheMap[x, y]) + ".", XleColor.White);
 				XleCore.Wait(100);
 			}
 
-			XleCore.TextArea.PrintLine("   H.P. - " + damage.ToString(), XleColor.White);
+			TextArea.PrintLine("   H.P. - " + damage.ToString(), XleColor.White);
 			player.HP -= damage;
 
 			SoundMan.PlaySound(LotaSound.EnemyHit);
@@ -298,7 +301,7 @@ namespace ERY.Xle.Maps.Extenders
 
 		private void MonsterAttackPlayer(GameState state, DungeonMonster monster)
 		{
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
 
 			var delta = new Point(
 				monster.Location.X - state.Player.X,
@@ -311,29 +314,29 @@ namespace ERY.Xle.Maps.Extenders
 
 			if (delta == forward)
 			{
-				XleCore.TextArea.Print("Attacked by ");
-				XleCore.TextArea.Print(monster.Name, XleColor.Yellow);
-				XleCore.TextArea.PrintLine("!");
+				TextArea.Print("Attacked by ");
+				TextArea.Print(monster.Name, XleColor.Yellow);
+				TextArea.PrintLine("!");
 
 				allowEffect = true;
 			}
 			else if (delta == right)
 			{
-				XleCore.TextArea.Print("Attacked from the ");
-				XleCore.TextArea.Print("right", XleColor.Yellow);
-				XleCore.TextArea.PrintLine(".");
+				TextArea.Print("Attacked from the ");
+				TextArea.Print("right", XleColor.Yellow);
+				TextArea.PrintLine(".");
 			}
 			else if (delta == left)
 			{
-				XleCore.TextArea.Print("Attacked from the ");
-				XleCore.TextArea.Print("left", XleColor.Yellow);
-				XleCore.TextArea.PrintLine(".");
+				TextArea.Print("Attacked from the ");
+				TextArea.Print("left", XleColor.Yellow);
+				TextArea.PrintLine(".");
 			}
 			else
 			{
-				XleCore.TextArea.Print("Attacked from ");
-				XleCore.TextArea.Print("behind", XleColor.Yellow);
-				XleCore.TextArea.PrintLine(".");
+				TextArea.Print("Attacked from ");
+				TextArea.Print("behind", XleColor.Yellow);
+				TextArea.PrintLine(".");
 			}
 
 			if (RollToHitPlayer(state, monster))
@@ -341,16 +344,16 @@ namespace ERY.Xle.Maps.Extenders
 				int damage = RollDamageToPlayer(state, monster);
 
 				SoundMan.PlaySound(LotaSound.EnemyHit);
-				XleCore.TextArea.Print("Hit by blow of ");
-				XleCore.TextArea.Print(damage.ToString(), XleColor.Yellow);
-				XleCore.TextArea.PrintLine("!");
+				TextArea.Print("Hit by blow of ");
+				TextArea.Print(damage.ToString(), XleColor.Yellow);
+				TextArea.PrintLine("!");
 
 				state.Player.HP -= damage;
 			}
 			else
 			{
 				SoundMan.PlaySound(LotaSound.EnemyMiss);
-				XleCore.TextArea.PrintLine("Attack missed.", XleColor.Green);
+				TextArea.PrintLine("Attack missed.", XleColor.Green);
 			}
 
 			XleCore.Wait(250);
@@ -439,9 +442,9 @@ namespace ERY.Xle.Maps.Extenders
 			}
 			else
 			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Nothing to open.");
+				TextArea.PrintLine();
+				TextArea.PrintLine();
+				TextArea.PrintLine("Nothing to open.");
 				XleCore.Wait(1000);
 			}
 
@@ -453,8 +456,8 @@ namespace ERY.Xle.Maps.Extenders
 		{
 			int amount = XleCore.random.Next(60, 200);
 
-			XleCore.TextArea.PrintLine(" Box");
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine(" Box");
+			TextArea.PrintLine();
 			SoundMan.PlaySound(LotaSound.OpenChest);
 			XleCore.Wait(500);
 
@@ -472,13 +475,13 @@ namespace ERY.Xle.Maps.Extenders
 			if (handled == false)
 			{
 				if (amount == 0)
-					XleCore.TextArea.PrintLine("You find nothing.", Color.Yellow);
+					TextArea.PrintLine("You find nothing.", Color.Yellow);
 				else
 				{
-					XleCore.TextArea.PrintLine("Hit points:  + " + amount.ToString(), XleColor.Yellow);
+					TextArea.PrintLine("Hit points:  + " + amount.ToString(), XleColor.Yellow);
 					player.HP += amount;
 					SoundMan.PlaySound(LotaSound.Good);
-					XleCore.FlashHPWhileSound(XleColor.Yellow);
+					Renderer.FlashHPWhileSound(XleColor.Yellow);
 				}
 			}
 
@@ -488,24 +491,24 @@ namespace ERY.Xle.Maps.Extenders
 		{
 			val -= 0x30;
 
-			XleCore.TextArea.PrintLine(" Chest");
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine(" Chest");
+			TextArea.PrintLine();
 
 			SoundMan.PlaySound(LotaSound.OpenChest);
-			XleCore.Wait(XleCore.GameState.GameSpeed.DungeonOpenChestSoundTime);
+			GameControl.Wait(XleCore.GameState.GameSpeed.DungeonOpenChestSoundTime);
 
 			// TODO: give weapons
 			// TODO: bobby trap chests.
 
 			if (val == 0)
 			{
-				int amount = XleCore.random.Next(90, 300);
+				int amount = Random.Next(90, 300);
 
-				XleCore.TextArea.PrintLine("You find " + amount.ToString() + " gold.", XleColor.Yellow);
+				TextArea.PrintLine("You find " + amount.ToString() + " gold.", XleColor.Yellow);
 
 				player.Gold += amount;
 
-				XleCore.FlashHPWhileSound(XleColor.Yellow);
+				Renderer.FlashHPWhileSound(XleColor.Yellow);
 			}
 			else
 			{
@@ -520,19 +523,19 @@ namespace ERY.Xle.Maps.Extenders
 					if (treasure > 0)
 					{
 						string text = "You find a " + XleCore.Data.ItemList[treasure].LongName + "!!";
-						XleCore.TextArea.Clear();
-						XleCore.TextArea.PrintLine(text);
+						TextArea.Clear();
+						TextArea.PrintLine(text);
 
 						player.Items[treasure] += 1;
 
 						SoundMan.PlaySound(LotaSound.VeryGood);
 
-						XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
+						TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
 							XleColor.White, XleColor.Yellow, 100);
 					}
 					else
 					{
-						XleCore.TextArea.PrintLine("You find nothing.");
+						TextArea.PrintLine("You find nothing.");
 					}
 				}
 			}
@@ -569,7 +572,7 @@ namespace ERY.Xle.Maps.Extenders
 				default: break;
 			}
 
-			XleCore.TextArea.PrintLine("\n");
+			TextArea.PrintLine("\n");
 
 			bool revealHidden = false;
 			DungeonMonster foundMonster = null;
@@ -593,7 +596,7 @@ namespace ERY.Xle.Maps.Extenders
 
 			if (revealHidden)
 			{
-				XleCore.TextArea.PrintLine("Hidden objects detected!!!", XleColor.White);
+				TextArea.PrintLine("Hidden objects detected!!!", XleColor.White);
 				SoundMan.PlaySound(LotaSound.XamineDetected);
 			}
 
@@ -612,7 +615,7 @@ namespace ERY.Xle.Maps.Extenders
 					if ("aeiou".Contains(foundMonster.Name[0]))
 						name = "n" + name;
 
-					XleCore.TextArea.PrintLine("A" + name + " is stalking you!", XleColor.White);
+					TextArea.PrintLine("A" + name + " is stalking you!", XleColor.White);
 				}
 			}
 			else
@@ -647,22 +650,22 @@ namespace ERY.Xle.Maps.Extenders
 				{
 					if (distance > 0)
 					{
-						XleCore.TextArea.PrintLine("A " + extraText + " is in sight.");
+						TextArea.PrintLine("A " + extraText + " is in sight.");
 					}
 					else
 					{
-						XleCore.TextArea.PrintLine("You are standing next ");
-						XleCore.TextArea.PrintLine("to a " + extraText + ".");
+						TextArea.PrintLine("You are standing next ");
+						TextArea.PrintLine("to a " + extraText + ".");
 					}
 				}
 				else
 				{
 					if (PrintLevelDuringXamine)
 					{
-						XleCore.TextArea.PrintLine("Level " + (player.DungeonLevel + 1).ToString() + ".");
+						TextArea.PrintLine("Level " + (player.DungeonLevel + 1).ToString() + ".");
 					}
 
-					XleCore.TextArea.PrintLine("Nothing unusual in sight.");
+					TextArea.PrintLine("Nothing unusual in sight.");
 				}
 			}
 
@@ -679,8 +682,8 @@ namespace ERY.Xle.Maps.Extenders
 		private void UseAttackMagic(GameState state, MagicSpell magic)
 		{
 			int distance = 0;
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Shoot " + magic.Name + ".", XleColor.White);
+			TextArea.PrintLine();
+			TextArea.PrintLine("Shoot " + magic.Name + ".", XleColor.White);
 
 			DungeonMonster monst = MonsterInFrontOfPlayer(state.Player, ref distance);
 			var magicSound = magic.ID == 1 ? LotaSound.MagicFlame : LotaSound.MagicBolt;
@@ -689,14 +692,14 @@ namespace ERY.Xle.Maps.Extenders
 			if (monst == null)
 			{
 				SoundMan.PlayMagicSound(magicSound, hitSound, distance);
-				XleCore.TextArea.PrintLine("There is no effect.", XleColor.White);
+				TextArea.PrintLine("There is no effect.", XleColor.White);
 			}
 			else
 			{
 				if (RollSpellFizzle(state, magic))
 				{
 					SoundMan.PlayMagicSound(magicSound, LotaSound.MagicFizzle, distance);
-					XleCore.TextArea.PrintLine("Attack fizzles.", XleColor.White);
+					TextArea.PrintLine("Attack fizzles.", XleColor.White);
 					XleCore.Wait(500);
 				}
 				else
@@ -762,9 +765,9 @@ namespace ERY.Xle.Maps.Extenders
 
 		private void HitMonster(DungeonMonster monst, int damage, Color clr)
 		{
-			XleCore.TextArea.Print("Enemy hit by blow of ", clr);
-			XleCore.TextArea.Print(damage.ToString(), XleColor.White);
-			XleCore.TextArea.PrintLine("!");
+			TextArea.Print("Enemy hit by blow of ", clr);
+			TextArea.Print(damage.ToString(), XleColor.White);
+			TextArea.PrintLine("!");
 
 			monst.HP -= damage;
 			XleCore.Wait(1000);
@@ -772,7 +775,7 @@ namespace ERY.Xle.Maps.Extenders
 			if (monst.HP <= 0)
 			{
 				TheMap.Monsters.Remove(monst);
-				XleCore.TextArea.PrintLine(monst.Name + " dies!!");
+				TextArea.PrintLine(monst.Name + " dies!!");
 
 				SoundMan.PlaySound(LotaSound.EnemyDie);
 
@@ -785,8 +788,8 @@ namespace ERY.Xle.Maps.Extenders
 		{
 			var player = state.Player;
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
+			TextArea.PrintLine();
 
 			int distance = 0;
 			int maxDistance = 1;
@@ -797,21 +800,21 @@ namespace ERY.Xle.Maps.Extenders
 
 			if (monst == null)
 			{
-				XleCore.TextArea.PrintLine("Nothing to fight.");
+				TextArea.PrintLine("Nothing to fight.");
 				return true;
 			}
 			else if (distance > maxDistance)
 			{
-				XleCore.TextArea.PrintLine("The " + monst.Name + " is out-of-range");
-				XleCore.TextArea.PrintLine("of your " + player.CurrentWeaponTypeName + ".");
+				TextArea.PrintLine("The " + monst.Name + " is out-of-range");
+				TextArea.PrintLine("of your " + player.CurrentWeaponTypeName + ".");
 				return true;
 			}
 
 			bool hit = RollToHitMonster(XleCore.GameState, monst);
 
-			XleCore.TextArea.Print("Hit ");
-			XleCore.TextArea.Print(monst.Name, XleColor.White);
-			XleCore.TextArea.PrintLine(" with " + player.CurrentWeaponTypeName);
+			TextArea.Print("Hit ");
+			TextArea.Print(monst.Name, XleColor.White);
+			TextArea.PrintLine(" with " + player.CurrentWeaponTypeName);
 
 			if (hit)
 			{
@@ -824,7 +827,7 @@ namespace ERY.Xle.Maps.Extenders
 			else
 			{
 				SoundMan.PlaySound(LotaSound.PlayerMiss);
-				XleCore.TextArea.PrintLine("Your attack misses.");
+				TextArea.PrintLine("Your attack misses.");
 				XleCore.Wait(500);
 			}
 

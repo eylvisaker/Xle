@@ -1,22 +1,24 @@
-﻿using ERY.Xle.Services.Implementation;
+﻿using ERY.Xle.Services;
 using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
     public class Casandra : LotaEvent
     {
+        public IQuickMenu QuickMenu { get; set; }
+
         public override bool Speak(GameState state)
         {
             SoundMan.PlaySound(LotaSound.VeryGood);
 
-            XleCore.TextArea.Clear(true);
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("     casandra the temptress", XleColor.Yellow);
-            XleCore.TextArea.PrintLine();
+            TextArea.Clear(true);
+            TextArea.PrintLine();
+            TextArea.PrintLine("     casandra the temptress", XleColor.Yellow);
+            TextArea.PrintLine();
 
-            XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Yellow, XleColor.Cyan, 250);
+            TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Yellow, XleColor.Cyan, 250);
 
-            if (Lota.Story.VisitedCasandra == false)
+            if (Story.VisitedCasandra == false)
             {
                 OfferGoldOrCharm(state);
             }
@@ -25,25 +27,25 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
                 BegoneMessage(state);
             }
 
-            XleCore.Wait(5000);
+            GameControl.Wait(5000);
             return true;
         }
 
         private void BegoneMessage(GameState state)
         {
-            XleCore.TextArea.PrintLine("I helped you already - be gone.");
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine("I helped you already - be gone.");
+            TextArea.PrintLine();
         }
 
         private void OfferGoldOrCharm(GameState state)
         {
-            XleCore.TextArea.PrintLineSlow("You may visit my magical room", XleColor.Green);
-            XleCore.TextArea.PrintLineSlow("only this once.  My power can", XleColor.Cyan);
-            XleCore.TextArea.PrintLineSlow("bring you different rewards.", XleColor.Yellow);
+            TextArea.PrintLineSlow("You may visit my magical room", XleColor.Green);
+            TextArea.PrintLineSlow("only this once.  My power can", XleColor.Cyan);
+            TextArea.PrintLineSlow("bring you different rewards.", XleColor.Yellow);
 
-            int choice = XleCore.QuickMenu(new MenuItemList("Gold", "Charm"), 2);
+            int choice = QuickMenu.QuickMenu(new MenuItemList("Gold", "Charm"), 2);
 
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
 
             if (choice == 0)
             {
@@ -54,18 +56,18 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
                 GiveCharm(state);
             }
 
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
 
             var old = state.Map.ColorScheme.BorderColor;
-            state.Map.ColorScheme.BorderColor = XleColor.White;
+            Map.ColorScheme.BorderColor = XleColor.White;
 
             SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-            state.Map.ColorScheme.BorderColor = old;
+            Map.ColorScheme.BorderColor = old;
 
-            Lota.Story.VisitedCasandra = true;
+            Story.VisitedCasandra = true;
 
-            if (Lota.Story.SearchingForTulip)
+            if (Story.SearchingForTulip)
             {
                 PassageHint(state);
             }
@@ -73,25 +75,23 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
         private void PassageHint(GameState state)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("You should know that there are many");
-            XleCore.TextArea.PrintLine("secret passageways.  The entrace to");
-            XleCore.TextArea.PrintLine("one is between two flower gardens.");
-
-
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("You should know that there are many");
+            TextArea.PrintLine("secret passageways.  The entrace to");
+            TextArea.PrintLine("one is between two flower gardens.");
         }
 
         private void GiveCharm(GameState state)
         {
-            XleCore.TextArea.PrintLine("Charm  +15");
-            XleCore.GameState.Player.Attribute[Attributes.charm] += 15;
+            TextArea.PrintLine("Charm  +15");
+            Player.Attribute[Attributes.charm] += 15;
         }
 
         private void GiveGold(GameState state)
         {
-            XleCore.TextArea.PrintLine("Gold  +5,000");
-            XleCore.GameState.Player.Gold += 5000;
+            TextArea.PrintLine("Gold  +5,000");
+            Player.Gold += 5000;
         }
     }
 }

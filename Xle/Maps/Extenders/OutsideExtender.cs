@@ -28,9 +28,8 @@ namespace ERY.Xle.Maps.Extenders
 		bool isMonsterFriendly;
 
 		public EncounterState EncounterState { get; set; }
-        public ICommandFactory CommandFactory { get; set; }
         public IMuseumCoinSale MuseumCoinSale { get; set; }
-
+        
 		public new Outside TheMap { get { return (Outside)base.TheMap; } }
 		public new OutsideRenderer MapRenderer
 		{

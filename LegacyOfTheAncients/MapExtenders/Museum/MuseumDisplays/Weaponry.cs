@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class Weaponry : LotaExhibit
+	public class Weaponry : LotaExhibit
 	{
 		public Weaponry() : base("Weaponry", Coin.Jade) { }
 		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Weaponry; } }
@@ -20,9 +20,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
 		bool viewedThisTime;
 
-		public override void RunExhibit(Player player)
+		public override void RunExhibit(Player unused)
 		{
-			if (StoryVariable == 0 && HasBeenVisited(player, MuseumDisplays.ExhibitIdentifier.Thornberry))
+			if (StoryVariable == 0 && HasBeenVisited(Player, MuseumDisplays.ExhibitIdentifier.Thornberry))
 			{
 				StoryVariable = 1;
 			}
@@ -32,21 +32,21 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 				ReadRawText(ExhibitInfo.Text[1]);
 				
 				// fair knife
-				player.AddWeapon(1, 1);
+				Player.AddWeapon(1, 1);
 			}
 			else if (StoryVariable == 1)
 			{
 				ReadRawText(ExhibitInfo.Text[2]);
 
 				// great bladed staff
-				player.AddWeapon(3, 3);
+				Player.AddWeapon(3, 3);
 
 				StoryVariable = -1;
 			}
 
 			viewedThisTime = true;
 		}
-		public override bool IsClosed(ERY.Xle.Player player)
+		public override bool IsClosed(ERY.Xle.Player unused)
 		{
 			int id = (int)ExhibitIdentifier;
 

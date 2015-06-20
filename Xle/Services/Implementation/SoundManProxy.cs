@@ -37,5 +37,23 @@ namespace ERY.Xle.Services.Implementation
         {
             SoundMan.PlaySoundSync(redraw, sound);
         }
+
+
+        public void FinishSounds()
+        {
+            SoundMan.FinishSounds();
+        }
+
+
+        public void PlayMagicSound(LotaSound sound, LotaSound endSound, int distance)
+        {
+            SoundMan.PlayMagicSound(sound, endSound, distance);
+        }
+
+
+        public bool IsAnyPlaying()
+        {
+            return SoundMan.IsAnyPlaying();
+        }
     }
 }

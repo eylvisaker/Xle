@@ -40,25 +40,27 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
             mExtenders.Add("StoreBuyback", new StoreBuyback());
         }
 
+        public XleOptions Options { get; set; }
+
         public override void OnLoad(GameState state)
         {
-            Lota.SetMuseumCoinOffers(XleCore.GameState);
+            Lota.SetMuseumCoinOffers(GameState);
 
             CheckLoan(state);
         }
 
 
-        static void CheckLoan(GameState state)
+        void CheckLoan(GameState state)
         {
             if (state.Map.Events.Any(x => x is Store && x.ExtenderName == "StoreLending"))
             {
                 if (state.Player.loan > 0 && state.Player.dueDate <= state.Player.TimeDays)
                 {
-                    XleCore.TextArea.PrintLine("This is your friendly lender.");
-                    XleCore.TextArea.PrintLine("You owe me money!");
+                    TextArea.PrintLine("This is your friendly lender.");
+                    TextArea.PrintLine("You owe me money!");
                     SoundMan.PlaySound(LotaSound.Bad);
 
-                    XleCore.Wait(1000);
+                    GameControl.Wait(1000);
                 }
             }
         }
@@ -68,7 +70,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
             commands.Items.Add(CommandFactory.Magic());
-            commands.Items.Add(CommandFactory.Leave(confirmPrompt: XleCore.Options.EnhancedUserInterface));
+            commands.Items.Add(CommandFactory.Leave(confirmPrompt: Options.EnhancedUserInterface));
             commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Speak());
         }

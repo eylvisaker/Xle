@@ -28,5 +28,9 @@ namespace ERY.Xle.Services
         void SetLineColor(Color color, params int[] lines);
 
         void Draw();
+
+        void SetCharacterColor(int p1, int p2, Color color);
+
+        int Margin { get; set; }
     }
 }

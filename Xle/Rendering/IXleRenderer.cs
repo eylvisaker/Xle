@@ -42,6 +42,11 @@ namespace ERY.Xle.Rendering
 
         void AnimateStep();
 
-        Color PlayerColor { get; set; }
+        void DrawObject(ColorScheme mColorScheme);
+
+        void FlashHPWhile(Color color1, Color color2, Func<bool> func);
+
+        void FlashHPWhileSound(Color clr, Color? clr2 = null);
+
     }
 }

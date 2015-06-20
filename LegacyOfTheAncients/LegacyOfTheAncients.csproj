@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap\LotaEventExtenderInstaller.cs" />
+    <Compile Include="Bootstrap\LotaExhibitInstaller.cs" />
     <Compile Include="Bootstrap\LotaMapExtenderInstaller.cs" />
     <Compile Include="Bootstrap\LotaTitleScreenInstaller.cs" />
     <Compile Include="GameVariableExtensions.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="LotaProgram.cs" />
     <Compile Include="LotaStory.cs" />
     <Compile Include="MapExtenders\Fortress\FirstArea\CompendiumFirst.cs" />
+    <Compile Include="MapExtenders\Museum\IExhibitFactory.cs" />
     <Compile Include="MapExtenders\Towns\Stores\LotaStore.cs" />
     <Compile Include="MapExtenders\Castle\Events\Arovyn.cs" />
     <Compile Include="MapExtenders\Castle\Events\Casandra.cs" />

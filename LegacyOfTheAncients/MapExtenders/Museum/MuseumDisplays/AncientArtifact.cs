@@ -7,7 +7,7 @@ using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class AncientArtifact : LotaExhibit
+public	class AncientArtifact : LotaExhibit
 	{
 		public AncientArtifact() : base("Ancient Artifact", Coin.None) { }
 		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.AncientArtifact; } }

@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ERY.Xle.Maps;
+using ERY.Xle.Rendering;
+using AgateLib.Geometry;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {
@@ -19,6 +21,14 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
         {
 
         }
+
+        public IXleRenderer Renderer { get; set; }
+
+        public LotaStory Story
+        {
+            get { return GameState.Story(); }
+        }
+
         public override void OnLoad(GameState state)
         {
             Lota.SetMuseumCoinOffers(state);
@@ -34,7 +44,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             commands.Items.Add(CommandFactory.Speak());
         }
 
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             if (y >= TheMap.Height)
                 return 16;
@@ -47,48 +57,46 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             switch (item)
             {
                 case (int)LotaItem.MagicSeed:
-                    handled = UseMagicSeeds(state.Player);
+                    handled = UseMagicSeeds();
                     break;
             }
         }
-        private bool UseMagicSeeds(Player player)
+        private bool UseMagicSeeds()
         {
-            XleCore.Wait(150);
+            GameControl.Wait(150);
 
-            Lota.Story.Invisible = true;
-            XleCore.TextArea.PrintLine("You're invisible.");
-            XleCore.Renderer.PlayerColor = XleColor.DarkGray;
+            Story.Invisible = true;
+            TextArea.PrintLine("You're invisible.");
+            Player.RenderColor = XleColor.DarkGray;
 
             TheMap.Guards.IsAngry = false;
 
-            XleCore.Wait(500);
+            GameControl.Wait(500);
 
-            player.Items[LotaItem.MagicSeed]--;
+            Player.Items[LotaItem.MagicSeed]--;
 
             return true;
         }
 
         public override void SpeakToGuard(GameState state)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine();
 
-            if (Lota.Story.Invisible)
+            if (Story.Invisible)
             {
-                XleCore.TextArea.PrintLine("The guard looks startled.");
+                TextArea.PrintLine("The guard looks startled.");
             }
             else
             {
-                XleCore.TextArea.PrintLine("The guard ignores you.");
+                TextArea.PrintLine("The guard ignores you.");
             }
         }
 
         protected override void OnSetAngry(bool value)
         {
-            var state = XleCore.GameState;
-
-            Lota.Story.Invisible = false;
-            XleCore.Renderer.PlayerColor = XleColor.White;
+            Story.Invisible = false;
+            Player.RenderColor = XleColor.White;
         }
 
         protected int WhichCastle = 1;
@@ -115,7 +123,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             double damage = player.Attribute[Attributes.strength] *
                        (weaponType / 2 + 1) / 7;
 
-            damage *= 1 + 2 * XleCore.random.NextDouble();
+            damage *= 1 + 2 * Random.NextDouble();
 
             return (int)Math.Round(damage);
         }
@@ -132,7 +140,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             int armorType = player.CurrentArmor.ID;
 
             double damage =
-                Math.Pow(CastleLevel, 1.8) * GuardAttack * (300 + XleCore.random.NextDouble() * 600) /
+                Math.Pow(CastleLevel, 1.8) * GuardAttack * (300 + Random.NextDouble() * 600) /
                 (armorType + 2) / Math.Pow(player.Attribute[Attributes.endurance], 0.9) + 2;
 
             return (int)Math.Round(damage);

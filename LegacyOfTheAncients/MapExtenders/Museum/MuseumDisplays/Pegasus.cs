@@ -5,39 +5,42 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class Pegasus : LotaExhibit
-	{
-		public Pegasus() : base("Pegasus", Coin.Diamond) { }
-		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Pegasus; } }
-		public override string LongName
-		{
-			get { return "A flight of fancy"; }
-		}
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+    public class Pegasus : LotaExhibit
+    {
+        public Pegasus() : base("Pegasus", Coin.Diamond) { }
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want to climb on?");
-			XleCore.TextArea.PrintLine();
+        public IMapChanger MapChanger { get; set; }
 
-			if (0 == XleCore.QuickMenuYesNo())
-			{
-				if (player.Food < 150)
-					player.Food = 150;
+        public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Pegasus; } }
+        public override string LongName
+        {
+            get { return "A flight of fancy"; }
+        }
 
-				XleCore.ChangeMap(player, 3, 0);
-			}
-		}
-		public override bool StaticBeforeCoin
-		{
-			get
-			{
-				return false;
-			}
-		}
-	}
+        public override void RunExhibit(Player player)
+        {
+            base.RunExhibit(player);
+
+            TextArea.PrintLine();
+            TextArea.PrintLine("Do you want to climb on?");
+            TextArea.PrintLine();
+
+            if (0 == QuickMenu.QuickMenuYesNo())
+            {
+                if (player.Food < 150)
+                    player.Food = 150;
+
+                MapChanger.ChangeMap(player, 3, 0);
+            }
+        }
+
+        public override bool StaticBeforeCoin
+        {
+            get { return false; }
+        }
+    }
 }

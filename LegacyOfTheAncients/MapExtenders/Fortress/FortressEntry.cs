@@ -44,20 +44,20 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
         {
             base.OnSetAngry(value);
 
-            XleCore.Renderer.PlayerColor = XleColor.White;
+            Player.RenderColor = XleColor.White;
         }
 
         public override void SpeakToGuard(GameState state)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine();
 
             if (IsAngry)
             {
-                XleCore.TextArea.PrintLine("The guard ignores you.");
+                TextArea.PrintLine("The guard ignores you.");
             }
             else
-                XleCore.TextArea.PrintLine("Greetings soldier.");
+                TextArea.PrintLine("Greetings soldier.");
         }
 
         public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)

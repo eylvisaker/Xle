@@ -5,53 +5,57 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class FourJewels : LotaExhibit
-	{
-		public FourJewels() : base("Four Jewels", Coin.Ruby) { }
-		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.FourJewels; } }
+    public class FourJewels : LotaExhibit
+    {
+        public FourJewels() : base("Four Jewels", Coin.Ruby) { }
 
-		public override string LongName
-		{
-			get
-			{
-				return "The four jewels";
-			}
-		}
-		public override AgateLib.Geometry.Color TitleColor
-		{
-			get { return XleColor.Yellow; }
-		}
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public IMapChanger MapChanger { get; set; }
 
-			XleCore.TextArea.PrintLine("Would you like to go");
-			XleCore.TextArea.PrintLine("to the four jewel dungeon?");
-			XleCore.TextArea.PrintLine();
+        public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.FourJewels; } }
 
-			if (XleCore.QuickMenuYesNo() == 0)
-			{
-				int map = player.MapID;
-				int x = player.X;
-				int y = player.Y;
-				Direction facing = player.FaceDirection;
+        public override string LongName
+        {
+            get
+            {
+                return "The four jewels";
+            }
+        }
+        public override AgateLib.Geometry.Color TitleColor
+        {
+            get { return XleColor.Yellow; }
+        }
+        public override void RunExhibit(Player player)
+        {
+            base.RunExhibit(player);
 
-				player.DungeonLevel = 0;
-				
-				XleCore.ChangeMap(player, 73, 0);
-				player.SetReturnLocation(map, x, y, facing);
-			}
-		}
+            TextArea.PrintLine("Would you like to go");
+            TextArea.PrintLine("to the four jewel dungeon?");
+            TextArea.PrintLine();
 
-		public override bool StaticBeforeCoin
-		{
-			get
-			{
-				return false;
-			}
-		}
-	}
+            if (QuickMenu.QuickMenuYesNo() == 0)
+            {
+                int map = player.MapID;
+                int x = player.X;
+                int y = player.Y;
+                Direction facing = player.FaceDirection;
+
+                player.DungeonLevel = 0;
+
+                MapChanger.ChangeMap(player, 73, 0);
+                player.SetReturnLocation(map, x, y, facing);
+            }
+        }
+
+        public override bool StaticBeforeCoin
+        {
+            get
+            {
+                return false;
+            }
+        }
+    }
 }

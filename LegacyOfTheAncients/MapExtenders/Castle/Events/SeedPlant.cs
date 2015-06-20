@@ -1,15 +1,18 @@
 ﻿using ERY.Xle.Data;
 using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
+using System;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
     public class SeedPlant : TreasureChestExtender
     {
+        public Random Random { get; set; }
+
         public override void BeforeGiveItem(GameState state, ref int item, ref int count)
         {
             if (item == 8)
-                count = XleCore.random.Next(3, 6);
+                count = Random.Next(3, 6);
         }
 
         public override bool MakesGuardsAngry
@@ -41,7 +44,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
         protected override void UpdateCommand()
         {
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
         }
 
         public override string AlreadyOpenMessage

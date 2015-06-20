@@ -58,6 +58,7 @@ namespace ERY.Xle.Services.Implementation
             set { systemState.Data = value; }
         }
 
+        [Obsolete("Use ITextArea service instead.")]
         public static TextArea TextArea { get; private set; }
         XleSystemState systemState;
 
@@ -77,7 +78,6 @@ namespace ERY.Xle.Services.Implementation
             this.commandExecutor = commandExecutor;
 
             Renderer = (XleRenderer)renderer;
-            Renderer.PlayerColor = XleColor.White;
 
             TextArea = (TextArea)textArea;
             Options = new XleOptions();
@@ -216,15 +216,18 @@ namespace ERY.Xle.Services.Implementation
             }
         }
 
+        [Obsolete("Use Renderer.FlashHPWhile")]
         public static void FlashHPWhileSound(Color clr)
         {
-            FlashHPWhileSound(clr, Renderer.FontColor);
+            Renderer.FlashHPWhileSound(clr);
         }
+        [Obsolete("Use Renderer.FlashHPWhile")]
         public static void FlashHPWhileSound(Color clr, Color clr2)
         {
-            FlashHPWhile(clr, clr2, () => SoundMan.IsAnyPlaying());
+            Renderer.FlashHPWhileSound(clr, clr2);
 
         }
+        [Obsolete("Use Renderer.FlashHPWhile")]
         public static void FlashHPWhile(Color clr, Color clr2, Func<bool> pred)
         {
             Renderer.FlashHPWhile(clr, clr2, pred);
@@ -310,14 +313,17 @@ namespace ERY.Xle.Services.Implementation
         /// amount of time.	
         /// </summary>
         /// <param name="howLong"></param>
+        [Obsolete("Use IXleGameControl.Wait instead.")]
         public static void Wait(int howLong)
         {
             Wait(howLong, false, Redraw);
         }
+        [Obsolete("Use IXleGameControl.Wait instead.")]
         public static void Wait(int howLong, Action redraw)
         {
             Wait(howLong, false, redraw);
         }
+        [Obsolete("Use IXleGameControl.Wait instead.")]
         public static void Wait(int howLong, bool keyBreak, Action redraw)
         {
             IStopwatch watch = Timing.CreateStopWatch();

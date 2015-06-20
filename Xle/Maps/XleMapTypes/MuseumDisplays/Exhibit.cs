@@ -5,245 +5,257 @@ using System.Text;
 using AgateLib.Geometry;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Data;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 {
-	public abstract class Exhibit
-	{
-		protected Exhibit(string name)
-		{
-			Name = name;
-		}
+    public abstract class Exhibit
+    {
+        protected Exhibit(string name)
+        {
+            Name = name;
+        }
 
-		public string Name { get; private set; }
-		public virtual string LongName { get { return Name; } }
+        public GameState GameState { get; set; }
+        public XleData Data { get; set; }
+        public IQuickMenu QuickMenu { get; set; }
+        public ITextArea TextArea { get; set; }
+        public ISoundMan SoundMan { get; set; }
+        public IXleInput Input { get; set; }
+        public IXleGameControl GameControl { get; set; }
 
-		public abstract Color ExhibitColor { get; }
+        protected Player Player { get { return GameState.Player; } }
 
-		public abstract int ExhibitID { get; }
+        public string Name { get; private set; }
+        public virtual string LongName { get { return Name; } }
 
-		/// <summary>
-		/// Gets the color of the text in the museum. Defaults to ExhibitColor.
-		/// </summary>
-		public virtual Color TitleColor
-		{
-			get { return ExhibitColor; }
-		}
-		protected virtual string RawText
-		{
-			get
-			{
-				if (XleCore.Data.ExhibitInfo.ContainsKey(ExhibitID))
-				{
-					var exinfo = XleCore.Data.ExhibitInfo[ExhibitID];
+        public abstract Color ExhibitColor { get; }
 
-					if (exinfo.Text.ContainsKey(1))
-						return XleCore.Data.ExhibitInfo[ExhibitID].Text[1];
-					else
-						return "This exhibit does not have any text with key 1.";
-				}
-				else
-				{
-					return "This exhibit is not working.";
-				}
-			}
-				
-		}
+        public abstract int ExhibitID { get; }
 
-		protected int ImageID { get; set; }
+        /// <summary>
+        /// Gets the color of the text in the museum. Defaults to ExhibitColor.
+        /// </summary>
+        public virtual Color TitleColor
+        {
+            get { return ExhibitColor; }
+        }
+        protected virtual string RawText
+        {
+            get
+            {
+                if (Data.ExhibitInfo.ContainsKey(ExhibitID))
+                {
+                    var exinfo = Data.ExhibitInfo[ExhibitID];
 
-		public virtual void RunExhibit(Player player)
-		{
-			if (CheckOfferReread(player) == false)
-				return;
+                    if (exinfo.Text.ContainsKey(1))
+                        return Data.ExhibitInfo[ExhibitID].Text[1];
+                    else
+                        return "This exhibit does not have any text with key 1.";
+                }
+                else
+                {
+                    return "This exhibit is not working.";
+                }
+            }
 
-			ReadRawText(RawText);
+        }
 
-			if (HasBeenVisited(player) == false)
-				MarkAsVisited(player);
-		}
+        protected int ImageID { get; set; }
 
-		protected abstract void MarkAsVisited(Player player);
+        public virtual void RunExhibit(Player Player)
+        {
+            if (CheckOfferReread(Player) == false)
+                return;
 
-		/// <summary>
-		/// Returns true if we are reading the exhibit for the first time,
-		/// or if the player answered yes to rereading the exhibit.
-		/// </summary>
-		/// <param name="player"></param>
-		/// <returns></returns>
-		protected bool CheckOfferReread(Player player)
-		{
-			if (HasBeenVisited(player))
-			{
-				return OfferReread();
-			}
+            ReadRawText(RawText);
 
-			return true;
-		}
+            if (HasBeenVisited(Player) == false)
+                MarkAsVisited(Player);
+        }
 
-		/// <summary>
-		/// Asks the player if they want to reread the description of the exhibit.
-		/// </summary>
-		/// <returns>True if the player chose yes, false otherwise.</returns>
-		protected bool OfferReread()
-		{
-			XleCore.TextArea.Clear();
-			XleCore.TextArea.PrintLine("Do you want to reread the");
-			XleCore.TextArea.PrintLine("description of this exhibit?");
-			XleCore.TextArea.PrintLine();
+        protected abstract void MarkAsVisited(Player player);
 
-			if (XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
-				return true;
-			else
-				return false;
-		}
+        /// <summary>
+        /// Returns true if we are reading the exhibit for the first time,
+        /// or if the player answered yes to rereading the exhibit.
+        /// </summary>
+        /// <param name="Player"></param>
+        /// <returns></returns>
+        protected bool CheckOfferReread(Player unused)
+        {
+            if (HasBeenVisited(Player))
+            {
+                return OfferReread();
+            }
 
-		protected virtual Color ArticleTextColor { get { return XleColor.Cyan; } }
-		protected virtual int TextAreaMargin { get { return 0; } }
+            return true;
+        }
 
-		protected void ReadRawText(string rawtext)
-		{
-			XleCore.TextArea.Margin = TextAreaMargin;
-			XleCore.TextArea.Clear(true);
+        /// <summary>
+        /// Asks the player if they want to reread the description of the exhibit.
+        /// </summary>
+        /// <returns>True if the player chose yes, false otherwise.</returns>
+        protected bool OfferReread()
+        {
+           TextArea.Clear();
+           TextArea.PrintLine("Do you want to reread the");
+           TextArea.PrintLine("description of this exhibit?");
+           TextArea.PrintLine();
 
-			int ip = 0;
-			int line = 4;
-			Color clr = ArticleTextColor;
-			ColorStringBuilder text = new ColorStringBuilder();
-			bool waiting = true;
+            if (QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
+                return true;
+            else
+                return false;
+        }
 
-			while (ip < rawtext.Length)
-			{
-				// ignore any \r characters. we will interpret \n as the new line character.
-				if (rawtext[ip] == '\r') { ip++; continue; }
+        protected virtual Color ArticleTextColor { get { return XleColor.Cyan; } }
+        protected virtual int TextAreaMargin { get { return 0; } }
 
-				if (rawtext[ip] == '\n')
-				{
-					line--;
-					text = new ColorStringBuilder();
+        protected void ReadRawText(string rawtext)
+        {
+            TextArea.Margin = TextAreaMargin;
+            TextArea.Clear(true);
 
-					int i = 1;
-					while (rawtext[ip + i] == ' ')
-						i++;
+            int ip = 0;
+            int line = 4;
+            Color clr = ArticleTextColor;
+            ColorStringBuilder text = new ColorStringBuilder();
+            bool waiting = true;
 
-					if (rawtext[ip + i] == '|')
-						ip += i - 1;
+            while (ip < rawtext.Length)
+            {
+                // ignore any \r characters. we will interpret \n as the new line character.
+                if (rawtext[ip] == '\r') { ip++; continue; }
 
-					XleCore.TextArea.PrintLine();
-				}
-				else if (rawtext[ip] == '|' && (text.Text == null || text.Text.Trim() == ""))
-				{
-					text.Clear();
-				}
-				else if (rawtext[ip] != '`')
-				{
-					text.AddText(rawtext[ip].ToString(), clr);
-					XleCore.TextArea.Print(rawtext[ip].ToString(), clr);
+                if (rawtext[ip] == '\n')
+                {
+                    line--;
+                    text = new ColorStringBuilder();
 
-					if (waiting)
-					{
-						string punctuation = ",.!";
+                    int i = 1;
+                    while (rawtext[ip + i] == ' ')
+                        i++;
 
-						if (punctuation.Contains(rawtext[ip]))
-							XleCore.Wait(350 * (1+punctuation.IndexOf(rawtext[ip])));
-						else if (AgateLib.InputLib.Legacy.Keyboard.AnyKeyPressed)
-							XleCore.Wait(1);
-						else
-							XleCore.Wait(30);
-					}
-				}
-				else
-				{
-					int next = rawtext.IndexOf('`', ip + 1);
-					if (next < 0)
-						throw new ArgumentException("Text had unmatched quote!");
+                    if (rawtext[ip + i] == '|')
+                        ip += i - 1;
 
-					string substr = rawtext.Substring(ip + 1, next - ip - 1);
+                    TextArea.PrintLine();
+                }
+                else if (rawtext[ip] == '|' && (text.Text == null || text.Text.Trim() == ""))
+                {
+                    text.Clear();
+                }
+                else if (rawtext[ip] != '`')
+                {
+                    text.AddText(rawtext[ip].ToString(), clr);
+                    TextArea.Print(rawtext[ip].ToString(), clr);
 
-					ip = next;
+                    if (waiting)
+                    {
+                        string punctuation = ",.!";
 
-					if (substr.StartsWith("image:"))
-					{
-						int image = int.Parse(substr.Substring(6));
+                        if (punctuation.Contains(rawtext[ip]))
+                            GameControl.Wait(350 * (1 + punctuation.IndexOf(rawtext[ip])));
+                        else if (AgateLib.InputLib.Legacy.Keyboard.AnyKeyPressed)
+                            GameControl.Wait(1);
+                        else
+                            GameControl.Wait(30);
+                    }
+                }
+                else
+                {
+                    int next = rawtext.IndexOf('`', ip + 1);
+                    if (next < 0)
+                        throw new ArgumentException("Text had unmatched quote!");
 
-						ImageID = image;
-					}
-					else
-					{
-						switch (substr)
-						{
-							case "": break;
-							case "white": clr = XleColor.White; break;
-							case "cyan": clr = XleColor.Cyan; break;
-							case "yellow": clr = XleColor.Yellow; break;
-							case "green": clr = XleColor.Green; break;
-							case "purple": clr = XleColor.Purple; break;
+                    string substr = rawtext.Substring(ip + 1, next - ip - 1);
 
-							case "pause":
-								XleCore.WaitForKey();
+                    ip = next;
 
-								break;
+                    if (substr.StartsWith("image:"))
+                    {
+                        int image = int.Parse(substr.Substring(6));
 
-							case "clear":
-								XleCore.TextArea.Clear(true);
-								line = 4;
-								break;
+                        ImageID = image;
+                    }
+                    else
+                    {
+                        switch (substr)
+                        {
+                            case "": break;
+                            case "white": clr = XleColor.White; break;
+                            case "cyan": clr = XleColor.Cyan; break;
+                            case "yellow": clr = XleColor.Yellow; break;
+                            case "green": clr = XleColor.Green; break;
+                            case "purple": clr = XleColor.Purple; break;
 
-							case "sound:VeryGood":
-								SoundMan.PlaySound(LotaSound.VeryGood);
-								break;
+                            case "pause":
+                                Input.WaitForKey();
 
-							case "wait:off":
-								waiting = false;
-								break;
+                                break;
 
-							case "wait:on":
-								waiting = true;
-								break;
+                            case "clear":
+                                TextArea.Clear(true);
+                                line = 4;
+                                break;
 
-							default:
-								System.Diagnostics.Trace.WriteLine("Failed to understand command: " + substr);
-								break;
-						}
-					}
-				}
+                            case "sound:VeryGood":
+                                SoundMan.PlaySound(LotaSound.VeryGood);
+                                break;
 
-				ip++;
-			}
+                            case "wait:off":
+                                waiting = false;
+                                break;
 
-			XleCore.TextArea.Margin = 1;
-			XleCore.TextArea.PrintLine();
-		}
+                            case "wait:on":
+                                waiting = true;
+                                break;
 
-		public virtual bool IsClosed(Player player)
-		{
-			return false;
-		}
+                            default:
+                                System.Diagnostics.Trace.WriteLine("Failed to understand command: " + substr);
+                                break;
+                        }
+                    }
+                }
 
-		/// <summary>
-		/// Returns true if we should draw the static before a coin is inserted.
-		/// </summary>
-		public virtual bool StaticBeforeCoin
-		{
-			get { return true; }
-		}
+                ip++;
+            }
 
-		public abstract void Draw(Rectangle displayRect);
+            TextArea.Margin = 1;
+            TextArea.PrintLine();
+        }
 
-		public abstract string InsertCoinText { get; }
+        public virtual bool IsClosed(Player player)
+        {
+            return false;
+        }
 
-		public abstract bool RequiresCoin(Player player);
+        /// <summary>
+        /// Returns true if we should draw the static before a coin is inserted.
+        /// </summary>
+        public virtual bool StaticBeforeCoin
+        {
+            get { return true; }
+        }
 
-		public abstract bool HasBeenVisited(Player player);
+        public abstract void Draw(Rectangle displayRect);
 
-		public virtual string IntroductionText
-		{
-			get { return "You see a plaque.  It Reads..."; }
-		}
+        public abstract string InsertCoinText { get; }
 
-		public abstract string UseCoinMessage { get; }
+        public abstract bool RequiresCoin(Player player);
 
-		public abstract bool PlayerHasCoin(Player player);
-		public abstract void UseCoin(Player player);
-	}
+        public abstract bool HasBeenVisited(Player player);
+
+        public virtual string IntroductionText
+        {
+            get { return "You see a plaque.  It Reads..."; }
+        }
+
+        public abstract string UseCoinMessage { get; }
+
+        public abstract bool PlayerHasCoin(Player player);
+        public abstract void UseCoin(Player player);
+    }
 }

@@ -67,7 +67,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected void DrawStore()
         {
-            mColorScheme.Draw();
+            Renderer.DrawObject(mColorScheme);
 
             // Draw the title
             DrawTitle(Title);

@@ -5,56 +5,62 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
+using ERY.Xle.Rendering;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class Thornberry : LotaExhibit
-	{
-		public Thornberry() : base("Thornberry", Coin.Jade) { }
-		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Thornberry; } }
-		public override string LongName
-		{
-			get { return "A typical town of Tarmalon"; }
-		}
+    public class Thornberry : LotaExhibit
+    {
+        public Thornberry() : base("Thornberry", Coin.Jade) { }
 
-		public override void RunExhibit(Player player)
-		{
-			if (CheckOfferReread(player))
-			{
-				ReadRawText(ExhibitInfo.Text[1]);
-			}
+        public IMapChanger MapChanger { get; set; }
+        public IXleRenderer Renderer { get; set; }
 
-			XleCore.TextArea.PrintLine("Would you like to go");
-			XleCore.TextArea.PrintLine("to thornberry?");
-			XleCore.TextArea.PrintLine();
+        public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Thornberry; } }
+        public override string LongName
+        {
+            get { return "A typical town of Tarmalon"; }
+        }
 
-			if (XleCore.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
-			{
-				ReadRawText(ExhibitInfo.Text[2]);
+        public override void RunExhibit(Player unused)
+        {
+            if (CheckOfferReread(Player))
+            {
+                ReadRawText(ExhibitInfo.Text[1]);
+            }
 
-				int amount = 100;
+            TextArea.PrintLine("Would you like to go");
+            TextArea.PrintLine("to thornberry?");
+            TextArea.PrintLine();
 
-				if (HasBeenVisited(player) ||
-					HasBeenVisited(player, ExhibitIdentifier.Fountain))
-				{
-					amount += 200;
-				}
+            if (QuickMenu.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
+            {
+                ReadRawText(ExhibitInfo.Text[2]);
 
-				player.Gold += amount;
+                int amount = 100;
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("             GOLD:  + " + amount.ToString(), XleColor.Yellow);
+                if (HasBeenVisited(Player) ||
+                    HasBeenVisited(Player, ExhibitIdentifier.Fountain))
+                {
+                    amount += 200;
+                }
 
-				SoundMan.PlaySound(LotaSound.VeryGood);
-				XleCore.FlashHPWhileSound(XleColor.Yellow);
+                Player.Gold += amount;
 
-				XleCore.WaitForKey();
+                TextArea.PrintLine();
+                TextArea.PrintLine("             GOLD:  + " + amount.ToString(), XleColor.Yellow);
 
-				XleCore.ChangeMap(player, 11, 0);
-				player.SetReturnLocation(1, 18, 56);
-			}
+                SoundMan.PlaySound(LotaSound.VeryGood);
+                Renderer.FlashHPWhileSound(XleColor.Yellow);
 
-            MarkAsVisited(player);
-		}
-	}
+                Input.WaitForKey();
+
+                MapChanger.ChangeMap(Player, 11, 0);
+                Player.SetReturnLocation(1, 18, 56);
+            }
+
+            MarkAsVisited(Player);
+        }
+    }
 }

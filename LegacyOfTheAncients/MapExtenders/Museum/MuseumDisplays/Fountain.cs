@@ -5,86 +5,92 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
+using ERY.Xle.Rendering;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	class Fountain : LotaExhibit
-	{
-		public Fountain() : base("A Fountain", Coin.Jade) { }
-		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Fountain; } }
-		public override string LongName
-		{
-			get
-			{
-				return "Enchanted flower fountain";
-			}
-		}
+    public class Fountain : LotaExhibit
+    {
+        public Fountain() : base("A Fountain", Coin.Jade) { }
 
-		public override bool IsClosed(ERY.Xle.Player player)
-		{
-			return Lota.Story.ReturnedTulip;
-		}
+        public IXleRenderer Renderer { get; set; }
+        public IXleInput Input { get; set; }
 
-		public override void RunExhibit(Player player)
-		{
-			if (player.Items[LotaItem.Tulip] == 0)
-			{
-				OfferTulipQuest(player);
-			}
-			else
-			{
-				RewardForTulip(player);
-			}
-		}
+        public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Fountain; } }
+        public override string LongName
+        {
+            get
+            {
+                return "Enchanted flower fountain";
+            }
+        }
 
-		private void RewardForTulip(Player player)
-		{
-			// remove the tulip from the player, give the reward and shut down the exhibit.
-			player.Items[LotaItem.Tulip] = 0;
-			player.Attribute[Attributes.charm] += 10;
-			Lota.Story.ReturnedTulip = true;
+        public override bool IsClosed(ERY.Xle.Player player)
+        {
+            return Story.ReturnedTulip;
+        }
 
-			ReadRawText(ExhibitInfo.Text[3]);
+        public override void RunExhibit(Player player)
+        {
+            if (player.Items[LotaItem.Tulip] == 0)
+            {
+                OfferTulipQuest();
+            }
+            else
+            {
+                RewardForTulip(player);
+            }
+        }
 
-			XleCore.TextArea.Clear();
-		}
+        private void RewardForTulip(Player player)
+        {
+            // remove the tulip from the player, give the reward and shut down the exhibit.
+            player.Items[LotaItem.Tulip] = 0;
+            player.Attribute[Attributes.charm] += 10;
+            Story.ReturnedTulip = true;
 
-		private void OfferTulipQuest(Player player)
-		{
-			bool firstVisit = HasBeenVisited(player);
+            ReadRawText(ExhibitInfo.Text[3]);
 
-			base.RunExhibit(player);
-			XleCore.TextArea.PrintLine();
+            TextArea.Clear();
+        }
 
-			if (Lota.Story.SearchingForTulip == false)
-				XleCore.TextArea.PrintLine("Do you want to help search?");
-			else
-				XleCore.TextArea.PrintLine("Do you want to continue searching?");
+        private void OfferTulipQuest()
+        {
+            bool firstVisit = HasBeenVisited(Player);
+
+            base.RunExhibit(Player);
+            TextArea.PrintLine();
+
+            if (Story.SearchingForTulip == false)
+                TextArea.PrintLine("Do you want to help search?");
+            else
+                TextArea.PrintLine("Do you want to continue searching?");
 
 
-			XleCore.TextArea.PrintLine();
-			if (XleCore.QuickMenuYesNo() == 0)
-			{
-				ReadRawText(ExhibitInfo.Text[2]);
-				int amount = 100;
-				
-				if (firstVisit || HasBeenVisited(player, ExhibitIdentifier.Thornberry))
-				{
-					amount += 200;
-				}
+            TextArea.PrintLine();
+            if (QuickMenu.QuickMenuYesNo() == 0)
+            {
+                ReadRawText(ExhibitInfo.Text[2]);
+                int amount = 100;
 
-				player.Gold += amount;
+                if (firstVisit || HasBeenVisited(Player, ExhibitIdentifier.Thornberry))
+                {
+                    amount += 200;
+                }
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("            Gold:  + " + amount.ToString(), XleColor.Yellow);
+                Player.Gold += amount;
 
-				SoundMan.PlaySound(LotaSound.VeryGood);
-				XleCore.FlashHPWhileSound(XleColor.Yellow);
+                TextArea.PrintLine();
+                TextArea.PrintLine("            Gold:  + " + amount.ToString(), XleColor.Yellow);
 
-				XleCore.WaitForKey();
+                SoundMan.PlaySound(LotaSound.VeryGood);
+                Renderer.FlashHPWhileSound(XleColor.Yellow);
 
-				Lota.Story.SearchingForTulip = true;
-			}
-		}
-	}
+                Input.WaitForKey();
+
+                Story.SearchingForTulip = true;
+            }
+        }
+    }
 }

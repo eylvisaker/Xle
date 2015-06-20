@@ -28,6 +28,9 @@ namespace ERY.Xle.Rendering
             this.commands = commands;
         }
 
+        public GameState GameState { get; set; }
+        public ISoundMan SoundMan { get; set; }
+
         public Size WindowSize { get; set; }
         public Rectangle Coordinates { get { return Display.Coordinates; } }
 
@@ -38,6 +41,9 @@ namespace ERY.Xle.Rendering
 
         bool mOverrideHPColor;
         Color mHPColor;
+
+
+        Player Player { get { return GameState.Player; } }
 
         public void DrawFrame(Color boxColor)
         {
@@ -232,7 +238,6 @@ namespace ERY.Xle.Rendering
         }
 
         public Point PlayerDrawPoint { get; set; }
-        public Color PlayerColor { get; set; }
 
         /// <summary>
         /// Draws the player character.
@@ -241,7 +246,7 @@ namespace ERY.Xle.Rendering
         /// <param name="vertLine"></param>
         void DrawCharacter(bool animating, int animFrame, int vertLine)
         {
-            DrawCharacter(animating, animFrame, vertLine, PlayerColor);
+            DrawCharacter(animating, animFrame, vertLine, Player.RenderColor);
         }
         void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
         {
@@ -452,7 +457,7 @@ namespace ERY.Xle.Rendering
             var location = textWindow.Location;
             var csb = textWindow.ColoredString;
 
-            WriteText(location.X * 16, location.Y * 16, 
+            WriteText(location.X * 16, location.Y * 16,
                 csb.Text, csb.Colors);
         }
 
@@ -604,5 +609,23 @@ namespace ERY.Xle.Rendering
             Display.FillRect(0, hp, 640, 400 - hp, cs.TextAreaBackColor);
         }
 
+        public void DrawObject(ColorScheme cs)
+        {
+            SetProjectionAndBackColors(cs);
+
+            // Draw the borders
+            DrawFrame(cs.FrameColor);
+            DrawFrameLine(0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameColor);
+
+            DrawFrameHighlight(cs.FrameHighlightColor);
+            DrawInnerFrameHighlight(0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameHighlightColor);
+
+        }
+
+
+        public void FlashHPWhileSound(Color clr, Color? clr2 = null)
+        {
+            FlashHPWhile(clr, clr2 ?? FontColor, () => SoundMan.IsAnyPlaying());
+        }
     }
 }

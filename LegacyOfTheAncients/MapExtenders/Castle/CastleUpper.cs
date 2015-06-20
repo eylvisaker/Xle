@@ -19,9 +19,9 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
         public override void OnAfterEntry(GameState state)
         {
-            if (Lota.Story.Invisible == false)
+            if (Story.Invisible == false)
             {
-                XleCore.TextArea.PrintLine("Private level!");
+                TextArea.PrintLine("Private level!");
 
                 IsAngry = true;
             }

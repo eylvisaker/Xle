@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress
 {
@@ -30,6 +31,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             extenders.Add("Compendium", new Compendium(this));
             extenders.Add("MagicIce", new FinalMagicIce(this));
         }
+
+        public IXleScreen Screen { get; set; }
 
         public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
         {
@@ -55,31 +58,31 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
         private void CompendiumAttack(GameState state)
         {
-            int damage = XleCore.random.Next((int)compendiumStrength / 2, (int)compendiumStrength);
+            int damage = Random.Next((int)compendiumStrength / 2, (int)compendiumStrength);
 
-            XleCore.Wait(75);
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("Compendium attack - blow " + damage + " H.P.", XleColor.Green);
+            GameControl.Wait(75);
+            TextArea.PrintLine();
+            TextArea.PrintLine("Compendium attack - blow " + damage + " H.P.", XleColor.Green);
 
             SoundMan.PlayMagicSound(LotaSound.MagicBolt, LotaSound.MagicBoltHit, 2);
-            XleCore.Wait(250, FlashBorder);
+            GameControl.Wait(250, redraw:FlashBorder);
             TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
             state.Player.HP -= damage;
 
-            XleCore.Wait(75);
+            GameControl.Wait(75);
 
             if (state.Player.Items[LotaItem.HealingHerb] > 24)
             {
                 int amount = (int)(state.Player.Items[LotaItem.HealingHerb] / 9);
 
-                amount = (int)(amount * (1 + XleCore.random.NextDouble()) * 0.5);
+                amount = (int)(amount * (1 + Random.NextDouble()) * 0.5);
 
-                XleCore.TextArea.PrintLine("** " + amount.ToString() + " healing herbs destroyed! **", XleColor.Yellow);
+                TextArea.PrintLine("** " + amount.ToString() + " healing herbs destroyed! **", XleColor.Yellow);
 
                 state.Player.Items[LotaItem.HealingHerb] -= amount;
 
-                XleCore.Wait(75);
+                GameControl.Wait(75);
             }
         }
 
@@ -95,24 +98,24 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             else
                 TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-            XleCore.Redraw();
+            Screen.Redraw();
         }
 
         private void WarlordAttack(GameState state)
         {
-            int damage = (int)(99 * XleCore.random.NextDouble() + 80);
+            int damage = (int)(99 * Random.NextDouble() + 80);
 
             TheMap.ColorScheme.FrameColor = XleColor.Pink;
             flashColor = XleColor.Red;
 
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
+            TextArea.PrintLine();
+            TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
 
             SoundMan.PlayMagicSound(LotaSound.MagicFlame, LotaSound.MagicFlameHit, 2);
-            XleCore.Wait(250, FlashBorder);
+            GameControl.Wait(250, redraw:FlashBorder);
             TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-            XleCore.Wait(150);
+            GameControl.Wait(150);
         }
 
 
@@ -137,16 +140,16 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
         {
             this.warlord = null;
 
-            XleCore.TextArea.Clear(true);
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("        ** warlord killed **");
+            TextArea.Clear(true);
+            TextArea.PrintLine();
+            TextArea.PrintLine("        ** warlord killed **");
 
             for (int i = 0; i < 5; i++)
             {
                 SoundMan.PlaySound(LotaSound.Good);
-                XleCore.Wait(750);
+                GameControl.Wait(750);
             }
-            XleCore.Wait(1000);
+            GameControl.Wait(1000);
 
             SoundMan.PlaySoundSync(LotaSound.VeryGood);
 

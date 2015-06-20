@@ -16,15 +16,17 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
     {
         int banditAmbush;
 
+        public IMapChanger MapChanger { get; set; }
+
         public override void OnLoad(GameState state)
         {
             base.OnLoad(state);
 
             Lota.Story.Invisible = false;
 
-            XleCore.Renderer.PlayerColor = XleColor.White;
+            Player.RenderColor = XleColor.White;
 
-            SetBanditAmbushTime(state);
+            SetBanditAmbushTime();
         }
 
         public int WaterAnimLevel
@@ -52,16 +54,16 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
         public override void UpdateEncounterState(GameState state, ref bool handled)
         {
-            handled = BanditAmbush(state);
+            handled = BanditAmbush();
         }
 
-        bool AllowBanditAmbush(GameState state)
+        bool AllowBanditAmbush()
         {
             // make sure the player has the compendium
-            if (state.Player.Items[LotaItem.Compendium] == 0) return false;
+            if (Player.Items[LotaItem.Compendium] == 0) return false;
 
             // if the player has the guard jewels we bail.
-            if (state.Player.Items[LotaItem.GuardJewel] == 4) return false;
+            if (Player.Items[LotaItem.GuardJewel] == 4) return false;
 
             return true;
         }
@@ -71,12 +73,12 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
         /// sets banditAmbush variable.
         /// </summary>
         /// <param name="player"></param>
-        private void SetBanditAmbushTime(GameState state)
+        private void SetBanditAmbushTime()
         {
-            if (AllowBanditAmbush(state) == false)
+            if (AllowBanditAmbush() == false)
                 return;
 
-            int pastTime = (int)(state.Player.TimeDays - 100);
+            int pastTime = (int)(Player.TimeDays - 100);
             if (pastTime < 0) pastTime = 0;
 
             int min = 40 - (int)(pastTime / 2);
@@ -85,71 +87,71 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
             int max = 100 - (int)(pastTime / 5);
             if (max < 12) max = 12;
 
-            int time = XleCore.random.Next(min, max);
+            int time = Random.Next(min, max);
 
-            if (time > state.Player.Food - 2)
+            if (time > Player.Food - 2)
             {
-                time = (int)state.Player.Food - 2;
+                time = (int)Player.Food - 2;
                 if (time < 0)
                     time = 1;
             }
 
-            banditAmbush = (int)(state.Player.TimeDays) + time;
+            banditAmbush = (int)(Player.TimeDays) + time;
         }
-        private bool BanditAmbush(GameState state)
+        private bool BanditAmbush()
         {
-            if (AllowBanditAmbush(state) == false)
+            if (AllowBanditAmbush() == false)
                 return false;
 
             if (banditAmbush <= 0)
-                SetBanditAmbushTime(state);
+                SetBanditAmbushTime();
 
-            if (state.Player.TimeDays <= banditAmbush)
+            if (Player.TimeDays <= banditAmbush)
                 return false;
 
             // set a random position for the appearance of the bandits.
-            SetMonsterImagePosition(state.Player);
+            SetMonsterImagePosition(Player);
 
             // bandit icon is number 4.
             MapRenderer.DisplayMonsterID = 4;
 
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
+            TextArea.PrintLine();
+            TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
 
             SoundMan.PlaySound(LotaSound.Encounter);
-            XleCore.Wait(500);
+            GameControl.Wait(500);
 
-            int maxDamage = state.Player.HP / 15;
+            int maxDamage = Player.HP / 15;
             int minDamage = Math.Min(5, maxDamage / 2);
 
             for (int i = 0; i < 8; i++)
             {
-                state.Player.HP -= XleCore.random.Next(minDamage, maxDamage + 1);
+                Player.HP -= Random.Next(minDamage, maxDamage + 1);
 
                 SoundMan.PlaySound(LotaSound.EnemyHit);
-                XleCore.Wait(250);
+                GameControl.Wait(250);
             }
 
-            XleCore.TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
+            TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
 
-            XleCore.Wait(1000);
+            GameControl.Wait(1000);
             MapRenderer.DisplayMonsterID = -1;
-            XleCore.Wait(3000, RedrawUnconscious);
+            GameControl.Wait(3000, redraw: RedrawUnconscious);
 
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("You awake.  The compendium is gone.");
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("You awake.  The compendium is gone.");
+            TextArea.PrintLine();
 
-            state.Player.Items[LotaItem.Compendium] = 0;
+            Player.Items[LotaItem.Compendium] = 0;
 
             SoundMan.PlaySoundSync(LotaSound.VeryBad);
 
-            XleCore.TextArea.PrintLine("You hear a voice...");
+            TextArea.PrintLine("You hear a voice...");
 
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLineSlow("Do not be discouraged.  It was\ninevitable.  Keep to your quest.");
+            TextArea.PrintLine();
+            TextArea.PrintLineSlow("Do not be discouraged.  It was\ninevitable.  Keep to your quest.");
 
-            XleCore.Wait(3000);
+            GameControl.Wait(3000);
             banditAmbush = 0;
 
             return true;
@@ -196,34 +198,34 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
             {
                 if (WaterAnimLevel == 1 && wasStormy == 0)
                 {
-                    XleCore.TextArea.PrintLine();
-                    XleCore.TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 2 || WaterAnimLevel == 3)
                 {
-                    XleCore.TextArea.PrintLine();
-                    XleCore.TextArea.PrintLine("The water is now very rough.", XleColor.White);
-                    XleCore.TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("The water is now very rough.", XleColor.White);
+                    TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 1 && wasStormy == 2)
                 {
-                    XleCore.TextArea.PrintLine();
-                    XleCore.TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 0 && wasStormy == 1)
                 {
-                    XleCore.TextArea.PrintLine();
-                    XleCore.TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
                 }
 
                 if (WaterAnimLevel == 3)
                 {
-                    XleCore.TextArea.PrintLine();
-                    XleCore.TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
-                    XleCore.TextArea.PrintLine();
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
+                    TextArea.PrintLine();
                 }
 
-                XleCore.Wait(1000);
+                GameControl.Wait(1000);
 
                 if (WaterAnimLevel == 3)
                 {
@@ -239,9 +241,9 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
         {
             get
             {
-                yield return XleCore.Data.MagicSpells[1];
-                yield return XleCore.Data.MagicSpells[2];
-                yield return XleCore.Data.MagicSpells[6];
+                yield return Data.MagicSpells[1];
+                yield return Data.MagicSpells[2];
+                yield return Data.MagicSpells[6];
             }
         }
 
@@ -255,23 +257,23 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
         private void CastSeekSpell(GameState state)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("Cast seek spell.");
+            TextArea.PrintLine();
+            TextArea.PrintLine("Cast seek spell.");
 
             if (state.Player.IsOnRaft)
             {
-                XleCore.TextArea.PrintLine("The water mutes the spell.");
+                TextArea.PrintLine("The water mutes the spell.");
             }
             else if (TheMap.MapID != 1)
             {
-                XleCore.TextArea.PrintLine("You're too far away.");
+                TextArea.PrintLine("You're too far away.");
             }
             else
             {
                 state.Player.FaceDirection = Direction.West;
                 SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-                XleCore.ChangeMap(state.Player, 1, 0);
+                MapChanger.ChangeMap(state.Player, 1, 0);
                 EncounterState = 0;
             }
         }
