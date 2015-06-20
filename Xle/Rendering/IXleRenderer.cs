@@ -39,5 +39,7 @@ namespace ERY.Xle.Rendering
         void DrawObject(TextWindow wind);
 
         void SetProjectionAndBackColors(ColorScheme colorScheme);
+
+        void AnimateStep();
     }
 }

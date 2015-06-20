@@ -65,6 +65,7 @@ namespace ERY.Xle.Services.Implementation
             XleSystemState systemState,
             IXleInput input,
             ICommandList commands,
+            ICommandExecutor commandExecutor,
             IXleRenderer renderer,
             ITextArea textArea,
             GameState gameState)
@@ -73,6 +74,7 @@ namespace ERY.Xle.Services.Implementation
             this.systemState = systemState;
             this.input = input;
             this.commands = commands;
+            this.commandExecutor = commandExecutor;
 
             Renderer = (XleRenderer)renderer;
             Renderer.PlayerColor = XleColor.White;
@@ -86,6 +88,7 @@ namespace ERY.Xle.Services.Implementation
         static Size windowBorderSize = new Size(20, 20);
         private IXleInput input;
         private ICommandList commands;
+        private ICommandExecutor commandExecutor;
 
         [Obsolete("Call Display.Clear(clearColor) instead.")]
         public static void SetOrthoProjection(Color clearColor)
@@ -148,7 +151,7 @@ namespace ERY.Xle.Services.Implementation
             inst.commands.Items.Clear();
 
             GameState.MapExtender.SetCommands(inst.commands);
-            inst.commands.ResetCurrentCommand();
+            inst.commandExecutor.ResetCurrentCommand();
 
             XleCore.LoadTiles(GameState.Map.TileImage);
         }
@@ -198,10 +201,10 @@ namespace ERY.Xle.Services.Implementation
             {
                 AcceptKey = false;
 
-                if (Keyboard.Keys[KeyCode.Down]) inst.commands.DoCommand(KeyCode.Down);
-                else if (Keyboard.Keys[KeyCode.Left]) inst.commands.DoCommand(KeyCode.Left);
-                else if (Keyboard.Keys[KeyCode.Up]) inst.commands.DoCommand(KeyCode.Up);
-                else if (Keyboard.Keys[KeyCode.Right]) inst.commands.DoCommand(KeyCode.Right);
+                if (Keyboard.Keys[KeyCode.Down]) inst.commandExecutor.DoCommand(KeyCode.Down);
+                else if (Keyboard.Keys[KeyCode.Left]) inst.commandExecutor.DoCommand(KeyCode.Left);
+                else if (Keyboard.Keys[KeyCode.Up]) inst.commandExecutor.DoCommand(KeyCode.Up);
+                else if (Keyboard.Keys[KeyCode.Right]) inst.commandExecutor.DoCommand(KeyCode.Right);
             }
             finally
             {

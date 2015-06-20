@@ -19,7 +19,7 @@ namespace ERY.Xle.Services.Implementation
         private GameState GameState;
         private ITextArea TextArea;
         private XleData Data;
-        private ICommandList commands;
+        private ICommandExecutor commandExecutor;
         private IMapLoader mapLoader;
         private XleOptions options;
         private IXleGameControl gameControl;
@@ -28,7 +28,7 @@ namespace ERY.Xle.Services.Implementation
         public XleConsole(
             GameState gameState, 
             ITextArea textArea, 
-            ICommandList commands, 
+            ICommandExecutor commandExecutor, 
             IMapLoader mapLoader,
             IXleGameControl gameControl,
             IMapChanger mapChanger,
@@ -39,7 +39,7 @@ namespace ERY.Xle.Services.Implementation
             this.mapLoader = mapLoader;
             this.GameState = gameState;
             this.TextArea = textArea;
-            this.commands = commands;
+            this.commandExecutor = commandExecutor;
             this.gameControl = gameControl;
             this.systemState = systemState;
             this.options = options;
@@ -249,7 +249,7 @@ namespace ERY.Xle.Services.Implementation
             ChangeMap(GameState.Player, mapInfo.ID, entryPoint);
 
             TextArea.Clear();
-            commands.Prompt();
+            commandExecutor.Prompt();
         }
 
         private void ChangeMap(Player player, int mapId, int entryPoint)
@@ -294,7 +294,7 @@ namespace ERY.Xle.Services.Implementation
             ChangeMap(player, map.MapID, new Point(targetX, targetY));
 
             TextArea.Clear();
-            commands.Prompt();
+            commandExecutor.Prompt();
         }
 
         private void ChangeMap(Player player, int mapId, Point targetPoint)

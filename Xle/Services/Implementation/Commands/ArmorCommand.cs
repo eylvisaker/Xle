@@ -2,14 +2,10 @@
 {
     public class ArmorCommand : Command
     {
-        private ITextArea textArea;
         private IEquipmentPicker equipmentPicker;
 
-        public ArmorCommand(
-            ITextArea textArea,
-            IEquipmentPicker equipmentPicker)
+        public ArmorCommand(IEquipmentPicker equipmentPicker)
         {
-            this.textArea = textArea;
             this.equipmentPicker = equipmentPicker;
         }
 
@@ -19,9 +15,9 @@
         }
         public override void Execute(GameState state)
         {
-            textArea.PrintLine("-choose above", XleColor.Cyan);
+            TextArea.PrintLine("-choose above", XleColor.Cyan);
 
-            state.Player.CurrentArmor = equipmentPicker.PickArmor(state.Player.CurrentArmor);
+            GameState.Player.CurrentArmor = equipmentPicker.PickArmor(GameState.Player.CurrentArmor);
         }
     }
 }

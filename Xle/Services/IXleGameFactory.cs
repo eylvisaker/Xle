@@ -10,5 +10,7 @@ namespace ERY.Xle.Services
         void SetGameSpeed(GameState GameState, int p);
 
         void CheatLevel(Player player, int level);
+
+        void PlayerIsDead(GameState gameState);
     }
 }

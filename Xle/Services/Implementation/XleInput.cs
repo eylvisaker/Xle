@@ -1,29 +1,40 @@
-﻿using AgateLib.InputLib;
-using AgateLib.InputLib.Legacy;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib.Diagnostics;
+using AgateLib.InputLib;
+using AgateLib.InputLib.Legacy;
 
 namespace ERY.Xle.Services.Implementation
 {
     public class XleInput : IXleInput
     {
-        ICommandList commands;
+        ICommandExecutor commands;
         private GameState gameState;
         private IXleScreen screen;
 
         public XleInput(
-            ICommandList commands,
+            ICommandExecutor commands,
             IXleScreen screen,
+            IXleGameControl gameControl,
             GameState gameState)
         {
             this.commands = commands;
             this.screen = screen;
             this.gameState = gameState;
 
+            gameControl.Update += gameControl_Update;
             Keyboard.KeyDown += Keyboard_KeyDown;
+        }
+
+        void gameControl_Update(object sender, EventArgs e)
+        {
+            if (AgateConsole.IsVisible == false)
+            {
+                CheckArrowKeys();
+            }
         }
 
         private void Keyboard_KeyDown(InputEventArgs e)

@@ -21,23 +21,22 @@ namespace ERY.Xle.Services.Implementation
     {
         private IXleScreen screen;
         private IXleRenderer renderer;
-        private IXleInput input;
         private GameState gameState;
         private XleSystemState systemState;
 
         public XleGameControl(
             IXleScreen screen,
             IXleRenderer renderer,
-            IXleInput input,
             GameState gameState,
             XleSystemState systemState)
         {
             this.screen = screen;
             this.renderer = renderer;
-            this.input = input;
             this.gameState = gameState;
             this.systemState = systemState;
         }
+
+        public event EventHandler Update;
 
         public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
         {
@@ -83,18 +82,13 @@ namespace ERY.Xle.Services.Implementation
 
         public void Redraw()
         {
-            Update();
+            OnUpdate();
             screen.Redraw();
 
             KeepAlive();
-
-            if (AgateConsole.IsVisible == false)
-            {
-                CheckArrowKeys();
-            }
         }
 
-        private void Update()
+        private void OnUpdate()
         {
             renderer.UpdateAnim();
 
@@ -102,13 +96,16 @@ namespace ERY.Xle.Services.Implementation
             {
                 gameState.Map.OnUpdate(gameState, Display.DeltaTime / 1000.0);
             }
+
+            if (Update != null)
+                Update(this, EventArgs.Empty);
         }
 
-        private void CheckArrowKeys()
+
+        public void PlayerIsDead()
         {
-            input.CheckArrowKeys();
+            systemState.Factory.PlayerIsDead(gameState);
         }
-
 
     }
 }

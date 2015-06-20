@@ -19,7 +19,7 @@ namespace ERY.Xle.Services.Implementation
         private ITextArea textArea;
         private IXleInput input;
         private GameState gameState;
-        private ICommandList commands;
+        private ICommandExecutor commandExecutor;
         private IMapLoader mapLoader;
         private IXleScreen screen;
         private IXleGameControl gameControl;
@@ -31,7 +31,7 @@ namespace ERY.Xle.Services.Implementation
             ITextArea textArea,
             IXleInput input,
             IXleScreen screen,
-            ICommandList commands,
+            ICommandExecutor commandExecutor,
             IMapLoader mapLoader,
             IXleGameControl gameControl,
             IMapChanger mapChanger,
@@ -42,7 +42,7 @@ namespace ERY.Xle.Services.Implementation
             this.titleScreenFactory = titleScreenFactory;
             this.textArea = textArea;
             this.input = input;
-            this.commands = commands;
+            this.commandExecutor = commandExecutor;
             this.mapLoader = mapLoader;
             this.gameControl = gameControl;
             this.mapChanger = mapChanger;
@@ -87,7 +87,7 @@ namespace ERY.Xle.Services.Implementation
             input.AcceptKey = true;
 
             textArea.Clear();
-            commands.Prompt();
+            commandExecutor.Prompt();
 
             gameControl.RunRedrawLoop();
         }

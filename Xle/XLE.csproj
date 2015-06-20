@@ -65,6 +65,7 @@
     <Compile Include="Services\Implementation\Commands\ArmorCommand.cs" />
     <Compile Include="Services\Implementation\Commands\Climb.cs" />
     <Compile Include="Services\Implementation\Commands\Command.cs" />
+    <Compile Include="Services\Implementation\CommandExecutor.cs" />
     <Compile Include="Services\Implementation\Commands\Disembark.cs" />
     <Compile Include="Services\Implementation\Commands\End.cs" />
     <Compile Include="Services\Implementation\Commands\Fight.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Equipment.cs" />
     <Compile Include="Rendering\IXleRenderer.cs" />
     <Compile Include="Services\Implementation\EquipmentPicker.cs" />
+    <Compile Include="Services\Implementation\ICommandExecutor.cs" />
     <Compile Include="Services\Implementation\MapChanger.cs" />
     <Compile Include="Services\Implementation\MenuRenderer.cs" />
     <Compile Include="Services\Implementation\XleGameControl.cs" />

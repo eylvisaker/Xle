@@ -8,5 +8,8 @@ namespace ERY.Xle.Services
 
         void PrintLine(string text, Color color);
         void PrintLine(string text = "", Color[] colors = null);
+
+        void Print(string text, Color? color);
+        void Print(string text = "", Color[] colors = null);
     }
 }

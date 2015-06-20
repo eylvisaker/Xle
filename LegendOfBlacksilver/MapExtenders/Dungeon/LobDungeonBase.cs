@@ -15,15 +15,17 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
 	abstract class LobDungeonBase : DungeonExtender
 	{
+        public ICommandFactory CommandFactory { get; set; }
+
 		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Climb());
-			commands.Items.Add(new End());
-			commands.Items.Add(new Magic());
-			commands.Items.Add(new Open());
-			commands.Items.Add(new Speak());
+			commands.Items.Add(CommandFactory.Climb());
+			commands.Items.Add(CommandFactory.End());
+			commands.Items.Add(CommandFactory.Magic());
+			commands.Items.Add(CommandFactory.Open());
+			commands.Items.Add(CommandFactory.Speak());
 		}
 
 		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)

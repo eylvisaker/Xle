@@ -23,6 +23,8 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			ResetDripTime();
 		}
 
+        public ICommandFactory CommandFactory { get; set; }
+
 		public override IEnumerable<MagicSpell> ValidMagic
 		{
 			get
@@ -42,10 +44,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-			commands.Items.Add(new Climb());
-			commands.Items.Add(new End());
-			commands.Items.Add(new Magic());
-			commands.Items.Add(new Open());
+			commands.Items.Add(CommandFactory.Climb());
+			commands.Items.Add(CommandFactory.End());
+			commands.Items.Add(CommandFactory.Magic());
+			commands.Items.Add(CommandFactory.Open());
 		}
 
 		protected abstract int StrengthBoost { get; }

@@ -12,33 +12,35 @@ using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LoB.MapExtenders.Temples
 {
-	class LobTempleExtender : TempleExtender
-	{
-		public override void SetCommands(ICommandList commands)
-		{
-			commands.Items.AddRange(LobProgram.CommonLobCommands);
+    class LobTempleExtender : TempleExtender
+    {
+        private ICommandFactory CommandFactory { get; set; }
 
-			commands.Items.Add(new Climb());
-			commands.Items.Add(new Leave());
-			commands.Items.Add(new Magic());
-			commands.Items.Add(new Speak());
-		}
+        public override void SetCommands(ICommandList commands)
+        {
+            commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-		public override void SetColorScheme(ColorScheme scheme)
-		{
-			base.SetColorScheme(scheme);
+            commands.Items.Add(CommandFactory.Climb());
+            commands.Items.Add(CommandFactory.Leave());
+            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Speak());
+        }
 
-			scheme.FrameColor = XleColor.LightGray;
-		}
+        public override void SetColorScheme(ColorScheme scheme)
+        {
+            base.SetColorScheme(scheme);
+
+            scheme.FrameColor = XleColor.LightGray;
+        }
 
 
-		public override IEnumerable<MagicSpell> ValidMagic
-		{
-			get
-			{
-				yield return XleCore.Data.MagicSpells[3];
-				yield return XleCore.Data.MagicSpells[4];
-			}
-		}
-	}
+        public override IEnumerable<MagicSpell> ValidMagic
+        {
+            get
+            {
+                yield return XleCore.Data.MagicSpells[3];
+                yield return XleCore.Data.MagicSpells[4];
+            }
+        }
+    }
 }
