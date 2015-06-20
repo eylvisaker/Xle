@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {
-	class CastleUpper : CastleGround
+	public class CastleUpper : CastleGround
 	{
 		public CastleUpper()
 		{

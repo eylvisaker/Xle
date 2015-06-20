@@ -4,6 +4,7 @@ using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 
 using ERY.Xle.Rendering;
+using AgateLib;
 
 namespace ERY.Xle.Services.Implementation
 {
@@ -44,6 +45,7 @@ namespace ERY.Xle.Services.Implementation
             renderer.Draw();
 
             Display.EndFrame();
+            Core.KeepAlive();
         }
 
         public bool CurrentWindowClosed

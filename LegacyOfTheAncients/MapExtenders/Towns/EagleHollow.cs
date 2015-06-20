@@ -9,7 +9,7 @@ using ERY.Xle.XleEventTypes;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns
 {
-	class EagleHollow : LotaTown
+	public class EagleHollow : LotaTown
 	{
 		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{

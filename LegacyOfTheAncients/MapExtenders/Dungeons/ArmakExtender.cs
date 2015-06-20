@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
-	class ArmakExtender : LotaDungeonExtenderBase
+	public class ArmakExtender : LotaDungeonExtenderBase
 	{
 		protected override bool IsCompleted
 		{

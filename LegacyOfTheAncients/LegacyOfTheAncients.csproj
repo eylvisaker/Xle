@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap\XleInstaller.cs" />
+    <Compile Include="Bootstrap\LotaEventExtenderInstaller.cs" />
+    <Compile Include="Bootstrap\LotaMapExtenderInstaller.cs" />
+    <Compile Include="Bootstrap\LotaTitleScreenInstaller.cs" />
     <Compile Include="GameVariableExtensions.cs" />
     <Compile Include="Lota.cs" />
     <Compile Include="LotaFactory.cs" />

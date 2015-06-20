@@ -4,35 +4,39 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Extenders.Common
 {
-	public class ChangeMapQuestion : ChangeMapExtender
-	{
-		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
-		{
-			string newMapName = GetMapName();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Enter " + newMapName + "?");
+    public class ChangeMapQuestion : ChangeMapExtender
+    {
+        public IQuickMenu QuickMenu { get; set; }
 
-			SoundMan.PlaySound(LotaSound.Question);
+        protected override bool OnStepOnImpl(GameState state, ref bool cancel)
+        {
+            string newMapName = GetMapName();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Enter " + newMapName + "?");
 
-			int choice = XleCore.QuickMenu(new MenuItemList("Yes", "No"), 3);
+            SoundMan.PlaySound(LotaSound.Question);
 
-			if (choice == 1)
-				return false;
-			else if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine(
-					string.Format(TheEvent.CommandText, 
-					state.Map.MapName, newMapName));
+            int choice = QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3);
 
-				XleCore.TextArea.PrintLine();
-				XleCore.Wait(500);
-			}
-		
-			return base.OnStepOnImpl(state, ref cancel);
-		}
-	}
+            if (choice == 1)
+                return false;
+            else if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
+            {
+                TextArea.PrintLine();
+                TextArea.PrintLine(
+                    string.Format(TheEvent.CommandText,
+                    state.Map.MapName, newMapName));
+
+                TextArea.PrintLine();
+                GameControl.Wait(500);
+            }
+
+            ExecuteMapChange();
+            return true;
+        }
+    }
 }

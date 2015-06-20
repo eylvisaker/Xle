@@ -39,6 +39,7 @@ namespace ERY.Xle.Maps.Extenders
 
 		public XleMapRenderer MapRenderer { get; set; }
         public ICommandFactory CommandFactory { get; set; }
+        public IEventExtenderFactory EventFactory { get; set; }
 
 		public bool IsAngry
 		{
@@ -66,7 +67,9 @@ namespace ERY.Xle.Maps.Extenders
 		}
 
 		public virtual void OnLoad(GameState state)
-		{ }
+		{
+        }
+
 		public virtual void OnAfterEntry(GameState state)
 		{ }
 

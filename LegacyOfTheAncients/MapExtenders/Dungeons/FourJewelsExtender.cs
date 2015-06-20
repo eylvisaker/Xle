@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
-	class FourJewelsExtender : LotaDungeonExtenderBase
+	public class FourJewelsExtender : LotaDungeonExtenderBase
 	{
 		public override Maps.Map3DSurfaces Surfaces(GameState state)
 		{

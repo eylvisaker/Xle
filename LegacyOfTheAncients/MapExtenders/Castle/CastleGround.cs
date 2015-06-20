@@ -13,7 +13,7 @@ using ERY.Xle.Maps;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {
-	class CastleGround : CastleExtender
+	public class CastleGround : CastleExtender
 	{
 		public CastleGround()
 		{

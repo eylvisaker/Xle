@@ -65,8 +65,6 @@ namespace ERY.Xle.Services.Implementation
                 gameState.MapExtender.CheckSounds(gameState);
             }
 
-            Core.KeepAlive();
-
             if (screen.CurrentWindowClosed)
                 throw new MainWindowClosedException();
         }

@@ -13,7 +13,7 @@ using ERY.Xle.XleEventTypes;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress
 {
-	class FortressFinal : FortressEntry
+	public class FortressFinal : FortressEntry
 	{
 		ExtenderDictionary extenders = new ExtenderDictionary();
 		Guard warlord;

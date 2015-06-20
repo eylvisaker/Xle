@@ -13,7 +13,7 @@ using ERY.Xle.XleEventTypes;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress
 {
-	class FortressEntry : CastleGround
+	public class FortressEntry : CastleGround
 	{
 		ExtenderDictionary extenders = new ExtenderDictionary();
 

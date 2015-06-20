@@ -16,7 +16,7 @@ using Magic = ERY.Xle.Services.Implementation.Commands.Magic;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns
 {
-    class LotaTown : TownExtender
+    public class LotaTown : TownExtender
     {
         ExtenderDictionary mExtenders = new ExtenderDictionary();
 

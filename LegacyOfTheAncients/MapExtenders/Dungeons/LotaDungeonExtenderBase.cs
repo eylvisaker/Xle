@@ -15,7 +15,7 @@ using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
-	abstract class LotaDungeonExtenderBase : DungeonExtender
+	public abstract class LotaDungeonExtenderBase : DungeonExtender
 	{
 		public LotaDungeonExtenderBase()
 		{

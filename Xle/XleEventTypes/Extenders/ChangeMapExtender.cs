@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Extenders
 {
 	public class ChangeMapExtender : EventExtender
 	{
 		public new ChangeMapEvent TheEvent { get { return (ChangeMapEvent)base.TheEvent; } }
+        
+        public IMapChanger MapChanger { get; set; }
+        public ISoundMan SoundMan { get; set; }
 
 		protected bool VerifyMapExistence()
 		{
@@ -52,7 +56,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 		protected virtual bool OnStepOnImpl(GameState state, ref bool cancel)
 		{
-			ExecuteMapChange(state.Player);
+			ExecuteMapChange();
 
 			return true;
 		}
@@ -63,31 +67,37 @@ namespace ERY.Xle.XleEventTypes.Extenders
 			return XleCore.Data.MapList[TheEvent.MapID].Name;
 		}
 
+        public void ExecuteMapChange()
+        {
+            try
+            {
+                MapChanger.ChangeMap(GameState.Player, TheEvent.MapID, TheEvent.TargetEntryPoint);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+
+                SoundMan.PlaySound(LotaSound.Bad);
+
+                TextArea.Print("Failed to load ", XleColor.White);
+                TextArea.Print(GetMapName(), XleColor.Red);
+                TextArea.Print(".", XleColor.White);
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+
+                GameControl.Wait(1500);
+            }
+        }
+
+        [Obsolete("Use overload with no parameters instead.")]
 		public void ExecuteMapChange(GameState state)
-		{
-			try
-			{
-				XleCore.ChangeMap(state.Player, TheEvent.MapID, TheEvent.TargetEntryPoint);
-			}
-			catch (Exception e)
-			{
-				System.Diagnostics.Debug.WriteLine(e.Message);
-
-				SoundMan.PlaySound(LotaSound.Bad);
-
-				XleCore.TextArea.Print("Failed to load ", XleColor.White);
-				XleCore.TextArea.Print(GetMapName(), XleColor.Red);
-				XleCore.TextArea.Print(".", XleColor.White);
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-
-				XleCore.Wait(1500);
-			}
+        {
+            ExecuteMapChange();
 		}
-		[Obsolete("Use GameState overload instead.")]
+        [Obsolete("Use overload with no parameters instead.")]
 		public void ExecuteMapChange(Player player)
 		{
-			ExecuteMapChange(XleCore.GameState);
+			ExecuteMapChange();
 		}
 
 	}

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
-	class PirateExtender : LotaDungeonExtenderBase
+	public class PirateExtender : LotaDungeonExtenderBase
 	{
 		protected override bool IsCompleted
 		{

@@ -7,6 +7,7 @@ using System.Text;
 
 using AgateLib;
 using AgateLib.InputLib;
+using AgateLib.IO;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using ERY.Xle.Maps;
@@ -15,7 +16,6 @@ using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes;
 
-using AgateLib.IO;
 
 namespace ERY.Xle.Maps
 {
@@ -31,7 +31,7 @@ namespace ERY.Xle.Maps
 		List<Roof> mRoofs;
 		GuardList mGuards;
 
-		protected MapExtender mBaseExtender;
+		public MapExtender mBaseExtender;
 
 		XleEventList mEvents = new XleEventList();
 		List<EntryPoint> mEntryPoints = new List<EntryPoint>();
@@ -131,7 +131,7 @@ namespace ERY.Xle.Maps
 
 		#endregion
 
-
+        [Obsolete("Use MapLoader service instead")]
 		public static XleMap LoadMap(string filename, int id)
 		{
 			if (System.IO.Path.GetExtension(filename).ToLower() != ".xmf")
@@ -181,7 +181,7 @@ namespace ERY.Xle.Maps
 			return new MapExtender();
 		}
 
-		protected virtual void CreateEventExtenders()
+		public virtual void CreateEventExtenders()
 		{
 			foreach (var evt in Events)
 			{

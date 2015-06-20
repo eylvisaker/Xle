@@ -12,25 +12,8 @@ using ERY.Xle.Services;
 
 namespace ERY.Xle.LotA.Bootstrap
 {
-    //public class XleInstaller : IWindsorInstaller
-    //{
-    //    public void Install(IWindsorContainer container, IConfigurationStore store)
-    //    {
-    //        container.Register(Classes.FromAssemblyContaining<IXleService>()
-    //            .BasedOn<IXleService>()
-    //            .WithServiceAllInterfaces()
-    //            .LifestyleSingleton());
-
-    //        container.Register(Classes.FromAssemblyContaining(typeof(XleInstaller))
-    //            .BasedOn<IXleService>()
-    //            .WithServiceAllInterfaces()
-    //            .LifestyleSingleton());
-    //    }
-    //}
-
     public class LotaTitleScreenInstaller : IWindsorInstaller
     {
-
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Classes.FromAssemblyContaining<LotaTitleScreen>()

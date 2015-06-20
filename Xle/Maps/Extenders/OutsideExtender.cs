@@ -144,6 +144,7 @@ namespace ERY.Xle.Maps.Extenders
 
 		public override EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
+            return EventFactory.Create(this, evt, defaultExtender);
 			if (evt is ChangeMapEvent)
 				return new ChangeMapQuestion();
 			else

@@ -57,6 +57,7 @@
     <Compile Include="Bootstrap\ServiceInstaller.cs" />
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
+    <Compile Include="Services\IEventExtenderFactory.cs" />
     <Compile Include="Services\ICommandFactory.cs" />
     <Compile Include="Services\IEquipmentPicker.cs" />
     <Compile Include="Services\IMapChanger.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Rendering\IXleRenderer.cs" />
     <Compile Include="Services\Implementation\EquipmentPicker.cs" />
     <Compile Include="Services\Implementation\ICommandExecutor.cs" />
+    <Compile Include="Services\Implementation\IMapExtenderFactory.cs" />
     <Compile Include="Services\Implementation\MapChanger.cs" />
     <Compile Include="Services\Implementation\MenuRenderer.cs" />
     <Compile Include="Services\Implementation\QuickMenu.cs" />
