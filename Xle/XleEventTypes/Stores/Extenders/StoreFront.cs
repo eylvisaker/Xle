@@ -7,186 +7,189 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
+using ERY.Xle.Rendering;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreFront : StoreExtender
-	{
-		ColorScheme mColorScheme;
+    public class StoreFront : StoreExtender
+    {
+        ColorScheme mColorScheme;
 
-		public List<TextWindow> Windows { get; private set; }
-		public new Store TheEvent { get { return (Store)base.TheEvent; } }
+        public IQuickMenu QuickMenuService { get; set; }
+        public IXleRenderer Renderer { get; set; }
+        public IXleInput input { get; set; }
+        public INumberPicker NumberPicker { get; set; }
 
-		protected ColorScheme ColorScheme { get { return mColorScheme; } }
-		protected bool ShowGoldText { get; set; }
+        public List<TextWindow> Windows { get; private set; }
+        public new Store TheEvent { get { return (Store)base.TheEvent; } }
 
-		public StoreFront()
-		{
-			PrivateInitializeColorScheme();
+        protected ColorScheme ColorScheme { get { return mColorScheme; } }
+        protected bool ShowGoldText { get; set; }
 
-			Windows = new List<TextWindow>();
+        public StoreFront()
+        {
+            PrivateInitializeColorScheme();
 
-			ClearWindow();
+            Windows = new List<TextWindow>();
 
-		}
+            ClearWindow();
 
-		private void PrivateInitializeColorScheme()
-		{
-			mColorScheme = new Xle.ColorScheme();
-			mColorScheme.BackColor = XleColor.Green;
-			
-			ShowGoldText = true;
+        }
 
-			InitializeColorScheme(mColorScheme);
-		}
+        private void PrivateInitializeColorScheme()
+        {
+            mColorScheme = new Xle.ColorScheme();
+            mColorScheme.BackColor = XleColor.Green;
 
-		protected void ClearWindow()
-		{
-			Windows.Clear();
-		}
+            ShowGoldText = true;
 
-		protected virtual void InitializeColorScheme(ColorScheme cs)
-		{ }
+            InitializeColorScheme(mColorScheme);
+        }
 
-		protected internal void RedrawStore()
-		{
-			Display.BeginFrame();
+        protected void ClearWindow()
+        {
+            Windows.Clear();
+        }
 
-			DrawStore();
+        protected virtual void InitializeColorScheme(ColorScheme cs)
+        { }
 
-			Display.EndFrame();
-			XleCore.KeepAlive();
-		}
+        protected internal void RedrawStore()
+        {
+            Display.BeginFrame();
 
-		protected void DrawStore()
-		{
-			var player = XleCore.GameState.Player;
+            DrawStore();
 
-			var renderer = XleCore.Renderer;
+            Display.EndFrame();
+            GameControl.KeepAlive();
+        }
 
-			mColorScheme.Draw();
+        protected void DrawStore()
+        {
+            mColorScheme.Draw();
 
-			// Draw the title
-			DrawTitle(Title);
+            // Draw the title
+            DrawTitle(Title);
 
-			foreach (var window in Windows)
-			{
-			    renderer.DrawObject(window);
-			}
+            foreach (var window in Windows)
+            {
+                Renderer.DrawObject(window);
+            }
 
-			DrawGoldText(player);
+            DrawGoldText(Player);
 
-			XleCore.TextArea.Draw();
-		}
+            TextArea.Draw();
+        }
 
-		private void DrawGoldText(Player player)
-		{
-			if (ShowGoldText == false)
-				return;
+        private void DrawGoldText(Player player)
+        {
+            if (ShowGoldText == false)
+                return;
 
-			string goldText;
-			if (robbing == false)
-			{
-				// Draw Gold
-				goldText = " Gold: ";
-				goldText += player.Gold;
-				goldText += " ";
-			}
-			else
-			{
-				// don't need gold if we're robbing it!
-				goldText = " Robbery in progress ";
-			}
+            string goldText;
+            if (robbing == false)
+            {
+                // Draw Gold
+                goldText = " Gold: ";
+                goldText += player.Gold;
+                goldText += " ";
+            }
+            else
+            {
+                // don't need gold if we're robbing it!
+                goldText = " Robbery in progress ";
+            }
 
-			Display.FillRect(
-				320 - (goldText.Length / 2) * 16, 
-				ColorScheme.HorizontalLinePosition * 16, 
-				goldText.Length * 16, 
-				14,
-				mColorScheme.BackColor);
+            Display.FillRect(
+                320 - (goldText.Length / 2) * 16,
+                ColorScheme.HorizontalLinePosition * 16,
+                goldText.Length * 16,
+                14,
+                mColorScheme.BackColor);
 
-			XleCore.Renderer.WriteText(320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
+            Renderer.WriteText(320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
 
-		}
+        }
 
-		private void DrawTitle(string title)
-		{
-			if (string.IsNullOrEmpty(title))
-				return;
+        private void DrawTitle(string title)
+        {
+            if (string.IsNullOrEmpty(title))
+                return;
 
-			Display.FillRect(320 - (title.Length + 2) / 2 * 16, 0,
-						 (title.Length + 2) * 16, 16, mColorScheme.BackColor);
+            Display.FillRect(320 - (title.Length + 2) / 2 * 16, 0,
+                         (title.Length + 2) * 16, 16, mColorScheme.BackColor);
 
-			XleCore.Renderer.WriteText(320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
-		}
+            Renderer.WriteText(320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
+        }
 
-		protected void StoreSound(LotaSound sound)
-		{
-			SoundMan.PlaySoundSync(RedrawStore, sound);
-		}
+        protected void StoreSound(LotaSound sound)
+        {
+            SoundMan.PlaySoundSync(RedrawStore, sound);
+        }
 
-		protected void Wait(int howLong)
-		{
-			XleCore.Wait(howLong, RedrawStore);
-		}
-		protected void WaitForKey(params KeyCode[] keys)
-		{
-			XleCore.WaitForKey(RedrawStore, keys);
-		}
+        protected void Wait(int howLong)
+        {
+            GameControl.Wait(howLong, redraw: RedrawStore);
+        }
+        protected void WaitForKey(params KeyCode[] keys)
+        {
+            input.WaitForKey(RedrawStore, keys);
+        }
 
-		protected int QuickMenu(MenuItemList menu, int spaces)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value, clrInit);
-		}
-		protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit, Color clrChanged)
-		{
-			return XleCore.QuickMenu(RedrawStore, menu, spaces, value, clrInit, clrChanged);
-		}
+        protected int QuickMenu(MenuItemList menu, int spaces)
+        {
+            return QuickMenuService.QuickMenu(menu, spaces, redraw: RedrawStore);
+        }
+        protected int QuickMenu(MenuItemList menu, int spaces, int value)
+        {
+            return QuickMenuService.QuickMenu(menu, spaces, value, redraw: RedrawStore);
+        }
+        protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit)
+        {
+            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, redraw: RedrawStore);
+        }
+        protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit, Color clrChanged)
+        {
+            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged, redraw: RedrawStore);
+        }
 
-		protected int ChooseNumber(int max)
-		{
-			return XleCore.ChooseNumber(RedrawStore, max);
-		}
+        protected int ChooseNumber(int max)
+        {
+            return NumberPicker.ChooseNumber(RedrawStore, max);
+        }
 
-		public string Title { get; set; }
+        public string Title { get; set; }
 
-		public override bool Speak(GameState state)
-		{
-			PrivateInitializeColorScheme();
+        public override bool Speak(GameState state)
+        {
+            PrivateInitializeColorScheme();
 
-			if (AllowInteractionWhenLoanOverdue == false)
-			{
-				if (IsLoanOverdue(state))
-				{
-					StoreDeclinePlayer(state);
-					return true;
-				}
-			}
+            if (AllowInteractionWhenLoanOverdue == false)
+            {
+                if (IsLoanOverdue())
+                {
+                    StoreDeclinePlayer();
+                    return true;
+                }
+            }
 
-			try
-			{
-				XleCore.Renderer.ReplacementDrawMethod = DrawStore;
+            try
+            {
+                Renderer.ReplacementDrawMethod = DrawStore;
 
-				return SpeakImpl(state);
-			}
-			finally
-			{
-				XleCore.Renderer.ReplacementDrawMethod = null;
-			}
-		}
+                return SpeakImpl(GameState);
+            }
+            finally
+            {
+                Renderer.ReplacementDrawMethod = null;
+            }
+        }
 
-		protected virtual bool SpeakImpl(GameState state)
-		{
-			return StoreNotImplementedMessage();
-		}
+        protected override bool SpeakImpl(GameState state)
+        {
+            return StoreNotImplementedMessage();
+        }
 
-	}
+    }
 }

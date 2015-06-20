@@ -32,6 +32,7 @@ namespace ERY.Xle.Data
         {
             
         }
+
         public Size OverworldMonsterSize { get; private set; }
 
         public void LoadGameFile(string filename)
@@ -363,5 +364,25 @@ namespace ERY.Xle.Data
                 dm.Value.Surface = new AgateLib.DisplayLib.Surface("Dungeon/Monsters/" + dm.Value.ImageFile);
             }
         }
+
+
+        public string GetWeaponName(int weaponID, int qualityID)
+        {
+            return QualityList[qualityID] + " " + WeaponList[weaponID].Name;
+        }
+        public string GetArmorName(int armorID, int qualityID)
+        {
+            return QualityList[qualityID] + " " + ArmorList[armorID].Name;
+        }
+
+        public int WeaponCost(int item, int quality)
+        {
+            return WeaponList[item].Prices[quality];
+        }
+        public int ArmorCost(int item, int quality)
+        {
+            return ArmorList[item].Prices[quality];
+        }
+
     }
 }

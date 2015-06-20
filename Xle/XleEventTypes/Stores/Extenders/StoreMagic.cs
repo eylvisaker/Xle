@@ -7,162 +7,164 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreMagic : StoreFront
-	{
-		public virtual int GetItemValue(int choice)
-		{
-			throw new NotImplementedException();
-		}
+    public class StoreMagic : StoreFront
+    {
+        public XleData Data { get; set; }
 
-		public virtual int GetMaxCarry(int choice)
-		{
-			throw new NotImplementedException();
-		}
+        public virtual int GetItemValue(int choice)
+        {
+            throw new NotImplementedException();
+        }
 
-		public virtual IEnumerable<TextWindow> CreateStoreWindows()
-		{
-			yield return CreateWindow();
-		}
+        public virtual int GetMaxCarry(int choice)
+        {
+            throw new NotImplementedException();
+        }
 
-		private TextWindow CreateWindow()
-		{
-			TextWindow window = new TextWindow();
+        public virtual IEnumerable<TextWindow> CreateStoreWindows()
+        {
+            yield return CreateWindow();
+        }
 
-			window.Location = new AgateLib.Geometry.Point(8, 2);
+        private TextWindow CreateWindow()
+        {
+            TextWindow window = new TextWindow();
 
-			window.WriteLine("General Purpose      Prices", XleColor.Blue);
-			window.WriteLine("");
-			window.WriteLine("1. Magic flame        " + MagicPrice(1));
-			window.WriteLine("2. Firebolt           " + MagicPrice(2));
-			window.WriteLine("");
-			window.WriteLine("Dungeon use only     Prices", XleColor.Blue);
-			window.WriteLine("");
-			window.WriteLine("3. Befuddle spell     " + MagicPrice(3));
-			window.WriteLine("4. Psycho strength    " + MagicPrice(4));
-			window.WriteLine("5. Kill Flash         " + MagicPrice(5));
-			window.WriteLine("");
-			window.WriteLine("Outside use only     Prices", XleColor.Blue);
-			window.WriteLine("");
-			window.WriteLine("6. Seek spell         " + MagicPrice(6));
-			return window;
-		}
+            window.Location = new AgateLib.Geometry.Point(8, 2);
 
-		public virtual IEnumerable<MagicSpell> AvailableSpells
-		{
-			get { return XleCore.Data.MagicSpells.Values; }
-		}
-		protected override void InitializeColorScheme(ColorScheme cs)
-		{
-			cs.BorderColor = XleColor.Purple;
-			cs.BackColor = XleColor.LightBlue;
-			cs.FrameColor = XleColor.Cyan;
-			cs.FrameHighlightColor = XleColor.Yellow;
-			cs.TextColor = XleColor.Cyan;
-			cs.TitleColor = XleColor.White;
-			cs.TextAreaBackColor = XleColor.Blue;
-		}
+            window.WriteLine("General Purpose      Prices", XleColor.Blue);
+            window.WriteLine("");
+            window.WriteLine("1. Magic flame        " + MagicPrice(1));
+            window.WriteLine("2. Firebolt           " + MagicPrice(2));
+            window.WriteLine("");
+            window.WriteLine("Dungeon use only     Prices", XleColor.Blue);
+            window.WriteLine("");
+            window.WriteLine("3. Befuddle spell     " + MagicPrice(3));
+            window.WriteLine("4. Psycho strength    " + MagicPrice(4));
+            window.WriteLine("5. Kill Flash         " + MagicPrice(5));
+            window.WriteLine("");
+            window.WriteLine("Outside use only     Prices", XleColor.Blue);
+            window.WriteLine("");
+            window.WriteLine("6. Seek spell         " + MagicPrice(6));
+            return window;
+        }
 
-		protected override bool SpeakImpl(GameState state)
-		{
-			var player = state.Player;
+        public virtual IEnumerable<MagicSpell> AvailableSpells
+        {
+            get { return Data.MagicSpells.Values; }
+        }
+        protected override void InitializeColorScheme(ColorScheme cs)
+        {
+            cs.BorderColor = XleColor.Purple;
+            cs.BackColor = XleColor.LightBlue;
+            cs.FrameColor = XleColor.Cyan;
+            cs.FrameHighlightColor = XleColor.Yellow;
+            cs.TextColor = XleColor.Cyan;
+            cs.TitleColor = XleColor.White;
+            cs.TextAreaBackColor = XleColor.Blue;
+        }
 
-			this.player = player;
+        protected override bool SpeakImpl(GameState state)
+        {
+            var player = state.Player;
 
-			Windows.Clear();
-			Windows.AddRange(CreateStoreWindows());
+            this.player = player;
 
-			Title = TheEvent.ShopName;
+            Windows.Clear();
+            Windows.AddRange(CreateStoreWindows());
 
-			XleCore.TextArea.Clear();
-			XleCore.TextArea.PrintLine("Make choice (hit 0 to cancel)");
-			XleCore.TextArea.PrintLine();
+            Title = TheEvent.ShopName;
 
-			IEnumerable<MagicSpell> magicSpells = AvailableSpells;
+            TextArea.Clear();
+            TextArea.PrintLine("Make choice (hit 0 to cancel)");
+            TextArea.PrintLine();
 
-			int choice = QuickMenu(MenuItemList.Numbers(0, magicSpells.Count()), 2);
+            IEnumerable<MagicSpell> magicSpells = AvailableSpells;
 
-			if (choice == 0)
-			{
-				NothingPurchased("Nothing purchased.");
-				return true;
-			}
+            int choice = QuickMenu(MenuItemList.Numbers(0, magicSpells.Count()), 2);
 
-			var item = magicSpells.ToArray()[choice - 1];
+            if (choice == 0)
+            {
+                NothingPurchased("Nothing purchased.");
+                return true;
+            }
 
-			int maxCarry = item.MaxCarry - player.Items[item.ItemID];
-			int maxAfford = player.Gold / MagicPrice(item);
-			int maxPurchase = Math.Min(maxCarry, maxAfford);
+            var item = magicSpells.ToArray()[choice - 1];
 
-			if (maxAfford <= 0)
-			{
-				NothingPurchased("You can't afford any " + item.PluralName + ".");
-				return true;
-			}
+            int maxCarry = item.MaxCarry - player.Items[item.ItemID];
+            int maxAfford = player.Gold / MagicPrice(item);
+            int maxPurchase = Math.Min(maxCarry, maxAfford);
 
-			if (XleCore.Options.EnhancedUserInterface)
-			{
-				if (maxCarry == 0)
-				{
-					NothingPurchased("You can't buy any more " + item.PluralName + ".");
-					return true;
-				}
-			}
-			else
-				maxPurchase = maxAfford;
+            if (maxAfford <= 0)
+            {
+                NothingPurchased("You can't afford any " + item.PluralName + ".");
+                return true;
+            }
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Purchase how many " + item.PluralName + "?");
+            if (XleCore.Options.EnhancedUserInterface)
+            {
+                if (maxCarry == 0)
+                {
+                    NothingPurchased("You can't buy any more " + item.PluralName + ".");
+                    return true;
+                }
+            }
+            else
+                maxPurchase = maxAfford;
 
-			int purchaseCount = XleCore.ChooseNumber(maxPurchase);
+            TextArea.PrintLine();
+            TextArea.PrintLine("Purchase how many " + item.PluralName + "?");
 
-			if (purchaseCount == 0)
-			{
-				NothingPurchased("Nothing purchased.");
-				return true;
-			}
+            int purchaseCount = ChooseNumber(maxPurchase);
 
-			if (player.Items[item.ItemID] + purchaseCount > item.MaxCarry)
-			{
-				NothingPurchased("You can't buy this many.");
-				return true;
-			}
+            if (purchaseCount == 0)
+            {
+                NothingPurchased("Nothing purchased.");
+                return true;
+            }
 
-			int cost = purchaseCount * MagicPrice(choice);
+            if (player.Items[item.ItemID] + purchaseCount > item.MaxCarry)
+            {
+                NothingPurchased("You can't buy this many.");
+                return true;
+            }
 
-			if (cost > player.Gold)
-			{
-				NothingPurchased("You're short on gold.");
-				return true;
-			}
+            int cost = purchaseCount * MagicPrice(choice);
 
-			player.Items[item.ItemID] += purchaseCount;
-			player.Gold -= purchaseCount * MagicPrice(choice);
+            if (cost > player.Gold)
+            {
+                NothingPurchased("You're short on gold.");
+                return true;
+            }
 
-			XleCore.TextArea.Clear();
-			XleCore.TextArea.PrintLine(" " + purchaseCount.ToString() + " " +
-				((purchaseCount != 1) ? item.PluralName : item.Name) + " purchased.");
-			XleCore.TextArea.PrintLine();
+            player.Items[item.ItemID] += purchaseCount;
+            player.Gold -= purchaseCount * MagicPrice(choice);
 
-			StoreSound(LotaSound.Sale);
+            TextArea.Clear();
+            TextArea.PrintLine(" " + purchaseCount.ToString() + " " +
+                ((purchaseCount != 1) ? item.PluralName : item.Name) + " purchased.");
+            TextArea.PrintLine();
 
-			return true;
-		}
+            StoreSound(LotaSound.Sale);
 
-		private void NothingPurchased(string message)
-		{
-			XleCore.TextArea.Clear();
-			XleCore.TextArea.PrintLine(message);
+            return true;
+        }
 
-			StoreSound(LotaSound.Medium);
-		}
+        private void NothingPurchased(string message)
+        {
+            TextArea.Clear();
+            TextArea.PrintLine(message);
 
-		int MagicPrice(int id)
-		{
-			return MagicPrice(XleCore.Data.MagicSpells[id]);
-		}
-		int MagicPrice(MagicSpell magicSpell)
-		{
-			return (int)(magicSpell.BasePrice * TheEvent.CostFactor);
-		}
-	}
+            StoreSound(LotaSound.Medium);
+        }
+
+        int MagicPrice(int id)
+        {
+            return MagicPrice(Data.MagicSpells[id]);
+        }
+        int MagicPrice(MagicSpell magicSpell)
+        {
+            return (int)(magicSpell.BasePrice * TheEvent.CostFactor);
+        }
+    }
 }

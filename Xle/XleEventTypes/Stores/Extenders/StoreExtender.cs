@@ -1,4 +1,5 @@
-﻿using ERY.Xle.Services.Implementation;
+﻿using ERY.Xle.Services;
+using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
     public class StoreExtender : EventExtender
     {
         private bool mRobbed = false;
+
+        public Random Random { get; set; }
+        public IMuseumCoinSale MuseumCoinSale { get; set; }
 
         public bool Robbed
         {
@@ -43,28 +47,26 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         /// speak with him and optionally displays a message to the player.  
         /// Returns false if the current map has no lending association
         /// regardless of whether the player has an overdue loan.</returns>
-        public bool IsLoanOverdue(GameState state)
+        public bool IsLoanOverdue()
         {
-            if (state.Map.Events.Any(x => x is Store && x.ExtenderName == "StoreLending") == false)
+            if (Map.Events.Any(x => x is Store && x.ExtenderName == "StoreLending") == false)
             {
                 return false;
             }
 
-            if (state.Player.loan > 0 && state.Player.dueDate - state.Player.TimeDays <= 0)
+            if (Player.loan > 0 && Player.dueDate - Player.TimeDays <= 0)
             {
                 return true;
             }
             else
                 return false;
         }
-        protected void StoreDeclinePlayer(GameState state)
+        protected void StoreDeclinePlayer()
         {
-            var player = state.Player;
-
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("Sorry.  I can't talk to you.");
-            XleCore.Wait(500);
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Sorry.  I can't talk to you.");
+            GameControl.Wait(500);
         }
         protected virtual void DisplayLoanOverdueMessage()
         {
@@ -75,9 +77,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         {
             if (AllowInteractionWhenLoanOverdue == false)
             {
-                if (IsLoanOverdue(state))
+                if (IsLoanOverdue())
                 {
-                    StoreDeclinePlayer(state);
+                    StoreDeclinePlayer();
                     return true;
                 }
             }
@@ -92,30 +94,30 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected bool StoreNotImplementedMessage()
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine(TheEvent.ShopName, XleColor.Yellow);
-            XleCore.TextArea.PrintLine("");
-            XleCore.TextArea.PrintLine("A Sign Says, ");
-            XleCore.TextArea.PrintLine("Closed for remodelling.");
+            TextArea.PrintLine();
+            TextArea.PrintLine(TheEvent.ShopName, XleColor.Yellow);
+            TextArea.PrintLine("");
+            TextArea.PrintLine("A Sign Says, ");
+            TextArea.PrintLine("Closed for remodelling.");
 
             SoundMan.PlaySound(LotaSound.Medium);
 
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
 
-            XleCore.Wait(1000);
+            GameControl.Wait(1000);
 
             return true;
         }
 
         public sealed override bool Rob(GameState state)
         {
-            if (AllowRobWhenNotAngry == false && state.Map.Guards.IsAngry == false)
+            if (AllowRobWhenNotAngry == false && Map.Guards.IsAngry == false)
             {
                 RobFail();
                 return true;
             }
 
-            state.MapExtender.IsAngry = true;
+            MapExtender.IsAngry = true;
 
             return RobImpl(state);
         }
@@ -124,10 +126,10 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         {
             if (Robbed)
             {
-                XleCore.TextArea.PrintLine();
-                XleCore.TextArea.PrintLine();
-                XleCore.TextArea.PrintLine("No items within reach here.");
-                XleCore.Wait(1000);
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+                TextArea.PrintLine("No items within reach here.");
+                GameControl.Wait(1000);
                 return true;
             }
 
@@ -135,18 +137,18 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             if (value == 0)
             {
-                XleCore.TextArea.PrintLine();
-                XleCore.TextArea.PrintLine();
-                XleCore.TextArea.PrintLine("There's nothing to really carry here.");
-                XleCore.Wait(1000);
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+                TextArea.PrintLine("There's nothing to really carry here.");
+                GameControl.Wait(1000);
                 return true;
             }
 
-            state.Player.Gold += value;
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("You get " + value.ToString() + " gold.", XleColor.Yellow);
-            XleCore.Wait(1000);
+            Player.Gold += value;
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("You get " + value.ToString() + " gold.", XleColor.Yellow);
+            GameControl.Wait(1000);
             Robbed = true;
 
             return true;
@@ -163,11 +165,11 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         /// </summary>
         public virtual void RobFail()
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("The merchant won't let you rob.");
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("The merchant won't let you rob.");
 
-            XleCore.Wait(1000);
+            GameControl.Wait(1000);
         }
 
         /// <summary>
@@ -178,59 +180,10 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         public virtual void CheckOfferMuseumCoin(Player player)
         {
-            if (XleCore.random.Next(1000) < 45 && robbing == false)
+            if (Random.Next(1000) < 45 && robbing == false)
             {
-                OfferMuseumCoin(player);
+                MuseumCoinSale.OfferMuseumCoin();
             }
         }
-        public static void OfferMuseumCoin(Player player)
-        {
-            int coin = -1;
-            MenuItemList menu = new MenuItemList("Yes", "No");
-
-            coin = XleCore.Factory.NextMuseumCoinOffer(XleCore.GameState);
-
-            if (coin == -1)
-                return;
-
-            // TODO: only allow player to buy a coin if he has less than Level of that type of coins.
-            int amount = 50 + (int)(XleCore.random.NextDouble() * 20 * player.Level);
-
-            if (amount > player.Gold)
-                amount /= 2;
-
-            Xle.SoundMan.PlaySound(LotaSound.Question);
-
-            XleCore.TextArea.PrintLine("Would you like to buy a ");
-            XleCore.Wait(1);
-
-            XleCore.TextArea.PrintLine("museum coin for " + amount.ToString() + " gold?");
-            XleCore.Wait(1);
-
-            XleCore.TextArea.PrintLine();
-            XleCore.Wait(1);
-
-            int choice = XleCore.QuickMenu(menu, 3, 0);
-
-            if (choice == 0)
-            {
-                if (player.Spend(amount))
-                {
-                    string coinName = XleCore.Data.ItemList[coin].Name;
-
-                    XleCore.TextArea.PrintLine("Use this " + coinName + " well!");
-
-                    player.Items[coin] += 1;
-
-                    Xle.SoundMan.PlaySound(LotaSound.Sale);
-                }
-                else
-                {
-                    XleCore.TextArea.PrintLine("Not enough gold.");
-                    Xle.SoundMan.PlaySound(LotaSound.Medium);
-                }
-            }
-        }
-
     }
 }

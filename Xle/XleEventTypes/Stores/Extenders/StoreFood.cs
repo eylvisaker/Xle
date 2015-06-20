@@ -6,267 +6,273 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Data;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreFood : StoreFront
-	{
-		protected override void InitializeColorScheme(ColorScheme cs)
-		{
-			cs.BackColor = XleColor.DarkGray;
-			cs.FrameColor = XleColor.Green;
-			cs.FrameHighlightColor = XleColor.Yellow;
-			cs.TextColor = XleColor.Yellow;
-		}
+    public class StoreFood : StoreFront
+    {
+        bool skipMailOffer = false;
 
-		bool skipMailOffer = false;
+        public XleData Data { get; set; }
+        public XleSystemState systemState { get; set; }
 
-		protected override bool SpeakImpl(GameState state)
-		{
-			var player = state.Player;
+        protected override void InitializeColorScheme(ColorScheme cs)
+        {
+            cs.BackColor = XleColor.DarkGray;
+            cs.FrameColor = XleColor.Green;
+            cs.FrameHighlightColor = XleColor.Yellow;
+            cs.TextColor = XleColor.Yellow;
+        }
 
-			string tempString;
-			double cost = ((int)(13 - player.Attribute[Attributes.charm] / 7.0)) / 10.0;
-			
-			if (cost < 0.1)
-				cost = 0.1;
-			
-			int max = (int)(player.Gold / cost);
-			if (max > 5000) max = 5000;
+        protected override bool SpeakImpl(GameState state)
+        {
+            string tempString;
+            double cost = ((int)(13 - Player.Attribute[Attributes.charm] / 7.0)) / 10.0;
 
-			SetTitle();
+            if (cost < 0.1)
+                cost = 0.1;
 
-			this.player = player;
-			this.robbing = false;
+            int max = (int)(Player.Gold / cost);
+            if (max > 5000) max = 5000;
 
-			Wait(1);
+            SetTitle();
 
-			XleCore.TextArea.PrintLine();
-			
-			int choice;
+            this.player = Player;
+            this.robbing = false;
 
-			if (player.mailTown == state.Map.MapID)
-			{
-				PayForMail(player);
-				skipMailOffer = true;
-			}
-			else
-			{
-				SetWindow(cost);
+            Wait(1);
 
-				tempString = "      Maximum purchase:  ";
-				tempString += max;
-				tempString += " days";
+            TextArea.PrintLine();
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine(tempString, XleColor.Cyan);
+            int choice;
 
-				choice = ChooseNumber(max);
+            if (Player.mailTown == state.Map.MapID)
+            {
+                PayForMail();
+                skipMailOffer = true;
+            }
+            else
+            {
+                SetWindow(cost);
 
-				if (choice > 0)
-				{
-					player.Spend((int)(choice * cost));
-					player.Food += choice;
+                tempString = "      Maximum purchase:  ";
+                tempString += max;
+                tempString += " days";
 
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine(" " + choice + " days of food bought.");
+                TextArea.PrintLine();
+                TextArea.PrintLine(tempString, XleColor.Cyan);
 
-					StoreSound(LotaSound.Sale);
+                choice = ChooseNumber(max);
 
-					if (skipMailOffer == false)
-						OfferMail(state);
+                if (choice > 0)
+                {
+                    Player.Spend((int)(choice * cost));
+                    Player.Food += choice;
 
-					return true;
-				}
-				else
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("Nothing Purchased");
+                    TextArea.PrintLine();
+                    TextArea.PrintLine(" " + choice + " days of food bought.");
 
-					StoreSound(LotaSound.Medium);
-				}
-			}
+                    StoreSound(LotaSound.Sale);
 
-			CheckOfferMuseumCoin(player);
+                    if (skipMailOffer == false)
+                        OfferMail(state);
 
-			return true;
+                    return true;
+                }
+                else
+                {
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("Nothing Purchased");
 
-		}
+                    StoreSound(LotaSound.Medium);
+                }
+            }
 
-		private void OfferMail(GameState state)
-		{
-			var player = state.Player;
+            CheckOfferMuseumCoin(Player);
 
-			Town twn = state.Map as Town;
+            return true;
 
-			if (player.Items[XleCore.Factory.MailItemID] > 0) return;
-			if (twn == null) return;
-			if (twn.Mail.Count == 0) return;
-			
-			int target = SelectDeliveryTarget(twn);
+        }
 
-			if (target < 0)
-				return;
+        private void OfferMail(GameState state)
+        {
+            Town twn = state.Map as Town;
 
-			SoundMan.PlaySound(LotaSound.Question);
+            if (Player.Items[MailItemId] > 0) return;
+            if (twn == null) return;
+            if (twn.Mail.Count == 0) return;
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Would you like to earn some gold?");
+            int target = SelectDeliveryTarget(twn);
 
-			MenuItemList menu = new MenuItemList("Yes", "No");
+            if (target < 0)
+                return;
 
-			int choice = QuickMenu(menu, 2);
+            SoundMan.PlaySound(LotaSound.Question);
 
-			if (choice == 0)
-			{
-				player.Items[XleCore.Factory.MailItemID] = 1;
-				player.mailTown = target;
+            TextArea.PrintLine();
+            TextArea.PrintLine("Would you like to earn some gold?");
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Here's some mail to");
-				XleCore.TextArea.PrintLine("deliver to " + XleCore.Data.MapList[target].Name + ".");
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("        Press Key to Continue");
+            MenuItemList menu = new MenuItemList("Yes", "No");
 
-				WaitForKey();
-			}
-		}
+            int choice = QuickMenu(menu, 2);
 
-		private static int SelectDeliveryTarget(Town twn)
-		{
-			int target;
-			int mMap = XleCore.random.Next(twn.Mail.Count);
+            if (choice == 0)
+            {
+                Player.Items[MailItemId] = 1;
+                Player.mailTown = target;
 
-			int count = 0;
-			bool valid = false;
+                TextArea.PrintLine();
+                TextArea.PrintLine("Here's some mail to");
+                TextArea.PrintLine("deliver to " + Data.MapList[target].Name + ".");
+                TextArea.PrintLine();
+                TextArea.PrintLine("        Press Key to Continue");
 
-			// search for a valid map
-			do
-			{
-				target = twn.Mail[mMap];
+                WaitForKey();
+            }
+        }
 
-				if (XleCore.Data.MapList.ContainsKey(target) &&
-					XleCore.Data.MapList[target].Name != "")
-				{
-					valid = true;
-				}
-				else
-				{
-					mMap++;
-					if (mMap == twn.Mail.Count) mMap = 0;
-				}
+        private int MailItemId
+        {
+            get { return systemState.Factory.MailItemID; }
+        }
 
-				count++;
+        private int SelectDeliveryTarget(Town twn)
+        {
+            int target;
+            int mMap = Random.Next(twn.Mail.Count);
 
-			} while (count < 6 && valid == false);
+            int count = 0;
+            bool valid = false;
 
-			if (valid == false)
-				return -1;
+            // search for a valid map
+            do
+            {
+                target = twn.Mail[mMap];
 
-			return target;
-		}
-		private void SetWindow(double cost)
-		{
-			ClearWindow();
+                if (Data.MapList.ContainsKey(target) &&
+                    Data.MapList[target].Name != "")
+                {
+                    valid = true;
+                }
+                else
+                {
+                    mMap++;
+                    if (mMap == twn.Mail.Count) mMap = 0;
+                }
 
-			var promptWindow = new TextWindow();
-			promptWindow.Location = new Point(9, 4);
+                count++;
 
-			promptWindow.WriteLine("    Food & water");
-			promptWindow.WriteLine();
-			promptWindow.WriteLine();
-			promptWindow.WriteLine("We sell food for travel.");
-			promptWindow.WriteLine("Each 'day' of food will ");
-			promptWindow.WriteLine("keep you fed for one day");
-			promptWindow.WriteLine("of travel (on foot).    ");
-			promptWindow.WriteLine();
-			promptWindow.WriteLine();
+            } while (count < 6 && valid == false);
 
-			if (robbing == false)
-			{
-				promptWindow.Write("Cost is ");
-				promptWindow.Write(cost.ToString());
-				promptWindow.WriteLine(" gold per 'day'");
-			}
-			else
-				promptWindow.WriteLine("Robbery in progress");
+            if (valid == false)
+                return -1;
 
-			promptWindow.SetColor(XleColor.Yellow);
+            return target;
+        }
+        private void SetWindow(double cost)
+        {
+            ClearWindow();
 
-			Windows.Add(promptWindow);
-		}
+            var promptWindow = new TextWindow();
+            promptWindow.Location = new Point(9, 4);
 
-		private void SetTitle()
-		{
-			Title = TheEvent.ShopName;
-		}
-		private void PayForMail(Player player)
-		{
-			int gold = XleCore.random.Next(1, 4);
+            promptWindow.WriteLine("    Food & water");
+            promptWindow.WriteLine();
+            promptWindow.WriteLine();
+            promptWindow.WriteLine("We sell food for travel.");
+            promptWindow.WriteLine("Each 'day' of food will ");
+            promptWindow.WriteLine("keep you fed for one day");
+            promptWindow.WriteLine("of travel (on foot).    ");
+            promptWindow.WriteLine();
+            promptWindow.WriteLine();
 
-			switch (gold)
-			{
-				case 1: gold = 95; break;
-				case 2: gold = 110; break;
-				case 3: gold = 125; break;
-			}
+            if (robbing == false)
+            {
+                promptWindow.Write("Cost is ");
+                promptWindow.Write(cost.ToString());
+                promptWindow.WriteLine(" gold per 'day'");
+            }
+            else
+                promptWindow.WriteLine("Robbery in progress");
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Thanks for the delivery. ");
-			XleCore.TextArea.PrintLine("Here's " + gold.ToString() + " gold.");
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+            promptWindow.SetColor(XleColor.Yellow);
 
-			StoreSound(LotaSound.Good);
-			XleCore.TextArea.RewriteLine(4, "        Press Key to Continue");
-			WaitForKey();
+            Windows.Add(promptWindow);
+        }
 
-			player.Gold += gold;
-			player.Items[XleCore.Factory.MailItemID] = 0;
-			player.mailTown = 0;
-		}
+        private void SetTitle()
+        {
+            Title = TheEvent.ShopName;
+        }
+        private void PayForMail()
+        {
+            int gold = Random.Next(1, 4);
 
-		int robCount;
+            switch (gold)
+            {
+                case 1: gold = 95; break;
+                case 2: gold = 110; break;
+                case 3: gold = 125; break;
+            }
 
-		protected override bool RobImpl(GameState state)
-		{
-			this.player = state.Player;
+            TextArea.PrintLine();
+            TextArea.PrintLine("Thanks for the delivery. ");
+            TextArea.PrintLine("Here's " + gold.ToString() + " gold.");
+            TextArea.PrintLine();
+            TextArea.PrintLine();
 
-			SetTitle();
-			Wait(1);
-			SetWindow(0);
+            StoreSound(LotaSound.Good);
+            TextArea.RewriteLine(4, "        Press Key to Continue");
+            WaitForKey();
 
-			XleCore.TextArea.Clear();
+            Player.Gold += gold;
+            Player.Items[MailItemId] = 0;
+            Player.mailTown = 0;
+        }
 
-			if (robCount < 4)
-			{
-				robCount++;
-				robbing = true;
+        int robCount;
 
-				int choice = XleCore.random.Next(1, 16) + XleCore.random.Next(20, 36);
+        protected override bool RobImpl(GameState state)
+        {
+            this.player = state.Player;
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Stole " + choice.ToString() + " days of food.", XleColor.Yellow);
+            SetTitle();
+            Wait(1);
+            SetWindow(0);
 
-				player.Food += choice;
-				SoundMan.PlaySound(LotaSound.Sale);
+            TextArea.Clear();
 
-				if (XleCore.random.NextDouble() < 0.25)
-					robCount = 4;
+            if (robCount < 4)
+            {
+                robCount++;
+                robbing = true;
 
-			}
-			else
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("No items within reach now.", XleColor.Yellow);
+                int choice = Random.Next(1, 16) + Random.Next(20, 36);
 
-				SoundMan.PlaySound(LotaSound.Medium);
-			}
+                TextArea.PrintLine();
+                TextArea.PrintLine(string.Format("Stole {0} days of food.", choice), XleColor.Yellow);
 
-			XleCore.TextArea.PrintLine();
-			Wait(2000);
+                player.Food += choice;
+                SoundMan.PlaySound(LotaSound.Sale);
 
-			return true;
-		}
-	}
+                if (Random.NextDouble() < 0.25)
+                    robCount = 4;
+
+            }
+            else
+            {
+                TextArea.PrintLine();
+                TextArea.PrintLine("No items within reach now.", XleColor.Yellow);
+
+                SoundMan.PlaySound(LotaSound.Medium);
+            }
+
+            TextArea.PrintLine();
+            Wait(2000);
+
+            return true;
+        }
+    }
 }

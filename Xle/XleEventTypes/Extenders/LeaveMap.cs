@@ -5,13 +5,13 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Extenders
 {
-	public class LeaveMap : EventExtender 
-	{
-		public override bool StepOn(GameState state)
-		{
-			state.MapExtender.LeaveMap(state.Player);
+    public class LeaveMap : EventExtender
+    {
+        public override bool StepOn(GameState state)
+        {
+            MapExtender.LeaveMap();
 
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 }

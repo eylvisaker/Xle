@@ -26,5 +26,7 @@ namespace ERY.Xle.Services
         void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines);
 
         void SetLineColor(Color color, params int[] lines);
+
+        void Draw();
     }
 }

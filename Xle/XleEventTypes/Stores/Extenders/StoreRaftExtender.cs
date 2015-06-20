@@ -4,127 +4,134 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreRaftExtender : StoreExtender
-	{
-		public new StoreRaft TheEvent { get { return (StoreRaft)base.TheEvent; } }
+    public class StoreRaftExtender : StoreExtender
+    {
+        public IQuickMenu QuickMenu { get; set; }
+        public XleSystemState systemState { get; set; }
 
-		protected override bool SpeakImpl(GameState state)
-		{
-			var player = state.Player;
+        public new StoreRaft TheEvent { get { return (StoreRaft)base.TheEvent; } }
 
-			int choice = 0;
-			int raftCost = (int)(400 * TheEvent.CostFactor);
-			int gearCost = (int)(50 * TheEvent.CostFactor);
-			MenuItemList theList = new MenuItemList("Yes", "No");
-			bool skipRaft = false;
-			bool offerCoin = false;
+        protected override bool SpeakImpl(GameState state)
+        {
+            int choice = 0;
+            int raftCost = (int)(400 * TheEvent.CostFactor);
+            int gearCost = (int)(50 * TheEvent.CostFactor);
+            MenuItemList theList = new MenuItemList("Yes", "No");
+            bool skipRaft = false;
+            bool offerCoin = false;
 
-			if (IsLoanOverdue(state))
-			{
-				StoreDeclinePlayer(state);
-				return true;
-			}
-			// check to see if there are any rafts near the raft drop point
-			skipRaft = CheckForNearbyRaft(player, skipRaft);
+            if (IsLoanOverdue())
+            {
+                StoreDeclinePlayer();
+                return true;
+            }
+            // check to see if there are any rafts near the raft drop point
+            skipRaft = CheckForNearbyRaft(skipRaft);
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("** " + TheEvent.ShopName + " **", XleColor.Yellow);
-			XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("** " + TheEvent.ShopName + " **", XleColor.Yellow);
+            TextArea.PrintLine();
 
-			if (skipRaft == false)
-			{
-				XleCore.TextArea.PrintLine("Want to buy a raft for " + raftCost.ToString() + " gold?");
+            if (skipRaft == false)
+            {
+                TextArea.PrintLine("Want to buy a raft for " + raftCost.ToString() + " gold?");
 
-				choice = XleCore.QuickMenu(theList, 3, 1);
+                choice = QuickMenu.QuickMenu(theList, 3, 1);
 
-				if (choice == 0)
-				{
-					// Purchase raft
-					if (player.Spend(raftCost))
-					{
-						player.Rafts.Add(new RaftData(TheEvent.BuyRaftPt.X, TheEvent.BuyRaftPt.Y, TheEvent.BuyRaftMap));
+                if (choice == 0)
+                {
+                    // Purchase raft
+                    if (Player.Spend(raftCost))
+                    {
+                        Player.Rafts.Add(new RaftData(TheEvent.BuyRaftPt.X, TheEvent.BuyRaftPt.Y, TheEvent.BuyRaftMap));
 
-						XleCore.TextArea.PrintLine("Raft purchased.");
-						SoundMan.PlaySound(LotaSound.Sale);
-						XleCore.Wait(1000);
+                        TextArea.PrintLine("Raft purchased.");
+                        SoundMan.PlaySound(LotaSound.Sale);
+                        GameControl.Wait(1000);
 
-						XleCore.TextArea.PrintLine("Board raft outside.");
+                        TextArea.PrintLine("Board raft outside.");
 
-						offerCoin = true;
-					}
-					else
-					{
-						XleCore.TextArea.PrintLine("Not enough gold.");
-						SoundMan.PlaySound(LotaSound.Medium);
-						XleCore.Wait(750);
-					}
-				}
-			}
+                        offerCoin = true;
+                    }
+                    else
+                    {
+                        TextArea.PrintLine("Not enough gold.");
+                        SoundMan.PlaySound(LotaSound.Medium);
+                        GameControl.Wait(750);
+                    }
+                }
+            }
 
-			if (skipRaft == true || choice == 1)
-			{
-				XleCore.TextArea.PrintLine("How about some climbing gear");
-				XleCore.TextArea.PrintLine("for " + gearCost.ToString() + " gold?");
-				XleCore.TextArea.PrintLine();
+            if (skipRaft == true || choice == 1)
+            {
+                TextArea.PrintLine("How about some climbing gear");
+                TextArea.PrintLine("for " + gearCost.ToString() + " gold?");
+                TextArea.PrintLine();
 
-				choice = XleCore.QuickMenu(theList, 3, 1);
+                choice = QuickMenu.QuickMenu(theList, 3, 1);
 
-				if (choice == 0)
-				{
-					if (player.Spend(gearCost))
-					{
-						XleCore.TextArea.PrintLine("Climbing gear purchased.");
+                if (choice == 0)
+                {
+                    if (Player.Spend(gearCost))
+                    {
+                        TextArea.PrintLine("Climbing gear purchased.");
 
-						player.Items[XleCore.Factory.ClimbingGearItemID] += 1;
-						offerCoin = true;
+                        Player.Items[ClimbingGearItemId] += 1;
+                        offerCoin = true;
 
-						SoundMan.PlaySound(LotaSound.Sale);
-					}
-					else
-					{
-						XleCore.TextArea.PrintLine("Not enough gold.");
-						SoundMan.PlaySound(LotaSound.Medium);
-					}
-				}
-				else if (choice == 1)
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("Nothing Purchased.");
+                        SoundMan.PlaySound(LotaSound.Sale);
+                    }
+                    else
+                    {
+                        TextArea.PrintLine("Not enough gold.");
+                        SoundMan.PlaySound(LotaSound.Medium);
+                    }
+                }
+                else if (choice == 1)
+                {
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("Nothing Purchased.");
 
-					SoundMan.PlaySound(LotaSound.Medium);
-				}
+                    SoundMan.PlaySound(LotaSound.Medium);
+                }
 
-				XleCore.Wait(750);
+                XleCore.Wait(750);
 
-			}
+            }
 
-			if (offerCoin)
-				CheckOfferMuseumCoin(player);
+            if (offerCoin)
+                CheckOfferMuseumCoin(Player);
 
-			return true;
-		}
+            return true;
+        }
 
-		private bool CheckForNearbyRaft(Player player, bool skipRaft)
-		{
-			for (int i = 0; i < player.Rafts.Count; i++)
-			{
-				if (player.Rafts[i].MapNumber != TheEvent.BuyRaftMap)
-					continue;
+        private int ClimbingGearItemId
+        {
+            get { return systemState.Factory.ClimbingGearItemID; }
+        }
 
-				int dist = Math.Abs(player.Rafts[i].X - TheEvent.BuyRaftPt.X) +
-					Math.Abs(player.Rafts[i].Y - TheEvent.BuyRaftPt.Y);
+        private bool CheckForNearbyRaft(bool skipRaft)
+        {
+            for (int i = 0; i < Player.Rafts.Count; i++)
+            {
+                if (Player.Rafts[i].MapNumber != TheEvent.BuyRaftMap)
+                    continue;
 
-				if (dist > 10)
-					continue;
+                int dist = Math.Abs(Player.Rafts[i].X - TheEvent.BuyRaftPt.X) +
+                    Math.Abs(Player.Rafts[i].Y - TheEvent.BuyRaftPt.Y);
 
-				skipRaft = true;
-				break;
-			}
-			return skipRaft;
-		}
+                if (dist > 10)
+                    continue;
 
-	}
+                skipRaft = true;
+                break;
+            }
+            return skipRaft;
+        }
+
+    }
 }

@@ -97,9 +97,13 @@
     <Compile Include="Services\Implementation\IMapExtenderFactory.cs" />
     <Compile Include="Services\Implementation\MapChanger.cs" />
     <Compile Include="Services\Implementation\MenuRenderer.cs" />
+    <Compile Include="Services\Implementation\MuseumCoinSale.cs" />
+    <Compile Include="Services\Implementation\NumberPicker.cs" />
     <Compile Include="Services\Implementation\QuickMenu.cs" />
     <Compile Include="Services\Implementation\XleGameControl.cs" />
     <Compile Include="Services\Implementation\XleMenu.cs" />
+    <Compile Include="Services\IMuseumCoinSale.cs" />
+    <Compile Include="Services\INumberPicker.cs" />
     <Compile Include="Services\IQuickMenu.cs" />
     <Compile Include="Services\IXleMenu.cs" />
     <Compile Include="Services\IXleScreen.cs" />

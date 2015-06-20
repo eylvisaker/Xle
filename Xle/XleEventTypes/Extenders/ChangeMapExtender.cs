@@ -13,7 +13,6 @@ namespace ERY.Xle.XleEventTypes.Extenders
 		public new ChangeMapEvent TheEvent { get { return (ChangeMapEvent)base.TheEvent; } }
         
         public IMapChanger MapChanger { get; set; }
-        public ISoundMan SoundMan { get; set; }
 
 		protected bool VerifyMapExistence()
 		{

@@ -14,5 +14,9 @@ namespace ERY.Xle.Services
         void PlayerIsDead(GameState gameState);
 
         int MailItemID { get; }
+        int ClimbingGearItemID { get; }
+
+        int NextMuseumCoinOffer(GameState gameState);
+
     }
 }

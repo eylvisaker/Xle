@@ -4,33 +4,36 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreFortune : StoreExtender
-	{
-		protected override bool SpeakImpl(GameState state)
-		{
-			var player = state.Player;
+    public class StoreFortune : StoreExtender
+    {
+        public IQuickMenu QuickMenu { get; set; }
 
-			MenuItemList theList = new MenuItemList("Yes", "No");
-			int choice;
+        protected override bool SpeakImpl(GameState state)
+        {
+            var player = state.Player;
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine(TheEvent.ShopName, XleColor.Green);
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Read your fortune for " + 
-				(int)(6 * TheEvent.CostFactor) + " gold?");
+            MenuItemList theList = new MenuItemList("Yes", "No");
+            int choice;
 
-			choice = XleCore.QuickMenu(theList, 3, 1);
+            TextArea.PrintLine();
+            TextArea.PrintLine(TheEvent.ShopName, XleColor.Green);
+            TextArea.PrintLine();
+            TextArea.PrintLine(string.Format(
+                "Read your fortune for {0} gold?", (int)(6 * TheEvent.CostFactor)));
 
-			if (choice == 0)
-			{
+            choice = QuickMenu.QuickMenu(theList, 3, 1);
+
+            if (choice == 0)
+            {
 
 
-			}
+            }
 
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 }

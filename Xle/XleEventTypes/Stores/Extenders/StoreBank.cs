@@ -5,137 +5,136 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreBank : StoreFront
-	{
-		public override int RobValue()
-		{
-			return XleCore.random.Next(180, 231);
-		}
+    public class StoreBank : StoreFront
+    {
+        public override int RobValue()
+        {
+            return Random.Next(180, 231);
+        }
 
-		public override bool AllowRobWhenNotAngry
-		{
-			get
-			{
-				return true;
-			}
-		}
-		
-		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
+        public override bool AllowRobWhenNotAngry
+        {
+            get
+            {
+                return true;
+            }
+        }
 
-		protected override void InitializeColorScheme(ColorScheme cs)
-		{
-			cs.BackColor = XleColor.DarkGray;
-			cs.FrameColor = XleColor.Green;
-			cs.FrameHighlightColor = XleColor.Yellow;
-			cs.TitleColor = XleColor.Yellow;
-			cs.BorderColor = XleColor.Gray;
-		}
+        public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
-		protected override bool SpeakImpl(GameState state)
-		{
-			var player = state.Player;
+        protected override void InitializeColorScheme(ColorScheme cs)
+        {
+            cs.BackColor = XleColor.DarkGray;
+            cs.FrameColor = XleColor.Green;
+            cs.FrameHighlightColor = XleColor.Yellow;
+            cs.TitleColor = XleColor.Yellow;
+            cs.BorderColor = XleColor.Gray;
+        }
 
-			int choice;
+        protected override bool SpeakImpl(GameState state)
+        {
+            var player = state.Player;
 
-			this.player = player;
-			robbing = false;
+            int choice;
 
-			ClearWindow();
+            this.player = player;
+            robbing = false;
 
-			Title = "Convenience Bank";
+            ClearWindow();
 
-			var promptWindow = new TextWindow();
-			promptWindow.Location = new Point(14, 3);
-			promptWindow.WriteLine("Our Services");
-			promptWindow.WriteLine("---------------");
+            Title = "Convenience Bank";
 
-			var optionsWindow = new TextWindow();
-			optionsWindow.Location = new Point(10, 7);
+            var promptWindow = new TextWindow();
+            promptWindow.Location = new Point(14, 3);
+            promptWindow.WriteLine("Our Services");
+            promptWindow.WriteLine("---------------");
 
-			optionsWindow.WriteLine("1.  Deposit Funds");
-			optionsWindow.WriteLine();
-			optionsWindow.WriteLine("2.  Withdraw Funds");
-			optionsWindow.WriteLine();
-			optionsWindow.WriteLine("3.  Balance Inquiry");
+            var optionsWindow = new TextWindow();
+            optionsWindow.Location = new Point(10, 7);
 
-			Windows.Add(promptWindow);
-			Windows.Add(optionsWindow);
+            optionsWindow.WriteLine("1.  Deposit Funds");
+            optionsWindow.WriteLine();
+            optionsWindow.WriteLine("2.  Withdraw Funds");
+            optionsWindow.WriteLine();
+            optionsWindow.WriteLine("3.  Balance Inquiry");
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Make choice (Hit 0 to cancel)");
-			XleCore.TextArea.PrintLine();
+            Windows.Add(promptWindow);
+            Windows.Add(optionsWindow);
 
-			MenuItemList theList = new MenuItemList("0", "1", "2", "3");
-			choice = QuickMenu(theList, 2, 0);
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Make choice (Hit 0 to cancel)");
+            TextArea.PrintLine();
 
-			switch (choice)
-			{
-				case 1:
-					MakeDeposit(player);
-					break;
+            MenuItemList theList = new MenuItemList("0", "1", "2", "3");
+            choice = QuickMenuService.QuickMenu(theList, 2, 0);
 
-				case 2:
-					MakeWithdrawal(player, choice);
-					break;
+            switch (choice)
+            {
+                case 1:
+                    MakeDeposit();
+                    break;
 
-				case 3:
-					PrintBalance(player);
-					break;
-			}
+                case 2:
+                    MakeWithdrawal();
+                    break;
 
-					
-			return true;
-		}
+                case 3:
+                    PrintBalance();
+                    break;
+            }
 
-		private static void PrintBalance(Player player)
-		{
-			XleCore.TextArea.PrintLine("Current balance: " + player.GoldInBank + " gold.");
-		}
 
-		private void MakeWithdrawal(Player player, int choice)
-		{
-			if (player.GoldInBank > 0)
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Withdraw how much?");
-				int amount = ChooseNumber(player.GoldInBank);
+            return true;
+        }
 
-				player.Gold += amount;
-				player.GoldInBank -= amount;
-			}
-			else
-			{
-				XleCore.TextArea.Clear();
-				XleCore.TextArea.PrintLine("Nothing to withdraw");
+        private void PrintBalance()
+        {
+            TextArea.PrintLine("Current balance: " + Player.GoldInBank + " gold.");
+        }
 
-				StoreSound(LotaSound.Medium);
-				choice = 0;
+        private void MakeWithdrawal()
+        {
+            if (Player.GoldInBank > 0)
+            {
+                TextArea.PrintLine();
+                TextArea.PrintLine("Withdraw how much?");
+                int amount = ChooseNumber(Player.GoldInBank);
 
-			}
+                Player.Gold += amount;
+                Player.GoldInBank -= amount;
+            }
+            else
+            {
+                TextArea.Clear();
+                TextArea.PrintLine("Nothing to withdraw");
 
-			XleCore.TextArea.PrintLine();
-			PrintBalance(player);
+                StoreSound(LotaSound.Medium);
+            }
 
-			StoreSound(LotaSound.Sale);
-		}
+            TextArea.PrintLine();
+            PrintBalance();
 
-		private void MakeDeposit(Player player)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Deposit how much?");
-			int amount = ChooseNumber(player.Gold);
+            StoreSound(LotaSound.Sale);
+        }
 
-			player.Spend(amount);
-			player.GoldInBank += amount;
+        private void MakeDeposit()
+        {
+            TextArea.PrintLine();
+            TextArea.PrintLine("Deposit how much?");
+            int amount = ChooseNumber(Player.Gold);
 
-			XleCore.TextArea.PrintLine();
-			PrintBalance(player);
+            Player.Spend(amount);
+            Player.GoldInBank += amount;
 
-			StoreSound(LotaSound.Sale);
-		}
-	}
+            TextArea.PrintLine();
+            PrintBalance();
+
+            StoreSound(LotaSound.Sale);
+        }
+    }
 }

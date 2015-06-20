@@ -40,6 +40,11 @@ namespace ERY.Xle.Maps.Extenders
         public XleMapRenderer MapRenderer { get; set; }
         public ICommandFactory CommandFactory { get; set; }
         public IEventExtenderFactory EventFactory { get; set; }
+        public IXleGameControl GameControl { get; set; }
+        public ITextArea TextArea { get; set; }
+        public GameState GameState { get; set; }
+
+        public Player Player { get { return GameState.Player; } }
 
         public bool IsAngry
         {
@@ -104,8 +109,6 @@ namespace ERY.Xle.Maps.Extenders
                 return (EventExtender)Activator.CreateInstance(defaultExtender);
             }
         }
-
-
 
         public virtual int StepSize
         {
@@ -185,28 +188,33 @@ namespace ERY.Xle.Maps.Extenders
             return true;
         }
 
-        [Obsolete("Use LeaveMap(GameState) overload instead.")]
+        [Obsolete("Use LeaveMap() overload instead.")]
         public virtual void LeaveMap(Player player)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("Leave " + TheMap.MapName);
-            XleCore.TextArea.PrintLine();
-
-            XleCore.Wait(XleCore.GameState.GameSpeed.LeaveMapTime);
-
-            player.ReturnToPreviousMap();
-
-            XleCore.TextArea.PrintLine();
+            LeaveMap();
         }
 
         protected virtual void LeaveMap(GameState state)
         {
-            XleCore.TextArea.PrintLine("Leave " + TheMap.MapName);
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine("Leave " + TheMap.MapName);
+            TextArea.PrintLine();
 
-            XleCore.Wait(state.GameSpeed.LeaveMapTime);
+            GameControl.Wait(state.GameSpeed.LeaveMapTime);
 
             state.Player.ReturnToPreviousMap();
+        }
+
+        public void LeaveMap()
+        {
+            TextArea.PrintLine();
+            TextArea.PrintLine("Leave " + TheMap.MapName);
+            TextArea.PrintLine();
+
+            GameControl.Wait(GameState.GameSpeed.LeaveMapTime);
+
+            Player.ReturnToPreviousMap();
+
+            TextArea.PrintLine();
         }
 
         public virtual bool PlayerFight(GameState state)
@@ -488,5 +496,6 @@ namespace ERY.Xle.Maps.Extenders
         public virtual void CheckSounds(GameState state)
         {
         }
+
     }
 }

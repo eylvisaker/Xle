@@ -1,4 +1,5 @@
 ﻿using ERY.Xle.Maps;
+using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Services;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
         public Player Player { get { return GameState.Player; } }
         public XleMap Map { get { return GameState.Map; } }
+        public MapExtender MapExtender { get { return GameState.MapExtender; } }
 
         /// <summary>
         /// Function called when player speaks in a square inside or next

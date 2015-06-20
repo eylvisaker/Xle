@@ -119,19 +119,23 @@ namespace ERY.Xle.Services.Implementation
         [Obsolete("Use XleData as a service instead.")]
         public static XleData Data { get { return inst.mData; } }
 
+        [Obsolete("Use method on XleData instead.")]
         public static string GetWeaponName(int weaponID, int qualityID)
         {
             return Data.QualityList[qualityID] + " " + Data.WeaponList[weaponID].Name;
         }
+        [Obsolete("Use method on XleData instead.")]
         public static string GetArmorName(int armorID, int qualityID)
         {
             return Data.QualityList[qualityID] + " " + Data.ArmorList[armorID].Name;
         }
 
+        [Obsolete("Use method on XleData instead.")]
         public static int WeaponCost(int item, int quality)
         {
             return Data.WeaponList[item].Prices[quality];
         }
+        [Obsolete("Use method on XleData instead.")]
         public static int ArmorCost(int item, int quality)
         {
             return Data.ArmorList[item].Prices[quality];
@@ -459,7 +463,7 @@ namespace ERY.Xle.Services.Implementation
         {
             return WaitForKey(Redraw, keys);
         }
-     
+
         /// <summary>
         /// Waits for one of the specified keys, while calling the delegate
         /// to redraw the screen.
@@ -934,10 +938,12 @@ namespace ERY.Xle.Services.Implementation
         /// </summary>
         /// <param name="max">The maximum value the user is allowed to select.</param>
         /// <returns></returns>
+        [Obsolete("Use NumberPicker service instead")]
         public static int ChooseNumber(int max)
         {
             return ChooseNumber(Redraw, max);
         }
+        [Obsolete("Use NumberPicker service instead")]
         public static int ChooseNumber(Action redraw, int max)
         {
             int method = 0;
