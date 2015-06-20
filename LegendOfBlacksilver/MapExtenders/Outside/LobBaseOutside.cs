@@ -13,21 +13,6 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 {
 	public class LobBaseOutside : OutsideExtender
 	{
-        public ICommandFactory CommandFactory { get; set; }
-
-		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-		{
-			if (evt is ChangeMapEvent)
-			{
-				ChangeMapEvent e = (ChangeMapEvent)evt;
-
-				if (e.MapID == 40 || e.MapID == 45)
-				{
-					return new Drawbridge();
-				}
-			}
-			return base.CreateEventExtender(evt, defaultExtender);
-		}
 		public override void SetCommands(ICommandList commands)
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);

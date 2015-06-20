@@ -73,19 +73,5 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
             commands.Items.Add(CommandFactory.Speak());
         }
 
-        public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-        {
-            return mExtenders.Find(evt.ExtenderName) ?? DefaultEvent(evt, defaultExtender);
-        }
-
-        private XleEventTypes.Extenders.EventExtender DefaultEvent(XleEvent evt, Type defaultExtender)
-        {
-            if (evt.ExtenderName.StartsWith("Store"))
-            {
-                System.Diagnostics.Debug.Print(evt.ExtenderName + " not implemented.");
-            }
-
-            return base.CreateEventExtender(evt, defaultExtender);
-        }
     }
 }

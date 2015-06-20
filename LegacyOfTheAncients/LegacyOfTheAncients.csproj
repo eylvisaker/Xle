@@ -61,7 +61,7 @@
     <Compile Include="MapExtenders\Castle\Events\CastleDoor.cs" />
     <Compile Include="MapExtenders\Castle\CastleGround.cs" />
     <Compile Include="MapExtenders\Castle\CastleUpper.cs" />
-    <Compile Include="MapExtenders\Castle\Events\Chest.cs" />
+    <Compile Include="MapExtenders\Castle\Events\TreasureChest.cs" />
     <Compile Include="MapExtenders\Castle\Events\MagicIce.cs" />
     <Compile Include="MapExtenders\Castle\Events\PasswordDoor.cs" />
     <Compile Include="MapExtenders\Castle\Events\SeedPlant.cs" />

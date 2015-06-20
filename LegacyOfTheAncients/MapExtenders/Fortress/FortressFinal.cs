@@ -31,11 +31,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 			extenders.Add("MagicIce", new FinalMagicIce(this));
 		}
 
-		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-		{
-			return extenders.Find(evt.ExtenderName) ?? base.CreateEventExtender(evt, defaultExtender);
-		}
-
 		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
 		{
 			if (y >= TheMap.Height)

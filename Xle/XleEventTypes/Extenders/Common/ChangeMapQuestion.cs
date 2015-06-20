@@ -8,7 +8,7 @@ using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Extenders.Common
 {
-    public class ChangeMapQuestion : ChangeMapExtender
+    public class ChangeMapQuestion : ChangeMap
     {
         public IQuickMenu QuickMenu { get; set; }
 

@@ -13,146 +13,129 @@ using ERY.Xle.Maps;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {
-	public class CastleGround : CastleExtender
-	{
-		public CastleGround()
-		{
+    public class CastleGround : CastleExtender
+    {
+        public CastleGround()
+        {
 
-		}
-		public override void OnLoad(GameState state)
-		{
-			Lota.SetMuseumCoinOffers(state);
-		}
+        }
+        public override void OnLoad(GameState state)
+        {
+            Lota.SetMuseumCoinOffers(state);
+        }
 
-		public override void SetCommands(ICommandList commands)
-		{
-			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+        public override void SetCommands(ICommandList commands)
+        {
+            commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak());
-		}
-		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-		{
-			string name = evt.ExtenderName.ToLowerInvariant();
+        }
 
-			if (evt is Door)
-				return new CastleDoor();
-			if (name == "magicice")
-				return new MagicIce();
-			if (name == "seeds")
-				return new SeedPlant();
-			if (name == "casandra")
-				return new Casandra();
-			if (evt is TreasureChestEvent)
-				return new Chest { CastleLevel = 1 };
+        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        {
+            if (y >= TheMap.Height)
+                return 16;
+            else
+                return base.GetOutsideTile(playerPoint, x, y);
+        }
 
-			return base.CreateEventExtender(evt, defaultExtender);
-		}
+        public override void PlayerUse(GameState state, int item, ref bool handled)
+        {
+            switch (item)
+            {
+                case (int)LotaItem.MagicSeed:
+                    handled = UseMagicSeeds(state.Player);
+                    break;
+            }
+        }
+        private bool UseMagicSeeds(Player player)
+        {
+            XleCore.Wait(150);
 
-		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
-		{
-			if (y >= TheMap.Height)
-				return 16;
-			else
-				return base.GetOutsideTile(playerPoint, x, y);
-		}
+            Lota.Story.Invisible = true;
+            XleCore.TextArea.PrintLine("You're invisible.");
+            XleCore.Renderer.PlayerColor = XleColor.DarkGray;
 
-		public override void PlayerUse(GameState state, int item, ref bool handled)
-		{
-			switch (item)
-			{
-				case (int)LotaItem.MagicSeed:
-					handled = UseMagicSeeds(state.Player);
-					break;
-			}
-		}
-		private bool UseMagicSeeds(Player player)
-		{
-			XleCore.Wait(150);
+            TheMap.Guards.IsAngry = false;
 
-			Lota.Story.Invisible = true;
-			XleCore.TextArea.PrintLine("You're invisible.");
-			XleCore.Renderer.PlayerColor = XleColor.DarkGray;
+            XleCore.Wait(500);
 
-			TheMap.Guards.IsAngry = false;
+            player.Items[LotaItem.MagicSeed]--;
 
-			XleCore.Wait(500);
+            return true;
+        }
 
-			player.Items[LotaItem.MagicSeed]--;
+        public override void SpeakToGuard(GameState state)
+        {
+            XleCore.TextArea.PrintLine();
+            XleCore.TextArea.PrintLine();
 
-			return true;
-		}
+            if (Lota.Story.Invisible)
+            {
+                XleCore.TextArea.PrintLine("The guard looks startled.");
+            }
+            else
+            {
+                XleCore.TextArea.PrintLine("The guard ignores you.");
+            }
+        }
 
-		public override void SpeakToGuard(GameState state)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+        protected override void OnSetAngry(bool value)
+        {
+            var state = XleCore.GameState;
 
-			if (Lota.Story.Invisible)
-			{
-				XleCore.TextArea.PrintLine("The guard looks startled.");
-			}
-			else
-			{
-				XleCore.TextArea.PrintLine("The guard ignores you.");
-			}
-		}
+            Lota.Story.Invisible = false;
+            XleCore.Renderer.PlayerColor = XleColor.White;
+        }
 
-		protected override void OnSetAngry(bool value)
-		{
-			var state = XleCore.GameState;
+        protected int WhichCastle = 1;
+        protected double CastleLevel = 1;
+        protected double GuardAttack = 1;
 
-			Lota.Story.Invisible = false;
-			XleCore.Renderer.PlayerColor = XleColor.White;
-		}
+        public override double ChanceToHitGuard(Player player, Guard guard, int distance)
+        {
+            int weaponType = player.CurrentWeapon.ID;
+            double GuardDefense = 1;
 
-		protected int WhichCastle = 1;
-		protected double CastleLevel = 1;
-		protected double GuardAttack = 1;
+            if (WhichCastle == 2)
+                GuardDefense = player.Attribute[Attributes.dexterity] / 26.0;
 
-		public override double ChanceToHitGuard(Player player, Guard guard, int distance)
-		{
-			int weaponType = player.CurrentWeapon.ID;
-			double GuardDefense = 1;
-
-			if (WhichCastle == 2)
-				GuardDefense = player.Attribute[Attributes.dexterity] / 26.0;
-
-			return (player.Attribute[Attributes.dexterity] + 13)
-				* (99 + weaponType * 11) / 7500.0 / GuardDefense;
-		}
+            return (player.Attribute[Attributes.dexterity] + 13)
+                * (99 + weaponType * 11) / 7500.0 / GuardDefense;
+        }
 
 
-		public override int RollDamageToGuard(Player player, Guard guard)
-		{
-			int weaponType = player.CurrentWeapon.ID;
+        public override int RollDamageToGuard(Player player, Guard guard)
+        {
+            int weaponType = player.CurrentWeapon.ID;
 
-			double damage = player.Attribute[Attributes.strength] *
-					   (weaponType / 2 + 1) / 7;
+            double damage = player.Attribute[Attributes.strength] *
+                       (weaponType / 2 + 1) / 7;
 
-			damage *= 1 + 2 * XleCore.random.NextDouble();
+            damage *= 1 + 2 * XleCore.random.NextDouble();
 
-			return (int)Math.Round(damage);
-		}
-
-
-		public override double ChanceToHitPlayer(Player player, Guard guard)
-		{
-			return 1 - (player.Attribute[Attributes.dexterity] / 99.0);
-		}
+            return (int)Math.Round(damage);
+        }
 
 
-		public override int RollDamageToPlayer(Player player, Guard guard)
-		{
-			int armorType = player.CurrentArmor.ID;
+        public override double ChanceToHitPlayer(Player player, Guard guard)
+        {
+            return 1 - (player.Attribute[Attributes.dexterity] / 99.0);
+        }
 
-			double damage =
-				Math.Pow(CastleLevel, 1.8) * GuardAttack * (300 + XleCore.random.NextDouble() * 600) /
-				(armorType + 2) / Math.Pow(player.Attribute[Attributes.endurance], 0.9) + 2;
 
-			return (int)Math.Round(damage);
-		}
-	}
+        public override int RollDamageToPlayer(Player player, Guard guard)
+        {
+            int armorType = player.CurrentArmor.ID;
+
+            double damage =
+                Math.Pow(CastleLevel, 1.8) * GuardAttack * (300 + XleCore.random.NextDouble() * 600) /
+                (armorType + 2) / Math.Pow(player.Attribute[Attributes.endurance], 0.9) + 2;
+
+            return (int)Math.Round(damage);
+        }
+    }
 }

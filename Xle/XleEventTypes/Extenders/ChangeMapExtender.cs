@@ -8,7 +8,7 @@ using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Extenders
 {
-	public class ChangeMapExtender : EventExtender
+	public class ChangeMap : EventExtender
 	{
 		public new ChangeMapEvent TheEvent { get { return (ChangeMapEvent)base.TheEvent; } }
         

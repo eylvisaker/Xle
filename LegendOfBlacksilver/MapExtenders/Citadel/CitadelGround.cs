@@ -59,24 +59,5 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
                 return 23;
         }
 
-        public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-        {
-            if (evt is Door)
-                return new CitadelDoor();
-
-            if (evt is ChangeMapEvent)
-                return new PasswordTeleporter();
-
-            string name = evt.ExtenderName.ToLowerInvariant();
-
-            switch (name)
-            {
-                case "wizard": return new Wizard();
-                case "jester": return new Jester();
-                case "floorpuzzle": return new FloorPuzzle();
-                default:
-                    return base.CreateEventExtender(evt, defaultExtender);
-            }
-        }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Outside.Events
 {
-	class Drawbridge : ChangeMapExtender
+	class Drawbridge : ChangeMap
 	{
 		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
 		{

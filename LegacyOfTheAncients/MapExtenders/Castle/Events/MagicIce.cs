@@ -5,7 +5,7 @@ using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
-	class MagicIce : EventExtender
+	public class MagicIce : EventExtender
 	{
 		public override bool Use(GameState state, int item)
 		{

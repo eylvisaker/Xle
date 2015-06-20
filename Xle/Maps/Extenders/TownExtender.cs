@@ -50,7 +50,6 @@ namespace ERY.Xle.Maps.Extenders
 			}
 		}
 
-
 		public virtual double ChanceToHitGuard(Player player, Guard guard, int distance)
 		{
 			int weaponType = player.CurrentWeapon.ID;
@@ -71,12 +70,10 @@ namespace ERY.Xle.Maps.Extenders
 			return (int)Math.Round(damage);
 		}
 
-
 		public override bool UseFancyMagicPrompt
 		{
 			get { return true; }
 		}
-
 
 		protected override bool GuardInSpot(int x, int y)
 		{
@@ -555,8 +552,6 @@ namespace ERY.Xle.Maps.Extenders
 			XleCore.Wait(200 + 50 * player.Gamespeed, true, XleCore.Redraw);
 		}
 
-
-
 		public override bool PlayerRob(GameState state)
 		{
 			foreach (var evt in TheMap.EventsAt(state.Player, 1))
@@ -579,7 +574,6 @@ namespace ERY.Xle.Maps.Extenders
 
 			return true;
 		}
-
 
 		protected override void AfterStepImpl(GameState state, bool didEvent)
 		{

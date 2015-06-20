@@ -20,18 +20,18 @@ namespace ERY.Xle.XleEventTypes
 		private bool mAsk = true;
 		private Point mLocation;
 		private string mCommandText = "";
-		ChangeMapExtender mExtender;
+		ChangeMap mExtender;
 
 		protected override Type ExtenderType
 		{
 			get
 			{
-				return typeof(ChangeMapExtender);
+				return typeof(ChangeMap);
 			}
 		}
 		protected override EventExtender CreateExtenderImpl(XleMap map)
 		{
-			mExtender = (ChangeMapExtender)base.CreateExtenderImpl(map);
+			mExtender = (ChangeMap)base.CreateExtenderImpl(map);
 
 			return mExtender;
 		}

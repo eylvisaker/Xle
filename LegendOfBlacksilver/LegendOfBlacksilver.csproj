@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrap\LobEventExtenderInstaller.cs" />
+    <Compile Include="Bootstrap\LobMapExtenderInstaller.cs" />
     <Compile Include="Lob.cs" />
     <Compile Include="LobFactory.cs" />
     <Compile Include="LobProgram.cs" />

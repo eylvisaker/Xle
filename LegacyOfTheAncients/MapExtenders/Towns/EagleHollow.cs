@@ -11,16 +11,6 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 {
 	public class EagleHollow : LotaTown
 	{
-		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-		{
-			if (evt.ExtenderName == "Healer")
-			{
-				return new EagleHollowHealer();
-			}
-
-			return base.CreateEventExtender(evt, defaultExtender);
-		}
-
 
 	}
 }

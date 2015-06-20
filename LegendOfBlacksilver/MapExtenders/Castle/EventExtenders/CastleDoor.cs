@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class CastleDoor : DoorExtender
+	public class CastleDoor : DoorExtender
 	{
 		public override bool ItemUnlocksDoor(GameState state, int item)
 		{
@@ -26,7 +26,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 		}
 	}
 
-	class FeatherDoor : CastleDoor
+	public class FeatherDoor : CastleDoor
 	{
 		public override bool ItemUnlocksDoor(GameState state, int item)
 		{

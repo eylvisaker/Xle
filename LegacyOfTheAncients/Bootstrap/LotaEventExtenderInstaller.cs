@@ -14,6 +14,7 @@ using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders.Common;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,22 @@ namespace ERY.Xle.LotA.Bootstrap
             container.Register(Classes.FromAssemblyContaining<LotaFactory>()
                 .BasedOn<EventExtender>()
                 .WithServiceSelf()
+                .Configure(c => c.Named(EventName(c.Implementation)))
                 .LifestyleTransient());
 
             container.Register(Classes.FromAssemblyContaining<XleColor>()
                 .BasedOn<EventExtender>()
                 .WithServiceSelf()
+                .Configure(c => c.Named(EventName(c.Implementation)))
                 .LifestyleTransient());
+        }
+
+        private string EventName(Type type)
+        {
+            if (type == typeof(StoreRaftExtender))
+                return "StoreRaft";
+
+            return type.Name;
         }
 
         private EventExtender factory(IKernel kernel, CreationContext context)
@@ -45,12 +56,12 @@ namespace ERY.Xle.LotA.Bootstrap
             var evt = context.AdditionalArguments["evt"] as XleEvent;
             var defaultExtender = context.AdditionalArguments["defaultExtender"] as Type;
 
-            var outside = map as OutsideExtender;
+            return CreateNamedEvent(kernel, evt.ExtenderName);
+        }
 
-            if (map is OutsideExtender)
-                return CreateOutsideEvent(kernel, outside, evt, defaultExtender);
-
-            throw new NotImplementedException();
+        private EventExtender CreateNamedEvent(IKernel kernel, string name)
+        {
+            return kernel.Resolve<EventExtender>(name);
         }
 
         private EventExtender CreateOutsideEvent(IKernel kernel, OutsideExtender outside, XleEvent evt, Type defaultExtender)

@@ -3,7 +3,7 @@ using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
-	class CastleDoor : DoorExtender
+	public class CastleDoor : DoorExtender
 	{
 		public override void PrintUnlockFailureText(GameState state, int item, ref bool handled)
 		{

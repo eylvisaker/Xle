@@ -2,7 +2,7 @@
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
-	class PasswordDoor : CastleDoor
+	public class PasswordDoor : CastleDoor
 	{
 		public override bool ItemUnlocksDoor(GameState state, int item)
 		{

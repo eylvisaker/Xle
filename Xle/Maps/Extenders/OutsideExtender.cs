@@ -142,15 +142,6 @@ namespace ERY.Xle.Maps.Extenders
 			get { return false; }
 		}
 
-		public override EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-		{
-            return EventFactory.Create(this, evt, defaultExtender);
-			if (evt is ChangeMapEvent)
-				return new ChangeMapQuestion();
-			else
-				return base.CreateEventExtender(evt, defaultExtender);
-		}
-
 		public override void SetColorScheme(ColorScheme scheme)
 		{
 			scheme.TextColor = XleColor.White;

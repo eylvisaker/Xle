@@ -83,7 +83,7 @@
       <Y>35</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <ExtenderName>Password</ExtenderName>
+      <ExtenderName>PasswordDoor</ExtenderName>
       <RequiredItem>0</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
@@ -99,7 +99,7 @@
       <Y>83</Y>
       <Width>1</Width>
       <Height>3</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>4</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
@@ -108,7 +108,7 @@
       <Y>87</Y>
       <Width>1</Width>
       <Height>3</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>5</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
@@ -117,7 +117,7 @@
       <Y>70</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>5</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
@@ -126,7 +126,7 @@
       <Y>70</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>6</RequiredItem>
       <ReplacementTile>3</ReplacementTile>
     </Item>

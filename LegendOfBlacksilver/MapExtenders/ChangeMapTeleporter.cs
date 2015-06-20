@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders
 {
-	class ChangeMapTeleporter : ChangeMapExtender
+	class ChangeMapTeleporter : ChangeMap
 	{
 		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
 		{

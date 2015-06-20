@@ -64,7 +64,7 @@
       <Y>25</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>4</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
@@ -73,7 +73,7 @@
       <Y>29</Y>
       <Width>1</Width>
       <Height>3</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>7</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
@@ -82,7 +82,7 @@
       <Y>33</Y>
       <Width>1</Width>
       <Height>3</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>7</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
@@ -91,7 +91,7 @@
       <Y>33</Y>
       <Width>4</Width>
       <Height>4</Height>
-      <ExtenderName>Seeds</ExtenderName>
+      <ExtenderName>SeedPlant</ExtenderName>
       <ContainsItem>True</ContainsItem>
       <Contents>8</Contents>
     </Item>
@@ -127,7 +127,7 @@
       <Y>72</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>7</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
