@@ -1,7 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Museum" Width="25" Height="40">
   <MapName>Museum</MapName>
-  <ExtenderName>
-  </ExtenderName>
+  <ExtenderName>LotaMuseum</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="null" />
   <TileImage>DungeonTiles.png</TileImage>

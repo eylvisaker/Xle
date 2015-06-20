@@ -41,6 +41,8 @@ namespace ERY.Xle.Services.Implementation
         {
             if (AcceptKey == false)
                 return;
+            if (e.KeyCode == AgateConsole.VisibleToggleKey)
+                return;
 
             try
             {

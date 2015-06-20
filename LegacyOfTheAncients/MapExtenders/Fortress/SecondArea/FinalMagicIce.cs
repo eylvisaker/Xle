@@ -9,13 +9,12 @@ using ERY.Xle.LotA.MapExtenders.Castle.Events;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
-	class FinalMagicIce : MagicIce
+	public class FinalMagicIce : MagicIce
 	{
 		private FortressFinal fortressFinal;
 
 		public FinalMagicIce(FortressFinal fortressFinal)
 		{
-			// TODO: Complete member initialization
 			this.fortressFinal = fortressFinal;
 		}
 

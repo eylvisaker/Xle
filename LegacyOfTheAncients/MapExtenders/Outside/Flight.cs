@@ -8,7 +8,7 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LotA.MapExtenders.Outside
 {
-	public class Flight : TarmalonExtender
+	public class Flight : Tarmalon
 	{
 		public override void OnBeforeEntry(GameState state, ref int targetEntryPoint)
 		{

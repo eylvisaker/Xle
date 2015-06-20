@@ -1,6 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Castle">
   <MapName>isle city</MapName>
-  <ExtenderName>Fortress1</ExtenderName>
+  <ExtenderName>FortressEntry</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,1,1,0,1,1,1,1,1,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,0,0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1</Tiles>
@@ -118,7 +118,7 @@
       <Y>22</Y>
       <Width>2</Width>
       <Height>2</Height>
-      <ExtenderName>Armor</ExtenderName>
+      <ExtenderName>ArmorBox</ExtenderName>
       <ContainsItem>False</ContainsItem>
       <Contents>0</Contents>
     </Item>

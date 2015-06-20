@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class Seravol : EventExtender
+	public class Seravol : EventExtender
 	{
 		public override bool Speak(GameState state)
 		{
@@ -152,17 +152,17 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 			XleCore.WaitForKey();
 		}
 
-		private static void Greetings()
+		private void Greetings()
 		{
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Greetings from the wizard seravol!");
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+			TextArea.Clear(true);
+			TextArea.PrintLine();
+			TextArea.PrintLine();
+			TextArea.PrintLine("Greetings from the wizard seravol!");
+			TextArea.PrintLine();
+			TextArea.PrintLine();
 
 			SoundMan.PlaySound(LotaSound.VeryGood);
-			XleCore.TextArea.FlashLinesWhile(
+			TextArea.FlashLinesWhile(
 				() => SoundMan.IsPlaying(LotaSound.VeryGood),
 				XleColor.White, XleColor.Yellow, 250);
 		}

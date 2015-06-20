@@ -26,6 +26,8 @@ namespace ERY.Xle.Bootstrap
                 .WithServiceSelf()
                 .WithServiceAllInterfaces()
                 .LifestyleSingleton());
+
+            container.Register(Component.For<Random>().ImplementedBy<Random>());
         }
     
     }

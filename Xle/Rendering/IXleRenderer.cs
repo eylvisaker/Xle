@@ -41,5 +41,7 @@ namespace ERY.Xle.Rendering
         void SetProjectionAndBackColors(ColorScheme colorScheme);
 
         void AnimateStep();
+
+        Color PlayerColor { get; set; }
     }
 }

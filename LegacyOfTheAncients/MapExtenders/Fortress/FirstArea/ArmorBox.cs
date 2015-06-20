@@ -1,4 +1,5 @@
-﻿using ERY.Xle.Services.Implementation;
+﻿using ERY.Xle.Rendering;
+using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
@@ -8,44 +9,46 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
-	class ArmorBox : TreasureChestExtender
-	{
-		public override bool Open(GameState state)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+    public class ArmorBox : TreasureChestExtender
+    {
+        public IXleRenderer Renderer { get; set; }
 
-			if (TheEvent.Closed)
-			{
-				XleCore.TextArea.PrintLine("you see yellow guard");
-				XleCore.TextArea.PrintLine("armor in the bottom.");
+        public override bool Open(GameState state)
+        {
+            TextArea.PrintLine();
+            TextArea.PrintLine();
 
-				PlayOpenChestSound();
-				TheEvent.SetOpenTilesOnMap(state.Map);
+            if (TheEvent.Closed)
+            {
+                TextArea.PrintLine("you see yellow guard");
+                TextArea.PrintLine("armor in the bottom.");
 
-				XleCore.Wait(state.GameSpeed.CastleOpenChestSoundTime);
-			}
-			else
-			{
-				XleCore.TextArea.PrintLine("box open already.");
-			}
+                PlayOpenChestSound();
+                TheEvent.SetOpenTilesOnMap(GameState.Map);
 
-			return true;
-		}
+                GameControl.Wait(GameState.GameSpeed.CastleOpenChestSoundTime);
+            }
+            else
+            {
+                TextArea.PrintLine("box open already.");
+            }
 
-		public override bool Take(GameState state)
-		{
-			state.Map.Guards.IsAngry = false;
+            return true;
+        }
 
-			XleCore.Renderer.PlayerColor = XleColor.Yellow;
+        public override bool Take(GameState state)
+        {
+            state.Map.Guards.IsAngry = false;
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("you put on armor.");
+            Renderer.PlayerColor = XleColor.Yellow;
 
-			XleCore.Wait(1000);
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("you put on armor.");
 
-			return true;
-		}
-	}
+            GameControl.Wait(1000);
+
+            return true;
+        }
+    }
 }

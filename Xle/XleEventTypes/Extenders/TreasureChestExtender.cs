@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Data;
 
 namespace ERY.Xle.XleEventTypes.Extenders
 {
 	public class TreasureChestExtender : EventExtender
-	{
+    {
+        public XleData Data { get; set; }
+
 		public new TreasureChestEvent TheEvent { get { return (TreasureChestEvent)base.TheEvent; } }
 
 		public override void OnLoad(GameState state)
@@ -29,10 +32,10 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 		public virtual void PrintObtainItemMessage(GameState state, int item, int count)
 		{
-			var itemName = XleCore.Data.ItemList[item].Name;
+			var itemName = Data.ItemList[item].Name;
 			var space = "aeiou".Contains(itemName.ToLowerInvariant()[0]) ? "n " : " ";
 
-			XleCore.TextArea.PrintLine("You find a" + space + itemName + "!");
+			TextArea.PrintLine("You find a" + space + itemName + "!");
 		}
 
 		public virtual void PlayObtainItemSound(GameState state, int item, int count)
@@ -44,7 +47,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 		private void PrintAlreadyOpenMessage()
 		{
-			XleCore.TextArea.PrintLine(AlreadyOpenMessage);
+			TextArea.PrintLine(AlreadyOpenMessage);
 		}
 
 		public virtual void PlayOpenChestSound()
@@ -65,14 +68,14 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 		protected virtual void UpdateCommand()
 		{
-			XleCore.TextArea.PrintLine(" chest");
+			TextArea.PrintLine(" chest");
 		}
 
 		public override bool Open(GameState state)
 		{
 			UpdateCommand();
 
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
 
 			if (TheEvent.Closed == false)
 			{
@@ -83,46 +86,46 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
 			PlayOpenChestSound();
 
-			XleCore.Wait(state.GameSpeed.CastleOpenChestSoundTime);
+			GameControl.Wait(GameState.GameSpeed.CastleOpenChestSoundTime);
 
-			SetOpenTilesOnMap(state.Map);
+			SetOpenTilesOnMap(GameState.Map);
 
 			if (MakesGuardsAngry)
-				SetAngry(state);
+				SetAngry(GameState);
 
 			if (TheEvent.ContainsItem)
 			{
 				int count = 1;
 				int item = TheEvent.Contents;
 
-				BeforeGiveItem(state, ref item, ref count);
+				BeforeGiveItem(GameState, ref item, ref count);
 
-				state.Player.Items[item] += count;
+				GameState.Player.Items[item] += count;
 
-				PrintObtainItemMessage(state, item, count);
-				PlayObtainItemSound(state, item, count);
+				PrintObtainItemMessage(GameState, item, count);
+				PlayObtainItemSound(GameState, item, count);
 			}
 			else
 			{
 				int gd = TheEvent.Contents;
 
-				XleCore.TextArea.PrintLine("You find " + gd.ToString() + " gold.");
+				TextArea.PrintLine("You find " + gd.ToString() + " gold.");
 
-				state.Player.Gold += gd;
+				GameState.Player.Gold += gd;
 				SoundMan.PlaySound(LotaSound.Sale);
 			}
 
 			TheEvent.Closed = false;
 
-			XleCore.Wait(state.GameSpeed.CastleOpenChestTime);
+			GameControl.Wait(GameState.GameSpeed.CastleOpenChestTime);
 
-			MarkChestAsOpen(state);
+			MarkChestAsOpen(GameState);
 
 			return true;
 		}
 		public override bool Take(GameState state)
 		{
-			XleCore.TextArea.PrintLine("\n\n" + TakeFailMessage);
+			TextArea.PrintLine("\n\n" + TakeFailMessage);
 
 			return true;
 		}

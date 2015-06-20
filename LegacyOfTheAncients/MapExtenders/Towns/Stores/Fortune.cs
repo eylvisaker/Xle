@@ -1,4 +1,6 @@
-﻿using ERY.Xle.Services.Implementation;
+﻿using ERY.Xle.Data;
+using ERY.Xle.Services;
+using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
@@ -7,60 +9,63 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
-	public class Fortune : StoreExtender
-	{
-		int timesUsed;
+    public class Fortune : LotaStore
+    {
+        int timesUsed;
 
-		protected override bool SpeakImpl(GameState state)
-		{
-			int choice;
-			int cost = 5 + (int)Math.Sqrt(state.Player.Gold) / 9;
+        public IQuickMenu QuickMenu { get; set; }
+        public XleData Data { get; set; }
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine(TheEvent.ShopName, XleColor.Green);
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Read your fortune for " +
-				cost + " gold?");
+        protected override bool SpeakImpl(GameState state)
+        {
+            int choice;
+            int cost = 5 + (int)Math.Sqrt(state.Player.Gold) / 9;
 
-			choice = XleCore.QuickMenuYesNo();
+            TextArea.PrintLine();
+            TextArea.PrintLine(TheEvent.ShopName, XleColor.Green);
+            TextArea.PrintLine();
+            TextArea.PrintLine("Read your fortune for " +
+                cost + " gold?");
 
-			XleCore.TextArea.PrintLine();
+            choice = QuickMenu.QuickMenuYesNo();
 
-			if (choice == 1)
-				return true;
+            TextArea.PrintLine();
 
-			if (timesUsed == 3)
-			{
-				XleCore.TextArea.PrintLine("\n\nI know no more.");
-				return true;
-			}
+            if (choice == 1)
+                return true;
 
-			timesUsed++; 
+            if (timesUsed == 3)
+            {
+                TextArea.PrintLine("\n\nI know no more.");
+                return true;
+            }
 
-			if (cost > state.Player.Gold)
-			{
-				XleCore.TextArea.PrintLine("You're short on gold.");
-				SoundMan.PlaySoundSync(LotaSound.Medium);
+            timesUsed++;
 
-				return true;
-			}
+            if (cost > Player.Gold)
+            {
+                TextArea.PrintLine("You're short on gold.");
+                SoundMan.PlaySoundSync(LotaSound.Medium);
 
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLine("\n\n");
+                return true;
+            }
 
-			state.Player.Gold -= cost;
+            TextArea.Clear(true);
+            TextArea.PrintLine("\n\n");
 
-			int index = Lota.Story.NextFortune;
-			
-			string fortune = XleCore.Data.Fortunes[index];
+            Player.Gold -= cost;
 
-			XleCore.TextArea.PrintLineSlow(fortune);
-			
-			Lota.Story.NextFortune++;
+            int index = Story.NextFortune;
 
-			XleCore.Wait(1500);
+            string fortune = Data.Fortunes[index];
 
-			return true;
-		}
-	}
+            TextArea.PrintLineSlow(fortune);
+
+            Story.NextFortune++;
+
+            GameControl.Wait(1500);
+
+            return true;
+        }
+    }
 }

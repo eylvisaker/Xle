@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
-	class DoorShut : EventExtender
+	public class DoorShut : EventExtender
 	{
 		int replacementTile = 40;
 
@@ -15,7 +15,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 		{
 			for(int i = TheEvent.Rectangle.X; i < TheEvent.Rectangle.Right; i++)
 			{
-				state.Map[i, TheEvent.Rectangle.Bottom - 1] = replacementTile;
+				Map[i, TheEvent.Rectangle.Bottom - 1] = replacementTile;
 			}
 
 			TheEvent.Enabled = false;

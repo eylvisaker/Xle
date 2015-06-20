@@ -17,5 +17,6 @@ namespace ERY.Xle.Services
         void PlaySound(LotaSound lotaSound);
 
         void PlaySoundSync(LotaSound lotaSound);
+        void PlaySoundSync(Action redraw, LotaSound sound);
     }
 }

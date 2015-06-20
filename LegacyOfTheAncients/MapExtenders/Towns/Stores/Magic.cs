@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
-	class Magic : StoreMagic
+	public class Magic : StoreMagic
 	{
 		public override int GetItemValue(int choice)
 		{

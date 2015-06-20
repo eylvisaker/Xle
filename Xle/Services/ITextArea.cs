@@ -1,4 +1,5 @@
-﻿using AgateLib.Geometry;
+﻿using System;
+using AgateLib.Geometry;
 
 namespace ERY.Xle.Services
 {
@@ -14,6 +15,16 @@ namespace ERY.Xle.Services
         void Print(string text, Color? color);
         void Print(string text = "", Color[] colors = null);
 
+        void PrintSlow(string text, Color color);
+        void PrintSlow(string text, Color[] colors = null);
+
         void RewriteLine(int line, string text, Color? color = null);
+
+        void PrintLineSlow(string text, Color color);
+        void PrintLineSlow(string text = "", Color[] colors = null);
+
+        void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines);
+
+        void SetLineColor(Color color, params int[] lines);
     }
 }

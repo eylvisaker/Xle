@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
-	class Compendium : EventExtender
+	public class Compendium : EventExtender
 	{
 		private FortressFinal fortressFinal;
 
@@ -25,32 +25,32 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 				return false;
 
 			//SoundMan.PlaySound("SonicMagic");
-			XleCore.Wait(2000);
+			GameControl.Wait(2000);
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("The attack stops.");
+			TextArea.PrintLine();
+			TextArea.PrintLine("The attack stops.");
 
-			this.fortressFinal.CompendiumAttacking = false;
+			fortressFinal.CompendiumAttacking = false;
 
 			return true;
 		}
 
 		public override bool Take(GameState state)
 		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
+			TextArea.PrintLine();
 
 			if (fortressFinal.CompendiumAttacking)
 			{
-				XleCore.TextArea.PrintLine("You can't hold it.");
+				TextArea.PrintLine("You can't hold it.");
 			}
 			else
 			{
-				XleCore.TextArea.PrintLine("You grab the compendium.");
+				TextArea.PrintLine("You grab the compendium.");
 				SoundMan.PlaySound(LotaSound.VeryGood);
-				XleCore.Wait(500);
+				GameControl.Wait(500);
 
-				XleCore.TextArea.FlashLinesWhile(new CountdownTimer(2500).StillRunning, 
+				TextArea.FlashLinesWhile(new CountdownTimer(2500).StillRunning, 
 					XleColor.Yellow, XleColor.Cyan, 50);
 
 				TheEvent.Enabled = false;

@@ -1,19 +1,21 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
-	public class MagicIce : EventExtender
+	public class MagicIce : LotaEvent
 	{
+        public Random Random { get; set; }
 		public override bool Use(GameState state, int item)
 		{
 			if (item != (int)LotaItem.MagicIce)
 				return false;
 
-			var iceGroup = state.Map.TileSet.TileGroups.FirstOrDefault(x => x.GroupType == Maps.GroupType.Special1);
-			var waterGroup = state.Map.TileSet.TileGroups.FirstOrDefault(x => x.GroupType == Maps.GroupType.Water);
+			var iceGroup = GameState.Map.TileSet.TileGroups.FirstOrDefault(x => x.GroupType == Maps.GroupType.Special1);
+            var waterGroup = GameState.Map.TileSet.TileGroups.FirstOrDefault(x => x.GroupType == Maps.GroupType.Water);
 
 			if (iceGroup == null || iceGroup.Tiles.Count == 0 ||
 				waterGroup == null || waterGroup.Tiles.Count == 0)
@@ -21,7 +23,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 				return false;
 			}
 
-			XleCore.Wait(250);
+			GameControl.Wait(250);
 
 			for (int j = TheEvent.Rectangle.Top; j < TheEvent.Rectangle.Bottom; j++)
 			{
@@ -31,7 +33,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
 					if (waterGroup.Tiles.Contains(tile))
 					{
-						state.Map[i, j] = iceGroup.Tiles[XleCore.random.Next(iceGroup.Tiles.Count)];
+						state.Map[i, j] = iceGroup.Tiles[Random.Next(iceGroup.Tiles.Count)];
 					}
 				}
 			}

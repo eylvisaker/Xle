@@ -1,85 +1,88 @@
-﻿using ERY.Xle.Services.Implementation;
+﻿using ERY.Xle.Services;
+using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
-	class Wizard : EventExtender
-	{
-		public override bool Speak(GameState state)
-		{
-			SoundMan.PlaySound(LotaSound.VeryGood);
+    public class Wizard : LotaEvent
+    {
+        public IQuickMenu QuickMenu { get; set; }
 
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("    Meet the wizard of potions!!", XleColor.Cyan);
-			XleCore.TextArea.PrintLine();
+        public override bool Speak(GameState state)
+        {
+            SoundMan.PlaySound(LotaSound.VeryGood);
 
-			XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Green, XleColor.Cyan, 250);
+            TextArea.Clear(true);
+            TextArea.PrintLine();
+            TextArea.PrintLine("    Meet the wizard of potions!!", XleColor.Cyan);
+            TextArea.PrintLine();
 
-			if (Lota.Story.BoughtPotion)
-			{
-				BegoneMessage();
-			}
-			else
-			{
-				OfferPotion(state);
-			}
+            TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Green, XleColor.Cyan, 250);
 
-			XleCore.Wait(5000);
-			return true;
-		}
+            if (Story.BoughtPotion)
+            {
+                BegoneMessage();
+            }
+            else
+            {
+                OfferPotion(state);
+            }
 
-		private void OfferPotion(GameState state)
-		{
-			XleCore.TextArea.PrintLine("My potion can help you.");
-			XleCore.TextArea.PrintLine("It will cost 2,500 gold.");
-			XleCore.TextArea.PrintLine();
+            GameControl.Wait(5000);
+            return true;
+        }
 
-			if (XleCore.QuickMenuYesNo() == 0)
-			{
-				if (state.Player.Gold < 2500)
-				{
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("you haven't the gold.");
-				}
-				else
-				{
-					state.Player.Gold -= 2500;
-					Lota.Story.BoughtPotion = true;
+        private void OfferPotion(GameState state)
+        {
+            TextArea.PrintLine("My potion can help you.");
+            TextArea.PrintLine("It will cost 2,500 gold.");
+            TextArea.PrintLine();
 
-					if (state.Player.Attribute[Attributes.dexterity] <= state.Player.Attribute[Attributes.endurance])
-					{
-						state.Player.Attribute[Attributes.dexterity] = 36;
-						state.Player.Attribute[Attributes.endurance] += 5;
-					}
-					else
-					{
-						state.Player.Attribute[Attributes.dexterity] += 5;
-						state.Player.Attribute[Attributes.endurance] = 36;
-					}
+            if (QuickMenu.QuickMenuYesNo() == 0)
+            {
+                if (Player.Gold < 2500)
+                {
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("you haven't the gold.");
+                }
+                else
+                {
+                    Player.Gold -= 2500;
+                    Story.BoughtPotion = true;
 
-					XleCore.TextArea.Clear(true);
-					XleCore.TextArea.PrintLine();
-					XleCore.TextArea.PrintLine("Check your attributes.");
-					XleCore.TextArea.PrintLine();
+                    if (Player.Attribute[Attributes.dexterity] <= Player.Attribute[Attributes.endurance])
+                    {
+                        Player.Attribute[Attributes.dexterity] = 36;
+                        Player.Attribute[Attributes.endurance] += 5;
+                    }
+                    else
+                    {
+                        Player.Attribute[Attributes.dexterity] += 5;
+                        Player.Attribute[Attributes.endurance] = 36;
+                    }
 
-					SoundMan.PlaySound(LotaSound.VeryGood);
+                    TextArea.Clear(true);
+                    TextArea.PrintLine();
+                    TextArea.PrintLine("Check your attributes.");
+                    TextArea.PrintLine();
 
-					XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.White, XleColor.Cyan, 250);
+                    SoundMan.PlaySound(LotaSound.VeryGood);
 
-				}
-			}
-			else
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("No?  Maybe later.");
-			}
-		}
+                    TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.White, XleColor.Cyan, 250);
 
-		private void BegoneMessage()
-		{
-			XleCore.TextArea.PrintLine("I can do no more for you.");
-			XleCore.TextArea.PrintLine();
-		}
-	}
+                }
+            }
+            else
+            {
+                TextArea.PrintLine();
+                TextArea.PrintLine("No?  Maybe later.");
+            }
+        }
+
+        private void BegoneMessage()
+        {
+            TextArea.PrintLine("I can do no more for you.");
+            TextArea.PrintLine();
+        }
+    }
 }

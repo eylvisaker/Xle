@@ -1,4 +1,5 @@
-﻿using ERY.Xle.Services.Implementation;
+﻿using ERY.Xle.Data;
+using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
@@ -16,9 +17,14 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
             get { return false; }
         }
 
+        public override bool Open(GameState state)
+        {
+            return false;
+        }
         public override void PrintObtainItemMessage(GameState state, int item, int count)
         {
-            XleCore.TextArea.PrintLine("You take " + count.ToString() + " " + XleCore.Data.ItemList[item].Name + "s.");
+            TextArea.PrintLine(string.Format(
+                "You take {0} {1}s.", count, Data.ItemList[item].Name));
         }
         public override void PlayObtainItemSound(GameState state, int item, int count)
         {
@@ -29,7 +35,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
         public override bool Take(GameState state)
         {
-            Open(state);
+            base.Open(state);
             return true;
         }
 

@@ -32,5 +32,10 @@ namespace ERY.Xle.Services.Implementation
         {
             SoundMan.PlaySoundSync(lotaSound);
         }
+
+        public void PlaySoundSync(Action redraw, LotaSound sound)
+        {
+            SoundMan.PlaySoundSync(redraw, sound);
+        }
     }
 }

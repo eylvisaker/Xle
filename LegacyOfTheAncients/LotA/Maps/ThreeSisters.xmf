@@ -1,6 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Outside">
-  <MapName>eagle hollow</MapName>
-  <ExtenderName>ThreeSisters</ExtenderName>
+  <MapName>Three Sisters</MapName>
+  <ExtenderName>Tarmalon</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Base64">

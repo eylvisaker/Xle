@@ -67,6 +67,8 @@ namespace ERY.Xle.Services.Implementation
 
             if (screen.CurrentWindowClosed)
                 throw new MainWindowClosedException();
+
+            Core.KeepAlive();
         }
 
         public void RunRedrawLoop()

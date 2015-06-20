@@ -8,29 +8,29 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
-	class EagleHollowHealer : Healer
-	{
-		protected override void AfterSpeak(GameState state)
-		{
-			if (Lota.Story.HasGuardianMark == false)
-				return;
+    public class EagleHollowHealer : Healer
+    {
+        protected override void AfterSpeak(GameState state)
+        {
+            if (Story.HasGuardianMark == false)
+                return;
 
-			if (Lota.Story.FoundGuardianLeader == false)
-			{
-				XleCore.TextArea.PrintLine("Welcome to our secret society!", XleColor.Yellow);
-				XleCore.TextArea.PrintLine();
+            if (Story.FoundGuardianLeader == false)
+            {
+                TextArea.PrintLine("Welcome to our secret society!", XleColor.Yellow);
+                TextArea.PrintLine();
 
-				SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-				XleCore.TextArea.PrintLineSlow("Four jewels dungeon text goes here.");
+                TextArea.PrintLineSlow("Four jewels dungeon text goes here.");
 
-				state.Player.Items[LotaItem.RubyCoin] += 1;
-				Lota.Story.FoundGuardianLeader = true;
-			}
-			else
-			{
-				XleCore.TextArea.PrintLineSlow("You must get all four jewels.");
-			}
-		}
-	}
+                Player.Items[LotaItem.RubyCoin] += 1;
+                Story.FoundGuardianLeader = true;
+            }
+            else
+            {
+                TextArea.PrintLineSlow("You must get all four jewels.");
+            }
+        }
+    }
 }

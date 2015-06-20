@@ -77,9 +77,6 @@ namespace ERY.Xle.LotA
 
         public override TownExtender CreateMapExtender(Town town)
         {
-            if (town.ExtenderName == "EagleHollow")
-                return new EagleHollow();
-
             return new LotaTown();
         }
         public override OutsideExtender CreateMapExtender(Outside outside)
@@ -87,22 +84,22 @@ namespace ERY.Xle.LotA
             if (outside.ExtenderName == "Flight")
                 return new Flight();
             else
-                return new TarmalonExtender();
+                return new Tarmalon();
         }
         public override DungeonExtender CreateMapExtender(Dungeon theMap)
         {
             switch (theMap.MapID)
             {
-                case 71: return new PirateExtender();
-                case 72: return new ArmakExtender();
-                case 73: return new FourJewelsExtender();
+                case 71: return new PiratesLairDungeon();
+                case 72: return new ArmakDungeon();
+                case 73: return new FourJewelsDungeon();
             }
 
             return base.CreateMapExtender(theMap);
         }
         public override MuseumExtender CreateMapExtender(Museum museum)
         {
-            return new LotaMuseumExtender();
+            return new LotaMuseum();
         }
         public override CastleExtender CreateMapExtender(CastleMap castle)
         {

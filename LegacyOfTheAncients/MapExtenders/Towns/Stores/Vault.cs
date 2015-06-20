@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
-	class Vault : StoreVault
+	public class Vault : StoreVault
 	{
 		protected override bool RobImpl(GameState state)
 		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
+			TextArea.PrintLine();
 
 			if (Robbed)
 			{
-				XleCore.TextArea.PrintLine("The mint is empty.");
+				TextArea.PrintLine("The mint is empty.");
 				return true;
 			}
 
-			int bags = (int)(state.Player.VaultGold / 99.0 + 1);
+			int bags = (int)(Player.VaultGold / 99.0 + 1);
 
-			XleCore.TextArea.PrintLine("You find " + bags.ToString() + " bags of gold!");
+			TextArea.PrintLine("You find " + bags.ToString() + " bags of gold!");
 			SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-			state.Player.Gold += state.Player.VaultGold;
-			state.Player.VaultGold = (int)(state.Player.VaultGold * 0.8);
+			Player.Gold += Player.VaultGold;
+			Player.VaultGold = (int)(Player.VaultGold * 0.8);
 
 			Robbed = true;
 

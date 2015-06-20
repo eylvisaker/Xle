@@ -20,5 +20,6 @@ namespace ERY.Xle.Services
         void KeepAlive();
 
         void PlayerIsDead();
+
     }
 }

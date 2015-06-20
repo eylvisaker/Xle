@@ -11,164 +11,164 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
-	class SeeCompendium : EventExtender
-	{
-		bool paralyzed = false;
+    public class SeeCompendium : EventExtender
+    {
+        bool paralyzed = false;
 
-		public override bool StepOn(GameState state)
-		{
-			if (paralyzed)
-				return false;
+        public override bool StepOn(GameState state)
+        {
+            if (paralyzed)
+                return false;
 
-			// make sure the player is entirely contained by the event.
-			if (state.Player.X != TheEvent.Location.X)
-				return false;
+            // make sure the player is entirely contained by the event.
+            if (Player.X != TheEvent.Location.X)
+                return false;
 
-			XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
 
-			paralyzed = true;
+            paralyzed = true;
 
-			Guard warlord = new Guard();
-			warlord.Location = new AgateLib.Geometry.Point(106, 47);
-			warlord.Color = XleColor.LightGreen;
+            Guard warlord = new Guard();
+            warlord.Location = new AgateLib.Geometry.Point(106, 47);
+            warlord.Color = XleColor.LightGreen;
 
-			state.Map.Guards.Add(warlord);
+            state.Map.Guards.Add(warlord);
 
-			PrintSeeCompendiumMessage(state);
-			DoSonicMagic(state, warlord);
+            PrintSeeCompendiumMessage(state);
+            DoSonicMagic(state, warlord);
 
-			XleCore.TextArea.PrintLine("The warlord appears at the wall.");
-			XleCore.TextArea.PrintLine();
+            TextArea.PrintLine("The warlord appears at the wall.");
+            TextArea.PrintLine();
 
-			MoveWarlordToCompendium(warlord);
-			HitPlayer(state);
-			WarlordSpeech();
-			RemoveCompendium(state);
+            MoveWarlordToCompendium(warlord);
+            HitPlayer(state);
+            WarlordSpeech();
+            RemoveCompendium(state);
 
-			MoveWarlordOut(warlord);
+            MoveWarlordOut(warlord);
 
-			state.Map.Guards.Remove(warlord);
+            state.Map.Guards.Remove(warlord);
 
-			return true;
-		}
+            return true;
+        }
 
-		private void RemoveCompendium(GameState state)
-		{
-			TreasureChestEvent evt = state.Map.Events.OfType<TreasureChestEvent>()
-				.First(x => x.ExtenderName.Equals("CompendiumFirst", StringComparison.InvariantCultureIgnoreCase));
+        private void RemoveCompendium(GameState state)
+        {
+            TreasureChestEvent evt = GameState.Map.Events.OfType<TreasureChestEvent>()
+                .First(x => x.ExtenderName.Equals("CompendiumFirst", StringComparison.InvariantCultureIgnoreCase));
 
-			evt.Enabled = false;
-			evt.SetOpenTilesOnMap(state.Map);
-		}
+            evt.Enabled = false;
+            evt.SetOpenTilesOnMap(GameState.Map);
+        }
 
-		public override void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
-		{
-			allowStep = true;
-			if (state.Player.HP > 30 && paralyzed)
-			{
-				paralyzed = false;
-				TheEvent.Enabled = false;
-			}
-			else if (paralyzed)
-			{
-				XleCore.TextArea.PrintLine("Legs paralyzed.");
-				allowStep = false;
-			}
-		}
-		private void DoSonicMagic(GameState state, Guard warlord)
-		{
-			XleCore.TextArea.PrintLine("Sonic magic...");
-			XleCore.TextArea.PrintLine();
-			XleCore.Wait(3000);
-			XleCore.TextArea.PrintLine("You can't move.");
-			XleCore.TextArea.PrintLine();
-			XleCore.Wait(3000);
-			
-		}
+        public override void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
+        {
+            allowStep = true;
+            if (Player.HP > 30 && paralyzed)
+            {
+                paralyzed = false;
+                TheEvent.Enabled = false;
+            }
+            else if (paralyzed)
+            {
+                TextArea.PrintLine("Legs paralyzed.");
+                allowStep = false;
+            }
+        }
+        private void DoSonicMagic(GameState state, Guard warlord)
+        {
+            TextArea.PrintLine("Sonic magic...");
+            TextArea.PrintLine();
+            GameControl.Wait(3000);
+            TextArea.PrintLine("You can't move.");
+            TextArea.PrintLine();
+            GameControl.Wait(3000);
 
-		private void MoveWarlordOut(Guard warlord)
-		{
-			for (int i = 0; i < 6; i++)
-			{
-				MoveWarlord(warlord, 1, 0);
-			}
+        }
 
-			for (int i = 0; i < 2; i++)
-			{
-				MoveWarlord(warlord, 0, 1);
-			}
+        private void MoveWarlordOut(Guard warlord)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                MoveWarlord(warlord, 1, 0);
+            }
 
-			XleCore.Wait(1000);
-		}
+            for (int i = 0; i < 2; i++)
+            {
+                MoveWarlord(warlord, 0, 1);
+            }
 
-		private void MoveWarlordToCompendium(Guard warlord)
-		{
+            GameControl.Wait(1000);
+        }
 
-			for (int i = 0; i < 5; i++)
-			{
-				MoveWarlord(warlord, -1, 0);
-			}
+        private void MoveWarlordToCompendium(Guard warlord)
+        {
 
-			for (int i = 0; i < 2; i++)
-			{
-				MoveWarlord(warlord, 0, -1);
-			}
+            for (int i = 0; i < 5; i++)
+            {
+                MoveWarlord(warlord, -1, 0);
+            }
 
-			for (int i = 0; i < 2; i++)
-			{
-				MoveWarlord(warlord, -1, 0);
-			}
+            for (int i = 0; i < 2; i++)
+            {
+                MoveWarlord(warlord, 0, -1);
+            }
 
-			warlord.Facing = Direction.South;
-		}
+            for (int i = 0; i < 2; i++)
+            {
+                MoveWarlord(warlord, -1, 0);
+            }
 
-		private void WarlordSpeech()
-		{
-			XleCore.TextArea.PrintSlow("You fool!  ", XleColor.Yellow);
-			XleCore.TextArea.PrintSlow("You can't stop me!  ", XleColor.Yellow);
-			XleCore.TextArea.PrintLineSlow("as you", XleColor.Yellow);
-			XleCore.TextArea.PrintLineSlow("stand helpless, I'll use this scroll", XleColor.Yellow);
-			XleCore.TextArea.PrintSlow("to cast the ", XleColor.Yellow);
-			XleCore.TextArea.PrintSlow("spell of death. ");
-			XleCore.TextArea.PrintLineSlow("All life", XleColor.Yellow);
-			XleCore.TextArea.PrintLineSlow("outside this fortress will cease.", XleColor.Yellow);
+            warlord.Facing = Direction.South;
+        }
 
-			XleCore.TextArea.SetLineColor(XleColor.Red, 0, 1, 2, 3, 4);
+        private void WarlordSpeech()
+        {
+            TextArea.PrintSlow("You fool!  ", XleColor.Yellow);
+            TextArea.PrintSlow("You can't stop me!  ", XleColor.Yellow);
+            TextArea.PrintLineSlow("as you", XleColor.Yellow);
+            TextArea.PrintLineSlow("stand helpless, I'll use this scroll", XleColor.Yellow);
+            TextArea.PrintSlow("to cast the ", XleColor.Yellow);
+            TextArea.PrintSlow("spell of death. ");
+            TextArea.PrintLineSlow("All life", XleColor.Yellow);
+            TextArea.PrintLineSlow("outside this fortress will cease.", XleColor.Yellow);
 
-			XleCore.Wait(2000);
-		}
+            TextArea.SetLineColor(XleColor.Red, 0, 1, 2, 3, 4);
 
-		private void HitPlayer(GameState state)
-		{
-			state.Player.HP = 28;
+            GameControl.Wait(2000);
+        }
 
-			XleCore.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
-			
-		}
+        private void HitPlayer(GameState state)
+        {
+            state.Player.HP = 28;
 
-		private void MoveWarlord(Guard warlord, int dx, int dy)
-		{
-			warlord.X += dx;
-			warlord.Y += dy;
-			warlord.Facing = new Point(dx, dy).ToDirection();
+            XleCore.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
 
-			SoundMan.PlaySound(LotaSound.WalkOutside);
-			XleCore.Wait(750);
-		}
+        }
 
-		private void PrintSeeCompendiumMessage(GameState state)
-		{
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("    you see the compendium!");
-			XleCore.TextArea.PrintLine();
-			
-			SoundMan.PlaySound(LotaSound.VeryGood);
-			XleCore.Wait(1500);
+        private void MoveWarlord(Guard warlord, int dx, int dy)
+        {
+            warlord.X += dx;
+            warlord.Y += dy;
+            warlord.Facing = new Point(dx, dy).ToDirection();
 
-			XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Yellow, XleColor.Cyan, 100);
+            SoundMan.PlaySound(LotaSound.WalkOutside);
+            GameControl.Wait(750);
+        }
 
-			XleCore.Wait(1000);
-		}
-	}
+        private void PrintSeeCompendiumMessage(GameState state)
+        {
+            TextArea.Clear(true);
+            TextArea.PrintLine();
+            TextArea.PrintLine("    you see the compendium!");
+            TextArea.PrintLine();
+
+            SoundMan.PlaySound(LotaSound.VeryGood);
+            GameControl.Wait(1500);
+
+            TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Yellow, XleColor.Cyan, 100);
+
+            GameControl.Wait(1000);
+        }
+    }
 }

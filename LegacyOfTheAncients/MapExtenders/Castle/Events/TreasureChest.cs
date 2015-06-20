@@ -4,9 +4,14 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
     public class TreasureChest : TreasureChestExtender
     {
+        public LotaStory Story
+        {
+            get { return GameState.Story(); }
+        }
+
         public override void BeforeGiveItem(GameState state, ref int item, ref int count)
         {
-            if (item == (int)LotaItem.CopperKey && state.Player.Items[item] > 0)
+            if (item == (int)LotaItem.CopperKey && Player.Items[item] > 0)
                 item++;
         }
 
@@ -14,13 +19,13 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
         {
             get
             {
-                return GameState.Map.ExtenderName.Contains("Castle1") ? 1 : 2;
+                return GameState.Map.ExtenderName.Contains("CastleGround") ? 1 : 2;
             }
         }
 
         public override void MarkChestAsOpen(GameState state)
         {
-            var chests = ChestArray(state);
+            var chests = ChestArray(GameState);
 
             chests[TheEvent.ChestID] = 1;
         }
@@ -34,7 +39,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
         private int[] ChestArray(GameState state)
         {
-            var chests = CastleLevel == 1 ? Lota.Story.CastleGroundChests : Lota.Story.CastleUpperChests;
+            var chests = CastleLevel == 1 ? Story.CastleGroundChests : Story.CastleUpperChests;
 
             return chests;
         }

@@ -9,6 +9,7 @@ using ERY.Xle.LotA.MapExtenders.Fortress;
 using ERY.Xle.LotA.MapExtenders.Museum;
 using ERY.Xle.LotA.MapExtenders.Outside;
 using ERY.Xle.LotA.MapExtenders.Towns;
+using ERY.Xle.Maps;
 using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes;
 using System;
@@ -27,37 +28,48 @@ namespace ERY.Xle.LotA.Bootstrap
 
             container.Register(Classes.FromAssemblyContaining<LotaFactory>()
                 .BasedOn<MapExtender>()
+                .Configure(c => c.Named(NameOf(c.Implementation)))
                 .WithServiceSelf()
                 .LifestyleTransient());
         }
 
+        private string NameOf(Type type)
+        {
+            return type.Name;
+        }
+
         private MapExtender factory(IKernel kernel, CreationContext context)
         {
-            var xlemap = context.AdditionalArguments["map"];
+            var xlemap = context.AdditionalArguments["map"] as XleMap;
             var town = xlemap as Town;
             var outside = xlemap as Outside;
             var dungeon = xlemap as Dungeon;
             var museum = xlemap as Museum;
             var castle = xlemap as CastleMap;
 
-            if (town != null)
-                return CreateMapExtender(kernel, town);
+            return CreateNamedMap(kernel, xlemap.ExtenderName);
+
+            if (castle != null)
+                return CreateMapExtender(kernel, castle);
             if (outside != null)
                 return CreateMapExtender(kernel, outside);
             if (dungeon != null)
                 return CreateMapExtender(kernel, dungeon);
             if (museum != null)
                 return CreateMapExtender(kernel, museum);
+            if (town != null)
+                return CreateMapExtender(kernel, town);
 
             throw new NotImplementedException();
         }
 
+        private MapExtender CreateNamedMap(IKernel kernel, string name)
+        {
+            return kernel.Resolve<MapExtender>(name);
+        }
 
         public TownExtender CreateMapExtender(IKernel kernel, Town town)
         {
-            if (town.ExtenderName == "EagleHollow")
-                return kernel.Resolve<EagleHollow>();
-
             return kernel.Resolve<LotaTown>();
         }
         public OutsideExtender CreateMapExtender(IKernel kernel, Outside outside)
@@ -65,22 +77,22 @@ namespace ERY.Xle.LotA.Bootstrap
             if (outside.ExtenderName == "Flight")
                 return kernel.Resolve<Flight>();
             else
-                return kernel.Resolve<TarmalonExtender>();
+                return kernel.Resolve<Tarmalon>();
         }
         public DungeonExtender CreateMapExtender(IKernel kernel, Dungeon theMap)
         {
             switch (theMap.MapID)
             {
-                case 71: return kernel.Resolve<PirateExtender>();
-                case 72: return kernel.Resolve<ArmakExtender>();
-                case 73: return kernel.Resolve<FourJewelsExtender>();
+                case 71: return kernel.Resolve<PiratesLairDungeon>();
+                case 72: return kernel.Resolve<ArmakDungeon>();
+                case 73: return kernel.Resolve<FourJewelsDungeon>();
             }
 
             return kernel.Resolve<DungeonExtender>();
         }
         public MuseumExtender CreateMapExtender(IKernel kernel, Museum museum)
         {
-            return kernel.Resolve<LotaMuseumExtender>();
+            return kernel.Resolve<LotaMuseum>();
         }
         public CastleExtender CreateMapExtender(IKernel kernel, CastleMap castle)
         {

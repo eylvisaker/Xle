@@ -13,60 +13,60 @@ using ERY.Xle.XleEventTypes;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress
 {
-	public class FortressEntry : CastleGround
-	{
-		ExtenderDictionary extenders = new ExtenderDictionary();
+    public class FortressEntry : CastleGround
+    {
+        ExtenderDictionary extenders = new ExtenderDictionary();
 
-		public FortressEntry()
-		{
-			WhichCastle = 2;
-			CastleLevel = 1;
-			GuardAttack = 3.5;
+        public FortressEntry()
+        {
+            WhichCastle = 2;
+            CastleLevel = 1;
+            GuardAttack = 3.5;
 
-			extenders.Add("MagicIce", new MagicIce());
-			extenders.Add("Elevator", new Elevator());
-			extenders.Add("GasTrap", new GasTrap());
-			extenders.Add("SpeakGuard", new SpeakGuard());
-			extenders.Add("Armor", new ArmorBox());
-			extenders.Add("GuardWarning", new GuardWarning());
-			extenders.Add("SeeCompendium", new SeeCompendium());
-		}
+            extenders.Add("MagicIce", new MagicIce());
+            extenders.Add("Elevator", new Elevator());
+            extenders.Add("GasTrap", new GasTrap());
+            extenders.Add("SpeakGuard", new SpeakGuard());
+            extenders.Add("Armor", new ArmorBox());
+            extenders.Add("GuardWarning", new GuardWarning());
+            extenders.Add("SeeCompendium", new SeeCompendium());
+        }
 
-		public override void SetColorScheme(ColorScheme scheme)
-		{
-			scheme.TextColor = XleColor.White;
+        public override void SetColorScheme(ColorScheme scheme)
+        {
+            scheme.TextColor = XleColor.White;
 
-			scheme.FrameColor = XleColor.Gray;
-			scheme.FrameHighlightColor = XleColor.Yellow;
-		}
+            scheme.FrameColor = XleColor.Gray;
+            scheme.FrameHighlightColor = XleColor.Yellow;
+        }
 
-		protected override void OnSetAngry(bool value)
-		{
-			base.OnSetAngry(value);
+        protected override void OnSetAngry(bool value)
+        {
+            base.OnSetAngry(value);
 
-			XleCore.Renderer.PlayerColor = XleColor.White;
-		}
+            XleCore.Renderer.PlayerColor = XleColor.White;
+        }
 
-		public override void SpeakToGuard(GameState state)
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
+        public override void SpeakToGuard(GameState state)
+        {
+            XleCore.TextArea.PrintLine();
+            XleCore.TextArea.PrintLine();
 
-			if (IsAngry)
-			{
-				XleCore.TextArea.PrintLine("The guard ignores you.");
-			}
-			else
-				XleCore.TextArea.PrintLine("Greetings soldier.");
-		}
+            if (IsAngry)
+            {
+                XleCore.TextArea.PrintLine("The guard ignores you.");
+            }
+            else
+                XleCore.TextArea.PrintLine("Greetings soldier.");
+        }
 
-		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
-		{
-			if (x >= 0) 
-				return 11;
-			else
-				return 0;
-		}
+        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        {
+            if (x >= 0)
+                return 11;
+            else
+                return 0;
+        }
 
-	}
+    }
 }

@@ -3,7 +3,7 @@ using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
-    public class Casandra : EventExtender
+    public class Casandra : LotaEvent
     {
         public override bool Speak(GameState state)
         {
