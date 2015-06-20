@@ -38,6 +38,7 @@ namespace ERY.Xle.Maps.Extenders
 		}
 
 		public XleMapRenderer MapRenderer { get; set; }
+        public ICommandFactory CommandFactory { get; set; }
 
 		public bool IsAngry
 		{

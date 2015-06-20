@@ -2,24 +2,32 @@
 {
     public class Leave : Command
     {
-        public Leave(bool confirmPrompt = true)
+        private IQuickMenu menu;
+
+        public Leave(
+            IQuickMenu menu,
+            string promptText,
+            bool confirmPrompt = true)
         {
             ConfirmPrompt = confirmPrompt;
+            PromptText = promptText;
+
+            this.menu = menu;
         }
 
         public override void Execute(GameState state)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine();
 
             if (ConfirmPrompt)
             {
                 if (string.IsNullOrWhiteSpace(PromptText) == false)
                 {
-                    XleCore.TextArea.PrintLine(PromptText);
-                    XleCore.TextArea.PrintLine();
+                    TextArea.PrintLine(PromptText);
+                    TextArea.PrintLine();
                 }
-                if (XleCore.QuickMenuYesNo() == 1)
+                if (menu.QuickMenuYesNo() == 1)
                     return;
             }
 

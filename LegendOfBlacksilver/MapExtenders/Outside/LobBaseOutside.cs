@@ -13,6 +13,8 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 {
 	public class LobBaseOutside : OutsideExtender
 	{
+        public ICommandFactory CommandFactory { get; set; }
+
 		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
 		{
 			if (evt is ChangeMapEvent)
@@ -30,11 +32,11 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Disembark());
-			commands.Items.Add(new End());
-			commands.Items.Add(new Magic());
-			commands.Items.Add(new Rob());
-			commands.Items.Add(new Speak());
+			commands.Items.Add(CommandFactory.Disembark());
+			commands.Items.Add(CommandFactory.End());
+			commands.Items.Add(CommandFactory.Magic());
+			commands.Items.Add(CommandFactory.Rob());
+			commands.Items.Add(CommandFactory.Speak());
 		}
 		public override int StepSize
 		{

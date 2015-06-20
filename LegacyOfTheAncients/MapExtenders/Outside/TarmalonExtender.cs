@@ -37,10 +37,10 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-			commands.Items.Add(new Disembark());
-			commands.Items.Add(new End());
-			commands.Items.Add(new Magic());
-			commands.Items.Add(new Speak());
+			commands.Items.Add(CommandFactory.Disembark());
+			commands.Items.Add(CommandFactory.End());
+			commands.Items.Add(CommandFactory.Magic());
+			commands.Items.Add(CommandFactory.Speak());
 		}
 
 		public override void SetColorScheme(ColorScheme scheme)

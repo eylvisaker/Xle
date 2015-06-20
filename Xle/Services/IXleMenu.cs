@@ -9,6 +9,6 @@ namespace ERY.Xle.Services
 {
     public interface IXleMenu : IXleService
     {
-        int SubMenu(string title, int choice, MenuItemList items, Color backColor);
+        int SubMenu(string title, int choice, MenuItemList items, Color? backColor = null);
     }
 }

@@ -30,8 +30,8 @@ namespace ERY.Xle.Services.Implementation
             this.menuRenderer = menuRenderer;
             this.input = input;
             this.GameState = gameState;
-
         }
+
         /// <summary>
         /// This function creates a sub menu in the top of the map section and
         /// forces the player to chose an option from the list provided.	
@@ -40,19 +40,14 @@ namespace ERY.Xle.Services.Implementation
         /// <param name="choice"></param>
         /// <param name="items">A MenuItemList collection of menu items</param>
         /// <returns>The choice the user made.</returns>
-        public int SubMenu(string title, int choice, MenuItemList items)
-        {
-            return SubMenu(title, choice, items, XleColor.Black);
-        }
-
-        public int SubMenu(string title, int choice, MenuItemList items, Color backColor)
+        public int SubMenu(string title, int choice, MenuItemList items, Color? backColor = null)
         {
             SubMenu menu = new SubMenu();
 
             menu.title = title;
             menu.value = choice;
             menu.theList = items;
-            menu.BackColor = backColor;
+            menu.BackColor = backColor ?? XleColor.Black;
 
             return RunSubMenu(menu);
         }

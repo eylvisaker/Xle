@@ -17,10 +17,10 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Leave { PromptText = "Leave the archives?" });
-			commands.Items.Add(new Open());
-			commands.Items.Add(new Rob());
-			commands.Items.Add(new Take());
+			commands.Items.Add(CommandFactory.Leave("Leave the archives?" ));
+            commands.Items.Add(CommandFactory.Open());
+            commands.Items.Add(CommandFactory.Rob());
+            commands.Items.Add(CommandFactory.Take());
 		}
 
 		public override Maps.Map3DSurfaces Surfaces(GameState state)

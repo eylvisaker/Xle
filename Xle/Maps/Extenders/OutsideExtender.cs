@@ -1,10 +1,10 @@
 ﻿using AgateLib.Geometry;
 using AgateLib.InputLib;
 using AgateLib.InputLib.Legacy;
-
 using ERY.Xle.Data;
 using ERY.Xle.Maps.Renderers;
 using ERY.Xle.Maps.XleMapTypes;
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
@@ -28,6 +28,7 @@ namespace ERY.Xle.Maps.Extenders
 		bool isMonsterFriendly;
 
 		public EncounterState EncounterState { get; set; }
+        public ICommandFactory CommandFactory { get; set; }
 
 		public new Outside TheMap { get { return (Outside)base.TheMap; } }
 		public new OutsideRenderer MapRenderer

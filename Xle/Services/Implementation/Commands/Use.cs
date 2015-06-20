@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using ERY.Xle.Data;
+using System.Linq;
 
 namespace ERY.Xle.Services.Implementation.Commands
 {
@@ -8,6 +9,9 @@ namespace ERY.Xle.Services.Implementation.Commands
         {
             ShowItemMenu = showItemMenu;
         }
+
+        public XleData Data { get; set; }
+        public IXleMenu Menu { get; set; }
 
         public bool ShowItemMenu { get; set; }
 
@@ -48,21 +52,21 @@ namespace ERY.Xle.Services.Implementation.Commands
             }
         }
 
-        public static void ChooseHeldItem(GameState state)
+        public void ChooseHeldItem(GameState state)
         {
-            XleCore.TextArea.PrintLine("-choose above", XleColor.Cyan);
+            TextArea.PrintLine("-choose above", XleColor.Cyan);
             MenuItemList theList = new MenuItemList();
             int value = 0;
 
             theList.Add("Nothing");
 
-            foreach (int i in from kvp in XleCore.Data.ItemList
+            foreach (int i in from kvp in Data.ItemList
                               where state.Player.Items[kvp.Key] > 0 &&
-                              XleCore.Data.MagicSpells.Values.All(
+                              Data.MagicSpells.Values.All(
                                   x => x.ItemID != kvp.Key)
                               select kvp.Key)
             {
-                string itemName = XleCore.Data.ItemList[i].Name;
+                string itemName = Data.ItemList[i].Name;
 
                 if (itemName.Contains("coin"))
                     continue;
@@ -81,7 +85,7 @@ namespace ERY.Xle.Services.Implementation.Commands
                 theList.Add(itemName);
             }
 
-            state.Player.HoldMenu(XleCore.SubMenu("Hold Item", value, theList));
+            state.Player.HoldMenu(Menu.SubMenu("Hold Item", value, theList));
         }
 
         private void UseHealingItem(GameState state, int itemID)

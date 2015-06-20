@@ -17,10 +17,10 @@ namespace ERY.Xle.LoB.MapExtenders.Towns
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Rob());
-			commands.Items.Add(new Leave());
-			commands.Items.Add(new Magic());
-			commands.Items.Add(new Speak());
+            commands.Items.Add(CommandFactory.Rob());
+            commands.Items.Add(CommandFactory.Leave());
+            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Speak());
 		}
 	}
 }

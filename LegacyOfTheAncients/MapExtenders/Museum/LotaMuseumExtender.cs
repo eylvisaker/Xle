@@ -43,9 +43,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
 		{
 			commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-			commands.Items.Add(new Rob());
-			commands.Items.Add(new Take());
-			commands.Items.Add(new Speak());
+			commands.Items.Add(CommandFactory. Rob());
+            commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Speak());
 		}
 
 		public override Exhibit GetExhibitByTile(int tile)

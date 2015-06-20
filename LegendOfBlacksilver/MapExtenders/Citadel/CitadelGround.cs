@@ -12,71 +12,71 @@ using ERY.Xle.Maps;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel
 {
-	class CitadelGround : CastleExtender
-	{
-		CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 1.3, v6 = 1.5, v7 = 1.5 };
+    class CitadelGround : CastleExtender
+    {
+        CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 1.3, v6 = 1.5, v7 = 1.5 };
 
-		public override void SetColorScheme(ColorScheme scheme)
-		{
-			scheme.TextColor = XleColor.White;
+        public override void SetColorScheme(ColorScheme scheme)
+        {
+            scheme.TextColor = XleColor.White;
 
-			scheme.FrameColor = XleColor.Orange;
-			scheme.FrameHighlightColor = XleColor.Yellow;
-		}
+            scheme.FrameColor = XleColor.Orange;
+            scheme.FrameHighlightColor = XleColor.Yellow;
+        }
 
-		public override void SetCommands(ICommandList commands)
-		{
-			commands.Items.AddRange(LobProgram.CommonLobCommands);
+        public override void SetCommands(ICommandList commands)
+        {
+            commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(new Open());
-			commands.Items.Add(new Magic());
-			commands.Items.Add(new Take());
-			commands.Items.Add(new Speak());
-		}
+            commands.Items.Add(CommandFactory.Open());
+            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Speak());
+        }
 
-		public override double ChanceToHitGuard(Player player, Guard guard, int distance)
-		{
-			return cdc.ChanceToHitGuard(player, distance);
-		}
-		public override double ChanceToHitPlayer(Player player, Guard guard)
-		{
-			return cdc.ChanceToHitPlayer(player);
-		}
-		public override int RollDamageToGuard(Player player, Guard guard)
-		{
-			return cdc.RollDamageToGuard(player);
-		}
-		public override int RollDamageToPlayer(Player player, Guard guard)
-		{
-			return cdc.RollDamageToPlayer(player);
-		}
+        public override double ChanceToHitGuard(Player player, Guard guard, int distance)
+        {
+            return cdc.ChanceToHitGuard(player, distance);
+        }
+        public override double ChanceToHitPlayer(Player player, Guard guard)
+        {
+            return cdc.ChanceToHitPlayer(player);
+        }
+        public override int RollDamageToGuard(Player player, Guard guard)
+        {
+            return cdc.RollDamageToGuard(player);
+        }
+        public override int RollDamageToPlayer(Player player, Guard guard)
+        {
+            return cdc.RollDamageToPlayer(player);
+        }
 
-		public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
-		{
-			if (playerPoint.X >= 83 && playerPoint.Y >= 65)
-				return 33;
-			else
-				return 23;
-		}
+        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        {
+            if (playerPoint.X >= 83 && playerPoint.Y >= 65)
+                return 33;
+            else
+                return 23;
+        }
 
-		public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-		{
-			if (evt is Door)
-				return new CitadelDoor();
+        public override XleEventTypes.Extenders.EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
+        {
+            if (evt is Door)
+                return new CitadelDoor();
 
-			if (evt is ChangeMapEvent)
-				return new PasswordTeleporter();
+            if (evt is ChangeMapEvent)
+                return new PasswordTeleporter();
 
-			string name = evt.ExtenderName.ToLowerInvariant();
+            string name = evt.ExtenderName.ToLowerInvariant();
 
-			switch (name)
-			{
-				case "wizard": return new Wizard();
-				case "jester": return new Jester();
-				case "floorpuzzle": return new FloorPuzzle();
-				default:
-					return base.CreateEventExtender(evt, defaultExtender);
-			}
-		}
-	}
+            switch (name)
+            {
+                case "wizard": return new Wizard();
+                case "jester": return new Jester();
+                case "floorpuzzle": return new FloorPuzzle();
+                default:
+                    return base.CreateEventExtender(evt, defaultExtender);
+            }
+        }
+    }
 }

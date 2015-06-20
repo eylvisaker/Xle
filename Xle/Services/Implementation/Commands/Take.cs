@@ -1,15 +1,22 @@
 ﻿namespace ERY.Xle.Services.Implementation.Commands
 {
-	public class Take : Command
-	{
-		public override void Execute(GameState state)
-		{
-			if (state.MapExtender.PlayerTake(state) == false)
-			{
-				XleCore.TextArea.PrintLine("\n\nNothing to take.");
+    public class Take : Command
+    {
+        private IXleGameControl gameControl;
 
-				XleCore.Wait(500);
-			}
-		}
-	}
+        public Take(IXleGameControl gameControl)
+        {
+            this.gameControl = gameControl;
+        }
+
+        public override void Execute(GameState state)
+        {
+            if (state.MapExtender.PlayerTake(state) == false)
+            {
+                TextArea.PrintLine("\n\nNothing to take.");
+
+                gameControl.Wait(500);
+            }
+        }
+    }
 }

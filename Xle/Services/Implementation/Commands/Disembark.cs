@@ -1,13 +1,13 @@
 ﻿namespace ERY.Xle.Services.Implementation.Commands
 {
-	public class Disembark : Command
-	{
-		public override void Execute(GameState state)
-		{
-			if (state.MapExtender.PlayerDisembark(state))
-				return;
+    public class Disembark : Command
+    {
+        public override void Execute(GameState state)
+        {
+            if (GameState.MapExtender.PlayerDisembark(GameState))
+                return;
 
-			XleCore.TextArea.PrintLine("\nNothing to disembark.", XleColor.Yellow);
-		}
-	}
+            TextArea.PrintLine("\nNothing to disembark.", XleColor.Yellow);
+        }
+    }
 }

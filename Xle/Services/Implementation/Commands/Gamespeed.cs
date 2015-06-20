@@ -1,25 +1,34 @@
 ﻿namespace ERY.Xle.Services.Implementation.Commands
 {
-	public class Gamespeed : Command 
-	{
-		public override void Execute(GameState state)
-		{
-			MenuItemList theList = new MenuItemList("1", "2", "3", "4", "5");
+    public class Gamespeed : Command
+    {
+        private XleSystemState systemState;
+        private IXleGameControl gameControl;
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("** Change gamespeed **", XleColor.Yellow);
-			XleCore.TextArea.PrintLine("    (1 is fastest)", XleColor.Yellow);
-			XleCore.TextArea.PrintLine();
+        public Gamespeed(XleSystemState systemState, IXleGameControl gameControl)
+        {
+            this.systemState = systemState;
+            this.gameControl = gameControl;
+        }
 
-			state.Player.Gamespeed = 1 + XleCore.QuickMenu(theList, 2, state.Player.Gamespeed - 1);
+        public override void Execute(GameState state)
+        {
+            MenuItemList theList = new MenuItemList("1", "2", "3", "4", "5");
 
-			XleCore.TextArea.Print("Gamespeed is: ", XleColor.Yellow);
-			XleCore.TextArea.PrintLine(state.Player.Gamespeed.ToString(), XleColor.White);
+            TextArea.PrintLine();
+            TextArea.PrintLine("** Change gamespeed **", XleColor.Yellow);
+            TextArea.PrintLine("    (1 is fastest)", XleColor.Yellow);
+            TextArea.PrintLine();
 
-			XleCore.Factory.SetGameSpeed(XleCore.GameState, state.Player.Gamespeed);
+            state.Player.Gamespeed = 1 + XleCore.QuickMenu(theList, 2, state.Player.Gamespeed - 1);
 
-			XleCore.Wait(XleCore.GameState.GameSpeed.AfterSetGamespeedTime);
+            TextArea.Print("Gamespeed is: ", XleColor.Yellow);
+            TextArea.PrintLine(state.Player.Gamespeed.ToString(), XleColor.White);
 
-		}
-	}
+            systemState.Factory.SetGameSpeed(XleCore.GameState, state.Player.Gamespeed);
+
+            gameControl.Wait(GameState.GameSpeed.AfterSetGamespeedTime);
+
+        }
+    }
 }

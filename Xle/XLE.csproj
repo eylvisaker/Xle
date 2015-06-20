@@ -95,8 +95,10 @@
     <Compile Include="Services\Implementation\ICommandExecutor.cs" />
     <Compile Include="Services\Implementation\MapChanger.cs" />
     <Compile Include="Services\Implementation\MenuRenderer.cs" />
+    <Compile Include="Services\Implementation\QuickMenu.cs" />
     <Compile Include="Services\Implementation\XleGameControl.cs" />
     <Compile Include="Services\Implementation\XleMenu.cs" />
+    <Compile Include="Services\IQuickMenu.cs" />
     <Compile Include="Services\IXleMenu.cs" />
     <Compile Include="Services\IXleScreen.cs" />
     <Compile Include="Services\Implementation\MapLoader.cs" />

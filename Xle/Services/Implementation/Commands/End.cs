@@ -1,65 +1,72 @@
 ﻿namespace ERY.Xle.Services.Implementation.Commands
 {
-	public class End : Command
-	{
-	    public End()
-	    {
-	    }
+    public class End : Command
+    {
+        private IQuickMenu menu;
+        private IXleGameControl gameControl;
+        private XleSystemState systemState;
 
-	    public override void Execute(GameState state)
-		{
-			var player = state.Player;
+        public End(IQuickMenu menu, IXleGameControl gameControl, XleSystemState systemState)
+        {
+            this.menu = menu;
+            this.gameControl = gameControl;
+            this.systemState = systemState;
+        }
 
-			MenuItemList menu = new MenuItemList("Yes", "No");
-			int choice;
-			bool saved = false;
+        public override void Execute(GameState state)
+        {
+            var player = GameState.Player;
 
-			XleCore.TextArea.PrintLine("\nWould you like to save");
-			XleCore.TextArea.PrintLine("the game in progress?");
-			XleCore.TextArea.PrintLine();
+            MenuItemList menuItems = new MenuItemList("Yes", "No");
+            int choice;
+            bool saved = false;
 
-			choice = XleCore.QuickMenu(menu, 2);
+            TextArea.PrintLine("\nWould you like to save");
+            TextArea.PrintLine("the game in progress?");
+            TextArea.PrintLine();
 
-			if (choice == 0)
-			{
-				player.SavePlayer();
+            choice = menu.QuickMenu(menuItems, 2);
 
-				saved = true;
+            if (choice == 0)
+            {
+                player.SavePlayer();
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Game Saved.");
-				XleCore.TextArea.PrintLine();
-			}
-			else
-			{
-				ColorStringBuilder builder = new ColorStringBuilder();
+                saved = true;
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.Print("Game ", XleColor.White);
-				XleCore.TextArea.Print("not", XleColor.Yellow);
-				XleCore.TextArea.Print(" saved.", XleColor.White);
+                TextArea.PrintLine();
+                TextArea.PrintLine("Game Saved.");
+                TextArea.PrintLine();
+            }
+            else
+            {
+                ColorStringBuilder builder = new ColorStringBuilder();
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-			}
+                TextArea.PrintLine();
+                TextArea.Print("Game ", XleColor.White);
+                TextArea.Print("not", XleColor.Yellow);
+                TextArea.Print(" saved.", XleColor.White);
 
-			XleCore.Wait(1500);
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+            }
 
-			XleCore.TextArea.PrintLine("Quit and return to title screen?");
+            gameControl.Wait(1500);
 
-			if (saved == false)
-				XleCore.TextArea.PrintLine("Unsaved progress will be lost.", XleColor.Yellow);
-			else
-				XleCore.TextArea.PrintLine();
+            TextArea.PrintLine("Quit and return to title screen?");
 
-			XleCore.TextArea.PrintLine();
+            if (saved == false)
+                TextArea.PrintLine("Unsaved progress will be lost.", XleColor.Yellow);
+            else
+                TextArea.PrintLine();
 
-			choice = XleCore.QuickMenu(menu, 2, 1);
+            TextArea.PrintLine();
 
-			if (choice == 0)
-			{
-				XleCore.ReturnToTitle = true;
-			}
-		}
-	}
+            choice = menu.QuickMenu(menuItems, 2, 1);
+
+            if (choice == 0)
+            {
+                systemState.ReturnToTitle = true;
+            }
+        }
+    }
 }

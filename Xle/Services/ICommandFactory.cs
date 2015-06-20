@@ -18,7 +18,7 @@ namespace ERY.Xle.Services
         Gamespeed Gamespeed();
         Hold Hold();
         Inventory Inventory();
-        Leave Leave(bool confirmPrompt = true);
+        Leave Leave(string promptText = "", bool confirmPrompt = true);
         Magic Magic();
         Open Open();
         Pass Pass();
