@@ -22,8 +22,8 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 
         public LotaTown()
         {
-            mExtenders.Add("Healer", new Healer());
-            mExtenders.Add("StoreHealer", new Healer());
+            mExtenders.Add("Healer", new StoreHealer());
+            mExtenders.Add("StoreHealer", new StoreHealer());
             mExtenders.Add("StoreFortune", new Fortune());
             mExtenders.Add("StoreFood", new StoreFood());
             mExtenders.Add("StoreWeaponTraining", new StoreWeaponTraining());

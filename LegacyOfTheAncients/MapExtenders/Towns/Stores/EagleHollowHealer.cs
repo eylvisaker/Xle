@@ -8,7 +8,7 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
-    public class EagleHollowHealer : Healer
+    public class EagleHollowHealer : StoreHealer
     {
         protected override void AfterSpeak(GameState state)
         {

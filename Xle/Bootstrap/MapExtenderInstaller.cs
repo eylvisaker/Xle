@@ -36,7 +36,11 @@ namespace ERY.Xle.Bootstrap
         {
             var xlemap = context.AdditionalArguments["map"] as XleMap;
 
-            return CreateNamedMap(kernel, xlemap.ExtenderName);
+            var result = CreateNamedMap(kernel, xlemap.ExtenderName);
+
+            result.TheMap = xlemap;
+
+            return result;
         }
 
         private MapExtender CreateNamedMap(IKernel kernel, string name)

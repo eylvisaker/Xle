@@ -11,6 +11,7 @@ namespace ERY.Xle.Services.Implementation
     public class SoundMan : ISoundMan
     {
         public IXleGameControl GameControl { get; set; }
+        public ITextArea TextArea { get; set; }
 
         Dictionary<LotaSound, SoundBuffer> mSounds = new Dictionary<LotaSound, SoundBuffer>();
 
@@ -37,7 +38,7 @@ namespace ERY.Xle.Services.Implementation
         {
             if (mSounds.ContainsKey(sound) == false)
             {
-                XleCore.TextArea.PrintLine("\nCould not play sound " + sound.ToString(), XleColor.Red);
+                TextArea.PrintLine("\nCould not play sound " + sound.ToString(), XleColor.Red);
                 return;
             }
 

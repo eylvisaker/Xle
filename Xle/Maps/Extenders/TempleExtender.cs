@@ -13,9 +13,9 @@ namespace ERY.Xle.Maps.Extenders
     {
         public new Temple TheMap { get { return (Temple)base.TheMap; } }
 
-        protected override Renderers.XleMapRenderer CreateMapRenderer()
+        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
-            return new Map2DRenderer();
+            return factory.TempleRenderer(this);
         }
 
         public override void SetColorScheme(ColorScheme scheme)

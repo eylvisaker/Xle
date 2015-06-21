@@ -121,7 +121,7 @@ namespace ERY.Xle
         int hp;
         int level;
         public int returnX, returnY, returnMap;
-        Direction returnFacing = Direction.East;
+        public Direction returnFacing = Direction.East;
         int x, y;
         int dungeonLevel;
         Direction faceDirection = Direction.East;
@@ -187,7 +187,6 @@ namespace ERY.Xle
             ClearRafts();
 
             SortEquipment();
-            DebugSettings();
         }
 
         void IXleSerializable.WriteData(XleSerializationInfo info)
@@ -277,7 +276,7 @@ namespace ERY.Xle
             lastAttacked = info.ReadInt32("LastAttacked");
             VaultGold = info.ReadInt32("VaultGold");
 
-            chests = info.ReadInt32Array("Chests");
+            chests = info.ReadArray<int>("Chests");
 
             loan = info.ReadInt32("Loan");					// loan amount
             dueDate = info.ReadInt32("DueDate");				// time in days that the money is due
@@ -286,26 +285,10 @@ namespace ERY.Xle
 
             mName = info.ReadString("Name");
 
-            if (info.ContainsKey("StoryData"))
-            {
-                StoryData = info.ReadObject<IXleSerializable>("StoryData");
-            }
-            else
-            {
-                StoryData = XleCore.Factory.CreateStoryData();
-            }
-            DebugSettings();
+            StoryData = info.ReadObject<IXleSerializable>("StoryData");
 
             RenderColor = XleColor.White;
 
-        }
-
-        private void DebugSettings()
-        {
-            if (XleCore.EnableDebugMode)
-            {
-                Gamespeed = 1;
-            }
         }
 
         #endregion
@@ -819,71 +802,7 @@ namespace ERY.Xle
             while (currentArmorIndex >= armor.Count)
                 currentArmorIndex--;
         }
-
-        /// <summary>
-        /// Player damages a creature. Returns the amount of damage the player did,
-        /// or zero if the player missed.
-        /// </summary>
-        /// <param name="defense"></param>
-        /// <returns></returns>
-        [Obsolete]
-        public int Hit(int defense)
-        {
-            int wt = CurrentWeapon.ID;
-            int qt = CurrentWeapon.Quality;
-
-            int dam = Attribute[Attributes.strength] - 12;
-            dam += (int)(wt * (qt + 2)) / 2;
-
-            dam = (int)(dam * XleCore.random.Next(30, 150) / 100.0 + 0.5);
-            dam += XleCore.random.Next(-2, 3);
-
-            if (dam < 3)
-                dam = 1 + XleCore.random.Next(3);
-
-            int hit = Attribute[Attributes.dexterity] * 8 + 15 * qt;
-
-            System.Diagnostics.Debug.WriteLine("Hit: " + hit.ToString() + " Dam: " + dam.ToString());
-
-            hit -= XleCore.random.Next(400);
-
-            if (hit < 0)
-                dam = 0;
-
-            //return 100;
-            return dam;
-        }
-        /// <summary>
-        /// Called when the player gets hit. Returns the damage done to the player and
-        /// subtracts that value from HP.
-        /// </summary>
-        /// <param name="attack"></param>
-        /// <returns></returns>	
-        [Obsolete]
-        public int Damage(int attack)
-        {
-            int dam = (int)(attack - (Attribute[Attributes.endurance] + CurrentArmor.ID) * 0.8);
-
-            dam += (int)(dam * XleCore.random.Next(-50, 100) / 100 + 0.5);
-
-            if (dam < 0 || 1 + XleCore.random.Next(60) + attack / 15
-                            < Attribute[Attributes.dexterity] + CurrentArmor.Quality)
-            {
-                dam = 0;
-            }
-
-            HP -= dam;
-
-            return dam;
-        }
-
-        public void ReturnToPreviousMap()
-        {
-            XleCore.ChangeMap(this, returnMap, new Point(returnX, returnY));
-
-            FaceDirection = returnFacing;
-        }
-
+        
         public void SetReturnLocation(int map, int x, int y)
         {
             SetReturnLocation(map, x, y, Direction.South);

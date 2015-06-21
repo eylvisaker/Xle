@@ -12,6 +12,10 @@ namespace ERY.Xle.Maps.Extenders
     {
         public new CastleMap TheMap { get { return (CastleMap)base.TheMap; } }
 
+        public override Renderers.XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        {
+            return factory.CastleRenderer(this);
+        }
         public override void SetColorScheme(ColorScheme scheme)
         {
             scheme.TextColor = XleColor.White;

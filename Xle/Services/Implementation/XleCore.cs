@@ -19,8 +19,6 @@ namespace ERY.Xle.Services.Implementation
 {
     public class XleCore : IXleService
     {
-        public const int myWindowWidth = 640;
-
         public static Random random = new Random();
 
         private static bool AcceptKey

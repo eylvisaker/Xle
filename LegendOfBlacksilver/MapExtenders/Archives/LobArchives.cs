@@ -28,9 +28,9 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
             return Lob3DSurfaces.Archives;
         }
 
-        protected override Maps.Renderers.XleMapRenderer CreateMapRenderer()
+        public override Maps.Renderers.XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
-            return new ArchiveRenderer();
+            return factory.MuseumRenderer(this, "ArchiveRenderer");
         }
 
         public override bool PlayerXamine(GameState state)

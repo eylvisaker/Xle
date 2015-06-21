@@ -19,10 +19,11 @@ namespace ERY.Xle.Maps.Extenders
 
         public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
 
-        protected override Renderers.XleMapRenderer CreateMapRenderer()
+        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
-            return new DungeonRenderer();
+            return factory.DungeonRenderer(this);
         }
+
         protected override void PlayPlayerMoveSound()
         {
             SoundMan.PlaySound(LotaSound.WalkDungeon);
@@ -181,8 +182,7 @@ namespace ERY.Xle.Maps.Extenders
 
                         GameControl.Wait(1000);
 
-                        // TODO: fix this
-                        player.ReturnToPreviousMap();
+                        MapChanger.ReturnToPreviousMap();
 
                         return true;
                     }

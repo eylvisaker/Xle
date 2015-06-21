@@ -37,6 +37,8 @@ namespace ERY.Xle.Services.Implementation
             this.mapLoader = mapLoader;
         }
 
+        Player Player { get { return gameState.Player; } }
+
         public void ChangeMap(Player player, int mapId, int entryPoint)
         {
             ChangeMapCore(player, mapId, entryPoint, 0, 0);
@@ -158,6 +160,15 @@ namespace ERY.Xle.Services.Implementation
             commands.ResetCurrentCommand();
 
             renderer.LoadTiles(gameState.Map.TileImage);
+        }
+
+
+
+        public void ReturnToPreviousMap()
+        {
+            ChangeMap(Player, Player.returnMap, new Point(Player.returnX, Player.returnY));
+
+            Player.FaceDirection = Player.returnFacing;
         }
 
     }

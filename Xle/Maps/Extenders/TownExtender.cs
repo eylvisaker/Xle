@@ -14,10 +14,11 @@ namespace ERY.Xle.Maps.Extenders
     {
         public new Town TheMap { get { return (Town)base.TheMap; } }
 
-        protected override Renderers.XleMapRenderer CreateMapRenderer()
+        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
-            return new TownRenderer();
+            return factory.TownRenderer(this);
         }
+
         public override void SetColorScheme(ColorScheme scheme)
         {
             scheme.TextColor = XleColor.White;

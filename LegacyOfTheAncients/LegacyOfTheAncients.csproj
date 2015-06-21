@@ -109,7 +109,7 @@
     <Compile Include="MapExtenders\Outside\Tarmalon.cs" />
     <Compile Include="MapExtenders\Towns\LotaTown.cs" />
     <Compile Include="MapExtenders\Towns\Stores\EagleHollowHealer.cs" />
-    <Compile Include="MapExtenders\Towns\Stores\Healer.cs" />
+    <Compile Include="MapExtenders\Towns\Stores\StoreHealer.cs" />
     <Compile Include="MapExtenders\Towns\Stores\LotaStoreFront.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Magic.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Fortune.cs" />

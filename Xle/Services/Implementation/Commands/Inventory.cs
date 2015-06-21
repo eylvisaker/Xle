@@ -65,10 +65,10 @@ namespace ERY.Xle.Services.Implementation.Commands
 
                 // Draw the borders
                 renderer.DrawFrame(Color.Gray);
-                renderer.DrawFrameLine(0, 128, 1, XleCore.myWindowWidth, XleColor.Gray);
+                renderer.DrawFrameLine(0, 128, 1, XleOptions.myWindowWidth, XleColor.Gray);
 
                 renderer.DrawFrameHighlight(Color.Yellow);
-                renderer.DrawInnerFrameHighlight(0, 128, 1, XleCore.myWindowWidth, XleColor.Yellow);
+                renderer.DrawInnerFrameHighlight(0, 128, 1, XleOptions.myWindowWidth, XleColor.Yellow);
 
                 // Draw the title
                 Display.FillRect(new Rectangle(176, 0, 288, 16), bgcolor);

@@ -17,15 +17,15 @@ namespace ERY.Xle.Maps.Extenders
         int doorVal = 2;
 
         public XleOptions Options { get; set; }
-        public IQuickMenu QuickMenu { get; set; }
 
         public new Museum TheMap { get { return (Museum)base.TheMap; } }
         public new MuseumRenderer MapRenderer { get { return (MuseumRenderer)base.MapRenderer; } }
 
-        protected override Renderers.XleMapRenderer CreateMapRenderer()
+        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
-            return new MuseumRenderer();
+            return factory.MuseumRenderer(this);
         }
+        
         protected override void PlayPlayerMoveSound()
         {
             SoundMan.PlaySound(LotaSound.WalkMuseum);

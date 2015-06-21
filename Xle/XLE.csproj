@@ -56,9 +56,13 @@
     <Compile Include="Bootstrap\FactoryInstaller.cs" />
     <Compile Include="Bootstrap\EventExtenderInstaller.cs" />
     <Compile Include="Bootstrap\MapExtenderInstaller.cs" />
+    <Compile Include="Bootstrap\MapRendererInstaller.cs" />
     <Compile Include="Bootstrap\ServiceInstaller.cs" />
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
+    <Compile Include="Maps\Renderers\CastleRenderer.cs" />
+    <Compile Include="Maps\Renderers\TempleRenderer.cs" />
+    <Compile Include="Services\IMapRendererFactory.cs" />
     <Compile Include="Services\Implementation\IStopwatch.cs" />
     <Compile Include="Services\IPlayerAnimator.cs" />
     <Compile Include="Services\Implementation\PlayerAnimator.cs" />

@@ -13,5 +13,7 @@ namespace ERY.Xle.Services
         void ChangeMap(Player player, int mapId, int entryPoint);
 
         void ChangeMap(Player player, int mapId, AgateLib.Geometry.Point targetPoint);
+
+        void ReturnToPreviousMap();
     }
 }

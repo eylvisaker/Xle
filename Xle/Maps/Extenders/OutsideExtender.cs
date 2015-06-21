@@ -41,9 +41,9 @@ namespace ERY.Xle.Maps.Extenders
             get { return (OutsideRenderer)base.MapRenderer; }
         }
 
-        protected override XleMapRenderer CreateMapRenderer()
+        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
-            return new OutsideRenderer();
+            return factory.OutsideRenderer(this);
         }
 
         public override void CheckSounds(GameState state)
@@ -195,7 +195,7 @@ namespace ERY.Xle.Maps.Extenders
 
         int attack(Player player)
         {
-            int damage = player.Hit(currentMonst[monstCount - 1].Defense);
+            int damage = PlayerHit(currentMonst[monstCount - 1].Defense);
 
             if (currentMonst[monstCount - 1].Vulnerability > 0)
             {
@@ -211,6 +211,39 @@ namespace ERY.Xle.Maps.Extenders
             isMonsterFriendly = false;
 
             return damage;
+        }
+
+        /// <summary>
+        /// Player damages a creature. Returns the amount of damage the player did,
+        /// or zero if the player missed.
+        /// </summary>
+        /// <param name="defense"></param>
+        /// <returns></returns>
+        private int PlayerHit(int defense)
+        {
+            int wt = Player.CurrentWeapon.ID;
+            int qt = Player.CurrentWeapon.Quality;
+
+            int dam = Player.Attribute[Attributes.strength] - 12;
+            dam += (int)(wt * (qt + 2)) / 2;
+
+            dam = (int)(dam * Random.Next(30, 150) / 100.0 + 0.5);
+            dam += Random.Next(-2, 3);
+
+            if (dam < 3)
+                dam = 1 + Random.Next(3);
+
+            int hit = Player.Attribute[Attributes.dexterity] * 8 + 15 * qt;
+
+            System.Diagnostics.Debug.WriteLine("Hit: " + hit.ToString() + " Dam: " + dam.ToString());
+
+            hit -= Random.Next(400);
+
+            if (hit < 0)
+                dam = 0;
+
+            //return 100;
+            return dam;
         }
 
         bool KilledOne()
@@ -571,7 +604,7 @@ namespace ERY.Xle.Maps.Extenders
 
                 for (int i = 0; i < monstCount; i++)
                 {
-                    int t = player.Damage(currentMonst[i].Attack);
+                    int t = DamagePlayer(currentMonst[i].Attack);
 
                     if (t > 0)
                     {
@@ -597,6 +630,29 @@ namespace ERY.Xle.Maps.Extenders
             }
 
             GameControl.Wait(250, keyBreak: !firstTime);
+        }
+
+        /// <summary>
+        /// Called when the player gets hit. Returns the damage done to the player and
+        /// subtracts that value from HP.
+        /// </summary>
+        /// <param name="attack"></param>
+        /// <returns></returns>	
+        private int DamagePlayer(int attack)
+        {
+            int dam = (int)(attack - (Player.Attribute[Attributes.endurance] + Player.CurrentArmor.ID) * 0.8);
+
+            dam += (int)(dam * Random.Next(-50, 100) / 100 + 0.5);
+
+            if (dam < 0 || 1 + Random.Next(60) + attack / 15
+                            < Player.Attribute[Attributes.dexterity] + Player.CurrentArmor.Quality)
+            {
+                dam = 0;
+            }
+
+            Player.HP -= dam;
+
+            return dam;
         }
 
         private int SelectRandomMonster(TerrainType terrain)

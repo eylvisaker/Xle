@@ -25,19 +25,7 @@ namespace ERY.Xle.Maps.Extenders
         public XleMap TheMap
         {
             get { return mTheMap; }
-            set
-            {
-                mTheMap = value;
-                MapRenderer = CreateMapRenderer();
-                MapRenderer.TheMap = TheMap;
-                MapRenderer.Extender = this;
-
-                InitializeMapRenderer();
-            }
-        }
-
-        protected virtual void InitializeMapRenderer()
-        {
+            set { mTheMap = value; }
         }
 
         public XleMapRenderer MapRenderer { get; set; }
@@ -51,6 +39,7 @@ namespace ERY.Xle.Maps.Extenders
         public ISoundMan SoundMan { get; set; }
         public IXleInput Input { get; set; }
         public IQuickMenu QuickMenu { get; set; }
+        public IMapChanger MapChanger { get; set; }
 
         protected Player Player { get { return GameState.Player; } }
         public IReadOnlyList<EventExtender> Events { get { return mEvents; } }
@@ -70,7 +59,7 @@ namespace ERY.Xle.Maps.Extenders
         {
         }
 
-        protected virtual XleMapRenderer CreateMapRenderer()
+        public virtual XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return new XleMapRenderer();
         }
@@ -202,7 +191,7 @@ namespace ERY.Xle.Maps.Extenders
 
             GameControl.Wait(state.GameSpeed.LeaveMapTime);
 
-            state.Player.ReturnToPreviousMap();
+            MapChanger.ReturnToPreviousMap();
         }
 
         public void LeaveMap()
@@ -213,7 +202,7 @@ namespace ERY.Xle.Maps.Extenders
 
             GameControl.Wait(GameState.GameSpeed.LeaveMapTime);
 
-            Player.ReturnToPreviousMap();
+            MapChanger.ReturnToPreviousMap();
 
             TextArea.PrintLine();
         }

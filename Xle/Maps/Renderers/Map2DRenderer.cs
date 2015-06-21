@@ -9,7 +9,7 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.Maps.Renderers
 {
-	public class Map2DRenderer : XleMapRenderer
+	public abstract class Map2DRenderer : XleMapRenderer
 	{
 		public override void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
 		{

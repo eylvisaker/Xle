@@ -22,9 +22,10 @@ namespace ERY.XleTests
 			Player player = new Player();
 			player.Items.ClearStoryItems(); // remove the compendium the player started with.
 			player.StoryData = new LotaStory();
-			XleCore.GameState = new GameState { Player = player };
+			var gameState = new GameState { Player = player };
 
 			Information information = new Information();
+            information.GameState = gameState;
 
 			Assert.IsFalse(information.ShouldLevelUp(player));
 
@@ -91,11 +92,12 @@ namespace ERY.XleTests
 		{
 			Player player = new Player();
 			player.StoryData = new LotaStory();
-			XleCore.GameState = new GameState { Player = player };
+			var gameState = new GameState { Player = player };
 
 		    LotaFactory factory = null;//new LotaFactory();
 			
 			Information information = new Information();
+            information.GameState = gameState;
 
 			Assert.IsFalse(information.ShouldLevelUp(player));
 			
