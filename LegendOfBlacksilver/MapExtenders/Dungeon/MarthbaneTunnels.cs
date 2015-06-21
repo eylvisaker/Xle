@@ -7,157 +7,160 @@ using System.Threading.Tasks;
 
 using ERY.Xle.Maps;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
-	class MarthbaneTunnels : LobDungeonBase
-	{
-		DungeonMonster king;
+    public class MarthbaneTunnels : LobDungeon
+    {
+        DungeonMonster king;
 
-		public override void OnLoad(GameState state)
-		{
-			if (Lob.Story.RescuedKing)
-			{
-				OpenEscapeRoute(state);
-			}
-			else
-			{
-				king = new DungeonMonster(XleCore.Data.DungeonMonsters[18])
-					{
-						DungeonLevel = 7,
-						Location = new Point(10, 0),
-						HP = 400,
-						KillFlashImmune = true,
-					};
+        public IQuickMenu QuickMenu { get; set; }
 
-				TheMap.Monsters.Add(king);
-			}
-		}
-		protected override int MonsterGroup(int dungeonLevel)
-		{
-			if (dungeonLevel <= 2) return 0;
-			if (dungeonLevel <= 6) return 1;
+        public override void OnLoad(GameState state)
+        {
+            if (Story.RescuedKing)
+            {
+                OpenEscapeRoute(state);
+            }
+            else
+            {
+                king = new DungeonMonster(Data.DungeonMonsters[18])
+                    {
+                        DungeonLevel = 7,
+                        Location = new Point(10, 0),
+                        HP = 400,
+                        KillFlashImmune = true,
+                    };
 
-			return 2;
-		}
+                TheMap.Monsters.Add(king);
+            }
+        }
+        protected override int MonsterGroup(int dungeonLevel)
+        {
+            if (dungeonLevel <= 2) return 0;
+            if (dungeonLevel <= 6) return 1;
 
-		public override DungeonMonster GetMonsterToSpawn(GameState state)
-		{
-			if (state.Player.DungeonLevel == 7)
-				return null;
+            return 2;
+        }
 
-			return base.GetMonsterToSpawn(state);
-		}
+        public override DungeonMonster GetMonsterToSpawn(GameState state)
+        {
+            if (Player.DungeonLevel == 7)
+                return null;
 
-		public override bool SpawnMonsters(GameState state)
-		{
-			if (state.Player.DungeonLevel == 7)
-				return false;
-			else
-				return true;
-		}
+            return base.GetMonsterToSpawn(state);
+        }
 
-		public override void UpdateMonsters(GameState state)
-		{
-			// disable normal monster processing if we see the king.
-			if (state.Player.DungeonLevel == 7)
-				return;
+        public override bool SpawnMonsters(GameState state)
+        {
+            if (Player.DungeonLevel == 7)
+                return false;
+            else
+                return true;
+        }
 
-			base.UpdateMonsters(state);
-		}
+        public override void UpdateMonsters(GameState state)
+        {
+            // disable normal monster processing if we see the king.
+            if (Player.DungeonLevel == 7)
+                return;
 
-		public override void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
-		{
-			if (foundMonster.Data.Name == "king")
-			{
-				XleCore.TextArea.PrintLine("You see a king!", XleColor.White);
-				handled = true;
-			}
-		}
+            base.UpdateMonsters(state);
+        }
 
-		public override bool PlayerSpeak(GameState state)
-		{
-			if (state.Player.DungeonLevel != 7) return false;
-			if (king == null) return false;
-			if (king.HP <= 0) return false;
+        public override void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
+        {
+            if (foundMonster.Data.Name == "king")
+            {
+                TextArea.PrintLine("You see a king!", XleColor.White);
+                handled = true;
+            }
+        }
 
-			if (Lob.Story.MarthbaneOfferedHelpToKing == false)
-			{
-				SoundMan.PlaySound(LotaSound.VeryGood);
+        public override bool PlayerSpeak(GameState unused)
+        {
+            if (Player.DungeonLevel != 7) return false;
+            if (king == null) return false;
+            if (king.HP <= 0) return false;
 
-				XleCore.TextArea.Clear(true);
-				XleCore.TextArea.PrintLineSlow("I am king durek!!", XleColor.White);
-				XleCore.TextArea.PrintLineSlow("Do you come to help me?", XleColor.White);
-				XleCore.TextArea.PrintLineSlow();
+            if (Story.MarthbaneOfferedHelpToKing == false)
+            {
+                SoundMan.PlaySound(LotaSound.VeryGood);
 
-				if (XleCore.QuickMenuYesNo() == 1)
-				{
-					DoomedMessage();
-					return true;
-				}
+                TextArea.Clear(true);
+                TextArea.PrintLineSlow("I am king durek!!", XleColor.White);
+                TextArea.PrintLineSlow("Do you come to help me?", XleColor.White);
+                TextArea.PrintLineSlow();
 
-				Lob.Story.MarthbaneOfferedHelpToKing = true;
+                if (QuickMenu.QuickMenuYesNo() == 1)
+                {
+                    DoomedMessage();
+                    return true;
+                }
 
-				XleCore.TextArea.Clear(true);
-				XleCore.TextArea.PrintLineSlow("I fear you have been caught in the", XleColor.White);
-				XleCore.TextArea.PrintLineSlow("same trap that imprisons me...", XleColor.White);
-				XleCore.TextArea.PrintLineSlow();
-				XleCore.TextArea.PrintLineSlow("unless...", XleColor.White);
+                Story.MarthbaneOfferedHelpToKing = true;
 
-				XleCore.Wait(2000);
-			}
+                TextArea.Clear(true);
+                TextArea.PrintLineSlow("I fear you have been caught in the", XleColor.White);
+                TextArea.PrintLineSlow("same trap that imprisons me...", XleColor.White);
+                TextArea.PrintLineSlow();
+                TextArea.PrintLineSlow("unless...", XleColor.White);
 
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLineSlow("Do you carry my signet ring?", XleColor.White);
-			XleCore.TextArea.PrintLineSlow();
+                GameControl.Wait(2000);
+            }
 
-			if (XleCore.QuickMenuYesNo() == 1)
-			{
-				DoomedMessage();
-				return true;
-			}
+            TextArea.Clear(true);
+            TextArea.PrintLineSlow("Do you carry my signet ring?", XleColor.White);
+            TextArea.PrintLineSlow();
 
-			state.Player.Items[LobItem.SignetRing] = 0;
+            if (QuickMenu.QuickMenuYesNo() == 1)
+            {
+                DoomedMessage();
+                return true;
+            }
 
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLineSlow("In times of distress, the ring will\nreturn me to the castle!!  I fear it\ncan do nothing more than give you a\nroute of escape.", XleColor.White);
+            GameState.Player.Items[LobItem.SignetRing] = 0;
 
-			XleCore.Wait(3000);
+            TextArea.Clear(true);
+            TextArea.PrintLineSlow("In times of distress, the ring will\nreturn me to the castle!!  I fear it\ncan do nothing more than give you a\nroute of escape.", XleColor.White);
 
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLineSlow("\n\n\nNoble adventurer, i am in your debt.\nMay we meet in better times.", XleColor.White);
+            GameControl.Wait(3000);
 
-			XleCore.Wait(3000);
+            TextArea.Clear(true);
+            TextArea.PrintLineSlow("\n\n\nNoble adventurer, i am in your debt.\nMay we meet in better times.", XleColor.White);
 
-			SoundMan.PlaySound(LotaSound.EnemyMiss);
+            GameControl.Wait(3000);
 
-			Lob.Story.RescuedKing = true;
-			TheMap.Monsters.Remove(king);
+            SoundMan.PlaySound(LotaSound.EnemyMiss);
 
-			OpenEscapeRoute(state);
+            Story.RescuedKing = true;
+            TheMap.Monsters.Remove(king);
 
-			return true;
-		}
+            OpenEscapeRoute(GameState);
 
-		private void OpenEscapeRoute(GameState state)
-		{
-			// 11, 0, 7 change to 17
-			// 13, 0, 4 change to 18
+            return true;
+        }
 
-			TheMap[11, 0, 7] = 17;
-			TheMap[13, 0, 4] = 18;
-		}
+        private void OpenEscapeRoute(GameState state)
+        {
+            // 11, 0, 7 change to 17
+            // 13, 0, 4 change to 18
 
-		private static void DoomedMessage()
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Then I fear we are both doomed.", XleColor.White);
-			XleCore.TextArea.PrintLine();
-		}
+            TheMap[11, 0, 7] = 17;
+            TheMap[13, 0, 4] = 18;
+        }
 
-		public override Maps.Map3DSurfaces Surfaces(GameState state)
-		{
-			return Lob3DSurfaces.MarthbaneTunnels;
-		}
-	}
+        private void DoomedMessage()
+        {
+            TextArea.PrintLine();
+            TextArea.PrintLine("Then I fear we are both doomed.", XleColor.White);
+            TextArea.PrintLine();
+        }
+
+        public override Maps.Map3DSurfaces Surfaces(GameState state)
+        {
+            return Lob3DSurfaces.MarthbaneTunnels;
+        }
+    }
 }

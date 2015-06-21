@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
-	class DeathspireChasm : LobDungeonBase
+	public class DeathspireChasm : LobDungeon
 	{
 		protected override int MonsterGroup(int dungeonLevel)
 		{

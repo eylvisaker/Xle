@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
-	class IslandCaverns : LobDungeonBase
+	public class IslandCaverns : LobDungeon
 	{
 		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
 		{

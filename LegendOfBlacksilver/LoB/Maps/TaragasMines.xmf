@@ -1,7 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Dungeon" Width="16" Height="16" Levels="6">
   <MapName>Taragas Mines</MapName>
-  <ExtenderName>
-  </ExtenderName>
+  <ExtenderName>TaragasMines</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="null" />
   <TileImage>DungeonTiles.png</TileImage>

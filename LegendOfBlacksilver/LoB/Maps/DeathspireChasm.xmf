@@ -1,7 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Dungeon" Width="16" Height="16" Levels="12">
   <MapName>Deathspire Chasm</MapName>
-  <ExtenderName>
-  </ExtenderName>
+  <ExtenderName>DeathspireChasm</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="null" />
   <TileImage>DungeonTiles.png</TileImage>
