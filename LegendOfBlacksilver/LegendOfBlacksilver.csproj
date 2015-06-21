@@ -48,8 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap\LobEventExtenderInstaller.cs" />
-    <Compile Include="Bootstrap\LobMapExtenderInstaller.cs" />
     <Compile Include="Lob.cs" />
     <Compile Include="LobFactory.cs" />
     <Compile Include="LobProgram.cs" />
@@ -83,7 +81,7 @@
     <Compile Include="MapExtenders\Castle\EventExtenders\AngryOrcs.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\Arman.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\CastleDoor.cs" />
-    <Compile Include="MapExtenders\Castle\EventExtenders\Chest.cs" />
+    <Compile Include="MapExtenders\Castle\EventExtenders\TreasureChest.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\DaisMessage.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\King.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\Seravol.cs" />
@@ -110,14 +108,15 @@
     <Compile Include="MapExtenders\Labyrinth\EventExtenders\LabyrinthDoor.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthBase.cs" />
     <Compile Include="MapExtenders\Labyrinth\LabyrinthUpper.cs" />
+    <Compile Include="MapExtenders\LobEvent.cs" />
     <Compile Include="MapExtenders\Outside\Events\Drawbridge.cs" />
     <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />
     <Compile Include="MapExtenders\Outside\Maelbane.cs" />
     <Compile Include="MapExtenders\Outside\Thalen.cs" />
     <Compile Include="MapExtenders\Temples\LobTempleExtender.cs" />
-    <Compile Include="MapExtenders\Towns\LobTownExtender.cs" />
-    <Compile Include="MapExtenders\Towns\MaelbaneTownExtender.cs" />
-    <Compile Include="MapExtenders\Towns\ThalenTownExtender.cs" />
+    <Compile Include="MapExtenders\Towns\LobTown.cs" />
+    <Compile Include="MapExtenders\Towns\MaelbaneTown.cs" />
+    <Compile Include="MapExtenders\Towns\ThalenTown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TitleScreen\LobTitleScreen.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -418,6 +417,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Bootstrap\" />
     <Folder Include="Support\EasyFlash\" />
   </ItemGroup>
   <ItemGroup>

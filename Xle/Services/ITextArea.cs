@@ -23,6 +23,7 @@ namespace ERY.Xle.Services
         void PrintLineSlow(string text, Color color);
         void PrintLineSlow(string text = "", Color[] colors = null);
 
+        void FlashLines(int howLong, Color color, int flashRate, params int[] lines);
         void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines);
 
         void SetLineColor(Color color, params int[] lines);
@@ -32,5 +33,6 @@ namespace ERY.Xle.Services
         void SetCharacterColor(int p1, int p2, Color color);
 
         int Margin { get; set; }
+
     }
 }

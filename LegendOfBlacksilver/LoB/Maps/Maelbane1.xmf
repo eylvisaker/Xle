@@ -1,6 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Outside">
-  <MapName>hawk</MapName>
-  <ExtenderName>Maelbane1</ExtenderName>
+  <MapName>Maelbane</MapName>
+  <ExtenderName>Maelbane</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Tiles>
@@ -14,7 +14,7 @@
       <Y>72</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapQuestion</ExtenderName>
       <MapID>63</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -26,7 +26,7 @@
       <Y>72</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapQuestion</ExtenderName>
       <MapID>54</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>

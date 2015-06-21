@@ -10,49 +10,49 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class SingingCrystal : EventExtender
-	{
-		public override bool Use(GameState state, int item)
-		{
-			if (item != (int)LobItem.SingingCrystal)
-				return false;
+    public class SingingCrystal : LobEvent
+    {
+        public override bool Use(GameState unused, int item)
+        {
+            if (item != (int)LobItem.SingingCrystal)
+                return false;
 
-			Rectangle area = new Rectangle(state.Player.X - 2, state.Player.Y - 3, 6, 8);
+            Rectangle area = new Rectangle(Player.X - 2, Player.Y - 3, 6, 8);
 
-			RemoveRockSlide(state.Map, area);
+            RemoveRockSlide(area);
 
-			if (area.Right >= TheEvent.Rectangle.Right - 3)
-			{
-				SoundMan.PlaySound(LotaSound.VeryBad);
-				state.Player.Items[LobItem.SingingCrystal] = 0;
+            if (area.Right >= TheEvent.Rectangle.Right - 3)
+            {
+                SoundMan.PlaySound(LotaSound.VeryBad);
+                Player.Items[LobItem.SingingCrystal] = 0;
 
-				XleCore.TextArea.PrintLine("Your singing crystal melts.");
+                TextArea.PrintLine("Your singing crystal melts.");
 
-				XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryBad), XleColor.Yellow, XleColor.Red, 250);
+                TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryBad), XleColor.Yellow, XleColor.Red, 250);
 
-				Lob.Story.ClearedRockSlide = true;
-			}
+                Story.ClearedRockSlide = true;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		public static void RemoveRockSlide(XleMap map, Rectangle area)
-		{
-			var group = map.TileSet.TileGroups.FirstOrDefault(x => x.GroupType == Maps.GroupType.Special1);
+        public void RemoveRockSlide(Rectangle area)
+        {
+            var group = Map.TileSet.TileGroups.FirstOrDefault(x => x.GroupType == Maps.GroupType.Special1);
 
-			var replacementTile = 6;
+            var replacementTile = 6;
 
-			for (int j = area.Top; j < area.Bottom; j++)
-			{
-				for (int i = area.Left; i < area.Right; i++)
-				{
-					var tile = map[i, j];
-					if (group.Tiles.Contains(tile))
-					{
-						map[i, j] = replacementTile;
-					}
-				}
-			}
-		}
-	}
+            for (int j = area.Top; j < area.Bottom; j++)
+            {
+                for (int i = area.Left; i < area.Right; i++)
+                {
+                    var tile = Map[i, j];
+                    if (group.Tiles.Contains(tile))
+                    {
+                        Map[i, j] = replacementTile;
+                    }
+                }
+            }
+        }
+    }
 }

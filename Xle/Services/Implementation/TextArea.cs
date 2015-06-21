@@ -93,7 +93,7 @@ namespace ERY.Xle.Services.Implementation
             IXleRenderer renderer,
             IXleGameControl gameControl,
             GameState gameState)
-        {
+        {                                       
             this.screen = screen;
             this.gameState = gameState;
             this.renderer = renderer;

@@ -1,6 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Castle">
   <MapName>castle</MapName>
-  <ExtenderName>Castle</ExtenderName>
+  <ExtenderName>DurekCastle</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,0,0,1,1,0,1,1,1,0,0,1,1,1,1,1,1,0,0,2</Tiles>
@@ -85,7 +85,7 @@
       <Y>81</Y>
       <Width>1</Width>
       <Height>5</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>FeatherDoor</ExtenderName>
       <RequiredItem>19</RequiredItem>
       <ReplacementTile>22</ReplacementTile>
     </Item>
@@ -108,7 +108,7 @@
       <Y>25</Y>
       <Width>1</Width>
       <Height>2</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>5</RequiredItem>
       <ReplacementTile>2</ReplacementTile>
     </Item>
@@ -117,7 +117,7 @@
       <Y>39</Y>
       <Width>1</Width>
       <Height>2</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>6</RequiredItem>
       <ReplacementTile>2</ReplacementTile>
     </Item>
@@ -126,7 +126,7 @@
       <Y>40</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>7</RequiredItem>
       <ReplacementTile>2</ReplacementTile>
     </Item>
@@ -135,7 +135,7 @@
       <Y>29</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>7</RequiredItem>
       <ReplacementTile>2</ReplacementTile>
     </Item>
@@ -144,7 +144,7 @@
       <Y>51</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>7</RequiredItem>
       <ReplacementTile>2</ReplacementTile>
     </Item>
@@ -153,7 +153,7 @@
       <Y>72</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>7</RequiredItem>
       <ReplacementTile>2</ReplacementTile>
     </Item>
@@ -162,7 +162,7 @@
       <Y>50</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CastleDoor</ExtenderName>
       <RequiredItem>5</RequiredItem>
       <ReplacementTile>2</ReplacementTile>
     </Item>

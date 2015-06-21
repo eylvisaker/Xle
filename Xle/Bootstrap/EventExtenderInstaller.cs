@@ -3,12 +3,6 @@ using Castle.MicroKernel.Context;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using ERY.Xle.LotA.MapExtenders.Castle;
-using ERY.Xle.LotA.MapExtenders.Dungeons;
-using ERY.Xle.LotA.MapExtenders.Fortress;
-using ERY.Xle.LotA.MapExtenders.Museum;
-using ERY.Xle.LotA.MapExtenders.Outside;
-using ERY.Xle.LotA.MapExtenders.Towns;
 using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.XleEventTypes;
@@ -21,15 +15,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.Bootstrap
+namespace ERY.Xle.Bootstrap
 {
-    public class LotaEventExtenderInstaller : IWindsorInstaller
+    public class EventExtenderInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<EventExtender>().UsingFactoryMethod<EventExtender>(factory).LifestyleTransient());
 
-            container.Register(Classes.FromAssemblyContaining<LotaFactory>()
+            container.Register(Classes.FromAssembly(WindsorInitializer.MasterAssembly)
                 .BasedOn<EventExtender>()
                 .WithServiceSelf()
                 .Configure(c => c.Named(EventName(c.Implementation)))
@@ -62,14 +56,6 @@ namespace ERY.Xle.LotA.Bootstrap
         private EventExtender CreateNamedEvent(IKernel kernel, string name)
         {
             return kernel.Resolve<EventExtender>(name);
-        }
-
-        private EventExtender CreateOutsideEvent(IKernel kernel, OutsideExtender outside, XleEvent evt, Type defaultExtender)
-        {
-            if (evt is ChangeMapEvent)
-                return kernel.Resolve<ChangeMapQuestion>();
-            else
-                return (EventExtender)kernel.Resolve(defaultExtender);
         }
     }
 }

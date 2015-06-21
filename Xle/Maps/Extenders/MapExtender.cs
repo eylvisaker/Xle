@@ -18,6 +18,7 @@ namespace ERY.Xle.Maps.Extenders
     public class MapExtender
     {
         XleMap mTheMap;
+        List<EventExtender> mEvents = new List<EventExtender>();
 
         public XleMap TheMap
         {
@@ -48,7 +49,8 @@ namespace ERY.Xle.Maps.Extenders
         public ISoundMan SoundMan { get; set; }
         public IXleInput Input { get; set; }
 
-        public Player Player { get { return GameState.Player; } }
+        protected Player Player { get { return GameState.Player; } }
+        public IReadOnlyList<EventExtender> Events { get { return mEvents; } }
 
         public bool IsAngry
         {
@@ -500,5 +502,11 @@ namespace ERY.Xle.Maps.Extenders
         {
         }
 
+
+        public void RefreshEvents()
+        {
+            mEvents.Clear();
+            mEvents.AddRange(TheMap.Events.Select(x => x.Extender));
+        }
     }
 }

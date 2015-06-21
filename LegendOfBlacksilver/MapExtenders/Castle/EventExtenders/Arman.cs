@@ -8,61 +8,59 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class Arman : EventExtender
-	{
-		public override bool Speak(GameState state)
-		{
-			var ta = XleCore.TextArea;
+    public class Arman : LobEvent
+    {
+        public override bool Speak(GameState state)
+        {
+            TextArea.PrintLine();
 
-			ta.PrintLine();
+            if (Story.DefeatedOrcs == false && Lob.Story.ArmanGaveElixirs == false)
+            {
+                Story.ArmanGaveElixirs = true;
+                state.Player.Items[LobItem.LifeElixir] += 2;
 
-			if (Lob.Story.DefeatedOrcs == false && Lob.Story.ArmanGaveElixirs == false)
-			{
-				Lob.Story.ArmanGaveElixirs = true;
-				state.Player.Items[LobItem.LifeElixir] += 2;
+                SoundMan.PlaySound(LotaSound.Good);
 
-				SoundMan.PlaySound(LotaSound.Good);
+                TextArea.PrintLineSlow("\nWelcome traveler, I'm arman, the");
+                TextArea.PrintLineSlow("apprentice to the great wizard");
+                TextArea.PrintLineSlow("Seravol.  He's up to his neck with");
+                TextArea.PrintLineSlow("these orcs, farther along.");
+                TextArea.PrintLineSlow();
 
-				ta.PrintLineSlow("\nWelcome traveler, I'm arman, the");
-				ta.PrintLineSlow("apprentice to the great wizard");
-				ta.PrintLineSlow("Seravol.  He's up to his neck with");
-				ta.PrintLineSlow("these orcs, farther along.");
-				ta.PrintLineSlow();
+                Input.WaitForKey();
 
-				XleCore.WaitForKey();
+                TextArea.PrintLineSlow("I know no attack spells, so i'd be");
+                TextArea.PrintLineSlow("most thankful if you could wipe out");
+                TextArea.PrintLineSlow("these orcs.  I also suggest that you");
+                TextArea.PrintLineSlow("gather all the orc loot you can.");
+                TextArea.PrintLineSlow();
 
-				ta.PrintLineSlow("I know no attack spells, so i'd be");
-				ta.PrintLineSlow("most thankful if you could wipe out");
-				ta.PrintLineSlow("these orcs.  I also suggest that you");
-				ta.PrintLineSlow("gather all the orc loot you can.");
-				ta.PrintLineSlow();
+                Input.WaitForKey();
 
-				XleCore.WaitForKey();
+                SoundMan.PlaySound(LotaSound.VeryGood);
+                TextArea.Clear(true);
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+                TextArea.PrintLineSlow("I can reward you with life elixir.");
+                TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.White, XleColor.Yellow, 125);
 
-				SoundMan.PlaySound(LotaSound.VeryGood);
-				ta.Clear(true);
-				ta.PrintLine();
-				ta.PrintLine();
-				ta.PrintLineSlow("I can reward you with life elixir.");
-				ta.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.White, XleColor.Yellow, 125);
+                Input.WaitForKey();
 
-				XleCore.WaitForKey();
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+                TextArea.PrintLineSlow("In case you missed it, there's a ");
+                TextArea.PrintLineSlow("chest with an archive gem in it.");
+                TextArea.PrintLineSlow("it's between here and the rockslide.");
+                TextArea.PrintLineSlow();
+            }
+            else
+            {
+                TextArea.PrintLine("\nI'm busy.  Go away now.");
+                TextArea.PrintLine();
+            }
 
-				ta.PrintLine();
-				ta.PrintLine();
-				ta.PrintLineSlow("In case you missed it, there's a ");
-				ta.PrintLineSlow("chest with an archive gem in it.");
-				ta.PrintLineSlow("it's between here and the rockslide.");
-				ta.PrintLineSlow();
-			}
-			else
-			{
-				ta.PrintLine("\nI'm busy.  Go away now.");
-				ta.PrintLine();
-			}
-
-			XleCore.WaitForKey();
-			return true;
-		}
-	}
+            XleCore.WaitForKey();
+            return true;
+        }
+    }
 }

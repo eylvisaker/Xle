@@ -8,141 +8,141 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class King : EventExtender
-	{
-		bool asked;
+    public class King : LobEvent
+    {
+        bool asked;
 
-		public override bool Speak(GameState state)
-		{
-			XleCore.TextArea.PrintLine(" to the " + Name(state) + ".");
-			XleCore.TextArea.PrintLine();
-			SoundMan.PlaySoundSync(LotaSound.VeryGood);
+        public override bool Speak(GameState state)
+        {
+            TextArea.PrintLine(" to the " + Name() + ".");
+            TextArea.PrintLine();
+            SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-			if (state.Player.Items[LobItem.FalconFeather] > 0)
-			{
-				PrinceAskForFeather(state);
-			}
-			else if (state.Player.Items[LobItem.SmallKey] == 0 && state.Player.Items[LobItem.GoldKey] == 0)
-			{
-				PrinceAskForHelp(state);
-			}
+            if (state.Player.Items[LobItem.FalconFeather] > 0)
+            {
+                PrinceAskForFeather(state);
+            }
+            else if (state.Player.Items[LobItem.SmallKey] == 0 && state.Player.Items[LobItem.GoldKey] == 0)
+            {
+                PrinceAskForHelp(state);
+            }
 
-			else 
-			{
-				NothingToTell();
-			}
+            else
+            {
+                NothingToTell();
+            }
 
-			XleCore.Wait(2000);
+            GameControl.Wait(2000);
 
-			return true;
-		}
+            return true;
+        }
 
-		private void NothingToTell()
-		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("     There is no more I can");
-			XleCore.TextArea.PrintLine("     tell you right now.  Our");
-			XleCore.TextArea.PrintLine("     hopes are still with you.");
-			XleCore.TextArea.PrintLine("");
+        private void NothingToTell()
+        {
+            TextArea.PrintLine();
+            TextArea.PrintLine("     There is no more I can");
+            TextArea.PrintLine("     tell you right now.  Our");
+            TextArea.PrintLine("     hopes are still with you.");
+            TextArea.PrintLine("");
 
-			XleCore.WaitForKey();
-		}
+            Input.WaitForKey();
+        }
 
-		private void PrinceAskForFeather(GameState state)
-		{
-			asked = false;
+        private void PrinceAskForFeather(GameState state)
+        {
+            asked = false;
 
-			if (asked)
-			{
-				XleCore.TextArea.PrintLineSlow("I ask again...");
+            if (asked)
+            {
+                TextArea.PrintLineSlow("I ask again...");
 
-				XleCore.Wait(1000);
-				XleCore.TextArea.PrintLineSlow("");
-			}
-			else
-			{
-				XleCore.TextArea.Clear();
-				XleCore.TextArea.PrintLineSlow("I am the prince of this castle");
-				XleCore.TextArea.PrintLineSlow("and all areas around here.");
-				XleCore.TextArea.PrintLineSlow();
+                GameControl.Wait(1000);
+                TextArea.PrintLineSlow("");
+            }
+            else
+            {
+                TextArea.Clear();
+                TextArea.PrintLineSlow("I am the prince of this castle");
+                TextArea.PrintLineSlow("and all areas around here.");
+                TextArea.PrintLineSlow();
 
-				XleCore.TextArea.FlashLines(2000, XleColor.Yellow, 250);
-				XleCore.Wait(500);
-			}
+                TextArea.FlashLines(2000, XleColor.Yellow, 250);
+                GameControl.Wait(500);
+            }
 
-			XleCore.TextArea.PrintLineSlow("I see you have an interesting");
-			XleCore.TextArea.PrintLineSlow("feather. May I have it?");
+            TextArea.PrintLineSlow("I see you have an interesting");
+            TextArea.PrintLineSlow("feather. May I have it?");
 
-			if (1 == XleCore.QuickMenuYesNo())
-			{
-				XleCore.TextArea.PrintLineSlow("I've confused you with a brave");
-				XleCore.TextArea.PrintLineSlow("warrior who I was expecting.");
-				
-				asked = true;
-			}
-			else
-			{
-				state.Player.Items[LobItem.FalconFeather] = 0;
+            if (1 == QuickMenu.QuickMenuYesNo())
+            {
+                TextArea.PrintLineSlow("I've confused you with a brave");
+                TextArea.PrintLineSlow("warrior who I was expecting.");
 
-				XleCore.TextArea.PrintLineSlow("Since you come with the feather, I");
-				XleCore.TextArea.PrintLineSlow("know my sister selected you to be our");
-				XleCore.TextArea.PrintLineSlow("champion.  I only pray that you are");
-				XleCore.TextArea.PrintLineSlow("not too late.  It's been many days");
-				XleCore.TextArea.PrintLineSlow("since the king was kidnapped.");
+                asked = true;
+            }
+            else
+            {
+                Player.Items[LobItem.FalconFeather] = 0;
 
-				XleCore.WaitForKey();
-				XleCore.TextArea.PrintLineSlow();
+                TextArea.PrintLineSlow("Since you come with the feather, I");
+                TextArea.PrintLineSlow("know my sister selected you to be our");
+                TextArea.PrintLineSlow("champion.  I only pray that you are");
+                TextArea.PrintLineSlow("not too late.  It's been many days");
+                TextArea.PrintLineSlow("since the king was kidnapped.");
 
-				PrinceAskForHelp(state);
-			}
-		}
-		void PrinceAskForHelp(GameState state)
-		{
-			XleCore.TextArea.PrintLineSlow("There is much to do.  The earthquakes");
-			XleCore.TextArea.PrintLineSlow("continue to batter the castle.  A");
-			XleCore.TextArea.PrintLineSlow("landslide now blocks entrance to the");
-			XleCore.TextArea.PrintLineSlow("inner chambers. The wizard seravol is");
-			XleCore.TextArea.PrintLineSlow("trapped inside, imprisoned by orcs.");
+                Input.WaitForKey();
+                TextArea.PrintLineSlow();
 
-			XleCore.WaitForKey();
+                PrinceAskForHelp(state);
+            }
+        }
+        void PrinceAskForHelp(GameState state)
+        {
+            TextArea.PrintLineSlow("There is much to do.  The earthquakes");
+            TextArea.PrintLineSlow("continue to batter the castle.  A");
+            TextArea.PrintLineSlow("landslide now blocks entrance to the");
+            TextArea.PrintLineSlow("inner chambers. The wizard seravol is");
+            TextArea.PrintLineSlow("trapped inside, imprisoned by orcs.");
 
-			XleCore.TextArea.PrintLineSlow();
-			XleCore.TextArea.PrintLineSlow("Will you help?");
-			XleCore.TextArea.PrintLineSlow();
+            Input.WaitForKey();
 
-			if (1 == XleCore.QuickMenuYesNo())
-			{
-				XleCore.TextArea.PrintLineSlow("I don't blame your fear.");
-				XleCore.TextArea.PrintLineSlow("Godspeed on your journeys.");
-			}
-			else
-			{
-				XleCore.TextArea.PrintLineSlow("Here is a key.  You must find a way");
-				XleCore.TextArea.PrintLineSlow("To get past the landslide.  Once you");
-				XleCore.TextArea.PrintLineSlow("do, you'll have to defeat the orcs");
-				XleCore.TextArea.PrintLineSlow("who have captured the inner castle");
-				XleCore.TextArea.PrintLineSlow("chambers.");
+            TextArea.PrintLineSlow();
+            TextArea.PrintLineSlow("Will you help?");
+            TextArea.PrintLineSlow();
 
-				state.Player.Items[LobItem.SmallKey] = 1;
-				XleCore.WaitForKey();
+            if (1 == QuickMenu.QuickMenuYesNo())
+            {
+                TextArea.PrintLineSlow("I don't blame your fear.");
+                TextArea.PrintLineSlow("Godspeed on your journeys.");
+            }
+            else
+            {
+                TextArea.PrintLineSlow("Here is a key.  You must find a way");
+                TextArea.PrintLineSlow("To get past the landslide.  Once you");
+                TextArea.PrintLineSlow("do, you'll have to defeat the orcs");
+                TextArea.PrintLineSlow("who have captured the inner castle");
+                TextArea.PrintLineSlow("chambers.");
 
-				XleCore.TextArea.PrintLineSlow();
-				XleCore.TextArea.PrintLineSlow("My gold is yours - provided you use");
-				XleCore.TextArea.PrintLineSlow("it for the good.  The wizard seravol");
-				XleCore.TextArea.PrintLineSlow("has much to offer, if you can defeat");
-				XleCore.TextArea.PrintLineSlow("the orcs and free him.  Godspeed.");
-				XleCore.TextArea.PrintLineSlow();
+                Player.Items[LobItem.SmallKey] = 1;
+                Input.WaitForKey();
 
-				XleCore.WaitForKey();
-			}
-		}
+                TextArea.PrintLineSlow();
+                TextArea.PrintLineSlow("My gold is yours - provided you use");
+                TextArea.PrintLineSlow("it for the good.  The wizard seravol");
+                TextArea.PrintLineSlow("has much to offer, if you can defeat");
+                TextArea.PrintLineSlow("the orcs and free him.  Godspeed.");
+                TextArea.PrintLineSlow();
 
-		private string Name(GameState gameState)
-		{
-			if (gameState.Player.Level > 4)
-				return "king";
-			else
-				return "prince";
-		}
-	}
+                Input.WaitForKey();
+            }
+        }
+
+        private string Name()
+        {
+            if (Player.Level > 4)
+                return "king";
+            else
+                return "prince";
+        }
+    }
 }

@@ -181,12 +181,15 @@ namespace ERY.Xle.Maps
 			return new MapExtender();
 		}
 
+        
 		public virtual void CreateEventExtenders()
 		{
 			foreach (var evt in Events)
 			{
 				evt.CreateExtender(this);
 			}
+
+            Extender.RefreshEvents();
 		}
 
 		public T CreateEventExtender<T>(XleEvent evt) where T : EventExtender, new()

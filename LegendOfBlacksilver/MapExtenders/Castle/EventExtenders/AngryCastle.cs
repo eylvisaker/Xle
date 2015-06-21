@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class AngryCastle : EventExtender
-	{
-		private DurekCastle durekCastle;
+    public class AngryCastle : EventExtender
+    {
+        private DurekCastle durekCastle;
 
-		public AngryCastle(DurekCastle durekCastle)
-		{
-			this.durekCastle = durekCastle;
-		}
+        public AngryCastle(DurekCastle durekCastle)
+        {
+            this.durekCastle = durekCastle;
+        }
 
-		public override bool StepOn(GameState state)
-		{
-			durekCastle.IsAngry = durekCastle.StoredAngryFlag;
-			durekCastle.InOrcArea = false;
+        public override bool StepOn(GameState state)
+        {
+            durekCastle.IsAngry = durekCastle.StoredAngryFlag;
+            durekCastle.InOrcArea = false;
 
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 }

@@ -8,41 +8,41 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Outside.Events
 {
-	class Drawbridge : ChangeMap
-	{
-		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
-		{
-			XleCore.TextArea.PrintLine();
+    public class Drawbridge : ChangeMap
+    {
+        protected override bool OnStepOnImpl(GameState state, ref bool cancel)
+        {
+            TextArea.PrintLine();
 
-			if (state.Player.Items[LobItem.RopeAndPulley] == 0)
-			{
-				XleCore.TextArea.PrintLine("You're not equipped");
-				XleCore.TextArea.PrintLine("to storm the citadel.");
-				SoundMan.PlaySound(LotaSound.Bad);
-			}
-			else
-			{
-				XleCore.TextArea.PrintLine("The drawbridge is up.");
-				XleCore.TextArea.PrintLine("You may wish to lower it.");
-				SoundMan.PlaySound(LotaSound.Question);
-			}
+            if (Player.Items[LobItem.RopeAndPulley] == 0)
+            {
+                TextArea.PrintLine("You're not equipped");
+                TextArea.PrintLine("to storm the citadel.");
+                SoundMan.PlaySound(LotaSound.Bad);
+            }
+            else
+            {
+                TextArea.PrintLine("The drawbridge is up.");
+                TextArea.PrintLine("You may wish to lower it.");
+                SoundMan.PlaySound(LotaSound.Question);
+            }
 
-			XleCore.Wait(1000);
+            GameControl.Wait(1000);
 
-			return true;
-		}
+            return true;
+        }
 
-		public override bool Use(GameState state, int item)
-		{
-			if (item == (int)LobItem.RopeAndPulley)
-			{
-				XleCore.Wait(1000);
-				TheEvent.ExecuteMapChange(state.Player);
+        public override bool Use(GameState state, int item)
+        {
+            if (item == (int)LobItem.RopeAndPulley)
+            {
+                GameControl.Wait(1000);
+                TheEvent.ExecuteMapChange(state.Player);
 
-				return true;
-			}
-			else
-				return false;
-		}
-	}
+                return true;
+            }
+            else
+                return false;
+        }
+    }
 }

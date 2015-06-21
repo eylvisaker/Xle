@@ -8,163 +8,162 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	public class Seravol : EventExtender
-	{
-		public override bool Speak(GameState state)
-		{
-			Greetings();
-			bool handled = false;
+    public class Seravol : LobEvent
+    {
+        public Random Random { get; set; }
 
-			if (state.Player.Level > 1)
-			{
-				if (state.Player.Items[LobItem.GoldKey] == 0 &&
-					AllOrcsKilled(state))
-				{
-					GiveGoldKey(state);
-					handled = true;
-				}
-			}
-			else
-			{
-				Introduction(state);
-				handled = true;
-			}
+        public override bool Speak(GameState unused)
+        {
+            Greetings();
+            bool handled = false;
 
-			if (XleCore.random.NextDouble() < 0.4)
-			{
-				QuakeMessage();
-			}
+            if (Player.Level > 1)
+            {
+                if (Player.Items[LobItem.GoldKey] == 0 &&
+                    AllOrcsKilled(GameState))
+                {
+                    GiveGoldKey(GameState);
+                    handled = true;
+                }
+            }
+            else
+            {
+                Introduction(GameState);
+                handled = true;
+            }
 
-			if (handled == false)
-			{
-				NothingToTellMessage(state);
-			}
+            if (Random.NextDouble() < 0.4)
+            {
+                QuakeMessage();
+            }
 
-			return true;
-		}
+            if (handled == false)
+            {
+                NothingToTellMessage(GameState);
+            }
 
-		private void NothingToTellMessage(GameState state)
-		{
-			XleCore.TextArea.PrintLineSlow();
-			XleCore.TextArea.PrintLine("I have nothing else to tell you.");
-			XleCore.TextArea.PrintLine();
-			XleCore.Wait(1000);
-			XleCore.TextArea.PrintLine("Perhaps the prince could");
-			XleCore.TextArea.PrintLine("Help you further.");
-			XleCore.WaitForKey();
-		}
+            return true;
+        }
 
-		private void GiveGoldKey(GameState state)
-		{
-			XleCore.TextArea.PrintLineSlow(); 
-			XleCore.TextArea.PrintLineSlow("I've taken your small and wooden");
-			XleCore.TextArea.PrintLineSlow("keys in exchange for this gold key.");
-			XleCore.TextArea.PrintLineSlow("I suspect you'll find the new one");
-			XleCore.TextArea.PrintLineSlow("more convenient.");
-			XleCore.TextArea.PrintLineSlow();
-			XleCore.WaitForKey();
+        private void NothingToTellMessage(GameState unused)
+        {
+            TextArea.PrintLineSlow();
+            TextArea.PrintLine("I have nothing else to tell you.");
+            TextArea.PrintLine();
+            GameControl.Wait(1000);
+            TextArea.PrintLine("Perhaps the prince could");
+            TextArea.PrintLine("Help you further.");
+            Input.WaitForKey();
+        }
 
-			state.Player.Items[LobItem.GoldKey] = 1;
-			state.Player.Items[LobItem.WoodenKey] = 0;
-			state.Player.Items[LobItem.SmallKey] = 0;
+        private void GiveGoldKey(GameState unused)
+        {
+            TextArea.PrintLineSlow();
+            TextArea.PrintLineSlow("I've taken your small and wooden");
+            TextArea.PrintLineSlow("keys in exchange for this gold key.");
+            TextArea.PrintLineSlow("I suspect you'll find the new one");
+            TextArea.PrintLineSlow("more convenient.");
+            TextArea.PrintLineSlow();
+            Input.WaitForKey();
 
-			Lob.Story.ClearedRockSlide = true;
-			Lob.Story.DefeatedOrcs = true;
+            Player.Items[LobItem.GoldKey] = 1;
+            Player.Items[LobItem.WoodenKey] = 0;
+            Player.Items[LobItem.SmallKey] = 0;
 
-			XleCore.TextArea.PrintLineSlow("My orb of vision has been stolen and");
-			XleCore.TextArea.PrintLineSlow("removed from this castle.  Without ");
-			XleCore.TextArea.PrintLineSlow("it, I'm almost blind.  With it, there");
-			XleCore.TextArea.PrintLineSlow("is much I could tell you.");
-			XleCore.TextArea.PrintLineSlow();
-			XleCore.WaitForKey();
+            Story.ClearedRockSlide = true;
+            Story.DefeatedOrcs = true;
 
-			SoundMan.PlaySound(LotaSound.VeryGood);
-			XleCore.TextArea.PrintLineSlow("To spur you on, I present this red");
-			XleCore.TextArea.PrintLineSlow("garnet gem.  Use it wisely.");
-			XleCore.WaitForKey();
+            TextArea.PrintLineSlow("My orb of vision has been stolen and");
+            TextArea.PrintLineSlow("removed from this castle.  Without ");
+            TextArea.PrintLineSlow("it, I'm almost blind.  With it, there");
+            TextArea.PrintLineSlow("is much I could tell you.");
+            TextArea.PrintLineSlow();
+            Input.WaitForKey();
 
-			state.Player.Items[LobItem.RedGarnet] += 1;
-		}
+            SoundMan.PlaySound(LotaSound.VeryGood);
+            TextArea.PrintLineSlow("To spur you on, I present this red");
+            TextArea.PrintLineSlow("garnet gem.  Use it wisely.");
+            Input.WaitForKey();
 
-		private static void QuakeMessage()
-		{
+            Player.Items[LobItem.RedGarnet] += 1;
+        }
 
-			XleCore.TextArea.PrintLineSlow("I've heard that the quakes seem to");
-			XleCore.TextArea.PrintLineSlow("be disturbing the tides of bantross.");
-			XleCore.WaitForKey();
-		}
+        private void QuakeMessage()
+        {
+            TextArea.PrintLineSlow("I've heard that the quakes seem to");
+            TextArea.PrintLineSlow("be disturbing the tides of bantross.");
+            Input.WaitForKey();
+        }
 
-		private bool AllOrcsKilled(GameState state)
-		{
-			if (state.Map.Guards.Any(x => x.Color == XleColor.Blue))
-				return false;
-			else
-				return true;
-		}
+        private bool AllOrcsKilled(GameState unused)
+        {
+            if (Map.Guards.Any(x => x.Color == XleColor.Blue))
+                return false;
+            else
+                return true;
+        }
 
-		private void Introduction(GameState state)
-		{
-			var ta = XleCore.TextArea;
+        private void Introduction(GameState unused)
+        {
+            TextArea.PrintLineSlow("Ah, it is a pleasure to at last be");
+            TextArea.PrintLineSlow("free from these vile and troublesome");
+            TextArea.PrintLineSlow("orc guards.  One good turn deserves");
+            TextArea.PrintLineSlow("another.");
+            TextArea.PrintLineSlow();
 
-			ta.PrintLineSlow("Ah, it is a pleasure to at last be");
-			ta.PrintLineSlow("free from these vile and troublesome");
-			ta.PrintLineSlow("orc guards.  One good turn deserves");
-			ta.PrintLineSlow("another.");
-			ta.PrintLineSlow();
+            Input.WaitForKey();
 
-			XleCore.WaitForKey();
-			
-			ta.Clear(true);
-			ta.PrintLine();
-			ta.PrintLine();
-			ta.PrintLine("I promote you to apprentice.");
-			ta.PrintLine();
+            TextArea.Clear(true);
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("I promote you to apprentice.");
+            TextArea.PrintLine();
 
-			SoundMan.PlaySound(LotaSound.VeryGood);
-			ta.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
-				XleColor.White, XleColor.Red, 250);
-			
-			ta.PrintLineSlow("(Admittedly, it's not much, but");
-			ta.PrintLineSlow("far better than being a serf.)");
-			ta.PrintLineSlow();
+            SoundMan.PlaySound(LotaSound.VeryGood);
+            TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
+                XleColor.White, XleColor.Red, 250);
 
-			SoundMan.PlaySound(LotaSound.Good);
-			ta.PrintLineSlow("Charisma: +5");
+            TextArea.PrintLineSlow("(Admittedly, it's not much, but");
+            TextArea.PrintLineSlow("far better than being a serf.)");
+            TextArea.PrintLineSlow();
 
-			state.Player.Attribute[Attributes.charm] += 5;
-			state.Player.Level = 2;
+            SoundMan.PlaySound(LotaSound.Good);
+            TextArea.PrintLineSlow("Charisma: +5");
 
-			ta.PrintLineSlow();
-			XleCore.WaitForKey();
+            Player.Attribute[Attributes.charm] += 5;
+            Player.Level = 2;
 
-			if (AllOrcsKilled(state))
-			{
-				GiveGoldKey(state);
-			}
-			else
-			{
-				ta.PrintLineSlow("Please get rid of the rest of these");
-				ta.PrintLineSlow("orcs.  If you don't, they'll only");
-				ta.PrintLineSlow("come back.");
-				ta.PrintLineSlow();
-			}
+            TextArea.PrintLineSlow();
+            Input.WaitForKey();
 
-			XleCore.WaitForKey();
-		}
+            if (AllOrcsKilled(GameState))
+            {
+                GiveGoldKey(GameState);
+            }
+            else
+            {
+                TextArea.PrintLineSlow("Please get rid of the rest of these");
+                TextArea.PrintLineSlow("orcs.  If you don't, they'll only");
+                TextArea.PrintLineSlow("come back.");
+                TextArea.PrintLineSlow();
+            }
 
-		private void Greetings()
-		{
-			TextArea.Clear(true);
-			TextArea.PrintLine();
-			TextArea.PrintLine();
-			TextArea.PrintLine("Greetings from the wizard seravol!");
-			TextArea.PrintLine();
-			TextArea.PrintLine();
+            Input.WaitForKey();
+        }
 
-			SoundMan.PlaySound(LotaSound.VeryGood);
-			TextArea.FlashLinesWhile(
-				() => SoundMan.IsPlaying(LotaSound.VeryGood),
-				XleColor.White, XleColor.Yellow, 250);
-		}
-	}
+        private void Greetings()
+        {
+            TextArea.Clear(true);
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Greetings from the wizard seravol!");
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+
+            SoundMan.PlaySound(LotaSound.VeryGood);
+            TextArea.FlashLinesWhile(
+                () => SoundMan.IsPlaying(LotaSound.VeryGood),
+                XleColor.White, XleColor.Yellow, 250);
+        }
+    }
 }

@@ -54,6 +54,8 @@
   <ItemGroup>
     <Compile Include="Bootstrap\CommandInstaller.cs" />
     <Compile Include="Bootstrap\FactoryInstaller.cs" />
+    <Compile Include="Bootstrap\EventExtenderInstaller.cs" />
+    <Compile Include="Bootstrap\MapExtenderInstaller.cs" />
     <Compile Include="Bootstrap\ServiceInstaller.cs" />
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
@@ -159,7 +161,7 @@
     <Compile Include="Services\Implementation\XleScreen.cs" />
     <Compile Include="Services\IXleGameControl.cs" />
     <Compile Include="XleEventTypes\Door.cs" />
-    <Compile Include="XleEventTypes\Extenders\ChangeMapExtender.cs" />
+    <Compile Include="XleEventTypes\Extenders\ChangeMap.cs" />
     <Compile Include="XleEventTypes\Extenders\Common\ChangeMapQuestion.cs" />
     <Compile Include="XleEventTypes\Extenders\DoorExtender.cs" />
     <Compile Include="XleEventTypes\Extenders\EventExtender.cs" />

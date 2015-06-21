@@ -9,28 +9,29 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-	class DaisMessage : EventExtender
-	{
-		bool givenMessage = false;
-		public override void BeforeStepOn(GameState state)
-		{
-			if (givenMessage)
-				return;
-			if (state.Player.Items[LobItem.FalconFeather] == 0)
-				return;
+    public class DaisMessage : EventExtender
+    {
+        bool givenMessage = false;
 
-			givenMessage = true;
+        public override void BeforeStepOn(GameState state)
+        {
+            if (givenMessage)
+                return;
+            if (Player.Items[LobItem.FalconFeather] == 0)
+                return;
 
-			XleCore.TextArea.Clear(true);
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("   You see the prince on a dais!");
+            givenMessage = true;
 
-			SoundMan.PlaySound(LotaSound.VeryGood);
+            TextArea.Clear(true);
+            TextArea.PrintLine();
+            TextArea.PrintLine("   You see the prince on a dais!");
 
-			XleCore.TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
-				XleColor.Yellow, XleColor.Cyan, 80, 1);
+            SoundMan.PlaySound(LotaSound.VeryGood);
 
-			XleCore.TextArea.Clear();
-		}
-	}
+            TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
+                XleColor.Yellow, XleColor.Cyan, 80, 1);
+
+            TextArea.Clear();
+        }
+    }
 }

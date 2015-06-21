@@ -1,6 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Outside">
-  <MapName>0</MapName>
-  <ExtenderName>Thalen2</ExtenderName>
+  <MapName>Thalen</MapName>
+  <ExtenderName>Thalen</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Base64">

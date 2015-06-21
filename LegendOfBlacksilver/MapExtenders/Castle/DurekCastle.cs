@@ -18,6 +18,8 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
     {
         CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 0.9, v6 = 0.95, v7 = 0.95 };
 
+        protected LobStory Story { get { return GameState.Story(); } }
+        
         public override double ChanceToHitGuard(Player player, Guard guard, int distance)
         {
             return cdc.ChanceToHitGuard(player, distance);
@@ -35,7 +37,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
             return cdc.RollDamageToPlayer(player);
         }
 
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             if (playerPoint.X < 12 && playerPoint.Y < 12)
                 return 0;
@@ -70,16 +72,16 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
         public override void OnLoad(GameState state)
         {
-            if (state.Player.Items[LobItem.FalconFeather] == 0)
+            if (Player.Items[LobItem.FalconFeather] == 0)
             {
                 RemoveFalconFeatherDoor(state);
             }
-            if (Lob.Story.ClearedRockSlide)
+            if (Story.ClearedRockSlide)
             {
                 RemoveRockSlide(state);
             }
 
-            if (Lob.Story.DefeatedOrcs == false)
+            if (Story.DefeatedOrcs == false)
             {
                 ColorOrcs(state);
             }
@@ -87,14 +89,14 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
         private void RemoveRockSlide(GameState state)
         {
-            var evt = TheMap.Events.FirstOrDefault(x => x.ExtenderName == "SingingCrystal");
+            var sc = Events.OfType<SingingCrystal>().FirstOrDefault();
 
-            SingingCrystal.RemoveRockSlide(TheMap, evt.Rectangle);
+            sc.RemoveRockSlide(sc.TheEvent.Rectangle);
         }
 
         private void ColorOrcs(GameState state)
         {
-            if (Lob.Story.DefeatedOrcs == false)
+            if (Story.DefeatedOrcs == false)
             {
                 Rectangle area = Rectangle.FromLTRB(66, 0, TheMap.Width, 68);
 
@@ -116,18 +118,18 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
         public override void SpeakToGuard(GameState state)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine();
 
             if (state.Player.Items[LobItem.FalconFeather] > 0)
             {
-                XleCore.TextArea.PrintLine("I see you have the feather,");
-                XleCore.TextArea.PrintLine("why not use it?");
-                XleCore.Wait(1500);
+                TextArea.PrintLine("I see you have the feather,");
+                TextArea.PrintLine("why not use it?");
+                GameControl.Wait(1500);
             }
             else
             {
-                XleCore.TextArea.PrintLine("I should not converse, sir.");
+                TextArea.PrintLine("I should not converse, sir.");
             }
         }
 
@@ -135,7 +137,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
         {
             if (item == (int)LobItem.FalconFeather)
             {
-                XleCore.TextArea.PrintLine("You're not by a door.");
+                TextArea.PrintLine("You're not by a door.");
                 handled = true;
             }
         }

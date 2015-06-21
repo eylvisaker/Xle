@@ -130,9 +130,9 @@ namespace ERY.Xle.LoB
 		public override TownExtender CreateMapExtender(Town town)
 		{
 			if (town.MapID <= 20)
-				return new ThalenTownExtender();
+				return new ThalenTown();
 			else
-				return new MaelbaneTownExtender();
+				return new MaelbaneTown();
 		}
 
 		public override void SetGameSpeed(GameState state, int Gamespeed)
