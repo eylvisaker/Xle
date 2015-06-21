@@ -6,97 +6,100 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Data;
 
 namespace ERY.Xle.Maps.Renderers
 {
-	public class DungeonRenderer : Map3DRenderer
-	{
-		protected override ExtraType GetExtraType(int val, int side)
-		{
-			if (side != 0)
-				return ExtraType.None;
+    public class DungeonRenderer : Map3DRenderer
+    {
+        public XleData Data { get; set; }
 
-			ExtraType extraType = ExtraType.None;
+        protected override ExtraType GetExtraType(int val, int side)
+        {
+            if (side != 0)
+                return ExtraType.None;
 
-			switch (val)
-			{
-				case 0x11:
-					extraType = ExtraType.GoUp;
-					break;
-				case 0x12:
-					extraType = ExtraType.GoDown;
-					break;
-				case 0x13:
-					extraType = ExtraType.Needle;
-					break;
-				case 0x14:
-					extraType = ExtraType.Slime;
-					break;
-				case 0x15:
-					extraType = ExtraType.TripWire;
-					break;
-				case 0x16:
-					extraType = ExtraType.GasVent;
-					break;
-				case 0x1d:
-					extraType = ExtraType.Urn;
-					break;
-				case 0x1e:
-					extraType = ExtraType.Box;
-					break;
-				case 0x30:
-				case 0x31:
-				case 0x32:
-				case 0x33:
-				case 0x34:
-				case 0x35:
-				case 0x36:
-				case 0x37:
-				case 0x38:
-				case 0x39:
-				case 0x3a:
-				case 0x3b:
-				case 0x3c:
-				case 0x3d:
-				case 0x3e:
-				case 0x3f:
-					extraType = ExtraType.Chest;
-					break;
+            ExtraType extraType = ExtraType.None;
 
-			}
-			return extraType;
-		}
+            switch (val)
+            {
+                case 0x11:
+                    extraType = ExtraType.GoUp;
+                    break;
+                case 0x12:
+                    extraType = ExtraType.GoDown;
+                    break;
+                case 0x13:
+                    extraType = ExtraType.Needle;
+                    break;
+                case 0x14:
+                    extraType = ExtraType.Slime;
+                    break;
+                case 0x15:
+                    extraType = ExtraType.TripWire;
+                    break;
+                case 0x16:
+                    extraType = ExtraType.GasVent;
+                    break;
+                case 0x1d:
+                    extraType = ExtraType.Urn;
+                    break;
+                case 0x1e:
+                    extraType = ExtraType.Box;
+                    break;
+                case 0x30:
+                case 0x31:
+                case 0x32:
+                case 0x33:
+                case 0x34:
+                case 0x35:
+                case 0x36:
+                case 0x37:
+                case 0x38:
+                case 0x39:
+                case 0x3a:
+                case 0x3b:
+                case 0x3c:
+                case 0x3d:
+                case 0x3e:
+                case 0x3f:
+                    extraType = ExtraType.Chest;
+                    break;
 
-		public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
+            }
+            return extraType;
+        }
 
-		protected override void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
-		{
-			Point stepDir = faceDirection.StepDirection();
+        public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
 
-			for (int distance = 1; distance <= maxDistance; distance++)
-			{
-				Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
+        protected override void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
+        {
+            Point stepDir = faceDirection.StepDirection();
 
-				var monster = TheMap.MonsterAt(XleCore.GameState.Player.DungeonLevel, loc);
+            for (int distance = 1; distance <= maxDistance; distance++)
+            {
+                Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
 
-				if (monster == null)
-					continue;
+                var monster = TheMap.MonsterAt(GameState.Player.DungeonLevel, loc);
 
-				var data = XleCore.Data.DungeonMonsters[monster.MonsterID];
-				int image = distance - 1;
-				var imageInfo = data.Images[image];
+                if (monster == null)
+                    continue;
 
-				var drawPoint = imageInfo.DrawPoint;
-				drawPoint.X += inRect.X;
-				drawPoint.Y += inRect.Y;
+                var data = Data.DungeonMonsters[monster.MonsterID];
+                int image = distance - 1;
+                var imageInfo = data.Images[image];
 
-				var srcRect = imageInfo.SourceRects[0];
+                var drawPoint = imageInfo.DrawPoint;
+                drawPoint.X += inRect.X;
+                drawPoint.Y += inRect.Y;
 
-				data.Surface.Draw(srcRect, drawPoint);
+                var srcRect = imageInfo.SourceRects[0];
 
-				break;
-			}
-		}
+                data.Surface.Draw(srcRect, drawPoint);
 
-	}
+                break;
+            }
+        }
+
+    }
 }

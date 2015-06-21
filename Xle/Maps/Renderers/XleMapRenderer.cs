@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Rendering;
 
 namespace ERY.Xle.Maps.Renderers
 {
@@ -14,6 +15,10 @@ namespace ERY.Xle.Maps.Renderers
     {
         XleMap mMap;
         MapExtender mExtender;
+
+        public GameState GameState { get; set; }
+        public Random Random { get; set; }
+        public IXleRenderer Renderer { get; set; }
 
         public virtual XleMap TheMap
         {
@@ -36,7 +41,7 @@ namespace ERY.Xle.Maps.Renderers
 
         public virtual void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
         {
-            XleCore.GameState.Map.Draw(playerPos.X, playerPos.Y, faceDirection, inRect);
+            GameState.Map.Draw(playerPos.X, playerPos.Y, faceDirection, inRect);
         }
 
         protected virtual void OnMapSet()

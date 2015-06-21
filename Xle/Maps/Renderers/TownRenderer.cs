@@ -61,7 +61,7 @@ namespace ERY.Xle.Maps.Renderers
 
 					if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
 					{
-						XleCore.Renderer.DrawCharacterSprite(rx, ry, facing, true, TheMap.Guards.AnimFrame, false, guard.Color);
+						Renderer.DrawCharacterSprite(rx, ry, facing, true, TheMap.Guards.AnimFrame, false, guard.Color);
 					}
 				}
 			}

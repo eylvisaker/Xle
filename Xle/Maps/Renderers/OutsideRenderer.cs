@@ -46,7 +46,7 @@ namespace ERY.Xle.Maps.Renderers
 			if (DisplayMonsterID > -1)
 			{
 				Point dir = MonsterDrawDirection.ToPoint();
-				Point pos = XleCore.Renderer.PlayerDrawPoint;
+				Point pos = Renderer.PlayerDrawPoint;
 
 				pos.X -= 15;
 				pos.Y -= 9;
@@ -60,7 +60,7 @@ namespace ERY.Xle.Maps.Renderers
 				else if (dir.Y > 0)
 					pos.Y += 35;
 
-				XleCore.Renderer.DrawMonster(pos.X, pos.Y, DisplayMonsterID);
+				Renderer.DrawMonster(pos.X, pos.Y, DisplayMonsterID);
 			}
 		}
 		protected override int TileToDraw(int x, int y)
@@ -110,12 +110,12 @@ namespace ERY.Xle.Maps.Renderers
 					{
 						if (waves[index] == 0)
 						{
-							if (XleCore.random.Next(0, 1000) < 20 * (WaterAnimLevel + 1))
+							if (Random.Next(0, 1000) < 20 * (WaterAnimLevel + 1))
 							{
-								waves[index] = XleCore.random.Next(1, 3);
+								waves[index] = Random.Next(1, 3);
 							}
 						}
-						else if (XleCore.random.Next(0, 100) < 25)
+						else if (Random.Next(0, 100) < 25)
 						{
 							waves[index] = 0;
 						}

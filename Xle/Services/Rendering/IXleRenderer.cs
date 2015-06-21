@@ -37,5 +37,13 @@ namespace ERY.Xle.Rendering
 
         void FlashHPWhileSound(Color clr, Color? clr2 = null);
 
+
+        void DrawTile(int drawx, int drawy, int tile);
+
+        Point PlayerDrawPoint { get; set; }
+
+        void DrawMonster(int p1, int p2, int DisplayMonsterID);
+
+        void DrawCharacterSprite(int rx, int ry, Direction facing, bool p1, int p2, bool p3, Color color);
     }
 }

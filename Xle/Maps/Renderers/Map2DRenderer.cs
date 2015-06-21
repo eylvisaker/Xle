@@ -45,7 +45,7 @@ namespace ERY.Xle.Maps.Renderers
 				{
 					tile = TileToDraw(i, j);
 
-					XleCore.Renderer.DrawTile(drawx, drawy, tile);
+					Renderer.DrawTile(drawx, drawy, tile);
 
 					drawx += 16;
 				}
@@ -127,12 +127,12 @@ namespace ERY.Xle.Maps.Renderers
 
 						case AnimationType.Random:
 							while (nextTile == current)
-								nextTile = group.Tiles[XleCore.random.Next(group.Tiles.Count)];
+								nextTile = group.Tiles[Random.Next(group.Tiles.Count)];
 
 							break;
 					}
 
-					if (group.AnimateChance == 100 || XleCore.random.Next(100) < group.AnimateChance)
+					if (group.AnimateChance == 100 || Random.Next(100) < group.AnimateChance)
 					{
 						TheMap[i, j] = nextTile;
 					}
