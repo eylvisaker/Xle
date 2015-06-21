@@ -8,5 +8,6 @@ namespace ERY.Xle.Services
 {
     public interface IPlayerDeathHandler : IXleService
     {
+        void PlayerIsDead();
     }
 }

@@ -18,6 +18,7 @@ namespace ERY.Xle.Services.Implementation
         private ISoundMan soundMan;
         private IXleRenderer renderer;
         private ICommandList commands;
+        private IPlayerDeathHandler deathHandler;
 
         Player player { get { return gameState.Player; } }
 
@@ -28,6 +29,7 @@ namespace ERY.Xle.Services.Implementation
             IXleGameControl gameControl,
             ISoundMan soundMan,
             IXleRenderer renderer,
+            IPlayerDeathHandler deathHandler,
             ITextArea textArea)
         {
             gameState = state;
@@ -36,6 +38,7 @@ namespace ERY.Xle.Services.Implementation
             this.textArea = textArea;
             this.soundMan = soundMan;
             this.renderer = renderer;
+            this.deathHandler = deathHandler;
 
             mDirectionMap[KeyCode.Right] = Direction.East;
             mDirectionMap[KeyCode.Up] = Direction.North;
@@ -52,7 +55,7 @@ namespace ERY.Xle.Services.Implementation
         {
             if (player.HP <= 0 || player.Food <= 0)
             {
-                gameControl.PlayerIsDead();
+                deathHandler.PlayerIsDead();
             }
 
             textArea.Print("\nEnter command: ");

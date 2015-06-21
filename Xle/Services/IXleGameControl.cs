@@ -16,10 +16,7 @@ namespace ERY.Xle.Services
 
         void Redraw();
 
-
         void KeepAlive();
-
-        void PlayerIsDead();
 
     }
 }

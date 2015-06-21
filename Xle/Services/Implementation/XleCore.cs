@@ -1170,9 +1170,5 @@ namespace ERY.Xle.Services.Implementation
             set { Options.EnableDebugMode = value; }
         }
 
-        public static void PlayerIsDead()
-        {
-            Factory.PlayerIsDead(GameState);
-        }
     }
 }

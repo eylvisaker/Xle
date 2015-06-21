@@ -101,11 +101,5 @@ namespace ERY.Xle.Services.Implementation
                 Update(this, EventArgs.Empty);
         }
 
-
-        public void PlayerIsDead()
-        {
-            systemState.Factory.PlayerIsDead(gameState);
-        }
-
     }
 }

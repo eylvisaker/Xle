@@ -11,8 +11,6 @@ namespace ERY.Xle.Services
 
         void CheatLevel(Player player, int level);
 
-        void PlayerIsDead(GameState gameState);
-
         int MailItemID { get; }
         int ClimbingGearItemID { get; }
         int HealingItemID { get; }
