@@ -11,20 +11,11 @@ using System.Text;
 namespace ERY.Xle.XleEventTypes.Stores
 {
 	public class StoreRaft : Store
-	{
-		protected override void AfterReadData()
-		{
-			ExtenderName = "StoreRaft";
-		}
+    {
 
-		protected override XleEventTypes.Extenders.EventExtender CreateExtenderImpl(XleMap map)
-		{
-			return map.CreateEventExtender(this, typeof(StoreRaftExtender));
-		}
-
-		// map and coords that mark where a purchased raft shows up
-		int mBuyRaftMap;
-		Point mBuyRaftPt;
+        // map and coords that mark where a purchased raft shows up
+        int mBuyRaftMap;
+        Point mBuyRaftPt;
 
 		protected override void WriteData(XleSerializationInfo info)
 		{
@@ -54,5 +45,9 @@ namespace ERY.Xle.XleEventTypes.Stores
 			set { mBuyRaftPt = value; }
 		}
 
+        protected override void AfterReadData()
+        {
+            ExtenderName = "StoreRaft";
+        }
 	}
 }

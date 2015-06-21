@@ -114,8 +114,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
         private void RemoveFalconFeatherDoor(GameState state)
         {
-            var door = TheMap.Events.OfType<Door>().First(
-                x => x is Door && (x as Door).RequiredItem == (int)LobItem.FalconFeather);
+            var door = Events.OfType<FeatherDoor>().First();
 
             door.RemoveDoor(state);
         }

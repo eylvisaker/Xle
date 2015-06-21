@@ -39,11 +39,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 			DoorRight,
 		}
 
-		public override void OnLoad(Player player)
-		{
-			base.OnLoad(player);
-		}
-		readonly Size imageSize = new Size(368, 272);
+        readonly Size imageSize = new Size(368, 272);
 
 		public override int WaitTimeAfterStep
 		{

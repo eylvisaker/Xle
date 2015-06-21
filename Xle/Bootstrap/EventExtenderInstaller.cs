@@ -50,7 +50,10 @@ namespace ERY.Xle.Bootstrap
             var evt = context.AdditionalArguments["evt"] as XleEvent;
             var defaultExtender = context.AdditionalArguments["defaultExtender"] as Type;
 
-            return CreateNamedEvent(kernel, evt.ExtenderName);
+            var result = CreateNamedEvent(kernel, evt.ExtenderName);
+            result.TheEvent = evt;
+
+            return result;
         }
 
         private EventExtender CreateNamedEvent(IKernel kernel, string name)

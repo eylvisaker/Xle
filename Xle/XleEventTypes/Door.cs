@@ -11,12 +11,6 @@ namespace ERY.Xle.XleEventTypes
 	[Serializable]
 	public class Door : XleEvent
 	{
-		DoorExtender mExtender;
-
-		protected override Extenders.EventExtender CreateExtenderImpl(XleMap map)
-		{
-			return mExtender = map.CreateEventExtender<DoorExtender>(this);
-		}
 		protected override void ReadData(XleSerializationInfo info)
 		{
 			RequiredItem = info.ReadInt32("RequiredItem", 0);
@@ -31,9 +25,9 @@ namespace ERY.Xle.XleEventTypes
 		public int RequiredItem { get; set; }
 		public int ReplacementTile { get; set; }
 
+        [Obsolete("use extender instead", true)]
 		public void RemoveDoor(GameState state)
 		{
-			mExtender.RemoveDoor(state);
 		}
 	}
 }

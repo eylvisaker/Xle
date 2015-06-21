@@ -115,7 +115,7 @@ namespace ERY.Xle.Services.Implementation
 
                 if (actualChangeMap)
                 {
-                    gameState.Map.OnLoad(player);
+                    gameState.MapExtender.OnLoad(gameState);
                 }
 
             }
@@ -140,7 +140,7 @@ namespace ERY.Xle.Services.Implementation
         public void SetMap(XleMap map)
         {
             gameState.Map = map;
-            gameState.Map.OnLoad(gameState.Player);
+            gameState.MapExtender.OnLoad(gameState);
 
             SetTilesAndCommands();
 

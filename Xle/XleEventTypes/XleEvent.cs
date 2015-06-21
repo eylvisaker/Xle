@@ -19,7 +19,6 @@ namespace ERY.Xle.XleEventTypes
     public abstract class XleEvent : IXleSerializable
     {
         private Rectangle rect;
-        EventExtender mExtender;
 
         public XleEvent()
         {
@@ -128,137 +127,7 @@ namespace ERY.Xle.XleEventTypes
 
         public bool Enabled { get; set; }
 
-        public EventExtender Extender { get { return mExtender; } }
-        protected virtual Type ExtenderType { get { return typeof(EventExtender); } }
-        public void CreateExtender(XleMap map)
-        {
-            mExtender = CreateExtenderImpl(map);
-            mExtender.TheEvent = this;
-        }
+        public virtual Type ExtenderType { get { return typeof(EventExtender); } }
 
-        protected virtual EventExtender CreateExtenderImpl(XleMap map)
-        {
-            return map.CreateEventExtender(this, ExtenderType);
-        }
-
-        /// <summary>
-        /// Function called when player speaks in a square inside or next
-        /// to the LotaEvent.
-        /// 
-        /// Returns true if handled by the event.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        public bool Speak(GameState state)
-        {
-            return mExtender.Speak(state);
-        }
-        /// <summary>
-        /// Function called when player executes Rob in a square inside or next
-        /// to the LotaEvent.
-        /// 
-        /// Returns true if handled by the event.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        public bool Rob(GameState state)
-        {
-            return mExtender.Rob(state);
-        }
-        /// <summary>
-        /// Function called when the player executes the Open command inside
-        /// or next to the LotaEvent.
-        /// 
-        /// Returns true if handled by the event.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        public bool Open(GameState state)
-        {
-            return mExtender.Open(state);
-        }
-        /// <summary>
-        /// Function called when the player executes the Take command inside
-        /// or next to the LotaEvent.
-        /// 
-        /// Returns true if handled by the event.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        public bool Take(GameState state)
-        {
-            return mExtender.Take(state);
-        }
-        /// <summary>
-        /// Function called when the player walks inside
-        /// the LotaEvent.
-        /// 
-        /// Returns true if handled by the event.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        public bool StepOn(GameState state)
-        {
-            return mExtender.StepOn(state);
-        }
-        /// <summary>
-        /// Function called when the player tries to walk inside
-        /// the XleEvent.
-        /// 
-        /// This is before the position is updated.  Returns false to 
-        /// block the player from stepping there, and true if the
-        /// player can walk there.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
-        {
-            mExtender.TryToStepOn(state, dx, dy, out allowStep);
-        }
-        /// <summary>
-        /// Function called when the player uses an item
-        /// or next to the XleEvent.
-        /// 
-        /// Returns true if handled by the event.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public bool Use(GameState state, int item)
-        {
-            return mExtender.Use(state, item);
-        }
-        /// <summary>
-        /// Function called when the player eXamines next
-        /// to the LotaEvent.
-        /// 
-        /// Returns true if handled by the event.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        public bool Xamine(GameState state)
-        {
-            return mExtender.Xamine(state);
-        }
-
-
-        public virtual void BeforeStepOn(GameState state)
-        {
-            mExtender.BeforeStepOn(state);
-        }
-
-
-        [Obsolete]
-        public virtual void OnLoad(GameState state)
-        {
-            mExtender.OnLoad(state);
-        }
-
-        public virtual void OnUpdate(GameState state, double deltaTime)
-        {
-            mExtender.OnUpdate(state, deltaTime);
-        }
     }
 }

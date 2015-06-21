@@ -554,9 +554,9 @@ namespace ERY.Xle.Maps.Extenders
 
 		public override bool PlayerRob(GameState state)
 		{
-			foreach (var evt in TheMap.EventsAt(state.Player, 1))
+			foreach (var evt in EventsAt(state.Player, 1))
 			{
-				bool handled = evt.Extender.Rob(state);
+				bool handled = evt.Rob(state);
 
 				if (handled)
 				{

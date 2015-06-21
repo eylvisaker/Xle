@@ -111,6 +111,8 @@ namespace ERY.Xle.Maps
 
 			// read events
 			ReadData(info);
+
+            SetChestIDs();
 		}
 
 		/// <summary>
@@ -148,7 +150,6 @@ namespace ERY.Xle.Maps
 			}
 
 			result.MapID = id;
-			result.CreateEventExtenders();
 
 			return result;
 		}
@@ -165,17 +166,6 @@ namespace ERY.Xle.Maps
 					ser.Serialize(file, map);
 				}
 			}
-		}
-
-        
-		public virtual void CreateEventExtenders()
-		{
-			foreach (var evt in Events)
-			{
-				evt.CreateExtender(this);
-			}
-
-            Extender.RefreshEvents();
 		}
 
 		public T CreateEventExtender<T>(XleEvent evt) where T : EventExtender, new()
@@ -197,23 +187,6 @@ namespace ERY.Xle.Maps
 			{
 				chest.ChestID = index;
 				index++;
-			}
-		}
-
-		/// <summary>
-		/// Called after a map is loaded.
-		/// </summary>
-		/// <param name="player"></param>
-		public virtual void OnLoad(Player player)
-		{
-			mBaseExtender.OnLoad(XleCore.GameState);
-			mBaseExtender.SetColorScheme(this.ColorScheme);
-
-			SetChestIDs();
-
-			foreach (var evt in Events)
-			{
-				evt.Extender.OnLoad(XleCore.GameState);
 			}
 		}
 
@@ -684,12 +657,5 @@ namespace ERY.Xle.Maps
 			mBaseExtender.MovePlayer(state, stepDirection);
 		}
 
-		public void OnUpdate(GameState state, double deltaTime)
-		{
-			foreach(var evt in Events)
-			{
-				evt.OnUpdate(state, deltaTime);
-			}
-		}
 	}
 }

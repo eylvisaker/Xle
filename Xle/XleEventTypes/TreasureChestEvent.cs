@@ -43,22 +43,6 @@ namespace ERY.Xle.XleEventTypes
 		[Browsable(false)]
 		public int ChestID { get; internal set; }
 
-		public new TreasureChestExtender Extender { get; set; }
-
-		protected override Type ExtenderType
-		{
-			get
-			{
-				return typeof(TreasureChestExtender);
-			}
-		}
-		protected override EventExtender CreateExtenderImpl(XleMap map)
-		{
-			Extender = (TreasureChestExtender)base.CreateExtenderImpl(map);
-
-			return Extender;
-		}
-
 		public void SetOpenTilesOnMap(XleMap map)
 		{
 			var firstTile = map[X, Y];
@@ -89,9 +73,9 @@ namespace ERY.Xle.XleEventTypes
 			}
 		}
 
+        [Obsolete("Use extender instead", true)]
 		public void OpenIfMarked(GameState state)
 		{
-			Extender.OpenIfMarked(state);
 		}
 
 		protected override void WriteData(XleSerializationInfo info)

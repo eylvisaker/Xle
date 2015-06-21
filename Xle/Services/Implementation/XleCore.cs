@@ -190,7 +190,7 @@ namespace ERY.Xle.Services.Implementation
 
             if (GameState != null && GameState.Map != null)
             {
-                GameState.Map.OnUpdate(GameState, Display.DeltaTime / 1000.0);
+                GameState.MapExtender.OnUpdate(Display.DeltaTime / 1000.0);
             }
         }
         [Obsolete("Use input as a service")]
@@ -1143,7 +1143,7 @@ namespace ERY.Xle.Services.Implementation
 
                 if (actualChangeMap)
                 {
-                    GameState.Map.OnLoad(player);
+                    GameState.MapExtender.OnLoad(GameState);
                 }
 
             }

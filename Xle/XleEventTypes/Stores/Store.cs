@@ -41,18 +41,11 @@ namespace ERY.Xle.XleEventTypes.Stores
 			mCostFactor = info.ReadDouble("CostFactor");
 		}
 
-		protected override XleEventTypes.Extenders.EventExtender CreateExtenderImpl(XleMap map)
-		{
-			return map.CreateEventExtender<StoreExtender>(this);
-		}
-
 		public double CostFactor
 		{
 			get { return mCostFactor; }
 			set { mCostFactor = value; }
 		}
-
-		public new StoreExtender Extender { get { return (StoreExtender)base.Extender; } }
 	}
 
 }

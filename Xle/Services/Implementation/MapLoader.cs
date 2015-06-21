@@ -21,11 +21,13 @@ namespace ERY.Xle.Services.Implementation
     {
         private XleData data;
         private IMapExtenderFactory extenderFactory;
+        private IEventExtenderFactory eventFactory;
 
-        public MapLoader(XleData data, IMapExtenderFactory extenderFactory)
+        public MapLoader(XleData data, IMapExtenderFactory extenderFactory, IEventExtenderFactory eventFactory)
         {
             this.data = data;
             this.extenderFactory = extenderFactory;
+            this.eventFactory = eventFactory;
         }
 
         public XleMap LoadMap(int mapId)
@@ -55,7 +57,8 @@ namespace ERY.Xle.Services.Implementation
 
             result.MapID = id;
             result.mBaseExtender = extender;
-            result.CreateEventExtenders();
+
+            extender.CreateEventExtenders(eventFactory);
 
             return result;
         }

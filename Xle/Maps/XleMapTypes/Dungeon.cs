@@ -150,11 +150,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		public override void OnLoad(Player player)
-		{
-			base.OnLoad(player);
-		}
-
 		public DungeonMonster MonsterAt(int dungeonLevel, Point loc)
 		{
 			return Monsters.FirstOrDefault(m => m.DungeonLevel == dungeonLevel && m.Location == loc);

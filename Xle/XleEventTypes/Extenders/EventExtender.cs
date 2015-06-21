@@ -1,4 +1,5 @@
-﻿using ERY.Xle.Maps;
+﻿using AgateLib.Geometry;
+using ERY.Xle.Maps;
 using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Services;
 using System;
@@ -134,5 +135,17 @@ namespace ERY.Xle.XleEventTypes.Extenders
         public virtual void OnUpdate(GameState state, double deltaTime)
         {
         }
+
+        public bool Enabled
+        {
+            get { return TheEvent.Enabled; }
+            set { TheEvent.Enabled = value; }
+        }
+        public Rectangle Rectangle
+        {
+            get { return TheEvent.Rectangle; }
+            set { TheEvent.Rectangle = value; }
+        }
+
     }
 }

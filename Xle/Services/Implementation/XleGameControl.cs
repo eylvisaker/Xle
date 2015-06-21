@@ -92,9 +92,9 @@ namespace ERY.Xle.Services.Implementation
         {
             renderer.UpdateAnim();
 
-            if (gameState != null && gameState.Map != null)
+            if (gameState != null && gameState.MapExtender != null)
             {
-                gameState.Map.OnUpdate(gameState, Display.DeltaTime / 1000.0);
+                gameState.MapExtender.OnUpdate(Display.DeltaTime / 1000.0);
             }
 
             if (Update != null)

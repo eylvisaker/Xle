@@ -79,6 +79,12 @@ namespace ERY.Xle.Maps.Extenders
 
         public virtual void OnLoad(GameState state)
         {
+            SetColorScheme(TheMap.ColorScheme);
+
+            foreach(var evt in Events)
+            {
+                evt.OnLoad(GameState);
+            }
         }
 
         public virtual void OnAfterEntry(GameState state)
@@ -88,7 +94,7 @@ namespace ERY.Xle.Maps.Extenders
         {
             bool didEvent = false;
 
-            foreach (var evt in TheMap.EventsAt(state.Player.X, state.Player.Y, 0))
+            foreach (var evt in EventsAt(state.Player.X, state.Player.Y, 0))
             {
                 evt.StepOn(state);
                 didEvent = true;
@@ -235,7 +241,7 @@ namespace ERY.Xle.Maps.Extenders
 
         public virtual bool PlayerSpeak(GameState state)
         {
-            foreach (var evt in TheMap.EnabledEventsAt(state.Player, 1))
+            foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
             {
                 bool handled = evt.Speak(state);
 
@@ -291,7 +297,7 @@ namespace ERY.Xle.Maps.Extenders
 
         public virtual bool PlayerTake(GameState state)
         {
-            foreach (var evt in TheMap.EnabledEventsAt(state.Player, 1))
+            foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
             {
                 if (evt.Take(state))
                     return true;
@@ -302,7 +308,7 @@ namespace ERY.Xle.Maps.Extenders
 
         public virtual bool PlayerOpen(GameState state)
         {
-            foreach (var evt in TheMap.EnabledEventsAt(state.Player, 1))
+            foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
             {
                 if (evt.Open(state))
                     return true;
@@ -320,7 +326,7 @@ namespace ERY.Xle.Maps.Extenders
         {
             bool handled = false;
 
-            foreach (var evt in TheMap.EventsAt(state.Player, 1))
+            foreach (var evt in EventsAt(state.Player, 1))
             {
                 handled = evt.Use(state, item);
 
@@ -454,7 +460,7 @@ namespace ERY.Xle.Maps.Extenders
 
         public void BeforeStepOn(GameState state, int x, int y)
         {
-            foreach (var evt in TheMap.EventsAt(x, y, 0))
+            foreach (var evt in EventsAt(x, y, 0))
             {
                 evt.BeforeStepOn(state);
             }
@@ -478,7 +484,7 @@ namespace ERY.Xle.Maps.Extenders
         protected virtual bool CanPlayerStep(GameState state, int dx, int dy)
         {
             var player = state.Player;
-            XleEvent evt = TheMap.GetEvent(player.X + dx, player.Y + dy, 0);
+            EventExtender evt = GetEvent(player.X + dx, player.Y + dy, 0);
 
             if (evt != null)
             {
@@ -502,11 +508,89 @@ namespace ERY.Xle.Maps.Extenders
         {
         }
 
-
-        public void RefreshEvents()
+        public void CreateEventExtenders(IEventExtenderFactory eventFactory)
         {
             mEvents.Clear();
-            mEvents.AddRange(TheMap.Events.Select(x => x.Extender));
+
+            foreach(var evt in TheMap.Events)
+            {
+                mEvents.Add(eventFactory.Create(this, evt, typeof(EventExtender)));
+            }
         }
+
+        public void OnUpdate(double deltaTime)
+        {
+            foreach (var evt in Events)
+            {
+                evt.OnUpdate(GameState, deltaTime);
+            }
+        }
+
+
+        public IEnumerable<EventExtender> EnabledEventsAt(Player player, int border)
+        {
+            return EventsAt(player, border).Where(e => e.Enabled);
+        }
+        public IEnumerable<EventExtender> EventsAt(Player player, int border)
+        {
+            int px = player.X;
+            int py = player.Y;
+
+            return EventsAt(px, py, border);
+        }
+        public IEnumerable<EventExtender> EventsAt(int px, int py, int border)
+        {
+            foreach (var e in mEvents)
+            {
+                bool found = false;
+
+                if (e.Enabled == false)
+                    continue;
+
+                var rectangle = e.Rectangle;
+
+                for (int j = 0; j < 2; j++)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        int x = px + i;
+                        int y = py + j;
+
+                        if (x >= rectangle.X - border && y >= rectangle.Y - border &&
+                            x < rectangle.Right + border && y < rectangle.Bottom + border)
+                        {
+                            found = true;
+
+                        }
+                    }
+                }
+
+                if (found)
+                    yield return e;
+            }
+        }
+
+        /// <summary>
+        /// returns the special event at the specified location
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public EventExtender GetEvent(int x, int y, int border)
+        {
+            for (int i = 0; i < mEvents.Count; i++)
+            {
+                EventExtender e = mEvents[i];
+
+                if (x >= e.Rectangle.X - border && y >= e.Rectangle.Y - border &&
+                    x < e.Rectangle.Right + border && y < e.Rectangle.Bottom + border)
+                {
+                    return e;
+                }
+            }
+
+            return null;
+        }
+
     }
 }
