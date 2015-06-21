@@ -46,6 +46,8 @@ namespace ERY.Xle.Maps.Extenders
 
         public override void OnLoad(GameState state)
         {
+            base.OnLoad(state);
+
             CurrentLevel = state.Player.DungeonLevel;
         }
 

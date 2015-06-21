@@ -61,6 +61,8 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
         public override void OnLoad(GameState state)
         {
+            base.OnLoad(state);
+
             Story.BeenInDungeon = true;
         }
 
