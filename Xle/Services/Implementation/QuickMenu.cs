@@ -94,13 +94,13 @@ namespace ERY.Xle.Services.Implementation
                 last = spacing[i] + spaces + 1;
             }
 
-            XleCore.TextArea.PrintLine(tempLine, clrInit);
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine(tempLine, clrInit);
+            TextArea.PrintLine();
 
             topLine = tempLine;
             tempLine = new string(' ', spacing[value]) + "`";
 
-            XleCore.TextArea.RewriteLine(lineIndex + 1, tempLine, clrInit);
+            TextArea.RewriteLine(lineIndex + 1, tempLine, clrInit);
             input.PromptToContinueOnWait = false;
 
             KeyCode key;

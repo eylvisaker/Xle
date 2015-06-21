@@ -18,7 +18,6 @@ namespace ERY.Xle.Maps.Extenders
         public IXleRenderer Renderer { get; set; }
 
         public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
-        public new DungeonRenderer MapRenderer { get { return (DungeonRenderer)base.MapRenderer; } }
 
         protected override Renderers.XleMapRenderer CreateMapRenderer()
         {

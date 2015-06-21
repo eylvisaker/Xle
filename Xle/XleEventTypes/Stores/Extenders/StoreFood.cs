@@ -39,7 +39,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             SetTitle();
 
-            this.player = Player;
             this.robbing = false;
 
             Wait(1);
@@ -236,8 +235,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected override bool RobImpl(GameState state)
         {
-            this.player = state.Player;
-
             SetTitle();
             Wait(1);
             SetWindow(0);
@@ -254,7 +251,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 TextArea.PrintLine();
                 TextArea.PrintLine(string.Format("Stole {0} days of food.", choice), XleColor.Yellow);
 
-                player.Food += choice;
+                Player.Food += choice;
                 SoundMan.PlaySound(LotaSound.Sale);
 
                 if (Random.NextDouble() < 0.25)

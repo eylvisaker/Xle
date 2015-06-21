@@ -26,12 +26,10 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected override bool SpeakImpl(GameState state)
         {
-            var player = state.Player;
             int i = 0;
-            int max = 200 * player.Level;
+            int max = 200 * Player.Level;
             int choice;
 
-            this.player = player;
             robbing = false;
 
             ClearWindow();
@@ -44,7 +42,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             TextArea.PrintLine();
 
-            if (player.loan == 0)
+            if (Player.loan == 0)
             {
                 var window2 = new TextWindow { Location = new Point(8, 7) };
 
@@ -67,9 +65,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
                 if (choice > 0)
                 {
-                    player.Gold += choice;
-                    player.loan = (int)(choice * 1.5);
-                    player.dueDate = (int)(player.TimeDays + 0.999) + 120;
+                    Player.Gold += choice;
+                    Player.loan = (int)(choice * 1.5);
+                    Player.dueDate = (int)(Player.TimeDays + 0.999) + 120;
 
                     TextArea.PrintLine();
                     TextArea.PrintLine(choice.ToString() + " gold borrowed.");
@@ -77,7 +75,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                     Wait(1000);
 
                     TextArea.Print("You'll owe ", XleColor.White);
-                    TextArea.Print(player.loan.ToString(), XleColor.Yellow);
+                    TextArea.Print(Player.loan.ToString(), XleColor.Yellow);
                     TextArea.Print(" gold", XleColor.Yellow);
                     TextArea.Print(" in 120 days.", XleColor.White);
                     TextArea.PrintLine();
@@ -88,9 +86,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             else
             {
                 String DueDate;
-                max = Math.Max(player.Gold, player.loan);
+                max = Math.Max(Player.Gold, Player.loan);
                 int min;
-                int timeLeft = (int)(player.dueDate - player.TimeDays + 0.02);
+                int timeLeft = (int)(Player.dueDate - Player.TimeDays + 0.02);
 
                 if (timeLeft > 0)
                 {
@@ -100,18 +98,18 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 else
                 {
                     DueDate = "NOW!!";
-                    min = (int)(player.loan * .3 + 0.5);
-                    if (min > player.Gold)
+                    min = (int)(Player.loan * .3 + 0.5);
+                    if (min > Player.Gold)
                     {
-                        min = player.Gold;
-                        if (player.Gold > 30)
+                        min = Player.Gold;
+                        if (Player.Gold > 30)
                             min -= 10;
                     }
                 }
 
                 var window2 = new TextWindow { Location = new Point(11, 7) };
 
-                window2.WriteLine("You owe:  " + player.loan.ToString() + " gold!");
+                window2.WriteLine("You owe:  " + Player.loan.ToString() + " gold!");
                 window2.WriteLine();
                 window2.WriteLine();
                 window2.WriteLine("Due Date: " + DueDate);
@@ -130,13 +128,13 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
                 choice = ChooseNumber(max);
 
-                if (choice > player.loan)
-                    choice = player.loan;
+                if (choice > Player.loan)
+                    choice = Player.loan;
 
-                player.Spend(choice);
-                player.loan -= choice;
+                Player.Spend(choice);
+                Player.loan -= choice;
 
-                if (player.loan <= 0)
+                if (Player.loan <= 0)
                 {
                     TextArea.PrintLine("Loan Repaid.");
 
@@ -144,7 +142,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 }
                 else if (min == 0)
                 {
-                    TextArea.PrintLine("You Owe " + player.loan.ToString() + " gold.");
+                    TextArea.PrintLine("You Owe " + Player.loan.ToString() + " gold.");
 
                     if (timeLeft > 15)
                         TextArea.PrintLine("Take your time.");
@@ -154,7 +152,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 else if (choice >= min)
                 {
                     TextArea.PrintLine("You have 14 days to pay the rest!");
-                    player.dueDate = (int)player.TimeDays + 14;
+                    Player.dueDate = (int)Player.TimeDays + 14;
 
                     StoreSound(LotaSound.Sale);
                 }

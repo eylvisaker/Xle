@@ -41,13 +41,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
         readonly Size imageSize = new Size(368, 272);
 
-		public override int WaitTimeAfterStep
-		{
-			get
-			{
-				return XleCore.GameState.GameSpeed.DungeonStepTime;
-			}
-		}
 
 		protected bool IsPassable(int value)
 		{

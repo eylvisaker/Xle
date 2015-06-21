@@ -5,11 +5,15 @@ using System.Text;
 using AgateLib.Geometry;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreBuyback : StoreFront
     {
+        public IEquipmentPicker EquipmentPicker { get; set; }
+        public INumberPicker NumberPicker { get; set; }
+
         public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
         protected override void InitializeColorScheme(ColorScheme cs)
@@ -33,14 +37,13 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             int choice;
             int amount;
 
-            this.player = Player;
             robbing = false;
 
             ClearWindow();
             Title = TheEvent.ShopName;
 
             var wind = new TextWindow();
-            wind.Location = new AgateLib.Geometry.Point(9, 4);
+            wind.Location = new Point(9, 4);
 
             wind.WriteLine("I will happily purchase");
             wind.WriteLine("your used arms and armor");
@@ -89,12 +92,12 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             {
                 case 1:
                     questionWindow.WriteLine("What weapon will you sell me?");
-                    item = XleCore.PickWeapon(state, null, ColorScheme.BackColor);
+                    item = EquipmentPicker.PickWeapon(state, null, ColorScheme.BackColor);
                     break;
 
                 case 2:
                     questionWindow.WriteLine("What armor will you sell me?");
-                    item = XleCore.PickArmor(state, null, ColorScheme.BackColor);
+                    item = EquipmentPicker.PickArmor(state, null, ColorScheme.BackColor);
                     break;
             }
 
@@ -120,7 +123,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             charm = Math.Min(charm, 80);
 
             int maxAccept = (int)(item.Price * Math.Pow(charm, .7) / 11);
-            int offer = (int)((6 + XleCore.random.NextDouble()) * maxAccept / 14.0);
+            int offer = (int)((6 + Random.NextDouble()) * maxAccept / 14.0);
 
             choice = MakeOffer(item, offer, false);
 
@@ -158,7 +161,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             spread = ask - offer;
             double scale = maxAccept / (double)spread;
-            offer = (int)(offer + (1 + XleCore.random.NextDouble() * 5) * scale);
+            offer = (int)(offer + (1 + Random.NextDouble() * 5) * scale);
             maxAccept = spread;
 
             if (offer >= ask)
@@ -194,22 +197,22 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 }
 
                 if (ask == lastAsk ||
-                    (ask > lastAsk && XleCore.random.NextDouble() < 0.5))
+                    (ask > lastAsk && Random.NextDouble() < 0.5))
                 {
                     ComeBackWhenSerious();
                     return;
                 }
 
                 double diff = lastAsk - ask;
-                if (diff == 0) diff = XleCore.random.NextDouble() * 3;
+                if (diff == 0) diff = Random.NextDouble() * 3;
 
                 if (diff / maxAccept < 0.03)
                     diff /= 1.3;
 
                 lastAsk = ask;
-                spread = (int)(offer + diff / 1.2 + XleCore.random.NextDouble() * diff / 1.6);
+                spread = (int)(offer + diff / 1.2 + Random.NextDouble() * diff / 1.6);
 
-                if (spread > ask - 2 && XleCore.random.NextDouble() < .5)
+                if (spread > ask - 2 && Random.NextDouble() < .5)
                 {
                     CompleteSale(ask, item);
                     return;
@@ -239,7 +242,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         {
             TextArea.Clear();
 
-            return XleCore.ChooseNumber(32767);
+            return NumberPicker.ChooseNumber(32767);
         }
 
         private int MakeOffer(Equipment item, int offer, bool finalOffer)
@@ -257,7 +260,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             else
                 ta.PrintLine(".");
 
-            return XleCore.QuickMenuYesNo(true);
+            return QuickMenuService.QuickMenuYesNo(true);
         }
 
         private bool WayTooHigh(double ask, int offer, int maxAccept)
@@ -313,8 +316,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             TextArea.PrintLine("It's a deal!");
             TextArea.PrintLine(item.BaseName + " sold for " + offer + " gold.");
 
-            player.Gold += offer;
-            player.RemoveEquipment(item);
+            Player.Gold += offer;
+            Player.RemoveEquipment(item);
 
             StoreSound(LotaSound.Sale);
         }

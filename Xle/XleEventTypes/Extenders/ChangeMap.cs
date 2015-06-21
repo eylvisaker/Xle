@@ -5,6 +5,7 @@ using System.Text;
 
 using ERY.Xle.Services.Implementation;
 using ERY.Xle.Services;
+using ERY.Xle.Data;
 
 namespace ERY.Xle.XleEventTypes.Extenders
 {
@@ -13,6 +14,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
         public new ChangeMapEvent TheEvent { get { return (ChangeMapEvent)base.TheEvent; } }
 
         public IMapChanger MapChanger { get; set; }
+        public XleData Data { get; set; }
 
         protected bool VerifyMapExistence()
         {
@@ -63,7 +65,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
         public string GetMapName()
         {
-            return XleCore.Data.MapList[TheEvent.MapID].Name;
+            return Data.MapList[TheEvent.MapID].Name;
         }
 
         public void ExecuteMapChange()

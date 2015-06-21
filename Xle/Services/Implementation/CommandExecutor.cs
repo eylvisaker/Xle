@@ -126,7 +126,7 @@ namespace ERY.Xle.Services.Implementation
 
             renderer.AnimateStep();
 
-            var waitTime = gameState.Map.WaitTimeAfterStep;
+            var waitTime = gameState.MapExtender.WaitTimeAfterStep;
 
             if (wasRaft != player.BoardedRaft)
             {

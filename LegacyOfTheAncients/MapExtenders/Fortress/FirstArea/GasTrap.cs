@@ -10,8 +10,10 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
-    public class GasTrap : EventExtender
+    public class GasTrap : LotaEvent
     {
+        public Random Random { get; set; }
+
         public override bool StepOn(GameState state)
         {
             if (Player.Y > TheEvent.Y + 2)
@@ -77,7 +79,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             {
                 for (int i = startx; i < startx + 3; i++)
                 {
-                    GameState.Map[i, j] = gasGroup.RandomTile();
+                    GameState.Map[i, j] = gasGroup.RandomTile(Random);
                 }
             }
         }

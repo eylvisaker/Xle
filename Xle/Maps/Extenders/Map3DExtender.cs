@@ -166,5 +166,13 @@ namespace ERY.Xle.Maps.Extenders
             return false;
         }
 
+        public override int WaitTimeAfterStep
+        {
+            get
+            {
+                return GameState.GameSpeed.DungeonStepTime;
+            }
+        }
+
     }
 }

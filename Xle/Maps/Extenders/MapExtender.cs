@@ -595,5 +595,13 @@ namespace ERY.Xle.Maps.Extenders
             return null;
         }
 
+        public virtual int WaitTimeAfterStep
+        {
+            get
+            {
+                return GameState.GameSpeed.GeneralStepTime;
+            }
+        }
+
     }
 }

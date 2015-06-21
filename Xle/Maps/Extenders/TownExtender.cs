@@ -549,7 +549,7 @@ namespace ERY.Xle.Maps.Extenders
 				TextArea.PrintLine("Nothing hit");
 			}
 
-			GameControl.Wait(200 + 50 * player.Gamespeed, true, XleCore.Redraw);
+            GameControl.Wait(200 + 50 * player.Gamespeed, keyBreak: true);
 		}
 
 		public override bool PlayerRob(GameState state)

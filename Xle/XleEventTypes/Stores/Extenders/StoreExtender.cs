@@ -22,10 +22,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         }
 
         /// <summary>
-        /// Stores the player object for use when redrawing.
-        /// </summary>
-        protected Player player;
-        /// <summary>
         /// Bool indicating whether or not we are robbing this store.
         /// </summary>
         protected bool robbing;

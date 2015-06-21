@@ -37,11 +37,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected override bool SpeakImpl(GameState state)
         {
-            var player = state.Player;
-
             int choice;
 
-            this.player = player;
             robbing = false;
 
             ClearWindow();

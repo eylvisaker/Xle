@@ -152,12 +152,5 @@ namespace ERY.Xle.Maps.XleMapTypes
             }
         }
 
-        public override int WaitTimeAfterStep
-        {
-            get
-            {
-                return XleCore.GameState.GameSpeed.OutsideStepTime;
-            }
-        }
     }
 }

@@ -1291,5 +1291,13 @@ namespace ERY.Xle.Maps.Extenders
                     break;
             }
         }
+
+        public override int WaitTimeAfterStep
+        {
+            get
+            {
+                return GameState.GameSpeed.OutsideStepTime;
+            }
+        }
     }
 }

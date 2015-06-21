@@ -224,7 +224,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             foreach (var it in stock)
             {
-                if (XleCore.random.Next(256) >= 191 && result.Count > 0)
+                if (Random.Next(256) >= 191 && result.Count > 0)
                 {
                     continue;
                 }
@@ -299,7 +299,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected override Equipment PickItemToSell()
         {
-            return EquipmentPicker.PickWeapon(XleCore.GameState, null, Color.FromArgb(0));
+            return EquipmentPicker.PickWeapon(GameState, null, Color.FromArgb(0));
         }
         protected override string StoreType
         {
@@ -342,7 +342,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected override Equipment PickItemToSell()
         {
-            return EquipmentPicker.PickArmor(XleCore.GameState, null, Color.FromArgb(0));
+            return EquipmentPicker.PickArmor(GameState, null, Color.FromArgb(0));
         }
         protected override string StoreType
         {

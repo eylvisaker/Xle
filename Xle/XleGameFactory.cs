@@ -14,6 +14,8 @@ namespace ERY.Xle
 {
     public abstract class XleGameFactory : IXleGameFactory
     {
+        public ITextArea TextArea { get; set; }
+
         public abstract string GameTitle { get; }
 
         public abstract void LoadSurfaces();
@@ -51,13 +53,14 @@ namespace ERY.Xle
             }
         }
 
+        [Obsolete("Use IPlayerDeathHandler service instead.")]
         public virtual void PlayerIsDead(GameState state)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("            You died!");
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("            You died!");
+            TextArea.PrintLine();
+            TextArea.PrintLine();
 
             SoundMan.PlaySound(LotaSound.VeryBad);
 

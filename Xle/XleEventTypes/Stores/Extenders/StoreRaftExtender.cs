@@ -99,7 +99,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                     SoundMan.PlaySound(LotaSound.Medium);
                 }
 
-                XleCore.Wait(750);
+                GameControl.Wait(750);
 
             }
 

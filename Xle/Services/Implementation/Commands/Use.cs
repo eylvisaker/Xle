@@ -11,9 +11,10 @@ namespace ERY.Xle.Services.Implementation.Commands
             ShowItemMenu = showItemMenu;
         }
 
+        public IXleGameFactory Factory { get; set; }
         public IXleGameControl GameControl { get; set; }
         public IXleRenderer Renderer { get; set; }
-
+        public ISoundMan SoundMan { get; set; }
         public XleData Data { get; set; }
         public IXleMenu Menu { get; set; }
 
@@ -31,27 +32,27 @@ namespace ERY.Xle.Services.Implementation.Commands
 
             TextArea.PrintLine();
 
-            string action = Data.ItemList[state.Player.Hold].Action;
+            string action = Data.ItemList[Player.Hold].Action;
 
             if (string.IsNullOrEmpty(action))
-                action = "Use " + Data.ItemList[state.Player.Hold].Name;
+                action = "Use " + Data.ItemList[Player.Hold].Name;
 
             TextArea.PrintLine(action + ".");
 
-            if (state.Player.Hold == XleCore.Factory.HealingItemID)
+            if (Player.Hold == Factory.HealingItemID)
             {
                 noEffect = false;
-                UseHealingItem(state, state.Player.Hold);
+                UseHealingItem(state, Player.Hold);
             }
             else
             {
-                noEffect = !state.MapExtender.PlayerUse(state, state.Player.Hold);
+                noEffect = !state.MapExtender.PlayerUse(state, Player.Hold);
             }
 
             if (noEffect == true)
             {
                 TextArea.PrintLine();
-                GameControl.Wait(400 + 100 * state.Player.Gamespeed);
+                GameControl.Wait(400 + 100 * Player.Gamespeed);
                 TextArea.PrintLine("No effect");
             }
         }
@@ -81,7 +82,7 @@ namespace ERY.Xle.Services.Implementation.Commands
                     itemName = XleCore.GetMapName(state.Player.mailTown) + " " + itemName;
                 }*/
 
-                if (i <= state.Player.Hold)
+                if (i <= Player.Hold)
                 {
                     value++;
                 }
@@ -89,13 +90,13 @@ namespace ERY.Xle.Services.Implementation.Commands
                 theList.Add(itemName);
             }
 
-            state.Player.HoldMenu(Menu.SubMenu("Hold Item", value, theList));
+            Player.HoldMenu(Menu.SubMenu("Hold Item", value, theList));
         }
 
         private void UseHealingItem(GameState state, int itemID)
         {
-            state.Player.HP += state.Player.MaxHP / 2;
-            state.Player.Items[itemID] -= 1;
+            Player.HP += Player.MaxHP / 2;
+            Player.Items[itemID] -= 1;
             SoundMan.PlaySound(LotaSound.Good);
 
             Renderer.FlashHPWhileSound(XleColor.Cyan);

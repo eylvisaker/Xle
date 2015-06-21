@@ -10,6 +10,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
     public class StoreMagic : StoreFront
     {
         public XleData Data { get; set; }
+        public XleOptions Options { get; set; }
 
         public virtual int GetItemValue(int choice)
         {
@@ -66,9 +67,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected override bool SpeakImpl(GameState state)
         {
-            var player = state.Player;
-
-            this.player = player;
+            var Player = state.Player;
 
             Windows.Clear();
             Windows.AddRange(CreateStoreWindows());
@@ -91,8 +90,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             var item = magicSpells.ToArray()[choice - 1];
 
-            int maxCarry = item.MaxCarry - player.Items[item.ItemID];
-            int maxAfford = player.Gold / MagicPrice(item);
+            int maxCarry = item.MaxCarry - Player.Items[item.ItemID];
+            int maxAfford = Player.Gold / MagicPrice(item);
             int maxPurchase = Math.Min(maxCarry, maxAfford);
 
             if (maxAfford <= 0)
@@ -101,7 +100,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 return true;
             }
 
-            if (XleCore.Options.EnhancedUserInterface)
+            if (Options.EnhancedUserInterface)
             {
                 if (maxCarry == 0)
                 {
@@ -123,7 +122,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 return true;
             }
 
-            if (player.Items[item.ItemID] + purchaseCount > item.MaxCarry)
+            if (Player.Items[item.ItemID] + purchaseCount > item.MaxCarry)
             {
                 NothingPurchased("You can't buy this many.");
                 return true;
@@ -131,14 +130,14 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             int cost = purchaseCount * MagicPrice(choice);
 
-            if (cost > player.Gold)
+            if (cost > Player.Gold)
             {
                 NothingPurchased("You're short on gold.");
                 return true;
             }
 
-            player.Items[item.ItemID] += purchaseCount;
-            player.Gold -= purchaseCount * MagicPrice(choice);
+            Player.Items[item.ItemID] += purchaseCount;
+            Player.Gold -= purchaseCount * MagicPrice(choice);
 
             TextArea.Clear();
             TextArea.PrintLine(" " + purchaseCount.ToString() + " " +

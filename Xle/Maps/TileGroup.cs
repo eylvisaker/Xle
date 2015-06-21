@@ -58,9 +58,9 @@ namespace ERY.Xle.Maps
 
 		#endregion
 
-		public int RandomTile()
+		public int RandomTile(Random random)
 		{
-			return Tiles[XleCore.random.Next(Tiles.Count)];
+			return Tiles[random.Next(Tiles.Count)];
 		}
 	}
 }

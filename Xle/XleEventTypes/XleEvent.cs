@@ -25,60 +25,6 @@ namespace ERY.Xle.XleEventTypes
             Enabled = true;
         }
 
-        public string ExtenderName { get; set; }
-
-        [Browsable(false)]
-        public Rectangle Rectangle
-        {
-            get { return rect; }
-            set { rect = value; }
-        }
-
-        public Point Location { get { return Rectangle.Location; } set { rect.Location = value; } }
-        public Size Size { get { return rect.Size; } set { rect.Size = value; } }
-
-        public int X
-        {
-            get { return rect.X; }
-            set { rect.X = value; }
-        }
-        public int Y
-        {
-            get { return rect.Y; }
-            set { rect.Y = value; }
-        }
-        public int Width
-        {
-            get { return rect.Width; }
-            set { rect.Width = value; }
-        }
-        public int Height
-        {
-            get { return rect.Height; }
-            set { rect.Height = value; }
-        }
-		
-        /// <summary>
-        /// Gets whether or not this type of event allows the player
-        /// to rob it when the town isn't angry at him.
-        /// </summary>
-        [Obsolete]
-        public virtual bool AllowRobWhenNotAngry { get { return false; } }
-
-        /// <summary>
-        /// Method called when the player attempts to rob and should get the 
-        /// message "the merchant won't let you rob."
-        /// </summary>
-        [Obsolete]
-        public virtual void RobFail()
-        {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("The merchant won't let you rob.");
-
-            XleCore.Wait(1000);
-        }
-
         #region IXleSerializable Members
 
         void IXleSerializable.WriteData(XleSerializationInfo info)
@@ -125,6 +71,40 @@ namespace ERY.Xle.XleEventTypes
 
         #endregion
 
+
+        public string ExtenderName { get; set; }
+
+        [Browsable(false)]
+        public Rectangle Rectangle
+        {
+            get { return rect; }
+            set { rect = value; }
+        }
+
+        public Point Location { get { return Rectangle.Location; } set { rect.Location = value; } }
+        public Size Size { get { return rect.Size; } set { rect.Size = value; } }
+
+        public int X
+        {
+            get { return rect.X; }
+            set { rect.X = value; }
+        }
+        public int Y
+        {
+            get { return rect.Y; }
+            set { rect.Y = value; }
+        }
+        public int Width
+        {
+            get { return rect.Width; }
+            set { rect.Width = value; }
+        }
+        public int Height
+        {
+            get { return rect.Height; }
+            set { rect.Height = value; }
+        }
+		
         public bool Enabled { get; set; }
 
         public virtual Type ExtenderType { get { return typeof(EventExtender); } }
