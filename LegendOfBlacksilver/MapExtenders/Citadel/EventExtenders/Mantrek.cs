@@ -1,4 +1,5 @@
 ﻿using ERY.Xle.Maps;
+using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
@@ -9,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
-	class Mantrek : EventExtender
+	public class Mantrek : LobEvent
 	{
+        public IMapChanger MapChanger { get; set; }
+
 		public override bool Speak(GameState state)
 		{
-			if (Lob.Story.MantrekKilled)
+			if (Story.MantrekKilled)
 				return false;
 
 			BegForLife(state);
@@ -22,18 +25,18 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 
 		private void BegForLife(GameState state)
 		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Spare me and I shall");
-			XleCore.TextArea.PrintLine("give you the staff.");
-			XleCore.TextArea.PrintLine();
-			XleCore.QuickMenuYesNo();
+			TextArea.PrintLine();
+			TextArea.PrintLine();
+			TextArea.PrintLine("Spare me and I shall");
+			TextArea.PrintLine("give you the staff.");
+			TextArea.PrintLine();
+			QuickMenu.QuickMenuYesNo();
 
-			XleCore.ChangeMap(state.Player, state.Player.MapID, 1);
+            MapChanger.ChangeMap(Player, Player.MapID, 1);
 
-			Lob.Story.MantrekKilled = true;
+			Story.MantrekKilled = true;
 
-			EraseMantrek(state.Map);
+			EraseMantrek(Map);
 		}
 
 		public void EraseMantrek(XleMap map)

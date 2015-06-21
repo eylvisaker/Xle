@@ -83,9 +83,10 @@ namespace ERY.Xle.XleEventTypes
 			TargetEntryPoint = info.ReadInt32("TargetEntryPoint");
 			mCommandText = info.ReadString("CommandText", "");
 		}
+        [Obsolete("Call the extender instead.")]
 		public void ExecuteMapChange(Player player)
 		{
-			mExtender.ExecuteMapChange(player);
+			mExtender.ExecuteMapChange();
 		}
 	}
 }

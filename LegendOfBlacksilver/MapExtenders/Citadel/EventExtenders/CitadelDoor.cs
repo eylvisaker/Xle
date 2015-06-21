@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
-	class CitadelDoor : DoorExtender
-	{
-		public override bool ItemUnlocksDoor(GameState state, int item)
-		{
-			if (item == (int)LobItem.QuartzKey)
-			{
-				return true;
-			}
-			else
-			{
-				return base.ItemUnlocksDoor(state, item);
-			}
-		}
-	}
+    public class CitadelDoor : DoorExtender
+    {
+        public override bool ItemUnlocksDoor(GameState state, int item)
+        {
+            if (item == (int)LobItem.QuartzKey)
+            {
+                return true;
+            }
+            else
+            {
+                return base.ItemUnlocksDoor(state, item);
+            }
+        }
+    }
 }

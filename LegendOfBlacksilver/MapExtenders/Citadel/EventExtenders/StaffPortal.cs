@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
-	class StaffPortal : ChangeMapTeleporter
-	{
-		public override bool StepOn(GameState state)
-		{
-			return true;
-		}
+    public class StaffPortal : ChangeMapTeleporter
+    {
+        public override bool StepOn(GameState state)
+        {
+            return true;
+        }
 
-		public override bool Use(GameState state, int item)
-		{
-			if (item != (int)LobItem.Staff)
-				return false;
+        public override bool Use(GameState state, int item)
+        {
+            if (item != (int)LobItem.Staff)
+                return false;
 
-			TeleportAnimation();
+            TeleportAnimation();
 
-			TheEvent.ExecuteMapChange(state.Player);
+            ExecuteMapChange();
 
-			return true;			
-		}
-	}
+            return true;
+        }
+    }
 }

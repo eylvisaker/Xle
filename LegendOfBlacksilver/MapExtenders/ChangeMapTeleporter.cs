@@ -9,49 +9,51 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders
 {
-	class ChangeMapTeleporter : ChangeMap
-	{
-		protected override bool OnStepOnImpl(GameState state, ref bool cancel)
-		{
-			return ExecuteTeleportation(state);
-		}
+    public class ChangeMapTeleporter : ChangeMap
+    {
+        protected LobStory Story { get { return GameState.Story(); } }
 
-		protected bool ExecuteTeleportation(GameState state)
-		{
-			TeleportAnimation();
-			ExecuteMapChange(state);
+        protected override bool OnStepOnImpl(GameState state, ref bool cancel)
+        {
+            return ExecuteTeleportation();
+        }
 
-			return true;
-		}
+        protected bool ExecuteTeleportation()
+        {
+            TeleportAnimation();
+            ExecuteMapChange();
 
-		protected void TeleportAnimation()
-		{
-			SoundMan.PlaySound(LotaSound.Teleporter);
+            return true;
+        }
 
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
+        protected void TeleportAnimation()
+        {
+            SoundMan.PlaySound(LotaSound.Teleporter);
 
-			while (watch.ElapsedMilliseconds < 100)
-				XleCore.Redraw();
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
 
-			while (watch.ElapsedMilliseconds < 1800)
-			{
-				int index = ((int)watch.ElapsedMilliseconds % 80) / 50;
-                
-				if (index == 0)
-					Player.RenderColor = XleColor.Black;
-				else
-					Player.RenderColor = XleColor.White;
+            while (watch.ElapsedMilliseconds < 100)
+                GameControl.Redraw();
 
-				XleCore.Redraw();
-			}
+            while (watch.ElapsedMilliseconds < 1800)
+            {
+                int index = ((int)watch.ElapsedMilliseconds % 80) / 50;
+
+                if (index == 0)
+                    Player.RenderColor = XleColor.Black;
+                else
+                    Player.RenderColor = XleColor.White;
+
+                GameControl.Redraw();
+            }
 
             Player.RenderColor = XleColor.White;
 
-			while (watch.ElapsedMilliseconds < 2000)
-			{
-				XleCore.Redraw();
-			}
-		}
-	}
+            while (watch.ElapsedMilliseconds < 2000)
+            {
+                GameControl.Redraw();
+            }
+        }
+    }
 }

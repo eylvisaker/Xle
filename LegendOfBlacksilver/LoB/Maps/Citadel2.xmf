@@ -1,6 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Castle">
   <MapName>citadel</MapName>
-  <ExtenderName>Citadel2</ExtenderName>
+  <ExtenderName>CitadelUpper</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,1,1,0,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,2</Tiles>
@@ -92,7 +92,7 @@
       <Y>4</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>40</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>
@@ -356,7 +356,7 @@
       <Y>74</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CitadelDoor</ExtenderName>
       <RequiredItem>10</RequiredItem>
       <ReplacementTile>21</ReplacementTile>
     </Item>
@@ -365,7 +365,7 @@
       <Y>74</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CitadelDoor</ExtenderName>
       <RequiredItem>9</RequiredItem>
       <ReplacementTile>20</ReplacementTile>
     </Item>
@@ -374,7 +374,7 @@
       <Y>81</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CitadelDoor</ExtenderName>
       <RequiredItem>9</RequiredItem>
       <ReplacementTile>18</ReplacementTile>
     </Item>
@@ -383,7 +383,7 @@
       <Y>7</Y>
       <Width>1</Width>
       <Height>3</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CitadelDoor</ExtenderName>
       <RequiredItem>10</RequiredItem>
       <ReplacementTile>20</ReplacementTile>
     </Item>

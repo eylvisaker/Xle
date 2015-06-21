@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
-	class Tattoo : EventExtender
+	public class Tattoo : LobEvent
 	{
 	}
 }

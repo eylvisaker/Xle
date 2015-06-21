@@ -12,7 +12,7 @@ using ERY.Xle.Maps;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel
 {
-    class CitadelGround : CastleExtender
+    public class CitadelGround : CastleExtender
     {
         CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 1.3, v6 = 1.5, v7 = 1.5 };
 

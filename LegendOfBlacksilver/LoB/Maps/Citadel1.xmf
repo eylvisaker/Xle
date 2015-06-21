@@ -1,6 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Castle">
   <MapName>citadel</MapName>
-  <ExtenderName>Citadel1</ExtenderName>
+  <ExtenderName>CitadelGround</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,1,0,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,0,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,1,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,1,1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2</Tiles>
@@ -92,7 +92,7 @@
       <Y>37</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>PasswordTeleporter</ExtenderName>
       <MapID>41</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -104,7 +104,7 @@
       <Y>13</Y>
       <Width>3</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CitadelDoor</ExtenderName>
       <RequiredItem>8</RequiredItem>
       <ReplacementTile>5</ReplacementTile>
     </Item>
@@ -113,7 +113,7 @@
       <Y>73</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CitadelDoor</ExtenderName>
       <RequiredItem>8</RequiredItem>
       <ReplacementTile>5</ReplacementTile>
     </Item>
@@ -122,7 +122,7 @@
       <Y>5</Y>
       <Width>1</Width>
       <Height>2</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>CitadelDoor</ExtenderName>
       <RequiredItem>9</RequiredItem>
       <ReplacementTile>0</ReplacementTile>
     </Item>
