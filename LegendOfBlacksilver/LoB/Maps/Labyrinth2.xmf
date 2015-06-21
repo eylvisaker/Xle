@@ -1,6 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Castle">
   <MapName>labyrinth</MapName>
-  <ExtenderName>Labyrinth2</ExtenderName>
+  <ExtenderName>LabyrinthUpper</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="ERY.Xle.TileSet">
     <Tiles array="true" encoding="Csv">1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,1,1,1,1,1,1,0,1,1,1,0,0,1,1,1,1,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,1,1,0,1,0,1,0,1,0,1,1,1,0,0,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2</Tiles>
@@ -85,7 +85,7 @@
       <Y>4</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>45</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>
@@ -97,7 +97,7 @@
       <Y>15</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>1</TargetEntryPoint>
@@ -109,7 +109,7 @@
       <Y>92</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>2</TargetEntryPoint>
@@ -121,7 +121,7 @@
       <Y>92</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>3</TargetEntryPoint>
@@ -133,7 +133,7 @@
       <Y>3</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>4</TargetEntryPoint>
@@ -145,7 +145,7 @@
       <Y>37</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>5</TargetEntryPoint>
@@ -157,7 +157,7 @@
       <Y>17</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>0</TargetEntryPoint>
@@ -169,7 +169,7 @@
       <Y>71</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>6</TargetEntryPoint>
@@ -181,7 +181,7 @@
       <Y>53</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>7</TargetEntryPoint>
@@ -193,7 +193,7 @@
       <Y>53</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>8</TargetEntryPoint>
@@ -205,7 +205,7 @@
       <Y>53</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>4</TargetEntryPoint>
@@ -217,7 +217,7 @@
       <Y>81</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>9</TargetEntryPoint>
@@ -229,7 +229,7 @@
       <Y>74</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>10</TargetEntryPoint>
@@ -241,7 +241,7 @@
       <Y>4</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>11</TargetEntryPoint>
@@ -253,7 +253,7 @@
       <Y>46</Y>
       <Width>1</Width>
       <Height>1</Height>
-      <ExtenderName>ChangeMap</ExtenderName>
+      <ExtenderName>ChangeMapTeleporter</ExtenderName>
       <MapID>0</MapID>
       <AskUser>True</AskUser>
       <TargetEntryPoint>12</TargetEntryPoint>
@@ -517,7 +517,7 @@
       <Y>88</Y>
       <Width>1</Width>
       <Height>2</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>LabyrinthDoor</ExtenderName>
       <RequiredItem>12</RequiredItem>
       <ReplacementTile>17</ReplacementTile>
     </Item>
@@ -526,7 +526,7 @@
       <Y>60</Y>
       <Width>2</Width>
       <Height>1</Height>
-      <ExtenderName>Door</ExtenderName>
+      <ExtenderName>LabyrinthDoor</ExtenderName>
       <RequiredItem>13</RequiredItem>
       <ReplacementTile>17</ReplacementTile>
     </Item>

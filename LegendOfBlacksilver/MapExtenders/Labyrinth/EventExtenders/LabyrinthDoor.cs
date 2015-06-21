@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Labyrinth.EventExtenders
 {
-	class LabyrinthDoor : DoorExtender
-	{
-		public override bool ItemUnlocksDoor(GameState state, int item)
-		{
-			if (item == (int)LobItem.SkeletonKey)
-			{
-				return true;
-			}
+    public class LabyrinthDoor : DoorExtender
+    {
+        public override bool ItemUnlocksDoor(GameState state, int item)
+        {
+            if (item == (int)LobItem.SkeletonKey)
+            {
+                return true;
+            }
 
-			return base.ItemUnlocksDoor(state, item);
-		}
-	}
+            return base.ItemUnlocksDoor(state, item);
+        }
+    }
 }

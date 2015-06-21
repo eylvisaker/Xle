@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ERY.Xle.Maps;
+using AgateLib.Geometry;
 
 namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 {
@@ -51,7 +52,7 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
             return cdc.RollDamageToPlayer(player);
         }
 
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             if (playerPoint.Y < 22 && playerPoint.X > 35 && playerPoint.X < 70)
                 return base.GetOutsideTile(playerPoint, x, y);

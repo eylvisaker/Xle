@@ -12,10 +12,8 @@ using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle.LoB.MapExtenders.Temples
 {
-    class LobTempleExtender : TempleExtender
+    public class LobTempleExtender : TempleExtender
     {
-        private ICommandFactory CommandFactory { get; set; }
-
         public override void SetCommands(ICommandList commands)
         {
             commands.Items.AddRange(LobProgram.CommonLobCommands);
@@ -38,8 +36,8 @@ namespace ERY.Xle.LoB.MapExtenders.Temples
         {
             get
             {
-                yield return XleCore.Data.MagicSpells[3];
-                yield return XleCore.Data.MagicSpells[4];
+                yield return Data.MagicSpells[3];
+                yield return Data.MagicSpells[4];
             }
         }
     }
