@@ -20,10 +20,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         public LotaDungeon()
         {
             FillDrips();
-            ResetDripTime();
+
+            nextSound = Timing.TotalSeconds + 3;
         }
 
-        public XleData Data { get; set; }
         public XleOptions Options { get; set; }
 
         public LotaStory Story
