@@ -19,20 +19,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
 		public List<int> Mail { get;set;}
 
-		protected override MapExtender CreateExtenderImpl()
-		{
-			if (XleCore.Factory == null)
-			{
-				Extender = new TownExtender();
-			}
-			else
-			{
-				Extender = XleCore.Factory.CreateMapExtender(this);
-			}
-
-			return Extender;
-		}
-
 		#region --- Construction and Serialization ---
 
 		public Town()

@@ -29,8 +29,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			Monsters = new List<DungeonMonster>();
 		}
 
-		public new DungeonExtender Extender { get; private set; }
-
 		public List<DungeonMonster> Monsters { get; set; }
 
 		public override IEnumerable<string> AvailableTileImages
@@ -58,21 +56,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			info.Write("MonsterHealthScale", MonsterHealthScale);
 			info.Write("MonsterDamageScale", MonsterDamageScale);
 		}
-
-		protected override MapExtender CreateExtenderImpl()
-		{
-			if (XleCore.Factory == null)
-			{
-				Extender = new DungeonExtender();
-			}
-			else
-			{
-				Extender = XleCore.Factory.CreateMapExtender(this);
-			}
-
-			return Extender;
-		}
-
 
 		public override bool IsMultiLevelMap
 		{

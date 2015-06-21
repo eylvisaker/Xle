@@ -88,55 +88,6 @@ namespace ERY.Xle.LoB
 			else
 				return Lob3DSurfaces.IslandCaverns;
 		}
-		public override MuseumExtender CreateMapExtender(Museum museum)
-		{
-			if (museum.MapID == 53)
-				return new OwlArchives(null);
-			else if (museum.MapID == 54)
-				return new HawkArchives(null);
-
-			return base.CreateMapExtender(museum);
-		}
-		public override OutsideExtender CreateMapExtender(Outside outside)
-		{
-			if (outside.MapID < 5)
-				return new Thalen();
-			else
-				return new Maelbane();
-		}
-		public override DungeonExtender CreateMapExtender(Dungeon theMap)
-		{
-			switch(theMap.MapID)
-			{
-				case 61: return new IslandCaverns();
-				case 62: return new TaragasMines();
-				case 63: return new MarthbaneTunnels();
-				case 64: return new PitsOfBlackmire();
-				case 65: return new DeathspireChasm();
-
-				default: return base.CreateMapExtender(theMap);
-			}
-		}
-		public override CastleExtender CreateMapExtender(CastleMap castle)
-		{
-			string ext = castle.ExtenderName.ToLowerInvariant();
-
-			if (mExtenders.ContainsKey(ext))
-				return (CastleExtender)Activator.CreateInstance(mExtenders[ext]);
-
-			return base.CreateMapExtender(castle);
-		}
-		public override TempleExtender CreateMapExtender(Temple town)
-		{
-			return new LobTemple();
-		}
-		public override TownExtender CreateMapExtender(Town town)
-		{
-			if (town.MapID <= 20)
-				return new ThalenTown();
-			else
-				return new MaelbaneTown();
-		}
 
 		public override void SetGameSpeed(GameState state, int Gamespeed)
 		{

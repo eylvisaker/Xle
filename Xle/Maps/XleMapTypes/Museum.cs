@@ -24,8 +24,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 		int mHeight;
 		int mWidth;
 
-		public new MuseumExtender Extender { get; set; }
-
 		public Museum()
 		{
 		}
@@ -98,18 +96,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 			{
 				return 0.5;
 			}
-		}
-
-		protected override Extenders.MapExtender CreateExtenderImpl()
-		{
-			if (XleCore.Factory == null)
-			{
-				Extender = new MuseumExtender();
-			}
-			else
-				Extender = XleCore.Factory.CreateMapExtender(this);
-
-			return Extender;
 		}
 
 		private bool IsExhibitAt(Point location)

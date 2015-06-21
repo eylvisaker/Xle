@@ -148,7 +148,6 @@ namespace ERY.Xle.Maps
 			}
 
 			result.MapID = id;
-			result.mBaseExtender = result.CreateExtender();
 			result.CreateEventExtenders();
 
 			return result;
@@ -166,19 +165,6 @@ namespace ERY.Xle.Maps
 					ser.Serialize(file, map);
 				}
 			}
-		}
-
-		private MapExtender CreateExtender()
-		{
-			var result = CreateExtenderImpl();
-
-			result.TheMap = this;
-
-			return result;
-		}
-		protected virtual MapExtender CreateExtenderImpl()
-		{
-			return new MapExtender();
 		}
 
         

@@ -75,46 +75,6 @@ namespace ERY.Xle.LotA
                 return Lota3DSurfaces.DungeonBrown;
         }
 
-        public override TownExtender CreateMapExtender(Town town)
-        {
-            return new LotaTown();
-        }
-        public override OutsideExtender CreateMapExtender(Outside outside)
-        {
-            if (outside.ExtenderName == "Flight")
-                return new Flight();
-            else
-                return new Tarmalon();
-        }
-        public override DungeonExtender CreateMapExtender(Dungeon theMap)
-        {
-            switch (theMap.MapID)
-            {
-                case 71: return new PiratesLairDungeon();
-                case 72: return new ArmakDungeon();
-                case 73: return new FourJewelsDungeon();
-            }
-
-            return base.CreateMapExtender(theMap);
-        }
-        public override MuseumExtender CreateMapExtender(Museum museum)
-        {
-            return new LotaMuseum(null);
-        }
-        public override CastleExtender CreateMapExtender(CastleMap castle)
-        {
-            if (castle.ExtenderName.ToLowerInvariant() == "castle1")
-                return new CastleGround();
-            if (castle.ExtenderName.ToLowerInvariant() == "castle2")
-                return new CastleUpper();
-            if (castle.ExtenderName.ToLowerInvariant() == "fortress1")
-                return new FortressEntry();
-            if (castle.ExtenderName.ToLowerInvariant() == "fortress2")
-                return new FortressFinal();
-
-            return base.CreateMapExtender(castle);
-        }
-
         public override void CheatLevel(Player player, int level)
         {
             if (level < 0) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");

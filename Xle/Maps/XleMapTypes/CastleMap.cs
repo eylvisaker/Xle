@@ -25,22 +25,5 @@ namespace ERY.Xle.Maps.XleMapTypes
 			}
 		}
 
-		protected override MapExtender CreateExtenderImpl()
-		{
-			if (XleCore.Factory == null)
-			{
-				Extender = new CastleExtender();
-			}
-			else
-			{
-				Extender = XleCore.Factory.CreateMapExtender(this);
-			}
-
-			base.Extender = Extender;
-
-			return Extender;
-		}
-		
-		public new CastleExtender Extender { get; set; }
 	}
 }
