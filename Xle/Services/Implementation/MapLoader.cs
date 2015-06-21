@@ -45,14 +45,16 @@ namespace ERY.Xle.Services.Implementation
 
             XleMap result;
 
-            using (var file = FileProvider.Assets.OpenRead(filename))
+            using (var file = AgateLib.IO.Assets.OpenRead(filename))
             {
                 result = (XleMap)ser.Deserialize(file);
             }
 
+            var extender = extenderFactory.CreateMapExtender(result);
+            extender.TheMap = result;
+
             result.MapID = id;
-            result.mBaseExtender = extenderFactory.CreateMapExtender(result);
-            result.mBaseExtender.TheMap = result;
+            result.mBaseExtender = extender;
             result.CreateEventExtenders();
 
             return result;

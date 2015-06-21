@@ -8,38 +8,38 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class CrystalTears : LobExhibit
-	{
-		public CrystalTears()
-			: base("Crystal Tears", Coin.BlackOpal)
-		{ }
+    public class CrystalTears : LobExhibit
+    {
+        public CrystalTears()
+            : base("Crystal Tears", Coin.BlackOpal)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.CrystalTears; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.CrystalTears; }
+        }
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want to borrow them?");
-			XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Do you want to borrow them?");
+            TextArea.PrintLine();
 
-			if (0 == XleCore.QuickMenuYesNo())
-			{
-				player.Items[LobItem.DragonTear] += 2;
+            if (0 == QuickMenu.QuickMenuYesNo())
+            {
+                Player.Items[LobItem.DragonTear] += 2;
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("You receive two dragon's tears.");
+                TextArea.PrintLine();
+                TextArea.PrintLine("You receive two dragon's tears.");
 
-				SoundMan.PlaySoundSync(LotaSound.VeryGood);
-			}
-			else
-			{
-				ReturnGem(player);
-			}
-		}
-	}
+                SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            }
+            else
+            {
+                ReturnGem(Player);
+            }
+        }
+    }
 }

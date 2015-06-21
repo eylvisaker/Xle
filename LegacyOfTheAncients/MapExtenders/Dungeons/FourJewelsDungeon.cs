@@ -13,8 +13,8 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 		}
 		protected override bool IsCompleted
 		{
-			get { return Lota.Story.FourJewelsComplete; }
-			set { Lota.Story.FourJewelsComplete = value; }
+			get { return Story.FourJewelsComplete; }
+			set { Story.FourJewelsComplete = value; }
 		}
 
 		protected override int StrengthBoost

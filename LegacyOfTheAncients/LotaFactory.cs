@@ -122,7 +122,7 @@ namespace ERY.Xle.LotA
             if (level == 9) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
             if (level > 10) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
 
-            var story = Lota.Story;
+            var story =  Lota.Story;
 
             ClearStoryItems(player);
             ClearMuseumCoins(player);
@@ -159,7 +159,7 @@ namespace ERY.Xle.LotA
                 story.Museum[(int)ExhibitIdentifier.PirateTreasure] = 1;
 
                 player.Items[LotaItem.HealingHerb] = 40;
-                Lota.Story.BeenInDungeon = true;
+                story.BeenInDungeon = true;
             }
             if (level >= 4)
             {
@@ -167,7 +167,7 @@ namespace ERY.Xle.LotA
                 story.Museum[(int)ExhibitIdentifier.Tapestry] = 1;
                 story.Museum[(int)ExhibitIdentifier.StonesWisdom] = 1;
 
-                Lota.Story.PirateComplete = true;
+                story.PirateComplete = true;
 
                 player.Attribute[Attributes.intelligence] = 35;
                 player.Attribute[Attributes.strength] = 25;
@@ -178,7 +178,7 @@ namespace ERY.Xle.LotA
             if (level >= 5)
             {
                 story.Museum[(int)ExhibitIdentifier.KnightsTest] = 1;
-                Lota.Story.ArmakComplete = true;
+                story.ArmakComplete = true;
 
                 player.Items[LotaItem.SapphireCoin] = 0;
                 player.Items[LotaItem.MagicIce] = 1;
@@ -188,7 +188,7 @@ namespace ERY.Xle.LotA
             }
             if (level >= 6)
             {
-                Lota.Story.FoundGuardianLeader = true;
+                story.FoundGuardianLeader = true;
                 player.Items[LotaItem.RubyCoin] = 1;
 
                 player.Items[LotaItem.CopperKey] = 1;
@@ -196,7 +196,7 @@ namespace ERY.Xle.LotA
             }
             if (level >= 7)
             {
-                Lota.Story.FourJewelsComplete = true;
+                story.FourJewelsComplete = true;
                 player.Attribute[Attributes.strength] = 50;
 
                 player.Items[LotaItem.RubyCoin] = 0;

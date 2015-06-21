@@ -8,34 +8,34 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class SingingCrystal : LobExhibit
-	{
-		public SingingCrystal()
-			: base("Singing Crystal", Coin.BlueGem)
-		{ }
+    public class SingingCrystal : LobExhibit
+    {
+        public SingingCrystal()
+            : base("Singing Crystal", Coin.BlueGem)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.SingingCrystal; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.SingingCrystal; }
+        }
 
-		public override bool IsClosed(ERY.Xle.Player player)
-		{
-			if (Lob.Story.ProcuredSingingCrystal)
-				return true;
+        public override bool IsClosed(Player unused)
+        {
+            if (Story.ProcuredSingingCrystal)
+                return true;
 
-			return base.IsClosed(player);
-		}
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+            return base.IsClosed(Player);
+        }
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-			XleCore.TextArea.Clear();
+            TextArea.Clear();
 
-			player.Items[LobItem.SingingCrystal] = 1;
-			Lob.Story.ProcuredSingingCrystal = true;
+            Player.Items[LobItem.SingingCrystal] = 1;
+            Story.ProcuredSingingCrystal = true;
 
-			SoundMan.PlaySoundSync(LotaSound.VeryGood);
-		}
-	}
+            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+        }
+    }
 }

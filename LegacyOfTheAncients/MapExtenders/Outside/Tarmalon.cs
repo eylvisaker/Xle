@@ -16,13 +16,15 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
     {
         int banditAmbush;
 
+        protected LotaStory Story { get { return GameState.Story(); } }
+
         public IMapChanger MapChanger { get; set; }
 
         public override void OnLoad(GameState state)
         {
             base.OnLoad(state);
 
-            Lota.Story.Invisible = false;
+            Story.Invisible = false;
 
             Player.RenderColor = XleColor.White;
 

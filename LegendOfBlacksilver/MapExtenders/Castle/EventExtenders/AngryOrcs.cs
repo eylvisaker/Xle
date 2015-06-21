@@ -7,23 +7,16 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
-    public class AngryOrcs : EventExtender
+    public class AngryOrcs : CastleEvent
     {
-        private DurekCastle durekCastle;
-
-        public AngryOrcs(DurekCastle durekCastle)
-        {
-            this.durekCastle = durekCastle;
-        }
-
         public override bool StepOn(GameState state)
         {
-            if (durekCastle.InOrcArea == false)
+            if (DurekCastleObject.InOrcArea == false)
             {
-                durekCastle.StoredAngryFlag = durekCastle.IsAngry;
+                DurekCastleObject.StoredAngryFlag = DurekCastleObject.IsAngry;
 
-                durekCastle.IsAngry = true;
-                durekCastle.InOrcArea = true;
+                DurekCastleObject.IsAngry = true;
+                DurekCastleObject.InOrcArea = true;
             }
 
             return true;

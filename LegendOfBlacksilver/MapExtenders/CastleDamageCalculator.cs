@@ -12,6 +12,12 @@ namespace ERY.Xle.LoB.MapExtenders
 	{
 		public double v5, v6, v7;
 
+        public CastleDamageCalculator(Random random)
+        {
+            this.Random = random;
+        }
+
+        public Random Random { get; set; }
 
 		public double ChanceToHitGuard(Player player, int distance)
 		{
@@ -27,14 +33,14 @@ namespace ERY.Xle.LoB.MapExtenders
 			var dam = (player.Attribute[Attributes.strength] + 5) *
 				(player.CurrentWeapon.ID / 2.0 + 1) / 7.0 / v7;
 
-			dam += 2 * XleCore.random.NextDouble() * dam;
+			dam += 2 * Random.NextDouble() * dam;
 
 			return (int)dam;
 		}
 
 		public int RollDamageToPlayer(Player player)
 		{
-			var dam = v6 * (300 + XleCore.random.NextDouble()*600) / 
+			var dam = v6 * (300 + Random.NextDouble()*600) / 
 				(player.CurrentArmor.ID + 2) / 
 				Math.Pow(player.Attribute[Attributes.endurance], 0.9) + 2;
 
@@ -45,5 +51,6 @@ namespace ERY.Xle.LoB.MapExtenders
 		{
 			return 1 - player.Attribute[Attributes.dexterity] / 99.0;
 		}
-	}
+
+    }
 }

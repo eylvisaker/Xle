@@ -8,39 +8,41 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class TheWealthy : LobExhibit
-	{
-		public TheWealthy()
-			: base("The Wealthy", Coin.RedGarnet)
-		{ }
+    public class TheWealthy : LobExhibit
+    {
+        public TheWealthy()
+            : base("The Wealthy", Coin.RedGarnet)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.TheWealthy; }
-		}
+        public Random Random { get; set; }
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.TheWealthy; }
+        }
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want some gold?");
-			XleCore.TextArea.PrintLine();
-			
-			if (0 == XleCore.QuickMenuYesNo())
-			{
-				int amount = (int)(400 + Math.Pow(player.Level, 1.35) + XleCore.random.Next(100));
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Gold + " + amount);
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Do you want some gold?");
+            TextArea.PrintLine();
 
-				player.Gold += amount;
+            if (0 == QuickMenu.QuickMenuYesNo())
+            {
+                int amount = (int)(400 + Math.Pow(Player.Level, 1.35) + Random.Next(100));
 
-				SoundMan.PlaySoundSync(LotaSound.VeryGood);
-			}
-		}
-	}
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+                TextArea.PrintLine("Gold + " + amount);
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+
+                Player.Gold += amount;
+
+                SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            }
+        }
+    }
 }

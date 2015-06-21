@@ -14,8 +14,12 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 {
     public class CitadelUpper : CastleExtender
     {
-        CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 1.6, v6 = 5.5, v7 = 2.3 };
+        CastleDamageCalculator cdc;
 
+        public CitadelUpper(Random random)
+        {
+            cdc = new CastleDamageCalculator (random){ v5 = 1.6, v6 = 5.5, v7 = 2.3 };
+        }
         public override void SetColorScheme(ColorScheme scheme)
         {
             scheme.TextColor = XleColor.White;

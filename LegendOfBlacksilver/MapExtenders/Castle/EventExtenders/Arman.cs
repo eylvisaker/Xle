@@ -14,7 +14,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
         {
             TextArea.PrintLine();
 
-            if (Story.DefeatedOrcs == false && Lob.Story.ArmanGaveElixirs == false)
+            if (Story.DefeatedOrcs == false && Story.ArmanGaveElixirs == false)
             {
                 Story.ArmanGaveElixirs = true;
                 state.Player.Items[LobItem.LifeElixir] += 2;
@@ -59,7 +59,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
                 TextArea.PrintLine();
             }
 
-            XleCore.WaitForKey();
+            Input.WaitForKey();
             return true;
         }
     }

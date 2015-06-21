@@ -128,7 +128,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
         public override void OnBeforeEntry(GameState state, ref int targetEntryPoint)
         {
             if (targetEntryPoint < 3)
-                targetEntryPoint = Lota.Story.MuseumEntryPoint;
+                targetEntryPoint = Story.MuseumEntryPoint;
         }
 
         public override void PlayerUse(GameState state, int item, ref bool handled)
@@ -168,7 +168,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
                 {
                     if (entry.Location == state.Player.Location)
                     {
-                        Lota.Story.MuseumEntryPoint = state.Map.EntryPoints.IndexOf(entry);
+                        Story.MuseumEntryPoint = state.Map.EntryPoints.IndexOf(entry);
                     }
                 }
 

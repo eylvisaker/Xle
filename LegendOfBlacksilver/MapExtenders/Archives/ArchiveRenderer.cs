@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives
 {
-	class ArchiveRenderer : MuseumRenderer
-	{
-		protected override AgateLib.Geometry.Rectangle ExhibitCloseupRect
-		{
-			get
-			{
-				var result = base.ExhibitCloseupRect;
+    public class ArchiveRenderer : MuseumRenderer
+    {
+        protected override AgateLib.Geometry.Rectangle ExhibitCloseupRect
+        {
+            get
+            {
+                var result = base.ExhibitCloseupRect;
 
-				result.Y -= 16;
+                result.Y -= 16;
 
-				return result;
-			}
-		}
-	}
+                return result;
+            }
+        }
+    }
 }

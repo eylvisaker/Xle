@@ -8,44 +8,43 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class MorningStar : LobExhibit
-	{
-		public MorningStar()
-			: base("Morning Star", Coin.Emerald)
-		{ }
+    public class MorningStar : LobExhibit
+    {
+        public MorningStar()
+            : base("Morning Star", Coin.Emerald)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.MorningStar; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.MorningStar; }
+        }
 
-		public override bool IsClosed(Player player)
-		{
-			return Lob.Story.ClosedMorningStar;
-		}
+        public override bool IsClosed(Player player)
+        {
+            return Story.ClosedMorningStar;
+        }
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want to borrow this item?");
-			XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Do you want to borrow this item?");
+            TextArea.PrintLine();
 
-			if (0 == XleCore.QuickMenuYesNo())
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Fight bravely.");
+            if (0 == QuickMenu.QuickMenuYesNo())
+            {
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+                TextArea.PrintLine("Fight bravely.");
 
-				SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-				player.AddWeapon(9, 4);
-				Lob.Story.ClosedMorningStar = true;
-
-			}
-			else
-				ReturnGem(player);
-		}
-	}
+                Player.AddWeapon(9, 4);
+                Story.ClosedMorningStar = true;
+            }
+            else
+                ReturnGem(Player);
+        }
+    }
 }

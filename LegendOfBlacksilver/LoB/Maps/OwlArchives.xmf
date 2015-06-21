@@ -1,8 +1,6 @@
 <XleRoot type="ERY.Xle.Maps.XleMapTypes.Museum" Width="24" Height="31">
-  <MapName>
-  </MapName>
-  <ExtenderName>
-  </ExtenderName>
+  <MapName>Owl Archives</MapName>
+  <ExtenderName>OwlArchives</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="null" />
   <TileImage>DungeonTiles.png</TileImage>

@@ -10,7 +10,12 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 {
     public class LabyrinthUpper : LabyrinthBase
     {
-        CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 2.1, v6 = 29, v7 = 2.5 };
+        CastleDamageCalculator cdc;
+
+        public LabyrinthUpper(Random random) : base(random)
+        {
+            cdc = new CastleDamageCalculator(random) { v5 = 2.1, v6 = 29, v7 = 2.5 };
+        }
 
         public override void SetColorScheme(ColorScheme scheme)
         {

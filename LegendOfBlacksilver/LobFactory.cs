@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 
 using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Data;
 
 namespace ERY.Xle.LoB
 {
@@ -32,7 +33,9 @@ namespace ERY.Xle.LoB
 		{
 			FillExtenderDictionaries();
 		}
-		
+
+        public XleData Data { get; set; }
+
 		public override IXleSerializable CreateStoryData()
 		{
 			return new LobStory();
@@ -65,7 +68,7 @@ namespace ERY.Xle.LoB
 
 			Lob3DSurfaces.LoadSurfaces();
 
-			foreach (var exinfo in XleCore.Data.ExhibitInfo.Values)
+			foreach (var exinfo in Data.ExhibitInfo.Values)
 			{
 				try
 				{
@@ -88,9 +91,9 @@ namespace ERY.Xle.LoB
 		public override MuseumExtender CreateMapExtender(Museum museum)
 		{
 			if (museum.MapID == 53)
-				return new OwlArchive();
+				return new OwlArchives(null);
 			else if (museum.MapID == 54)
-				return new HawkArchive();
+				return new HawkArchives(null);
 
 			return base.CreateMapExtender(museum);
 		}
@@ -125,7 +128,7 @@ namespace ERY.Xle.LoB
 		}
 		public override TempleExtender CreateMapExtender(Temple town)
 		{
-			return new LobTempleExtender();
+			return new LobTemple();
 		}
 		public override TownExtender CreateMapExtender(Town town)
 		{

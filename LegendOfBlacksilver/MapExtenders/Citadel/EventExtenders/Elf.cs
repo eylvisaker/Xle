@@ -41,19 +41,19 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
             TextArea.PrintLineSlow("Would you rather rescue a beautiful");
             TextArea.PrintLineSlow("princess or a elven baby?\n");
 
-            int choice = XleCore.QuickMenu(new MenuItemList("Princess", "Baby"), 2);
+            int choice = QuickMenu.QuickMenu(new MenuItemList("Princess", "Baby"), 2);
             valid &= (choice == 1);
 
             TextArea.PrintLineSlow("Would you rather slay a marauding");
             TextArea.PrintLineSlow("dragon or an incompetent baron?\n");
 
-            choice = XleCore.QuickMenu(new MenuItemList("Dragon", "Baron"), 2);
+            choice = QuickMenu.QuickMenu(new MenuItemList("Dragon", "Baron"), 2);
             valid &= (choice == 1);
 
             TextArea.PrintLineSlow("Would you rather give money to");
             TextArea.PrintLineSlow("a hungry thief or a thirsty drunk?\n");
 
-            choice = XleCore.QuickMenu(new MenuItemList("Thief", "Drunk"), 2);
+            choice = QuickMenu.QuickMenu(new MenuItemList("Thief", "Drunk"), 2);
             valid &= (choice == 0);
 
             if (valid == false)
@@ -98,7 +98,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
             else
             {
                 state.Player.Gold -= 1500;
-                Lob.Story.ElfPaid = true;
+                Story.ElfPaid = true;
 
                 Puzzle(state);
             }

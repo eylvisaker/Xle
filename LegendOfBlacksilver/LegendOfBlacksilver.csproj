@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lob.cs" />
+    <Compile Include="Bootstrap\LobExhibitInstaller.cs" />
     <Compile Include="LobFactory.cs" />
     <Compile Include="LobProgram.cs" />
     <Compile Include="LobStory.cs" />
@@ -73,14 +73,16 @@
     <Compile Include="MapExtenders\Archives\Exhibits\TheWealthy.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\UnderwaterPort.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\VaseOfSouls.cs" />
-    <Compile Include="MapExtenders\Archives\HawkArchive.cs" />
-    <Compile Include="MapExtenders\Archives\LobArchiveExtenderBase.cs" />
-    <Compile Include="MapExtenders\Archives\OwlArchive.cs" />
+    <Compile Include="MapExtenders\Archives\HawkArchives.cs" />
+    <Compile Include="MapExtenders\Archives\IExhibitFactory.cs" />
+    <Compile Include="MapExtenders\Archives\LobArchives.cs" />
+    <Compile Include="MapExtenders\Archives\OwlArchives.cs" />
     <Compile Include="MapExtenders\CastleDamageCalculator.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\AngryCastle.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\AngryOrcs.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\Arman.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\CastleDoor.cs" />
+    <Compile Include="MapExtenders\Castle\EventExtenders\CastleEvent.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\TreasureChest.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\DaisMessage.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\King.cs" />
@@ -113,7 +115,7 @@
     <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />
     <Compile Include="MapExtenders\Outside\Maelbane.cs" />
     <Compile Include="MapExtenders\Outside\Thalen.cs" />
-    <Compile Include="MapExtenders\Temples\LobTempleExtender.cs" />
+    <Compile Include="MapExtenders\Temples\LobTemple.cs" />
     <Compile Include="MapExtenders\Towns\LobTown.cs" />
     <Compile Include="MapExtenders\Towns\MaelbaneTown.cs" />
     <Compile Include="MapExtenders\Towns\ThalenTown.cs" />
@@ -417,7 +419,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bootstrap\" />
     <Folder Include="Support\EasyFlash\" />
   </ItemGroup>
   <ItemGroup>

@@ -8,37 +8,37 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class GameOfHonor : LobExhibit
-	{
-		public GameOfHonor()
-			: base("Game Of Honor", Coin.RedGarnet)
-		{ }
+    public class GameOfHonor : LobExhibit
+    {
+        public GameOfHonor()
+            : base("Game Of Honor", Coin.RedGarnet)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.GameOfHonor; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.GameOfHonor; }
+        }
 
-		public override bool IsClosed(Player player)
-		{
-			return Lob.Story.RegisteredForTrist;
-		}
-		public override void RunExhibit(Player player)
-		{
-			if (player.Level < 3)
-			{
-				XleCore.TextArea.PrintLine("You must be more advanced");
-				XleCore.TextArea.PrintLine("to use this exhibit.");
-				XleCore.TextArea.PrintLine();
+        public override bool IsClosed(Player player)
+        {
+            return Story.RegisteredForTrist;
+        }
+        public override void RunExhibit(Player unused)
+        {
+            if (Player.Level < 3)
+            {
+                TextArea.PrintLine("You must be more advanced");
+                TextArea.PrintLine("to use this exhibit.");
+                TextArea.PrintLine();
 
-				ReturnGem(player);
-			}
-			else
-			{
-				base.RunExhibit(player);
+                ReturnGem(Player);
+            }
+            else
+            {
+                base.RunExhibit(Player);
 
-				Lob.Story.RegisteredForTrist = true;
-			}
-		}
-	}
+                Story.RegisteredForTrist = true;
+            }
+        }
+    }
 }

@@ -8,7 +8,7 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class Mountains : LobExhibit
+    public class Mountains : LobExhibit
 	{
 		public Mountains()
 			: base("Mountains", Coin.AmethystGem)
@@ -19,31 +19,31 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 			get { return ExhibitIdentifier.Mountains; }
 		}
 
-		public override bool IsClosed(Player player)
+		public override bool IsClosed(Player unused)
 		{
-			return player.Items[LobItem.ClimbingGear] > 0;
+			return Player.Items[LobItem.ClimbingGear] > 0;
 		}
 
-		public override void RunExhibit(Player player)
+		public override void RunExhibit(Player unused)
 		{
-			base.RunExhibit(player);
+			base.RunExhibit(Player);
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want a set?");
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
+			TextArea.PrintLine("Do you want a set?");
+			TextArea.PrintLine();
 
-			if (0 == XleCore.QuickMenuYesNo())
+			if (0 == QuickMenu.QuickMenuYesNo())
 			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("Use it carefully.");
+				TextArea.PrintLine();
+				TextArea.PrintLine();
+				TextArea.PrintLine("Use it carefully.");
 
 				SoundMan.PlaySoundSync(LotaSound.Good);
 
-				player.Items[LobItem.ClimbingGear] += 1;
+				Player.Items[LobItem.ClimbingGear] += 1;
 			}
 			else
-				ReturnGem(player);
+				ReturnGem(Player);
 		}
 	}
 }

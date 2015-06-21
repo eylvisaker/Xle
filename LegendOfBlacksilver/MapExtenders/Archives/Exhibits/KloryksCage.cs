@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class KloryksCage : LobExhibit
-	{
-		public KloryksCage()
-			: base("Kloryk's Cage", Coin.WhiteDiamond)
-		{ }
+    public class KloryksCage : LobExhibit
+    {
+        public KloryksCage()
+            : base("Kloryk's Cage", Coin.WhiteDiamond)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.KloryksCage; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.KloryksCage; }
+        }
 
-		public override bool IsClosed(Player player)
-		{
-			return HasBeenVisited(player);
-		}
+        public override bool IsClosed(Player unused)
+        {
+            return HasBeenVisited(Player);
+        }
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-			ReturnGem(player);
-		}
-	}
+            ReturnGem(Player);
+        }
+    }
 }

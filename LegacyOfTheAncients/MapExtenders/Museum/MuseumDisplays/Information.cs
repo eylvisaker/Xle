@@ -214,7 +214,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 return 7;
 
             // check if we've found the leader of the guardians
-            if (Lota.Story.FoundGuardianLeader == true)
+            if (Story.FoundGuardianLeader == true)
                 return 6;
 
             int jadeExhibits = CountExhibits(2, 4);

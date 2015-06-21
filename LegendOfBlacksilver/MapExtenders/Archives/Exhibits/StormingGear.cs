@@ -8,42 +8,43 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class StormingGear : LobExhibit
-	{
-		public StormingGear()
-			: base("Storming Gear", Coin.RedGarnet)
-		{ }
+    public class StormingGear : LobExhibit
+    {
+        public StormingGear()
+            : base("Storming Gear", Coin.RedGarnet)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.StormingGear; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.StormingGear; }
+        }
 
-		public override bool IsClosed(Player player)
-		{
-			return player.Items[LobItem.RopeAndPulley] > 0;
-		}
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public override bool IsClosed(Player player)
+        {
+            return player.Items[LobItem.RopeAndPulley] > 0;
+        }
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want to borrow this gear?");
-			XleCore.TextArea.PrintLine();
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-			if (0 == XleCore.QuickMenuYesNo())
-			{
-				player.Items[LobItem.RopeAndPulley] += 1;
+            TextArea.PrintLine();
+            TextArea.PrintLine("Do you want to borrow this gear?");
+            TextArea.PrintLine();
 
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("The equipment is now");
-				XleCore.TextArea.PrintLine("in your possession.");
-			}
-			else
-			{
-				ReturnGem(player);
-			}
-		}
+            if (0 == QuickMenu.QuickMenuYesNo())
+            {
+                Player.Items[LobItem.RopeAndPulley] += 1;
 
-	}
+                TextArea.PrintLine();
+                TextArea.PrintLine("The equipment is now");
+                TextArea.PrintLine("in your possession.");
+            }
+            else
+            {
+                ReturnGem(Player);
+            }
+        }
+
+    }
 }

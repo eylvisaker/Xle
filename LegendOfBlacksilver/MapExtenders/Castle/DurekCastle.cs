@@ -16,8 +16,12 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 {
     public class DurekCastle : CastleExtender
     {
-        CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 0.9, v6 = 0.95, v7 = 0.95 };
+        CastleDamageCalculator cdc;
 
+        public DurekCastle(Random random)
+        {
+            cdc = new CastleDamageCalculator(random) { v5 = 0.9, v6 = 0.95, v7 = 0.95 };
+        }
         protected LobStory Story { get { return GameState.Story(); } }
         
         public override double ChanceToHitGuard(Player player, Guard guard, int distance)

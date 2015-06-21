@@ -6,45 +6,48 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class IslandRetreat : LobExhibit
-	{
-		public IslandRetreat() : base("Island Retreat", Coin.BlueGem) { }
+    public class IslandRetreat : LobExhibit
+    {
+        public IslandRetreat() : base("Island Retreat", Coin.BlueGem) { }
 
-		public override string LongName
-		{
-			get
-			{
-				return "An island retreat";
-			}
-		}
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.IslandRetreat; }
-		}
+        public IMapChanger MapChanger { get; set; }
 
-		public override bool RequiresCoin(Player player)
-		{
-			if (HasBeenVisited(player))
-				return false;
+        public override string LongName
+        {
+            get
+            {
+                return "An island retreat";
+            }
+        }
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.IslandRetreat; }
+        }
 
-			return base.RequiresCoin(player);
-		}
+        public override bool RequiresCoin(Player unused)
+        {
+            if (HasBeenVisited(Player))
+                return false;
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+            return base.RequiresCoin(Player);
+        }
 
-			XleCore.TextArea.PrintLine("Would you like to go");
-			XleCore.TextArea.PrintLine("to the island caverns now?");
-			XleCore.TextArea.PrintLine();
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-			if (XleCore.QuickMenuYesNo() == 0)
-			{
-				XleCore.ChangeMap(player, 1, 1);
-			}
-		}
-	}
+            TextArea.PrintLine("Would you like to go");
+            TextArea.PrintLine("to the island caverns now?");
+            TextArea.PrintLine();
+
+            if (QuickMenu.QuickMenuYesNo() == 0)
+            {
+                MapChanger.ChangeMap(Player, 1, 1);
+            }
+        }
+    }
 }

@@ -5,40 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class MarthbaneTunnels : LobExhibit
-	{
-		public MarthbaneTunnels()
-			: base("Marthbane Tunnels", Coin.Emerald)
-		{ }
+    public class MarthbaneTunnels : LobExhibit
+    {
+        public MarthbaneTunnels()
+            : base("Marthbane Tunnels", Coin.Emerald)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.MarthbaneTunnels; }
-		}
+        public IMapChanger MapChanger { get; set; }
 
-		public override bool RequiresCoin(Player player)
-		{
-			if (HasBeenVisited(player))
-				return false;
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.MarthbaneTunnels; }
+        }
 
-			return base.RequiresCoin(player);
-		}
+        public override bool RequiresCoin(Player player)
+        {
+            if (HasBeenVisited(player))
+                return false;
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+            return base.RequiresCoin(player);
+        }
 
-			XleCore.TextArea.PrintLine("Would you like to go");
-			XleCore.TextArea.PrintLine("to Marthbane tunnels?");
-			XleCore.TextArea.PrintLine();
+        public override void RunExhibit(Player player)
+        {
+            base.RunExhibit(player);
 
-			if (0 == XleCore.QuickMenuYesNo())
-			{
-				XleCore.ChangeMap(player, 4, 0);
-			}
-		}
-	}
+            TextArea.PrintLine("Would you like to go");
+            TextArea.PrintLine("to Marthbane tunnels?");
+            TextArea.PrintLine();
+
+            if (0 == QuickMenu.QuickMenuYesNo())
+            {
+                MapChanger.ChangeMap(player, 4, 0);
+            }
+        }
+    }
 }

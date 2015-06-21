@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class UnderwaterPort : LobExhibit
+    public class UnderwaterPort : LobExhibit
 	{
 		public UnderwaterPort()
 			: base("Underwater Port", Coin.YellowDiamond)
 		{ }
 
-		public override bool IsClosed(Player player)
+		public override bool IsClosed(Player unused)
 		{
-			return HasBeenVisited(player);
+			return HasBeenVisited(Player);
 		}
 		public override ExhibitIdentifier ExhibitIdentifier
 		{

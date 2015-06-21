@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class DarkWand : LobExhibit
+    public class DarkWand : LobExhibit
 	{
 		public DarkWand()
 			: base("Dark Wand", Coin.YellowDiamond)

@@ -9,8 +9,8 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 	{
 		protected override bool IsCompleted
 		{
-			get { return Lota.Story.ArmakComplete; }
-			set { Lota.Story.ArmakComplete = value; }
+			get { return Story.ArmakComplete; }
+			set { Story.ArmakComplete = value; }
 		}
 
 		protected override int StrengthBoost

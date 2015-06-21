@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class VaseOfSouls : LobExhibit
-	{
-		public VaseOfSouls()
-			: base("Vase of Souls", Coin.AmethystGem)
-		{ }
+    public class VaseOfSouls : LobExhibit
+    {
+        public VaseOfSouls()
+            : base("Vase of Souls", Coin.AmethystGem)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.VaseOfSouls; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.VaseOfSouls; }
+        }
 
-		public override bool IsClosed(Player player)
-		{
-			return Lob.Story.ClosedVaseOfSouls;
-		}
+        public override bool IsClosed(Player player)
+        {
+            return Story.ClosedVaseOfSouls;
+        }
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(unused);
 
-			ReturnGem(player);
+            ReturnGem(unused);
 
-			Lob.Story.ClosedVaseOfSouls = true;
-		}
-	}
+            Story.ClosedVaseOfSouls = true;
+        }
+    }
 }

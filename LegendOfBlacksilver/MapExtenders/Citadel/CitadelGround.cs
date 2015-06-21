@@ -14,7 +14,12 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
 {
     public class CitadelGround : CastleExtender
     {
-        CastleDamageCalculator cdc = new CastleDamageCalculator { v5 = 1.3, v6 = 1.5, v7 = 1.5 };
+        CastleDamageCalculator cdc;
+
+        public CitadelGround()
+        {
+            cdc = new CastleDamageCalculator (Random) { v5 = 1.3, v6 = 1.5, v7 = 1.5 };
+        }
 
         public override void SetColorScheme(ColorScheme scheme)
         {

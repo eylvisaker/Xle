@@ -8,40 +8,40 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class FlaxtonIncense : LobExhibit
-	{
-		public FlaxtonIncense()
-			: base("Flaxton Incense", Coin.WhiteDiamond)
-		{ }
+    public class FlaxtonIncense : LobExhibit
+    {
+        public FlaxtonIncense()
+            : base("Flaxton Incense", Coin.WhiteDiamond)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.FlaxtonIncense; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.FlaxtonIncense; }
+        }
 
-		public override bool IsClosed(Player player)
-		{
-			return Lob.Story.EatenFlaxton;
-		}
+        public override bool IsClosed(Player player)
+        {
+            return Story.EatenFlaxton;
+        }
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
+        public override void RunExhibit(Player unused)
+        {
+            base.RunExhibit(Player);
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want to partake?");
-			XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Do you want to partake?");
+            TextArea.PrintLine();
 
-			if (0 == XleCore.QuickMenuYesNo())
-			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("It's sour but doesn't taste that bad.");
+            if (0 == QuickMenu.QuickMenuYesNo())
+            {
+                TextArea.PrintLine();
+                TextArea.PrintLine();
+                TextArea.PrintLine("It's sour but doesn't taste that bad.");
 
-				Lob.Story.EatenFlaxton = true;
-			}
-			else
-				ReturnGem(player);
-		}
-	}
+                Story.EatenFlaxton = true;
+            }
+            else
+                ReturnGem(Player);
+        }
+    }
 }

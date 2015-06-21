@@ -8,7 +8,7 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	class MagicEtherium : LobExhibit
+    public class MagicEtherium : LobExhibit
 	{
 		public MagicEtherium()
 			: base("Magic Etherium", Coin.AmethystGem)
@@ -21,28 +21,28 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
 		public override bool IsClosed(Player player)
 		{
-			return Lob.Story.DrankEtherium;
+			return Story.DrankEtherium;
 		}
 
-		public override void RunExhibit(Player player)
+		public override void RunExhibit(Player unused)
 		{
-			base.RunExhibit(player);
+			base.RunExhibit(Player);
 
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Do you want to drink the etherium?");
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
+			TextArea.PrintLine("Do you want to drink the etherium?");
+			TextArea.PrintLine();
 
-			if (0 == XleCore.QuickMenuYesNo())
+			if (0 == QuickMenu.QuickMenuYesNo())
 			{
-				XleCore.TextArea.PrintLine();
-				XleCore.TextArea.PrintLine("You feel dizzy.");
-				XleCore.Wait(1500);
-				XleCore.TextArea.PrintLine("The feeling passes.");
+				TextArea.PrintLine();
+				TextArea.PrintLine("You feel dizzy.");
+				GameControl.Wait(1500);
+				TextArea.PrintLine("The feeling passes.");
 
-				Lob.Story.DrankEtherium = true;
+				Story.DrankEtherium = true;
 			}
 			else
-				ReturnGem(player);
+				ReturnGem(Player);
 		}
 	}
 }
