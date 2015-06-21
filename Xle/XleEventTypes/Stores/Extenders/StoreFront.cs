@@ -20,6 +20,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         public IXleRenderer Renderer { get; set; }
         public IXleInput input { get; set; }
         public INumberPicker NumberPicker { get; set; }
+        public ITextAreaRenderer TextAreaRenderer { get; set; }
+        public ITextRenderer TextRenderer { get; set; }
 
         public List<TextWindow> Windows { get; private set; }
         public new Store TheEvent { get { return (Store)base.TheEvent; } }
@@ -79,7 +81,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             DrawGoldText(Player);
 
-            TextArea.Draw();
+            TextAreaRenderer.Draw(TextArea);
         }
 
         private void DrawGoldText(Player player)
@@ -108,7 +110,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 14,
                 mColorScheme.BackColor);
 
-            Renderer.WriteText(320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
+            TextRenderer.WriteText(320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
 
         }
 
@@ -120,7 +122,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             Display.FillRect(320 - (title.Length + 2) / 2 * 16, 0,
                          (title.Length + 2) * 16, 16, mColorScheme.BackColor);
 
-            Renderer.WriteText(320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
+            TextRenderer.WriteText(320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
         }
 
         protected void StoreSound(LotaSound sound)

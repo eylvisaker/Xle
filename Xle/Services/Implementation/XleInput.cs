@@ -25,7 +25,7 @@ namespace ERY.Xle.Services.Implementation
             this.screen = screen;
             this.gameState = gameState;
 
-            gameControl.Update += gameControl_Update;
+            screen.Update += gameControl_Update;
             Keyboard.KeyDown += Keyboard_KeyDown;
         }
 
@@ -88,7 +88,7 @@ namespace ERY.Xle.Services.Implementation
         /// <returns></returns>
         public KeyCode WaitForKey(params KeyCode[] keys)
         {
-            return WaitForKey(screen.Redraw, keys);
+            return WaitForKey(screen.OnDraw, keys);
         }
 
         /// <summary>
@@ -148,16 +148,14 @@ namespace ERY.Xle.Services.Implementation
         }
 
 
-        public bool PromptToContinueOnWait
-        {
-            get { return XleCore.PromptToContinueOnWait; }
-            set { XleCore.PromptToContinueOnWait = value; }
-        }
-
-        public bool PromptToContinue
-        {
-            get { return XleCore.PromptToContinue; }
-            set { XleCore.PromptToContinue = value; }
-        }
+        /// <summary>
+        /// Set to false to have WaitForKey not display a prompt 
+        /// with the standard drawing method.
+        /// </summary>
+        public bool PromptToContinueOnWait { get; set; }
+        /// <summary>
+        /// Set to true to show the (press to cont) prompt.
+        /// </summary>
+        public bool PromptToContinue { get; private set; }
     }
 }

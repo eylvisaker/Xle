@@ -15,6 +15,7 @@ namespace ERY.Xle.Services.Implementation
     public class MapChanger : IMapChanger
     {
         private GameState gameState;
+        private IXleScreen screen;
         private ITextArea textArea;
         private ICommandList commands;
         private IMapLoader mapLoader;
@@ -22,16 +23,18 @@ namespace ERY.Xle.Services.Implementation
 
         public MapChanger(
             GameState gameState,
+            IXleScreen screen,
+            IXleRenderer renderer,
             ITextArea textArea,
             ICommandList commands,
-            IMapLoader mapLoader,
-            IXleRenderer renderer)
+            IMapLoader mapLoader)
         {
             this.gameState = gameState;
+            this.screen = screen;
+            this.renderer = renderer;
             this.textArea = textArea;
             this.commands = commands;
             this.mapLoader = mapLoader;
-            this.renderer = renderer;
         }
 
         public void ChangeMap(Player player, int mapId, int entryPoint)
@@ -144,7 +147,7 @@ namespace ERY.Xle.Services.Implementation
 
             SetTilesAndCommands();
 
-            renderer.FontColor = gameState.Map.ColorScheme.TextColor;
+            screen.FontColor = gameState.Map.ColorScheme.TextColor;
         }
 
         private void SetTilesAndCommands()

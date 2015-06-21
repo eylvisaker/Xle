@@ -11,20 +11,17 @@ namespace ERY.Xle.Services.Implementation
 {
     public class QuickMenuRunner : IQuickMenu
     {
-        private IXleRenderer Renderer;
         private IXleScreen screen;
         private ITextArea TextArea;
         private IXleInput input;
         private IXleGameControl gameControl;
 
         public QuickMenuRunner(
-            IXleRenderer renderer,
             IXleScreen screen,
             ITextArea textArea,
             IXleInput input,
             IXleGameControl gameControl)
         {
-            this.Renderer = renderer;
             this.screen = screen;
             this.TextArea = textArea;
             this.input = input;
@@ -50,12 +47,12 @@ namespace ERY.Xle.Services.Implementation
         /// <returns></returns>
         public int QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null, Action redraw = null)
         {
-            return QuickMenu(redraw ?? screen.Redraw, items, spaces, value, clrInit, clrChanged);
+            return QuickMenu(redraw ?? screen.OnDraw, items, spaces, value, clrInit, clrChanged);
         }
 
         public int QuickMenu(Action redraw, MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null)
         {
-            return QuickMenuImpl(redraw, items, spaces, value, clrInit ?? Renderer.FontColor, clrChanged ?? Renderer.FontColor);
+            return QuickMenuImpl(redraw, items, spaces, value, clrInit ?? screen.FontColor, clrChanged ?? screen.FontColor);
         }
 
         public int QuickMenuImpl(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)

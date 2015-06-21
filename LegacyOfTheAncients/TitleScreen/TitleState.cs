@@ -25,6 +25,7 @@ namespace ERY.Xle.LotA.TitleScreen
         public ILotaTitleScreenFactory Factory { get; set; }
         public ISoundMan SoundMan { get; set; }
         public IXleGameControl GameControl { get; set; }
+        public ITextRenderer TextRenderer { get; set; }
 
         public abstract void KeyDown(KeyCode keyCode, string keyString);
 
@@ -83,7 +84,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
             Display.FillRect(new Rectangle(destx * 16, y * 16, text.Length * 16, 16), backColor);
 
-            Renderer.WriteText(destx * 16, y * 16, text, textColor);
+            TextRenderer.WriteText(destx * 16, y * 16, text, textColor);
         }
 
         protected virtual void DrawWindows()

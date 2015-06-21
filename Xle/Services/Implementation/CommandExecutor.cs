@@ -16,9 +16,9 @@ namespace ERY.Xle.Services.Implementation
         private IXleGameControl gameControl;
         private ITextArea textArea;
         private ISoundMan soundMan;
-        private IXleRenderer renderer;
         private ICommandList commands;
         private IPlayerDeathHandler deathHandler;
+        private IPlayerAnimator characterAnimator;
 
         Player player { get { return gameState.Player; } }
 
@@ -28,8 +28,8 @@ namespace ERY.Xle.Services.Implementation
             ICommandFactory factory,
             IXleGameControl gameControl,
             ISoundMan soundMan,
-            IXleRenderer renderer,
             IPlayerDeathHandler deathHandler,
+            IPlayerAnimator characterAnimator,
             ITextArea textArea)
         {
             gameState = state;
@@ -37,7 +37,7 @@ namespace ERY.Xle.Services.Implementation
             this.gameControl = gameControl;
             this.textArea = textArea;
             this.soundMan = soundMan;
-            this.renderer = renderer;
+            this.characterAnimator = characterAnimator;
             this.deathHandler = deathHandler;
 
             mDirectionMap[KeyCode.Right] = Direction.East;
@@ -127,7 +127,7 @@ namespace ERY.Xle.Services.Implementation
 
             CursorMovement(cmd);
 
-            renderer.AnimateStep();
+            characterAnimator.AnimateStep();
 
             var waitTime = gameState.MapExtender.WaitTimeAfterStep;
 

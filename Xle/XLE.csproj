@@ -59,6 +59,12 @@
     <Compile Include="Bootstrap\ServiceInstaller.cs" />
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
+    <Compile Include="Services\Implementation\IStopwatch.cs" />
+    <Compile Include="Services\IPlayerAnimator.cs" />
+    <Compile Include="Services\Implementation\PlayerAnimator.cs" />
+    <Compile Include="Services\Implementation\TextAreaRenderer.cs" />
+    <Compile Include="Services\Implementation\TextRenderer.cs" />
+    <Compile Include="Services\ITextAreaRenderer.cs" />
     <Compile Include="Services\IEventExtenderFactory.cs" />
     <Compile Include="Services\ICommandFactory.cs" />
     <Compile Include="Services\IEquipmentPicker.cs" />
@@ -93,7 +99,7 @@
     <Compile Include="Direction.cs" />
     <Compile Include="DirectionHelper.cs" />
     <Compile Include="Equipment.cs" />
-    <Compile Include="Rendering\IXleRenderer.cs" />
+    <Compile Include="Services\Rendering\IXleRenderer.cs" />
     <Compile Include="Services\Implementation\EquipmentPicker.cs" />
     <Compile Include="Services\Implementation\ICommandExecutor.cs" />
     <Compile Include="Services\Implementation\IMapExtenderFactory.cs" />
@@ -110,6 +116,7 @@
     <Compile Include="Services\INumberPicker.cs" />
     <Compile Include="Services\IPlayerDeathHandler.cs" />
     <Compile Include="Services\IQuickMenu.cs" />
+    <Compile Include="Services\ITextRenderer.cs" />
     <Compile Include="Services\IStatsDisplay.cs" />
     <Compile Include="Services\IXleMenu.cs" />
     <Compile Include="Services\IXleScreen.cs" />
@@ -158,7 +165,7 @@
     <Compile Include="ColorStringBuilder.cs" />
     <Compile Include="Services\Implementation\Commands\CommandList.cs" />
     <Compile Include="Maps\Renderers\XleMapRenderer.cs" />
-    <Compile Include="Rendering\XleRenderer.cs" />
+    <Compile Include="Services\Rendering\XleRenderer.cs" />
     <Compile Include="Services\Implementation\TextArea.cs" />
     <Compile Include="Maps\TileInfo.cs" />
     <Compile Include="Maps\TileSet.cs" />

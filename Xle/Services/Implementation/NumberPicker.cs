@@ -30,7 +30,7 @@ namespace ERY.Xle.Services.Implementation
         /// <returns></returns>
         public int ChooseNumber(int max)
         {
-            return ChooseNumber(screen.Redraw, max);
+            return ChooseNumber(screen.OnDraw, max);
         }
         public int ChooseNumber(Action redraw, int max)
         {

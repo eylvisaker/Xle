@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.Maps.Renderers
 {
 	public class MuseumRenderer : Map3DRenderer
 	{
+        public ITextRenderer TextRenderer { get; set; }
+
 		protected override ExtraType GetExtraType(int val, int side)
 		{
 			if (val >= 0x50 && val <= 0x5f)
@@ -95,7 +98,7 @@ namespace ERY.Xle.Maps.Renderers
 				DrawExhibitText(destRect, exhibit);
 		}
 
-		private static void DrawExhibitText(Rectangle destRect, Exhibit exhibit)
+		private void DrawExhibitText(Rectangle destRect, Exhibit exhibit)
 		{
 			int px = 176;
 			int py = 208;
@@ -110,7 +113,7 @@ namespace ERY.Xle.Maps.Renderers
 			AgateLib.DisplayLib.Display.FillRect(px, py, textLength * 16, 16, Color.Black);
 
 			Color clr = exhibit.TitleColor;
-			XleCore.Renderer.WriteText(px, py, exhibit.Name, clr);
+			TextRenderer.WriteText(px, py, exhibit.Name, clr);
 		}
 
 	}

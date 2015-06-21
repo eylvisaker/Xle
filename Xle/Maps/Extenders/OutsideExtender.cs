@@ -706,7 +706,7 @@ namespace ERY.Xle.Maps.Extenders
 
             do
             {
-                Screen.Redraw();
+                Screen.OnDraw();
 
             } while (!(
                 Keyboard.Keys[KeyCode.Left] || Keyboard.Keys[KeyCode.Right] ||

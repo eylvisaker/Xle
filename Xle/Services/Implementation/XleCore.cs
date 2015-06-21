@@ -106,7 +106,7 @@ namespace ERY.Xle.Services.Implementation
             GameState.MapExtender.SetCommands(inst.commands);
             inst.commandExecutor.ResetCurrentCommand();
 
-            XleCore.LoadTiles(GameState.Map.TileImage);
+            LoadTiles(GameState.Map.TileImage);
         }
 
         [Obsolete("Use Screen as a service and call Redraw")]
@@ -124,7 +124,7 @@ namespace ERY.Xle.Services.Implementation
             Renderer.Draw();
 
             Display.EndFrame();
-            XleCore.KeepAlive();
+            KeepAlive();
 
             if (AgateConsole.IsVisible == false)
             {
@@ -191,7 +191,7 @@ namespace ERY.Xle.Services.Implementation
                 Renderer.UpdateAnim();
 
                 redraw();
-                XleCore.KeepAlive();
+                KeepAlive();
 
                 if (keyBreak && Keyboard.AnyKeyPressed)
                     break;
@@ -204,7 +204,7 @@ namespace ERY.Xle.Services.Implementation
         {
             if (GameState.Map != null)
             {
-                XleCore.GameState.MapExtender.CheckSounds(GameState);
+                GameState.MapExtender.CheckSounds(GameState);
             }
 
             Core.KeepAlive();
@@ -213,14 +213,8 @@ namespace ERY.Xle.Services.Implementation
                 throw new MainWindowClosedException();
         }
 
-        /// <summary>
-        /// Set to false to have WaitForKey not display a prompt 
-        /// with the standard drawing method.
-        /// </summary>
         public static bool PromptToContinueOnWait { get; set; }
-        /// <summary>
-        /// Set to true to show the (press to cont) prompt.
-        /// </summary>
+
         public static bool PromptToContinue { get; set; }
 
         [Obsolete("Use XleRenderer.LoadTiles instead")]

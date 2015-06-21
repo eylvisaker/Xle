@@ -16,6 +16,7 @@ namespace ERY.Xle.Services.Implementation
         public GameState GameState { get; set; }
         public IMapChanger MapChanger { get; set; }
         public IXleGameControl GameControl { get; set; }
+        public Random Random { get; set; }
 
         protected Player Player { get { return GameState.Player; } }
         protected XleMap Map { get { return GameState.Map; } }
@@ -39,8 +40,8 @@ namespace ERY.Xle.Services.Implementation
 
             do
             {
-                Player.X = XleCore.random.Next(Map.Width);
-                Player.Y = XleCore.random.Next(Map.Height);
+                Player.X = Random.Next(Map.Width);
+                Player.Y = Random.Next(Map.Height);
 
                 t = map.TerrainAt(Player.X, Player.Y);
 
@@ -49,8 +50,8 @@ namespace ERY.Xle.Services.Implementation
             Player.Rafts.Clear();
 
             Player.HP = Player.MaxHP;
-            Player.Food = 30 + XleCore.random.Next(10);
-            Player.Gold = 25 + XleCore.random.Next(30);
+            Player.Food = 30 + Random.Next(10);
+            Player.Gold = 25 + Random.Next(30);
             Player.BoardedRaft = null;
 
             while (SoundMan.IsPlaying(LotaSound.VeryBad))

@@ -10,16 +10,13 @@ namespace ERY.Xle.Services.Implementation
 {
     public class XleScreen : IXleScreen
     {
-        private IXleRenderer renderer;
         private XleSystemState systemState;
         private GameState gameState;
 
         public XleScreen(
-            IXleRenderer renderer,
             GameState gameState,
             XleSystemState systemState)
         {
-            this.renderer = renderer;
             this.gameState = gameState;
             this.systemState = systemState;
 
@@ -28,7 +25,7 @@ namespace ERY.Xle.Services.Implementation
 
         private void InitializeScreenSize()
         {
-            Rectangle coords = renderer.Coordinates;
+            Rectangle coords = Coordinates;
             int height = coords.Height - systemState.WindowBorderSize.Height * 2;
             int width = (int)(320 / 200.0 * height);
 
@@ -37,20 +34,35 @@ namespace ERY.Xle.Services.Implementation
                 systemState.WindowBorderSize.Height);
         }
 
+        public Rectangle Coordinates { get { return Display.Coordinates; } }
 
-        public void Redraw()
+        public Color FontColor { get; set; }
+
+        public void OnDraw()
         {
             Display.BeginFrame();
 
-            renderer.Draw();
+            if (Draw != null)
+                Draw(this, EventArgs.Empty);
 
             Display.EndFrame();
             Core.KeepAlive();
         }
 
+        public event EventHandler Draw;
+        public event EventHandler Update;
+
         public bool CurrentWindowClosed
         {
             get { return Display.CurrentWindow.IsClosed; }
         }
+
+
+        public void OnUpdate()
+        {
+            if (Update != null)
+                Update(this, EventArgs.Empty);
+        }
+
     }
 }

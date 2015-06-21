@@ -130,7 +130,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
             Point pt = new Point(5, 9 + titleMenu * 2);
 
-            Renderer.WriteText(pt.X * 16, pt.Y * 16, "`");
+            TextRenderer.WriteText(pt.X * 16, pt.Y * 16, "`");
         }
 
         private void DrawTitleHeader(Color frameColor, Color lineColor)

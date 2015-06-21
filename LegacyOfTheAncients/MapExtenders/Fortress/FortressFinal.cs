@@ -98,7 +98,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             else
                 TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-            Screen.Redraw();
+            Screen.OnDraw();
         }
 
         private void WarlordAttack(GameState state)

@@ -1,5 +1,6 @@
 ﻿using System;
 using AgateLib.Geometry;
+using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.Services
 {
@@ -28,13 +29,13 @@ namespace ERY.Xle.Services
 
         void SetLineColor(Color color, params int[] lines);
 
-        void Draw();
-
         void SetCharacterColor(int p1, int p2, Color color);
 
         int Margin { get; set; }
 
 
         void PrintLineCentered(string p, Color color);
+
+        TextLine GetLine(int i);
     }
 }

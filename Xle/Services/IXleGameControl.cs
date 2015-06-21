@@ -8,8 +8,6 @@ namespace ERY.Xle.Services
 {
     public interface IXleGameControl : IXleService
     {
-        event EventHandler Update;
-
         void Wait(int howLong, bool keyBreak = false, Action redraw = null);
 
         void RunRedrawLoop();
@@ -17,6 +15,5 @@ namespace ERY.Xle.Services
         void Redraw();
 
         void KeepAlive();
-
     }
 }

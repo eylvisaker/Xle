@@ -9,94 +9,22 @@ namespace ERY.Xle.Services.Implementation
 {
     public class TextArea : ITextArea
     {
-        class TextLine
-        {
-            private readonly TextArea parent;
-
-            public string Text { get; set; }
-            public Color[] Colors { get; set; }
-
-            public TextLine(TextArea parent)
-            {
-                this.parent = parent;
-
-                Colors = new Color[40];
-            }
-
-            public void SetColor(Color color)
-            {
-                for (int i = 0; i < Colors.Length; i++)
-                    Colors[i] = color;
-            }
-            public void WriteText(int x, string t, Color[] newColors, int colorStartIndex = 0)
-            {
-                SetTextLength(x);
-
-                Text += t;
-
-                if (newColors != null)
-                {
-                    for (int i = 0; i < t.Length; i++)
-                    {
-                        if (x + i + colorStartIndex >= Colors.Length)
-                            break;
-
-                        Colors[x + i] = newColors[i + colorStartIndex];
-                    }
-                }
-                else
-                {
-                    WriteColors(x, t.Length, parent.DefaultColor);
-                }
-            }
-
-            public void WriteText(int x, string t, Color? color)
-            {
-                SetTextLength(x);
-
-                Text += t;
-
-                WriteColors(x, t.Length, color ?? parent.DefaultColor);
-            }
-
-            private void WriteColors(int x, int length, Color newColor)
-            {
-                for (int i = 0; i < length && x + i < Colors.Length; i++)
-                    Colors[x + i] = newColor;
-            }
-
-
-            private void SetTextLength(int x)
-            {
-                if (Text.Length < x)
-                    Text += new string(' ', x - Text.Length);
-                if (Text.Length > x)
-                    Text = Text.Substring(0, x);
-            }
-            public override string ToString()
-            {
-                return Text;
-            }
-        }
-
         TextLine[] lines = new TextLine[5];
         Point cursor = new Point(1, 5);
         int margin = 1;
         Color[] tempColors;
-        private IXleRenderer renderer;
+
         private IXleScreen screen;
         private GameState gameState;
         private IXleGameControl gameControl;
 
         public TextArea(
-            IXleScreen screen,
-            IXleRenderer renderer,
             IXleGameControl gameControl,
+            IXleScreen screen,
             GameState gameState)
-        {                                       
-            this.screen = screen;
+        {
             this.gameState = gameState;
-            this.renderer = renderer;
+            this.screen = screen;
             this.gameControl = gameControl;
 
             for (int i = 0; i < lines.Length; i++)
@@ -105,29 +33,9 @@ namespace ERY.Xle.Services.Implementation
 
         public int Margin { get { return margin; } set { margin = value; } }
 
-        private Color DefaultColor
+        public Color DefaultColor
         {
             get { return gameState.Map.ColorScheme.TextColor; }
-        }
-
-        public void Draw()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                //int x = 16 + 16 * g.BottomMargin(i);
-
-                //DrawText(x, 368 - 16 * i, g.Bottom(i), g.BottomColor(i));
-                int x = 16;
-
-                var line = lines[i];
-
-                DrawText(x, 304 + 16 * i, line.Text, line.Colors);
-            }
-        }
-
-        private void DrawText(int x, int y, string text, Color[] color)
-        {
-            renderer.WriteText(x, y, text, color);
         }
 
         private void CycleLines()
@@ -242,7 +150,7 @@ namespace ERY.Xle.Services.Implementation
 
         public void PrintSlow(string text, Color[] colors = null)
         {
-            PrintSlowImpl(text, renderer.FontColor, colors);
+            PrintSlowImpl(text, screen.FontColor, colors);
         }
         public void PrintSlow(string text, Color color)
         {
@@ -264,7 +172,7 @@ namespace ERY.Xle.Services.Implementation
             foreach (var line in lines)
             {
                 line.Text = "";
-                line.SetColor(renderer.FontColor);
+                line.SetColor(screen.FontColor);
             }
 
             cursor.X = margin;
@@ -301,7 +209,7 @@ namespace ERY.Xle.Services.Implementation
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, renderer.FontColor, color, flashRate, lines);
+            FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, screen.FontColor, color, flashRate, lines);
         }
 
         public void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)
@@ -367,5 +275,83 @@ namespace ERY.Xle.Services.Implementation
 
             PrintLine(text, color);
         }
+
+
+        public TextLine GetLine(int i)
+        {
+            return lines[i];
+        }
     }
+
+
+    public class TextLine
+    {
+        private readonly TextArea parent;
+
+        public string Text { get; set; }
+        public Color[] Colors { get; set; }
+
+        public TextLine(TextArea parent)
+        {
+            this.parent = parent;
+
+            Colors = new Color[40];
+        }
+
+        public void SetColor(Color color)
+        {
+            for (int i = 0; i < Colors.Length; i++)
+                Colors[i] = color;
+        }
+        public void WriteText(int x, string t, Color[] newColors, int colorStartIndex = 0)
+        {
+            SetTextLength(x);
+
+            Text += t;
+
+            if (newColors != null)
+            {
+                for (int i = 0; i < t.Length; i++)
+                {
+                    if (x + i + colorStartIndex >= Colors.Length)
+                        break;
+
+                    Colors[x + i] = newColors[i + colorStartIndex];
+                }
+            }
+            else
+            {
+                WriteColors(x, t.Length, parent.DefaultColor);
+            }
+        }
+
+        public void WriteText(int x, string t, Color? color)
+        {
+            SetTextLength(x);
+
+            Text += t;
+
+            WriteColors(x, t.Length, color ?? parent.DefaultColor);
+        }
+
+        private void WriteColors(int x, int length, Color newColor)
+        {
+            for (int i = 0; i < length && x + i < Colors.Length; i++)
+                Colors[x + i] = newColor;
+        }
+
+
+        private void SetTextLength(int x)
+        {
+            if (Text.Length < x)
+                Text += new string(' ', x - Text.Length);
+            if (Text.Length > x)
+                Text = Text.Substring(0, x);
+        }
+        public override string ToString()
+        {
+            return Text;
+        }
+    }
+
 }

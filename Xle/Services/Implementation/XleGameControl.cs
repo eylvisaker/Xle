@@ -20,34 +20,29 @@ namespace ERY.Xle.Services.Implementation
     public class XleGameControl : IXleGameControl
     {
         private IXleScreen screen;
-        private IXleRenderer renderer;
         private GameState gameState;
         private XleSystemState systemState;
 
         public XleGameControl(
             IXleScreen screen,
-            IXleRenderer renderer,
             GameState gameState,
             XleSystemState systemState)
         {
             this.screen = screen;
-            this.renderer = renderer;
             this.gameState = gameState;
             this.systemState = systemState;
         }
 
-        public event EventHandler Update;
-
         public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
         {
             if (redraw == null)
-                redraw = screen.Redraw;
+                redraw = screen.OnDraw;
 
             IStopwatch watch = Timing.CreateStopWatch();
 
             do
             {
-                renderer.UpdateAnim();
+                screen.OnUpdate();
 
                 redraw();
                 KeepAlive();
@@ -83,22 +78,19 @@ namespace ERY.Xle.Services.Implementation
         public void Redraw()
         {
             OnUpdate();
-            screen.Redraw();
+            screen.OnDraw();
 
             KeepAlive();
         }
 
         private void OnUpdate()
         {
-            renderer.UpdateAnim();
-
             if (gameState != null && gameState.MapExtender != null)
             {
                 gameState.MapExtender.OnUpdate(Display.DeltaTime / 1000.0);
             }
 
-            if (Update != null)
-                Update(this, EventArgs.Empty);
+            screen.OnUpdate();
         }
 
     }

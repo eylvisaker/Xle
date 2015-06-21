@@ -18,8 +18,9 @@ namespace ERY.Xle.Services.Implementation
        {
            this.GameState = gameState;
            this.Renderer = renderer;
-
        }
+
+       public ITextRenderer TextRenderer { get; set; }
 
        /// <summary>
        /// Draws the submenu created by SubMenu.
@@ -54,7 +55,7 @@ namespace ERY.Xle.Services.Implementation
 
            thestring = menu.title;
 
-           Renderer.WriteText(xx + (int)((624 - xx) / 32) * 16 - (int)(thestring.Length / 2) * 16,
+           TextRenderer.WriteText(xx + (int)((624 - xx) / 32) * 16 - (int)(thestring.Length / 2) * 16,
                       yy, thestring, fontColor);
 
            yy += 16;
@@ -71,14 +72,14 @@ namespace ERY.Xle.Services.Implementation
 
                thestring += ". " + buffer;
 
-               Renderer.WriteText(xx, yy, thestring);
+               TextRenderer.WriteText(xx, yy, thestring);
 
                if (i == menu.value)
                {
                    int xx1;
 
                    xx1 = xx + thestring.Length * 16;
-                   Renderer.WriteText(xx1, yy, "`");
+                   TextRenderer.WriteText(xx1, yy, "`");
                }
            }
        }
