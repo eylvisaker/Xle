@@ -39,10 +39,10 @@ namespace ERY.Xle.Maps.Extenders
 			{
 				IsAngry = true;
 
-				XleCore.TextArea.Clear(true);
-				XleCore.TextArea.PrintLine("\nWe remember you - slime!");
+				TextArea.Clear(true);
+				TextArea.PrintLine("\nWe remember you - slime!");
 
-				XleCore.Wait(2000);
+				GameControl.Wait(2000);
 			}
 			else
 			{
@@ -65,7 +65,7 @@ namespace ERY.Xle.Maps.Extenders
 			double damage = 1 + player.Attribute[Attributes.strength] *
 					   (weaponType / 2 + 1) / 4;
 
-			damage *= 0.5 + XleCore.random.NextDouble();
+			damage *= 0.5 + Random.NextDouble();
 
 			return (int)Math.Round(damage);
 		}
@@ -153,7 +153,7 @@ namespace ERY.Xle.Maps.Extenders
 						if (Math.Abs(xdist) > Math.Abs(ydist))
 						{
 							if (ydist == 0)
-								dy = XleCore.random.Next(2) * 2 - 1;
+								dy = Random.Next(2) * 2 - 1;
 							else
 								dy = ydist / Math.Abs(ydist);
 
@@ -164,7 +164,7 @@ namespace ERY.Xle.Maps.Extenders
 						else
 						{
 							if (xdist == 0)
-								dx = XleCore.random.Next(2) * 2 - 1;
+								dx = Random.Next(2) * 2 - 1;
 							else
 								dx = xdist / Math.Abs(xdist);
 
@@ -264,7 +264,7 @@ namespace ERY.Xle.Maps.Extenders
 		{
 			if (guard.OnPlayerAttack != null)
 			{
-				bool cancel = guard.OnPlayerAttack(XleCore.GameState, guard);
+				bool cancel = guard.OnPlayerAttack(GameState, guard);
 				if (cancel)
 					return;
 			}
@@ -272,9 +272,9 @@ namespace ERY.Xle.Maps.Extenders
 			double hitChance = ChanceToHitGuard(player, guard, distance);
 
 
-			if (XleCore.random.NextDouble() > hitChance)
+			if (Random.NextDouble() > hitChance)
 			{
-				XleCore.TextArea.PrintLine("Attack on " + guard.Name + " missed", XleColor.Purple);
+				TextArea.PrintLine("Attack on " + guard.Name + " missed", XleColor.Purple);
 				SoundMan.PlaySound(LotaSound.PlayerMiss);
 			}
 			else
@@ -284,10 +284,10 @@ namespace ERY.Xle.Maps.Extenders
 				IsAngry = true;
 				player.LastAttackedMapID = TheMap.MapID;
 
-				XleCore.TextArea.Print(guard.Name + " struck  ", XleColor.Yellow);
-				XleCore.TextArea.Print(dam.ToString(), XleColor.White);
-				XleCore.TextArea.Print("  H.P. Blow", XleColor.White);
-				XleCore.TextArea.PrintLine();
+				TextArea.Print(guard.Name + " struck  ", XleColor.Yellow);
+				TextArea.Print(dam.ToString(), XleColor.White);
+				TextArea.Print("  H.P. Blow", XleColor.White);
+				TextArea.PrintLine();
 
 				guard.HP -= dam;
 
@@ -295,17 +295,17 @@ namespace ERY.Xle.Maps.Extenders
 
 				if (guard.HP <= 0)
 				{
-					XleCore.TextArea.PrintLine(guard.Name + " killed");
+					TextArea.PrintLine(guard.Name + " killed");
 
 					TheMap.Guards.Remove(guard);
 
-					XleCore.Wait(100);
+					GameControl.Wait(100);
 
 					SoundMan.StopSound(LotaSound.PlayerHit);
 					SoundMan.PlaySound(LotaSound.EnemyDie);
 
 					if (guard.OnGuardDead != null)
-						guard.OnGuardDead(XleCore.GameState, guard);
+						guard.OnGuardDead(GameState, guard);
 				}
 			}
 		}
@@ -333,46 +333,46 @@ namespace ERY.Xle.Maps.Extenders
 		public virtual void PlayCloseRoofSound(Roof roof)
 		{
 			SoundMan.PlaySound(LotaSound.BuildingClose);
-			XleCore.Wait(50);
+			GameControl.Wait(50);
 		}
 		public virtual void PlayOpenRoofSound(Roof roof)
 		{
 			SoundMan.PlaySound(LotaSound.BuildingOpen);
-			XleCore.Wait(50);
+			GameControl.Wait(50);
 		}
 
 		public virtual void SpeakToGuard(GameState gameState)
 		{
-			XleCore.TextArea.PrintLine("\n\nThe guard salutes.");
+			TextArea.PrintLine("\n\nThe guard salutes.");
 		}
 
 		public virtual void GuardAttackPlayer(Player player, Guard guard)
 		{
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
 
-			XleCore.TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
+			TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
 
-			if (XleCore.random.NextDouble() > ChanceToHitPlayer(player, guard))
+			if (Random.NextDouble() > ChanceToHitPlayer(player, guard))
 			{
-				XleCore.TextArea.Print("Missed", XleColor.Cyan);
+				TextArea.Print("Missed", XleColor.Cyan);
 				SoundMan.PlaySound(LotaSound.EnemyMiss);
 			}
 			else
 			{
 				int dam = RollDamageToPlayer(player, guard);
 
-				XleCore.TextArea.Print("Blow ", XleColor.Yellow);
-				XleCore.TextArea.Print(dam.ToString(), XleColor.White);
-				XleCore.TextArea.Print(" H.P.", XleColor.White);
+				TextArea.Print("Blow ", XleColor.Yellow);
+				TextArea.Print(dam.ToString(), XleColor.White);
+				TextArea.Print(" H.P.", XleColor.White);
 
 				SoundMan.PlaySound(LotaSound.EnemyHit);
 
 				player.HP -= dam;
 			}
 
-			XleCore.TextArea.PrintLine();
+			TextArea.PrintLine();
 
-			XleCore.Wait(100 * player.Gamespeed);
+			GameControl.Wait(100 * player.Gamespeed);
 		}
 
 		protected override void PlayerFight(GameState state, Direction fightDir)
@@ -452,7 +452,7 @@ namespace ERY.Xle.Maps.Extenders
 							AttackGuard(player, k, Math.Max(i, j));
 							attacked = true;
 
-							XleCore.Wait(200);
+							GameControl.Wait(200);
 						}
 					}
 
@@ -513,10 +513,10 @@ namespace ERY.Xle.Maps.Extenders
 							}
 						}
 
-						int dam = XleCore.random.Next(10) + 30;
+						int dam = Random.Next(10) + 30;
 
-						XleCore.TextArea.PrintLine();
-						XleCore.TextArea.PrintLine("Merchant killed by blow of " + dam.ToString());
+						TextArea.PrintLine();
+						TextArea.PrintLine("Merchant killed by blow of " + dam.ToString());
 
 						TheMap[attackPt.X + dx, attackPt.Y + dy] = 0x52;
 						TheMap[attackPt.X + dx, attackPt.Y + dy + 1] = 0x52;
@@ -534,7 +534,7 @@ namespace ERY.Xle.Maps.Extenders
 
 					if (tile == 176 || tile1 == 176 || tile == 192 || tile == 192)
 					{
-						XleCore.TextArea.PrintLine("The prison bars hold.");
+						TextArea.PrintLine("The prison bars hold.");
 
 						SoundMan.PlaySound(LotaSound.Bump);
 
@@ -546,10 +546,10 @@ namespace ERY.Xle.Maps.Extenders
 
 			if (attacked == false)
 			{
-				XleCore.TextArea.PrintLine("Nothing hit");
+				TextArea.PrintLine("Nothing hit");
 			}
 
-			XleCore.Wait(200 + 50 * player.Gamespeed, true, XleCore.Redraw);
+			GameControl.Wait(200 + 50 * player.Gamespeed, true, XleCore.Redraw);
 		}
 
 		public override bool PlayerRob(GameState state)
@@ -568,9 +568,9 @@ namespace ERY.Xle.Maps.Extenders
 		}
 		protected virtual bool PlayerRobImpl(Player player)
 		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Nothing to rob.");
-			XleCore.Wait(500);
+			TextArea.PrintLine();
+			TextArea.PrintLine("Nothing to rob.");
+			GameControl.Wait(500);
 
 			return true;
 		}

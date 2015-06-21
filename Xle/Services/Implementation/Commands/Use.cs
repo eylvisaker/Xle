@@ -1,4 +1,5 @@
 ﻿using ERY.Xle.Data;
+using ERY.Xle.Rendering;
 using System.Linq;
 
 namespace ERY.Xle.Services.Implementation.Commands
@@ -10,6 +11,9 @@ namespace ERY.Xle.Services.Implementation.Commands
             ShowItemMenu = showItemMenu;
         }
 
+        public IXleGameControl GameControl { get; set; }
+        public IXleRenderer Renderer { get; set; }
+
         public XleData Data { get; set; }
         public IXleMenu Menu { get; set; }
 
@@ -20,19 +24,19 @@ namespace ERY.Xle.Services.Implementation.Commands
             if (ShowItemMenu)
                 ChooseHeldItem(state);
             else
-                XleCore.TextArea.PrintLine();
+                TextArea.PrintLine();
 
             string commandstring = string.Empty;
             bool noEffect = true;
 
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
 
-            string action = XleCore.Data.ItemList[state.Player.Hold].Action;
+            string action = Data.ItemList[state.Player.Hold].Action;
 
             if (string.IsNullOrEmpty(action))
-                action = "Use " + XleCore.Data.ItemList[state.Player.Hold].Name;
+                action = "Use " + Data.ItemList[state.Player.Hold].Name;
 
-            XleCore.TextArea.PrintLine(action + ".");
+            TextArea.PrintLine(action + ".");
 
             if (state.Player.Hold == XleCore.Factory.HealingItemID)
             {
@@ -46,9 +50,9 @@ namespace ERY.Xle.Services.Implementation.Commands
 
             if (noEffect == true)
             {
-                XleCore.TextArea.PrintLine();
-                XleCore.Wait(400 + 100 * state.Player.Gamespeed);
-                XleCore.TextArea.PrintLine("No effect");
+                TextArea.PrintLine();
+                GameControl.Wait(400 + 100 * state.Player.Gamespeed);
+                TextArea.PrintLine("No effect");
             }
         }
 
@@ -94,7 +98,7 @@ namespace ERY.Xle.Services.Implementation.Commands
             state.Player.Items[itemID] -= 1;
             SoundMan.PlaySound(LotaSound.Good);
 
-            XleCore.FlashHPWhileSound(XleColor.Cyan);
+            Renderer.FlashHPWhileSound(XleColor.Cyan);
         }
 
     }

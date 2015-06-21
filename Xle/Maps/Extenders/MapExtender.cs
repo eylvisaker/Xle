@@ -20,6 +20,8 @@ namespace ERY.Xle.Maps.Extenders
         XleMap mTheMap;
         List<EventExtender> mEvents = new List<EventExtender>();
 
+        public IXleMenu Menu { get; set; }
+
         public XleMap TheMap
         {
             get { return mTheMap; }
@@ -48,6 +50,7 @@ namespace ERY.Xle.Maps.Extenders
         public XleData Data { get; set; }
         public ISoundMan SoundMan { get; set; }
         public IXleInput Input { get; set; }
+        public IQuickMenu QuickMenu { get; set; }
 
         protected Player Player { get { return GameState.Player; } }
         public IReadOnlyList<EventExtender> Events { get { return mEvents; } }
@@ -81,7 +84,7 @@ namespace ERY.Xle.Maps.Extenders
         {
             SetColorScheme(TheMap.ColorScheme);
 
-            foreach(var evt in Events)
+            foreach (var evt in Events)
             {
                 evt.OnLoad(GameState);
             }
@@ -115,7 +118,7 @@ namespace ERY.Xle.Maps.Extenders
             {
                 return EventFactory.Create(this, evt, defaultExtender);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Print(e.ToString());
                 return (EventExtender)Activator.CreateInstance(defaultExtender);
@@ -160,7 +163,7 @@ namespace ERY.Xle.Maps.Extenders
             int armorType = player.CurrentArmor.ID;
 
             double damage = guard.Attack / 99.0 *
-                               (120 + XleCore.random.NextDouble() * 250) /
+                               (120 + Random.NextDouble() * 250) /
                                Math.Pow(armorType + 3, 0.8) /
                                    Math.Pow(player.Attribute[Attributes.endurance], 0.8) + 3;
 
@@ -184,12 +187,12 @@ namespace ERY.Xle.Maps.Extenders
 
         public virtual bool RollSpellFizzle(GameState state, MagicSpell magic)
         {
-            return XleCore.random.Next(10) < 5;
+            return Random.Next(10) < 5;
         }
 
         public virtual int RollSpellDamage(GameState state, MagicSpell magic, int distance)
         {
-            return (int)((magic.ID + 0.5) * 15 * (XleCore.random.NextDouble() + 1));
+            return (int)((magic.ID + 0.5) * 15 * (Random.NextDouble() + 1));
         }
         public virtual bool CanPlayerStepInto(GameState state, Point pt)
         {
@@ -360,8 +363,8 @@ namespace ERY.Xle.Maps.Extenders
 
             if (state.Player.Items[magic.ItemID] <= 0)
             {
-                XleCore.TextArea.PrintLine();
-                XleCore.TextArea.PrintLine("You have no " + magic.PluralName + ".", XleColor.White);
+                TextArea.PrintLine();
+                TextArea.PrintLine("You have no " + magic.PluralName + ".", XleColor.White);
                 return;
             }
 
@@ -377,13 +380,13 @@ namespace ERY.Xle.Maps.Extenders
 
         protected virtual MagicSpell MagicPrompt(GameState state, MagicSpell[] magics)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("Use which magic?", XleColor.Purple);
-            XleCore.TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("Use which magic?", XleColor.Purple);
+            TextArea.PrintLine();
 
-            bool hasFlames = magics.Contains(XleCore.Data.MagicSpells[1]);
-            bool hasBolts = magics.Contains(XleCore.Data.MagicSpells[2]);
+            bool hasFlames = magics.Contains(Data.MagicSpells[1]);
+            bool hasBolts = magics.Contains(Data.MagicSpells[2]);
 
             int defaultValue = 0;
             int otherStart = 2 - (hasBolts ? 0 : 1) - (hasFlames ? 0 : 1);
@@ -399,26 +402,26 @@ namespace ERY.Xle.Maps.Extenders
 
             var menu = new MenuItemList("Flame", "Bolt", anyOthers ? "Other" : "Nothing");
 
-            int choice = XleCore.QuickMenu(menu, 2, defaultValue,
+            int choice = QuickMenu.QuickMenu(menu, 2, defaultValue,
                 XleColor.Purple, XleColor.White);
 
             if (choice == 0)
-                return XleCore.Data.MagicSpells[1];
+                return Data.MagicSpells[1];
             else if (choice == 1)
-                return XleCore.Data.MagicSpells[2];
+                return Data.MagicSpells[2];
             else
             {
                 if (anyOthers == false)
                     return null;
 
-                XleCore.TextArea.PrintLine(" - select above", XleColor.White);
-                XleCore.TextArea.PrintLine();
+                TextArea.PrintLine(" - select above", XleColor.White);
+                TextArea.PrintLine();
 
                 return MagicMenu(magics.Skip(otherStart).ToList());
             }
         }
 
-        private static MagicSpell MagicMenu(IList<MagicSpell> magics)
+        private MagicSpell MagicMenu(IList<MagicSpell> magics)
         {
             MenuItemList menu = new MenuItemList("Nothing");
 
@@ -427,11 +430,11 @@ namespace ERY.Xle.Maps.Extenders
                 menu.Add(magics[i].Name);
             }
 
-            int choice = XleCore.SubMenu("Pick magic", 0, menu);
+            int choice = Menu.SubMenu("Pick magic", 0, menu);
 
             if (choice == 0)
             {
-                XleCore.TextArea.PrintLine("Select no magic.", XleColor.White);
+                TextArea.PrintLine("Select no magic.", XleColor.White);
                 return null;
             }
 
@@ -512,7 +515,7 @@ namespace ERY.Xle.Maps.Extenders
         {
             mEvents.Clear();
 
-            foreach(var evt in TheMap.Events)
+            foreach (var evt in TheMap.Events)
             {
                 mEvents.Add(eventFactory.Create(this, evt, typeof(EventExtender)));
             }

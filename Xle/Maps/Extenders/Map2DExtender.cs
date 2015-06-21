@@ -85,9 +85,9 @@ namespace ERY.Xle.Maps.Extenders
 
             if (CanPlayerStep(state, stepDirection))
             {
-                XleCore.TextArea.PrintLine(command);
+                TextArea.PrintLine(command);
 
-                MovePlayer(XleCore.GameState, stepDirection);
+                MovePlayer(GameState, stepDirection);
                 SoundMan.PlaySound(LotaSound.WalkTown);
 
                 player.TimeQuality += 0.03;
@@ -97,7 +97,7 @@ namespace ERY.Xle.Maps.Extenders
                 SoundMan.PlaySound(LotaSound.Invalid);
 
                 //Commands.CommandList.UpdateCommand("Move Nowhere");
-                XleCore.TextArea.PrintLine("Move nowhere");
+                TextArea.PrintLine("Move nowhere");
             }
         }
 
@@ -138,10 +138,10 @@ namespace ERY.Xle.Maps.Extenders
 
         public override bool PlayerXamine(GameState state)
         {
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine();
-            XleCore.TextArea.PrintLine("You are in " + TheMap.MapName + ".");
-            XleCore.TextArea.PrintLine("Look about to see more.");
+            TextArea.PrintLine();
+            TextArea.PrintLine();
+            TextArea.PrintLine("You are in " + TheMap.MapName + ".");
+            TextArea.PrintLine("Look about to see more.");
 
             return true;
         }
@@ -150,8 +150,8 @@ namespace ERY.Xle.Maps.Extenders
         {
             if (TheMap.HasGuards && TheMap.Guards.IsAngry)
             {
-                XleCore.TextArea.PrintLine("Walk out yourself.");
-                XleCore.Wait(200);
+                TextArea.PrintLine("Walk out yourself.");
+                GameControl.Wait(200);
             }
             else
             {

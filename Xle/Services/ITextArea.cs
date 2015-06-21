@@ -34,5 +34,7 @@ namespace ERY.Xle.Services
 
         int Margin { get; set; }
 
+
+        void PrintLineCentered(string p, Color color);
     }
 }

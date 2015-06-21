@@ -28,8 +28,8 @@ namespace ERY.Xle.Maps.Extenders
 
 		protected override void PlayerFight(GameState state, Direction fightDir)
 		{
-			XleCore.TextArea.PrintLine();
-			XleCore.TextArea.PrintLine("Nothing much hit.");
+			TextArea.PrintLine();
+			TextArea.PrintLine("Nothing much hit.");
 
 			SoundMan.PlaySound(LotaSound.Bump);
 		}
