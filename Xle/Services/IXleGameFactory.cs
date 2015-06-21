@@ -6,6 +6,8 @@ namespace ERY.Xle.Services
     {
         void LoadSurfaces();
         FontSurface Font { get; }
+        Surface Monsters { get; }
+        Surface Character { get; }
 
         void SetGameSpeed(GameState GameState, int p);
 
@@ -16,6 +18,7 @@ namespace ERY.Xle.Services
         int HealingItemID { get; }
 
         int NextMuseumCoinOffer(GameState gameState);
+
 
 
     }

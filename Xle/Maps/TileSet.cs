@@ -22,7 +22,6 @@ namespace ERY.Xle.Maps
             {
                 if (mTiles.ContainsKey(index) == false)
                 {
-                    SoundMan.PlaySound(LotaSound.Bad);
                     System.Diagnostics.Debug.Print("Tileset does not contain tile " + index.ToString());
 
                     return TileInfo.Normal;

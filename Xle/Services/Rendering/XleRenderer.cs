@@ -11,6 +11,7 @@ using System.Text;
 
 using ERY.Xle.Services;
 using ERY.Xle.Services.Implementation;
+using ERY.Xle.Data;
 
 namespace ERY.Xle.Rendering
 {
@@ -55,6 +56,10 @@ namespace ERY.Xle.Rendering
         public ITextArea TextArea { get; set; }
         public ITextAreaRenderer TextAreaRenderer { get; set; }
         public ITextRenderer TextRenderer { get; set; }
+        public XleData Data { get; set; }
+        public IXleGameFactory Factory { get; set; }
+        public IXleGameControl GameControl { get; set; }
+
         IXleScreen Screen { get; set; }
         IXleInput Input { get; set; }
 
@@ -187,7 +192,7 @@ namespace ERY.Xle.Rendering
 
             Rectangle monstRect;
             Rectangle destRect;
-            var size = XleCore.Data.OverworldMonsterSize;
+            var size = Data.OverworldMonsterSize;
 
             tx = (monst % 8) * size.Width;
             ty = (monst / 8) * size.Height;
@@ -195,8 +200,8 @@ namespace ERY.Xle.Rendering
             monstRect = new Rectangle(tx, ty, size.Width, size.Height);
             destRect = new Rectangle(px, py, size.Width, size.Height);
 
-            if (XleCore.Factory.Monsters != null)
-                XleCore.Factory.Monsters.Draw(monstRect, destRect);
+            if (Factory.Monsters != null)
+                Factory.Monsters.Draw(monstRect, destRect);
 
         }
 
@@ -220,7 +225,7 @@ namespace ERY.Xle.Rendering
             px += 11 * 16;
             PlayerDrawPoint = new Point(px, py);
 
-            DrawCharacterSprite(px, py, XleCore.GameState.Player.FaceDirection, animating, animFrame, true, clr);
+            DrawCharacterSprite(px, py, GameState.Player.FaceDirection, animating, animFrame, true, clr);
 
             CharRect = new Rectangle(px, py, 32, 32);
         }
@@ -253,8 +258,8 @@ namespace ERY.Xle.Rendering
             charRect = new Rectangle(tx, ty, 32, 32);
             destRect = new Rectangle(destx, desty, 32, 32);
 
-            XleCore.Factory.Character.Color = clr;
-            XleCore.Factory.Character.Draw(charRect, destRect);
+            Factory.Character.Color = clr;
+            Factory.Character.Draw(charRect, destRect);
         }
 
         public Rectangle CharRect { get; private set; }
@@ -265,7 +270,7 @@ namespace ERY.Xle.Rendering
         /// <param name="inRect"></param>
         void DrawRafts(Rectangle inRect)
         {
-            Player player = XleCore.GameState.Player;
+            Player player = GameState.Player;
             int tx, ty;
             int lx = inRect.Left;
             int width = inRect.Width;
@@ -289,7 +294,7 @@ namespace ERY.Xle.Rendering
                 tx = sourceX;
                 ty = sourceY;
 
-                if (XleCore.GameState.Map.MapID != raft.MapNumber)
+                if (GameState.Map.MapID != raft.MapNumber)
                     continue;
                 if (raft.RaftImage > 0)
                 {
@@ -319,18 +324,18 @@ namespace ERY.Xle.Rendering
                 {
                     destRect = new Rectangle(rx, ry, 32, 32);
 
-                    XleCore.Factory.Character.Draw(charRect, destRect);
+                    Factory.Character.Draw(charRect, destRect);
                 }
             }
         }
 
         public Action ReplacementDrawMethod { get; set; }
 
-        public XleMapRenderer MapRenderer { get { return XleCore.GameState.MapExtender.MapRenderer; } }
+        public XleMapRenderer MapRenderer { get { return GameState.MapExtender.MapRenderer; } }
 
         public void Draw()
         {
-            if (XleCore.GameState == null)
+            if (GameState == null)
                 return;
 
             if (ReplacementDrawMethod != null)
@@ -339,10 +344,10 @@ namespace ERY.Xle.Rendering
                 return;
             }
 
-            SetProjectionAndBackColors(XleCore.GameState.Map.ColorScheme);
+            SetProjectionAndBackColors(GameState.Map.ColorScheme);
 
-            Player player = XleCore.GameState.Player;
-            XleMap map = XleCore.GameState.Map;
+            Player player = GameState.Player;
+            XleMap map = GameState.Map;
 
             int i = 0;
             Color boxColor = map.ColorScheme.FrameColor;
@@ -441,7 +446,7 @@ namespace ERY.Xle.Rendering
 
                 mHPColor = lastColor;
 
-                XleCore.Wait(80);
+                GameControl.Wait(80);
 
                 count++;
 

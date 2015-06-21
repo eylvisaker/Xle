@@ -121,7 +121,7 @@
     <Compile Include="Services\IXleMenu.cs" />
     <Compile Include="Services\IXleScreen.cs" />
     <Compile Include="Services\Implementation\MapLoader.cs" />
-    <Compile Include="Services\Implementation\SoundManProxy.cs" />
+    <Compile Include="Services\Implementation\SoundMan.cs" />
     <Compile Include="Services\Implementation\XleConsole.cs" />
     <Compile Include="Services\Implementation\XleInput.cs" />
     <Compile Include="Services\ISoundMan.cs" />
@@ -226,7 +226,7 @@
     <Compile Include="MenuItemList.cs" />
     <Compile Include="Data\Monster.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="SoundMan.cs" />
+    <Compile Include="LotaSound.cs" />
     <Compile Include="XleEventTypes\XleEvent.cs" />
     <Compile Include="SubMenu.cs" />
     <Compile Include="Maps\XleMapTypes\MuseumDisplays\Exhibit.cs" />
