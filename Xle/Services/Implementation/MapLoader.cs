@@ -14,6 +14,7 @@ using AgateLib.Serialization.Xle;
 using ERY.Xle.Data;
 using ERY.Xle.Maps;
 using ERY.Xle.Rendering;
+using ERY.Xle.Maps.Extenders;
 
 namespace ERY.Xle.Services.Implementation
 {
@@ -36,14 +37,45 @@ namespace ERY.Xle.Services.Implementation
             this.rendererFactory = rendererFactory;
         }
 
-        public XleMap LoadMap(int mapId)
+        private string GetFilename(int mapId)
         {
-            string file = "Maps/" + data.MapList[mapId].Filename;
+            return "Maps/" + data.MapList[mapId].Filename;
+        }
+
+        public MapExtender LoadMap(int mapId)
+        {
+            string file = GetFilename(mapId);
 
             return LoadMap(file, mapId);
         }
 
-        public XleMap LoadMap(string filename, int id)
+        public MapExtender LoadMap(string filename, int id)
+        {
+            XleMap data = LoadMapData(filename, id);
+
+            var extender = extenderFactory.CreateMapExtender(data);
+            extender.TheMap = data;
+            
+            var renderer = extender.CreateMapRenderer(rendererFactory);
+            renderer.Extender = extender;
+            renderer.TheMap = data;
+            extender.MapRenderer = renderer;
+
+            data.MapID = id;
+
+            extender.CreateEventExtenders(eventFactory);
+
+            return extender;
+        }
+
+        public XleMap LoadMapData(int mapId)
+        {
+            string filename = GetFilename(mapId);
+
+            return LoadMapData(filename, mapId);
+        }
+
+        private XleMap LoadMapData(string filename, int mapId)
         {
             if (System.IO.Path.GetExtension(filename).ToLower() != ".xmf")
                 throw new ArgumentException("File extension not recognized.");
@@ -51,27 +83,10 @@ namespace ERY.Xle.Services.Implementation
             XleSerializer ser = new XleSerializer(typeof(XleMap));
             ser.Binder = new XleTypeBinder(ser.Binder);
 
-            XleMap result;
-
             using (var file = AgateLib.IO.Assets.OpenRead(filename))
             {
-                result = (XleMap)ser.Deserialize(file);
+                return (XleMap)ser.Deserialize(file);
             }
-
-            var extender = extenderFactory.CreateMapExtender(result);
-            extender.TheMap = result;
-            
-            var renderer = extender.CreateMapRenderer(rendererFactory);
-            renderer.Extender = extender;
-            renderer.TheMap = result;
-            extender.MapRenderer = renderer;
-
-            result.MapID = id;
-            result.mBaseExtender = extender;
-
-            extender.CreateEventExtenders(eventFactory);
-
-            return result;
         }
     }
 }

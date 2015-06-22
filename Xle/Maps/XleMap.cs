@@ -168,18 +168,6 @@ namespace ERY.Xle.Maps
             }
         }
 
-        public T CreateEventExtender<T>(XleEvent evt) where T : EventExtender, new()
-        {
-            return (T)CreateEventExtender(evt, typeof(T));
-        }
-        public EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-        {
-            if (mBaseExtender != null)
-                return mBaseExtender.CreateEventExtender(evt, defaultExtender);
-            else
-                return (EventExtender)Activator.CreateInstance(defaultExtender);
-        }
-
         private void SetChestIDs()
         {
             int index = 0;
@@ -445,8 +433,6 @@ namespace ERY.Xle.Maps
 
         #region --- Drawing ---
 
-        protected Point centerPoint;
-
         private IEnumerable<TileGroup> GetGroupsToAnimate()
         {
             if (TileSet == null)
@@ -577,18 +563,6 @@ namespace ERY.Xle.Maps
         public virtual void GuardAttackPlayer(Player player, Guard guard)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Executes the movement of the player in a certain direction.
-        /// Assumes validation has already been performed. Call CanPlayerStep
-        /// first to check to see if the movement is valid.
-        /// </summary>
-        /// <param name="state"></param>
-        /// <param name="stepDirection"></param>
-        protected virtual void MovePlayer(GameState state, Point stepDirection)
-        {
-            mBaseExtender.MovePlayer(state, stepDirection);
         }
 
     }

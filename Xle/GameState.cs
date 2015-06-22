@@ -21,23 +21,13 @@ namespace ERY.Xle
         {
             GameSpeed = new GameSpeed();
             Player = thePlayer;
-            Map = null;
+            MapExtender = null;
         }
 
         public Player Player { get; set; }
-        public XleMap Map { get; set; }
-        public MapExtender MapExtender
-        {
-            get
-            {
-                if (Map == null) 
-                    return null; 
-                
-                return Map.Extender;
-            }
-        }
+        public XleMap Map { get { return MapExtender.TheMap; } }
+        public MapExtender MapExtender { get; set; }
 
         public GameSpeed GameSpeed { get; set; }
-
     }
 }

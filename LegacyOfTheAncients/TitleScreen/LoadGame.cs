@@ -9,40 +9,40 @@ using System.Text;
 namespace ERY.Xle.LotA.TitleScreen
 {
     public class LoadGame : FileMenu
-	{
-		public LoadGame()
-		{
-			Colors.FrameColor = XleColor.LightGray;
-			Colors.FrameHighlightColor = XleColor.Yellow;
-			Colors.BackColor = XleColor.Brown;
-			Colors.BorderColor = XleColor.Red;
+    {
+        public LoadGame()
+        {
+            Colors.FrameColor = XleColor.LightGray;
+            Colors.FrameHighlightColor = XleColor.Yellow;
+            Colors.BackColor = XleColor.Brown;
+            Colors.BorderColor = XleColor.Red;
 
-			Title = " Restart a game ";
+            Title = " Restart a game ";
 
-			var instruction = new TextWindow();
+            var instruction = new TextWindow();
 
-			instruction.Location = new Point(3, 21);
-			instruction.WriteLine("(Select by joystick or number keys)", XleColor.Yellow);
+            instruction.Location = new Point(3, 21);
+            instruction.WriteLine("(Select by joystick or number keys)", XleColor.Yellow);
 
-			Windows.Add(instruction);
+            Windows.Add(instruction);
 
-			var prompt = new TextWindow();
+            var prompt = new TextWindow();
 
-			prompt.Location = new Point(9, 5);
-			prompt.WriteLine("Restart which character?");
+            prompt.Location = new Point(9, 5);
+            prompt.WriteLine("Restart which character?");
 
-			Windows.Add(prompt);
-		}
+            Windows.Add(prompt);
+        }
 
 
-		protected override void UserSelectedFile(string file)
-		{
-			ThePlayer = Player.LoadPlayer(file);
-		}
+        protected override void UserSelectedFile(string file)
+        {
+            ThePlayer = Player.LoadPlayer(file);
+        }
 
-		protected override void UserSelectedCancel()
-		{
-			NewState = Factory.CreateSecondMainMenu();
-		}
-	}
+        protected override void UserSelectedCancel()
+        {
+            NewState = Factory.CreateSecondMainMenu();
+        }
+    }
 }

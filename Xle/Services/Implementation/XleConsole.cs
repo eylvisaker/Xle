@@ -269,7 +269,7 @@ namespace ERY.Xle.Services.Implementation
             var map = mapLoader.LoadMap(mapInfo.ParentMapID);
             int targetX = 0, targetY = 0;
 
-            foreach (ChangeMapEvent evt in from evt in map.Events
+            foreach (ChangeMapEvent evt in from evt in map.TheMap.Events
                                            where evt is ChangeMapEvent
                                            select (ChangeMapEvent)evt)
             {
@@ -280,15 +280,13 @@ namespace ERY.Xle.Services.Implementation
                 }
             }
 
-            var ext = map.Extender;
-
-            if (ext.CanPlayerStepIntoImpl(player, targetX + 2, targetY))
+            if (map.CanPlayerStepIntoImpl(player, targetX + 2, targetY))
                 targetX += 2;
-            else if (ext.CanPlayerStepIntoImpl(player, targetX - 2, targetY))
+            else if (map.CanPlayerStepIntoImpl(player, targetX - 2, targetY))
                 targetX -= 2;
-            else if (ext.CanPlayerStepIntoImpl(player, targetX, targetY + 2))
+            else if (map.CanPlayerStepIntoImpl(player, targetX, targetY + 2))
                 targetY += 2;
-            else if (ext.CanPlayerStepIntoImpl(player, targetX, targetY - 2))
+            else if (map.CanPlayerStepIntoImpl(player, targetX, targetY - 2))
                 targetY -= 2;
 
             ChangeMap(player, map.MapID, new Point(targetX, targetY));

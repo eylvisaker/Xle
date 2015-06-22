@@ -573,5 +573,6 @@ namespace ERY.Xle.Maps.Extenders
             }
         }
 
+        public int MapID { get { return TheMap.MapID; } }
     }
 }

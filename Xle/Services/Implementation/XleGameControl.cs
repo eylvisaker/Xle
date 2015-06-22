@@ -55,7 +55,7 @@ namespace ERY.Xle.Services.Implementation
 
         public void KeepAlive()
         {
-            if (gameState.Map != null)
+            if (gameState.MapExtender != null)
             {
                 gameState.MapExtender.CheckSounds(gameState);
             }

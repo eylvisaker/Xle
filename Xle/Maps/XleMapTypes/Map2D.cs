@@ -26,7 +26,7 @@ namespace ERY.Xle.Maps.XleMapTypes
         {
             mWidth = info.ReadInt32("Width");
             mHeight = info.ReadInt32("Height");
-            mData = info.ReadInt32Array("MapData");
+            mData = info.ReadArray<int>("MapData");
 
             base.ReadData(info);
         }
@@ -48,24 +48,16 @@ namespace ERY.Xle.Maps.XleMapTypes
             get { return mWidth; }
         }
 
-
         public override int this[int xx, int yy]
         {
-            get
+            get 
             {
                 if (yy < 0 || yy >= Height || xx < 0 || xx >= Width)
                 {
-                    var outsideTile = mBaseExtender.GetOutsideTile(centerPoint, xx, yy);
-
-                    if (outsideTile == -1)
-                        return OutsideTile;
-                    else
-                        return outsideTile;
+                    return OutsideTile;
                 }
-                else
-                {
-                    return mData[xx + yy * mWidth];
-                }
+                    
+                return mData[xx + yy * mWidth]; 
             }
             set
             {
@@ -74,12 +66,9 @@ namespace ERY.Xle.Maps.XleMapTypes
                 {
                     return;
                 }
-                else
-                {
-                    mData[xx + yy * mWidth] = value;
-                }
+
+                mData[xx + yy * mWidth] = value;
             }
         }
-
     }
 }

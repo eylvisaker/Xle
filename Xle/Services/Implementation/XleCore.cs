@@ -14,6 +14,7 @@ using ERY.Xle.Data;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Rendering;
+using ERY.Xle.Maps.Extenders;
 
 namespace ERY.Xle.Services.Implementation
 {
@@ -80,6 +81,7 @@ namespace ERY.Xle.Services.Implementation
         private IXleInput input;
         private ICommandList commands;
         private ICommandExecutor commandExecutor;
+        public IMapLoader MapLoader { get; set; }
 
         public static GameState GameState { get; set; }
         [Obsolete("Use IXleRenderer as a service instead.")]
@@ -89,11 +91,9 @@ namespace ERY.Xle.Services.Implementation
         public static XleData Data { get { return inst.mData; } }
 
         [Obsolete("Use MapLoader service instead.")]
-        public static XleMap LoadMap(int mapID)
+        public static MapExtender LoadMap(int mapID)
         {
-            string file = "Maps/" + Data.MapList[mapID].Filename;
-
-            return XleMap.LoadMap(file, mapID);
+            return inst.MapLoader.LoadMap(mapID);
         }
 
         [Obsolete("Use MapLoader service instead.")]
@@ -233,7 +233,7 @@ namespace ERY.Xle.Services.Implementation
                 return;
             }
 
-            var saveMap = GameState.Map;
+            var saveMap = GameState.MapExtender;
             var saveX = player.X;
             var saveY = player.Y;
 
@@ -251,13 +251,13 @@ namespace ERY.Xle.Services.Implementation
             {
                 if (actualChangeMap)
                 {
-                    GameState.Map = LoadMap(mMapID);
+                    GameState.MapExtender = LoadMap(mMapID);
                     player.MapID = mMapID;
 
                     if (GameState.Map.GetType() == saveMap.GetType() &&
                         GameState.Map.Guards != null)
                     {
-                        GameState.Map.Guards.IsAngry = saveMap.Guards.IsAngry;
+                        GameState.Map.Guards.IsAngry = saveMap.TheMap.Guards.IsAngry;
                     }
 
                     TextArea.Clear();
@@ -305,7 +305,7 @@ namespace ERY.Xle.Services.Implementation
                 System.Diagnostics.Debug.Print(e.StackTrace);
 
                 player.MapID = saveMap.MapID;
-                GameState.Map = saveMap;
+                GameState.MapExtender = saveMap;
                 player.X = saveX;
                 player.Y = saveY;
 

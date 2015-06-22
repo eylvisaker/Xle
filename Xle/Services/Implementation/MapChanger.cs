@@ -9,6 +9,7 @@ using AgateLib.Geometry;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Rendering;
+using ERY.Xle.Maps.Extenders;
 
 namespace ERY.Xle.Services.Implementation
 {
@@ -57,7 +58,7 @@ namespace ERY.Xle.Services.Implementation
                 return;
             }
 
-            var saveMap = gameState.Map;
+            var saveMap = gameState.MapExtender;
             var saveX = player.X;
             var saveY = player.Y;
 
@@ -75,13 +76,13 @@ namespace ERY.Xle.Services.Implementation
             {
                 if (actualChangeMap)
                 {
-                    gameState.Map = mapLoader.LoadMap(mMapID);
+                    gameState.MapExtender = mapLoader.LoadMap(mMapID);
                     player.MapID = mMapID;
 
                     if (gameState.Map.GetType() == saveMap.GetType() &&
                         gameState.Map.Guards != null)
                     {
-                        gameState.Map.Guards.IsAngry = saveMap.Guards.IsAngry;
+                        gameState.Map.Guards.IsAngry = saveMap.TheMap.Guards.IsAngry;
                     }
 
                     textArea.Clear();
@@ -130,7 +131,7 @@ namespace ERY.Xle.Services.Implementation
                 System.Diagnostics.Debug.Print(e.StackTrace);
 
                 player.MapID = saveMap.MapID;
-                gameState.Map = saveMap;
+                gameState.MapExtender = saveMap;
                 player.X = saveX;
                 player.Y = saveY;
 
@@ -142,9 +143,9 @@ namespace ERY.Xle.Services.Implementation
         }
 
 
-        public void SetMap(XleMap map)
+        public void SetMap(MapExtender map)
         {
-            gameState.Map = map;
+            gameState.MapExtender = map;
             gameState.MapExtender.OnLoad(gameState);
 
             SetTilesAndCommands();

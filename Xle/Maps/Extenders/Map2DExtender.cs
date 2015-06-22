@@ -135,7 +135,6 @@ namespace ERY.Xle.Maps.Extenders
         protected virtual void PlayerFight(GameState state, Direction fightDir)
         { }
 
-
         public override bool PlayerXamine(GameState state)
         {
             TextArea.PrintLine();
