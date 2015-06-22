@@ -137,7 +137,7 @@ namespace ERY.Xle.Maps.Extenders
             }
         }
 
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             return 0;
         }
@@ -1207,45 +1207,12 @@ namespace ERY.Xle.Maps.Extenders
             base.OnLoad(state);
         }
 
-        [Obsolete("Call SetMonsterImagePosition first, then use monstDir.ToString for the return value.", true)]
-        public string MonsterDirection(Player player)
-        {
-            SetMonsterImagePosition(player);
-
-            return monstDir.ToString();
-        }
-
         protected void SetMonsterImagePosition(Player player)
         {
             monstDir = (Direction)Random.Next((int)Direction.East, (int)Direction.South + 1);
             MapRenderer.MonsterDrawDirection = monstDir;
         }
 
-
-        /*
-        public override void PlayerMagic(GameState state)
-        {
-            var magics = Extender.ValidMagic.Where(x => state.Player.Items[x.ItemID] > 0).ToList();
-
-            MenuItemList menu = new MenuItemList();
-            menu.Add("Nothing");
-            menu.AddRange(magics.Select(x => x.Name));
-
-            TextArea.PrintLine(" - select above", XleColor.Cyan);
-            int choice = XleCore.SubMenu("Pick Magic", 0, menu);
-
-            if (choice == 0)
-                return;
-
-            var magic = magics[choice-1];
-
-            TextArea.PrintLine();
-
-            state.Player.Items[magic.ItemID]--;
-
-			
-        }
-        */
         protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
         {
             switch (magic.ID)

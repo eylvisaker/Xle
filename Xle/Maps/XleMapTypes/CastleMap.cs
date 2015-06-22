@@ -13,17 +13,15 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
-	public class CastleMap : Town
-	{
-		public CastleMap() { }
+    public class CastleMap : Town
+    {
+        public override IEnumerable<string> AvailableTileImages
+        {
+            get
+            {
+                yield return "CastleTiles.png";
+            }
+        }
 
-		public override IEnumerable<string> AvailableTileImages
-		{
-			get
-			{
-				yield return "CastleTiles.png";
-			}
-		}
-
-	}
+    }
 }

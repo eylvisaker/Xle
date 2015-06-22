@@ -114,14 +114,6 @@ namespace ERY.Xle.Maps
 			return true;
 		}
 
-		private void GuardAttackPlayer(Player player, Guard guard)
-		{
-			if (guard.SkipAttacking)
-				return;
-
-			TheMap.GuardAttackPlayer(player, guard);
-		}
-
 		public void InitializeGuardData()
 		{
 			foreach (var guard in this)

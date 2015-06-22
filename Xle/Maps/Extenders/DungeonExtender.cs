@@ -40,7 +40,6 @@ namespace ERY.Xle.Maps.Extenders
         public virtual void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled, ref bool clearBox)
         {
         }
-
         public virtual void OnBeforeOpenBox(Player player, ref bool handled)
         {
         }
@@ -81,29 +80,23 @@ namespace ERY.Xle.Maps.Extenders
             return 0;
         }
 
-
         public virtual bool ShowDirection(Player player)
         {
             return true;
         }
-
-
         public override void CheckSounds(GameState state)
         {
         }
-
 
         public virtual DungeonMonster GetMonsterToSpawn(GameState state)
         {
             return null;
         }
 
-
         public virtual bool RollToHitMonster(GameState state, DungeonMonster monster)
         {
             return true;
         }
-
 
         public virtual int RollDamageToMonster(GameState state, DungeonMonster monster)
         {
@@ -117,18 +110,15 @@ namespace ERY.Xle.Maps.Extenders
             return count % 2 == 1;
         }
 
-
         public virtual int RollDamageToPlayer(GameState state, DungeonMonster monster)
         {
             return 4;
         }
 
-
         public virtual bool SpawnMonsters(GameState state)
         {
             return true;
         }
-
         public virtual void UpdateMonsters(GameState state)
         {
             foreach (var monster in TheMap.Monsters.Where(x => x.DungeonLevel == state.Player.DungeonLevel))
@@ -168,8 +158,6 @@ namespace ERY.Xle.Maps.Extenders
         public virtual void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
         {
         }
-
-
 
         public virtual bool PrintLevelDuringXamine
         {
@@ -216,7 +204,6 @@ namespace ERY.Xle.Maps.Extenders
             return true;
         }
 
-
         private void DungeonLevelText(Player player)
         {
             CurrentLevel = player.DungeonLevel;
@@ -227,13 +214,11 @@ namespace ERY.Xle.Maps.Extenders
             TextArea.PrintLine("\n\nYou are now at level " + (player.DungeonLevel + 1).ToString() + ".", XleColor.White);
         }
 
-
         public int CurrentLevel
         {
             get { return TheMap.CurrentLevel; }
             set { TheMap.CurrentLevel = value; }
         }
-
 
         private void OnPlayerAvoidTrap(Player player, int x, int y)
         {
@@ -726,14 +711,12 @@ namespace ERY.Xle.Maps.Extenders
             }
         }
 
-
-
-        public DungeonMonster MonsterInFrontOfPlayer(Player player)
+        protected DungeonMonster MonsterInFrontOfPlayer(Player player)
         {
             int distance = 0;
             return MonsterInFrontOfPlayer(player, ref distance);
         }
-        public DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
+        protected DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
         {
             Point fightDir = player.FaceDirection.StepDirection();
             DungeonMonster monst = null;
@@ -833,33 +816,5 @@ namespace ERY.Xle.Maps.Extenders
             return true;
         }
 
-        internal void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
-        {
-            Point stepDir = faceDirection.StepDirection();
-
-            for (int distance = 1; distance <= maxDistance; distance++)
-            {
-                Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
-
-                var monster = MonsterAt(Player.DungeonLevel, loc);
-
-                if (monster == null)
-                    continue;
-
-                var data = Data.DungeonMonsters[monster.MonsterID];
-                int image = distance - 1;
-                var imageInfo = data.Images[image];
-
-                var drawPoint = imageInfo.DrawPoint;
-                drawPoint.X += inRect.X;
-                drawPoint.Y += inRect.Y;
-
-                var srcRect = imageInfo.SourceRects[0];
-
-                data.Surface.Draw(srcRect, drawPoint);
-
-                break;
-            }
-        }
     }
 }

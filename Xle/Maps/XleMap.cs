@@ -168,18 +168,6 @@ namespace ERY.Xle.Maps
             }
         }
 
-        public T CreateEventExtender<T>(XleEvent evt) where T : EventExtender, new()
-        {
-            return (T)CreateEventExtender(evt, typeof(T));
-        }
-        public EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-        {
-            if (mBaseExtender != null)
-                return mBaseExtender.CreateEventExtender(evt, defaultExtender);
-            else
-                return (EventExtender)Activator.CreateInstance(defaultExtender);
-        }
-
         private void SetChestIDs()
         {
             int index = 0;
@@ -406,23 +394,6 @@ namespace ERY.Xle.Maps
             }
         }
 
-        [Obsolete("Use ClosedRoofAt instead.", true)]
-        public int PointInRoof(int ptx, int pty)
-        {
-            for (int i = 0; i < mRoofs.Count; i++)
-            {
-                if (mRoofs[i].PointInRoof(ptx, pty, false))
-                {
-                    if (mRoofs[i].Open)
-                        return -1;
-                    else
-                        return i;
-                }
-            }
-
-            return -1;
-        }
-
         public Roof ClosedRoofAt(int x, int y)
         {
             Roof result = null;
@@ -455,28 +426,6 @@ namespace ERY.Xle.Maps
         protected virtual void DrawImpl(int x, int y, Direction faceDirection, Rectangle inRect)
         { }
 
-        private IEnumerable<TileGroup> GetGroupsToAnimate()
-        {
-            if (TileSet == null)
-                yield break;
-
-            foreach (var group in TileSet.TileGroups)
-            {
-                if (group.AnimationType == AnimationType.None)
-                    continue;
-                if (group.Tiles.Count < 2)
-                    continue;
-
-                group.TimeSinceLastAnim += AgateLib.DisplayLib.Display.DeltaTime;
-
-                if (group.TimeSinceLastAnim >= group.AnimationTime)
-                {
-                    group.TimeSinceLastAnim %= group.AnimationTime;
-                    yield return group;
-                }
-            }
-        }
-
         public ColorScheme ColorScheme { get; private set; }
 
         #endregion
@@ -488,80 +437,12 @@ namespace ERY.Xle.Maps
         }
 
         #endregion
-        #region --- Events ---
-
-        public IEnumerable<XleEvent> EnabledEventsAt(Player player, int border)
-        {
-            return EventsAt(player, border).Where(e => e.Enabled);
-        }
-        public IEnumerable<XleEvent> EventsAt(Player player, int border)
-        {
-            int px = player.X;
-            int py = player.Y;
-
-            return EventsAt(px, py, border);
-        }
-        public IEnumerable<XleEvent> EventsAt(int px, int py, int border)
-        {
-            foreach (var e in mEvents)
-            {
-                bool found = false;
-
-                if (e.Enabled == false)
-                    continue;
-
-                for (int j = 0; j < 2; j++)
-                {
-                    for (int i = 0; i < 2; i++)
-                    {
-                        int x = px + i;
-                        int y = py + j;
-
-                        if (x >= e.Rectangle.X - border && y >= e.Rectangle.Y - border &&
-                            x < e.Rectangle.Right + border && y < e.Rectangle.Bottom + border)
-                        {
-                            found = true;
-
-                        }
-                    }
-                }
-
-                if (found)
-                    yield return e;
-            }
-        }
-
-        /// <summary>
-        /// returns the special event at the specified location
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public XleEvent GetEvent(int x, int y, int border)
-        {
-            for (int i = 0; i < mEvents.Count; i++)
-            {
-                XleEvent e = mEvents[i];
-
-                if (x >= e.Rectangle.X - border && y >= e.Rectangle.Y - border &&
-                    x < e.Rectangle.Right + border && y < e.Rectangle.Bottom + border)
-                {
-                    return e;
-                }
-            }
-
-            return null;
-        }
-
-        #endregion
 
         #region --- Player movement stuff ---
-
 
         public virtual double StepQuality { get { return 1; } }
 
         #endregion
-
 
         public void RemoveJailBars(Rectangle rectangle, int replacementTile)
         {
@@ -580,23 +461,6 @@ namespace ERY.Xle.Maps
                     this[rectangle.X + i, rectangle.Y + j] = replacementTile;
                 }
             }
-        }
-
-        public virtual void GuardAttackPlayer(Player player, Guard guard)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Executes the movement of the player in a certain direction.
-        /// Assumes validation has already been performed. Call CanPlayerStep
-        /// first to check to see if the movement is valid.
-        /// </summary>
-        /// <param name="state"></param>
-        /// <param name="stepDirection"></param>
-        protected virtual void MovePlayer(GameState state, Point stepDirection)
-        {
-            mBaseExtender.MovePlayer(state, stepDirection);
         }
 
     }

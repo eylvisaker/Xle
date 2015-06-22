@@ -24,9 +24,6 @@ namespace ERY.Xle.Maps.XleMapTypes
 
         #region --- Construction and Serialization ---
 
-        public Outside()
-        { }
-
         protected override void WriteData(XleSerializationInfo info)
         {
             info.Write("Width", Width);

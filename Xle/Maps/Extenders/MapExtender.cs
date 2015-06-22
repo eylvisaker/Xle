@@ -111,20 +111,6 @@ namespace ERY.Xle.Maps.Extenders
             throw new NotImplementedException();
         }
 
-
-        public EventExtender CreateEventExtender(XleEvent evt, Type defaultExtender)
-        {
-            try
-            {
-                return EventFactory.Create(this, evt, defaultExtender);
-            }
-            catch (Exception e)
-            {
-                Debug.Print(e.ToString());
-                return (EventExtender)Activator.CreateInstance(defaultExtender);
-            }
-        }
-
         public virtual int StepSize
         {
             get { return 1; }
@@ -529,11 +515,6 @@ namespace ERY.Xle.Maps.Extenders
             }
         }
 
-
-        public IEnumerable<EventExtender> EnabledEventsAt(Player player, int border)
-        {
-            return EventsAt(player, border).Where(e => e.Enabled);
-        }
         public IEnumerable<EventExtender> EventsAt(Player player, int border)
         {
             int px = player.X;

@@ -53,8 +53,7 @@ namespace ERY.Xle.Maps.Extenders
             return facingDoor;
         }
 
-
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             throw new NotImplementedException();
         }
@@ -67,10 +66,6 @@ namespace ERY.Xle.Maps.Extenders
             scheme.FrameHighlightColor = XleColor.Yellow;
 
             scheme.MapAreaWidth = 23;
-        }
-
-        public MuseumExtender()
-        {
         }
 
         public override void OnLoad(GameState state)

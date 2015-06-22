@@ -9,37 +9,37 @@ using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.Maps.Extenders
 {
-	public class TempleExtender : Map2DExtender
-	{
-		public new Temple TheMap { get { return (Temple)base.TheMap; } }
-		
-		protected override Renderers.XleMapRenderer CreateMapRenderer()
-		{
-			return new Map2DRenderer();
-		}
+    public class TempleExtender : Map2DExtender
+    {
+        public new Temple TheMap { get { return (Temple)base.TheMap; } }
 
-		public override void SetColorScheme(ColorScheme scheme)
-		{
-			scheme.TextColor = XleColor.White;
+        protected override Renderers.XleMapRenderer CreateMapRenderer()
+        {
+            return new Map2DRenderer();
+        }
 
-			scheme.FrameColor = XleColor.Orange;
-			scheme.FrameHighlightColor = XleColor.Yellow;
-		}
+        public override void SetColorScheme(ColorScheme scheme)
+        {
+            scheme.TextColor = XleColor.White;
 
-		protected override void PlayerFight(GameState state, Direction fightDir)
-		{
-			TextArea.PrintLine();
-			TextArea.PrintLine("Nothing much hit.");
+            scheme.FrameColor = XleColor.Orange;
+            scheme.FrameHighlightColor = XleColor.Yellow;
+        }
 
-			SoundMan.PlaySound(LotaSound.Bump);
-		}
+        protected override void PlayerFight(GameState state, Direction fightDir)
+        {
+            TextArea.PrintLine();
+            TextArea.PrintLine("Nothing much hit.");
 
-		public override bool UseFancyMagicPrompt
-		{
-			get
-			{
-				return false;
-			}
-		}
-	}
+            SoundMan.PlaySound(LotaSound.Bump);
+        }
+
+        public override bool UseFancyMagicPrompt
+        {
+            get
+            {
+                return false;
+            }
+        }
+    }
 }
