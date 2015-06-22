@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Data;
+
 namespace ERY.Xle.Services.Implementation
 {
     public class EquipmentPicker : IEquipmentPicker
@@ -18,6 +20,9 @@ namespace ERY.Xle.Services.Implementation
             this.GameState = gameState;
             this.menu = menu;
         }
+
+        public XleData Data { get; set; }
+
         public ArmorItem PickArmor(ArmorItem defaultItem)
         {
             return PickArmor(GameState, defaultItem);
@@ -27,7 +32,7 @@ namespace ERY.Xle.Services.Implementation
             MenuItemList theList = new MenuItemList();
 
             theList.Add("Nothing");
-            theList.AddRange(state.Player.Armor.Select(x => x.NameWithQuality));
+            theList.AddRange(state.Player.Armor.Select(x => x.NameWithQuality(Data)));
 
             int sel = menu.SubMenu("Pick Armor", state.Player.Armor.IndexOf(defaultItem) + 1,
                 theList, backColor ?? XleColor.Black);
@@ -47,7 +52,7 @@ namespace ERY.Xle.Services.Implementation
             MenuItemList theList = new MenuItemList();
 
             theList.Add("Nothing");
-            theList.AddRange(state.Player.Weapons.Select(x => x.NameWithQuality));
+            theList.AddRange(state.Player.Weapons.Select(x => x.NameWithQuality(Data)));
 
             int sel = menu.SubMenu("Pick Weapon", state.Player.Weapons.IndexOf(defaultItem) + 1,
                 theList, backColor ?? XleColor.Black);

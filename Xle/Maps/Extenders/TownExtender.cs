@@ -386,7 +386,7 @@ namespace ERY.Xle.Maps.Extenders
             int tile = 0, tile1;
             int hit = 0;
 
-            if (player.CurrentWeapon.Info.Ranged)
+            if (player.CurrentWeapon.Info(Data).Ranged)
             {
                 maxXdist = 12;
                 maxYdist = 8;

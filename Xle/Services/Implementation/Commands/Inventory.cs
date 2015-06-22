@@ -124,8 +124,8 @@ namespace ERY.Xle.Services.Implementation.Commands
                         if (player.CurrentWeapon == weapon)
                             clr = XleColor.White;
 
-                        TextRenderer.WriteText(128, ++yy * 16, weapon.BaseName, clr);
-                        TextRenderer.WriteText(416, yy * 16, weapon.QualityName, clr);
+                        TextRenderer.WriteText(128, ++yy * 16, weapon.BaseName(data), clr);
+                        TextRenderer.WriteText(416, yy * 16, weapon.QualityName(data), clr);
                     }
 
                     yy++;
@@ -137,8 +137,8 @@ namespace ERY.Xle.Services.Implementation.Commands
                         if (player.CurrentArmor == armor)
                             clr = XleColor.White;
 
-                        TextRenderer.WriteText(128, ++yy * 16, armor.BaseName, clr);
-                        TextRenderer.WriteText(416, yy * 16, armor.QualityName, clr);
+                        TextRenderer.WriteText(128, ++yy * 16, armor.BaseName(data), clr);
+                        TextRenderer.WriteText(416, yy * 16, armor.QualityName(data), clr);
                     }
                 }
                 else if (inventoryScreen == 1)

@@ -874,7 +874,7 @@ namespace ERY.Xle.Maps.Extenders
             string weaponName;
             var player = state.Player;
 
-            weaponName = player.CurrentWeaponTypeName;
+            weaponName = player.CurrentWeapon.BaseName(Data);
 
             TextArea.PrintLine("\n");
 

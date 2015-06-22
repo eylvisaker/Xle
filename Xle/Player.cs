@@ -737,21 +737,6 @@ namespace ERY.Xle
         public List<ArmorItem> Armor { get { return armor; } }
         public List<WeaponItem> Weapons { get { return weapons; } }
 
-        /// <summary>
-        /// Gives the name of the current weapon being used. Does not include the
-        /// quality information (shoddy, good, etc.)
-        /// </summary>
-        public string CurrentWeaponTypeName
-        {
-            get
-            {
-                if (currentWeaponIndex == 0)
-                    return "Bare Hands";
-
-                return CurrentWeapon.BaseName;
-            }
-        }
-
         public ItemContainer Items { get { return mItems; } }
 
         /// <summary>

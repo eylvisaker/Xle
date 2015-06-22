@@ -75,9 +75,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 return;
             }
 
-            int sellPrice = ComputeSellPrice(eq.Price);
-            TextArea.PrintLine("I'll pay you exactly " + sellPrice.ToString() + " gold");
-            TextArea.PrintLine("for your " + eq.NameWithQuality + ".");
+            int sellPrice = ComputeSellPrice(eq.Price(Data));
+            TextArea.PrintLine("I'll pay you exactly " + sellPrice + " gold");
+            TextArea.PrintLine("for your " + eq.NameWithQuality(Data) + ".");
             TextArea.PrintLine();
 
             choice = QuickMenuService.QuickMenuYesNo(true);
@@ -90,7 +90,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             TextArea.Clear();
             TextArea.PrintLine("It's a deal!");
-            TextArea.PrintLine(eq.BaseName + " sold for " + sellPrice + " gold.");
+            TextArea.PrintLine(eq.BaseName(Data) + " sold for " + sellPrice + " gold.");
 
             Player.RemoveEquipment(eq);
 

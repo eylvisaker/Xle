@@ -108,7 +108,7 @@ namespace ERY.Xle.Maps.Extenders
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            TextArea.PrintLine("Fight with " + player.CurrentWeaponTypeName);
+            TextArea.PrintLine("Fight with " + player.CurrentWeapon.BaseName(Data));
             TextArea.Print("Enter direction: ");
 
             KeyCode key = Input.WaitForKey(KeyCode.Up, KeyCode.Down, KeyCode.Left, KeyCode.Right);

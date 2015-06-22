@@ -26,12 +26,12 @@ namespace ERY.Xle
             }
         }
 
-        public abstract EquipmentInfo Info { get; }
+        public abstract EquipmentInfo Info(XleData data);
 
-        public string BaseName { get { return Info.Name; } }
+        public string BaseName(XleData data) { return Info(data).Name; }
 
-        public string NameWithQuality { get { return QualityName + " " + BaseName; } }
-        public string QualityName { get { return XleCore.Data.QualityList[Quality]; } }
+        public string NameWithQuality(XleData data) { return QualityName(data) + " " + BaseName(data); }
+        public string QualityName(XleData data) { return data.QualityList[Quality]; }
 
         public static int Sorter(Equipment a, Equipment b)
         {
@@ -52,22 +52,22 @@ namespace ERY.Xle
             Quality = info.ReadInt32("Quality");
         }
 
-        public int Price { get { return Info.Prices[quality]; } }
+        public int Price(XleData data) { return Info(data).Prices[quality]; } 
     }
 
     public class WeaponItem : Equipment
     {
-        public override EquipmentInfo Info
+        public override EquipmentInfo Info(XleData data)
         {
-            get { return XleCore.Data.WeaponList[ID]; }
+            return data.WeaponList[ID]; 
         }
     }
 
     public class ArmorItem : Equipment
     {
-        public override EquipmentInfo Info
+        public override EquipmentInfo Info(XleData data)
         {
-            get { return XleCore.Data.ArmorList[ID]; }
+            return data.ArmorList[ID]; 
         }
     }
 }

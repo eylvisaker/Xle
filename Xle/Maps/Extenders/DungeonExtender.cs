@@ -777,7 +777,7 @@ namespace ERY.Xle.Maps.Extenders
 
             int distance = 0;
             int maxDistance = 1;
-            if (player.CurrentWeapon.Info.Ranged)
+            if (player.CurrentWeapon.Info(Data).Ranged)
                 maxDistance = 5;
 
             DungeonMonster monst = MonsterInFrontOfPlayer(player, ref distance);
@@ -790,7 +790,7 @@ namespace ERY.Xle.Maps.Extenders
             else if (distance > maxDistance)
             {
                 TextArea.PrintLine("The " + monst.Name + " is out-of-range");
-                TextArea.PrintLine("of your " + player.CurrentWeaponTypeName + ".");
+                TextArea.PrintLine("of your " + player.CurrentWeapon.BaseName(Data) + ".");
                 return true;
             }
 
@@ -798,7 +798,7 @@ namespace ERY.Xle.Maps.Extenders
 
             TextArea.Print("Hit ");
             TextArea.Print(monst.Name, XleColor.White);
-            TextArea.PrintLine(" with " + player.CurrentWeaponTypeName);
+            TextArea.PrintLine(" with " + player.CurrentWeapon.BaseName(Data));
 
             if (hit)
             {

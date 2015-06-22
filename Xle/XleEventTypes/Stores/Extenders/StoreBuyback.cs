@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AgateLib.Geometry;
 
+using ERY.Xle.Data;
 using ERY.Xle.Services.Implementation;
 using ERY.Xle.Services;
 
@@ -13,6 +14,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
     {
         public IEquipmentPicker EquipmentPicker { get; set; }
         public INumberPicker NumberPicker { get; set; }
+        public XleData Data { get; set; }
 
         public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
@@ -122,7 +124,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             int charm = Player.Attribute[Attributes.charm];
             charm = Math.Min(charm, 80);
 
-            int maxAccept = (int)(item.Price * Math.Pow(charm, .7) / 11);
+            int maxAccept = (int)(item.Price(Data) * Math.Pow(charm, .7) / 11);
             int offer = (int)((6 + Random.NextDouble()) * maxAccept / 14.0);
 
             choice = MakeOffer(item, offer, false);
@@ -251,7 +253,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             ta.Clear();
             ta.PrintLine("I'll give " + offer + " gold for your");
-            ta.Print(item.NameWithQuality);
+            ta.Print(item.NameWithQuality(Data));
 
             if (finalOffer)
             {
@@ -314,7 +316,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         {
             TextArea.Clear();
             TextArea.PrintLine("It's a deal!");
-            TextArea.PrintLine(item.BaseName + " sold for " + offer + " gold.");
+            TextArea.PrintLine(item.BaseName(Data) + " sold for " + offer + " gold.");
 
             Player.Gold += offer;
             Player.RemoveEquipment(item);
