@@ -84,38 +84,5 @@ namespace ERY.Xle.Maps.XleMapTypes
 
             return 0;
         }
-
-        protected override void DrawImpl(int x, int y, Direction facingDirection, Rectangle inRect)
-        {
-            base.DrawImpl(x, y, facingDirection, inRect);
-
-            DrawGuards(new Point(x, y), inRect);
-        }
-
-        protected void DrawGuards(Point centerPoint, Rectangle inRect)
-        {
-            Point topLeftMapPt = new Point(centerPoint.X - 11, centerPoint.Y - 7);
-
-            int px = inRect.Left;
-            int py = inRect.Top;
-
-            for (int i = 0; i < Guards.Count; i++)
-            {
-                Guard guard = Guards[i];
-
-                if (ClosedRoofAt(guard.X, guard.Y) == null)
-                {
-                    var facing = guard.Facing;
-
-                    int rx = px + (guard.X - topLeftMapPt.X) * 16;
-                    int ry = py + (guard.Y - topLeftMapPt.Y) * 16;
-
-                    if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
-                    {
-                        XleCore.Renderer.DrawCharacterSprite(rx, ry, facing, true, Guards.AnimFrame, false, guard.Color);
-                    }
-                }
-            }
-        }
     }
 }

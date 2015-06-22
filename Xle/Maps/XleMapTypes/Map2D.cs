@@ -48,6 +48,7 @@ namespace ERY.Xle.Maps.XleMapTypes
             get { return mWidth; }
         }
 
+
         public override int this[int xx, int yy]
         {
             get
@@ -79,5 +80,6 @@ namespace ERY.Xle.Maps.XleMapTypes
                 }
             }
         }
+
     }
 }

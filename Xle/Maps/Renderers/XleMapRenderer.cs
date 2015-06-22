@@ -41,7 +41,6 @@ namespace ERY.Xle.Maps.Renderers
 
         public virtual void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
         {
-            GameState.Map.Draw(playerPos.X, playerPos.Y, faceDirection, inRect);
         }
 
         protected virtual void OnMapSet()
