@@ -16,10 +16,5 @@ namespace ERY.Xle.Services
         int MailItemID { get; }
         int ClimbingGearItemID { get; }
         int HealingItemID { get; }
-
-        int NextMuseumCoinOffer(GameState gameState);
-
-
-
     }
 }

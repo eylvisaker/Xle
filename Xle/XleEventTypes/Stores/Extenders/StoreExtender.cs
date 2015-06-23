@@ -176,7 +176,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         public virtual void CheckOfferMuseumCoin(Player player)
         {
-            if (Random.Next(1000) < 45 && robbing == false)
+            if (MuseumCoinSale.RollToOfferCoin() && robbing == false)
             {
                 MuseumCoinSale.OfferMuseumCoin();
             }

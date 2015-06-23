@@ -22,7 +22,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
         }
 
-        public IXleRenderer Renderer { get; set; }
+        public LotaMuseumCoinSale MuseumCoinSale { get; set; }
 
         public LotaStory Story
         {
@@ -31,7 +31,8 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
 
         public override void OnLoad(GameState state)
         {
-            Lota.SetMuseumCoinOffers(state);
+            base.OnLoad(state);
+            MuseumCoinSale.ResetMuseumCoinOffers();
         }
 
         public override void SetCommands(ICommandList commands)

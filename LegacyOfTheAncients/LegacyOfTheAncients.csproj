@@ -51,8 +51,9 @@
     <Compile Include="Bootstrap\LotaExhibitInstaller.cs" />
     <Compile Include="Bootstrap\LotaTitleScreenInstaller.cs" />
     <Compile Include="GameVariableExtensions.cs" />
-    <Compile Include="Lota.cs" />
     <Compile Include="LotaFactory.cs" />
+    <Compile Include="LotaMuseumCoinSale.cs" />
+    <Compile Include="LotaObject.cs" />
     <Compile Include="LotaProgram.cs" />
     <Compile Include="LotaStory.cs" />
     <Compile Include="MapExtenders\Fortress\FirstArea\CompendiumFirst.cs" />
@@ -398,6 +399,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LotA\Saved\" />
+    <Folder Include="Services\" />
     <Folder Include="Support\OldMaps\" />
   </ItemGroup>
   <ItemGroup>

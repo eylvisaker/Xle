@@ -51,17 +51,19 @@ namespace ERY.Xle.LotA
 
             var model = new SerialModel(parameters);
 
-            model.Run(() =>
-            {
-                var initializer = new WindsorInitializer();
-                var container = initializer.BootstrapContainer(typeof(LotaProgram).Assembly);
+            model.Run(() => GameRunner(args));
+        }
 
-                IXleStartup core = container.Resolve<IXleStartup>();
-                core.ProcessArguments(args);
-                commandFactory = container.Resolve<ICommandFactory>();
+        private static void GameRunner(string[] args)
+        {
+            var initializer = new WindsorInitializer();
+            var container = initializer.BootstrapContainer(typeof(LotaProgram).Assembly);
 
-                core.Run();
-            });
+            IXleStartup core = container.Resolve<IXleStartup>();
+            core.ProcessArguments(args);
+            commandFactory = container.Resolve<ICommandFactory>();
+
+            core.Run();
         }
 
         public static IEnumerable<Command> CommonLotaCommands

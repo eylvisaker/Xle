@@ -9,5 +9,7 @@ namespace ERY.Xle.Services
     public interface IMuseumCoinSale : IXleService
     {
         void OfferMuseumCoin();
+
+        bool RollToOfferCoin();
     }
 }

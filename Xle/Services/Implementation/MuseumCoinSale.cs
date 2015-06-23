@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.Services.Implementation
 {
-    public class MuseumCoinSale : IMuseumCoinSale
+    public abstract class MuseumCoinSale : IMuseumCoinSale
     {
         public Random Random { get; set; }
         public ITextArea TextArea { get; set; }
         public IXleGameControl GameControl { get; set; }
-        public XleSystemState systemState { get; set; }
         public GameState GameState { get; set; }
         public ISoundMan SoundMan { get; set; }
         public IQuickMenu QuickMenu { get; set; }
@@ -20,17 +19,21 @@ namespace ERY.Xle.Services.Implementation
 
         public Player Player { get { return GameState.Player; } }
 
+        public bool RollToOfferCoin()
+        {
+            return Random.Next(1000) < 1000 * ChanceToOfferCoin;
+        }
+
         public void OfferMuseumCoin()
         {
             int coin = -1;
             MenuItemList menu = new MenuItemList("Yes", "No");
 
-            coin = systemState.Factory.NextMuseumCoinOffer(GameState);
+            coin = NextMuseumCoinOffer();
 
             if (coin == -1)
                 return;
 
-            // TODO: only allow player to buy a coin if he has less than Level of that type of coins.
             int amount = 50 + (int)(Random.NextDouble() * 20 * Player.Level);
 
             if (amount > Player.Gold)
@@ -69,5 +72,11 @@ namespace ERY.Xle.Services.Implementation
             }
         }
 
+        protected abstract int NextMuseumCoinOffer();
+
+        /// <summary>
+        /// Probability of offering a museum coin (between 0 and 1).
+        /// </summary>
+        public abstract double ChanceToOfferCoin { get; }
     }
 }

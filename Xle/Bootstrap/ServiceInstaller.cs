@@ -15,13 +15,13 @@ namespace ERY.Xle.Bootstrap
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Classes.FromAssemblyContaining<IXleService>()
+            container.Register(Classes.FromAssembly(WindsorInitializer.MasterAssembly)
                 .BasedOn<IXleService>()
                 .WithServiceSelf()
                 .WithServiceAllInterfaces()
                 .LifestyleSingleton());
-
-            container.Register(Classes.FromAssembly(WindsorInitializer.MasterAssembly)
+            
+            container.Register(Classes.FromAssemblyContaining<IXleService>()
                 .BasedOn<IXleService>()
                 .WithServiceSelf()
                 .WithServiceAllInterfaces()

@@ -57,9 +57,5 @@ namespace ERY.Xle
         public abstract int HealingItemID { get; }
         public abstract int ClimbingGearItemID { get; }
 
-        public virtual int NextMuseumCoinOffer(GameState gameState)
-        {
-            return -1;
-        }
     }
 }

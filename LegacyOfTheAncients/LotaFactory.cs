@@ -82,7 +82,7 @@ namespace ERY.Xle.LotA
             if (level == 9) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
             if (level > 10) throw new ArgumentOutOfRangeException("level", "Level must be 1-7 or 10.");
 
-            var story =  Lota.Story;
+            var story = player.Story();
 
             ClearStoryItems(player);
             ClearMuseumCoins(player);
@@ -199,11 +199,6 @@ namespace ERY.Xle.LotA
         public override int ClimbingGearItemID
         {
             get { return (int)LotaItem.ClimbingGear; }
-        }
-
-        public override int NextMuseumCoinOffer(GameState state)
-        {
-            return Lota.NextMuseumCoinOffer();
         }
     }
 }

@@ -41,10 +41,11 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
         }
 
         public XleOptions Options { get; set; }
+        public LotaMuseumCoinSale MuseumCoinSale { get; set; }
 
         public override void OnLoad(GameState state)
         {
-            Lota.SetMuseumCoinOffers(GameState);
+            MuseumCoinSale.ResetMuseumCoinOffers();
 
             CheckLoan(state);
         }
