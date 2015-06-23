@@ -31,8 +31,9 @@ namespace ERY.XleTests
 
             var museum = GameVariableExtensions.Story(player).Museum;
 
+            // mark weaponry as closed, others as visited.
             museum[(int)ExhibitIdentifier.Thornberry] = 1;
-            museum[(int)ExhibitIdentifier.Weaponry] = 10; // mark weaponry as closed.
+            museum[(int)ExhibitIdentifier.Weaponry] = 10; 
             museum[(int)ExhibitIdentifier.Fountain] = 1;
 
             Assert.IsTrue(information.ShouldLevelUp(player));
@@ -40,6 +41,7 @@ namespace ERY.XleTests
             player.Level = 2;
             Assert.IsFalse(information.ShouldLevelUp(player));
 
+            // mark topaz coin exhibits as visited
             museum[(int)ExhibitIdentifier.NativeCurrency] = 1;
             museum[(int)ExhibitIdentifier.HerbOfLife] = 1;
             museum[(int)ExhibitIdentifier.PirateTreasure] = 1;
@@ -85,8 +87,8 @@ namespace ERY.XleTests
 
             player.Items[LotaItem.Compendium] = 1; // give the compendium
             Assert.IsTrue(information.ShouldLevelUp(player));
-
         }
+
         [TestMethod]
         public void InformationLevelupWithCheatTest()
         {
@@ -114,7 +116,7 @@ namespace ERY.XleTests
             factory.CheatLevel(player, 10);
             player.Level = 7;
             Assert.IsTrue(information.ShouldLevelUp(player));
-
         }
+
     }
 }
