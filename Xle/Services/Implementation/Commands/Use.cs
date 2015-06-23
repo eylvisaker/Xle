@@ -20,10 +20,10 @@ namespace ERY.Xle.Services.Implementation.Commands
 
         public bool ShowItemMenu { get; set; }
 
-        public override void Execute(GameState state)
+        public override void Execute()
         {
             if (ShowItemMenu)
-                ChooseHeldItem(state);
+                ChooseHeldItem();
             else
                 TextArea.PrintLine();
 
@@ -42,11 +42,11 @@ namespace ERY.Xle.Services.Implementation.Commands
             if (Player.Hold == Factory.HealingItemID)
             {
                 noEffect = false;
-                UseHealingItem(state, Player.Hold);
+                UseHealingItem(GameState, Player.Hold);
             }
             else
             {
-                noEffect = !state.MapExtender.PlayerUse(state, Player.Hold);
+                noEffect = !GameState.MapExtender.PlayerUse(GameState, Player.Hold);
             }
 
             if (noEffect == true)
@@ -57,7 +57,7 @@ namespace ERY.Xle.Services.Implementation.Commands
             }
         }
 
-        public void ChooseHeldItem(GameState state)
+        public void ChooseHeldItem()
         {
             TextArea.PrintLine("-choose above", XleColor.Cyan);
             MenuItemList theList = new MenuItemList();
@@ -66,7 +66,7 @@ namespace ERY.Xle.Services.Implementation.Commands
             theList.Add("Nothing");
 
             foreach (int i in from kvp in Data.ItemList
-                              where state.Player.Items[kvp.Key] > 0 &&
+                              where Player.Items[kvp.Key] > 0 &&
                               Data.MagicSpells.Values.All(
                                   x => x.ItemID != kvp.Key)
                               select kvp.Key)

@@ -108,7 +108,7 @@ namespace ERY.Xle.Services.Implementation
 
                 textArea.Print(command.Name);
 
-                command.Execute(gameState);
+                command.Execute();
             }
             else
             {

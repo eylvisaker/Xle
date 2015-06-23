@@ -17,11 +17,11 @@
         {
             get { return "Weapon"; }
         }
-        public override void Execute(GameState state)
+        public override void Execute()
         {
             textArea.PrintLine("-choose above", XleColor.Cyan);
 
-            state.Player.CurrentWeapon = equipmentPicker.PickWeapon(state.Player.CurrentWeapon);
+            Player.CurrentWeapon = equipmentPicker.PickWeapon(Player.CurrentWeapon);
         }
     }
 }

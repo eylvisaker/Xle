@@ -13,7 +13,7 @@
 
         public IQuickMenu QuickMenu { get; set; }
 
-        public override void Execute(GameState state)
+        public override void Execute()
         {
             MenuItemList theList = new MenuItemList("1", "2", "3", "4", "5");
 
@@ -22,12 +22,12 @@
             TextArea.PrintLine("    (1 is fastest)", XleColor.Yellow);
             TextArea.PrintLine();
 
-            state.Player.Gamespeed = 1 + QuickMenu.QuickMenu(theList, 2, state.Player.Gamespeed - 1);
+            Player.Gamespeed = 1 + QuickMenu.QuickMenu(theList, 2, Player.Gamespeed - 1);
 
             TextArea.Print("Gamespeed is: ", XleColor.Yellow);
-            TextArea.PrintLine(state.Player.Gamespeed.ToString(), XleColor.White);
+            TextArea.PrintLine(Player.Gamespeed.ToString(), XleColor.White);
 
-            systemState.Factory.SetGameSpeed(GameState, state.Player.Gamespeed);
+            systemState.Factory.SetGameSpeed(GameState, Player.Gamespeed);
 
             gameControl.Wait(GameState.GameSpeed.AfterSetGamespeedTime);
 

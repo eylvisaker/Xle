@@ -25,7 +25,7 @@ namespace ERY.Xle.Services.Implementation.Commands
 
         public ITextRenderer TextRenderer { get; set; }
 
-        public override void Execute(GameState state)
+        public override void Execute()
         {
             TextArea.PrintLine();
 
@@ -59,6 +59,7 @@ namespace ERY.Xle.Services.Implementation.Commands
                     bgcolor = XleColor.Blue;
                     fontcolor = XleColor.Cyan;
                 }
+
                 Display.BeginFrame();
                 Display.Clear(XleColor.DarkGray);
                 Display.FillRect(new Rectangle(0, 0, 640, 400), bgcolor);

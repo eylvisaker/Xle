@@ -2,7 +2,7 @@
 {
     public class Disembark : Command
     {
-        public override void Execute(GameState state)
+        public override void Execute()
         {
             if (GameState.MapExtender.PlayerDisembark(GameState))
                 return;

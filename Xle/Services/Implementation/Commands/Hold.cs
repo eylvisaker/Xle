@@ -9,9 +9,9 @@
             this.use = use;
         }
 
-        public override void Execute(GameState state)
+        public override void Execute()
         {
-            use.ChooseHeldItem(state);
+            use.ChooseHeldItem();
         }
     }
 }

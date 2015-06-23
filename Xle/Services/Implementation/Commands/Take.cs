@@ -9,9 +9,9 @@
             this.gameControl = gameControl;
         }
 
-        public override void Execute(GameState state)
+        public override void Execute()
         {
-            if (state.MapExtender.PlayerTake(state) == false)
+            if (GameState.MapExtender.PlayerTake(GameState) == false)
             {
                 TextArea.PrintLine("\n\nNothing to take.");
 

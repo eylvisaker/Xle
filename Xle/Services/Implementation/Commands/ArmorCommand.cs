@@ -13,11 +13,12 @@
         {
             get { return "Armor"; }
         }
-        public override void Execute(GameState state)
+
+        public override void Execute()
         {
             TextArea.PrintLine("-choose above", XleColor.Cyan);
 
-            GameState.Player.CurrentArmor = equipmentPicker.PickArmor(GameState.Player.CurrentArmor);
+            Player.CurrentArmor = equipmentPicker.PickArmor(Player.CurrentArmor);
         }
     }
 }

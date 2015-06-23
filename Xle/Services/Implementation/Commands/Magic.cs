@@ -2,9 +2,9 @@
 {
     public class Magic : Command
     {
-        public override void Execute(GameState state)
+        public override void Execute()
         {
-            GameState.MapExtender.PlayerMagic(state);
+            GameState.MapExtender.PlayerMagic(GameState);
         }
     }
 }

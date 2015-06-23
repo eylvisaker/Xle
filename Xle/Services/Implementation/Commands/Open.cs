@@ -9,9 +9,9 @@
             this.gameControl = gameControl;
         }
 
-        public override void Execute(GameState state)
+        public override void Execute()
         {
-            if (GameState.MapExtender.PlayerOpen(state) == false)
+            if (GameState.MapExtender.PlayerOpen(GameState) == false)
             {
                 TextArea.PrintLine("\n\nNothing opens.");
 

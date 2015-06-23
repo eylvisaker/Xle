@@ -2,9 +2,9 @@
 {
     public class Speak : Command
     {
-        public override void Execute(GameState state)
+        public override void Execute()
         {
-            if (GameState.MapExtender.PlayerSpeak(state) == false)
+            if (GameState.MapExtender.PlayerSpeak(GameState) == false)
             {
                 TextArea.PrintLine();
                 TextArea.PrintLine();

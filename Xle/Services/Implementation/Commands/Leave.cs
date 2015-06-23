@@ -15,7 +15,7 @@
             this.menu = menu;
         }
 
-        public override void Execute(GameState state)
+        public override void Execute()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -31,7 +31,7 @@
                     return;
             }
 
-            state.MapExtender.PlayerLeave(state);
+            GameState.MapExtender.PlayerLeave(GameState);
         }
 
         public bool ConfirmPrompt { get; set; }

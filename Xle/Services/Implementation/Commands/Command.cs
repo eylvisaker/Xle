@@ -15,6 +15,6 @@
             }
         }
 
-        public abstract void Execute(GameState state);
+        public abstract void Execute();
     }
 }

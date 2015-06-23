@@ -2,9 +2,9 @@
 {
     public class Rob : Command
     {
-        public override void Execute(GameState state)
+        public override void Execute()
         {
-            if (GameState.MapExtender.PlayerRob(state) == false)
+            if (GameState.MapExtender.PlayerRob(GameState) == false)
             {
                 TextArea.PrintLine("\n\nNothing to rob.");
             }

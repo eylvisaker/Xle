@@ -13,10 +13,8 @@
             this.systemState = systemState;
         }
 
-        public override void Execute(GameState state)
+        public override void Execute()
         {
-            var player = GameState.Player;
-
             MenuItemList menuItems = new MenuItemList("Yes", "No");
             int choice;
             bool saved = false;
@@ -29,7 +27,7 @@
 
             if (choice == 0)
             {
-                player.SavePlayer();
+                Player.SavePlayer();
 
                 saved = true;
 
