@@ -11,12 +11,9 @@ namespace ERY.Xle.Services
     {
         bool AcceptKey { get; set; }
 
-        void CheckArrowKeys();
-
         KeyCode WaitForKey(params KeyCode[] keys);
         KeyCode WaitForKey(Action redraw, params KeyCode[] keys);
 
         bool PromptToContinueOnWait { get; set; }
-        bool PromptToContinue { get; }
     }
 }

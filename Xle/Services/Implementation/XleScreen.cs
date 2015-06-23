@@ -35,6 +35,7 @@ namespace ERY.Xle.Services.Implementation
         }
 
         public Rectangle Coordinates { get { return Display.Coordinates; } }
+        public bool PromptToContinue { get; set; }
 
         public Color FontColor { get; set; }
 

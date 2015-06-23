@@ -17,8 +17,6 @@ namespace ERY.Xle.Rendering
 
         void UpdateAnim();
 
-        void LoadTiles(string tileset);
-
         void DrawFrame(Color color);
 
         void DrawFrameHighlight(Color color);

@@ -19,7 +19,6 @@ namespace ERY.Xle.Services.Implementation
             IXleConsole console, 
             XleOptions options,
             XleData data,
-            XleCore core,
             ISoundMan soundMan)
         {
             this.runner = runner;

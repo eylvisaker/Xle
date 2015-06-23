@@ -64,6 +64,7 @@
     <Compile Include="Maps\Renderers\TempleRenderer.cs" />
     <Compile Include="Services\IMapRendererFactory.cs" />
     <Compile Include="Services\Implementation\IStopwatch.cs" />
+    <Compile Include="Services\Implementation\XleImages.cs" />
     <Compile Include="Services\IPlayerAnimator.cs" />
     <Compile Include="Services\Implementation\PlayerAnimator.cs" />
     <Compile Include="Services\Implementation\TextAreaRenderer.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Direction.cs" />
     <Compile Include="DirectionHelper.cs" />
     <Compile Include="Equipment.cs" />
+    <Compile Include="Services\IXleImages.cs" />
     <Compile Include="Services\Rendering\IXleRenderer.cs" />
     <Compile Include="Services\Implementation\EquipmentPicker.cs" />
     <Compile Include="Services\Implementation\ICommandExecutor.cs" />
@@ -223,7 +225,6 @@
     <Compile Include="Maps\XleMapTypes\Map3D.cs" />
     <Compile Include="Maps\XleMapTypes\Museum.cs" />
     <Compile Include="XleColor.cs" />
-    <Compile Include="Services\Implementation\XleCore.cs" />
     <Compile Include="XleBaseTypeFactory.cs" />
     <Compile Include="Maps\XleMap.cs" />
     <Compile Include="Maps\MapList.cs" />
@@ -253,6 +254,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -260,6 +263,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -282,5 +286,4 @@
       <Name>AgateLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
 </Project>

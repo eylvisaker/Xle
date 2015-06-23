@@ -18,7 +18,6 @@ namespace ERY.Xle.Services.Implementation
         public XleInput(
             ICommandExecutor commands,
             IXleScreen screen,
-            IXleGameControl gameControl,
             GameState gameState)
         {
             this.commands = commands;
@@ -106,7 +105,7 @@ namespace ERY.Xle.Services.Implementation
 
             InputEventHandler keyhandler = e => key = e.KeyCode;
 
-            PromptToContinue = PromptToContinueOnWait;
+            screen.PromptToContinue = PromptToContinueOnWait;
 
             Keyboard.ReleaseAllKeys();
             Keyboard.KeyDown += keyhandler;
@@ -141,7 +140,7 @@ namespace ERY.Xle.Services.Implementation
 
             Keyboard.KeyDown -= keyhandler;
 
-            PromptToContinue = false;
+            screen.PromptToContinue = false;
             PromptToContinueOnWait = true;
 
             return key;
@@ -153,9 +152,5 @@ namespace ERY.Xle.Services.Implementation
         /// with the standard drawing method.
         /// </summary>
         public bool PromptToContinueOnWait { get; set; }
-        /// <summary>
-        /// Set to true to show the (press to cont) prompt.
-        /// </summary>
-        public bool PromptToContinue { get; private set; }
     }
 }

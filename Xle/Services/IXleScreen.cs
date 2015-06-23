@@ -10,6 +10,11 @@ namespace ERY.Xle.Services
         Color FontColor { get; set; }
         bool CurrentWindowClosed { get; }
 
+        /// <summary>
+        /// Set to true to show the (press to cont) prompt.
+        /// </summary>
+        bool PromptToContinue { get; set; }
+
         event EventHandler Draw;
         event EventHandler Update;
 

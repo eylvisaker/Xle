@@ -10,11 +10,16 @@ namespace ERY.Xle.Services.Implementation
 {
     public class PlayerDeathHandler : IPlayerDeathHandler
     {
+        public PlayerDeathHandler(IMapChanger mapChanger, IStatsDisplay statsDisplay)
+        {
+            this.MapChanger = mapChanger;
+            this.StatsDisplay = statsDisplay;
+        }
         public ITextArea TextArea { get; set; }
         public ISoundMan SoundMan { get; set; }
-        public IStatsDisplay StatsDisplay { get; set; }
+        IStatsDisplay StatsDisplay { get; set; }
         public GameState GameState { get; set; }
-        public IMapChanger MapChanger { get; set; }
+        IMapChanger MapChanger { get; set; }
         public IXleGameControl GameControl { get; set; }
         public Random Random { get; set; }
 

@@ -10,11 +10,16 @@ namespace ERY.Xle.Services.Implementation
 {
     public class StatsDisplay : IStatsDisplay
     {
-        public IXleRenderer Renderer { get; set; }
+        private IXleRenderer renderer;
+
+        public StatsDisplay(IXleRenderer renderer)
+        {
+            this.renderer = renderer;
+        }
 
         public void FlashHPWhileSound(Color color1, Color? color2 = null)
         {
-            Renderer.FlashHPWhileSound(color1, color2);
+            renderer.FlashHPWhileSound(color1, color2);
         }
     }
 }

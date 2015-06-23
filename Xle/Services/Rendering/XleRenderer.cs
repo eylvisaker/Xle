@@ -28,12 +28,12 @@ namespace ERY.Xle.Rendering
 
         public XleRenderer(
             ICommandList commands, 
-            IXleInput input,
+            IXleImages images,
             IPlayerAnimator playerAnimator,
             IXleScreen screen)
         {
             this.commands = commands;
-            this.Input = input;
+            this.images = images;
             this.Screen = screen;
             this.playerAnimator = playerAnimator;
 
@@ -61,16 +61,16 @@ namespace ERY.Xle.Rendering
         public IXleGameControl GameControl { get; set; }
 
         IXleScreen Screen { get; set; }
-        IXleInput Input { get; set; }
 
         public Size WindowSize { get; set; }
 
         Size GameAreaSize { get { return new Size(640, 400); } }
 
-        public Surface Tiles { get; set; }
+       ISurface Tiles { get { return images.Tiles; }}
 
         bool mOverrideHPColor;
         Color mHPColor;
+        private IXleImages images;
 
 
         Player Player { get { return GameState.Player; } }
@@ -410,7 +410,7 @@ namespace ERY.Xle.Rendering
                     DrawCharacter(playerAnimator.Animating, playerAnimator.AnimFrame, vertLine);
             }
 
-            if (Input.PromptToContinue)
+            if (Screen.PromptToContinue)
             {
                 Display.FillRect(192, 384, 17 * 16, 16, XleColor.Black);
                 WriteText(208, 384, "(Press to Cont)", XleColor.Yellow);
@@ -472,13 +472,6 @@ namespace ERY.Xle.Rendering
             }
         }
 
-        public void LoadTiles(string tileset)
-        {
-            if (tileset.EndsWith(".png") == false)
-                tileset += ".png";
-
-            Tiles = new Surface(tileset) { InterpolationHint = InterpolationMode.Fastest };
-        }
 
         public void UpdateAnim()
         {

@@ -20,19 +20,19 @@ namespace ERY.Xle.Services.Implementation
         private ITextArea textArea;
         private ICommandList commands;
         private IMapLoader mapLoader;
-        private IXleRenderer renderer;
+        private IXleImages images;
 
         public MapChanger(
             GameState gameState,
             IXleScreen screen,
-            IXleRenderer renderer,
+            IXleImages images,
             ITextArea textArea,
             ICommandList commands,
             IMapLoader mapLoader)
         {
             this.gameState = gameState;
             this.screen = screen;
-            this.renderer = renderer;
+            this.images = images;
             this.textArea = textArea;
             this.commands = commands;
             this.mapLoader = mapLoader;
@@ -160,7 +160,7 @@ namespace ERY.Xle.Services.Implementation
             gameState.MapExtender.SetCommands(commands);
             commands.ResetCurrentCommand();
 
-            renderer.LoadTiles(gameState.Map.TileImage);
+            images.LoadTiles(gameState.Map.TileImage);
         }
 
 
