@@ -1,4 +1,4 @@
-﻿using ERY.Xle.Maps.Extenders;
+﻿using ERY.Xle.Maps;
 
 namespace ERY.Xle.Services.MapLoad
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-using ERY.Xle.Maps.Extenders;
+using ERY.Xle.Maps;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 

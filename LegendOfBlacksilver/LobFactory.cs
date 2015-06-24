@@ -12,7 +12,7 @@ using ERY.Xle.LoB.MapExtenders.Temples;
 using ERY.Xle.LoB.MapExtenders.Towns;
 using ERY.Xle.LoB.TitleScreen;
 using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Maps.Extenders;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

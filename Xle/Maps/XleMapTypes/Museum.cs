@@ -12,7 +12,6 @@ using AgateLib.Serialization.Xle;
 using AgateLib.DisplayLib;
 
 using Vertex = AgateLib.Geometry.VertexTypes.PositionTextureNormalTangent;
-using ERY.Xle.Maps.Extenders;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {

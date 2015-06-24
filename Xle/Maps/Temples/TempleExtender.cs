@@ -1,13 +1,8 @@
 ﻿using ERY.Xle.Maps.XleMapTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.Rendering.Maps;
 
-namespace ERY.Xle.Maps.Extenders
+namespace ERY.Xle.Maps.Temples
 {
     public class TempleExtender : Map2DExtender
     {

@@ -2,7 +2,7 @@
 
 using AgateLib.Geometry;
 
-using ERY.Xle.Maps.Extenders;
+using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Rendering;

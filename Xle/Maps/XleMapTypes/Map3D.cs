@@ -5,7 +5,6 @@ using System.Text;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using ERY.Xle.Maps;
-using ERY.Xle.Maps.Extenders;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {

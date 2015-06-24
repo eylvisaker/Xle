@@ -4,7 +4,6 @@ using AgateLib.Serialization.Xle;
 
 using ERY.Xle.Data;
 using ERY.Xle.Maps;
-using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Rendering;
 

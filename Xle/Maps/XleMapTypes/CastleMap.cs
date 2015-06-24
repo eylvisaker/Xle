@@ -8,7 +8,6 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
-using ERY.Xle.Maps.Extenders;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {

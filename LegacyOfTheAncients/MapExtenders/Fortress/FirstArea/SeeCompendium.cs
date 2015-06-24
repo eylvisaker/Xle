@@ -1,6 +1,5 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Maps;
-using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;

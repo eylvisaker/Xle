@@ -1,8 +1,9 @@
 ﻿using ERY.Xle.LoB.MapExtenders.Outside.Events;
+using ERY.Xle.Maps.Outdoors;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.XleEventTypes;
-using ERY.Xle.Maps.Extenders;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

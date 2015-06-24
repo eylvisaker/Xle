@@ -8,7 +8,7 @@ using Castle.MicroKernel.Context;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using ERY.Xle.Maps.Extenders;
+
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Rendering.Maps;
 using ERY.Xle.XleEventTypes;

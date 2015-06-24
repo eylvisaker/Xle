@@ -1,6 +1,6 @@
 ﻿using AgateLib.Geometry;
 
-using ERY.Xle.Maps.Extenders;
+using ERY.Xle.Maps.Museums;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace ERY.Xle.Services.Rendering.Maps

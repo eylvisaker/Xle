@@ -4,7 +4,6 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using ERY.Xle.Maps;
-using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes;
 using System;
 using System.Collections.Generic;

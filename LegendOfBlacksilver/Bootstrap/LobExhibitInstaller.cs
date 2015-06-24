@@ -4,7 +4,6 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using ERY.Xle.LoB.MapExtenders.Archives.Exhibits;
-using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;

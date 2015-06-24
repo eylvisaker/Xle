@@ -12,9 +12,7 @@ using AgateLib.DisplayLib;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
-	using Extenders;
-
-	public class Dungeon : Map3D
+    public class Dungeon : Map3D
 	{
 		int mWidth;
 		int mHeight;

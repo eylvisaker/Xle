@@ -1,4 +1,4 @@
-﻿using ERY.Xle.Maps.Extenders;
+﻿using ERY.Xle.Maps;
 using ERY.Xle.Services.Rendering.Maps;
 
 namespace ERY.Xle.Services.Rendering

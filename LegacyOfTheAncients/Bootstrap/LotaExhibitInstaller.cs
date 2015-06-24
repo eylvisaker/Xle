@@ -10,7 +10,6 @@ using ERY.Xle.LotA.MapExtenders.Museum;
 using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
 using ERY.Xle.LotA.MapExtenders.Outside;
 using ERY.Xle.LotA.MapExtenders.Towns;
-using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
