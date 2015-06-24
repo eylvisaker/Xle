@@ -10,8 +10,6 @@ using AgateLib.Geometry;
 using AgateLib.Serialization.Xle;
 using AgateLib.DisplayLib;
 
-using ERY.Xle.Services.Implementation;
-
 namespace ERY.Xle.Maps.XleMapTypes
 {
 	using Extenders;

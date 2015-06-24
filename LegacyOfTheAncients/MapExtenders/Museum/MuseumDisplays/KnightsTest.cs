@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Services.Implementation;
 using ERY.Xle.Services;
 using AgateLib.Geometry;
+
+using ERY.Xle.Services.MapLoad;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {

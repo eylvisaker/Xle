@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Rendering;
-
 namespace ERY.Xle.LotA.TitleScreen
 {
     public class Introduction : TitleState

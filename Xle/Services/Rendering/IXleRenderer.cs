@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using AgateLib.Geometry;
 
-using ERY.Xle.Services;
-
-namespace ERY.Xle.Rendering
+namespace ERY.Xle.Services.Rendering
 {
     public interface IXleRenderer : IXleService
     {

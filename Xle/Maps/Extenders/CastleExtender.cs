@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.Rendering.Maps;
 
 namespace ERY.Xle.Maps.Extenders
 {
@@ -12,7 +13,7 @@ namespace ERY.Xle.Maps.Extenders
     {
         public new CastleMap TheMap { get { return (CastleMap)base.TheMap; } }
 
-        public override Renderers.XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.CastleRenderer(this);
         }

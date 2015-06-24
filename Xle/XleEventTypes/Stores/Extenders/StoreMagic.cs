@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using ERY.Xle.Data;
-using ERY.Xle.Services.Implementation;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {

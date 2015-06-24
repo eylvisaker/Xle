@@ -7,8 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
-using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Commands;
 
 namespace ERY.Xle.LoB.MapExtenders.Temples
 {

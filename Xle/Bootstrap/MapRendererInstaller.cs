@@ -10,12 +10,12 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Maps.XleMapTypes;
+using ERY.Xle.Services.Rendering.Maps;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders.Common;
 using ERY.Xle.XleEventTypes.Stores.Extenders;
 using System.Reflection;
-using ERY.Xle.Maps.Renderers;
 
 namespace ERY.Xle.Bootstrap
 {

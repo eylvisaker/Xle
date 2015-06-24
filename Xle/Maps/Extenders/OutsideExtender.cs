@@ -2,11 +2,13 @@
 using AgateLib.InputLib;
 using AgateLib.InputLib.Legacy;
 using ERY.Xle.Data;
-using ERY.Xle.Maps.Renderers;
 using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Rendering;
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Menus;
+using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.Rendering.Maps;
+using ERY.Xle.Services.ScreenModel;
+using ERY.Xle.Services.XleSystem;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.Xle.XleEventTypes.Extenders.Common;

@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Maps;
-using ERY.Xle.Services.Implementation;
 using ERY.Xle.Services;
+using ERY.Xle.Services.Menus;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {

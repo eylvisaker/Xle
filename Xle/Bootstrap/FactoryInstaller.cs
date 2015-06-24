@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Services;
+using ERY.Xle.Services.Commands;
 
 namespace ERY.Xle.Bootstrap
 {

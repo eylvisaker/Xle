@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation.Commands;
 
 namespace ERY.Xle
 {

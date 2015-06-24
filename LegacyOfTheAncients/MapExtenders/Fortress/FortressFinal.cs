@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Services;
 

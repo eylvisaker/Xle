@@ -1,6 +1,4 @@
-﻿using ERY.Xle.Services.Implementation;
-
-namespace ERY.Xle.LotA.MapExtenders.Castle.Events
+﻿namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
 	public class PasswordDoor : CastleDoor
     {

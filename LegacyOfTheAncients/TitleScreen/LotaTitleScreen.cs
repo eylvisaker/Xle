@@ -10,9 +10,10 @@ using AgateLib.Geometry;
 using AgateLib.Platform;
 using AgateLib.InputLib.Legacy;
 
-using ERY.Xle.Rendering;
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Game;
+using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.XleSystem;
 
 namespace ERY.Xle.LotA.TitleScreen
 {

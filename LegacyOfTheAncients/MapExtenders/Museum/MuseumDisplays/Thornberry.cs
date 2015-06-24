@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Services.Implementation;
 using ERY.Xle.Services;
-using ERY.Xle.Rendering;
+using ERY.Xle.Services.MapLoad;
+using ERY.Xle.Services.Rendering;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {

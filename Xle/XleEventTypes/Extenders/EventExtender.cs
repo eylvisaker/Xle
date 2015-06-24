@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Services.Game;
+using ERY.Xle.Services.ScreenModel;
+using ERY.Xle.Services.XleSystem;
+
 namespace ERY.Xle.XleEventTypes.Extenders
 {
     public class EventExtender

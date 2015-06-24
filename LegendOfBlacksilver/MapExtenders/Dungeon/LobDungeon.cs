@@ -1,5 +1,6 @@
 ﻿using ERY.Xle.Data;
 using ERY.Xle.Maps;
+using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.Extenders;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
-using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Commands;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {

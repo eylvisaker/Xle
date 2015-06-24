@@ -1,10 +1,14 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Data;
-using ERY.Xle.Maps.Renderers;
-using ERY.Xle.Rendering;
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
-using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Commands;
+using ERY.Xle.Services.Game;
+using ERY.Xle.Services.MapLoad;
+using ERY.Xle.Services.Menus;
+using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.Rendering.Maps;
+using ERY.Xle.Services.ScreenModel;
+using ERY.Xle.Services.XleSystem;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
@@ -20,7 +24,7 @@ namespace ERY.Xle.Maps.Extenders
         XleMap mTheMap;
         List<EventExtender> mEvents = new List<EventExtender>();
 
-        public IXleMenu Menu { get; set; }
+        public IXleSubMenu SubMenu { get; set; }
 
         public XleMap TheMap
         {
@@ -405,7 +409,7 @@ namespace ERY.Xle.Maps.Extenders
                 menu.Add(magics[i].Name);
             }
 
-            int choice = Menu.SubMenu("Pick magic", 0, menu);
+            int choice = SubMenu.SubMenu("Pick magic", 0, menu);
 
             if (choice == 0)
             {

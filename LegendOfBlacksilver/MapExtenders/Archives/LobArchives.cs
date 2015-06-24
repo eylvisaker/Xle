@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
-using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Commands;
+using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.Rendering.Maps;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives
 {
@@ -28,7 +29,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
             return Lob3DSurfaces.Archives;
         }
 
-        public override Maps.Renderers.XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.MuseumRenderer(this, "ArchiveRenderer");
         }

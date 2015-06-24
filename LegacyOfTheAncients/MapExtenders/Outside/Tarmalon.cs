@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
-using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Commands;
+using ERY.Xle.Services.MapLoad;
 
 namespace ERY.Xle.LotA.MapExtenders.Outside
 {

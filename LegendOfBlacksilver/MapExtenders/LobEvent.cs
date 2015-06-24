@@ -1,4 +1,6 @@
 ﻿using ERY.Xle.Services;
+using ERY.Xle.Services.Menus;
+using ERY.Xle.Services.XleSystem;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;

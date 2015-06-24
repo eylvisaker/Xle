@@ -6,10 +6,11 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation.Commands;
-using ERY.Xle.Services.Implementation.Commands.MapSpecific;
+
 using Castle.MicroKernel.Context;
 using Castle.MicroKernel;
+
+using ERY.Xle.Services.Commands;
 
 namespace ERY.Xle.Bootstrap
 {

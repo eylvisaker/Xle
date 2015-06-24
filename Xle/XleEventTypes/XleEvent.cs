@@ -10,7 +10,6 @@ using AgateLib.InputLib;
 using AgateLib.Serialization.Xle;
 
 using ERY.Xle.Maps;
-using ERY.Xle.Services.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.XleEventTypes

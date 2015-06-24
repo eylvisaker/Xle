@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using AgateLib.Geometry;
 
-using ERY.Xle.Services.Implementation;
 using ERY.Xle.Data;
 using ERY.Xle.Services;
+using ERY.Xle.Services.Game;
+using ERY.Xle.Services.Menus;
+using ERY.Xle.Services.ScreenModel;
+using ERY.Xle.Services.XleSystem;
 
 namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 {

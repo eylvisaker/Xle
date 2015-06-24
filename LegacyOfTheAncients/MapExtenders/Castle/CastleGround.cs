@@ -1,7 +1,6 @@
 ﻿using ERY.Xle.LotA.MapExtenders.Castle.Events;
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
-using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Commands;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Maps.Extenders;
 using System;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ERY.Xle.Maps;
-using ERY.Xle.Rendering;
+
 using AgateLib.Geometry;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle

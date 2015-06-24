@@ -1,8 +1,7 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.LoB.MapExtenders.Castle.EventExtenders;
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
-using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Commands;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.Maps.Extenders;
 using System;

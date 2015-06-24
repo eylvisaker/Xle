@@ -1,4 +1,5 @@
 ﻿using ERY.Xle.Services;
+using ERY.Xle.Services.Menus;
 using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle.Events

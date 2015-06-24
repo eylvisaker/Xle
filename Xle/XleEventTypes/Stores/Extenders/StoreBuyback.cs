@@ -5,8 +5,8 @@ using System.Text;
 using AgateLib.Geometry;
 
 using ERY.Xle.Data;
-using ERY.Xle.Services.Implementation;
 using ERY.Xle.Services;
+using ERY.Xle.Services.Menus;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {

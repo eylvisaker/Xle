@@ -1,8 +1,7 @@
 ﻿using ERY.Xle.LotA.MapExtenders.Towns.Stores;
 using ERY.Xle.Maps.Extenders;
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
-using ERY.Xle.Services.Implementation.Commands;
+using ERY.Xle.Services.Commands;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Stores;
 using ERY.Xle.XleEventTypes.Stores.Extenders;
@@ -12,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Magic = ERY.Xle.Services.Implementation.Commands.Magic;
+using Magic = ERY.Xle.Services.Commands.Implementation.Magic;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns
 {

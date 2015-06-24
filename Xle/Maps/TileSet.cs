@@ -4,8 +4,6 @@ using System.Linq;
 
 using AgateLib.Serialization.Xle;
 
-using ERY.Xle.Services.Implementation;
-
 namespace ERY.Xle.Maps
 {
     public class TileSet : IXleSerializable, IEnumerable<KeyValuePair<int, TileInfo>>

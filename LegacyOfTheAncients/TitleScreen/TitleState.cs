@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Rendering;
 using ERY.Xle.Services;
-using ERY.Xle.Services.Implementation;
+using ERY.Xle.Services.Game;
+using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.XleSystem;
 
 namespace ERY.Xle.LotA.TitleScreen
 {

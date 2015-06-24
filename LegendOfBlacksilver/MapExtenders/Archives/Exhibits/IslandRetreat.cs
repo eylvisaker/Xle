@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services.Implementation;
 using ERY.Xle.Services;
+using ERY.Xle.Services.MapLoad;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
