@@ -11,7 +11,7 @@ namespace ERY.Xle.Services
     public interface ICommandFactory : IXleFactory
     {
         ArmorCommand Armor();
-        Climb Climb();
+        Climb Climb(string name);
         Disembark Disembark();
         End End();
         Fight Fight();
@@ -28,6 +28,5 @@ namespace ERY.Xle.Services
         Use Use(bool showItemNenu = true);
         WeaponCommand Weapon();
         Xamine Xamine();
-
     }
 }

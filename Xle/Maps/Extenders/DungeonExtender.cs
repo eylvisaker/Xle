@@ -167,45 +167,6 @@ namespace ERY.Xle.Maps.Extenders
             get { return true; }
         }
 
-        public override bool PlayerClimb(GameState state)
-        {
-            var player = state.Player;
-
-            switch (TheMap[player.X, player.Y])
-            {
-                case 0x11:
-                    if (player.DungeonLevel == 0)
-                    {
-                        TextArea.PrintLine("\n\nYou climb out of the dungeon.");
-
-                        OnPlayerExitDungeon(player);
-
-                        GameControl.Wait(1000);
-
-                        MapChanger.ReturnToPreviousMap();
-
-                        return true;
-                    }
-                    else
-                    {
-                        player.DungeonLevel--;
-                    }
-                    break;
-
-                case 0x12:
-                    player.DungeonLevel++;
-                    break;
-
-                default:
-                    return false;
-
-            }
-
-            DungeonLevelText(player);
-
-            return true;
-        }
-
         private void DungeonLevelText(Player player)
         {
             CurrentLevel = player.DungeonLevel;

@@ -52,6 +52,7 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="Bootstrap\CommandComponentSelector.cs" />
     <Compile Include="Bootstrap\CommandInstaller.cs" />
     <Compile Include="Bootstrap\FactoryInstaller.cs" />
     <Compile Include="Bootstrap\EventExtenderInstaller.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="Maps\Renderers\CastleRenderer.cs" />
     <Compile Include="Maps\Renderers\TempleRenderer.cs" />
     <Compile Include="Services\IMapRendererFactory.cs" />
+    <Compile Include="Services\Implementation\Commands\MapSpecific\DungeonClimb.cs" />
+    <Compile Include="Services\ServiceName.cs" />
     <Compile Include="Services\Implementation\IStopwatch.cs" />
     <Compile Include="Services\Implementation\XleImages.cs" />
     <Compile Include="Services\IPlayerAnimator.cs" />

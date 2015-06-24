@@ -21,7 +21,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 		{
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-			commands.Items.Add(CommandFactory.Climb());
+			commands.Items.Add(CommandFactory.Climb("Dungeon"));
 			commands.Items.Add(CommandFactory.End());
 			commands.Items.Add(CommandFactory.Magic());
 			commands.Items.Add(CommandFactory.Open());

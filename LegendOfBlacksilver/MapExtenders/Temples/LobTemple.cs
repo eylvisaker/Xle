@@ -18,7 +18,7 @@ namespace ERY.Xle.LoB.MapExtenders.Temples
         {
             commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-            commands.Items.Add(CommandFactory.Climb());
+            commands.Items.Add(CommandFactory.Climb(""));
             commands.Items.Add(CommandFactory.Leave());
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Speak());
