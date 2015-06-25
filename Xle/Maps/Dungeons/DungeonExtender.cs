@@ -396,7 +396,7 @@ namespace ERY.Xle.Maps.Dungeons
             return true;
         }
 
-        private void OpenBox(Player player, ref bool clearBox)
+        public virtual void OpenBox(Player Player, ref bool clearBox)
         {
             int amount = Random.Next(60, 200);
 
@@ -405,16 +405,16 @@ namespace ERY.Xle.Maps.Dungeons
             SoundMan.PlaySound(LotaSound.OpenChest);
             GameControl.Wait(500);
 
-            if (amount + player.HP > player.MaxHP)
+            if (amount + Player.HP > Player.MaxHP)
             {
-                amount = player.MaxHP - player.HP;
+                amount = Player.MaxHP - Player.HP;
                 if (amount < 0)
                     amount = 0;
             }
 
             bool handled = false;
 
-            OnBeforeOpenBox(player, ref handled);
+            OnBeforeOpenBox(Player, ref handled);
 
             if (handled == false)
             {
@@ -423,7 +423,7 @@ namespace ERY.Xle.Maps.Dungeons
                 else
                 {
                     TextArea.PrintLine("Hit points:  + " + amount.ToString(), XleColor.Yellow);
-                    player.HP += amount;
+                    Player.HP += amount;
                     SoundMan.PlaySound(LotaSound.Good);
                     Renderer.FlashHPWhileSound(XleColor.Yellow);
                 }
@@ -431,7 +431,7 @@ namespace ERY.Xle.Maps.Dungeons
 
             SoundMan.FinishSounds();
         }
-        private void OpenChest(Player player, int val, ref bool clearBox)
+        public virtual void OpenChest(Player player, int val, ref bool clearBox)
         {
             val -= 0x30;
 

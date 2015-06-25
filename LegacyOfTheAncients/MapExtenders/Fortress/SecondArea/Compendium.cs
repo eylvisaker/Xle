@@ -34,7 +34,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 			return true;
 		}
 
-		public override bool Take(GameState state)
+		public override bool Take()
 		{
 			TextArea.PrintLine();
 			TextArea.PrintLine();
@@ -54,9 +54,9 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 
 				TheEvent.Enabled = false;
 
-				CloseExit(state);
+				CloseExit(GameState);
 
-				fortressFinal.CreateWarlord(state);
+				fortressFinal.CreateWarlord(GameState);
 			}
 
 			return true;

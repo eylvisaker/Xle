@@ -50,10 +50,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         {
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-            commands.Items.Add(CommandFactory.Climb("Dungeon"));
+            commands.Items.Add(CommandFactory.Climb("DungeonClimb"));
             commands.Items.Add(CommandFactory.End());
             commands.Items.Add(CommandFactory.Magic());
-            commands.Items.Add(CommandFactory.Open());
+            commands.Items.Add(CommandFactory.Open("DungeonOpen"));
         }
 
         protected abstract int StrengthBoost { get; }
@@ -78,25 +78,6 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         {
         }
 
-
-        public override void OnBeforeOpenBox(Player player, ref bool handled)
-        {
-            if (player.DungeonLevel == 0)
-                return;
-            if (player.Items[LotaItem.Compass] > 0)
-                return;
-
-            if (Random.NextDouble() < .6)
-            {
-                TextArea.PrintLine("You find a compass!", XleColor.Yellow);
-                player.Items[LotaItem.Compass] += 1;
-
-                SoundMan.PlaySound(LotaSound.VeryGood);
-
-                handled = true;
-            }
-
-        }
 
         public override bool ShowDirection(Player player)
         {

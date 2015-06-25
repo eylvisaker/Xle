@@ -279,7 +279,7 @@ namespace ERY.Xle.Maps
         {
             foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
             {
-                if (evt.Take(state))
+                if (evt.Take())
                     return true;
             }
 
@@ -290,7 +290,7 @@ namespace ERY.Xle.Maps
         {
             foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
             {
-                if (evt.Open(state))
+                if (evt.Open())
                     return true;
             }
 

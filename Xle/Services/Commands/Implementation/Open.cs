@@ -4,11 +4,11 @@ namespace ERY.Xle.Services.Commands.Implementation
 {
     public class Open : Command
     {
-        private IXleGameControl gameControl;
+        public IXleGameControl GameControl { get; set; }
 
-        public Open(IXleGameControl gameControl)
+        public override string Name
         {
-            this.gameControl = gameControl;
+            get { return "Open"; }
         }
 
         public override void Execute()
@@ -17,7 +17,7 @@ namespace ERY.Xle.Services.Commands.Implementation
             {
                 TextArea.PrintLine("\n\nNothing opens.");
 
-                gameControl.Wait(500);
+                GameControl.Wait(500);
             }
         }
     }

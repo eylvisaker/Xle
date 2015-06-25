@@ -14,7 +14,7 @@ namespace ERY.Xle.Services.Commands
         Inventory Inventory();
         Leave Leave(string promptText = "", bool confirmPrompt = true);
         Magic Magic();
-        Open Open();
+        Open Open(string name = null);
         Pass Pass();
         Rob Rob();
         Speak Speak();

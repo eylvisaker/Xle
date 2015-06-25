@@ -12,7 +12,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
     {
         public IXleRenderer Renderer { get; set; }
 
-        public override bool Open(GameState state)
+        public override bool Open()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -35,9 +35,9 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             return true;
         }
 
-        public override bool Take(GameState state)
+        public override bool Take()
         {
-            state.Map.Guards.IsAngry = false;
+            GameState.Map.Guards.IsAngry = false;
 
             Player.RenderColor = XleColor.Yellow;
 

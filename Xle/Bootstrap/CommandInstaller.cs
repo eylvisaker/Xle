@@ -18,20 +18,19 @@ namespace ERY.Xle.Bootstrap
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Classes.FromAssemblyContaining<Command>()
+            container.Register(Classes.FromAssembly(WindsorInitializer.MasterAssembly)
                 .BasedOn<Command>()
                 .LifestyleTransient()
                 .Configure(NameComponent)
                 .WithServiceSelf()
                 );
 
-            //container.Register(Component.For<ICommandFactory>()
-            //    .AsFactory());
-
-            //container.Register(Types.FromAssemblyContaining<ICommandFactory>()
-            //    .BasedOn<ICommandFactory>()
-            //    .Configure(x => x.AsFactory()));
-
+            container.Register(Classes.FromAssemblyContaining<Command>()
+                .BasedOn<Command>()
+                .LifestyleTransient()
+                .Configure(NameComponent)
+                .WithServiceSelf()
+                );
         }
 
         private void NameComponent(ComponentRegistration obj)

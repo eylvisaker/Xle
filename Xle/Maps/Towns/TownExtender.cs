@@ -553,17 +553,15 @@ namespace ERY.Xle.Maps.Towns
 
         public override bool PlayerRob(GameState state)
         {
-            foreach (var evt in EventsAt(state.Player, 1))
+            foreach (var evt in EventsAt(Player, 1))
             {
-                bool handled = evt.Rob(state);
+                bool handled = evt.Rob(GameState);
 
                 if (handled)
-                {
-                    return handled;
-                }
+                    return true;
             }
 
-            return PlayerRobImpl(state.Player);
+            return PlayerRobImpl(Player);
         }
         protected virtual bool PlayerRobImpl(Player player)
         {

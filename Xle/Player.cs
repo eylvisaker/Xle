@@ -530,17 +530,13 @@ namespace ERY.Xle
         }
 
         /// <summary>
-        /// Sets or returns the current dungeon level for the player
+        /// Sets or returns the current dungeon level for the player. This is zero-based, so level 1 has DungeonLevel = 0.
         /// </summary>
-        /// <param name="i"></param>
         /// <returns></returns>
         public int DungeonLevel
         {
             get { return dungeonLevel; }
-            set
-            {
-                dungeonLevel = value;
-            }
+            set { dungeonLevel = value; }
         }
         /// <summary>
         /// Sets or returns the direction the player is facing
@@ -786,7 +782,7 @@ namespace ERY.Xle
             while (currentArmorIndex >= armor.Count)
                 currentArmorIndex--;
         }
-        
+
         public void SetReturnLocation(int map, int x, int y)
         {
             SetReturnLocation(map, x, y, Direction.South);

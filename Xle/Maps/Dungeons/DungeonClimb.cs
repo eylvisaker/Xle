@@ -6,7 +6,7 @@ using ERY.Xle.Services.MapLoad;
 
 namespace ERY.Xle.Maps.Dungeons
 {
-    [ServiceName("Dungeon")]
+    [ServiceName("DungeonClimb")]
     public class DungeonClimb : Climb
     {
         public IXleGameControl GameControl { get; set; }

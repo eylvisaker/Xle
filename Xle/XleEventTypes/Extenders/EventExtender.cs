@@ -43,12 +43,13 @@ namespace ERY.Xle.XleEventTypes.Extenders
         /// 
         /// Returns true if handled by the event.
         /// </summary>
-        /// <param name="player"></param>
+        /// <param name="state"></param>
         /// <returns></returns>
         public virtual bool Rob(GameState state)
         {
             return false;
         }
+
         /// <summary>
         /// Function called when the player executes the Open command inside
         /// or next to the LotaEvent.
@@ -57,10 +58,11 @@ namespace ERY.Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Open(GameState state)
+        public virtual bool Open()
         {
             return false;
         }
+
         /// <summary>
         /// Function called when the player executes the Take command inside
         /// or next to the LotaEvent.
@@ -69,7 +71,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Take(GameState state)
+        public virtual bool Take()
         {
             return false;
         }

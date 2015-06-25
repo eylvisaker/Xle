@@ -70,7 +70,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
             TextArea.PrintLine(" chest");
         }
 
-        public override bool Open(GameState state)
+        public override bool Open()
         {
             UpdateCommand();
 
@@ -122,7 +122,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
             return true;
         }
-        public override bool Take(GameState state)
+        public override bool Take()
         {
             TextArea.PrintLine("\n\n" + TakeFailMessage);
 

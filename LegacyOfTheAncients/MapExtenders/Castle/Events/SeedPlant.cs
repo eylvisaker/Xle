@@ -19,7 +19,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
             get { return false; }
         }
 
-        public override bool Open(GameState state)
+        public override bool Open()
         {
             return false;
         }
@@ -35,9 +35,9 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
         {
         }
 
-        public override bool Take(GameState state)
+        public override bool Take()
         {
-            base.Open(state);
+            base.Open();
             return true;
         }
 
