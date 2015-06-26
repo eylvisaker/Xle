@@ -22,7 +22,7 @@ namespace ERY.Xle.Maps.Museums
         {
             return factory.MuseumRenderer(this);
         }
-        
+
         protected override void PlayPlayerMoveSound()
         {
             SoundMan.PlaySound(LotaSound.WalkMuseum);
@@ -191,7 +191,7 @@ namespace ERY.Xle.Maps.Museums
 
             Input.PromptToContinueOnWait = true;
 
-            if (ex.IsClosed(player))
+            if (ex.IsClosed)
             {
                 TextArea.PrintLineCentered(" - Exhibit closed - ", ex.TitleColor);
                 TextArea.PrintLine();
@@ -204,19 +204,19 @@ namespace ERY.Xle.Maps.Museums
             TextArea.PrintLine();
             Input.WaitForKey();
 
-            if (ex.RequiresCoin(player) == false)
+            if (ex.RequiresCoin == false)
             {
                 MapRenderer.mDrawStatic = false;
                 RunExhibit(state, ex);
             }
             else
             {
-                if (ex.HasBeenVisited(player) == false)
+                if (ex.HasBeenVisited == false)
                     TextArea.PrintLine("You haven't used this exhibit.");
                 else
                     TextArea.PrintLine();
 
-                if (Options.DisableExhibitsRequireCoins == false && ex.PlayerHasCoin(player) == false)
+                if (Options.DisableExhibitsRequireCoins == false && ex.PlayerHasCoin == false)
                 {
                     NeedsCoinMessage(player, ex);
                     GameControl.Wait(500);
@@ -234,7 +234,7 @@ namespace ERY.Xle.Maps.Museums
                         return true;
 
                     if (Options.DisableExhibitsRequireCoins == false)
-                        ex.UseCoin(player);
+                        ex.UseCoin();
 
                     MapRenderer.mDrawStatic = false;
                     RunExhibit(state, ex);
@@ -246,7 +246,7 @@ namespace ERY.Xle.Maps.Museums
 
         private void RunExhibit(GameState state, Exhibit ex)
         {
-            ex.RunExhibit(state.Player);
+            ex.RunExhibit();
 
             CheckExhibitStatus(state);
         }

@@ -24,9 +24,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 return false;
             }
         }
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
-            base.RunExhibit(Player);
+            base.RunExhibit();
 
             TextArea.PrintLine("Would you like to go");
             TextArea.PrintLine("to the pirate's lair?");

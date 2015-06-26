@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
     public class KloryksCage : LobExhibit
@@ -17,16 +19,16 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             get { return ExhibitIdentifier.KloryksCage; }
         }
 
-        public override bool IsClosed(Player unused)
+        public override bool IsClosed
         {
-            return HasBeenVisited(Player);
+            get { return HasBeenVisited; }
         }
 
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
-            base.RunExhibit(Player);
+            base.RunExhibit();
 
-            ReturnGem(Player);
+            ReturnGem();
         }
     }
 }

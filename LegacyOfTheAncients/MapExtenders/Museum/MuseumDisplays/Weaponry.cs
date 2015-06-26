@@ -6,58 +6,60 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-	public class Weaponry : LotaExhibit
-	{
-		public Weaponry() : base("Weaponry", Coin.Jade) { }
-		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Weaponry; } }
-		public override string LongName
-		{
-			get
-			{
-				return "The ancient art of weaponry";
-			}
-		}
+    public class Weaponry : LotaExhibit
+    {
+        public Weaponry() : base("Weaponry", Coin.Jade) { }
+        public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Weaponry; } }
+        public override string LongName
+        {
+            get
+            {
+                return "The ancient art of weaponry";
+            }
+        }
 
-		bool viewedThisTime;
+        bool viewedThisTime;
 
-		public override void RunExhibit(Player unused)
-		{
-			if (StoryVariable == 0 && HasBeenVisited(Player, MuseumDisplays.ExhibitIdentifier.Thornberry))
-			{
-				StoryVariable = 1;
-			}
+        public override void RunExhibit()
+        {
+            if (StoryVariable == 0 && ExhibitHasBeenVisited(ExhibitIdentifier.Thornberry))
+            {
+                StoryVariable = 1;
+            }
 
-			if (StoryVariable == 0)
-			{
-				ReadRawText(ExhibitInfo.Text[1]);
-				
-				// fair knife
-				Player.AddWeapon(1, 1);
-			}
-			else if (StoryVariable == 1)
-			{
-				ReadRawText(ExhibitInfo.Text[2]);
+            if (StoryVariable == 0)
+            {
+                ReadRawText(ExhibitInfo.Text[1]);
 
-				// great bladed staff
-				Player.AddWeapon(3, 3);
+                // fair knife
+                Player.AddWeapon(1, 1);
+            }
+            else if (StoryVariable == 1)
+            {
+                ReadRawText(ExhibitInfo.Text[2]);
 
-				StoryVariable = -1;
-			}
+                // great bladed staff
+                Player.AddWeapon(3, 3);
 
-			viewedThisTime = true;
-		}
-		public override bool IsClosed(ERY.Xle.Player unused)
-		{
-			int id = (int)ExhibitIdentifier;
+                StoryVariable = -1;
+            }
 
-			if (viewedThisTime)
-				return true;
+            viewedThisTime = true;
+        }
 
-			if (StoryVariable < 0)
-				return true;
+        public override bool IsClosed
+        {
+            get
+            {
+                if (viewedThisTime)
+                    return true;
 
-			return false;
-		}
-	}
-	
+                if (StoryVariable < 0)
+                    return true;
+
+                return false;
+            }
+        }
+    }
+
 }

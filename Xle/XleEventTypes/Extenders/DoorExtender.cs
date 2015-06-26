@@ -12,7 +12,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
         public XleData Data { get; set; }
 
         public new Door TheEvent { get { return (Door)base.TheEvent; } }
-        
+
         public virtual bool ItemUnlocksDoor(int item)
         {
             return item == TheEvent.RequiredItem;

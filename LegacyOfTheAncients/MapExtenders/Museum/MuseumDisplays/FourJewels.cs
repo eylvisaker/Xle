@@ -28,9 +28,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
         {
             get { return XleColor.Yellow; }
         }
-        public override void RunExhibit(Player player)
+        public override void RunExhibit()
         {
-            base.RunExhibit(player);
+            base.RunExhibit();
 
             TextArea.PrintLine("Would you like to go");
             TextArea.PrintLine("to the four jewel dungeon?");
@@ -38,15 +38,15 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
             if (QuickMenu.QuickMenuYesNo() == 0)
             {
-                int map = player.MapID;
-                int x = player.X;
-                int y = player.Y;
-                Direction facing = player.FaceDirection;
+                int map = Player.MapID;
+                int x = Player.X;
+                int y = Player.Y;
+                Direction facing = Player.FaceDirection;
 
-                player.DungeonLevel = 0;
+                Player.DungeonLevel = 0;
 
-                MapChanger.ChangeMap(player, 73, 0);
-                player.SetReturnLocation(map, x, y, facing);
+                MapChanger.ChangeMap(Player, 73, 0);
+                Player.SetReturnLocation(map, x, y, facing);
             }
         }
 

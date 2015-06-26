@@ -18,7 +18,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             }
         }
 
-        public override void RunExhibit(Player player)
+        public override void RunExhibit()
         {
             ReadRawText(RawText);
 
@@ -33,7 +33,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
                 Story.EatenJutonFruit = true;
 
-                MarkAsVisited(Player);
+                MarkAsVisited();
             }
         }
     }

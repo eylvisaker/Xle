@@ -26,7 +26,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 return "A test for knights";
             }
         }
-        public override void RunExhibit(Player player)
+        public override void RunExhibit()
         {
             ReadRawText(RawText);
 
@@ -35,10 +35,10 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             int y = Player.Y;
             Direction facing = Player.FaceDirection;
 
-            MapChanger.ChangeMap(player, 72, 0);
+            MapChanger.ChangeMap(Player, 72, 0);
             Player.SetReturnLocation(map, x, y, facing);
 
-            MarkAsVisited(Player);
+            MarkAsVisited();
         }
 
         public override bool StaticBeforeCoin

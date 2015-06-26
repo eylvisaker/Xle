@@ -33,21 +33,23 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
         public Coin Coin { get; private set; }
 
-        public override bool RequiresCoin(Player player)
+        public override bool RequiresCoin
         {
-            return Coin != Coin.None;
+            get { return Coin != Coin.None; }
         }
 
-        protected override void MarkAsVisited(Player player)
+        protected override void MarkAsVisited()
         {
             if (StoryVariable == 0)
                 StoryVariable = 1;
         }
-        public override bool HasBeenVisited(Player player)
+
+        public override bool HasBeenVisited
         {
-            return StoryVariable != 0;
+            get { return StoryVariable != 0; }
         }
-        public bool HasBeenVisited(Player player, ExhibitIdentifier exhibit)
+
+        public bool ExhibitHasBeenVisited(ExhibitIdentifier exhibit)
         {
             return Story.Museum[(int)exhibit] != 0;
         }
@@ -120,17 +122,17 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             }
         }
 
-        public override bool PlayerHasCoin(Player player)
+        public override bool PlayerHasCoin
         {
-            return player.Items[ItemFromCoin(Coin)] > 0;
+            get { return Player.Items[ItemFromCoin(Coin)] > 0; }
         }
 
-        public override void UseCoin(Player player)
+        public override void UseCoin()
         {
-            if (player.Items[ItemFromCoin(Coin)] <= 0)
+            if (Player.Items[ItemFromCoin(Coin)] <= 0)
                 throw new InvalidOperationException("Cannot use a coin the player does not have!");
 
-            player.Items[ItemFromCoin(Coin)]--;
+            Player.Items[ItemFromCoin(Coin)]--;
         }
     }
 }

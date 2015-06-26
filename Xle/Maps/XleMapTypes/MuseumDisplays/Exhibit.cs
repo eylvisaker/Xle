@@ -67,18 +67,18 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 
         protected int ImageID { get; set; }
 
-        public virtual void RunExhibit(Player Player)
+        public virtual void RunExhibit()
         {
-            if (CheckOfferReread(Player) == false)
+            if (CheckOfferReread() == false)
                 return;
 
             ReadRawText(RawText);
 
-            if (HasBeenVisited(Player) == false)
-                MarkAsVisited(Player);
+            if (HasBeenVisited == false)
+                MarkAsVisited();
         }
 
-        protected abstract void MarkAsVisited(Player player);
+        protected abstract void MarkAsVisited();
 
         /// <summary>
         /// Returns true if we are reading the exhibit for the first time,
@@ -86,9 +86,9 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
         /// </summary>
         /// <param name="Player"></param>
         /// <returns></returns>
-        protected bool CheckOfferReread(Player unused)
+        protected bool CheckOfferReread()
         {
-            if (HasBeenVisited(Player))
+            if (HasBeenVisited)
             {
                 return OfferReread();
             }
@@ -102,10 +102,10 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
         /// <returns>True if the player chose yes, false otherwise.</returns>
         protected bool OfferReread()
         {
-           TextArea.Clear();
-           TextArea.PrintLine("Do you want to reread the");
-           TextArea.PrintLine("description of this exhibit?");
-           TextArea.PrintLine();
+            TextArea.Clear();
+            TextArea.PrintLine("Do you want to reread the");
+            TextArea.PrintLine("description of this exhibit?");
+            TextArea.PrintLine();
 
             if (QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
                 return true;
@@ -230,9 +230,9 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
             TextArea.PrintLine();
         }
 
-        public virtual bool IsClosed(Player player)
+        public virtual bool IsClosed
         {
-            return false;
+            get { return false; }
         }
 
         /// <summary>
@@ -247,9 +247,9 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 
         public abstract string InsertCoinText { get; }
 
-        public abstract bool RequiresCoin(Player player);
+        public abstract bool RequiresCoin { get; }
 
-        public abstract bool HasBeenVisited(Player player);
+        public abstract bool HasBeenVisited { get; }
 
         public virtual string IntroductionText
         {
@@ -258,7 +258,7 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
 
         public abstract string UseCoinMessage { get; }
 
-        public abstract bool PlayerHasCoin(Player player);
-        public abstract void UseCoin(Player player);
+        public abstract bool PlayerHasCoin { get; }
+        public abstract void UseCoin();
     }
 }

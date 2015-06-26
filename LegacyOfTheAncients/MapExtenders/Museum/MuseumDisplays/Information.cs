@@ -69,7 +69,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             get { return GetBit(2); }
             set { SetBit(2, value); }
         }
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
             bool[] bits = GetBitStatus(Story.Museum[0]);
             bool doneAnything = false;
@@ -90,7 +90,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 LostCompendiumText = true;
                 doneAnything = true;
             }
-            doneAnything |= CheckSceptorCrown(Player);
+            doneAnything |= CheckSceptorCrown();
 
             doneAnything |= CheckLevelUp();
 
@@ -103,7 +103,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             }
         }
 
-        private bool CheckSceptorCrown(Player unused)
+        private bool CheckSceptorCrown()
         {
             // If the player has not accepted the caretakers offer and
             // received the iron key, skip any crown/sceptor checks.
@@ -172,7 +172,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
         private bool CheckLevelUp()
         {
-            if (ShouldLevelUp(Player))
+            if (ShouldLevelUp())
             {
                 ReadRawText(ExhibitInfo.Text[0]);
                 int newLevel = TargetLevel();
@@ -190,7 +190,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 return false;
         }
 
-        public bool ShouldLevelUp(Player unused)
+        public bool ShouldLevelUp()
         {
             if (TargetLevel() > Player.Level)
                 return true;

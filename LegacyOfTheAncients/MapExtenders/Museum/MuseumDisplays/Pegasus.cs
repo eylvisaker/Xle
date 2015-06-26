@@ -21,9 +21,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             get { return "A flight of fancy"; }
         }
 
-        public override void RunExhibit(Player player)
+        public override void RunExhibit()
         {
-            base.RunExhibit(player);
+            base.RunExhibit();
 
             TextArea.PrintLine();
             TextArea.PrintLine("Do you want to climb on?");
@@ -31,10 +31,10 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
             if (0 == QuickMenu.QuickMenuYesNo())
             {
-                if (player.Food < 150)
-                    player.Food = 150;
+                if (Player.Food < 150)
+                    Player.Food = 150;
 
-                MapChanger.ChangeMap(player, 3, 0);
+                MapChanger.ChangeMap(Player, 3, 0);
             }
         }
 

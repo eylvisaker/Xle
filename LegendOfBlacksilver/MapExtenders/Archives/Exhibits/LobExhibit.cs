@@ -56,7 +56,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
                     return 0;
             }
         }
-        protected void ReturnGem(Player unused)
+        protected void ReturnGem()
         {
             Player.Items[ItemFromCoin(Coin)]++;
 
@@ -119,18 +119,19 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             ExhibitInfo.DrawImage(displayRect, ImageID);
         }
 
-        protected override void MarkAsVisited(Player player)
+        protected override void MarkAsVisited()
         {
             Story.VisitedArchive[ExhibitID] = 1;
         }
-        public override bool HasBeenVisited(Player player)
+
+        public override bool HasBeenVisited
         {
-            return Story.VisitedArchive[ExhibitID] != 0;
+            get { return Story.VisitedArchive[ExhibitID] != 0; }
         }
 
-        public override bool RequiresCoin(Player player)
+        public override bool RequiresCoin
         {
-            return Coin != Coin.None;
+            get { return Coin != Coin.None; }
         }
 
         public override string IntroductionText
@@ -148,11 +149,12 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             }
         }
 
-        public override bool PlayerHasCoin(Player unused)
+        public override bool PlayerHasCoin
         {
-            return Player.Items[ItemFromCoin(Coin)] > 0;
+            get { return Player.Items[ItemFromCoin(Coin)] > 0; }
         }
-        public override void UseCoin(Player unused)
+
+        public override void UseCoin()
         {
             if (Player.Items[ItemFromCoin(Coin)] <= 0)
                 throw new InvalidOperationException("Cannot use a coin the player does not have!");

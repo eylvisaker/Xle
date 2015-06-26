@@ -28,17 +28,20 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             get { return ExhibitIdentifier.IslandRetreat; }
         }
 
-        public override bool RequiresCoin(Player unused)
+        public override bool RequiresCoin
         {
-            if (HasBeenVisited(Player))
-                return false;
+            get
+            {
+                if (HasBeenVisited)
+                    return false;
 
-            return base.RequiresCoin(Player);
+                return base.RequiresCoin;
+            }
         }
 
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
-            base.RunExhibit(Player);
+            base.RunExhibit();
 
             TextArea.PrintLine("Would you like to go");
             TextArea.PrintLine("to the island caverns now?");

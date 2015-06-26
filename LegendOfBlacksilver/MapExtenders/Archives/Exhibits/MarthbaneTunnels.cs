@@ -22,17 +22,20 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             get { return ExhibitIdentifier.MarthbaneTunnels; }
         }
 
-        public override bool RequiresCoin(Player player)
+        public override bool RequiresCoin
         {
-            if (HasBeenVisited(player))
-                return false;
+            get
+            {
+                if (HasBeenVisited)
+                    return false;
 
-            return base.RequiresCoin(player);
+                return base.RequiresCoin;
+            }
         }
 
-        public override void RunExhibit(Player player)
+        public override void RunExhibit()
         {
-            base.RunExhibit(player);
+            base.RunExhibit();
 
             TextArea.PrintLine("Would you like to go");
             TextArea.PrintLine("to Marthbane tunnels?");
@@ -40,7 +43,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
             if (0 == QuickMenu.QuickMenuYesNo())
             {
-                MapChanger.ChangeMap(player, 4, 0);
+                MapChanger.ChangeMap(Player, 4, 0);
             }
         }
     }

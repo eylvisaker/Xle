@@ -110,7 +110,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
             // check to see if the caretaker wants to see the player
             var info = Information;
 
-            if (info.ShouldLevelUp(state.Player))
+            if (info.ShouldLevelUp())
             {
                 TextArea.Clear();
                 TextArea.PrintLine("The caretaker wants to see you!");
@@ -148,7 +148,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
                 if (Story.Museum[1] < 3)
                 {
                     var welcome = (Welcome)GetExhibitByTile(0x51);
-                    welcome.PlayGoldArmbandMessage(state.Player);
+                    welcome.PlayGoldArmbandMessage();
                     Story.Museum[1] = 3;
 
                     CheckExhibitStatus(state);

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
     public class MorningStar : LobExhibit
@@ -17,14 +19,14 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             get { return ExhibitIdentifier.MorningStar; }
         }
 
-        public override bool IsClosed(Player player)
+        public override bool IsClosed
         {
-            return Story.ClosedMorningStar;
+            get { return Story.ClosedMorningStar; }
         }
 
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
-            base.RunExhibit(Player);
+            base.RunExhibit();
 
             TextArea.PrintLine();
             TextArea.PrintLine("Do you want to borrow this item?");
@@ -42,7 +44,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
                 Story.ClosedMorningStar = true;
             }
             else
-                ReturnGem(Player);
+                ReturnGem();
         }
     }
 }

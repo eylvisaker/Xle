@@ -19,7 +19,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 			get { return "Tarmalon Museum!"; }
 		}
 
-		public void PlayGoldArmbandMessage(Player player)
+		public void PlayGoldArmbandMessage()
 		{
 			ReadRawText(ExhibitInfo.Text[2]);
 		}

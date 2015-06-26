@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
     public class GameOfHonor : LobExhibit
@@ -17,11 +19,12 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             get { return ExhibitIdentifier.GameOfHonor; }
         }
 
-        public override bool IsClosed(Player player)
+        public override bool IsClosed
         {
-            return Story.RegisteredForTrist;
+            get { return Story.RegisteredForTrist; }
         }
-        public override void RunExhibit(Player unused)
+
+        public override void RunExhibit()
         {
             if (Player.Level < 3)
             {
@@ -29,11 +32,11 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
                 TextArea.PrintLine("to use this exhibit.");
                 TextArea.PrintLine();
 
-                ReturnGem(Player);
+                ReturnGem();
             }
             else
             {
-                base.RunExhibit(Player);
+                base.RunExhibit();
 
                 Story.RegisteredForTrist = true;
             }

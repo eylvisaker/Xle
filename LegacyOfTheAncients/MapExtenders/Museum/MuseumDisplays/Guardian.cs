@@ -6,24 +6,21 @@ using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
-public	class Guardian : LotaExhibit
-	{
-		public Guardian() : base("The guardian", Coin.Turquoise) { }
-		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Guardian; } }
+    public class Guardian : LotaExhibit
+    {
+        public Guardian() : base("The guardian", Coin.Turquoise) { }
+        public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Guardian; } }
 
-		public override bool IsClosed(Player player)
-		{
-			if (Story.HasGuardianPassword)
-				return true;
+        public override bool IsClosed
+        {
+            get { return Story.HasGuardianPassword; }
+        }
 
-			return false;
-		}
+        public override void RunExhibit()
+        {
+            base.RunExhibit();
 
-		public override void RunExhibit(Player player)
-		{
-			base.RunExhibit(player);
-
-			Story.HasGuardianPassword = true;
-		}
-	}
+            Story.HasGuardianPassword = true;
+        }
+    }
 }

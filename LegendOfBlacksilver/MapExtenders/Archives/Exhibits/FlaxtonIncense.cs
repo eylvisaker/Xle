@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
     public class FlaxtonIncense : LobExhibit
@@ -17,14 +19,14 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             get { return ExhibitIdentifier.FlaxtonIncense; }
         }
 
-        public override bool IsClosed(Player player)
+        public override bool IsClosed
         {
-            return Story.EatenFlaxton;
+            get { return Story.EatenFlaxton; }
         }
 
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
-            base.RunExhibit(Player);
+            base.RunExhibit();
 
             TextArea.PrintLine();
             TextArea.PrintLine("Do you want to partake?");
@@ -39,7 +41,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
                 Story.EatenFlaxton = true;
             }
             else
-                ReturnGem(Player);
+                ReturnGem();
         }
     }
 }

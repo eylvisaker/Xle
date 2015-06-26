@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
     public class CrystalTears : LobExhibit
@@ -17,9 +19,9 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             get { return ExhibitIdentifier.CrystalTears; }
         }
 
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
-            base.RunExhibit(Player);
+            base.RunExhibit();
 
             TextArea.PrintLine();
             TextArea.PrintLine("Do you want to borrow them?");
@@ -36,7 +38,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
             }
             else
             {
-                ReturnGem(Player);
+                ReturnGem();
             }
         }
     }

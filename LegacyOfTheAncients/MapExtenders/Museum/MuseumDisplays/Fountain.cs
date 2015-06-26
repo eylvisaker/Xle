@@ -25,28 +25,28 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             }
         }
 
-        public override bool IsClosed(ERY.Xle.Player player)
+        public override bool IsClosed
         {
-            return Story.ReturnedTulip;
+            get { return Story.ReturnedTulip; }
         }
 
-        public override void RunExhibit(Player player)
+        public override void RunExhibit()
         {
-            if (player.Items[LotaItem.Tulip] == 0)
+            if (Player.Items[LotaItem.Tulip] == 0)
             {
                 OfferTulipQuest();
             }
             else
             {
-                RewardForTulip(player);
+                RewardForTulip();
             }
         }
 
-        private void RewardForTulip(Player player)
+        private void RewardForTulip()
         {
             // remove the tulip from the player, give the reward and shut down the exhibit.
-            player.Items[LotaItem.Tulip] = 0;
-            player.Attribute[Attributes.charm] += 10;
+            Player.Items[LotaItem.Tulip] = 0;
+            Player.Attribute[Attributes.charm] += 10;
             Story.ReturnedTulip = true;
 
             ReadRawText(ExhibitInfo.Text[3]);
@@ -56,9 +56,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
         private void OfferTulipQuest()
         {
-            bool firstVisit = HasBeenVisited(Player);
+            bool firstVisit = HasBeenVisited;
 
-            base.RunExhibit(Player);
+            base.RunExhibit();
             TextArea.PrintLine();
 
             if (Story.SearchingForTulip == false)
@@ -66,14 +66,14 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             else
                 TextArea.PrintLine("Do you want to continue searching?");
 
-
             TextArea.PrintLine();
+
             if (QuickMenu.QuickMenuYesNo() == 0)
             {
                 ReadRawText(ExhibitInfo.Text[2]);
                 int amount = 100;
 
-                if (firstVisit || HasBeenVisited(Player, ExhibitIdentifier.Thornberry))
+                if (firstVisit || ExhibitHasBeenVisited(ExhibitIdentifier.Thornberry))
                 {
                     amount += 200;
                 }

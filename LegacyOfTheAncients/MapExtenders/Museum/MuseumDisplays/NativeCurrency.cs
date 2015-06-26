@@ -17,9 +17,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
         public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.NativeCurrency; } }
 
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
-            base.RunExhibit(Player);
+            base.RunExhibit();
 
             int gold = (int)(350 * (1 + Player.Level)
                 * (1 + Random.NextDouble()));

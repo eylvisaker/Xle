@@ -23,9 +23,9 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             get { return "A typical town of Tarmalon"; }
         }
 
-        public override void RunExhibit(Player unused)
+        public override void RunExhibit()
         {
-            if (CheckOfferReread(Player))
+            if (CheckOfferReread())
             {
                 ReadRawText(ExhibitInfo.Text[1]);
             }
@@ -40,8 +40,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
                 int amount = 100;
 
-                if (HasBeenVisited(Player) ||
-                    HasBeenVisited(Player, ExhibitIdentifier.Fountain))
+                if (HasBeenVisited || ExhibitHasBeenVisited(ExhibitIdentifier.Fountain))
                 {
                     amount += 200;
                 }
@@ -60,7 +59,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 Player.SetReturnLocation(1, 18, 56);
             }
 
-            MarkAsVisited(Player);
+            MarkAsVisited();
         }
     }
 }
