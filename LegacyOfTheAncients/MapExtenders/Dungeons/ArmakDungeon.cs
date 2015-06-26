@@ -25,7 +25,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
 			IsCompleted = true;
 
-			GivePermanentStrengthBoost(player);
+			GivePermanentStrengthBoost();
 		}
 
 		public override Maps.Map3DSurfaces Surfaces(GameState state)

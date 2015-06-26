@@ -80,10 +80,6 @@ namespace ERY.Xle.Maps.Dungeons
             return 0;
         }
 
-        public virtual bool ShowDirection(Player player)
-        {
-            return true;
-        }
         public override void CheckSounds(GameState state)
         {
         }

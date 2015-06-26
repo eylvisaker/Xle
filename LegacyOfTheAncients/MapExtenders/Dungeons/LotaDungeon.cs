@@ -66,23 +66,18 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             Story.BeenInDungeon = true;
         }
 
-        protected void GivePermanentStrengthBoost(Player player)
+        protected void GivePermanentStrengthBoost()
         {
-            player.Attribute[Attributes.strength] += StrengthBoost;
+            Player.Attribute[Attributes.strength] += StrengthBoost;
 
-            TextArea.PrintLine("Strength + " + StrengthBoost.ToString());
+            TextArea.PrintLine("Strength + " + StrengthBoost);
             SoundMan.PlaySoundSync(LotaSound.VeryGood);
         }
 
-        public virtual void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled)
-        {
-        }
-
-
-        public override bool ShowDirection(Player player)
+        protected override bool ShowDirections()
         {
             // check for compass.
-            return player.Items[LotaItem.Compass] > 0;
+            return Player.Items[LotaItem.Compass] > 0;
         }
 
         double nextSound;

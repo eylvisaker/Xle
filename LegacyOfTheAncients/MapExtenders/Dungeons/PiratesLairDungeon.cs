@@ -16,21 +16,10 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         {
             get { return 10; }
         }
-        public override void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled)
-        {
-            // crown
-            if (treasure == (int)LotaItem.Crown)
-            {
-                if (player.Items[LotaItem.Crown] > 0)
-                    treasure = 0;
 
-                if (player.Level > 3)
-                    treasure = 0;
-            }
-        }
         public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
         {
-            if (chestID == 1) return (int)LotaItem.Crown;
+            if (chestID == 1 && Player.Items[LotaItem.MagicIce] == 0 && Player.Items[LotaItem.Crown] == 0) return (int)LotaItem.Crown;
             if (chestID == 2) return (int)LotaItem.SapphireCoin;
 
             return 0;
@@ -44,7 +33,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             {
                 IsCompleted = true;
 
-                GivePermanentStrengthBoost(player);
+                GivePermanentStrengthBoost();
             }
         }
 

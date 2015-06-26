@@ -4,7 +4,7 @@ namespace ERY.Xle.Maps
 {
     public abstract class Map3DExtender : MapExtender
     {
-        protected virtual bool ShowDirections(Player player)
+        protected virtual bool ShowDirections()
         {
             return true;
         }
@@ -27,7 +27,7 @@ namespace ERY.Xle.Maps
 
             OnBeforePlayerMove(state, dir);
 
-            _MoveDungeon(player, dir, ShowDirections(player), out command, out stepDirection);
+            _MoveDungeon(player, dir, ShowDirections(), out command, out stepDirection);
 
             if (stepDirection.IsEmpty == false)
             {
