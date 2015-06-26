@@ -247,7 +247,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
             // check that we've seen all the jade coin exhibits and we've closed
             // down the weaponry exhibit.
-            if (jadeExhibits == 3 && Story.Museum[2] >= 10)
+            if (jadeExhibits == 3 && Story.Museum[2] < 0)
                 return 2;
 
             // geez, they've done nothing.

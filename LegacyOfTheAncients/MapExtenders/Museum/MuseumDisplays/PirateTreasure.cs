@@ -26,10 +26,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
         }
         public override void RunExhibit(Player unused)
         {
-            if (CheckOfferReread(Player))
-            {
-                ReadRawText(ExhibitInfo.Text[1]);
-            }
+            base.RunExhibit(Player);
 
             TextArea.PrintLine("Would you like to go");
             TextArea.PrintLine("to the pirate's lair?");

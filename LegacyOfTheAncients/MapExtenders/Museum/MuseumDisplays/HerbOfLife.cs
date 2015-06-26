@@ -32,6 +32,8 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 SoundMan.PlaySoundSync(LotaSound.Good);
 
                 Story.EatenJutonFruit = true;
+
+                MarkAsVisited(Player);
             }
         }
     }

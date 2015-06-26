@@ -239,6 +239,9 @@ namespace ERY.Xle.Services.XleSystem.Implementation
                     player.X = x;
                     player.Y = y;
                     player.DungeonLevel = level - 1;
+
+                    var dungeon = GameState.MapExtender as DungeonExtender;
+                    dungeon.CurrentLevel = player.DungeonLevel;
                 }
             }
         }

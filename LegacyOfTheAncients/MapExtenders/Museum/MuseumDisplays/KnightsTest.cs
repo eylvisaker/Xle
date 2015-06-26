@@ -30,14 +30,15 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
         {
             ReadRawText(RawText);
 
-            int map = player.MapID;
-            int x = player.X;
-            int y = player.Y;
-            Direction facing = player.FaceDirection;
+            int map = Player.MapID;
+            int x = Player.X;
+            int y = Player.Y;
+            Direction facing = Player.FaceDirection;
 
             MapChanger.ChangeMap(player, 72, 0);
-            player.SetReturnLocation(map, x, y, facing);
+            Player.SetReturnLocation(map, x, y, facing);
 
+            MarkAsVisited(Player);
         }
 
         public override bool StaticBeforeCoin

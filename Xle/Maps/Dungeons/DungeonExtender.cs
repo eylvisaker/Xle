@@ -124,7 +124,7 @@ namespace ERY.Xle.Maps.Dungeons
         }
         public virtual void UpdateMonsters(GameState state)
         {
-            foreach (var monster in Combat.Monsters.Where(x => x.DungeonLevel == state.Player.DungeonLevel))
+            foreach (var monster in Combat.Monsters.Where(x => x.DungeonLevel == Player.DungeonLevel))
             {
                 var delta = new Point(
                     state.Player.X - monster.Location.X,
@@ -152,7 +152,7 @@ namespace ERY.Xle.Maps.Dungeons
             }
 
             if (SpawnMonsters(state) &&
-                Combat.Monsters.Count(monst => monst.DungeonLevel == state.Player.DungeonLevel) < TheMap.MaxMonsters)
+                Combat.Monsters.Count(monst => monst.DungeonLevel == Player.DungeonLevel) < TheMap.MaxMonsters)
             {
                 SpawnMonster(state);
             }

@@ -15,7 +15,6 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
         public Fountain() : base("A Fountain", Coin.Jade) { }
 
         public IXleRenderer Renderer { get; set; }
-        public IXleInput Input { get; set; }
 
         public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Fountain; } }
         public override string LongName
