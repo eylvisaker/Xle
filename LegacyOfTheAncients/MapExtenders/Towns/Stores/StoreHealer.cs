@@ -22,7 +22,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
             cs.BorderColor = XleColor.Gray;
         }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
             buyingHerbs = false;
 
@@ -114,12 +114,12 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
                 }
             }
 
-            AfterSpeak(state);
+            AfterSpeak();
 
             return true;
         }
 
-        protected virtual void AfterSpeak(GameState state)
+        protected virtual void AfterSpeak()
         {
             if (Story.HasGuardianMark == false)
                 return;
@@ -139,12 +139,12 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
             if (woundPrice <= 0)
                 window.WriteLine("Not needed", XleColor.Yellow);
             else
-                window.WriteLine(woundPrice.ToString() + " gold");
+                window.WriteLine(woundPrice + " gold");
 
             window.WriteLine();
             window.WriteLine();
 
-            window.WriteLine("2. Healing Herbs -  " + herbsPrice.ToString() + " apiece");
+            window.WriteLine("2. Healing Herbs -  " + herbsPrice + " apiece");
 
             Windows.Add(window);
         }
@@ -153,7 +153,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
         {
             TextWindow window = new TextWindow();
 
-            window.Location = new AgateLib.Geometry.Point(7, 3);
+            window.Location = new Point(7, 3);
             window.WriteLine("Our sect offers restorative");
             window.WriteLine("    cures for your wounds.");
 

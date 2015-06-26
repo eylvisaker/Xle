@@ -9,7 +9,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 	{
 		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
-		public override bool Speak(GameState state)
+		public override bool Speak()
 		{
 			return false;
 		}

@@ -116,7 +116,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
         {
             var door = Events.OfType<FeatherDoor>().First();
 
-            door.RemoveDoor(state);
+            door.RemoveDoor();
         }
 
         public override void SpeakToGuard(GameState state)

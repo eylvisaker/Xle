@@ -11,15 +11,15 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
     public class SpeakGuard : EventExtender
     {
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
-            Guard guard = FindGuard(state);
+            Guard guard = FindGuard();
             if (guard == null)
                 return false;
             if (guard.OnPlayerAttack == null)
-                guard.OnPlayerAttack += KillGuard;
+                guard.OnPlayerAttack += (state, guard1) => KillGuard(guard1);
 
-            MoveGuardToBars(state, guard);
+            MoveGuardToBars(guard);
 
             TextArea.PrintLine();
             TextArea.PrintLine("Shut yer trap or I'll");
@@ -28,7 +28,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             return true;
         }
 
-        private void MoveGuardToBars(GameState state, Guard guard)
+        private void MoveGuardToBars(Guard guard)
         {
             if (guard.Location.X <= TheEvent.X + 1)
                 return;
@@ -63,7 +63,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             GameControl.Wait(150);
         }
 
-        private bool KillGuard(GameState state, Guard guard)
+        private bool KillGuard(Guard guard)
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -96,7 +96,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             return true;
         }
 
-        private Guard FindGuard(GameState state)
+        private Guard FindGuard()
         {
             foreach (var guard in Map.Guards)
             {

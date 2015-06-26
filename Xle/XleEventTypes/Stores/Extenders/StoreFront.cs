@@ -10,6 +10,7 @@ using ERY.Xle.Services;
 using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.XleSystem;
+using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
@@ -80,12 +81,12 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 Renderer.DrawObject(window);
             }
 
-            DrawGoldText(Player);
+            DrawGoldText();
 
             TextAreaRenderer.Draw(TextArea);
         }
 
-        private void DrawGoldText(Player player)
+        private void DrawGoldText()
         {
             if (ShowGoldText == false)
                 return;
@@ -95,7 +96,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             {
                 // Draw Gold
                 goldText = " Gold: ";
-                goldText += player.Gold;
+                goldText += Player.Gold;
                 goldText += " ";
             }
             else
@@ -164,7 +165,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         public string Title { get; set; }
 
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
             PrivateInitializeColorScheme();
 
@@ -181,7 +182,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             {
                 Renderer.ReplacementDrawMethod = DrawStore;
 
-                return SpeakImpl(GameState);
+                return SpeakImpl();
             }
             finally
             {
@@ -189,7 +190,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             }
         }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
             return StoreNotImplementedMessage();
         }

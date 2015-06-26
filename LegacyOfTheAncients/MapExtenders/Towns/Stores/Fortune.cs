@@ -16,10 +16,10 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
         public IQuickMenu QuickMenu { get; set; }
         public XleData Data { get; set; }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
             int choice;
-            int cost = 5 + (int)Math.Sqrt(state.Player.Gold) / 9;
+            int cost = 5 + (int)Math.Sqrt(Player.Gold) / 9;
 
             TextArea.PrintLine();
             TextArea.PrintLine(TheEvent.ShopName, XleColor.Green);

@@ -13,14 +13,14 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
     {
         public Random Random { get; set; }
 
-        public override bool StepOn(GameState state)
+        public override bool StepOn()
         {
             if (Player.Y > TheEvent.Y + 2)
                 return false;
 
             TheEvent.Enabled = false;
 
-            MapData data = GameState.Map.ReadMapData(TheEvent.Rectangle);
+            MapData data = ((EventExtender)this).GameState.Map.ReadMapData(TheEvent.Rectangle);
 
             TextArea.Clear(true);
             TextArea.PrintLine();
@@ -50,7 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
             GameControl.Wait(3500);
 
-            GameState.Map.WriteMapData(data, TheEvent.Rectangle.Location);
+            ((EventExtender)this).GameState.Map.WriteMapData(data, TheEvent.Rectangle.Location);
 
             return true;
         }

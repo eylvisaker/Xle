@@ -27,13 +27,13 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             cs.BorderColor = XleColor.Red;
         }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
-            RunStore(state);
+            RunStore();
             return true;
         }
 
-        void RunStore(GameState state)
+        void RunStore()
         {
             int i = 0;
             int choice;
@@ -94,12 +94,12 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             {
                 case 1:
                     questionWindow.WriteLine("What weapon will you sell me?");
-                    item = EquipmentPicker.PickWeapon(state, null, ColorScheme.BackColor);
+                    item = EquipmentPicker.PickWeapon(GameState, null, ColorScheme.BackColor);
                     break;
 
                 case 2:
                     questionWindow.WriteLine("What armor will you sell me?");
-                    item = EquipmentPicker.PickArmor(state, null, ColorScheme.BackColor);
+                    item = EquipmentPicker.PickArmor(GameState, null, ColorScheme.BackColor);
                     break;
             }
 

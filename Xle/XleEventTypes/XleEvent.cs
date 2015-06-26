@@ -70,7 +70,6 @@ namespace ERY.Xle.XleEventTypes
 
         #endregion
 
-
         public string ExtenderName { get; set; }
 
         [Browsable(false)]

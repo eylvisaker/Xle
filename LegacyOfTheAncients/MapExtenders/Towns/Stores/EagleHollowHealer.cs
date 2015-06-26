@@ -8,7 +8,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
     public class EagleHollowHealer : StoreHealer
     {
-        protected override void AfterSpeak(GameState state)
+        protected override void AfterSpeak()
         {
             if (Story.HasGuardianMark == false)
                 return;

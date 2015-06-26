@@ -4,21 +4,21 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 {
     public class Arovyn : LotaEvent
     {
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
-            if (state.Player.Attribute[Attributes.strength] <= 25)
+            if (Player.Attribute[Attributes.strength] <= 25)
             {
-                TooWeakMessage(state);
+                TooWeakMessage();
             }
             else
             {
-                GiveMark(state);
+                GiveMark();
             }
 
             return true;
         }
 
-        private void TooWeakMessage(GameState state)
+        private void TooWeakMessage()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -29,7 +29,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
             GameControl.Wait(1500);
         }
 
-        private void GiveMark(GameState state)
+        private void GiveMark()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();

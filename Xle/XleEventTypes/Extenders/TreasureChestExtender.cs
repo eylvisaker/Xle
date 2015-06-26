@@ -14,22 +14,22 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
         public new TreasureChestEvent TheEvent { get { return (TreasureChestEvent)base.TheEvent; } }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
-            OpenIfMarked(state);
+            OpenIfMarked();
         }
-        public virtual void SetAngry(GameState state)
+        public virtual void SetAngry()
         {
-            state.Map.Guards.IsAngry = true;
+            Map.Guards.IsAngry = true;
         }
 
         public virtual bool MakesGuardsAngry { get { return true; } }
 
-        public virtual void BeforeGiveItem(GameState state, ref int item, ref int count)
+        public virtual void BeforeGiveItem(ref int item, ref int count)
         {
         }
 
-        public virtual void PrintObtainItemMessage(GameState state, int item, int count)
+        public virtual void PrintObtainItemMessage(int item, int count)
         {
             var itemName = Data.ItemList[item].Name;
             var space = "aeiou".Contains(itemName.ToLowerInvariant()[0]) ? "n " : " ";
@@ -37,7 +37,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
             TextArea.PrintLine("You find a" + space + itemName + "!");
         }
 
-        public virtual void PlayObtainItemSound(GameState state, int item, int count)
+        public virtual void PlayObtainItemSound(int item, int count)
         {
             SoundMan.PlaySound(LotaSound.VeryGood);
         }
@@ -56,14 +56,13 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
         public virtual string TakeFailMessage { get { return "You can't \"take\" the whole chest."; } }
 
-        public virtual void MarkChestAsOpen(GameState state)
+        public virtual void MarkChestAsOpen()
         {
         }
 
-        public virtual void OpenIfMarked(GameState state)
+        public virtual void OpenIfMarked()
         {
         }
-
 
         protected virtual void UpdateCommand()
         {
@@ -87,22 +86,22 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
             GameControl.Wait(GameState.GameSpeed.CastleOpenChestSoundTime);
 
-            SetOpenTilesOnMap(GameState.Map);
+            SetOpenTilesOnMap();
 
             if (MakesGuardsAngry)
-                SetAngry(GameState);
+                SetAngry();
 
             if (TheEvent.ContainsItem)
             {
                 int count = 1;
                 int item = TheEvent.Contents;
 
-                BeforeGiveItem(GameState, ref item, ref count);
+                BeforeGiveItem(ref item, ref count);
 
                 GameState.Player.Items[item] += count;
 
-                PrintObtainItemMessage(GameState, item, count);
-                PlayObtainItemSound(GameState, item, count);
+                PrintObtainItemMessage(item, count);
+                PlayObtainItemSound(item, count);
             }
             else
             {
@@ -118,7 +117,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
             GameControl.Wait(GameState.GameSpeed.CastleOpenChestTime);
 
-            MarkChestAsOpen(GameState);
+            MarkChestAsOpen();
 
             return true;
         }
@@ -129,12 +128,12 @@ namespace ERY.Xle.XleEventTypes.Extenders
             return true;
         }
 
-        public void SetOpenTilesOnMap(XleMap map)
+        public void SetOpenTilesOnMap()
         {
-            var firstTile = map[TheEvent.X, TheEvent.Y];
-            var chestGroup = map.TileSet.TileGroups.FirstOrDefault(
+            var firstTile = Map[TheEvent.X, TheEvent.Y];
+            var chestGroup = Map.TileSet.TileGroups.FirstOrDefault(
                 x => x.GroupType == Maps.GroupType.Chest && x.Tiles.Contains(firstTile));
-            var openChestGroup = (from grp in map.TileSet.TileGroups
+            var openChestGroup = (from grp in Map.TileSet.TileGroups
                                   where grp.GroupType == Maps.GroupType.OpenChest &&
                                      grp.Tiles.All(x => x > firstTile)
                                   orderby grp.Tiles.Min()
@@ -149,12 +148,12 @@ namespace ERY.Xle.XleEventTypes.Extenders
             {
                 for (int i = TheEvent.Rectangle.Left; i < TheEvent.Rectangle.Right; i++)
                 {
-                    int index = chestGroup.Tiles.IndexOf(map[i, j]);
+                    int index = chestGroup.Tiles.IndexOf(Map[i, j]);
 
                     if (index == -1 || index >= openChestGroup.Tiles.Count)
                         continue;
 
-                    map[i, j] = openChestGroup.Tiles[index];
+                    Map[i, j] = openChestGroup.Tiles[index];
                 }
             }
         }

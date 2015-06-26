@@ -64,10 +64,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             cs.TextAreaBackColor = XleColor.Blue;
         }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
-            var Player = state.Player;
-
             Windows.Clear();
             Windows.AddRange(CreateStoreWindows());
 

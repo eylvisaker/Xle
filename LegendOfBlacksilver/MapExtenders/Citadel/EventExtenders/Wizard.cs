@@ -9,7 +9,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class Wizard : LobEvent
     {
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -23,7 +23,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
             else
                 NoMoreHelp();
 
-            GameControl.Wait(state.GameSpeed.AfterSpeakTime);
+            GameControl.Wait(GameState.GameSpeed.AfterSpeakTime);
             return true;
         }
 

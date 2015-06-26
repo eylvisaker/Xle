@@ -9,7 +9,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
     public class AngryOrcs : CastleEvent
     {
-        public override bool StepOn(GameState state)
+        public override bool StepOn()
         {
             if (DurekCastleObject.InOrcArea == false)
             {

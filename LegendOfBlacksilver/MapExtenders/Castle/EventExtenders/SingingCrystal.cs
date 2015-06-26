@@ -11,7 +11,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
     public class SingingCrystal : LobEvent
     {
-        public override bool Use(GameState unused, int item)
+        public override bool Use(int item)
         {
             if (item != (int)LobItem.SingingCrystal)
                 return false;

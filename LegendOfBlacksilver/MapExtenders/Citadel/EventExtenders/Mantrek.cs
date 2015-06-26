@@ -14,16 +14,16 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 	{
         public IMapChanger MapChanger { get; set; }
 
-		public override bool Speak(GameState state)
+		public override bool Speak()
 		{
 			if (Story.MantrekKilled)
 				return false;
 
-			BegForLife(state);
+			BegForLife();
 			return true;
 		}
 
-		private void BegForLife(GameState state)
+		private void BegForLife()
 		{
 			TextArea.PrintLine();
 			TextArea.PrintLine();

@@ -8,7 +8,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
     {
         public IQuickMenu QuickMenu { get; set; }
 
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
             SoundMan.PlaySound(LotaSound.VeryGood);
 
@@ -25,14 +25,14 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
             }
             else
             {
-                OfferPotion(state);
+                OfferPotion();
             }
 
             GameControl.Wait(5000);
             return true;
         }
 
-        private void OfferPotion(GameState state)
+        private void OfferPotion()
         {
             TextArea.PrintLine("My potion can help you.");
             TextArea.PrintLine("It will cost 2,500 gold.");

@@ -34,7 +34,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             cs.BorderColor = XleColor.Gray;
         }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
             int choice;
 

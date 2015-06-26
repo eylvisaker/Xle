@@ -9,7 +9,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
 	public class Vault : StoreVault
 	{
-		protected override bool RobImpl(GameState state)
+		protected override bool RobCore()
 		{
 			TextArea.PrintLine();
 			TextArea.PrintLine();

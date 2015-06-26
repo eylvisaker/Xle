@@ -7,19 +7,19 @@
             get { return GameState.Story(); }
         }
 
-		public override bool ItemUnlocksDoor(GameState state, int item)
+		public override bool ItemUnlocksDoor(int item)
 		{
 			return false ;
 		}
 
-		public override bool Speak(GameState state)
+		public override bool Speak()
 		{
 			if (Story.HasGuardianPassword)
 			{
 				TextArea.PrintLine(" password.");
 				SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-				RemoveDoor(state);
+				RemoveDoor();
 				return true;
 			}
 			else

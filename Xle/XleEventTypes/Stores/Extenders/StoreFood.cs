@@ -26,7 +26,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             cs.TextColor = XleColor.Yellow;
         }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
             string tempString;
             double cost = ((int)(13 - Player.Attribute[Attributes.charm] / 7.0)) / 10.0;
@@ -47,7 +47,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             int choice;
 
-            if (Player.mailTown == state.Map.MapID)
+            if (Player.mailTown == Map.MapID)
             {
                 PayForMail();
                 skipMailOffer = true;
@@ -76,7 +76,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                     StoreSound(LotaSound.Sale);
 
                     if (skipMailOffer == false)
-                        OfferMail(state);
+                        OfferMail();
 
                     return true;
                 }
@@ -95,9 +95,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         }
 
-        private void OfferMail(GameState state)
+        private void OfferMail()
         {
-            Town twn = state.Map as Town;
+            Town twn = GameState.Map as Town;
 
             if (Player.Items[MailItemId] > 0) return;
             if (twn == null) return;
@@ -233,7 +233,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         int robCount;
 
-        protected override bool RobImpl(GameState state)
+        protected override bool RobCore()
         {
             SetTitle();
             Wait(1);

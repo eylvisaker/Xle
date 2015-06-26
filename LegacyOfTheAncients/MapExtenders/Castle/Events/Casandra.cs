@@ -8,7 +8,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
     {
         public IQuickMenu QuickMenu { get; set; }
 
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
             SoundMan.PlaySound(LotaSound.VeryGood);
 
@@ -21,24 +21,24 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
             if (Story.VisitedCasandra == false)
             {
-                OfferGoldOrCharm(state);
+                OfferGoldOrCharm();
             }
             else
             {
-                BegoneMessage(state);
+                BegoneMessage();
             }
 
             GameControl.Wait(5000);
             return true;
         }
 
-        private void BegoneMessage(GameState state)
+        private void BegoneMessage()
         {
             TextArea.PrintLine("I helped you already - be gone.");
             TextArea.PrintLine();
         }
 
-        private void OfferGoldOrCharm(GameState state)
+        private void OfferGoldOrCharm()
         {
             TextArea.PrintLineSlow("You may visit my magical room", XleColor.Green);
             TextArea.PrintLineSlow("only this once.  My power can", XleColor.Cyan);
@@ -50,16 +50,16 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
             if (choice == 0)
             {
-                GiveGold(state);
+                GiveGold();
             }
             if (choice == 1)
             {
-                GiveCharm(state);
+                GiveCharm();
             }
 
             TextArea.PrintLine();
 
-            var old = state.Map.ColorScheme.BorderColor;
+            var old = Map.ColorScheme.BorderColor;
             Map.ColorScheme.BorderColor = XleColor.White;
 
             SoundMan.PlaySoundSync(LotaSound.VeryGood);
@@ -70,11 +70,11 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
             if (Story.SearchingForTulip)
             {
-                PassageHint(state);
+                PassageHint();
             }
         }
 
-        private void PassageHint(GameState state)
+        private void PassageHint()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -83,13 +83,13 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
             TextArea.PrintLine("one is between two flower gardens.");
         }
 
-        private void GiveCharm(GameState state)
+        private void GiveCharm()
         {
             TextArea.PrintLine("Charm  +15");
             Player.Attribute[Attributes.charm] += 15;
         }
 
-        private void GiveGold(GameState state)
+        private void GiveGold()
         {
             TextArea.PrintLine("Gold  +5,000");
             Player.Gold += 5000;

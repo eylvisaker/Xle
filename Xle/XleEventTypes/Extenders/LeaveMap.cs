@@ -7,7 +7,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 {
     public class LeaveMap : EventExtender
     {
-        public override bool StepOn(GameState state)
+        public override bool StepOn()
         {
             MapExtender.LeaveMap();
 

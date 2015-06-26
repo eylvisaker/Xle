@@ -9,7 +9,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class CitadelDoor : DoorExtender
     {
-        public override bool ItemUnlocksDoor(GameState state, int item)
+        public override bool ItemUnlocksDoor(int item)
         {
             if (item == (int)LobItem.QuartzKey)
             {
@@ -17,7 +17,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
             }
             else
             {
-                return base.ItemUnlocksDoor(state, item);
+                return base.ItemUnlocksDoor(item);
             }
         }
     }

@@ -11,19 +11,19 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
     {
         bool asked;
 
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
             TextArea.PrintLine(" to the " + Name() + ".");
             TextArea.PrintLine();
             SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-            if (state.Player.Items[LobItem.FalconFeather] > 0)
+            if (Player.Items[LobItem.FalconFeather] > 0)
             {
-                PrinceAskForFeather(state);
+                PrinceAskForFeather();
             }
-            else if (state.Player.Items[LobItem.SmallKey] == 0 && state.Player.Items[LobItem.GoldKey] == 0)
+            else if (Player.Items[LobItem.SmallKey] == 0 && Player.Items[LobItem.GoldKey] == 0)
             {
-                PrinceAskForHelp(state);
+                PrinceAskForHelp();
             }
 
             else
@@ -47,7 +47,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
             Input.WaitForKey();
         }
 
-        private void PrinceAskForFeather(GameState state)
+        private void PrinceAskForFeather()
         {
             asked = false;
 
@@ -92,10 +92,10 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
                 Input.WaitForKey();
                 TextArea.PrintLineSlow();
 
-                PrinceAskForHelp(state);
+                PrinceAskForHelp();
             }
         }
-        void PrinceAskForHelp(GameState state)
+        void PrinceAskForHelp()
         {
             TextArea.PrintLineSlow("There is much to do.  The earthquakes");
             TextArea.PrintLineSlow("continue to batter the castle.  A");

@@ -8,7 +8,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
     public class GuardWarning : EventExtender
     {
-        public override bool StepOn(GameState state)
+        public override bool StepOn()
         {
             TheEvent.Enabled = false;
 

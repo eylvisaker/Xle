@@ -12,7 +12,7 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
     {
         public IQuickMenu QuickMenu { get; set; }
 
-        protected override bool OnStepOnImpl(GameState state, ref bool cancel)
+        protected override bool OnStepOnImpl(ref bool cancel)
         {
             string newMapName = GetMapName();
             TextArea.PrintLine();
@@ -29,7 +29,7 @@ namespace ERY.Xle.XleEventTypes.Extenders.Common
                 TextArea.PrintLine();
                 TextArea.PrintLine(
                     string.Format(TheEvent.CommandText,
-                    state.Map.MapName, newMapName));
+                    Map.MapName, newMapName));
 
                 TextArea.PrintLine();
                 GameControl.Wait(500);

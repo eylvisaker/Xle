@@ -16,7 +16,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 			this.fortressFinal = fortressFinal;
 		}
 
-		public override bool Use(GameState state, int item)
+		public override bool Use(int item)
 		{
 			if (item != (int)LotaItem.GuardJewel)
 				return false;

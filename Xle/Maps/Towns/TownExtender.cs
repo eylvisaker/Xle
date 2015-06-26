@@ -555,7 +555,7 @@ namespace ERY.Xle.Maps.Towns
         {
             foreach (var evt in EventsAt(Player, 1))
             {
-                bool handled = evt.Rob(GameState);
+                bool handled = evt.Rob();
 
                 if (handled)
                     return true;

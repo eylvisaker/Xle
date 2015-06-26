@@ -11,7 +11,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 	{
 		int replacementTile = 40;
 
-		public override bool StepOn(GameState state)
+		public override bool StepOn()
 		{
 			for(int i = TheEvent.Rectangle.X; i < TheEvent.Rectangle.Right; i++)
 			{

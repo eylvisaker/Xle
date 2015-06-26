@@ -16,7 +16,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         public new StoreRaft TheEvent { get { return (StoreRaft)base.TheEvent; } }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
             int choice = 0;
             int raftCost = (int)(400 * TheEvent.CostFactor);

@@ -69,7 +69,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             throw new NotImplementedException();
         }
 
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
             if (AllowInteractionWhenLoanOverdue == false)
             {
@@ -80,10 +80,10 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 }
             }
 
-            return SpeakImpl(state);
+            return SpeakImpl();
         }
 
-        protected virtual bool SpeakImpl(GameState state)
+        protected virtual bool SpeakImpl()
         {
             return StoreNotImplementedMessage();
         }
@@ -105,7 +105,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             return true;
         }
 
-        public sealed override bool Rob(GameState state)
+        public sealed override bool Rob()
         {
             if (AllowRobWhenNotAngry == false && Map.Guards.IsAngry == false)
             {
@@ -115,10 +115,10 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             MapExtender.IsAngry = true;
 
-            return RobImpl(state);
+            return RobCore();
         }
 
-        protected virtual bool RobImpl(GameState state)
+        protected virtual bool RobCore()
         {
             if (Robbed)
             {

@@ -16,7 +16,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
         public IXleRenderer Renderer { get; set; }
 
-        public override bool StepOn(GameState state)
+        public override bool StepOn()
         {
             if (paralyzed)
                 return false;
@@ -30,39 +30,39 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             paralyzed = true;
 
             Guard warlord = new Guard();
-            warlord.Location = new AgateLib.Geometry.Point(106, 47);
+            warlord.Location = new Point(106, 47);
             warlord.Color = XleColor.LightGreen;
 
-            state.Map.Guards.Add(warlord);
+            Map.Guards.Add(warlord);
 
-            PrintSeeCompendiumMessage(state);
-            DoSonicMagic(state, warlord);
+            PrintSeeCompendiumMessage();
+            DoSonicMagic(GameState, warlord);
 
             TextArea.PrintLine("The warlord appears at the wall.");
             TextArea.PrintLine();
 
             MoveWarlordToCompendium(warlord);
-            HitPlayer(state);
+            HitPlayer();
             WarlordSpeech();
-            RemoveCompendium(state);
+            RemoveCompendium();
 
             MoveWarlordOut(warlord);
 
-            state.Map.Guards.Remove(warlord);
+            GameState.Map.Guards.Remove(warlord);
 
             return true;
         }
 
-        private void RemoveCompendium(GameState state)
+        private void RemoveCompendium()
         {
-            TreasureChestEvent evt = GameState.Map.Events.OfType<TreasureChestEvent>()
+            TreasureChestEvent evt = Map.Events.OfType<TreasureChestEvent>()
                 .First(x => x.ExtenderName.Equals("CompendiumFirst", StringComparison.InvariantCultureIgnoreCase));
 
             evt.Enabled = false;
-            evt.SetOpenTilesOnMap(GameState.Map);
+            evt.SetOpenTilesOnMap(Map);
         }
 
-        public override void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
+        public override void TryToStepOn(int dx, int dy, out bool allowStep)
         {
             allowStep = true;
             if (Player.HP > 30 && paralyzed)
@@ -139,9 +139,9 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             GameControl.Wait(2000);
         }
 
-        private void HitPlayer(GameState state)
+        private void HitPlayer()
         {
-            state.Player.HP = 28;
+            Player.HP = 28;
 
             Renderer.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
         }
@@ -156,7 +156,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             GameControl.Wait(750);
         }
 
-        private void PrintSeeCompendiumMessage(GameState state)
+        private void PrintSeeCompendiumMessage()
         {
             TextArea.Clear(true);
             TextArea.PrintLine();

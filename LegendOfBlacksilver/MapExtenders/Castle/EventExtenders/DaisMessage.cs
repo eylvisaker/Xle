@@ -12,7 +12,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
     {
         bool givenMessage = false;
 
-        public override void BeforeStepOn(GameState state)
+        public override void BeforeStepOn()
         {
             if (givenMessage)
                 return;

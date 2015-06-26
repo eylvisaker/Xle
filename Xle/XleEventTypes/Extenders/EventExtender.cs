@@ -33,19 +33,19 @@ namespace ERY.Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Speak(GameState state)
+        public virtual bool Speak()
         {
             return false;
         }
+
         /// <summary>
         /// Function called when player executes Rob in a square inside or next
         /// to the LotaEvent.
         /// 
         /// Returns true if handled by the event.
         /// </summary>
-        /// <param name="state"></param>
         /// <returns></returns>
-        public virtual bool Rob(GameState state)
+        public virtual bool Rob()
         {
             return false;
         }
@@ -75,6 +75,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
         {
             return false;
         }
+
         /// <summary>
         /// Function called when the player walks inside
         /// the LotaEvent.
@@ -83,10 +84,11 @@ namespace ERY.Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool StepOn(GameState state)
+        public virtual bool StepOn()
         {
             return false;
         }
+
         /// <summary>
         /// Function called when the player tries to walk inside
         /// the XleEvent.
@@ -95,27 +97,30 @@ namespace ERY.Xle.XleEventTypes.Extenders
         /// block the player from stepping there, and true if the
         /// player can walk there.
         /// </summary>
-        /// <param name="player"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
+        /// <param name="allowStep"></param>
+        /// <param name="player"></param>
         /// <returns></returns>
-        public virtual void TryToStepOn(GameState state, int dx, int dy, out bool allowStep)
+        public virtual void TryToStepOn(int dx, int dy, out bool allowStep)
         {
             allowStep = true;
         }
+
         /// <summary>
         /// Function called when the player uses an item
         /// or next to the XleEvent.
         /// 
         /// Returns true if handled by the event.
         /// </summary>
-        /// <param name="player"></param>
         /// <param name="item"></param>
+        /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Use(GameState state, int item)
+        public virtual bool Use(int item)
         {
             return false;
         }
+
         /// <summary>
         /// Function called when the player eXamines next
         /// to the LotaEvent.
@@ -124,20 +129,20 @@ namespace ERY.Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Xamine(GameState state)
+        public virtual bool Xamine()
         {
             return false;
         }
 
-        public virtual void BeforeStepOn(GameState state)
+        public virtual void BeforeStepOn()
         {
 
         }
 
-        public virtual void OnLoad(GameState state)
+        public virtual void OnLoad()
         { }
 
-        public virtual void OnUpdate(GameState state, double deltaTime)
+        public virtual void OnUpdate(double deltaTime)
         {
         }
 

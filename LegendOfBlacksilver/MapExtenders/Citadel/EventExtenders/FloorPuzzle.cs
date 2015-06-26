@@ -15,7 +15,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
         bool failed;
         const double secondsToTileUpdate = 3;
 
-        public override bool StepOn(GameState state)
+        public override bool StepOn()
         {
             if (failed)
                 return false;
@@ -85,7 +85,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
             }
         }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
             tiles = new int[TheEvent.Width / 2, TheEvent.Height / 2];
 
@@ -97,14 +97,14 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
                     loc.X += i;
                     loc.Y += j;
 
-                    tiles[i / 2, j / 2] = state.Map[loc];
+                    tiles[i / 2, j / 2] = Map[loc];
                 }
             }
 
             tiles[4, 5] = -1;
         }
 
-        public override void OnUpdate(GameState state, double deltaTime)
+        public override void OnUpdate(double deltaTime)
         {
             double newtime = time + deltaTime / secondsToTileUpdate;
 

@@ -77,7 +77,7 @@ namespace ERY.Xle.Maps
 
             foreach (var evt in Events)
             {
-                evt.OnLoad(GameState);
+                evt.OnLoad();
             }
         }
 
@@ -90,7 +90,7 @@ namespace ERY.Xle.Maps
 
             foreach (var evt in EventsAt(state.Player.X, state.Player.Y, 0))
             {
-                evt.StepOn(state);
+                evt.StepOn();
                 didEvent = true;
             }
 
@@ -223,7 +223,7 @@ namespace ERY.Xle.Maps
         {
             foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
             {
-                bool handled = evt.Speak(state);
+                bool handled = evt.Speak();
 
                 if (handled)
                     return handled;
@@ -308,7 +308,7 @@ namespace ERY.Xle.Maps
 
             foreach (var evt in EventsAt(state.Player, 1))
             {
-                handled = evt.Use(state, item);
+                handled = evt.Use(item);
 
                 if (handled)
                     return handled;
@@ -442,7 +442,7 @@ namespace ERY.Xle.Maps
         {
             foreach (var evt in EventsAt(x, y, 0))
             {
-                evt.BeforeStepOn(state);
+                evt.BeforeStepOn();
             }
         }
 
@@ -470,7 +470,7 @@ namespace ERY.Xle.Maps
             {
                 bool allowStep;
 
-                evt.TryToStepOn(state, dx, dy, out allowStep);
+                evt.TryToStepOn(dx, dy, out allowStep);
 
                 if (allowStep == false)
                     return false;
@@ -502,7 +502,7 @@ namespace ERY.Xle.Maps
         {
             foreach (var evt in Events)
             {
-                evt.OnUpdate(GameState, deltaTime);
+                evt.OnUpdate(deltaTime);
             }
         }
 

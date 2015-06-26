@@ -11,20 +11,20 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
     {
         protected LobStory Story { get { return GameState.Story(); } }
 
-        public override void SetAngry(GameState state)
+        public override void SetAngry()
         {
         }
 
-        public override void MarkChestAsOpen(GameState state)
+        public override void MarkChestAsOpen()
         {
             Story.CastleChests[ChestArrayIndex][TheEvent.ChestID] = 1;
         }
 
-        public override void OpenIfMarked(GameState state)
+        public override void OpenIfMarked()
         {
             if (Story.CastleChests[ChestArrayIndex][TheEvent.ChestID] == 1)
             {
-                TheEvent.SetOpenTilesOnMap(state.Map);
+                TheEvent.SetOpenTilesOnMap(Map);
             }
         }
 

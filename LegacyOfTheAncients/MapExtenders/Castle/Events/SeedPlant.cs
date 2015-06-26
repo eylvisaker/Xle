@@ -8,7 +8,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
     {
         public Random Random { get; set; }
 
-        public override void BeforeGiveItem(GameState state, ref int item, ref int count)
+        public override void BeforeGiveItem(ref int item, ref int count)
         {
             if (item == 8)
                 count = Random.Next(3, 6);
@@ -23,12 +23,12 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
         {
             return false;
         }
-        public override void PrintObtainItemMessage(GameState state, int item, int count)
+        public override void PrintObtainItemMessage(int item, int count)
         {
             TextArea.PrintLine(string.Format(
                 "You take {0} {1}s.", count, Data.ItemList[item].Name));
         }
-        public override void PlayObtainItemSound(GameState state, int item, int count)
+        public override void PlayObtainItemSound(int item, int count)
         {
         }
         public override void PlayOpenChestSound()
@@ -54,7 +54,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
             }
         }
 
-        public override void MarkChestAsOpen(GameState state)
+        public override void MarkChestAsOpen()
         {
             // do nothing, as this is supposed to refresh every time the map is reloaded.
         }

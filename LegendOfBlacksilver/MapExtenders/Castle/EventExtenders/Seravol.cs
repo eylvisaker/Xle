@@ -11,7 +11,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
     {
         public Random Random { get; set; }
 
-        public override bool Speak(GameState unused)
+        public override bool Speak()
         {
             Greetings();
             bool handled = false;
@@ -19,15 +19,15 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
             if (Player.Level > 1)
             {
                 if (Player.Items[LobItem.GoldKey] == 0 &&
-                    AllOrcsKilled(GameState))
+                    AllOrcsKilled(((EventExtender)this).GameState))
                 {
-                    GiveGoldKey(GameState);
+                    GiveGoldKey(((EventExtender)this).GameState);
                     handled = true;
                 }
             }
             else
             {
-                Introduction(GameState);
+                Introduction(((EventExtender)this).GameState);
                 handled = true;
             }
 
@@ -38,7 +38,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
             if (handled == false)
             {
-                NothingToTellMessage(GameState);
+                NothingToTellMessage(((EventExtender)this).GameState);
             }
 
             return true;

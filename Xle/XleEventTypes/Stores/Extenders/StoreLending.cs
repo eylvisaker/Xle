@@ -22,7 +22,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             cs.BorderColor = XleColor.Black;
         }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
             int i = 0;
             int max = 200 * Player.Level;

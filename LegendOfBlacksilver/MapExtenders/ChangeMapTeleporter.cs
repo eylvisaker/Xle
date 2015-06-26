@@ -12,7 +12,7 @@ namespace ERY.Xle.LoB.MapExtenders
     {
         protected LobStory Story { get { return GameState.Story(); } }
 
-        protected override bool OnStepOnImpl(GameState state, ref bool cancel)
+        protected override bool OnStepOnImpl(ref bool cancel)
         {
             return ExecuteTeleportation();
         }

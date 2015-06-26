@@ -13,51 +13,51 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
         public new Door TheEvent { get { return (Door)base.TheEvent; } }
         
-        public virtual bool ItemUnlocksDoor(GameState state, int item)
+        public virtual bool ItemUnlocksDoor(int item)
         {
             return item == TheEvent.RequiredItem;
         }
 
-        public virtual void PrintUnlockText(GameState state, int item, ref bool handled)
+        public virtual void PrintUnlockText(int item, ref bool handled)
         {
             TextArea.PrintLine("Unlock door.");
         }
 
-        public virtual void PrintUnlockFailureText(GameState state, int item, ref bool handled)
+        public virtual void PrintUnlockFailureText(int item, ref bool handled)
         {
             TextArea.PrintLine();
-            GameControl.Wait(300 + 200 * state.Player.Gamespeed);
+            GameControl.Wait(300 + 200 * Player.Gamespeed);
             TextArea.PrintLine("It doesn't fit this door.");
         }
 
-        public override bool Use(GameState state, int item)
+        public override bool Use(int item)
         {
             if (Data.ItemList.IsKey(item) == false)
                 return false;
 
-            bool itemUnlocksDoor = ItemUnlocksDoor(state, item);
+            bool itemUnlocksDoor = ItemUnlocksDoor(item);
 
             if (itemUnlocksDoor)
             {
-                UnlockDoor(state, item);
+                UnlockDoor(item);
             }
             else
             {
                 bool unused = false;
-                PrintUnlockFailureText(state, item, ref unused);
+                PrintUnlockFailureText(item, ref unused);
             }
 
             return true;
         }
 
-        protected virtual void UnlockDoor(GameState state, int item)
+        protected virtual void UnlockDoor(int item)
         {
             bool handled = false;
 
-            PrintUnlockText(state, item, ref handled);
+            PrintUnlockText(item, ref handled);
 
             PlayRemoveSound();
-            RemoveDoor(state);
+            RemoveDoor();
         }
 
         public virtual void PlayRemoveSound()
@@ -65,13 +65,13 @@ namespace ERY.Xle.XleEventTypes.Extenders
             SoundMan.PlaySound(LotaSound.UnlockDoor);
             GameControl.Wait(250);
         }
-        public virtual void RemoveDoor(GameState state)
+        public virtual void RemoveDoor()
         {
             for (int j = TheEvent.Rectangle.Y; j < TheEvent.Rectangle.Bottom; j++)
             {
                 for (int i = TheEvent.Rectangle.X; i < TheEvent.Rectangle.Right; i++)
                 {
-                    state.Map[i, j] = TheEvent.ReplacementTile;
+                    Map[i, j] = TheEvent.ReplacementTile;
                 }
             }
 

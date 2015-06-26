@@ -12,10 +12,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
     {
         public IQuickMenu QuickMenu { get; set; }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
-            var player = state.Player;
-
             MenuItemList theList = new MenuItemList("Yes", "No");
             int choice;
 

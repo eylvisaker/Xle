@@ -9,28 +9,28 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class Elf : LobEvent
     {
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
 
             if (Story.ElfPaid == false)
             {
-                OfferMoney(state);
+                OfferMoney();
                 return true;
             }
 
             if (Story.ElfSolvedPuzzle == false)
             {
-                Puzzle(state);
+                Puzzle();
             }
             else
-                NoMoreHelp(state);
+                NoMoreHelp();
 
             return true;
         }
 
-        private void Puzzle(GameState state)
+        private void Puzzle()
         {
             TextArea.PrintLine("I've prepared a test.");
             TextArea.PrintLine();
@@ -71,17 +71,17 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
             TextArea.PrintLineSlow("I have happened across this signet ring. I ");
             TextArea.PrintLineSlow("believe it will help you.\n");
 
-            state.Player.Items[LobItem.SignetRing]++;
+            Player.Items[LobItem.SignetRing]++;
 
             Story.ElfSolvedPuzzle = true;
         }
 
-        private void NoMoreHelp(GameState state)
+        private void NoMoreHelp()
         {
             TextArea.PrintLine("I can't help you anymore.");
         }
 
-        private void OfferMoney(GameState state)
+        private void OfferMoney()
         {
             TextArea.PrintLine("Would you rather take 500 gold from");
             TextArea.PrintLine("me, or give me 1,500 gold?\n");
@@ -89,17 +89,17 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
             int choice = QuickMenu.QuickMenu(new MenuItemList("Take", "Give"), 2);
 
             if (choice == 0)
-                state.Player.Gold += 500;
-            else if (state.Player.Gold < 1500)
+                Player.Gold += 500;
+            else if (Player.Gold < 1500)
             {
                 TextArea.PrintLine("You don't have enough gold.");
             }
             else
             {
-                state.Player.Gold -= 1500;
+                Player.Gold -= 1500;
                 Story.ElfPaid = true;
 
-                Puzzle(state);
+                Puzzle();
             }
         }
     }

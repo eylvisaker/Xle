@@ -9,7 +9,7 @@ namespace ERY.Xle.LoB.MapExtenders.Outside.Events
 {
     public class Drawbridge : ChangeMap
     {
-        protected override bool OnStepOnImpl(GameState state, ref bool cancel)
+        protected override bool OnStepOnImpl(ref bool cancel)
         {
             TextArea.PrintLine();
 
@@ -31,7 +31,7 @@ namespace ERY.Xle.LoB.MapExtenders.Outside.Events
             return true;
         }
 
-        public override bool Use(GameState state, int item)
+        public override bool Use(int item)
         {
             if (item == (int)LobItem.RopeAndPulley)
             {

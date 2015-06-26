@@ -33,7 +33,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected abstract string StoreType { get; }
 
-        protected override bool SpeakImpl(GameState state)
+        protected override bool SpeakImpl()
         {
             MenuItemList theList = new MenuItemList("Buy", "Sell", "Neither");
 

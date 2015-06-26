@@ -9,7 +9,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class Jester : LobEvent
     {
-        public override bool Speak(GameState state)
+        public override bool Speak()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();

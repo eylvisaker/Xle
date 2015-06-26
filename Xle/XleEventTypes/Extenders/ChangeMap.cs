@@ -38,24 +38,22 @@ namespace ERY.Xle.XleEventTypes.Extenders
             return true;
         }
 
-        public override bool StepOn(GameState state)
+        public override bool StepOn()
         {
-            var player = state.Player;
-
-            if (player.X < TheEvent.X) return false;
-            if (player.Y < TheEvent.Y) return false;
-            if (player.X >= TheEvent.X + TheEvent.Width) return false;
-            if (player.Y >= TheEvent.Y + TheEvent.Height) return false;
+            if (Player.X < TheEvent.X) return false;
+            if (Player.Y < TheEvent.Y) return false;
+            if (Player.X >= TheEvent.X + TheEvent.Width) return false;
+            if (Player.Y >= TheEvent.Y + TheEvent.Height) return false;
 
             if (TheEvent.MapID != 0 && VerifyMapExistence() == false)
                 return false;
 
             bool cancel = false;
 
-            return OnStepOnImpl(state, ref cancel);
+            return OnStepOnImpl(ref cancel);
         }
 
-        protected virtual bool OnStepOnImpl(GameState state, ref bool cancel)
+        protected virtual bool OnStepOnImpl(ref bool cancel)
         {
             ExecuteMapChange();
 

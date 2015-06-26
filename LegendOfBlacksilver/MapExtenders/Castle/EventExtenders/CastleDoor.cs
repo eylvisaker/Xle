@@ -10,15 +10,15 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
     public class CastleDoor : DoorExtender
     {
-        public override bool ItemUnlocksDoor(GameState state, int item)
+        public override bool ItemUnlocksDoor(int item)
         {
             if (item == (int)LobItem.GoldKey)
                 return true;
             else
-                return base.ItemUnlocksDoor(state, item);
+                return base.ItemUnlocksDoor(item);
         }
 
-        public override void PrintUnlockFailureText(GameState state, int item, ref bool handled)
+        public override void PrintUnlockFailureText(int item, ref bool handled)
         {
             TextArea.PrintLine("It doesn't fit this door.");
             handled = true;
@@ -27,14 +27,14 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 
     public class FeatherDoor : CastleDoor
     {
-        public override bool ItemUnlocksDoor(GameState state, int item)
+        public override bool ItemUnlocksDoor(int item)
         {
             if (item == (int)LobItem.SmallKey || item == (int)LobItem.GoldKey)
                 return true;
             else
-                return base.ItemUnlocksDoor(state, item);
+                return base.ItemUnlocksDoor(item);
         }
-        public override void RemoveDoor(GameState state)
+        public override void RemoveDoor()
         {
             var rect = TheEvent.Rectangle;
             var doorEvent = (Door)TheEvent;
