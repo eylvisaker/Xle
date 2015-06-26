@@ -12,9 +12,16 @@ namespace ERY.Xle.Maps.Dungeons
 {
     public class DungeonExtender : Map3DExtender
     {
+        public DungeonExtender()
+        {
+            Combat = new DungeonCombat();
+        }
+
         public IXleRenderer Renderer { get; set; }
 
         public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
+
+        public DungeonCombat Combat { get; set; }
 
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
@@ -117,7 +124,7 @@ namespace ERY.Xle.Maps.Dungeons
         }
         public virtual void UpdateMonsters(GameState state)
         {
-            foreach (var monster in TheMap.Monsters.Where(x => x.DungeonLevel == state.Player.DungeonLevel))
+            foreach (var monster in Combat.Monsters.Where(x => x.DungeonLevel == state.Player.DungeonLevel))
             {
                 var delta = new Point(
                     state.Player.X - monster.Location.X,
@@ -145,7 +152,7 @@ namespace ERY.Xle.Maps.Dungeons
             }
 
             if (SpawnMonsters(state) &&
-                TheMap.Monsters.Count(monst => monst.DungeonLevel == state.Player.DungeonLevel) < TheMap.MaxMonsters)
+                Combat.Monsters.Count(monst => monst.DungeonLevel == state.Player.DungeonLevel) < TheMap.MaxMonsters)
             {
                 SpawnMonster(state);
             }
@@ -337,7 +344,7 @@ namespace ERY.Xle.Maps.Dungeons
 
         private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
         {
-            return TheMap.MonsterAt(dungeonLevel, loc);
+            return Combat.MonsterAt(dungeonLevel, loc);
         }
         private void SpawnMonster(Xle.GameState state)
         {
@@ -356,7 +363,7 @@ namespace ERY.Xle.Maps.Dungeons
 
             monster.DungeonLevel = state.Player.DungeonLevel;
 
-            TheMap.Monsters.Add(monster);
+            Combat.Monsters.Add(monster);
         }
 
         public override bool PlayerOpen(GameState state)
@@ -616,7 +623,7 @@ namespace ERY.Xle.Maps.Dungeons
         {
             SoundMan.PlaySoundSync(LotaSound.VeryBad);
 
-            TheMap.Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
+            Combat.Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
         }
 
         private void UseAttackMagic(GameState state, MagicSpell magic)
@@ -712,7 +719,7 @@ namespace ERY.Xle.Maps.Dungeons
 
             if (monst.HP <= 0)
             {
-                TheMap.Monsters.Remove(monst);
+                Combat.Monsters.Remove(monst);
                 TextArea.PrintLine(monst.Name + " dies!!");
 
                 SoundMan.PlaySound(LotaSound.EnemyDie);

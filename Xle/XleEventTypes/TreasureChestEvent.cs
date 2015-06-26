@@ -73,11 +73,6 @@ namespace ERY.Xle.XleEventTypes
 			}
 		}
 
-        [Obsolete("Use extender instead", true)]
-		public void OpenIfMarked(GameState state)
-		{
-		}
-
 		protected override void WriteData(XleSerializationInfo info)
 		{
 			info.Write("ContainsItem", mContainsItem);

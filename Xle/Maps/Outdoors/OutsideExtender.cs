@@ -176,8 +176,8 @@ namespace ERY.Xle.Maps.Outdoors
             {
                 switch (EncounterState)
                 {
-                    case XleMapTypes.EncounterState.MonsterAppeared:
-                    case XleMapTypes.EncounterState.MonsterReady:
+                    case EncounterState.MonsterAppeared:
+                    case EncounterState.MonsterReady:
                         return true;
                     default:
                         return false;
@@ -725,7 +725,7 @@ namespace ERY.Xle.Maps.Outdoors
 
                 MovePlayer(GameState, stepDirection);
 
-                if (EncounterState == XleMapTypes.EncounterState.JustDisengaged)
+                if (EncounterState == EncounterState.JustDisengaged)
                 {
                     TextArea.PrintLine();
                     TextArea.PrintLine("Attempt to disengage");
@@ -733,7 +733,7 @@ namespace ERY.Xle.Maps.Outdoors
 
                     GameControl.Wait(500);
 
-                    EncounterState = XleMapTypes.EncounterState.NoEncounter;
+                    EncounterState = EncounterState.NoEncounter;
                 }
 
                 TerrainInfo info = GetTerrainInfo(player);
@@ -1278,7 +1278,7 @@ namespace ERY.Xle.Maps.Outdoors
                         TextArea.PrintLine("Nothing to fight.");
                         return;
                     }
-                    else if (EncounterState != XleMapTypes.EncounterState.MonsterReady)
+                    else if (EncounterState != EncounterState.MonsterReady)
                     {
                         state.Player.Items[magic.ItemID]++;
                         TextArea.PrintLine("The unknown creature is out of range.");

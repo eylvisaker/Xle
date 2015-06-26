@@ -15,6 +15,7 @@ using ERY.Xle.Services.Game;
 using ERY.Xle.Services.MapLoad;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.XleEventTypes;
+using ERY.Xle.Maps.Dungeons;
 
 namespace ERY.Xle.Services.XleSystem.Implementation
 {
@@ -114,11 +115,11 @@ namespace ERY.Xle.Services.XleSystem.Implementation
         [Description("Kills all the guards or monsters on the map.")]
         private void CheatKillAll()
         {
-            if (GameState.Map is Dungeon)
+            if (GameState.MapExtender is DungeonExtender)
             {
-                var dung = GameState.Map as Dungeon;
+                var dung = GameState.MapExtender as DungeonExtender;
 
-                dung.Monsters.Clear();
+                dung.Combat.Monsters.Clear();
             }
             else
             {

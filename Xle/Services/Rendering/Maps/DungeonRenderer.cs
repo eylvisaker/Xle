@@ -1,6 +1,6 @@
 ﻿using AgateLib.Geometry;
-
 using ERY.Xle.Data;
+using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.XleMapTypes;
 
 namespace ERY.Xle.Services.Rendering.Maps
@@ -66,6 +66,7 @@ namespace ERY.Xle.Services.Rendering.Maps
         }
 
         public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
+        public new DungeonExtender Extender { get { return (DungeonExtender)base.Extender; } }
 
         protected override void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
         {
@@ -75,7 +76,7 @@ namespace ERY.Xle.Services.Rendering.Maps
             {
                 Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
 
-                var monster = TheMap.MonsterAt(GameState.Player.DungeonLevel, loc);
+                var monster = Extender.Combat.MonsterAt(GameState.Player.DungeonLevel, loc);
 
                 if (monster == null)
                     continue;

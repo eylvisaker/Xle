@@ -33,7 +33,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
                         KillFlashImmune = true,
                     };
 
-                TheMap.Monsters.Add(king);
+                Combat.Monsters.Add(king);
             }
         }
         protected override int MonsterGroup(int dungeonLevel)
@@ -135,7 +135,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             SoundMan.PlaySound(LotaSound.EnemyMiss);
 
             Story.RescuedKing = true;
-            TheMap.Monsters.Remove(king);
+            Combat.Monsters.Remove(king);
 
             OpenEscapeRoute(GameState);
 

@@ -62,6 +62,7 @@
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonOpenCommand.cs" />
+    <Compile Include="Maps\Dungeons\DungeonCombat.cs" />
     <Compile Include="Services\Rendering\Maps\CastleRenderer.cs" />
     <Compile Include="Services\Rendering\Maps\TempleRenderer.cs" />
     <Compile Include="Services\Rendering\IMapRendererFactory.cs" />
@@ -224,7 +225,7 @@
     <Compile Include="XleEventTypes\Stores\Store.cs" />
     <Compile Include="Maps\XleMapTypes\CastleMap.cs" />
     <Compile Include="Maps\XleMapTypes\Dungeon.cs" />
-    <Compile Include="Maps\XleMapTypes\EncounterState.cs" />
+    <Compile Include="Maps\Outdoors\EncounterState.cs" />
     <Compile Include="Maps\XleMapTypes\Map3D.cs" />
     <Compile Include="Maps\XleMapTypes\Museum.cs" />
     <Compile Include="XleColor.cs" />
