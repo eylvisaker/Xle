@@ -8,6 +8,7 @@ using ERY.Xle.Data;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.Rendering.Maps;
+using ERY.Xle.Services.ScreenModel;
 
 namespace ERY.Xle.Maps.Dungeons
 {
@@ -18,7 +19,7 @@ namespace ERY.Xle.Maps.Dungeons
             Combat = new DungeonCombat();
         }
 
-        public IXleRenderer Renderer { get; set; }
+        public IStatsDisplay StatsDisplay { get; set; }
 
         public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
 
@@ -425,7 +426,7 @@ namespace ERY.Xle.Maps.Dungeons
                     TextArea.PrintLine("Hit points:  + " + amount.ToString(), XleColor.Yellow);
                     Player.HP += amount;
                     SoundMan.PlaySound(LotaSound.Good);
-                    Renderer.FlashHPWhileSound(XleColor.Yellow);
+                    StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
                 }
             }
 
@@ -452,7 +453,7 @@ namespace ERY.Xle.Maps.Dungeons
 
                 Player.Gold += amount;
 
-                Renderer.FlashHPWhileSound(XleColor.Yellow);
+                StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
             }
             else
             {

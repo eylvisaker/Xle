@@ -7,6 +7,7 @@ using System.Text;
 using ERY.Xle.Services;
 using ERY.Xle.Services.MapLoad;
 using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.ScreenModel;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
@@ -15,7 +16,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
         public Thornberry() : base("Thornberry", Coin.Jade) { }
 
         public IMapChanger MapChanger { get; set; }
-        public IXleRenderer Renderer { get; set; }
+        public IStatsDisplay StatsDisplay { get; set; }
 
         public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Thornberry; } }
         public override string LongName
@@ -51,7 +52,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 TextArea.PrintLine("             GOLD:  + " + amount.ToString(), XleColor.Yellow);
 
                 SoundMan.PlaySound(LotaSound.VeryGood);
-                Renderer.FlashHPWhileSound(XleColor.Yellow);
+                StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
 
                 Input.WaitForKey();
 

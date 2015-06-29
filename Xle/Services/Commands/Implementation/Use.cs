@@ -4,6 +4,7 @@ using ERY.Xle.Data;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 
 namespace ERY.Xle.Services.Commands.Implementation
@@ -17,7 +18,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 
         public IXleGameFactory Factory { get; set; }
         public IXleGameControl GameControl { get; set; }
-        public IXleRenderer Renderer { get; set; }
+        public IStatsDisplay StatsDisplay { get; set; }
         public ISoundMan SoundMan { get; set; }
         public XleData Data { get; set; }
         public IXleSubMenu SubMenu { get; set; }
@@ -46,7 +47,7 @@ namespace ERY.Xle.Services.Commands.Implementation
             if (Player.Hold == Factory.HealingItemID)
             {
                 noEffect = false;
-                UseHealingItem(GameState, Player.Hold);
+                UseHealingItem(Player.Hold);
             }
             else
             {
@@ -97,13 +98,13 @@ namespace ERY.Xle.Services.Commands.Implementation
             Player.HoldMenu(SubMenu.SubMenu("Hold Item", value, theList));
         }
 
-        private void UseHealingItem(GameState state, int itemID)
+        private void UseHealingItem(int itemID)
         {
             Player.HP += Player.MaxHP / 2;
             Player.Items[itemID] -= 1;
             SoundMan.PlaySound(LotaSound.Good);
 
-            Renderer.FlashHPWhileSound(XleColor.Cyan);
+            StatsDisplay.FlashHPWhileSound(XleColor.Cyan);
         }
 
     }

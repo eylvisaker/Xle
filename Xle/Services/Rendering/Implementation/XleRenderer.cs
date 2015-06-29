@@ -24,17 +24,21 @@ namespace ERY.Xle.Services.Rendering.Implementation
         static double lastRaftAnim = 0;
 
         private IPlayerAnimator playerAnimator;
+        private IXleImages images;
+        private IStatsDisplay statsDisplay;
 
         public XleRenderer(
-            ICommandList commands, 
+            ICommandList commands,
             IXleImages images,
             IPlayerAnimator playerAnimator,
-            IXleScreen screen)
+            IXleScreen screen,
+            IStatsDisplay statsDisplay)
         {
             this.commands = commands;
             this.images = images;
             this.Screen = screen;
             this.playerAnimator = playerAnimator;
+            this.statsDisplay = statsDisplay;
 
             Screen.Draw += Screen_Draw;
             Screen.Update += Screen_Update;
@@ -51,13 +55,11 @@ namespace ERY.Xle.Services.Rendering.Implementation
         }
 
         public GameState GameState { get; set; }
-        public ISoundMan SoundMan { get; set; }
         public ITextArea TextArea { get; set; }
         public ITextAreaRenderer TextAreaRenderer { get; set; }
         public ITextRenderer TextRenderer { get; set; }
         public XleData Data { get; set; }
         public IXleGameFactory Factory { get; set; }
-        public IXleGameControl GameControl { get; set; }
 
         IXleScreen Screen { get; set; }
 
@@ -65,12 +67,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
         Size GameAreaSize { get { return new Size(640, 400); } }
 
-       ISurface Tiles { get { return images.Tiles; }}
-
-        bool mOverrideHPColor;
-        Color mHPColor;
-        private IXleImages images;
-
+        ISurface Tiles { get { return images.Tiles; } }
 
         Player Player { get { return GameState.Player; } }
 
@@ -209,6 +206,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
         /// <summary>
         /// Draws the player character.
         /// </summary>
+        /// <param name="animating"></param>
         /// <param name="animFrame"></param>
         /// <param name="vertLine"></param>
         void DrawCharacter(bool animating, int animFrame, int vertLine)
@@ -391,13 +389,11 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             WriteText(32, 16 * (cursorPos + 1), "`", menuColor);
 
-            Color hpColor = map.ColorScheme.TextColor;
-            if (mOverrideHPColor)
-                hpColor = mHPColor;
+            Color hpColor = statsDisplay.HPColor;
 
-            WriteText(48, 16 * 15, "H.P. " + player.HP.ToString(), hpColor);
-            WriteText(48, 16 * 16, "Food " + ((int)player.Food).ToString(), hpColor);
-            WriteText(48, 16 * 17, "Gold " + player.Gold.ToString(), hpColor);
+            WriteText(48, 16 * 15, "H.P. " + statsDisplay.HP, hpColor);
+            WriteText(48, 16 * 16, "Food " + statsDisplay.Food, hpColor);
+            WriteText(48, 16 * 17, "Gold " + statsDisplay.Gold, hpColor);
 
             TextAreaRenderer.Draw(TextArea);
 
@@ -426,36 +422,6 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             WriteText(location.X * 16, location.Y * 16,
                 csb.Text, csb.Colors);
-        }
-
-        public void FlashHPWhile(Color clr, Color clr2, Func<bool> pred)
-        {
-            Color oldClr = mHPColor;
-            Color lastColor = clr2;
-
-            mOverrideHPColor = true;
-            int count = 0;
-
-            while (pred())
-            {
-                if (lastColor == clr)
-                    lastColor = clr2;
-                else
-                    lastColor = clr;
-
-                mHPColor = lastColor;
-
-                GameControl.Wait(80);
-
-                count++;
-
-                if (count > 10000 / 80)
-                    break;
-            }
-
-            mOverrideHPColor = false;
-            mHPColor = oldClr;
-
         }
 
         /// <summary>
@@ -497,12 +463,6 @@ namespace ERY.Xle.Services.Rendering.Implementation
             DrawFrameHighlight(cs.FrameHighlightColor);
             DrawInnerFrameHighlight(0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameHighlightColor);
 
-        }
-
-
-        public void FlashHPWhileSound(Color clr, Color? clr2 = null)
-        {
-            FlashHPWhile(clr, clr2 ?? Screen.FontColor, () => SoundMan.IsAnyPlaying());
         }
     }
 }

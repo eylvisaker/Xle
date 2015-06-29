@@ -28,7 +28,7 @@ namespace ERY.Xle.Maps.Outdoors
         public EncounterState EncounterState { get; set; }
         public IMuseumCoinSale MuseumCoinSale { get; set; }
         public XleOptions Options { get; set; }
-        public IXleRenderer Renderer { get; set; }
+        public IStatsDisplay StatsDisplay { get; set; }
         public IXleScreen Screen { get; set; }
         public XleSystemState systemState { get; set; }
 
@@ -437,7 +437,7 @@ namespace ERY.Xle.Maps.Outdoors
                                 break;
                         }
 
-                        Renderer.FlashHPWhileSound(clr2);
+                        StatsDisplay.FlashHPWhileSound(clr2);
                     }
                     else
                     {

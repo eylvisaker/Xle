@@ -26,11 +26,6 @@ namespace ERY.Xle.Services.Rendering
 
         void DrawObject(ColorScheme mColorScheme);
 
-        void FlashHPWhile(Color color1, Color color2, Func<bool> func);
-
-        void FlashHPWhileSound(Color clr, Color? clr2 = null);
-
-
         void DrawTile(int drawx, int drawy, int tile);
 
         Point PlayerDrawPoint { get; set; }

@@ -1,6 +1,7 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Maps;
 using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
@@ -14,7 +15,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
     {
         bool paralyzed = false;
 
-        public IXleRenderer Renderer { get; set; }
+        public IStatsDisplay StatsDisplay { get; set; }
 
         public override bool StepOn()
         {
@@ -143,7 +144,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
         {
             Player.HP = 28;
 
-            Renderer.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
+            StatsDisplay.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
         }
 
         private void MoveWarlord(Guard warlord, int dx, int dy)

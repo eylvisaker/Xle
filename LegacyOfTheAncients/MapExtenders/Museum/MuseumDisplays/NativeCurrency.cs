@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.ScreenModel;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {
@@ -13,7 +14,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
         public NativeCurrency() : base("Native Currency", Coin.Topaz) { }
 
         public Random Random { get; set; }
-        public IXleRenderer Renderer { get; set; }
+        public IStatsDisplay StatsDisplay { get; set; }
 
         public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.NativeCurrency; } }
 
@@ -33,7 +34,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             Player.Gold += gold;
 
             SoundMan.PlaySound(LotaSound.VeryGood);
-            Renderer.FlashHPWhileSound(XleColor.Yellow);
+            StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
         }
     }
 }
