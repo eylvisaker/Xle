@@ -46,7 +46,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             Player.RenderColor = XleColor.White;
         }
 
-        public override void SpeakToGuard(GameState state)
+        public override void SpeakToGuard()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();

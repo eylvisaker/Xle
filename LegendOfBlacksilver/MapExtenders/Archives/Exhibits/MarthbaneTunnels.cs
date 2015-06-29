@@ -43,7 +43,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
             if (0 == QuickMenu.QuickMenuYesNo())
             {
-                MapChanger.ChangeMap(Player, 4, 0);
+                MapChanger.ChangeMap(4, 0);
             }
         }
     }

@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps;
+
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
 	public class IslandCaverns : LobDungeon
 	{
-		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
+		public override int GetTreasure(int dungeonLevel, int chestID)
 		{
 			if (chestID == 3)
 				return (int)LobItem.CrystalRing;
 
-			return base.GetTreasure(state, dungeonLevel, chestID);
+			return base.GetTreasure(dungeonLevel, chestID);
 		}
 		protected override int MonsterGroup(int dungeonLevel)
 		{
@@ -23,7 +25,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 				return 0;
 		}
 
-		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		public override Map3DSurfaces Surfaces()
 		{
 			return Lob3DSurfaces.IslandCaverns;
 		}

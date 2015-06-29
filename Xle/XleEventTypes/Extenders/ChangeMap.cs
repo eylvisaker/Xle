@@ -70,7 +70,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
         {
             try
             {
-                MapChanger.ChangeMap(GameState.Player, TheEvent.MapID, TheEvent.TargetEntryPoint);
+                MapChanger.ChangeMap(TheEvent.MapID, TheEvent.TargetEntryPoint);
             }
             catch (Exception e)
             {

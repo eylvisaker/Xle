@@ -1,5 +1,6 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
+using ERY.Xle.Maps;
 using ERY.Xle.Maps.Museums;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
@@ -60,29 +61,29 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
             return mExhibits[tile];
         }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
-            base.OnLoad(state);
-            CheckExhibitStatus(state);
+            base.OnLoad();
+            CheckExhibitStatus();
             MapRenderer.AnimateExhibits = true;
         }
 
-        public override void OnAfterEntry(GameState state)
+        public override void OnAfterEntry()
         {
-            CheckInformationMessage(state);
+            CheckInformationMessage();
         }
 
-        public override void CheckExhibitStatus(GameState state)
+        public override void CheckExhibitStatus()
         {
             // lost displays
             if (Story.Museum[0xa] > 0)
             {
-                for (int i = 0; i < state.Map.Width; i++)
+                for (int i = 0; i < Map.Width; i++)
                 {
-                    for (int j = 0; j < state.Map.Height; j++)
+                    for (int j = 0; j < Map.Height; j++)
                     {
-                        if (state.Map[i, j] == 0x5a)
-                            state.Map[i, j] = 0x10;
+                        if (Map[i, j] == 0x5a)
+                            Map[i, j] = 0x10;
                     }
                 }
             }
@@ -90,22 +91,22 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
             // welcome exhibit
             if (Story.Museum[1] == 0)
             {
-                state.Map[4, 1] = 0;
-                state.Map[3, 10] = 0;
+                Map[4, 1] = 0;
+                Map[3, 10] = 0;
             }
             else if (Story.Museum[1] == 1)
             {
-                state.Map[4, 1] = 0;
-                state.Map[3, 10] = 16;
+                Map[4, 1] = 0;
+                Map[3, 10] = 16;
             }
             else
             {
-                state.Map[4, 1] = 16;
-                state.Map[3, 10] = 16;
+                Map[4, 1] = 16;
+                Map[3, 10] = 16;
             }
         }
 
-        private void CheckInformationMessage(GameState state)
+        private void CheckInformationMessage()
         {
             // check to see if the caretaker wants to see the player
             var info = Information;
@@ -124,26 +125,26 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
             get { return (Information)GetExhibitByTile(0x50); }
         }
 
-        public override void OnBeforeEntry(GameState state, ref int targetEntryPoint)
+        public override void OnBeforeEntry(ref int targetEntryPoint)
         {
             if (targetEntryPoint < 3)
                 targetEntryPoint = Story.MuseumEntryPoint;
         }
 
-        public override void PlayerUse(GameState state, int item, ref bool handled)
+        public override void PlayerUse(int item, ref bool handled)
         {
             // twist gold armband
             if (item == (int)LotaItem.GoldArmband)
             {
-                UseGoldArmband(state);
+                UseGoldArmband();
 
                 handled = true;
                 return;
             }
         }
-        public override void AfterPlayerStep(GameState state)
+        public override void AfterPlayerStep()
         {
-            if (state.Player.X == 12 && state.Player.Y == 13)
+            if (Player.X == 12 && Player.Y == 13)
             {
                 if (Story.Museum[1] < 3)
                 {
@@ -151,23 +152,23 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
                     welcome.PlayGoldArmbandMessage();
                     Story.Museum[1] = 3;
 
-                    CheckExhibitStatus(state);
+                    CheckExhibitStatus();
                 }
             }
         }
-        private void UseGoldArmband(GameState state)
+        private void UseGoldArmband()
         {
-            bool facingDoor = IsFacingDoor(state);
+            bool facingDoor = IsFacingDoor;
 
             if (facingDoor)
             {
                 GameControl.Wait(1000);
 
-                foreach (var entry in state.Map.EntryPoints)
+                foreach (var entry in Map.EntryPoints)
                 {
-                    if (entry.Location == state.Player.Location)
+                    if (entry.Location == Player.Location)
                     {
-                        Story.MuseumEntryPoint = state.Map.EntryPoints.IndexOf(entry);
+                        Story.MuseumEntryPoint = Map.EntryPoints.IndexOf(entry);
                     }
                 }
 
@@ -179,29 +180,29 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
             }
         }
 
-        public override void NeedsCoinMessage(Player player, Exhibit ex)
+        public override void NeedsCoinMessage(Exhibit ex)
         {
             var lotaex = (LotaExhibit)ex;
 
             TextArea.PrintLine("You'll need a " + lotaex.Coin.ToString() + " coin.");
         }
 
-        public override void PrintUseCoinMessage(Player player, Exhibit ex)
+        public override void PrintUseCoinMessage(Exhibit ex)
         {
             var lotaex = (LotaExhibit)ex;
 
             TextArea.PrintLine();
         }
 
-        public override Maps.Map3DSurfaces Surfaces(GameState state)
+        public override Map3DSurfaces Surfaces()
         {
-            var step = state.Player.FaceDirection.StepDirection();
+            var step = Player.FaceDirection.StepDirection();
             var first = new Point(
-                state.Player.Location.X + step.X,
-                state.Player.Location.Y + step.Y);
+                Player.Location.X + step.X,
+                Player.Location.Y + step.Y);
 
-            if (TheMap[state.Player.Location.X, state.Player.Location.Y] == 31 ||
-                TheMap[first.X, first.Y] == 31)
+            if (Map[Player.Location.X, Player.Location.Y] == 31 ||
+                Map[first.X, first.Y] == 31)
                 return Lota3DSurfaces.MuseumDark;
             else
                 return Lota3DSurfaces.Museum;

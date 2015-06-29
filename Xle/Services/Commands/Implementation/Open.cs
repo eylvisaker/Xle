@@ -13,7 +13,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 
         public override void Execute()
         {
-            if (GameState.MapExtender.PlayerOpen(GameState) == false)
+            if (GameState.MapExtender.PlayerOpen() == false)
             {
                 TextArea.PrintLine("\n\nNothing opens.");
 

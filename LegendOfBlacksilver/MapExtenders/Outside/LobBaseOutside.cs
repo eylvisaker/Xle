@@ -29,15 +29,15 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 			get { return 2; }
 		}
 
-		public override void AfterPlayerStep(GameState state)
+		public override void AfterPlayerStep()
 		{
-			if (state.Player.X % 2 == 1) state.Player.X--;
-			if (state.Player.Y % 2 == 1) state.Player.Y--;
+			if (Player.X % 2 == 1) Player.X--;
+			if (Player.Y % 2 == 1) Player.Y--;
 
-			base.AfterPlayerStep(state);
+			base.AfterPlayerStep();
 		}
 
-		public override void PlayerUse(GameState state, int item, ref bool handled)
+		public override void PlayerUse(int item, ref bool handled)
 		{
 			switch((LobItem)item)
 			{

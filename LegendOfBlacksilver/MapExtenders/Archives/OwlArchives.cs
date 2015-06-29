@@ -36,7 +36,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
             return mExhibits[tile];
         }
 
-        public override void NeedsCoinMessage(Player player, Exhibit ex)
+        public override void NeedsCoinMessage(Exhibit ex)
         {
             TextArea.PrintLine(ex.UseCoinMessage);
         }

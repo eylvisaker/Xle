@@ -44,7 +44,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
                 Input.WaitForKey();
 
-                MapChanger.ChangeMap(Player, 2, 0);
+                MapChanger.ChangeMap(2, 0);
             }
         }
     }

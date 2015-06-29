@@ -70,7 +70,7 @@ namespace ERY.Xle.Services.Commands.Implementation
         {
             Direction dir = mDirectionMap[cmd];
 
-            gameState.MapExtender.PlayerCursorMovement(gameState, dir);
+            gameState.MapExtender.PlayerCursorMovement(dir);
         }
 
         bool IsCursorMovement(KeyCode cmd)
@@ -157,7 +157,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 
         private void AfterDoCommand(int waitTime, KeyCode cmd)
         {
-            gameState.MapExtender.AfterExecuteCommand(gameState, cmd);
+            gameState.MapExtender.AfterExecuteCommand(cmd);
 
             gameControl.Wait(waitTime);
 

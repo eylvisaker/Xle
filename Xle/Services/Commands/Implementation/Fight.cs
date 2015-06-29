@@ -4,7 +4,7 @@
     {
         public override void Execute()
         {
-            GameState.MapExtender.PlayerFight(GameState);
+            GameState.MapExtender.PlayerFight();
         }
     }
 }

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Maps;
+
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
     public class FourJewelsDungeon : LotaDungeon
     {
-        public override Maps.Map3DSurfaces Surfaces(GameState state)
+        public override Map3DSurfaces Surfaces()
         {
             return Lota3DSurfaces.DungeonBlue;
         }
@@ -22,20 +24,20 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             get { return 10; }
         }
 
-        public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
+        public override int GetTreasure(int dungeonLevel, int chestID)
         {
-            if (state.Player.Items[LotaItem.GuardJewel] >= 4)
+            if (Player.Items[LotaItem.GuardJewel] >= 4)
                 return 0;
 
             return (int)LotaItem.GuardJewel;
         }
 
-        public override void OnPlayerExitDungeon(Player player)
+        public override void OnPlayerExitDungeon()
         {
             if (IsCompleted)
                 return;
 
-            if (player.Items[LotaItem.GuardJewel] >= 4)
+            if (Player.Items[LotaItem.GuardJewel] >= 4)
             {
                 IsCompleted = true;
                 GivePermanentStrengthBoost();

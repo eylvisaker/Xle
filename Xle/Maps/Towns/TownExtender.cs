@@ -1,6 +1,7 @@
 ﻿using System;
 
 using AgateLib.Geometry;
+using AgateLib.InputLib;
 
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Rendering;
@@ -25,16 +26,16 @@ namespace ERY.Xle.Maps.Towns
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
+        public override void AfterExecuteCommand(KeyCode cmd)
         {
-            base.AfterExecuteCommand(state, cmd);
+            base.AfterExecuteCommand(cmd);
 
-            UpdateGuards(state.Player);
+            UpdateGuards();
         }
 
-        public override void OnAfterEntry(GameState state)
+        public override void OnAfterEntry()
         {
-            if (TheMap.MapID == state.Player.LastAttackedMapID)
+            if (TheMap.MapID == Player.LastAttackedMapID)
             {
                 IsAngry = true;
 
@@ -45,23 +46,23 @@ namespace ERY.Xle.Maps.Towns
             }
             else
             {
-                state.Player.LastAttackedMapID = 0;
+                Player.LastAttackedMapID = 0;
             }
         }
 
-        public virtual double ChanceToHitGuard(Player player, Guard guard, int distance)
+        public virtual double ChanceToHitGuard(Guard guard, int distance)
         {
-            int weaponType = player.CurrentWeapon.ID;
+            int weaponType = Player.CurrentWeapon.ID;
 
-            return (player.Attribute[Attributes.dexterity] + 16)
+            return (Player.Attribute[Attributes.dexterity] + 16)
                 * (99 + weaponType * 8) / 7000.0 / guard.Defense * 99;
         }
 
-        public virtual int RollDamageToGuard(Player player, Guard guard)
+        public virtual int RollDamageToGuard(Guard guard)
         {
-            int weaponType = player.CurrentWeapon.ID;
+            int weaponType = Player.CurrentWeapon.ID;
 
-            double damage = 1 + player.Attribute[Attributes.strength] *
+            double damage = 1 + Player.Attribute[Attributes.strength] *
                        (weaponType / 2 + 1) / 4;
 
             damage *= 0.5 + Random.NextDouble();
@@ -88,7 +89,7 @@ namespace ERY.Xle.Maps.Towns
             return false;
         }
 
-        public void UpdateGuards(Player player)
+        public void UpdateGuards()
         {
             if (IsAngry == false)
                 return;
@@ -102,8 +103,8 @@ namespace ERY.Xle.Maps.Towns
 
                 bool badPt = false;
 
-                int xdist = player.X - guard.X;
-                int ydist = player.Y - guard.Y;
+                int xdist = Player.X - guard.X;
+                int ydist = Player.Y - guard.Y;
 
                 int dx = 0;
                 int dy = 0;
@@ -128,7 +129,7 @@ namespace ERY.Xle.Maps.Towns
                     else
                         dx = 0;
 
-                    GuardAttackPlayer(player, guard);
+                    GuardAttackPlayer(guard);
                 }
                 else if (dist < 25)
                 {
@@ -255,11 +256,11 @@ namespace ERY.Xle.Maps.Towns
 
             return true;
         }
-        void AttackGuard(Player player, int grd, int distance)
+        void AttackGuard(int grd, int distance)
         {
-            AttackGuard(player, TheMap.Guards[grd], distance);
+            AttackGuard(TheMap.Guards[grd], distance);
         }
-        void AttackGuard(Player player, Guard guard, int distance)
+        void AttackGuard(Guard guard, int distance)
         {
             if (guard.OnPlayerAttack != null)
             {
@@ -268,7 +269,7 @@ namespace ERY.Xle.Maps.Towns
                     return;
             }
 
-            double hitChance = ChanceToHitGuard(player, guard, distance);
+            double hitChance = ChanceToHitGuard(guard, distance);
 
 
             if (Random.NextDouble() > hitChance)
@@ -278,10 +279,10 @@ namespace ERY.Xle.Maps.Towns
             }
             else
             {
-                int dam = RollDamageToGuard(player, guard);
+                int dam = RollDamageToGuard(guard);
 
                 IsAngry = true;
-                player.LastAttackedMapID = TheMap.MapID;
+                Player.LastAttackedMapID = TheMap.MapID;
 
                 TextArea.Print(guard.Name + " struck  ", XleColor.Yellow);
                 TextArea.Print(dam.ToString(), XleColor.White);
@@ -340,25 +341,25 @@ namespace ERY.Xle.Maps.Towns
             GameControl.Wait(50);
         }
 
-        public virtual void SpeakToGuard(GameState gameState)
+        public virtual void SpeakToGuard()
         {
             TextArea.PrintLine("\n\nThe guard salutes.");
         }
 
-        public virtual void GuardAttackPlayer(Player player, Guard guard)
+        public virtual void GuardAttackPlayer(Guard guard)
         {
             TextArea.PrintLine();
 
             TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
 
-            if (Random.NextDouble() > ChanceToHitPlayer(player, guard))
+            if (Random.NextDouble() > ChanceToHitPlayer(guard))
             {
                 TextArea.Print("Missed", XleColor.Cyan);
                 SoundMan.PlaySound(LotaSound.EnemyMiss);
             }
             else
             {
-                int dam = RollDamageToPlayer(player, guard);
+                int dam = RollDamageToPlayer(guard);
 
                 TextArea.Print("Blow ", XleColor.Yellow);
                 TextArea.Print(dam.ToString(), XleColor.White);
@@ -366,36 +367,34 @@ namespace ERY.Xle.Maps.Towns
 
                 SoundMan.PlaySound(LotaSound.EnemyHit);
 
-                player.HP -= dam;
+                Player.HP -= dam;
             }
 
             TextArea.PrintLine();
 
-            GameControl.Wait(100 * player.Gamespeed);
+            GameControl.Wait(100 * Player.Gamespeed);
         }
 
-        protected override void PlayerFight(GameState state, Direction fightDir)
+        protected override void PlayerFight(Direction fightDir)
         {
-            var player = state.Player;
-
             bool attacked = false;
             int maxXdist = 1;
             int maxYdist = 1;
             int tile = 0, tile1;
             int hit = 0;
 
-            if (player.CurrentWeapon.Info(Data).Ranged)
+            if (Player.CurrentWeapon.Info(Data).Ranged)
             {
                 maxXdist = 12;
                 maxYdist = 8;
             }
 
-            player.FaceDirection = fightDir;
+            Player.FaceDirection = fightDir;
 
             Point attackPt = Point.Empty, attackPt2 = Point.Empty;
 
-            attackPt.X = player.X;
-            attackPt.Y = player.Y;
+            attackPt.X = Player.X;
+            attackPt.Y = Player.Y;
             attackPt2.X = attackPt.X;
             attackPt2.Y = attackPt.Y;
 
@@ -448,7 +447,7 @@ namespace ERY.Xle.Maps.Towns
                             &&
                             attacked == false)
                         {
-                            AttackGuard(player, k, Math.Max(i, j));
+                            AttackGuard(k, Math.Max(i, j));
                             attacked = true;
 
                             GameControl.Wait(200);
@@ -548,12 +547,12 @@ namespace ERY.Xle.Maps.Towns
                 TextArea.PrintLine("Nothing hit");
             }
 
-            GameControl.Wait(200 + 50 * player.Gamespeed, keyBreak: true);
+            GameControl.Wait(200 + 50 * Player.Gamespeed, keyBreak: true);
         }
 
-        public override bool PlayerRob(GameState state)
+        public override bool PlayerRob()
         {
-            foreach (var evt in EventsAt(Player, 1))
+            foreach (var evt in EventsAt(1))
             {
                 bool handled = evt.Rob();
 
@@ -561,9 +560,9 @@ namespace ERY.Xle.Maps.Towns
                     return true;
             }
 
-            return PlayerRobImpl(Player);
+            return PlayerRobImpl();
         }
-        protected virtual bool PlayerRobImpl(Player player)
+        protected virtual bool PlayerRobImpl()
         {
             TextArea.PrintLine();
             TextArea.PrintLine("Nothing to rob.");
@@ -572,11 +571,9 @@ namespace ERY.Xle.Maps.Towns
             return true;
         }
 
-        protected override void AfterStepImpl(GameState state, bool didEvent)
+        protected override void AfterStepImpl(bool didEvent)
         {
-            var player = state.Player;
-
-            Point pt = new Point(player.X, player.Y);
+            Point pt = new Point(Player.X, Player.Y);
             var roofs = TheMap.Roofs;
 
             for (int i = 0; i < roofs.Count; i++)
@@ -594,22 +591,21 @@ namespace ERY.Xle.Maps.Towns
                 }
             }
 
-            if (player.X < 0 || player.X >= TheMap.Width - 1 ||
-                player.Y < 0 || player.Y >= TheMap.Height - 1)
+            if (Player.X < 0 || Player.X >= TheMap.Width - 1 ||
+                Player.Y < 0 || Player.Y >= TheMap.Height - 1)
             {
                 if (IsAngry && this.GetType().Equals(typeof(Town)))
                 {
-                    player.LastAttackedMapID = TheMap.MapID;
+                    Player.LastAttackedMapID = TheMap.MapID;
                 }
 
-                LeaveMap(player);
+                LeaveMap();
             }
         }
 
-        protected override bool PlayerSpeakImpl(GameState state)
+        protected override bool PlayerSpeakImpl()
         {
             var guards = TheMap.Guards;
-            var player = state.Player;
 
             for (int j = -1; j < 3; j++)
             {
@@ -617,10 +613,10 @@ namespace ERY.Xle.Maps.Towns
                 {
                     foreach (var guard in guards)
                     {
-                        if ((guard.X == player.X + i || guard.X + 1 == player.X + i) &&
-                            (guard.Y == player.Y + j || guard.Y + 1 == player.Y + j))
+                        if ((guard.X == Player.X + i || guard.X + 1 == Player.X + i) &&
+                            (guard.Y == Player.Y + j || guard.Y + 1 == Player.Y + j))
                         {
-                            SpeakToGuard(state);
+                            SpeakToGuard();
                             return true;
 
                         }

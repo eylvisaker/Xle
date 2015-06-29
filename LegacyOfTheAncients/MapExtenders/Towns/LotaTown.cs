@@ -42,19 +42,19 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
         public XleOptions Options { get; set; }
         public LotaMuseumCoinSale MuseumCoinSale { get; set; }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
             MuseumCoinSale.ResetMuseumCoinOffers();
 
-            CheckLoan(state);
+            CheckLoan();
         }
 
 
-        void CheckLoan(GameState state)
+        void CheckLoan()
         {
-            if (state.Map.Events.Any(x => x is Store && x.ExtenderName == "StoreLending"))
+            if (TheMap.Events.Any(x => x is Store && x.ExtenderName == "StoreLending"))
             {
-                if (state.Player.loan > 0 && state.Player.dueDate <= state.Player.TimeDays)
+                if (Player.loan > 0 && Player.dueDate <= Player.TimeDays)
                 {
                     TextArea.PrintLine("This is your friendly lender.");
                     TextArea.PrintLine("You owe me money!");

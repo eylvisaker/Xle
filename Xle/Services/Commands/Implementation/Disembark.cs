@@ -4,7 +4,7 @@
     {
         public override void Execute()
         {
-            if (GameState.MapExtender.PlayerDisembark(GameState))
+            if (GameState.MapExtender.PlayerDisembark())
                 return;
 
             TextArea.PrintLine("\nNothing to disembark.", XleColor.Yellow);

@@ -17,11 +17,11 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 
         public IQuickMenu QuickMenu { get; set; }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
             if (Story.RescuedKing)
             {
-                OpenEscapeRoute(state);
+                OpenEscapeRoute();
             }
             else
             {
@@ -44,15 +44,15 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             return 2;
         }
 
-        public override DungeonMonster GetMonsterToSpawn(GameState state)
+        public override DungeonMonster GetMonsterToSpawn()
         {
             if (Player.DungeonLevel == 7)
                 return null;
 
-            return base.GetMonsterToSpawn(state);
+            return base.GetMonsterToSpawn();
         }
 
-        public override bool SpawnMonsters(GameState state)
+        public override bool SpawnMonsters()
         {
             if (Player.DungeonLevel == 7)
                 return false;
@@ -60,13 +60,13 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
                 return true;
         }
 
-        public override void UpdateMonsters(GameState state)
+        public override void UpdateMonsters()
         {
             // disable normal monster processing if we see the king.
             if (Player.DungeonLevel == 7)
                 return;
 
-            base.UpdateMonsters(state);
+            base.UpdateMonsters();
         }
 
         public override void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
@@ -78,7 +78,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             }
         }
 
-        public override bool PlayerSpeak(GameState unused)
+        public override bool PlayerSpeak()
         {
             if (Player.DungeonLevel != 7) return false;
             if (king == null) return false;
@@ -137,12 +137,12 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             Story.RescuedKing = true;
             Combat.Monsters.Remove(king);
 
-            OpenEscapeRoute(GameState);
+            OpenEscapeRoute();
 
             return true;
         }
 
-        private void OpenEscapeRoute(GameState state)
+        private void OpenEscapeRoute()
         {
             // 11, 0, 7 change to 17
             // 13, 0, 4 change to 18
@@ -158,7 +158,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             TextArea.PrintLine();
         }
 
-        public override Maps.Map3DSurfaces Surfaces(GameState state)
+        public override Map3DSurfaces Surfaces()
         {
             return Lob3DSurfaces.MarthbaneTunnels;
         }

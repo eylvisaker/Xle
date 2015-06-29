@@ -24,21 +24,21 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
         }
         protected LobStory Story { get { return GameState.Story(); } }
         
-        public override double ChanceToHitGuard(Player player, Guard guard, int distance)
+        public override double ChanceToHitGuard(Guard guard, int distance)
         {
-            return cdc.ChanceToHitGuard(player, distance);
+            return cdc.ChanceToHitGuard(Player, distance);
         }
-        public override double ChanceToHitPlayer(Player player, Guard guard)
+        public override double ChanceToHitPlayer(Guard guard)
         {
-            return cdc.ChanceToHitPlayer(player);
+            return cdc.ChanceToHitPlayer(Player);
         }
-        public override int RollDamageToGuard(Player player, Guard guard)
+        public override int RollDamageToGuard(Guard guard)
         {
-            return cdc.RollDamageToGuard(player);
+            return cdc.RollDamageToGuard(Player);
         }
-        public override int RollDamageToPlayer(Player player, Guard guard)
+        public override int RollDamageToPlayer(Guard guard)
         {
-            return cdc.RollDamageToPlayer(player);
+            return cdc.RollDamageToPlayer(Player);
         }
 
         public override int GetOutsideTile(Point playerPoint, int x, int y)
@@ -74,31 +74,31 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
             if (Player.Items[LobItem.FalconFeather] == 0)
             {
-                RemoveFalconFeatherDoor(state);
+                RemoveFalconFeatherDoor();
             }
             if (Story.ClearedRockSlide)
             {
-                RemoveRockSlide(state);
+                RemoveRockSlide();
             }
 
             if (Story.DefeatedOrcs == false)
             {
-                ColorOrcs(state);
+                ColorOrcs();
             }
         }
 
-        private void RemoveRockSlide(GameState state)
+        private void RemoveRockSlide()
         {
             var sc = Events.OfType<SingingCrystal>().FirstOrDefault();
 
             sc.RemoveRockSlide(sc.TheEvent.Rectangle);
         }
 
-        private void ColorOrcs(GameState state)
+        private void ColorOrcs()
         {
             if (Story.DefeatedOrcs == false)
             {
@@ -112,19 +112,19 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
             }
         }
 
-        private void RemoveFalconFeatherDoor(GameState state)
+        private void RemoveFalconFeatherDoor()
         {
             var door = Events.OfType<FeatherDoor>().First();
 
             door.RemoveDoor();
         }
 
-        public override void SpeakToGuard(GameState state)
+        public override void SpeakToGuard()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            if (state.Player.Items[LobItem.FalconFeather] > 0)
+            if (Player.Items[LobItem.FalconFeather] > 0)
             {
                 TextArea.PrintLine("I see you have the feather,");
                 TextArea.PrintLine("why not use it?");
@@ -136,7 +136,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
             }
         }
 
-        public override void PlayerUse(GameState state, int item, ref bool handled)
+        public override void PlayerUse(int item, ref bool handled)
         {
             if (item == (int)LobItem.FalconFeather)
             {

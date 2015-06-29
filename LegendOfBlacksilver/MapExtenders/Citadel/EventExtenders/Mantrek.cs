@@ -32,7 +32,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
 			TextArea.PrintLine();
 			QuickMenu.QuickMenuYesNo();
 
-            MapChanger.ChangeMap(Player, Player.MapID, 1);
+            MapChanger.ChangeMap(Player.MapID, 1);
 
 			Story.MantrekKilled = true;
 

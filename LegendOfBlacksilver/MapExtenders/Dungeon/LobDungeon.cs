@@ -28,7 +28,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			commands.Items.Add(CommandFactory.Speak());
 		}
 
-		public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
+		public override int GetTreasure(int dungeonLevel, int chestID)
 		{
 			if (chestID == 1)
 				return (int)LobItem.SilverCoin;
@@ -52,14 +52,14 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 
 		protected abstract int MonsterGroup(int dungeonLevel);
 
-		public override DungeonMonster GetMonsterToSpawn(GameState state)
+		public override DungeonMonster GetMonsterToSpawn()
 		{
 			if (Random.NextDouble() > 0.07)
 				return null;
 
 			int monsterID = Random.Next(6);
 
-			monsterID += 6 * MonsterGroup(state.Player.DungeonLevel + 1);
+			monsterID += 6 * MonsterGroup(Player.DungeonLevel + 1);
 
 			DungeonMonster monst = new DungeonMonster(
 				Data.DungeonMonsters[monsterID]);
@@ -70,12 +70,12 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			return monst;
 		}
 
-		public override void CastSpell(GameState state, MagicSpell magic)
+		public override void CastSpell(MagicSpell magic)
 		{
 			TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
 
 			if (magic.ID == 5)
-				ExecuteKillFlash(state);
+				ExecuteKillFlash();
 		}
 
 		public override IEnumerable<MagicSpell> ValidMagic

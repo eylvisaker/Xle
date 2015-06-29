@@ -50,7 +50,7 @@ namespace ERY.Xle.Services.Game.Implementation
         {
             if (gameState.MapExtender != null)
             {
-                gameState.MapExtender.CheckSounds(gameState);
+                gameState.MapExtender.CheckSounds();
             }
 
             if (screen.CurrentWindowClosed)

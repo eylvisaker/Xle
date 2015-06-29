@@ -4,7 +4,7 @@
     {
         public override void Execute()
         {
-            if (GameState.MapExtender.PlayerSpeak(GameState) == false)
+            if (GameState.MapExtender.PlayerSpeak() == false)
             {
                 TextArea.PrintLine();
                 TextArea.PrintLine();

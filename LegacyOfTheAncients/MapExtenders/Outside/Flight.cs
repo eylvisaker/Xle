@@ -8,13 +8,13 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 {
     public class Flight : Tarmalon
     {
-        public override void OnBeforeEntry(GameState state, ref int targetEntryPoint)
+        public override void OnBeforeEntry(ref int targetEntryPoint)
         {
-            base.OnBeforeEntry(state, ref targetEntryPoint);
+            base.OnBeforeEntry(ref targetEntryPoint);
 
         }
 
-        public override void OnAfterEntry(GameState state)
+        public override void OnAfterEntry()
         {
             if (Player.X == 11 && Player.Y == 8)
             {
@@ -24,7 +24,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
                 Player.Rafts.Add(pegasus);
                 Player.BoardedRaft = pegasus;
 
-                PegasusFlightToIsland(state);
+                PegasusFlightToIsland();
 
                 TextArea.PrintLine("Pegasus sets you down.");
                 SoundMan.PlaySound(LotaSound.WalkOutside);
@@ -45,7 +45,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 			new Tuple<int,int,int>(63,108,12)
 		};
 
-        private void PegasusFlightToIsland(GameState state)
+        private void PegasusFlightToIsland()
         {
             for (int i = 0; i < points.Length; i++)
             {

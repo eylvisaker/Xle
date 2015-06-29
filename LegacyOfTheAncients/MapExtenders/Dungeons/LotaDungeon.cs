@@ -59,9 +59,9 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         protected abstract int StrengthBoost { get; }
         protected abstract bool IsCompleted { get; set; }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
-            base.OnLoad(state);
+            base.OnLoad();
 
             Story.BeenInDungeon = true;
         }
@@ -90,7 +90,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             drips[1] = LotaSound.Drip1;
         }
 
-        public override void CheckSounds(GameState state)
+        public override void CheckSounds()
         {
             if (Timing.TotalSeconds > nextSound)
             {
@@ -109,7 +109,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         }
 
 
-        public override DungeonMonster GetMonsterToSpawn(GameState state)
+        public override DungeonMonster GetMonsterToSpawn()
         {
             if (Random.NextDouble() > 0.07)
                 return null;
@@ -128,11 +128,11 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             return monst;
         }
 
-        public override bool RollToHitMonster(GameState state, DungeonMonster monster)
+        public override bool RollToHitMonster(DungeonMonster monster)
         {
             return Random.NextDouble() * 70 < Player.Attribute[Attributes.dexterity] + 30;
         }
-        public override int RollDamageToMonster(GameState state, DungeonMonster monster)
+        public override int RollDamageToMonster(DungeonMonster monster)
         {
             double damage = Player.Attribute[Attributes.strength] + 30;
             damage /= 45;
@@ -153,7 +153,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             return (int)(damage * (0.5 + Random.NextDouble()));
         }
 
-        public override bool RollToHitPlayer(GameState state, DungeonMonster monster)
+        public override bool RollToHitPlayer(DungeonMonster monster)
         {
             if (Random.NextDouble() * 70 > Player.Attribute[Attributes.dexterity])
             {
@@ -163,7 +163,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
                 return false;
         }
 
-        public override int RollDamageToPlayer(GameState state, DungeonMonster monster)
+        public override int RollDamageToPlayer(DungeonMonster monster)
         {
             var armor = Player.CurrentArmor;
             double vc = armor.ID + armor.Quality / 3.5;
@@ -173,40 +173,40 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             return (int)((Random.NextDouble() + 0.5) * damage);
         }
 
-        public override bool RollSpellFizzle(GameState state, MagicSpell magic)
+        public override bool RollSpellFizzle(MagicSpell magic)
         {
             return Random.NextDouble() * 45 > Player.Attribute[Attributes.intelligence] || Random.NextDouble() < 0.05;
         }
-        public override int RollSpellDamage(GameState state, MagicSpell magic, int distance)
+        public override int RollSpellDamage(MagicSpell magic, int distance)
         {
             var dam = (1.0 / distance + .3) * 45 * (1 + Random.NextDouble()) * ((magic.ID == 2) ? 2 : 1);
 
             return (int)dam;
         }
 
-        public override void CastSpell(GameState state, MagicSpell magic)
+        public override void CastSpell(MagicSpell magic)
         {
             TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
 
             if (magic.ID == 3)
-                CastBefuddle(state, magic);
+                CastBefuddle(magic);
             if (magic.ID == 4)
-                CastPsychoStrength(state, magic);
+                CastPsychoStrength(magic);
             if (magic.ID == 5)
-                CastKillFlash(state, magic);
+                CastKillFlash(magic);
         }
 
-        private void CastKillFlash(GameState state, MagicSpell magic)
+        private void CastKillFlash(MagicSpell magic)
         {
-            ExecuteKillFlash(state);
+            ExecuteKillFlash();
         }
 
-        private void CastPsychoStrength(GameState state, MagicSpell magic)
+        private void CastPsychoStrength(MagicSpell magic)
         {
             throw new NotImplementedException();
         }
 
-        private void CastBefuddle(GameState state, MagicSpell magic)
+        private void CastBefuddle(MagicSpell magic)
         {
             if (Player.HP >= 250 && Random.NextDouble() < 0.07)
             {
@@ -229,14 +229,14 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             }
         }
 
-        public override void UpdateMonsters(GameState state)
+        public override void UpdateMonsters()
         {
             if (Story.BefuddleTurns > 0)
             {
                 Story.BefuddleTurns--;
             }
             else
-                base.UpdateMonsters(state);
+                base.UpdateMonsters();
         }
     }
 }

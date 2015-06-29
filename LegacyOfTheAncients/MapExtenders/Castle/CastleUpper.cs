@@ -16,7 +16,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             CastleLevel = 2;
         }
 
-        public override void OnAfterEntry(GameState state)
+        public override void OnAfterEntry()
         {
             if (Story.Invisible == false)
             {

@@ -45,7 +45,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
                 Player.DungeonLevel = 0;
 
-                MapChanger.ChangeMap(Player, 73, 0);
+                MapChanger.ChangeMap(73, 0);
                 Player.SetReturnLocation(map, x, y, facing);
             }
         }

@@ -71,7 +71,7 @@ namespace ERY.Xle.Services.Game.Implementation
 
         protected virtual void LoadOutsideMap()
         {
-            MapChanger.ChangeMap(GameState.Player, 1, -1);
+            MapChanger.ChangeMap(1, -1);
         }
 
     }

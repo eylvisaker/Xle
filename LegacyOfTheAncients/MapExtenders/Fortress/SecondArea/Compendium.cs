@@ -56,7 +56,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 
 				CloseExit(GameState);
 
-				fortressFinal.CreateWarlord(GameState);
+				fortressFinal.CreateWarlord();
 			}
 
 			return true;

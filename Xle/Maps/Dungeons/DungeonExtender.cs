@@ -2,6 +2,7 @@
 using System.Linq;
 
 using AgateLib.Geometry;
+using AgateLib.InputLib;
 
 using ERY.Xle.Data;
 using ERY.Xle.Maps.XleMapTypes;
@@ -33,27 +34,27 @@ namespace ERY.Xle.Maps.Dungeons
             SoundMan.PlaySound(LotaSound.WalkDungeon);
         }
 
-        public override Map3DSurfaces Surfaces(GameState state)
+        public override Map3DSurfaces Surfaces()
         {
             return null;
         }
 
-        public virtual void OnPlayerExitDungeon(Player player)
+        public virtual void OnPlayerExitDungeon()
         {
         }
 
-        public virtual void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled, ref bool clearBox)
+        public virtual void OnBeforeGiveItem(ref int treasure, ref bool handled, ref bool clearBox)
         {
         }
-        public virtual void OnBeforeOpenBox(Player player, ref bool handled)
+        public virtual void OnBeforeOpenBox(ref bool handled)
         {
         }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
-            base.OnLoad(state);
+            base.OnLoad();
 
-            CurrentLevel = state.Player.DungeonLevel;
+            CurrentLevel = Player.DungeonLevel;
         }
 
         public virtual string TrapName(int val)
@@ -82,57 +83,57 @@ namespace ERY.Xle.Maps.Dungeons
         }
 
 
-        public virtual int GetTreasure(GameState state, int dungeonLevel, int chestID)
+        public virtual int GetTreasure(int dungeonLevel, int chestID)
         {
             return 0;
         }
 
-        public override void CheckSounds(GameState state)
+        public override void CheckSounds()
         {
         }
 
-        public virtual DungeonMonster GetMonsterToSpawn(GameState state)
+        public virtual DungeonMonster GetMonsterToSpawn()
         {
             return null;
         }
 
-        public virtual bool RollToHitMonster(GameState state, DungeonMonster monster)
+        public virtual bool RollToHitMonster(DungeonMonster monster)
         {
             return true;
         }
 
-        public virtual int RollDamageToMonster(GameState state, DungeonMonster monster)
+        public virtual int RollDamageToMonster(DungeonMonster monster)
         {
             return 9999;
         }
 
         int count = 0;
-        public virtual bool RollToHitPlayer(GameState state, DungeonMonster monster)
+        public virtual bool RollToHitPlayer(DungeonMonster monster)
         {
             count++;
             return count % 2 == 1;
         }
 
-        public virtual int RollDamageToPlayer(GameState state, DungeonMonster monster)
+        public virtual int RollDamageToPlayer(DungeonMonster monster)
         {
             return 4;
         }
 
-        public virtual bool SpawnMonsters(GameState state)
+        public virtual bool SpawnMonsters()
         {
             return true;
         }
-        public virtual void UpdateMonsters(GameState state)
+        public virtual void UpdateMonsters()
         {
             foreach (var monster in Combat.Monsters.Where(x => x.DungeonLevel == Player.DungeonLevel))
             {
                 var delta = new Point(
-                    state.Player.X - monster.Location.X,
-                    state.Player.Y - monster.Location.Y);
+                    Player.X - monster.Location.X,
+                    Player.Y - monster.Location.Y);
 
                 if (Math.Abs(delta.X) + Math.Abs(delta.Y) == 1)
                 {
-                    MonsterAttackPlayer(state, monster);
+                    MonsterAttackPlayer(monster);
                 }
                 else
                 {
@@ -151,10 +152,10 @@ namespace ERY.Xle.Maps.Dungeons
                 }
             }
 
-            if (SpawnMonsters(state) &&
+            if (SpawnMonsters() &&
                 Combat.Monsters.Count(monst => monst.DungeonLevel == Player.DungeonLevel) < TheMap.MaxMonsters)
             {
-                SpawnMonster(state);
+                SpawnMonster();
             }
         }
 
@@ -167,14 +168,14 @@ namespace ERY.Xle.Maps.Dungeons
             get { return true; }
         }
 
-        private void DungeonLevelText(Player player)
+        private void DungeonLevelText()
         {
-            CurrentLevel = player.DungeonLevel;
+            CurrentLevel = Player.DungeonLevel;
 
-            if (TheMap[player.X, player.Y] == 0x21) TheMap[player.X, player.Y] = 0x11;
-            if (TheMap[player.X, player.Y] == 0x22) TheMap[player.X, player.Y] = 0x12;
+            if (TheMap[Player.X, Player.Y] == 0x21) TheMap[Player.X, Player.Y] = 0x11;
+            if (TheMap[Player.X, Player.Y] == 0x22) TheMap[Player.X, Player.Y] = 0x12;
 
-            TextArea.PrintLine("\n\nYou are now at level " + (player.DungeonLevel + 1).ToString() + ".", XleColor.White);
+            TextArea.PrintLine("\n\nYou are now at level " + (Player.DungeonLevel + 1).ToString() + ".", XleColor.White);
         }
 
         public int CurrentLevel
@@ -183,7 +184,7 @@ namespace ERY.Xle.Maps.Dungeons
             set { TheMap.CurrentLevel = value; }
         }
 
-        private void OnPlayerAvoidTrap(Player player, int x, int y)
+        private void OnPlayerAvoidTrap(int x, int y)
         {
             // don't print a message for ceiling holes
             if (TheMap[x, y] == 0x21) return;
@@ -223,40 +224,38 @@ namespace ERY.Xle.Maps.Dungeons
             if (TheMap[x, y] == 0x12)
             {
                 player.DungeonLevel++;
-                DungeonLevelText(player);
+                DungeonLevelText();
             }
         }
 
-        public override void AfterPlayerStep(GameState state)
+        public override void AfterPlayerStep()
         {
-            var player = state.Player;
+            int val = TheMap[Player.X, Player.Y];
 
-            int val = TheMap[player.X, player.Y];
-
-            CurrentLevel = player.DungeonLevel;
+            CurrentLevel = Player.DungeonLevel;
 
             if (val >= 0x21 && val <= 0x2a)
             {
-                OnPlayerTriggerTrap(player, player.X, player.Y);
+                OnPlayerTriggerTrap(Player, Player.X, Player.Y);
             }
             else if (val >= 0x11 && val <= 0x1a)
             {
-                OnPlayerAvoidTrap(player, player.X, player.Y);
+                OnPlayerAvoidTrap(Player.X, Player.Y);
             }
 
         }
 
-        private void MonsterAttackPlayer(GameState state, DungeonMonster monster)
+        private void MonsterAttackPlayer(DungeonMonster monster)
         {
             TextArea.PrintLine();
 
             var delta = new Point(
-                monster.Location.X - state.Player.X,
-                monster.Location.Y - state.Player.Y);
+                monster.Location.X - Player.X,
+                monster.Location.Y - Player.Y);
 
-            var forward = state.Player.FaceDirection.StepDirection();
-            var right = state.Player.FaceDirection.RightDirection();
-            var left = state.Player.FaceDirection.LeftDirection();
+            var forward = Player.FaceDirection.StepDirection();
+            var right = Player.FaceDirection.RightDirection();
+            var left = Player.FaceDirection.LeftDirection();
             bool allowEffect = false;
 
             if (delta == forward)
@@ -286,16 +285,16 @@ namespace ERY.Xle.Maps.Dungeons
                 TextArea.PrintLine(".");
             }
 
-            if (RollToHitPlayer(state, monster))
+            if (RollToHitPlayer(monster))
             {
-                int damage = RollDamageToPlayer(state, monster);
+                int damage = RollDamageToPlayer(monster);
 
                 SoundMan.PlaySound(LotaSound.EnemyHit);
                 TextArea.Print("Hit by blow of ");
                 TextArea.Print(damage.ToString(), XleColor.Yellow);
                 TextArea.PrintLine("!");
 
-                state.Player.HP -= damage;
+                Player.HP -= damage;
             }
             else
             {
@@ -331,24 +330,24 @@ namespace ERY.Xle.Maps.Dungeons
             if (IsMapSpaceBlocked(newPt.X, newPt.Y))
                 return false;
 
-            if (IsSpaceOccupiedByMonster(Player, newPt.X, newPt.Y))
+            if (IsSpaceOccupiedByMonster(newPt.X, newPt.Y))
                 return false;
 
             return true;
         }
 
-        protected bool IsSpaceOccupiedByMonster(Player player, int xx, int yy)
+        protected bool IsSpaceOccupiedByMonster(int xx, int yy)
         {
-            return MonsterAt(player.DungeonLevel, new Point(xx, yy)) != null;
+            return MonsterAt(Player.DungeonLevel, new Point(xx, yy)) != null;
         }
 
         private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
         {
             return Combat.MonsterAt(dungeonLevel, loc);
         }
-        private void SpawnMonster(Xle.GameState state)
+        private void SpawnMonster()
         {
-            DungeonMonster monster = GetMonsterToSpawn(state);
+            DungeonMonster monster = GetMonsterToSpawn();
 
             if (monster == null)
                 return;
@@ -359,33 +358,31 @@ namespace ERY.Xle.Maps.Dungeons
                     Random.Next(1, 15),
                     Random.Next(1, 15));
 
-            } while (CanPlayerStepIntoImpl(state.Player, monster.Location.X, monster.Location.Y) == false || monster.Location == state.Player.Location);
+            } while (CanPlayerStepIntoImpl(monster.Location.X, monster.Location.Y) == false || monster.Location == Player.Location);
 
-            monster.DungeonLevel = state.Player.DungeonLevel;
+            monster.DungeonLevel = Player.DungeonLevel;
 
             Combat.Monsters.Add(monster);
         }
 
-        public override bool PlayerOpen(GameState state)
+        public override bool PlayerOpen()
         {
-            var player = state.Player;
-
-            int val = TheMap[player.X, player.Y];
+            int val = TheMap[Player.X, Player.Y];
             bool clearBox = true;
 
             if (val == 0x1e)
             {
-                OpenBox(player, ref clearBox);
+                OpenBox(ref clearBox);
 
                 if (clearBox)
-                    TheMap[player.X, player.Y] = 0x10;
+                    TheMap[Player.X, Player.Y] = 0x10;
             }
             else if (val >= 0x30 && val <= 0x3f)
             {
-                OpenChest(player, val, ref clearBox);
+                OpenChest(val, ref clearBox);
 
                 if (clearBox)
-                    TheMap[player.X, player.Y] = 0x10;
+                    TheMap[Player.X, Player.Y] = 0x10;
             }
             else
             {
@@ -399,7 +396,7 @@ namespace ERY.Xle.Maps.Dungeons
             return true;
         }
 
-        public virtual void OpenBox(Player Player, ref bool clearBox)
+        public virtual void OpenBox(ref bool clearBox)
         {
             int amount = Random.Next(60, 200);
 
@@ -417,7 +414,7 @@ namespace ERY.Xle.Maps.Dungeons
 
             bool handled = false;
 
-            OnBeforeOpenBox(Player, ref handled);
+            OnBeforeOpenBox(ref handled);
 
             if (handled == false)
             {
@@ -434,7 +431,7 @@ namespace ERY.Xle.Maps.Dungeons
 
             SoundMan.FinishSounds();
         }
-        public virtual void OpenChest(Player player, int val, ref bool clearBox)
+        public virtual void OpenChest(int val, ref bool clearBox)
         {
             val -= 0x30;
 
@@ -453,17 +450,17 @@ namespace ERY.Xle.Maps.Dungeons
 
                 TextArea.PrintLine("You find " + amount.ToString() + " gold.", XleColor.Yellow);
 
-                player.Gold += amount;
+                Player.Gold += amount;
 
                 Renderer.FlashHPWhileSound(XleColor.Yellow);
             }
             else
             {
-                int treasure = GetTreasure(GameState, CurrentLevel + 1, val);
+                int treasure = GetTreasure(CurrentLevel + 1, val);
 
                 bool handled = false;
 
-                OnBeforeGiveItem(player, ref treasure, ref handled, ref clearBox);
+                OnBeforeGiveItem(ref treasure, ref handled, ref clearBox);
 
                 if (handled == false)
                 {
@@ -473,7 +470,7 @@ namespace ERY.Xle.Maps.Dungeons
                         TextArea.Clear();
                         TextArea.PrintLine(text);
 
-                        player.Items[treasure] += 1;
+                        Player.Items[treasure] += 1;
 
                         SoundMan.PlaySound(LotaSound.VeryGood);
 
@@ -488,29 +485,27 @@ namespace ERY.Xle.Maps.Dungeons
             }
         }
 
-        public override bool PlayerSpeak(GameState state)
+        public override bool PlayerSpeak()
         {
             return false;
         }
 
-        public override void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
+        public override void AfterExecuteCommand(KeyCode cmd)
         {
-            base.AfterExecuteCommand(state, cmd);
+            base.AfterExecuteCommand(cmd);
 
             GameControl.Wait(100);
-            UpdateMonsters(GameState);
+            UpdateMonsters();
         }
 
-        public override bool PlayerXamine(GameState state)
+        public override bool PlayerXamine()
         {
-            var player = state.Player;
-
             SoundMan.PlaySound(LotaSound.Xamine);
             GameControl.Wait(500);
 
             Point faceDir = new Point();
 
-            switch (player.FaceDirection)
+            switch (Player.FaceDirection)
             {
                 case Direction.East: faceDir = new Point(1, 0); break;
                 case Direction.West: faceDir = new Point(-1, 0); break;
@@ -526,9 +521,9 @@ namespace ERY.Xle.Maps.Dungeons
 
             for (int i = 0; i < 5; i++)
             {
-                Point loc = new Point(player.X + faceDir.X * i, player.Y + faceDir.Y * i);
+                Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
 
-                foundMonster = MonsterAt(player.DungeonLevel, loc);
+                foundMonster = MonsterAt(Player.DungeonLevel, loc);
 
                 if (foundMonster != null)
                     break;
@@ -569,7 +564,7 @@ namespace ERY.Xle.Maps.Dungeons
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Point loc = new Point(player.X + faceDir.X * i, player.Y + faceDir.Y * i);
+                    Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
                     int val = TheMap[loc.X, loc.Y];
 
                     if (val < 0x10) break;
@@ -609,7 +604,7 @@ namespace ERY.Xle.Maps.Dungeons
                 {
                     if (PrintLevelDuringXamine)
                     {
-                        TextArea.PrintLine("Level " + (player.DungeonLevel + 1).ToString() + ".");
+                        TextArea.PrintLine("Level " + (Player.DungeonLevel + 1).ToString() + ".");
                     }
 
                     TextArea.PrintLine("Nothing unusual in sight.");
@@ -619,20 +614,20 @@ namespace ERY.Xle.Maps.Dungeons
             return true;
         }
 
-        public void ExecuteKillFlash(Xle.GameState state)
+        public void ExecuteKillFlash()
         {
             SoundMan.PlaySoundSync(LotaSound.VeryBad);
 
             Combat.Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
         }
 
-        private void UseAttackMagic(GameState state, MagicSpell magic)
+        private void UseAttackMagic(MagicSpell magic)
         {
             int distance = 0;
             TextArea.PrintLine();
             TextArea.PrintLine("Shoot " + magic.Name + ".", XleColor.White);
 
-            DungeonMonster monst = MonsterInFrontOfPlayer(state.Player, ref distance);
+            DungeonMonster monst = MonsterInFrontOfPlayer(Player, ref distance);
             var magicSound = magic.ID == 1 ? LotaSound.MagicFlame : LotaSound.MagicBolt;
             var hitSound = magic.ID == 1 ? LotaSound.MagicFlameHit : LotaSound.MagicBoltHit;
 
@@ -643,7 +638,7 @@ namespace ERY.Xle.Maps.Dungeons
             }
             else
             {
-                if (RollSpellFizzle(state, magic))
+                if (RollSpellFizzle(magic))
                 {
                     SoundMan.PlayMagicSound(magicSound, LotaSound.MagicFizzle, distance);
                     TextArea.PrintLine("Attack fizzles.", XleColor.White);
@@ -652,24 +647,24 @@ namespace ERY.Xle.Maps.Dungeons
                 else
                 {
                     SoundMan.PlayMagicSound(magicSound, hitSound, distance);
-                    int damage = RollSpellDamage(state, magic, distance);
+                    int damage = RollSpellDamage(magic, distance);
 
                     HitMonster(monst, damage, XleColor.White);
                 }
             }
         }
 
-        protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
+        protected override void PlayerMagicImpl(MagicSpell magic)
         {
             switch (magic.ID)
             {
                 case 1:
                 case 2:
-                    UseAttackMagic(state, magic);
+                    UseAttackMagic(magic);
                     break;
 
                 default:
-                    CastSpell(state, magic);
+                    CastSpell(magic);
                     break;
             }
         }
@@ -693,19 +688,19 @@ namespace ERY.Xle.Maps.Dungeons
 
                 if (monst != null)
                     break;
-                if (CanPlayerStepIntoImpl(player, loc.X, loc.Y) == false)
+                if (CanPlayerStepIntoImpl(loc.X, loc.Y) == false)
                     break;
             }
 
             return monst;
         }
 
-        public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
+        public override bool CanPlayerStepIntoImpl(int xx, int yy)
         {
-            if (IsSpaceOccupiedByMonster(player, xx, yy))
+            if (IsSpaceOccupiedByMonster(xx, yy))
                 return false;
 
-            return base.CanPlayerStepIntoImpl(player, xx, yy);
+            return base.CanPlayerStepIntoImpl(xx, yy);
         }
 
         private void HitMonster(DungeonMonster monst, int damage, Color clr)
@@ -729,19 +724,17 @@ namespace ERY.Xle.Maps.Dungeons
         }
 
 
-        public override bool PlayerFight(GameState state)
+        public override bool PlayerFight()
         {
-            var player = state.Player;
-
             TextArea.PrintLine();
             TextArea.PrintLine();
 
             int distance = 0;
             int maxDistance = 1;
-            if (player.CurrentWeapon.Info(Data).Ranged)
+            if (Player.CurrentWeapon.Info(Data).Ranged)
                 maxDistance = 5;
 
-            DungeonMonster monst = MonsterInFrontOfPlayer(player, ref distance);
+            DungeonMonster monst = MonsterInFrontOfPlayer(Player, ref distance);
 
             if (monst == null)
             {
@@ -751,19 +744,19 @@ namespace ERY.Xle.Maps.Dungeons
             else if (distance > maxDistance)
             {
                 TextArea.PrintLine("The " + monst.Name + " is out-of-range");
-                TextArea.PrintLine("of your " + player.CurrentWeapon.BaseName(Data) + ".");
+                TextArea.PrintLine("of your " + Player.CurrentWeapon.BaseName(Data) + ".");
                 return true;
             }
 
-            bool hit = RollToHitMonster(GameState, monst);
+            bool hit = RollToHitMonster(monst);
 
             TextArea.Print("Hit ");
             TextArea.Print(monst.Name, XleColor.White);
-            TextArea.PrintLine(" with " + player.CurrentWeapon.BaseName(Data));
+            TextArea.PrintLine(" with " + Player.CurrentWeapon.BaseName(Data));
 
             if (hit)
             {
-                int damage = RollDamageToMonster(GameState, monst);
+                int damage = RollDamageToMonster(monst);
 
                 SoundMan.PlaySound(LotaSound.PlayerHit);
 

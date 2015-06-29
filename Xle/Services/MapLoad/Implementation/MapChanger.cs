@@ -37,31 +37,31 @@ namespace ERY.Xle.Services.MapLoad.Implementation
 
         Player Player { get { return gameState.Player; } }
 
-        public void ChangeMap(Player player, int mapId, int entryPoint)
+        public void ChangeMap(int mapId, int entryPoint)
         {
-            ChangeMapCore(player, mapId, entryPoint, 0, 0);
+            ChangeMapCore(mapId, entryPoint, 0, 0);
         }
 
-        public void ChangeMap(Player player, int mapId, Point targetPoint)
+        public void ChangeMap(int mapId, Point targetPoint)
         {
-            ChangeMapCore(player, mapId, -1, targetPoint.X, targetPoint.Y);
+            ChangeMapCore(mapId, -1, targetPoint.X, targetPoint.Y);
         }
 
-        void ChangeMapCore(Player player, int mMapID, int targetEntryPoint, int targetX, int targetY)
+        void ChangeMapCore(int mMapID, int targetEntryPoint, int targetX, int targetY)
         {
             if (gameState.Map == null)
             {
-                player.MapID = mMapID;
+                Player.MapID = mMapID;
                 return;
             }
 
             var saveMap = gameState.MapExtender;
-            var saveX = player.X;
-            var saveY = player.Y;
+            var saveX = Player.X;
+            var saveY = Player.Y;
 
             if (gameState.Map is Outside)
             {
-                player.SetReturnLocation(player.MapID, player.X, player.Y, Direction.South);
+                Player.SetReturnLocation(Player.MapID, Player.X, Player.Y, Direction.South);
             }
 
             bool actualChangeMap = saveMap.MapID != mMapID;
@@ -74,7 +74,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
                 if (actualChangeMap)
                 {
                     gameState.MapExtender = mapLoader.LoadMap(mMapID);
-                    player.MapID = mMapID;
+                    Player.MapID = mMapID;
 
                     if (gameState.Map.GetType() == saveMap.GetType() &&
                         gameState.Map.Guards != null)
@@ -88,8 +88,8 @@ namespace ERY.Xle.Services.MapLoad.Implementation
                 if (targetEntryPoint < 0 ||
                     targetEntryPoint >= gameState.Map.EntryPoints.Count)
                 {
-                    player.X = targetX;
-                    player.Y = targetY;
+                    Player.X = targetX;
+                    Player.Y = targetY;
 
                     if (targetEntryPoint >= 0)
                     {
@@ -100,17 +100,17 @@ namespace ERY.Xle.Services.MapLoad.Implementation
                 else
                 {
                     if (actualChangeMap)
-                        gameState.MapExtender.OnBeforeEntry(gameState, ref targetEntryPoint);
+                        gameState.MapExtender.OnBeforeEntry(ref targetEntryPoint);
 
                     var ep = gameState.Map.EntryPoints[targetEntryPoint];
 
-                    player.X = ep.Location.X;
-                    player.Y = ep.Location.Y;
-                    player.DungeonLevel = ep.DungeonLevel;
+                    Player.X = ep.Location.X;
+                    Player.Y = ep.Location.Y;
+                    Player.DungeonLevel = ep.DungeonLevel;
 
                     if (ep.Facing != Direction.None)
                     {
-                        player.FaceDirection = ep.Facing;
+                        Player.FaceDirection = ep.Facing;
                     }
                 }
 
@@ -118,7 +118,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
 
                 if (actualChangeMap)
                 {
-                    gameState.MapExtender.OnLoad(gameState);
+                    gameState.MapExtender.OnLoad();
                 }
 
             }
@@ -127,23 +127,23 @@ namespace ERY.Xle.Services.MapLoad.Implementation
                 System.Diagnostics.Debug.Print(e.Message);
                 System.Diagnostics.Debug.Print(e.StackTrace);
 
-                player.MapID = saveMap.MapID;
+                Player.MapID = saveMap.MapID;
                 gameState.MapExtender = saveMap;
-                player.X = saveX;
-                player.Y = saveY;
+                Player.X = saveX;
+                Player.Y = saveY;
 
                 throw;
             }
 
             if (actualChangeMap)
-                gameState.MapExtender.OnAfterEntry(gameState);
+                gameState.MapExtender.OnAfterEntry();
         }
 
 
         public void SetMap(MapExtender map)
         {
             gameState.MapExtender = map;
-            gameState.MapExtender.OnLoad(gameState);
+            gameState.MapExtender.OnLoad();
 
             SetTilesAndCommands();
 
@@ -164,7 +164,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
 
         public void ReturnToPreviousMap()
         {
-            ChangeMap(Player, Player.returnMap, new Point(Player.returnX, Player.returnY));
+            ChangeMap(Player.returnMap, new Point(Player.returnX, Player.returnY));
 
             Player.FaceDirection = Player.returnFacing;
         }

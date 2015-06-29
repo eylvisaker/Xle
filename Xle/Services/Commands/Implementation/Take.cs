@@ -13,7 +13,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 
         public override void Execute()
         {
-            if (GameState.MapExtender.PlayerTake(GameState) == false)
+            if (GameState.MapExtender.PlayerTake() == false)
             {
                 TextArea.PrintLine("\n\nNothing to take.");
 

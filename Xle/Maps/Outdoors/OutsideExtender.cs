@@ -43,11 +43,9 @@ namespace ERY.Xle.Maps.Outdoors
             return factory.OutsideRenderer(this);
         }
 
-        public override void CheckSounds(GameState state)
+        public override void CheckSounds()
         {
-            var player = state.Player;
-
-            if (player.IsOnRaft)
+            if (Player.IsOnRaft)
             {
                 if (SoundMan.IsPlaying(LotaSound.Raft1) == false)
                     SoundMan.PlaySound(LotaSound.Raft1);
@@ -67,7 +65,7 @@ namespace ERY.Xle.Maps.Outdoors
                     {
                         if (Math.Sqrt(Math.Pow(i, 2) + Math.Pow(j, 2)) <= 5)
                         {
-                            if (TheMap[player.X + i, player.Y + j] < 16)
+                            if (TheMap[Player.X + i, Player.Y + j] < 16)
                             {
                                 ocean = 1;
                             }
@@ -158,14 +156,14 @@ namespace ERY.Xle.Maps.Outdoors
         {
         }
 
-        protected override bool PlayerSpeakImpl(GameState state)
+        protected override bool PlayerSpeakImpl()
         {
             if (EncounterState != EncounterState.MonsterReady)
             {
                 return false;
             }
 
-            SpeakToMonster(state.Player);
+            SpeakToMonster();
 
             return true;
         }
@@ -190,13 +188,13 @@ namespace ERY.Xle.Maps.Outdoors
             get { return currentMonst[0].Name; }
         }
 
-        int attack(Player player)
+        int attack()
         {
             int damage = PlayerHit(currentMonst[monstCount - 1].Defense);
 
             if (currentMonst[monstCount - 1].Vulnerability > 0)
             {
-                if (player.CurrentWeapon.ID == currentMonst[monstCount - 1].Vulnerability)
+                if (Player.CurrentWeapon.ID == currentMonst[monstCount - 1].Vulnerability)
                 {
                     damage += Random.Next(11) + 20;
                 }
@@ -288,7 +286,7 @@ namespace ERY.Xle.Maps.Outdoors
             return finished;
         }
 
-        void SpeakToMonster(Player player)
+        void SpeakToMonster()
         {
             TextArea.PrintLine();
 
@@ -316,7 +314,7 @@ namespace ERY.Xle.Maps.Outdoors
             do
             {
                 type = Random.Next(talkTypes) + 1;
-            } while (player.MaxHP == player.HP && type == 4);
+            } while (Player.MaxHP == Player.HP && type == 4);
 
             string name = "";
 
@@ -371,10 +369,10 @@ namespace ERY.Xle.Maps.Outdoors
                     break;
                 case 4:			// buy hp
 
-                    item = Random.Next(player.MaxHP / 4) + 20;
+                    item = Random.Next(Player.MaxHP / 4) + 20;
 
-                    if (item > (player.MaxHP - player.HP))
-                        item = (player.MaxHP - player.HP);
+                    if (item > (Player.MaxHP - Player.HP))
+                        item = (Player.MaxHP - Player.HP);
 
                     cost = (int)(item * (Random.NextDouble() * 0.15 + 0.75));
 
@@ -406,7 +404,7 @@ namespace ERY.Xle.Maps.Outdoors
 
                 if (choice == 0)
                 {
-                    if (player.Spend(cost))
+                    if (Player.Spend(cost))
                     {
                         SoundMan.PlaySound(LotaSound.Sale);
 
@@ -418,20 +416,20 @@ namespace ERY.Xle.Maps.Outdoors
                         switch (type)
                         {
                             case 1:
-                                player.AddArmor(item, qual);
+                                Player.AddArmor(item, qual);
 
                                 break;
                             case 2:
-                                player.AddWeapon(item, qual);
+                                Player.AddWeapon(item, qual);
 
                                 break;
                             case 3:
-                                player.Food += item;
+                                Player.Food += item;
                                 clr2 = XleColor.Green;
 
                                 break;
                             case 4:
-                                player.HP += item;
+                                Player.HP += item;
                                 clr2 = XleColor.Green;
 
                                 break;
@@ -469,7 +467,7 @@ namespace ERY.Xle.Maps.Outdoors
         }
 
 
-        private void StartEncounter(Player player)
+        private void StartEncounter()
         {
             currentMonst.Clear();
             isMonsterFriendly = false;
@@ -478,7 +476,7 @@ namespace ERY.Xle.Maps.Outdoors
 
             if (type < 10)
             {
-                SetMonsterImagePosition(player);
+                SetMonsterImagePosition();
 
                 EncounterState = EncounterState.UnknownCreatureApproaching;
                 SoundMan.PlaySound(LotaSound.Encounter);
@@ -502,7 +500,7 @@ namespace ERY.Xle.Maps.Outdoors
             stepCountToEncounter = Random.Next(1, 40);
         }
 
-        private void MonsterAppearing(Player player)
+        private void MonsterAppearing()
         {
             if (Random.Next(100) < 55)
                 EncounterState = EncounterState.MonsterAppeared;
@@ -511,10 +509,10 @@ namespace ERY.Xle.Maps.Outdoors
 
             SoundMan.PlaySound(LotaSound.Encounter);
 
-            MapRenderer.DisplayMonsterID = SelectRandomMonster(TerrainAt(player.X, player.Y));
+            MapRenderer.DisplayMonsterID = SelectRandomMonster(TerrainAt(Player.X, Player.Y));
 
             if (monstDir == Direction.None)
-                SetMonsterImagePosition(player);
+                SetMonsterImagePosition();
 
             int max = 1;
             initMonstCount = monstCount = 1 + Random.Next(max);
@@ -536,7 +534,7 @@ namespace ERY.Xle.Maps.Outdoors
             GameControl.Wait(500);
         }
 
-        private void AvoidMonster(GameState state)
+        private void AvoidMonster()
         {
             TextArea.PrintLine();
             TextArea.PrintLine("You avoid the unknown creature.");
@@ -569,9 +567,8 @@ namespace ERY.Xle.Maps.Outdoors
             GameControl.Wait(1000);
         }
 
-        private void MonsterTurn(GameState state, bool firstTime)
+        private void MonsterTurn(bool firstTime)
         {
-            var player = state.Player;
             GameControl.Wait(500);
 
             if (isMonsterFriendly)
@@ -663,23 +660,22 @@ namespace ERY.Xle.Maps.Outdoors
         }
 
 
-        public virtual void UpdateEncounterState(GameState state, ref bool handled)
+        public virtual void UpdateEncounterState(ref bool handled)
         {
         }
 
-        public override void PlayerCursorMovement(GameState state, Direction dir)
+        public override void PlayerCursorMovement(Direction dir)
         {
-            var player = state.Player;
             string command;
             Point stepDirection;
 
-            _Move2D(player, dir, "Move", out command, out stepDirection);
+            _Move2D(dir, "Move", out command, out stepDirection);
 
             TextArea.PrintLine(command);
 
-            if (CanPlayerStep(state, stepDirection) == false)
+            if (CanPlayerStep(stepDirection) == false)
             {
-                TerrainType terrain = TheMap.TerrainAt(player.X + stepDirection.X, player.Y + stepDirection.Y);
+                TerrainType terrain = TheMap.TerrainAt(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
                 if (InEncounter)
                 {
@@ -691,7 +687,7 @@ namespace ERY.Xle.Maps.Outdoors
 
                     GameControl.Wait(500);
                 }
-                else if (player.IsOnRaft)
+                else if (Player.IsOnRaft)
                 {
                     SoundMan.PlaySound(LotaSound.Bump);
 
@@ -721,9 +717,9 @@ namespace ERY.Xle.Maps.Outdoors
             }
             else
             {
-                BeforeStepOn(state, player.X + stepDirection.X, player.Y + stepDirection.Y);
+                BeforeStepOn(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
-                MovePlayer(GameState, stepDirection);
+                MovePlayer(stepDirection);
 
                 if (EncounterState == EncounterState.JustDisengaged)
                 {
@@ -736,22 +732,22 @@ namespace ERY.Xle.Maps.Outdoors
                     EncounterState = EncounterState.NoEncounter;
                 }
 
-                TerrainInfo info = GetTerrainInfo(player);
+                TerrainInfo info = GetTerrainInfo();
 
-                if (player.IsOnRaft == false)
+                if (Player.IsOnRaft == false)
                 {
                     SoundMan.PlaySound(info.WalkSound);
                 }
 
-                player.TimeDays += info.StepTimeDays;
-                player.TimeQuality += 1;
+                Player.TimeDays += info.StepTimeDays;
+                Player.TimeQuality += 1;
             }
         }
-        public override bool PlayerDisembark(GameState state)
+        public override bool PlayerDisembark()
         {
             TextArea.PrintLine(" raft");
 
-            if (state.Player.IsOnRaft == false)
+            if (Player.IsOnRaft == false)
                 return false;
 
             TextArea.PrintLine();
@@ -765,8 +761,8 @@ namespace ERY.Xle.Maps.Outdoors
                 Keyboard.Keys[KeyCode.Left] || Keyboard.Keys[KeyCode.Right] ||
                 Keyboard.Keys[KeyCode.Up] || Keyboard.Keys[KeyCode.Down]));
 
-            int newx = state.Player.X;
-            int newy = state.Player.Y;
+            int newx = Player.X;
+            int newy = Player.Y;
 
             Direction dir = Direction.East;
 
@@ -779,27 +775,27 @@ namespace ERY.Xle.Maps.Outdoors
             else if (Keyboard.Keys[KeyCode.Right])
                 dir = Direction.East;
 
-            PlayerDisembark(state, dir);
+            PlayerDisembark(dir);
 
             return true;
         }
 
-        private void PlayerDisembark(GameState state, Direction dir)
+        private void PlayerDisembark(Direction dir)
         {
-            state.Player.BoardedRaft = null;
-            PlayerCursorMovement(state, dir);
+            Player.BoardedRaft = null;
+            PlayerCursorMovement(dir);
 
             SoundMan.StopSound(LotaSound.Raft1);
         }
 
-        private void HitMonster(Player player, int dam)
+        private void HitMonster(int dam)
         {
             TextArea.Print("Enemy hit by blow of ", XleColor.White);
             TextArea.Print(dam.ToString(), XleColor.Cyan);
             TextArea.Print(".", XleColor.White);
             TextArea.PrintLine();
 
-            GameControl.Wait(250 + 100 * player.Gamespeed, keyBreak: true);
+            GameControl.Wait(250 + 100 * Player.Gamespeed, keyBreak: true);
 
             currentMonst[monstCount - 1].HP -= dam;
 
@@ -815,7 +811,7 @@ namespace ERY.Xle.Maps.Outdoors
                 int gold, food;
                 bool finished = FinishedCombat(out gold, out food);
 
-                GameControl.Wait(250 + 150 * player.Gamespeed);
+                GameControl.Wait(250 + 150 * Player.Gamespeed);
 
                 if (finished)
                 {
@@ -841,7 +837,7 @@ namespace ERY.Xle.Maps.Outdoors
                             TextArea.Print(" days of food.", XleColor.White);
                             TextArea.PrintLine();
 
-                            player.Food += food;
+                            Player.Food += food;
                         }
 
                     }
@@ -858,26 +854,23 @@ namespace ERY.Xle.Maps.Outdoors
                         TextArea.Print(" gold.", XleColor.White);
                         TextArea.PrintLine();
 
-                        player.Gold += gold;
+                        Player.Gold += gold;
                     }
 
-                    GameControl.Wait(400 + 100 * player.Gamespeed);
+                    GameControl.Wait(400 + 100 * Player.Gamespeed);
                 }
             }
         }
 
-        public override bool PlayerFight(GameState state)
+        public override bool PlayerFight()
         {
-            string weaponName;
-            var player = state.Player;
-
-            weaponName = player.CurrentWeapon.BaseName(Data);
+            string weaponName = Player.CurrentWeapon.BaseName(Data);
 
             TextArea.PrintLine("\n");
 
             if (EncounterState == EncounterState.MonsterReady)
             {
-                int dam = attack(player);
+                int dam = attack();
 
                 TextArea.Print("Attack ", XleColor.White);
                 TextArea.Print(MonstName, XleColor.Cyan);
@@ -898,14 +891,14 @@ namespace ERY.Xle.Maps.Outdoors
 
                 SoundMan.PlaySound(LotaSound.PlayerHit);
 
-                HitMonster(player, dam);
+                HitMonster(dam);
             }
             else if (EncounterState > 0)
             {
                 TextArea.PrintLine("The unknown creature is not ");
                 TextArea.PrintLine("within range.");
 
-                GameControl.Wait(300 + 100 * player.Gamespeed);
+                GameControl.Wait(300 + 100 * Player.Gamespeed);
             }
             else
             {
@@ -915,9 +908,9 @@ namespace ERY.Xle.Maps.Outdoors
             return true;
         }
 
-        public override bool PlayerXamine(GameState state)
+        public override bool PlayerXamine()
         {
-            TerrainInfo info = GetTerrainInfo(state.Player);
+            TerrainInfo info = GetTerrainInfo();
 
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -932,9 +925,9 @@ namespace ERY.Xle.Maps.Outdoors
             return true;
         }
 
-        private TerrainInfo GetTerrainInfo(Player player)
+        private TerrainInfo GetTerrainInfo()
         {
-            var terrain = TerrainAt(player.X, player.Y);
+            var terrain = TerrainAt(Player.X, Player.Y);
 
             return GetTerrainInfo(terrain);
         }
@@ -1092,29 +1085,29 @@ namespace ERY.Xle.Maps.Outdoors
             return (TerrainType)2;
         }
 
-        private void UpdateRaftState(Player player)
+        private void UpdateRaftState()
         {
-            if (player.IsOnRaft == false)
+            if (Player.IsOnRaft == false)
             {
-                foreach (var raft in player.Rafts.Where(r => r.MapNumber == TheMap.MapID))
+                foreach (var raft in Player.Rafts.Where(r => r.MapNumber == TheMap.MapID))
                 {
-                    if (raft.Location.Equals(player.Location))
+                    if (raft.Location.Equals(Player.Location))
                     {
-                        player.BoardedRaft = raft;
+                        Player.BoardedRaft = raft;
                         break;
                     }
                 }
             }
 
-            if (player.IsOnRaft)
+            if (Player.IsOnRaft)
             {
-                var raft = player.BoardedRaft;
+                var raft = Player.BoardedRaft;
 
-                raft.X = player.X;
-                raft.Y = player.Y;
+                raft.X = Player.X;
+                raft.Y = Player.Y;
             }
         }
-        private void StepEncounter(Player player)
+        private void StepEncounter()
         {
             if (Data.MonsterInfoList.Count == 0) return;
             if (Options.DisableOutsideEncounters) return;
@@ -1124,7 +1117,7 @@ namespace ERY.Xle.Maps.Outdoors
                 return;
 
             bool handled = false;
-            UpdateEncounterState(GameState, ref handled);
+            UpdateEncounterState(ref handled);
 
             if (handled)
                 return;
@@ -1133,7 +1126,7 @@ namespace ERY.Xle.Maps.Outdoors
             {
                 SetNextEncounterStepCount();
 
-                StartEncounter(player);
+                StartEncounter();
             }
             else if (EncounterState == EncounterState.NoEncounter && stepCountToEncounter > 0)
             {
@@ -1148,16 +1141,16 @@ namespace ERY.Xle.Maps.Outdoors
 
             if (EncounterState == EncounterState.CreatureAppearing)
             {
-                MonsterAppearing(player);
+                MonsterAppearing();
             }
 
         }
 
-        public override void AfterExecuteCommand(GameState state, KeyCode cmd)
+        public override void AfterExecuteCommand(KeyCode cmd)
         {
             if (EncounterState == EncounterState.MonsterAvoided)
             {
-                AvoidMonster(state);
+                AvoidMonster();
             }
             else if (EncounterState == EncounterState.MonsterAppeared)
             {
@@ -1165,18 +1158,18 @@ namespace ERY.Xle.Maps.Outdoors
             }
             else if (EncounterState == EncounterState.MonsterReady)
             {
-                MonsterTurn(state, false);
+                MonsterTurn(false);
             }
         }
 
-        public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
+        public override bool CanPlayerStepIntoImpl(int xx, int yy)
         {
             if (EncounterState == EncounterState.UnknownCreatureApproaching)
             {
                 bool moveTowards = false;
 
-                int dx = xx - player.X;
-                int dy = yy - player.Y;
+                int dx = xx - Player.X;
+                int dy = yy - Player.Y;
 
                 switch (monstDir)
                 {
@@ -1210,7 +1203,7 @@ namespace ERY.Xle.Maps.Outdoors
             TerrainType terrain = TerrainAt(xx, yy);
             int test = (int)terrain;
 
-            if (player.IsOnRaft)
+            if (Player.IsOnRaft)
             {
                 if (terrain == TerrainType.Water)
                     return true;
@@ -1220,9 +1213,9 @@ namespace ERY.Xle.Maps.Outdoors
 
             if (terrain == TerrainType.Water)
             {
-                for (int i = 0; i < player.Rafts.Count; i++)
+                for (int i = 0; i < Player.Rafts.Count; i++)
                 {
-                    if (Math.Abs(player.Rafts[i].X - xx) < 2 && Math.Abs(player.Rafts[i].Y - yy) < 2)
+                    if (Math.Abs(Player.Rafts[i].X - xx) < 2 && Math.Abs(Player.Rafts[i].Y - yy) < 2)
                     {
                         return true;
                     }
@@ -1231,7 +1224,7 @@ namespace ERY.Xle.Maps.Outdoors
                 return false;
             }
 
-            if (terrain == TerrainType.Mountain && player.Hold != systemState.Factory.ClimbingGearItemID)
+            if (terrain == TerrainType.Mountain && Player.Hold != systemState.Factory.ClimbingGearItemID)
             {
                 return false;
             }
@@ -1240,33 +1233,28 @@ namespace ERY.Xle.Maps.Outdoors
 
         }
 
-        public override void AfterPlayerStep(GameState state)
+        public override void AfterPlayerStep()
         {
-            base.AfterPlayerStep(state);
+            base.AfterPlayerStep();
 
-            UpdateRaftState(state.Player);
+            UpdateRaftState();
 
-            StepEncounter(state.Player);
+            StepEncounter();
         }
 
-        public override void LeaveMap(Player player)
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
             SetNextEncounterStepCount();
-            base.OnLoad(state);
+            base.OnLoad();
         }
 
-        protected void SetMonsterImagePosition(Player player)
+        protected void SetMonsterImagePosition()
         {
             monstDir = (Direction)Random.Next((int)Direction.East, (int)Direction.South + 1);
             MapRenderer.MonsterDrawDirection = monstDir;
         }
 
-        protected override void PlayerMagicImpl(GameState state, MagicSpell magic)
+        protected override void PlayerMagicImpl(MagicSpell magic)
         {
             switch (magic.ID)
             {
@@ -1274,13 +1262,13 @@ namespace ERY.Xle.Maps.Outdoors
                 case 2:
                     if (EncounterState == 0)
                     {
-                        state.Player.Items[magic.ItemID]++;
+                        Player.Items[magic.ItemID]++;
                         TextArea.PrintLine("Nothing to fight.");
                         return;
                     }
                     else if (EncounterState != EncounterState.MonsterReady)
                     {
-                        state.Player.Items[magic.ItemID]++;
+                        Player.Items[magic.ItemID]++;
                         TextArea.PrintLine("The unknown creature is out of range.");
                         return;
                     }
@@ -1290,7 +1278,7 @@ namespace ERY.Xle.Maps.Outdoors
                     var sound = (magic.ID == 1) ?
                         LotaSound.MagicFlame : LotaSound.MagicBolt;
 
-                    if (RollSpellFizzle(state, magic))
+                    if (RollSpellFizzle(magic))
                     {
                         SoundMan.PlayMagicSound(sound, LotaSound.MagicFizzle, 1);
 
@@ -1300,14 +1288,14 @@ namespace ERY.Xle.Maps.Outdoors
                     else
                         SoundMan.PlayMagicSound(sound, LotaSound.MagicFlameHit, 1);
 
-                    int damage = RollSpellDamage(state, magic, 0);
+                    int damage = RollSpellDamage(magic, 0);
 
-                    HitMonster(state.Player, damage);
+                    HitMonster(damage);
 
                     break;
 
                 default:
-                    CastSpell(state, magic);
+                    CastSpell(magic);
                     break;
             }
         }

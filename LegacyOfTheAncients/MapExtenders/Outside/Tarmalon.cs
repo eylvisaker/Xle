@@ -21,9 +21,9 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
         public IMapChanger MapChanger { get; set; }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
-            base.OnLoad(state);
+            base.OnLoad();
 
             Story.Invisible = false;
 
@@ -55,7 +55,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
             scheme.MapAreaWidth = 23;
         }
 
-        public override void UpdateEncounterState(GameState state, ref bool handled)
+        public override void UpdateEncounterState(ref bool handled)
         {
             handled = BanditAmbush();
         }
@@ -113,7 +113,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
                 return false;
 
             // set a random position for the appearance of the bandits.
-            SetMonsterImagePosition(Player);
+            SetMonsterImagePosition();
 
             // bandit icon is number 4.
             MapRenderer.DisplayMonsterID = 4;
@@ -250,20 +250,20 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
             }
         }
 
-        public override void CastSpell(GameState state, MagicSpell magic)
+        public override void CastSpell(MagicSpell magic)
         {
             if (magic.ID == 6)
             {
-                CastSeekSpell(state);
+                CastSeekSpell();
             }
         }
 
-        private void CastSeekSpell(GameState state)
+        private void CastSeekSpell()
         {
             TextArea.PrintLine();
             TextArea.PrintLine("Cast seek spell.");
 
-            if (state.Player.IsOnRaft)
+            if (Player.IsOnRaft)
             {
                 TextArea.PrintLine("The water mutes the spell.");
             }
@@ -273,10 +273,10 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
             }
             else
             {
-                state.Player.FaceDirection = Direction.West;
+                Player.FaceDirection = Direction.West;
                 SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
-                MapChanger.ChangeMap(state.Player, 1, 0);
+                MapChanger.ChangeMap(1, 0);
                 EncounterState = 0;
             }
         }

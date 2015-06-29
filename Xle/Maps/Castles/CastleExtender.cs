@@ -21,7 +21,7 @@ namespace ERY.Xle.Maps.Castles
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override void SpeakToGuard(GameState state)
+        public override void SpeakToGuard()
         {
             TextArea.PrintLine("\n\nThe guard ignores you.");
         }

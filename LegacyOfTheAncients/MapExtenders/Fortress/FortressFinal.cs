@@ -1,4 +1,6 @@
 ﻿using AgateLib.Geometry;
+using AgateLib.InputLib;
+
 using ERY.Xle.LotA.MapExtenders.Fortress.FirstArea;
 using ERY.Xle.LotA.MapExtenders.Fortress.SecondArea;
 using ERY.Xle.Maps;
@@ -34,7 +36,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
         public IXleScreen Screen { get; set; }
 
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             if (y >= TheMap.Height)
                 return 0;
@@ -44,19 +46,19 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
         public bool CompendiumAttacking { get; set; }
 
-        public override void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
+        public override void AfterExecuteCommand(KeyCode cmd)
         {
             if (warlord != null)
             {
-                WarlordAttack(state);
+                WarlordAttack();
             }
             else if (CompendiumAttacking)
             {
-                CompendiumAttack(state);
+                CompendiumAttack();
             }
         }
 
-        private void CompendiumAttack(GameState state)
+        private void CompendiumAttack()
         {
             int damage = Random.Next((int)compendiumStrength / 2, (int)compendiumStrength);
 
@@ -68,19 +70,19 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             GameControl.Wait(250, redraw:FlashBorder);
             TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-            state.Player.HP -= damage;
+            Player.HP -= damage;
 
             GameControl.Wait(75);
 
-            if (state.Player.Items[LotaItem.HealingHerb] > 24)
+            if (Player.Items[LotaItem.HealingHerb] > 24)
             {
-                int amount = (int)(state.Player.Items[LotaItem.HealingHerb] / 9);
+                int amount = (int)(Player.Items[LotaItem.HealingHerb] / 9);
 
                 amount = (int)(amount * (1 + Random.NextDouble()) * 0.5);
 
                 TextArea.PrintLine("** " + amount.ToString() + " healing herbs destroyed! **", XleColor.Yellow);
 
-                state.Player.Items[LotaItem.HealingHerb] -= amount;
+                Player.Items[LotaItem.HealingHerb] -= amount;
 
                 GameControl.Wait(75);
             }
@@ -101,7 +103,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             Screen.OnDraw();
         }
 
-        private void WarlordAttack(GameState state)
+        private void WarlordAttack()
         {
             int damage = (int)(99 * Random.NextDouble() + 80);
 
@@ -119,7 +121,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
         }
 
 
-        public void CreateWarlord(GameState state)
+        public void CreateWarlord()
         {
             warlord = new Guard
             {
@@ -128,7 +130,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
                 HP = 420,
                 Color = XleColor.LightGreen,
                 Name = "Warlord",
-                OnGuardDead = WarlordDead,
+                OnGuardDead = (state, unused) => WarlordDead(unused),
                 SkipAttacking = true,
                 SkipMovement = true,
             };
@@ -136,7 +138,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             TheMap.Guards.Add(warlord);
         }
 
-        private bool WarlordDead(GameState state, Guard unused)
+        private bool WarlordDead(Guard unused)
         {
             this.warlord = null;
 

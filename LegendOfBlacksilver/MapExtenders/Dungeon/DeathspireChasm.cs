@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps;
+
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
 	public class DeathspireChasm : LobDungeon
@@ -16,7 +18,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			return 2;
 		}
 
-		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		public override Map3DSurfaces Surfaces()
 		{
 			return Lob3DSurfaces.DeathspireChasm;
 		}

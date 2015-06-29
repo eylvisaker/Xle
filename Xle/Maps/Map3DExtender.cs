@@ -13,25 +13,24 @@ namespace ERY.Xle.Maps
 
 
 
-        public abstract Map3DSurfaces Surfaces(GameState state);
+        public abstract Map3DSurfaces Surfaces();
 
         protected virtual void CommandTextForInvalidMovement(ref string command)
         {
         }
 
-        public override void PlayerCursorMovement(GameState state, Direction dir)
+        public override void PlayerCursorMovement(Direction dir)
         {
-            var player = state.Player;
             Point stepDirection;
             string command;
 
-            OnBeforePlayerMove(state, dir);
+            OnBeforePlayerMove(dir);
 
-            _MoveDungeon(player, dir, ShowDirections(), out command, out stepDirection);
+            _MoveDungeon(dir, ShowDirections(), out command, out stepDirection);
 
             if (stepDirection.IsEmpty == false)
             {
-                if (CanPlayerStepIntoImpl(player, player.X + stepDirection.X, player.Y + stepDirection.Y) == false)
+                if (CanPlayerStepIntoImpl(Player.X + stepDirection.X, Player.Y + stepDirection.Y) == false)
                 {
                     CommandTextForInvalidMovement(ref command);
                     TextArea.PrintLine(command);
@@ -42,7 +41,7 @@ namespace ERY.Xle.Maps
                     TextArea.PrintLine(command);
 
                     PlayPlayerMoveSound();
-                    MovePlayer(GameState, stepDirection);
+                    MovePlayer(stepDirection);
                 }
             }
             else
@@ -54,11 +53,11 @@ namespace ERY.Xle.Maps
             }
         }
 
-        protected virtual void OnBeforePlayerMove(GameState state, Direction dir)
+        protected virtual void OnBeforePlayerMove(Direction dir)
         {
         }
 
-        protected void _MoveDungeon(Player player, Direction dir, bool haveCompass, out string command, out Point stepDirection)
+        protected void _MoveDungeon(Direction dir, bool haveCompass, out string command, out Point stepDirection)
         {
             Direction newDirection;
             command = "";
@@ -69,64 +68,64 @@ namespace ERY.Xle.Maps
                 case Direction.East:
                     command = "Turn Right";
 
-                    newDirection = player.FaceDirection - 1;
+                    newDirection = Player.FaceDirection - 1;
 
                     if (newDirection < Direction.East)
                         newDirection = Direction.South;
 
 
-                    player.FaceDirection = (Direction)newDirection;
+                    Player.FaceDirection = (Direction)newDirection;
 
                     if (haveCompass)
-                        command = "Turn " + player.FaceDirection.ToString();
+                        command = "Turn " + Player.FaceDirection.ToString();
 
                     break;
 
                 case Direction.North:
                     command = "Move Forward";
 
-                    stepDirection = player.FaceDirection.StepDirection();
+                    stepDirection = Player.FaceDirection.StepDirection();
 
                     if (haveCompass)
-                        command = "Walk " + player.FaceDirection.ToString();
+                        command = "Walk " + Player.FaceDirection.ToString();
 
-                    player.TimeQuality += TheMap.StepQuality;
+                    Player.TimeQuality += TheMap.StepQuality;
 
                     break;
 
                 case Direction.West:
                     command = "Turn Left";
 
-                    newDirection = player.FaceDirection + 1;
+                    newDirection = Player.FaceDirection + 1;
 
 
                     if (newDirection > Direction.South)
                         newDirection = Direction.East;
 
-                    player.FaceDirection = (Direction)newDirection;
+                    Player.FaceDirection = (Direction)newDirection;
 
                     if (haveCompass)
-                        command = "Turn " + player.FaceDirection.ToString();
+                        command = "Turn " + Player.FaceDirection.ToString();
 
                     break;
 
                 case Direction.South:
                     command = "Move Backward";
 
-                    if (player.FaceDirection == Direction.East)
+                    if (Player.FaceDirection == Direction.East)
                         stepDirection = new Point(-1, 0);
-                    if (player.FaceDirection == Direction.North)
+                    if (Player.FaceDirection == Direction.North)
                         stepDirection = new Point(0, 1);
-                    if (player.FaceDirection == Direction.West)
+                    if (Player.FaceDirection == Direction.West)
                         stepDirection = new Point(1, 0);
-                    if (player.FaceDirection == Direction.South)
+                    if (Player.FaceDirection == Direction.South)
                         stepDirection = new Point(0, -1);
 
                     if (haveCompass)
                     {
                         // we're walking backwards here, so make the text work right!
                         command = "Walk ";
-                        switch (player.FaceDirection)
+                        switch (Player.FaceDirection)
                         {
                             case Direction.East: command += "West"; break;
                             case Direction.West: command += "East"; break;
@@ -135,14 +134,14 @@ namespace ERY.Xle.Maps
                         }
                     }
 
-                    player.TimeQuality += TheMap.StepQuality;
+                    Player.TimeQuality += TheMap.StepQuality;
 
 
                     break;
             }
         }
 
-        public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
+        public override bool CanPlayerStepIntoImpl(int xx, int yy)
         {
             if (IsMapSpaceBlocked(xx, yy))
                 return false;

@@ -35,7 +35,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             int y = Player.Y;
             Direction facing = Player.FaceDirection;
 
-            MapChanger.ChangeMap(Player, 72, 0);
+            MapChanger.ChangeMap(72, 0);
             Player.SetReturnLocation(map, x, y, facing);
 
             MarkAsVisited();

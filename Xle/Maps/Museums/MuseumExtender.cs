@@ -15,7 +15,7 @@ namespace ERY.Xle.Maps.Museums
 
         public XleOptions Options { get; set; }
 
-        public new Museum TheMap { get { return (Museum)base.TheMap; } }
+        public new Museum Map { get { return (Museum)base.TheMap; } }
         public new MuseumRenderer MapRenderer { get { return (MuseumRenderer)base.MapRenderer; } }
 
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
@@ -27,7 +27,7 @@ namespace ERY.Xle.Maps.Museums
         {
             SoundMan.PlaySound(LotaSound.WalkMuseum);
         }
-        protected override void OnBeforePlayerMove(GameState state, Direction dir)
+        protected override void OnBeforePlayerMove(Direction dir)
         {
             MapRenderer.DrawCloseup = false;
         }
@@ -36,18 +36,21 @@ namespace ERY.Xle.Maps.Museums
             command = "Bump into wall";
         }
 
-        public override Map3DSurfaces Surfaces(GameState state)
+        public override Map3DSurfaces Surfaces()
         {
             return null;
         }
 
-        protected bool IsFacingDoor(GameState state)
+        protected bool IsFacingDoor
         {
-            Point faceDir = state.Player.FaceDirection.StepDirection();
-            Point test = new Point(state.Player.X + faceDir.X, state.Player.Y + faceDir.Y);
-            bool facingDoor = TheMap[test.X, test.Y] == 0x02;
+            get
+            {
+                Point faceDir = Player.FaceDirection.StepDirection();
+                Point test = new Point(Player.X + faceDir.X, Player.Y + faceDir.Y);
+                bool facingDoor = Map[test.X, test.Y] == 0x02;
 
-            return facingDoor;
+                return facingDoor;
+            }
         }
 
         public override int GetOutsideTile(Point playerPoint, int x, int y)
@@ -65,53 +68,53 @@ namespace ERY.Xle.Maps.Museums
             scheme.MapAreaWidth = 23;
         }
 
-        public override void OnLoad(GameState state)
+        public override void OnLoad()
         {
-            base.OnLoad(state);
+            base.OnLoad();
 
-            CheckExhibitStatus(state);
+            CheckExhibitStatus();
         }
         public virtual Exhibit GetExhibitByTile(int tile)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void CheckExhibitStatus(GameState state)
+        public virtual void CheckExhibitStatus()
         {
         }
-        public virtual void NeedsCoinMessage(Player player, Exhibit ex)
+        public virtual void NeedsCoinMessage(Exhibit ex)
         {
         }
-        public virtual void PrintUseCoinMessage(Player player, Exhibit ex)
+        public virtual void PrintUseCoinMessage(Exhibit ex)
         {
         }
 
-        public override bool PlayerXamine(GameState state)
+        public override bool PlayerXamine()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            if (InteractWithDisplay(state))
+            if (InteractWithDisplay())
                 return true;
 
             TextArea.PrintLine("You are in an ancient museum.");
 
             return true;
         }
-        public override bool PlayerFight(GameState state)
+        public override bool PlayerFight()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            Point lookingAt = state.Player.Location;
-            lookingAt.X += state.Player.FaceDirection.StepDirection().X;
-            lookingAt.Y += state.Player.FaceDirection.StepDirection().Y;
+            Point lookingAt = Player.Location;
+            lookingAt.X += Player.FaceDirection.StepDirection().X;
+            lookingAt.Y += Player.FaceDirection.StepDirection().Y;
 
-            if (ExhibitAt(state.Player.Location) != null)
+            if (ExhibitAt(Player.Location) != null)
             {
                 PrintExhibitStopsActionMessage();
             }
-            else if (TheMap[lookingAt] == doorVal)
+            else if (Map[lookingAt] == doorVal)
             {
                 SoundMan.PlaySound(LotaSound.PlayerHit);
 
@@ -128,12 +131,12 @@ namespace ERY.Xle.Maps.Museums
             TextArea.PrintLine("The display case");
             TextArea.PrintLine("force field stops you.");
         }
-        public override bool PlayerRob(GameState state)
+        public override bool PlayerRob()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            if (ExhibitAt(state.Player.Location) != null)
+            if (ExhibitAt(Player.Location) != null)
             {
                 PrintExhibitStopsActionMessage();
             }
@@ -144,7 +147,7 @@ namespace ERY.Xle.Maps.Museums
 
             return true;
         }
-        protected override bool PlayerSpeakImpl(GameState state)
+        protected override bool PlayerSpeakImpl()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -152,7 +155,7 @@ namespace ERY.Xle.Maps.Museums
 
             return true;
         }
-        public override bool PlayerTake(GameState state)
+        public override bool PlayerTake()
         {
             TextArea.PrintLine();
             TextArea.PrintLine("There is nothing to take.");
@@ -166,17 +169,16 @@ namespace ERY.Xle.Maps.Museums
         }
         public Exhibit ExhibitAt(int x, int y)
         {
-            int tileAt = TheMap[x, y];
+            int tileAt = Map[x, y];
 
             return GetExhibitByTile(tileAt);
         }
 
-        protected bool InteractWithDisplay(GameState state)
+        protected bool InteractWithDisplay()
         {
-            var player = state.Player;
-            Point stepDir = player.FaceDirection.StepDirection();
+            Point stepDir = Player.FaceDirection.StepDirection();
 
-            Exhibit ex = ExhibitAt(player.X + stepDir.X, player.Y + stepDir.Y);
+            Exhibit ex = ExhibitAt(Player.X + stepDir.X, Player.Y + stepDir.Y);
 
             if (ex == null)
                 return false;
@@ -207,7 +209,7 @@ namespace ERY.Xle.Maps.Museums
             if (ex.RequiresCoin == false)
             {
                 MapRenderer.mDrawStatic = false;
-                RunExhibit(state, ex);
+                RunExhibit(ex);
             }
             else
             {
@@ -218,7 +220,7 @@ namespace ERY.Xle.Maps.Museums
 
                 if (Options.DisableExhibitsRequireCoins == false && ex.PlayerHasCoin == false)
                 {
-                    NeedsCoinMessage(player, ex);
+                    NeedsCoinMessage(ex);
                     GameControl.Wait(500);
 
                     return true;
@@ -237,18 +239,18 @@ namespace ERY.Xle.Maps.Museums
                         ex.UseCoin();
 
                     MapRenderer.mDrawStatic = false;
-                    RunExhibit(state, ex);
+                    RunExhibit(ex);
                 }
             }
 
             return true;
         }
 
-        private void RunExhibit(GameState state, Exhibit ex)
+        private void RunExhibit(Exhibit ex)
         {
             ex.RunExhibit();
 
-            CheckExhibitStatus(state);
+            CheckExhibitStatus();
         }
 
 

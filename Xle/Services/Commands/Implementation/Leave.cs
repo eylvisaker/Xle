@@ -33,7 +33,7 @@ namespace ERY.Xle.Services.Commands.Implementation
                     return;
             }
 
-            GameState.MapExtender.PlayerLeave(GameState);
+            GameState.MapExtender.PlayerLeave();
         }
 
         public bool ConfirmPrompt { get; set; }

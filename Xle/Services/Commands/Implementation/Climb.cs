@@ -9,7 +9,7 @@
 
         public override void Execute()
         {
-            if (GameState.MapExtender.PlayerClimb(GameState) == false)
+            if (GameState.MapExtender.PlayerClimb() == false)
             {
                 FailMessage();
             }

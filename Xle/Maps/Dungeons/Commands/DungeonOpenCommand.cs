@@ -190,7 +190,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
         private int GetTreasure(int val)
         {
-            return Map.GetTreasure(GameState, Player.DungeonLevel + 1, val);
+            return Map.GetTreasure(Player.DungeonLevel + 1, val);
         }
     }
 }

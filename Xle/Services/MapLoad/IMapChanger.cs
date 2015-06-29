@@ -1,4 +1,6 @@
-﻿using ERY.Xle.Maps;
+﻿using AgateLib.Geometry;
+
+using ERY.Xle.Maps;
 
 namespace ERY.Xle.Services.MapLoad
 {
@@ -6,9 +8,8 @@ namespace ERY.Xle.Services.MapLoad
     {
         void SetMap(MapExtender map);
 
-        void ChangeMap(Player player, int mapId, int entryPoint);
-
-        void ChangeMap(Player player, int mapId, AgateLib.Geometry.Point targetPoint);
+        void ChangeMap(int mapId, int entryPoint);
+        void ChangeMap(int mapId, Point targetPoint);
 
         void ReturnToPreviousMap();
     }

@@ -262,7 +262,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
         private void ChangeMap(Player player, int mapId, int entryPoint)
         {
-            mapChanger.ChangeMap(player, mapId, entryPoint);
+            mapChanger.ChangeMap(mapId, entryPoint);
         }
 
         public void CheatGoto(string mapName)
@@ -288,13 +288,13 @@ namespace ERY.Xle.Services.XleSystem.Implementation
                 }
             }
 
-            if (map.CanPlayerStepIntoImpl(player, targetX + 2, targetY))
+            if (map.CanPlayerStepIntoImpl(targetX + 2, targetY))
                 targetX += 2;
-            else if (map.CanPlayerStepIntoImpl(player, targetX - 2, targetY))
+            else if (map.CanPlayerStepIntoImpl(targetX - 2, targetY))
                 targetX -= 2;
-            else if (map.CanPlayerStepIntoImpl(player, targetX, targetY + 2))
+            else if (map.CanPlayerStepIntoImpl(targetX, targetY + 2))
                 targetY += 2;
-            else if (map.CanPlayerStepIntoImpl(player, targetX, targetY - 2))
+            else if (map.CanPlayerStepIntoImpl(targetX, targetY - 2))
                 targetY -= 2;
 
             ChangeMap(player, map.MapID, new Point(targetX, targetY));
@@ -305,7 +305,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
         private void ChangeMap(Player player, int mapId, Point targetPoint)
         {
-            mapChanger.ChangeMap(player, mapId, targetPoint);
+            mapChanger.ChangeMap(mapId, targetPoint);
         }
 
         private MapInfo FindMapByPartialName(string mapName)

@@ -4,7 +4,7 @@
     {
         public override void Execute()
         {
-            GameState.MapExtender.PlayerXamine(GameState);
+            GameState.MapExtender.PlayerXamine();
         }
     }
 }

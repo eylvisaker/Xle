@@ -25,21 +25,21 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override double ChanceToHitGuard(Player player, Guard guard, int distance)
+        public override double ChanceToHitGuard(Guard guard, int distance)
         {
-            return cdc.ChanceToHitGuard(player, distance);
+            return cdc.ChanceToHitGuard(Player, distance);
         }
-        public override double ChanceToHitPlayer(Player player, Guard guard)
+        public override double ChanceToHitPlayer(Guard guard)
         {
-            return cdc.ChanceToHitPlayer(player);
+            return cdc.ChanceToHitPlayer(Player);
         }
-        public override int RollDamageToGuard(Player player, Guard guard)
+        public override int RollDamageToGuard(Guard guard)
         {
-            return cdc.RollDamageToGuard(player);
+            return cdc.RollDamageToGuard(Player);
         }
-        public override int RollDamageToPlayer(Player player, Guard guard)
+        public override int RollDamageToPlayer(Guard guard)
         {
-            return cdc.RollDamageToPlayer(player);
+            return cdc.RollDamageToPlayer(Player);
         }
 
         public override int GetOutsideTile(Point playerPoint, int x, int y)

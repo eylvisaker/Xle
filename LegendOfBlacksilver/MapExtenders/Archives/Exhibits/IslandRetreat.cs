@@ -49,7 +49,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 
             if (QuickMenu.QuickMenuYesNo() == 0)
             {
-                MapChanger.ChangeMap(Player, 1, 1);
+                MapChanger.ChangeMap(1, 1);
             }
         }
     }

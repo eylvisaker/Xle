@@ -50,7 +50,7 @@ namespace ERY.Xle.Services.Commands.Implementation
             }
             else
             {
-                noEffect = !GameState.MapExtender.PlayerUse(GameState, Player.Hold);
+                noEffect = !GameState.MapExtender.PlayerUse(Player.Hold);
             }
 
             if (noEffect == true)

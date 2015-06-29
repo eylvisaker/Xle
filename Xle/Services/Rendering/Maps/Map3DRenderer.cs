@@ -96,7 +96,7 @@ namespace ERY.Xle.Services.Rendering.Maps
 
         public override void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
         {
-            Surfaces = Extender.Surfaces(GameState);
+            Surfaces = Extender.Surfaces();
 
             DrawImpl(playerPos.X, playerPos.Y, faceDirection, inRect);
         }

@@ -7,9 +7,9 @@ namespace ERY.Xle.Maps
 {
     public abstract class Map2DExtender : MapExtender
     {
-        protected void _Move2D(Player player, Direction dir, string textStart, out string command, out Point stepDirection)
+        protected void _Move2D(Direction dir, string textStart, out string command, out Point stepDirection)
         {
-            player.FaceDirection = dir;
+            Player.FaceDirection = dir;
 
             command = textStart + " " + dir.ToString();
             int stepSize = StepSize;
@@ -39,7 +39,7 @@ namespace ERY.Xle.Maps
 
         }
 
-        public override bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
+        public override bool CanPlayerStepIntoImpl(int xx, int yy)
         {
             int test = 0;
 
@@ -70,23 +70,21 @@ namespace ERY.Xle.Maps
             return TheMap.TileSet[tile] == TileInfo.Blocked;
         }
 
-        public override void PlayerCursorMovement(GameState state, Direction dir)
+        public override void PlayerCursorMovement(Direction dir)
         {
-            var player = state.Player;
-
             string command;
             Point stepDirection;
 
-            _Move2D(player, dir, "Move", out command, out stepDirection);
+            _Move2D(dir, "Move", out command, out stepDirection);
 
-            if (CanPlayerStep(state, stepDirection))
+            if (CanPlayerStep(stepDirection))
             {
                 TextArea.PrintLine(command);
 
-                MovePlayer(GameState, stepDirection);
+                MovePlayer(stepDirection);
                 SoundMan.PlaySound(LotaSound.WalkTown);
 
-                player.TimeQuality += 0.03;
+                Player.TimeQuality += 0.03;
             }
             else
             {
@@ -97,14 +95,12 @@ namespace ERY.Xle.Maps
             }
         }
 
-        public override bool PlayerFight(GameState state)
+        public override bool PlayerFight()
         {
-            var player = state.Player;
-
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            TextArea.PrintLine("Fight with " + player.CurrentWeapon.BaseName(Data));
+            TextArea.PrintLine("Fight with " + Player.CurrentWeapon.BaseName(Data));
             TextArea.Print("Enter direction: ");
 
             KeyCode key = Input.WaitForKey(KeyCode.Up, KeyCode.Down, KeyCode.Left, KeyCode.Right);
@@ -123,15 +119,15 @@ namespace ERY.Xle.Maps
 
             TextArea.PrintLine(fightDir.ToString());
 
-            PlayerFight(state, fightDir);
+            PlayerFight(fightDir);
 
             return true;
         }
 
-        protected virtual void PlayerFight(GameState state, Direction fightDir)
+        protected virtual void PlayerFight(Direction fightDir)
         { }
 
-        public override bool PlayerXamine(GameState state)
+        public override bool PlayerXamine()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -141,7 +137,7 @@ namespace ERY.Xle.Maps
             return true;
         }
 
-        public override bool PlayerLeave(GameState state)
+        public override bool PlayerLeave()
         {
             if (TheMap.HasGuards && TheMap.Guards.IsAngry)
             {
@@ -150,7 +146,7 @@ namespace ERY.Xle.Maps
             }
             else
             {
-                LeaveMap(state);
+                LeaveMap();
             }
 
             return true;

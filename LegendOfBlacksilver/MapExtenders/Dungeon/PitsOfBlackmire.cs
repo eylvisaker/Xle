@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps;
+
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
     public class PitsOfBlackmire : LobDungeon
     {
-        public override int GetTreasure(GameState state, int dungeonLevel, int chestID)
+        public override int GetTreasure(int dungeonLevel, int chestID)
         {
             if (chestID == 3)
             {
@@ -33,10 +35,10 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
                 }
             }
 
-            return base.GetTreasure(state, dungeonLevel, chestID);
+            return base.GetTreasure(dungeonLevel, chestID);
         }
 
-        public override void OnBeforeGiveItem(Player player, ref int treasure, ref bool handled, ref bool clearBox)
+        public override void OnBeforeGiveItem(ref int treasure, ref bool handled, ref bool clearBox)
         {
             if (treasure == -1)
             {
@@ -47,38 +49,38 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             }
         }
 
-        public override void PlayerUse(GameState state, int item, ref bool handled)
+        public override void PlayerUse(int item, ref bool handled)
         {
             if (item == (int)LobItem.RustyKey)
             {
                 if (Player.DungeonLevel + 1 == 2 &&
-                    TheMap[state.Player.X, state.Player.Y] == 0x33)
+                    TheMap[Player.X, Player.Y] == 0x33)
                 {
                     TextArea.PrintLine();
                     TextArea.PrintLine("A hole appears!", XleColor.White);
 
-                    state.Map[state.Player.X, state.Player.Y] = 0x12;
+                    TheMap[Player.X, Player.Y] = 0x12;
 
                     SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
                     handled = true;
                 }
             }
-            base.PlayerUse(state, item, ref handled);
+            base.PlayerUse(item, ref handled);
         }
 
-        public override void PlayerMagic(GameState state)
+        public override void PlayerMagic()
         {
-            base.PlayerMagic(state);
+            base.PlayerMagic();
 
             if (Player.DungeonLevel >= 6 && Story.Illusion == false)
             {
                 // turn off the display.
             }
         }
-        public override bool PlayerClimb(GameState state)
+        public override bool PlayerClimb()
         {
-            var result = base.PlayerClimb(state);
+            var result = base.PlayerClimb();
 
             if (Player.DungeonLevel == 4 && Story.RotlungContracted == false)
             {
@@ -106,7 +108,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             return 2;
         }
 
-        public override Maps.Map3DSurfaces Surfaces(GameState state)
+        public override Map3DSurfaces Surfaces()
         {
             return Lob3DSurfaces.PitsOfBlackmire;
         }

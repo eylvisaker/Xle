@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps;
 using ERY.Xle.Maps.Museums;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands;
@@ -24,7 +25,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
             commands.Items.Add(CommandFactory.Take());
         }
 
-        public override Maps.Map3DSurfaces Surfaces(GameState state)
+        public override Map3DSurfaces Surfaces()
         {
             return Lob3DSurfaces.Archives;
         }
@@ -34,7 +35,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
             return factory.MuseumRenderer(this, "ArchiveRenderer");
         }
 
-        public override bool PlayerXamine(GameState state)
+        public override bool PlayerXamine()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -42,14 +43,14 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 
             return true;
         }
-        public override bool PlayerOpen(GameState state)
+        public override bool PlayerOpen()
         {
-            if (IsFacingDoor(state))
+            if (IsFacingDoor)
             {
                 TextArea.PrintLine(" door");
                 TextArea.PrintLine();
 
-                LeaveMap(state);
+                LeaveMap();
 
                 return true;
             }
@@ -57,15 +58,15 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            if (InteractWithDisplay(state))
+            if (InteractWithDisplay())
                 return true;
 
             return false;
         }
 
-        public override bool PlayerLeave(GameState state)
+        public override bool PlayerLeave()
         {
-            LeaveMap(state);
+            LeaveMap();
 
             return true;
         }

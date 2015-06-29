@@ -53,7 +53,7 @@ namespace ERY.Xle.Maps.Dungeons
 
         private void OnPlayerExitDungeon()
         {
-            Map.OnPlayerExitDungeon(Player);
+            Map.OnPlayerExitDungeon();
         }
 
         private void DungeonLevelText()

@@ -4,7 +4,7 @@
     {
         public override void Execute()
         {
-            GameState.MapExtender.PlayerMagic(GameState);
+            GameState.MapExtender.PlayerMagic();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
                 if (Player.Food < 150)
                     Player.Food = 150;
 
-                MapChanger.ChangeMap(Player, 3, 0);
+                MapChanger.ChangeMap(3, 0);
             }
         }
 

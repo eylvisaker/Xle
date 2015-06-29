@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ERY.Xle.Maps;
+
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
 	public class ArmakDungeon : LotaDungeon
@@ -18,7 +20,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			get { return 15; }
 		}
 
-		public override void OnPlayerExitDungeon(Player player)
+		public override void OnPlayerExitDungeon()
 		{
 			if (IsCompleted)
 				return;
@@ -28,7 +30,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 			GivePermanentStrengthBoost();
 		}
 
-		public override Maps.Map3DSurfaces Surfaces(GameState state)
+		public override Map3DSurfaces Surfaces()
 		{
 			return Lota3DSurfaces.DungeonBrown;
 		}

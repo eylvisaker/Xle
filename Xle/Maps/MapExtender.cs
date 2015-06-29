@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using AgateLib.Geometry;
+using AgateLib.InputLib;
 
 using ERY.Xle.Data;
 using ERY.Xle.Services.Commands;
@@ -71,7 +72,7 @@ namespace ERY.Xle.Maps
             return TheMap.OutsideTile;
         }
 
-        public virtual void OnLoad(GameState state)
+        public virtual void OnLoad()
         {
             SetColorScheme(TheMap.ColorScheme);
 
@@ -81,20 +82,20 @@ namespace ERY.Xle.Maps
             }
         }
 
-        public virtual void OnAfterEntry(GameState state)
+        public virtual void OnAfterEntry()
         { }
 
-        public virtual void AfterPlayerStep(GameState state)
+        public virtual void AfterPlayerStep()
         {
             bool didEvent = false;
 
-            foreach (var evt in EventsAt(state.Player.X, state.Player.Y, 0))
+            foreach (var evt in EventsAt(Player.X, Player.Y, 0))
             {
                 evt.StepOn();
                 didEvent = true;
             }
 
-            AfterStepImpl(state, didEvent);
+            AfterStepImpl(didEvent);
         }
 
         public virtual void SetColorScheme(ColorScheme scheme)
@@ -108,17 +109,17 @@ namespace ERY.Xle.Maps
         }
 
 
-        public virtual void PlayerUse(GameState state, int item, ref bool handled)
+        public virtual void PlayerUse(int item, ref bool handled)
         {
             handled = CommandNotImplemented();
         }
 
 
-        public virtual void OnBeforeEntry(GameState state, ref int targetEntryPoint)
+        public virtual void OnBeforeEntry(ref int targetEntryPoint)
         {
         }
 
-        public virtual void AfterExecuteCommand(GameState state, AgateLib.InputLib.KeyCode cmd)
+        public virtual void AfterExecuteCommand(KeyCode cmd)
         {
         }
 
@@ -129,20 +130,20 @@ namespace ERY.Xle.Maps
         }
 
 
-        public virtual double ChanceToHitPlayer(Player player, Guard guard)
+        public virtual double ChanceToHitPlayer(Guard guard)
         {
-            return (player.Attribute[Attributes.dexterity] / 80.0);
+            return (Player.Attribute[Attributes.dexterity] / 80.0);
         }
 
 
-        public virtual int RollDamageToPlayer(Player player, Guard guard)
+        public virtual int RollDamageToPlayer(Guard guard)
         {
-            int armorType = player.CurrentArmor.ID;
+            int armorType = Player.CurrentArmor.ID;
 
             double damage = guard.Attack / 99.0 *
                                (120 + Random.NextDouble() * 250) /
                                Math.Pow(armorType + 3, 0.8) /
-                                   Math.Pow(player.Attribute[Attributes.endurance], 0.8) + 3;
+                                   Math.Pow(Player.Attribute[Attributes.endurance], 0.8) + 3;
 
             return (int)Math.Round(damage);
         }
@@ -158,42 +159,26 @@ namespace ERY.Xle.Maps
             get { yield break; }
         }
 
-        public virtual void CastSpell(GameState state, MagicSpell magic)
+        public virtual void CastSpell(MagicSpell magic)
         {
         }
 
-        public virtual bool RollSpellFizzle(GameState state, MagicSpell magic)
+        public virtual bool RollSpellFizzle(MagicSpell magic)
         {
             return Random.Next(10) < 5;
         }
 
-        public virtual int RollSpellDamage(GameState state, MagicSpell magic, int distance)
+        public virtual int RollSpellDamage(MagicSpell magic, int distance)
         {
             return (int)((magic.ID + 0.5) * 15 * (Random.NextDouble() + 1));
         }
-        public virtual bool CanPlayerStepInto(GameState state, Point pt)
+        public virtual bool CanPlayerStepInto(Point pt)
         {
-            return CanPlayerStepIntoImpl(state.Player, pt.X, pt.Y);
+            return CanPlayerStepIntoImpl(pt.X, pt.Y);
         }
-        public virtual bool CanPlayerStepIntoImpl(Player player, int xx, int yy)
+        public virtual bool CanPlayerStepIntoImpl(int xx, int yy)
         {
             return true;
-        }
-
-        [Obsolete("Use LeaveMap() overload instead.")]
-        public virtual void LeaveMap(Player player)
-        {
-            LeaveMap();
-        }
-
-        protected virtual void LeaveMap(GameState state)
-        {
-            TextArea.PrintLine("Leave " + TheMap.MapName);
-            TextArea.PrintLine();
-
-            GameControl.Wait(state.GameSpeed.LeaveMapTime);
-
-            MapChanger.ReturnToPreviousMap();
         }
 
         public void LeaveMap()
@@ -209,19 +194,19 @@ namespace ERY.Xle.Maps
             TextArea.PrintLine();
         }
 
-        public virtual bool PlayerFight(GameState state)
+        public virtual bool PlayerFight()
         {
             return CommandNotImplemented();
         }
 
-        public virtual bool PlayerRob(GameState state)
+        public virtual bool PlayerRob()
         {
             return CommandNotImplemented();
         }
 
-        public virtual bool PlayerSpeak(GameState state)
+        public virtual bool PlayerSpeak()
         {
-            foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
+            foreach (var evt in EventsAt(1).Where(x => x.Enabled))
             {
                 bool handled = evt.Speak();
 
@@ -229,21 +214,21 @@ namespace ERY.Xle.Maps
                     return handled;
             }
 
-            return PlayerSpeakImpl(state);
+            return PlayerSpeakImpl();
         }
 
-        protected virtual bool PlayerSpeakImpl(GameState state)
+        protected virtual bool PlayerSpeakImpl()
         {
             return false;
         }
+
         /// <summary>
         /// Function called when the player executes the Climb command.
         /// Returns true if the command was handled by this function, false
         /// if the caller should display a "Nothing to Climb" type message.
         /// </summary>
-        /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool PlayerClimb(GameState state)
+        public virtual bool PlayerClimb()
         {
             return CommandNotImplemented();
         }
@@ -252,15 +237,13 @@ namespace ERY.Xle.Maps
         /// Returns true if the command was handled by this function, false
         /// if the caller should display a "Nothing to Xamine" type message.
         /// </summary>
-        /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool PlayerXamine(GameState state)
+        public virtual bool PlayerXamine()
         {
-
             return CommandNotImplemented();
         }
 
-        public virtual bool PlayerLeave(GameState state)
+        public virtual bool PlayerLeave()
         {
             return CommandNotImplemented();
         }
@@ -275,9 +258,9 @@ namespace ERY.Xle.Maps
             return false;
         }
 
-        public virtual bool PlayerTake(GameState state)
+        public virtual bool PlayerTake()
         {
-            foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
+            foreach (var evt in EventsAt(1).Where(x => x.Enabled))
             {
                 if (evt.Take())
                     return true;
@@ -286,9 +269,9 @@ namespace ERY.Xle.Maps
             return false;
         }
 
-        public virtual bool PlayerOpen(GameState state)
+        public virtual bool PlayerOpen()
         {
-            foreach (var evt in EventsAt(state.Player, 1).Where(x => x.Enabled))
+            foreach (var evt in EventsAt(1).Where(x => x.Enabled))
             {
                 if (evt.Open())
                     return true;
@@ -296,17 +279,18 @@ namespace ERY.Xle.Maps
 
             return false;
         }
+
         /// <summary>
         /// Returns true if there was an effect of using the item.
         /// </summary>
-        /// <param name="player"></param>
         /// <param name="item"></param>
+        /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool PlayerUse(GameState state, int item)
+        public virtual bool PlayerUse(int item)
         {
             bool handled = false;
 
-            foreach (var evt in EventsAt(state.Player, 1))
+            foreach (var evt in EventsAt(1))
             {
                 handled = evt.Use(item);
 
@@ -314,48 +298,48 @@ namespace ERY.Xle.Maps
                     return handled;
             }
 
-            PlayerUse(state, item, ref handled);
+            PlayerUse(item, ref handled);
 
             return handled;
         }
 
-        public virtual bool PlayerDisembark(GameState state)
+        public virtual bool PlayerDisembark()
         {
             return false;
         }
 
-        public virtual void PlayerMagic(GameState state)
+        public virtual void PlayerMagic()
         {
-            var magics = ValidMagic.Where(x => state.Player.Items[x.ItemID] > 0).ToList();
+            var magics = ValidMagic.Where(x => Player.Items[x.ItemID] > 0).ToList();
 
             MagicSpell magic;
 
             if (UseFancyMagicPrompt)
-                magic = MagicPrompt(state, magics.ToArray());
+                magic = MagicPrompt(magics.ToArray());
             else
                 magic = MagicMenu(magics.ToArray());
 
             if (magic == null)
                 return;
 
-            if (state.Player.Items[magic.ItemID] <= 0)
+            if (Player.Items[magic.ItemID] <= 0)
             {
                 TextArea.PrintLine();
                 TextArea.PrintLine("You have no " + magic.PluralName + ".", XleColor.White);
                 return;
             }
 
-            state.Player.Items[magic.ItemID]--;
+            Player.Items[magic.ItemID]--;
 
-            PlayerMagicImpl(state, magic);
+            PlayerMagicImpl(magic);
         }
 
-        protected virtual void PlayerMagicImpl(GameState state, MagicSpell magic)
+        protected virtual void PlayerMagicImpl(MagicSpell magic)
         {
         }
 
 
-        protected virtual MagicSpell MagicPrompt(GameState state, MagicSpell[] magics)
+        protected virtual MagicSpell MagicPrompt(MagicSpell[] magics)
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -425,20 +409,19 @@ namespace ERY.Xle.Maps
         /// Assumes validation has already been performed. Call CanPlayerStep
         /// first to check to see if the movement is valid.
         /// </summary>
-        /// <param name="state"></param>
         /// <param name="stepDirection"></param>
-        public virtual void MovePlayer(GameState state, Point stepDirection)
+        public virtual void MovePlayer(Point stepDirection)
         {
-            Point newPoint = new Point(state.Player.X + stepDirection.X, state.Player.Y + stepDirection.Y);
+            Point newPoint = new Point(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
-            BeforeStepOn(state, newPoint.X, newPoint.Y);
+            BeforeStepOn(newPoint.X, newPoint.Y);
 
-            state.Player.Location = newPoint;
+            Player.Location = newPoint;
 
-            AfterPlayerStep(state);
+            AfterPlayerStep();
         }
 
-        public void BeforeStepOn(GameState state, int x, int y)
+        public void BeforeStepOn(int x, int y)
         {
             foreach (var evt in EventsAt(x, y, 0))
             {
@@ -449,22 +432,21 @@ namespace ERY.Xle.Maps
         /// <summary>
         /// Called after the player steps.
         /// </summary>
-        /// <param name="player"></param>
         /// <param name="didEvent">True if there was an event that occured at this location</param>
-        protected virtual void AfterStepImpl(GameState state, bool didEvent)
+        /// <param name="player"></param>
+        protected virtual void AfterStepImpl(bool didEvent)
         {
 
         }
 
-        public bool CanPlayerStep(GameState state, Point stepDirection)
+        public bool CanPlayerStep(Point stepDirection)
         {
-            return CanPlayerStep(state, stepDirection.X, stepDirection.Y);
+            return CanPlayerStep(stepDirection.X, stepDirection.Y);
         }
 
-        protected virtual bool CanPlayerStep(GameState state, int dx, int dy)
+        protected virtual bool CanPlayerStep(int dx, int dy)
         {
-            var player = state.Player;
-            EventExtender evt = GetEvent(player.X + dx, player.Y + dy, 0);
+            EventExtender evt = GetEvent(Player.X + dx, Player.Y + dy, 0);
 
             if (evt != null)
             {
@@ -476,15 +458,15 @@ namespace ERY.Xle.Maps
                     return false;
             }
 
-            return CanPlayerStepIntoImpl(player, player.X + dx, player.Y + dy);
+            return CanPlayerStepIntoImpl(Player.X + dx, Player.Y + dy);
         }
 
-        public virtual void PlayerCursorMovement(GameState state, Direction dir)
+        public virtual void PlayerCursorMovement(Direction dir)
         {
 
         }
 
-        public virtual void CheckSounds(GameState state)
+        public virtual void CheckSounds()
         {
         }
 
@@ -506,10 +488,10 @@ namespace ERY.Xle.Maps
             }
         }
 
-        public IEnumerable<EventExtender> EventsAt(Player player, int border)
+        public IEnumerable<EventExtender> EventsAt(int border)
         {
-            int px = player.X;
-            int py = player.Y;
+            int px = Player.X;
+            int py = Player.Y;
 
             return EventsAt(px, py, border);
         }
