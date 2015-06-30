@@ -97,11 +97,8 @@ namespace ERY.Xle.Services.Menus.Implementation
                     if (key == KeyCode.BackSpace)
                         amount /= 10;
 
-                    if (amount > max)
-                        amount = max;
-
-                    if (amount < 0)
-                        amount = 0;
+                    amount = Math.Min(amount, max);
+                    amount = Math.Max(amount, 0);
 
                     TextArea.RewriteLine(4, "                          - " + amount.ToString() + " -");
                 }
