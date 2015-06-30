@@ -98,6 +98,7 @@
     <Compile Include="LegacyOfTheAncients\LotaTest.cs" />
     <Compile Include="LegacyOfTheAncients\MuseumExhibitLevelUpTests.cs" />
     <Compile Include="ServiceTests\CommandTests\ClimbTest.cs" />
+    <Compile Include="ServiceTests\EquipmentPickerTest.cs" />
     <Compile Include="ServiceTests\NumberPickerTests.cs" />
     <Compile Include="XleServices.cs" />
     <Compile Include="ColorStringbiulderTests.cs" />

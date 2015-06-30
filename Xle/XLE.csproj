@@ -61,6 +61,7 @@
     <Compile Include="Bootstrap\ServiceInstaller.cs" />
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
+    <Compile Include="Data\EquipmentInfo.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonOpenCommand.cs" />
     <Compile Include="Maps\Dungeons\DungeonCombat.cs" />
     <Compile Include="Services\Rendering\Maps\CastleRenderer.cs" />

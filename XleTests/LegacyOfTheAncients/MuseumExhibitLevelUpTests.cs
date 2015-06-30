@@ -17,27 +17,23 @@ namespace ERY.XleTests
     [TestClass]
     public class MuseumExhibitTests : LotaTest
     {
-        Player player = new Player();
-        GameState gameState;
         Information information;
 
         [TestInitialize]
         public void Initialize()
         {
-            player.Items.ClearStoryItems(); // remove the compendium the player started with.
-            player.StoryData = new LotaStory();
+            Player.Items.ClearStoryItems(); // remove the compendium the player started with.
+            Player.StoryData = new LotaStory();
             
-            gameState = new GameState { Player = player };
-        
             information = new Information();
-            information.GameState = gameState;
+            information.GameState = GameState;
         
             Assert.IsFalse(information.ShouldLevelUp());
         }
 
         void MarkExhibit(ExhibitIdentifier ex, int value)
         {
-            var museum = player.Story().Museum;
+            var museum = Player.Story().Museum;
             museum[(int)ex] = value;
         }
 
@@ -60,7 +56,7 @@ namespace ERY.XleTests
         [TestMethod]
         public void PromoteToLevel3()
         {
-            player.Level = 2;
+            Player.Level = 2;
             Assert.IsFalse(information.ShouldLevelUp());
 
             CompleteJadeExhibits();
@@ -71,14 +67,14 @@ namespace ERY.XleTests
             MarkExhibit(ExhibitIdentifier.PirateTreasure, 1);
 
             Assert.IsFalse(information.ShouldLevelUp());
-            player.Story().BeenInDungeon = true;
+            Player.Story().BeenInDungeon = true;
             Assert.IsTrue(information.ShouldLevelUp());
         }
 
         [TestMethod]
         public void PromoteToLevel4()
         {
-            player.Level = 3;
+            Player.Level = 3;
             Assert.IsFalse(information.ShouldLevelUp());
 
             MarkExhibit(ExhibitIdentifier.StonesWisdom, 1);
@@ -91,12 +87,12 @@ namespace ERY.XleTests
         [TestMethod]
         public void PromoteToLevel5()
         {
-            player.Level = 4;
+            Player.Level = 4;
             Assert.IsFalse(information.ShouldLevelUp());
 
             MarkExhibit(ExhibitIdentifier.LostDisplays, 1);
             MarkExhibit(ExhibitIdentifier.KnightsTest, 1);
-            player.Items[LotaItem.MagicIce] = 1;
+            Player.Items[LotaItem.MagicIce] = 1;
 
             Assert.IsTrue(information.ShouldLevelUp());
         }
@@ -104,22 +100,22 @@ namespace ERY.XleTests
         [TestMethod]
         public void PromoteToLevel6()
         {
-            player.Level = 5;
+            Player.Level = 5;
             Assert.IsFalse(information.ShouldLevelUp());
 
-            player.Story().FoundGuardianLeader = true;
+            Player.Story().FoundGuardianLeader = true;
             Assert.IsTrue(information.ShouldLevelUp());
         }
 
         [TestMethod]
         public void PromoteToLevel7()
         {
-            player.Level = 6;
+            Player.Level = 6;
 
             for (int i = 0; i < 4; i++)
             {
                 Assert.IsFalse(information.ShouldLevelUp());
-                player.Items[LotaItem.GuardJewel]++; //  add a guard jewel.
+                Player.Items[LotaItem.GuardJewel]++; //  add a guard jewel.
             }
 
             Assert.IsTrue(information.ShouldLevelUp());
@@ -128,11 +124,11 @@ namespace ERY.XleTests
         [TestMethod]
         public void PromoteToLevel10()
         {
-            player.Level = 7;
+            Player.Level = 7;
             Assert.IsFalse(information.ShouldLevelUp());
 
-            player.Items[LotaItem.GuardJewel] = 4;
-            player.Items[LotaItem.Compendium] = 1;
+            Player.Items[LotaItem.GuardJewel] = 4;
+            Player.Items[LotaItem.Compendium] = 1;
 
             Assert.IsTrue(information.ShouldLevelUp());
         }

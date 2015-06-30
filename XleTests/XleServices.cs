@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using AgateLib.InputLib;
 
+using ERY.Xle.Data;
+using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 
@@ -36,19 +38,37 @@ namespace ERY.XleTests
             TextArea = new Mock<ITextArea>();
             TextArea.SetupAllProperties();
 
-            GameControl = new Mock<IXleGameControl>();
-            GameControl.SetupAllProperties();
+            SubMenu = new Mock<IXleSubMenu>();
+            SubMenu.SetupAllProperties();
 
-            MapChanger = new Mock<IMapChanger>();
-            MapChanger.SetupAllProperties();
+            Data = new XleData();
+            InitializeData();
         }
 
-        public List<KeyCode> KeysToSend { get; set; } 
-        
+        private void InitializeData()
+        {
+            Data.WeaponList.Add(1, "Knife", "30,40,52,66,81");
+            Data.WeaponList.Add(2, "Leaded Club", "66,80,97,114,133");
+            Data.WeaponList.Add(3, "Bladed Staff", "115,134,155,177,200");
+
+            Data.ArmorList.Add(1, "Studded Hide", "50,65,82,103,127");
+            Data.ArmorList.Add(2, "Ring Mail", "120,147,177,211,249");
+            Data.ArmorList.Add(3, "Double Mail", "239,281,327,379,436");
+
+            Data.QualityList.Add(0, "Shoddy");
+            Data.QualityList.Add(1, "Fair");
+            Data.QualityList.Add(2, "Good");
+            Data.QualityList.Add(3, "Great");
+            Data.QualityList.Add(4, "Superb");
+        }
+
+        public List<KeyCode> KeysToSend { get; set; }
+
         public Mock<IXleScreen> Screen { get; set; }
         public Mock<IXleInput> Input { get; set; }
         public Mock<ITextArea> TextArea { get; set; }
-        public Mock<IXleGameControl> GameControl { get; set; }
-        public Mock<IMapChanger> MapChanger { get; set; }
+        public Mock<IXleSubMenu> SubMenu { get; set; }
+
+        public XleData Data { get; set; }
     }
 }
