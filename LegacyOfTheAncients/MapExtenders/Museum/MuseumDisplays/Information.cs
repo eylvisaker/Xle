@@ -175,7 +175,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
             if (ShouldLevelUp())
             {
                 ReadRawText(ExhibitInfo.Text[0]);
-                int newLevel = TargetLevel();
+                int newLevel = TargetLevel;
 
                 TextArea.PrintLine();
                 TextArea.PrintLine("Your level is now " + newLevel.ToString() + "!!");
@@ -192,66 +192,69 @@ namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 
         public bool ShouldLevelUp()
         {
-            if (TargetLevel() > Player.Level)
+            if (TargetLevel > Player.Level)
                 return true;
             else
                 return false;
         }
 
-        private int TargetLevel()
+        private int TargetLevel
         {
-            // check if we have compendium and guard jewels
-            if (Player.Items[LotaItem.Compendium] > 0 &&
-                Player.Items[LotaItem.GuardJewel] >= 4)
+            get
             {
-                return 10;
+                // check if we have compendium and guard jewels
+                if (Player.Items[LotaItem.Compendium] > 0 &&
+                    Player.Items[LotaItem.GuardJewel] >= 4)
+                {
+                    return 10;
+                }
+
+                // check if we've gotten the four jewels
+                if (Player.Items[LotaItem.GuardJewel] >= 4)
+                    return 7;
+
+                // check if we've found the leader of the guardians
+                if (Story.FoundGuardianLeader == true)
+                    return 6;
+
+                int jadeExhibits = CountExhibits(2, 4);
+                int topazExhibits = CountExhibits(5, 7);
+                int amethystExhibits = CountExhibits(8, 9);
+                int sapphireExhibits = CountExhibits(10, 11);
+
+                // check if we've viewed both sapphire visits 
+                // (thus having completed the first two dungeons
+                // TODO - this won't work if the player dies in Armak!)
+                // and check if we've returned the crown and sceptor
+                // and received the magic ice.
+                if (sapphireExhibits == 2 &&
+                    Player.Items[LotaItem.MagicIce] > 0)
+                {
+                    return 5;
+                }
+
+                // check if we've viewed both amethyst exhibits and opened
+                // the lost displays.
+                if (amethystExhibits == 2 && sapphireExhibits == 1)
+                    return 4;
+
+                // check if we've viewed all jade and topaz exhibits and been 
+                // to the pirate's lair
+                if (Story.BeenInDungeon &&
+                    jadeExhibits == 3 &&
+                    topazExhibits == 3)
+                {
+                    return 3;
+                }
+
+                // check that we've seen all the jade coin exhibits and we've closed
+                // down the weaponry exhibit.
+                if (jadeExhibits == 3 && Story.Museum[2] < 0)
+                    return 2;
+
+                // geez, they've done nothing.
+                return 1;
             }
-
-            // check if we've gotten the four jewels
-            if (Player.Items[LotaItem.GuardJewel] >= 4)
-                return 7;
-
-            // check if we've found the leader of the guardians
-            if (Story.FoundGuardianLeader == true)
-                return 6;
-
-            int jadeExhibits = CountExhibits(2, 4);
-            int topazExhibits = CountExhibits(5, 7);
-            int amethystExhibits = CountExhibits(8, 9);
-            int sapphireExhibits = CountExhibits(10, 11);
-
-            // check if we've viewed both sapphire visits 
-            // (thus having completed the first two dungeons
-            // TODO - this won't work if the player dies in Armak!)
-            // and check if we've returned the crown and sceptor
-            // and received the magic ice.
-            if (sapphireExhibits == 2 &&
-                Player.Items[LotaItem.MagicIce] > 0)
-            {
-                return 5;
-            }
-
-            // check if we've viewed both amethyst exhibits and opened
-            // the lost displays.
-            if (amethystExhibits == 2 && sapphireExhibits == 1)
-                return 4;
-
-            // check if we've viewed all jade and topaz exhibits and been 
-            // to the pirate's lair
-            if (Story.BeenInDungeon &&
-                jadeExhibits == 3 &&
-                topazExhibits == 3)
-            {
-                return 3;
-            }
-
-            // check that we've seen all the jade coin exhibits and we've closed
-            // down the weaponry exhibit.
-            if (jadeExhibits == 3 && Story.Museum[2] < 0)
-                return 2;
-
-            // geez, they've done nothing.
-            return 1;
         }
 
         private int CountExhibits(int start, int finish)

@@ -104,7 +104,7 @@ namespace ERY.Xle.LotA
                 player.Attribute[Attributes.endurance] = 32;
 
                 story.Museum[(int)ExhibitIdentifier.Thornberry] = 1;
-                story.Museum[(int)ExhibitIdentifier.Weaponry] = 10; // mark weaponry as closed.
+                story.Museum[(int)ExhibitIdentifier.Weaponry] = -1; // mark weaponry as closed.
                 story.Museum[(int)ExhibitIdentifier.Fountain] = 1;
 
                 player.AddWeapon(3, 3);

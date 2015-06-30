@@ -75,6 +75,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\moq.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -90,10 +93,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ColorSchemeTests.cs" />
-    <Compile Include="MuseumExhibitTests.cs" />
-    <Compile Include="XleBaseTests.cs" />
+    <Compile Include="Fakes\FakeMap.cs" />
+    <Compile Include="LegacyOfTheAncients\LotaTest.cs" />
+    <Compile Include="LegacyOfTheAncients\MuseumExhibitLevelUpTests.cs" />
+    <Compile Include="ServiceTests\NumberPickerTests.cs" />
+    <Compile Include="XleServices.cs" />
+    <Compile Include="ColorStringbiulderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XleMapTests.cs" />
+    <Compile Include="XleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Agate\AgateLib\AgateLib.csproj">
@@ -117,9 +125,7 @@
       <Name>XLE</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
