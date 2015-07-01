@@ -8,12 +8,6 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 {
     public class Flight : Tarmalon
     {
-        public override void OnBeforeEntry(ref int targetEntryPoint)
-        {
-            base.OnBeforeEntry(ref targetEntryPoint);
-
-        }
-
         public override void OnAfterEntry()
         {
             if (Player.X == 11 && Player.Y == 8)

@@ -38,12 +38,14 @@ namespace ERY.XleTests.ServiceTests
 
         }
 
-        private void SetupMapLoader<TMapData>() where TMapData : XleMap, new()
+        private void SetupMapLoader<TMapData>(Action<Mock<MapExtender>> mapGenerator = null) where TMapData : XleMap, new()
         {
             Services.MapLoader.Setup(x => x.LoadMap(It.IsAny<int>()))
                 .Returns((int mapId) =>
                 {
                     returnedMap = InitializeMap<TMapData>(mapId);
+                    if (mapGenerator != null)
+                        mapGenerator(returnedMap);
                     return returnedMap.Object;
                 });
         }
@@ -79,6 +81,13 @@ namespace ERY.XleTests.ServiceTests
             return newMap;
         }
 
+        private void SetStartMap()
+        {
+            var startMap = InitializeMap<Outside>(1);
+            changer.SetMap(startMap.Object);
+            Player.MapID = startMap.Object.MapID;
+        }
+
         [TestMethod]
         public void ChangeMapToPoint()
         {
@@ -98,9 +107,7 @@ namespace ERY.XleTests.ServiceTests
         {
             SetupMapLoader<Town>();
 
-            var startMap = InitializeMap<Outside>(1);
-            changer.SetMap(startMap.Object);
-            Player.MapID = startMap.Object.MapID;
+            SetStartMap();
 
             Player.Location = new Point(22, 44);
             Player.FaceDirection = Direction.West;
@@ -110,7 +117,51 @@ namespace ERY.XleTests.ServiceTests
             Assert.AreEqual(1, Player.returnMap);
             Assert.AreEqual(22, Player.returnX);
             Assert.AreEqual(44, Player.returnY);
+            Assert.AreEqual(2, GameState.Map.MapID);
+            Assert.AreEqual(2, Player.MapID);
+            Assert.AreEqual(new Point(4, 4), Player.Location);
             Assert.AreEqual(Direction.South, Player.returnFacing);
+        }
+
+        [TestMethod]
+        public void MapEntryPointEvents()
+        {
+            SetupMapLoader<Town>(m =>
+            {
+                m.Object.TheMap.EntryPoints.Add(new EntryPoint { Location = new Point(4, 4) });
+                m.Setup(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>())).Verifiable();
+                m.Setup(x => x.OnLoad()).Verifiable();
+                m.Setup(x => x.SetCommands(Services.CommandList.Object)).Verifiable();
+                m.Setup(x => x.OnAfterEntry()).Verifiable();
+            });
+
+            SetStartMap();
+            changer.ChangeMap(2, 0);
+
+            returnedMap.Verify(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>()));
+            returnedMap.Verify(x => x.OnLoad());
+            returnedMap.Verify(x => x.SetCommands(Services.CommandList.Object));
+            returnedMap.Verify(x => x.OnAfterEntry());
+        }
+
+        [TestMethod]
+        public void MapDirectEntryEvents()
+        {
+            SetupMapLoader<Town>(m =>
+            {
+                m.Setup(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>())).Verifiable();
+                m.Setup(x => x.OnLoad()).Verifiable();
+                m.Setup(x => x.SetCommands(Services.CommandList.Object)).Verifiable();
+                m.Setup(x => x.OnAfterEntry()).Verifiable();
+            });
+
+            SetStartMap();
+            changer.ChangeMap(2, new Point(5, 5));
+
+            returnedMap.Verify(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>()), Times.Never);
+            returnedMap.Verify(x => x.OnLoad());
+            returnedMap.Verify(x => x.SetCommands(Services.CommandList.Object));
+            returnedMap.Verify(x => x.OnAfterEntry());
         }
     }
 }

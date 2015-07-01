@@ -115,7 +115,7 @@ namespace ERY.Xle.Maps
         }
 
 
-        public virtual void OnBeforeEntry(ref int targetEntryPoint)
+        public virtual void ModifyEntryPoint(MapEntryParams entryParams)
         {
         }
 

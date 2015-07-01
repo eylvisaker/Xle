@@ -93,14 +93,21 @@ namespace ERY.Xle.Services.MapLoad.Implementation
 
                     if (targetEntryPoint >= 0)
                     {
-                        textArea.PrintLine("Failed to find entry point " + targetEntryPoint.ToString(), XleColor.Yellow);
+                        textArea.PrintLine("Failed to find entry point " + targetEntryPoint, XleColor.Yellow);
                         textArea.PrintLine();
                     }
                 }
                 else
                 {
                     if (actualChangeMap)
-                        gameState.MapExtender.OnBeforeEntry(ref targetEntryPoint);
+                    {
+                        MapEntryParams entryParams = new MapEntryParams
+                        { EntryPoint = targetEntryPoint };
+
+                        gameState.MapExtender.ModifyEntryPoint(entryParams);
+                            
+                        targetEntryPoint = entryParams.EntryPoint;
+                    }
 
                     var ep = gameState.Map.EntryPoints[targetEntryPoint];
 

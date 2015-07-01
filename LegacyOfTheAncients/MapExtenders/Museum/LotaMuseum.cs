@@ -125,10 +125,10 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
             get { return (Information)GetExhibitByTile(0x50); }
         }
 
-        public override void OnBeforeEntry(ref int targetEntryPoint)
+        public override void ModifyEntryPoint(MapEntryParams entryParams)
         {
-            if (targetEntryPoint < 3)
-                targetEntryPoint = Story.MuseumEntryPoint;
+            if (entryParams.EntryPoint < 3)
+                entryParams.EntryPoint = Story.MuseumEntryPoint;
         }
 
         public override void PlayerUse(int item, ref bool handled)
