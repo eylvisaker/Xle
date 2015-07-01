@@ -99,11 +99,11 @@
     <Compile Include="LegacyOfTheAncients\MuseumExhibitLevelUpTests.cs" />
     <Compile Include="ServiceTests\CommandTests\ClimbTest.cs" />
     <Compile Include="ServiceTests\EquipmentPickerTest.cs" />
+    <Compile Include="ServiceTests\MapChangerTest.cs" />
     <Compile Include="ServiceTests\NumberPickerTests.cs" />
     <Compile Include="XleServices.cs" />
     <Compile Include="ColorStringbiulderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XleMapTests.cs" />
     <Compile Include="XleTest.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,16 @@ namespace ERY.Xle
         }
 
         public Player Player { get; set; }
-        public XleMap Map { get { return MapExtender.TheMap; } }
+        public XleMap Map
+        {
+            get
+            {
+                if (MapExtender == null)
+                    return null;
+                return MapExtender.TheMap;
+            }
+        }
+
         public MapExtender MapExtender { get; set; }
 
         public GameSpeed GameSpeed { get; set; }

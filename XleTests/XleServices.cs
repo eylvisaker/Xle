@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using AgateLib.InputLib;
 
 using ERY.Xle.Data;
+using ERY.Xle.Services.Commands;
+using ERY.Xle.Services.MapLoad;
 using ERY.Xle.Services.Menus;
+using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 
@@ -41,9 +44,31 @@ namespace ERY.XleTests
             SubMenu = new Mock<IXleSubMenu>();
             SubMenu.SetupAllProperties();
 
+            Images = new Mock<IXleImages>();
+            Images.SetupAllProperties();
+
+            CommandList = new Mock<ICommandList>();
+            CommandList.SetupAllProperties();
+            CommandList.SetupGet(x => x.Items).Returns(new List<ICommand>());
+
+            MapLoader = new Mock<IMapLoader>();
+            MapLoader.SetupAllProperties();
+
             Data = new XleData();
             InitializeData();
         }
+
+        public Mock<IXleScreen> Screen { get; set; }
+        public Mock<IXleInput> Input { get; set; }
+        public Mock<ITextArea> TextArea { get; set; }
+        public Mock<IXleSubMenu> SubMenu { get; set; }
+        public Mock<IXleImages> Images { get; set; }
+        public Mock<ICommandList> CommandList { get; set; }
+        public Mock<IMapLoader> MapLoader { get; set; }
+
+        public XleData Data { get; set; }
+
+        public List<KeyCode> KeysToSend { get; set; }
 
         private void InitializeData()
         {
@@ -62,13 +87,5 @@ namespace ERY.XleTests
             Data.QualityList.Add(4, "Superb");
         }
 
-        public List<KeyCode> KeysToSend { get; set; }
-
-        public Mock<IXleScreen> Screen { get; set; }
-        public Mock<IXleInput> Input { get; set; }
-        public Mock<ITextArea> TextArea { get; set; }
-        public Mock<IXleSubMenu> SubMenu { get; set; }
-
-        public XleData Data { get; set; }
     }
 }

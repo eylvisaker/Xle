@@ -124,8 +124,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.Print(e.Message);
-                System.Diagnostics.Debug.Print(e.StackTrace);
+                System.Diagnostics.Debug.Print(e.ToString());
 
                 Player.MapID = saveMap.MapID;
                 gameState.MapExtender = saveMap;
@@ -159,8 +158,6 @@ namespace ERY.Xle.Services.MapLoad.Implementation
 
             images.LoadTiles(gameState.Map.TileImage);
         }
-
-
 
         public void ReturnToPreviousMap()
         {
