@@ -2,7 +2,7 @@
 
 namespace ERY.Xle.Services.Commands
 {
-    public abstract class Command
+    public abstract class Command : ICommand
     {
         public ITextArea TextArea { get; set; }
         public GameState GameState { get; set; }

@@ -64,6 +64,7 @@
     <Compile Include="Data\EquipmentInfo.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonOpenCommand.cs" />
     <Compile Include="Maps\Dungeons\DungeonCombat.cs" />
+    <Compile Include="Services\Commands\ICommand.cs" />
     <Compile Include="Services\Rendering\Maps\CastleRenderer.cs" />
     <Compile Include="Services\Rendering\Maps\TempleRenderer.cs" />
     <Compile Include="Services\Rendering\IMapRendererFactory.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="Services\Rendering\IMenuRenderer.cs" />
     <Compile Include="Services\Commands\Implementation\ArmorCommand.cs" />
     <Compile Include="Services\Commands\Implementation\Climb.cs" />
-    <Compile Include="Services\Commands\Command.cs" />
+    <Compile Include="Services\Commands\Implementation\Command.cs" />
     <Compile Include="Services\Commands\Implementation\CommandExecutor.cs" />
     <Compile Include="Services\Commands\Implementation\Disembark.cs" />
     <Compile Include="Services\Commands\Implementation\End.cs" />

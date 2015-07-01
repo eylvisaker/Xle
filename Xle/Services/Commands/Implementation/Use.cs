@@ -25,6 +25,11 @@ namespace ERY.Xle.Services.Commands.Implementation
 
         public bool ShowItemMenu { get; set; }
 
+        public override string Name
+        {
+            get { return "Use"; }
+        }
+
         public override void Execute()
         {
             if (ShowItemMenu)
@@ -44,6 +49,12 @@ namespace ERY.Xle.Services.Commands.Implementation
 
             TextArea.PrintLine(action + ".");
 
+            UseItem();
+        }
+
+        private void UseItem()
+        {
+            bool noEffect;
             if (Player.Hold == Factory.HealingItemID)
             {
                 noEffect = false;

@@ -20,10 +20,10 @@ namespace ERY.Xle.Services.Commands.Implementation
             mDirectionMap[KeyCode.Quotes] = Direction.East;
             mDirectionMap[KeyCode.Slash] = Direction.South;
 
-            Items = new List<Command>();
+            Items = new List<ICommand>();
         }
 
-        public List<Command> Items { get; set; }
+        public List<ICommand> Items { get; set; }
 
         bool IsCursorMovement(KeyCode cmd)
         {
@@ -40,7 +40,7 @@ namespace ERY.Xle.Services.Commands.Implementation
             }
         }
 
-        public Command FindCommand(KeyCode cmd)
+        public ICommand FindCommand(KeyCode cmd)
         {
             var keystring = AgateLib.InputLib.Legacy.Keyboard.GetKeyString(cmd, new KeyModifiers());
 
@@ -62,7 +62,7 @@ namespace ERY.Xle.Services.Commands.Implementation
                 CurrentCommand = Items[0];
         }
 
-        public Command CurrentCommand { get; set; }
+        public ICommand CurrentCommand { get; set; }
 
         public bool IsLeftMenuActive { get; set; }
     }

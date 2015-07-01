@@ -6,14 +6,14 @@ namespace ERY.Xle.Services.Commands
 {
     public interface ICommandList : IXleService
     {
-        List<Command> Items { get; }
+        List<ICommand> Items { get; }
 
         bool IsLeftMenuActive { get; }
 
-        Command CurrentCommand { get; set; }
+        ICommand CurrentCommand { get; set; }
 
         void ResetCurrentCommand();
 
-        Command FindCommand(KeyCode cmd);
+        ICommand FindCommand(KeyCode cmd);
     }
 }
