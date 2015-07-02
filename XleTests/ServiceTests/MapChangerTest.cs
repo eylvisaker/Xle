@@ -25,6 +25,7 @@ namespace ERY.XleTests.ServiceTests
     {
         MapChanger changer;
         Mock<MapExtender> returnedMap;
+        Mock<MapExtender> startMap;
 
         [TestInitialize]
         public void Initialize()
@@ -44,6 +45,12 @@ namespace ERY.XleTests.ServiceTests
                 .Returns((int mapId) =>
                 {
                     returnedMap = InitializeMap<TMapData>(mapId);
+
+                    returnedMap.Setup(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>())).Verifiable();
+                    returnedMap.Setup(x => x.OnLoad()).Verifiable();
+                    returnedMap.Setup(x => x.SetCommands(Services.CommandList.Object)).Verifiable();
+                    returnedMap.Setup(x => x.OnAfterEntry()).Verifiable();
+
                     if (mapGenerator != null)
                         mapGenerator(returnedMap);
                     return returnedMap.Object;
@@ -81,9 +88,9 @@ namespace ERY.XleTests.ServiceTests
             return newMap;
         }
 
-        private void SetStartMap()
+        private void SetStartMap(int mapId = 1)
         {
-            var startMap = InitializeMap<Outside>(1);
+            startMap = InitializeMap<Outside>(mapId);
             changer.SetMap(startMap.Object);
             Player.MapID = startMap.Object.MapID;
         }
@@ -129,10 +136,6 @@ namespace ERY.XleTests.ServiceTests
             SetupMapLoader<Town>(m =>
             {
                 m.Object.TheMap.EntryPoints.Add(new EntryPoint { Location = new Point(4, 4) });
-                m.Setup(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>())).Verifiable();
-                m.Setup(x => x.OnLoad()).Verifiable();
-                m.Setup(x => x.SetCommands(Services.CommandList.Object)).Verifiable();
-                m.Setup(x => x.OnAfterEntry()).Verifiable();
             });
 
             SetStartMap();
@@ -147,13 +150,7 @@ namespace ERY.XleTests.ServiceTests
         [TestMethod]
         public void MapDirectEntryEvents()
         {
-            SetupMapLoader<Town>(m =>
-            {
-                m.Setup(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>())).Verifiable();
-                m.Setup(x => x.OnLoad()).Verifiable();
-                m.Setup(x => x.SetCommands(Services.CommandList.Object)).Verifiable();
-                m.Setup(x => x.OnAfterEntry()).Verifiable();
-            });
+            SetupMapLoader<Town>();
 
             SetStartMap();
             changer.ChangeMap(2, new Point(5, 5));
@@ -162,6 +159,22 @@ namespace ERY.XleTests.ServiceTests
             returnedMap.Verify(x => x.OnLoad());
             returnedMap.Verify(x => x.SetCommands(Services.CommandList.Object));
             returnedMap.Verify(x => x.OnAfterEntry());
+        }
+
+        [TestMethod]
+        public void MoveOnSameMap()
+        {
+            SetupMapLoader<Town>();
+
+            SetStartMap(1);
+            startMap.ResetCalls();
+
+            changer.ChangeMap(1, new Point(24, 33));
+
+            Assert.AreEqual(new Point(24,33), Player.Location);
+            startMap.Verify(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>()), Times.Never());
+            startMap.Verify(x => x.OnLoad(), Times.Never());
+            startMap.Verify(x => x.OnAfterEntry(), Times.Never);
         }
     }
 }

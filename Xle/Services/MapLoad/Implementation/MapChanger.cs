@@ -59,74 +59,34 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             var saveX = Player.X;
             var saveY = Player.Y;
 
-            if (gameState.Map is Outside)
+            SetReturnLocationIfOutside();
+
+            if (saveMap.MapID == mMapID || mMapID == 0)
             {
-                Player.SetReturnLocation(Player.MapID, Player.X, Player.Y, Direction.South);
+                var ep = DetermineEntryPoint(targetEntryPoint, targetX, targetY);
+
+                MoveToEntryPoint(ep);
+
+                return;
             }
-
-            bool actualChangeMap = saveMap.MapID != mMapID;
-
-            if (mMapID == 0)
-                actualChangeMap = false;
 
             try
             {
-                if (actualChangeMap)
-                {
-                    gameState.MapExtender = mapLoader.LoadMap(mMapID);
-                    Player.MapID = mMapID;
+                gameState.MapExtender = mapLoader.LoadMap(mMapID);
+                Player.MapID = mMapID;
 
-                    if (gameState.Map.GetType() == saveMap.GetType() &&
-                        gameState.Map.Guards != null)
-                    {
-                        gameState.Map.Guards.IsAngry = saveMap.TheMap.Guards.IsAngry;
-                    }
+                TransferAngryStateIfNeeded(saveMap);
 
-                    textArea.Clear();
-                }
+                textArea.Clear();
 
-                if (targetEntryPoint < 0 ||
-                    targetEntryPoint >= gameState.Map.EntryPoints.Count)
-                {
-                    Player.X = targetX;
-                    Player.Y = targetY;
+                targetEntryPoint = ModifyTargetEntryPoint(targetEntryPoint);
 
-                    if (targetEntryPoint >= 0)
-                    {
-                        textArea.PrintLine("Failed to find entry point " + targetEntryPoint, XleColor.Yellow);
-                        textArea.PrintLine();
-                    }
-                }
-                else
-                {
-                    if (actualChangeMap)
-                    {
-                        MapEntryParams entryParams = new MapEntryParams
-                        { EntryPoint = targetEntryPoint };
+                var ep = DetermineEntryPoint(targetEntryPoint, targetX, targetY);
 
-                        gameState.MapExtender.ModifyEntryPoint(entryParams);
-                            
-                        targetEntryPoint = entryParams.EntryPoint;
-                    }
-
-                    var ep = gameState.Map.EntryPoints[targetEntryPoint];
-
-                    Player.X = ep.Location.X;
-                    Player.Y = ep.Location.Y;
-                    Player.DungeonLevel = ep.DungeonLevel;
-
-                    if (ep.Facing != Direction.None)
-                    {
-                        Player.FaceDirection = ep.Facing;
-                    }
-                }
+                MoveToEntryPoint(ep);
 
                 SetTilesAndCommands();
-
-                if (actualChangeMap)
-                {
-                    gameState.MapExtender.OnLoad();
-                }
+                gameState.MapExtender.OnLoad();
 
             }
             catch (Exception e)
@@ -141,8 +101,79 @@ namespace ERY.Xle.Services.MapLoad.Implementation
                 throw;
             }
 
-            if (actualChangeMap)
-                gameState.MapExtender.OnAfterEntry();
+            gameState.MapExtender.OnAfterEntry();
+        }
+
+        private void TransferAngryStateIfNeeded(MapExtender saveMap)
+        {
+            // Preserve guard anger state for castle 
+            // when changing levels
+            if (gameState.Map.GetType() == saveMap.GetType() &&
+                gameState.Map.Guards != null)
+            {
+                gameState.Map.Guards.IsAngry = saveMap.TheMap.Guards.IsAngry;
+            }
+        }
+
+        private int ModifyTargetEntryPoint(int targetEntryPoint)
+        {
+            if (targetEntryPoint >= 0)
+            {
+                MapEntryParams entryParams = new MapEntryParams { EntryPoint = targetEntryPoint };
+
+                gameState.MapExtender.ModifyEntryPoint(entryParams);
+
+                targetEntryPoint = entryParams.EntryPoint;
+            }
+            return targetEntryPoint;
+        }
+
+        private EntryPoint DetermineEntryPoint(int targetEntryPoint, int targetX, int targetY)
+        {
+            EntryPoint ep;
+
+            if (targetEntryPoint >= gameState.Map.EntryPoints.Count)
+            {
+                throw new InvalidOperationException("Failed to find entry point " + targetEntryPoint);
+            }
+
+            if (targetEntryPoint >= 0)
+            {
+                ep = gameState.Map.EntryPoints[targetEntryPoint];
+            }
+            else
+            {
+                ep = new EntryPoint
+                {
+                    Location = new Point(targetX, targetY),
+                    DungeonLevel = Player.DungeonLevel,
+                    Facing = Player.FaceDirection
+                };
+            }
+            return ep;
+        }
+
+        private void MoveToEntryPoint(EntryPoint ep)
+        {
+            Player.X = ep.Location.X;
+            Player.Y = ep.Location.Y;
+            Player.DungeonLevel = ep.DungeonLevel;
+
+            if (ep.Facing != Direction.None)
+            {
+                Player.FaceDirection = ep.Facing;
+            }
+        }
+        private void MoveToLocation(int targetEntryPoint, int targetX, int targetY)
+        {
+        }
+
+        private void SetReturnLocationIfOutside()
+        {
+            if (gameState.Map is Outside)
+            {
+                Player.SetReturnLocation(Player.MapID, Player.X, Player.Y, Direction.South);
+            }
         }
 
 
