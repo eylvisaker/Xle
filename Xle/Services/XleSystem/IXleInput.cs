@@ -12,5 +12,7 @@ namespace ERY.Xle.Services.XleSystem
         KeyCode WaitForKey(Action redraw, params KeyCode[] keys);
 
         bool PromptToContinueOnWait { get; set; }
+
+        event EventHandler<CommandEventArgs> DoCommand;
     }
 }

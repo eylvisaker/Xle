@@ -134,6 +134,7 @@
     <Compile Include="Services\Menus\IXleSubMenu.cs" />
     <Compile Include="Services\ScreenModel\IXleScreen.cs" />
     <Compile Include="Services\MapLoad\Implementation\MapLoader.cs" />
+    <Compile Include="Services\XleSystem\CommandEventArgs.cs" />
     <Compile Include="Services\XleSystem\Implementation\SoundMan.cs" />
     <Compile Include="Services\XleSystem\Implementation\XleConsole.cs" />
     <Compile Include="Services\XleSystem\Implementation\XleInput.cs" />

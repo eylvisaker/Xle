@@ -25,8 +25,8 @@ namespace ERY.Xle.Services.Commands.Implementation
         public CommandExecutor(
             GameState state,
             ICommandList commands,
-            ICommandFactory factory,
             IXleGameControl gameControl,
+            IXleInput input,
             ISoundMan soundMan,
             IPlayerDeathHandler deathHandler,
             IPlayerAnimator characterAnimator,
@@ -39,6 +39,8 @@ namespace ERY.Xle.Services.Commands.Implementation
             this.soundMan = soundMan;
             this.characterAnimator = characterAnimator;
             this.deathHandler = deathHandler;
+
+            input.DoCommand += (sender, args) => DoCommand(args.Command);
 
             mDirectionMap[KeyCode.Right] = Direction.East;
             mDirectionMap[KeyCode.Up] = Direction.North;

@@ -11,16 +11,13 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 {
     public class XleInput : IXleInput
     {
-        ICommandExecutor commands;
         private GameState gameState;
         private IXleScreen screen;
 
         public XleInput(
-            ICommandExecutor commands,
             IXleScreen screen,
             GameState gameState)
         {
-            this.commands = commands;
             this.screen = screen;
             this.gameState = gameState;
 
@@ -46,13 +43,21 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             try
             {
                 AcceptKey = false;
-                commands.DoCommand(e.KeyCode);
+                OnDoCommand(e.KeyCode);
             }
             finally
             {
                 AcceptKey = true;
             }
         }
+
+        private void OnDoCommand(KeyCode command)
+        {
+            if (DoCommand != null)
+                DoCommand(this, new CommandEventArgs(command));
+        }
+
+        public event EventHandler<CommandEventArgs> DoCommand;
 
         public bool AcceptKey { get; set; }
 
@@ -67,10 +72,14 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             {
                 AcceptKey = false;
 
-                if (Keyboard.Keys[KeyCode.Down]) commands.DoCommand(KeyCode.Down);
-                else if (Keyboard.Keys[KeyCode.Left]) commands.DoCommand(KeyCode.Left);
-                else if (Keyboard.Keys[KeyCode.Up]) commands.DoCommand(KeyCode.Up);
-                else if (Keyboard.Keys[KeyCode.Right]) commands.DoCommand(KeyCode.Right);
+                if (Keyboard.Keys[KeyCode.Down]) 
+                    OnDoCommand(KeyCode.Down);
+                else if (Keyboard.Keys[KeyCode.Left]) 
+                    OnDoCommand(KeyCode.Left);
+                else if (Keyboard.Keys[KeyCode.Up]) 
+                    OnDoCommand(KeyCode.Up);
+                else if (Keyboard.Keys[KeyCode.Right]) 
+                    OnDoCommand(KeyCode.Right);
             }
             finally
             {

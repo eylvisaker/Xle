@@ -15,7 +15,7 @@ namespace ERY.Xle.Services.Game.Implementation
         private IXleScreen screen;
         private GameState gameState;
         private XleSystemState systemState;
-
+        
         public XleGameControl(
             IXleScreen screen,
             GameState gameState,
