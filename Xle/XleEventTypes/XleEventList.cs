@@ -4,123 +4,123 @@ using System.Linq;
 
 namespace ERY.Xle.XleEventTypes
 {
-	public class XleEventList : IList<XleEvent>
-	{
-		List<XleEvent> mList = new List<XleEvent>();
+    public class XleEventList : IList<XleEvent>
+    {
+        List<XleEvent> mList = new List<XleEvent>();
 
-		#region IList<XleEvent> Members
+        #region IList<XleEvent> Members
 
-		public int IndexOf(XleEvent item)
-		{
-			return mList.IndexOf(item);
-		}
+        public int IndexOf(XleEvent item)
+        {
+            return mList.IndexOf(item);
+        }
 
-		public void Insert(int index, XleEvent item)
-		{
-			if (item == null)
-				throw new ArgumentNullException();
+        public void Insert(int index, XleEvent item)
+        {
+            if (item == null)
+                throw new ArgumentNullException();
 
-			mList.Insert(index, item);
-		}
+            mList.Insert(index, item);
+        }
 
-		public void RemoveAt(int index)
-		{
-			mList.RemoveAt(index);
-		}
+        public void RemoveAt(int index)
+        {
+            mList.RemoveAt(index);
+        }
 
-		public XleEvent this[int index]
-		{
-			get
-			{
-				return mList[index];
-			}
-			set
-			{
-				mList[index] = value;
-			}
-		}
+        public XleEvent this[int index]
+        {
+            get
+            {
+                return mList[index];
+            }
+            set
+            {
+                mList[index] = value;
+            }
+        }
 
-		#endregion
+        #endregion
 
-		public void AddRange(IEnumerable<XleEvent> events)
-		{
-			foreach (var evt in events)
-			{
-				if (evt == null)
-					throw new ArgumentNullException();
+        public void AddRange(IEnumerable<XleEvent> events)
+        {
+            foreach (var evt in events)
+            {
+                if (evt == null)
+                    throw new ArgumentNullException();
 
-				mList.Add(evt);
-			}
-		}
-		#region ICollection<XleEvent> Members
+                mList.Add(evt);
+            }
+        }
+        #region ICollection<XleEvent> Members
 
-		public void Add(XleEvent item)
-		{
-			if (item == null)
-				throw new ArgumentNullException();
+        public void Add(XleEvent item)
+        {
+            if (item == null)
+                throw new ArgumentNullException();
 
-			mList.Add(item);
-		}
+            mList.Add(item);
+        }
 
-		public void Clear()
-		{
-			mList.Clear();
-		}
+        public void Clear()
+        {
+            mList.Clear();
+        }
 
-		public bool Contains(XleEvent item)
-		{
-			return mList.Contains(item);
-		}
+        public bool Contains(XleEvent item)
+        {
+            return mList.Contains(item);
+        }
 
-		public void CopyTo(XleEvent[] array, int arrayIndex)
-		{
-			mList.CopyTo(array, arrayIndex);
-		}
+        public void CopyTo(XleEvent[] array, int arrayIndex)
+        {
+            mList.CopyTo(array, arrayIndex);
+        }
 
-		public int Count
-		{
-			get { return mList.Count; }
-		}
+        public int Count
+        {
+            get { return mList.Count; }
+        }
 
-		public bool IsReadOnly
-		{
-			get { return false; }
-		}
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
-		public bool Remove(XleEvent item)
-		{
-			return mList.Remove(item);
-		}
+        public bool Remove(XleEvent item)
+        {
+            return mList.Remove(item);
+        }
 
-		#endregion
+        #endregion
 
-		#region IEnumerable<XleEvent> Members
+        #region IEnumerable<XleEvent> Members
 
-		public IEnumerator<XleEvent> GetEnumerator()
-		{
-			return mList.GetEnumerator();
-		}
+        public IEnumerator<XleEvent> GetEnumerator()
+        {
+            return mList.GetEnumerator();
+        }
 
-		#endregion
+        #endregion
 
-		#region IEnumerable Members
+        #region IEnumerable Members
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return mList.GetEnumerator();
-		}
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return mList.GetEnumerator();
+        }
 
-		#endregion
+        #endregion
 
-		public TEventType FindFirst<TEventType>(Predicate<TEventType> condition) where TEventType : XleEvent
-		{
-			foreach(TEventType evt in this.OfType<TEventType>())
-			{
-				if (condition(evt) == true)
-					return evt;
-			}
+        public TEventType FindFirst<TEventType>(Predicate<TEventType> condition) where TEventType : XleEvent
+        {
+            foreach (TEventType evt in this.OfType<TEventType>())
+            {
+                if (condition(evt) == true)
+                    return evt;
+            }
 
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }

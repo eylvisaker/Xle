@@ -30,7 +30,7 @@ namespace ERY.Xle.Data
 
         public XleData()
         {
-            
+
         }
 
         public Size OverworldMonsterSize { get; private set; }

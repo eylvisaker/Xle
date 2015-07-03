@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes
 {
-	public class Script : XleEvent
-	{
-	}
+    public class Script : XleEvent
+    {
+    }
 }

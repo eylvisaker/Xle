@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AgateLib.Geometry;
 using AgateLib.InputLib;
 
+using ERY.Xle;
 using ERY.Xle.Data;
 using ERY.Xle.Services.Commands;
+using ERY.Xle.Services.Game;
 using ERY.Xle.Services.MapLoad;
 using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
@@ -54,9 +57,39 @@ namespace ERY.XleTests
             MapLoader = new Mock<IMapLoader>();
             MapLoader.SetupAllProperties();
 
+            GameControl = new Mock<IXleGameControl>();
+            GameControl.SetupAllProperties();
+
+            SoundMan = new Mock<ISoundMan>();
+            SoundMan.SetupAllProperties();
+
+            QuickMenu = new Mock<IQuickMenu>();
+            QuickMenu.SetupAllProperties();
+            InitializeQuickMenu();
+
             Data = new XleData();
             InitializeData();
         }
+
+        private void InitializeQuickMenu()
+        {
+            QuickMenu.Setup(
+                x =>
+                    x.QuickMenu(It.IsAny<MenuItemList>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<Color?>(), It.IsAny<Color?>(),
+                        It.IsAny<Action>()))
+                .Returns((MenuItemList menu, int a, int b, Color? c, Color? d, Action e) =>
+                {
+                    if (QuickMenuCallback != null)
+                    {
+                        return QuickMenuCallback(menu);
+                    }
+
+                    return 0;
+                });
+        }
+
+        public delegate int QuickMenuHandler(MenuItemList menu);
+        public QuickMenuHandler QuickMenuCallback;
 
         public Mock<IXleScreen> Screen { get; set; }
         public Mock<IXleInput> Input { get; set; }
@@ -65,6 +98,9 @@ namespace ERY.XleTests
         public Mock<IXleImages> Images { get; set; }
         public Mock<ICommandList> CommandList { get; set; }
         public Mock<IMapLoader> MapLoader { get; set; }
+        public Mock<IXleGameControl> GameControl { get; set; }
+        public Mock<ISoundMan> SoundMan { get; set; }
+        public Mock<IQuickMenu> QuickMenu { get; set; }
 
         public XleData Data { get; set; }
 
@@ -86,6 +122,7 @@ namespace ERY.XleTests
             Data.QualityList.Add(3, "Great");
             Data.QualityList.Add(4, "Superb");
         }
+
 
     }
 }

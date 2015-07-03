@@ -2,67 +2,67 @@
 
 namespace ERY.Xle.Maps
 {
-	public class MapData : IXleSerializable
-	{
-		int[] mData;
-		int mWidth, mHeight;
-		
-		#region IXleSerializable Members
+    public class MapData : IXleSerializable
+    {
+        int[] mData;
+        int mWidth, mHeight;
 
-		void IXleSerializable.WriteData(XleSerializationInfo info)
-		{
-			info.Write("Width", mWidth);
-			info.Write("Height", mHeight);
-			info.Write("Data", mData);
-		}
+        #region IXleSerializable Members
 
-		void IXleSerializable.ReadData(XleSerializationInfo info)
-		{
-			mWidth = info.ReadInt32("Width");
-			mHeight = info.ReadInt32("Height");
-			mData = info.ReadInt32Array("Data");
-		}
+        void IXleSerializable.WriteData(XleSerializationInfo info)
+        {
+            info.Write("Width", mWidth);
+            info.Write("Height", mHeight);
+            info.Write("Data", mData);
+        }
 
-		#endregion
-		public int Width
-		{
-			get { return mWidth; }
-		}
-		public int Height
-		{
-			get { return mHeight; }
-		}
+        void IXleSerializable.ReadData(XleSerializationInfo info)
+        {
+            mWidth = info.ReadInt32("Width");
+            mHeight = info.ReadInt32("Height");
+            mData = info.ReadInt32Array("Data");
+        }
 
-		MapData()
-		{ }
-		public MapData(int width, int height)
-		{
-			mWidth = width;
-			mHeight = height;
+        #endregion
+        public int Width
+        {
+            get { return mWidth; }
+        }
+        public int Height
+        {
+            get { return mHeight; }
+        }
 
-			mData = new int[mWidth * mHeight];
-		}
+        MapData()
+        { }
+        public MapData(int width, int height)
+        {
+            mWidth = width;
+            mHeight = height;
 
-		public int this[int x, int y]
-		{
-			get { return mData[x + y * mWidth]; }
-			set { mData[x + y * mWidth] = value; }
-		}
+            mData = new int[mWidth * mHeight];
+        }
 
-		/// <summary>
-		/// Sets the entire MapData to a single value.
-		/// </summary>
-		/// <param name="value"></param>
-		public void SetValue(int value)
-		{
-			for (int j = 0; j < Height; j++)
-			{
-				for (int i = 0; i < Width; i++)
-				{
-					this[i, j] = value;
-				}
-			}
-		}
+        public int this[int x, int y]
+        {
+            get { return mData[x + y * mWidth]; }
+            set { mData[x + y * mWidth] = value; }
+        }
 
-	}
+        /// <summary>
+        /// Sets the entire MapData to a single value.
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetValue(int value)
+        {
+            for (int j = 0; j < Height; j++)
+            {
+                for (int i = 0; i < Width; i++)
+                {
+                    this[i, j] = value;
+                }
+            }
+        }
+
+    }
 }

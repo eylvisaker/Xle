@@ -196,7 +196,7 @@ namespace ERY.Xle.Maps.Dungeons
             //TextArea.PrintLine("You avoid the " + name + ".");
             //XleCore.wait(150);
         }
-        private void OnPlayerTriggerTrap(Player player, int x, int y)
+        private void OnPlayerTriggerTrap(int x, int y)
         {
             // don't trigger ceiling holes
             if (TheMap[x, y] == 0x21) return;
@@ -217,14 +217,14 @@ namespace ERY.Xle.Maps.Dungeons
             }
 
             TextArea.PrintLine("   H.P. - " + damage.ToString(), XleColor.White);
-            player.HP -= damage;
+            Player.HP -= damage;
 
             SoundMan.PlaySound(LotaSound.EnemyHit);
             GameControl.Wait(500);
 
             if (TheMap[x, y] == 0x12)
             {
-                player.DungeonLevel++;
+                Player.DungeonLevel++;
                 DungeonLevelText();
             }
         }
@@ -237,7 +237,7 @@ namespace ERY.Xle.Maps.Dungeons
 
             if (val >= 0x21 && val <= 0x2a)
             {
-                OnPlayerTriggerTrap(Player, Player.X, Player.Y);
+                OnPlayerTriggerTrap(Player.X, Player.Y);
             }
             else if (val >= 0x11 && val <= 0x1a)
             {

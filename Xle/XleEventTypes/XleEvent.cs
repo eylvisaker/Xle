@@ -102,7 +102,7 @@ namespace ERY.Xle.XleEventTypes
             get { return rect.Height; }
             set { rect.Height = value; }
         }
-		
+
         public bool Enabled { get; set; }
 
         public virtual Type ExtenderType { get { return typeof(EventExtender); } }

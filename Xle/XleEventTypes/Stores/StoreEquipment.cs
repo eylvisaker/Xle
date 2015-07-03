@@ -7,26 +7,26 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
-	public class StoreEquipment : Store
-	{
-		public StoreEquipment()
-		{
-			AllowedItemTypes = new List<int>();
-		}
+    public class StoreEquipment : Store
+    {
+        public StoreEquipment()
+        {
+            AllowedItemTypes = new List<int>();
+        }
 
-		protected override void ReadData(XleSerializationInfo info)
-		{
-			base.ReadData(info);
+        protected override void ReadData(XleSerializationInfo info)
+        {
+            base.ReadData(info);
 
-			AllowedItemTypes = info.ReadInt32Array("AllowedItemTypes").ToList();
-		}
-		protected override void WriteData(XleSerializationInfo info)
-		{
-			base.WriteData(info);
+            AllowedItemTypes = info.ReadInt32Array("AllowedItemTypes").ToList();
+        }
+        protected override void WriteData(XleSerializationInfo info)
+        {
+            base.WriteData(info);
 
-			info.Write("AllowedItemTypes", AllowedItemTypes.ToArray());
-		}
+            info.Write("AllowedItemTypes", AllowedItemTypes.ToArray());
+        }
 
-		public List<int> AllowedItemTypes { get; set; }
-	}
+        public List<int> AllowedItemTypes { get; set; }
+    }
 }

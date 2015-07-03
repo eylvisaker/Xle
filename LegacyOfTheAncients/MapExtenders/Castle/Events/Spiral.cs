@@ -33,7 +33,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
         {
             get
             {
-                return (Map.Events.Where(x => x.ExtenderName.ToLowerInvariant().Contains("spiral"))).ToArray(); 
+                return (Map.Events.Where(x => x.ExtenderName.ToLowerInvariant().Contains("spiral"))).ToArray();
             }
         }
         protected void ClearSpiral()

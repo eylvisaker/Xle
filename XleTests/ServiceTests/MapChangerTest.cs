@@ -73,21 +73,6 @@ namespace ERY.XleTests.ServiceTests
             newMap.Verify();
         }
 
-        private Mock<MapExtender> InitializeMap<TMapData>(int mapId)
-            where TMapData : XleMap, new()
-        {
-            XleMap map = new TMapData();
-            map.MapID = mapId;
-            map.TileImage = "MyTiles";
-
-            Mock<MapExtender> newMap = new Mock<MapExtender>();
-            newMap.SetupAllProperties();
-
-            newMap.Object.TheMap = map;
-
-            return newMap;
-        }
-
         private void SetStartMap(int mapId = 1)
         {
             startMap = InitializeMap<Outside>(mapId);

@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="ColorSchemeTests.cs" />
     <Compile Include="Fakes\FakeMap.cs" />
+    <Compile Include="LegacyOfTheAncients\CasandraTest.cs" />
     <Compile Include="LegacyOfTheAncients\LotaTest.cs" />
     <Compile Include="LegacyOfTheAncients\MuseumExhibitLevelUpTests.cs" />
     <Compile Include="ServiceTests\CommandTests\ClimbTest.cs" />

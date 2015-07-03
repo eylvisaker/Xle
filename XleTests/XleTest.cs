@@ -5,8 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle;
+using ERY.Xle.Maps;
+using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleEventTypes.Extenders;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using Moq;
 
 namespace ERY.XleTests
 {
@@ -24,6 +29,32 @@ namespace ERY.XleTests
 
             Services = new XleServices();
 
+        }
+
+        protected virtual void InitializeEvent(EventExtender evt)
+        {
+            evt.TheEvent = new Script();
+
+            evt.TextArea = Services.TextArea.Object;
+            evt.GameState = GameState;
+            evt.GameControl = Services.GameControl.Object;
+            evt.SoundMan = Services.SoundMan.Object;
+
+        }
+
+        protected virtual Mock<MapExtender> InitializeMap<TMapData>(int mapId)
+            where TMapData : XleMap, new()
+        {
+            XleMap map = new TMapData();
+            map.MapID = mapId;
+            map.TileImage = "MyTiles";
+
+            Mock<MapExtender> newMap = new Mock<MapExtender>();
+            newMap.SetupAllProperties();
+
+            newMap.Object.TheMap = map;
+
+            return newMap;
         }
     }
 }

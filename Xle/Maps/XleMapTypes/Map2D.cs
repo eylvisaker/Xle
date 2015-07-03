@@ -50,14 +50,14 @@ namespace ERY.Xle.Maps.XleMapTypes
 
         public override int this[int xx, int yy]
         {
-            get 
+            get
             {
                 if (yy < 0 || yy >= Height || xx < 0 || xx >= Width)
                 {
                     return OutsideTile;
                 }
-                    
-                return mData[xx + yy * mWidth]; 
+
+                return mData[xx + yy * mWidth];
             }
             set
             {

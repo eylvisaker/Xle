@@ -21,10 +21,10 @@ namespace ERY.Xle.Maps.Temples
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-		protected override void PlayerFight(Direction fightDir)
-		{
-			TextArea.PrintLine();
-			TextArea.PrintLine("Nothing much hit.");
+        protected override void PlayerFight(Direction fightDir)
+        {
+            TextArea.PrintLine();
+            TextArea.PrintLine("Nothing much hit.");
 
             SoundMan.PlaySound(LotaSound.Bump);
         }

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace ERY.Xle.Maps
 {
-	public enum AnimationType
-	{
-		None,
-		Random,
-		Loop,
-	}
+    public enum AnimationType
+    {
+        None,
+        Random,
+        Loop,
+    }
 }
