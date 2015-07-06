@@ -10,6 +10,8 @@ using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 
 using Moq;
+using ERY.Xle.Services.Game;
+using ERY.Xle.Services.MapLoad;
 
 namespace ERY.XleTests
 {
@@ -33,6 +35,12 @@ namespace ERY.XleTests
 
             TextArea = new Mock<ITextArea>();
             TextArea.SetupAllProperties();
+
+            GameControl = new Mock<IXleGameControl>();
+            GameControl.SetupAllProperties();
+
+            MapChanger = new Mock<IMapChanger>();
+            MapChanger.SetupAllProperties();
         }
 
         public List<KeyCode> KeysToSend { get; set; } 
@@ -40,5 +48,7 @@ namespace ERY.XleTests
         public Mock<IXleScreen> Screen { get; set; }
         public Mock<IXleInput> Input { get; set; }
         public Mock<ITextArea> TextArea { get; set; }
+        public Mock<IXleGameControl> GameControl { get; set; }
+        public Mock<IMapChanger> MapChanger { get; set; }
     }
 }

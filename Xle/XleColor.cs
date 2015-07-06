@@ -5,23 +5,23 @@ using AgateLib.Geometry;
 
 namespace ERY.Xle
 {
-	public class XleColor
-	{
-		public static Color Black { get { return Color.FromArgb(0, 0, 0); } }
-		public static Color White { get { return Color.FromArgb(255, 255, 255); } }
-		public static Color Red { get { return Color.FromArgb(126, 53, 43); } }
-		public static Color Cyan { get { return Color.FromArgb(110, 183, 193); } }
-		public static Color Purple { get { return Color.FromArgb(127, 59, 166); } }
-		public static Color Green { get { return Color.FromArgb(92, 160, 53); } }
-		public static Color Blue { get { return Color.FromArgb(51, 39, 153); } }
-		public static Color Yellow { get { return Color.FromArgb(203, 215, 101); } }
-		public static Color Orange { get { return Color.FromArgb(133, 83, 28); } }
-		public static Color Brown { get { return Color.FromArgb(80, 60, 0); } }
-		public static Color Pink { get { return Color.FromArgb(180, 107, 97); } }
-		public static Color DarkGray { get { return Color.FromArgb(74, 74, 74); } }
-		public static Color Gray { get { return Color.FromArgb(117, 117, 117); } }
-		public static Color LightGreen { get { return Color.FromArgb(163, 231, 124); } }
-		public static Color LightBlue { get { return Color.FromArgb(112, 100, 214); } }
-		public static Color LightGray { get { return Color.FromArgb(163, 163, 163); } }
-	}
+    public class XleColor
+    {
+        public static readonly Color Black = Color.FromArgb(0, 0, 0);
+        public static readonly Color White = Color.FromArgb(255, 255, 255);
+        public static readonly Color Red = Color.FromArgb(126, 53, 43);
+        public static readonly Color Cyan = Color.FromArgb(110, 183, 193);
+        public static readonly Color Purple = Color.FromArgb(127, 59, 166);
+        public static readonly Color Green = Color.FromArgb(92, 160, 53);
+        public static readonly Color Blue = Color.FromArgb(51, 39, 153);
+        public static readonly Color Yellow = Color.FromArgb(203, 215, 101);
+        public static readonly Color Orange = Color.FromArgb(133, 83, 28);
+        public static readonly Color Brown = Color.FromArgb(80, 60, 0);
+        public static readonly Color Pink = Color.FromArgb(180, 107, 97);
+        public static readonly Color DarkGray = Color.FromArgb(74, 74, 74);
+        public static readonly Color Gray = Color.FromArgb(117, 117, 117);
+        public static readonly Color LightGreen = Color.FromArgb(163, 231, 124);
+        public static readonly Color LightBlue = Color.FromArgb(112, 100, 214);
+        public static readonly Color LightGray = Color.FromArgb(163, 163, 163);
+    }
 }

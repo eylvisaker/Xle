@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace ERY.XleTests
 {
-	[TestClass]
-	public class ColorSchemeTests
-	{
-		[TestMethod]
-		[Obsolete]
-		public void VertLine()
-		{
-			ColorScheme cs = new ColorScheme();
+    [TestClass]
+    public class ColorSchemeTests
+    {
+        [TestMethod]
+        [Obsolete]
+        public void VertLine()
+        {
+            ColorScheme cs = new ColorScheme();
 
-			cs.VerticalLinePosition = 13 * 16;
+            cs.VerticalLinePosition = 13 * 16;
 
-			Assert.AreEqual(13 * 16, cs.VerticalLinePosition);
+            Assert.AreEqual(13 * 16, cs.VerticalLinePosition);
 
-			Assert.AreEqual(25, cs.MapAreaWidth);
-		}
-	}
+            Assert.AreEqual(25, cs.MapAreaWidth);
+        }
+    }
 }

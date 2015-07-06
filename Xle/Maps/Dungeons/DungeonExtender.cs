@@ -21,7 +21,7 @@ namespace ERY.Xle.Maps.Dungeons
 
         public IStatsDisplay StatsDisplay { get; set; }
 
-        public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
+        public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } set { base.TheMap = value; } }
 
         public DungeonCombat Combat { get; set; }
 
