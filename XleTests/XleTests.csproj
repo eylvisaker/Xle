@@ -97,6 +97,8 @@
     <Compile Include="Fakes\FakeMap.cs" />
     <Compile Include="LegacyOfTheAncients\CasandraTest.cs" />
     <Compile Include="LegacyOfTheAncients\LotaTest.cs" />
+    <Compile Include="LegendOfBlacksilver\ArmanTest.cs" />
+    <Compile Include="LegendOfBlacksilver\LobTest.cs" />
     <Compile Include="LegacyOfTheAncients\MuseumExhibitLevelUpTests.cs" />
     <Compile Include="ServiceTests\CommandTests\ClimbTest.cs" />
     <Compile Include="ServiceTests\EquipmentPickerTest.cs" />
