@@ -18,8 +18,6 @@ using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 
 using Moq;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.MapLoad;
 
 namespace ERY.XleTests
 {
@@ -43,6 +41,8 @@ namespace ERY.XleTests
 
             TextArea = new Mock<ITextArea>();
             TextArea.SetupAllProperties();
+            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text));
+            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text + Environment.NewLine));
 
             SubMenu = new Mock<IXleSubMenu>();
             SubMenu.SetupAllProperties();
@@ -69,6 +69,11 @@ namespace ERY.XleTests
 
             Data = new XleData();
             InitializeData();
+        }
+
+        private void AppendTextAreaText(string text)
+        {
+            TextAreaText += text;
         }
 
         private void InitializeQuickMenu()
@@ -103,6 +108,8 @@ namespace ERY.XleTests
         public Mock<IQuickMenu> QuickMenu { get; set; }
 
         public XleData Data { get; set; }
+
+        public string TextAreaText { get; set; }
 
         public List<KeyCode> KeysToSend { get; set; }
 

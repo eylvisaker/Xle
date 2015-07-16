@@ -9,14 +9,16 @@ namespace ERY.Xle.LoB.MapExtenders.Castle.EventExtenders
 {
     public class Arman : LobEvent
     {
+        bool spokeThisTime = false;
+
         public override bool Speak()
         {
             TextArea.PrintLine();
 
-            if (Story.DefeatedOrcs == false && Story.ArmanGaveElixirs == false)
+            if (Story.DefeatedOrcs == false && spokeThisTime == false && Player.Items[LobItem.LifeElixir] <= 1)
             {
-                Story.ArmanGaveElixirs = true;
-                Player.Items[LobItem.LifeElixir] += 2;
+                spokeThisTime = true;
+                Player.Items[LobItem.LifeElixir] = 2;
 
                 SoundMan.PlaySound(LotaSound.Good);
 

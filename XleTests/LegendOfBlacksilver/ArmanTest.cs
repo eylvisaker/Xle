@@ -42,9 +42,32 @@ namespace ERY.XleTests.LegendOfBlacksilver
         }
 
         [TestMethod]
-        public void ArmanDontGiveIfAlreadyHappened()
+        public void ArmanDontGiveIfHasElixirs()
         {
-            Story.ArmanGaveElixirs = true;
+            Player.Items[LobItem.LifeElixir] = 2;
+
+            arman.Speak();
+
+            Assert.AreEqual(2, Player.Items[LobItem.LifeElixir]);
+            Assert.IsTrue(Services.TextAreaText.Contains("Go away"));
+        }
+
+        [TestMethod]
+        public void ArmanGiveOneElixir()
+        {
+            Player.Items[LobItem.LifeElixir] = 1;
+
+            arman.Speak();
+
+            Assert.AreEqual(2, Player.Items[LobItem.LifeElixir]);
+        }
+
+        [TestMethod]
+        public void ArmanDontGiveTwiceInOneVisit()
+        {
+            arman.Speak();
+
+            Player.Items[LobItem.LifeElixir] = 0;
 
             arman.Speak();
 
