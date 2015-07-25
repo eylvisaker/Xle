@@ -129,7 +129,5 @@ namespace ERY.XleTests
             Data.QualityList.Add(3, "Great");
             Data.QualityList.Add(4, "Superb");
         }
-
-
     }
 }
