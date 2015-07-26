@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLE", "Xle\XLE.csproj", "{FDE0A61F-558B-4964-8292-B7A212A3AB45}"
 EndProject
@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XleTests", "XleTests\XleTes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4522371-10CA-4972-8DE2-F10087A2C795}"
 	ProjectSection(SolutionItems) = preProject
+		Build.bat = Build.bat
 		Coverage.bat = Coverage.bat
 		Performance1.psess = Performance1.psess
 		sonar-project.properties = sonar-project.properties
@@ -28,6 +29,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.Platform.WinForms", "Agate\AgateLib.Platform.WinForms\AgateLib.Platform.WinForms.csproj", "{4B12561E-D37B-48A1-B6DB-218E94906C22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Agate", "Agate", "{6E1EE147-14CA-4CCE-936F-247838740322}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.Tests.UnitTests", "Agate\AgateLib.Tests\UnitTests\AgateLib.Tests.UnitTests.csproj", "{F22ADCCC-7991-4F52-B2D0-697D60121BB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.Tests.Portable", "Agate\AgateLib.Tests\AgateLib.Tests.Portable\AgateLib.Tests.Portable.csproj", "{3AAA6832-55D7-47A9-AF95-9393792ECB2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,6 +148,30 @@ Global
 		{4B12561E-D37B-48A1-B6DB-218E94906C22}.Release|x64.Build.0 = Release|x64
 		{4B12561E-D37B-48A1-B6DB-218E94906C22}.Release|x86.ActiveCfg = Release|x86
 		{4B12561E-D37B-48A1-B6DB-218E94906C22}.Release|x86.Build.0 = Release|x86
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Debug|x64.ActiveCfg = Debug|x64
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Debug|x64.Build.0 = Debug|x64
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Debug|x86.ActiveCfg = Debug|x86
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Debug|x86.Build.0 = Debug|x86
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Release|x64.ActiveCfg = Release|x64
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Release|x64.Build.0 = Release|x64
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Release|x86.ActiveCfg = Release|x86
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3}.Release|x86.Build.0 = Release|x86
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Debug|x64.Build.0 = Debug|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Debug|x86.Build.0 = Debug|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Release|x64.ActiveCfg = Release|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Release|x64.Build.0 = Release|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Release|x86.ActiveCfg = Release|Any CPU
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,5 +181,7 @@ Global
 		{935D67A0-931E-46DE-9F6A-2D6DBC99AFF3} = {6E1EE147-14CA-4CCE-936F-247838740322}
 		{94734E5A-0344-43E8-BB30-E32E3F57F611} = {6E1EE147-14CA-4CCE-936F-247838740322}
 		{4B12561E-D37B-48A1-B6DB-218E94906C22} = {6E1EE147-14CA-4CCE-936F-247838740322}
+		{F22ADCCC-7991-4F52-B2D0-697D60121BB3} = {6E1EE147-14CA-4CCE-936F-247838740322}
+		{3AAA6832-55D7-47A9-AF95-9393792ECB2C} = {6E1EE147-14CA-4CCE-936F-247838740322}
 	EndGlobalSection
 EndGlobal
