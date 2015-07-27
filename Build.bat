@@ -1,10 +1,10 @@
 @ECHO OFF
 
-nuget restore
+nuget restore Xle.sln
 if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
 
 cd Agate
-nuget restore
+nuget restore AgateLib-Windows.sln
 if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
 
 cd ..
