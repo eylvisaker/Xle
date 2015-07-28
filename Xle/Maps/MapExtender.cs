@@ -221,17 +221,7 @@ namespace ERY.Xle.Maps
         {
             return false;
         }
-
-        /// <summary>
-        /// Function called when the player executes the Climb command.
-        /// Returns true if the command was handled by this function, false
-        /// if the caller should display a "Nothing to Climb" type message.
-        /// </summary>
-        /// <returns></returns>
-        public virtual bool PlayerClimb()
-        {
-            return CommandNotImplemented();
-        }
+        
         /// <summary>
         /// Function called when the player executes the Xamine command.
         /// Returns true if the command was handled by this function, false

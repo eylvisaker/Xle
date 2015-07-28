@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace ERY.XleTests.ServiceTests.CommandTests
 {
     [TestClass]
-    public class ClimbTest : XleTest
+    public class DungeonClimbTest : XleTest
     {
         DungeonClimb climb;
         Player player;
@@ -21,7 +21,7 @@ namespace ERY.XleTests.ServiceTests.CommandTests
         Mock<DungeonExtender> map;
         Dungeon mapData;
 
-        public ClimbTest()
+        public DungeonClimbTest()
         {
             mapData = new Dungeon();
             mapData.SetLevels(8);

@@ -103,6 +103,7 @@
     <Compile Include="ServiceTests\CommandTests\ClimbTest.cs" />
     <Compile Include="ServiceTests\EquipmentPickerTest.cs" />
     <Compile Include="ServiceTests\MapChangerTest.cs" />
+    <Compile Include="ServiceTests\CommandTests\DungeonClimbTest.cs" />
     <Compile Include="ServiceTests\NumberPickerTests.cs" />
     <Compile Include="XleServices.cs" />
     <Compile Include="ColorStringbiulderTests.cs" />

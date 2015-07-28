@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Maps;
+using ERY.Xle.Services.Commands;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
 {
@@ -36,6 +37,15 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             }
 
             return base.GetTreasure(dungeonLevel, chestID);
+        }
+
+        public override void SetCommands(ICommandList commands)
+        {
+            base.SetCommands(commands);
+
+            commands.Items.Remove(commands.Items.First(x => x.Name.Equals("Climb", StringComparison.OrdinalIgnoreCase)));
+
+            commands.Items.Add(CommandFactory.Climb("BlackmireClimb"));
         }
 
         public override void OnBeforeGiveItem(ref int treasure, ref bool handled, ref bool clearBox)
@@ -77,28 +87,6 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             {
                 // turn off the display.
             }
-        }
-        public override bool PlayerClimb()
-        {
-            var result = base.PlayerClimb();
-
-            if (Player.DungeonLevel == 4 && Story.RotlungContracted == false)
-            {
-                SoundMan.PlaySound(LotaSound.VeryBad);
-
-                TextArea.PrintLineSlow("You have contracted rotlung.");
-                TextArea.PrintLine("Endurance  - 10");
-
-                Story.RotlungContracted = true;
-                Player.Attribute[Attributes.endurance] -= 10;
-            }
-
-            if (Player.DungeonLevel == 6 && Story.Illusion == false)
-            {
-                // TODO: turn off the display.
-            }
-
-            return result;
         }
         protected override int MonsterGroup(int dungeonLevel)
         {
