@@ -59,7 +59,7 @@
     <Compile Include="MapExtenders\Castle\Events\SpiralSuccess.cs" />
     <Compile Include="MapExtenders\Dungeons\Commands\DungeonOpen.cs" />
     <Compile Include="MapExtenders\Fortress\FirstArea\CompendiumFirst.cs" />
-    <Compile Include="MapExtenders\Museum\Commands\MuseumRob.cs" />
+    <Compile Include="MapExtenders\Museum\Commands\LotaMuseumRob.cs" />
     <Compile Include="MapExtenders\Museum\IExhibitFactory.cs" />
     <Compile Include="MapExtenders\Towns\Commands\TownRob.cs" />
     <Compile Include="MapExtenders\Towns\Stores\LotaStore.cs" />

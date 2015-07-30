@@ -106,9 +106,7 @@ namespace ERY.Xle.Maps.Museums
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            Point lookingAt = Player.Location;
-            lookingAt.X += Player.FaceDirection.StepDirection().X;
-            lookingAt.Y += Player.FaceDirection.StepDirection().Y;
+            var lookingAt = PlayerLookingAt;
 
             if (ExhibitAt(Player.Location) != null)
             {
@@ -126,41 +124,31 @@ namespace ERY.Xle.Maps.Museums
             return true;
         }
 
-        private void PrintExhibitStopsActionMessage()
+        public Point PlayerLookingAt
         {
-            TextArea.PrintLine("The display case");
-            TextArea.PrintLine("force field stops you.");
-        }
-        public override bool PlayerRob()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            if (ExhibitAt(Player.Location) != null)
+            get
             {
-                PrintExhibitStopsActionMessage();
-            }
-            else
-            {
-                TextArea.PrintLine("There is nothing to rob.");
-            }
+                Point lookingAt = Player.Location;
 
-            return true;
-        }
-        protected override bool PlayerSpeakImpl()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("There is no reply.");
+                lookingAt.X += Player.FaceDirection.StepDirection().X;
+                lookingAt.Y += Player.FaceDirection.StepDirection().Y;
 
-            return true;
+                return lookingAt;
+            }
         }
+
         public override bool PlayerTake()
         {
             TextArea.PrintLine();
             TextArea.PrintLine("There is nothing to take.");
 
             return true;
+        }
+
+        private void PrintExhibitStopsActionMessage()
+        {
+            TextArea.PrintLine("The display case");
+            TextArea.PrintLine("force field stops you.");
         }
 
         public Exhibit ExhibitAt(Point location)
@@ -176,9 +164,9 @@ namespace ERY.Xle.Maps.Museums
 
         protected bool InteractWithDisplay()
         {
-            Point stepDir = Player.FaceDirection.StepDirection();
+            Point lookingAt = PlayerLookingAt;
 
-            Exhibit ex = ExhibitAt(Player.X + stepDir.X, Player.Y + stepDir.Y);
+            Exhibit ex = ExhibitAt(lookingAt.X, lookingAt.Y);
 
             if (ex == null)
                 return false;

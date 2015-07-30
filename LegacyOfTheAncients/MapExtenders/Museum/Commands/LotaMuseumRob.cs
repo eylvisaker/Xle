@@ -9,8 +9,8 @@ using ERY.Xle.Services.Commands.Implementation;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.Commands
 {
-    [ServiceName("MuseumRob")]
-    public class MuseumRob : Rob
+    [ServiceName("LotaMuseumRob")]
+    public class LotaMuseumRob : MuseumRob
     {
     }
 }

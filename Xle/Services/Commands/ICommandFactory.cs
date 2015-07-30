@@ -17,7 +17,7 @@ namespace ERY.Xle.Services.Commands
         Open Open(string name = null);
         Pass Pass();
         Rob Rob(string name = null);
-        Speak Speak();
+        Speak Speak(string name = null);
         Take Take();
         Use Use(bool showItemNenu = true);
         WeaponCommand Weapon();

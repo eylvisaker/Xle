@@ -2,6 +2,11 @@
 {
     public class Rob : Command
     {
+        public override string Name
+        {
+            get { return "Rob"; }
+        }
+
         public override void Execute()
         {
             foreach (var evt in GameState.MapExtender.EventsAt(1))
