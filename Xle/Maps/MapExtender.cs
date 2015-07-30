@@ -33,7 +33,6 @@ namespace ERY.Xle.Maps
 
         public XleMapRenderer MapRenderer { get; set; }
         public ICommandFactory CommandFactory { get; set; }
-        public IEventExtenderFactory EventFactory { get; set; }
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
         public GameState GameState { get; set; }
@@ -108,12 +107,10 @@ namespace ERY.Xle.Maps
             get { return 1; }
         }
 
-
         public virtual void PlayerUse(int item, ref bool handled)
         {
             handled = CommandNotImplemented();
         }
-
 
         public virtual void ModifyEntryPoint(MapEntryParams entryParams)
         {
@@ -123,18 +120,15 @@ namespace ERY.Xle.Maps
         {
         }
 
-
         public virtual void SetCommands(ICommandList commands)
         {
 
         }
 
-
         public virtual double ChanceToHitPlayer(Guard guard)
         {
             return (Player.Attribute[Attributes.dexterity] / 80.0);
         }
-
 
         public virtual int RollDamageToPlayer(Guard guard)
         {
@@ -195,11 +189,6 @@ namespace ERY.Xle.Maps
         }
 
         public virtual bool PlayerFight()
-        {
-            return CommandNotImplemented();
-        }
-
-        public virtual bool PlayerRob()
         {
             return CommandNotImplemented();
         }

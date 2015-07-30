@@ -48,7 +48,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
         {
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-            commands.Items.Add(CommandFactory.Rob());
+            commands.Items.Add(CommandFactory.Rob("MuseumRob"));
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak());
         }
@@ -184,7 +184,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
         {
             var lotaex = (LotaExhibit)ex;
 
-            TextArea.PrintLine("You'll need a " + lotaex.Coin.ToString() + " coin.");
+            TextArea.PrintLine("You'll need a " + lotaex.Coin + " coin.");
         }
 
         public override void PrintUseCoinMessage(Exhibit ex)

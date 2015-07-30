@@ -4,10 +4,20 @@
     {
         public override void Execute()
         {
-            if (GameState.MapExtender.PlayerRob() == false)
+            foreach (var evt in GameState.MapExtender.EventsAt(1))
             {
-                TextArea.PrintLine("\n\nNothing to rob.");
+                bool handled = evt.Rob();
+
+                if (handled)
+                    return;
             }
+
+            PrintNothingToRobMessage();
+        }
+
+        protected void PrintNothingToRobMessage()
+        {
+            TextArea.PrintLine("\n\nNothing to rob.");
         }
     }
 }

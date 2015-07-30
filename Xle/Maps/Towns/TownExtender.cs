@@ -550,27 +550,6 @@ namespace ERY.Xle.Maps.Towns
             GameControl.Wait(200 + 50 * Player.Gamespeed, keyBreak: true);
         }
 
-        public override bool PlayerRob()
-        {
-            foreach (var evt in EventsAt(1))
-            {
-                bool handled = evt.Rob();
-
-                if (handled)
-                    return true;
-            }
-
-            return PlayerRobImpl();
-        }
-        protected virtual bool PlayerRobImpl()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine("Nothing to rob.");
-            GameControl.Wait(500);
-
-            return true;
-        }
-
         protected override void AfterStepImpl(bool didEvent)
         {
             Point pt = new Point(Player.X, Player.Y);

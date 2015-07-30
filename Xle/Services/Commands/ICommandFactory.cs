@@ -16,7 +16,7 @@ namespace ERY.Xle.Services.Commands
         Magic Magic();
         Open Open(string name = null);
         Pass Pass();
-        Rob Rob();
+        Rob Rob(string name = null);
         Speak Speak();
         Take Take();
         Use Use(bool showItemNenu = true);
