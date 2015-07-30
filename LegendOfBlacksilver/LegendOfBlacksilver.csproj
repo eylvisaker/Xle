@@ -102,6 +102,7 @@
     <Compile Include="MapExtenders\Citadel\EventExtenders\Wizard.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\BlackmireClimb.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\DungeonOpen.cs" />
+    <Compile Include="MapExtenders\Dungeon\Commands\MarthbaneSpeak.cs" />
     <Compile Include="MapExtenders\Dungeon\DeathspireChasm.cs" />
     <Compile Include="MapExtenders\Dungeon\IslandCaverns.cs" />
     <Compile Include="MapExtenders\Dungeon\LobDungeon.cs" />

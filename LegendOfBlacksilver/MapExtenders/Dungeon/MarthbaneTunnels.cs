@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using ERY.Xle.Maps;
 using ERY.Xle.Services;
+using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Menus;
 
 namespace ERY.Xle.LoB.MapExtenders.Dungeon
@@ -15,7 +16,16 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
     {
         DungeonMonster king;
 
-        public IQuickMenu QuickMenu { get; set; }
+        public DungeonMonster King { get { return king; } }
+
+        public override void SetCommands(ICommandList commands)
+        {
+            base.SetCommands(commands);
+
+            commands.Items.Remove(commands.Items.First(x => x.Name == "Speak"));
+
+            commands.Items.Add(CommandFactory.Speak("MarthbaneSpeak"));
+        }
 
         public override void OnLoad()
         {
@@ -78,84 +88,13 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             }
         }
 
-        public override bool PlayerSpeak()
-        {
-            if (Player.DungeonLevel != 7) return false;
-            if (king == null) return false;
-            if (king.HP <= 0) return false;
-
-            if (Story.MarthbaneOfferedHelpToKing == false)
-            {
-                SoundMan.PlaySound(LotaSound.VeryGood);
-
-                TextArea.Clear(true);
-                TextArea.PrintLineSlow("I am king durek!!", XleColor.White);
-                TextArea.PrintLineSlow("Do you come to help me?", XleColor.White);
-                TextArea.PrintLineSlow();
-
-                if (QuickMenu.QuickMenuYesNo() == 1)
-                {
-                    DoomedMessage();
-                    return true;
-                }
-
-                Story.MarthbaneOfferedHelpToKing = true;
-
-                TextArea.Clear(true);
-                TextArea.PrintLineSlow("I fear you have been caught in the", XleColor.White);
-                TextArea.PrintLineSlow("same trap that imprisons me...", XleColor.White);
-                TextArea.PrintLineSlow();
-                TextArea.PrintLineSlow("unless...", XleColor.White);
-
-                GameControl.Wait(2000);
-            }
-
-            TextArea.Clear(true);
-            TextArea.PrintLineSlow("Do you carry my signet ring?", XleColor.White);
-            TextArea.PrintLineSlow();
-
-            if (QuickMenu.QuickMenuYesNo() == 1)
-            {
-                DoomedMessage();
-                return true;
-            }
-
-            GameState.Player.Items[LobItem.SignetRing] = 0;
-
-            TextArea.Clear(true);
-            TextArea.PrintLineSlow("In times of distress, the ring will\nreturn me to the castle!!  I fear it\ncan do nothing more than give you a\nroute of escape.", XleColor.White);
-
-            GameControl.Wait(3000);
-
-            TextArea.Clear(true);
-            TextArea.PrintLineSlow("\n\n\nNoble adventurer, i am in your debt.\nMay we meet in better times.", XleColor.White);
-
-            GameControl.Wait(3000);
-
-            SoundMan.PlaySound(LotaSound.EnemyMiss);
-
-            Story.RescuedKing = true;
-            Combat.Monsters.Remove(king);
-
-            OpenEscapeRoute();
-
-            return true;
-        }
-
-        private void OpenEscapeRoute()
+        public void OpenEscapeRoute()
         {
             // 11, 0, 7 change to 17
             // 13, 0, 4 change to 18
 
             TheMap[11, 0, 7] = 17;
             TheMap[13, 0, 4] = 18;
-        }
-
-        private void DoomedMessage()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine("Then I fear we are both doomed.", XleColor.White);
-            TextArea.PrintLine();
         }
 
         public override Map3DSurfaces Surfaces()

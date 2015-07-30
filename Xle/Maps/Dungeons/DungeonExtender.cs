@@ -486,11 +486,6 @@ namespace ERY.Xle.Maps.Dungeons
             }
         }
 
-        public override bool PlayerSpeak()
-        {
-            return false;
-        }
-
         public override void AfterExecuteCommand(KeyCode cmd)
         {
             base.AfterExecuteCommand(cmd);

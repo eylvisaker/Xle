@@ -45,7 +45,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
             commands.Items.Add(CommandFactory.Disembark());
             commands.Items.Add(CommandFactory.End());
             commands.Items.Add(CommandFactory.Magic());
-            commands.Items.Add(CommandFactory.Speak());
+            commands.Items.Add(CommandFactory.Speak("OutsideSpeak"));
         }
 
         public override void SetColorScheme(ColorScheme scheme)

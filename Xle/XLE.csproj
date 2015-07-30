@@ -68,6 +68,7 @@
     <Compile Include="Maps\MapInfo.cs" />
     <Compile Include="Maps\Museums\MuseumRob.cs" />
     <Compile Include="Maps\Museums\MuseumSpeak.cs" />
+    <Compile Include="Maps\Outdoors\OutsideSpeak.cs" />
     <Compile Include="Services\Commands\ICommand.cs" />
     <Compile Include="Services\Rendering\Maps\CastleRenderer.cs" />
     <Compile Include="Services\Rendering\Maps\TempleRenderer.cs" />

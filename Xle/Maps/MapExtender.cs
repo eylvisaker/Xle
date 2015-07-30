@@ -195,14 +195,6 @@ namespace ERY.Xle.Maps
 
         public virtual bool PlayerSpeak()
         {
-            foreach (var evt in EventsAt(1).Where(x => x.Enabled))
-            {
-                bool handled = evt.Speak();
-
-                if (handled)
-                    return handled;
-            }
-
             return PlayerSpeakImpl();
         }
 
