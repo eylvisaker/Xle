@@ -49,10 +49,8 @@
       <Y>7</Y>
       <Width>3</Width>
       <Height>3</Height>
-      <ExtenderName>
-      </ExtenderName>
-      <ShopName>
-      </ShopName>
+      <ExtenderName>Industry</ExtenderName>
+      <ShopName></ShopName>
       <CostFactor>1</CostFactor>
       <Product>
       </Product>

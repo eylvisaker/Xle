@@ -14,8 +14,7 @@
       <Y>4</Y>
       <Width>3</Width>
       <Height>7</Height>
-      <ExtenderName>
-      </ExtenderName>
+      <ExtenderName>Weapon</ExtenderName>
       <ShopName>Weapon</ShopName>
       <CostFactor>1</CostFactor>
     </Item>
