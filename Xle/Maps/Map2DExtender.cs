@@ -127,16 +127,6 @@ namespace ERY.Xle.Maps
         protected virtual void PlayerFight(Direction fightDir)
         { }
 
-        public override bool PlayerXamine()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("You are in " + TheMap.MapName + ".");
-            TextArea.PrintLine("Look about to see more.");
-
-            return true;
-        }
-
         public override bool PlayerLeave()
         {
             if (TheMap.HasGuards && TheMap.Guards.IsAngry)

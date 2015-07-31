@@ -342,7 +342,7 @@ namespace ERY.Xle.Maps.Dungeons
             return MonsterAt(Player.DungeonLevel, new Point(xx, yy)) != null;
         }
 
-        private DungeonMonster MonsterAt(int dungeonLevel, Point loc)
+        public DungeonMonster MonsterAt(int dungeonLevel, Point loc)
         {
             return Combat.MonsterAt(dungeonLevel, loc);
         }
@@ -492,122 +492,6 @@ namespace ERY.Xle.Maps.Dungeons
 
             GameControl.Wait(100);
             UpdateMonsters();
-        }
-
-        public override bool PlayerXamine()
-        {
-            SoundMan.PlaySound(LotaSound.Xamine);
-            GameControl.Wait(500);
-
-            Point faceDir = new Point();
-
-            switch (Player.FaceDirection)
-            {
-                case Direction.East: faceDir = new Point(1, 0); break;
-                case Direction.West: faceDir = new Point(-1, 0); break;
-                case Direction.North: faceDir = new Point(0, -1); break;
-                case Direction.South: faceDir = new Point(0, 1); break;
-                default: break;
-            }
-
-            TextArea.PrintLine("\n");
-
-            bool revealHidden = false;
-            DungeonMonster foundMonster = null;
-
-            for (int i = 0; i < 5; i++)
-            {
-                Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
-
-                foundMonster = MonsterAt(Player.DungeonLevel, loc);
-
-                if (foundMonster != null)
-                    break;
-                if (TheMap[loc.X, loc.Y] < 0x10)
-                    break;
-                if (TheMap[loc.X, loc.Y] >= 0x21 && TheMap[loc.X, loc.Y] < 0x2a)
-                {
-                    TheMap[loc.X, loc.Y] -= 0x10;
-                    revealHidden = true;
-                }
-            }
-
-            if (revealHidden)
-            {
-                TextArea.PrintLine("Hidden objects detected!!!", XleColor.White);
-                SoundMan.PlaySound(LotaSound.XamineDetected);
-            }
-
-            string extraText = string.Empty;
-            int distance = 0;
-
-            if (foundMonster != null)
-            {
-                bool handled = false;
-
-                PrintExamineMonsterMessage(foundMonster, ref handled);
-
-                if (false == handled)
-                {
-                    string name = " " + foundMonster.Name;
-                    if ("aeiou".Contains(foundMonster.Name[0]))
-                        name = "n" + name;
-
-                    TextArea.PrintLine("A" + name + " is stalking you!", XleColor.White);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
-                    int val = TheMap[loc.X, loc.Y];
-
-                    if (val < 0x10) break;
-
-                    if (extraText == string.Empty)
-                    {
-                        distance = i;
-
-                        if (val > 0x10 && val < 0x1a)
-                        {
-                            extraText = TrapName(val);
-                        }
-                        if (val >= 0x30 && val <= 0x3f)
-                        {
-                            extraText = "treasure chest";
-                        }
-                        if (val == 0x1e)
-                        {
-                            extraText = "box";
-                        }
-                    }
-                }
-
-                if (extraText != string.Empty)
-                {
-                    if (distance > 0)
-                    {
-                        TextArea.PrintLine("A " + extraText + " is in sight.");
-                    }
-                    else
-                    {
-                        TextArea.PrintLine("You are standing next ");
-                        TextArea.PrintLine("to a " + extraText + ".");
-                    }
-                }
-                else
-                {
-                    if (PrintLevelDuringXamine)
-                    {
-                        TextArea.PrintLine("Level " + (Player.DungeonLevel + 1).ToString() + ".");
-                    }
-
-                    TextArea.PrintLine("Nothing unusual in sight.");
-                }
-            }
-
-            return true;
         }
 
         public void ExecuteKillFlash()

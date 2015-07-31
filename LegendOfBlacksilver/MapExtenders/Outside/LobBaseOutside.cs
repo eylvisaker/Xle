@@ -23,6 +23,8 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 			commands.Items.Add(CommandFactory.Magic());
 			commands.Items.Add(CommandFactory.Rob());
 			commands.Items.Add(CommandFactory.Speak("OutsideSpeak"));
+            commands.Items.Add(CommandFactory.Xamine("OutsideXamine"));
+
 		}
 		public override int StepSize
 		{

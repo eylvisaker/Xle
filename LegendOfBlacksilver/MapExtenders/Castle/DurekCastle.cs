@@ -64,6 +64,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak("DurekCastleSpeak"));
+            commands.Items.Add(CommandFactory.Xamine());
         }
 
         public override void SetColorScheme(ColorScheme scheme)

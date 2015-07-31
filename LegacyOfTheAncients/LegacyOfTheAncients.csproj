@@ -62,6 +62,7 @@
     <Compile Include="MapExtenders\Fortress\FirstArea\CompendiumFirst.cs" />
     <Compile Include="MapExtenders\Fortress\FortressSpeak.cs" />
     <Compile Include="MapExtenders\Museum\Commands\LotaMuseumRob.cs" />
+    <Compile Include="MapExtenders\Museum\Commands\MuseumXamine.cs" />
     <Compile Include="MapExtenders\Museum\IExhibitFactory.cs" />
     <Compile Include="MapExtenders\Towns\Commands\TownRob.cs" />
     <Compile Include="MapExtenders\Towns\Stores\LotaStore.cs" />

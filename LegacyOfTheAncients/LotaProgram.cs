@@ -78,7 +78,6 @@ namespace ERY.Xle.LotA
                 yield return commandFactory.Pass();
                 yield return commandFactory.Use(showItemNenu:false);
                 yield return commandFactory.Weapon();
-                yield return commandFactory.Xamine();
             }
         }
     }

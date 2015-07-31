@@ -54,6 +54,7 @@
     <Compile Include="LobStory.cs" />
     <Compile Include="Lob3DSurfaces.cs" />
     <Compile Include="MapExtenders\Archives\ArchiveRenderer.cs" />
+    <Compile Include="MapExtenders\Archives\Commands\ArchiveXamine.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\Blacksmith.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\CrystalTears.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\DarkWand.cs" />

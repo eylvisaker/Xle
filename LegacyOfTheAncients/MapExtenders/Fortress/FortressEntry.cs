@@ -14,21 +14,11 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 {
     public class FortressEntry : CastleGround
     {
-        ExtenderDictionary extenders = new ExtenderDictionary();
-
         public FortressEntry()
         {
             WhichCastle = 2;
             CastleLevel = 1;
             GuardAttack = 3.5;
-
-            extenders.Add("MagicIce", new MagicIce());
-            extenders.Add("Elevator", new Elevator());
-            extenders.Add("GasTrap", new GasTrap());
-            extenders.Add("SpeakGuard", new SpeakGuard());
-            extenders.Add("Armor", new ArmorBox());
-            extenders.Add("GuardWarning", new GuardWarning());
-            extenders.Add("SeeCompendium", new SeeCompendium());
         }
 
         public override void SetColorScheme(ColorScheme scheme)

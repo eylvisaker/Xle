@@ -89,18 +89,6 @@ namespace ERY.Xle.Maps.Museums
         {
         }
 
-        public override bool PlayerXamine()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            if (InteractWithDisplay())
-                return true;
-
-            TextArea.PrintLine("You are in an ancient museum.");
-
-            return true;
-        }
         public override bool PlayerFight()
         {
             TextArea.PrintLine();
@@ -162,7 +150,7 @@ namespace ERY.Xle.Maps.Museums
             return GetExhibitByTile(tileAt);
         }
 
-        protected bool InteractWithDisplay()
+        public bool InteractWithDisplay()
         {
             Point lookingAt = PlayerLookingAt;
 

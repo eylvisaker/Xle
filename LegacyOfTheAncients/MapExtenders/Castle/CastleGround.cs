@@ -43,6 +43,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak("CastleSpeak"));
+            commands.Items.Add(CommandFactory.Xamine());
         }
 
         public override int GetOutsideTile(Point playerPoint, int x, int y)

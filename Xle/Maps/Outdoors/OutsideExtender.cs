@@ -715,24 +715,7 @@ namespace ERY.Xle.Maps.Outdoors
             return true;
         }
 
-        public override bool PlayerXamine()
-        {
-            TerrainInfo info = GetTerrainInfo();
-
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("You are in " + info.TerrainName + ".");
-
-            TextArea.Print("Travel: ", XleColor.White);
-            TextArea.Print(info.TravelText, XleColor.Green);
-            TextArea.Print("  -  Food use: ", XleColor.White);
-            TextArea.Print(info.FoodUseText, XleColor.Green);
-            TextArea.PrintLine();
-
-            return true;
-        }
-
-        private TerrainInfo GetTerrainInfo()
+        public TerrainInfo GetTerrainInfo()
         {
             var terrain = TerrainAt(Player.X, Player.Y);
 

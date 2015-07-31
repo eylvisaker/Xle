@@ -193,17 +193,6 @@ namespace ERY.Xle.Maps
             return CommandNotImplemented();
         }
 
-        /// <summary>
-        /// Function called when the player executes the Xamine command.
-        /// Returns true if the command was handled by this function, false
-        /// if the caller should display a "Nothing to Xamine" type message.
-        /// </summary>
-        /// <returns></returns>
-        public virtual bool PlayerXamine()
-        {
-            return CommandNotImplemented();
-        }
-
         public virtual bool PlayerLeave()
         {
             return CommandNotImplemented();

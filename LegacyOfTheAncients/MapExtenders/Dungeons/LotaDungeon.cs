@@ -50,6 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         {
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
+            commands.Items.Add(CommandFactory.Xamine("DungeonXamine"));
             commands.Items.Add(CommandFactory.Climb("DungeonClimb"));
             commands.Items.Add(CommandFactory.End());
             commands.Items.Add(CommandFactory.Magic());

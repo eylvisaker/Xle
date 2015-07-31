@@ -38,6 +38,7 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Xamine());
             commands.Items.Add(CommandFactory.Speak());
         }
 

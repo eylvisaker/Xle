@@ -23,6 +23,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Xamine("ArchiveXamine"));
         }
 
         public override Map3DSurfaces Surfaces()
@@ -35,14 +36,6 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
             return factory.MuseumRenderer(this, "ArchiveRenderer");
         }
 
-        public override bool PlayerXamine()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("You are in ancient archives.");
-
-            return true;
-        }
         public override bool PlayerOpen()
         {
             if (IsFacingDoor)

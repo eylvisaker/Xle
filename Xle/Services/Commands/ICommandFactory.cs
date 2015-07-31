@@ -21,6 +21,6 @@ namespace ERY.Xle.Services.Commands
         Take Take();
         Use Use(bool showItemNenu = true);
         WeaponCommand Weapon();
-        Xamine Xamine();
+        Xamine Xamine(string name = null);
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders
 {
+    [Obsolete]
 	class ExtenderDictionary
 	{
 		Dictionary<string, EventExtender> extenders = new Dictionary<string,EventExtender>();

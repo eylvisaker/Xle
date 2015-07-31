@@ -66,7 +66,6 @@ namespace ERY.Xle.LoB
 				yield return commandFactory.Pass();
 				yield return commandFactory.Use();
 				yield return commandFactory.Weapon();
-				yield return commandFactory.Xamine();
 			}
 		}
 	}

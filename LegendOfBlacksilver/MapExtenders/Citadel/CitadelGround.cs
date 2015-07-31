@@ -38,6 +38,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak());
+            commands.Items.Add(CommandFactory.Xamine());
         }
 
         public override double ChanceToHitGuard(Guard guard, int distance)
