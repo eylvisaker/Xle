@@ -72,7 +72,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Leave(confirmPrompt: Options.EnhancedUserInterface));
             commands.Items.Add(CommandFactory.Rob());
-            commands.Items.Add(CommandFactory.Speak());
+            commands.Items.Add(CommandFactory.Speak("TownSpeak"));
         }
 
     }

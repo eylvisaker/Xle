@@ -78,6 +78,7 @@
     <Compile Include="MapExtenders\Archives\LobArchives.cs" />
     <Compile Include="MapExtenders\Archives\OwlArchives.cs" />
     <Compile Include="MapExtenders\CastleDamageCalculator.cs" />
+    <Compile Include="MapExtenders\Castle\Commands\DurekCastleSpeak.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\AngryCastle.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\AngryOrcs.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\Arman.cs" />

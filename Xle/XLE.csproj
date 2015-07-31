@@ -62,6 +62,7 @@
     <Compile Include="Bootstrap\WindsorInitializer.cs" />
     <Compile Include="ColorScheme.cs" />
     <Compile Include="Data\EquipmentInfo.cs" />
+    <Compile Include="Maps\Castles\CastleSpeak.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonOpenCommand.cs" />
     <Compile Include="Maps\Dungeons\DungeonCombat.cs" />
     <Compile Include="Maps\MapEntryParams.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Maps\Museums\MuseumRob.cs" />
     <Compile Include="Maps\Museums\MuseumSpeak.cs" />
     <Compile Include="Maps\Outdoors\OutsideSpeak.cs" />
+    <Compile Include="Maps\Towns\TownSpeak.cs" />
     <Compile Include="Services\Commands\ICommand.cs" />
     <Compile Include="Services\Rendering\Maps\CastleRenderer.cs" />
     <Compile Include="Services\Rendering\Maps\TempleRenderer.cs" />

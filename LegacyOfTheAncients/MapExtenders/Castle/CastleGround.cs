@@ -42,7 +42,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Take());
-            commands.Items.Add(CommandFactory.Speak());
+            commands.Items.Add(CommandFactory.Speak("CastleSpeak"));
         }
 
         public override int GetOutsideTile(Point playerPoint, int x, int y)
@@ -77,21 +77,6 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             Player.Items[LotaItem.MagicSeed]--;
 
             return true;
-        }
-
-        public override void SpeakToGuard()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            if (Story.Invisible)
-            {
-                TextArea.PrintLine("The guard looks startled.");
-            }
-            else
-            {
-                TextArea.PrintLine("The guard ignores you.");
-            }
         }
 
         protected override void OnSetAngry(bool value)

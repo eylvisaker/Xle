@@ -63,7 +63,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Take());
-            commands.Items.Add(CommandFactory.Speak());
+            commands.Items.Add(CommandFactory.Speak("DurekCastleSpeak"));
         }
 
         public override void SetColorScheme(ColorScheme scheme)
@@ -117,23 +117,6 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
             var door = Events.OfType<FeatherDoor>().First();
 
             door.RemoveDoor();
-        }
-
-        public override void SpeakToGuard()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            if (Player.Items[LobItem.FalconFeather] > 0)
-            {
-                TextArea.PrintLine("I see you have the feather,");
-                TextArea.PrintLine("why not use it?");
-                GameControl.Wait(1500);
-            }
-            else
-            {
-                TextArea.PrintLine("I should not converse, sir.");
-            }
         }
 
         public override void PlayerUse(int item, ref bool handled)

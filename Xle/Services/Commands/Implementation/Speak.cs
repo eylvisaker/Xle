@@ -11,18 +11,23 @@ namespace ERY.Xle.Services.Commands.Implementation
 
         public override void Execute()
         {
+            if (SpeakToEvent())
+                return;
+
+            PrintNoResponseMessage();
+        }
+
+        protected bool SpeakToEvent()
+        {
             foreach (var evt in GameState.MapExtender.EventsAt(1).Where(x => x.Enabled))
             {
                 bool handled = evt.Speak();
 
                 if (handled)
-                    return;
+                    return true;
             }
 
-            if (GameState.MapExtender.PlayerSpeak() == false)
-            {
-                PrintNoResponseMessage();
-            }
+            return false;
         }
 
         protected void PrintNoResponseMessage()

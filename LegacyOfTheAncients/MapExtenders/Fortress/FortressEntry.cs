@@ -46,19 +46,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             Player.RenderColor = XleColor.White;
         }
 
-        public override void SpeakToGuard()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            if (IsAngry)
-            {
-                TextArea.PrintLine("The guard ignores you.");
-            }
-            else
-                TextArea.PrintLine("Greetings soldier.");
-        }
-
         public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
         {
             if (x >= 0)

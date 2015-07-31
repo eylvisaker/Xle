@@ -193,16 +193,6 @@ namespace ERY.Xle.Maps
             return CommandNotImplemented();
         }
 
-        public virtual bool PlayerSpeak()
-        {
-            return PlayerSpeakImpl();
-        }
-
-        protected virtual bool PlayerSpeakImpl()
-        {
-            return false;
-        }
-        
         /// <summary>
         /// Function called when the player executes the Xamine command.
         /// Returns true if the command was handled by this function, false

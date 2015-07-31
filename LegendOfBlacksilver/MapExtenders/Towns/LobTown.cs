@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Towns
             commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Leave());
             commands.Items.Add(CommandFactory.Magic());
-            commands.Items.Add(CommandFactory.Speak());
+            commands.Items.Add(CommandFactory.Speak("TownSpeak"));
         }
     }
 }

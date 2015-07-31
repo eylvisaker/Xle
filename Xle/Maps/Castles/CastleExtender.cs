@@ -21,12 +21,6 @@ namespace ERY.Xle.Maps.Castles
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override void SpeakToGuard()
-        {
-            TextArea.PrintLine("\n\nThe guard ignores you.");
-        }
-
-
         public override void PlayOpenRoofSound(Roof roof)
         {
             // do nothing here
