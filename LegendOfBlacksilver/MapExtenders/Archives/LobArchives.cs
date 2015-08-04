@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
         {
             commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-            commands.Items.Add(CommandFactory.Leave("Leave the archives?"));
+            commands.Items.Add(CommandFactory.Leave(promptText: "Leave the archives?"));
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Take());
@@ -55,13 +55,6 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
                 return true;
 
             return false;
-        }
-
-        public override bool PlayerLeave()
-        {
-            LeaveMap();
-
-            return true;
         }
     }
 }

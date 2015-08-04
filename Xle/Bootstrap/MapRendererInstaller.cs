@@ -33,11 +33,11 @@ namespace ERY.Xle.Bootstrap
             RegisterRendererType<MuseumRenderer>(container, store, assembly);
             RegisterRendererType<OutsideRenderer>(container, store, assembly);
             RegisterRendererType<TownRenderer>(container, store, assembly);
+            RegisterRendererType<TempleRenderer>(container, store, assembly);
         }
 
         private void RegisterRendererType<T>(IWindsorContainer container, IConfigurationStore store, Assembly assembly)
         {
-
             container.Register(Classes.FromAssembly(assembly)
                 .BasedOn<T>()
                 .Configure(c => c.Named(NameOf(c.Implementation)))
@@ -45,6 +45,7 @@ namespace ERY.Xle.Bootstrap
                 .WithServiceSelf()
                 .LifestyleTransient());
         }
+
         private string NameOf(Type type)
         {
             return type.Name;

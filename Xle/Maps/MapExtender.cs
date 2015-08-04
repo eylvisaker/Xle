@@ -193,11 +193,6 @@ namespace ERY.Xle.Maps
             return CommandNotImplemented();
         }
 
-        public virtual bool PlayerLeave()
-        {
-            return CommandNotImplemented();
-        }
-
         protected bool CommandNotImplemented()
         {
             TextArea.PrintLine("This command is not implemented.", Color.Red);

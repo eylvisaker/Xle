@@ -73,6 +73,7 @@
     <Compile Include="Maps\Museums\Commands\MuseumXamine.cs" />
     <Compile Include="Maps\Outdoors\Commands\OutsideSpeak.cs" />
     <Compile Include="Maps\Outdoors\Commands\OutsideXamine.cs" />
+    <Compile Include="Maps\Towns\TownLeave.cs" />
     <Compile Include="Maps\Towns\TownSpeak.cs" />
     <Compile Include="Services\Commands\ICommand.cs" />
     <Compile Include="Services\Rendering\Maps\CastleRenderer.cs" />

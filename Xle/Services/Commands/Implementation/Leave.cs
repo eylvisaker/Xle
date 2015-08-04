@@ -4,20 +4,34 @@ namespace ERY.Xle.Services.Commands.Implementation
 {
     public class Leave : Command
     {
-        private IQuickMenu menu;
-
         public Leave(
-            IQuickMenu menu,
             string promptText,
             bool confirmPrompt = true)
         {
             ConfirmPrompt = confirmPrompt;
             PromptText = promptText;
+        }
 
-            this.menu = menu;
+        public IQuickMenu QuickMenu { get; set; }
+
+        public override string Name
+        {
+            get { return "Leave"; }
         }
 
         public override void Execute()
+        {
+            if (!ConfirmLeave())
+                return;
+
+            GameState.MapExtender.LeaveMap();
+        }
+
+        /// <summary>
+        /// Returns false if the player cancels the leave action.
+        /// </summary>
+        /// <returns></returns>
+        protected bool ConfirmLeave()
         {
             TextArea.PrintLine();
             TextArea.PrintLine();
@@ -29,11 +43,13 @@ namespace ERY.Xle.Services.Commands.Implementation
                     TextArea.PrintLine(PromptText);
                     TextArea.PrintLine();
                 }
-                if (menu.QuickMenuYesNo() == 1)
-                    return;
+                if (QuickMenu.QuickMenuYesNo() == 1)
+                {
+                    return false;
+                }
             }
 
-            GameState.MapExtender.PlayerLeave();
+            return true;
         }
 
         public bool ConfirmPrompt { get; set; }

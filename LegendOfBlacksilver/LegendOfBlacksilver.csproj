@@ -121,6 +121,7 @@
     <Compile Include="MapExtenders\Outside\Maelbane.cs" />
     <Compile Include="MapExtenders\Outside\Thalen.cs" />
     <Compile Include="MapExtenders\Temples\LobTemple.cs" />
+    <Compile Include="MapExtenders\Temples\TempleClimb.cs" />
     <Compile Include="MapExtenders\Towns\LobTown.cs" />
     <Compile Include="MapExtenders\Towns\MaelbaneTown.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Armor.cs" />

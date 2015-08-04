@@ -70,7 +70,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
             commands.Items.Add(CommandFactory.Magic());
-            commands.Items.Add(CommandFactory.Leave(confirmPrompt: Options.EnhancedUserInterface));
+            commands.Items.Add(CommandFactory.Leave("TownLeave", confirmPrompt: Options.EnhancedUserInterface));
             commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Speak("TownSpeak"));
             commands.Items.Add(CommandFactory.Xamine());

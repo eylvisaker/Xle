@@ -126,21 +126,5 @@ namespace ERY.Xle.Maps
 
         protected virtual void PlayerFight(Direction fightDir)
         { }
-
-        public override bool PlayerLeave()
-        {
-            if (TheMap.HasGuards && TheMap.Guards.IsAngry)
-            {
-                TextArea.PrintLine("Walk out yourself.");
-                GameControl.Wait(200);
-            }
-            else
-            {
-                LeaveMap();
-            }
-
-            return true;
-        }
-
     }
 }
