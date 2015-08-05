@@ -50,6 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         {
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
+            commands.Items.Add(CommandFactory.Fight("LotaDungeonFight"));
             commands.Items.Add(CommandFactory.Xamine("DungeonXamine"));
             commands.Items.Add(CommandFactory.Climb("DungeonClimb"));
             commands.Items.Add(CommandFactory.End());
@@ -127,31 +128,6 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
                 ((monsterID + 15 + 15 * Random.NextDouble()) * 2.4 * TheMap.MonsterHealthScale);
 
             return monst;
-        }
-
-        public override bool RollToHitMonster(DungeonMonster monster)
-        {
-            return Random.NextDouble() * 70 < Player.Attribute[Attributes.dexterity] + 30;
-        }
-        public override int RollDamageToMonster(DungeonMonster monster)
-        {
-            double damage = Player.Attribute[Attributes.strength] + 30;
-            damage /= 45;
-
-            var weapon = Player.CurrentWeapon;
-
-            double vd = weapon.ID + 1 + weapon.Quality / 2.8;
-
-            damage *= vd + 4;
-
-            if (Player.WeaponEnchantTurnsRemaining > 0)
-            {
-                damage *= 2.5;
-            }
-            else
-                damage *= 1.5;
-
-            return (int)(damage * (0.5 + Random.NextDouble()));
         }
 
         public override bool RollToHitPlayer(DungeonMonster monster)

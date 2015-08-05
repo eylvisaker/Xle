@@ -45,6 +45,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
             commands.Items.Add(CommandFactory.Disembark());
             commands.Items.Add(CommandFactory.End());
             commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Fight("OutsideFight"));
             commands.Items.Add(CommandFactory.Speak("OutsideSpeak"));
             commands.Items.Add(CommandFactory.Xamine("OutsideXamine"));
         }

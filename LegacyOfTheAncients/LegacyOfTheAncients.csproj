@@ -56,9 +56,11 @@
     <Compile Include="LotaObject.cs" />
     <Compile Include="LotaProgram.cs" />
     <Compile Include="LotaStory.cs" />
+    <Compile Include="MapExtenders\Castle\Commands\CastleFight.cs" />
     <Compile Include="MapExtenders\Castle\Commands\CastleSpeak.cs" />
     <Compile Include="MapExtenders\Castle\Events\SpiralSuccess.cs" />
     <Compile Include="MapExtenders\Dungeons\Commands\DungeonOpen.cs" />
+    <Compile Include="MapExtenders\Dungeons\Commands\LotaDungeonFight.cs" />
     <Compile Include="MapExtenders\Fortress\FirstArea\CompendiumFirst.cs" />
     <Compile Include="MapExtenders\Fortress\FortressSpeak.cs" />
     <Compile Include="MapExtenders\Museum\Commands\LotaMuseumRob.cs" />

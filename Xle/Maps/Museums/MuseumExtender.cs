@@ -89,29 +89,6 @@ namespace ERY.Xle.Maps.Museums
         {
         }
 
-        public override bool PlayerFight()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            var lookingAt = PlayerLookingAt;
-
-            if (ExhibitAt(Player.Location) != null)
-            {
-                PrintExhibitStopsActionMessage();
-            }
-            else if (Map[lookingAt] == doorVal)
-            {
-                SoundMan.PlaySound(LotaSound.PlayerHit);
-
-                TextArea.PrintLine("The door does not budge.");
-            }
-            else
-                TextArea.PrintLine("There is nothing to fight.");
-
-            return true;
-        }
-
         public Point PlayerLookingAt
         {
             get
@@ -133,7 +110,7 @@ namespace ERY.Xle.Maps.Museums
             return true;
         }
 
-        private void PrintExhibitStopsActionMessage()
+        public void PrintExhibitStopsActionMessage()
         {
             TextArea.PrintLine("The display case");
             TextArea.PrintLine("force field stops you.");

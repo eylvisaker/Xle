@@ -19,7 +19,8 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 			commands.Items.AddRange(LobProgram.CommonLobCommands);
 
 			commands.Items.Add(CommandFactory.Disembark());
-			commands.Items.Add(CommandFactory.End());
+            commands.Items.Add(CommandFactory.End());
+            commands.Items.Add(CommandFactory.Fight("OutsideFight"));
 			commands.Items.Add(CommandFactory.Magic());
 			commands.Items.Add(CommandFactory.Rob());
 			commands.Items.Add(CommandFactory.Speak("OutsideSpeak"));

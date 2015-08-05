@@ -60,7 +60,6 @@ namespace ERY.Xle.LoB
 			get
 			{
                 yield return commandFactory.Armor();
-                yield return commandFactory.Fight();
 				yield return commandFactory.Gamespeed();
 				yield return commandFactory.Inventory();
 				yield return commandFactory.Pass();

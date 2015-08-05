@@ -34,6 +34,11 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
         {
             commands.Items.AddRange(LobProgram.CommonLobCommands);
 
+            var fight = (LobCastleFight)CommandFactory.Fight("LobCastleFight");
+            fight.DamageCalculator = cdc;
+
+            commands.Items.Add(fight);
+            
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Take());

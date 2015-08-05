@@ -6,15 +6,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ERY.Xle.Maps.Castles;
+using ERY.Xle.Services.Commands;
+
 namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 {
-    public class LabyrinthUpper : LabyrinthBase
+    public class LabyrinthUpper : CastleExtender
     {
         CastleDamageCalculator cdc;
 
-        public LabyrinthUpper(Random random) : base(random)
+        public LabyrinthUpper(Random random)
         {
             cdc = new CastleDamageCalculator(random) { v5 = 2.1, v6 = 29, v7 = 2.5 };
+        }
+
+        public override void SetCommands(ICommandList commands)
+        {
+            commands.Items.AddRange(LobProgram.CommonLobCommands);
+
+            var fight = (LobCastleFight)CommandFactory.Fight("LobCastleFight");
+            fight.DamageCalculator = cdc;
+
+            commands.Items.Add(fight);
+            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Open());
+            commands.Items.Add(CommandFactory.Speak());
+            commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Xamine());
         }
 
         public override void SetColorScheme(ColorScheme scheme)
@@ -25,17 +43,9 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override double ChanceToHitGuard(Guard guard, int distance)
-        {
-            return cdc.ChanceToHitGuard(Player, distance);
-        }
         public override double ChanceToHitPlayer(Guard guard)
         {
             return cdc.ChanceToHitPlayer(Player);
-        }
-        public override int RollDamageToGuard(Guard guard)
-        {
-            return cdc.RollDamageToGuard(Player);
         }
         public override int RollDamageToPlayer(Guard guard)
         {

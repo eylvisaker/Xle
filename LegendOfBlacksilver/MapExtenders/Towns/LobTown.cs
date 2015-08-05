@@ -16,9 +16,10 @@ namespace ERY.Xle.LoB.MapExtenders.Towns
         {
             commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-            commands.Items.Add(CommandFactory.Rob());
+            commands.Items.Add(CommandFactory.Fight("FightAgainstGuard"));
             commands.Items.Add(CommandFactory.Leave("TownLeave"));
             commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Speak("TownSpeak"));
             commands.Items.Add(CommandFactory.Xamine());
         }

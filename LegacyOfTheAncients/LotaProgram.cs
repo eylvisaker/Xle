@@ -71,7 +71,6 @@ namespace ERY.Xle.LotA
             get
             {
                 yield return commandFactory.Armor();
-                yield return commandFactory.Fight();
                 yield return commandFactory.Gamespeed();
                 yield return commandFactory.Hold();
                 yield return commandFactory.Inventory();

@@ -4,6 +4,7 @@ using System.Linq;
 
 using AgateLib.Geometry;
 using AgateLib.InputLib;
+using AgateLib.Quality;
 
 using ERY.Xle.Data;
 using ERY.Xle.Services.Commands;
@@ -28,7 +29,11 @@ namespace ERY.Xle.Maps
         public XleMap TheMap
         {
             get { return mTheMap; }
-            set { mTheMap = value; }
+            set
+            {
+                Condition.RequireArgumentNotNull(value, "value");
+                mTheMap = value;
+            }
         }
 
         public XleMapRenderer MapRenderer { get; set; }
@@ -186,11 +191,6 @@ namespace ERY.Xle.Maps
             MapChanger.ReturnToPreviousMap();
 
             TextArea.PrintLine();
-        }
-
-        public virtual bool PlayerFight()
-        {
-            return CommandNotImplemented();
         }
 
         protected bool CommandNotImplemented()

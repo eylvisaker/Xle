@@ -554,7 +554,7 @@ namespace ERY.Xle.Maps.Dungeons
             int distance = 0;
             return MonsterInFrontOfPlayer(player, ref distance);
         }
-        protected DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
+        public DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
         {
             Point fightDir = player.FaceDirection.StepDirection();
             DungeonMonster monst = null;
@@ -603,54 +603,6 @@ namespace ERY.Xle.Maps.Dungeons
             }
         }
 
-
-        public override bool PlayerFight()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            int distance = 0;
-            int maxDistance = 1;
-            if (Player.CurrentWeapon.Info(Data).Ranged)
-                maxDistance = 5;
-
-            DungeonMonster monst = MonsterInFrontOfPlayer(Player, ref distance);
-
-            if (monst == null)
-            {
-                TextArea.PrintLine("Nothing to fight.");
-                return true;
-            }
-            else if (distance > maxDistance)
-            {
-                TextArea.PrintLine("The " + monst.Name + " is out-of-range");
-                TextArea.PrintLine("of your " + Player.CurrentWeapon.BaseName(Data) + ".");
-                return true;
-            }
-
-            bool hit = RollToHitMonster(monst);
-
-            TextArea.Print("Hit ");
-            TextArea.Print(monst.Name, XleColor.White);
-            TextArea.PrintLine(" with " + Player.CurrentWeapon.BaseName(Data));
-
-            if (hit)
-            {
-                int damage = RollDamageToMonster(monst);
-
-                SoundMan.PlaySound(LotaSound.PlayerHit);
-
-                HitMonster(monst, damage, XleColor.Cyan);
-            }
-            else
-            {
-                SoundMan.PlaySound(LotaSound.PlayerMiss);
-                TextArea.PrintLine("Your attack misses.");
-                GameControl.Wait(500);
-            }
-
-            return true;
-        }
 
     }
 }

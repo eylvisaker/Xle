@@ -69,6 +69,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
         {
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
+            commands.Items.Add(CommandFactory.Fight("FightAgainstGuard"));
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Leave("TownLeave", confirmPrompt: Options.EnhancedUserInterface));
             commands.Items.Add(CommandFactory.Rob());

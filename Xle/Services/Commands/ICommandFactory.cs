@@ -8,7 +8,7 @@ namespace ERY.Xle.Services.Commands
         Climb Climb(string name);
         Disembark Disembark();
         End End();
-        Fight Fight();
+        Fight Fight(string name = null);
         Gamespeed Gamespeed();
         Hold Hold();
         Inventory Inventory();

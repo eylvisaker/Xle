@@ -95,35 +95,6 @@ namespace ERY.Xle.Maps
             }
         }
 
-        public override bool PlayerFight()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            TextArea.PrintLine("Fight with " + Player.CurrentWeapon.BaseName(Data));
-            TextArea.Print("Enter direction: ");
-
-            KeyCode key = Input.WaitForKey(KeyCode.Up, KeyCode.Down, KeyCode.Left, KeyCode.Right);
-
-            Direction fightDir;
-
-            switch (key)
-            {
-                case KeyCode.Right: fightDir = Direction.East; break;
-                case KeyCode.Up: fightDir = Direction.North; break;
-                case KeyCode.Left: fightDir = Direction.West; break;
-                case KeyCode.Down: fightDir = Direction.South; break;
-                default:
-                    throw new InvalidOperationException();
-            }
-
-            TextArea.PrintLine(fightDir.ToString());
-
-            PlayerFight(fightDir);
-
-            return true;
-        }
-
         protected virtual void PlayerFight(Direction fightDir)
         { }
     }

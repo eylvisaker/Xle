@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LoB.MapExtenders
 {
-	class CastleDamageCalculator
+	public class CastleDamageCalculator
 	{
 		public double v5, v6, v7;
 

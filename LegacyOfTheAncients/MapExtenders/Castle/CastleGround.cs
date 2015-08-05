@@ -1,4 +1,5 @@
-﻿using ERY.Xle.LotA.MapExtenders.Castle.Events;
+﻿using ERY.Xle.LotA.MapExtenders.Castle.Commands;
+using ERY.Xle.LotA.MapExtenders.Castle.Events;
 using ERY.Xle.Maps.Castles;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands;
@@ -39,6 +40,11 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
         {
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
+            var fight = (CastleFight)CommandFactory.Fight("CastleFight");
+            fight.WhichCastle = WhichCastle;
+            fight.CastleLevel = CastleLevel;
+
+            commands.Items.Add(fight);
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Take());
@@ -87,40 +93,13 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
         }
 
         protected int WhichCastle = 1;
-        protected double CastleLevel = 1;
+        protected int CastleLevel = 1;
         protected double GuardAttack = 1;
-
-        public override double ChanceToHitGuard(Guard guard, int distance)
-        {
-            int weaponType = Player.CurrentWeapon.ID;
-            double GuardDefense = 1;
-
-            if (WhichCastle == 2)
-                GuardDefense = Player.Attribute[Attributes.dexterity] / 26.0;
-
-            return (Player.Attribute[Attributes.dexterity] + 13)
-                * (99 + weaponType * 11) / 7500.0 / GuardDefense;
-        }
-
-
-        public override int RollDamageToGuard(Guard guard)
-        {
-            int weaponType = Player.CurrentWeapon.ID;
-
-            double damage = Player.Attribute[Attributes.strength] *
-                       (weaponType / 2 + 1) / 7;
-
-            damage *= 1 + 2 * Random.NextDouble();
-
-            return (int)Math.Round(damage);
-        }
-
 
         public override double ChanceToHitPlayer(Guard guard)
         {
             return 1 - (Player.Attribute[Attributes.dexterity] / 99.0);
         }
-
 
         public override int RollDamageToPlayer(Guard guard)
         {

@@ -35,24 +35,20 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
         {
             commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-            commands.Items.Add(CommandFactory.Open());
+            var fight = (LobCastleFight)CommandFactory.Fight("LobCastleFight");
+            fight.DamageCalculator = cdc;
+
+            commands.Items.Add(fight);
             commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Open());
+            commands.Items.Add(CommandFactory.Speak());
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Xamine());
-            commands.Items.Add(CommandFactory.Speak());
         }
 
-        public override double ChanceToHitGuard(Guard guard, int distance)
-        {
-            return cdc.ChanceToHitGuard(Player, distance);
-        }
         public override double ChanceToHitPlayer(Guard guard)
         {
             return cdc.ChanceToHitPlayer(Player);
-        }
-        public override int RollDamageToGuard(Guard guard)
-        {
-            return cdc.RollDamageToGuard(Player);
         }
         public override int RollDamageToPlayer(Guard guard)
         {

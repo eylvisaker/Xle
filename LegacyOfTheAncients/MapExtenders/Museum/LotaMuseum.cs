@@ -48,6 +48,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
         {
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
+            commands.Items.Add(CommandFactory.Fight("MuseumFight"));
             commands.Items.Add(CommandFactory.Rob("LotaMuseumRob"));
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak("MuseumSpeak"));

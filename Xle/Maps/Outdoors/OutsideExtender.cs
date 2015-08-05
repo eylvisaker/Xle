@@ -22,7 +22,8 @@ namespace ERY.Xle.Maps.Outdoors
 
         int stepCountToEncounter;
         Direction monstDir;
-        int monstCount, initMonstCount;
+        [Obsolete("Replace this with something else.")]
+        public int monstCount, initMonstCount;
 
         public EncounterState EncounterState { get; set; }
         public bool IsMonsterFriendly { get; set; }
@@ -37,6 +38,11 @@ namespace ERY.Xle.Maps.Outdoors
         {
             get { return (OutsideRenderer)base.MapRenderer; }
         }
+
+        public List<Monster> CurrentMonsters
+        {
+            get { return currentMonst; } 
+        } 
 
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
@@ -667,52 +673,6 @@ namespace ERY.Xle.Maps.Outdoors
                     GameControl.Wait(400 + 100 * Player.Gamespeed);
                 }
             }
-        }
-
-        public override bool PlayerFight()
-        {
-            string weaponName = Player.CurrentWeapon.BaseName(Data);
-
-            TextArea.PrintLine("\n");
-
-            if (EncounterState == EncounterState.MonsterReady)
-            {
-                int dam = attack();
-
-                TextArea.Print("Attack ", XleColor.White);
-                TextArea.Print(MonstName, XleColor.Cyan);
-                TextArea.PrintLine();
-
-                TextArea.Print("with ", XleColor.White);
-                TextArea.Print(weaponName, XleColor.Cyan);
-                TextArea.PrintLine();
-
-                if (dam <= 0)
-                {
-                    SoundMan.PlaySound(LotaSound.PlayerMiss);
-
-                    TextArea.PrintLine("Your Attack missed.", XleColor.Yellow);
-
-                    return true;
-                }
-
-                SoundMan.PlaySound(LotaSound.PlayerHit);
-
-                HitMonster(dam);
-            }
-            else if (EncounterState > 0)
-            {
-                TextArea.PrintLine("The unknown creature is not ");
-                TextArea.PrintLine("within range.");
-
-                GameControl.Wait(300 + 100 * Player.Gamespeed);
-            }
-            else
-            {
-                return false;
-            }
-
-            return true;
         }
 
         public TerrainInfo GetTerrainInfo()
