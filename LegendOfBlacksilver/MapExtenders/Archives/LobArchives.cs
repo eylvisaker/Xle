@@ -19,7 +19,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
         {
             commands.Items.AddRange(LobProgram.CommonLobCommands);
 
-            commands.Items.Add(CommandFactory.Fight());
+            commands.Items.Add(CommandFactory.Fight("ArchiveFight"));
             commands.Items.Add(CommandFactory.Leave(promptText: "Leave the archives?"));
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Rob());
