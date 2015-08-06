@@ -556,50 +556,6 @@ namespace ERY.Xle.Maps.Outdoors
                 Player.TimeQuality += 1;
             }
         }
-        public override bool PlayerDisembark()
-        {
-            TextArea.PrintLine(" raft");
-
-            if (Player.IsOnRaft == false)
-                return false;
-
-            TextArea.PrintLine();
-            TextArea.PrintLine("Disembark in which direction?");
-
-            do
-            {
-                Screen.OnDraw();
-
-            } while (!(
-                Keyboard.Keys[KeyCode.Left] || Keyboard.Keys[KeyCode.Right] ||
-                Keyboard.Keys[KeyCode.Up] || Keyboard.Keys[KeyCode.Down]));
-
-            int newx = Player.X;
-            int newy = Player.Y;
-
-            Direction dir = Direction.East;
-
-            if (Keyboard.Keys[KeyCode.Left])
-                dir = Direction.West;
-            else if (Keyboard.Keys[KeyCode.Up])
-                dir = Direction.North;
-            else if (Keyboard.Keys[KeyCode.Down])
-                dir = Direction.South;
-            else if (Keyboard.Keys[KeyCode.Right])
-                dir = Direction.East;
-
-            PlayerDisembark(dir);
-
-            return true;
-        }
-
-        private void PlayerDisembark(Direction dir)
-        {
-            Player.BoardedRaft = null;
-            PlayerCursorMovement(dir);
-
-            SoundMan.StopSound(LotaSound.Raft1);
-        }
 
         private void HitMonster(int dam)
         {

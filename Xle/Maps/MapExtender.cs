@@ -237,11 +237,6 @@ namespace ERY.Xle.Maps
             return handled;
         }
 
-        public virtual bool PlayerDisembark()
-        {
-            return false;
-        }
-
         public virtual void PlayerMagic()
         {
             var magics = ValidMagic.Where(x => Player.Items[x.ItemID] > 0).ToList();
