@@ -72,6 +72,7 @@
     <Compile Include="Maps\Museums\Commands\MuseumFight.cs" />
     <Compile Include="Maps\Museums\Commands\MuseumRob.cs" />
     <Compile Include="Maps\Museums\Commands\MuseumSpeak.cs" />
+    <Compile Include="Maps\Museums\Commands\MuseumTake.cs" />
     <Compile Include="Maps\Museums\Commands\MuseumXamine.cs" />
     <Compile Include="Maps\Museums\MuseumTiles.cs" />
     <Compile Include="Maps\Outdoors\Commands\OutsideFight.cs" />

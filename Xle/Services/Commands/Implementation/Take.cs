@@ -1,24 +1,38 @@
-﻿using ERY.Xle.Services.Game;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+using ERY.Xle.Services.Game;
+using ERY.Xle.XleEventTypes;
+using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.Services.Commands.Implementation
 {
     public class Take : Command
     {
-        private IXleGameControl gameControl;
+        public IXleGameControl GameControl { get; set; }
 
-        public Take(IXleGameControl gameControl)
+        public override string Name
         {
-            this.gameControl = gameControl;
+            get { return "Take"; }
+        }
+
+        IEnumerable<EventExtender> EventsAt(int borderSize)
+        {
+            return GameState.MapExtender.EventsAt(borderSize);
         }
 
         public override void Execute()
         {
-            if (GameState.MapExtender.PlayerTake() == false)
+            foreach (var evt in EventsAt(1).Where(x => x.Enabled))
             {
-                TextArea.PrintLine("\n\nNothing to take.");
-
-                gameControl.Wait(500);
+                if (evt.Take())
+                    return;
             }
+
+            TextArea.PrintLine("\n\nNothing to take.");
+
+            GameControl.Wait(500);
         }
     }
 }

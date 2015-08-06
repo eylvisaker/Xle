@@ -203,17 +203,6 @@ namespace ERY.Xle.Maps
             return false;
         }
 
-        public virtual bool PlayerTake()
-        {
-            foreach (var evt in EventsAt(1).Where(x => x.Enabled))
-            {
-                if (evt.Take())
-                    return true;
-            }
-
-            return false;
-        }
-
         public virtual bool PlayerOpen()
         {
             foreach (var evt in EventsAt(1).Where(x => x.Enabled))

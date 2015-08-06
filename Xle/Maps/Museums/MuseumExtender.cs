@@ -102,14 +102,6 @@ namespace ERY.Xle.Maps.Museums
             }
         }
 
-        public override bool PlayerTake()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine("There is nothing to take.");
-
-            return true;
-        }
-
         public void PrintExhibitStopsActionMessage()
         {
             TextArea.PrintLine("The display case");
