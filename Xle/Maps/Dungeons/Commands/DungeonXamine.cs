@@ -39,6 +39,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
             }
 
             TextArea.PrintLine("\n");
+            PrintDungeonLevel();
 
             bool revealHidden = false;
             DungeonMonster foundMonster = null;
@@ -115,13 +116,16 @@ namespace ERY.Xle.Maps.Dungeons.Commands
                 }
                 else
                 {
-                    if (PrintLevelDuringXamine)
-                    {
-                        TextArea.PrintLine("Level " + (Player.DungeonLevel + 1).ToString() + ".");
-                    }
-
                     TextArea.PrintLine("Nothing unusual in sight.");
                 }
+            }
+        }
+
+        private void PrintDungeonLevel()
+        {
+            if (PrintLevelDuringXamine)
+            {
+                TextArea.PrintLine("Level " + (Player.DungeonLevel + 1).ToString() + ".");
             }
         }
 

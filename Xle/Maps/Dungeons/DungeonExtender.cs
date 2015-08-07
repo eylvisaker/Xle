@@ -147,11 +147,6 @@ namespace ERY.Xle.Maps.Dungeons
             }
         }
 
-        public virtual bool PrintLevelDuringXamine
-        {
-            get { return true; }
-        }
-
         private void DungeonLevelText()
         {
             CurrentLevel = Player.DungeonLevel;

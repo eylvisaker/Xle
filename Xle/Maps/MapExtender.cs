@@ -188,27 +188,6 @@ namespace ERY.Xle.Maps
             TextArea.PrintLine();
         }
 
-        protected bool CommandNotImplemented()
-        {
-            TextArea.PrintLine("This command is not implemented.", Color.Red);
-            TextArea.PrintLine();
-
-            SoundMan.PlaySoundSync(LotaSound.Medium);
-
-            return false;
-        }
-
-        public virtual bool PlayerOpen()
-        {
-            foreach (var evt in EventsAt(1).Where(x => x.Enabled))
-            {
-                if (evt.Open())
-                    return true;
-            }
-
-            return false;
-        }
-
         public virtual void PlayerMagic()
         {
             var magics = ValidMagic.Where(x => Player.Items[x.ItemID] > 0).ToList();

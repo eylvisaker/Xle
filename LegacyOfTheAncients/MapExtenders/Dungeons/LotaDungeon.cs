@@ -41,22 +41,18 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
                        select m.Value;
             }
         }
-        public override bool PrintLevelDuringXamine
-        {
-            get { return Options.EnhancedGameplay; }
-        }
 
         public override void SetCommands(ICommandList commands)
         {
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
-            commands.Items.Add(CommandFactory.Fight("LotaDungeonFight"));
-            commands.Items.Add(CommandFactory.Xamine("DungeonXamine"));
             commands.Items.Add(CommandFactory.Climb("DungeonClimb"));
             commands.Items.Add(CommandFactory.End());
+            commands.Items.Add(CommandFactory.Fight("LotaDungeonFight"));
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Open("DungeonOpen"));
             commands.Items.Add(CommandFactory.Use("LotaUse"));
+            commands.Items.Add(CommandFactory.Xamine("LotaDungeonXamine"));
         }
 
         protected abstract int StrengthBoost { get; }
