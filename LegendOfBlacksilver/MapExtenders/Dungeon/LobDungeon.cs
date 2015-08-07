@@ -27,7 +27,8 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 			commands.Items.Add(CommandFactory.Magic());
 			commands.Items.Add(CommandFactory.Open("DungeonOpen"));
 			commands.Items.Add(CommandFactory.Speak());
-		    commands.Items.Add(CommandFactory.Xamine("DungeonXamine"));
+            commands.Items.Add(CommandFactory.Use("LobUse"));
+            commands.Items.Add(CommandFactory.Xamine("DungeonXamine"));
 		}
 
 		public override int GetTreasure(int dungeonLevel, int chestID)

@@ -23,6 +23,7 @@ namespace ERY.Xle.LoB.MapExtenders.Temples
             commands.Items.Add(CommandFactory.Leave());
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Speak());
+            commands.Items.Add(CommandFactory.Use("LobUse"));
             commands.Items.Add(CommandFactory.Xamine());
         }
 

@@ -46,6 +46,11 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             commands.Items.Remove(commands.Items.First(x => x.Name.Equals("Climb", StringComparison.OrdinalIgnoreCase)));
 
             commands.Items.Add(CommandFactory.Climb("BlackmireClimb"));
+
+            commands.Items.Remove(commands.Items.First(x => x.Name.Equals("Use", StringComparison.OrdinalIgnoreCase)));
+
+            commands.Items.Add(CommandFactory.Use("BlackmireUse"));
+
         }
 
         public override void OnBeforeGiveItem(ref int treasure, ref bool handled, ref bool clearBox)
@@ -57,26 +62,6 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
                 handled = true;
                 clearBox = false;
             }
-        }
-
-        public override void PlayerUse(int item, ref bool handled)
-        {
-            if (item == (int)LobItem.RustyKey)
-            {
-                if (Player.DungeonLevel + 1 == 2 &&
-                    TheMap[Player.X, Player.Y] == 0x33)
-                {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("A hole appears!", XleColor.White);
-
-                    TheMap[Player.X, Player.Y] = 0x12;
-
-                    SoundMan.PlaySoundSync(LotaSound.VeryGood);
-
-                    handled = true;
-                }
-            }
-            base.PlayerUse(item, ref handled);
         }
 
         public override void PlayerMagic()

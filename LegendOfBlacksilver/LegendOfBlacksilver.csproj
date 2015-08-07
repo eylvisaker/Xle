@@ -53,6 +53,7 @@
     <Compile Include="LobProgram.cs" />
     <Compile Include="LobStory.cs" />
     <Compile Include="Lob3DSurfaces.cs" />
+    <Compile Include="LobUse.cs" />
     <Compile Include="MapExtenders\Archives\ArchiveRenderer.cs" />
     <Compile Include="MapExtenders\Archives\Commands\ArchiveFight.cs" />
     <Compile Include="MapExtenders\Archives\Commands\ArchiveXamine.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="MapExtenders\Archives\OwlArchives.cs" />
     <Compile Include="MapExtenders\CastleDamageCalculator.cs" />
     <Compile Include="MapExtenders\Castle\Commands\DurekCastleSpeak.cs" />
+    <Compile Include="MapExtenders\Castle\Commands\DurekCastleUse.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\AngryCastle.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\AngryOrcs.cs" />
     <Compile Include="MapExtenders\Castle\EventExtenders\Arman.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="MapExtenders\Citadel\EventExtenders\PasswordTeleporter.cs" />
     <Compile Include="MapExtenders\Citadel\EventExtenders\Wizard.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\BlackmireClimb.cs" />
+    <Compile Include="MapExtenders\Dungeon\Commands\BlackmireUse.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\LobDungeonFight.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\DungeonOpen.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\MarthbaneSpeak.cs" />
@@ -122,6 +125,7 @@
     <Compile Include="MapExtenders\Outside\Events\Drawbridge.cs" />
     <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />
     <Compile Include="MapExtenders\Outside\Maelbane.cs" />
+    <Compile Include="MapExtenders\Outside\OutsideUse.cs" />
     <Compile Include="MapExtenders\Outside\Thalen.cs" />
     <Compile Include="MapExtenders\Temples\LobTemple.cs" />
     <Compile Include="MapExtenders\Temples\TempleClimb.cs" />

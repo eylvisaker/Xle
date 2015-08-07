@@ -41,7 +41,7 @@ namespace ERY.Xle.Maps.Museums
             return null;
         }
 
-        protected bool IsFacingDoor
+        public bool IsFacingDoor
         {
             get
             {

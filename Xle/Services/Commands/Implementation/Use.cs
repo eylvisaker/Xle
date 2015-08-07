@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 
 using ERY.Xle.Data;
+using ERY.Xle.Maps;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
@@ -9,14 +10,13 @@ using ERY.Xle.Services.XleSystem;
 
 namespace ERY.Xle.Services.Commands.Implementation
 {
-    public class Use : Command
+    public abstract class Use : Command
     {
         public Use(bool showItemMenu = true)
         {
             ShowItemMenu = showItemMenu;
         }
 
-        public IXleGameFactory Factory { get; set; }
         public IXleGameControl GameControl { get; set; }
         public IStatsDisplay StatsDisplay { get; set; }
         public ISoundMan SoundMan { get; set; }
@@ -24,6 +24,8 @@ namespace ERY.Xle.Services.Commands.Implementation
         public IXleSubMenu SubMenu { get; set; }
 
         public bool ShowItemMenu { get; set; }
+
+        MapExtender MapExtender { get { return GameState.MapExtender; } }
 
         public override string Name
         {
@@ -33,12 +35,9 @@ namespace ERY.Xle.Services.Commands.Implementation
         public override void Execute()
         {
             if (ShowItemMenu)
-                ChooseHeldItem();
+                ChooseHeldItem(TextArea, Data, GameState.Player, SubMenu);
             else
                 TextArea.PrintLine();
-
-            string commandstring = string.Empty;
-            bool noEffect = true;
 
             TextArea.PrintLine();
 
@@ -52,42 +51,49 @@ namespace ERY.Xle.Services.Commands.Implementation
             UseItem();
         }
 
-        private void UseItem()
+        protected void UseItem()
         {
-            bool noEffect;
-            if (Player.Hold == Factory.HealingItemID)
-            {
-                noEffect = false;
-                UseHealingItem(Player.Hold);
-            }
-            else
-            {
-                noEffect = !GameState.MapExtender.PlayerUse(Player.Hold);
-            }
+            if (UseHealingItem(Player.Hold))
+                return;
 
-            if (noEffect == true)
-            {
-                TextArea.PrintLine();
-                GameControl.Wait(400 + 100 * Player.Gamespeed);
-                TextArea.PrintLine("No effect");
-            }
+            var effect = UseWithEvent(Player.Hold);
+
+            if (effect)
+                return;
+
+            effect = UseWithMap(Player.Hold);
+
+            if (effect)
+                return;
+
+            PrintNoEffectMessage();
         }
 
-        public void ChooseHeldItem()
+        protected virtual bool UseWithMap(int item)
         {
-            TextArea.PrintLine("-choose above", XleColor.Cyan);
+            return false;
+        }
+
+        public static void ChooseHeldItem(
+            ITextArea textArea,
+            XleData data,
+            Player player,
+            IXleSubMenu subMenu
+            )
+        {
+            textArea.PrintLine("-choose above", XleColor.Cyan);
             MenuItemList theList = new MenuItemList();
             int value = 0;
 
             theList.Add("Nothing");
 
-            foreach (int i in from kvp in Data.ItemList
-                              where Player.Items[kvp.Key] > 0 &&
-                              Data.MagicSpells.Values.All(
+            foreach (int i in from kvp in data.ItemList
+                              where player.Items[kvp.Key] > 0 &&
+                              data.MagicSpells.Values.All(
                                   x => x.ItemID != kvp.Key)
                               select kvp.Key)
             {
-                string itemName = Data.ItemList[i].Name;
+                string itemName = data.ItemList[i].Name;
 
                 if (itemName.Contains("coin"))
                     continue;
@@ -98,7 +104,7 @@ namespace ERY.Xle.Services.Commands.Implementation
                     itemName = XleCore.GetMapName(state.Player.mailTown) + " " + itemName;
                 }*/
 
-                if (i <= Player.Hold)
+                if (i <= player.Hold)
                 {
                     value++;
                 }
@@ -106,17 +112,42 @@ namespace ERY.Xle.Services.Commands.Implementation
                 theList.Add(itemName);
             }
 
-            Player.HoldMenu(SubMenu.SubMenu("Hold Item", value, theList));
+            player.HoldMenu(subMenu.SubMenu("Hold Item", value, theList));
         }
 
-        private void UseHealingItem(int itemID)
+        protected abstract bool UseHealingItem(int itemID);
+
+        protected void ApplyHealingEffect()
         {
             Player.HP += Player.MaxHP / 2;
-            Player.Items[itemID] -= 1;
             SoundMan.PlaySound(LotaSound.Good);
 
             StatsDisplay.FlashHPWhileSound(XleColor.Cyan);
         }
 
+        protected void PrintNoEffectMessage()
+        {
+            TextArea.PrintLine();
+            GameControl.Wait(400 + 100 * Player.Gamespeed);
+            TextArea.PrintLine("No effect");
+        }
+
+
+        /// <summary>
+        /// Returns true if there was an effect of using the item.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        protected bool UseWithEvent(int item)
+        {
+            foreach (var evt in MapExtender.EventsAt(1))
+            {
+                if (evt.Use(item))
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

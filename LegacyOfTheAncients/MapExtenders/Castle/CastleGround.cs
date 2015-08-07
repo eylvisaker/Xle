@@ -50,6 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak("CastleSpeak"));
             commands.Items.Add(CommandFactory.Xamine());
+            commands.Items.Add(CommandFactory.Use("CastleUse"));
         }
 
         public override int GetOutsideTile(Point playerPoint, int x, int y)
@@ -58,32 +59,6 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
                 return 16;
             else
                 return base.GetOutsideTile(playerPoint, x, y);
-        }
-
-        public override void PlayerUse(int item, ref bool handled)
-        {
-            switch (item)
-            {
-                case (int)LotaItem.MagicSeed:
-                    handled = UseMagicSeeds();
-                    break;
-            }
-        }
-        private bool UseMagicSeeds()
-        {
-            GameControl.Wait(150);
-
-            Story.Invisible = true;
-            TextArea.PrintLine("You're invisible.");
-            Player.RenderColor = XleColor.DarkGray;
-
-            TheMap.Guards.IsAngry = false;
-
-            GameControl.Wait(500);
-
-            Player.Items[LotaItem.MagicSeed]--;
-
-            return true;
         }
 
         protected override void OnSetAngry(bool value)

@@ -52,6 +52,7 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
             commands.Items.Add(CommandFactory.Rob("LotaMuseumRob"));
             commands.Items.Add(CommandFactory.Take("MuseumTake"));
             commands.Items.Add(CommandFactory.Speak("MuseumSpeak"));
+            commands.Items.Add(CommandFactory.Use("MuseumUse"));
             commands.Items.Add(CommandFactory.Xamine("MuseumXamine"));
         }
 
@@ -133,17 +134,6 @@ namespace ERY.Xle.LotA.MapExtenders.Museum
                 entryParams.EntryPoint = Story.MuseumEntryPoint;
         }
 
-        public override void PlayerUse(int item, ref bool handled)
-        {
-            // twist gold armband
-            if (item == (int)LotaItem.GoldArmband)
-            {
-                UseGoldArmband();
-
-                handled = true;
-                return;
-            }
-        }
         public override void AfterPlayerStep()
         {
             if (Player.X == 12 && Player.Y == 13)

@@ -112,11 +112,6 @@ namespace ERY.Xle.Maps
             get { return 1; }
         }
 
-        public virtual void PlayerUse(int item, ref bool handled)
-        {
-            handled = CommandNotImplemented();
-        }
-
         public virtual void ModifyEntryPoint(MapEntryParams entryParams)
         {
         }
@@ -212,29 +207,6 @@ namespace ERY.Xle.Maps
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Returns true if there was an effect of using the item.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        public virtual bool PlayerUse(int item)
-        {
-            bool handled = false;
-
-            foreach (var evt in EventsAt(1))
-            {
-                handled = evt.Use(item);
-
-                if (handled)
-                    return handled;
-            }
-
-            PlayerUse(item, ref handled);
-
-            return handled;
         }
 
         public virtual void PlayerMagic()

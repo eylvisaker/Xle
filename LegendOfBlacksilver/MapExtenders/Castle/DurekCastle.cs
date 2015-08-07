@@ -64,10 +64,11 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
             commands.Items.Add(fight);
             commands.Items.Add(CommandFactory.Leave());
-            commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Magic());
-            commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Speak("DurekCastleSpeak"));
+            commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Use("DurekCastleUse"));
             commands.Items.Add(CommandFactory.Xamine());
         }
 
@@ -122,15 +123,6 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
             var door = Events.OfType<FeatherDoor>().First();
 
             door.RemoveDoor();
-        }
-
-        public override void PlayerUse(int item, ref bool handled)
-        {
-            if (item == (int)LobItem.FalconFeather)
-            {
-                TextArea.PrintLine("You're not by a door.");
-                handled = true;
-            }
         }
 
         public bool StoredAngryFlag { get; set; }

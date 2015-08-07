@@ -63,7 +63,6 @@ namespace ERY.Xle.LoB
 				yield return commandFactory.Gamespeed();
 				yield return commandFactory.Inventory();
 				yield return commandFactory.Pass();
-				yield return commandFactory.Use();
 				yield return commandFactory.Weapon();
 			}
 		}

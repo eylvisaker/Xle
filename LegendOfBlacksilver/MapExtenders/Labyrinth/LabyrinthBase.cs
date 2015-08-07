@@ -43,6 +43,7 @@ namespace ERY.Xle.LoB.MapExtenders.Labyrinth
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Speak());
             commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Use("LobUse"));
             commands.Items.Add(CommandFactory.Xamine());
         }
 

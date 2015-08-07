@@ -1,17 +1,21 @@
-﻿namespace ERY.Xle.Services.Commands.Implementation
+﻿using ERY.Xle.Data;
+using ERY.Xle.Services.Menus;
+using ERY.Xle.Services.ScreenModel;
+
+namespace ERY.Xle.Services.Commands.Implementation
 {
     public class Hold : Command
     {
-        private Use use;
-
-        public Hold(Use use)
-        {
-            this.use = use;
-        }
+        public XleData Data { get; set; }
+        public IXleSubMenu SubMenu { get; set; }
 
         public override void Execute()
         {
-            use.ChooseHeldItem();
+            Use.ChooseHeldItem(
+                TextArea, 
+                Data, 
+                GameState.Player, 
+                SubMenu);
         }
     }
 }

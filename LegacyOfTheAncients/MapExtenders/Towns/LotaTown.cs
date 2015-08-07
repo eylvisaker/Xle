@@ -74,6 +74,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
             commands.Items.Add(CommandFactory.Leave("TownLeave", confirmPrompt: Options.EnhancedUserInterface));
             commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Speak("TownSpeak"));
+            commands.Items.Add(CommandFactory.Use("LotaUse"));
             commands.Items.Add(CommandFactory.Xamine());
         }
 

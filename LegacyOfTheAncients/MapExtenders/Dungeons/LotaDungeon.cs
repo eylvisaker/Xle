@@ -56,6 +56,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             commands.Items.Add(CommandFactory.End());
             commands.Items.Add(CommandFactory.Magic());
             commands.Items.Add(CommandFactory.Open("DungeonOpen"));
+            commands.Items.Add(CommandFactory.Use("LotaUse"));
         }
 
         protected abstract int StrengthBoost { get; }

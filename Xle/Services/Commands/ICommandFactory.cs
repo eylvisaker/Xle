@@ -19,7 +19,7 @@ namespace ERY.Xle.Services.Commands
         Rob Rob(string name = null);
         Speak Speak(string name = null);
         Take Take(string name = null);
-        Use Use(bool showItemNenu = true);
+        Use Use(string name);
         WeaponCommand Weapon();
         Xamine Xamine(string name = null);
     }
