@@ -71,18 +71,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
             if (foundMonster != null)
             {
-                bool handled = false;
-
-                PrintExamineMonsterMessage(foundMonster, ref handled);
-
-                if (false == handled)
-                {
-                    string name = " " + foundMonster.Name;
-                    if ("aeiou".Contains(foundMonster.Name[0]))
-                        name = "n" + name;
-
-                    TextArea.PrintLine("A" + name + " is stalking you!", XleColor.White);
-                }
+                PrintExamineMonsterMessage(foundMonster);
             }
             else
             {
@@ -136,8 +125,13 @@ namespace ERY.Xle.Maps.Dungeons.Commands
             }
         }
 
-        protected virtual void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
+        protected virtual void PrintExamineMonsterMessage(DungeonMonster foundMonster)
         {
+            string name = " " + foundMonster.Name;
+            if ("aeiou".Contains(foundMonster.Name[0]))
+                name = "n" + name;
+
+            TextArea.PrintLine("A" + name + " is stalking you!", XleColor.White);
         }
 
         protected virtual bool PrintLevelDuringXamine

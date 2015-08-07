@@ -79,15 +79,6 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
             base.UpdateMonsters();
         }
 
-        public override void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
-        {
-            if (foundMonster.Data.Name == "king")
-            {
-                TextArea.PrintLine("You see a king!", XleColor.White);
-                handled = true;
-            }
-        }
-
         public void OpenEscapeRoute()
         {
             // 11, 0, 7 change to 17

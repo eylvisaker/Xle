@@ -21,7 +21,7 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
 
             commands.Items.Add(CommandFactory.Fight("ArchiveFight"));
             commands.Items.Add(CommandFactory.Leave(promptText: "Leave the archives?"));
-            commands.Items.Add(CommandFactory.Open());
+            commands.Items.Add(CommandFactory.Open("ArchiveOpen"));
             commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Use("LobUse"));
@@ -36,27 +36,6 @@ namespace ERY.Xle.LoB.MapExtenders.Archives
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.MuseumRenderer(this, "ArchiveRenderer");
-        }
-
-        public override bool PlayerOpen()
-        {
-            if (IsFacingDoor)
-            {
-                TextArea.PrintLine(" door");
-                TextArea.PrintLine();
-
-                LeaveMap();
-
-                return true;
-            }
-
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-
-            if (InteractWithDisplay())
-                return true;
-
-            return false;
         }
     }
 }

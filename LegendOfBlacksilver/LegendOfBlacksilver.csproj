@@ -56,6 +56,7 @@
     <Compile Include="LobUse.cs" />
     <Compile Include="MapExtenders\Archives\ArchiveRenderer.cs" />
     <Compile Include="MapExtenders\Archives\Commands\ArchiveFight.cs" />
+    <Compile Include="MapExtenders\Archives\Commands\ArchiveOpen.cs" />
     <Compile Include="MapExtenders\Archives\Commands\ArchiveXamine.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\Blacksmith.cs" />
     <Compile Include="MapExtenders\Archives\Exhibits\CrystalTears.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="MapExtenders\Citadel\EventExtenders\Wizard.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\BlackmireClimb.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\BlackmireUse.cs" />
+    <Compile Include="MapExtenders\Dungeon\Commands\LobDungeonXamine.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\LobDungeonFight.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\DungeonOpen.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\MarthbaneSpeak.cs" />

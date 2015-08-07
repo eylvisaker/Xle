@@ -47,9 +47,6 @@ namespace ERY.Xle.Maps.Dungeons
         public virtual void OnBeforeGiveItem(ref int treasure, ref bool handled, ref bool clearBox)
         {
         }
-        public virtual void OnBeforeOpenBox(ref bool handled)
-        {
-        }
 
         public override void OnLoad()
         {
@@ -96,16 +93,6 @@ namespace ERY.Xle.Maps.Dungeons
         public virtual DungeonMonster GetMonsterToSpawn()
         {
             return null;
-        }
-
-        public virtual bool RollToHitMonster(DungeonMonster monster)
-        {
-            return true;
-        }
-
-        public virtual int RollDamageToMonster(DungeonMonster monster)
-        {
-            return 9999;
         }
 
         int count = 0;
@@ -158,10 +145,6 @@ namespace ERY.Xle.Maps.Dungeons
             {
                 SpawnMonster();
             }
-        }
-
-        public virtual void PrintExamineMonsterMessage(DungeonMonster foundMonster, ref bool handled)
-        {
         }
 
         public virtual bool PrintLevelDuringXamine
@@ -364,126 +347,6 @@ namespace ERY.Xle.Maps.Dungeons
             monster.DungeonLevel = Player.DungeonLevel;
 
             Combat.Monsters.Add(monster);
-        }
-
-        public override bool PlayerOpen()
-        {
-            int val = TheMap[Player.X, Player.Y];
-            bool clearBox = true;
-
-            if (val == 0x1e)
-            {
-                OpenBox(ref clearBox);
-
-                if (clearBox)
-                    TheMap[Player.X, Player.Y] = 0x10;
-            }
-            else if (val >= 0x30 && val <= 0x3f)
-            {
-                OpenChest(val, ref clearBox);
-
-                if (clearBox)
-                    TheMap[Player.X, Player.Y] = 0x10;
-            }
-            else
-            {
-                TextArea.PrintLine();
-                TextArea.PrintLine();
-                TextArea.PrintLine("Nothing to open.");
-                GameControl.Wait(1000);
-            }
-
-
-            return true;
-        }
-
-        public virtual void OpenBox(ref bool clearBox)
-        {
-            int amount = Random.Next(60, 200);
-
-            TextArea.PrintLine(" Box");
-            TextArea.PrintLine();
-            SoundMan.PlaySound(LotaSound.OpenChest);
-            GameControl.Wait(500);
-
-            if (amount + Player.HP > Player.MaxHP)
-            {
-                amount = Player.MaxHP - Player.HP;
-                if (amount < 0)
-                    amount = 0;
-            }
-
-            bool handled = false;
-
-            OnBeforeOpenBox(ref handled);
-
-            if (handled == false)
-            {
-                if (amount == 0)
-                    TextArea.PrintLine("You find nothing.", Color.Yellow);
-                else
-                {
-                    TextArea.PrintLine("Hit points:  + " + amount.ToString(), XleColor.Yellow);
-                    Player.HP += amount;
-                    SoundMan.PlaySound(LotaSound.Good);
-                    StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
-                }
-            }
-
-            SoundMan.FinishSounds();
-        }
-        public virtual void OpenChest(int val, ref bool clearBox)
-        {
-            val -= 0x30;
-
-            TextArea.PrintLine(" Chest");
-            TextArea.PrintLine();
-
-            SoundMan.PlaySound(LotaSound.OpenChest);
-            GameControl.Wait(GameState.GameSpeed.DungeonOpenChestSoundTime);
-
-            // TODO: give weapons
-            // TODO: bobby trap chests.
-
-            if (val == 0)
-            {
-                int amount = Random.Next(90, 300);
-
-                TextArea.PrintLine("You find " + amount.ToString() + " gold.", XleColor.Yellow);
-
-                Player.Gold += amount;
-
-                StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
-            }
-            else
-            {
-                int treasure = GetTreasure(CurrentLevel + 1, val);
-
-                bool handled = false;
-
-                OnBeforeGiveItem(ref treasure, ref handled, ref clearBox);
-
-                if (handled == false)
-                {
-                    if (treasure > 0)
-                    {
-                        string text = "You find a " + Data.ItemList[treasure].LongName + "!!";
-                        TextArea.Clear();
-                        TextArea.PrintLine(text);
-
-                        Player.Items[treasure] += 1;
-
-                        SoundMan.PlaySound(LotaSound.VeryGood);
-
-                        TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
-                            XleColor.White, XleColor.Yellow, 100);
-                    }
-                    else
-                    {
-                        TextArea.PrintLine("You find nothing.");
-                    }
-                }
-            }
         }
 
         public override void AfterExecuteCommand(KeyCode cmd)
