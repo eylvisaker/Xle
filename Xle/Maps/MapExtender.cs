@@ -142,14 +142,6 @@ namespace ERY.Xle.Maps
             return (int)Math.Round(damage);
         }
 
-
-        /// <summary>
-        /// Returns the list of magic spells that can be used on this map.
-        /// </summary>
-        /// <param name="state"></param>
-        /// <returns></returns>
-      
-
         public virtual void CastSpell(MagicSpell magic)
         {
         }

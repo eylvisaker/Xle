@@ -14,7 +14,7 @@ namespace ERY.Xle
 
 		public void AddText(string text, Color color)
 		{
-			if (text == null)
+			if (string.IsNullOrEmpty(text))
 				return;
 
 			this.text += text;

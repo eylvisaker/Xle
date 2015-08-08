@@ -109,12 +109,8 @@ namespace ERY.Xle.Maps
                 return new Rectangle(Location, new Size(Width, Height));
             }
         }
-
-        public bool CharIn(int ptx, int pty)
-        {
-            return CharIn(ptx, pty, false);
-        }
-        public bool CharIn(int ptx, int pty, bool ignoreTransparency)
+        
+        public bool CharIn(int ptx, int pty, bool ignoreTransparency = false)
         {
             if (PointInRoof(ptx, pty, ignoreTransparency))
             {
@@ -135,13 +131,9 @@ namespace ERY.Xle.Maps
             else
                 return false;
         }
-        public bool CharIn(Point pt, bool ignoreTransparency)
+        public bool CharIn(Point pt, bool ignoreTransparency = false)
         {
             return CharIn(pt.X, pt.Y, ignoreTransparency);
-        }
-        public bool CharIn(Point pt)
-        {
-            return CharIn(pt.X, pt.Y, false);
         }
 
         public bool PointInRoof(int ptx, int pty)
@@ -160,7 +152,5 @@ namespace ERY.Xle.Maps
 
             return false;
         }
-
-
     }
 }

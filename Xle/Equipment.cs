@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using ERY.Xle.Data;
+using AgateLib.Quality;
 
 namespace ERY.Xle
 {
@@ -19,8 +20,7 @@ namespace ERY.Xle
             get { return quality; }
             set
             {
-                if (value < 0 || value > 4)
-                    throw new ArgumentOutOfRangeException();
+                Condition.Requires<ArgumentOutOfRangeException>(value >= 0 && value <= 4);
                 quality = value;
             }
         }
