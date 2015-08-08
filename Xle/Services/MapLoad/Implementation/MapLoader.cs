@@ -35,6 +35,9 @@ namespace ERY.Xle.Services.MapLoad.Implementation
 
         public MapExtender LoadMap(int mapId)
         {
+            if (data.MapList.ContainsKey(mapId) == false)
+                return null;
+
             string file = GetFilename(mapId);
 
             return LoadMap(file, mapId);

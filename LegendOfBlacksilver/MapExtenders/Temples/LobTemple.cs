@@ -21,7 +21,7 @@ namespace ERY.Xle.LoB.MapExtenders.Temples
             commands.Items.Add(CommandFactory.Climb("TempleClimb"));
             commands.Items.Add(CommandFactory.Fight("TempleFight"));
             commands.Items.Add(CommandFactory.Leave());
-            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Magic("TempleMagic"));
             commands.Items.Add(CommandFactory.Speak());
             commands.Items.Add(CommandFactory.Use("LobUse"));
             commands.Items.Add(CommandFactory.Xamine());
@@ -34,13 +34,5 @@ namespace ERY.Xle.LoB.MapExtenders.Temples
             scheme.FrameColor = XleColor.LightGray;
         }
 
-        public override IEnumerable<MagicSpell> ValidMagic
-        {
-            get
-            {
-                yield return Data.MagicSpells[3];
-                yield return Data.MagicSpells[4];
-            }
-        }
     }
 }

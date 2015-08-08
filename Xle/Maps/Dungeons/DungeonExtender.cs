@@ -358,55 +358,7 @@ namespace ERY.Xle.Maps.Dungeons
 
             Combat.Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
         }
-
-        private void UseAttackMagic(MagicSpell magic)
-        {
-            int distance = 0;
-            TextArea.PrintLine();
-            TextArea.PrintLine("Shoot " + magic.Name + ".", XleColor.White);
-
-            DungeonMonster monst = MonsterInFrontOfPlayer(Player, ref distance);
-            var magicSound = magic.ID == 1 ? LotaSound.MagicFlame : LotaSound.MagicBolt;
-            var hitSound = magic.ID == 1 ? LotaSound.MagicFlameHit : LotaSound.MagicBoltHit;
-
-            if (monst == null)
-            {
-                SoundMan.PlayMagicSound(magicSound, hitSound, distance);
-                TextArea.PrintLine("There is no effect.", XleColor.White);
-            }
-            else
-            {
-                if (RollSpellFizzle(magic))
-                {
-                    SoundMan.PlayMagicSound(magicSound, LotaSound.MagicFizzle, distance);
-                    TextArea.PrintLine("Attack fizzles.", XleColor.White);
-                    GameControl.Wait(500);
-                }
-                else
-                {
-                    SoundMan.PlayMagicSound(magicSound, hitSound, distance);
-                    int damage = RollSpellDamage(magic, distance);
-
-                    HitMonster(monst, damage, XleColor.White);
-                }
-            }
-        }
-
-        protected override void PlayerMagicImpl(MagicSpell magic)
-        {
-            switch (magic.ID)
-            {
-                case 1:
-                case 2:
-                    UseAttackMagic(magic);
-                    break;
-
-                default:
-                    CastSpell(magic);
-                    break;
-            }
-        }
-
+        
         protected DungeonMonster MonsterInFrontOfPlayer(Player player)
         {
             int distance = 0;
@@ -440,27 +392,5 @@ namespace ERY.Xle.Maps.Dungeons
 
             return base.CanPlayerStepIntoImpl(xx, yy);
         }
-
-        private void HitMonster(DungeonMonster monst, int damage, Color clr)
-        {
-            TextArea.Print("Enemy hit by blow of ", clr);
-            TextArea.Print(damage.ToString(), XleColor.White);
-            TextArea.PrintLine("!");
-
-            monst.HP -= damage;
-            GameControl.Wait(1000);
-
-            if (monst.HP <= 0)
-            {
-                Combat.Monsters.Remove(monst);
-                TextArea.PrintLine(monst.Name + " dies!!");
-
-                SoundMan.PlaySound(LotaSound.EnemyDie);
-
-                GameControl.Wait(500);
-            }
-        }
-
-
     }
 }

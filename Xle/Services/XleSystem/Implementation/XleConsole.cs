@@ -277,6 +277,12 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             var map = mapLoader.LoadMap(mapInfo.ParentMapID);
             int targetX = 0, targetY = 0;
 
+            if (map == null)
+            {
+                AgateConsole.WriteLine("Map not found.");
+                return;
+            }
+
             foreach (ChangeMapEvent evt in from evt in map.TheMap.Events
                                            where evt is ChangeMapEvent
                                            select (ChangeMapEvent)evt)

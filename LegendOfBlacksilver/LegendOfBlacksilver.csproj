@@ -115,6 +115,7 @@
     <Compile Include="MapExtenders\Dungeon\DeathspireChasm.cs" />
     <Compile Include="MapExtenders\Dungeon\IslandCaverns.cs" />
     <Compile Include="MapExtenders\Dungeon\LobDungeon.cs" />
+    <Compile Include="MapExtenders\Dungeon\LobDungeonMagic.cs" />
     <Compile Include="MapExtenders\Dungeon\MarthbaneTunnels.cs" />
     <Compile Include="MapExtenders\Dungeon\PitsOfBlackmire.cs" />
     <Compile Include="MapExtenders\Dungeon\TaragasMines.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="MapExtenders\Temples\LobTemple.cs" />
     <Compile Include="MapExtenders\Temples\TempleClimb.cs" />
     <Compile Include="MapExtenders\Temples\TempleFight.cs" />
+    <Compile Include="MapExtenders\Temples\TempleMagic.cs" />
     <Compile Include="MapExtenders\Towns\LobTown.cs" />
     <Compile Include="MapExtenders\Towns\MaelbaneTown.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Armor.cs" />

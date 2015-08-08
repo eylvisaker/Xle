@@ -94,8 +94,5 @@ namespace ERY.Xle.Maps
                 TextArea.PrintLine("Move nowhere");
             }
         }
-
-        protected virtual void PlayerFight(Direction fightDir)
-        { }
     }
 }

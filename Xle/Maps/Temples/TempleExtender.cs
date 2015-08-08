@@ -20,21 +20,5 @@ namespace ERY.Xle.Maps.Temples
             scheme.FrameColor = XleColor.Orange;
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
-
-        protected override void PlayerFight(Direction fightDir)
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine("Nothing much hit.");
-
-            SoundMan.PlaySound(LotaSound.Bump);
-        }
-
-        public override bool UseFancyMagicPrompt
-        {
-            get
-            {
-                return false;
-            }
-        }
     }
 }

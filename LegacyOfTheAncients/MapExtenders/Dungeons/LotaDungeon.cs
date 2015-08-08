@@ -31,16 +31,6 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             get { return GameState.Story(); }
         }
 
-        public override IEnumerable<MagicSpell> ValidMagic
-        {
-            get
-            {
-                // everything but seek spell
-                return from m in Data.MagicSpells
-                       where m.Key != 6
-                       select m.Value;
-            }
-        }
 
         public override void SetCommands(ICommandList commands)
         {
@@ -49,7 +39,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             commands.Items.Add(CommandFactory.Climb("DungeonClimb"));
             commands.Items.Add(CommandFactory.End());
             commands.Items.Add(CommandFactory.Fight("LotaDungeonFight"));
-            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Magic("LotaDungeonMagic"));
             commands.Items.Add(CommandFactory.Open("DungeonOpen"));
             commands.Items.Add(CommandFactory.Use("LotaUse"));
             commands.Items.Add(CommandFactory.Xamine("LotaDungeonXamine"));

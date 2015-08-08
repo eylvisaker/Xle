@@ -62,6 +62,7 @@
     <Compile Include="MapExtenders\Castle\Commands\CastleUse.cs" />
     <Compile Include="MapExtenders\Castle\Events\SpiralSuccess.cs" />
     <Compile Include="MapExtenders\Dungeons\Commands\DungeonOpen.cs" />
+    <Compile Include="MapExtenders\Dungeons\Commands\LotaDungeonMagic.cs" />
     <Compile Include="MapExtenders\Dungeons\Commands\LotaDungeonXamine.cs" />
     <Compile Include="MapExtenders\Dungeons\Commands\LotaDungeonFight.cs" />
     <Compile Include="MapExtenders\Fortress\FirstArea\CompendiumFirst.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="MapExtenders\Museum\Commands\MuseumUse.cs" />
     <Compile Include="MapExtenders\Museum\Commands\MuseumXamine.cs" />
     <Compile Include="MapExtenders\Museum\IExhibitFactory.cs" />
+    <Compile Include="MapExtenders\Outside\LotaOutsideMagic.cs" />
     <Compile Include="MapExtenders\Towns\Commands\TownRob.cs" />
     <Compile Include="MapExtenders\Towns\Stores\LotaStore.cs" />
     <Compile Include="MapExtenders\Castle\Events\Arovyn.cs" />

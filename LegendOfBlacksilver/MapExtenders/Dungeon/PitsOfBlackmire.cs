@@ -63,16 +63,7 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
                 clearBox = false;
             }
         }
-
-        public override void PlayerMagic()
-        {
-            base.PlayerMagic();
-
-            if (Player.DungeonLevel >= 6 && Story.Illusion == false)
-            {
-                // turn off the display.
-            }
-        }
+        
         protected override int MonsterGroup(int dungeonLevel)
         {
             if (dungeonLevel <= 2) return 0;

@@ -148,10 +148,7 @@ namespace ERY.Xle.Maps
         /// </summary>
         /// <param name="state"></param>
         /// <returns></returns>
-        public virtual IEnumerable<MagicSpell> ValidMagic
-        {
-            get { yield break; }
-        }
+      
 
         public virtual void CastSpell(MagicSpell magic)
         {
@@ -187,102 +184,6 @@ namespace ERY.Xle.Maps
 
             TextArea.PrintLine();
         }
-
-        public virtual void PlayerMagic()
-        {
-            var magics = ValidMagic.Where(x => Player.Items[x.ItemID] > 0).ToList();
-
-            MagicSpell magic;
-
-            if (UseFancyMagicPrompt)
-                magic = MagicPrompt(magics.ToArray());
-            else
-                magic = MagicMenu(magics.ToArray());
-
-            if (magic == null)
-                return;
-
-            if (Player.Items[magic.ItemID] <= 0)
-            {
-                TextArea.PrintLine();
-                TextArea.PrintLine("You have no " + magic.PluralName + ".", XleColor.White);
-                return;
-            }
-
-            Player.Items[magic.ItemID]--;
-
-            PlayerMagicImpl(magic);
-        }
-
-        protected virtual void PlayerMagicImpl(MagicSpell magic)
-        {
-        }
-
-
-        protected virtual MagicSpell MagicPrompt(MagicSpell[] magics)
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("Use which magic?", XleColor.Purple);
-            TextArea.PrintLine();
-
-            bool hasFlames = magics.Contains(Data.MagicSpells[1]);
-            bool hasBolts = magics.Contains(Data.MagicSpells[2]);
-
-            int defaultValue = 0;
-            int otherStart = 2 - (hasBolts ? 0 : 1) - (hasFlames ? 0 : 1);
-            bool anyOthers = otherStart < magics.Length;
-
-            if (hasFlames == false)
-            {
-                defaultValue = 1;
-
-                if (hasBolts == false)
-                    defaultValue = 2;
-            }
-
-            var menu = new MenuItemList("Flame", "Bolt", anyOthers ? "Other" : "Nothing");
-
-            int choice = QuickMenu.QuickMenu(menu, 2, defaultValue,
-                XleColor.Purple, XleColor.White);
-
-            if (choice == 0)
-                return Data.MagicSpells[1];
-            else if (choice == 1)
-                return Data.MagicSpells[2];
-            else
-            {
-                if (anyOthers == false)
-                    return null;
-
-                TextArea.PrintLine(" - select above", XleColor.White);
-                TextArea.PrintLine();
-
-                return MagicMenu(magics.Skip(otherStart).ToList());
-            }
-        }
-
-        private MagicSpell MagicMenu(IList<MagicSpell> magics)
-        {
-            MenuItemList menu = new MenuItemList("Nothing");
-
-            for (int i = 0; i < magics.Count; i++)
-            {
-                menu.Add(magics[i].Name);
-            }
-
-            int choice = SubMenu.SubMenu("Pick magic", 0, menu);
-
-            if (choice == 0)
-            {
-                TextArea.PrintLine("Select no magic.", XleColor.White);
-                return null;
-            }
-
-            return magics[choice - 1];
-        }
-
-        public virtual bool UseFancyMagicPrompt { get { return true; } }
 
         /// <summary>
         /// Executes the movement of the player in a certain direction.

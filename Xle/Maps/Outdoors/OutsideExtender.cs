@@ -142,11 +142,7 @@ namespace ERY.Xle.Maps.Outdoors
         {
             return 0;
         }
-
-        public override bool UseFancyMagicPrompt
-        {
-            get { return false; }
-        }
+        
 
         public override void SetColorScheme(ColorScheme scheme)
         {
@@ -557,7 +553,7 @@ namespace ERY.Xle.Maps.Outdoors
             }
         }
 
-        private void HitMonster(int dam)
+        public void HitMonster(int dam)
         {
             TextArea.Print("Enemy hit by blow of ", XleColor.White);
             TextArea.Print(dam.ToString(), XleColor.Cyan);
@@ -958,52 +954,6 @@ namespace ERY.Xle.Maps.Outdoors
         {
             monstDir = (Direction)Random.Next((int)Direction.East, (int)Direction.South + 1);
             MapRenderer.MonsterDrawDirection = monstDir;
-        }
-
-        protected override void PlayerMagicImpl(MagicSpell magic)
-        {
-            switch (magic.ID)
-            {
-                case 1:
-                case 2:
-                    if (EncounterState == 0)
-                    {
-                        Player.Items[magic.ItemID]++;
-                        TextArea.PrintLine("Nothing to fight.");
-                        return;
-                    }
-                    else if (EncounterState != EncounterState.MonsterReady)
-                    {
-                        Player.Items[magic.ItemID]++;
-                        TextArea.PrintLine("The unknown creature is out of range.");
-                        return;
-                    }
-
-                    TextArea.PrintLine("Attack with " + magic.Name + ".");
-
-                    var sound = (magic.ID == 1) ?
-                        LotaSound.MagicFlame : LotaSound.MagicBolt;
-
-                    if (RollSpellFizzle(magic))
-                    {
-                        SoundMan.PlayMagicSound(sound, LotaSound.MagicFizzle, 1);
-
-                        TextArea.PrintLine("Attack fizzles.", XleColor.Yellow);
-                        return;
-                    }
-                    else
-                        SoundMan.PlayMagicSound(sound, LotaSound.MagicFlameHit, 1);
-
-                    int damage = RollSpellDamage(magic, 0);
-
-                    HitMonster(damage);
-
-                    break;
-
-                default:
-                    CastSpell(magic);
-                    break;
-            }
         }
 
         public override int WaitTimeAfterStep

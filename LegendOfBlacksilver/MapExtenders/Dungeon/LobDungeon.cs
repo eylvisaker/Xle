@@ -81,12 +81,5 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 				ExecuteKillFlash();
 		}
 
-		public override IEnumerable<MagicSpell> ValidMagic
-		{
-			get
-			{
-				return Data.MagicSpells.Values;
-			}
-		}
 	}
 }
