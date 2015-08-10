@@ -37,6 +37,9 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
         public override bool Take()
         {
+            if (TheEvent.Closed)
+                return base.Take();
+
             GameState.Map.Guards.IsAngry = false;
 
             Player.RenderColor = XleColor.Yellow;
@@ -46,6 +49,10 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             TextArea.PrintLine("you put on armor.");
 
             GameControl.Wait(1000);
+
+            Player.AddArmor(4, 3);
+            if (Player.CurrentArmor.ID == 0)
+                Player.CurrentArmor = Player.Armor.Last();
 
             return true;
         }

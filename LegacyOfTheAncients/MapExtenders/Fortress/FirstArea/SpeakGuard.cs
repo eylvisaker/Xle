@@ -90,6 +90,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
             Player.AddWeapon(7, 3);
+            if (Player.CurrentWeapon.ID == 0)
+                Player.CurrentWeapon = Player.Weapons.Last();
 
             TheEvent.Enabled = false;
 

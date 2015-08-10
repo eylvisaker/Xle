@@ -17,27 +17,6 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 {
     public class LotaTown : TownExtender
     {
-        ExtenderDictionary mExtenders = new ExtenderDictionary();
-
-        public LotaTown()
-        {
-            mExtenders.Add("Healer", new StoreHealer());
-            mExtenders.Add("StoreHealer", new StoreHealer());
-            mExtenders.Add("StoreFortune", new Fortune());
-            mExtenders.Add("StoreFood", new StoreFood());
-            mExtenders.Add("StoreWeaponTraining", new StoreWeaponTraining());
-            mExtenders.Add("StoreArmorTraining", new StoreArmorTraining());
-            mExtenders.Add("StoreMagic", new StoreMagic());
-            mExtenders.Add("StoreLending", new StoreLending());
-            mExtenders.Add("StoreFlipFlop", new StoreFlipFlop());
-            mExtenders.Add("StoreBlackjack", new StoreBlackjack());
-            mExtenders.Add("StoreArmor", new StoreArmor());
-            mExtenders.Add("StoreWeapon", new StoreWeapon());
-            mExtenders.Add("StoreRaft", new StoreRaftExtender());
-            mExtenders.Add("StoreBank", new StoreBank());
-            mExtenders.Add("StoreVault", new Vault());
-            mExtenders.Add("StoreBuyback", new StoreBuyback());
-        }
 
         public XleOptions Options { get; set; }
         public LotaMuseumCoinSale MuseumCoinSale { get; set; }
@@ -48,7 +27,6 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 
             CheckLoan();
         }
-
 
         void CheckLoan()
         {
@@ -70,7 +48,7 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
             commands.Items.AddRange(LotaProgram.CommonLotaCommands);
 
             commands.Items.Add(CommandFactory.Fight("FightAgainstGuard"));
-            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Magic("TownMagic"));
             commands.Items.Add(CommandFactory.Leave("TownLeave", confirmPrompt: Options.EnhancedUserInterface));
             commands.Items.Add(CommandFactory.Rob());
             commands.Items.Add(CommandFactory.Speak("TownSpeak"));

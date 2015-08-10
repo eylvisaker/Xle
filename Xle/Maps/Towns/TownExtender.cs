@@ -111,9 +111,8 @@ namespace ERY.Xle.Maps.Towns
                     dy = ydist / Math.Abs(ydist);
                 else dy = 0;
 
-                double dist = Math.Sqrt(Math.Pow(xdist, 2) + Math.Pow(ydist, 2));
-                if (dist >= 25)
-                    continue;
+                if (Math.Abs(xdist) > 12) continue;
+                if (Math.Abs(ydist) > 9) continue;
 
                 Point newPt = guard.Location;
 
@@ -126,7 +125,7 @@ namespace ERY.Xle.Maps.Towns
 
                     GuardAttackPlayer(guard);
                 }
-                else if (dist < 25)
+                else 
                 {
                     if (Math.Abs(xdist) > Math.Abs(ydist))
                     {

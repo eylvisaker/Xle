@@ -73,6 +73,7 @@
     <Compile Include="MapExtenders\Museum\Commands\MuseumXamine.cs" />
     <Compile Include="MapExtenders\Museum\IExhibitFactory.cs" />
     <Compile Include="MapExtenders\Outside\LotaOutsideMagic.cs" />
+    <Compile Include="MapExtenders\Towns\Commands\TownMagic.cs" />
     <Compile Include="MapExtenders\Towns\Commands\TownRob.cs" />
     <Compile Include="MapExtenders\Towns\Stores\LotaStore.cs" />
     <Compile Include="MapExtenders\Castle\Events\Arovyn.cs" />
