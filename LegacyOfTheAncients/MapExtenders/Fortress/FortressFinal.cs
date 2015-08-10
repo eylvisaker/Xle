@@ -18,8 +18,10 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 {
     public class FortressFinal : FortressEntry
     {
-        ExtenderDictionary extenders = new ExtenderDictionary();
         Guard warlord;
+
+        int borderIndex;
+        Color flashColor = XleColor.LightGreen;
 
         double compendiumStrength = 140;
 
@@ -28,10 +30,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             WhichCastle = 2;
             CastleLevel = 2;
             GuardAttack = 3.5;
-
-            extenders.Add("DoorShut", new DoorShut());
-            extenders.Add("Compendium", new Compendium(this));
-            extenders.Add("MagicIce", new FinalMagicIce(this));
         }
 
         public IXleScreen Screen { get; set; }
@@ -56,6 +54,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             {
                 CompendiumAttack();
             }
+
+            base.AfterExecuteCommand(cmd);
         }
 
         private void CompendiumAttack()
@@ -88,9 +88,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             }
         }
 
-        int borderIndex;
-        Color flashColor = XleColor.LightGreen;
-
         private void FlashBorder()
         {
             borderIndex++;
@@ -112,6 +109,8 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 
             TextArea.PrintLine();
             TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
+
+            Player.HP -= damage;
 
             SoundMan.PlayMagicSound(LotaSound.MagicFlame, LotaSound.MagicFlameHit, 2);
             GameControl.Wait(250, redraw:FlashBorder);

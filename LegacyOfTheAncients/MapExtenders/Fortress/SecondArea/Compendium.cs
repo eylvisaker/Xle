@@ -9,12 +9,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
 	public class Compendium : EventExtender
 	{
-		private FortressFinal fortressFinal;
-
-		public Compendium(FortressFinal fortressFinal)
-		{
-			this.fortressFinal = fortressFinal;
-		}
+		FortressFinal fortressFinal { get { return (FortressFinal)GameState.MapExtender; } }
 
 		public override bool Use(int item)
 		{

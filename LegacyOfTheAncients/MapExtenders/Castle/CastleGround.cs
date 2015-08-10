@@ -45,7 +45,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             fight.CastleLevel = CastleLevel;
 
             commands.Items.Add(fight);
-            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Magic("CastleMagic"));
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak("CastleSpeak"));

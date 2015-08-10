@@ -8,7 +8,7 @@ using ERY.Xle.Services.Commands.Implementation;
 
 namespace ERY.Xle.Maps.Castles
 {
-    public class CastleMagic : Magic
+    public class CastleMagic : MagicCommand
     {
     }
 }

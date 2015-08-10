@@ -8,7 +8,7 @@ using ERY.Xle.Services.Game;
 
 namespace ERY.Xle.Services.Commands.Implementation
 {
-    public abstract class Magic : Command
+    public abstract class MagicCommand : Command
     {
         public IXleSubMenu SubMenu { get; set; }
         public IQuickMenu QuickMenu { get; set; }

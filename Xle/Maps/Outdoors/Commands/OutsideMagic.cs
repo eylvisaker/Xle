@@ -8,7 +8,7 @@ using ERY.Xle.Services.Commands.Implementation;
 
 namespace ERY.Xle.Maps.Outdoors.Commands
 {
-    public class OutsideMagic : Magic
+    public class OutsideMagic : MagicCommand
     {
         OutsideExtender MapExtender {  get { return (OutsideExtender)GameState.MapExtender; } }
         EncounterState EncounterState {  get { return MapExtender.EncounterState; } }

@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Magic = ERY.Xle.Services.Commands.Implementation.Magic;
+using Magic = ERY.Xle.Services.Commands.Implementation.MagicCommand;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns
 {

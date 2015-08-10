@@ -58,6 +58,7 @@
     <Compile Include="LotaStory.cs" />
     <Compile Include="LotaUse.cs" />
     <Compile Include="MapExtenders\Castle\Commands\CastleFight.cs" />
+    <Compile Include="MapExtenders\Castle\Commands\CastleMagic.cs" />
     <Compile Include="MapExtenders\Castle\Commands\CastleSpeak.cs" />
     <Compile Include="MapExtenders\Castle\Commands\CastleUse.cs" />
     <Compile Include="MapExtenders\Castle\Events\SpiralSuccess.cs" />

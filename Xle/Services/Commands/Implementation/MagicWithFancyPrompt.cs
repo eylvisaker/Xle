@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.Services.Commands.Implementation
 {
-    public class MagicWithFancyPrompt : Magic
+    public class MagicWithFancyPrompt : MagicCommand
     {
         protected override MagicSpell RunMagicMenu(IList<MagicSpell> magics)
         {

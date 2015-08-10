@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ERY.Xle.LotA.MapExtenders.Outside
 {
     [ServiceName("LotaOutsideMagic")]
-    public class LotaOutsideMagic : Magic
+    public class LotaOutsideMagic : MagicCommand
     {
         protected override IEnumerable<MagicSpell> ValidMagic
         {

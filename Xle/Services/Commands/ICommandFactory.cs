@@ -13,7 +13,7 @@ namespace ERY.Xle.Services.Commands
         Hold Hold();
         Inventory Inventory();
         Leave Leave(string name = null, string promptText = "", bool confirmPrompt = true);
-        Magic Magic(string name = null);
+        MagicCommand Magic(string name = null);
         Open Open(string name = null);
         Pass Pass();
         Rob Rob(string name = null);

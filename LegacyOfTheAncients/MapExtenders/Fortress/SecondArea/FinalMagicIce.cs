@@ -11,12 +11,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
 	public class FinalMagicIce : MagicIce
 	{
-		private FortressFinal fortressFinal;
-
-		public FinalMagicIce(FortressFinal fortressFinal)
-		{
-			this.fortressFinal = fortressFinal;
-		}
+		FortressFinal fortressFinal {  get { return (FortressFinal)GameState.MapExtender; } }
 
 		public override bool Use(int item)
 		{

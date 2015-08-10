@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ERY.Xle.LoB.MapExtenders.Temples
 {
     [ServiceName("TempleMagic")]
-    public class TempleMagic : Magic
+    public class TempleMagic : MagicCommand
     {
         protected override IEnumerable<MagicSpell> ValidMagic
         {
