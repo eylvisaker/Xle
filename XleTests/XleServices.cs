@@ -9,6 +9,7 @@ using AgateLib.InputLib;
 
 using ERY.Xle;
 using ERY.Xle.Data;
+using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.MapLoad;
@@ -42,7 +43,9 @@ namespace ERY.XleTests
             TextArea = new Mock<ITextArea>();
             TextArea.SetupAllProperties();
             TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text));
+            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color?>())).Callback((string text, Color? color) => AppendTextAreaText(text));
             TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text + Environment.NewLine));
+            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color>())).Callback((string text, Color color) => AppendTextAreaText(text + Environment.NewLine));
 
             SubMenu = new Mock<IXleSubMenu>();
             SubMenu.SetupAllProperties();
@@ -66,6 +69,15 @@ namespace ERY.XleTests
             QuickMenu = new Mock<IQuickMenu>();
             QuickMenu.SetupAllProperties();
             InitializeQuickMenu();
+
+            MapChanger = new Mock<IMapChanger>();
+            MapChanger.SetupAllProperties();
+
+            DungeonAdapter = new Mock<IDungeonAdapter>();
+            DungeonAdapter.SetupAllProperties();
+
+            StatsDisplay = new Mock<IStatsDisplay>();
+            StatsDisplay.SetupAllProperties();
 
             Data = new XleData();
             InitializeData();
@@ -106,6 +118,9 @@ namespace ERY.XleTests
         public Mock<IXleGameControl> GameControl { get; set; }
         public Mock<ISoundMan> SoundMan { get; set; }
         public Mock<IQuickMenu> QuickMenu { get; set; }
+        public Mock<IMapChanger> MapChanger { get; set; }
+        public Mock<IDungeonAdapter> DungeonAdapter { get; set; }
+        public Mock<IStatsDisplay> StatsDisplay { get; set; }
 
         public XleData Data { get; set; }
 

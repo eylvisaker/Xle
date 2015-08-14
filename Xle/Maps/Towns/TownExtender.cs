@@ -11,7 +11,11 @@ namespace ERY.Xle.Maps.Towns
 {
     public class TownExtender : Map2DExtender
     {
-        public new Town TheMap { get { return (Town)base.TheMap; } }
+        public new Town TheMap
+        {
+            get { return (Town)base.TheMap; }
+            set { base.TheMap = value; }
+        }
 
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
@@ -125,7 +129,7 @@ namespace ERY.Xle.Maps.Towns
 
                     GuardAttackPlayer(guard);
                 }
-                else 
+                else
                 {
                     if (Math.Abs(xdist) > Math.Abs(ydist))
                     {
@@ -281,7 +285,7 @@ namespace ERY.Xle.Maps.Towns
             SoundMan.PlaySound(LotaSound.BuildingOpen);
             GameControl.Wait(50);
         }
-        
+
         public virtual void GuardAttackPlayer(Guard guard)
         {
             TextArea.PrintLine();

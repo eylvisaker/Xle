@@ -69,6 +69,9 @@
     <Compile Include="Maps\Dungeons\Commands\DungeonXamine.cs" />
     <Compile Include="Maps\Dungeons\DungeonCombat.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonMagic.cs" />
+    <Compile Include="Maps\Dungeons\DungeonAdapter.cs" />
+    <Compile Include="Maps\Dungeons\DungeonTile.cs" />
+    <Compile Include="Maps\Dungeons\IDungeonAdapter.cs" />
     <Compile Include="Maps\MapEntryParams.cs" />
     <Compile Include="Maps\MapInfo.cs" />
     <Compile Include="Maps\Museums\Commands\MuseumFight.cs" />

@@ -14,7 +14,6 @@ namespace ERY.Xle.Maps.Dungeons.Commands
     [ServiceName("DungeonOpen")]
     public class DungeonOpenCommand : Open
     {
-        Maps.XleMapTypes.Dungeon TheMap { get { return (Maps.XleMapTypes.Dungeon)GameState.Map; } }
         DungeonExtender Map { get { return (DungeonExtender)GameState.MapExtender; } }
 
         public ISoundMan SoundMan { get; set; }
@@ -22,21 +21,23 @@ namespace ERY.Xle.Maps.Dungeons.Commands
         public IStatsDisplay StatsDisplay { get; set; }
         public XleData Data { get; set; }
 
+        public IDungeonAdapter DungeonAdapter { get; set; }
+
         public override void Execute()
         {
-            int val = TheMap[Player.X, Player.Y];
+            DungeonTile tile = DungeonAdapter.TileAt(Player.X, Player.Y);
 
-            if (val == 0x1d)
+            if (tile == DungeonTile.Urn)
             {
                 OpenUrn();
             }
-            else if (val == 0x1e)
+            else if (tile == DungeonTile.Box)
             {
                 OpenBox();
             }
-            else if (val >= 0x30 && val <= 0x3f)
+            else if (tile == DungeonTile.Chest)
             {
-                OpenChest(val);
+                OpenChest(DungeonAdapter.ChestValueAt(Player.X, Player.Y));
             }
             else
             {
@@ -57,12 +58,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
             GiveUrnContents();
 
             SoundMan.FinishSounds();
-            ClearSpace();
-        }
-
-        private void ClearSpace()
-        {
-            TheMap[Player.X, Player.Y] = 0x10;
+            DungeonAdapter.ClearSpace(Player.X, Player.Y);
         }
 
         private void OpenBox()
@@ -76,7 +72,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
             SoundMan.FinishSounds();
 
-            ClearSpace();
+            DungeonAdapter.ClearSpace(Player.X, Player.Y);
         }
 
 
@@ -94,18 +90,11 @@ namespace ERY.Xle.Maps.Dungeons.Commands
         {
             int amount = Random.Next(60, 200);
 
-            if (amount + Player.HP > Player.MaxHP)
-            {
-                amount = Player.MaxHP - Player.HP;
-                if (amount < 0)
-                {
-                    amount = 0;
-                }
-            }
+            amount = Math.Min(amount, Player.MaxHP - Player.HP);
 
-            if (amount == 0)
+            if (amount <= 0)
             {
-                TextArea.PrintLine("You find nothing.", Color.Yellow);
+                TextArea.PrintLine("You find nothing.", XleColor.Yellow);
             }
             else
             {
@@ -118,8 +107,6 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
         private void OpenChest(int val)
         {
-            val -= 0x30;
-
             TextArea.PrintLine(" Chest");
             TextArea.PrintLine();
 
@@ -143,7 +130,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
                 GiveSpecialChestItem(val);
             }
 
-            ClearSpace();
+            DungeonAdapter.ClearSpace(Player.X, Player.Y);
         }
 
         private void GiveGold()
@@ -161,36 +148,28 @@ namespace ERY.Xle.Maps.Dungeons.Commands
         {
             int treasure = GetTreasure(val);
 
-            bool handled = false;
-
-            // Used by LOB only.
-            //OnBeforeGiveItem(ref treasure, ref handled, ref clearBox);
-
-            if (handled == false)
+            if (treasure > 0)
             {
-                if (treasure > 0)
-                {
-                    string text = "You find a " + Data.ItemList[treasure].LongName + "!!";
-                    TextArea.Clear();
-                    TextArea.PrintLine(text);
+                string text = "You find a " + Data.ItemList[treasure].LongName + "!!";
+                TextArea.Clear();
+                TextArea.PrintLine(text);
 
-                    Player.Items[treasure] += 1;
+                Player.Items[treasure] += 1;
 
-                    SoundMan.PlaySound(LotaSound.VeryGood);
+                SoundMan.PlaySound(LotaSound.VeryGood);
 
-                    TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
-                        XleColor.White, XleColor.Yellow, 100);
-                }
-                else
-                {
-                    TextArea.PrintLine("You find nothing.");
-                }
+                TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
+                    XleColor.White, XleColor.Yellow, 100);
+            }
+            else
+            {
+                TextArea.PrintLine("You find nothing.");
             }
         }
 
         private int GetTreasure(int val)
         {
-            return Map.GetTreasure(Player.DungeonLevel + 1, val);
+            return DungeonAdapter.GetTreasure(val);
         }
     }
 }

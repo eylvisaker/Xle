@@ -12,6 +12,7 @@ using ERY.Xle.XleEventTypes.Extenders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Moq;
+using ERY.Xle.Services.Commands;
 
 namespace ERY.XleTests
 {
@@ -55,6 +56,12 @@ namespace ERY.XleTests
             newMap.Object.TheMap = map;
 
             return newMap;
+        }
+
+        protected virtual void InitializeCommand(Command command)
+        {
+            command.GameState = GameState;
+            command.TextArea = Services.TextArea.Object;
         }
     }
 }

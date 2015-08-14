@@ -18,15 +18,19 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
 {
     public class FortressFinal : FortressEntry
     {
-        Guard warlord;
+        IFortressFinalActivator fortressActivator;
 
         int borderIndex;
         Color flashColor = XleColor.LightGreen;
 
         double compendiumStrength = 140;
 
-        public FortressFinal()
+        public FortressFinal(IFortressFinalActivator fortressActivator)
         {
+            this.fortressActivator = fortressActivator;
+            fortressActivator.Reset();
+            fortressActivator.WarlordCreated += (sender, e) => TheMap.Guards.Add(fortressActivator.Warlord);
+
             WhichCastle = 2;
             CastleLevel = 2;
             GuardAttack = 3.5;
@@ -42,15 +46,13 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
                 return 11;
         }
 
-        public bool CompendiumAttacking { get; set; }
-
         public override void AfterExecuteCommand(KeyCode cmd)
         {
-            if (warlord != null)
+            if (fortressActivator.Warlord != null)
             {
                 WarlordAttack();
             }
-            else if (CompendiumAttacking)
+            else if (fortressActivator.CompendiumAttacking)
             {
                 CompendiumAttack();
             }
@@ -117,50 +119,6 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
             GameControl.Wait(150);
-        }
-
-
-        public void CreateWarlord()
-        {
-            warlord = new Guard
-            {
-                X = 5,
-                Y = 45,
-                HP = 420,
-                Color = XleColor.LightGreen,
-                Name = "Warlord",
-                OnGuardDead = (state, unused) => WarlordDead(unused),
-                SkipAttacking = true,
-                SkipMovement = true,
-            };
-
-            TheMap.Guards.Add(warlord);
-        }
-
-        private bool WarlordDead(Guard unused)
-        {
-            this.warlord = null;
-
-            TextArea.Clear(true);
-            TextArea.PrintLine();
-            TextArea.PrintLine("        ** warlord killed **");
-
-            for (int i = 0; i < 5; i++)
-            {
-                SoundMan.PlaySound(LotaSound.Good);
-                GameControl.Wait(750);
-            }
-            GameControl.Wait(1000);
-
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
-
-            PrintSecurityAlertMessage();
-
-            return true;
-        }
-
-        private void PrintSecurityAlertMessage()
-        {
         }
     }
 }

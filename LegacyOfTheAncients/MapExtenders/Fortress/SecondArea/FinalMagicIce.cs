@@ -9,17 +9,28 @@ using ERY.Xle.LotA.MapExtenders.Castle.Events;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
-	public class FinalMagicIce : MagicIce
-	{
-		FortressFinal fortressFinal {  get { return (FortressFinal)GameState.MapExtender; } }
+    public class FinalMagicIce : MagicIce
+    {
+        private bool activatedCompendium;
+        private IFortressFinalActivator fortressActivator;
 
-		public override bool Use(int item)
-		{
-			base.Use(item);
+        public FinalMagicIce(IFortressFinalActivator fortressActivator)
+        {
+            this.fortressActivator = fortressActivator;
+        }
 
-			fortressFinal.CompendiumAttacking = true;
+        FortressFinal fortressFinal { get { return (FortressFinal)GameState.MapExtender; } }
 
-			return true;
-		}
-	}
+        public override bool Use(int item)
+        {
+            base.Use(item);
+
+            if (item == (int)LotaItem.MagicIce && activatedCompendium == false)
+            {
+                activatedCompendium = true;
+                fortressActivator.CompendiumAttacking = true;
+            }
+            return true;
+        }
+    }
 }

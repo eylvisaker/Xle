@@ -9,13 +9,18 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 {
 	public class Compendium : EventExtender
 	{
-		FortressFinal fortressFinal { get { return (FortressFinal)GameState.MapExtender; } }
+        private IFortressFinalActivator fortressActivator;
+
+        public Compendium(IFortressFinalActivator fortressActivator)
+        {
+            this.fortressActivator = fortressActivator;
+        }
 
 		public override bool Use(int item)
 		{
 			if (item != (int)LotaItem.GuardJewel)
 				return false;
-			if (this.fortressFinal.CompendiumAttacking == false)
+			if (fortressActivator.CompendiumAttacking == false)
 				return false;
 
 			//SoundMan.PlaySound("SonicMagic");
@@ -24,7 +29,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 			TextArea.PrintLine();
 			TextArea.PrintLine("The attack stops.");
 
-			fortressFinal.CompendiumAttacking = false;
+			fortressActivator.CompendiumAttacking = false;
 
 			return true;
 		}
@@ -34,7 +39,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 			TextArea.PrintLine();
 			TextArea.PrintLine();
 
-			if (fortressFinal.CompendiumAttacking)
+			if (fortressActivator.CompendiumAttacking)
 			{
 				TextArea.PrintLine("You can't hold it.");
 			}
@@ -51,7 +56,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 
 				CloseExit(GameState);
 
-				fortressFinal.CreateWarlord();
+				fortressActivator.CreateWarlord();
 			}
 
 			return true;

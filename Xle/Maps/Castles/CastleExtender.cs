@@ -7,7 +7,11 @@ namespace ERY.Xle.Maps.Castles
 {
     public class CastleExtender : TownExtender
     {
-        public new CastleMap TheMap { get { return (CastleMap)base.TheMap; } }
+        public new CastleMap TheMap
+        {
+            get { return (CastleMap)base.TheMap; }
+            set { base.TheMap = value; }
+        }
 
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {

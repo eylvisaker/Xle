@@ -68,6 +68,8 @@
     <Compile Include="MapExtenders\Dungeons\Commands\LotaDungeonFight.cs" />
     <Compile Include="MapExtenders\Fortress\FirstArea\CompendiumFirst.cs" />
     <Compile Include="MapExtenders\Fortress\FortressSpeak.cs" />
+    <Compile Include="MapExtenders\Fortress\SecondArea\FortressFinalActivator.cs" />
+    <Compile Include="MapExtenders\Fortress\SecondArea\IFortressFinalActivator.cs" />
     <Compile Include="MapExtenders\Museum\Commands\LotaMuseumRob.cs" />
     <Compile Include="MapExtenders\Museum\Commands\MuseumUse.cs" />
     <Compile Include="MapExtenders\Museum\Commands\MuseumXamine.cs" />
@@ -416,7 +418,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LotA\Saved\" />
-    <Folder Include="MapExtenders\Fortress\Commands\" />
     <Folder Include="Services\" />
     <Folder Include="Support\OldMaps\" />
   </ItemGroup>
