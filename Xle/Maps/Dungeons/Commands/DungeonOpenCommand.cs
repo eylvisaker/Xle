@@ -14,8 +14,6 @@ namespace ERY.Xle.Maps.Dungeons.Commands
     [ServiceName("DungeonOpen")]
     public class DungeonOpenCommand : Open
     {
-        DungeonExtender Map { get { return (DungeonExtender)GameState.MapExtender; } }
-
         public ISoundMan SoundMan { get; set; }
         public Random Random { get; set; }
         public IStatsDisplay StatsDisplay { get; set; }
@@ -146,7 +144,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
         protected virtual void GiveSpecialChestItem(int val)
         {
-            int treasure = GetTreasure(val);
+            int treasure = DungeonAdapter.GetTreasure(val);
 
             if (treasure > 0)
             {
@@ -165,11 +163,6 @@ namespace ERY.Xle.Maps.Dungeons.Commands
             {
                 TextArea.PrintLine("You find nothing.");
             }
-        }
-
-        private int GetTreasure(int val)
-        {
-            return DungeonAdapter.GetTreasure(val);
         }
     }
 }
