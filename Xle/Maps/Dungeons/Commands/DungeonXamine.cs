@@ -19,6 +19,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
     {
         public ISoundMan SoundMan { get; set; }
         public IXleGameControl GameControl { get; set; }
+        public IDungeonAdapter DungeonAdapter { get; set; }
 
         DungeonExtender Dungeon { get { return (DungeonExtender)GameState.MapExtender; } }
         Dungeon TheMap { get { return (Dungeon)GameState.Map; } }
@@ -28,47 +29,19 @@ namespace ERY.Xle.Maps.Dungeons.Commands
             SoundMan.PlaySound(LotaSound.Xamine);
             GameControl.Wait(500);
 
-            Point faceDir = new Point();
-
-            switch (Player.FaceDirection)
-            {
-                case Direction.East: faceDir = new Point(1, 0); break;
-                case Direction.West: faceDir = new Point(-1, 0); break;
-                case Direction.North: faceDir = new Point(0, -1); break;
-                case Direction.South: faceDir = new Point(0, 1); break;
-            }
-
             TextArea.PrintLine("\n");
             PrintDungeonLevel();
 
-            bool revealHidden = false;
-            DungeonMonster foundMonster = null;
+            DungeonMonster foundMonster = FirstVisibleMonster(Player.Location, Player.FaceDirection, Player.DungeonLevel);
+            int monsterDistance = RevealDistance(foundMonster);
 
-            for (int i = 0; i < 5; i++)
-            {
-                Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
-
-                foundMonster = Dungeon.MonsterAt(Player.DungeonLevel, loc);
-
-                if (foundMonster != null)
-                    break;
-                if (TheMap[loc.X, loc.Y] < 0x10)
-                    break;
-                if (TheMap[loc.X, loc.Y] >= 0x21 && TheMap[loc.X, loc.Y] < 0x2a)
-                {
-                    TheMap[loc.X, loc.Y] -= 0x10;
-                    revealHidden = true;
-                }
-            }
-
+            bool revealHidden = RevealTrapsUpTo(monsterDistance);
+            
             if (revealHidden)
             {
                 TextArea.PrintLine("Hidden objects detected!!!", XleColor.White);
                 SoundMan.PlaySound(LotaSound.XamineDetected);
             }
-
-            string extraText = string.Empty;
-            int distance = 0;
 
             if (foundMonster != null)
             {
@@ -76,49 +49,105 @@ namespace ERY.Xle.Maps.Dungeons.Commands
             }
             else
             {
-                for (int i = 0; i < 5; i++)
+                PrintExamineObjectMessage();
+            }
+        }
+
+        private void PrintExamineObjectMessage()
+        {
+            Point faceDir = DungeonAdapter.FaceDirectionAsPoint;
+            string objectName = string.Empty;
+            int distance = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
+                int val = TheMap[loc.X, loc.Y];
+
+                if (val < 0x10) break;
+
+                if (objectName == string.Empty)
                 {
-                    Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
-                    int val = TheMap[loc.X, loc.Y];
+                    distance = i;
 
-                    if (val < 0x10) break;
-
-                    if (extraText == string.Empty)
+                    if (val > 0x10 && val < 0x1a)
                     {
-                        distance = i;
-
-                        if (val > 0x10 && val < 0x1a)
-                        {
-                            extraText = TrapName(val);
-                        }
-                        if (val >= 0x30 && val <= 0x3f)
-                        {
-                            extraText = "treasure chest";
-                        }
-                        if (val == 0x1e)
-                        {
-                            extraText = "box";
-                        }
+                        objectName = TrapName(val);
+                    }
+                    if (val >= 0x30 && val <= 0x3f)
+                    {
+                        objectName = "treasure chest";
+                    }
+                    if (val == 0x1e)
+                    {
+                        objectName = "box";
                     }
                 }
+            }
 
-                if (extraText != string.Empty)
+            if (objectName != string.Empty)
+            {
+                if (distance > 0)
                 {
-                    if (distance > 0)
-                    {
-                        TextArea.PrintLine("A " + extraText + " is in sight.");
-                    }
-                    else
-                    {
-                        TextArea.PrintLine("You are standing next ");
-                        TextArea.PrintLine("to a " + extraText + ".");
-                    }
+                    TextArea.PrintLine("A " + objectName + " is in sight.");
                 }
                 else
                 {
-                    TextArea.PrintLine("Nothing unusual in sight.");
+                    TextArea.PrintLine("You are standing next ");
+                    TextArea.PrintLine("to a " + objectName + ".");
                 }
             }
+            else
+            {
+                TextArea.PrintLine("Nothing unusual in sight.");
+            }
+        }
+
+        private int RevealDistance(DungeonMonster foundMonster)
+        {
+            int distance = 5;
+
+            if (foundMonster != null)
+                distance = Math.Abs(foundMonster.Location.X - Player.Location.X) + Math.Abs(foundMonster.Location.Y + Player.Location.Y);
+
+            return distance;
+        }
+
+        private bool RevealTrapsUpTo(int distance)
+        {
+            var faceDir = DungeonAdapter.FaceDirectionAsPoint;
+            bool result = false;
+
+            for (int i = 0; i < distance; i++)
+            {
+                Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
+
+                if (DungeonAdapter.IsWallAt(loc))
+                    break;
+
+                result |= DungeonAdapter.RevealTrapAt(loc);
+            }
+
+            return result;
+        }
+
+        private DungeonMonster FirstVisibleMonster(Point location, Direction faceDirection, int dungeonLevel)
+        {
+            var faceDir = DungeonAdapter.FaceDirectionAsPoint;
+
+            for (int i = 0; i < 5; i++)
+            {
+                Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
+
+                var foundMonster = Dungeon.MonsterAt(Player.DungeonLevel, loc);
+
+                if (foundMonster != null)
+                    return foundMonster;
+                if (DungeonAdapter.IsWallAt(loc))
+                    return null;
+            }
+
+            return null;
         }
 
         private void PrintDungeonLevel()
