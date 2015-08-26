@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon
+namespace ERY.Xle.LoB.MapExtenders.Dungeon.Commands
 {
     [ServiceName("LobDungeonMagic")]
     public class LobDungeonMagic : DungeonMagic

@@ -64,7 +64,7 @@ namespace ERY.Xle.LoB.MapExtenders.Castle
 
             commands.Items.Add(fight);
             commands.Items.Add(CommandFactory.Leave());
-            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Magic("LobCastleMagic"));
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Speak("DurekCastleSpeak"));
             commands.Items.Add(CommandFactory.Take());

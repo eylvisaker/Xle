@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ERY.Xle.Maps;
+using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.Dungeons.Commands;
 using ERY.Xle.Services;
 
@@ -22,6 +23,14 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon.Commands
             }
 
             base.PrintExamineMonsterMessage(foundMonster);
+        }
+
+        protected override string TileName(DungeonTile val)
+        {
+            if (val == DungeonTile.Box)
+                return "case";
+
+            return base.TileName(val);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
             commands.Items.Add(fight);
             
             commands.Items.Add(CommandFactory.Open());
-            commands.Items.Add(CommandFactory.Magic());
+            commands.Items.Add(CommandFactory.Magic("LobCastleMagic"));
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Use("LobUse"));
             commands.Items.Add(CommandFactory.Speak());

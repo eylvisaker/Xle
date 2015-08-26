@@ -22,7 +22,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
         public IDungeonAdapter DungeonAdapter { get; set; }
 
         DungeonExtender Dungeon { get { return (DungeonExtender)GameState.MapExtender; } }
-        Dungeon TheMap { get { return (Dungeon)GameState.Map; } }
+        Dungeon Map { get { return (Dungeon)GameState.Map; } }
 
         public override void Execute()
         {
@@ -56,45 +56,39 @@ namespace ERY.Xle.Maps.Dungeons.Commands
         private void PrintExamineObjectMessage()
         {
             Point faceDir = DungeonAdapter.FaceDirectionAsPoint;
-            string objectName = string.Empty;
+            string objectName = "";
             int distance = 0;
 
             for (int i = 0; i < 5; i++)
             {
                 Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
-                int val = TheMap[loc.X, loc.Y];
+                var val = DungeonAdapter.TileAt(loc.X, loc.Y);
 
-                if (val < 0x10) break;
+                if (val == DungeonTile.Wall) break;
 
-                if (objectName == string.Empty)
+                if (objectName == "")
                 {
                     distance = i;
 
-                    if (val > 0x10 && val < 0x1a)
-                    {
-                        objectName = TrapName(val);
-                    }
-                    if (val >= 0x30 && val <= 0x3f)
-                    {
-                        objectName = "treasure chest";
-                    }
-                    if (val == 0x1e)
-                    {
-                        objectName = "box";
-                    }
+                    objectName = TileName(val);
                 }
             }
 
-            if (objectName != string.Empty)
+            if (objectName != "")
             {
+                string prefix = "A ";
+
+                if ("aeiou".Contains(objectName.First()))
+                    prefix = "An ";
+
                 if (distance > 0)
                 {
-                    TextArea.PrintLine("A " + objectName + " is in sight.");
+                    TextArea.PrintLine(prefix + objectName + " is in sight.");
                 }
                 else
                 {
                     TextArea.PrintLine("You are standing next ");
-                    TextArea.PrintLine("to a " + objectName + ".");
+                    TextArea.PrintLine("to " + prefix + objectName + ".");
                 }
             }
             else
@@ -171,18 +165,21 @@ namespace ERY.Xle.Maps.Dungeons.Commands
         {
             get { return true; }
         }
-
-        protected virtual string TrapName(int val)
+        
+        protected virtual string TileName(DungeonTile val)
         {
             switch (val)
             {
-                case 0x11: return "ceiling hole";
-                case 0x12: return "floor hole";
-                case 0x13: return "poison gas vent";
-                case 0x14: return "slime splotch";
-                case 0x15: return "trip wire";
-                case 0x16: return "gas vent";
-                default: throw new ArgumentException();
+                case DungeonTile.CeilingHole: return "ceiling hole";
+                case DungeonTile.FloorHole: return "floor hole";
+                case DungeonTile.PoisonGasVent: return "poison gas vent";
+                case DungeonTile.SlimeSplotch: return "slime splotch";
+                case DungeonTile.TripWire: return "trip wire";
+                case DungeonTile.GasVent: return "gas vent";
+                case DungeonTile.Chest: return "treasure chest";
+                case DungeonTile.Box: return "box";
+                case DungeonTile.Urn: return "urn";
+                default: return "";
             }
         }
     }
