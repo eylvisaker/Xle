@@ -67,6 +67,8 @@
     <Compile Include="Maps\Dungeons\Commands\DungeonFight.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonOpenCommand.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonXamine.cs" />
+    <Compile Include="Maps\Dungeons\Commands\IXamineFormatter.cs" />
+    <Compile Include="Maps\Dungeons\Commands\XamineFormatter.cs" />
     <Compile Include="Maps\Dungeons\DungeonCombat.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonMagic.cs" />
     <Compile Include="Maps\Dungeons\DungeonAdapter.cs" />

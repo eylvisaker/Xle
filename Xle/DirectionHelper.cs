@@ -7,8 +7,8 @@ using System.Text;
 namespace ERY.Xle
 {
 	public static class DirectionHelper
-	{
-		public static Point ToPoint(this Direction dir)
+    {
+        public static Point ToPoint(this Direction dir)
 		{
 			switch(dir)
 			{

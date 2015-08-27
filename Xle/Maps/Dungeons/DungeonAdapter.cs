@@ -16,21 +16,6 @@ namespace ERY.Xle.Maps.Dungeons
 
         DungeonExtender MapExtender {  get { return (DungeonExtender)GameState.MapExtender; } }
 
-        public Point FaceDirectionAsPoint
-        {
-            get
-            {
-                switch (GameState.Player.FaceDirection)
-                {
-                    case Direction.East: return new Point(1, 0);
-                    case Direction.West: return new Point(-1, 0);
-                    case Direction.North: return new Point(0, -1);
-                    case Direction.South: return new Point(0, 1);
-                    default:
-                        throw new InvalidOperationException("Face direction could not be determined.");
-                }
-            }
-        }
 
         public int ChestValueAt(int x, int y, int level = -1)
         {
@@ -91,6 +76,11 @@ namespace ERY.Xle.Maps.Dungeons
             }
 
             return false;
+        }
+
+        public DungeonMonster MonsterAt(Point loc)
+        {
+            return MapExtender.MonsterAt(GameState.Player.DungeonLevel, loc);
         }
     }
 }

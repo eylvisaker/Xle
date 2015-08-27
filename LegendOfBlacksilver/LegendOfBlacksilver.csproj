@@ -111,6 +111,7 @@
     <Compile Include="MapExtenders\Dungeon\Commands\LobDungeonXamine.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\LobDungeonFight.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\DungeonOpen.cs" />
+    <Compile Include="MapExtenders\Dungeon\Commands\LobDungeonXamineFormatter.cs" />
     <Compile Include="MapExtenders\Dungeon\Commands\MarthbaneSpeak.cs" />
     <Compile Include="MapExtenders\Dungeon\DeathspireChasm.cs" />
     <Compile Include="MapExtenders\Dungeon\IslandCaverns.cs" />

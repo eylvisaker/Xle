@@ -24,13 +24,5 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon.Commands
 
             base.PrintExamineMonsterMessage(foundMonster);
         }
-
-        protected override string TileName(DungeonTile val)
-        {
-            if (val == DungeonTile.Box)
-                return "case";
-
-            return base.TileName(val);
-        }
     }
 }

@@ -15,7 +15,7 @@ namespace ERY.Xle.Maps.Museums
 
         public XleOptions Options { get; set; }
 
-        public new Museum Map { get { return (Museum)base.TheMap; } }
+        public Museum Map { get { return (Museum)base.TheMap; } }
         public new MuseumRenderer MapRenderer { get { return (MuseumRenderer)base.MapRenderer; } }
 
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)

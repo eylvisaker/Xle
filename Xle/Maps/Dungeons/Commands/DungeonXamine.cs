@@ -21,6 +21,8 @@ namespace ERY.Xle.Maps.Dungeons.Commands
         public IXleGameControl GameControl { get; set; }
         public IDungeonAdapter DungeonAdapter { get; set; }
 
+        public IXamineFormatter XamineFormatter { get; set; }
+
         DungeonExtender Dungeon { get { return (DungeonExtender)GameState.MapExtender; } }
         Dungeon Map { get { return (Dungeon)GameState.Map; } }
 
@@ -36,10 +38,10 @@ namespace ERY.Xle.Maps.Dungeons.Commands
             int monsterDistance = RevealDistance(foundMonster);
 
             bool revealHidden = RevealTrapsUpTo(monsterDistance);
-            
+
             if (revealHidden)
             {
-                TextArea.PrintLine("Hidden objects detected!!!", XleColor.White);
+                XamineFormatter.PrintHiddenObjectsDetected();
                 SoundMan.PlaySound(LotaSound.XamineDetected);
             }
 
@@ -55,45 +57,29 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
         private void PrintExamineObjectMessage()
         {
-            Point faceDir = DungeonAdapter.FaceDirectionAsPoint;
-            string objectName = "";
+            Point faceDir = GameState.Player.FaceDirection.ToPoint();
+            DungeonTile tile = DungeonTile.Wall;
             int distance = 0;
 
             for (int i = 0; i < 5; i++)
             {
                 Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
-                var val = DungeonAdapter.TileAt(loc.X, loc.Y);
+                tile = DungeonAdapter.TileAt(loc.X, loc.Y);
 
-                if (val == DungeonTile.Wall) break;
+                distance = i;
 
-                if (objectName == "")
-                {
-                    distance = i;
-
-                    objectName = TileName(val);
-                }
+                if (tile != DungeonTile.Empty)
+                    break;
             }
 
-            if (objectName != "")
+            if (tile != DungeonTile.Wall &&
+                    tile != DungeonTile.Empty)
             {
-                string prefix = "A ";
-
-                if ("aeiou".Contains(objectName.First()))
-                    prefix = "An ";
-
-                if (distance > 0)
-                {
-                    TextArea.PrintLine(prefix + objectName + " is in sight.");
-                }
-                else
-                {
-                    TextArea.PrintLine("You are standing next ");
-                    TextArea.PrintLine("to " + prefix + objectName + ".");
-                }
+                XamineFormatter.DescribeTile(tile, distance);
             }
             else
             {
-                TextArea.PrintLine("Nothing unusual in sight.");
+                XamineFormatter.PrintNothingUnusualInSight();
             }
         }
 
@@ -109,7 +95,7 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
         private bool RevealTrapsUpTo(int distance)
         {
-            var faceDir = DungeonAdapter.FaceDirectionAsPoint;
+            var faceDir = GameState.Player.FaceDirection.ToPoint();
             bool result = false;
 
             for (int i = 0; i < distance; i++)
@@ -127,13 +113,13 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
         private DungeonMonster FirstVisibleMonster(Point location, Direction faceDirection, int dungeonLevel)
         {
-            var faceDir = DungeonAdapter.FaceDirectionAsPoint;
+            var faceDir = GameState.Player.FaceDirection.ToPoint();
 
             for (int i = 0; i < 5; i++)
             {
                 Point loc = new Point(Player.X + faceDir.X * i, Player.Y + faceDir.Y * i);
 
-                var foundMonster = Dungeon.MonsterAt(Player.DungeonLevel, loc);
+                var foundMonster = DungeonAdapter.MonsterAt(loc);
 
                 if (foundMonster != null)
                     return foundMonster;
@@ -154,33 +140,13 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
         protected virtual void PrintExamineMonsterMessage(DungeonMonster foundMonster)
         {
-            string name = " " + foundMonster.Name;
-            if ("aeiou".Contains(foundMonster.Name[0]))
-                name = "n" + name;
-
-            TextArea.PrintLine("A" + name + " is stalking you!", XleColor.White);
+            XamineFormatter.DescribeMonster(foundMonster);
         }
 
         protected virtual bool PrintLevelDuringXamine
         {
             get { return true; }
         }
-        
-        protected virtual string TileName(DungeonTile val)
-        {
-            switch (val)
-            {
-                case DungeonTile.CeilingHole: return "ceiling hole";
-                case DungeonTile.FloorHole: return "floor hole";
-                case DungeonTile.PoisonGasVent: return "poison gas vent";
-                case DungeonTile.SlimeSplotch: return "slime splotch";
-                case DungeonTile.TripWire: return "trip wire";
-                case DungeonTile.GasVent: return "gas vent";
-                case DungeonTile.Chest: return "treasure chest";
-                case DungeonTile.Box: return "box";
-                case DungeonTile.Urn: return "urn";
-                default: return "";
-            }
-        }
+
     }
 }

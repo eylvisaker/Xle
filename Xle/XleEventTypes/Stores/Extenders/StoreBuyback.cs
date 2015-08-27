@@ -13,7 +13,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
     public class StoreBuyback : StoreFront
     {
         public IEquipmentPicker EquipmentPicker { get; set; }
-        public INumberPicker NumberPicker { get; set; }
         public XleData Data { get; set; }
 
         public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
