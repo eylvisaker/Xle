@@ -12,5 +12,7 @@ namespace ERY.Xle.Maps.Dungeons
         bool IsWallAt(Point loc);
         bool RevealTrapAt(Point loc);
         DungeonMonster MonsterAt(Point loc);
+        void OnPlayerExitDungeon();
+        void OnCurrentLevelChanged();
     }
 }

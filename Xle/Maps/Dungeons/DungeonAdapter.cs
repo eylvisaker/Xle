@@ -82,5 +82,15 @@ namespace ERY.Xle.Maps.Dungeons
         {
             return MapExtender.MonsterAt(GameState.Player.DungeonLevel, loc);
         }
+
+        public void OnPlayerExitDungeon()
+        {
+            MapExtender.OnPlayerExitDungeon();
+        }
+
+        public void OnCurrentLevelChanged()
+        {
+            Map.CurrentLevel = GameState.Player.DungeonLevel;
+        }
     }
 }

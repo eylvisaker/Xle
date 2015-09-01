@@ -11,15 +11,14 @@ namespace ERY.Xle.Maps.Dungeons
     {
         public IXleGameControl GameControl { get; set; }
         public IMapChanger MapChanger { get; set; }
+        public IDungeonAdapter DungeonAdapter { get; set; }
 
-        Dungeon TheMap { get { return (Dungeon)GameState.Map; } }
-        DungeonExtender Map { get { return (DungeonExtender)GameState.MapExtender; } }
-        
         public override void Execute()
         {
-            switch (TheMap[Player.X, Player.Y])
+            var tile = DungeonAdapter.TileAt(Player.X, Player.Y);
+            switch (tile)
             {
-                case 0x11:
+                case DungeonTile.CeilingHole:
                     if (Player.DungeonLevel == 0)
                     {
                         TextArea.PrintLine("\n\nYou climb out of the dungeon.");
@@ -38,7 +37,7 @@ namespace ERY.Xle.Maps.Dungeons
                     }
                     break;
 
-                case 0x12:
+                case DungeonTile.FloorHole:
                     Player.DungeonLevel++;
                     break;
 
@@ -53,15 +52,13 @@ namespace ERY.Xle.Maps.Dungeons
 
         private void OnPlayerExitDungeon()
         {
-            Map.OnPlayerExitDungeon();
+            DungeonAdapter.OnPlayerExitDungeon();
         }
 
         private void DungeonLevelText()
         {
-            Map.CurrentLevel = Player.DungeonLevel;
-
-            if (TheMap[Player.X, Player.Y] == 0x21) TheMap[Player.X, Player.Y] = 0x11;
-            if (TheMap[Player.X, Player.Y] == 0x22) TheMap[Player.X, Player.Y] = 0x12;
+            DungeonAdapter.OnCurrentLevelChanged();
+            DungeonAdapter.RevealTrapAt(Player.Location);
 
             TextArea.PrintLine("\n\nYou are now at level " + (Player.DungeonLevel + 1).ToString() + ".", XleColor.White);
         }

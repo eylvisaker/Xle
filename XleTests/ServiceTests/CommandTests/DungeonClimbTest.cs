@@ -19,10 +19,13 @@ namespace ERY.XleTests.ServiceTests.CommandTests
         Player player;
         GameState gameState;
         Mock<DungeonExtender> map;
+        Mock<IDungeonAdapter> adapter;
         Dungeon mapData;
 
         public DungeonClimbTest()
         {
+            adapter = new Mock<IDungeonAdapter>();
+
             mapData = new Dungeon();
             mapData.SetLevels(8);
             mapData.InitializeMap(16, 16);
@@ -35,6 +38,7 @@ namespace ERY.XleTests.ServiceTests.CommandTests
             gameState = new GameState { Player = player, MapExtender = map.Object };
 
             climb = new DungeonClimb();
+            climb.DungeonAdapter = adapter.Object;
             climb.GameControl = Services.GameControl.Object;
             climb.MapChanger = Services.MapChanger.Object;
             climb.TextArea = Services.TextArea.Object;
@@ -44,8 +48,8 @@ namespace ERY.XleTests.ServiceTests.CommandTests
         [TestMethod]
         public void ClimbDown()
         {
-            player.Location = new Point(4, 4);
-            mapData[4, 4] = 0x12;
+            Player.Location = new Point(4, 4);
+            adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.FloorHole);
 
             player.DungeonLevel = 0;
 
@@ -57,8 +61,8 @@ namespace ERY.XleTests.ServiceTests.CommandTests
         [TestMethod]
         public void ClimbUp()
         {
-            player.Location = new Point(4, 4);
-            mapData[4, 4] = 0x11;
+            Player.Location = new Point(4, 4);
+            adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.CeilingHole);
 
             player.DungeonLevel = 2;
 
@@ -70,17 +74,17 @@ namespace ERY.XleTests.ServiceTests.CommandTests
         [TestMethod]
         public void ClimbOut()
         {
-            player.Location = new Point(4, 4);
-            mapData[4, 4] = 0x11;
+            Player.Location = new Point(4, 4);
+            adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.CeilingHole);
 
             player.DungeonLevel = 0;
 
             Services.MapChanger.Setup(x => x.ReturnToPreviousMap()).Verifiable();
-            map.Setup(x => x.OnPlayerExitDungeon()).Verifiable();
+            adapter.Setup(x => x.OnPlayerExitDungeon()).Verifiable();
 
             climb.Execute();
 
-            map.Verify();
+            adapter.Verify();
             Services.MapChanger.Verify();
         }
     }

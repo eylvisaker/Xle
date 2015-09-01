@@ -23,9 +23,6 @@ namespace ERY.Xle.Maps.Dungeons.Commands
 
         public IXamineFormatter XamineFormatter { get; set; }
 
-        DungeonExtender Dungeon { get { return (DungeonExtender)GameState.MapExtender; } }
-        Dungeon Map { get { return (Dungeon)GameState.Map; } }
-
         public override void Execute()
         {
             SoundMan.PlaySound(LotaSound.Xamine);
