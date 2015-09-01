@@ -221,8 +221,10 @@
     <Compile Include="XleEventTypes\SpeakToPerson.cs" />
     <Compile Include="XleEventTypes\Extenders\TreasureChestExtender.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\BuybackImplementation\BuybackFormatter.cs" />
+    <Compile Include="XleEventTypes\Stores\Extenders\BuybackImplementation\BuybackNegotiator.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\BuybackImplementation\BuybackOfferWindow.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\BuybackImplementation\IBuybackFormatter.cs" />
+    <Compile Include="XleEventTypes\Stores\Extenders\BuybackImplementation\IBuybackNegotiator.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\BuybackImplementation\IBuybackOfferWindow.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\BuybackImplementation\StoreBuyback.cs" />
     <Compile Include="XleEventTypes\Stores\Extenders\StoreEquipmentExtender.cs" />

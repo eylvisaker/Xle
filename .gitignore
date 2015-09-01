@@ -5,3 +5,4 @@ XLE.sln.ide/
 packages/
 *.user
 *.suo
+*.coverage
