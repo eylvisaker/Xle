@@ -15,12 +15,6 @@ namespace ERY.Xle.Maps
         int guardAnimFrame;
 
         List<Guard> mGuards = new List<Guard>();
-        private Random random;
-
-        public GuardList()
-        {
-        }
-
 
         void IXleSerializable.WriteData(XleSerializationInfo info)
         {
@@ -126,7 +120,6 @@ namespace ERY.Xle.Maps
                     guard.Color = XleColor.Yellow;
             }
         }
-
 
         public int IndexOf(Guard item)
         {
