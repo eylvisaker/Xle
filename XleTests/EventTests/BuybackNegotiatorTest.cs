@@ -1,5 +1,5 @@
 ﻿using ERY.Xle;
-using ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation;
+using ERY.Xle.XleEventTypes.Stores.Buyback;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;

@@ -1,7 +1,7 @@
 ﻿using ERY.Xle.Services;
 using System;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation
+namespace ERY.Xle.XleEventTypes.Stores.Buyback
 {
     public interface IBuybackNegotiator : IXleService
     {

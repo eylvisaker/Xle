@@ -1,12 +1,12 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.ScreenModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ERY.Xle.Data;
+using ERY.Xle.Services.ScreenModel;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace ERY.Xle.XleEventTypes.Stores.Buyback
 {
     public class BuybackFormatter : IBuybackFormatter
     {

@@ -1,6 +1,6 @@
 ﻿using ERY.Xle.Services;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation
+namespace ERY.Xle.XleEventTypes.Stores.Buyback
 {
     public interface IBuybackOfferWindow : IXleService
     {

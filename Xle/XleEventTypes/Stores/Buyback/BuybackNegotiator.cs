@@ -1,15 +1,14 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ERY.Xle.Data;
+using ERY.Xle.Services.Game;
+using ERY.Xle.Services.Menus;
+using ERY.Xle.Services.XleSystem;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation
+namespace ERY.Xle.XleEventTypes.Stores.Buyback
 {
     public class BuybackNegotiator : IBuybackNegotiator
     {

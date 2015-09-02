@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AgateLib.Geometry;
-
 using ERY.Xle.Data;
-using ERY.Xle.Services;
 using ERY.Xle.Services.Menus;
-using ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation;
+using ERY.Xle.XleEventTypes.Stores.Extenders;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace ERY.Xle.XleEventTypes.Stores.Buyback
 {
     public class StoreBuyback : StoreFront
     {

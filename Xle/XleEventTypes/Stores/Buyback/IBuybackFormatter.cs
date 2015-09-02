@@ -1,6 +1,6 @@
 ﻿using ERY.Xle.Services;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace ERY.Xle.XleEventTypes.Stores.Buyback
 {
     public interface IBuybackFormatter : IXleService
     {

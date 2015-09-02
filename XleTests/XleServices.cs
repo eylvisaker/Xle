@@ -17,8 +17,7 @@ using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
-using ERY.Xle.XleEventTypes.Stores.Extenders;
-using ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation;
+using ERY.Xle.XleEventTypes.Stores.Buyback;
 using Moq;
 
 namespace ERY.XleTests
