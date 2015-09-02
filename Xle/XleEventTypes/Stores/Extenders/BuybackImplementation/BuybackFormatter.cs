@@ -58,5 +58,10 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             TextArea.PrintLine("Select (0 to cancel)");
             TextArea.PrintLine();
         }
+
+        public void ClearTextArea()
+        {
+            TextArea.Clear();
+        }
     }
 }

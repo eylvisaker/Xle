@@ -13,12 +13,16 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation
 {
     public class BuybackNegotiator : IBuybackNegotiator
     {
+        public BuybackNegotiator()
+        {
+            Redraw = () => { };
+        }
+
         public IBuybackFormatter BuybackFormatter { get; set; }
         public IBuybackOfferWindow OfferWindow { get; set; }
         public INumberPicker NumberPicker { get; set; }
-        public IQuickMenu QuickMenuService { get; set; }
+        public IQuickMenu QuickMenu { get; set; }
         public IXleGameControl GameControl { get; set; }
-        public ITextArea TextArea { get; set; }
         public ISoundMan SoundMan { get; set; }
         public GameState GameState { get; set; }
         public XleData Data { get; set; }
@@ -154,7 +158,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation
 
         private int GetAskingPrice()
         {
-            TextArea.Clear();
+            BuybackFormatter.ClearTextArea();
 
             return NumberPicker.ChooseNumber(32767);
         }
@@ -163,7 +167,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation
         {
             BuybackFormatter.Offer(item, offer, finalOffer);
 
-            return QuickMenuService.QuickMenuYesNo(true);
+            return QuickMenu.QuickMenuYesNo(true);
         }
 
         private bool IsAskWayTooHigh(double ask, int offer, int maxAccept)

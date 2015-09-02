@@ -96,6 +96,7 @@
     <Compile Include="ColorSchemeTests.cs" />
     <Compile Include="Commands\DungeonOpenTest.cs" />
     <Compile Include="Commands\DungeonXamineTest.cs" />
+    <Compile Include="EventTests\BuybackNegotiatorTest.cs" />
     <Compile Include="Fakes\FakeMap.cs" />
     <Compile Include="LegacyOfTheAncients\CasandraTest.cs" />
     <Compile Include="LegacyOfTheAncients\Fortress\FortressFinalMagicIceTest.cs" />

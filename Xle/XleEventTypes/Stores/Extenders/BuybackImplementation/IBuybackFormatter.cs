@@ -10,5 +10,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         void CompleteSale(Equipment item, int amount);
         void SeeYouLater();
         void InitialMenuPrompt();
+        void ClearTextArea();
     }
 }

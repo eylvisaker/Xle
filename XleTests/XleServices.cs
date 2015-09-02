@@ -17,7 +17,8 @@ using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
-
+using ERY.Xle.XleEventTypes.Stores.Extenders;
+using ERY.Xle.XleEventTypes.Stores.Extenders.BuybackImplementation;
 using Moq;
 
 namespace ERY.XleTests
@@ -60,6 +61,8 @@ namespace ERY.XleTests
             MapLoader = new Mock<IMapLoader>();
             MapLoader.SetupAllProperties();
 
+            NumberPicker = new Mock<INumberPicker>();
+            NumberPicker.SetupAllProperties();
             GameControl = new Mock<IXleGameControl>();
             GameControl.SetupAllProperties();
 
@@ -78,6 +81,12 @@ namespace ERY.XleTests
 
             StatsDisplay = new Mock<IStatsDisplay>();
             StatsDisplay.SetupAllProperties();
+
+            BuybackFormatter = new Mock<IBuybackFormatter>();
+            BuybackFormatter.SetupAllProperties();
+
+            BuybackOfferWindow = new Mock<IBuybackOfferWindow>();
+            BuybackOfferWindow.SetupAllProperties();
 
             Data = new XleData();
             InitializeData();
@@ -127,6 +136,9 @@ namespace ERY.XleTests
         public string TextAreaText { get; set; }
 
         public List<KeyCode> KeysToSend { get; set; }
+        public Mock<IBuybackFormatter> BuybackFormatter { get; set; }
+        public Mock<IBuybackOfferWindow> BuybackOfferWindow { get; internal set; }
+        public Mock<INumberPicker> NumberPicker { get; internal set; }
 
         private void InitializeData()
         {
