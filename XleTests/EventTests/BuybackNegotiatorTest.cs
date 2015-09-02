@@ -151,5 +151,100 @@ namespace ERY.XleTests.EventTests
             Assert.AreEqual(playerGold, Player.Gold);
             Services.BuybackFormatter.Verify(x => x.ComeBackWhenSerious(), Times.Once);
         }
+
+        [TestMethod]
+        public void GradualNegotiation()
+        {
+            int initialOffer = 0;
+            int ask = 0;
+            int offer = 0;
+            int playerGold = Player.Gold;
+            bool finalOffer = false;
+
+            Services.BuybackFormatter
+                .Setup(x => x.Offer(eq, It.IsAny<int>(), It.IsAny<bool>()))
+                .Callback<Equipment, int, bool>((e, o, fo) =>
+                {
+                    finalOffer = fo;
+                    offer = o;
+                    if (initialOffer == 0)
+                        initialOffer = offer;
+                });
+
+            Services.QuickMenu.Setup(x => x.QuickMenuYesNo(true))
+                .Returns(() =>
+                {
+                    if (offer > ask - 5 && finalOffer)
+                        return 0;
+                    else
+                        return 1;
+                });
+
+            Services.NumberPicker
+                .Setup(x => x.ChooseNumber(It.IsAny<int>()))
+                .Returns(() =>
+                {
+                    int newAsk = Math.Max(ask - 5, offer + 2);
+
+                    if (ask == 0)
+                        newAsk = initialOffer * 3;
+                    else if (newAsk >= ask)
+                        newAsk = ask - 1;
+
+                    ask = newAsk;
+                    return newAsk;
+                });
+
+            negotiator.NegotiatePrice(eq);
+
+            Assert.AreNotEqual(0, offer);
+            Assert.AreNotEqual(0, ask);
+            Assert.IsTrue((
+                playerGold + offer == Player.Gold ||
+                playerGold + ask == Player.Gold) &&
+                Math.Abs(ask - offer) < 10);
+        }
+
+        [TestMethod]
+        public void IncreaseAskPrice()
+        {
+            int initialOffer = 0;
+            int ask = 0;
+            int offer = 0;
+            int playerGold = Player.Gold;
+            bool finalOffer = false;
+
+            Services.BuybackFormatter
+                .Setup(x => x.Offer(eq, It.IsAny<int>(), It.IsAny<bool>()))
+                .Callback<Equipment, int, bool>((e, o, fo) =>
+                {
+                    finalOffer = fo;
+                    offer = o;
+                    if (initialOffer == 0)
+                        initialOffer = offer;
+                });
+
+            Services.QuickMenu.Setup(x => x.QuickMenuYesNo(true))
+                .Returns(1);
+
+            Services.NumberPicker
+                .Setup(x => x.ChooseNumber(It.IsAny<int>()))
+                .Returns(() =>
+                {
+                    int newAsk = ask + 1;
+
+                    if (ask == 0)
+                        newAsk = initialOffer * 3;
+
+                    ask = newAsk;
+                    return newAsk;
+                });
+
+            negotiator.NegotiatePrice(eq);
+
+            Assert.AreNotEqual(0, offer);
+            Assert.AreNotEqual(0, ask);
+            Assert.AreEqual(playerGold, Player.Gold);
+        }
     }
 }
