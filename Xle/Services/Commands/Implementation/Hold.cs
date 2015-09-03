@@ -6,16 +6,11 @@ namespace ERY.Xle.Services.Commands.Implementation
 {
     public class Hold : Command
     {
-        public XleData Data { get; set; }
-        public IXleSubMenu SubMenu { get; set; }
+        public IItemChooser ItemChooser { get; set; }
 
         public override void Execute()
         {
-            Use.ChooseHeldItem(
-                TextArea, 
-                Data, 
-                GameState.Player, 
-                SubMenu);
+            Player.Hold = ItemChooser.ChooseItem();
         }
     }
 }

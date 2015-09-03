@@ -17,6 +17,8 @@ namespace ERY.Xle.Services.Commands.Implementation
             ShowItemMenu = showItemMenu;
         }
 
+        public IEventInteractor EventInteractor { get; set; }
+        public IItemChooser ItemChooser { get; set; }
         public IXleGameControl GameControl { get; set; }
         public IStatsDisplay StatsDisplay { get; set; }
         public ISoundMan SoundMan { get; set; }
@@ -35,7 +37,7 @@ namespace ERY.Xle.Services.Commands.Implementation
         public override void Execute()
         {
             if (ShowItemMenu)
-                ChooseHeldItem(TextArea, Data, GameState.Player, SubMenu);
+                Player.Hold = ItemChooser.ChooseItem();
             else
                 TextArea.PrintLine();
 
@@ -74,47 +76,6 @@ namespace ERY.Xle.Services.Commands.Implementation
             return false;
         }
 
-        public static void ChooseHeldItem(
-            ITextArea textArea,
-            XleData data,
-            Player player,
-            IXleSubMenu subMenu
-            )
-        {
-            textArea.PrintLine("-choose above", XleColor.Cyan);
-            MenuItemList theList = new MenuItemList();
-            int value = 0;
-
-            theList.Add("Nothing");
-
-            foreach (int i in from kvp in data.ItemList
-                              where player.Items[kvp.Key] > 0 &&
-                              data.MagicSpells.Values.All(
-                                  x => x.ItemID != kvp.Key)
-                              select kvp.Key)
-            {
-                string itemName = data.ItemList[i].Name;
-
-                if (itemName.Contains("coin"))
-                    continue;
-
-                /*
-                if (i == 9)			// mail
-                {
-                    itemName = XleCore.GetMapName(state.Player.mailTown) + " " + itemName;
-                }*/
-
-                if (i <= player.Hold)
-                {
-                    value++;
-                }
-
-                theList.Add(itemName);
-            }
-
-            player.HoldMenu(subMenu.SubMenu("Hold Item", value, theList));
-        }
-
         protected abstract bool UseHealingItem(int itemID);
 
         protected void ApplyHealingEffect()
@@ -132,7 +93,6 @@ namespace ERY.Xle.Services.Commands.Implementation
             TextArea.PrintLine("No effect");
         }
 
-
         /// <summary>
         /// Returns true if there was an effect of using the item.
         /// </summary>
@@ -141,13 +101,8 @@ namespace ERY.Xle.Services.Commands.Implementation
         /// <returns></returns>
         protected bool UseWithEvent(int item)
         {
-            foreach (var evt in MapExtender.EventsAt(1))
-            {
-                if (evt.Use(item))
-                    return true;
-            }
+            return EventInteractor.InteractWithFirstEvent(evt => evt.Use(item));
 
-            return false;
         }
     }
 }

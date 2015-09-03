@@ -660,35 +660,6 @@ namespace ERY.Xle
                 }
             }
         }
-        /// <summary>
-        /// Sets the item that is currently being held.
-        /// </summary>
-        /// <param name="h">The value of the menu selection chosen.</param>
-        /// <returns></returns>
-        public int HoldMenu(int h)
-        {
-            int i;
-
-            if (h != 0)
-            {
-                for (i = 1; i <= h && h < 30; i++)
-                {
-                    if (Items[i] == 0)
-                    {
-                        h++;
-                    }
-
-                }
-            }
-
-            if (h < 30)
-            {
-                hold = h;
-            }
-
-            return hold;
-
-        }
 
         public WeaponItem CurrentWeapon
         {

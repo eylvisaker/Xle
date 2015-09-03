@@ -91,6 +91,9 @@
     <Compile Include="Maps\Towns\TownMagic.cs" />
     <Compile Include="Maps\Towns\TownSpeak.cs" />
     <Compile Include="Services\Commands\ICommand.cs" />
+    <Compile Include="Services\Commands\Implementation\EventInteractor.cs" />
+    <Compile Include="Services\Commands\Implementation\IEventInteractor.cs" />
+    <Compile Include="Services\Commands\Implementation\ItemChooser.cs" />
     <Compile Include="Services\Commands\Implementation\MagicWithFancyPrompt.cs" />
     <Compile Include="Services\Rendering\Maps\CastleRenderer.cs" />
     <Compile Include="Services\Rendering\Maps\TempleRenderer.cs" />
