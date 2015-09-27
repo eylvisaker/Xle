@@ -110,7 +110,6 @@
     <Compile Include="LegendOfBlacksilver\ArmanTest.cs" />
     <Compile Include="LegendOfBlacksilver\LobTest.cs" />
     <Compile Include="LegacyOfTheAncients\MuseumExhibitLevelUpTests.cs" />
-    <Compile Include="ServiceTests\CommandTests\ClimbTest.cs" />
     <Compile Include="ServiceTests\EquipmentPickerTest.cs" />
     <Compile Include="ServiceTests\MapChangerTest.cs" />
     <Compile Include="ServiceTests\CommandTests\DungeonClimbTest.cs" />
