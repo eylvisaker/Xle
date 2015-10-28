@@ -48,7 +48,7 @@ namespace ERY.XleTests.ServiceTests.CommandTests
         [TestMethod]
         public void ClimbDown()
         {
-            Player.Location = new Point(4, 4);
+            player.Location = new Point(4, 4);
             adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.FloorHole);
 
             player.DungeonLevel = 0;
@@ -61,7 +61,7 @@ namespace ERY.XleTests.ServiceTests.CommandTests
         [TestMethod]
         public void ClimbUp()
         {
-            Player.Location = new Point(4, 4);
+            player.Location = new Point(4, 4);
             adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.CeilingHole);
 
             player.DungeonLevel = 2;
@@ -74,7 +74,7 @@ namespace ERY.XleTests.ServiceTests.CommandTests
         [TestMethod]
         public void ClimbOut()
         {
-            Player.Location = new Point(4, 4);
+            player.Location = new Point(4, 4);
             adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.CeilingHole);
 
             player.DungeonLevel = 0;
