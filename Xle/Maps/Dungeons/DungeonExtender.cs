@@ -88,6 +88,7 @@ namespace ERY.Xle.Maps.Dungeons
 
         public override void CheckSounds()
         {
+            // Used by LOTA to play the dungeon drip sounds.
         }
 
         public virtual DungeonMonster GetMonsterToSpawn()
