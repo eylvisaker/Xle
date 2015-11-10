@@ -29,6 +29,8 @@ namespace ERY.Xle.LoB.MapExtenders.Dungeon
 
         public override void OnLoad()
         {
+            base.OnLoad();
+
             if (Story.RescuedKing)
             {
                 OpenEscapeRoute();

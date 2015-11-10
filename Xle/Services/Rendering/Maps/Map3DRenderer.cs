@@ -11,43 +11,8 @@ namespace ERY.Xle.Services.Rendering.Maps
 {
     public abstract class Map3DRenderer : XleMapRenderer
     {
-        class TorchAnim
-        {
-            public TorchAnim(Random random)
-            {
-                this.Random = random;
+        private readonly Dictionary<int, TorchAnim> torchAnims = new Dictionary<int, TorchAnim>();
 
-                SetNextAnimTime();
-                AdvanceFrame();
-            }
-
-            public void AdvanceFrame()
-            {
-                if (CurrentFrame == 3 || CurrentFrame == 4)
-                {
-                    CurrentFrame++;
-                }
-                else
-                {
-                    int newFrame = CurrentFrame;
-
-                    while (newFrame == CurrentFrame)
-                        newFrame = Random.Next(77) / 25;
-
-                    CurrentFrame = newFrame;
-                }
-            }
-            public void SetNextAnimTime()
-            {
-                NextAnimTime = Random.Next(100, 125);
-            }
-
-            public double NextAnimTime;
-            public int CurrentFrame;
-            private Random Random;
-        }
-
-        Dictionary<int, TorchAnim> torchAnims = new Dictionary<int, TorchAnim>();
         protected int exhibitFrame { get; private set; }
         double exhibitAnimTime;
         const double exhibitFrameTime = 50;
