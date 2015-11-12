@@ -14,6 +14,7 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 {
     public class LobBaseOutside : OutsideExtender
     {
+
         public override void SetCommands(ICommandList commands)
         {
             commands.Items.AddRange(LobProgram.CommonLobCommands);

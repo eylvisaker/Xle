@@ -20,6 +20,7 @@ namespace ERY.Xle.Maps.Outdoors
     [ServiceName("OutsideSpeak")]
     public class OutsideSpeak : Speak
     {
+        public IOutsideEncounters Encounters { get; set; }
         public IStatsDisplay StatsDisplay { get; set; }
         public IXleGameControl GameControl { get; set; }
         public Random Random { get; set; }
@@ -49,7 +50,7 @@ namespace ERY.Xle.Maps.Outdoors
             if (!outside.IsMonsterFriendly)
             {
                 TextArea.PrintLine();
-                TextArea.PrintLine("The " + outside.MonstName + " does not reply.");
+                TextArea.PrintLine("The " + Encounters.MonsterName + " does not reply.");
 
                 GameControl.Wait(250);
 

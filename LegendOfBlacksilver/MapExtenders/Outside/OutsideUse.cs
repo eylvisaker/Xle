@@ -17,9 +17,10 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
             {
                 case LobItem.ClimbingGear:
                     return true;
-            }
 
-            return false;
+                default:
+                    return false;
+            }
         }
     }
 }

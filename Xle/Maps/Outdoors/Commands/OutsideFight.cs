@@ -14,6 +14,8 @@ namespace ERY.Xle.Maps.Outdoors.Commands
     [ServiceName("OutsideFight")]
     public class OutsideFight : Fight
     {
+        public IOutsideEncounters Encounters { get; set; }
+
         OutsideExtender map { get { return (OutsideExtender)GameState.MapExtender; } }
         OutsideRenderer MapRenderer
         {
@@ -22,32 +24,29 @@ namespace ERY.Xle.Maps.Outdoors.Commands
 
         EncounterState EncounterState
         {
-            get { return map.EncounterState; }
-            set { map.EncounterState = value; }
+            get { return Encounters.EncounterState; }
         }
 
         bool IsMonsterFriendly
         {
-            get { return map.IsMonsterFriendly; }
-            set { map.IsMonsterFriendly = value; }
+            get { return Encounters.IsMonsterFriendly; }
+            set { Encounters.IsMonsterFriendly = value; }
         }
 
         string MonstName
         {
-            get { return map.MonstName; }
+            get { return Encounters.MonsterName; }
         }
 
         List<Monster> currentMonst
         {
-            get { return map.CurrentMonsters; }
+            get { return Encounters.CurrentMonsters; }
         }
 
         int monstCount
         {
-            get { return map.monstCount; }
-            set { map.monstCount = value; }
+            get { return Encounters.CurrentMonsters.Count; }
         }
-        int initMonstCount { get { return map.initMonstCount; } }
 
         public override void Execute()
         {
@@ -78,7 +77,7 @@ namespace ERY.Xle.Maps.Outdoors.Commands
 
                 SoundMan.PlaySound(LotaSound.PlayerHit);
 
-                HitMonster(dam);
+                Encounters.HitMonster(dam);
             }
             else if (EncounterState > 0)
             {
@@ -93,123 +92,6 @@ namespace ERY.Xle.Maps.Outdoors.Commands
             }
 
             return;
-        }
-        private void HitMonster(int dam)
-        {
-            TextArea.Print("Enemy hit by blow of ", XleColor.White);
-            TextArea.Print(dam.ToString(), XleColor.Cyan);
-            TextArea.Print(".", XleColor.White);
-            TextArea.PrintLine();
-
-            GameControl.Wait(250 + 100 * Player.Gamespeed, keyBreak: true);
-
-            currentMonst[monstCount - 1].HP -= dam;
-
-            if (KilledOne())
-            {
-                GameControl.Wait(250);
-
-                SoundMan.PlaySound(LotaSound.EnemyDie);
-
-                TextArea.PrintLine();
-                TextArea.PrintLine("the " + MonstName + " dies.");
-
-                int gold, food;
-                bool finished = FinishedCombat(out gold, out food);
-
-                GameControl.Wait(250 + 150 * Player.Gamespeed);
-
-                if (finished)
-                {
-                    TextArea.PrintLine();
-
-                    if (food > 0)
-                    {
-                        MenuItemList menu = new MenuItemList("Yes", "No");
-                        int choice;
-
-                        TextArea.PrintLine("Would you like to use the");
-                        TextArea.PrintLine(MonstName + "'s flesh for food?");
-                        TextArea.PrintLine();
-
-                        choice = QuickMenu.QuickMenu(menu, 3, 0);
-
-                        if (choice == 1)
-                            food = 0;
-                        else
-                        {
-                            TextArea.Print("You gain ", XleColor.White);
-                            TextArea.Print(food.ToString(), XleColor.Green);
-                            TextArea.Print(" days of food.", XleColor.White);
-                            TextArea.PrintLine();
-
-                            Player.Food += food;
-                        }
-
-                    }
-
-
-                    if (gold < 0)
-                    {
-                        // gain weapon or armor
-                    }
-                    else if (gold > 0)
-                    {
-                        TextArea.Print("You find ", XleColor.White);
-                        TextArea.Print(gold.ToString(), XleColor.Yellow);
-                        TextArea.Print(" gold.", XleColor.White);
-                        TextArea.PrintLine();
-
-                        Player.Gold += gold;
-                    }
-
-                    GameControl.Wait(400 + 100 * Player.Gamespeed);
-                }
-            }
-        }
-
-        bool FinishedCombat(out int gold, out int food)
-        {
-            bool finished = false;
-
-            gold = 0;
-            food = 0;
-
-            if (monstCount == 0)
-            {
-                finished = true;
-
-
-                for (int i = 0; i < initMonstCount; i++)
-                {
-                    gold += currentMonst[i].Gold;
-                    food += currentMonst[i].Food;
-
-                }
-
-                gold = (int)(gold * (Random.NextDouble() + 0.5));
-                food = (int)(food * (Random.NextDouble() + 0.5));
-
-                if (Random.Next(100) < 50)
-                    food = 0;
-
-                EncounterState = 0;
-                MapRenderer.DisplayMonsterID = -1;
-            }
-
-            return finished;
-        }
-        bool KilledOne()
-        {
-            if (currentMonst[monstCount - 1].HP <= 0)
-            {
-                monstCount--;
-
-                return true;
-
-            }
-
-            return false;
         }
 
         int attack()

@@ -86,6 +86,10 @@
     <Compile Include="Maps\Outdoors\Commands\OutsideMagic.cs" />
     <Compile Include="Maps\Outdoors\Commands\OutsideSpeak.cs" />
     <Compile Include="Maps\Outdoors\Commands\OutsideXamine.cs" />
+    <Compile Include="Maps\Outdoors\IOutsideEncounters.cs" />
+    <Compile Include="Maps\Outdoors\ITerrainMeasurement.cs" />
+    <Compile Include="Maps\Outdoors\OutsideEncounters.cs" />
+    <Compile Include="Maps\Outdoors\TerrainMeasurement.cs" />
     <Compile Include="Maps\Towns\FightAgainstGuard.cs" />
     <Compile Include="Maps\Towns\TownLeave.cs" />
     <Compile Include="Maps\Towns\TownMagic.cs" />

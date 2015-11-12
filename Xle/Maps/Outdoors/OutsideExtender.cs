@@ -27,23 +27,16 @@ namespace ERY.Xle.Maps.Outdoors
 
         public EncounterState EncounterState { get; set; }
         public bool IsMonsterFriendly { get; set; }
-        public IMuseumCoinSale MuseumCoinSale { get; set; }
-        public XleOptions Options { get; set; }
-        public IStatsDisplay StatsDisplay { get; set; }
-        public IXleScreen Screen { get; set; }
-        public XleSystemState systemState { get; set; }
+        public XleSystemState SystemState { get; set; }
+        public ITerrainMeasurement TerrainMeasurement { get; set; }
+        public IOutsideEncounters OutsideEncounters { get; set; }
 
         public new Outside TheMap { get { return (Outside)base.TheMap; } }
         public new OutsideRenderer MapRenderer
         {
             get { return (OutsideRenderer)base.MapRenderer; }
         }
-
-        public List<Monster> CurrentMonsters
-        {
-            get { return currentMonst; } 
-        } 
-
+        
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.OutsideRenderer(this);
@@ -143,7 +136,6 @@ namespace ERY.Xle.Maps.Outdoors
             return 0;
         }
         
-
         public override void SetColorScheme(ColorScheme scheme)
         {
             scheme.TextColor = XleColor.White;
@@ -157,318 +149,7 @@ namespace ERY.Xle.Maps.Outdoors
         public virtual void ModifyTerrainInfo(TerrainInfo info, TerrainType terrain)
         {
         }
-
-        private bool InEncounter
-        {
-            get
-            {
-                switch (EncounterState)
-                {
-                    case EncounterState.MonsterAppeared:
-                    case EncounterState.MonsterReady:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        }
-
-        public string MonstName
-        {
-            get { return currentMonst[0].Name; }
-        }
-
-        int attack()
-        {
-            int damage = PlayerHit(currentMonst[monstCount - 1].Defense);
-
-            if (currentMonst[monstCount - 1].Vulnerability > 0)
-            {
-                if (Player.CurrentWeapon.ID == currentMonst[monstCount - 1].Vulnerability)
-                {
-                    damage += Random.Next(11) + 20;
-                }
-                else
-                {
-                    damage = 1 + Random.Next((damage < 10) ? damage : 10);
-                }
-            }
-            IsMonsterFriendly = false;
-
-            return damage;
-        }
-
-        /// <summary>
-        /// Player damages a creature. Returns the amount of damage the player did,
-        /// or zero if the player missed.
-        /// </summary>
-        /// <param name="defense"></param>
-        /// <returns></returns>
-        private int PlayerHit(int defense)
-        {
-            int wt = Player.CurrentWeapon.ID;
-            int qt = Player.CurrentWeapon.Quality;
-
-            int dam = Player.Attribute[Attributes.strength] - 12;
-            dam += (int)(wt * (qt + 2)) / 2;
-
-            dam = (int)(dam * Random.Next(30, 150) / 100.0 + 0.5);
-            dam += Random.Next(-2, 3);
-
-            if (dam < 3)
-                dam = 1 + Random.Next(3);
-
-            int hit = Player.Attribute[Attributes.dexterity] * 8 + 15 * qt;
-
-            System.Diagnostics.Debug.WriteLine("Hit: " + hit.ToString() + " Dam: " + dam.ToString());
-
-            hit -= Random.Next(400);
-
-            if (hit < 0)
-                dam = 0;
-
-            //return 100;
-            return dam;
-        }
-
-        bool KilledOne()
-        {
-            if (currentMonst[monstCount - 1].HP <= 0)
-            {
-                monstCount--;
-
-                return true;
-
-            }
-
-            return false;
-        }
-
-        bool FinishedCombat(out int gold, out int food)
-        {
-            bool finished = false;
-
-            gold = 0;
-            food = 0;
-
-            if (monstCount == 0)
-            {
-                finished = true;
-
-
-                for (int i = 0; i < initMonstCount; i++)
-                {
-                    gold += currentMonst[i].Gold;
-                    food += currentMonst[i].Food;
-
-                }
-
-                gold = (int)(gold * (Random.NextDouble() + 0.5));
-                food = (int)(food * (Random.NextDouble() + 0.5));
-
-                if (Random.Next(100) < 50)
-                    food = 0;
-
-                EncounterState = 0;
-                MapRenderer.DisplayMonsterID = -1;
-            }
-
-            return finished;
-        }
-
-        private void StartEncounter()
-        {
-            currentMonst.Clear();
-            IsMonsterFriendly = false;
-
-            int type = Random.Next(0, 15);
-
-            if (type < 10)
-            {
-                SetMonsterImagePosition();
-
-                EncounterState = EncounterState.UnknownCreatureApproaching;
-                SoundMan.PlaySound(LotaSound.Encounter);
-
-                TextArea.PrintLine();
-                TextArea.PrintLine("An unknown creature is approaching ", XleColor.Cyan);
-                TextArea.PrintLine("from the " + monstDir.ToString() + ".", XleColor.Cyan);
-
-                GameControl.Wait(1000);
-            }
-            else if (type < 15)
-            {
-                EncounterState = EncounterState.CreatureAppearing;
-
-                //GameControl.Wait(1000);
-            }
-        }
-
-        private void SetNextEncounterStepCount()
-        {
-            stepCountToEncounter = Random.Next(1, 40);
-        }
-
-        private void MonsterAppearing()
-        {
-            if (Random.Next(100) < 55)
-                EncounterState = EncounterState.MonsterAppeared;
-            else
-                EncounterState = EncounterState.MonsterReady;
-
-            SoundMan.PlaySound(LotaSound.Encounter);
-
-            MapRenderer.DisplayMonsterID = SelectRandomMonster(TerrainAt(Player.X, Player.Y));
-
-            if (monstDir == Direction.None)
-                SetMonsterImagePosition();
-
-            int max = 1;
-            initMonstCount = monstCount = 1 + Random.Next(max);
-
-            for (int i = 0; i < monstCount; i++)
-            {
-                var m = new Monster(Data.MonsterInfoList.First(x => x.ID == MapRenderer.DisplayMonsterID));
-
-                m.HP = (int)(m.HP * (Random.NextDouble() * 0.4 + 0.8));
-
-                currentMonst.Add(m);
-            }
-
-            if (Random.Next(256) <= currentMonst[0].Friendly)
-                IsMonsterFriendly = true;
-            else
-                IsMonsterFriendly = false;
-
-            GameControl.Wait(500);
-        }
-
-        private void AvoidMonster()
-        {
-            TextArea.PrintLine();
-            TextArea.PrintLine("You avoid the unknown creature.");
-
-            EncounterState = EncounterState.NoEncounter;
-
-            GameControl.Wait(250);
-        }
-
-        private void MonsterAppeared()
-        {
-            GameControl.Wait(500);
-
-            Color[] colors = new Color[40];
-            string plural = (monstCount > 1) ? "s" : "";
-
-            for (int i = 0; i < 40; i++)
-                colors[i] = XleColor.Cyan;
-
-            colors[0] = XleColor.White;
-
-            EncounterState = EncounterState.MonsterReady;
-
-            TextArea.PrintLine();
-            TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name + plural, colors);
-
-            colors[0] = XleColor.Cyan;
-            TextArea.PrintLine("is approaching.", colors);
-
-            GameControl.Wait(1000);
-        }
-
-        private void MonsterTurn(bool firstTime)
-        {
-            GameControl.Wait(500);
-
-            if (IsMonsterFriendly)
-            {
-                Color[] colors = new Color[40];
-
-                for (int i = 0; i < 40; i++)
-                    colors[i] = XleColor.Cyan;
-                colors[0] = XleColor.White;
-
-                TextArea.PrintLine();
-                TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name, colors);
-                TextArea.PrintLine("Stands before you.");
-
-                GameControl.Wait(1500);
-            }
-            else
-            {
-                TextArea.PrintLine();
-                TextArea.Print("Attacked by ", XleColor.White);
-                TextArea.Print(monstCount.ToString(), XleColor.Yellow);
-                TextArea.Print(" " + currentMonst[0].Name, XleColor.Cyan);
-                TextArea.PrintLine();
-
-                int dam = 0;
-                int hits = 0;
-
-                for (int i = 0; i < monstCount; i++)
-                {
-                    int t = DamagePlayer(currentMonst[i].Attack);
-
-                    if (t > 0)
-                    {
-                        dam += t;
-                        hits++;
-                    }
-                }
-
-                TextArea.Print("Hits:  ", XleColor.White);
-                TextArea.Print(hits.ToString(), XleColor.Yellow);
-                TextArea.Print("   Damage:  ", XleColor.White);
-                TextArea.Print(dam.ToString(), XleColor.Yellow);
-                TextArea.PrintLine();
-
-                if (dam > 0)
-                {
-                    SoundMan.PlaySound(LotaSound.EnemyHit);
-                }
-                else
-                {
-                    SoundMan.PlaySound(LotaSound.EnemyMiss);
-                }
-            }
-
-            GameControl.Wait(250, keyBreak: !firstTime);
-        }
-
-        /// <summary>
-        /// Called when the player gets hit. Returns the damage done to the player and
-        /// subtracts that value from HP.
-        /// </summary>
-        /// <param name="attack"></param>
-        /// <returns></returns>	
-        private int DamagePlayer(int attack)
-        {
-            int dam = (int)(attack - (Player.Attribute[Attributes.endurance] + Player.CurrentArmor.ID) * 0.8);
-
-            dam += (int)(dam * Random.Next(-50, 100) / 100 + 0.5);
-
-            if (dam < 0 || 1 + Random.Next(60) + attack / 15
-                            < Player.Attribute[Attributes.dexterity] + Player.CurrentArmor.Quality)
-            {
-                dam = 0;
-            }
-
-            Player.HP -= dam;
-
-            return dam;
-        }
-
-        private int SelectRandomMonster(TerrainType terrain)
-        {
-            int mCount = 0;
-            var monsters = Data.MonsterInfoList.Where(x => x.Terrain == terrain || x.Terrain == TerrainType.All);
-
-            mCount = monsters.Count();
-
-            return (monsters.Skip(Random.Next(mCount)).First()).ID;
-        }
-
-
+        
         public virtual void UpdateEncounterState(ref bool handled)
         {
         }
@@ -486,7 +167,7 @@ namespace ERY.Xle.Maps.Outdoors
             {
                 TerrainType terrain = TheMap.TerrainAt(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
-                if (InEncounter)
+                if (OutsideEncounters.InEncounter)
                 {
                     SoundMan.PlaySound(LotaSound.Bump);
 
@@ -553,83 +234,9 @@ namespace ERY.Xle.Maps.Outdoors
             }
         }
 
-        public void HitMonster(int dam)
-        {
-            TextArea.Print("Enemy hit by blow of ", XleColor.White);
-            TextArea.Print(dam.ToString(), XleColor.Cyan);
-            TextArea.Print(".", XleColor.White);
-            TextArea.PrintLine();
-
-            GameControl.Wait(250 + 100 * Player.Gamespeed, keyBreak: true);
-
-            currentMonst[monstCount - 1].HP -= dam;
-
-            if (KilledOne())
-            {
-                GameControl.Wait(250);
-
-                SoundMan.PlaySound(LotaSound.EnemyDie);
-
-                TextArea.PrintLine();
-                TextArea.PrintLine("the " + MonstName + " dies.");
-
-                int gold, food;
-                bool finished = FinishedCombat(out gold, out food);
-
-                GameControl.Wait(250 + 150 * Player.Gamespeed);
-
-                if (finished)
-                {
-                    TextArea.PrintLine();
-
-                    if (food > 0)
-                    {
-                        MenuItemList menu = new MenuItemList("Yes", "No");
-                        int choice;
-
-                        TextArea.PrintLine("Would you like to use the");
-                        TextArea.PrintLine(MonstName + "'s flesh for food?");
-                        TextArea.PrintLine();
-
-                        choice = QuickMenu.QuickMenu(menu, 3, 0);
-
-                        if (choice == 1)
-                            food = 0;
-                        else
-                        {
-                            TextArea.Print("You gain ", XleColor.White);
-                            TextArea.Print(food.ToString(), XleColor.Green);
-                            TextArea.Print(" days of food.", XleColor.White);
-                            TextArea.PrintLine();
-
-                            Player.Food += food;
-                        }
-
-                    }
-
-
-                    if (gold < 0)
-                    {
-                        // gain weapon or armor
-                    }
-                    else if (gold > 0)
-                    {
-                        TextArea.Print("You find ", XleColor.White);
-                        TextArea.Print(gold.ToString(), XleColor.Yellow);
-                        TextArea.Print(" gold.", XleColor.White);
-                        TextArea.PrintLine();
-
-                        Player.Gold += gold;
-                    }
-
-                    GameControl.Wait(400 + 100 * Player.Gamespeed);
-                }
-            }
-        }
-
         public TerrainInfo GetTerrainInfo()
         {
-            var terrain = TerrainAt(Player.X, Player.Y);
+            var terrain = TerrainMeasurement.TerrainAtPlayer();
 
             return GetTerrainInfo(terrain);
         }
@@ -728,65 +335,6 @@ namespace ERY.Xle.Maps.Outdoors
             return info;
         }
 
-        public TerrainType TerrainAt(int xx, int yy)
-        {
-            int[,] t = new int[2, 2] { { 0, 0 }, { 0, 0 } };
-            int[] tc = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
-
-            for (int j = 0; j < 2; j++)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    t[j, i] = TheMap[xx + i, yy + j];
-                }
-            }
-
-            for (int j = 0; j < 2; j++)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    tc[t[j, i] / 32]++;
-
-                    if (t[j, i] % 32 <= 1)
-                        tc[t[j, i] / 32] += 1;
-                }
-            }
-
-            if (tc[(int)TerrainType.Mountain] > 4)
-            {
-                return TerrainType.Mountain;
-            }
-
-            if (tc[(int)TerrainType.Mountain] > 0)
-            {
-                return TerrainType.Foothills;
-            }
-
-            if (tc[(int)TerrainType.Desert] >= 1)
-            {
-                return TerrainType.Desert;
-            }
-
-            if (tc[(int)TerrainType.Swamp] > 1)
-            {
-                return TerrainType.Swamp;
-            }
-
-            for (int i = 0; i < 8; i++)
-            {
-                if (tc[i] > 3)
-                {
-                    return (TerrainType)i;
-                }
-                else if (tc[i] == 2 && i != 1)
-                {
-                    return TerrainType.Mixed;
-                }
-            }
-
-            return (TerrainType)2;
-        }
-
         private void UpdateRaftState()
         {
             if (Player.IsOnRaft == false)
@@ -809,59 +357,10 @@ namespace ERY.Xle.Maps.Outdoors
                 raft.Y = Player.Y;
             }
         }
-        private void StepEncounter()
-        {
-            if (Data.MonsterInfoList.Count == 0) return;
-            if (Options.DisableOutsideEncounters) return;
-
-            // bail out if the player entered another map on this step.
-            if (GameState.Map != TheMap)
-                return;
-
-            bool handled = false;
-            UpdateEncounterState(ref handled);
-
-            if (handled)
-                return;
-
-            if (EncounterState == EncounterState.NoEncounter && stepCountToEncounter <= 0)
-            {
-                SetNextEncounterStepCount();
-
-                StartEncounter();
-            }
-            else if (EncounterState == EncounterState.NoEncounter && stepCountToEncounter > 0)
-            {
-                currentMonst.Clear();
-                stepCountToEncounter--;
-            }
-            else if (EncounterState == EncounterState.UnknownCreatureApproaching)
-            {
-                currentMonst.Clear();
-                EncounterState = EncounterState.CreatureAppearing;
-            }
-
-            if (EncounterState == EncounterState.CreatureAppearing)
-            {
-                MonsterAppearing();
-            }
-
-        }
 
         public override void AfterExecuteCommand(KeyCode cmd)
         {
-            if (EncounterState == EncounterState.MonsterAvoided)
-            {
-                AvoidMonster();
-            }
-            else if (EncounterState == EncounterState.MonsterAppeared)
-            {
-                MonsterAppeared();
-            }
-            else if (EncounterState == EncounterState.MonsterReady)
-            {
-                MonsterTurn(false);
-            }
+            OutsideEncounters.AfterPlayerAction();
         }
 
         public override bool CanPlayerStepIntoImpl(int xx, int yy)
@@ -902,7 +401,7 @@ namespace ERY.Xle.Maps.Outdoors
                 }
             }
 
-            TerrainType terrain = TerrainAt(xx, yy);
+            TerrainType terrain = TerrainMeasurement.TerrainAt(xx, yy);
             int test = (int)terrain;
 
             if (Player.IsOnRaft)
@@ -926,7 +425,7 @@ namespace ERY.Xle.Maps.Outdoors
                 return false;
             }
 
-            if (terrain == TerrainType.Mountain && Player.Hold != systemState.Factory.ClimbingGearItemID)
+            if (terrain == TerrainType.Mountain && Player.Hold != SystemState.Factory.ClimbingGearItemID)
             {
                 return false;
             }
@@ -939,14 +438,18 @@ namespace ERY.Xle.Maps.Outdoors
         {
             base.AfterPlayerStep();
 
+            // bail out if the player entered another map on this step.
+            if (GameState.Map != TheMap)
+                return;
+
             UpdateRaftState();
 
-            StepEncounter();
+            OutsideEncounters.Step();
         }
 
         public override void OnLoad()
         {
-            SetNextEncounterStepCount();
+            OutsideEncounters.OnLoad();
             base.OnLoad();
         }
 

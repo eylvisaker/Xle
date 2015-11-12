@@ -10,6 +10,8 @@ namespace ERY.Xle.Maps.Outdoors.Commands
 {
     public class OutsideMagic : MagicCommand
     {
+        public IOutsideEncounters OutsideEncounters { get; set; }
+
         OutsideExtender MapExtender {  get { return (OutsideExtender)GameState.MapExtender; } }
         EncounterState EncounterState {  get { return MapExtender.EncounterState; } }
 
@@ -55,13 +57,12 @@ namespace ERY.Xle.Maps.Outdoors.Commands
 
                 default:
                     throw new NotImplementedException();
-                    break;
             }
         }
 
         private void HitMonster(int damage)
         {
-            MapExtender.HitMonster(damage);
+            OutsideEncounters.HitMonster(damage);
         }
 
         protected virtual int RollSpellDamage(MagicSpell magic, int v)
