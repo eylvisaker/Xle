@@ -14,7 +14,17 @@ namespace ERY.Xle.LoB.MapExtenders.Temples
     {
         public override void Execute()
         {
-            TextArea.PrintLine("\n\nNothing to climb.");
+            var stairs = GameState.MapExtender.Events.OfType<TempleStairs>().FirstOrDefault();
+
+            if (stairs != null && stairs.Enabled && 
+                stairs.Rectangle.X == Player.X && stairs.Rectangle.Y == Player.Y)
+            {
+                stairs.ExecuteMapChange();
+            }
+            else
+            {
+                TextArea.PrintLine("\n\nNothing to climb.");
+            }
         }
     }
 }

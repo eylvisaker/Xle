@@ -52,7 +52,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 				TextArea.FlashLinesWhile(new CountdownTimer(2500).StillRunning, 
 					XleColor.Yellow, XleColor.Cyan, 50);
 
-				TheEvent.Enabled = false;
+				Enabled = false;
 
 				CloseExit(GameState);
 

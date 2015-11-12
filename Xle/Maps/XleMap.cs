@@ -464,73 +464,7 @@ namespace ERY.Xle.Maps
         }
 
         #endregion
-        #region --- Events ---
-
-        public IEnumerable<XleEvent> EnabledEventsAt(Player player, int border)
-        {
-            return EventsAt(player, border).Where(e => e.Enabled);
-        }
-        public IEnumerable<XleEvent> EventsAt(Player player, int border)
-        {
-            int px = player.X;
-            int py = player.Y;
-
-            return EventsAt(px, py, border);
-        }
-        public IEnumerable<XleEvent> EventsAt(int px, int py, int border)
-        {
-            foreach (var e in mEvents)
-            {
-                bool found = false;
-
-                if (e.Enabled == false)
-                    continue;
-
-                for (int j = 0; j < 2; j++)
-                {
-                    for (int i = 0; i < 2; i++)
-                    {
-                        int x = px + i;
-                        int y = py + j;
-
-                        if (x >= e.Rectangle.X - border && y >= e.Rectangle.Y - border &&
-                            x < e.Rectangle.Right + border && y < e.Rectangle.Bottom + border)
-                        {
-                            found = true;
-
-                        }
-                    }
-                }
-
-                if (found)
-                    yield return e;
-            }
-        }
-
-        /// <summary>
-        /// returns the special event at the specified location
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public XleEvent GetEvent(int x, int y, int border)
-        {
-            for (int i = 0; i < mEvents.Count; i++)
-            {
-                XleEvent e = mEvents[i];
-
-                if (x >= e.Rectangle.X - border && y >= e.Rectangle.Y - border &&
-                    x < e.Rectangle.Right + border && y < e.Rectangle.Bottom + border)
-                {
-                    return e;
-                }
-            }
-
-            return null;
-        }
-
-        #endregion
-
+        
         #region --- Player movement stuff ---
 
 

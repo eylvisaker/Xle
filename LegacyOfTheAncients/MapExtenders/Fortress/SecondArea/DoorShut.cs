@@ -18,7 +18,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
 				Map[i, TheEvent.Rectangle.Bottom - 1] = replacementTile;
 			}
 
-			TheEvent.Enabled = false;
+			Enabled = false;
 
 			return true;
 		}

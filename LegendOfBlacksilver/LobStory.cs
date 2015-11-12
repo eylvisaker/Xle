@@ -68,6 +68,8 @@ namespace ERY.Xle.LoB
         public bool RotlungContracted { get; set; }
 
         public bool Illusion { get; set; }
+        public bool ArchivesOpenedOwlTemple { get; internal set; }
+        public bool ArchivesOpenedHawkTemmple { get; internal set; }
     }
 
     public static class LobStoryExtensions

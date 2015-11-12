@@ -155,9 +155,11 @@
     <Compile Include="MapExtenders\Outside\OutsideUse.cs" />
     <Compile Include="MapExtenders\Outside\Thalen.cs" />
     <Compile Include="MapExtenders\Temples\LobTemple.cs" />
+    <Compile Include="MapExtenders\Temples\Events\Priest.cs" />
     <Compile Include="MapExtenders\Temples\TempleClimb.cs" />
     <Compile Include="MapExtenders\Temples\TempleFight.cs" />
     <Compile Include="MapExtenders\Temples\TempleMagic.cs" />
+    <Compile Include="MapExtenders\Temples\Events\TempleStairs.cs" />
     <Compile Include="MapExtenders\Towns\LobTown.cs" />
     <Compile Include="MapExtenders\Towns\MaelbaneTown.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Armor.cs" />

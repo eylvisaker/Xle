@@ -25,17 +25,18 @@ namespace ERY.Xle.LotA.MapExtenders.Castle.Events
 
         protected void RemoveSpiralEvents()
         {
-            foreach (XleEvent spiralEvent in SpiralEvents)
+            foreach (var spiralEvent in SpiralEvents)
                 spiralEvent.Enabled = false;
         }
 
-        private IEnumerable<XleEvent> SpiralEvents
+        private IEnumerable<Spiral> SpiralEvents
         {
             get
             {
-                return (Map.Events.Where(x => x.ExtenderName.ToLowerInvariant().Contains("spiral"))).ToArray();
+                return MapExtender.Events.OfType<Spiral>();
             }
         }
+
         protected void ClearSpiral()
         {
             foreach (var evt in SpiralEvents)

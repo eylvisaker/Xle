@@ -14,6 +14,11 @@ namespace ERY.Xle.XleEventTypes.Extenders
 {
     public class EventExtender
     {
+        public EventExtender()
+        {
+            Enabled = true;
+        }
+
         public XleEvent TheEvent { get; set; }
 
         public ITextArea TextArea { get; set; }
@@ -146,11 +151,8 @@ namespace ERY.Xle.XleEventTypes.Extenders
         {
         }
 
-        public bool Enabled
-        {
-            get { return TheEvent.Enabled; }
-            set { TheEvent.Enabled = value; }
-        }
+        public virtual bool Enabled { get; set; }
+
         public Rectangle Rectangle
         {
             get { return TheEvent.Rectangle; }

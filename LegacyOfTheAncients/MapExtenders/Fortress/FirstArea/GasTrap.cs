@@ -18,7 +18,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             if (Player.Y > TheEvent.Y + 2)
                 return false;
 
-            TheEvent.Enabled = false;
+            Enabled = false;
 
             MapData data = ((EventExtender)this).GameState.Map.ReadMapData(TheEvent.Rectangle);
 
@@ -50,7 +50,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
             GameControl.Wait(3500);
 
-            ((EventExtender)this).GameState.Map.WriteMapData(data, TheEvent.Rectangle.Location);
+            GameState.Map.WriteMapData(data, TheEvent.Rectangle.Location);
 
             return true;
         }

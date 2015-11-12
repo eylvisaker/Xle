@@ -93,7 +93,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             if (Player.CurrentWeapon.ID == 0)
                 Player.CurrentWeapon = Player.Weapons.Last();
 
-            TheEvent.Enabled = false;
+            Enabled = false;
 
             return true;
         }

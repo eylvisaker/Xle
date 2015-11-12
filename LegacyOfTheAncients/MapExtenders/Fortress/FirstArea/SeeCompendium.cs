@@ -56,11 +56,10 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
         private void RemoveCompendium()
         {
-            TreasureChestEvent evt = Map.Events.OfType<TreasureChestEvent>()
-                .First(x => x.ExtenderName.Equals("CompendiumFirst", StringComparison.InvariantCultureIgnoreCase));
+            var evt = MapExtender.Events.OfType<CompendiumFirst>().First();
 
             evt.Enabled = false;
-            evt.SetOpenTilesOnMap(Map);
+            evt.TheEvent.SetOpenTilesOnMap(Map);
         }
 
         public override void TryToStepOn(int dx, int dy, out bool allowStep)
@@ -69,7 +68,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
             if (Player.HP > 30 && paralyzed)
             {
                 paralyzed = false;
-                TheEvent.Enabled = false;
+                Enabled = false;
             }
             else if (paralyzed)
             {

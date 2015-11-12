@@ -10,7 +10,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
     {
         public override bool StepOn()
         {
-            TheEvent.Enabled = false;
+            Enabled = false;
 
             TextArea.PrintLine();
             TextArea.PrintLine();
