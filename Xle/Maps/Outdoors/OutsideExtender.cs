@@ -18,14 +18,8 @@ namespace ERY.Xle.Maps.Outdoors
 {
     public class OutsideExtender : Map2DExtender
     {
-        List<Monster> currentMonst = new List<Monster>();
+        Direction monstDir { get; set; }
 
-        int stepCountToEncounter;
-        Direction monstDir;
-        [Obsolete("Replace this with something else.")]
-        public int monstCount, initMonstCount;
-
-        public EncounterState EncounterState { get; set; }
         public bool IsMonsterFriendly { get; set; }
         public XleSystemState SystemState { get; set; }
         public ITerrainMeasurement TerrainMeasurement { get; set; }
@@ -36,7 +30,12 @@ namespace ERY.Xle.Maps.Outdoors
         {
             get { return (OutsideRenderer)base.MapRenderer; }
         }
-        
+
+        protected override void OnMapRendererSet()
+        {
+            OutsideEncounters.MapRenderer = MapRenderer;
+        }
+
         public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.OutsideRenderer(this);
@@ -211,7 +210,7 @@ namespace ERY.Xle.Maps.Outdoors
 
                 MovePlayer(stepDirection);
 
-                if (EncounterState == EncounterState.JustDisengaged)
+                if (OutsideEncounters.EncounterState == EncounterState.JustDisengaged)
                 {
                     TextArea.PrintLine();
                     TextArea.PrintLine("Attempt to disengage");
@@ -219,7 +218,7 @@ namespace ERY.Xle.Maps.Outdoors
 
                     GameControl.Wait(500);
 
-                    EncounterState = EncounterState.NoEncounter;
+                    OutsideEncounters.CancelEncounter();
                 }
 
                 TerrainInfo info = GetTerrainInfo();
@@ -365,40 +364,15 @@ namespace ERY.Xle.Maps.Outdoors
 
         public override bool CanPlayerStepIntoImpl(int xx, int yy)
         {
-            if (EncounterState == EncounterState.UnknownCreatureApproaching)
+            int dx = xx - Player.X;
+            int dy = yy - Player.Y;
+
+            if (OutsideEncounters.EncounterState != EncounterState.NoEncounter)
             {
-                bool moveTowards = false;
+                bool result = OutsideEncounters.AttemptMovement(dx, dy);
 
-                int dx = xx - Player.X;
-                int dy = yy - Player.Y;
-
-                switch (monstDir)
-                {
-                    case Direction.East: if (dx > 0) moveTowards = true; break;
-                    case Direction.North: if (dy < 0) moveTowards = true; break;
-                    case Direction.West: if (dx < 0) moveTowards = true; break;
-                    case Direction.South: if (dy > 0) moveTowards = true; break;
-                }
-
-                if (moveTowards == false)
-                {
-                    if (Random.Next(100) < 50)
-                    {
-                        EncounterState = EncounterState.MonsterAvoided;
-                    }
-                }
-            }
-            else if (EncounterState == EncounterState.MonsterReady)
-            {
-                if (Random.Next(100) < 50 && IsMonsterFriendly == false)
-                {
+                if (result == false)
                     return false;
-                }
-                else
-                {
-                    EncounterState = EncounterState.JustDisengaged;
-                    MapRenderer.DisplayMonsterID = -1;
-                }
             }
 
             TerrainType terrain = TerrainMeasurement.TerrainAt(xx, yy);

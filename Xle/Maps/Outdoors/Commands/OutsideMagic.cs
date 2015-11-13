@@ -13,7 +13,7 @@ namespace ERY.Xle.Maps.Outdoors.Commands
         public IOutsideEncounters OutsideEncounters { get; set; }
 
         OutsideExtender MapExtender {  get { return (OutsideExtender)GameState.MapExtender; } }
-        EncounterState EncounterState {  get { return MapExtender.EncounterState; } }
+        EncounterState EncounterState {  get { return OutsideEncounters.EncounterState; } }
 
         protected override void CastSpell(MagicSpell magic)
         {

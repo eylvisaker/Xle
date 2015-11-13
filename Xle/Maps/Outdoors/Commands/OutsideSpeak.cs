@@ -37,7 +37,7 @@ namespace ERY.Xle.Maps.Outdoors
 
         public override void Execute()
         {
-            if (outside.EncounterState != EncounterState.MonsterReady)
+            if (Encounters.EncounterState != EncounterState.MonsterReady)
                 base.Execute();
 
             SpeakToMonster();
@@ -47,7 +47,7 @@ namespace ERY.Xle.Maps.Outdoors
         {
             TextArea.PrintLine();
 
-            if (!outside.IsMonsterFriendly)
+            if (!Encounters.IsMonsterFriendly)
             {
                 TextArea.PrintLine();
                 TextArea.PrintLine("The " + Encounters.MonsterName + " does not reply.");
@@ -146,6 +146,8 @@ namespace ERY.Xle.Maps.Outdoors
                     qcolor = XleColor.Green;
 
                     break;
+
+                default:
                 case 5:			// buy museum coin
                     MuseumCoinSale.OfferMuseumCoin();
 
@@ -219,7 +221,7 @@ namespace ERY.Xle.Maps.Outdoors
                 }
             }
 
-            outside.EncounterState = EncounterState.NoEncounter;
+            Encounters.CancelEncounter();
             MapRenderer.DisplayMonsterID = -1;
         }
 

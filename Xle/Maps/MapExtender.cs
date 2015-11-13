@@ -23,6 +23,7 @@ namespace ERY.Xle.Maps
     {
         XleMap mTheMap;
         List<EventExtender> mEvents = new List<EventExtender>();
+        XleMapRenderer mapRenderer;
 
         public IXleSubMenu SubMenu { get; set; }
 
@@ -36,7 +37,17 @@ namespace ERY.Xle.Maps
             }
         }
 
-        public XleMapRenderer MapRenderer { get; set; }
+        public XleMapRenderer MapRenderer
+        {
+            get { return mapRenderer; }
+            set
+            {
+                mapRenderer = value;
+                OnMapRendererSet();
+            }
+        }
+
+
         public ICommandFactory CommandFactory { get; set; }
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
@@ -60,6 +71,10 @@ namespace ERY.Xle.Maps
 
                 OnSetAngry(value);
             }
+        }
+
+        protected virtual void OnMapRendererSet()
+        {
         }
 
         protected virtual void OnSetAngry(bool value)

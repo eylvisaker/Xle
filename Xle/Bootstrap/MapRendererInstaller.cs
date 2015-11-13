@@ -43,7 +43,7 @@ namespace ERY.Xle.Bootstrap
                 .Configure(c => c.Named(NameOf(c.Implementation)))
                 .WithServiceBase()
                 .WithServiceSelf()
-                .LifestyleTransient());
+                .LifestyleSingleton());
         }
 
         private string NameOf(Type type)

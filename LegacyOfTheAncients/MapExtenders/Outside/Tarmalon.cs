@@ -270,7 +270,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
                 SoundMan.PlaySoundSync(LotaSound.VeryGood);
 
                 MapChanger.ChangeMap(1, 0);
-                EncounterState = 0;
+                OutsideEncounters.CancelEncounter();
             }
         }
 

@@ -66,6 +66,27 @@ namespace ERY.Xle.Maps.Outdoors
             }
         }
 
+        double TerrainEncounterChance()
+        {
+            switch(TerrainMeasurement.TerrainAtPlayer())
+            {
+                case TerrainType.Grass:
+                    return 0.51;
+                case TerrainType.Mixed:
+                case TerrainType.Forest:
+                    return 0.67;
+                case TerrainType.Swamp:
+                case TerrainType.Foothills:
+                    return 0.9;
+                case TerrainType.Desert:
+                case TerrainType.Mountain:
+                    return 1.25;
+                case TerrainType.Water:
+                default:
+                    return 0.4;
+            }
+        }
+
         public void OnLoad()
         {
             SetNextEncounterStepCount();
@@ -82,16 +103,16 @@ namespace ERY.Xle.Maps.Outdoors
             if (handled)
                 return;
 
-            if (EncounterState == EncounterState.NoEncounter && stepCountToEncounter <= 0)
+            if (EncounterState == EncounterState.NoEncounter)
             {
-                SetNextEncounterStepCount();
-
-                StartEncounter();
-            }
-            else if (EncounterState == EncounterState.NoEncounter && stepCountToEncounter > 0)
-            {
-                currentMonst.Clear();
-                stepCountToEncounter--;
+                if (Random.Next(Player.Level + 8) > TerrainEncounterChance())
+                {
+                    currentMonst.Clear();
+                }
+                else
+                {
+                    StartEncounter();
+                }
             }
             else if (EncounterState == EncounterState.UnknownCreatureApproaching)
             {
@@ -149,39 +170,94 @@ namespace ERY.Xle.Maps.Outdoors
 
             SoundMan.PlaySound(LotaSound.Encounter);
 
-            MapRenderer.DisplayMonsterID = SelectRandomMonster(TerrainMeasurement.TerrainAtPlayer());
+            var monsterId = SelectRandomMonster(TerrainMeasurement.TerrainAtPlayer());
+
+            MapRenderer.DisplayMonsterID = monsterId;
 
             if (monstDir == Direction.None)
                 SetMonsterImagePosition();
 
-            int max = 1;
-            initMonstCount = monstCount = 1 + Random.Next(max);
-
             for (int i = 0; i < monstCount; i++)
             {
-                var m = new Monster(Data.MonsterInfoList.First(x => x.ID == MapRenderer.DisplayMonsterID));
+                var m = new Monster(Data.MonsterInfoList.First(x => x.ID == monsterId));
 
                 m.HP = (int)(m.HP * (Random.NextDouble() * 0.4 + 0.8));
 
                 currentMonst.Add(m);
             }
 
-            if (Random.Next(256) <= currentMonst[0].Friendly)
-                IsMonsterFriendly = true;
-            else
-                IsMonsterFriendly = false;
-
             GameControl.Wait(500);
         }
 
         private int SelectRandomMonster(TerrainType terrain)
         {
-            int mCount = 0;
-            var monsters = Data.MonsterInfoList.Where(x => x.Terrain == terrain || x.Terrain == TerrainType.All);
+            int friendlyChance = 0;
+            int allTerrainChance = 0;
 
-            mCount = monsters.Count();
+            switch(terrain)
+            {
+                case TerrainType.Swamp:
+                case TerrainType.Foothills:
+                    allTerrainChance = 35;
+                    friendlyChance = 55;
+                    break;
+                case TerrainType.Desert:
+                case TerrainType.Mountain:
+                    allTerrainChance = 40;
+                    friendlyChance = 60;
+                    break;
+                case TerrainType.Mixed:
+                case TerrainType.Forest:
+                    allTerrainChance = 25;
+                    friendlyChance = 50;
+                    break;
+                case TerrainType.Grass:
+                    allTerrainChance = 22;
+                    friendlyChance = 40;
+                    break;
+                case TerrainType.Water:
+                default:
+                    break;
+            }
 
-            return (monsters.Skip(Random.Next(mCount)).First()).ID;
+            IEnumerable<MonsterInfo> monsters;
+
+            IsMonsterFriendly = false;
+
+            if (Random.Next(100) < allTerrainChance)
+            {
+                int skip = 3;
+                int count = 4;
+
+                if (Random.Next(100) < friendlyChance)
+                {
+                    IsMonsterFriendly = true;
+
+                    if (Random.Next(2) < 1)
+                    {
+                        skip = 0;
+                        count = 3;
+                    }
+                }
+
+                monsters = Data.MonsterInfoList
+                    .Where(x => x.Terrain == TerrainType.All)
+                    .Skip(skip)
+                    .Take(count);
+            }
+            else
+            {
+                monsters = Data.MonsterInfoList.Where(x => x.Terrain == terrain);
+            }
+
+            int sp = (int)(Math.Min(Player.TimeQuality / 2500.0 + 1, 7.0) + 0.5);
+            double rnd = Random.NextDouble();
+
+            initMonstCount = (int)
+                (Math.Pow(rnd, 3.2 * rnd + 0.83)) * sp + 1;
+            monstCount = initMonstCount;
+
+            return (monsters.Skip(Random.Next(monsters.Count())).First()).ID;
         }
 
         public virtual void UpdateEncounterState(ref bool handled)
@@ -332,7 +408,7 @@ namespace ERY.Xle.Maps.Outdoors
 
             return false;
         }
-        
+
         bool FinishedCombat(out int gold, out int food)
         {
             bool finished = false;
@@ -496,5 +572,44 @@ namespace ERY.Xle.Maps.Outdoors
             return dam;
         }
 
+        public void CancelEncounter()
+        {
+            EncounterState = EncounterState.NoEncounter;
+        }
+
+        public bool AttemptMovement(int dx, int dy)
+        {
+            if (EncounterState == EncounterState.UnknownCreatureApproaching)
+            {
+                bool moveTowards = false;
+
+                switch (monstDir)
+                {
+                    case Direction.East: if (dx > 0) moveTowards = true; break;
+                    case Direction.North: if (dy < 0) moveTowards = true; break;
+                    case Direction.West: if (dx < 0) moveTowards = true; break;
+                    case Direction.South: if (dy > 0) moveTowards = true; break;
+                }
+
+                if (moveTowards == false && Random.Next(100) < 50)
+                {
+                    EncounterState = EncounterState.MonsterAvoided;
+                }
+            }
+            else if (EncounterState == EncounterState.MonsterReady)
+            {
+                if (Random.Next(100) < 50 && IsMonsterFriendly == false)
+                {
+                    return false;
+                }
+                else
+                {
+                    EncounterState = EncounterState.JustDisengaged;
+                    MapRenderer.DisplayMonsterID = -1;
+                }
+            }
+
+            return true;
+        }
     }
 }
