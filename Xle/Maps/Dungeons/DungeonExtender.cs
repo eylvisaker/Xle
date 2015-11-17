@@ -9,19 +9,34 @@ using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.Rendering.Maps;
 using ERY.Xle.Services.ScreenModel;
+using System.Collections.Generic;
 
 namespace ERY.Xle.Maps.Dungeons
 {
     public class DungeonExtender : Map3DExtender
     {
+        static Dictionary<int, string> trapNames = new Dictionary<int, string>()
+        {
+            { 0x11, "ceiling hole" },
+            { 0x12, "floor hole" },
+            { 0x13, "poison gas vent" },
+            { 0x14, "slime splotch" },
+            { 0x15, "trip wire" },
+            { 0x16, "gas vent" }
+        };
+
+        int hitAttemptCount = 0;
+
         public DungeonExtender()
         {
             Combat = new DungeonCombat();
         }
 
-        public IStatsDisplay StatsDisplay { get; set; }
-
-        public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } set { base.TheMap = value; } }
+        public new Dungeon TheMap
+        {
+            get { return (Dungeon)base.TheMap; }
+            set { base.TheMap = value; }
+        }
 
         public DungeonCombat Combat { get; set; }
 
@@ -57,18 +72,8 @@ namespace ERY.Xle.Maps.Dungeons
 
         public virtual string TrapName(int val)
         {
-            switch (val)
-            {
-                case 0x11: return "ceiling hole";
-                case 0x12: return "floor hole";
-                case 0x13: return "poison gas vent";
-                case 0x14: return "slime splotch";
-                case 0x15: return "trip wire";
-                case 0x16: return "gas vent";
-                default: throw new ArgumentException();
-            }
+            return trapNames[val];
         }
-
 
         public override void SetColorScheme(ColorScheme scheme)
         {
@@ -96,11 +101,10 @@ namespace ERY.Xle.Maps.Dungeons
             return null;
         }
 
-        int count = 0;
         public virtual bool RollToHitPlayer(DungeonMonster monster)
         {
-            count++;
-            return count % 2 == 1;
+            hitAttemptCount++;
+            return hitAttemptCount % 2 == 1;
         }
 
         public virtual int RollDamageToPlayer(DungeonMonster monster)
@@ -359,7 +363,7 @@ namespace ERY.Xle.Maps.Dungeons
 
             Combat.Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
         }
-        
+
         protected DungeonMonster MonsterInFrontOfPlayer(Player player)
         {
             int distance = 0;
