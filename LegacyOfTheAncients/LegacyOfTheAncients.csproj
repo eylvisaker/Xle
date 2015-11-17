@@ -95,6 +95,7 @@
     <Compile Include="MapExtenders\Museum\Commands\MuseumUse.cs" />
     <Compile Include="MapExtenders\Museum\Commands\MuseumXamine.cs" />
     <Compile Include="MapExtenders\Museum\IExhibitFactory.cs" />
+    <Compile Include="MapExtenders\Outside\LotaOutsideEncounters.cs" />
     <Compile Include="MapExtenders\Outside\LotaOutsideMagic.cs" />
     <Compile Include="MapExtenders\Towns\Commands\TownMagic.cs" />
     <Compile Include="MapExtenders\Towns\Commands\TownRob.cs" />

@@ -1,5 +1,6 @@
 ﻿using AgateLib.Geometry;
 using ERY.Xle.Data;
+using ERY.Xle.Maps.Outdoors;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Menus;
@@ -12,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.Maps.Outdoors
+namespace ERY.Xle.LotA.MapExtenders.Outside
 {
     public class OutsideEncounters : IOutsideEncounters
     {

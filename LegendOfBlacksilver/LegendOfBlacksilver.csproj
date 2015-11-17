@@ -150,6 +150,7 @@
     <Compile Include="MapExtenders\LobEvent.cs" />
     <Compile Include="MapExtenders\Outside\Events\Drawbridge.cs" />
     <Compile Include="MapExtenders\Outside\LobBaseOutside.cs" />
+    <Compile Include="MapExtenders\Outside\LobOutsideEncounters.cs" />
     <Compile Include="MapExtenders\Outside\LobOutsideMagic.cs" />
     <Compile Include="MapExtenders\Outside\Maelbane.cs" />
     <Compile Include="MapExtenders\Outside\OutsideUse.cs" />
