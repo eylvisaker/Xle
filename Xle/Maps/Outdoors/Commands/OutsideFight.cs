@@ -38,7 +38,7 @@ namespace ERY.Xle.Maps.Outdoors.Commands
             get { return Encounters.MonsterName; }
         }
 
-        List<Monster> currentMonst
+        IReadOnlyList<Monster> currentMonst
         {
             get { return Encounters.CurrentMonsters; }
         }

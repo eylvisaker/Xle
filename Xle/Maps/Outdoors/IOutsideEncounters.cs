@@ -10,7 +10,7 @@ namespace ERY.Xle.Maps.Outdoors
         string MonsterName { get; }
         bool InEncounter { get; }
         bool IsMonsterFriendly { get; set; }
-        List<Monster> CurrentMonsters { get; }
+        IReadOnlyList<Monster> CurrentMonsters { get; }
         EncounterState EncounterState { get; }
         OutsideRenderer MapRenderer { get; set; }
 

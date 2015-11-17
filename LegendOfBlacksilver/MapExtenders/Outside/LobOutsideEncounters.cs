@@ -13,7 +13,7 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
     {
         List<Monster> monsters = new List<Monster>();
 
-        public List<Monster> CurrentMonsters
+        public IReadOnlyList<Monster> CurrentMonsters
         {
             get
             {

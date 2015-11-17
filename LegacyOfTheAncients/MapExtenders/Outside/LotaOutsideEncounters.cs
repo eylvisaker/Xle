@@ -42,7 +42,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
         public bool IsMonsterFriendly { get; set; }
 
-        public List<Monster> CurrentMonsters
+        public IReadOnlyList<Monster> CurrentMonsters
         {
             get { return currentMonst; }
         }
