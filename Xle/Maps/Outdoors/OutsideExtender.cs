@@ -20,7 +20,6 @@ namespace ERY.Xle.Maps.Outdoors
     {
         Direction monstDir { get; set; }
 
-        public bool IsMonsterFriendly { get; set; }
         public XleSystemState SystemState { get; set; }
         public ITerrainMeasurement TerrainMeasurement { get; set; }
         public IOutsideEncounters OutsideEncounters { get; set; }
