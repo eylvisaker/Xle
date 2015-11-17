@@ -375,14 +375,10 @@ namespace ERY.Xle.Maps.Outdoors
             }
 
             TerrainType terrain = TerrainMeasurement.TerrainAt(xx, yy);
-            int test = (int)terrain;
 
             if (Player.IsOnRaft)
             {
-                if (terrain == TerrainType.Water)
-                    return true;
-                else
-                    return false;
+                return terrain == TerrainType.Water;
             }
 
             if (terrain == TerrainType.Water)
@@ -404,7 +400,6 @@ namespace ERY.Xle.Maps.Outdoors
             }
 
             return true;
-
         }
 
         public override void AfterPlayerStep()

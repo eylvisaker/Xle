@@ -29,12 +29,6 @@ namespace ERY.Xle.Maps.Outdoors
         public IQuickMenu QuickMenu { get; set; }
         public ISoundMan SoundMan { get; set; }
 
-        OutsideRenderer MapRenderer { get { return outside.MapRenderer; } }
-        OutsideExtender outside
-        {
-            get { return (OutsideExtender)GameState.MapExtender; }
-        }
-
         public override void Execute()
         {
             if (Encounters.EncounterState != EncounterState.MonsterReady)
@@ -222,7 +216,6 @@ namespace ERY.Xle.Maps.Outdoors
             }
 
             Encounters.CancelEncounter();
-            MapRenderer.DisplayMonsterID = -1;
         }
 
     }

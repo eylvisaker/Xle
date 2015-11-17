@@ -246,7 +246,11 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
                     .Skip(skip)
                     .Take(count);
             }
-            else
+            else if (terrain == TerrainType.Mixed)
+            {
+                monsters = Data.MonsterInfoList.Where(x => x.Terrain == TerrainType.Forest);
+            }
+            else 
             {
                 monsters = Data.MonsterInfoList.Where(x => x.Terrain == terrain);
             }
@@ -258,7 +262,8 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
                 (Math.Pow(rnd, 3.2 * rnd + 0.83)) * sp + 1;
             monstCount = initMonstCount;
 
-            return (monsters.Skip(Random.Next(monsters.Count())).First()).ID;
+            int index = Random.Next(monsters.Count());
+            return (monsters.Skip(index).First()).ID;
         }
 
         public virtual void UpdateEncounterState(ref bool handled)
@@ -576,6 +581,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
         public void CancelEncounter()
         {
             EncounterState = EncounterState.NoEncounter;
+            MapRenderer.DisplayMonsterID = -1;
         }
 
         public bool AttemptMovement(int dx, int dy)
