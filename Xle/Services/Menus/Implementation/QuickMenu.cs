@@ -6,6 +6,7 @@ using AgateLib.InputLib;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
+using AgateLib.Quality;
 
 namespace ERY.Xle.Services.Menus.Implementation
 {
@@ -57,6 +58,10 @@ namespace ERY.Xle.Services.Menus.Implementation
 
         public int QuickMenuImpl(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
         {
+            Condition.Requires<ArgumentOutOfRangeException>(value >= 0);
+            Condition.Requires<ArgumentOutOfRangeException>(value < items.Count);
+
+            int result = value;
             int[] spacing = new int[items.Count];
             int last = 0;
             string tempLine = "Choose: ";
@@ -68,15 +73,8 @@ namespace ERY.Xle.Services.Menus.Implementation
             if (lineIndex >= 4)
                 lineIndex = 3;
 
-            System.Diagnostics.Debug.Assert(value >= 0);
-            System.Diagnostics.Debug.Assert(value < items.Count);
-
-            if (value < 0)
-                value = 0;
-
             for (int i = 0; i < 40; i++)
                 colors[i] = clrChanged;
-
 
             spacing[0] = 8;
 
@@ -95,28 +93,28 @@ namespace ERY.Xle.Services.Menus.Implementation
             TextArea.PrintLine();
 
             topLine = tempLine;
-            tempLine = new string(' ', spacing[value]) + "`";
+            tempLine = new string(' ', spacing[result]) + "`";
 
             TextArea.RewriteLine(lineIndex + 1, tempLine, clrInit);
-            input.PromptToContinueOnWait = false;
 
             KeyCode key;
 
             do
             {
+                input.PromptToContinueOnWait = false;
                 key = input.WaitForKey(redraw);
 
                 if (key == KeyCode.Left)
                 {
-                    value--;
-                    if (value < 0)
-                        value = 0;
+                    result--;
+                    if (result < 0)
+                        result = 0;
                 }
                 if (key == KeyCode.Right)
                 {
-                    value++;
-                    if (value >= items.Count)
-                        value = items.Count - 1;
+                    result++;
+                    if (result >= items.Count)
+                        result = items.Count - 1;
                 }
                 else if (key >= KeyCode.D0)
                 {
@@ -127,13 +125,13 @@ namespace ERY.Xle.Services.Menus.Implementation
                         if (key - KeyCode.A ==
                             char.ToUpperInvariant(bulletLine[0]) - 'A')
                         {
-                            value = i;
+                            result = i;
                             key = KeyCode.Return;
                         }
                     }
                 }
 
-                tempLine = new string(' ', spacing[value]) + "`";
+                tempLine = new string(' ', spacing[result]) + "`";
 
                 if (key != KeyCode.None)
                 {
@@ -148,7 +146,7 @@ namespace ERY.Xle.Services.Menus.Implementation
 
             TextArea.PrintLine();
 
-            return value;
+            return result;
 
         }
 
