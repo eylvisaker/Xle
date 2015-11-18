@@ -33,7 +33,6 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
         public override void OnLoad()
         {
             base.OnLoad();
-            MuseumCoinSale.ResetMuseumCoinOffers();
         }
 
         public override void SetCommands(ICommandList commands)

@@ -31,7 +31,7 @@ namespace ERY.Xle.LotA
             get { return 0.045; }
         }
 
-        public void ResetMuseumCoinOffers()
+        public override void ResetCoinOffers()
         {
             mMuseumCoinOffers.Clear();
 

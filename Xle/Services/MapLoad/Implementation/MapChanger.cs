@@ -7,6 +7,7 @@ using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.ScreenModel;
+using ERY.Xle.Services.Menus;
 
 namespace ERY.Xle.Services.MapLoad.Implementation
 {
@@ -18,6 +19,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
         private ICommandList commands;
         private IMapLoader mapLoader;
         private IXleImages images;
+        private readonly IMuseumCoinSale museumCoinSale;
 
         public MapChanger(
             GameState gameState,
@@ -25,7 +27,8 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             IXleImages images,
             ITextArea textArea,
             ICommandList commands,
-            IMapLoader mapLoader)
+            IMapLoader mapLoader,
+            IMuseumCoinSale museumCoinSale)
         {
             this.gameState = gameState;
             this.screen = screen;
@@ -33,6 +36,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             this.textArea = textArea;
             this.commands = commands;
             this.mapLoader = mapLoader;
+            this.museumCoinSale = museumCoinSale;
         }
 
         Player Player { get { return gameState.Player; } }
@@ -87,6 +91,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
 
                 SetTilesAndCommands();
                 gameState.MapExtender.OnLoad();
+                museumCoinSale.ResetCoinOffers();
 
             }
             catch (Exception e)

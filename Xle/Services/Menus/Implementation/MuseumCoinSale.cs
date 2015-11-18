@@ -78,5 +78,7 @@ namespace ERY.Xle.Services.Menus.Implementation
         /// Probability of offering a museum coin (between 0 and 1).
         /// </summary>
         public abstract double ChanceToOfferCoin { get; }
+
+        public abstract void ResetCoinOffers();
     }
 }

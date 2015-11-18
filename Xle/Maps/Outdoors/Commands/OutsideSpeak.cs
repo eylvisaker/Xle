@@ -143,6 +143,7 @@ namespace ERY.Xle.Maps.Outdoors
 
                 default:
                 case 5:			// buy museum coin
+                    MuseumCoinSale.ResetCoinOffers();
                     MuseumCoinSale.OfferMuseumCoin();
 
                     break;

@@ -23,9 +23,9 @@ namespace ERY.Xle.LotA.MapExtenders.Towns
 
         public override void OnLoad()
         {
-            MuseumCoinSale.ResetMuseumCoinOffers();
-
             CheckLoan();
+
+            base.OnLoad();
         }
 
         void CheckLoan()

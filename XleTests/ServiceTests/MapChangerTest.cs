@@ -17,6 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Moq;
 using ERY.Xle.Services.Commands;
+using ERY.Xle.Services.Menus;
 
 namespace ERY.XleTests.ServiceTests
 {
@@ -26,16 +27,20 @@ namespace ERY.XleTests.ServiceTests
         MapChanger changer;
         Mock<MapExtender> returnedMap;
         Mock<MapExtender> startMap;
+        Mock<IMuseumCoinSale> museumCoinSale;
 
         [TestInitialize]
         public void Initialize()
         {
+            museumCoinSale = new Mock<IMuseumCoinSale>();
+
             changer = new MapChanger(GameState,
                 Services.Screen.Object,
                 Services.Images.Object,
                 Services.TextArea.Object,
                 Services.CommandList.Object,
-                Services.MapLoader.Object);
+                Services.MapLoader.Object,
+                museumCoinSale.Object);
 
         }
 

@@ -22,5 +22,10 @@ namespace ERY.Xle.LoB.Services
         {
             return -1;
         }
+
+        public override void ResetCoinOffers()
+        {
+            
+        }
     }
 }

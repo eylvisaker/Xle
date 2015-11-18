@@ -5,5 +5,7 @@
         void OfferMuseumCoin();
 
         bool RollToOfferCoin();
+        
+        void ResetCoinOffers();
     }
 }
