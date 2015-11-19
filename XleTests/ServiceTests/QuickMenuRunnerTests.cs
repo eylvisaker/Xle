@@ -1,4 +1,5 @@
-﻿using AgateLib.InputLib;
+﻿using AgateLib.Geometry;
+using AgateLib.InputLib;
 using ERY.Xle;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Menus.Implementation;
@@ -32,7 +33,7 @@ namespace ERY.XleTests.ServiceTests
             gameControl = new Mock<IXleGameControl>();
 
             qmr = new QuickMenuRunner(screen.Object, textArea.Object, input.Object, gameControl.Object);
-            
+
         }
 
         [TestMethod]
@@ -119,6 +120,31 @@ namespace ERY.XleTests.ServiceTests
             var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
             Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void QuickMenuVerifyMenuLayout()
+        {
+            input.SetupSequence(x => x.WaitForKey(It.IsAny<Action>()))
+                .Returns(KeyCode.Enter);
+
+            string expected = "Choose: Battle  Charge  Magic  Other";
+            string actual = null;
+            bool found = false;
+
+            textArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color>()))
+                .Callback<string, Color>((s, c) =>
+                {
+                    actual = actual ?? s;
+                    if (s.TrimEnd() == expected)
+                        found = true;
+                });
+
+            qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
+
+            Assert.IsTrue(found, "QuickMenu did not produce the correct choice string. It should be '{0}' but was '{1}'.",
+                expected, actual);
+
         }
     }
 }
