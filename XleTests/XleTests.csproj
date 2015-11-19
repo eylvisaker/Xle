@@ -115,6 +115,7 @@
     <Compile Include="ServiceTests\CommandTests\DungeonClimbTest.cs" />
     <Compile Include="ServiceTests\NumberPickerTests.cs" />
     <Compile Include="ServiceTests\QuickMenuRunnerTests.cs" />
+    <Compile Include="ServiceTests\SubmenuTests.cs" />
     <Compile Include="XleServices.cs" />
     <Compile Include="ColorStringbiulderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -12,24 +12,18 @@ namespace ERY.Xle.Services.Menus.Implementation
 {
     public class XleSubMenu : IXleSubMenu
     {
-        private IXleRenderer Renderer;
-        private IXleGameControl gameControl;
-        private GameState GameState;
-        private IMenuRenderer menuRenderer;
-        private IXleInput input;
+        private readonly IXleGameControl gameControl;
+        private readonly IXleInput input;
+        private readonly IXleSubMenuRedraw redraw;
 
         public XleSubMenu(
-            IXleRenderer renderer, 
             IXleGameControl gameControl, 
-            IMenuRenderer menuRenderer,
             IXleInput input,
-            GameState gameState)
+            IXleSubMenuRedraw redraw)
         {
-            this.Renderer = renderer;
             this.gameControl = gameControl;
-            this.menuRenderer = menuRenderer;
             this.input = input;
-            this.GameState = gameState;
+            this.redraw = redraw;
         }
 
         /// <summary>
@@ -70,25 +64,13 @@ namespace ERY.Xle.Services.Menus.Implementation
                 menu.width = displayTitle.Length + 2;
             }
 
-            Action redraw = () =>
-            {
-                Renderer.UpdateAnim();
-
-                Display.BeginFrame();
-                Renderer.SetProjectionAndBackColors(GameState.Map.ColorScheme);
-
-                Renderer.Draw();
-                menuRenderer.DrawMenu(menu);
-
-                Display.EndFrame();
-                gameControl.KeepAlive();
-            };
-
             KeyCode key;
+
+            redraw.Menu = menu;
 
             do
             {
-                key = input.WaitForKey(redraw);
+                key = input.WaitForKey(redraw.Redraw);
 
                 if (key == KeyCode.Up)
                 {
@@ -109,6 +91,7 @@ namespace ERY.Xle.Services.Menus.Implementation
                     if (key >= KeyCode.A)
                     {
                         v = (int)(key) - (int)(KeyCode.A);
+                        v += 10;
                     }
                     else
                     {

@@ -62,9 +62,6 @@ namespace ERY.Xle.Services.Menus.Implementation
             Condition.Requires<ArgumentOutOfRangeException>(value < items.Count);
 
             int result = value;
-            int[] spacing = new int[items.Count];
-            int last = 0;
-            string tempLine = "Choose: ";
             string topLine;
             string bulletLine;
             int lineIndex = TextArea.CursorLocation.Y;
@@ -76,9 +73,13 @@ namespace ERY.Xle.Services.Menus.Implementation
             for (int i = 0; i < 40; i++)
                 colors[i] = clrChanged;
 
+            int[] spacing = new int[items.Count];
+            int last = 0;
+
             spacing[0] = 8;
 
             // Construct the temporary line
+            string tempLine = "Choose: ";
             for (int i = 0; i < items.Count; i++)
             {
                 bulletLine = items[i];

@@ -98,6 +98,8 @@
     <Compile Include="Services\Commands\Implementation\IEventInteractor.cs" />
     <Compile Include="Services\Commands\Implementation\ItemChooser.cs" />
     <Compile Include="Services\Commands\Implementation\MagicWithFancyPrompt.cs" />
+    <Compile Include="Services\Menus\Implementation\IXleSubMenuRedraw.cs" />
+    <Compile Include="Services\Menus\Implementation\XleSubMenuRedraw.cs" />
     <Compile Include="Services\Rendering\Maps\CastleRenderer.cs" />
     <Compile Include="Services\Rendering\Maps\TempleRenderer.cs" />
     <Compile Include="Services\Rendering\IMapRendererFactory.cs" />
