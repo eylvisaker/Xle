@@ -101,6 +101,7 @@ namespace ERY.Xle.Services.Menus.Implementation
 
             do
             {
+                // Set this on each iteration because it gets reset after a key is pressed.
                 input.PromptToContinueOnWait = false;
                 key = input.WaitForKey(redraw);
 
@@ -138,7 +139,6 @@ namespace ERY.Xle.Services.Menus.Implementation
                     TextArea.RewriteLine(lineIndex, topLine, clrChanged);
                     TextArea.RewriteLine(lineIndex + 1, tempLine, clrChanged);
                 }
-
 
             } while (key != KeyCode.Return && screen.CurrentWindowClosed == false);
 
