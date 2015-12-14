@@ -105,6 +105,7 @@
     <Compile Include="Services\Rendering\IMapRendererFactory.cs" />
     <Compile Include="Maps\Dungeons\Commands\DungeonClimb.cs" />
     <Compile Include="Services\Rendering\Maps\TorchAnim.cs" />
+    <Compile Include="Services\ScreenModel\TextLine.cs" />
     <Compile Include="Services\ServiceName.cs" />
     <Compile Include="Services\Rendering\Implementation\XleImages.cs" />
     <Compile Include="Services\ScreenModel\IPlayerAnimator.cs" />

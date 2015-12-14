@@ -34,7 +34,7 @@ namespace ERY.Xle.Services.ScreenModel
         void SetCharacterColor(int p1, int p2, Color color);
 
         int Margin { get; set; }
-
+        Color DefaultColor { get; }
 
         void PrintLineCentered(string p, Color color);
 
