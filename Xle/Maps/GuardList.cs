@@ -35,8 +35,6 @@ namespace ERY.Xle.Maps
             InitializeGuardData();
         }
 
-        public XleMap TheMap { get; set; }
-
         public int DefaultAttack { get; set; }
         public int DefaultDefense { get; set; }
         public int DefaultHP { get; set; }
@@ -71,39 +69,6 @@ namespace ERY.Xle.Maps
             }
 
             return false;
-        }
-
-        private bool CanGuardStepInto(Point pt, Guard guard)
-        {
-            Size guardSize = new Size(2, 2);
-
-            for (int j = 0; j < 2; j++)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    var tile = TheMap[pt.X + i, pt.Y + j];
-
-                    if (TheMap.TileSet[tile] == TileInfo.Blocked ||
-                        TheMap.TileSet[tile] == TileInfo.NormalBlockGuards)
-                        return false;
-
-                    // check for guard-guard collisions
-                    Rectangle guardRect = new Rectangle(pt, guardSize);
-
-                    foreach (var otherGuard in this)
-                    {
-                        if (guard == otherGuard)
-                            continue;
-
-                        Rectangle otherGuardRect = new Rectangle(otherGuard.Location, guardSize);
-
-                        if (guardRect.IntersectsWith(otherGuardRect))
-                            return false;
-                    }
-                }
-            }
-
-            return true;
         }
 
         public void InitializeGuardData()

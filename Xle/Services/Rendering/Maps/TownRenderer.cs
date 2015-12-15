@@ -6,7 +6,7 @@ namespace ERY.Xle.Services.Rendering.Maps
 {
     public class TownRenderer : Map2DRenderer
     {
-        protected override void Animate(AgateLib.Geometry.Rectangle tileRect)
+        protected override void Animate(Rectangle tileRect)
         {
             base.Animate(tileRect);
 
