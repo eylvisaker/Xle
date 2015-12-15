@@ -101,6 +101,7 @@
     <Compile Include="Commands\DisembarkTest.cs" />
     <Compile Include="Commands\DungeonOpenTest.cs" />
     <Compile Include="Commands\DungeonXamineTest.cs" />
+    <Compile Include="DirectionHelperTest.cs" />
     <Compile Include="LegacyOfTheAncients\Commands\LotaUseTest.cs" />
     <Compile Include="EventTests\BuybackNegotiatorTest.cs" />
     <Compile Include="Fakes\FakeMap.cs" />
