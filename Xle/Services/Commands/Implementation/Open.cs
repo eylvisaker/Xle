@@ -9,7 +9,7 @@ namespace ERY.Xle.Services.Commands.Implementation
     {
         public IXleGameControl GameControl { get; set; }
 
-        protected MapExtender MapExtender
+        protected IMapExtender MapExtender
         {
             get { return GameState.MapExtender; }
         }

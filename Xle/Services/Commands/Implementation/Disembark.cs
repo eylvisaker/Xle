@@ -1,5 +1,4 @@
 ﻿using AgateLib.InputLib;
-using AgateLib.InputLib.Legacy;
 
 using ERY.Xle.Maps.Outdoors;
 using ERY.Xle.Services.ScreenModel;
@@ -11,10 +10,11 @@ namespace ERY.Xle.Services.Commands.Implementation
     {
         public IXleScreen Screen { get; set; }
         public ISoundMan SoundMan { get; set; }
+        public IXleInput Input { get; set; }
 
-        OutsideExtender Map
+        IOutsideExtender Map
         {
-            get { return (OutsideExtender)GameState.MapExtender; } 
+            get { return (IOutsideExtender)GameState.MapExtender; } 
         }
 
         public override void Execute()
@@ -30,27 +30,11 @@ namespace ERY.Xle.Services.Commands.Implementation
             TextArea.PrintLine();
             TextArea.PrintLine("Disembark in which direction?");
 
-            do
-            {
-                Screen.OnDraw();
+            Input.PromptToContinueOnWait = false;
 
-            } while (!(
-                Keyboard.Keys[KeyCode.Left] || Keyboard.Keys[KeyCode.Right] ||
-                Keyboard.Keys[KeyCode.Up] || Keyboard.Keys[KeyCode.Down]));
+            var key = Input.WaitForKey(KeyCode.Left, KeyCode.Up, KeyCode.Right, KeyCode.Down);
 
-            int newx = Player.X;
-            int newy = Player.Y;
-
-            Direction dir = Direction.East;
-
-            if (Keyboard.Keys[KeyCode.Left])
-                dir = Direction.West;
-            else if (Keyboard.Keys[KeyCode.Up])
-                dir = Direction.North;
-            else if (Keyboard.Keys[KeyCode.Down])
-                dir = Direction.South;
-            else if (Keyboard.Keys[KeyCode.Right])
-                dir = Direction.East;
+            Direction dir = key.ToDirection();
 
             PlayerDisembark(dir);
         }

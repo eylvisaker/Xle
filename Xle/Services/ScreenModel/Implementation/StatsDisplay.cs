@@ -21,7 +21,7 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
 
         private Player Player { get { return GameState.Player; } }
         private XleMap Map { get { return GameState.Map; } }
-        private MapExtender MapExtender { get { return GameState.MapExtender; } }
+        private IMapExtender MapExtender { get { return GameState.MapExtender; } }
 
         public Color HPColor
         {

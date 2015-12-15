@@ -43,17 +43,18 @@ namespace ERY.XleTests
 
         }
 
-        protected virtual Mock<MapExtender> InitializeMap<TMapData>(int mapId)
+        protected virtual Mock<IMapExtender> InitializeMap<TMapData>(int mapId)
             where TMapData : XleMap, new()
         {
             XleMap map = new TMapData();
             map.MapID = mapId;
             map.TileImage = "MyTiles";
 
-            Mock<MapExtender> newMap = new Mock<MapExtender>();
+            Mock<IMapExtender> newMap = new Mock<IMapExtender>();
             newMap.SetupAllProperties();
 
-            newMap.Object.TheMap = map;
+            newMap.Setup(x => x.TheMap).Returns(map);
+            newMap.Setup(x => x.MapID).Returns(map.MapID);
 
             return newMap;
         }

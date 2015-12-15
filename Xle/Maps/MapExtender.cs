@@ -19,7 +19,7 @@ using ERY.Xle.XleEventTypes.Extenders;
 
 namespace ERY.Xle.Maps
 {
-    public class MapExtender
+    public class MapExtender : IMapExtender
     {
         XleMap mTheMap;
         List<EventExtender> mEvents = new List<EventExtender>();

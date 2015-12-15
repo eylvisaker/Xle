@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.XleTests.ServiceTests.CommandTests
+namespace ERY.XleTests.Commands
 {
     [TestClass]
     public class DungeonClimbTest : XleTest

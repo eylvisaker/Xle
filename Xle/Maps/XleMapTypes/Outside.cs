@@ -38,6 +38,11 @@ namespace ERY.Xle.Maps.XleMapTypes
 
         #endregion
 
+        public override bool StoreReturnLocation
+        {
+            get { return true; }
+        }
+
         public TerrainType TerrainAt(int xx, int yy)
         {
             int[,] t = new int[2, 2] { { 0, 0 }, { 0, 0 } };

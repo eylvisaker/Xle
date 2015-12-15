@@ -27,7 +27,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 
         public bool ShowItemMenu { get; set; }
 
-        MapExtender MapExtender { get { return GameState.MapExtender; } }
+        IMapExtender MapExtender { get { return GameState.MapExtender; } }
 
         public override string Name
         {

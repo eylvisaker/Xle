@@ -33,7 +33,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             return "Maps/" + data.MapList[mapId].Filename;
         }
 
-        public MapExtender LoadMap(int mapId)
+        public IMapExtender LoadMap(int mapId)
         {
             if (data.MapList.ContainsKey(mapId) == false)
                 return null;
@@ -43,7 +43,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             return LoadMap(file, mapId);
         }
 
-        public MapExtender LoadMap(string filename, int id)
+        public IMapExtender LoadMap(string filename, int id)
         {
             XleMap data = LoadMapData(filename, id);
 

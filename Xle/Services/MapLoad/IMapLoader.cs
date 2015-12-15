@@ -5,7 +5,7 @@ namespace ERY.Xle.Services.MapLoad
     public interface IMapLoader : IXleService
     {
         XleMap LoadMapData(int mapId);
-        MapExtender LoadMap(int mapId);
-        MapExtender LoadMap(string filename, int mapId);
+        IMapExtender LoadMap(int mapId);
+        IMapExtender LoadMap(string filename, int mapId);
     }
 }

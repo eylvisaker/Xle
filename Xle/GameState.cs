@@ -34,7 +34,7 @@ namespace ERY.Xle
             }
         }
 
-        public MapExtender MapExtender { get; set; }
+        public IMapExtender MapExtender { get; set; }
 
         public GameSpeed GameSpeed { get; set; }
     }

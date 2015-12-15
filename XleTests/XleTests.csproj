@@ -98,6 +98,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ColorSchemeTests.cs" />
+    <Compile Include="Commands\DisembarkTest.cs" />
     <Compile Include="Commands\DungeonOpenTest.cs" />
     <Compile Include="Commands\DungeonXamineTest.cs" />
     <Compile Include="LegacyOfTheAncients\Commands\LotaUseTest.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="LegacyOfTheAncients\MuseumExhibitLevelUpTests.cs" />
     <Compile Include="ServiceTests\EquipmentPickerTest.cs" />
     <Compile Include="ServiceTests\MapChangerTest.cs" />
-    <Compile Include="ServiceTests\CommandTests\DungeonClimbTest.cs" />
+    <Compile Include="Commands\DungeonClimbTest.cs" />
     <Compile Include="ServiceTests\NumberPickerTests.cs" />
     <Compile Include="ServiceTests\QuickMenuRunnerTests.cs" />
     <Compile Include="ServiceTests\SubmenuTests.cs" />

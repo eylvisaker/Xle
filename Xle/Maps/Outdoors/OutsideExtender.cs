@@ -16,7 +16,7 @@ using ERY.Xle.Services.XleSystem;
 
 namespace ERY.Xle.Maps.Outdoors
 {
-    public class OutsideExtender : Map2DExtender
+    public class OutsideExtender : Map2DExtender, IOutsideExtender
     {
         Direction monstDir { get; set; }
 

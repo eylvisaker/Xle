@@ -470,6 +470,8 @@ namespace ERY.Xle.Maps
 
         public virtual double StepQuality { get { return 1; } }
 
+        public virtual bool StoreReturnLocation { get { return false; } }
+
         #endregion
 
 

@@ -25,8 +25,8 @@ namespace ERY.XleTests.ServiceTests
     public class MapChangerTest : XleTest
     {
         MapChanger changer;
-        Mock<MapExtender> returnedMap;
-        Mock<MapExtender> startMap;
+        Mock<IMapExtender> returnedMap;
+        Mock<IMapExtender> startMap;
         Mock<IMuseumCoinSale> museumCoinSale;
 
         [TestInitialize]
@@ -44,7 +44,7 @@ namespace ERY.XleTests.ServiceTests
 
         }
 
-        private void SetupMapLoader<TMapData>(Action<Mock<MapExtender>> mapGenerator = null) where TMapData : XleMap, new()
+        private void SetupMapLoader<TMapData>(Action<Mock<IMapExtender>> mapGenerator = null) where TMapData : XleMap, new()
         {
             Services.MapLoader.Setup(x => x.LoadMap(It.IsAny<int>()))
                 .Returns((int mapId) =>
@@ -111,7 +111,7 @@ namespace ERY.XleTests.ServiceTests
 
             changer.ChangeMap(2, new Point(4, 4));
 
-            Assert.AreEqual(1, Player.returnMap);
+            Assert.AreEqual(1, Player.returnMap, "Player's return map ID not set properly.");
             Assert.AreEqual(22, Player.returnX);
             Assert.AreEqual(44, Player.returnY);
             Assert.AreEqual(2, GameState.Map.MapID);

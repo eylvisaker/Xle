@@ -12,7 +12,7 @@ namespace ERY.Xle.Services.Commands.Implementation
     {
         public GameState GameState { get; set; }
 
-        MapExtender MapExtender { get { return GameState.MapExtender; } }
+        IMapExtender MapExtender { get { return GameState.MapExtender; } }
 
         public bool InteractWithFirstEvent(Func<EventExtender, bool> function)
         {

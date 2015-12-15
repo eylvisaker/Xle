@@ -28,7 +28,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
 
         protected Player Player { get { return GameState.Player; } }
         protected XleMap Map { get { return GameState.Map; } }
-        protected MapExtender MapExtender { get { return GameState.MapExtender; } }
+        protected IMapExtender MapExtender { get { return GameState.MapExtender; } }
 
         /// <summary>
         /// Function called when player speaks in a square inside or next

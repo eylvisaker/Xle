@@ -109,7 +109,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             gameState.MapExtender.OnAfterEntry();
         }
 
-        private void TransferAngryStateIfNeeded(MapExtender saveMap)
+        private void TransferAngryStateIfNeeded(IMapExtender saveMap)
         {
             // Preserve guard anger state for castle 
             // when changing levels
@@ -175,14 +175,14 @@ namespace ERY.Xle.Services.MapLoad.Implementation
 
         private void SetReturnLocationIfOutside()
         {
-            if (gameState.Map is Outside)
+            if (gameState.Map.StoreReturnLocation)
             {
                 Player.SetReturnLocation(Player.MapID, Player.X, Player.Y, Direction.South);
             }
         }
 
 
-        public void SetMap(MapExtender map)
+        public void SetMap(IMapExtender map)
         {
             gameState.MapExtender = map;
             gameState.MapExtender.OnLoad();
