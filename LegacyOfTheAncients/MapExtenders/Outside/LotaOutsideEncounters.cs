@@ -32,7 +32,7 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
         public ISoundMan SoundMan { get; set; }
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
-        public OutsideRenderer MapRenderer { get; set; }
+        public IOutsideEncounterRenderer MapRenderer { get; set; }
         public ITerrainMeasurement TerrainMeasurement { get; set; }
         public IQuickMenu QuickMenu { get; set; }
 
@@ -171,26 +171,33 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
             SoundMan.PlaySound(LotaSound.Encounter);
 
-            var monsterId = SelectRandomMonster(TerrainMeasurement.TerrainAtPlayer());
+            InitiateEncounter();
 
-            MapRenderer.DisplayMonsterID = monsterId;
-
-            if (monstDir == Direction.None)
-                SetMonsterImagePosition();
-
-            for (int i = 0; i < monstCount; i++)
-            {
-                var m = new Monster(Data.MonsterInfoList.First(x => x.ID == monsterId));
-
-                m.HP = (int)(m.HP * (Random.NextDouble() * 0.4 + 0.8));
-
-                currentMonst.Add(m);
-            }
-
-            GameControl.Wait(500);
+	        GameControl.Wait(500);
         }
 
-        private int SelectRandomMonster(TerrainType terrain)
+	    public void InitiateEncounter()
+	    {
+		    var monsterId = SelectRandomMonster(TerrainMeasurement.TerrainAtPlayer());
+
+		    MapRenderer.DisplayMonsterID = monsterId;
+
+		    if (monstDir == Direction.None)
+		    {
+			    SetMonsterImagePosition();
+		    }
+
+		    for (int i = 0; i < monstCount; i++)
+		    {
+			    var m = new Monster(Data.MonsterInfoList.First(x => x.ID == monsterId));
+
+			    m.HP = (int)(m.HP * (Random.NextDouble() * 0.4 + 0.8));
+
+			    currentMonst.Add(m);
+		    }
+	    }
+
+	    private int SelectRandomMonster(TerrainType terrain)
         {
             int friendlyChance = 0;
             int allTerrainChance = 0;

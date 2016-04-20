@@ -30,7 +30,7 @@ namespace ERY.Xle.LoB.MapExtenders.Outside
 
         public bool IsMonsterFriendly { get; set; }
 
-        public OutsideRenderer MapRenderer { get; set; }
+        public IOutsideEncounterRenderer MapRenderer { get; set; }
 
         public string MonsterName
         {

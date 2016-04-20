@@ -12,7 +12,7 @@ namespace ERY.Xle.Maps.Outdoors
         bool IsMonsterFriendly { get; set; }
         IReadOnlyList<Monster> CurrentMonsters { get; }
         EncounterState EncounterState { get; }
-        OutsideRenderer MapRenderer { get; set; }
+		IOutsideEncounterRenderer MapRenderer { get; set; }
 
         void Step();
         void HitMonster(int damage);

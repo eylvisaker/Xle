@@ -5,8 +5,8 @@ using AgateLib.Platform;
 
 namespace ERY.Xle.Services.Rendering.Maps
 {
-    public class OutsideRenderer : Map2DRenderer
-    {
+    public class OutsideRenderer : Map2DRenderer, IOutsideEncounterRenderer
+	{
         int[] waves;
         Rectangle drawRect;
         int mWaterAnimLevel;
@@ -14,7 +14,7 @@ namespace ERY.Xle.Services.Rendering.Maps
 
         public int DisplayMonsterID { get; set; } = -1;
 
-        public Direction MonsterDrawDirection;
+        public Direction MonsterDrawDirection { get; set; }
 
         /// <summary>
         /// Gets or sets whether or not the player is in stormy water
@@ -131,4 +131,10 @@ namespace ERY.Xle.Services.Rendering.Maps
         }
 
     }
+
+	public interface IOutsideEncounterRenderer
+	{
+		Direction MonsterDrawDirection { get; set; }
+		int DisplayMonsterID { get; set; }
+	}
 }
