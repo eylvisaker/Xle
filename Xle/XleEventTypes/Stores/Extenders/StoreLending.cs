@@ -6,167 +6,231 @@ using System.Text;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-    public class StoreLending : StoreFront
-    {
-        public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
+	public class StoreLending : StoreFront
+	{
+		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
-        public override int RobValue()
-        {
-            return Random.Next(180, 231);
-        }
-        protected override void InitializeColorScheme(ColorScheme cs)
-        {
-            cs.BackColor = XleColor.DarkGray;
-            cs.FrameColor = XleColor.Gray;
-            cs.FrameHighlightColor = XleColor.Yellow;
-            cs.BorderColor = XleColor.Black;
-        }
+		public override int RobValue()
+		{
+			return Random.Next(180, 231);
+		}
 
-        protected override bool SpeakImpl()
-        {
-            int i = 0;
-            int max = 200 * Player.Level;
-            int choice;
+		protected override void InitializeColorScheme(ColorScheme cs)
+		{
+			cs.BackColor = XleColor.DarkGray;
+			cs.FrameColor = XleColor.Gray;
+			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.BorderColor = XleColor.Black;
+		}
 
-            robbing = false;
+		protected override bool SpeakImpl()
+		{
+			robbing = false;
 
-            ClearWindow();
+			InitializeWindow();
 
-            Title = "Friendly";
+			TextArea.PrintLine();
 
-            var window1 = new TextWindow { Location = new Point(10, 2), Text = "Lending Association" };
+			if (Player.loan == 0)
+			{
+				OfferLoan();
+			}
+			else
+			{
+				RepayLoan();
+			}
 
-            Windows.Add(window1);
+			return true;
+		}
 
-            TextArea.PrintLine();
+		private void InitializeWindow()
+		{
+			ClearWindow();
 
-            if (Player.loan == 0)
-            {
-                var window2 = new TextWindow { Location = new Point(8, 7) };
+			Title = "Friendly";
 
-                window2.WriteLine("We'd be happy to loan you");
-                window2.WriteLine("money at 'friendly' rates");
+			var window1 = new TextWindow { Location = new Point(10, 2), Text = "Lending Association" };
 
-                var window3 = new TextWindow { Location = new Point(7, 11) };
+			Windows.Add(window1);
+		}
 
-                window3.Write("You may borrow up to ");
-                window3.Write(max.ToString());
-                window3.WriteLine(" gold");
+		private void RepayLoan()
+		{
+			int maxPayment = Math.Max(Player.Gold, Player.loan);
+			int minPayment;
+			int timeLeft = (int)(Player.dueDate - Player.TimeDays + 0.02);
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("Borrow how much?");
+			if (timeLeft > 0)
+			{
+				minPayment = 0;
+			}
+			else
+			{
+				minPayment = (int)(Player.loan * .3 + 0.5);
 
-                Windows.Add(window2);
-                Windows.Add(window3);
+				if (minPayment > Player.Gold)
+				{
+					minPayment = Player.Gold;
+					if (Player.Gold > 30)
+					{
+						minPayment -= 10;
+					}
+				}
+			}
 
-                choice = ChooseNumber(max);
+			var paymentAmount = PaymentPrompt(Player.loan, timeLeft, minPayment, maxPayment);
 
-                if (choice > 0)
-                {
-                    Player.Gold += choice;
-                    Player.loan = (int)(choice * 1.5);
-                    Player.dueDate = (int)(Player.TimeDays + 0.999) + 120;
+			if (paymentAmount > Player.loan)
+			{
+				paymentAmount = Player.loan;
+			}
 
-                    TextArea.PrintLine();
-                    TextArea.PrintLine(choice.ToString() + " gold borrowed.");
+			Player.Gold -= paymentAmount;
+			Player.loan -= paymentAmount;
 
-                    Wait(1000);
+			if (Player.loan <= 0)
+			{
+				DisplayLoanRepaid();
+			}
+			else if (minPayment == 0)
+			{
+				DisplayDebtRemainder(Player.loan, timeLeft);
+			}
+			else if (paymentAmount >= minPayment)
+			{
+				Player.dueDate = (int)Player.TimeDays + 14;
+				DisplayLoanExtension();
+			}
+			else
+			{
+				DisplayFailureToPay();
+			}
+		}
 
-                    TextArea.Print("You'll owe ", XleColor.White);
-                    TextArea.Print(Player.loan.ToString(), XleColor.Yellow);
-                    TextArea.Print(" gold", XleColor.Yellow);
-                    TextArea.Print(" in 120 days.", XleColor.White);
-                    TextArea.PrintLine();
+		private void DisplayFailureToPay()
+		{
+			TextArea.PrintLine("Better pay up!");
+			StoreSound(LotaSound.Bad);
+		}
 
-                    StoreSound(LotaSound.Bad);
-                }
-            }
-            else
-            {
-                String DueDate;
-                max = Math.Max(Player.Gold, Player.loan);
-                int min;
-                int timeLeft = (int)(Player.dueDate - Player.TimeDays + 0.02);
+		private void DisplayLoanExtension()
+		{
+			TextArea.PrintLine("You have 14 days to pay the rest!");
 
-                if (timeLeft > 0)
-                {
-                    DueDate = timeLeft.ToString() + " days ";
-                    min = 0;
-                }
-                else
-                {
-                    DueDate = "NOW!!";
-                    min = (int)(Player.loan * .3 + 0.5);
-                    if (min > Player.Gold)
-                    {
-                        min = Player.Gold;
-                        if (Player.Gold > 30)
-                            min -= 10;
-                    }
-                }
+			StoreSound(LotaSound.Sale);
+		}
 
-                var window2 = new TextWindow { Location = new Point(11, 7) };
+		private void DisplayDebtRemainder(int loan, int timeLeft)
+		{
+			TextArea.PrintLine("You Owe " + loan + " gold.");
 
-                window2.WriteLine("You owe:  " + Player.loan.ToString() + " gold!");
-                window2.WriteLine();
-                window2.WriteLine();
-                window2.WriteLine("Due Date: " + DueDate);
+			if (timeLeft > 15)
+			{
+				TextArea.PrintLine("Take your time.");
+			}
 
-                Windows.Add(window2);
+			StoreSound(LotaSound.Sale);
+		}
 
-                TextArea.PrintLine();
-                TextArea.Print("Pay how much? ");
+		private void DisplayLoanRepaid()
+		{
+			TextArea.PrintLine("Loan Repaid.");
 
-                if (min > 0)
-                {
-                    TextArea.Print("(At Least " + min.ToString() + " gold)", XleColor.Yellow);
-                }
+			StoreSound(LotaSound.Sale);
+		}
 
-                TextArea.PrintLine();
+		private int PaymentPrompt(int debt, int timeLeft, int minPayment, int maxPayment)
+		{
+			string dueDate;
 
-                choice = ChooseNumber(max);
+			if (timeLeft > 0)
+			{
+				dueDate = timeLeft + " days ";
+			}
+			else
+			{
+				dueDate = "NOW!!";
+			}
 
-                if (choice > Player.loan)
-                    choice = Player.loan;
+			var window2 = new TextWindow { Location = new Point(11, 7) };
 
-                Player.Spend(choice);
-                Player.loan -= choice;
+			window2.WriteLine("You owe:  " + debt + " gold!");
+			window2.WriteLine();
+			window2.WriteLine();
+			window2.WriteLine("Due Date: " + dueDate);
 
-                if (Player.loan <= 0)
-                {
-                    TextArea.PrintLine("Loan Repaid.");
+			Windows.Add(window2);
 
-                    StoreSound(LotaSound.Sale);
-                }
-                else if (min == 0)
-                {
-                    TextArea.PrintLine("You Owe " + Player.loan.ToString() + " gold.");
+			TextArea.PrintLine();
+			TextArea.Print("Pay how much? ");
 
-                    if (timeLeft > 15)
-                        TextArea.PrintLine("Take your time.");
+			if (minPayment > 0)
+			{
+				TextArea.Print("(At Least " + minPayment + " gold)", XleColor.Yellow);
+			}
 
-                    StoreSound(LotaSound.Sale);
-                }
-                else if (choice >= min)
-                {
-                    TextArea.PrintLine("You have 14 days to pay the rest!");
-                    Player.dueDate = (int)Player.TimeDays + 14;
+			TextArea.PrintLine();
 
-                    StoreSound(LotaSound.Sale);
-                }
-                else
-                {
-                    TextArea.PrintLine("Better pay up!");
-                    StoreSound(LotaSound.Bad);
-                }
+			var choice = ChooseNumber(maxPayment);
 
+			return choice;
+		}
 
-            }
+		private void OfferLoan()
+		{
+			var amount = PromptBorrow();
 
-            return true;
+			if (amount <= 0)
+				return;
 
-        }
+			Player.Gold += amount;
+			Player.loan = (int)(amount * 1.5);
+			Player.dueDate = (int)(Player.TimeDays + 0.999) + 120;
 
+			DisplayNewLoan(amount, Player.loan, 120);
+		}
 
-    }
+		private void DisplayNewLoan(int amount, int repaymentAmount, int timeDays)
+		{
+			TextArea.PrintLine();
+			TextArea.PrintLine(amount + " gold borrowed.");
+
+			Wait(1000);
+
+			TextArea.Print("You'll owe ", XleColor.White);
+			TextArea.Print(repaymentAmount.ToString(), XleColor.Yellow);
+			TextArea.Print(" gold", XleColor.Yellow);
+			TextArea.Print(" in " + timeDays + " days.", XleColor.White);
+			TextArea.PrintLine();
+
+			StoreSound(LotaSound.Bad);
+		}
+
+		private int PromptBorrow()
+		{
+			var window2 = new TextWindow { Location = new Point(8, 7) };
+
+			window2.WriteLine("We'd be happy to loan you");
+			window2.WriteLine("money at 'friendly' rates");
+
+			var window3 = new TextWindow { Location = new Point(7, 11) };
+
+			window3.Write("You may borrow up to ");
+			window3.Write(MaxLoan.ToString());
+			window3.WriteLine(" gold");
+
+			TextArea.PrintLine();
+			TextArea.PrintLine("Borrow how much?");
+
+			Windows.Add(window2);
+			Windows.Add(window3);
+
+			return ChooseNumber(MaxLoan);
+		}
+
+		private int MaxLoan
+		{
+			get { return 200 * Player.Level; }
+		}
+	}
 }

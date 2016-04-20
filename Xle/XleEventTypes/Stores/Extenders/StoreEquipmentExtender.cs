@@ -65,9 +65,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             TextArea.PrintLine("      what will you sell me?");
             TextArea.PrintLine();
 
-            int choice;
-
-            Equipment eq = PickItemToSell();
+	        Equipment eq = PickItemToSell();
 
             if (eq == null)
             {
@@ -80,7 +78,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             TextArea.PrintLine("for your " + eq.NameWithQuality(Data) + ".");
             TextArea.PrintLine();
 
-            choice = QuickMenuService.QuickMenuYesNo(true);
+            var choice = QuickMenuService.QuickMenuYesNo(true);
 
             if (choice == 1)
             {
