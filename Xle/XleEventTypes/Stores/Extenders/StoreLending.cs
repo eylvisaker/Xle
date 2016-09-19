@@ -3,31 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ERY.Xle.Services;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
-	public class StoreLending : StoreFront
+	public class StoreLending : StoreExtender
 	{
+		public ILendingPresentation LendingPresentation { get; set; }
+
 		public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
 		public override int RobValue()
 		{
 			return Random.Next(180, 231);
 		}
-
-		protected override void InitializeColorScheme(ColorScheme cs)
-		{
-			cs.BackColor = XleColor.DarkGray;
-			cs.FrameColor = XleColor.Gray;
-			cs.FrameHighlightColor = XleColor.Yellow;
-			cs.BorderColor = XleColor.Black;
-		}
-
+		
 		protected override bool SpeakImpl()
 		{
-			robbing = false;
-
-			InitializeWindow();
+			LendingPresentation.InitializeWindow();
 
 			TextArea.PrintLine();
 
@@ -41,17 +34,6 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			}
 
 			return true;
-		}
-
-		private void InitializeWindow()
-		{
-			ClearWindow();
-
-			Title = "Friendly";
-
-			var window1 = new TextWindow { Location = new Point(10, 2), Text = "Lending Association" };
-
-			Windows.Add(window1);
 		}
 
 		private void RepayLoan()
@@ -78,7 +60,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 				}
 			}
 
-			var paymentAmount = PaymentPrompt(Player.loan, timeLeft, minPayment, maxPayment);
+			var paymentAmount = LendingPresentation.PaymentPrompt(Player.loan, timeLeft, minPayment, maxPayment);
 
 			if (paymentAmount > Player.loan)
 			{
@@ -90,37 +72,87 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 			if (Player.loan <= 0)
 			{
-				DisplayLoanRepaid();
+				LendingPresentation.DisplayLoanRepaid();
 			}
 			else if (minPayment == 0)
 			{
-				DisplayDebtRemainder(Player.loan, timeLeft);
+				LendingPresentation.DisplayDebtRemainder(Player.loan, timeLeft);
 			}
 			else if (paymentAmount >= minPayment)
 			{
 				Player.dueDate = (int)Player.TimeDays + 14;
-				DisplayLoanExtension();
+				LendingPresentation.DisplayLoanExtension();
 			}
 			else
 			{
-				DisplayFailureToPay();
+				LendingPresentation.DisplayFailureToPay();
 			}
 		}
 
-		private void DisplayFailureToPay()
+
+		public void OfferLoan()
+		{
+			var amount = LendingPresentation.PromptBorrow(MaxLoan);
+
+			if (amount <= 0)
+				return;
+
+			Player.Gold += amount;
+			Player.loan = (int)(amount * 1.5);
+			Player.dueDate = (int)(Player.TimeDays + 0.999) + 120;
+
+			LendingPresentation.DisplayNewLoan(amount, Player.loan, 120);
+		}
+
+		private int MaxLoan => 200 * Player.Level;
+	}
+
+	public interface ILendingPresentation : IXleService
+	{
+		void InitializeWindow();
+
+		int PromptBorrow(int maxLoan);
+
+		void DisplayNewLoan(int amount, int loan, int i);
+
+		void DisplayLoanRepaid();
+
+		void DisplayDebtRemainder(int loan, int timeLeft);
+
+		void DisplayLoanExtension();
+
+		void DisplayFailureToPay();
+
+		int PaymentPrompt(int loan, int timeLeft, int minPayment, int maxPayment);
+	}
+
+	public class LendingPresentation : StoreFront, ILendingPresentation
+	{
+		public void InitializeWindow()
+		{
+			ClearWindow();
+
+			Title = "Friendly";
+
+			var window1 = new TextWindow { Location = new Point(10, 2), Text = "Lending Association" };
+
+			Windows.Add(window1);
+		}
+
+		public void DisplayFailureToPay()
 		{
 			TextArea.PrintLine("Better pay up!");
 			StoreSound(LotaSound.Bad);
 		}
 
-		private void DisplayLoanExtension()
+		public void DisplayLoanExtension()
 		{
 			TextArea.PrintLine("You have 14 days to pay the rest!");
 
 			StoreSound(LotaSound.Sale);
 		}
 
-		private void DisplayDebtRemainder(int loan, int timeLeft)
+		public void DisplayDebtRemainder(int loan, int timeLeft)
 		{
 			TextArea.PrintLine("You Owe " + loan + " gold.");
 
@@ -132,14 +164,15 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			StoreSound(LotaSound.Sale);
 		}
 
-		private void DisplayLoanRepaid()
+
+		public void DisplayLoanRepaid()
 		{
 			TextArea.PrintLine("Loan Repaid.");
 
 			StoreSound(LotaSound.Sale);
 		}
 
-		private int PaymentPrompt(int debt, int timeLeft, int minPayment, int maxPayment)
+		public int PaymentPrompt(int debt, int timeLeft, int minPayment, int maxPayment)
 		{
 			string dueDate;
 
@@ -176,21 +209,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			return choice;
 		}
 
-		private void OfferLoan()
-		{
-			var amount = PromptBorrow();
-
-			if (amount <= 0)
-				return;
-
-			Player.Gold += amount;
-			Player.loan = (int)(amount * 1.5);
-			Player.dueDate = (int)(Player.TimeDays + 0.999) + 120;
-
-			DisplayNewLoan(amount, Player.loan, 120);
-		}
-
-		private void DisplayNewLoan(int amount, int repaymentAmount, int timeDays)
+		public void DisplayNewLoan(int amount, int repaymentAmount, int timeDays)
 		{
 			TextArea.PrintLine();
 			TextArea.PrintLine(amount + " gold borrowed.");
@@ -205,8 +224,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
 			StoreSound(LotaSound.Bad);
 		}
-
-		private int PromptBorrow()
+		public int PromptBorrow(int MaxLoan)
 		{
 			var window2 = new TextWindow { Location = new Point(8, 7) };
 
@@ -228,9 +246,12 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 			return ChooseNumber(MaxLoan);
 		}
 
-		private int MaxLoan
+		protected override void InitializeColorScheme(ColorScheme cs)
 		{
-			get { return 200 * Player.Level; }
+			cs.BackColor = XleColor.DarkGray;
+			cs.FrameColor = XleColor.Gray;
+			cs.FrameHighlightColor = XleColor.Yellow;
+			cs.BorderColor = XleColor.Black;
 		}
 	}
 }

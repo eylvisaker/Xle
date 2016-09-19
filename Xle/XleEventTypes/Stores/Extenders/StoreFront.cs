@@ -9,6 +9,7 @@ using System.Text;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
+using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 using ERY.Xle.XleEventTypes.Extenders;
 
@@ -24,7 +25,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         public INumberPicker NumberPicker { get; set; }
         public ITextAreaRenderer TextAreaRenderer { get; set; }
         public ITextRenderer TextRenderer { get; set; }
-
+		public IXleScreen Screen { get; set; }
         public List<TextWindow> Windows { get; private set; }
         public new Store TheEvent { get { return (Store)base.TheEvent; } }
 
@@ -158,12 +159,23 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged, redraw: RedrawStore);
         }
 
-        protected int ChooseNumber(int max)
-        {
-            return NumberPicker.ChooseNumber(RedrawStore, max);
-        }
+	    protected int ChooseNumber(int max)
+	    {
+		    EventHandler draw = (sender, args) => { RedrawStore(); };
 
-        public string Title { get; set; }
+		    try
+		    {
+			    //Screen.Draw += draw;
+
+			    return NumberPicker.ChooseNumber(RedrawStore, max);
+		    }
+		    finally
+		    {
+			    Screen.Draw -= draw;
+		    }
+	    }
+
+	    public string Title { get; set; }
 
         public override bool Speak()
         {
