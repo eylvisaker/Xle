@@ -73,8 +73,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AgateLib, Version=2.0.39.16003, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.2.0.39.16003\lib\portable-net45+win+wpa81+wp80\AgateLib.dll</HintPath>
+    <Reference Include="AgateLib, Version=2.0.40.16290, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.2.0.40.16290\lib\portable-net45+win+wpa81+wp80\AgateLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AgateLib.Platform.IntegrationTest, Version=2.0.39.16003, Culture=neutral, processorArchitecture=MSIL">
