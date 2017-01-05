@@ -1,6 +1,6 @@
 ﻿using AgateLib.Geometry;
 using AgateLib.InputLib;
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace ERY.Xle.Maps.XleMapTypes
         int mHeight;
         int[] mData;
 
-        protected override void WriteData(AgateLib.Serialization.Xle.XleSerializationInfo info)
+        protected override void WriteData(ERY.Xle.Serialization.XleSerializationInfo info)
         {
             info.Write("Width", mWidth);
             info.Write("Height", mHeight);
@@ -22,7 +22,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
             base.WriteData(info);
         }
-        protected override void ReadData(AgateLib.Serialization.Xle.XleSerializationInfo info)
+        protected override void ReadData(ERY.Xle.Serialization.XleSerializationInfo info)
         {
             mWidth = info.ReadInt32("Width");
             mHeight = info.ReadInt32("Height");

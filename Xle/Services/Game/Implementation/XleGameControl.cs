@@ -2,6 +2,7 @@
 
 using AgateLib;
 using AgateLib.DisplayLib;
+using AgateLib.InputLib;
 using AgateLib.InputLib.Legacy;
 using AgateLib.Platform;
 
@@ -10,81 +11,86 @@ using ERY.Xle.Services.XleSystem;
 
 namespace ERY.Xle.Services.Game.Implementation
 {
-    public class XleGameControl : IXleGameControl
-    {
-        private IXleScreen screen;
-        private GameState gameState;
-        private XleSystemState systemState;
-        
-        public XleGameControl(
-            IXleScreen screen,
-            GameState gameState,
-            XleSystemState systemState)
-        {
-            this.screen = screen;
-            this.gameState = gameState;
-            this.systemState = systemState;
-        }
+	public class XleGameControl : IXleGameControl
+	{
+		private IXleScreen screen;
+		private GameState gameState;
+		private XleSystemState systemState;
 
-        public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
-        {
-            if (redraw == null)
-                redraw = screen.OnDraw;
+		public XleGameControl(
+			IXleScreen screen,
+			GameState gameState,
+			XleSystemState systemState)
+		{
+			this.screen = screen;
+			this.gameState = gameState;
+			this.systemState = systemState;
+		}
 
-            IStopwatch watch = Timing.CreateStopWatch();
+		public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
+		{
+			if (redraw == null)
+				redraw = screen.OnDraw;
 
-            do
-            {
-                screen.OnUpdate();
+			IStopwatch watch = Timing.CreateStopWatch();
 
-                redraw();
-                KeepAlive();
+			using (var input = new SimpleInputHandler())
+			{
+				Input.Handlers.Add(input);
 
-                if (keyBreak && Keyboard.AnyKeyPressed)
-                    break;
+				do
+				{
+					screen.OnUpdate();
 
-            } while (watch.TotalMilliseconds < howLong);
-        }
+					redraw();
+					KeepAlive();
 
-        public void KeepAlive()
-        {
-            if (gameState.MapExtender != null)
-            {
-                gameState.MapExtender.CheckSounds();
-            }
+					if (keyBreak && input.Keys.Any)
+						break;
 
-            if (screen.CurrentWindowClosed)
-                throw new MainWindowClosedException();
+				} while (watch.TotalMilliseconds < howLong);
+			}
+		}
 
-            Core.KeepAlive();
-        }
+		public void KeepAlive()
+		{
+			if (gameState.MapExtender != null)
+			{
+				gameState.MapExtender.CheckSounds();
+			}
 
-        public void RunRedrawLoop()
-        {
-            while (screen.CurrentWindowClosed == false &&
-                systemState.ReturnToTitle == false)
-            {
-                Redraw();
-            }
-        }
+			if (screen.CurrentWindowClosed)
+				throw new MainWindowClosedException();
 
-        public void Redraw()
-        {
-            OnUpdate();
-            screen.OnDraw();
+			Core.KeepAlive();
+		}
 
-            KeepAlive();
-        }
+		public void RunRedrawLoop()
+		{
+			while (screen.CurrentWindowClosed == false &&
+				systemState.ReturnToTitle == false)
+			{
+				Redraw();
+			}
+		}
 
-        private void OnUpdate()
-        {
-            if (gameState != null && gameState.MapExtender != null)
-            {
-                gameState.MapExtender.OnUpdate(Display.DeltaTime / 1000.0);
-            }
+		public void Redraw()
+		{
+			OnUpdate();
+			screen.OnDraw();
 
-            screen.OnUpdate();
-        }
+			KeepAlive();
+		}
 
-    }
+		private void OnUpdate()
+		{
+			if (gameState != null && gameState.MapExtender != null)
+			{
+				gameState.MapExtender.OnUpdate(Display.DeltaTime / 1000.0);
+			}
+
+			screen.OnUpdate();
+		}
+
+	}
 }

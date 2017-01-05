@@ -1,6 +1,6 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Geometry;
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 
 using ERY.Xle.Data;
 using ERY.Xle.LotA.MapExtenders.Castle;

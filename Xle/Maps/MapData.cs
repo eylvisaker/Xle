@@ -1,4 +1,4 @@
-﻿using AgateLib.Serialization.Xle;
+﻿using ERY.Xle.Serialization;
 
 namespace ERY.Xle.Maps
 {

@@ -17,49 +17,40 @@ namespace ERY.Xle.LoB
 {
 	static class LobProgram
 	{
-        private static ICommandFactory commandFactory;
+		private static ICommandFactory commandFactory;
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
 		static void Main(string[] args)
 		{
-			var parameters = new SerialModelParameters(args);
-
-			parameters.ApplicationName = "Legend of Blacksilver";
-			parameters.AssetLocations.Path = "LoB";
-			parameters.AssetLocations.Sound = "Audio";
-			parameters.AssetLocations.Surfaces = "Images";
-			parameters.CoordinateSystem = new FixedAspectRatioCoordinates
+			using (var setup = new AgateSetupWinForms(args))
 			{
-				MinHeight = 440,
-				MaxHeight = 440,
-				MinWidth = 680,
-				MaxWidth = 680,
-				AspectRatio = 680.0 / 440.0,
-				Origin = new Point(-20, -20),
-			};
+				setup.ApplicationName = "Legend of Blacksilver";
+				setup.AssetLocations.Path = "LoB";
+				setup.AssetLocations.Sound = "Audio";
+				setup.AssetLocations.Surfaces = "Images";
+				setup.DesiredDisplayWindowResolution = new Size(680, 440);
+				setup.DisplayWindowExpansionType = AgateLib.Configuration.WindowExpansionType.Scale;
 
-			var model = new SerialModel(parameters);
+				setup.InitializeAgateLib();
 
-			model.Run(() =>
-			{
-                var initializer = new WindsorInitializer();
-                var container = initializer.BootstrapContainer(typeof(LobProgram).Assembly);
+				var initializer = new WindsorInitializer();
+				var container = initializer.BootstrapContainer(typeof(LobProgram).Assembly);
 
-                IXleStartup core = container.Resolve<IXleStartup>();
-                core.ProcessArguments(args);
-                commandFactory = container.Resolve<ICommandFactory>();
+				IXleStartup core = container.Resolve<IXleStartup>();
+				core.ProcessArguments(args);
+				commandFactory = container.Resolve<ICommandFactory>();
 
-                core.Run();
-			});
+				core.Run();
+			}
 		}
 
 		public static IEnumerable<Command> CommonLobCommands
 		{
 			get
 			{
-                yield return commandFactory.Armor();
+				yield return commandFactory.Armor();
 				yield return commandFactory.Gamespeed();
 				yield return commandFactory.Inventory();
 				yield return commandFactory.Pass();

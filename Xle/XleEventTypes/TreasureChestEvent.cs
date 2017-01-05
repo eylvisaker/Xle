@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 using ERY.Xle.XleEventTypes.Extenders;
 using System.ComponentModel;
 using ERY.Xle.Maps;

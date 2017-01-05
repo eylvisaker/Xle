@@ -1,6 +1,6 @@
 ﻿using System;
 
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 
 using ERY.Xle.Data;
 using ERY.Xle.Maps;

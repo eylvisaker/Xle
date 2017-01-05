@@ -8,7 +8,7 @@ using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.Geometry;
 using AgateLib.Geometry.VertexTypes;
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 using AgateLib.DisplayLib;
 
 using Vertex = AgateLib.Geometry.VertexTypes.PositionTextureNormalTangent;

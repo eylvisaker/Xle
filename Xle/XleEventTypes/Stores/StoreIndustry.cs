@@ -7,13 +7,13 @@ namespace ERY.Xle.XleEventTypes.Stores
 {
     public class StoreIndustry : Store
     {
-        protected override void ReadData(AgateLib.Serialization.Xle.XleSerializationInfo info)
+        protected override void ReadData(ERY.Xle.Serialization.XleSerializationInfo info)
         {
             base.ReadData(info);
 
             Product = info.ReadString("Product");
         }
-        protected override void WriteData(AgateLib.Serialization.Xle.XleSerializationInfo info)
+        protected override void WriteData(ERY.Xle.Serialization.XleSerializationInfo info)
         {
             base.WriteData(info);
 

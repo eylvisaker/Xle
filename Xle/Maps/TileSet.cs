@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 
 namespace ERY.Xle.Maps
 {

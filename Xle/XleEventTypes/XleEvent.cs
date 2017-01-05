@@ -7,7 +7,7 @@ using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.Geometry;
 using AgateLib.InputLib;
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 
 using ERY.Xle.Maps;
 using ERY.Xle.XleEventTypes.Extenders;

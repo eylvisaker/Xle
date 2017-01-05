@@ -1,5 +1,5 @@
 ﻿using AgateLib.Geometry;
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.XleEventTypes.Stores.Extenders;

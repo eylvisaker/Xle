@@ -9,10 +9,10 @@ using System.Text;
 
 namespace ERY.Xle.Maps
 {
-    class XleTypeBinder : AgateLib.Serialization.Xle.ITypeBinder
+    class XleTypeBinder : ERY.Xle.Serialization.ITypeBinder
     {
         Dictionary<string, Type> typemap = new Dictionary<string, Type>();
-        private AgateLib.Serialization.Xle.ITypeBinder typeBinder;
+        private ERY.Xle.Serialization.ITypeBinder typeBinder;
 
         XleTypeBinder()
         {
@@ -49,7 +49,7 @@ namespace ERY.Xle.Maps
             MapSpecificStore(p, typeof(Store));
         }
 
-        public XleTypeBinder(AgateLib.Serialization.Xle.ITypeBinder typeBinder)
+        public XleTypeBinder(ERY.Xle.Serialization.ITypeBinder typeBinder)
             : this()
         {
             this.typeBinder = typeBinder;

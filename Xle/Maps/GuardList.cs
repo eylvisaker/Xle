@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using AgateLib.Geometry;
 using AgateLib.Platform;
-using AgateLib.Serialization.Xle;
+using ERY.Xle.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
