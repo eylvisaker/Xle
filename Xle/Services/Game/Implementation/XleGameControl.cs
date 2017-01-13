@@ -48,7 +48,7 @@ namespace ERY.Xle.Services.Game.Implementation
 					if (keyBreak && input.Keys.Any)
 						break;
 
-				} while (watch.TotalMilliseconds < howLong);
+				} while (watch.TotalMilliseconds < howLong && Core.IsAlive);
 			}
 		}
 
@@ -67,7 +67,7 @@ namespace ERY.Xle.Services.Game.Implementation
 
 		public void RunRedrawLoop()
 		{
-			while (screen.CurrentWindowClosed == false &&
+			while (Core.IsAlive &&
 				systemState.ReturnToTitle == false)
 			{
 				Redraw();

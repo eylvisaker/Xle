@@ -1,8 +1,6 @@
-﻿using AgateLib.ApplicationModels;
-using AgateLib.Geometry;
+﻿using AgateLib.Geometry;
 using AgateLib.Geometry.CoordinateSystems;
 using AgateLib.Platform.WinForms;
-using AgateLib.Platform.WinForms.ApplicationModels;
 using AgateLib.Utility;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
@@ -33,7 +31,7 @@ namespace ERY.Xle.LotA
 
 		private static void RunGame(string[] args)
 		{
-			using (var setup = new AgateSetupWinForms(args))
+			using (var setup = new AgateSetup(args))
 			{
 				setup.ApplicationName = "Legacy of the Ancients";
 				setup.AssetLocations.Path = "LotA";

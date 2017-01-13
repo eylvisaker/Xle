@@ -53,8 +53,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
 		private void OnDoCommand(KeyCode command)
 		{
-			if (DoCommand != null)
-				DoCommand(this, new CommandEventArgs(command));
+			DoCommand?.Invoke(this, new CommandEventArgs(command));
 		}
 
 		public event EventHandler<CommandEventArgs> DoCommand;

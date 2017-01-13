@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using AgateLib.ApplicationModels;
 using AgateLib.Drivers;
 using AgateLib.Platform.IntegrationTest;
 using Castle.MicroKernel;
@@ -25,14 +24,14 @@ namespace ERY.XleTests.ServiceTests
 
 		public ContainerTests()
 		{
-			var appDirPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(ContainerTests)).Location);
-			var parameters = new SerialModelParameters();
+			using (var setup = new IntegrationTestPlatform())
+			{
+				setup.InitializeAgateLib();
 
-			IntegrationTestPlatform.Initialize(parameters, appDirPath);
+				var init = new WindsorInitializer();
 
-			var init = new WindsorInitializer();
-
-			container = init.BootstrapContainer(GetType().Assembly);
+				container = init.BootstrapContainer(GetType().Assembly);
+			}
 		}
 	}
 }

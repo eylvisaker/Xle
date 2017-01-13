@@ -39,13 +39,12 @@ namespace ERY.Xle.Serialization
 		Stack<XElement> nodes = new Stack<XElement>();
 		XleTypeSerializerCollection TypeSerializers;
 
-		internal XleSerializationInfo(ITypeBinder Binder1, XleTypeSerializerCollection TypeSerializers, IPlatformSerialization constructor = null, XDocument document = null)
+		internal XleSerializationInfo(ITypeBinder Binder1, XleTypeSerializerCollection TypeSerializers, XDocument document = null)
 		{
 			this.Binder = Binder1;
 			this.TypeSerializers = TypeSerializers;
 
 			this.doc = document;
-			this.ObjectConstructor = constructor;
 
 			if (this.doc == null)
 				this.doc = new XDocument();
@@ -56,7 +55,6 @@ namespace ERY.Xle.Serialization
 			get { return doc; }
 		}
 
-		IPlatformSerialization ObjectConstructor { get; set; }
 		XElement CurrentNode
 		{
 			get
@@ -1604,7 +1602,7 @@ namespace ERY.Xle.Serialization
 
 				try
 				{
-					obj = (IXleSerializable)ObjectConstructor.CreateInstance(type);
+					obj = (IXleSerializable)Activator.CreateInstance(type);
 				}
 				catch (Exception e)
 				{

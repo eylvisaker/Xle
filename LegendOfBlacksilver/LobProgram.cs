@@ -1,8 +1,6 @@
-﻿using AgateLib.ApplicationModels;
-using AgateLib.Geometry;
+﻿using AgateLib.Geometry;
 using AgateLib.Geometry.CoordinateSystems;
 using AgateLib.Platform.WinForms;
-using AgateLib.Platform.WinForms.ApplicationModels;
 using ERY.Xle.Bootstrap;
 using System;
 using System.Collections.Generic;
@@ -24,7 +22,7 @@ namespace ERY.Xle.LoB
 		[STAThread]
 		static void Main(string[] args)
 		{
-			using (var setup = new AgateSetupWinForms(args))
+			using (var setup = new AgateSetup(args))
 			{
 				setup.ApplicationName = "Legend of Blacksilver";
 				setup.AssetLocations.Path = "LoB";

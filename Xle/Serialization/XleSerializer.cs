@@ -37,7 +37,6 @@ namespace ERY.Xle.Serialization
 		Type objectType;
 		XleTypeSerializerCollection mTypeSerializers = new XleTypeSerializerCollection();
 
-		public IPlatformSerialization ObjectConstructor { get; set; }
 		/// <summary>
 		/// An object which implements the ERY.Xle.Serialization.ITypeBinder interface.
 		/// This object is used to convert strings to System.Type objects.  The default value
@@ -58,26 +57,22 @@ namespace ERY.Xle.Serialization
 		/// <param name="objectType">The type of the object to serialize.</param>
 		/// <param name="objectConstructor">An object which can construct arbitrary types. If this is null
 		/// it will be obtained from the platform factory.</param>
-		public XleSerializer(Type objectType, IPlatformSerialization objectConstructor = null)
+		public XleSerializer(Type objectType)
 		{
-			if (objectConstructor == null)
-				objectConstructor = new AgateLib.Platform.Common.PlatformImplementation.PlatformSerialization();// Core.Factory.PlatformFactory.CreateDefaultSerializationConstructor();
-
-			ObjectConstructor = objectConstructor;
-
 			var typeBinder = new TypeBinder();
 
 			typeBinder.AddAssembly(objectType.GetTypeInfo().Assembly);
 			typeBinder.AddAssembly(typeof(XleSerializer).GetTypeInfo().Assembly);
 
-			if (Core.Factory != null)
+			typeBinder.AddAssemblies(new[] 
 			{
-				typeBinder.AddAssemblies(
-					Core.Factory.PlatformFactory.GetSerializationSearchAssemblies(objectType));
-			}
+				Assembly.GetEntryAssembly(),
+				Assembly.GetAssembly(typeof(XleSerializer)),
+				Assembly.GetAssembly(typeof(AgateLib.Geometry.Point))
+			});
 
-			Binder = typeBinder;
-			
+			this.Binder = typeBinder;
+
 			this.objectType = objectType;
 		}
 
@@ -124,7 +119,7 @@ namespace ERY.Xle.Serialization
 		{
 			XDocument doc = XDocument.Load(XmlReader.Create(inStream));
 
-			XleSerializationInfo info = new XleSerializationInfo(Binder, TypeSerializers, ObjectConstructor, doc);
+			XleSerializationInfo info = new XleSerializationInfo(Binder, TypeSerializers, doc);
 
 			return info.BeginDeserialize();
 		}
