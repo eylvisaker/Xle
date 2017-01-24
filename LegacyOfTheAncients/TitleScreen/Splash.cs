@@ -26,7 +26,7 @@ namespace ERY.Xle.LotA.TitleScreen
         {
             if (titleScreenSurface == null)
             {
-                titleScreenSurface = new Surface("title.png");
+                titleScreenSurface = new Surface("Images/title.png");
                 titleScreenSurface.InterpolationHint = InterpolationMode.Fastest;
             }
 

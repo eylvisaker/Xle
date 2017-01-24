@@ -25,7 +25,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
                 try
                 {
-                    mSounds[s] = new SoundBuffer(name);
+                    mSounds[s] = new SoundBuffer("Audio/" + name);
                 }
                 catch (Exception e)
                 {

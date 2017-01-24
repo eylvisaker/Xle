@@ -59,11 +59,15 @@ namespace ERY.Xle.LoB
 
 		public override void LoadSurfaces()
 		{
-			Font = FontSurface.BitmapMonospace("font.png", new Size(16, 16));
-			Font.StringTransformer = StringTransformer.ToUpper;
+			var fontSurface = FontSurface.BitmapMonospace("Images/font.png", new Size(16, 16));
+			
+			Font = new FontBuilder("LotaFont")
+				.AddFontSurface(new FontSettings(16, FontStyles.None), fontSurface)
+				.Build();
+			Font.Size = 16;
 
-			Character = new Surface("character.png");
-			Monsters = new Surface("OverworldMonsters.png");
+			Character = new Surface("Images/character.png");
+			Monsters = new Surface("Images/OverworldMonsters.png");
 
 			Lob3DSurfaces.LoadSurfaces();
 

@@ -9,24 +9,24 @@ using ERY.Xle.Services.Commands.Implementation;
 
 namespace ERY.Xle.LotA
 {
-    [ServiceName("LotaUse")]
-    public class LotaUse : Use
-    {
-        public LotaUse()
-        {
-            ShowItemMenu = false;
-        }
+	[ServiceName("LotaUse")]
+	public class LotaUse : Use
+	{
+		public LotaUse()
+		{
+			ShowItemMenu = false;
+		}
 
-        protected override bool UseHealingItem(int itemID)
-        {
-            if (itemID == (int)LotaItem.HealingHerb)
-            {
-                Player.Items[itemID] -= 1;
-                ApplyHealingEffect();
-                return true;
-            }
+		protected override bool UseHealingItem(int itemID)
+		{
+			if (itemID == (int)LotaItem.HealingHerb)
+			{
+				Player.Items[itemID] -= 1;
+				ApplyHealingEffect();
+				return true;
+			}
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 }

@@ -10,7 +10,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
+using AgateLib;
+using AgateLib.DisplayLib;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.XleSystem;
@@ -31,15 +32,13 @@ namespace ERY.Xle.LotA
 
 		private static void RunGame(string[] args)
 		{
-			using (var setup = new AgateSetup(args))
+			using (AgateWinForms.Initialize(args))
+			using (new DisplayWindowBuilder(args)
+				.BackbufferSize(680, 440)
+				.Title("Legacy of the Ancients")
+				.Build())
 			{
-				setup.ApplicationName = "Legacy of the Ancients";
-				setup.AssetLocations.Path = "LotA";
-				setup.AssetLocations.Sound = "Audio";
-				setup.AssetLocations.Surfaces = "Images";
-				setup.DesiredDisplayWindowResolution = new Size(680, 440);
-				setup.DisplayWindowExpansionType = AgateLib.Configuration.WindowExpansionType.Scale;
-				setup.InitializeAgateLib();
+				AgateApp.SetAssetPath("LotA");
 
 				GameRunner(args);
 			}

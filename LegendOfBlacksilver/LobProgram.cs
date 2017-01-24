@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using AgateLib;
+using AgateLib.DisplayLib;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.XleSystem;
@@ -22,16 +23,13 @@ namespace ERY.Xle.LoB
 		[STAThread]
 		static void Main(string[] args)
 		{
-			using (var setup = new AgateSetup(args))
+			using (AgateWinForms.Initialize(args))
+			using (new DisplayWindowBuilder(args)
+				.BackbufferSize(680, 440)
+				.Title("Legend of Blacksilver")
+				.Build())
 			{
-				setup.ApplicationName = "Legend of Blacksilver";
-				setup.AssetLocations.Path = "LoB";
-				setup.AssetLocations.Sound = "Audio";
-				setup.AssetLocations.Surfaces = "Images";
-				setup.DesiredDisplayWindowResolution = new Size(680, 440);
-				setup.DisplayWindowExpansionType = AgateLib.Configuration.WindowExpansionType.Scale;
-
-				setup.InitializeAgateLib();
+				AgateApp.SetAssetPath("LoB");
 
 				var initializer = new WindsorInitializer();
 				var container = initializer.BootstrapContainer(typeof(LobProgram).Assembly);

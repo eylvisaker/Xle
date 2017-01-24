@@ -48,7 +48,7 @@ namespace ERY.Xle.Services.Game.Implementation
 					if (keyBreak && input.Keys.Any)
 						break;
 
-				} while (watch.TotalMilliseconds < howLong && Core.IsAlive);
+				} while (watch.TotalMilliseconds < howLong && AgateApp.IsAlive);
 			}
 		}
 
@@ -62,12 +62,12 @@ namespace ERY.Xle.Services.Game.Implementation
 			if (screen.CurrentWindowClosed)
 				throw new MainWindowClosedException();
 
-			Core.KeepAlive();
+			AgateApp.KeepAlive();
 		}
 
 		public void RunRedrawLoop()
 		{
-			while (Core.IsAlive &&
+			while (AgateApp.IsAlive &&
 				systemState.ReturnToTitle == false)
 			{
 				Redraw();

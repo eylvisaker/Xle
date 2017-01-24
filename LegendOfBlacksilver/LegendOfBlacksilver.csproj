@@ -35,20 +35,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AgateLib, Version=2.0.81.17012, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.2.0.81.17012\lib\portable45-net45+win8+wp8+wpa81\AgateLib.dll</HintPath>
+    <Reference Include="AgateLib, Version=2.0.104.17023, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.2.0.104.17023\lib\portable45-net45+win8+wp8+wpa81\AgateLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AgateLib.OpenGL, Version=2.0.81.17012, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.OpenGL.2.0.81.17012\lib\net461\AgateLib.OpenGL.dll</HintPath>
+    <Reference Include="AgateLib.OpenGL, Version=2.0.104.17023, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.OpenGL.2.0.104.17023\lib\net451\AgateLib.OpenGL.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AgateLib.Platform.WinForms, Version=2.0.81.17012, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.Platform.WinForms.2.0.81.17012\lib\net461\AgateLib.Platform.WinForms.dll</HintPath>
+    <Reference Include="AgateLib.Platform.WinForms, Version=2.0.104.17023, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.Platform.WinForms.2.0.104.17023\lib\net451\AgateLib.Platform.WinForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AgateLib.SDL, Version=2.0.81.17012, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.SDL.2.0.81.17012\lib\net461\AgateLib.SDL.dll</HintPath>
+    <Reference Include="AgateLib.SDL, Version=2.0.104.17023, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.SDL.2.0.104.17023\lib\net451\AgateLib.SDL.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -183,6 +183,7 @@
     <Compile Include="MapExtenders\Towns\Stores\Vault.cs" />
     <Compile Include="MapExtenders\Towns\Stores\Weapon.cs" />
     <Compile Include="MapExtenders\Towns\ThalenTown.cs" />
+    <Compile Include="MapExtenders\Towns\TownMagic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LobArchiveGemSale.cs" />
     <Compile Include="TitleScreen\LobTitleScreen.cs" />

@@ -51,8 +51,6 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 			this.Data = data;
 			this.mapChanger = mapChanger;
 
-			AgateConsole.Initialize();
-
 			AgateConsole.CommandLibraries.Add(new LibraryVocabulary(this));
 		}
 

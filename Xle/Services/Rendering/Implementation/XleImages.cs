@@ -11,7 +11,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
             if (tileset.EndsWith(".png") == false)
                 tileset += ".png";
 
-            Tiles = new Surface(tileset) { InterpolationHint = InterpolationMode.Fastest };
+            Tiles = new Surface("Images/" + tileset) { InterpolationHint = InterpolationMode.Fastest };
         }
     }
 }

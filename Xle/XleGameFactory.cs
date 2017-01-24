@@ -24,7 +24,7 @@ namespace ERY.Xle
         public abstract IXleSerializable CreateStoryData();
 
         // Surfaces
-        public FontSurface Font { get; protected set; }					// returns the handle to the font resource
+        public IFont Font { get; protected set; }					// returns the handle to the font resource
         public Surface Character { get; protected set; }		// returns the handle to the character resource
         public Surface Monsters { get; protected set; }				// returns the handle to the monsters resource
 

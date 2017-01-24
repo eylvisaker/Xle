@@ -27,8 +27,8 @@ namespace ERY.Xle.LotA.TitleScreen
 		{
 			if (titleHeader1 == null)
 			{
-				titleHeader1 = new Surface("TitleHeader1.png");
-				titleHeader2 = new Surface("TitleHeader2.png");
+				titleHeader1 = new Surface("Images/TitleHeader1.png");
+				titleHeader2 = new Surface("Images/TitleHeader2.png");
 			}
 
 			Instruction = new TextWindow();

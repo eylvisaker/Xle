@@ -197,7 +197,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 					}
 
 					Display.EndFrame();
-					Core.KeepAlive();
+					AgateApp.KeepAlive();
 				}
 			}
 		}

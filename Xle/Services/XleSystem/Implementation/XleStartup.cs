@@ -38,9 +38,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             systemState.Factory.LoadSurfaces();
             data.LoadDungeonMonsterSurfaces();
 
-            systemState.Factory.Font.InterpolationHint = InterpolationMode.Fastest;
-             
-            AgateLib.Core.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
+            AgateApp.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
 
             soundMan.Load();
 

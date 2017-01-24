@@ -7,73 +7,78 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.Maps.Outdoors
 {
-    public class TerrainMeasurement : ITerrainMeasurement
-    {
-        public GameState GameState { get; set; }
+	public class TerrainMeasurement : ITerrainMeasurement
+	{
+		public GameState GameState { get; set; }
 
-        XleMap TheMap {  get { return GameState.Map; } }
+		XleMap TheMap { get { return GameState.Map; } }
 
-        public TerrainType TerrainAtPlayer()
-        {
-            return TerrainAt(GameState.Player.X, GameState.Player.Y);
-        }
-        public TerrainType TerrainAt(int x, int y)
-        {
-            int[,] t = new int[2, 2] { { 0, 0 }, { 0, 0 } };
-            int[] tc = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		public TerrainType TerrainAtPlayer()
+		{
+			return TerrainAt(GameState.Player.X, GameState.Player.Y);
+		}
+		public TerrainType TerrainAt(int x, int y)
+		{
+			int[,] terrainAt = new int[2, 2] { { 0, 0 }, { 0, 0 } };
+			int[] terrainCount = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
 
-            for (int j = 0; j < 2; j++)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    t[j, i] = TheMap[x + i, y + j];
-                }
-            }
+			for (int j = 0; j < 2; j++)
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					terrainAt[j, i] = TheMap[x + i, y + j];
+				}
+			}
 
-            for (int j = 0; j < 2; j++)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    tc[t[j, i] / 32]++;
+			for (int j = 0; j < 2; j++)
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					var terrainIndex = terrainAt[j, i] / 32;
 
-                    if (t[j, i] % 32 <= 1)
-                        tc[t[j, i] / 32] += 1;
-                }
-            }
+					if (terrainIndex >= terrainCount.Length)
+						continue;
 
-            if (tc[(int)TerrainType.Mountain] > 4)
-            {
-                return TerrainType.Mountain;
-            }
+					terrainCount[terrainAt[j, i] / 32]++;
 
-            if (tc[(int)TerrainType.Mountain] > 0)
-            {
-                return TerrainType.Foothills;
-            }
+					if (terrainAt[j, i] % 32 <= 1)
+						terrainCount[terrainAt[j, i] / 32] += 1;
+				}
+			}
 
-            if (tc[(int)TerrainType.Desert] >= 1)
-            {
-                return TerrainType.Desert;
-            }
+			if (terrainCount[(int)TerrainType.Mountain] > 4)
+			{
+				return TerrainType.Mountain;
+			}
 
-            if (tc[(int)TerrainType.Swamp] > 1)
-            {
-                return TerrainType.Swamp;
-            }
+			if (terrainCount[(int)TerrainType.Mountain] > 0)
+			{
+				return TerrainType.Foothills;
+			}
 
-            for (int i = 0; i < 8; i++)
-            {
-                if (tc[i] > 3)
-                {
-                    return (TerrainType)i;
-                }
-                else if (tc[i] == 2 && i != 1)
-                {
-                    return TerrainType.Mixed;
-                }
-            }
+			if (terrainCount[(int)TerrainType.Desert] >= 1)
+			{
+				return TerrainType.Desert;
+			}
 
-            return (TerrainType)2;
-        }
-    }
+			if (terrainCount[(int)TerrainType.Swamp] > 1)
+			{
+				return TerrainType.Swamp;
+			}
+
+			for (int i = 0; i < 8; i++)
+			{
+				if (terrainCount[i] > 3)
+				{
+					return (TerrainType)i;
+				}
+				else if (terrainCount[i] == 2 && i != 1)
+				{
+					return TerrainType.Mixed;
+				}
+			}
+
+			return (TerrainType)2;
+		}
+	}
 }

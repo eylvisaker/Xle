@@ -189,9 +189,9 @@ namespace ERY.Xle.LotA.TitleScreen
 		{
 			if (titleScreenSurface == null)
 			{
-				titleScreenSurface = new Surface("title.png");
-				titleHeader1 = new Surface("TitleHeader1.png");
-				titleHeader2 = new Surface("TitleHeader2.png");
+				titleScreenSurface = new Surface("Images/title.png");
+				titleHeader1 = new Surface("Images/TitleHeader1.png");
+				titleHeader2 = new Surface("Images/TitleHeader2.png");
 			}
 
 			player = null;
@@ -214,7 +214,7 @@ namespace ERY.Xle.LotA.TitleScreen
 						break;
 					}
 
-					Core.KeepAlive();
+					AgateApp.KeepAlive();
 				}
 
 				renderer.ReplacementDrawMethod = null;
@@ -254,7 +254,7 @@ namespace ERY.Xle.LotA.TitleScreen
 				while (watch.TotalMilliseconds < milliseconds)
 				{
 					DisplayTitleScreen();
-					Core.KeepAlive();
+					AgateApp.KeepAlive();
 				}
 			}
 			finally

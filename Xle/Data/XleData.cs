@@ -361,7 +361,7 @@ namespace ERY.Xle.Data
         {
             foreach (var dm in DungeonMonsters)
             {
-                dm.Value.Surface = new AgateLib.DisplayLib.Surface("Dungeon/Monsters/" + dm.Value.ImageFile);
+                dm.Value.Surface = new AgateLib.DisplayLib.Surface("Images/Dungeon/Monsters/" + dm.Value.ImageFile);
             }
         }
 

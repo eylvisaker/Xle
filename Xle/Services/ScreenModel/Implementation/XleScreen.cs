@@ -46,7 +46,7 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
 			Draw?.Invoke(this, EventArgs.Empty);
 
 			Display.EndFrame();
-			Core.KeepAlive();
+			AgateApp.KeepAlive();
 		}
 
 		public event EventHandler Draw;

@@ -28,7 +28,7 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
             if (string.IsNullOrEmpty(ImageFile))
                 return;
 
-            Image = new Surface("Museum/Exhibits/" + ImageFile);
+            Image = new Surface("Images/Museum/Exhibits/" + ImageFile);
         }
 
         public int FrameTime { get; set; }

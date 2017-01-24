@@ -17,18 +17,18 @@ namespace ERY.Xle.LotA
 
 		internal static void LoadSurfaces()
 		{
-			Museum.Walls = new Surface("Museum/walls.png");
-			Museum.Torches = new Surface("Museum/torches.png");
-			Museum.ExhibitOpen = new Surface("Museum/Exhibits/exopen.png");
-			Museum.ExhibitClosed = new Surface("Museum/Exhibits/exopen.png");
+			Museum.Walls = new Surface("Images/Museum/walls.png");
+			Museum.Torches = new Surface("Images/Museum/torches.png");
+			Museum.ExhibitOpen = new Surface("Images/Museum/Exhibits/exopen.png");
+			Museum.ExhibitClosed = new Surface("Images/Museum/Exhibits/exopen.png");
 
-			MuseumDark.Walls = new Surface("MuseumDark/walls.png");
+			MuseumDark.Walls = new Surface("Images/MuseumDark/walls.png");
 
-			DungeonBlue.Traps = new Surface("Dungeon/PiratesLair/traps.png");
-			DungeonBlue.Walls = new Surface("Dungeon/PiratesLair/walls.png");
+			DungeonBlue.Traps = new Surface("Images/Dungeon/PiratesLair/traps.png");
+			DungeonBlue.Walls = new Surface("Images/Dungeon/PiratesLair/walls.png");
 
-			DungeonBrown.Traps = new Surface("Dungeon/Armak/traps.png");
-			DungeonBrown.Walls = new Surface("Dungeon/Armak/walls.png");
+			DungeonBrown.Traps = new Surface("Images/Dungeon/Armak/traps.png");
+			DungeonBrown.Walls = new Surface("Images/Dungeon/Armak/walls.png");
 		}
 	}
 }
