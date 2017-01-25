@@ -36,6 +36,8 @@ namespace ERY.Xle.LotA
 			using (new DisplayWindowBuilder(args)
 				.BackbufferSize(680, 440)
 				.Title("Legacy of the Ancients")
+				.WithCoordinates(new FixedCoordinateSystem(new Rectangle(-20, -20, 680, 440)))
+				.AllowResize()
 				.Build())
 			{
 				AgateApp.SetAssetPath("LotA");

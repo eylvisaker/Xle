@@ -27,6 +27,8 @@ namespace ERY.Xle.LoB
 			using (new DisplayWindowBuilder(args)
 				.BackbufferSize(680, 440)
 				.Title("Legend of Blacksilver")
+				.WithCoordinates(new FixedCoordinateSystem(new Rectangle(-20, -20, 680, 440)))
+				.AllowResize()
 				.Build())
 			{
 				AgateApp.SetAssetPath("LoB");
