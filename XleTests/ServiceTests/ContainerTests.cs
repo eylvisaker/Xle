@@ -24,10 +24,8 @@ namespace ERY.XleTests.ServiceTests
 
 		public ContainerTests()
 		{
-			using (var setup = new IntegrationTestPlatform())
+			using (var platform = new AgateIntegrationTestPlatform())
 			{
-				setup.InitializeAgateLib();
-
 				var init = new WindsorInitializer();
 
 				container = init.BootstrapContainer(GetType().Assembly);
