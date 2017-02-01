@@ -1,5 +1,5 @@
 ﻿using System;
-
+using AgateLib;
 using ERY.Xle.Serialization;
 
 using ERY.Xle.Data;
@@ -77,7 +77,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             XleSerializer ser = new XleSerializer(typeof(XleMap));
             ser.Binder = new XleTypeBinder(ser.Binder);
 
-            using (var file = AgateLib.IO.Assets.OpenRead(filename))
+            using (var file = AgateApp.Assets.OpenRead(filename))
             {
                 return (XleMap)ser.Deserialize(file);
             }

@@ -142,7 +142,7 @@ namespace ERY.Xle.Maps
 
 			XleMap result;
 
-			using (var file = Assets.OpenRead(filename))
+			using (var file = AgateApp.Assets.OpenRead(filename))
 			{
 				result = (XleMap)ser.Deserialize(file);
 			}

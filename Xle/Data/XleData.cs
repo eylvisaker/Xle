@@ -37,7 +37,7 @@ namespace ERY.Xle.Data
 
         public void LoadGameFile(string filename)
         {
-            XDocument doc = XDocument.Load(AgateLib.IO.Assets.OpenReadAsync(filename).Result);
+            XDocument doc = XDocument.Load(AgateLib.AgateApp.Assets.OpenReadAsync(filename).Result);
             XElement root = doc.Root;
 
             LoadMapInfo(root.Element("Maps"));
