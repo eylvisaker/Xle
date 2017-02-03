@@ -32,7 +32,9 @@ namespace ERY.Xle.LotA
 
 		private static void RunGame(string[] args)
 		{
-			using (AgateWinForms.Initialize(args))
+			using (new AgateWinForms(args)
+				.AssetPath("LotA")
+				.Initialize())
 			using (new DisplayWindowBuilder(args)
 				.BackbufferSize(680, 440)
 				.Title("Legacy of the Ancients")

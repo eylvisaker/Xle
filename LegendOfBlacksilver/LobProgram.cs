@@ -23,7 +23,9 @@ namespace ERY.Xle.LoB
 		[STAThread]
 		static void Main(string[] args)
 		{
-			using (AgateWinForms.Initialize(args))
+			using (new AgateWinForms(args)
+				.AssetPath("LoB")
+				.Initialize())
 			using (new DisplayWindowBuilder(args)
 				.BackbufferSize(680, 440)
 				.Title("Legend of Blacksilver")
@@ -31,8 +33,6 @@ namespace ERY.Xle.LoB
 				.AllowResize()
 				.Build())
 			{
-				AgateApp.SetAssetPath("LoB");
-
 				var initializer = new WindsorInitializer();
 				var container = initializer.BootstrapContainer(typeof(LobProgram).Assembly);
 

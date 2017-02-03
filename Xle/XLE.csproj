@@ -321,20 +321,20 @@
     <Compile Include="Services\XleSystem\XleSystemState.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AgateLib, Version=2.0.119.17031, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.2.0.119.17031\lib\portable45-net45+win8+wp8+wpa81\AgateLib.dll</HintPath>
+    <Reference Include="AgateLib, Version=2.0.123.17033, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.2.0.123.17033\lib\portable45-net45+win8+wp8+wpa81\AgateLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AgateLib.OpenGL, Version=2.0.119.17031, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.OpenGL.2.0.119.17031\lib\net451\AgateLib.OpenGL.dll</HintPath>
+    <Reference Include="AgateLib.OpenGL, Version=2.0.123.17033, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.OpenGL.2.0.123.17033\lib\net451\AgateLib.OpenGL.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AgateLib.Platform.WinForms, Version=2.0.119.17031, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.Platform.WinForms.2.0.119.17031\lib\net451\AgateLib.Platform.WinForms.dll</HintPath>
+    <Reference Include="AgateLib.Platform.WinForms, Version=2.0.123.17033, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.Platform.WinForms.2.0.123.17033\lib\net451\AgateLib.Platform.WinForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AgateLib.SDL, Version=2.0.119.17031, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.SDL.2.0.119.17031\lib\net451\AgateLib.SDL.dll</HintPath>
+    <Reference Include="AgateLib.SDL, Version=2.0.123.17033, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AgateLib.SDL.2.0.123.17033\lib\net451\AgateLib.SDL.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -375,11 +375,11 @@
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup />
-  <Import Project="..\packages\AgateLib.SDL.2.0.119.17031\build\AgateLib.SDL.targets" Condition="Exists('..\packages\AgateLib.SDL.2.0.119.17031\build\AgateLib.SDL.targets')" />
+  <Import Project="..\packages\AgateLib.SDL.2.0.123.17033\build\AgateLib.SDL.targets" Condition="Exists('..\packages\AgateLib.SDL.2.0.123.17033\build\AgateLib.SDL.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\AgateLib.SDL.2.0.119.17031\build\AgateLib.SDL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AgateLib.SDL.2.0.119.17031\build\AgateLib.SDL.targets'))" />
+    <Error Condition="!Exists('..\packages\AgateLib.SDL.2.0.123.17033\build\AgateLib.SDL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AgateLib.SDL.2.0.123.17033\build\AgateLib.SDL.targets'))" />
   </Target>
 </Project>
