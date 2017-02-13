@@ -1,5 +1,5 @@
 ﻿using AgateLib.DisplayLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle.Services.Rendering.Implementation
 {

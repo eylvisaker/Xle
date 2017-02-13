@@ -1,6 +1,6 @@
 ﻿using System;
-
-using AgateLib.Geometry;
+using AgateLib.DisplayLib;
+using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle.Services.Menus
 {

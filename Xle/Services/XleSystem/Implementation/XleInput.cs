@@ -1,9 +1,6 @@
 ﻿using System;
-
 using AgateLib.Diagnostics;
 using AgateLib.InputLib;
-using AgateLib.InputLib.Legacy;
-
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.ScreenModel;
 

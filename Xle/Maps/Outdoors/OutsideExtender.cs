@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.InputLib;
-using AgateLib.InputLib.Legacy;
-
 using ERY.Xle.Data;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Menus;

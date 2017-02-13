@@ -1,6 +1,6 @@
 ﻿using System;
 
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.Platform;
 
 namespace ERY.Xle.Services.Rendering.Maps

@@ -2,7 +2,7 @@
 
 using AgateLib;
 using AgateLib.DisplayLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 
 using ERY.Xle.Services.XleSystem;
 

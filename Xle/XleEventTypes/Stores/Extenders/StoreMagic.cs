@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Data;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
@@ -30,7 +30,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         {
             TextWindow window = new TextWindow();
 
-            window.Location = new AgateLib.Geometry.Point(8, 2);
+            window.Location = new Point(8, 2);
 
             window.WriteLine("General Purpose      Prices", XleColor.Blue);
             window.WriteLine("");

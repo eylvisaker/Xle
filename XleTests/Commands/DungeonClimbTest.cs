@@ -1,4 +1,4 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle;
 using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.XleMapTypes;
@@ -12,80 +12,80 @@ using System.Threading.Tasks;
 
 namespace ERY.XleTests.Commands
 {
-    [TestClass]
-    public class DungeonClimbTest : XleTest
-    {
-        DungeonClimb climb;
-        Player player;
-        GameState gameState;
-        Mock<DungeonExtender> map;
-        Mock<IDungeonAdapter> adapter;
-        Dungeon mapData;
+	[TestClass]
+	public class DungeonClimbTest : XleTest
+	{
+		DungeonClimb climb;
+		Player player;
+		GameState gameState;
+		Mock<DungeonExtender> map;
+		Mock<IDungeonAdapter> adapter;
+		Dungeon mapData;
 
-        public DungeonClimbTest()
-        {
-            adapter = new Mock<IDungeonAdapter>();
+		public DungeonClimbTest()
+		{
+			adapter = new Mock<IDungeonAdapter>();
 
-            mapData = new Dungeon();
-            mapData.SetLevels(8);
-            mapData.InitializeMap(16, 16);
+			mapData = new Dungeon();
+			mapData.SetLevels(8);
+			mapData.InitializeMap(16, 16);
 
-            map = new Mock<DungeonExtender>();
-            map.SetupAllProperties();
-            map.Object.TheMap = mapData ;
+			map = new Mock<DungeonExtender>();
+			map.SetupAllProperties();
+			map.Object.TheMap = mapData;
 
-            player = new Player();
-            gameState = new GameState { Player = player, MapExtender = map.Object };
+			player = new Player();
+			gameState = new GameState { Player = player, MapExtender = map.Object };
 
-            climb = new DungeonClimb();
-            climb.DungeonAdapter = adapter.Object;
-            climb.GameControl = Services.GameControl.Object;
-            climb.MapChanger = Services.MapChanger.Object;
-            climb.TextArea = Services.TextArea.Object;
-            climb.GameState = gameState;
-        }
+			climb = new DungeonClimb();
+			climb.DungeonAdapter = adapter.Object;
+			climb.GameControl = Services.GameControl.Object;
+			climb.MapChanger = Services.MapChanger.Object;
+			climb.TextArea = Services.TextArea.Object;
+			climb.GameState = gameState;
+		}
 
-        [TestMethod]
-        public void ClimbDown()
-        {
-            player.Location = new Point(4, 4);
-            adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.FloorHole);
+		[TestMethod]
+		public void ClimbDown()
+		{
+			player.Location = new Point(4, 4);
+			adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.FloorHole);
 
-            player.DungeonLevel = 0;
+			player.DungeonLevel = 0;
 
-            climb.Execute();
+			climb.Execute();
 
-            Assert.AreEqual(1, player.DungeonLevel);
-        }
+			Assert.AreEqual(1, player.DungeonLevel);
+		}
 
-        [TestMethod]
-        public void ClimbUp()
-        {
-            player.Location = new Point(4, 4);
-            adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.CeilingHole);
+		[TestMethod]
+		public void ClimbUp()
+		{
+			player.Location = new Point(4, 4);
+			adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.CeilingHole);
 
-            player.DungeonLevel = 2;
+			player.DungeonLevel = 2;
 
-            climb.Execute();
+			climb.Execute();
 
-            Assert.AreEqual(1, player.DungeonLevel);
-        }
+			Assert.AreEqual(1, player.DungeonLevel);
+		}
 
-        [TestMethod]
-        public void ClimbOut()
-        {
-            player.Location = new Point(4, 4);
-            adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.CeilingHole);
+		[TestMethod]
+		public void ClimbOut()
+		{
+			player.Location = new Point(4, 4);
+			adapter.Setup(x => x.TileAt(4, 4, -1)).Returns(DungeonTile.CeilingHole);
 
-            player.DungeonLevel = 0;
+			player.DungeonLevel = 0;
 
-            Services.MapChanger.Setup(x => x.ReturnToPreviousMap()).Verifiable();
-            adapter.Setup(x => x.OnPlayerExitDungeon()).Verifiable();
+			Services.MapChanger.Setup(x => x.ReturnToPreviousMap()).Verifiable();
+			adapter.Setup(x => x.OnPlayerExitDungeon()).Verifiable();
 
-            climb.Execute();
+			climb.Execute();
 
-            adapter.Verify();
-            Services.MapChanger.Verify();
-        }
-    }
+			adapter.Verify();
+			Services.MapChanger.Verify();
+		}
+	}
 }

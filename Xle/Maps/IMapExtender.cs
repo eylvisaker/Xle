@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.InputLib;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Rendering.Maps;

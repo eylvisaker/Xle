@@ -6,12 +6,12 @@ using System.Text;
 
 using AgateLib;
 using AgateLib.InputLib;
-using AgateLib.Geometry;
-using AgateLib.Geometry.VertexTypes;
+using AgateLib.Mathematics.Geometry;
+using AgateLib.Mathematics.Geometry.VertexTypes;
 using ERY.Xle.Serialization;
 using AgateLib.DisplayLib;
 
-using Vertex = AgateLib.Geometry.VertexTypes.PositionTextureNormalTangent;
+using Vertex = AgateLib.Mathematics.Geometry.VertexTypes.PositionTextureNormalTangent;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {

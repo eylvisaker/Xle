@@ -1,4 +1,4 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Services;
 
 namespace ERY.Xle.Maps.Dungeons

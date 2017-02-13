@@ -1,7 +1,6 @@
 ﻿using AgateLib.DisplayLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.InputLib;
-using AgateLib.InputLib.Legacy;
 using System;
 using System.Collections.Generic;
 using System.Linq;

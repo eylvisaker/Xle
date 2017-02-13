@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using AgateLib.Mathematics.Geometry;
 using ERY.Xle.XleEventTypes;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress
@@ -36,7 +36,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress
             Player.RenderColor = XleColor.White;
         }
 
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             if (x >= 0)
                 return 11;

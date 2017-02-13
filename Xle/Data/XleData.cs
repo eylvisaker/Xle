@@ -1,4 +1,4 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.Mathematics.Geometry;
 
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;

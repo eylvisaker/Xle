@@ -7,7 +7,7 @@ using ERY.Xle.Data;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands.Implementation;
 using ERY.Xle.XleEventTypes;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle.LotA.MapExtenders.Outside
 {

@@ -26,6 +26,7 @@ using System.Xml.Linq;
 using System.Xml;
 using AgateLib.Drivers;
 using AgateLib;
+using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle.Serialization
 {
@@ -68,7 +69,7 @@ namespace ERY.Xle.Serialization
 			{
 				Assembly.GetEntryAssembly(),
 				Assembly.GetAssembly(typeof(XleSerializer)),
-				Assembly.GetAssembly(typeof(AgateLib.Geometry.Point))
+				Assembly.GetAssembly(typeof(Point))
 			});
 
 			this.Binder = typeBinder;

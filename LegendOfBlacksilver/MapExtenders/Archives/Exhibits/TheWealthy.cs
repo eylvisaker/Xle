@@ -8,41 +8,41 @@ using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
 {
-    public class TheWealthy : LobExhibit
-    {
-        public TheWealthy()
-            : base("The Wealthy", Coin.RedGarnet)
-        { }
+	public class TheWealthy : LobExhibit
+	{
+		public TheWealthy()
+			: base("The Wealthy", Coin.RedGarnet)
+		{ }
 
-        public Random Random { get; set; }
+		public Random Random { get; set; }
 
-        public override ExhibitIdentifier ExhibitIdentifier
-        {
-            get { return ExhibitIdentifier.TheWealthy; }
-        }
+		public override ExhibitIdentifier ExhibitIdentifier
+		{
+			get { return ExhibitIdentifier.TheWealthy; }
+		}
 
-        public override void RunExhibit()
-        {
-            base.RunExhibit();
+		public override void RunExhibit()
+		{
+			base.RunExhibit();
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Do you want some gold?");
-            TextArea.PrintLine();
+			TextArea.PrintLine();
+			TextArea.PrintLine("Do you want some gold?");
+			TextArea.PrintLine();
 
-            if (0 == QuickMenu.QuickMenuYesNo())
-            {
-                int amount = (int)(400 + Math.Pow(Player.Level, 1.35) + Random.Next(100));
+			if (0 == QuickMenu.QuickMenuYesNo())
+			{
+				int amount = (int)(400 + Math.Pow(Player.Level, 1.35) + Random.Next(100));
 
-                TextArea.PrintLine();
-                TextArea.PrintLine();
-                TextArea.PrintLine("Gold + " + amount);
-                TextArea.PrintLine();
-                TextArea.PrintLine();
+				TextArea.PrintLine();
+				TextArea.PrintLine();
+				TextArea.PrintLine("Gold + " + amount);
+				TextArea.PrintLine();
+				TextArea.PrintLine();
 
-                Player.Gold += amount;
+				Player.Gold += amount;
 
-                SoundMan.PlaySoundSync(LotaSound.VeryGood);
-            }
-        }
-    }
+				SoundMan.PlaySoundSync(LotaSound.VeryGood);
+			}
+		}
+	}
 }

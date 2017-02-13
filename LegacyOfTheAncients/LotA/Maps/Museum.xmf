@@ -9,37 +9,37 @@
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
-      <Location type="AgateLib.Geometry.Point" X="8" Y="1" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="8" Y="1" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Geometry.Point" X="21" Y="7" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="21" Y="7" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>West</Facing>
-      <Location type="AgateLib.Geometry.Point" X="12" Y="28" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="12" Y="28" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Geometry.Point" X="3" Y="7" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="3" Y="7" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>North</Facing>
-      <Location type="AgateLib.Geometry.Point" X="3" Y="20" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="3" Y="20" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Geometry.Point" X="22" Y="26" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="22" Y="26" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>North</Facing>
-      <Location type="AgateLib.Geometry.Point" X="3" Y="26" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="3" Y="26" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

@@ -1,10 +1,10 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using AgateLib.DisplayLib;
 using ERY.Xle.Services;
 using ERY.Xle.Data;
 using ERY.Xle.Services.Menus;

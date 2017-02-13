@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
-using AgateLib.Geometry;
+using AgateLib;
+using AgateLib.Mathematics.Geometry;
 
 using ERY.Xle.Maps;
 
@@ -80,7 +80,7 @@ namespace ERY.Xle.Services.Rendering.Maps
                 if (group.Tiles.Count < 2)
                     continue;
 
-                group.TimeSinceLastAnim += AgateLib.DisplayLib.Display.DeltaTime;
+                group.TimeSinceLastAnim += AgateApp.GameClock.Elapsed.TotalMilliseconds;
 
                 if (group.TimeSinceLastAnim >= group.AnimationTime)
                 {

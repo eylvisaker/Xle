@@ -6,7 +6,7 @@ using System.Text;
 
 using AgateLib;
 using AgateLib.InputLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Serialization;
 
 namespace ERY.Xle.Maps.XleMapTypes

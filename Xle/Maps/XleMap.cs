@@ -8,7 +8,7 @@ using System.Text;
 using AgateLib;
 using AgateLib.InputLib;
 using AgateLib.IO;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Serialization;
 using ERY.Xle.Maps;
 using ERY.Xle.XleEventTypes.Extenders;
@@ -443,7 +443,7 @@ namespace ERY.Xle.Maps
 				if (group.Tiles.Count < 2)
 					continue;
 
-				group.TimeSinceLastAnim += AgateLib.DisplayLib.Display.DeltaTime;
+				group.TimeSinceLastAnim += AgateApp.GameClock.Elapsed.TotalMilliseconds;
 
 				if (group.TimeSinceLastAnim >= group.AnimationTime)
 				{

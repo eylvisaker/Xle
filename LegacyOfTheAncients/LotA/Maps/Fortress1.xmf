@@ -156,7 +156,7 @@
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
-      <Location type="AgateLib.Geometry.Point" X="4" Y="34" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="4" Y="34" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

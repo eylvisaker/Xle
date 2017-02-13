@@ -1,11 +1,7 @@
 ﻿using System;
-
 using AgateLib;
-using AgateLib.DisplayLib;
 using AgateLib.InputLib;
-using AgateLib.InputLib.Legacy;
 using AgateLib.Platform;
-
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 
@@ -86,7 +82,7 @@ namespace ERY.Xle.Services.Game.Implementation
 		{
 			if (gameState != null && gameState.MapExtender != null)
 			{
-				gameState.MapExtender.OnUpdate(Display.DeltaTime / 1000.0);
+				gameState.MapExtender.OnUpdate(AgateApp.GameClock.Elapsed.TotalSeconds);
 			}
 
 			screen.OnUpdate();

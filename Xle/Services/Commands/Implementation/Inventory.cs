@@ -1,9 +1,7 @@
 ﻿using AgateLib;
 using AgateLib.DisplayLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.InputLib;
-using AgateLib.InputLib.Legacy;
-
 using ERY.Xle.Data;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.XleSystem;

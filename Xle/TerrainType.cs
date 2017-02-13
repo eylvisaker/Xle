@@ -5,7 +5,7 @@ using System.Text;
 using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.InputLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle
 {

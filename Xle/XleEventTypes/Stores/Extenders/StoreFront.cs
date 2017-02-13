@@ -1,5 +1,5 @@
 ﻿using AgateLib.DisplayLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.InputLib;
 using System;
 using System.Collections.Generic;

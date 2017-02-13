@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AgateLib.DisplayLib;
 
 namespace ERY.Xle
 {
@@ -12,6 +13,6 @@ namespace ERY.Xle
 		public int value;					// value of menu
 		public int width;					// width in CHARACTERS!!!
 
-		public AgateLib.Geometry.Color BackColor { get; set; }
+		public Color BackColor { get; set; }
 	}
 }

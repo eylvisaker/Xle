@@ -4,7 +4,7 @@ using System.Text;
 using AgateLib;
 using AgateLib.AudioLib;
 using AgateLib.DisplayLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using System.Diagnostics;
 
 namespace ERY.Xle

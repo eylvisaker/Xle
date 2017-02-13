@@ -9,12 +9,12 @@
   <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Geometry.Point" X="8" Y="9" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="8" Y="9" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Geometry.Point" X="6" Y="12" />
+      <Location type="AgateLib.Mathematics.Geometry.Point" X="6" Y="12" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

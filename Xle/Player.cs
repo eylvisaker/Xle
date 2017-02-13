@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 using AgateLib;
-using AgateLib.Geometry;
+using AgateLib.DisplayLib;
+using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Serialization;
 using ERY.Xle.Maps.XleMapTypes;
 

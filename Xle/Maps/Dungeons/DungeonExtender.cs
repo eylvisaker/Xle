@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.InputLib;
 
 using ERY.Xle.Data;

@@ -1,7 +1,8 @@
 ﻿using System;
+using AgateLib.DisplayLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ERY.Xle;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 
 namespace ERY.XleTests
 {

@@ -1,4 +1,4 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.LoB.MapExtenders.Castle.EventExtenders;
 using ERY.Xle.Maps.Castles;
 using ERY.Xle.Services;

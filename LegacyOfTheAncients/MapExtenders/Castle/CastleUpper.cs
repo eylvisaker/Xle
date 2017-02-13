@@ -26,7 +26,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             }
         }
 
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(AgateLib.Mathematics.Geometry.Point playerPoint, int x, int y)
         {
             return TheMap.OutsideTile;
         }

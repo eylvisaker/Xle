@@ -1,11 +1,12 @@
 ﻿using AgateLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.Platform;
 using ERY.Xle.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AgateLib.DisplayLib;
 
 namespace ERY.Xle.Maps
 {

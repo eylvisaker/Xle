@@ -1,4 +1,4 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Services.Menus;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;

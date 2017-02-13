@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 using AgateLib.Diagnostics;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 
 using ERY.Xle.Data;
 using ERY.Xle.Maps;
@@ -19,7 +19,7 @@ using ERY.Xle.Maps.Dungeons;
 
 namespace ERY.Xle.Services.XleSystem.Implementation
 {
-	public class XleConsole : IXleConsole, ICommandVocabulary
+	public class XleConsole : IXleConsole, IVocabulary
 	{
 		private GameState GameState;
 		private ITextArea TextArea;
@@ -53,6 +53,8 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
 			AgateConsole.CommandLibraries.Add(new LibraryVocabulary(this));
 		}
+
+		public string Namespace => "";
 
 		public void Initialize()
 		{

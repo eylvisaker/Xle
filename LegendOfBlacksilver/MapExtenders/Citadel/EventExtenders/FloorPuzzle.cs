@@ -1,4 +1,4 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;

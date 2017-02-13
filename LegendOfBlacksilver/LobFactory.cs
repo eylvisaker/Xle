@@ -1,5 +1,5 @@
 ﻿using AgateLib.DisplayLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Serialization;
 using ERY.Xle.LoB.MapExtenders;
 using ERY.Xle.LoB.MapExtenders.Archives;

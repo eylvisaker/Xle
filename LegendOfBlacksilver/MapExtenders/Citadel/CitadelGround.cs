@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Maps;
 
 namespace ERY.Xle.LoB.MapExtenders.Citadel
@@ -64,7 +65,7 @@ namespace ERY.Xle.LoB.MapExtenders.Citadel
             return cdc.RollDamageToPlayer(Player);
         }
 
-        public override int GetOutsideTile(AgateLib.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             if (playerPoint.X >= 83 && playerPoint.Y >= 65)
                 return 33;

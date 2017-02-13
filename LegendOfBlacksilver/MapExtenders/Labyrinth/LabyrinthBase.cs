@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ERY.Xle.Maps;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 {

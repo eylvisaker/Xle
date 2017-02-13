@@ -1,4 +1,4 @@
-﻿using AgateLib.Geometry;
+﻿using AgateLib.Mathematics.Geometry;
 using AgateLib.InputLib;
 using ERY.Xle.Serialization;
 using System;

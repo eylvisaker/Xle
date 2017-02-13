@@ -1,7 +1,7 @@
 ﻿using System;
 
 using AgateLib.DisplayLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.Platform;
 
 using ERY.Xle.Data;

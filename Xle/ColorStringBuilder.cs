@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 using AgateLib;
-using AgateLib.Geometry;
+using AgateLib.DisplayLib;
+using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle
 {

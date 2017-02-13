@@ -6,10 +6,8 @@ using System.Text;
 using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.InputLib;
-using AgateLib.Geometry;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.Platform;
-using AgateLib.InputLib.Legacy;
-
 using ERY.Xle.Services;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Rendering;
@@ -203,7 +201,7 @@ namespace ERY.Xle.LotA.TitleScreen
 				Input.Handlers.Add(input);
 				input.KeyDown += Keyboard_KeyDown;
 
-				while (Display.CurrentWindow.IsClosed == false && !titleDone)
+				while (AgateApp.IsAlive && !titleDone)
 				{
 					UpdateTitleScreen();
 					DisplayTitleScreen();
