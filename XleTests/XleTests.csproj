@@ -73,18 +73,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AgateLib, Version=2.0.147.17043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.2.0.147.17043\lib\portable45-net45+win8+wp8+wpa81\AgateLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AgateLib.Platform.IntegrationTest, Version=2.0.147.17043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.Platform.IntegrationTest.2.0.147.17043\lib\net451\AgateLib.Platform.IntegrationTest.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AgateLib.Platform.Test, Version=2.0.147.17043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.Platform.Test.2.0.147.17043\lib\portable45-net45+win8+wp8+wpa81\AgateLib.Platform.Test.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
@@ -102,7 +90,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="YamlDotNet, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YamlDotNet.4.1.0\lib\net35\YamlDotNet.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -149,6 +136,18 @@
     <Compile Include="XleTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AgateLib\AgateLib.Platform.IntegrationTest\AgateLib.Platform.IntegrationTest.csproj">
+      <Project>{a2bd2d8f-4afe-4548-80d9-bf73bfcafcf8}</Project>
+      <Name>AgateLib.Platform.IntegrationTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AgateLib\AgateLib.Platform.Test\AgateLib.Platform.Test.csproj">
+      <Project>{8092e103-5700-4d09-b315-192f0e792c45}</Project>
+      <Name>AgateLib.Platform.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AgateLib\AgateLib\AgateLib.csproj">
+      <Project>{9490b719-829e-43a7-a5fe-8001f8a81759}</Project>
+      <Name>AgateLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LegacyOfTheAncients\LegacyOfTheAncients.csproj">
       <Project>{44a9fc5d-abdd-42f8-9d86-aa5001ebda14}</Project>
       <Name>LegacyOfTheAncients</Name>

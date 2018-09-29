@@ -321,22 +321,6 @@
     <Compile Include="Services\XleSystem\XleSystemState.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AgateLib, Version=2.0.147.17043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.2.0.147.17043\lib\portable45-net45+win8+wp8+wpa81\AgateLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AgateLib.OpenGL, Version=2.0.147.17043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.OpenGL.2.0.147.17043\lib\net451\AgateLib.OpenGL.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AgateLib.Platform.WinForms, Version=2.0.147.17043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.Platform.WinForms.2.0.147.17043\lib\net451\AgateLib.Platform.WinForms.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AgateLib.SDL, Version=2.0.147.17043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AgateLib.SDL.2.0.147.17043\lib\net451\AgateLib.SDL.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
@@ -374,12 +358,22 @@
   <ItemGroup>
     <Content Include="TODO.txt" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="..\packages\AgateLib.SDL.2.0.147.17043\build\AgateLib.SDL.targets" Condition="Exists('..\packages\AgateLib.SDL.2.0.147.17043\build\AgateLib.SDL.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\AgateLib.SDL.2.0.147.17043\build\AgateLib.SDL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AgateLib.SDL.2.0.147.17043\build\AgateLib.SDL.targets'))" />
-  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\AgateLib\AgateLib.OpenGL\AgateLib.OpenGL.csproj">
+      <Project>{94734e5a-0344-43e8-bb30-e32e3f57f611}</Project>
+      <Name>AgateLib.OpenGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AgateLib\AgateLib.Platform.WinForms\AgateLib.Platform.WinForms.csproj">
+      <Project>{4b12561e-d37b-48a1-b6db-218e94906c22}</Project>
+      <Name>AgateLib.Platform.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AgateLib\AgateLib.SDL\AgateLib.SDL.csproj">
+      <Project>{935d67a0-931e-46de-9f6a-2d6dbc99aff3}</Project>
+      <Name>AgateLib.SDL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AgateLib\AgateLib\AgateLib.csproj">
+      <Project>{9490b719-829e-43a7-a5fe-8001f8a81759}</Project>
+      <Name>AgateLib</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
