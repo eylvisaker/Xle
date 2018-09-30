@@ -3,17 +3,17 @@ using ERY.Xle.LotA;
 using ERY.Xle.Services.Commands.Implementation;
 using ERY.Xle.XleEventTypes.Extenders;
 using ERY.XleTests.LegacyOfTheAncients;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace ERY.XleTests.LegacyOfTheAncients.Commands
 {
-    [TestClass]
     public class LotaUseTest : LotaTest
     {
         LotaUse use;
@@ -51,7 +51,7 @@ namespace ERY.XleTests.LegacyOfTheAncients.Commands
             itemChooser.Setup(x => x.ChooseItem()).Returns((int)item);
         }
 
-        [TestMethod]
+        [Fact]
         public void UseHealingItem()
         {
             SetupItemForUse(LotaItem.HealingHerb);
@@ -59,10 +59,10 @@ namespace ERY.XleTests.LegacyOfTheAncients.Commands
             Player.HP = 1;
             use.Execute();
 
-            Assert.AreEqual(Player.MaxHP / 2 + 1, Player.HP);
+            Player.HP.Should().Be(Player.MaxHP / 2 + 1);
         }
 
-        [TestMethod]
+        [Fact]
         public void UseWithEvent()
         {
             SetupItemForUse(LotaItem.MagicIce);

@@ -1,29 +1,29 @@
 ﻿using AgateLib.Mathematics.Geometry;
 using AgateLib.InputLib;
 using ERY.Xle;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace ERY.XleTests
 {
-    [TestClass]
     public class DirectionHelperTest
     {
         private void Verify<Tin,Tout>(Tout[] expected, Tin[] inputs, Func<Tin, Tout> trans)
         {
-            Assert.AreEqual(expected.Length, inputs.Length, "Array inputs must be equal length.");
+            inputs.Length.Should().Be(expected.Length, "Array inputs must be equal length.");
 
             for(int i = 0; i < inputs.Length; i++)
             {
-                Assert.AreEqual(expected[i], trans(inputs[i]), $"Failed on index {i}.");
+                trans(inputs[i]).Should().Be(expected[i], $"Failed on index {i}.");
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DirectionToPointAndStepDirection()
         {
             var inputs = new[] { Direction.West, Direction.East, Direction.North, Direction.South};
@@ -33,7 +33,7 @@ namespace ERY.XleTests
             Verify(expected, inputs, x => x.StepDirection());
         }
 
-        [TestMethod]
+        [Fact]
         public void DirectionToLeftDirection()
         {
             var inputs = new[] { Direction.West, Direction.East, Direction.North, Direction.South };
@@ -42,7 +42,7 @@ namespace ERY.XleTests
             Verify(expected, inputs, x => x.LeftDirection());
         }
 
-        [TestMethod]
+        [Fact]
         public void DirectionToRightDirection()
         {
             var inputs = new[] { Direction.West, Direction.East, Direction.North, Direction.South };
@@ -51,7 +51,7 @@ namespace ERY.XleTests
             Verify(expected, inputs, x => x.RightDirection());
         }
 
-        [TestMethod]
+        [Fact]
         public void PointToDirection()
         {
             var inputs = new[] { new Point(-1, 0), new Point(1, 0), new Point(0, -1), new Point(0, 1) };
@@ -60,7 +60,7 @@ namespace ERY.XleTests
             Verify(expected, inputs, x => x.ToDirection());
         }
 
-        [TestMethod]
+        [Fact]
         public void KeyCodeToDirection()
         {
             var inputs = new[] { KeyCode.Left, KeyCode.Right, KeyCode.Up, KeyCode.Down };

@@ -3,7 +3,7 @@ using ERY.Xle;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.Dungeons.Commands;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace ERY.XleTests.Commands
 {
-    [TestClass]
     public class DungeonXamineTest : XleTest
     {
         private DungeonXamine command;
@@ -36,7 +35,7 @@ namespace ERY.XleTests.Commands
             GameState.Player.FaceDirection = Direction.East;
         }
 
-        [TestMethod]
+        [Fact]
         public void ExamineNothing()
         {
             formatter.Setup(x => x.PrintNothingUnusualInSight()).Verifiable();
@@ -46,7 +45,7 @@ namespace ERY.XleTests.Commands
             formatter.Verify(x => x.PrintNothingUnusualInSight(), Times.Once);
         }
 
-        [TestMethod]
+        [Fact]
         public void ExamineDistantTrap()
         {
             Services.DungeonAdapter.Setup(x => x.TileAt(It.IsAny<int>(), It.IsAny<int>(), -1))
@@ -64,7 +63,7 @@ namespace ERY.XleTests.Commands
             formatter.Verify(x => x.DescribeTile(DungeonTile.TripWire, 2), Times.Once);
         }
 
-        [TestMethod]
+        [Fact]
         public void RevealTrap()
         {
             Services.DungeonAdapter.Setup(x => x.RevealTrapAt(new Point(4, 2)))
@@ -77,7 +76,7 @@ namespace ERY.XleTests.Commands
             formatter.Verify(x => x.PrintHiddenObjectsDetected(), Times.Once);
         }
 
-        [TestMethod]
+        [Fact]
         public void DontRevealTrapThruWall()
         {
             Services.DungeonAdapter.Setup(x => x.RevealTrapAt(new Point(4, 2)))
@@ -91,7 +90,7 @@ namespace ERY.XleTests.Commands
             formatter.Verify(x => x.PrintHiddenObjectsDetected(), Times.Never);
         }
 
-        [TestMethod]
+        [Fact]
         public void ExamineMonster()
         {
             var monster = new DungeonMonster(new Xle.Data.DungeonMonsterData());

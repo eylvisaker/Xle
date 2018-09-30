@@ -2,17 +2,17 @@
 using ERY.Xle;
 using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.XleMapTypes;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace ERY.XleTests.Commands
 {
-	[TestClass]
 	public class DungeonClimbTest : XleTest
 	{
 		DungeonClimb climb;
@@ -45,7 +45,7 @@ namespace ERY.XleTests.Commands
 			climb.GameState = gameState;
 		}
 
-		[TestMethod]
+		[Fact]
 		public void ClimbDown()
 		{
 			player.Location = new Point(4, 4);
@@ -55,10 +55,10 @@ namespace ERY.XleTests.Commands
 
 			climb.Execute();
 
-			Assert.AreEqual(1, player.DungeonLevel);
+			player.DungeonLevel.Should().Be(1);
 		}
 
-		[TestMethod]
+		[Fact]
 		public void ClimbUp()
 		{
 			player.Location = new Point(4, 4);
@@ -68,10 +68,10 @@ namespace ERY.XleTests.Commands
 
 			climb.Execute();
 
-			Assert.AreEqual(1, player.DungeonLevel);
+			player.DungeonLevel.Should().Be(1);
 		}
 
-		[TestMethod]
+		[Fact]
 		public void ClimbOut()
 		{
 			player.Location = new Point(4, 4);

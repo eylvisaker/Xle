@@ -1,17 +1,17 @@
 ﻿using ERY.Xle;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace ERY.XleTests
 {
-    [TestClass]
     public class ColorSchemeTests
     {
-        [TestMethod]
+        [Fact]
         [Obsolete]
         public void VertLine()
         {
@@ -19,9 +19,9 @@ namespace ERY.XleTests
 
             cs.VerticalLinePosition = 13 * 16;
 
-            Assert.AreEqual(13 * 16, cs.VerticalLinePosition);
+            cs.VerticalLinePosition.Should().Be(13 * 16);
 
-            Assert.AreEqual(25, cs.MapAreaWidth);
+            cs.MapAreaWidth.Should().Be(25);
         }
     }
 }

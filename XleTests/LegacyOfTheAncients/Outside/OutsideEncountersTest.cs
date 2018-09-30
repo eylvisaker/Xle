@@ -7,12 +7,11 @@ using ERY.Xle.Data;
 using ERY.Xle.LotA.MapExtenders.Outside;
 using ERY.Xle.Maps.Outdoors;
 using ERY.Xle.Services.Rendering.Maps;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 
 namespace ERY.XleTests.LegacyOfTheAncients.Outside
 {
-	[TestClass]
 	public class OutsideEncountersTest : LotaTest
 	{
 		OutsideEncounters oe = new OutsideEncounters();
@@ -33,7 +32,7 @@ namespace ERY.XleTests.LegacyOfTheAncients.Outside
 			oe.Data.MonsterInfoList.Add(new MonsterInfo());
 		}
 
-		[TestMethod]
+		[Fact]
 		public void OutsideAttack()
 		{
 			

@@ -1,17 +1,17 @@
 ﻿using ERY.Xle;
 using ERY.Xle.LotA.MapExtenders.Fortress.SecondArea;
 using ERY.Xle.Maps;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace ERY.XleTests.LegacyOfTheAncients.Fortress
 {
-    [TestClass]
     public class FortressFinalMagicIceTest : MagicIceTest
     {
         Mock<IFortressFinalActivator> fortressActivator = new Mock<IFortressFinalActivator>();
@@ -26,20 +26,20 @@ namespace ERY.XleTests.LegacyOfTheAncients.Fortress
 
         }
 
-        [TestMethod]
+        [Fact]
         public void UseMagicIceCausesCompendiumAttack()
         {
             evt.Use((int)LotaItem.MagicIce);
 
-            Assert.IsTrue(fortressActivator.Object.CompendiumAttacking);
+            (fortressActivator.Object.CompendiumAttacking).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void UseOtherItemDoesntCauseAttack()
         {
             evt.Use((int)LotaItem.StoneKey);
 
-            Assert.IsFalse(fortressActivator.Object.CompendiumAttacking);
+            (fortressActivator.Object.CompendiumAttacking).Should().BeFalse();
         }
     }
 }

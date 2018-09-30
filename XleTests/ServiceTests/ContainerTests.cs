@@ -13,11 +13,10 @@ using Castle.Windsor.Installer;
 using ERY.Xle.Bootstrap;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Menus;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace ERY.XleTests.ServiceTests
 {
-	[TestClass]
 	public class ContainerTests
 	{
 		private IWindsorContainer container;

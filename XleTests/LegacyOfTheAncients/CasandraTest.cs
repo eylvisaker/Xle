@@ -9,18 +9,17 @@ using ERY.Xle.LotA.MapExtenders.Castle.Events;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using ERY.Xle.Maps.XleMapTypes;
+using FluentAssertions;
 
 namespace ERY.XleTests.LegacyOfTheAncients
 {
-    [TestClass]
     public class CasandraTest : LotaTest
     {
         Casandra casandra;
 
-        [TestInitialize]
-        public void Initialize()
+        public CasandraTest()
         {
             casandra = new Casandra();
 
@@ -30,7 +29,7 @@ namespace ERY.XleTests.LegacyOfTheAncients
             GameState.MapExtender = InitializeMap<CastleMap>(1).Object;
         }
 
-        [TestMethod]
+        [Fact]
         public void CasandraGiveGold()
         {
             Services.QuickMenuCallback = menu => 0;
@@ -39,17 +38,17 @@ namespace ERY.XleTests.LegacyOfTheAncients
 
             casandra.Speak();
 
-            Assert.AreEqual(5020, Player.Gold);
+            Player.Gold.Should().Be(5020);
         }
 
-        [TestMethod]
+        [Fact]
         public void CasandraGiveCharm()
         {
             Services.QuickMenuCallback = menu => 1;
 
             casandra.Speak();
 
-            Assert.AreEqual(30, Player.Attribute[Attributes.charm]);
+            Player.Attribute[Attributes.charm].Should().Be(30);
         }
     }
 }

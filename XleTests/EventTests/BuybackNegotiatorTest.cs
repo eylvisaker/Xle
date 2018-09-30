@@ -1,16 +1,16 @@
 ﻿using ERY.Xle;
 using ERY.Xle.XleEventTypes.Stores.Buyback;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace ERY.XleTests.EventTests
 {
-    [TestClass]
     public class BuybackNegotiatorTest : XleTest
     {
         BuybackNegotiator negotiator;
@@ -34,7 +34,7 @@ namespace ERY.XleTests.EventTests
             eq = new WeaponItem { ID = 1, Quality = 3 };
         }
 
-        [TestMethod]
+        [Fact]
         public void AcceptFirstOffer()
         {
             int offer = 0;
@@ -49,10 +49,10 @@ namespace ERY.XleTests.EventTests
 
             negotiator.NegotiatePrice(eq);
 
-            Assert.AreEqual(GameState.Player.Gold, playerGold + offer);
+            GameState.Player.Gold.Should().Be(playerGold + offer);
         }
 
-        [TestMethod]
+        [Fact]
         public void AcceptSecondOffer()
         {
             List<int> offers = new List<int>();
@@ -78,11 +78,11 @@ namespace ERY.XleTests.EventTests
 
             negotiator.NegotiatePrice(eq);
 
-            Assert.IsTrue(offers[1] > offers[0]);
-            Assert.AreEqual(GameState.Player.Gold, playerGold + offers[1]);
+            (offers[1] > offers[0]).Should().BeTrue();
+            GameState.Player.Gold.Should().Be(playerGold + offers[1]);
         }
 
-        [TestMethod]
+        [Fact]
         public void CancelNegotiation()
         {
             int offer = 0;
@@ -101,10 +101,10 @@ namespace ERY.XleTests.EventTests
 
             negotiator.NegotiatePrice(eq);
 
-            Assert.AreEqual(playerGold, Player.Gold);
+            Player.Gold.Should().Be(playerGold);
         }
 
-        [TestMethod]
+        [Fact]
         public void MakeSaleIfAskIsLow()
         {
             int offer = 0;
@@ -124,10 +124,10 @@ namespace ERY.XleTests.EventTests
 
             negotiator.NegotiatePrice(eq);
 
-            Assert.AreEqual(playerGold + ask, Player.Gold);
+            Player.Gold.Should().Be(playerGold + ask);
         }
 
-        [TestMethod]
+        [Fact]
         public void TerminateIfAskIsTooHigh()
         {
             int offer = 0;
@@ -148,11 +148,11 @@ namespace ERY.XleTests.EventTests
 
             negotiator.NegotiatePrice(eq);
 
-            Assert.AreEqual(playerGold, Player.Gold);
+            Player.Gold.Should().Be(playerGold);
             Services.BuybackFormatter.Verify(x => x.ComeBackWhenSerious(), Times.Once);
         }
 
-        [TestMethod]
+        [Fact]
         public void GradualNegotiation()
         {
             int initialOffer = 0;
@@ -197,15 +197,15 @@ namespace ERY.XleTests.EventTests
 
             negotiator.NegotiatePrice(eq);
 
-            Assert.AreNotEqual(0, offer);
-            Assert.AreNotEqual(0, ask);
-            Assert.IsTrue((
-                playerGold + offer == Player.Gold ||
+            offer.Should().NotBe(0);
+            ask.Should().NotBe(0);
+
+              ((playerGold + offer == Player.Gold ||
                 playerGold + ask == Player.Gold) &&
-                Math.Abs(ask - offer) < 10);
+                Math.Abs(ask - offer) < 10).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void IncreaseAskPrice()
         {
             int initialOffer = 0;
@@ -242,9 +242,9 @@ namespace ERY.XleTests.EventTests
 
             negotiator.NegotiatePrice(eq);
 
-            Assert.AreNotEqual(0, offer);
-            Assert.AreNotEqual(0, ask);
-            Assert.AreEqual(playerGold, Player.Gold);
+            offer.Should().NotBe(0);
+            ask.Should().NotBe(0);
+            Player.Gold.Should().Be(playerGold);
         }
     }
 }

@@ -10,21 +10,20 @@ using AgateLib.UserInterface.Widgets;
 using ERY.Xle;
 using ERY.Xle.Services.Menus.Implementation;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using Moq;
+using FluentAssertions;
 
 namespace ERY.XleTests.ServiceTests
 {
-	[TestClass]
 	public class EquipmentPickerTest : XleTest
 	{
 		EquipmentPicker picker;
 		int selectArmorIndex = -1;
 		int selectWeaponIndex = -1;
 
-		[TestInitialize]
-		public void Initialize()
+		public EquipmentPickerTest()
 		{
 			picker = new EquipmentPicker(GameState, Services.SubMenu.Object) { Data = Services.Data };
 
@@ -52,19 +51,19 @@ namespace ERY.XleTests.ServiceTests
 
 		}
 
-		[TestMethod]
+		[Fact]
 		public void PickArmorNothingAvailable()
 		{
-			Assert.IsNull(picker.PickArmor(null));
+			picker.PickArmor(null).Should().BeNull();
 		}
 
-		[TestMethod]
+		[Fact]
 		public void PickWeaponNothingAvailable()
 		{
-			Assert.IsNull(picker.PickWeapon(null));
+			picker.PickWeapon(null).Should().BeNull();
 		}
 
-		[TestMethod]
+		[Fact]
 		public void PickArmor()
 		{
 			Player.Armor.Add(new ArmorItem { ID = 1, Quality = 2 });
@@ -74,12 +73,12 @@ namespace ERY.XleTests.ServiceTests
 
 			var sel = picker.PickArmor(null);
 
-			Assert.IsInstanceOfType(sel, typeof(ArmorItem));
-			Assert.AreEqual(2, sel.ID);
-			Assert.AreEqual(0, sel.Quality);
+            sel.Should().BeOfType<ArmorItem>();
+			sel.ID.Should().Be(2);
+			sel.Quality.Should().Be(0);
 		}
 
-		[TestMethod]
+		[Fact]
 		public void PickWeapon()
 		{
 			Player.Weapons.Add(new WeaponItem { ID = 1, Quality = 2 });
@@ -89,9 +88,9 @@ namespace ERY.XleTests.ServiceTests
 
 			var sel = picker.PickWeapon(null);
 
-			Assert.IsInstanceOfType(sel, typeof(WeaponItem));
-			Assert.AreEqual(2, sel.ID);
-			Assert.AreEqual(0, sel.Quality);
+            sel.Should().BeOfType<WeaponItem>();
+			sel.ID.Should().Be(2);
+			sel.Quality.Should().Be(0);
 		}
 	}
 }

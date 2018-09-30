@@ -1,23 +1,22 @@
 ﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle;
 using ERY.Xle.Maps;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AgateLib.DisplayLib;
+using FluentAssertions;
 
 namespace ERY.XleTests.Maps
 {
-	[TestClass]
 	public class GuardListTest
 	{
 		GuardList guards;
 
-		[TestInitialize]
-		public void Init()
+		public GuardListTest()
 		{
 			guards = new GuardList();
 
@@ -32,7 +31,7 @@ namespace ERY.XleTests.Maps
 			}
 		}
 
-		[TestMethod]
+		[Fact]
 		public void InitializeGuards()
 		{
 			guards.DefaultAttack = 77;
@@ -46,32 +45,32 @@ namespace ERY.XleTests.Maps
 
 			foreach (var guard in guards)
 			{
-				Assert.AreEqual(77, guard.Attack);
-				Assert.AreEqual(88, guard.Defense);
-				Assert.AreEqual(45, guard.HP);
-				Assert.AreEqual(Color.AliceBlue, guard.Color);
-				Assert.AreEqual(Direction.South, guard.Facing);
+				guard.Attack.Should().Be(77);
+				guard.Defense.Should().Be(88);
+				guard.HP.Should().Be(45);
+				guard.Color.Should().Be(Color.AliceBlue);
+				guard.Facing.Should().Be(Direction.South);
 
 				count++;
 			}
 
-			Assert.AreEqual(4, count);
+			count.Should().Be(4);
 		}
 
-		[TestMethod]
+		[Fact]
 		public void GuardInSpot()
 		{
-			Assert.IsTrue(guards.GuardInSpot(112, 212));
-			Assert.IsTrue(guards.GuardInSpot(111, 212));
-			Assert.IsTrue(guards.GuardInSpot(113, 213));
+			guards.GuardInSpot(112, 212).Should().BeTrue();
+			guards.GuardInSpot(111, 212).Should().BeTrue();
+			guards.GuardInSpot(113, 213).Should().BeTrue();
 
-			Assert.IsFalse(guards.GuardInSpot(110, 212));
-			Assert.IsFalse(guards.GuardInSpot(112, 210));
-			Assert.IsFalse(guards.GuardInSpot(114, 212));
-			Assert.IsFalse(guards.GuardInSpot(112, 214));
+			guards.GuardInSpot(110, 212).Should().BeFalse();
+			guards.GuardInSpot(112, 210).Should().BeFalse();
+			guards.GuardInSpot(114, 212).Should().BeFalse();
+			guards.GuardInSpot(112, 214).Should().BeFalse();
 		}
 
-		[TestMethod]
+		[Fact]
 		public void GuardListRemoveIndexOfContains()
 		{
 			var g = guards[1];
@@ -80,14 +79,14 @@ namespace ERY.XleTests.Maps
 
 			guards.Remove(g);
 
-			Assert.AreEqual(0, guards.IndexOf(gbefore));
-			Assert.AreEqual(1, guards.IndexOf(gafter));
-			Assert.AreEqual(3, guards.Count);
-			Assert.IsTrue(guards.Contains(gafter));
-			Assert.IsFalse(guards.Contains(g));
+			guards.IndexOf(gbefore).Should().Be(0);
+			guards.IndexOf(gafter).Should().Be(1);
+			guards.Count.Should().Be(3);
+			(guards.Contains(gafter)).Should().BeTrue();
+			(guards.Contains(g)).Should().BeFalse();
 		}
 
-		[TestMethod]
+		[Fact]
 		public void GuardListRemoveIndexOf()
 		{
 			var g = guards[1];
@@ -97,11 +96,11 @@ namespace ERY.XleTests.Maps
 			guards.Remove(g);
 			guards.Add(g);
 
-			Assert.AreEqual(0, guards.IndexOf(gbefore));
-			Assert.AreEqual(1, guards.IndexOf(gafter));
-			Assert.AreEqual(3, guards.IndexOf(g));
-			Assert.IsTrue(guards.Contains(gafter));
-			Assert.IsTrue(guards.Contains(g));
+			guards.IndexOf(gbefore).Should().Be(0);
+			guards.IndexOf(gafter).Should().Be(1);
+			guards.IndexOf(g).Should().Be(3);
+			(guards.Contains(gafter)).Should().BeTrue();
+			(guards.Contains(g)).Should().BeTrue();
 		}
 	}
 }

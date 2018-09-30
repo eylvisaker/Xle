@@ -1,15 +1,15 @@
 ﻿using System;
 using AgateLib.DisplayLib;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using ERY.Xle;
 using AgateLib.Mathematics.Geometry;
+using FluentAssertions;
 
 namespace ERY.XleTests
 {
-    [TestClass]
     public class ColorStringbiulderTests
     {
-        [TestMethod]
+        [Fact]
         public void AddTextTest()
         {
             ColorStringBuilder b = new ColorStringBuilder();
@@ -21,11 +21,11 @@ namespace ERY.XleTests
             var colors = b.Colors;
 
             for (int i = 0; i < 6; i++)
-                Assert.AreEqual(Color.White, colors[i]);
+                colors[i].Should().Be(Color.White);
             for (int i = 6; i < 11; i++)
-                Assert.AreEqual(Color.Yellow, colors[i]);
+                colors[i].Should().Be(Color.Yellow);
 
-            Assert.AreEqual("Hello World", b.Text);
+            b.Text.Should().Be("Hello World");
 
         }
     }

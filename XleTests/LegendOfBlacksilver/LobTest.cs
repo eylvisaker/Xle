@@ -1,6 +1,6 @@
 ﻿using ERY.Xle.LoB;
 using ERY.Xle.LoB.MapExtenders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace ERY.XleTests.LegendOfBlacksilver
 {
-    [TestClass]
     public class LobTest : XleTest
     {
         public LobTest()

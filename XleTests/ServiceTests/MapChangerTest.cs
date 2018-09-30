@@ -13,15 +13,15 @@ using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Commands.Implementation;
 using ERY.Xle.Services.MapLoad.Implementation;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using Moq;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Menus;
+using FluentAssertions;
 
 namespace ERY.XleTests.ServiceTests
 {
-    [TestClass]
     public class MapChangerTest : XleTest
     {
         MapChanger changer;
@@ -29,8 +29,7 @@ namespace ERY.XleTests.ServiceTests
         Mock<IMapExtender> startMap;
         Mock<IMuseumCoinSale> museumCoinSale;
 
-        [TestInitialize]
-        public void Initialize()
+        public MapChangerTest()
         {
             museumCoinSale = new Mock<IMuseumCoinSale>();
 
@@ -62,7 +61,7 @@ namespace ERY.XleTests.ServiceTests
                 });
         }
 
-        [TestMethod]
+        [Fact]
         public void SetMap()
         {
             var newMap = InitializeMap<CastleMap>(1);
@@ -85,7 +84,7 @@ namespace ERY.XleTests.ServiceTests
             Player.MapID = startMap.Object.MapID;
         }
 
-        [TestMethod]
+        [Fact]
         public void ChangeMapToPoint()
         {
             SetupMapLoader<CastleMap>();
@@ -95,11 +94,11 @@ namespace ERY.XleTests.ServiceTests
 
             changer.ChangeMap(2, new Point(4, 4));
 
-            Assert.AreEqual(2, GameState.Map.MapID);
-            Assert.AreEqual(new Point(4, 4), Player.Location);
+            GameState.Map.MapID.Should().Be(2);
+            Player.Location.Should().Be(new Point(4, 4));
         }
 
-        [TestMethod]
+        [Fact]
         public void PreserveReturnLocation()
         {
             SetupMapLoader<Town>();
@@ -111,16 +110,16 @@ namespace ERY.XleTests.ServiceTests
 
             changer.ChangeMap(2, new Point(4, 4));
 
-            Assert.AreEqual(1, Player.returnMap, "Player's return map ID not set properly.");
-            Assert.AreEqual(22, Player.returnX);
-            Assert.AreEqual(44, Player.returnY);
-            Assert.AreEqual(2, GameState.Map.MapID);
-            Assert.AreEqual(2, Player.MapID);
-            Assert.AreEqual(new Point(4, 4), Player.Location);
-            Assert.AreEqual(Direction.South, Player.returnFacing);
+            Player.returnMap.Should().Be(1, "Player's return map ID not set properly.");
+            Player.returnX.Should().Be(22);
+            Player.returnY.Should().Be(44);
+            GameState.Map.MapID.Should().Be(2);
+            Player.MapID.Should().Be(2);
+            Player.Location.Should().Be(new Point(4, 4));
+            Player.returnFacing.Should().Be(Direction.South);
         }
 
-        [TestMethod]
+        [Fact]
         public void MapEntryPointEvents()
         {
             SetupMapLoader<Town>(m =>
@@ -137,7 +136,7 @@ namespace ERY.XleTests.ServiceTests
             returnedMap.Verify(x => x.OnAfterEntry());
         }
 
-        [TestMethod]
+        [Fact]
         public void MapDirectEntryEvents()
         {
             SetupMapLoader<Town>();
@@ -151,7 +150,7 @@ namespace ERY.XleTests.ServiceTests
             returnedMap.Verify(x => x.OnAfterEntry());
         }
 
-        [TestMethod]
+        [Fact]
         public void MoveOnSameMap()
         {
             SetupMapLoader<Town>();
@@ -161,7 +160,7 @@ namespace ERY.XleTests.ServiceTests
 
             changer.ChangeMap(1, new Point(24, 33));
 
-            Assert.AreEqual(new Point(24,33), Player.Location);
+            Player.Location.Should().Be(new Point(24,33));
             startMap.Verify(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>()), Times.Never());
             startMap.Verify(x => x.OnLoad(), Times.Never());
             startMap.Verify(x => x.OnAfterEntry(), Times.Never);

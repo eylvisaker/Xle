@@ -5,11 +5,10 @@ using System.Text;
 
 using ERY.Xle.LotA;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace ERY.XleTests.LegacyOfTheAncients
 {
-    [TestClass]
     public class LotaTest : XleTest
     {
         public LotaTest()

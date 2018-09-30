@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using ERY.Xle.Services.Commands.Implementation;
 using ERY.Xle.Services.ScreenModel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using ERY.Xle.Services.XleSystem;
 using AgateLib.InputLib;
 using ERY.Xle.Maps.Outdoors;
+using FluentAssertions;
 
 namespace ERY.XleTests.Commands
 {
-    [TestClass]
     public class DisembarkTest : XleTest
     {
         Disembark disembark = new Disembark();
@@ -23,8 +23,7 @@ namespace ERY.XleTests.Commands
 
         Mock<IOutsideExtender> outsideExtender = new Mock<IOutsideExtender>();
 
-        [TestInitialize]
-        public void Init()
+        public DisembarkTest()
         {
             InitializeCommand(disembark);
 
@@ -46,7 +45,7 @@ namespace ERY.XleTests.Commands
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void Disembark()
         {
             SetKeys(KeyCode.Right);
@@ -54,11 +53,11 @@ namespace ERY.XleTests.Commands
             Player.Rafts.Add(new Xle.RaftData(18, 18, 1));
             Player.BoardedRaft = Player.Rafts.First();
 
-            Assert.IsNotNull(Player.BoardedRaft, "Player is not on a raft.");
+            Player.BoardedRaft.Should().NotBeNull("Player is not on a raft.");
 
             disembark.Execute();
 
-            Assert.IsNull(Player.BoardedRaft, "Player did not disembark.");
+            Player.BoardedRaft.Should().BeNull("Player did not disembark.");
         }
     }
 }

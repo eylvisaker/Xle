@@ -9,14 +9,13 @@ using ERY.Xle.Maps;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using Moq;
 using ERY.Xle.Services.Commands;
 
 namespace ERY.XleTests
 {
-    [TestClass]
     public class XleTest
     {
         protected Player Player { get; private set; }
