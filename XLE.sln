@@ -9,10 +9,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XleTests", "XleTests\XleTes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4522371-10CA-4972-8DE2-F10087A2C795}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Build-All.bat = Build-All.bat
 		Build.bat = Build.bat
+		Build.ps1 = Build.ps1
 		Coverage.bat = Coverage.bat
 		IntegrationTest.bat = IntegrationTest.bat
-		Performance1.psess = Performance1.psess
+		Package.bat = Package.bat
+		Package.ps1 = Package.ps1
+		publish.sh = publish.sh
 		UnitTest.bat = UnitTest.bat
 	EndProjectSection
 EndProject

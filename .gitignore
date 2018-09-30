@@ -7,3 +7,6 @@ packages/
 *.suo
 *.coverage
 /.vs
+*.swp
+/TestReport
+/Coverage.xml

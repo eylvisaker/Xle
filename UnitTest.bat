@@ -1,4 +1,4 @@
 
-packages\xunit.runner.console.2.4.0\tools\net452\xunit.console.exe SmokedGB.UnitTests\bin\Debug\SmokedGB.UnitTests.dll 
+packages\xunit.runner.console.2.4.0\tools\net452\xunit.console.exe XleTests\bin\Debug\XleTests.dll 
 
 exit /b %ERRORLEVEL%

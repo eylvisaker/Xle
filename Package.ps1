@@ -20,8 +20,7 @@ Add-Type -assembly "System.IO.Compression.FileSystem"
 
 $dummy = New-Item -ItemType Directory -Force -Path $destDir
 
-CreatePackage SmokedGB\bin\Release "SmokedGB_Windows$version"
-CreatePackage Thornbridge.WindowsUniversal\bin\x64\Release "ThornbridgeSaga_XBoxOne$version"
-CreatePackage Thornbridge.Android\bin\Android\AnyCPU\Release "ThornbridgeSaga_Android$version"
+CreatePackage LegacyOfTheAncients\bin\Release "LegacyOfTheAncients_Windows$version"
+CreatePackage LegendOfBlacksilver\bin\Release "LegendOfBlacksilver_Windows$version"
 
 "Packaging complete."

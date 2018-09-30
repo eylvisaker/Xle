@@ -8,7 +8,7 @@ Param(
   [string]$version
 )
 
-$solutionFile = "SmokedGB.sln"
+$solutionFile = "Xle.sln"
 
 $ErrorActionPreference = "Stop"
 
