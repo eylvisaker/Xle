@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9D86AB00-7AF4-4A76-982D-125F1C4414B4}</ProjectGuid>
+    <ProjectGuid>{46516763-DDC4-4203-9047-3C36CDEF7E04}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xle.Ancients</RootNamespace>
-    <AssemblyName>LegacyOfTheAncients</AssemblyName>
+    <RootNamespace>Xle.Blacksilver</RootNamespace>
+    <AssemblyName>LegendOfBlacksilver</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -118,8 +118,8 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\LegendOfBlacksilver\LegendOfBlacksilver.projitems" Label="Shared" />
   <Import Project="..\Xle\Xle.projitems" Label="Shared" />
-  <Import Project="..\LegacyOfTheAncients\LegacyOfTheAncients.projitems" Label="Shared" />
   <Import Project="..\AgateLib\AgateLib\AgateLib.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

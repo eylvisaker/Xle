@@ -159,33 +159,9 @@
     <Compile Include="XleTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AgateLib\AgateLib.Platform.IntegrationTest\AgateLib.Platform.IntegrationTest.csproj">
-      <Project>{a2bd2d8f-4afe-4548-80d9-bf73bfcafcf8}</Project>
-      <Name>AgateLib.Platform.IntegrationTest</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AgateLib\AgateLib.Platform.Test\AgateLib.Platform.Test.csproj">
-      <Project>{8092e103-5700-4d09-b315-192f0e792c45}</Project>
-      <Name>AgateLib.Platform.Test</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AgateLib\AgateLib\AgateLib.csproj">
-      <Project>{9490b719-829e-43a7-a5fe-8001f8a81759}</Project>
-      <Name>AgateLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LegacyOfTheAncients\LegacyOfTheAncients.csproj">
-      <Project>{44a9fc5d-abdd-42f8-9d86-aa5001ebda14}</Project>
-      <Name>LegacyOfTheAncients</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LegendOfBlacksilver\LegendOfBlacksilver.csproj">
-      <Project>{9ef5e01a-90b0-4cc4-ac37-5b7307872ebe}</Project>
-      <Name>LegendOfBlacksilver</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XleMapEditor\XleMapEditor.csproj">
       <Project>{e6a48d1c-d8e3-4fe4-a65a-6d550580938b}</Project>
       <Name>XleMapEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xle\XLE.csproj">
-      <Project>{fde0a61f-558b-4964-8292-b7a212a3ab45}</Project>
-      <Name>XLE</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

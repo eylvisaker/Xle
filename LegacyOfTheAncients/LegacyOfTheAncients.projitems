@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>44A9FC5D-ABDD-42F8-9D86-AA5001EBDA14</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Xle.Ancients</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaExhibitInstaller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaTitleScreenInstaller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\CastleGround.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\CastleUpper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Commands\CastleFight.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Commands\CastleMagic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Commands\CastleSpeak.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Commands\CastleUse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\Arovyn.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\Casandra.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\CastleDoor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\MagicIce.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\PasswordDoor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\SeedPlant.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\Spiral.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\SpiralSuccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\TreasureChest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Events\Wizard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Dungeons\ArmakDungeon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Dungeons\Commands\DungeonOpen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Dungeons\Commands\LotaDungeonFight.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Dungeons\Commands\LotaDungeonMagic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Dungeons\Commands\LotaDungeonXamine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Dungeons\FourJewelsDungeon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Dungeons\LotaDungeon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Dungeons\PiratesLairDungeon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\ExtenderDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FirstArea\ArmorBox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FirstArea\CompendiumFirst.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FirstArea\Elevator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FirstArea\GasTrap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FirstArea\GuardWarning.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FirstArea\SeeCompendium.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FirstArea\SpeakGuard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FortressEntry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FortressFinal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\FortressSpeak.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\Compendium.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\DoorShut.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\FinalMagicIce.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\FortressFinalActivator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\IFortressFinalActivator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\LotaEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\LotaMuseumRob.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\MuseumUse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\MuseumXamine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\IExhibitFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\LotaMuseum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\AncientArtifact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Fountain.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\FourJewels.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Guardian.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\HerbOfLife.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Information.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\KnightsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\LostDisplays.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\LotaExhibit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\NativeCurrency.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Pegasus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\PirateTreasure.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\StonesWisdom.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Tapestry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Thornberry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Weaponry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Welcome.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Outside\Flight.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Outside\LotaOutsideEncounters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Outside\LotaOutsideMagic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Outside\Tarmalon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Commands\TownMagic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Commands\TownRob.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\LotaTown.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Stores\EagleHollowHealer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Stores\Fortune.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Stores\LotaStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Stores\LotaStoreFront.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Stores\Magic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Stores\StoreHealer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Stores\Vault.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\GameSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\EraseGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\FileMenu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\FirstMainMenu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\ILotaTitleScreenFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\Introduction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LoadGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LotaTitleScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\MainMenuScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\NewGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\SecondMainMenu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\Splash.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\TitleScreenState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\TitleState.cs" />
+  </ItemGroup>
+</Project>

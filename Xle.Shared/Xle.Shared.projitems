@@ -6,7 +6,7 @@
     <SharedGUID>726a3d46-b6b3-44c8-b209-4fa55c3edd5c</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Xle.Shared</Import_RootNamespace>
+    <Import_RootNamespace>Xle</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
   </ItemGroup>
