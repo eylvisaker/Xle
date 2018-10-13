@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/eylvisaker/AgateLib.git
+	branch = master
+	commit = cbd7af1a316ad3d1fe267c7247e33fd4c592f422
+	parent = f559ad68830040840c9ee56f8e9cc14c3895d8a2
+	cmdver = 0.3.1
