@@ -1,52 +1,39 @@
-﻿using Castle.MicroKernel;
-using Castle.MicroKernel.Context;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ERY.Xle.Bootstrap
+﻿namespace ERY.Xle.Bootstrap
 {
-    public class MapExtenderInstaller : IWindsorInstaller
-    {
-        public void Install(IWindsorContainer container, IConfigurationStore store)
-        {
-            container.Register(Component.For<MapExtender>().UsingFactoryMethod<MapExtender>(factory).LifestyleTransient());
+    //public class MapExtenderInstaller : IWindsorInstaller
+    //{
+    //    public void Install(IWindsorContainer container, IConfigurationStore store)
+    //    {
+    //        container.Register(Component.For<MapExtender>().UsingFactoryMethod<MapExtender>(factory).LifestyleTransient());
 
-            container.Register(Classes.FromAssembly(WindsorInitializer.MasterAssembly)
-                .BasedOn<MapExtender>()
-                .Configure(c => c.Named(NameOf(c.Implementation)))
-                .WithServiceSelf()
-                .LifestyleTransient());
-        }
+    //        container.Register(Classes.FromAssembly(WindsorInitializer.MasterAssembly)
+    //            .BasedOn<MapExtender>()
+    //            .Configure(c => c.Named(NameOf(c.Implementation)))
+    //            .WithServiceSelf()
+    //            .LifestyleTransient());
+    //    }
 
-        private string NameOf(Type type)
-        {
-            return type.Name;
-        }
+    //    private string NameOf(Type type)
+    //    {
+    //        return type.Name;
+    //    }
 
-        private MapExtender factory(IKernel kernel, CreationContext context)
-        {
-            var xlemap = context.AdditionalArguments["map"] as XleMap;
-            if (xlemap == null)
-                return null;
+    //    private MapExtender factory(IKernel kernel, CreationContext context)
+    //    {
+    //        var xlemap = context.AdditionalArguments["map"] as XleMap;
+    //        if (xlemap == null)
+    //            return null;
 
-            var result = CreateNamedMap(kernel, xlemap.ExtenderName);
+    //        var result = CreateNamedMap(kernel, xlemap.ExtenderName);
 
-            result.TheMap = xlemap;
+    //        result.TheMap = xlemap;
 
-            return result;
-        }
+    //        return result;
+    //    }
 
-        private MapExtender CreateNamedMap(IKernel kernel, string name)
-        {
-            return kernel.Resolve<MapExtender>(name);
-        }
-    }
+    //    private MapExtender CreateNamedMap(IKernel kernel, string name)
+    //    {
+    //        return kernel.Resolve<MapExtender>(name);
+    //    }
+    //}
 }

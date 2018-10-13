@@ -11,6 +11,7 @@ using ERY.Xle.Services;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.LotA.TitleScreen
 {

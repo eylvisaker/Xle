@@ -1,15 +1,10 @@
-﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle;
+﻿using ERY.Xle;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.Dungeons.Commands;
-using Xunit;
+using Microsoft.Xna.Framework;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Xunit;
 
 namespace ERY.XleTests.Commands
 {

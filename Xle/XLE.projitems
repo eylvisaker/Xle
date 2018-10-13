@@ -13,10 +13,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\CommandInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\EventExtenderInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\FactoryInstaller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\IServiceLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\MapExtenderInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\MapRendererInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\ServiceInstaller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\WindsorInitializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\Plumbing.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColorScheme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColorStringBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CountdownTimer.cs" />

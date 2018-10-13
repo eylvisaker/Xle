@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle
 {
@@ -19,7 +21,7 @@ namespace ERY.Xle
                 case Direction.South: return new Point(0, 1);
 
                 default:
-                    return Point.Empty;
+                    return Point.Zero;
             }
         }
         public static Direction ToDirection(this Point point)
@@ -69,15 +71,15 @@ namespace ERY.Xle
             }
         }
 
-        public static Direction ToDirection(this KeyCode key)
+        public static Direction ToDirection(this Keys key)
         {
-            if (key == KeyCode.Left)
+            if (key == Keys.Left)
                 return Direction.West;
-            if (key == KeyCode.Up)
+            if (key == Keys.Up)
                 return Direction.North;
-            if (key == KeyCode.Down)
+            if (key == Keys.Down)
                 return Direction.South;
-            if (key == KeyCode.Right)
+            if (key == Keys.Right)
                 return Direction.East;
 
             throw new ArgumentException();

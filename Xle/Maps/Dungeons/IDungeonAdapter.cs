@@ -1,5 +1,5 @@
-﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Services;
+﻿using ERY.Xle.Services;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.Maps.Dungeons
 {

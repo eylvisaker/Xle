@@ -1,9 +1,7 @@
-﻿using System;
-using AgateLib.DisplayLib;
-using Xunit;
-using ERY.Xle;
-using AgateLib.Mathematics.Geometry;
+﻿using ERY.Xle;
 using FluentAssertions;
+using Microsoft.Xna.Framework;
+using Xunit;
 
 namespace ERY.XleTests
 {

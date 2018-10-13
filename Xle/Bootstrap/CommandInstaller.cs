@@ -1,56 +1,42 @@
-﻿using System.Reflection;
-
-using Castle.Facilities.TypedFactory;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
-
-using ERY.Xle.Services;
-
-using Castle.MicroKernel.Context;
-using Castle.MicroKernel;
-
-using ERY.Xle.Services.Commands;
-
-namespace ERY.Xle.Bootstrap
+﻿namespace ERY.Xle.Bootstrap
 {
-    public class CommandInstaller : IWindsorInstaller
-    {
-        public void Install(IWindsorContainer container, IConfigurationStore store)
-        {
-            container.Register(Classes.FromAssembly(WindsorInitializer.MasterAssembly)
-                .BasedOn<Command>()
-                .LifestyleTransient()
-                .Configure(NameComponent)
-                .WithServiceSelf()
-                );
+    //public class CommandInstaller : IWindsorInstaller
+    //{
+    //    public void Install(IWindsorContainer container, IConfigurationStore store)
+    //    {
+    //        container.Register(Classes.FromAssembly(WindsorInitializer.MasterAssembly)
+    //            .BasedOn<Command>()
+    //            .LifestyleTransient()
+    //            .Configure(NameComponent)
+    //            .WithServiceSelf()
+    //            );
 
-            container.Register(Classes.FromAssemblyContaining<Command>()
-                .BasedOn<Command>()
-                .LifestyleTransient()
-                .Configure(NameComponent)
-                .WithServiceSelf()
-                );
-        }
+    //        container.Register(Classes.FromAssemblyContaining<Command>()
+    //            .BasedOn<Command>()
+    //            .LifestyleTransient()
+    //            .Configure(NameComponent)
+    //            .WithServiceSelf()
+    //            );
+    //    }
 
-        private void NameComponent(ComponentRegistration obj)
-        {
-            var name = Nameof(obj.Implementation);
+    //    private void NameComponent(ComponentRegistration obj)
+    //    {
+    //        var name = Nameof(obj.Implementation);
 
-            if (string.IsNullOrEmpty(name))
-                return;
+    //        if (string.IsNullOrEmpty(name))
+    //            return;
 
-            obj.Named(name);
-        }
+    //        obj.Named(name);
+    //    }
 
-        private string Nameof(System.Type type)
-        {
-            var serviceName = type.GetCustomAttribute<ServiceNameAttribute>();
+    //    private string Nameof(System.Type type)
+    //    {
+    //        var serviceName = type.GetCustomAttribute<ServiceNameAttribute>();
 
-            if (serviceName == null)
-                return "";
+    //        if (serviceName == null)
+    //            return "";
 
-            return serviceName.Name ?? "";
-        }
-    }
+    //        return serviceName.Name ?? "";
+    //    }
+    //}
 }

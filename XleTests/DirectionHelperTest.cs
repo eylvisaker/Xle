@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.XleTests
 {
@@ -61,9 +63,9 @@ namespace ERY.XleTests
         }
 
         [Fact]
-        public void KeyCodeToDirection()
+        public void KeysToDirection()
         {
-            var inputs = new[] { KeyCode.Left, KeyCode.Right, KeyCode.Up, KeyCode.Down };
+            var inputs = new[] { Keys.Left, Keys.Right, Keys.Up, Keys.Down };
             var expected = new[] { Direction.West, Direction.East, Direction.North, Direction.South };
 
             Verify(expected, inputs, x => x.ToDirection());

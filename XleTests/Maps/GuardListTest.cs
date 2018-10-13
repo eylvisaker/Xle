@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AgateLib.DisplayLib;
 using FluentAssertions;
+using Microsoft.Xna.Framework;
 
 namespace ERY.XleTests.Maps
 {

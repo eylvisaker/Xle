@@ -14,6 +14,7 @@ using Xunit;
 
 using Moq;
 using FluentAssertions;
+using Microsoft.Xna.Framework;
 
 namespace ERY.XleTests.ServiceTests
 {

@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ERY.XleTests</RootNamespace>
     <AssemblyName>XleTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -89,6 +89,7 @@
     <Reference Include="FluentAssertions, Version=5.4.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.5.4.2\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.7.0.1708, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Moq, Version=4.5.30.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.5.30\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
@@ -134,17 +135,8 @@
     <Compile Include="Commands\DungeonOpenTest.cs" />
     <Compile Include="Commands\DungeonXamineTest.cs" />
     <Compile Include="DirectionHelperTest.cs" />
-    <Compile Include="LegacyOfTheAncients\Commands\LotaUseTest.cs" />
     <Compile Include="EventTests\BuybackNegotiatorTest.cs" />
     <Compile Include="Fakes\FakeMap.cs" />
-    <Compile Include="LegacyOfTheAncients\CasandraTest.cs" />
-    <Compile Include="LegacyOfTheAncients\Fortress\FortressFinalMagicIceTest.cs" />
-    <Compile Include="LegacyOfTheAncients\LotaTest.cs" />
-    <Compile Include="LegacyOfTheAncients\MagicIceTest.cs" />
-    <Compile Include="LegacyOfTheAncients\Outside\OutsideEncountersTest.cs" />
-    <Compile Include="LegendOfBlacksilver\ArmanTest.cs" />
-    <Compile Include="LegendOfBlacksilver\LobTest.cs" />
-    <Compile Include="LegacyOfTheAncients\MuseumExhibitLevelUpTests.cs" />
     <Compile Include="Maps\GuardListTest.cs" />
     <Compile Include="ServiceTests\ContainerTests.cs" />
     <Compile Include="ServiceTests\EquipmentPickerTest.cs" />
@@ -159,17 +151,18 @@
     <Compile Include="XleTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XleMapEditor\XleMapEditor.csproj">
-      <Project>{e6a48d1c-d8e3-4fe4-a65a-6d550580938b}</Project>
-      <Name>XleMapEditor</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LegacyOfTheAncients.Desktop\LegacyOfTheAncients.Desktop.csproj">
+      <Project>{9d86ab00-7af4-4a76-982d-125f1c4414b4}</Project>
+      <Name>LegacyOfTheAncients.Desktop</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

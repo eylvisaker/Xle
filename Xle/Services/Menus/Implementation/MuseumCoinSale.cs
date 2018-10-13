@@ -1,9 +1,8 @@
-﻿using System;
-
-using ERY.Xle.Data;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
+using System;
 
 namespace ERY.Xle.Services.Menus.Implementation
 {
