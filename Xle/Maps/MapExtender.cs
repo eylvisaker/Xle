@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-using AgateLib.Quality;
-
-using ERY.Xle.Data;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.MapLoad;
@@ -16,14 +8,17 @@ using ERY.Xle.Services.Rendering.Maps;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 using ERY.Xle.XleEventTypes.Extenders;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace ERY.Xle.Maps
 {
     public class MapExtender : IMapExtender
     {
-        XleMap mTheMap;
-        List<EventExtender> mEvents = new List<EventExtender>();
-        XleMapRenderer mapRenderer;
+        private XleMap mTheMap;
+        private List<EventExtender> mEvents = new List<EventExtender>();
+        private XleMapRenderer mapRenderer;
 
         public IXleSubMenu SubMenu { get; set; }
 

@@ -14,46 +14,47 @@ using ERY.Xle.Services.XleSystem;
 
 namespace ERY.Xle.LoB
 {
-	static class LobProgram
-	{
-		private static ICommandFactory commandFactory;
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main(string[] args)
-		{
-			using (new AgateWinForms(args)
-				.AssetPath("LoB")
-				.Initialize())
-			using (new DisplayWindowBuilder(args)
-				.BackbufferSize(680, 440)
-				.Title("Legend of Blacksilver")
-				.WithCoordinates(new FixedCoordinateSystem(new Rectangle(-20, -20, 680, 440)))
-				.AllowResize()
-				.Build())
-			{
-				var initializer = new WindsorInitializer();
-				var container = initializer.BootstrapContainer(typeof(LobProgram).Assembly);
+    static class LobProgram
+    {
+        //		private static ICommandFactory commandFactory;
+        //		/// <summary>
+        //		/// The main entry point for the application.
+        //		/// </summary>
+        //		[STAThread]
+        //		static void Main(string[] args)
+        //		{
+        //			using (new AgateWinForms(args)
+        //				.AssetPath("LoB")
+        //				.Initialize())
+        //			using (new DisplayWindowBuilder(args)
+        //				.BackbufferSize(680, 440)
+        //				.Title("Legend of Blacksilver")
+        //				.WithCoordinates(new FixedCoordinateSystem(new Rectangle(-20, -20, 680, 440)))
+        //				.AllowResize()
+        //				.Build())
+        //			{
+        //				var initializer = new WindsorInitializer();
+        //				var container = initializer.BootstrapContainer(typeof(LobProgram).Assembly);
 
-				IXleStartup core = container.Resolve<IXleStartup>();
-				core.ProcessArguments(args);
-				commandFactory = container.Resolve<ICommandFactory>();
+        //				IXleStartup core = container.Resolve<IXleStartup>();
+        //				core.ProcessArguments(args);
+        //				commandFactory = container.Resolve<ICommandFactory>();
 
-				core.Run();
-			}
-		}
+        //				core.Run();
+        //			}
+        //		}
 
-		public static IEnumerable<Command> CommonLobCommands
-		{
-			get
-			{
-				yield return commandFactory.Armor();
-				yield return commandFactory.Gamespeed();
-				yield return commandFactory.Inventory();
-				yield return commandFactory.Pass();
-				yield return commandFactory.Weapon();
-			}
-		}
-	}
+        public static IEnumerable<Command> CommonLobCommands
+        {
+            get
+            {
+                throw new NotImplementedException();
+                //yield return commandFactory.Armor();
+                //yield return commandFactory.Gamespeed();
+                //yield return commandFactory.Inventory();
+                //yield return commandFactory.Pass();
+                //yield return commandFactory.Weapon();
+            }
+        }
+    }
 }

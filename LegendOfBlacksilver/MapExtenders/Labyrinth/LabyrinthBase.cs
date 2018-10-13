@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ERY.Xle.Maps;
 using AgateLib.Mathematics.Geometry;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.LoB.MapExtenders.Labyrinth
 {
