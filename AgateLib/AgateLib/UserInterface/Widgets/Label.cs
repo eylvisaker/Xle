@@ -1,16 +1,16 @@
 ﻿//
-//    Copyright (c) 2006-2017 Erik Ylvisaker
-//    
+//    Copyright (c) 2006-2018 Erik Ylvisaker
+//
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the "Software"), to deal
 //    in the Software without restriction, including without limitation the rights
 //    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //    copies of the Software, and to permit persons to whom the Software is
 //    furnished to do so, subject to the following conditions:
-//    
+//
 //    The above copyright notice and this permission notice shall be included in all
 //    copies or substantial portions of the Software.
-//  
+//
 //    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,310 +20,145 @@
 //    SOFTWARE.
 //
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AgateLib.DisplayLib;
 using AgateLib.Mathematics.Geometry;
-using AgateLib.Platform;
+using AgateLib.UserInterface.Content;
+using Microsoft.Xna.Framework;
+using System;
 
-namespace AgateLib.UserInterface.Widgets
+namespace AgateLib.UserInterface
 {
-	public class Label : Widget, ITextAlignment
-	{
-		string mText = string.Empty;
-		bool mWrapText;
-		List<int> mWrapPositions = new List<int>();
-		int mSlowReadPosition = 0;
-		double mSlowReadTime;
-		const double mSlowReadTextPeriod = 0.05;
+    public class Label : Widget<LabelProps, WidgetState>
+    {
+        public Label(LabelProps props) : base(props)
+        {
+        }
 
-		public Label()
-		{
-			TextAlign = OriginAlignment.TopLeft;
-			WrapText = true;
-		}
+        public override IRenderable Render()
+        {
+            return new LabelElement(new LabelElementProps
+            {
+                Text = Props.Text,
+                PerformLocalization = Props.LocalizeContent,
+                ReadSlowly = Props.ReadSlowly,
+                AnimationComplete = Props.AnimationComplete,
+            }.CopyFromWidgetProps(Props));
+        }
 
-		public Label(string text)
-			: this()
-		{
-			this.Text = text;
-		}
+        public override string ToString()
+        {
+            return $"Label: {Props.Text?.Substring(0, Math.Min(20, Props.Text.Length)) ?? "null"}";
+        }
+    }
 
-		public string Text
-		{
-			get { return mText; }
-			set
-			{
-				if (value == null)
-					value = string.Empty;
+    public class LabelProps : WidgetProps
+    {
+        public string Text { get; set; }
 
-				value = value.Replace("\r", "");
-				if (value == mText)
-					return;
+        /// <summary>
+        /// Defaults to true. Set to false to bypass content localization.
+        /// </summary>
+        public bool LocalizeContent { get; set; } = true;
 
-				LayoutDirty = true;
-				mText = value;
+        /// <summary>
+        /// Defaults to false. Set to true to have characters printed out one at a time.
+        /// </summary>
+        public bool ReadSlowly { get; set; }
 
-				if (WrapText)
-				{
-					RewrapText(Width);
-				}
+        /// <summary>
+        /// Callback which is executed when the animation completes.
+        /// </summary>
+        public UserInterfaceEventHandler AnimationComplete { get; set; }
+    }
 
-				mSlowReadPosition = 0;
-				mSlowReadTime = 0;
-			}
-		}
-		public object[] Parameters
-		{
-			get;set;	
-		}
-		
-		private void RewrapText(int maxWidth)
-		{
-			if (Font == null)
-				return;
+    public class LabelElement : RenderElement<LabelElementProps>
+    {
+        private IContentLayout content;
+        private bool dirty;
+        private int lastContentMaxWidth;
+        private ContentLayoutOptions layoutOptions = new ContentLayoutOptions();
+        private UserInterfaceEvent evt = new UserInterfaceEvent();
 
-			mWrapPositions.Clear();
+        public LabelElement(LabelElementProps props) : base(props)
+        {
+            Style.FontChanged += () => dirty = true;
+        }
 
-			List<int> spacePositions = new List<int>();
+        protected override void OnReceiveProps()
+        {
+            base.OnReceiveProps();
 
-			for (int i = 0; i < mText.Length; i++)
-				if (mText[i] == ' ' || mText[i] == '\n')
-					spacePositions.Add(i);
+            dirty = true;
+        }
 
-			spacePositions.Add(mText.Length);
+        public override void DoLayout(IUserInterfaceRenderContext renderContext, Size size)
+        {
+        }
 
-			int lineStart = 0;
-			for (int i = 1; i < spacePositions.Count; i++)
-			{
-				if (spacePositions[i] < mText.Length)
-				{
-					char ch = mText[spacePositions[i]];
-					if (ch == '\n')
-					{
-						lineStart = spacePositions[i] + 1;
-						mWrapPositions.Add(spacePositions[i]+1);
-						continue;
-					}
-				}
+        public override string StyleTypeId => "label";
 
-				int length = spacePositions[i] - lineStart;
-				string text = mText.Substring(lineStart, length);
-				int width = Font.MeasureString(text).Width;
+        public override Size CalcIdealContentSize(IUserInterfaceRenderContext renderContext, Size maxSize)
+        {
+            RefreshContent(renderContext, maxSize.Width);
 
-				if (width > maxWidth)
-				{
-					lineStart = spacePositions[i - 1] + 1;
-					mWrapPositions.Add(lineStart);
-				}
-			}
+            return content?.Size ?? Size.Empty;
+        }
 
-			mWrapPositions.Add(mText.Length);
-			mWrapPositions.Sort();
-		}
-		int WrappedHeight
-		{
-			get { return mWrapPositions.Count * Font.FontHeight; }
-		}
-		int WrappedWidth
-		{
-			get
-			{
-				int lastPos = 0;
-				int largestWidth = 0;
+        public override void Draw(IUserInterfaceRenderContext renderContext, Rectangle clientArea)
+        {
+            content?.Draw(clientArea.Location.ToVector2(), renderContext.SpriteBatch);
+        }
 
-				for(int i = 0; i <= mWrapPositions.Count; i++)
-				{
-					string text;
+        public override void Update(IUserInterfaceRenderContext renderContext)
+        {
+            content?.Update(renderContext.GameTime);
+        }
 
-					if (i == mWrapPositions.Count)
-						text = mText.Substring(lastPos);
-					else
-					{
-						text = mText.Substring(lastPos, mWrapPositions[i] - lastPos);
-						lastPos = mWrapPositions[i];
-					}
+        public override string ToString()
+        {
+            return $"label: {Props.Text?.Substring(0, Math.Min(200, Props.Text.Length)) ?? "null"}";
+        }
 
-					largestWidth = Math.Max(largestWidth, Font.MeasureString(text).Width);
-				}
+        private void RefreshContent(IUserInterfaceRenderContext renderContext, int maxWidth)
+        {
+            if (!dirty && content != null)
+            {
+                if (maxWidth > content.Size.Width)
+                    return;
 
-				return largestWidth;
-			}
-		}
+                dirty = true;
+            }
 
-		public override void Update(ClockTimeSpan elapsed, ref bool processInput)
-		{
-			if (SlowRead)
-			{
-				mSlowReadTime += elapsed.TotalSeconds;
-				
-				double period = mSlowReadTextPeriod;
-				if (AccelerateSlowReading) period /= 3;
+            if (dirty || lastContentMaxWidth != maxWidth)
+            {
+                if (Props.Text == null)
+                {
+                    content = null;
+                }
+                else
+                {
+                    layoutOptions.Font = Style.Font;
+                    layoutOptions.MaxWidth = maxWidth;
 
-				if (mSlowReadTime >= period)
-				{
-					mSlowReadTime -= period;
+                    content = renderContext.CreateContentLayout(Props.Text, layoutOptions, Props.PerformLocalization);
+                    content.Options.ReadSlowly = Props.ReadSlowly;
 
-					if (mSlowReadPosition < Text.Length)
-					{
-						do
-						{
-							mSlowReadPosition++;
-						} while (mSlowReadPosition < Text.Length && IsWhiteSpace(Text[mSlowReadPosition]));
-						
-						if (mSlowReadPosition + 1 < Text.Length && Text[mSlowReadPosition - 1] == '{')
-						{
-							for (int i = 2; i < 4; i++)
-							{
-								if (mSlowReadPosition + i < Text.Length &&
-									Text[mSlowReadPosition + i - 1] == '}')
-								{
-									mSlowReadPosition += i;
-									break;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+                    content.AnimationComplete += () => Props.AnimationComplete?.Invoke(evt.Reset(this));
+                }
 
-		private bool IsWhiteSpace(char p)
-		{
-			if (p == ' ') return true;
-			if (p == '\n') return true;
-			if (p == '\r') return true;
-			if (p == '\t') return true;
+                lastContentMaxWidth = maxWidth;
+                dirty = false;
+            }
+        }
+    }
 
-			return false;
-		}
+    public class LabelElementProps : RenderElementProps
+    {
+        public string Text { get; set; }
 
-		public override void DrawImpl(Rectangle screenRect)
-		{
-			Font.Color = FontColor;
-			Font.DisplayAlignment = TextAlign;
+        public bool PerformLocalization { get; set; }
 
-			Point dest = screenRect.Location;
+        public bool ReadSlowly { get; set; }
 
-			switch (Font.DisplayAlignment)
-			{
-				case OriginAlignment.Center:
-				case OriginAlignment.CenterLeft:
-				case OriginAlignment.CenterRight:
-					dest.Y += Height / 2;
-					break;
-
-				case OriginAlignment.BottomCenter:
-				case OriginAlignment.BottomLeft:
-				case OriginAlignment.BottomRight:
-					dest.Y += Height;
-					break;
-			}
-			switch (Font.DisplayAlignment)
-			{
-				case OriginAlignment.TopCenter:
-				case OriginAlignment.Center:
-				case OriginAlignment.BottomCenter:
-					dest.X += Width / 2;
-					break;
-
-				case OriginAlignment.TopRight:
-				case OriginAlignment.CenterRight:
-				case OriginAlignment.BottomRight:
-					dest.X += Width;
-					break;
-			}
-
-			Surface image = null;
-
-			if (WrapText == false || mWrapPositions.Count == 0)
-			{
-				if (image != null)
-				{
-					Font.DrawText(dest.X, dest.Y, "{0} " + Text, image);
-				}
-				else
-					Font.DrawText(dest, Text);
-			}
-			else
-			{
-				RewrapText(Width);
-
-				int lineStart = 0;
-				for (int i = 0; i < mWrapPositions.Count; i++)
-				{
-					int length = mWrapPositions[i] - lineStart;
-					
-					if (SlowRead && lineStart + length > mSlowReadPosition)
-						length = mSlowReadPosition - lineStart;
-
-					string text = Text.Substring(lineStart, length);
-					
-					if (Parameters == null)
-						Font.DrawText(dest.X, dest.Y, text);
-					else 
-						Font.DrawText(dest.X, dest.Y, text, Parameters);
-					
-					dest.Y += Font.FontHeight;
-
-					lineStart = mWrapPositions[i];
-
-					if (SlowRead && lineStart >= mSlowReadPosition)
-						break;
-				}
-			}
-		}
-
-		public override string ToString()
-		{
-			if (string.IsNullOrEmpty(Name))
-			{
-				return "Label: \"" + Text + "\"";
-			}
-			else
-				return base.ToString();
-		}
-
-		internal override Size ComputeSize(int? maxWidth, int? maxHeight)
-		{
-			if (WrapText == false)
-			{
-				return Font.MeasureString(Text);
-			}
-
-			if (maxWidth != null)
-			{
-				RewrapText(maxWidth.Value);
-
-				if (mWrapPositions.Count > 0)
-					return new Size(WrappedWidth, WrappedHeight);
-			}
-
-			var result = Font.MeasureString(Text);
-			return result;
-		}
-
-		public OriginAlignment TextAlign { get; set; }
-
-		public bool WrapText
-		{
-			get { return mWrapText; }
-			set
-			{
-				mWrapText = value;
-
-				if (mWrapText)
-					RewrapText(Width);
-			}
-		}
-
-		public bool SlowRead { get; set; }
-		public bool IsSlowReading
-		{
-			get { return SlowRead && mSlowReadPosition < Text.Length; }
-		}
-		public bool AccelerateSlowReading { get; set; }
-	}
+        public UserInterfaceEventHandler AnimationComplete { get; set; }
+    }
 }
