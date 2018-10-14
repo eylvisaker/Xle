@@ -6,6 +6,7 @@ using AgateLib.InputLib;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.Rendering.Maps;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.Maps.Towns
 {
@@ -30,7 +31,7 @@ namespace ERY.Xle.Maps.Towns
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override void AfterExecuteCommand(KeyCode cmd)
+        public override void AfterExecuteCommand(Keys cmd)
         {
             base.AfterExecuteCommand(cmd);
 

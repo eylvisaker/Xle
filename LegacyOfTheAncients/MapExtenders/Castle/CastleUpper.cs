@@ -1,6 +1,7 @@
 ﻿using ERY.Xle.LotA.MapExtenders.Castle.Events;
 using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace ERY.Xle.LotA.MapExtenders.Castle
             }
         }
 
-        public override int GetOutsideTile(AgateLib.Mathematics.Geometry.Point playerPoint, int x, int y)
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
         {
             return TheMap.OutsideTile;
         }

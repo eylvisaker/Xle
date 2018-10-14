@@ -1,23 +1,17 @@
-﻿using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using ERY.Xle.Services;
-using ERY.Xle.Services.Menus;
+﻿using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
-using ERY.Xle.XleEventTypes.Extenders;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreFront : StoreExtender
     {
-        ColorScheme mColorScheme;
+        private ColorScheme mColorScheme;
 
         public IQuickMenu QuickMenuService { get; set; }
         public IXleRenderer Renderer { get; set; }
@@ -25,9 +19,9 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         public INumberPicker NumberPicker { get; set; }
         public ITextAreaRenderer TextAreaRenderer { get; set; }
         public ITextRenderer TextRenderer { get; set; }
-		public IXleScreen Screen { get; set; }
+        public IXleScreen Screen { get; set; }
         public List<TextWindow> Windows { get; private set; }
-        public new Store TheEvent { get { return (Store)base.TheEvent; } }
+        public new Store TheEvent { get { return base.TheEvent; } }
 
         protected ColorScheme ColorScheme { get { return mColorScheme; } }
         protected bool ShowGoldText { get; set; }
@@ -137,7 +131,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
         {
             GameControl.Wait(howLong, redraw: RedrawStore);
         }
-        protected void WaitForKey(params KeyCode[] keys)
+        protected void WaitForKey(params Keys[] keys)
         {
             input.WaitForKey(RedrawStore, keys);
         }
@@ -159,23 +153,23 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged, redraw: RedrawStore);
         }
 
-	    protected int ChooseNumber(int max)
-	    {
-		    EventHandler draw = (sender, args) => { RedrawStore(); };
+        protected int ChooseNumber(int max)
+        {
+            EventHandler draw = (sender, args) => { RedrawStore(); };
 
-		    try
-		    {
-			    //Screen.Draw += draw;
+            try
+            {
+                //Screen.Draw += draw;
 
-			    return NumberPicker.ChooseNumber(RedrawStore, max);
-		    }
-		    finally
-		    {
-			    Screen.Draw -= draw;
-		    }
-	    }
+                return NumberPicker.ChooseNumber(RedrawStore, max);
+            }
+            finally
+            {
+                Screen.Draw -= draw;
+            }
+        }
 
-	    public string Title { get; set; }
+        public string Title { get; set; }
 
         public override bool Speak()
         {

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-
-using ERY.Xle;
+﻿using ERY.Xle;
 using ERY.Xle.Data;
 using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Services.Commands;
@@ -18,7 +9,12 @@ using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 using ERY.Xle.XleEventTypes.Stores.Buyback;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ERY.XleTests
 {
@@ -26,14 +22,14 @@ namespace ERY.XleTests
     {
         public XleServices()
         {
-            KeysToSend = new List<KeyCode>();
+            KeysToSend = new List<Keys>();
 
             Screen = new Mock<IXleScreen>();
             Screen.SetupAllProperties();
 
             Input = new Mock<IXleInput>();
             Input.SetupAllProperties();
-            Input.Setup(x => x.WaitForKey(It.IsAny<Action>(), It.IsAny<KeyCode[]>())).Returns(() =>
+            Input.Setup(x => x.WaitForKey(It.IsAny<Action>(), It.IsAny<Keys[]>())).Returns(() =>
             {
                 var result = KeysToSend.First();
                 KeysToSend.RemoveAt(0);
@@ -134,7 +130,7 @@ namespace ERY.XleTests
 
         public string TextAreaText { get; set; }
 
-        public List<KeyCode> KeysToSend { get; set; }
+        public List<Keys> KeysToSend { get; set; }
         public Mock<IBuybackFormatter> BuybackFormatter { get; set; }
         public Mock<IBuybackOfferWindow> BuybackOfferWindow { get; internal set; }
         public Mock<INumberPicker> NumberPicker { get; internal set; }

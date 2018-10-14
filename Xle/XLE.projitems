@@ -111,7 +111,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Maps\XleTypeBinder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MenuItemList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Player.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\CompressionMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\CompressionType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\ITypeBinder.cs" />
@@ -275,63 +274,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\XleEvent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\XleEventList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleGameFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\AssemblyInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\EditorState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmEvent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmEvent.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmImport.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmImport.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmMapEdit.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmMapEdit.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmProperties.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmProperties.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmRoof.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\frmRoof.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\MainModule.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\Properties\Resources.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\TilePicker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\TilePicker.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\XleMapView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XleMapEditor\XleMapView.Designer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleOptions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)XleMapEditor\frmEvent.resX" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)XleMapEditor\frmImport.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)XleMapEditor\frmMapEdit.resX" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)XleMapEditor\frmProperties.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)XleMapEditor\frmRoof.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)XleMapEditor\Properties\Resources.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)XleMapEditor\TilePicker.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)XleMapEditor\XleMapView.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\ResolveAssemblyReference.cache" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.csproj.GenerateResource.Cache" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.exe" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.frmEvent.resources" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.frmImport.resources" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.frmMapEdit.resources" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.frmProperties.resources" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.frmRoof.resources" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.pdb" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.Properties.Resources.resources" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.TilePicker.resources" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.XleMapView.resources" />
-    <None Include="$(MSBuildThisFileDirectory)XleMapEditor\XleMapEditor.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)TODO.txt" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\obj\Debug\XleMapEditor.csproj.FileListAbsolute.txt" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\CopyHS.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\CutHS.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\NewDocumentHS.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\openHS.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\PasteHS.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\PropertiesHS.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\saveHS.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\ZoomHS.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\ZoomIn.png" />
-    <Content Include="$(MSBuildThisFileDirectory)XleMapEditor\Resources\ZoomOut.png" />
   </ItemGroup>
 </Project>

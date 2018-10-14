@@ -1,7 +1,7 @@
-﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Data;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.XleMapTypes;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.Services.Rendering.Maps
 {

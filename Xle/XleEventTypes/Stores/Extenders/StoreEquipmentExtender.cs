@@ -1,23 +1,18 @@
-﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
+﻿using ERY.Xle.Data;
+using ERY.Xle.Services.Menus;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AgateLib.DisplayLib;
-using ERY.Xle.Services;
-using ERY.Xle.Data;
-using ERY.Xle.Services.Menus;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
     public abstract class StoreEquipmentExtender : StoreFront
     {
-        int LeftOffset;
-
-        TextWindow titlePrompt = new TextWindow();
-        TextWindow itemsPrompt = new TextWindow();
-        TextWindow inventoryDisplay = new TextWindow();
+        private int LeftOffset;
+        private TextWindow titlePrompt = new TextWindow();
+        private TextWindow itemsPrompt = new TextWindow();
+        private TextWindow inventoryDisplay = new TextWindow();
 
         public IEquipmentPicker EquipmentPicker { get; set; }
         public XleData Data { get; set; }
@@ -65,7 +60,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             TextArea.PrintLine("      what will you sell me?");
             TextArea.PrintLine();
 
-	        Equipment eq = PickItemToSell();
+            Equipment eq = PickItemToSell();
 
             if (eq == null)
             {
@@ -233,8 +228,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             return result;
         }
 
-
-        void FillItems(double timeQuality,
+        private void FillItems(double timeQuality,
             int[] itemList, int[] qualList, int[] priceList)
         {
             if (ItemStockThisTime == null)
@@ -250,8 +244,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             for (int i = 1; i <= stock.Count && i <= 8; i++)
             {
                 int item = stock[i - 1];
-                int itemType = (int)(item / 5);
-                int quality = (int)(item - itemType * 5);
+                int itemType = item / 5;
+                int quality = item - itemType * 5;
 
                 itemList[i] = itemType;
                 qualList[i] = quality;
@@ -297,7 +291,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected override Equipment PickItemToSell()
         {
-            return EquipmentPicker.PickWeapon(GameState, null, Color.FromArgb(0));
+            return EquipmentPicker.PickWeapon(GameState, null, XleColor.Black);
         }
         protected override string StoreType
         {
@@ -340,7 +334,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected override Equipment PickItemToSell()
         {
-            return EquipmentPicker.PickArmor(GameState, null, Color.FromArgb(0));
+            return EquipmentPicker.PickArmor(GameState, null, XleColor.Black);
         }
         protected override string StoreType
         {

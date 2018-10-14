@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AgateLib.InputLib;
-
-using ERY.Xle.Services.Menus.Implementation;
+﻿using ERY.Xle.Services.Menus.Implementation;
 using FluentAssertions;
+using Microsoft.Xna.Framework.Input;
 using Xunit;
 
 namespace ERY.XleTests.ServiceTests
 {
     public class NumberPickerTests : XleTest
     {
-        NumberPicker picker;
+        private NumberPicker picker;
 
         public NumberPickerTests()
         {
             picker = new NumberPicker(Services.Screen.Object, Services.Input.Object, Services.TextArea.Object);
         }
 
-        void SetKeys(params KeyCode[] keys)
+        private void SetKeys(params Keys[] keys)
         {
             Services.KeysToSend.AddRange(keys);
         }
@@ -29,7 +22,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void ChooseByKeyboard()
         {
-            SetKeys(KeyCode.D2, KeyCode.D3, KeyCode.D4, KeyCode.Enter);
+            SetKeys(Keys.D2, Keys.D3, Keys.D4, Keys.Enter);
 
             var result = picker.ChooseNumber(2000);
 
@@ -39,7 +32,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void ChooseByKeyboardHitMax()
         {
-            SetKeys(KeyCode.D2, KeyCode.D3, KeyCode.D4, KeyCode.D5, KeyCode.Enter);
+            SetKeys(Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.Enter);
 
             var result = picker.ChooseNumber(2000);
 
@@ -49,7 +42,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void ChooseByKeyboardHitBackspace()
         {
-            SetKeys(KeyCode.D2, KeyCode.D3, KeyCode.BackSpace, KeyCode.D5, KeyCode.Enter);
+            SetKeys(Keys.D2, Keys.D3, Keys.Back, Keys.D5, Keys.Enter);
 
             var result = picker.ChooseNumber(2000);
 
@@ -59,7 +52,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void ChooseByJoystick()
         {
-            SetKeys(KeyCode.Up, KeyCode.Right, KeyCode.Up, KeyCode.Left, KeyCode.Left, KeyCode.Enter);
+            SetKeys(Keys.Up, Keys.Right, Keys.Up, Keys.Left, Keys.Left, Keys.Enter);
 
             var result = picker.ChooseNumber(100);
 
@@ -69,7 +62,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void ChooseByJoystickHitMax()
         {
-            SetKeys(KeyCode.Up, KeyCode.Up, KeyCode.Up, KeyCode.Enter);
+            SetKeys(Keys.Up, Keys.Up, Keys.Up, Keys.Enter);
 
             var result = picker.ChooseNumber(50);
 
@@ -79,7 +72,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void ChooseByJoystickHitMin()
         {
-            SetKeys(KeyCode.Right, KeyCode.Right, KeyCode.Down, KeyCode.Enter);
+            SetKeys(Keys.Right, Keys.Right, Keys.Down, Keys.Enter);
 
             var result = picker.ChooseNumber(50);
 

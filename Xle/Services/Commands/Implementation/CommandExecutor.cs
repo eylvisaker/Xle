@@ -12,7 +12,7 @@ namespace ERY.Xle.Services.Commands.Implementation
     {
         GameState gameState;
 
-        Dictionary<KeyCode, Direction> mDirectionMap = new Dictionary<KeyCode, Direction>();
+        Dictionary<Keys, Direction> mDirectionMap = new Dictionary<Keys, Direction>();
         private IXleGameControl gameControl;
         private ITextArea textArea;
         private ISoundMan soundMan;
@@ -42,15 +42,15 @@ namespace ERY.Xle.Services.Commands.Implementation
 
             input.DoCommand += (sender, args) => DoCommand(args.Command);
 
-            mDirectionMap[KeyCode.Right] = Direction.East;
-            mDirectionMap[KeyCode.Up] = Direction.North;
-            mDirectionMap[KeyCode.Left] = Direction.West;
-            mDirectionMap[KeyCode.Down] = Direction.South;
+            mDirectionMap[Keys.Right] = Direction.East;
+            mDirectionMap[Keys.Up] = Direction.North;
+            mDirectionMap[Keys.Left] = Direction.West;
+            mDirectionMap[Keys.Down] = Direction.South;
 
-            mDirectionMap[KeyCode.OpenBracket] = Direction.North;
-            mDirectionMap[KeyCode.Semicolon] = Direction.West;
-            mDirectionMap[KeyCode.Quotes] = Direction.East;
-            mDirectionMap[KeyCode.Slash] = Direction.South;
+            mDirectionMap[Keys.OpenBracket] = Direction.North;
+            mDirectionMap[Keys.Semicolon] = Direction.West;
+            mDirectionMap[Keys.Quotes] = Direction.East;
+            mDirectionMap[Keys.Slash] = Direction.South;
         }
 
         public void Prompt()
@@ -68,30 +68,30 @@ namespace ERY.Xle.Services.Commands.Implementation
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>
-        private void CursorMovement(KeyCode cmd)
+        private void CursorMovement(Keys cmd)
         {
             Direction dir = mDirectionMap[cmd];
 
             gameState.MapExtender.PlayerCursorMovement(dir);
         }
 
-        bool IsCursorMovement(KeyCode cmd)
+        bool IsCursorMovement(Keys cmd)
         {
             switch (cmd)
             {
-                case KeyCode.Right:
-                case KeyCode.Up:
-                case KeyCode.Left:
-                case KeyCode.Down:
+                case Keys.Right:
+                case Keys.Up:
+                case Keys.Left:
+                case Keys.Down:
                     return true;
 
                 default:
                     return false;
             }
         }
-        public void DoCommand(KeyCode cmd)
+        public void DoCommand(Keys cmd)
         {
-            if (cmd == KeyCode.None)
+            if (cmd == Keys.None)
                 return;
 
             int waitTime = 700;
@@ -123,7 +123,7 @@ namespace ERY.Xle.Services.Commands.Implementation
             AfterDoCommand(waitTime, cmd);
         }
 
-        private void ExecuteCursorMovement(KeyCode cmd)
+        private void ExecuteCursorMovement(Keys cmd)
         {
             var wasRaft = player.BoardedRaft;
 
@@ -157,7 +157,7 @@ namespace ERY.Xle.Services.Commands.Implementation
                 commands.CurrentCommand = commands.Items[0];
         }
 
-        private void AfterDoCommand(int waitTime, KeyCode cmd)
+        private void AfterDoCommand(int waitTime, Keys cmd)
         {
             gameState.MapExtender.AfterExecuteCommand(cmd);
 

@@ -1,11 +1,9 @@
-﻿using System;
+﻿using ERY.Xle.Services.Game;
+using ERY.Xle.Services.ScreenModel;
+using Microsoft.Xna.Framework.Audio;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-using AgateLib.AudioLib;
-
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.ScreenModel;
 
 namespace ERY.Xle.Services.XleSystem.Implementation
 {
@@ -14,7 +12,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
 
-        Dictionary<LotaSound, SoundBuffer> mSounds = new Dictionary<LotaSound, SoundBuffer>();
+        private Dictionary<LotaSound, SoundEffect> mSounds = new Dictionary<LotaSound, SoundEffect>();
 
         public void Load()
         {
@@ -53,33 +51,37 @@ namespace ERY.Xle.Services.XleSystem.Implementation
                 return;
             }
 
-            mSounds[sound].Stop();
+            //mSounds[sound].Stop();
+            throw new NotImplementedException();
         }
 
         public bool IsAnyPlaying()
         {
-            foreach (var kvp in mSounds)
-            {
-                if (kvp.Value.IsPlaying)
-                    return true;
-            }
+            throw new NotImplementedException();
+            //foreach (var kvp in mSounds)
+            //{
+            //    if (kvp.Value.IsPlaying)
+            //        return true;
+            //}
 
-            return false;
+            //return false;
         }
         public bool IsPlaying(LotaSound sound)
         {
             if (mSounds.ContainsKey(sound) == false)
                 return false;
 
-            return mSounds[sound].IsPlaying;
+            //return mSounds[sound].IsPlaying;
+            throw new NotImplementedException();
         }
 
         public void StopAllSounds()
         {
-            foreach (var kvp in mSounds)
-            {
-                kvp.Value.Stop();
-            }
+            //foreach (var kvp in mSounds)
+            //{
+            //    kvp.Value.Stop();
+            //}
+            throw new NotImplementedException();
         }
 
 
@@ -88,7 +90,8 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             if (mSounds.ContainsKey(sound) == false)
                 return;
 
-            mSounds[sound].Volume = volume;
+            //mSounds[sound].Volume = volume;
+            throw new NotImplementedException();
         }
 
         public void PlaySoundSync(LotaSound lotaSound)

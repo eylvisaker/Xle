@@ -1,11 +1,6 @@
-﻿using AgateLib.DisplayLib;
-
-using ERY.Xle.Maps;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using ERY.Xle.Maps;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
@@ -20,7 +15,7 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
             Enabled = false;
 
-            MapData data = ((EventExtender)this).GameState.Map.ReadMapData(TheEvent.Rectangle);
+            MapData data = (this).GameState.Map.ReadMapData(TheEvent.Rectangle);
 
             TextArea.Clear(true);
             TextArea.PrintLine();
@@ -63,9 +58,10 @@ namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 
         private void DrawBlankScreen()
         {
-            Display.BeginFrame();
-            Display.Clear(XleColor.Gray);
-            Display.EndFrame();
+            //Display.BeginFrame();
+            //Display.Clear(XleColor.Gray);
+            //Display.EndFrame();
+            throw new NotImplementedException();
         }
 
         private void AddGas()

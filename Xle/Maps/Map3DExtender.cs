@@ -29,7 +29,7 @@ namespace ERY.Xle.Maps
 
             _MoveDungeon(dir, ShowDirections(), out command, out stepDirection);
 
-            if (stepDirection.IsEmpty == false)
+            if (stepDirection != Point.Zero)
             {
                 if (CanPlayerStepIntoImpl(Player.X + stepDirection.X, Player.Y + stepDirection.Y) == false)
                 {
@@ -62,7 +62,7 @@ namespace ERY.Xle.Maps
         {
             Direction newDirection;
             command = "";
-            stepDirection = Point.Empty;
+            stepDirection = Point.Zero;
 
             switch (dir)
             {

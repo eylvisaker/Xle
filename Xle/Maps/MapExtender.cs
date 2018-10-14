@@ -1,4 +1,5 @@
-﻿using ERY.Xle.Data;
+﻿using AgateLib.Quality;
+using ERY.Xle.Data;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.MapLoad;
@@ -9,6 +10,7 @@ using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 using ERY.Xle.XleEventTypes.Extenders;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
@@ -27,7 +29,7 @@ namespace ERY.Xle.Maps
             get { return mTheMap; }
             set
             {
-                Condition.RequireArgumentNotNull(value, "value");
+                Require.ArgumentNotNull(value, "value");
                 mTheMap = value;
             }
         }
@@ -126,7 +128,7 @@ namespace ERY.Xle.Maps
         {
         }
 
-        public virtual void AfterExecuteCommand(KeyCode cmd)
+        public virtual void AfterExecuteCommand(Keys cmd)
         {
         }
 
@@ -249,7 +251,7 @@ namespace ERY.Xle.Maps
 
         }
 
-        public virtual void CheckSounds()
+        public virtual void CheckSounds(GameTime time)
         {
         }
 

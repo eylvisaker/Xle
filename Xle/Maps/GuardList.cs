@@ -1,21 +1,15 @@
-﻿using AgateLib;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.Platform;
+﻿using AgateLib.Display;
 using ERY.Xle.Serialization;
-using System;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AgateLib.DisplayLib;
 
 namespace ERY.Xle.Maps
 {
     public class GuardList : IXleSerializable, IList<Guard>
     {
-        double lastGuardAnim = 0;
-        int guardAnimFrame;
-
-        List<Guard> mGuards = new List<Guard>();
+        private double lastGuardAnim = 0;
+        private int guardAnimFrame;
+        private List<Guard> mGuards = new List<Guard>();
 
         void IXleSerializable.WriteData(XleSerializationInfo info)
         {
@@ -29,7 +23,7 @@ namespace ERY.Xle.Maps
         {
             mGuards = info.ReadList<Guard>("Guards");
             DefaultAttack = info.ReadInt32("GuardDefaultAttack");
-            DefaultColor = Color.FromArgb(info.ReadInt32("GuardDefaultColor"));
+            DefaultColor = ColorX.FromArgb(info.ReadInt32("GuardDefaultColor").ToString("X8"));
             DefaultDefense = info.ReadInt32("GuardDefaultDefense");
             DefaultHP = info.ReadInt32("GuardDefaultHP");
 
@@ -82,7 +76,7 @@ namespace ERY.Xle.Maps
                 guard.Color = DefaultColor;
                 guard.Facing = Direction.South;
 
-                if (guard.Color.ToArgb() == 0)
+                if (guard.Color.ToArgb() == "00000000")
                     guard.Color = XleColor.Yellow;
             }
         }

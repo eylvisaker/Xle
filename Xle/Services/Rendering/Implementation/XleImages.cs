@@ -1,17 +1,20 @@
-﻿using AgateLib.DisplayLib;
+﻿using AgateLib;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ERY.Xle.Services.Rendering.Implementation
 {
     public class XleImages : IXleImages
     {
-        public ISurface Tiles { get; private set; }
+        public IContentProvider Content { get; set; }
+
+        public Texture2D Tiles { get; private set; }
 
         public void LoadTiles(string tileset)
         {
             if (tileset.EndsWith(".png") == false)
                 tileset += ".png";
 
-            Tiles = new Surface("Images/" + tileset) { InterpolationHint = InterpolationMode.Fastest };
+            Tiles = Content.Load<Texture2D>("Images/" + tileset);
         }
     }
 }

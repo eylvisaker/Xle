@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ERY.Xle.Maps;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.Linq;
-using AgateLib;
-using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle.Maps;
 
 namespace ERY.Xle.Services.Rendering.Maps
 {
@@ -68,7 +66,7 @@ namespace ERY.Xle.Services.Rendering.Maps
             return TheMap[x, y];
         }
 
-        private IEnumerable<TileGroup> GetGroupsToAnimate()
+        private IEnumerable<TileGroup> GetGroupsToAnimate(GameTime time)
         {
             if (TheMap.TileSet == null)
                 yield break;
@@ -80,7 +78,7 @@ namespace ERY.Xle.Services.Rendering.Maps
                 if (group.Tiles.Count < 2)
                     continue;
 
-                group.TimeSinceLastAnim += AgateApp.GameClock.Elapsed.TotalMilliseconds;
+                group.TimeSinceLastAnim += time.ElapsedGameTime.TotalMilliseconds;
 
                 if (group.TimeSinceLastAnim >= group.AnimationTime)
                 {

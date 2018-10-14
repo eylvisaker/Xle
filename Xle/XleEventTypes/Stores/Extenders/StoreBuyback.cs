@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AgateLib.Geometry;
-
-using ERY.Xle.Data;
-using ERY.Xle.Services;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Services.Menus;
+using System;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
@@ -32,7 +26,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             return true;
         }
 
-        void RunStore()
+        private void RunStore()
         {
             int i = 0;
             int choice;

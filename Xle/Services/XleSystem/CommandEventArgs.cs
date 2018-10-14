@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AgateLib.InputLib;
+﻿using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ERY.Xle.Services.XleSystem
 {
     public class CommandEventArgs : EventArgs
     {
-        public CommandEventArgs(KeyCode command)
+        public CommandEventArgs(Keys command)
         {
             this.Command = command;
         }
 
-        public KeyCode Command { get; private set; }
+        public Keys Command { get; private set; }
     }
 }

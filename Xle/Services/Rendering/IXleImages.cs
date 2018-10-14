@@ -1,4 +1,4 @@
-﻿using AgateLib.DisplayLib;
+﻿using Microsoft.Xna.Framework.Graphics;
 
 namespace ERY.Xle.Services.Rendering
 {
@@ -6,6 +6,6 @@ namespace ERY.Xle.Services.Rendering
     {
         void LoadTiles(string tileset);
 
-        ISurface Tiles { get; }
+        Texture2D Tiles { get; }
     }
 }

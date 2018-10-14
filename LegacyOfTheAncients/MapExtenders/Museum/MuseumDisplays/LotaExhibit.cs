@@ -8,6 +8,7 @@ using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Data;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using ERY.Xle.Services;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
 {

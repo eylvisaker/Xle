@@ -11,6 +11,7 @@ using ERY.Xle.Services.XleSystem;
 using AgateLib.InputLib;
 using ERY.Xle.Maps.Outdoors;
 using FluentAssertions;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.XleTests.Commands
 {
@@ -34,10 +35,10 @@ namespace ERY.XleTests.Commands
             GameState.MapExtender = outsideExtender.Object;
         }
 
-        void SetKeys(params KeyCode[] keys)
+        void SetKeys(params Keys[] keys)
         {
             var sequence = input.SetupSequence(
-                    x => x.WaitForKey(It.IsAny<KeyCode[]>()));
+                    x => x.WaitForKey(It.IsAny<Keys[]>()));
 
             foreach (var key in keys)
             {
@@ -48,7 +49,7 @@ namespace ERY.XleTests.Commands
         [Fact]
         public void Disembark()
         {
-            SetKeys(KeyCode.Right);
+            SetKeys(Keys.Right);
 
             Player.Rafts.Add(new Xle.RaftData(18, 18, 1));
             Player.BoardedRaft = Player.Rafts.First();

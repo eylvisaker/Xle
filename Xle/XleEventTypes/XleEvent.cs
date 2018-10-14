@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-
-using AgateLib;
-using AgateLib.DisplayLib;
 using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
 using ERY.Xle.Serialization;
-
-using ERY.Xle.Maps;
 using ERY.Xle.XleEventTypes.Extenders;
+using Microsoft.Xna.Framework;
+using System;
+using System.ComponentModel;
 
 namespace ERY.Xle.XleEventTypes
 {

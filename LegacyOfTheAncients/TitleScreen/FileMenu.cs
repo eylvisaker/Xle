@@ -1,178 +1,177 @@
-﻿using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-	public abstract class FileMenu : TitleState
-	{
-		int menuSelection;
-		int page;
-		List<string> files = new List<string>();
-		int maxPages { get { return (files.Count - 1) / 8; } }
-		bool titleDone;
-		protected TextWindow filesWindow = new TextWindow();
+    public abstract class FileMenu : TitleState
+    {
+        private int menuSelection;
+        private int page;
+        private List<string> files = new List<string>();
 
-		public FileMenu()
-		{
-			SetFiles();
+        private int maxPages { get { return (files.Count - 1) / 8; } }
 
-			filesWindow.Location = new Point(11, 8);
+        private bool titleDone;
+        protected TextWindow filesWindow = new TextWindow();
 
-			Windows.Add(filesWindow);
-		}
+        public FileMenu()
+        {
+            SetFiles();
 
-		private void SetFiles()
-		{
-			string savedDirectory = "Saved";
+            filesWindow.Location = new Point(11, 8);
 
-			if (Directory.Exists(savedDirectory) == false)
-				Directory.CreateDirectory(savedDirectory);
+            Windows.Add(filesWindow);
+        }
 
-			string[] sourceFiles = Directory.GetFiles(savedDirectory);
+        private void SetFiles()
+        {
+            string savedDirectory = "Saved";
 
-			files.AddRange(sourceFiles);
-		}
+            if (Directory.Exists(savedDirectory) == false)
+                Directory.CreateDirectory(savedDirectory);
 
-		int FileStartIndex { get { return page * 8; } }
+            string[] sourceFiles = Directory.GetFiles(savedDirectory);
 
-		protected override void DrawWindows()
-		{
-			base.DrawWindows();
+            files.AddRange(sourceFiles);
+        }
 
-			Point pt = filesWindow.Location;
+        private int FileStartIndex { get { return page * 8; } }
 
-			pt.X -= 2;
-			pt.Y += menuSelection;
+        protected override void DrawWindows()
+        {
+            base.DrawWindows();
+
+            Point pt = filesWindow.Location;
+
+            pt.X -= 2;
+            pt.Y += menuSelection;
 
             TextRenderer.WriteText(pt.X * 16, pt.Y * 16, "`");
-		}
-		public override void Update()
-		{
-			filesWindow.Clear();
+        }
+        public override void Update(GameTime time)
+        {
+            filesWindow.Clear();
 
-			if (page == 0)
-				filesWindow.WriteLine("0.  Cancel");
-			else
-				filesWindow.WriteLine("0.  Previous Page");
+            if (page == 0)
+                filesWindow.WriteLine("0.  Cancel");
+            else
+                filesWindow.WriteLine("0.  Previous Page");
 
-			for (int i = 0; i < 8; i++)
-			{
-				filesWindow.Write((i + 1).ToString());
-				filesWindow.Write(".  ");
+            for (int i = 0; i < 8; i++)
+            {
+                filesWindow.Write((i + 1).ToString());
+                filesWindow.Write(".  ");
 
-				if (files.Count <= FileStartIndex + i)
-					filesWindow.WriteLine("Empty");
-				else
-				{
-					filesWindow.WriteLine(Path.GetFileNameWithoutExtension(files[i]));
-				}
-			}
+                if (files.Count <= FileStartIndex + i)
+                    filesWindow.WriteLine("Empty");
+                else
+                {
+                    filesWindow.WriteLine(Path.GetFileNameWithoutExtension(files[i]));
+                }
+            }
 
-			if (page < maxPages)
-				filesWindow.WriteLine("9.  Next Page");
-		}
+            if (page < maxPages)
+                filesWindow.WriteLine("9.  Next Page");
+        }
 
-		public override void KeyDown(KeyCode keyCode, string keyString)
-		{
-			if (keyCode == KeyCode.Down)
-			{
-				menuSelection++;
+        public override void KeyDown(Keys keyCode, string keyString)
+        {
+            if (keyCode == KeyCode.Down)
+            {
+                menuSelection++;
 
-				if (menuSelection >= 9)
-					menuSelection = 9;
-				else if (files.Count < FileStartIndex + menuSelection)
-				{
-					menuSelection = 9;
-				}
+                if (menuSelection >= 9)
+                    menuSelection = 9;
+                else if (files.Count < FileStartIndex + menuSelection)
+                {
+                    menuSelection = 9;
+                }
 
-				SoundMan.PlaySound(LotaSound.TitleCursor);
-			}
-			else if (keyCode == KeyCode.Up)
-			{
-				do
-				{
-					menuSelection--;
+                SoundMan.PlaySound(LotaSound.TitleCursor);
+            }
+            else if (keyCode == KeyCode.Up)
+            {
+                do
+                {
+                    menuSelection--;
 
-					if (menuSelection <= 0)
-						break;
+                    if (menuSelection <= 0)
+                        break;
 
-				} while (menuSelection > 0 &&
-					files.Count < FileStartIndex + menuSelection);
+                } while (menuSelection > 0 &&
+                    files.Count < FileStartIndex + menuSelection);
 
-				if (menuSelection < 0)
-					menuSelection = 0;
+                if (menuSelection < 0)
+                    menuSelection = 0;
 
-				SoundMan.PlaySound(LotaSound.TitleCursor);
-			}
-			else if (keyCode >= KeyCode.D0 && keyCode <= KeyCode.D9)
-			{
-				menuSelection = keyCode - KeyCode.D0;
+                SoundMan.PlaySound(LotaSound.TitleCursor);
+            }
+            else if (keyCode >= KeyCode.D0 && keyCode <= KeyCode.D9)
+            {
+                menuSelection = keyCode - KeyCode.D0;
 
-				keyCode = KeyCode.Return;
-			}
+                keyCode = KeyCode.Return;
+            }
 
-			if (menuSelection == 9 && page == maxPages)
-			{
-				menuSelection = 8;
+            if (menuSelection == 9 && page == maxPages)
+            {
+                menuSelection = 8;
 
-				do
-				{
-					menuSelection--;
+                do
+                {
+                    menuSelection--;
 
-					if (menuSelection <= 0)
-						break;
+                    if (menuSelection <= 0)
+                        break;
 
-				} while (menuSelection > 0 && files.Count < FileStartIndex + menuSelection);
+                } while (menuSelection > 0 && files.Count < FileStartIndex + menuSelection);
 
-			}
+            }
 
-			if (keyCode == KeyCode.Return)
-			{
-				SoundMan.PlaySound(LotaSound.TitleAccept);
+            if (keyCode == KeyCode.Return)
+            {
+                SoundMan.PlaySound(LotaSound.TitleAccept);
 
-				Wait(500);
+                Wait(500);
 
-				if (menuSelection == 0)
-				{
-					if (page > 0)
-					{
-						page--;
-					}
-					else
-					{
-						UserSelectedCancel();
-					}
-				}
-				else if (menuSelection == 9)
-				{
-					page++;
+                if (menuSelection == 0)
+                {
+                    if (page > 0)
+                    {
+                        page--;
+                    }
+                    else
+                    {
+                        UserSelectedCancel();
+                    }
+                }
+                else if (menuSelection == 9)
+                {
+                    page++;
 
-					if (page > maxPages)
-						page = maxPages;
-				}
-				else
-				{
-					int index = FileStartIndex + menuSelection - 1;
+                    if (page > maxPages)
+                        page = maxPages;
+                }
+                else
+                {
+                    int index = FileStartIndex + menuSelection - 1;
 
-					if (index < files.Count)
-					{
-						string file = files[index];
+                    if (index < files.Count)
+                    {
+                        string file = files[index];
 
-						if (string.IsNullOrEmpty(file) == false)
-						{
-							UserSelectedFile(file);
-						}
-					}
-				}
-			}
-		}
+                        if (string.IsNullOrEmpty(file) == false)
+                        {
+                            UserSelectedFile(file);
+                        }
+                    }
+                }
+            }
+        }
 
-		protected abstract void UserSelectedFile(string file);
-		protected abstract void UserSelectedCancel();
-	}
+        protected abstract void UserSelectedFile(string file);
+        protected abstract void UserSelectedCancel();
+    }
 }

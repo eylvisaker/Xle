@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-using ERY.Xle.Data;
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services.Menus;
+﻿using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.Rendering.Maps;
-using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Linq;
 
 namespace ERY.Xle.Maps.Outdoors
 {
     public class OutsideExtender : Map2DExtender, IOutsideExtender
     {
-        Direction monstDir { get; set; }
+        private Direction monstDir { get; set; }
 
         public XleSystemState SystemState { get; set; }
         public ITerrainMeasurement TerrainMeasurement { get; set; }
@@ -38,7 +33,7 @@ namespace ERY.Xle.Maps.Outdoors
             return factory.OutsideRenderer(this);
         }
 
-        public override void CheckSounds()
+        public override void CheckSounds(GameTime time)
         {
             if (Player.IsOnRaft)
             {
@@ -131,7 +126,7 @@ namespace ERY.Xle.Maps.Outdoors
         {
             return 0;
         }
-        
+
         public override void SetColorScheme(ColorScheme scheme)
         {
             scheme.TextColor = XleColor.White;
@@ -145,7 +140,7 @@ namespace ERY.Xle.Maps.Outdoors
         public virtual void ModifyTerrainInfo(TerrainInfo info, TerrainType terrain)
         {
         }
-        
+
         public virtual void UpdateEncounterState(ref bool handled)
         {
         }
@@ -237,7 +232,7 @@ namespace ERY.Xle.Maps.Outdoors
             return GetTerrainInfo(terrain);
         }
 
-        TerrainInfo GetTerrainInfo(TerrainType terrain)
+        private TerrainInfo GetTerrainInfo(TerrainType terrain)
         {
             TerrainInfo info = new TerrainInfo();
 
@@ -354,7 +349,7 @@ namespace ERY.Xle.Maps.Outdoors
             }
         }
 
-        public override void AfterExecuteCommand(KeyCode cmd)
+        public override void AfterExecuteCommand(Keys cmd)
         {
             OutsideEncounters.AfterPlayerAction();
         }

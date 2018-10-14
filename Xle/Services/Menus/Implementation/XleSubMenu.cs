@@ -1,12 +1,8 @@
-﻿using System;
-
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-
+﻿
 using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.Services.Menus.Implementation
 {
@@ -17,7 +13,7 @@ namespace ERY.Xle.Services.Menus.Implementation
         private readonly IXleSubMenuRedraw redraw;
 
         public XleSubMenu(
-            IXleGameControl gameControl, 
+            IXleGameControl gameControl,
             IXleInput input,
             IXleSubMenuRedraw redraw)
         {
@@ -64,7 +60,7 @@ namespace ERY.Xle.Services.Menus.Implementation
                 menu.width = displayTitle.Length + 2;
             }
 
-            KeyCode key;
+            Keys key;
 
             redraw.Menu = menu;
 
@@ -72,39 +68,39 @@ namespace ERY.Xle.Services.Menus.Implementation
             {
                 key = input.WaitForKey(redraw.Redraw);
 
-                if (key == KeyCode.Up)
+                if (key == Keys.Up)
                 {
                     menu.value--;
                     if (menu.value < 0)
                         menu.value = 0;
                 }
-                if (key == KeyCode.Down)
+                if (key == Keys.Down)
                 {
                     menu.value++;
                     if (menu.value >= menu.theList.Count)
                         menu.value = menu.theList.Count - 1;
                 }
-                else if (key >= KeyCode.D0)
+                else if (key >= Keys.D0)
                 {
                     int v;
 
-                    if (key >= KeyCode.A)
+                    if (key >= Keys.A)
                     {
-                        v = (int)(key) - (int)(KeyCode.A);
+                        v = (int)(key) - (int)(Keys.A);
                         v += 10;
                     }
                     else
                     {
-                        v = key - KeyCode.D0;
+                        v = key - Keys.D0;
                     }
 
                     if (v < menu.theList.Count)
                     {
                         menu.value = v;
-                        key = KeyCode.Return;
+                        key = Keys.Enter;
                     }
                 }
-            } while (key != KeyCode.Return);
+            } while (key != Keys.Enter);
 
             gameControl.Wait(300);
 

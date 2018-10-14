@@ -1,16 +1,13 @@
-﻿using System;
-
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.Platform;
-
+﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Data;
 using ERY.Xle.Maps;
 using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Rendering.Maps;
 using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace ERY.Xle.Services.Rendering.Implementation
 {
@@ -18,10 +15,10 @@ namespace ERY.Xle.Services.Rendering.Implementation
     {
         private ICommandList commands;
 
-        public int raftAnim;				// raft animation frame
+        public int raftAnim;                // raft animation frame
 
         // TODO: Which of these are obsolete?
-        static double lastRaftAnim = 0;
+        private static double lastRaftAnim = 0;
 
         private IPlayerAnimator playerAnimator;
         private IXleImages images;
@@ -44,12 +41,14 @@ namespace ERY.Xle.Services.Rendering.Implementation
             Screen.Update += Screen_Update;
         }
 
-        void Screen_Update(object sender, EventArgs e)
+        public SpriteBatch spriteBatch { get; set; }
+
+        private void Screen_Update(object sender, EventArgs e)
         {
             UpdateAnim();
         }
 
-        void Screen_Draw(object sender, EventArgs e)
+        private void Screen_Draw(object sender, EventArgs e)
         {
             Draw();
         }
@@ -61,15 +60,15 @@ namespace ERY.Xle.Services.Rendering.Implementation
         public XleData Data { get; set; }
         public IXleGameFactory Factory { get; set; }
 
-        IXleScreen Screen { get; set; }
+        private IXleScreen Screen { get; set; }
 
         public Size WindowSize { get; set; }
 
-        Size GameAreaSize { get { return new Size(640, 400); } }
+        private Size GameAreaSize { get { return new Size(640, 400); } }
 
-        ISurface Tiles { get { return images.Tiles; } }
+        private Texture2D Tiles { get { return images.Tiles; } }
 
-        Player Player { get { return GameState.Player; } }
+        private Player Player { get { return GameState.Player; } }
 
         public void DrawFrame(Color boxColor)
         {
@@ -106,13 +105,13 @@ namespace ERY.Xle.Services.Rendering.Implementation
             {
                 boxWidth -= 2;
 
-                Display.FillRect(left, top, length, boxWidth, boxColor);
+                FillRect(left, top, length, boxWidth, boxColor);
             }
             else
             {
                 length -= 4;
 
-                Display.FillRect(left, top, boxWidth, length, boxColor);
+                FillRect(left, top, boxWidth, length, boxColor);
             }
         }
 
@@ -128,7 +127,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             if (direction == 1)
             {
-                Display.FillRect(left + innerOffsetH,
+                FillRect(left + innerOffsetH,
                     top + innerOffsetV,
                     length - boxWidth + 2,
                     innerWidth,
@@ -137,7 +136,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
             else
             {
 
-                Display.FillRect(left + innerOffsetH,
+                FillRect(left + innerOffsetH,
                     top + innerOffsetV,
                     innerWidth + 2,
                     length - boxWidth,
@@ -147,15 +146,17 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
         }
 
-        void WriteText(int px, int py, string theText)
+        private void WriteText(int px, int py, string theText)
         {
             TextRenderer.WriteText(px, py, theText);
         }
-        void WriteText(int px, int py, string theText, Color c)
+
+        private void WriteText(int px, int py, string theText, Color c)
         {
             TextRenderer.WriteText(px, py, theText, c);
         }
-        void WriteText(int px, int py, string theText, Color[] coloring)
+
+        private void WriteText(int px, int py, string theText, Color[] coloring)
         {
             TextRenderer.WriteText(px, py, theText, coloring);
         }
@@ -168,12 +169,12 @@ namespace ERY.Xle.Services.Rendering.Implementation
             Rectangle destRect;
 
             tx = tile % 16 * 16;
-            ty = (int)(tile / 16) * 16;
+            ty = tile / 16 * 16;
 
             tileRect = new Rectangle(tx, ty, 16, 16);
             destRect = new Rectangle(px, py, 16, 16);
 
-            Tiles.Draw(tileRect, destRect);
+            spriteBatch.Draw(Tiles, destRect, tileRect, Color.White);
         }
 
         /// <summary>
@@ -197,7 +198,9 @@ namespace ERY.Xle.Services.Rendering.Implementation
             destRect = new Rectangle(px, py, size.Width, size.Height);
 
             if (Factory.Monsters != null)
-                Factory.Monsters.Draw(monstRect, destRect);
+            {
+                spriteBatch.Draw(Factory.Monsters, destRect, srcRect, Color.White);
+            }
 
         }
 
@@ -209,11 +212,12 @@ namespace ERY.Xle.Services.Rendering.Implementation
         /// <param name="animating"></param>
         /// <param name="animFrame"></param>
         /// <param name="vertLine"></param>
-        void DrawCharacter(bool animating, int animFrame, int vertLine)
+        private void DrawCharacter(bool animating, int animFrame, int vertLine)
         {
             DrawCharacter(animating, animFrame, vertLine, Player.RenderColor);
         }
-        void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
+
+        private void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
         {
             int px = vertLine + 16;
             int py = 16 + 7 * 16;
@@ -254,9 +258,8 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             charRect = new Rectangle(tx, ty, 32, 32);
             destRect = new Rectangle(destx, desty, 32, 32);
-
-            Factory.Character.Color = clr;
-            Factory.Character.Draw(charRect, destRect);
+            
+            spriteBatch.Draw(Factory.Character, destRect, charRect, clr);
         }
 
         public Rectangle CharRect { get; private set; }
@@ -265,13 +268,13 @@ namespace ERY.Xle.Services.Rendering.Implementation
         /// Draws the rafts that should be on the screen.
         /// </summary>
         /// <param name="inRect"></param>
-        void DrawRafts(Rectangle inRect)
+        private void DrawRafts(SpriteBatch spriteBatch, Rectangle inRect)
         {
             Player player = GameState.Player;
             int tx, ty;
             int lx = inRect.Left;
             int width = inRect.Width;
-            int px = lx + (int)((width / 16) / 2) * 16;
+            int px = lx + (width / 16) / 2 * 16;
             int py = 128;
             int rx, ry;
             Rectangle charRect;
@@ -321,7 +324,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
                 {
                     destRect = new Rectangle(rx, ry, 32, 32);
 
-                    Factory.Character.Draw(charRect, destRect);
+                    spriteBatch.Draw(Factory.Character, destRect, charRect, Color.White);
                 }
             }
         }
@@ -370,7 +373,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
             DrawInnerFrameHighlight(vertLine, 0, 0, horizLine + 12, innerColor);
             DrawInnerFrameHighlight(0, horizLine, 1, GameAreaSize.Width, innerColor);
 
-            Rectangle mapRect = Rectangle.FromLTRB
+            Rectangle mapRect = RectangleX.FromLTRB
                 (vertLine + 16, 16, GameAreaSize.Width - 16, horizLine);
 
             MapRenderer.Draw(player.Location, player.FaceDirection, mapRect);
@@ -427,7 +430,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
         /// <summary>
         /// Animates the rafts.
         /// </summary>
-        void RaftAnim()
+        private void RaftAnim()
         {
             if (lastRaftAnim + 100 < Timing.TotalMilliseconds)
             {
@@ -445,11 +448,13 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
         public void SetProjectionAndBackColors(ColorScheme cs)
         {
-            Display.Clear(cs.BorderColor);
+            //Display.Clear(cs.BorderColor);
+            throw new NotImplementedException();
+
             int hp = cs.HorizontalLinePosition * 16 + 8;
 
-            Display.FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
-            Display.FillRect(0, hp, 640, 400 - hp, cs.TextAreaBackColor);
+            FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
+            FillRect(0, hp, 640, 400 - hp, cs.TextAreaBackColor);
         }
 
         public void DrawObject(ColorScheme cs)

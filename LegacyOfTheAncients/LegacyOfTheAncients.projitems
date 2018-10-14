@@ -11,6 +11,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaExhibitInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaTitleScreenInstaller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameVariableExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LotaMuseumCoinSale.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LotaProgram.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LotaStory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LotaUse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\CastleGround.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\CastleUpper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\Commands\CastleFight.cs" />

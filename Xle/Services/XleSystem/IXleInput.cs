@@ -1,6 +1,5 @@
-﻿using System;
-
-using AgateLib.InputLib;
+﻿using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ERY.Xle.Services.XleSystem
 {
@@ -8,8 +7,8 @@ namespace ERY.Xle.Services.XleSystem
     {
         bool AcceptKey { get; set; }
 
-        KeyCode WaitForKey(params KeyCode[] keys);
-        KeyCode WaitForKey(Action redraw, params KeyCode[] keys);
+        Keys WaitForKey(params Keys[] keys);
+        Keys WaitForKey(Action redraw, params Keys[] keys);
 
         bool PromptToContinueOnWait { get; set; }
 

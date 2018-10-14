@@ -1,8 +1,5 @@
-﻿using System;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle.Services.ScreenModel.Implementation;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.ScreenModel
 {

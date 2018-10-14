@@ -1,124 +1,112 @@
-﻿using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-
-using ERY.Xle.LotA.MapExtenders.Fortress.FirstArea;
-using ERY.Xle.LotA.MapExtenders.Fortress.SecondArea;
-using ERY.Xle.Maps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib.DisplayLib;
+﻿using ERY.Xle.LotA.MapExtenders.Fortress.SecondArea;
 using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.Services;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress
 {
-	public class FortressFinal : FortressEntry
-	{
-		IFortressFinalActivator fortressActivator;
+    public class FortressFinal : FortressEntry
+    {
+        private IFortressFinalActivator fortressActivator;
+        private int borderIndex;
+        private Color flashColor = XleColor.LightGreen;
+        private double compendiumStrength = 140;
 
-		int borderIndex;
-		Color flashColor = XleColor.LightGreen;
+        public FortressFinal(IFortressFinalActivator fortressActivator)
+        {
+            this.fortressActivator = fortressActivator;
+            fortressActivator.Reset();
+            fortressActivator.WarlordCreated += (sender, e) => TheMap.Guards.Add(fortressActivator.Warlord);
 
-		double compendiumStrength = 140;
+            WhichCastle = 2;
+            CastleLevel = 2;
+            GuardAttack = 3.5;
+        }
 
-		public FortressFinal(IFortressFinalActivator fortressActivator)
-		{
-			this.fortressActivator = fortressActivator;
-			fortressActivator.Reset();
-			fortressActivator.WarlordCreated += (sender, e) => TheMap.Guards.Add(fortressActivator.Warlord);
+        public IXleScreen Screen { get; set; }
 
-			WhichCastle = 2;
-			CastleLevel = 2;
-			GuardAttack = 3.5;
-		}
+        public override int GetOutsideTile(Point playerPoint, int x, int y)
+        {
+            if (y >= TheMap.Height)
+                return 0;
+            else
+                return 11;
+        }
 
-		public IXleScreen Screen { get; set; }
+        public override void AfterExecuteCommand(Keys cmd)
+        {
+            if (fortressActivator.Warlord != null)
+            {
+                WarlordAttack();
+            }
+            else if (fortressActivator.CompendiumAttacking)
+            {
+                CompendiumAttack();
+            }
 
-		public override int GetOutsideTile(Point playerPoint, int x, int y)
-		{
-			if (y >= TheMap.Height)
-				return 0;
-			else
-				return 11;
-		}
+            base.AfterExecuteCommand(cmd);
+        }
 
-		public override void AfterExecuteCommand(KeyCode cmd)
-		{
-			if (fortressActivator.Warlord != null)
-			{
-				WarlordAttack();
-			}
-			else if (fortressActivator.CompendiumAttacking)
-			{
-				CompendiumAttack();
-			}
+        private void CompendiumAttack()
+        {
+            int damage = Random.Next((int)compendiumStrength / 2, (int)compendiumStrength);
 
-			base.AfterExecuteCommand(cmd);
-		}
+            GameControl.Wait(75);
+            TextArea.PrintLine();
+            TextArea.PrintLine("Compendium attack - blow " + damage + " H.P.", XleColor.Green);
 
-		private void CompendiumAttack()
-		{
-			int damage = Random.Next((int)compendiumStrength / 2, (int)compendiumStrength);
+            SoundMan.PlayMagicSound(LotaSound.MagicBolt, LotaSound.MagicBoltHit, 2);
+            GameControl.Wait(250, redraw: FlashBorder);
+            TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-			GameControl.Wait(75);
-			TextArea.PrintLine();
-			TextArea.PrintLine("Compendium attack - blow " + damage + " H.P.", XleColor.Green);
+            Player.HP -= damage;
 
-			SoundMan.PlayMagicSound(LotaSound.MagicBolt, LotaSound.MagicBoltHit, 2);
-			GameControl.Wait(250, redraw: FlashBorder);
-			TheMap.ColorScheme.FrameColor = XleColor.Gray;
+            GameControl.Wait(75);
 
-			Player.HP -= damage;
+            if (Player.Items[LotaItem.HealingHerb] > 24)
+            {
+                int amount = Player.Items[LotaItem.HealingHerb] / 9;
 
-			GameControl.Wait(75);
+                amount = (int)(amount * (1 + Random.NextDouble()) * 0.5);
 
-			if (Player.Items[LotaItem.HealingHerb] > 24)
-			{
-				int amount = (int)(Player.Items[LotaItem.HealingHerb] / 9);
+                TextArea.PrintLine("** " + amount.ToString() + " healing herbs destroyed! **", XleColor.Yellow);
 
-				amount = (int)(amount * (1 + Random.NextDouble()) * 0.5);
+                Player.Items[LotaItem.HealingHerb] -= amount;
 
-				TextArea.PrintLine("** " + amount.ToString() + " healing herbs destroyed! **", XleColor.Yellow);
+                GameControl.Wait(75);
+            }
+        }
 
-				Player.Items[LotaItem.HealingHerb] -= amount;
+        private void FlashBorder()
+        {
+            borderIndex++;
 
-				GameControl.Wait(75);
-			}
-		}
+            if (borderIndex % 4 < 2)
+                TheMap.ColorScheme.FrameColor = flashColor;
+            else
+                TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-		private void FlashBorder()
-		{
-			borderIndex++;
+            Screen.OnDraw();
+        }
 
-			if (borderIndex % 4 < 2)
-				TheMap.ColorScheme.FrameColor = flashColor;
-			else
-				TheMap.ColorScheme.FrameColor = XleColor.Gray;
+        private void WarlordAttack()
+        {
+            int damage = (int)(99 * Random.NextDouble() + 80);
 
-			Screen.OnDraw();
-		}
+            TheMap.ColorScheme.FrameColor = XleColor.Pink;
+            flashColor = XleColor.Red;
 
-		private void WarlordAttack()
-		{
-			int damage = (int)(99 * Random.NextDouble() + 80);
+            TextArea.PrintLine();
+            TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
 
-			TheMap.ColorScheme.FrameColor = XleColor.Pink;
-			flashColor = XleColor.Red;
+            Player.HP -= damage;
 
-			TextArea.PrintLine();
-			TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
+            SoundMan.PlayMagicSound(LotaSound.MagicFlame, LotaSound.MagicFlameHit, 2);
+            GameControl.Wait(250, redraw: FlashBorder);
+            TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-			Player.HP -= damage;
-
-			SoundMan.PlayMagicSound(LotaSound.MagicFlame, LotaSound.MagicFlameHit, 2);
-			GameControl.Wait(250, redraw: FlashBorder);
-			TheMap.ColorScheme.FrameColor = XleColor.Gray;
-
-			GameControl.Wait(150);
-		}
-	}
+            GameControl.Wait(150);
+        }
+    }
 }

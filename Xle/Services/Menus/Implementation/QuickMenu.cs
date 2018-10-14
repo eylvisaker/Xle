@@ -1,12 +1,10 @@
-﻿using System;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-
+﻿using AgateLib.Quality;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
-using AgateLib.Quality;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ERY.Xle.Services.Menus.Implementation
 {
@@ -58,8 +56,8 @@ namespace ERY.Xle.Services.Menus.Implementation
 
         public int QuickMenuImpl(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
         {
-            Condition.Requires<ArgumentOutOfRangeException>(value >= 0);
-            Condition.Requires<ArgumentOutOfRangeException>(value < items.Count);
+            Require.That<ArgumentOutOfRangeException>(value >= 0, "value should be positive");
+            Require.That<ArgumentOutOfRangeException>(value < items.Count, "value should be less than items.Count");
 
             int result = value;
             string topLine;
@@ -98,7 +96,7 @@ namespace ERY.Xle.Services.Menus.Implementation
 
             TextArea.RewriteLine(lineIndex + 1, tempLine, clrInit);
 
-            KeyCode key;
+            Keys key;
 
             do
             {
@@ -106,42 +104,42 @@ namespace ERY.Xle.Services.Menus.Implementation
                 input.PromptToContinueOnWait = false;
                 key = input.WaitForKey(redraw);
 
-                if (key == KeyCode.Left)
+                if (key == Keys.Left)
                 {
                     result--;
                     if (result < 0)
                         result = 0;
                 }
-                if (key == KeyCode.Right)
+                if (key == Keys.Right)
                 {
                     result++;
                     if (result >= items.Count)
                         result = items.Count - 1;
                 }
-                else if (key >= KeyCode.D0)
+                else if (key >= Keys.D0)
                 {
                     for (int i = 0; i < items.Count; i++)
                     {
                         bulletLine = items[i];
 
-                        if (key - KeyCode.A ==
+                        if (key - Keys.A ==
                             char.ToUpperInvariant(bulletLine[0]) - 'A')
                         {
                             result = i;
-                            key = KeyCode.Return;
+                            key = Keys.Enter;
                         }
                     }
                 }
 
                 tempLine = new string(' ', spacing[result]) + "`";
 
-                if (key != KeyCode.None)
+                if (key != Keys.None)
                 {
                     TextArea.RewriteLine(lineIndex, topLine, clrChanged);
                     TextArea.RewriteLine(lineIndex + 1, tempLine, clrChanged);
                 }
 
-            } while (key != KeyCode.Return && screen.CurrentWindowClosed == false);
+            } while (key != Keys.Enter && screen.CurrentWindowClosed == false);
 
             gameControl.Wait(100, redraw: redraw);
 

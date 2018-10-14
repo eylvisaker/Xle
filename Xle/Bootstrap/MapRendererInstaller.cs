@@ -1,23 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Context;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
-
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services.Rendering.Maps;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Extenders;
-using ERY.Xle.XleEventTypes.Extenders.Common;
-using ERY.Xle.XleEventTypes.Stores.Extenders;
-using System.Reflection;
-
-namespace ERY.Xle.Bootstrap
+﻿namespace ERY.Xle.Bootstrap
 {
     //public class MapRendererInstaller : IWindsorInstaller
     //{

@@ -1,17 +1,9 @@
-﻿using AgateLib;
-using AgateLib.Platform;
-
-using ERY.Xle.Data;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.Dungeons;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using ERY.Xle.Services;
 using ERY.Xle.Services.Commands;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.LotA.MapExtenders.Dungeons
 {
@@ -20,8 +12,6 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
         public LotaDungeon()
         {
             FillDrips();
-
-            nextSound = Timing.TotalSeconds + 3;
         }
 
         public XleOptions Options { get; set; }
@@ -69,8 +59,12 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             return Player.Items[LotaItem.Compass] > 0;
         }
 
-        double nextSound;
-        LotaSound[] drips;
+        /// <summary>
+        /// Amount of time in seconds until next atmosphere sound.
+        /// </summary>
+        private double timeToNextSound = 3;
+
+        private LotaSound[] drips;
 
         private void FillDrips()
         {
@@ -79,9 +73,11 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
             drips[1] = LotaSound.Drip1;
         }
 
-        public override void CheckSounds()
+        public override void CheckSounds(GameTime time)
         {
-            if (Timing.TotalSeconds > nextSound)
+            timeToNextSound -= time.ElapsedGameTime.TotalSeconds;
+
+            if (timeToNextSound <= 0)
             {
                 ResetDripTime();
 
@@ -92,9 +88,7 @@ namespace ERY.Xle.LotA.MapExtenders.Dungeons
 
         private void ResetDripTime()
         {
-            double time = Random.NextDouble() * 10 + 2;
-
-            nextSound = Timing.TotalSeconds + time;
+            timeToNextSound += Random.NextDouble() * 10 + 2;
         }
 
 

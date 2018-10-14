@@ -7,32 +7,32 @@ namespace ERY.Xle.Services.Commands.Implementation
 {
 	public class CommandList : ICommandList
 	{
-		Dictionary<KeyCode, Direction> mDirectionMap = new Dictionary<KeyCode, Direction>();
+		Dictionary<Keys, Direction> mDirectionMap = new Dictionary<Keys, Direction>();
 
 		public CommandList()
 		{
-			mDirectionMap[KeyCode.Up] = Direction.North;
-			mDirectionMap[KeyCode.Left] = Direction.West;
-			mDirectionMap[KeyCode.Down] = Direction.South;
+			mDirectionMap[Keys.Up] = Direction.North;
+			mDirectionMap[Keys.Left] = Direction.West;
+			mDirectionMap[Keys.Down] = Direction.South;
 
-			mDirectionMap[KeyCode.OpenBracket] = Direction.North;
-			mDirectionMap[KeyCode.Semicolon] = Direction.West;
-			mDirectionMap[KeyCode.Quotes] = Direction.East;
-			mDirectionMap[KeyCode.Slash] = Direction.South;
+			mDirectionMap[Keys.OpenBracket] = Direction.North;
+			mDirectionMap[Keys.Semicolon] = Direction.West;
+			mDirectionMap[Keys.Quotes] = Direction.East;
+			mDirectionMap[Keys.Slash] = Direction.South;
 
 			Items = new List<ICommand>();
 		}
 
 		public List<ICommand> Items { get; set; }
 
-		bool IsCursorMovement(KeyCode cmd)
+		bool IsCursorMovement(Keys cmd)
 		{
 			switch (cmd)
 			{
-				case KeyCode.Right:
-				case KeyCode.Up:
-				case KeyCode.Left:
-				case KeyCode.Down:
+				case Keys.Right:
+				case Keys.Up:
+				case Keys.Left:
+				case Keys.Down:
 					return true;
 
 				default:
@@ -40,7 +40,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 			}
 		}
 
-		public ICommand FindCommand(KeyCode cmd)
+		public ICommand FindCommand(Keys cmd)
 		{
 			var keystring = AgateInputEventArgs.GetKeyString(cmd, new KeyModifiers());
 

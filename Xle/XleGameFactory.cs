@@ -1,15 +1,10 @@
-﻿using AgateLib.DisplayLib;
-using ERY.Xle.Serialization;
+﻿using AgateLib.Display;
 using ERY.Xle.Maps.XleMapTypes;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using ERY.Xle.Services;
+using ERY.Xle.Serialization;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.ScreenModel;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace ERY.Xle
 {
@@ -24,9 +19,9 @@ namespace ERY.Xle
         public abstract IXleSerializable CreateStoryData();
 
         // Surfaces
-        public IFont Font { get; protected set; }					// returns the handle to the font resource
-        public Surface Character { get; protected set; }		// returns the handle to the character resource
-        public Surface Monsters { get; protected set; }				// returns the handle to the monsters resource
+        public Font Font { get; protected set; }					// returns the handle to the font resource
+        public Texture2D Character { get; protected set; }		// returns the handle to the character resource
+        public Texture2D Monsters { get; protected set; }				// returns the handle to the monsters resource
 
         public virtual void CheatLevel(Player player, int level)
         {

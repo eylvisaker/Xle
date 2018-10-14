@@ -1,17 +1,14 @@
-﻿using AgateLib.Mathematics.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
     public class Introduction : TitleState
     {
         private string enteredName;
-        TextWindow window = new TextWindow();
-        int page = 0;
-        LotaStory story;
+        private TextWindow window = new TextWindow();
+        private int page = 0;
+        private LotaStory story;
 
         public Introduction(string enteredName, LotaStory story)
         {
@@ -52,7 +49,7 @@ namespace ERY.Xle.LotA.TitleScreen
             window.WriteLine("his chest.");
         }
 
-        void SetSecondWindow()
+        private void SetSecondWindow()
         {
             page = 1;
             window.Clear();
@@ -75,7 +72,7 @@ namespace ERY.Xle.LotA.TitleScreen
             window.WriteLine("way beckons.");
         }
 
-        void CreatePlayer()
+        private void CreatePlayer()
         {
             var player = new Player(enteredName);
             player.MapID = 5;
@@ -101,7 +98,7 @@ namespace ERY.Xle.LotA.TitleScreen
         }
 
 
-        public override void KeyDown(AgateLib.InputLib.KeyCode keyCode, string keyString)
+        public override void KeyDown(Keys keyCode, string keyString)
         {
             if (page == 0)
                 SetSecondWindow();

@@ -1,6 +1,5 @@
-﻿using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle.Maps;
+﻿using ERY.Xle.Maps;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.Services.Rendering.Maps
 {

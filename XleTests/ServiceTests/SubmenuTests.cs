@@ -1,25 +1,20 @@
-﻿using AgateLib.InputLib;
-using ERY.Xle;
+﻿using ERY.Xle;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Menus.Implementation;
 using ERY.Xle.Services.XleSystem;
-using Xunit;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.Xna.Framework.Input;
+using Moq;
+using Xunit;
 
 namespace ERY.XleTests.ServiceTests
 {
     public class SubmenuTests
     {
-        XleSubMenu subMenu;
-        Mock<IXleInput> input;
-        Mock<IXleSubMenuRedraw> redraw;
-        Mock<IXleGameControl> gameControl;
+        private XleSubMenu subMenu;
+        private Mock<IXleInput> input;
+        private Mock<IXleSubMenuRedraw> redraw;
+        private Mock<IXleGameControl> gameControl;
 
         public SubmenuTests()
         {
@@ -30,9 +25,9 @@ namespace ERY.XleTests.ServiceTests
             subMenu = new XleSubMenu(gameControl.Object, input.Object, redraw.Object);
         }
 
-        void SetupInputSequence(params KeyCode[] keys)
+        private void SetupInputSequence(params Keys[] keys)
         {
-            var setup = input.SetupSequence(x => x.WaitForKey(redraw.Object.Redraw, It.IsAny<KeyCode[]>()));
+            var setup = input.SetupSequence(x => x.WaitForKey(redraw.Object.Redraw, It.IsAny<Keys[]>()));
 
             foreach (var key in keys)
                 setup.Returns(key);
@@ -41,7 +36,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void ChooseFirstItem()
         {
-            SetupInputSequence(KeyCode.Enter);
+            SetupInputSequence(Keys.Enter);
 
             var result = subMenu.SubMenu("Title", 0, new MenuItemList("A", "B", "C", "D"));
 
@@ -51,7 +46,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void ChooseDefaultItem()
         {
-            SetupInputSequence(KeyCode.Enter);
+            SetupInputSequence(Keys.Enter);
 
             var result = subMenu.SubMenu("Title", 1, new MenuItemList("A", "B", "C", "D"));
 
@@ -61,7 +56,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void MoveToTop()
         {
-            SetupInputSequence(KeyCode.Up, KeyCode.Up, KeyCode.Up, KeyCode.Up, KeyCode.Enter);
+            SetupInputSequence(Keys.Up, Keys.Up, Keys.Up, Keys.Up, Keys.Enter);
 
             var result = subMenu.SubMenu("Title", 2, new MenuItemList("A", "B", "C", "D"));
 
@@ -71,7 +66,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void MoveToBottom()
         {
-            SetupInputSequence(KeyCode.Down, KeyCode.Down, KeyCode.Down, KeyCode.Down, KeyCode.Enter);
+            SetupInputSequence(Keys.Down, Keys.Down, Keys.Down, Keys.Down, Keys.Enter);
 
             var result = subMenu.SubMenu("Title", 2, new MenuItemList("A", "B", "C", "D"));
 
@@ -81,7 +76,7 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void SelectByNumber()
         {
-            SetupInputSequence(KeyCode.D2);
+            SetupInputSequence(Keys.D2);
 
             var result = subMenu.SubMenu("Title", 0, new MenuItemList("A", "B", "C", "D"));
 
@@ -91,9 +86,9 @@ namespace ERY.XleTests.ServiceTests
         [Fact]
         public void SelectByLetter()
         {
-            SetupInputSequence(KeyCode.B);
+            SetupInputSequence(Keys.B);
 
-            var result = subMenu.SubMenu("Title", 0, new MenuItemList("0","1","2","3","4","5","6","7","8","9","A","B","C"));
+            var result = subMenu.SubMenu("Title", 0, new MenuItemList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C"));
 
             result.Should().Be(11);
         }

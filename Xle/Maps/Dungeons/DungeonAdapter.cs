@@ -1,10 +1,6 @@
 ﻿using ERY.Xle.Maps.XleMapTypes;
+using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle.Maps.Dungeons
 {
@@ -12,9 +8,9 @@ namespace ERY.Xle.Maps.Dungeons
     {
         public GameState GameState { get; set; }
 
-        Dungeon Map { get { return (Dungeon)GameState.Map; } }
+        private Dungeon Map { get { return (Dungeon)GameState.Map; } }
 
-        DungeonExtender MapExtender {  get { return (DungeonExtender)GameState.MapExtender; } }
+        private DungeonExtender MapExtender { get { return (DungeonExtender)GameState.MapExtender; } }
 
 
         public int ChestValueAt(int x, int y, int level = -1)

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ERY.Xle.LotA;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -10,11 +11,14 @@ namespace LegacyOfTheAncients.Desktop
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        
+        private LotaProgram lota;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 680;
+            graphics.PreferredBackBufferHeight = 440;
+
             Content.RootDirectory = "Content";
         }
 
@@ -26,9 +30,11 @@ namespace LegacyOfTheAncients.Desktop
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
+
+            Window.Title = "Legacy of the Ancients";
+
+            lota = new LotaProgram();
         }
 
         /// <summary>
@@ -37,10 +43,7 @@ namespace LegacyOfTheAncients.Desktop
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>

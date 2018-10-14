@@ -1,12 +1,5 @@
-﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.XleEventTypes.Stores.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ERY.Xle.Serialization;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.XleEventTypes.Stores
 {
@@ -14,8 +7,8 @@ namespace ERY.Xle.XleEventTypes.Stores
     {
 
         // map and coords that mark where a purchased raft shows up
-        int mBuyRaftMap;
-        Point mBuyRaftPt;
+        private int mBuyRaftMap;
+        private Point mBuyRaftPt;
 
         protected override void WriteData(XleSerializationInfo info)
         {

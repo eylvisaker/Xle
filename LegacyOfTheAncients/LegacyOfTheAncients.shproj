@@ -9,14 +9,9 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.Common.props" />
   <PropertyGroup />
   <ItemGroup>
-    <Compile Include="GameVariableExtensions.cs" />
     <Compile Include="Lota3DSurfaces.cs" />
     <Compile Include="LotaFactory.cs" />
-    <Compile Include="LotaMuseumCoinSale.cs" />
     <Compile Include="LotaObject.cs" />
-    <Compile Include="LotaProgram.cs" />
-    <Compile Include="LotaStory.cs" />
-    <Compile Include="LotaUse.cs" />
   </ItemGroup>
   <Import Project="LegacyOfTheAncients.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />

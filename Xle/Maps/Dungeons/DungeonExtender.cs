@@ -1,21 +1,17 @@
-﻿using System;
-using System.Linq;
-
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-
-using ERY.Xle.Data;
-using ERY.Xle.Maps.XleMapTypes;
+﻿using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.Rendering.Maps;
-using ERY.Xle.Services.ScreenModel;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ERY.Xle.Maps.Dungeons
 {
     public class DungeonExtender : Map3DExtender
     {
-        static Dictionary<int, string> trapNames = new Dictionary<int, string>()
+        private static Dictionary<int, string> trapNames = new Dictionary<int, string>()
         {
             { 0x11, "ceiling hole" },
             { 0x12, "floor hole" },
@@ -24,8 +20,7 @@ namespace ERY.Xle.Maps.Dungeons
             { 0x15, "trip wire" },
             { 0x16, "gas vent" }
         };
-
-        int hitAttemptCount = 0;
+        private int hitAttemptCount = 0;
 
         public DungeonExtender()
         {
@@ -91,7 +86,7 @@ namespace ERY.Xle.Maps.Dungeons
             return 0;
         }
 
-        public override void CheckSounds()
+        public override void CheckSounds(GameTime time)
         {
             // Used by LOTA to play the dungeon drip sounds.
         }
@@ -349,7 +344,7 @@ namespace ERY.Xle.Maps.Dungeons
             Combat.Monsters.Add(monster);
         }
 
-        public override void AfterExecuteCommand(KeyCode cmd)
+        public override void AfterExecuteCommand(Keys cmd)
         {
             base.AfterExecuteCommand(cmd);
 

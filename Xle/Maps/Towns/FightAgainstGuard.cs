@@ -37,16 +37,16 @@ namespace ERY.Xle.Maps.Towns
             TextArea.PrintLine("Fight with " + Player.CurrentWeapon.BaseName(Data));
             TextArea.Print("Enter direction: ");
 
-            KeyCode key = Input.WaitForKey(KeyCode.Up, KeyCode.Down, KeyCode.Left, KeyCode.Right);
+            Keys key = Input.WaitForKey(Keys.Up, Keys.Down, Keys.Left, Keys.Right);
 
             Direction fightDir;
 
             switch (key)
             {
-                case KeyCode.Right: fightDir = Direction.East; break;
-                case KeyCode.Up: fightDir = Direction.North; break;
-                case KeyCode.Left: fightDir = Direction.West; break;
-                case KeyCode.Down: fightDir = Direction.South; break;
+                case Keys.Right: fightDir = Direction.East; break;
+                case Keys.Up: fightDir = Direction.North; break;
+                case Keys.Left: fightDir = Direction.West; break;
+                case Keys.Down: fightDir = Direction.South; break;
                 default:
                     throw new InvalidOperationException();
             }

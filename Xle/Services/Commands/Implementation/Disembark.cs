@@ -32,7 +32,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 
             Input.PromptToContinueOnWait = false;
 
-            var key = Input.WaitForKey(KeyCode.Left, KeyCode.Up, KeyCode.Right, KeyCode.Down);
+            var key = Input.WaitForKey(Keys.Left, Keys.Up, Keys.Right, Keys.Down);
 
             Direction dir = key.ToDirection();
 

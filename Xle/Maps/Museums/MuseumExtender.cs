@@ -6,6 +6,7 @@ using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.Rendering.Maps;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.Maps.Museums
 {

@@ -1,285 +1,284 @@
-﻿using System;
+﻿using ERY.Xle.Services.Game;
+using Microsoft.Xna.Framework;
+using System;
 using System.Diagnostics;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle.Services.Game;
 
 namespace ERY.Xle.Services.ScreenModel.Implementation
 {
-	public class TextArea : ITextArea
-	{
-		TextLine[] lines = new TextLine[5];
-		Point cursor = new Point(1, 5);
-		int margin = 1;
-		Color[] tempColors;
+    public class TextArea : ITextArea
+    {
+        private TextLine[] lines = new TextLine[5];
+        private Point cursor = new Point(1, 5);
+        private int margin = 1;
+        private Color[] tempColors;
 
-		private IXleScreen screen;
-		private GameState gameState;
-		private IXleGameControl gameControl;
+        private IXleScreen screen;
+        private GameState gameState;
+        private IXleGameControl gameControl;
 
-		public TextArea(
-			IXleGameControl gameControl,
-			IXleScreen screen,
-			GameState gameState)
-		{
-			this.gameState = gameState;
-			this.screen = screen;
-			this.gameControl = gameControl;
+        public TextArea(
+            IXleGameControl gameControl,
+            IXleScreen screen,
+            GameState gameState)
+        {
+            this.gameState = gameState;
+            this.screen = screen;
+            this.gameControl = gameControl;
 
-			for (int i = 0; i < lines.Length; i++)
-				lines[i] = new TextLine(this);
-		}
+            for (int i = 0; i < lines.Length; i++)
+                lines[i] = new TextLine(this);
+        }
 
-		public int Margin { get { return margin; } set { margin = value; } }
+        public int Margin { get { return margin; } set { margin = value; } }
 
-		public Color DefaultColor
-		{
-			get { return gameState.Map.ColorScheme.TextColor; }
-		}
+        public Color DefaultColor
+        {
+            get { return gameState.Map.ColorScheme.TextColor; }
+        }
 
-		private void CycleLines()
-		{
-			var old = lines[0];
+        private void CycleLines()
+        {
+            var old = lines[0];
 
-			for (int i = 0; i < lines.Length - 1; i++)
-				lines[i] = lines[i + 1];
+            for (int i = 0; i < lines.Length - 1; i++)
+                lines[i] = lines[i + 1];
 
-			lines[4] = old;
+            lines[4] = old;
 
-			lines[4].Text = "";
-			lines[4].SetColor(XleColor.White);
+            lines[4].Text = "";
+            lines[4].SetColor(XleColor.White);
 
-			cursor.Y--;
+            cursor.Y--;
 
-			if (cursor.Y < 0) cursor.Y = 0;
-			if (cursor.Y >= lines.Length) cursor.Y = lines.Length - 1;
-		}
+            if (cursor.Y < 0) cursor.Y = 0;
+            if (cursor.Y >= lines.Length) cursor.Y = lines.Length - 1;
+        }
 
-		public string GetTextLine(int line)
-		{
-			return lines[line].Text.Substring(margin);
-		}
+        public string GetTextLine(int line)
+        {
+            return lines[line].Text.Substring(margin);
+        }
 
-		private void CycleIfNeeded()
-		{
-			if (cursor.Y == 5)
-			{
-				CycleLines();
-			}
-		}
+        private void CycleIfNeeded()
+        {
+            if (cursor.Y == 5)
+            {
+                CycleLines();
+            }
+        }
 
-		void PrintImpl(string text, Color[] colors)
-		{
-			int startIndex = 0;
+        private void PrintImpl(string text, Color[] colors)
+        {
+            int startIndex = 0;
 
-			while (startIndex < text.Length)
-			{
-				CycleIfNeeded();
+            while (startIndex < text.Length)
+            {
+                CycleIfNeeded();
 
-				int endIndex = text.IndexOf("\n", startIndex);
-				var current = lines[cursor.Y];
+                int endIndex = text.IndexOf("\n", startIndex);
+                var current = lines[cursor.Y];
 
-				if (endIndex == -1)
-				{
-					current.WriteText(cursor.X, text.Substring(startIndex), colors, startIndex);
-					cursor.X += text.Length - startIndex;
-					startIndex = text.Length;
-				}
-				else
-				{
-					current.WriteText(cursor.X, text.Substring(startIndex, endIndex - startIndex), colors, startIndex);
+                if (endIndex == -1)
+                {
+                    current.WriteText(cursor.X, text.Substring(startIndex), colors, startIndex);
+                    cursor.X += text.Length - startIndex;
+                    startIndex = text.Length;
+                }
+                else
+                {
+                    current.WriteText(cursor.X, text.Substring(startIndex, endIndex - startIndex), colors, startIndex);
 
-					startIndex = endIndex + 1;
-					cursor.X = Margin;
-					cursor.Y++;
-				}
-			}
+                    startIndex = endIndex + 1;
+                    cursor.X = Margin;
+                    cursor.Y++;
+                }
+            }
 
-			gameControl.Wait(1);
-		}
-		void PrintSlowImpl(string text, Color defaultColor, Color[] colors = null)
-		{
-			for (int i = 0; i < text.Length; i++)
-			{
-				if (colors != null)
-				{
-					Print(text[i].ToString(), colors[i]);
-				}
-				else
-				{
-					Print(text[i].ToString(), defaultColor);
-				}
+            gameControl.Wait(1);
+        }
 
-				gameControl.Wait(50, keyBreak: true);
+        private void PrintSlowImpl(string text, Color defaultColor, Color[] colors = null)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (colors != null)
+                {
+                    Print(text[i].ToString(), colors[i]);
+                }
+                else
+                {
+                    Print(text[i].ToString(), defaultColor);
+                }
 
-				if (text[i] == '.' || text[i] == '!')
-					gameControl.Wait(500);
-				if (text[i] == ',')
-					gameControl.Wait(350);
-			}
-		}
+                gameControl.Wait(50, keyBreak: true);
 
-		public void Print(string text, Color? color)
-		{
-			if (tempColors == null || tempColors.Length < text.Length)
-			{
-				tempColors = new Color[text.Length];
-			}
+                if (text[i] == '.' || text[i] == '!')
+                    gameControl.Wait(500);
+                if (text[i] == ',')
+                    gameControl.Wait(350);
+            }
+        }
 
-			for (int i = 0; i < tempColors.Length; i++)
-			{
-				tempColors[i] = color ?? DefaultColor;
-			}
+        public void Print(string text, Color? color)
+        {
+            if (tempColors == null || tempColors.Length < text.Length)
+            {
+                tempColors = new Color[text.Length];
+            }
 
-			PrintImpl(text, tempColors);
-		}
-		public void Print(string text = "", Color[] colors = null)
-		{
-			PrintImpl(text, colors);
-		}
+            for (int i = 0; i < tempColors.Length; i++)
+            {
+                tempColors[i] = color ?? DefaultColor;
+            }
 
-		public void PrintLine(string text, Color color)
-		{
-			Print(text + "\n", color);
-		}
-		public void PrintLine(string text = "", Color[] colors = null)
-		{
-			Print(text + "\n", colors);
-		}
+            PrintImpl(text, tempColors);
+        }
+        public void Print(string text = "", Color[] colors = null)
+        {
+            PrintImpl(text, colors);
+        }
 
-		public void PrintSlow(string text, Color[] colors = null)
-		{
-			PrintSlowImpl(text, screen.FontColor, colors);
-		}
-		public void PrintSlow(string text, Color color)
-		{
-			PrintSlowImpl(text, color, null);
-		}
-		public void PrintLineSlow(string text = "", Color[] colors = null)
-		{
-			PrintSlow(text, colors);
-			PrintLine();
-		}
-		public void PrintLineSlow(string text, Color color)
-		{
-			PrintSlow(text, color);
-			PrintLine();
-		}
+        public void PrintLine(string text, Color color)
+        {
+            Print(text + "\n", color);
+        }
+        public void PrintLine(string text = "", Color[] colors = null)
+        {
+            Print(text + "\n", colors);
+        }
 
-		public void Clear(bool cursorAtTop = false)
-		{
-			foreach (var line in lines)
-			{
-				line.Text = "";
-				line.SetColor(screen.FontColor);
-			}
+        public void PrintSlow(string text, Color[] colors = null)
+        {
+            PrintSlowImpl(text, screen.FontColor, colors);
+        }
+        public void PrintSlow(string text, Color color)
+        {
+            PrintSlowImpl(text, color, null);
+        }
+        public void PrintLineSlow(string text = "", Color[] colors = null)
+        {
+            PrintSlow(text, colors);
+            PrintLine();
+        }
+        public void PrintLineSlow(string text, Color color)
+        {
+            PrintSlow(text, color);
+            PrintLine();
+        }
 
-			cursor.X = margin;
-			cursor.Y = 4;
+        public void Clear(bool cursorAtTop = false)
+        {
+            foreach (var line in lines)
+            {
+                line.Text = "";
+                line.SetColor(screen.FontColor);
+            }
 
-			if (cursorAtTop)
-				cursor.Y = 0;
-		}
+            cursor.X = margin;
+            cursor.Y = 4;
 
-		public void RewriteLine(int line, string text, Color? color = null)
-		{
-			cursor.X = margin;
-			cursor.Y = line;
+            if (cursorAtTop)
+                cursor.Y = 0;
+        }
 
-			Print(text, color);
-		}
+        public void RewriteLine(int line, string text, Color? color = null)
+        {
+            cursor.X = margin;
+            cursor.Y = line;
 
-		/// <summary>
-		/// Flashes lines of text on the screen.
-		/// </summary>
-		/// <param name="howLong">How many milliseconds to flash for.</param>
-		/// <param name="color">The color to flash to.</param>
-		/// <param name="lines">Which lines. Don't pass any extra parameters to flash the whole text area.</param>
-		public void FlashLines(int howLong, Color color, int flashRate, params int[] lines)
-		{
-			if (lines == null || lines.Length == 0)
-			{
-				FlashLines(howLong, color, flashRate, 0, 1, 2, 3, 4);
-				return;
-			}
-			if (flashRate == 0)
-				throw new ArgumentOutOfRangeException("flashRate", "flashRate must be positive.");
+            Print(text, color);
+        }
 
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
+        /// <summary>
+        /// Flashes lines of text on the screen.
+        /// </summary>
+        /// <param name="howLong">How many milliseconds to flash for.</param>
+        /// <param name="color">The color to flash to.</param>
+        /// <param name="lines">Which lines. Don't pass any extra parameters to flash the whole text area.</param>
+        public void FlashLines(int howLong, Color color, int flashRate, params int[] lines)
+        {
+            if (lines == null || lines.Length == 0)
+            {
+                FlashLines(howLong, color, flashRate, 0, 1, 2, 3, 4);
+                return;
+            }
+            if (flashRate == 0)
+                throw new ArgumentOutOfRangeException("flashRate", "flashRate must be positive.");
 
-			FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, screen.FontColor, color, flashRate, lines);
-		}
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
 
-		public void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)
-		{
-			if (lines == null || lines.Length == 0)
-			{
-				FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
-				return;
-			}
-			if (flashRate == 0)
-				throw new ArgumentOutOfRangeException("flashRate", "flashRate must be positive.");
+            FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, screen.FontColor, color, flashRate, lines);
+        }
 
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
+        public void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)
+        {
+            if (lines == null || lines.Length == 0)
+            {
+                FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
+                return;
+            }
+            if (flashRate == 0)
+                throw new ArgumentOutOfRangeException("flashRate", "flashRate must be positive.");
 
-			while (pred())
-			{
-				int index = (int)watch.ElapsedMilliseconds % flashRate / (flashRate / 2);
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
 
-				Color clr = color2;
+            while (pred())
+            {
+                int index = (int)watch.ElapsedMilliseconds % flashRate / (flashRate / 2);
 
-				if (index == 1)
-					clr = color1;
+                Color clr = color2;
 
-				foreach (var line in lines)
-				{
-					this.lines[line].SetColor(clr);
-				}
+                if (index == 1)
+                    clr = color1;
 
-				gameControl.Redraw();
+                foreach (var line in lines)
+                {
+                    this.lines[line].SetColor(clr);
+                }
 
-				if (watch.ElapsedMilliseconds > 10000)
-					break;
-			}
+                gameControl.Redraw();
 
-			foreach (var line in lines)
-			{
-				this.lines[line].SetColor(color1);
-			}
-		}
+                if (watch.ElapsedMilliseconds > 10000)
+                    break;
+            }
 
-		public Point CursorLocation { get { return cursor; } }
+            foreach (var line in lines)
+            {
+                this.lines[line].SetColor(color1);
+            }
+        }
 
-		public void SetLineColor(Color color, params int[] lines)
-		{
-			if (lines.Length == 0)
-				SetLineColor(color, 0, 1, 2, 3, 4);
+        public Point CursorLocation { get { return cursor; } }
 
-			foreach (var line in lines)
-			{
-				this.lines[line].SetColor(color);
-			}
-		}
+        public void SetLineColor(Color color, params int[] lines)
+        {
+            if (lines.Length == 0)
+                SetLineColor(color, 0, 1, 2, 3, 4);
 
-		public void SetCharacterColor(int line, int x, Color color)
-		{
-			lines[line].Colors[x] = color;
-		}
+            foreach (var line in lines)
+            {
+                this.lines[line].SetColor(color);
+            }
+        }
 
-		public void PrintLineCentered(string text, Color color)
-		{
-			text = new string(' ', 19 - text.Length / 2) + text;
+        public void SetCharacterColor(int line, int x, Color color)
+        {
+            lines[line].Colors[x] = color;
+        }
 
-			PrintLine(text, color);
-		}
+        public void PrintLineCentered(string text, Color color)
+        {
+            text = new string(' ', 19 - text.Length / 2) + text;
+
+            PrintLine(text, color);
+        }
 
 
-		public TextLine GetLine(int i)
-		{
-			return lines[i];
-		}
-	}
+        public TextLine GetLine(int i)
+        {
+            return lines[i];
+        }
+    }
 }

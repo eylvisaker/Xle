@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-using ERY.Xle.Services.Commands;
+﻿using ERY.Xle.Services.Commands;
 using ERY.Xle.Services.Rendering.Maps;
 using ERY.Xle.XleEventTypes.Extenders;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace ERY.Xle.Maps
 {
@@ -25,8 +25,8 @@ namespace ERY.Xle.Maps
         void OnAfterEntry();
         void ModifyEntryPoint(MapEntryParams entryParams);
         void LeaveMap();
-        void CheckSounds();
-        void AfterExecuteCommand(KeyCode cmd);
+        void CheckSounds(GameTime time);
+        void AfterExecuteCommand(Keys cmd);
         bool CanPlayerStepInto(Point corridorPt);
         bool CanPlayerStepIntoImpl(int v, int targetY);
     }

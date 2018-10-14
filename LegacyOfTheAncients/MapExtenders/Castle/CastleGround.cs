@@ -1,18 +1,9 @@
 ﻿using ERY.Xle.LotA.MapExtenders.Castle.Commands;
-using ERY.Xle.LotA.MapExtenders.Castle.Events;
-using ERY.Xle.Maps.Castles;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.XleEventTypes;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ERY.Xle.Maps;
-
-using AgateLib.Mathematics.Geometry;
+using ERY.Xle.Maps.Castles;
+using ERY.Xle.Services.Commands;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.LotA.MapExtenders.Castle
 {

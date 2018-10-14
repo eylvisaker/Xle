@@ -47,7 +47,7 @@ namespace ERY.Xle.Services.Menus.Implementation
             TextArea.PrintLine();
             TextArea.PrintLine();
 
-            KeyCode key;
+            Keys key;
 
 
             do
@@ -60,13 +60,13 @@ namespace ERY.Xle.Services.Menus.Implementation
                 {
                     switch (key)
                     {
-                        case KeyCode.None:
+                        case Keys.None:
                             break;
 
-                        case KeyCode.Right:
-                        case KeyCode.Up:
-                        case KeyCode.Left:
-                        case KeyCode.Down:
+                        case Keys.Right:
+                        case Keys.Up:
+                        case Keys.Left:
+                        case Keys.Down:
 
                             TextArea.PrintLine("Use joystick - press button when done");
                             TextArea.PrintLine();
@@ -91,10 +91,10 @@ namespace ERY.Xle.Services.Menus.Implementation
 
                 if (method == 1)
                 {
-                    if (key >= KeyCode.D0 && key <= KeyCode.D9)
-                        amount = 10 * amount + key - KeyCode.D0;
+                    if (key >= Keys.D0 && key <= Keys.D9)
+                        amount = 10 * amount + key - Keys.D0;
 
-                    if (key == KeyCode.BackSpace)
+                    if (key == Keys.BackSpace)
                         amount /= 10;
 
                     amount = Math.Min(amount, max);
@@ -106,16 +106,16 @@ namespace ERY.Xle.Services.Menus.Implementation
                 {
                     switch (key)
                     {
-                        case KeyCode.Right:
+                        case Keys.Right:
                             amount++;
                             break;
-                        case KeyCode.Up:
+                        case Keys.Up:
                             amount += 20;
                             break;
-                        case KeyCode.Left:
+                        case Keys.Left:
                             amount--;
                             break;
-                        case KeyCode.Down:
+                        case Keys.Down:
                             amount -= 20;
                             break;
                     }
@@ -130,7 +130,7 @@ namespace ERY.Xle.Services.Menus.Implementation
                 }
 
 
-            } while (key != KeyCode.Return);
+            } while (key != Keys.Return);
 
             input.PromptToContinueOnWait = true;
             TextArea.PrintLine();

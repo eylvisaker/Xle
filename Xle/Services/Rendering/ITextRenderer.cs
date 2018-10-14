@@ -1,5 +1,4 @@
-﻿using AgateLib.DisplayLib;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.Services.Rendering
 {

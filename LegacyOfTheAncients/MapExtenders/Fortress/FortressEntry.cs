@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AgateLib.Mathematics.Geometry;
 using ERY.Xle.XleEventTypes;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress
 {

@@ -6,7 +6,7 @@ namespace ERY.Xle.Services.Commands
     {
         void Prompt();
 
-        void DoCommand(KeyCode keyCode);
+        void DoCommand(Keys Keys);
 
         void ResetCurrentCommand();
     }

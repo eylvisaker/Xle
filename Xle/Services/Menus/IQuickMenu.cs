@@ -1,6 +1,5 @@
-﻿using System;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.Menus
 {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -60,10 +61,10 @@ namespace ERY.Xle.LotA.TitleScreen
 			lowerWindow.WriteLine("- Press 'F1' or Escape to cancel -");
 		}
 		
-		public override void KeyDown(KeyCode keyCode, string keyString)
+		public override void KeyDown(Keys keyCode, string keyString)
 		{
-			if ((keyCode >= KeyCode.A && keyCode <= KeyCode.Z) || keyCode == KeyCode.Space ||
-				(keyCode >= KeyCode.D0 && keyCode <= KeyCode.D9))
+			if ((keyCode >= Keys.A && keyCode <= Keys.Z) || keyCode == Keys.Space ||
+				(keyCode >= Keys.D0 && keyCode <= Keys.D9))
 			{
 				if (enteredName.Length < 14)
 				{
@@ -75,7 +76,7 @@ namespace ERY.Xle.LotA.TitleScreen
 					SoundMan.PlaySound(LotaSound.Invalid);
 				}
 			}
-			else if (keyCode == KeyCode.BackSpace || keyCode == KeyCode.Delete)
+			else if (keyCode == Keys.Back || keyCode == Keys.Delete)
 			{
 				if (enteredName.Length > 0)
 				{
@@ -86,12 +87,12 @@ namespace ERY.Xle.LotA.TitleScreen
 				else
 					SoundMan.PlaySound(LotaSound.Invalid);
 			}
-			else if (keyCode == KeyCode.Escape || keyCode == KeyCode.F1)
+			else if (keyCode == Keys.Escape || keyCode == Keys.F1)
 			{
 				SoundMan.PlaySound(LotaSound.TitleAccept);
 				NewState = Factory.CreateSecondMainMenu();
 			}
-			else if (keyCode == KeyCode.Enter && enteredName.Length > 0)
+			else if (keyCode == Keys.Enter && enteredName.Length > 0)
 			{
 				if (System.IO.File.Exists(@"Saved\" + enteredName + ".chr"))
 				{

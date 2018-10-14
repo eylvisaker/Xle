@@ -1,16 +1,14 @@
-﻿using System;
-
-using AgateLib.Mathematics.Geometry;
-using AgateLib.Platform;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.Rendering.Maps
 {
     public class OutsideRenderer : Map2DRenderer, IOutsideEncounterRenderer
-	{
-        int[] waves;
-        Rectangle drawRect;
-        int mWaterAnimLevel;
-        int lastAnimate = 0;
+    {
+        private int[] waves;
+        private Rectangle drawRect;
+        private int mWaterAnimLevel;
+        private int lastAnimate = 0;
 
         public int DisplayMonsterID { get; set; } = -1;
 
@@ -132,9 +130,9 @@ namespace ERY.Xle.Services.Rendering.Maps
 
     }
 
-	public interface IOutsideEncounterRenderer
-	{
-		Direction MonsterDrawDirection { get; set; }
-		int DisplayMonsterID { get; set; }
-	}
+    public interface IOutsideEncounterRenderer
+    {
+        Direction MonsterDrawDirection { get; set; }
+        int DisplayMonsterID { get; set; }
+    }
 }

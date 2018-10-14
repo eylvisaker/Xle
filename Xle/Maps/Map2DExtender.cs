@@ -1,7 +1,4 @@
-﻿using System;
-
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
+﻿using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.Maps
 {
@@ -33,7 +30,7 @@ namespace ERY.Xle.Maps
                     break;
 
                 default:
-                    stepDirection = Point.Empty;
+                    stepDirection = Point.Zero;
                     break;
             }
 

@@ -1,6 +1,4 @@
-﻿using AgateLib;
-using AgateLib.DisplayLib;
-
+﻿
 using ERY.Xle.Data;
 using ERY.Xle.Services.Game;
 
@@ -8,16 +6,16 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 {
     public class XleStartup : IXleStartup
     {
-        IXleRunner runner;
-        IXleGameFactory gameFactory;
-        XleData data;
+        private IXleRunner runner;
+        private IXleGameFactory gameFactory;
+        private XleData data;
         private XleOptions options;
 
         public XleStartup(
-            IXleRunner runner, 
-            IXleGameFactory xleGameFactory, 
-            XleSystemState systemState, 
-            IXleConsole console, 
+            IXleRunner runner,
+            IXleGameFactory xleGameFactory,
+            XleSystemState systemState,
+            IXleConsole console,
             XleOptions options,
             XleData data,
             ISoundMan soundMan)
@@ -38,10 +36,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             systemState.Factory.LoadSurfaces();
             data.LoadDungeonMonsterSurfaces();
 
-            AgateApp.ErrorReporting.CrossPlatformDebugLevel = CrossPlatformDebugLevel.Exception;
-
             soundMan.Load();
-
         }
 
         public void ProcessArguments(string[] args)

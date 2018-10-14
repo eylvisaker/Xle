@@ -14,6 +14,6 @@ namespace ERY.Xle.Services.Commands
 
         void ResetCurrentCommand();
 
-        ICommand FindCommand(KeyCode cmd);
+        ICommand FindCommand(Keys cmd);
     }
 }
