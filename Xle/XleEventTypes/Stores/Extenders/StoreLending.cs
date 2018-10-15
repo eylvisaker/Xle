@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ERY.Xle.Services;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {

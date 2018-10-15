@@ -213,41 +213,42 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
 
         public void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)
         {
-            if (lines == null || lines.Length == 0)
-            {
-                FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
-                return;
-            }
-            if (flashRate == 0)
-                throw new ArgumentOutOfRangeException("flashRate", "flashRate must be positive.");
+            throw new NotImplementedException();
+            //if (lines == null || lines.Length == 0)
+            //{
+            //    FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
+            //    return;
+            //}
+            //if (flashRate == 0)
+            //    throw new ArgumentOutOfRangeException("flashRate", "flashRate must be positive.");
 
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
+            //Stopwatch watch = new Stopwatch();
+            //watch.Start();
 
-            while (pred())
-            {
-                int index = (int)watch.ElapsedMilliseconds % flashRate / (flashRate / 2);
+            //while (pred())
+            //{
+            //    int index = (int)watch.ElapsedMilliseconds % flashRate / (flashRate / 2);
 
-                Color clr = color2;
+            //    Color clr = color2;
 
-                if (index == 1)
-                    clr = color1;
+            //    if (index == 1)
+            //        clr = color1;
 
-                foreach (var line in lines)
-                {
-                    this.lines[line].SetColor(clr);
-                }
+            //    foreach (var line in lines)
+            //    {
+            //        this.lines[line].SetColor(clr);
+            //    }
 
-                gameControl.Redraw();
+            //    gameControl.Redraw(time);
 
-                if (watch.ElapsedMilliseconds > 10000)
-                    break;
-            }
+            //    if (watch.ElapsedMilliseconds > 10000)
+            //        break;
+            //}
 
-            foreach (var line in lines)
-            {
-                this.lines[line].SetColor(color1);
-            }
+            //foreach (var line in lines)
+            //{
+            //    this.lines[line].SetColor(color1);
+            //}
         }
 
         public Point CursorLocation { get { return cursor; } }

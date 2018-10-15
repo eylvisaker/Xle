@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace ERY.Xle.Services.Rendering.Maps
@@ -8,7 +9,7 @@ namespace ERY.Xle.Services.Rendering.Maps
         private int[] waves;
         private Rectangle drawRect;
         private int mWaterAnimLevel;
-        private int lastAnimate = 0;
+        private float timeToNextAnimate = 0;
 
         public int DisplayMonsterID { get; set; } = -1;
 
@@ -29,12 +30,12 @@ namespace ERY.Xle.Services.Rendering.Maps
             }
         }
 
-        public override void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
+        public override void Draw(GameTime time, SpriteBatch spriteBatch, Point playerPos, Direction faceDirection, Rectangle inRect)
         {
             int x = playerPos.X;
             int y = playerPos.Y;
 
-            Draw2D(x, y, faceDirection, inRect);
+            Draw2D(time, x, y, faceDirection, inRect);
 
             if (DisplayMonsterID > -1)
             {
@@ -69,17 +70,18 @@ namespace ERY.Xle.Services.Rendering.Maps
                 return TheMap[x, y];
         }
 
-        protected override void AnimateTiles(Rectangle rectangle)
+        protected override void AnimateTiles(GameTime time, Rectangle rectangle)
         {
-            int now = (int)Timing.TotalMilliseconds;
-
             if (rectangle != drawRect)
             {
                 ClearWaves();
 
                 drawRect = rectangle;
             }
-            if (lastAnimate + 400 > now)
+
+            timeToNextAnimate -= (float)time.ElapsedGameTime.TotalMilliseconds;
+
+            if (timeToNextAnimate > 0)
                 return;
 
             if (waves == null || waves.Length != rectangle.Width * rectangle.Height)
@@ -87,7 +89,7 @@ namespace ERY.Xle.Services.Rendering.Maps
                 waves = new int[rectangle.Width * rectangle.Height];
             }
 
-            lastAnimate = now;
+            timeToNextAnimate = 400;
 
             for (int j = 0; j < rectangle.Height; j++)
             {
@@ -121,11 +123,9 @@ namespace ERY.Xle.Services.Rendering.Maps
         {
             if (waves != null)
                 Array.Clear(waves, 0, waves.Length);
-
-            int now = (int)Timing.TotalMilliseconds;
-
+            
             // force an update.
-            lastAnimate = now - 500;
+            timeToNextAnimate = 500;
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using AgateLib.Display;
+﻿using AgateLib;
+using AgateLib.Display;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Serialization;
 using ERY.Xle.Services.Game;

@@ -1,108 +1,104 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Data;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Services.Commands.Implementation;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Maps.Dungeons.Commands
 {
-	public class DungeonMagic : MagicWithFancyPrompt
-	{
-		DungeonExtender MapExtender { get { return (DungeonExtender)GameState.MapExtender; } }
-		DungeonCombat Combat { get { return MapExtender.Combat; } }
+    public class DungeonMagic : MagicWithFancyPrompt
+    {
+        private DungeonExtender MapExtender { get { return (DungeonExtender)GameState.MapExtender; } }
 
-		protected override void CastSpell(MagicSpell magic)
-		{
-			switch (magic.ID)
-			{
-				case 1:
-				case 2:
-					UseAttackMagic(magic);
-					break;
+        private DungeonCombat Combat { get { return MapExtender.Combat; } }
 
-				default:
-					break;
-			}
-		}
+        protected override void CastSpell(MagicSpell magic)
+        {
+            switch (magic.ID)
+            {
+                case 1:
+                case 2:
+                    UseAttackMagic(magic);
+                    break;
 
-		private void UseAttackMagic(MagicSpell magic)
-		{
-			int distance = 0;
-			TextArea.PrintLine();
-			TextArea.PrintLine("Shoot " + magic.Name + ".", XleColor.White);
+                default:
+                    break;
+            }
+        }
 
-			DungeonMonster monst = MonsterInFrontOfPlayer(Player, ref distance);
-			var magicSound = magic.ID == 1 ? LotaSound.MagicFlame : LotaSound.MagicBolt;
-			var hitSound = magic.ID == 1 ? LotaSound.MagicFlameHit : LotaSound.MagicBoltHit;
+        private void UseAttackMagic(MagicSpell magic)
+        {
+            int distance = 0;
+            TextArea.PrintLine();
+            TextArea.PrintLine("Shoot " + magic.Name + ".", XleColor.White);
 
-			if (monst == null)
-			{
-				SoundMan.PlayMagicSound(magicSound, hitSound, distance);
-				TextArea.PrintLine("There is no effect.", XleColor.White);
-			}
-			else
-			{
-				if (RollSpellFizzle(magic))
-				{
-					SoundMan.PlayMagicSound(magicSound, LotaSound.MagicFizzle, distance);
-					TextArea.PrintLine("Attack fizzles.", XleColor.White);
-					GameControl.Wait(500);
-				}
-				else
-				{
-					SoundMan.PlayMagicSound(magicSound, hitSound, distance);
-					int damage = RollSpellDamage(magic, distance);
+            DungeonMonster monst = MonsterInFrontOfPlayer(Player, ref distance);
+            var magicSound = magic.ID == 1 ? LotaSound.MagicFlame : LotaSound.MagicBolt;
+            var hitSound = magic.ID == 1 ? LotaSound.MagicFlameHit : LotaSound.MagicBoltHit;
 
-					HitMonster(monst, damage, XleColor.White);
-				}
-			}
-		}
+            if (monst == null)
+            {
+                SoundMan.PlayMagicSound(magicSound, hitSound, distance);
+                TextArea.PrintLine("There is no effect.", XleColor.White);
+            }
+            else
+            {
+                if (RollSpellFizzle(magic))
+                {
+                    SoundMan.PlayMagicSound(magicSound, LotaSound.MagicFizzle, distance);
+                    TextArea.PrintLine("Attack fizzles.", XleColor.White);
+                    GameControl.Wait(500);
+                }
+                else
+                {
+                    SoundMan.PlayMagicSound(magicSound, hitSound, distance);
+                    int damage = RollSpellDamage(magic, distance);
 
-		private void HitMonster(DungeonMonster monst, int damage, Color clr)
-		{
-			TextArea.Print("Enemy hit by blow of ", clr);
-			TextArea.Print(damage.ToString(), XleColor.White);
-			TextArea.PrintLine("!");
+                    HitMonster(monst, damage, XleColor.White);
+                }
+            }
+        }
 
-			monst.HP -= damage;
-			GameControl.Wait(1000);
+        private void HitMonster(DungeonMonster monst, int damage, Color clr)
+        {
+            TextArea.Print("Enemy hit by blow of ", clr);
+            TextArea.Print(damage.ToString(), XleColor.White);
+            TextArea.PrintLine("!");
 
-			if (monst.HP <= 0)
-			{
-				Combat.Monsters.Remove(monst);
-				TextArea.PrintLine(monst.Name + " dies!!");
+            monst.HP -= damage;
+            GameControl.Wait(1000);
 
-				SoundMan.PlaySound(LotaSound.EnemyDie);
+            if (monst.HP <= 0)
+            {
+                Combat.Monsters.Remove(monst);
+                TextArea.PrintLine(monst.Name + " dies!!");
 
-				GameControl.Wait(500);
-			}
-		}
+                SoundMan.PlaySound(LotaSound.EnemyDie);
 
-		public virtual bool RollSpellFizzle(MagicSpell magic)
-		{
-			return Random.Next(10) < 5;
-		}
+                GameControl.Wait(500);
+            }
+        }
 
-		public virtual int RollSpellDamage(MagicSpell magic, int distance)
-		{
-			return (int)((magic.ID + 0.5) * 15 * (Random.NextDouble() + 1));
-		}
+        public virtual bool RollSpellFizzle(MagicSpell magic)
+        {
+            return Random.Next(10) < 5;
+        }
 
-		private DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
-		{
-			return MapExtender.MonsterInFrontOfPlayer(player, ref distance);
-		}
+        public virtual int RollSpellDamage(MagicSpell magic, int distance)
+        {
+            return (int)((magic.ID + 0.5) * 15 * (Random.NextDouble() + 1));
+        }
 
-		private void ExecuteKillFlash()
-		{
-			SoundMan.PlaySoundSync(LotaSound.VeryBad);
+        private DungeonMonster MonsterInFrontOfPlayer(Player player, ref int distance)
+        {
+            return MapExtender.MonsterInFrontOfPlayer(player, ref distance);
+        }
 
-			Combat.Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
-		}
+        private void ExecuteKillFlash()
+        {
+            SoundMan.PlaySoundSync(LotaSound.VeryBad);
 
-	}
+            Combat.Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
+        }
+
+    }
 }

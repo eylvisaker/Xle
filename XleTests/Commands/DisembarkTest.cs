@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ERY.Xle.Maps.Outdoors;
 using ERY.Xle.Services.Commands.Implementation;
 using ERY.Xle.Services.ScreenModel;
-using Xunit;
-using Moq;
 using ERY.Xle.Services.XleSystem;
-using AgateLib.InputLib;
-using ERY.Xle.Maps.Outdoors;
 using FluentAssertions;
 using Microsoft.Xna.Framework.Input;
+using Moq;
+using System.Linq;
+using Xunit;
 
 namespace ERY.XleTests.Commands
 {
     public class DisembarkTest : XleTest
     {
-        Disembark disembark = new Disembark();
-        Mock<IXleScreen> screen = new Mock<IXleScreen>();
-        Mock<ISoundMan> soundMan = new Mock<ISoundMan>();
-        Mock<IXleInput> input = new Mock<IXleInput>();
-
-        Mock<IOutsideExtender> outsideExtender = new Mock<IOutsideExtender>();
+        private Disembark disembark = new Disembark();
+        private Mock<IXleScreen> screen = new Mock<IXleScreen>();
+        private Mock<ISoundMan> soundMan = new Mock<ISoundMan>();
+        private Mock<IXleInput> input = new Mock<IXleInput>();
+        private Mock<IOutsideExtender> outsideExtender = new Mock<IOutsideExtender>();
 
         public DisembarkTest()
         {
@@ -35,7 +29,7 @@ namespace ERY.XleTests.Commands
             GameState.MapExtender = outsideExtender.Object;
         }
 
-        void SetKeys(params Keys[] keys)
+        private void SetKeys(params Keys[] keys)
         {
             var sequence = input.SetupSequence(
                     x => x.WaitForKey(It.IsAny<Keys[]>()));

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System.IO;
 
 namespace ERY.Xle.LotA.TitleScreen
@@ -48,24 +49,24 @@ namespace ERY.Xle.LotA.TitleScreen
                 return;
             }
 
-            if (keyCode == KeyCode.Y)
+            if (keyCode == Keys.Y)
             {
                 selection = 0;
-                keyCode = KeyCode.Enter;
+                keyCode = Keys.Enter;
             }
-            else if (keyCode == KeyCode.N)
+            else if (keyCode == Keys.N)
             {
                 selection = 1;
-                keyCode = KeyCode.Enter;
+                keyCode = Keys.Enter;
             }
-            else if (keyCode == KeyCode.Right)
+            else if (keyCode == Keys.Right)
                 selection = 1;
-            else if (keyCode == KeyCode.Left)
+            else if (keyCode == Keys.Left)
                 selection = 0;
 
             cursor.Location = new Point(19 + 4 * selection, cursor.Location.Y);
 
-            if (keyCode == KeyCode.Enter)
+            if (keyCode == Keys.Enter)
             {
                 NewState = Factory.CreateSecondMainMenu();
 

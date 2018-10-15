@@ -265,11 +265,11 @@ namespace ERY.Xle.Maps
             }
         }
 
-        public void OnUpdate(double deltaTime)
+        public void OnUpdate(GameTime time)
         {
             foreach (var evt in Events)
             {
-                evt.OnUpdate(deltaTime);
+                evt.OnUpdate(time);
             }
         }
 

@@ -1,12 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using AgateLib;
-using AgateLib.AudioLib;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-using System.Diagnostics;
-
 namespace ERY.Xle
 {
     public enum LotaSound

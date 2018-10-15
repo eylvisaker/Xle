@@ -34,7 +34,7 @@ namespace ERY.Xle.Serialization
 		public XleTypeSerializerCollection()
 		{
 			AddTypeSerializer(new PointSerializer());
-			AddTypeSerializer(new PointFSerializer());
+			AddTypeSerializer(new Vector2Serializer());
 			AddTypeSerializer(new SizeSerializer());
 			AddTypeSerializer(new SizeFSerializer());
 			AddTypeSerializer(new RectangleSerializer());

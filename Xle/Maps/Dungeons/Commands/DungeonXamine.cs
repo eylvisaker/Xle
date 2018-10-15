@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services;
+﻿using ERY.Xle.Services;
 using ERY.Xle.Services.Commands.Implementation;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Maps.Dungeons.Commands
 {

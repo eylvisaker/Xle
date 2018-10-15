@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AgateLib.Mathematics.Geometry;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
     public class Map3DExtraInfo
     {
-        Dictionary<int, Map3DExtraImage> mImages = new Dictionary<int, Map3DExtraImage>();
+        private Dictionary<int, Map3DExtraImage> mImages = new Dictionary<int, Map3DExtraImage>();
 
         public Dictionary<int, Map3DExtraImage> Images
         {

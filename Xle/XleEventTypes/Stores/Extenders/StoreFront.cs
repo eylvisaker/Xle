@@ -56,12 +56,13 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         protected internal void RedrawStore()
         {
-            Display.BeginFrame();
+            throw new NotImplementedException();
+            //Display.BeginFrame();
 
-            DrawStore();
+            //DrawStore();
 
-            Display.EndFrame();
-            GameControl.KeepAlive();
+            //Display.EndFrame();
+            //GameControl.KeepAlive();
         }
 
         protected void DrawStore()
@@ -100,7 +101,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 goldText = " Robbery in progress ";
             }
 
-            Display.FillRect(
+            FillRect(
                 320 - (goldText.Length / 2) * 16,
                 ColorScheme.HorizontalLinePosition * 16,
                 goldText.Length * 16,
@@ -111,12 +112,14 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
         }
 
+        private void FillRect(int v1, int v2, int v3, int v4, Color backColor) => throw new NotImplementedException();
+
         private void DrawTitle(string title)
         {
             if (string.IsNullOrEmpty(title))
                 return;
 
-            Display.FillRect(320 - (title.Length + 2) / 2 * 16, 0,
+            FillRect(320 - (title.Length + 2) / 2 * 16, 0,
                          (title.Length + 2) * 16, 16, mColorScheme.BackColor);
 
             TextRenderer.WriteText(320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);

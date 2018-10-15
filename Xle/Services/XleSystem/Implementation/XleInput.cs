@@ -18,7 +18,8 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             this.gameState = gameState;
 
             screen.Update += gameControl_Update;
-            Input.Unhandled.KeyDown += Keyboard_KeyDown;
+            throw new NotImplementedException();
+            //Input.Unhandled.KeyDown += Keyboard_KeyDown;
         }
 
         private void gameControl_Update(object sender, EventArgs e)
@@ -30,22 +31,22 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             //}
         }
 
-        private void Keyboard_KeyDown(object sender, AgateInputEventArgs e)
+        private void Keyboard_KeyDown(object sender, object /*AgateInputEventArgs */e)
         {
             if (AcceptKey == false)
                 return;
             //if (e.Keys == AgateConsole.VisibleToggleKey)
             //    return;
             throw new NotImplementedException();
-            try
-            {
-                AcceptKey = false;
-                OnDoCommand(e.Keys);
-            }
-            finally
-            {
-                AcceptKey = true;
-            }
+            //try
+            //{
+            //    AcceptKey = false;
+            //    OnDoCommand(e.Keys);
+            //}
+            //finally
+            //{
+            //    AcceptKey = true;
+            //}
         }
 
         private void OnDoCommand(Keys command)
@@ -109,50 +110,51 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             Keys key = Keys.None;
             bool done = false;
 
-            using (var input = new SimpleInputHandler())
-            {
-                Input.Handlers.Add(input);
+            throw new NotImplementedException();
+            //using (var input = new SimpleInputHandler())
+            //{
+            //    Input.Handlers.Add(input);
 
-                EventHandler<AgateInputEventArgs> keyhandler = (sender, e) => key = e.Keys;
+            //    EventHandler<AgateInputEventArgs> keyhandler = (sender, e) => key = e.Keys;
 
-                screen.PromptToContinue = PromptToContinueOnWait;
+            //    screen.PromptToContinue = PromptToContinueOnWait;
 
-                input.Keys.ReleaseAll();
-                input.KeyDown += keyhandler;
+            //    input.Keys.ReleaseAll();
+            //    input.KeyDown += keyhandler;
 
-                do
-                {
-                    redraw();
+            //    do
+            //    {
+            //        redraw();
 
-                    if (screen.CurrentWindowClosed == true)
-                    {
-                        if (keys.Length > 0)
-                            key = keys[0];
-                        else
-                            key = Keys.Escape;
+            //        if (screen.CurrentWindowClosed == true)
+            //        {
+            //            if (keys.Length > 0)
+            //                key = keys[0];
+            //            else
+            //                key = Keys.Escape;
 
-                        break;
-                    }
+            //            break;
+            //        }
 
-                    if ((keys == null || keys.Length == 0) && key != Keys.None)
-                        break;
+            //        if ((keys == null || keys.Length == 0) && key != Keys.None)
+            //            break;
 
-                    for (int i = 0; i < keys.Length; i++)
-                    {
-                        if (keys[i] == key)
-                        {
-                            done = true;
-                            break;
-                        }
-                    }
+            //        for (int i = 0; i < keys.Length; i++)
+            //        {
+            //            if (keys[i] == key)
+            //            {
+            //                done = true;
+            //                break;
+            //            }
+            //        }
 
-                } while (!done && screen.CurrentWindowClosed == false);
-            }
+            //    } while (!done && screen.CurrentWindowClosed == false);
+            //}
 
-            screen.PromptToContinue = false;
-            PromptToContinueOnWait = true;
+            //screen.PromptToContinue = false;
+            //PromptToContinueOnWait = true;
 
-            return key;
+            //return key;
         }
 
 

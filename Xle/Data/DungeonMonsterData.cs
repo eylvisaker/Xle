@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace ERY.Xle.Data
 {
@@ -16,7 +15,7 @@ namespace ERY.Xle.Data
         public int ID { get; set; }
         public string ImageFile { get; set; }
 
-        public Surface Surface { get; set; }
+        public Texture2D Image { get; set; }
 
         public List<DungeonMonsterImage> Images { get; private set; }
 

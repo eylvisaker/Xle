@@ -1,4 +1,5 @@
-﻿using ERY.Xle.Services.Game;
+﻿using AgateLib;
+using ERY.Xle.Services.Game;
 using ERY.Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework.Audio;
 using System;
@@ -11,6 +12,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
     {
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
+        public IContentProvider Content { get; set; }
 
         private Dictionary<LotaSound, SoundEffect> mSounds = new Dictionary<LotaSound, SoundEffect>();
 
@@ -23,7 +25,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
                 try
                 {
-                    mSounds[s] = new SoundBuffer("Audio/" + name);
+                    mSounds[s] = Content.Load<SoundEffect>("Audio/" + name);
                 }
                 catch (Exception e)
                 {

@@ -18,7 +18,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
         public int raftAnim;                // raft animation frame
 
         // TODO: Which of these are obsolete?
-        private static double lastRaftAnim = 0;
+        private static double timeToNextRaftAnim = 0;
 
         private IPlayerAnimator playerAnimator;
         private IXleImages images;
@@ -50,7 +50,8 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
         private void Screen_Draw(object sender, EventArgs e)
         {
-            Draw();
+            throw new NotImplementedException();
+            //Draw();
         }
 
         public GameState GameState { get; set; }
@@ -199,7 +200,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             if (Factory.Monsters != null)
             {
-                spriteBatch.Draw(Factory.Monsters, destRect, srcRect, Color.White);
+                spriteBatch.Draw(Factory.Monsters, destRect, monstRect, Color.White);
             }
 
         }
@@ -333,7 +334,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
         public XleMapRenderer MapRenderer { get { return GameState.MapExtender.MapRenderer; } }
 
-        public void Draw()
+        public void Draw(GameTime time, SpriteBatch spriteBatch)
         {
             if (GameState == null)
                 return;
@@ -376,7 +377,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
             Rectangle mapRect = RectangleX.FromLTRB
                 (vertLine + 16, 16, GameAreaSize.Width - 16, horizLine);
 
-            MapRenderer.Draw(player.Location, player.FaceDirection, mapRect);
+            MapRenderer.Draw(time, spriteBatch, player.Location, player.FaceDirection, mapRect);
 
             i = 0;
             int cursorPos = 0;
@@ -402,7 +403,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             if (map.AutoDrawPlayer)
             {
-                DrawRafts(mapRect);
+                DrawRafts(spriteBatch, mapRect);
 
                 if (player.IsOnRaft == false)
                     DrawCharacter(playerAnimator.Animating, playerAnimator.AnimFrame, vertLine);
@@ -410,10 +411,12 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             if (Screen.PromptToContinue)
             {
-                Display.FillRect(192, 384, 17 * 16, 16, XleColor.Black);
+                FillRect(192, 384, 17 * 16, 16, XleColor.Black);
                 WriteText(208, 384, "(Press to Cont)", XleColor.Yellow);
             }
         }
+
+        private void FillRect(int v1, int v2, int v3, int v4, Color black) => throw new NotImplementedException();
 
         public void DrawObject(TextWindow textWindow)
         {
@@ -430,20 +433,22 @@ namespace ERY.Xle.Services.Rendering.Implementation
         /// <summary>
         /// Animates the rafts.
         /// </summary>
-        private void RaftAnim()
+        private void RaftAnim(GameTime time)
         {
-            if (lastRaftAnim + 100 < Timing.TotalMilliseconds)
+            timeToNextRaftAnim -= time.ElapsedGameTime.TotalMilliseconds;
+
+            if (timeToNextRaftAnim < 0)
             {
                 raftAnim++;
 
-                lastRaftAnim = Timing.TotalMilliseconds;
+                timeToNextRaftAnim += 100;
             }
         }
 
 
         public void UpdateAnim()
         {
-            RaftAnim();
+            //RaftAnim();
         }
 
         public void SetProjectionAndBackColors(ColorScheme cs)
@@ -453,8 +458,8 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             int hp = cs.HorizontalLinePosition * 16 + 8;
 
-            FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
-            FillRect(0, hp, 640, 400 - hp, cs.TextAreaBackColor);
+            //FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
+            //FillRect(0, hp, 640, 400 - hp, cs.TextAreaBackColor);
         }
 
         public void DrawObject(ColorScheme cs)

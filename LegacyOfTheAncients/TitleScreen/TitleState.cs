@@ -85,10 +85,12 @@ namespace ERY.Xle.LotA.TitleScreen
         {
             int destx = 20 - text.Length / 2;
 
-            Display.FillRect(new Rectangle(destx * 16, y * 16, text.Length * 16, 16), backColor);
+            FillRect(new Rectangle(destx * 16, y * 16, text.Length * 16, 16), backColor);
 
             TextRenderer.WriteText(destx * 16, y * 16, text, textColor);
         }
+
+        private void FillRect(Rectangle rectangle, Color backColor) => throw new NotImplementedException();
 
         protected virtual void DrawWindows()
         {

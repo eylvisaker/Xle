@@ -1,8 +1,8 @@
-﻿using AgateLib.InputLib;
-
+﻿
 using ERY.Xle.Maps.Outdoors;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.Services.Commands.Implementation
 {
@@ -12,9 +12,9 @@ namespace ERY.Xle.Services.Commands.Implementation
         public ISoundMan SoundMan { get; set; }
         public IXleInput Input { get; set; }
 
-        IOutsideExtender Map
+        private IOutsideExtender Map
         {
-            get { return (IOutsideExtender)GameState.MapExtender; } 
+            get { return (IOutsideExtender)GameState.MapExtender; }
         }
 
         public override void Execute()

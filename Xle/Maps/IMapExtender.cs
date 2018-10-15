@@ -20,7 +20,7 @@ namespace ERY.Xle.Maps
         IEnumerable<EventExtender> EventsAt(int v);
         void SetCommands(ICommandList commands);
         void PlayerCursorMovement(Direction dir);
-        void OnUpdate(double v);
+        void OnUpdate(GameTime time);
         void OnLoad();
         void OnAfterEntry();
         void ModifyEntryPoint(MapEntryParams entryParams);

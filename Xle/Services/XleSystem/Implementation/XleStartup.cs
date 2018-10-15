@@ -1,4 +1,5 @@
 ﻿
+using AgateLib;
 using ERY.Xle.Data;
 using ERY.Xle.Services.Game;
 
@@ -8,6 +9,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
     {
         private IXleRunner runner;
         private IXleGameFactory gameFactory;
+        private readonly IContentProvider content;
         private XleData data;
         private XleOptions options;
 
@@ -16,12 +18,14 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             IXleGameFactory xleGameFactory,
             XleSystemState systemState,
             IXleConsole console,
+            IContentProvider content,
             XleOptions options,
             XleData data,
             ISoundMan soundMan)
         {
             this.runner = runner;
             this.gameFactory = xleGameFactory;
+            this.content = content;
             this.data = data;
             this.options = options;
 
@@ -34,7 +38,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
             systemState.Factory = xleGameFactory;
 
             systemState.Factory.LoadSurfaces();
-            data.LoadDungeonMonsterSurfaces();
+            data.LoadDungeonMonsterSurfaces(content);
 
             soundMan.Load();
         }
@@ -54,7 +58,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
         private void LoadGameFile()
         {
-            data.LoadGameFile("Game.xml");
+            data.LoadGameFile(content, "Game.xml");
         }
 
         public void Run()

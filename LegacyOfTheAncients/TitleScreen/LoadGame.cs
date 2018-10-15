@@ -1,10 +1,4 @@
-﻿using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.LotA.TitleScreen
 {

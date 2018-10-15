@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle.Data;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands.Implementation;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.Rendering.Maps;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Maps.Outdoors
 {
@@ -37,7 +30,7 @@ namespace ERY.Xle.Maps.Outdoors
             SpeakToMonster();
         }
 
-        void SpeakToMonster()
+        private void SpeakToMonster()
         {
             TextArea.PrintLine();
 

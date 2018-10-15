@@ -1,19 +1,15 @@
-﻿using AgateLib.DisplayLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Xna.Framework.Graphics;
 
 namespace ERY.Xle.Maps
 {
     public class Map3DSurfaces
     {
-        public Surface Walls { get; set; }
-        public Surface Torches { get; set; }
+        public Texture2D Walls { get; set; }
+        public Texture2D Torches { get; set; }
 
-        public Surface Traps { get; set; }
+        public Texture2D Traps { get; set; }
 
-        public Surface ExhibitOpen { get; set; }
-        public Surface ExhibitClosed { get; set; }
+        public Texture2D ExhibitOpen { get; set; }
+        public Texture2D ExhibitClosed { get; set; }
     }
 }

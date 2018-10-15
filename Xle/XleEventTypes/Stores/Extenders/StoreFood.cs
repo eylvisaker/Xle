@@ -1,19 +1,14 @@
-﻿using AgateLib.Mathematics.Geometry;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Maps.XleMapTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using ERY.Xle.Data;
-using ERY.Xle.Services;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreFood : StoreFront
     {
-        bool skipMailOffer = false;
+        private bool skipMailOffer = false;
 
         public XleData Data { get; set; }
         public XleSystemState systemState { get; set; }
@@ -231,7 +226,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             Player.mailTown = 0;
         }
 
-        int robCount;
+        private int robCount;
 
         protected override bool RobCore()
         {

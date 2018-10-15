@@ -1,5 +1,6 @@
 ﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Serialization;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;

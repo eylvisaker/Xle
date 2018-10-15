@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ERY.XleTests.LegacyOfTheAncients;
 using FluentAssertions;
+using Moq;
+using AgateLib;
 
 namespace ERY.XleTests
 {
@@ -136,11 +138,14 @@ namespace ERY.XleTests
         public void InformationLevelupWithCheatTest()
         {
             Player player = new Player();
-            player.StoryData = new LotaStory();
-            var gameState = new GameState { Player = player };
 
+            player.StoryData = new LotaStory();
+
+            var gameState = new GameState { Player = player };
+            var contentProvider = new Mock<IContentProvider>();
             var data = new XleData();
-            LotaFactory factory = new LotaFactory(data);
+
+            LotaFactory factory = new LotaFactory(contentProvider.Object, data);
 
             Information information = new Information();
             information.GameState = gameState;

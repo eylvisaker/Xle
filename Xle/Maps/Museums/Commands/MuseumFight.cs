@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AgateLib.Mathematics.Geometry;
-
+﻿
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands.Implementation;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.Maps.Museums.Commands
 {
     [ServiceName("MuseumFight")]
     public class MuseumFight : Fight
     {
-        Museum Map { get { return (Museum)GameState.Map; } }
-        MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
+        private Museum Map { get { return (Museum)GameState.Map; } }
 
-        Point PlayerLookingAt { get { return Museum.PlayerLookingAt; } }
+        private MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
 
-        Exhibit ExhibitAt(Point location)
+        private Point PlayerLookingAt { get { return Museum.PlayerLookingAt; } }
+
+        private Exhibit ExhibitAt(Point location)
         {
             return Museum.ExhibitAt(location);
         }
 
-        void PrintExhibitStopsActionMessage()
+        private void PrintExhibitStopsActionMessage()
         {
             Museum.PrintExhibitStopsActionMessage();
         }
+
         public override void Execute()
         {
             TextArea.PrintLine();

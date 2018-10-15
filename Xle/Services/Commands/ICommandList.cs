@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-
-using AgateLib.InputLib;
+﻿using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace ERY.Xle.Services.Commands
 {

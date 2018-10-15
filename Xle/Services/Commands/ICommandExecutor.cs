@@ -1,4 +1,4 @@
-﻿using AgateLib.InputLib;
+﻿using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.Services.Commands
 {

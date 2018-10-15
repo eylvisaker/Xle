@@ -9,7 +9,7 @@ using ERY.Xle.Maps.Towns;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.Maps.Castles
+namespace Xle.Ancients.MapExtenders.Castle.Commands
 {
     [ServiceName("CastleSpeak")]
     public class CastleSpeak : TownSpeak

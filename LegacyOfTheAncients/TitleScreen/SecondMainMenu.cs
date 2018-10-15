@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace ERY.Xle.LotA.TitleScreen
 {
     public class SecondMainMenu : MainMenuScreen
 	{
-		public SecondMainMenu()
+		public SecondMainMenu(IContentProvider content) : base(content)
 		{
 			Colors.FrameColor = XleColor.Brown;
 			Colors.FrameHighlightColor = XleColor.Yellow;

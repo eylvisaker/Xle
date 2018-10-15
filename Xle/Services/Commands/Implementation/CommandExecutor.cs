@@ -1,18 +1,15 @@
-﻿using System.Collections.Generic;
-
-using AgateLib.InputLib;
-
-using ERY.Xle.Services.Game;
+﻿using ERY.Xle.Services.Game;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace ERY.Xle.Services.Commands.Implementation
 {
     public class CommandExecutor : ICommandExecutor
     {
-        GameState gameState;
-
-        Dictionary<Keys, Direction> mDirectionMap = new Dictionary<Keys, Direction>();
+        private GameState gameState;
+        private Dictionary<Keys, Direction> mDirectionMap = new Dictionary<Keys, Direction>();
         private IXleGameControl gameControl;
         private ITextArea textArea;
         private ISoundMan soundMan;
@@ -20,7 +17,7 @@ namespace ERY.Xle.Services.Commands.Implementation
         private IPlayerDeathHandler deathHandler;
         private IPlayerAnimator characterAnimator;
 
-        Player player { get { return gameState.Player; } }
+        private Player player { get { return gameState.Player; } }
 
         public CommandExecutor(
             GameState state,
@@ -47,10 +44,10 @@ namespace ERY.Xle.Services.Commands.Implementation
             mDirectionMap[Keys.Left] = Direction.West;
             mDirectionMap[Keys.Down] = Direction.South;
 
-            mDirectionMap[Keys.OpenBracket] = Direction.North;
-            mDirectionMap[Keys.Semicolon] = Direction.West;
-            mDirectionMap[Keys.Quotes] = Direction.East;
-            mDirectionMap[Keys.Slash] = Direction.South;
+            mDirectionMap[Keys.OemOpenBrackets] = Direction.North;
+            mDirectionMap[Keys.OemSemicolon] = Direction.West;
+            mDirectionMap[Keys.OemQuotes] = Direction.East;
+            mDirectionMap[Keys.OemQuestion] = Direction.South;
         }
 
         public void Prompt()
@@ -75,7 +72,7 @@ namespace ERY.Xle.Services.Commands.Implementation
             gameState.MapExtender.PlayerCursorMovement(dir);
         }
 
-        bool IsCursorMovement(Keys cmd)
+        private bool IsCursorMovement(Keys cmd)
         {
             switch (cmd)
             {

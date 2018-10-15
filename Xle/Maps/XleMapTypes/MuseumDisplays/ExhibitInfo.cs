@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -20,12 +21,12 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
         public string ImageFile { get; set; }
         private Texture2D Image { get; set; }
 
-        public void LoadImage()
+        public void LoadImage(IContentProvider content)
         {
             if (string.IsNullOrEmpty(ImageFile))
                 return;
 
-            Image = new Surface("Images/Museum/Exhibits/" + ImageFile);
+            Image = content.Load<Texture2D>("Images/Museum/Exhibits/" + ImageFile);
         }
 
         public int FrameTime { get; set; }

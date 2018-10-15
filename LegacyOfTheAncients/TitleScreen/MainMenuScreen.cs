@@ -1,5 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace ERY.Xle.LotA.TitleScreen
@@ -9,19 +12,19 @@ namespace ERY.Xle.LotA.TitleScreen
         private int titleMenu;
         protected List<string> MenuItems = new List<string>();
         private List<TextWindow> MenuItemWindows = new List<TextWindow>();
-        private static Surface titleHeader1;
-        private static Surface titleHeader2;
+        private static Texture2D titleHeader1;
+        private static Texture2D titleHeader2;
 
         protected TextWindow Instruction { get; private set; }
         protected TextWindow Copyright { get; private set; }
 
 
-        public MainMenuScreen()
+        public MainMenuScreen(IContentProvider content)
         {
             if (titleHeader1 == null)
             {
-                titleHeader1 = new Surface("Images/TitleHeader1.png");
-                titleHeader2 = new Surface("Images/TitleHeader2.png");
+                titleHeader1 = content.Load<Texture2D>("Images/TitleHeader1.png");
+                titleHeader2 = content.Load<Texture2D>("Images/TitleHeader2.png");
             }
 
             Instruction = new TextWindow();
@@ -126,14 +129,15 @@ namespace ERY.Xle.LotA.TitleScreen
 
         private void DrawTitleHeader(Color frameColor, Color lineColor)
         {
-            titleHeader1.InterpolationHint = InterpolationMode.Fastest;
-            titleHeader2.InterpolationHint = InterpolationMode.Fastest;
+            throw new NotImplementedException();
+            //titleHeader1.InterpolationHint = InterpolationMode.Fastest;
+            //titleHeader2.InterpolationHint = InterpolationMode.Fastest;
 
-            titleHeader1.Color = frameColor;
-            titleHeader2.Color = lineColor;
+            //titleHeader1.Color = frameColor;
+            //titleHeader2.Color = lineColor;
 
-            titleHeader1.Draw();
-            titleHeader2.Draw();
+            //titleHeader1.Draw();
+            //titleHeader2.Draw();
         }
 
     }

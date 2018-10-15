@@ -118,7 +118,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\IXleTypeSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\NumericEncoding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\TypeBinder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Serialization\TypeSerializers\PointFSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Serialization\TypeSerializers\Vector2Serializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\TypeSerializers\PointSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\TypeSerializers\RectangleFSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\TypeSerializers\RectangleSerializer.cs" />

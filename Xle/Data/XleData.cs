@@ -1,16 +1,13 @@
-﻿using AgateLib.Mathematics.Geometry;
-
+﻿using AgateLib;
+using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
-
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-
 using ERY.Xle.Services;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace ERY.Xle.Data
 {
@@ -35,22 +32,25 @@ namespace ERY.Xle.Data
 
         public Size OverworldMonsterSize { get; private set; }
 
-        public void LoadGameFile(string filename)
+        public void LoadGameFile(IContentProvider content, string filename)
         {
-            XDocument doc = XDocument.Load(AgateLib.AgateApp.Assets.OpenReadAsync(filename).Result);
-            XElement root = doc.Root;
+            using (var stream = content.Open(filename))
+            {
+                XDocument doc = XDocument.Load(stream);
+                XElement root = doc.Root;
 
-            LoadMapInfo(root.Element("Maps"));
-            LoadMagicInfo(root.Element("MagicSpells"));
-            LoadEquipmentInfo(root.Element("Weapons"), ref mWeaponList);
-            LoadEquipmentInfo(root.Element("Armor"), ref mArmorList);
-            LoadItemInfo(root.Element("Items"));
-            LoadQualityInfo(root.Element("Qualities"));
-            LoadExhibitInfo(root.Element("Exhibits"));
-            Load3DExtraInfo(root.Element("DungeonExtras"));
-            LoadDungeonMonsters(root.Element("DungeonMonsters"));
-            LoadMonsterInfo(root.Element("OutsideMonsters"));
-            LoadFortunes(root.Element("Fortunes"));
+                LoadMapInfo(root.Element("Maps"));
+                LoadMagicInfo(root.Element("MagicSpells"));
+                LoadEquipmentInfo(root.Element("Weapons"), ref mWeaponList);
+                LoadEquipmentInfo(root.Element("Armor"), ref mArmorList);
+                LoadItemInfo(root.Element("Items"));
+                LoadQualityInfo(root.Element("Qualities"));
+                LoadExhibitInfo(root.Element("Exhibits"));
+                Load3DExtraInfo(root.Element("DungeonExtras"));
+                LoadDungeonMonsters(root.Element("DungeonMonsters"));
+                LoadMonsterInfo(root.Element("OutsideMonsters"));
+                LoadFortunes(root.Element("Fortunes"));
+            }
         }
 
         private void LoadFortunes(XElement xElement)
@@ -357,14 +357,13 @@ namespace ERY.Xle.Data
                 int.Parse(vals[3]));
         }
 
-        public void LoadDungeonMonsterSurfaces()
+        public void LoadDungeonMonsterSurfaces(IContentProvider content)
         {
             foreach (var dm in DungeonMonsters)
             {
-                dm.Value.Surface = new AgateLib.DisplayLib.Surface("Images/Dungeon/Monsters/" + dm.Value.ImageFile);
+                dm.Value.Image = content.Load<Texture2D>("Images/Dungeon/Monsters/" + dm.Value.ImageFile);
             }
         }
-
 
         public string GetWeaponName(int weaponID, int qualityID)
         {

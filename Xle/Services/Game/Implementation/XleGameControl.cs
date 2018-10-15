@@ -1,92 +1,93 @@
-﻿using System;
-using AgateLib;
-using AgateLib.InputLib;
-using AgateLib.Platform;
-using ERY.Xle.Services.ScreenModel;
+﻿using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.Game.Implementation
 {
-	public class XleGameControl : IXleGameControl
-	{
-		private IXleScreen screen;
-		private GameState gameState;
-		private XleSystemState systemState;
+    public class XleGameControl : IXleGameControl
+    {
+        private IXleScreen screen;
+        private GameState gameState;
+        private XleSystemState systemState;
 
-		public XleGameControl(
-			IXleScreen screen,
-			GameState gameState,
-			XleSystemState systemState)
-		{
-			this.screen = screen;
-			this.gameState = gameState;
-			this.systemState = systemState;
-		}
+        public XleGameControl(
+            IXleScreen screen,
+            GameState gameState,
+            XleSystemState systemState)
+        {
+            this.screen = screen;
+            this.gameState = gameState;
+            this.systemState = systemState;
+        }
 
-		public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
-		{
-			if (redraw == null)
-				redraw = screen.OnDraw;
+        public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
+        {
+            if (redraw == null)
+                redraw = screen.OnDraw;
 
-			IStopwatch watch = Timing.CreateStopWatch();
+            //IStopwatch watch = Timing.CreateStopWatch();
 
-			using (var input = new SimpleInputHandler())
-			{
-				Input.Handlers.Add(input);
+            //using (var input = new SimpleInputHandler())
+            //{
+            //    Input.Handlers.Add(input);
 
-				do
-				{
-					screen.OnUpdate();
+            //    do
+            //    {
+            //        screen.OnUpdate();
 
-					redraw();
-					KeepAlive();
+            //        redraw();
+            //        KeepAlive();
 
-					if (keyBreak && input.Keys.Any)
-						break;
+            //        if (keyBreak && input.Keys.Any)
+            //            break;
 
-				} while (watch.TotalMilliseconds < howLong && AgateApp.IsAlive);
-			}
-		}
+            //    } while (watch.TotalMilliseconds < howLong && AgateApp.IsAlive);
+            //}
+            throw new NotImplementedException();
+        }
 
-		public void KeepAlive()
-		{
-			if (gameState.MapExtender != null)
-			{
-				gameState.MapExtender.CheckSounds();
-			}
+        public void KeepAlive(GameTime time)
+        {
+            if (gameState.MapExtender != null)
+            {
+                gameState.MapExtender.CheckSounds(time);
+            }
 
-			if (screen.CurrentWindowClosed)
-				throw new MainWindowClosedException();
+            if (screen.CurrentWindowClosed)
+                throw new MainWindowClosedException();
 
-			AgateApp.KeepAlive();
-		}
+            throw new NotImplementedException();
+            //AgateApp.KeepAlive();
+        }
 
-		public void RunRedrawLoop()
-		{
-			while (AgateApp.IsAlive &&
-				systemState.ReturnToTitle == false)
-			{
-				Redraw();
-			}
-		}
+        public void RunRedrawLoop()
+        {
+            throw new NotImplementedException();
+            //while (AgateApp.IsAlive &&
+            //    systemState.ReturnToTitle == false)
+            //{
+            //    Redraw();
+            //}
+        }
 
-		public void Redraw()
-		{
-			OnUpdate();
-			screen.OnDraw();
+        public void Redraw(GameTime time)
+        {
+            OnUpdate(time);
+            screen.OnDraw();
 
-			KeepAlive();
-		}
+            KeepAlive(time);
+        }
 
-		private void OnUpdate()
-		{
-			if (gameState != null && gameState.MapExtender != null)
-			{
-				gameState.MapExtender.OnUpdate(AgateApp.GameClock.Elapsed.TotalSeconds);
-			}
+        private void OnUpdate(GameTime time)
+        {
+            if (gameState != null && gameState.MapExtender != null)
+            {
+                gameState.MapExtender.OnUpdate(time);
+            }
 
-			screen.OnUpdate();
-		}
+            screen.OnUpdate();
+        }
 
-	}
+    }
 }

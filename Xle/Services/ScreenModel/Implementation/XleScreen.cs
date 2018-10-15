@@ -31,7 +31,7 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
                 systemState.WindowBorderSize.Height);
         }
 
-        public Rectangle Coordinates { get { return Display.Coordinates; } }
+        public Rectangle Coordinates { get => throw new NotImplementedException(); }
         public bool PromptToContinue { get; set; }
 
         public Color FontColor { get; set; }
@@ -52,9 +52,8 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
 
         public bool CurrentWindowClosed
         {
-            get { return Display.CurrentWindow.IsClosed; }
+            get => throw new NotImplementedException();
         }
-
 
         public void OnUpdate()
         {

@@ -1,203 +1,204 @@
-﻿using AgateLib;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-using ERY.Xle.Data;
+﻿using ERY.Xle.Data;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.Commands.Implementation
 {
-	public class Inventory : Command
-	{
-		private IXleRenderer renderer;
-		private XleData data;
-		private XleSystemState systemState;
+    public class Inventory : Command
+    {
+        private IXleRenderer renderer;
+        private XleData data;
+        private XleSystemState systemState;
 
-		public Inventory(
-			IXleRenderer renderer,
-			XleData data,
-			XleSystemState systemState)
-		{
-			this.renderer = renderer;
-			this.data = data;
-			this.systemState = systemState;
-		}
+        public Inventory(
+            IXleRenderer renderer,
+            XleData data,
+            XleSystemState systemState)
+        {
+            this.renderer = renderer;
+            this.data = data;
+            this.systemState = systemState;
+        }
 
-		public ITextRenderer TextRenderer { get; set; }
+        public ITextRenderer TextRenderer { get; set; }
 
-		public override void Execute()
-		{
-			TextArea.PrintLine();
+        public override void Execute()
+        {
+            TextArea.PrintLine();
 
-			var player = GameState.Player;
+            var player = GameState.Player;
 
-			int inventoryScreen = 0;
+            int inventoryScreen = 0;
 
-			string tempstring;
-			Color bgcolor;
-			Color fontcolor;
+            string tempstring;
+            Color bgcolor;
+            Color fontcolor;
 
-			using (var input = new SimpleInputHandler())
-			{
-				Input.Handlers.Add(input);
+            throw new NotImplementedException();
 
-				while (inventoryScreen < 2)
-				{
-					if (input.Keys.Any)
-					{
-						input.Keys.ReleaseAll();
-						inventoryScreen++;
-					}
+            //using (var input = new SimpleInputHandler())
+            //{
+            //    Input.Handlers.Add(input);
 
-					// select the right colors for the screen.
-					if (inventoryScreen == 0)
-					{
-						bgcolor = XleColor.Brown;
-						fontcolor = XleColor.Yellow;
-					}
-					else
-					{
-						bgcolor = XleColor.Blue;
-						fontcolor = XleColor.Cyan;
-					}
+            //    while (inventoryScreen < 2)
+            //    {
+            //        if (input.Keys.Any)
+            //        {
+            //            input.Keys.ReleaseAll();
+            //            inventoryScreen++;
+            //        }
 
-					Display.BeginFrame();
-					Display.Clear(XleColor.DarkGray);
-					Display.FillRect(new Rectangle(0, 0, 640, 400), bgcolor);
+            //        // select the right colors for the screen.
+            //        if (inventoryScreen == 0)
+            //        {
+            //            bgcolor = XleColor.Brown;
+            //            fontcolor = XleColor.Yellow;
+            //        }
+            //        else
+            //        {
+            //            bgcolor = XleColor.Blue;
+            //            fontcolor = XleColor.Cyan;
+            //        }
 
-					// Draw the borders
-					renderer.DrawFrame(Color.Gray);
-					renderer.DrawFrameLine(0, 128, 1, XleOptions.myWindowWidth, XleColor.Gray);
+            //        throw new NotImplementedException();
+                    //Display.BeginFrame();
+                    //Display.Clear(XleColor.DarkGray);
+                    //Display.FillRect(new Rectangle(0, 0, 640, 400), bgcolor);
 
-					renderer.DrawFrameHighlight(Color.Yellow);
-					renderer.DrawInnerFrameHighlight(0, 128, 1, XleOptions.myWindowWidth, XleColor.Yellow);
+                    //// Draw the borders
+                    //renderer.DrawFrame(Color.Gray);
+                    //renderer.DrawFrameLine(0, 128, 1, XleOptions.myWindowWidth, XleColor.Gray);
 
-					// Draw the title
-					Display.FillRect(new Rectangle(176, 0, 288, 16), bgcolor);
-					TextRenderer.WriteText(176, 0, " Player Inventory", fontcolor);
+                    //renderer.DrawFrameHighlight(Color.Yellow);
+                    //renderer.DrawInnerFrameHighlight(0, 128, 1, XleOptions.myWindowWidth, XleColor.Yellow);
 
-					// Draw the prompt
-					Display.FillRect(144, 384, 336, 16, bgcolor);
-					TextRenderer.WriteText(144, 384, " Hit key to continue", fontcolor);
+                    //// Draw the title
+                    //Display.FillRect(new Rectangle(176, 0, 288, 16), bgcolor);
+                    //TextRenderer.WriteText(176, 0, " Player Inventory", fontcolor);
 
-					// Draw the top box
-					TextRenderer.WriteText(48, 32, player.Name, fontcolor);
+                    //// Draw the prompt
+                    //Display.FillRect(144, 384, 336, 16, bgcolor);
+                    //TextRenderer.WriteText(144, 384, " Hit key to continue", fontcolor);
 
-					tempstring = "Level        ";
-					tempstring += player.Level.ToString().PadLeft(2);
-					TextRenderer.WriteText(48, 64, tempstring, fontcolor);
+                    //// Draw the top box
+                    //TextRenderer.WriteText(48, 32, player.Name, fontcolor);
 
-					string timeString = ((int)player.TimeDays).ToString().PadLeft(5);
-					tempstring = "Time-days ";
-					tempstring += timeString;
-					TextRenderer.WriteText(48, 96, tempstring, fontcolor);
+                    //tempstring = "Level        ";
+                    //tempstring += player.Level.ToString().PadLeft(2);
+                    //TextRenderer.WriteText(48, 64, tempstring, fontcolor);
 
-					tempstring = "Dexterity     ";
-					tempstring += player.Attribute[Attributes.dexterity];
-					TextRenderer.WriteText(336, 32, tempstring, fontcolor);
+                    //string timeString = ((int)player.TimeDays).ToString().PadLeft(5);
+                    //tempstring = "Time-days ";
+                    //tempstring += timeString;
+                    //TextRenderer.WriteText(48, 96, tempstring, fontcolor);
 
-					tempstring = "Strength      ";
-					tempstring += player.Attribute[Attributes.strength];
-					TextRenderer.WriteText(336, 48, tempstring, fontcolor);
+                    //tempstring = "Dexterity     ";
+                    //tempstring += player.Attribute[Attributes.dexterity];
+                    //TextRenderer.WriteText(336, 32, tempstring, fontcolor);
 
-					tempstring = "Charm         ";
-					tempstring += player.Attribute[Attributes.charm];
-					TextRenderer.WriteText(336, 64, tempstring, fontcolor);
+                    //tempstring = "Strength      ";
+                    //tempstring += player.Attribute[Attributes.strength];
+                    //TextRenderer.WriteText(336, 48, tempstring, fontcolor);
 
-					tempstring = "Endurance     ";
-					tempstring += player.Attribute[Attributes.endurance];
-					TextRenderer.WriteText(336, 80, tempstring, fontcolor);
+                    //tempstring = "Charm         ";
+                    //tempstring += player.Attribute[Attributes.charm];
+                    //TextRenderer.WriteText(336, 64, tempstring, fontcolor);
 
-					tempstring = "Intelligence  ";
-					tempstring += player.Attribute[Attributes.intelligence];
-					TextRenderer.WriteText(336, 96, tempstring, fontcolor);
+                    //tempstring = "Endurance     ";
+                    //tempstring += player.Attribute[Attributes.endurance];
+                    //TextRenderer.WriteText(336, 80, tempstring, fontcolor);
 
-					if (inventoryScreen == 0)
-					{
-						TextRenderer.WriteText(80, 160, "Armor & Weapons  -  Quality", fontcolor);
+                    //tempstring = "Intelligence  ";
+                    //tempstring += player.Attribute[Attributes.intelligence];
+                    //TextRenderer.WriteText(336, 96, tempstring, fontcolor);
 
-						int yy = 11;
-						Color tempcolor;
+                    //if (inventoryScreen == 0)
+                    //{
+                    //    TextRenderer.WriteText(80, 160, "Armor & Weapons  -  Quality", fontcolor);
 
-						foreach (var weapon in player.Weapons)
-						{
-							var clr = fontcolor;
+                    //    int yy = 11;
+                    //    Color tempcolor;
 
-							if (player.CurrentWeapon == weapon)
-								clr = XleColor.White;
+                    //    foreach (var weapon in player.Weapons)
+                    //    {
+                    //        var clr = fontcolor;
 
-							TextRenderer.WriteText(128, ++yy * 16, weapon.BaseName(data), clr);
-							TextRenderer.WriteText(416, yy * 16, weapon.QualityName(data), clr);
-						}
+                    //        if (player.CurrentWeapon == weapon)
+                    //            clr = XleColor.White;
 
-						yy++;
+                    //        TextRenderer.WriteText(128, ++yy * 16, weapon.BaseName(data), clr);
+                    //        TextRenderer.WriteText(416, yy * 16, weapon.QualityName(data), clr);
+                    //    }
 
-						foreach (var armor in player.Armor)
-						{
-							var clr = fontcolor;
+                    //    yy++;
 
-							if (player.CurrentArmor == armor)
-								clr = XleColor.White;
+                    //    foreach (var armor in player.Armor)
+                    //    {
+                    //        var clr = fontcolor;
 
-							TextRenderer.WriteText(128, ++yy * 16, armor.BaseName(data), clr);
-							TextRenderer.WriteText(416, yy * 16, armor.QualityName(data), clr);
-						}
-					}
-					else if (inventoryScreen == 1)
-					{
+                    //        if (player.CurrentArmor == armor)
+                    //            clr = XleColor.White;
 
-						// Draw the middle prompt
-						Display.FillRect(160, 128, 288, 16, bgcolor);
-						TextRenderer.WriteText(160, 128, " Other Possesions", fontcolor);
+                    //        TextRenderer.WriteText(128, ++yy * 16, armor.BaseName(data), clr);
+                    //        TextRenderer.WriteText(416, yy * 16, armor.QualityName(data), clr);
+                    //    }
+                    //}
+                    //else if (inventoryScreen == 1)
+                    //{
 
-						string line;
-						int yy = 9;
-						int xx = 48;
-						Color tempcolor;
+                    //    // Draw the middle prompt
+                    //    Display.FillRect(160, 128, 288, 16, bgcolor);
+                    //    TextRenderer.WriteText(160, 128, " Other Possesions", fontcolor);
 
-						foreach (int i in data.ItemList.Keys)
-						{
-							if (player.Items[i] > 0)
-							{
-								if (player.Hold == i)
-								{
-									tempcolor = XleColor.White;
-								}
-								else
-								{
-									tempcolor = fontcolor;
-								}
+                    //    string line;
+                    //    int yy = 9;
+                    //    int xx = 48;
+                    //    Color tempcolor;
 
-								if (i == 17)
-								{
-									yy = 9;
-									xx = 352;
-								}
-								if (i == 24)
-								{
-									yy++;
-								}
+                    //    foreach (int i in data.ItemList.Keys)
+                    //    {
+                    //        if (player.Items[i] > 0)
+                    //        {
+                    //            if (player.Hold == i)
+                    //            {
+                    //                tempcolor = XleColor.White;
+                    //            }
+                    //            else
+                    //            {
+                    //                tempcolor = fontcolor;
+                    //            }
 
-								line = player.Items[i].ToString() + " ";
+                    //            if (i == 17)
+                    //            {
+                    //                yy = 9;
+                    //                xx = 352;
+                    //            }
+                    //            if (i == 24)
+                    //            {
+                    //                yy++;
+                    //            }
 
-								if (i == systemState.Factory.MailItemID)
-								{
-									line += data.MapList[player.mailTown].Name + " ";
-								}
+                    //            line = player.Items[i].ToString() + " ";
 
-								line += data.ItemList[i].Name;
+                    //            if (i == systemState.Factory.MailItemID)
+                    //            {
+                    //                line += data.MapList[player.mailTown].Name + " ";
+                    //            }
 
-								TextRenderer.WriteText(xx, ++yy * 16, line, tempcolor);
-							}
-						}
+                    //            line += data.ItemList[i].Name;
 
-					}
+                    //            TextRenderer.WriteText(xx, ++yy * 16, line, tempcolor);
+                    //        }
+                    //    }
 
-					Display.EndFrame();
-					AgateApp.KeepAlive();
-				}
-			}
-		}
-	}
+                    //}
+
+                    //Display.EndFrame();
+                    //AgateApp.KeepAlive();
+            //    }
+            //}
+        }
+    }
 }

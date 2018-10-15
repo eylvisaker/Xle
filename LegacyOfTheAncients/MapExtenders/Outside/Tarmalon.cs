@@ -165,9 +165,10 @@ namespace ERY.Xle.LotA.MapExtenders.Outside
 
         void RedrawUnconscious()
         {
-            AgateLib.DisplayLib.Display.BeginFrame();
-            AgateLib.DisplayLib.Display.Clear(XleColor.Gray);
-            AgateLib.DisplayLib.Display.EndFrame();
+            //AgateLib.DisplayLib.Display.BeginFrame();
+            //AgateLib.DisplayLib.Display.Clear(XleColor.Gray);
+            //AgateLib.DisplayLib.Display.EndFrame();
+            throw new NotImplementedException();
         }
 
         /// <summary>

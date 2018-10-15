@@ -1,10 +1,11 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using AgateLib;
+using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
     public class FirstMainMenu : MainMenuScreen
     {
-        public FirstMainMenu()
+        public FirstMainMenu(IContentProvider content) : base(content)
         {
             Colors.BorderColor = XleColor.Purple;
             Colors.FrameColor = XleColor.Blue;

@@ -49,7 +49,7 @@ namespace ERY.Xle.Maps
         {
             info.Write("X", X);
             info.Write("Y", Y);
-            info.Write("Color", ColorX.ToArgb());
+            info.Write("Color", Color.ToArgb());
 
             info.Write("HP", HP);
             info.Write("Attack", Attack);

@@ -1,18 +1,11 @@
-﻿using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle.XleEventTypes.Stores;
-using ERY.Xle.XleEventTypes.Stores.Extenders;
+﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
 {
     public class StoreHealer : LotaStoreFront
     {
-        bool buyingHerbs = false;
+        private bool buyingHerbs = false;
 
         protected override void InitializeColorScheme(ColorScheme cs)
         {

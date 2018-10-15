@@ -46,7 +46,7 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
         public void Run(IXleGameFactory factory)
         {
-            Condition.RequireArgumentNotNull(factory, "factory");
+            Require.ArgumentNotNull(factory, "factory");
 
             try
             {

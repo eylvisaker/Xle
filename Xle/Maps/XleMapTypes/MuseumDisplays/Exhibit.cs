@@ -4,6 +4,7 @@ using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
 
@@ -155,12 +156,13 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
                     {
                         string punctuation = ",.!";
 
-                        if (punctuation.Contains(rawtext[ip]))
-                            GameControl.Wait(350 * (1 + punctuation.IndexOf(rawtext[ip])));
-                        else if (AgateLib.InputLib.Input.Unhandled.Keys.Any)
-                            GameControl.Wait(1);
-                        else
-                            GameControl.Wait(30);
+                        throw new NotImplementedException();
+                        //if (punctuation.Contains(rawtext[ip]))
+                        //    GameControl.Wait(350 * (1 + punctuation.IndexOf(rawtext[ip])));
+                        //else if (AgateLib.InputLib.Input.Unhandled.Keys.Any)
+                        //    GameControl.Wait(1);
+                        //else
+                        //    GameControl.Wait(30);
                     }
                 }
                 else
@@ -239,7 +241,7 @@ namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
             get { return true; }
         }
 
-        public abstract void Draw(Rectangle displayRect);
+        public abstract void Draw(GameTime time, SpriteBatch spriteBatch, Rectangle displayRect);
 
         public abstract string InsertCoinText { get; }
 

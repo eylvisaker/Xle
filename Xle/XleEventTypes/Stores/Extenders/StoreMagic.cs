@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ERY.Xle.Data;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Data;
 
 namespace ERY.Xle.XleEventTypes.Stores.Extenders
 {
@@ -154,11 +154,12 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             StoreSound(LotaSound.Medium);
         }
 
-        int MagicPrice(int id)
+        private int MagicPrice(int id)
         {
             return MagicPrice(Data.MagicSpells[id]);
         }
-        int MagicPrice(MagicSpell magicSpell)
+
+        private int MagicPrice(MagicSpell magicSpell)
         {
             return (int)(magicSpell.BasePrice * TheEvent.CostFactor);
         }

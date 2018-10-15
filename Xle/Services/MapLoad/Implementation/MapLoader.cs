@@ -12,17 +12,20 @@ namespace ERY.Xle.Services.MapLoad.Implementation
     public class MapLoader : IMapLoader
     {
         private XleData data;
+        private readonly IContentProvider content;
         private IMapExtenderFactory extenderFactory;
         private IEventExtenderFactory eventFactory;
         private IMapRendererFactory rendererFactory;
 
         public MapLoader(
             XleData data,
+            IContentProvider content,
             IMapExtenderFactory extenderFactory,
             IEventExtenderFactory eventFactory,
             IMapRendererFactory rendererFactory)
         {
             this.data = data;
+            this.content = content;
             this.extenderFactory = extenderFactory;
             this.eventFactory = eventFactory;
             this.rendererFactory = rendererFactory;
@@ -77,7 +80,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             XleSerializer ser = new XleSerializer(typeof(XleMap));
             ser.Binder = new XleTypeBinder(ser.Binder);
 
-            using (var file = AgateApp.Assets.OpenRead(filename))
+            using (var file = content.Open(filename))
             {
                 return (XleMap)ser.Deserialize(file);
             }

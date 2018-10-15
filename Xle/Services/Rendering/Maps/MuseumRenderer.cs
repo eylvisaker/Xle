@@ -2,6 +2,8 @@
 using ERY.Xle.Maps.Museums;
 using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace ERY.Xle.Services.Rendering.Maps
 {
@@ -38,7 +40,7 @@ namespace ERY.Xle.Services.Rendering.Maps
         public Exhibit mCloseup;
         public bool mDrawStatic;
 
-        protected override void DrawCloseupImpl(Rectangle inRect)
+        protected override void DrawCloseupImpl(SpriteBatch spriteBatch, Rectangle inRect)
         {
             Rectangle displayRect = ExhibitCloseupRect;
             Rectangle screenDisplayRect = displayRect;
@@ -48,17 +50,19 @@ namespace ERY.Xle.Services.Rendering.Maps
 
             if (mDrawStatic == false)
             {
-                Surfaces.ExhibitOpen.Draw(inRect);
+                throw new NotImplementedException();
+                //Surfaces.ExhibitOpen.Draw(inRect);
 
-                mCloseup.Draw(screenDisplayRect);
+                //mCloseup.Draw(spriteBatch, screenDisplayRect);
             }
             else
             {
-                Surfaces.ExhibitClosed.Draw(inRect);
+                throw new NotImplementedException();
+                //Surfaces.ExhibitClosed.Draw(inRect);
 
                 if (AnimateExhibits)
                 {
-                    Display.FillRect(screenDisplayRect, XleColor.DarkGray);
+                    FillRect(screenDisplayRect, XleColor.DarkGray);
                     DrawExhibitStatic(inRect, displayRect, mCloseup.ExhibitColor);
                 }
             }
@@ -67,6 +71,8 @@ namespace ERY.Xle.Services.Rendering.Maps
             DrawExhibitText(inRect, mCloseup);
 
         }
+
+        private void FillRect(Rectangle screenDisplayRect, Color darkGray) => throw new NotImplementedException();
 
         protected virtual Rectangle ExhibitCloseupRect
         {
@@ -105,11 +111,12 @@ namespace ERY.Xle.Services.Rendering.Maps
             px += destRect.X;
             py += destRect.Y;
 
-            AgateLib.DisplayLib.Display.FillRect(px, py, textLength * 16, 16, Color.Black);
+            FillRect(px, py, textLength * 16, 16, Color.Black);
 
             Color clr = exhibit.TitleColor;
             TextRenderer.WriteText(px, py, exhibit.Name, clr);
         }
 
+        private void FillRect(int px, int py, int v1, int v2, Color black) => throw new NotImplementedException();
     }
 }

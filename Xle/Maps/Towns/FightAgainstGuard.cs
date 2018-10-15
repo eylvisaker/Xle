@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-
-using ERY.Xle.Maps.XleMapTypes;
+﻿using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands.Implementation;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ERY.Xle.Maps.Towns
 {
@@ -19,11 +13,13 @@ namespace ERY.Xle.Maps.Towns
     {
         public IXleInput Input { get; set; }
 
-        Town TheMap { get { return (Town)GameState.Map; } }
-        TownExtender Town { get { return (TownExtender)GameState.MapExtender; } }
-        GuardList guards { get { return GameState.Map.Guards; } }
+        private Town TheMap { get { return (Town)GameState.Map; } }
 
-        bool IsAngry
+        private TownExtender Town { get { return (TownExtender)GameState.MapExtender; } }
+
+        private GuardList guards { get { return GameState.Map.Guards; } }
+
+        private bool IsAngry
         {
             get { return Town.IsAngry; }
             set { Town.IsAngry = value; }
@@ -73,7 +69,8 @@ namespace ERY.Xle.Maps.Towns
 
             Player.FaceDirection = fightDir;
 
-            Point attackPt = Point.Empty, attackPt2 = Point.Empty;
+            Point attackPt = Point.Zero, 
+                  attackPt2 = Point.Zero;
 
             attackPt.X = Player.X;
             attackPt.Y = Player.Y;
@@ -229,11 +226,13 @@ namespace ERY.Xle.Maps.Towns
 
             GameControl.Wait(200 + 50 * Player.Gamespeed, keyBreak: true);
         }
-        void AttackGuard(int grd, int distance)
+
+        private void AttackGuard(int grd, int distance)
         {
             AttackGuard(TheMap.Guards[grd], distance);
         }
-        void AttackGuard(Guard guard, int distance)
+
+        private void AttackGuard(Guard guard, int distance)
         {
             if (guard.OnPlayerAttack != null)
             {

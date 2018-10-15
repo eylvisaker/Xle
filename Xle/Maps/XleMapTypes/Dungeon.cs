@@ -1,24 +1,14 @@
-﻿using System;
+﻿using ERY.Xle.Serialization;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using AgateLib;
-using AgateLib.InputLib;
-using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
-using AgateLib.DisplayLib;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
     public class Dungeon : Map3D
     {
-        int mWidth;
-        int mHeight;
-        int mLevels = 1;
-
-        int[] mData;
+        private int mWidth;
+        private int mHeight;
+        private int mLevels = 1;
+        private int[] mData;
 
         public override IEnumerable<string> AvailableTileImages
         {

@@ -20,7 +20,8 @@ namespace ERY.Xle
             get { return quality; }
             set
             {
-                Condition.Requires<ArgumentOutOfRangeException>(value >= 0 && value <= 4);
+                Require.That<ArgumentOutOfRangeException>(value >= 0 && value <= 4, 
+                    $"{nameof(Quality)} should be between 0 and 4");
                 quality = value;
             }
         }

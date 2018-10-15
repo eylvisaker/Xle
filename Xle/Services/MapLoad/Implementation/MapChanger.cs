@@ -1,13 +1,10 @@
-﻿using System;
-
-using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes;
+﻿using ERY.Xle.Maps;
 using ERY.Xle.Services.Commands;
+using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.Menus;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.MapLoad.Implementation
 {
@@ -39,7 +36,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             this.museumCoinSale = museumCoinSale;
         }
 
-        Player Player { get { return gameState.Player; } }
+        private Player Player { get { return gameState.Player; } }
 
         public void ChangeMap(int mapId, int entryPoint)
         {
@@ -51,7 +48,7 @@ namespace ERY.Xle.Services.MapLoad.Implementation
             ChangeMapCore(mapId, -1, targetPoint.X, targetPoint.Y);
         }
 
-        void ChangeMapCore(int mMapID, int targetEntryPoint, int targetX, int targetY)
+        private void ChangeMapCore(int mMapID, int targetEntryPoint, int targetX, int targetY)
         {
             if (gameState.Map == null)
             {

@@ -2,6 +2,7 @@
 using ERY.Xle.Maps.Dungeons;
 using ERY.Xle.Maps.XleMapTypes;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.Rendering.Maps
 {
@@ -70,32 +71,33 @@ namespace ERY.Xle.Services.Rendering.Maps
 
         protected override void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
         {
-            Point stepDir = faceDirection.StepDirection();
+            throw new NotImplementedException();
 
-            for (int distance = 1; distance <= maxDistance; distance++)
-            {
-                Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
+            //Point stepDir = faceDirection.StepDirection();
 
-                var monster = Extender.Combat.MonsterAt(GameState.Player.DungeonLevel, loc);
+            //for (int distance = 1; distance <= maxDistance; distance++)
+            //{
+            //    Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
 
-                if (monster == null)
-                    continue;
+            //    var monster = Extender.Combat.MonsterAt(GameState.Player.DungeonLevel, loc);
 
-                var data = Data.DungeonMonsters[monster.MonsterID];
-                int image = distance - 1;
-                var imageInfo = data.Images[image];
+            //    if (monster == null)
+            //        continue;
 
-                var drawPoint = imageInfo.DrawPoint;
-                drawPoint.X += inRect.X;
-                drawPoint.Y += inRect.Y;
+            //    var data = Data.DungeonMonsters[monster.MonsterID];
+            //    int image = distance - 1;
+            //    var imageInfo = data.Images[image];
 
-                var srcRect = imageInfo.SourceRects[0];
+            //    var drawPoint = imageInfo.DrawPoint;
+            //    drawPoint.X += inRect.X;
+            //    drawPoint.Y += inRect.Y;
 
-                data.Surface.Draw(srcRect, drawPoint);
+            //    var srcRect = imageInfo.SourceRects[0];
 
-                break;
-            }
+            //    data.Image.Draw(srcRect, drawPoint);
+
+            //    break;
+            //}
         }
-
     }
 }

@@ -1,23 +1,13 @@
-﻿using System;
+﻿using ERY.Xle.Serialization;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using AgateLib;
-using AgateLib.InputLib;
-using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
-
-using ERY.Xle.XleEventTypes.Stores;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
     public class Outside : XleMap
     {
-        int[] mData;
-        int mHeight;
-        int mWidth;
+        private int[] mData;
+        private int mHeight;
+        private int mWidth;
 
         #region --- Construction and Serialization ---
 

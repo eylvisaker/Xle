@@ -64,7 +64,8 @@ namespace ERY.Xle.LotA.TitleScreen
 
         private void state_ReleaseAllKeys(object sender, EventArgs e)
         {
-            input.Keys.ReleaseAll();
+            throw new NotImplementedException();
+            //input.Keys.ReleaseAll();
         }
 
         private void ClearTitleText()
@@ -140,7 +141,7 @@ namespace ERY.Xle.LotA.TitleScreen
         {
             renderer.ReplacementDrawMethod = State.Draw;
 
-            State.Update();
+            //State.Update();
 
             //Display.BeginFrame();
             //State.Draw();
@@ -209,27 +210,28 @@ namespace ERY.Xle.LotA.TitleScreen
             //}
         }
 
-        private void Keyboard_KeyDown(object sender, AgateInputEventArgs e)
+        private void Keyboard_KeyDown(object sender, object /*AgateInputEventArgs */e)
         {
             if (waiting)
                 return;
 
-            KeyCode keyCode = e.KeyCode;
+            throw new NotImplementedException();
+            //KeyCode keyCode = e.KeyCode;
 
-            if (lastTime + waitTime > Timing.TotalMilliseconds)
-                return;
+            //if (lastTime + waitTime > Timing.TotalMilliseconds)
+            //    return;
 
-            lastTime = Timing.TotalMilliseconds;
-            waitTime = 50;
+            //lastTime = Timing.TotalMilliseconds;
+            //waitTime = 50;
 
-            State.SkipWait = false;
-            State.KeyDown(e.KeyCode, e.KeyString);
+            //State.SkipWait = false;
+            //State.KeyDown(e.KeyCode, e.KeyString);
 
-            if (State.SkipWait)
-                waitTime = 0;
+            //if (State.SkipWait)
+            //    waitTime = 0;
 
-            if (State.NewState != null)
-                State = State.NewState;
+            //if (State.NewState != null)
+            //    State = State.NewState;
         }
 
         private void Wait(int milliseconds)
@@ -265,9 +267,10 @@ namespace ERY.Xle.LotA.TitleScreen
 
                 i++;
 
-                if (input.Keys.Any == false)
-                    Wait(62);
-                else
+                throw new NotImplementedException();
+                //if (input.Keys.Any == false)
+                //    Wait(62);
+                //else
                 {
                     i++;
                     Wait(1);
@@ -321,11 +324,12 @@ namespace ERY.Xle.LotA.TitleScreen
             }
             wnd[24] = "    (Press key/button to continue)";
 
-            input.Keys.ReleaseAll();
-            while (input.Keys.Any == false)
-            {
-                Wait(50);
-            }
+            throw new NotImplementedException();
+            //input.Keys.ReleaseAll();
+            //while (input.Keys.Any == false)
+            //{
+            //    Wait(50);
+            //}
 
             ClearTitleText();
 
@@ -365,11 +369,12 @@ namespace ERY.Xle.LotA.TitleScreen
 
             wnd[24] = "    (Press key/button to continue)";
 
-            input.Keys.ReleaseAll();
-            while (input.Keys.Any == false)
-            {
-                Wait(50);
-            }
+            throw new NotImplementedException();
+            //input.Keys.ReleaseAll();
+            //while (input.Keys.Any == false)
+            //{
+            //    Wait(50);
+            //}
 
             titleDone = true;
         }

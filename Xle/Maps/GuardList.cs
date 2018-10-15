@@ -7,7 +7,7 @@ namespace ERY.Xle.Maps
 {
     public class GuardList : IXleSerializable, IList<Guard>
     {
-        private double lastGuardAnim = 0;
+        private double timeToGuardAnim = 0;
         private int guardAnimFrame;
         private List<Guard> mGuards = new List<Guard>();
 
@@ -37,18 +37,17 @@ namespace ERY.Xle.Maps
 
         public bool IsAngry { get; set; }
 
-        public void AnimateGuards()
+        public void AnimateGuards(GameTime time)
         {
-            int animTime = 460;
+            int animTime = IsAngry ? 150 : 460;
 
-            if (IsAngry)
-                animTime = 150;
+            timeToGuardAnim -= (float)time.ElapsedGameTime.TotalMilliseconds;
 
-            if (lastGuardAnim + animTime <= Timing.TotalMilliseconds)
+            if (timeToGuardAnim <= 0)
             {
                 guardAnimFrame++;
 
-                lastGuardAnim = Timing.TotalMilliseconds;
+                timeToGuardAnim += animTime;
             }
         }
 

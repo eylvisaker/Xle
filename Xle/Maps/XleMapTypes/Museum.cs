@@ -1,31 +1,19 @@
-﻿using System;
+﻿using ERY.Xle.Serialization;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using AgateLib;
-using AgateLib.InputLib;
-using AgateLib.Mathematics.Geometry;
-using AgateLib.Mathematics.Geometry.VertexTypes;
-using ERY.Xle.Serialization;
-using AgateLib.DisplayLib;
-
-using Vertex = AgateLib.Mathematics.Geometry.VertexTypes.PositionTextureNormalTangent;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
     public class Museum : Map3D
     {
-        int[] mData;
-        int mHeight;
-        int mWidth;
+        private int[] mData;
+        private int mHeight;
+        private int mWidth;
 
         protected override void ReadData(XleSerializationInfo info)
         {
             mWidth = info.ReadInt32("Width");
             mHeight = info.ReadInt32("Height");
-            mData = info.ReadInt32Array("Data");
+            mData = info.ReadArray<int>("Data");
         }
         protected override void WriteData(XleSerializationInfo info)
         {

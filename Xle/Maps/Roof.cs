@@ -1,16 +1,14 @@
 ﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Serialization;
+using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ERY.Xle.Maps
 {
     public class Roof : IXleSerializable
     {
-        Rectangle mRect;
-        int[] mData;
+        private Rectangle mRect;
+        private int[] mData;
 
         private bool mOpen;
 
@@ -109,7 +107,7 @@ namespace ERY.Xle.Maps
                 return new Rectangle(Location, new Size(Width, Height));
             }
         }
-        
+
         public bool CharIn(int ptx, int pty, bool ignoreTransparency = false)
         {
             if (PointInRoof(ptx, pty, ignoreTransparency))

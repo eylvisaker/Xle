@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.Game
 {
@@ -8,8 +9,8 @@ namespace ERY.Xle.Services.Game
 
         void RunRedrawLoop();
 
-        void Redraw();
+        void Redraw(GameTime time);
 
-        void KeepAlive();
+        void KeepAlive(GameTime time);
     }
 }

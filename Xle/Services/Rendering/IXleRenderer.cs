@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace ERY.Xle.Services.Rendering
@@ -7,7 +8,7 @@ namespace ERY.Xle.Services.Rendering
     {
         Action ReplacementDrawMethod { get; set; }
 
-        void Draw();
+        void Draw(GameTime time, SpriteBatch spriteBatch);
 
         void UpdateAnim();
 

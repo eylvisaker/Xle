@@ -1,19 +1,14 @@
-﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Maps;
-using ERY.Xle.Services.Rendering;
+﻿using ERY.Xle.Maps;
 using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.XleEventTypes;
 using ERY.Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using System.Linq;
-using System.Text;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {
     public class SeeCompendium : EventExtender
     {
-        bool paralyzed = false;
+        private bool paralyzed = false;
 
         public IStatsDisplay StatsDisplay { get; set; }
 

@@ -1,11 +1,6 @@
-﻿using AgateLib.DisplayLib;
-using ERY.Xle.Services.Game;
+﻿using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Rendering;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ERY.Xle.Services.Menus.Implementation
 {
@@ -34,14 +29,15 @@ namespace ERY.Xle.Services.Menus.Implementation
         {
             Renderer.UpdateAnim();
 
-            Display.BeginFrame();
-            Renderer.SetProjectionAndBackColors(GameState.Map.ColorScheme);
+            throw new NotImplementedException();
+            //Display.BeginFrame();
+            //Renderer.SetProjectionAndBackColors(GameState.Map.ColorScheme);
 
-            Renderer.Draw();
-            menuRenderer.DrawMenu(Menu);
+            //Renderer.Draw();
+            //menuRenderer.DrawMenu(Menu);
 
-            Display.EndFrame();
-            gameControl.KeepAlive();
+            //Display.EndFrame();
+            //gameControl.KeepAlive();
         }
     }
 }

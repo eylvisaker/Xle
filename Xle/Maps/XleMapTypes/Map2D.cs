@@ -1,18 +1,12 @@
-﻿using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-using ERY.Xle.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ERY.Xle.Serialization;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {
     public abstract class Map2D : XleMap
     {
-        int mWidth;
-        int mHeight;
-        int[] mData;
+        private int mWidth;
+        private int mHeight;
+        private int[] mData;
 
         protected override void WriteData(ERY.Xle.Serialization.XleSerializationInfo info)
         {

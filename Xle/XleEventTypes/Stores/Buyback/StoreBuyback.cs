@@ -6,6 +6,7 @@ using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Data;
 using ERY.Xle.Services.Menus;
 using ERY.Xle.XleEventTypes.Stores.Extenders;
+using Microsoft.Xna.Framework;
 
 namespace ERY.Xle.XleEventTypes.Stores.Buyback
 {

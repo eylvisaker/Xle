@@ -1,20 +1,23 @@
 ﻿using ERY.Xle.Maps;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ERY.Xle.Services.Rendering.Maps
 {
     public class TownRenderer : Map2DRenderer
     {
-        protected override void Animate(Rectangle tileRect)
+        protected override void Animate(GameTime time, Rectangle tileRect)
         {
-            base.Animate(tileRect);
+            base.Animate(time, tileRect);
 
-            TheMap.Guards.AnimateGuards();
+            TheMap.Guards.AnimateGuards(time);
         }
 
-        public override void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
+        public override void Draw(GameTime time, SpriteBatch spriteBatch, 
+                                  Point playerPos, Direction faceDirection, 
+                                  Rectangle inRect)
         {
-            base.Draw(playerPos, faceDirection, inRect);
+            base.Draw(time, spriteBatch, playerPos, faceDirection, inRect);
 
             DrawGuards(playerPos, inRect);
         }

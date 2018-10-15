@@ -1,11 +1,7 @@
-﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Maps;
+﻿using ERY.Xle.Maps;
 using ERY.Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
 {

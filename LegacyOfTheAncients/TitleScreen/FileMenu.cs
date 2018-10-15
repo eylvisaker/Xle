@@ -78,7 +78,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
         public override void KeyDown(Keys keyCode, string keyString)
         {
-            if (keyCode == KeyCode.Down)
+            if (keyCode == Keys.Down)
             {
                 menuSelection++;
 
@@ -91,7 +91,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
                 SoundMan.PlaySound(LotaSound.TitleCursor);
             }
-            else if (keyCode == KeyCode.Up)
+            else if (keyCode == Keys.Up)
             {
                 do
                 {
@@ -108,11 +108,11 @@ namespace ERY.Xle.LotA.TitleScreen
 
                 SoundMan.PlaySound(LotaSound.TitleCursor);
             }
-            else if (keyCode >= KeyCode.D0 && keyCode <= KeyCode.D9)
+            else if (keyCode >= Keys.D0 && keyCode <= Keys.D9)
             {
-                menuSelection = keyCode - KeyCode.D0;
+                menuSelection = keyCode - Keys.D0;
 
-                keyCode = KeyCode.Return;
+                keyCode = Keys.Enter;
             }
 
             if (menuSelection == 9 && page == maxPages)
@@ -130,7 +130,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
             }
 
-            if (keyCode == KeyCode.Return)
+            if (keyCode == Keys.Enter)
             {
                 SoundMan.PlaySound(LotaSound.TitleAccept);
 

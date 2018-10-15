@@ -1,5 +1,6 @@
 ﻿using ERY.Xle.Maps;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,15 +8,16 @@ namespace ERY.Xle.Services.Rendering.Maps
 {
     public abstract class Map2DRenderer : XleMapRenderer
     {
-        public override void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
+        public override void Draw(GameTime time, SpriteBatch spriteBatch,
+                                  Point playerPos, Direction faceDirection, Rectangle inRect)
         {
-            Draw2D(playerPos.X, playerPos.Y, faceDirection, inRect);
+            Draw2D(time, playerPos.X, playerPos.Y, faceDirection, inRect);
         }
 
         protected Point centerPoint { get; set; }
         protected Point topLeftPoint { get; private set; }
 
-        protected void Draw2D(int x, int y, Direction faceDirction, Rectangle inRect)
+        protected void Draw2D(GameTime time, int x, int y, Direction faceDirction, Rectangle inRect)
         {
             int i, j;
             int initialxx = inRect.X;
@@ -33,7 +35,7 @@ namespace ERY.Xle.Services.Rendering.Maps
             Rectangle tileRect = new Rectangle(topLeftPoint.X, topLeftPoint.Y,
                 width, height);
 
-            Animate(tileRect);
+            Animate(time, tileRect);
 
             for (j = topLeftPoint.Y; j < topLeftPoint.Y + height; j++)
             {
@@ -51,9 +53,9 @@ namespace ERY.Xle.Services.Rendering.Maps
             }
         }
 
-        protected virtual void Animate(Rectangle tileRect)
+        protected virtual void Animate(GameTime time, Rectangle tileRect)
         {
-            AnimateTiles(tileRect);
+            AnimateTiles(time, tileRect);
         }
 
         protected virtual int TileToDraw(int x, int y)
@@ -88,9 +90,9 @@ namespace ERY.Xle.Services.Rendering.Maps
             }
         }
 
-        protected virtual void AnimateTiles(Rectangle rectangle)
+        protected virtual void AnimateTiles(GameTime time, Rectangle rectangle)
         {
-            List<TileGroup> groupsToAnimate = GetGroupsToAnimate().ToList();
+            List<TileGroup> groupsToAnimate = GetGroupsToAnimate(time).ToList();
 
             if (groupsToAnimate.Count == 0)
                 return;

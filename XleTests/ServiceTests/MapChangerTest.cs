@@ -1,33 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AgateLib.Mathematics.Geometry;
-
-using ERY.Xle;
+﻿using ERY.Xle;
 using ERY.Xle.Maps;
-using ERY.Xle.Maps.Towns;
 using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.Services.MapLoad.Implementation;
-
-using Xunit;
-
-using Moq;
 using ERY.Xle.Services.Commands;
+using ERY.Xle.Services.MapLoad.Implementation;
 using ERY.Xle.Services.Menus;
 using FluentAssertions;
+using Microsoft.Xna.Framework;
+using Moq;
+using System;
+using Xunit;
 
 namespace ERY.XleTests.ServiceTests
 {
     public class MapChangerTest : XleTest
     {
-        MapChanger changer;
-        Mock<IMapExtender> returnedMap;
-        Mock<IMapExtender> startMap;
-        Mock<IMuseumCoinSale> museumCoinSale;
+        private MapChanger changer;
+        private Mock<IMapExtender> returnedMap;
+        private Mock<IMapExtender> startMap;
+        private Mock<IMuseumCoinSale> museumCoinSale;
 
         public MapChangerTest()
         {
@@ -160,7 +150,7 @@ namespace ERY.XleTests.ServiceTests
 
             changer.ChangeMap(1, new Point(24, 33));
 
-            Player.Location.Should().Be(new Point(24,33));
+            Player.Location.Should().Be(new Point(24, 33));
             startMap.Verify(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>()), Times.Never());
             startMap.Verify(x => x.OnLoad(), Times.Never());
             startMap.Verify(x => x.OnAfterEntry(), Times.Never);

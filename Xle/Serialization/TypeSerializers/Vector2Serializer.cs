@@ -16,30 +16,25 @@
 //
 //     Contributor(s): Erik Ylvisaker
 //
-using AgateLib.Mathematics.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 
 namespace ERY.Xle.Serialization.TypeSerializers
 {
-	class PointFSerializer : XleTypeSerializerBase<PointF>
-	{
-		public override void Serialize(XleSerializationInfo info, PointF value)
-		{
-			info.Write("X", value.X, true);
-			info.Write("Y", value.Y, true);
-		}
+    internal class Vector2Serializer : XleTypeSerializerBase<Vector2>
+    {
+        public override void Serialize(XleSerializationInfo info, Vector2 value)
+        {
+            info.Write("X", value.X, true);
+            info.Write("Y", value.Y, true);
+        }
 
-		public override PointF Deserialize(XleSerializationInfo info)
-		{
-			return new PointF()
-			{
-				X = info.ReadFloat("X"),
-				Y = info.ReadFloat("Y"),
-			};
-		}
-	}
+        public override Vector2 Deserialize(XleSerializationInfo info)
+        {
+            return new Vector2()
+            {
+                X = info.ReadFloat("X"),
+                Y = info.ReadFloat("Y"),
+            };
+        }
+    }
 }

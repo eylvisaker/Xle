@@ -1,25 +1,29 @@
-﻿using AgateLib.Platform;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ERY.Xle.Services.ScreenModel.Implementation
 {
     public class PlayerAnimator : IPlayerAnimator
     {
-        int charAnimCount;			// animation count for the player
-        
-        // character functions
-        IStopwatch animWatch = AgateLib.Platform.Timing.CreateStopWatch();
-        const int frameTime = 150;
+        private int charAnimCount;           // animation count for the player
 
-        int animFrame;
+        // character functions
+        private const int frameTime = 150;
+        private int animFrame;
+
+        private float timeToNextFrame = frameTime;
+        private bool paused;
 
         public int AnimFrame
         {
             get
             {
+                throw new NotImplementedException();
+
                 int oldAnim = animFrame;
 
-                if (animWatch.IsPaused == false)
-                    animFrame = (((int)animWatch.TotalMilliseconds) / frameTime);
+                if (paused == false)
+                    animFrame++;// = (((int)animWatch.TotalMilliseconds) / frameTime);
 
                 if (oldAnim != animFrame)
                 {
@@ -42,7 +46,7 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
                 while (animFrame < 0)
                     animFrame += 3;
 
-                animWatch.Reset();
+                timeToNextFrame = frameTime;
             }
         }
         /// <summary>
@@ -53,12 +57,12 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
         {
             get
             {
-                if (animWatch.IsPaused == true)
+                if (paused == true)
                 {
                     animFrame = 0;
                 }
 
-                return animWatch.IsPaused == false;
+                return paused == false;
             }
             set
             {
@@ -67,12 +71,11 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
                     animFrame = 0;
                     charAnimCount = 0;
 
-                    if (animWatch.IsPaused == false)
-                        animWatch.Pause();
+                    if (paused == false)
+                        paused = true;
                 }
                 else
-                    animWatch.Resume();
-
+                    paused = false;
             }
         }
 
@@ -87,5 +90,9 @@ namespace ERY.Xle.Services.ScreenModel.Implementation
             charAnimCount = 0;
         }
 
+        public void Update(GameTime time)
+        {
+            timeToNextFrame -= (float)time.ElapsedGameTime.TotalMilliseconds;
+        }
     }
 }

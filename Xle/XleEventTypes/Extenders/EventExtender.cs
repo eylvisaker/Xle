@@ -148,7 +148,7 @@ namespace ERY.Xle.XleEventTypes.Extenders
         public virtual void OnLoad()
         { }
 
-        public virtual void OnUpdate(double deltaTime)
+        public virtual void OnUpdate(GameTime time)
         {
         }
 

@@ -1,5 +1,6 @@
 ﻿using ERY.Xle.Maps;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace ERY.Xle.Services.Rendering.Maps
@@ -32,7 +33,8 @@ namespace ERY.Xle.Services.Rendering.Maps
             }
         }
 
-        public virtual void Draw(Point playerPos, Direction faceDirection, Rectangle inRect)
+        public virtual void Draw(GameTime time, SpriteBatch spriteBatch, 
+                                 Point playerPos, Direction faceDirection, Rectangle inRect)
         {
         }
 

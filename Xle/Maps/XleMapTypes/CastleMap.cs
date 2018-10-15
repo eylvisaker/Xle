@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using AgateLib;
-using AgateLib.InputLib;
-using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
+﻿using System.Collections.Generic;
 
 namespace ERY.Xle.Maps.XleMapTypes
 {

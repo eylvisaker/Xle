@@ -1,9 +1,7 @@
-﻿using System;
-
-using AgateLib.InputLib;
-
-using ERY.Xle.Services.ScreenModel;
+﻿using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
+using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ERY.Xle.Services.Menus.Implementation
 {
@@ -94,7 +92,7 @@ namespace ERY.Xle.Services.Menus.Implementation
                     if (key >= Keys.D0 && key <= Keys.D9)
                         amount = 10 * amount + key - Keys.D0;
 
-                    if (key == Keys.BackSpace)
+                    if (key == Keys.Back)
                         amount /= 10;
 
                     amount = Math.Min(amount, max);
@@ -130,7 +128,7 @@ namespace ERY.Xle.Services.Menus.Implementation
                 }
 
 
-            } while (key != Keys.Return);
+            } while (key != Keys.Enter);
 
             input.PromptToContinueOnWait = true;
             TextArea.PrintLine();

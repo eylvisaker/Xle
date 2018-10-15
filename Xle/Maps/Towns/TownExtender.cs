@@ -1,12 +1,10 @@
-﻿using System;
-
-using AgateLib.Mathematics.Geometry;
-using AgateLib.InputLib;
-
+﻿using AgateLib.Mathematics.Geometry;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.Rendering.Maps;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ERY.Xle.Maps.Towns
 {
@@ -223,7 +221,7 @@ namespace ERY.Xle.Maps.Towns
             }
         }
 
-        bool CanGuardStepInto(Point pt, Guard guard)
+        private bool CanGuardStepInto(Point pt, Guard guard)
         {
             Size guardSize = new Size(2, 2);
 
@@ -263,7 +261,7 @@ namespace ERY.Xle.Maps.Towns
         /// <param name="ptx"></param>
         /// <param name="pty"></param>
         /// <returns></returns>
-        int CharInRoof(int ptx, int pty)
+        private int CharInRoof(int ptx, int pty)
         {
             for (int i = 0; i < TheMap.Roofs.Count; i++)
             {

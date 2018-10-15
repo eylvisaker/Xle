@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ERY.Xle.Maps.Museums;
 using ERY.Xle.Services;
 using ERY.Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.Maps.Museums.Commands
+namespace Xle.Ancients.MapExtenders.Museum.Commands
 {
     [ServiceName("MuseumXamine")]
     public class MuseumXamine : Xamine
