@@ -1,11 +1,52 @@
-﻿using ERY.Xle.Services.Commands;
+﻿using AgateLib.Scenes;
+using ERY.Xle.Bootstrap;
+using ERY.Xle.Services.Commands;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Xle.Ancients.TitleScreen;
 
 namespace ERY.Xle.LotA
 {
     public class LotaProgram
     {
         private static ICommandFactory commandFactory;
+
+        public static IEnumerable<Command> CommonLotaCommands
+        {
+            get
+            {
+                yield return commandFactory.Armor();
+                yield return commandFactory.Gamespeed();
+                yield return commandFactory.Hold();
+                yield return commandFactory.Inventory();
+                yield return commandFactory.Pass();
+                yield return commandFactory.Weapon();
+            }
+        }
+
+        private SceneStack scenes = new SceneStack();
+        private Plumbing plumbing;
+
+        public LotaProgram()
+        {
+            plumbing = new Plumbing();
+            plumbing.Complete();
+
+            var title = plumbing.Resolve<LotaTitleScene>();
+
+            scenes.Add(title);
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            scenes.Update(gameTime);
+        }
+
+        public void Draw(GameTime gameTime)
+        {
+            scenes.Draw(gameTime);
+        }
+
         ///// <summary>
         ///// The main entry point for the application.
         ///// </summary>
@@ -45,17 +86,5 @@ namespace ERY.Xle.LotA
         //	core.Run();
         //}
 
-        public static IEnumerable<Command> CommonLotaCommands
-        {
-            get
-            {
-                yield return commandFactory.Armor();
-                yield return commandFactory.Gamespeed();
-                yield return commandFactory.Hold();
-                yield return commandFactory.Inventory();
-                yield return commandFactory.Pass();
-                yield return commandFactory.Weapon();
-            }
-        }
     }
 }

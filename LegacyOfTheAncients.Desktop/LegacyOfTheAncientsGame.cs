@@ -65,7 +65,7 @@ namespace LegacyOfTheAncients.Desktop
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            lota.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -78,7 +78,7 @@ namespace LegacyOfTheAncients.Desktop
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            lota.Draw(gameTime);
 
             base.Draw(gameTime);
         }

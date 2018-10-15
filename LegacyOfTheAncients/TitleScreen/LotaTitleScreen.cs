@@ -8,7 +8,13 @@ using System;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-    public class LotaTitleScreen : IXleTitleScreen
+    public interface ILotaTitleScreen : IXleTitleScreen
+    {
+        void Update(GameTime time);
+    }
+
+    [Transient]
+    public class LotaTitleScreen : ILotaTitleScreen
     {
         private TitleState state;
         private Texture2D titleScreenTexture2D;         // stores the image of the title screen.
@@ -80,6 +86,11 @@ namespace ERY.Xle.LotA.TitleScreen
                     color[i][j] = XleColor.White;
                 }
             }
+        }
+
+        public void Update(GameTime time)
+        {
+            UpdateTitleScreen();
         }
 
         private void UpdateTitleScreen()

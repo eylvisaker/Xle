@@ -108,6 +108,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\NewGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\SecondMainMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\Splash.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LotaTitleScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\TitleScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\TitleState.cs" />
   </ItemGroup>
