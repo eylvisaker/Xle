@@ -1,5 +1,5 @@
-*/bin/
-*/obj/
+bin/
+obj/
 out/
 XLE.sln.ide/
 packages/

@@ -191,11 +191,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Implementation\TextAreaRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Implementation\TextRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Implementation\XleImages.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Implementation\XleRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\XleRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\ITextAreaRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\ITextRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\IXleImages.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\IXleRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Maps\CastleRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Maps\DungeonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Maps\Map2DRenderer.cs" />
@@ -220,12 +219,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\XleDisplay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceName.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\CommandEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\Implementation\SoundMan.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\SoundMan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\Implementation\XleConsole.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\Implementation\XleInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\Implementation\XleRunner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\Implementation\XleStartup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\ISoundMan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\IXleConsole.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\IXleInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\IXleRunner.cs" />

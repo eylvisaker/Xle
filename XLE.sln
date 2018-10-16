@@ -26,6 +26,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{E9F98B92-F11B-42EE-9438-54ACFA8117DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendOfBlacksilver.Desktop", "LegendOfBlacksilver.Desktop\LegendOfBlacksilver.Desktop.csproj", "{46516763-DDC4-4203-9047-3C36CDEF7E04}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D86AB00-7AF4-4A76-982D-125F1C4414B4} = {9D86AB00-7AF4-4A76-982D-125F1C4414B4}
+	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AgateLib", "AgateLib\AgateLib\AgateLib.shproj", "{BE7C38F8-7A5B-4CBD-B57B-2CD54558062B}"
 EndProject
