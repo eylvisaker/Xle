@@ -10,8 +10,6 @@ namespace ERY.Xle.Services.XleSystem
 {
     public interface ISoundMan : IXleService
     {
-        void Load();
-
         bool IsPlaying(LotaSound lotaSound);
 
         void StopSound(LotaSound lotaSound);
@@ -24,28 +22,60 @@ namespace ERY.Xle.Services.XleSystem
 
         void FinishSounds();
 
-
         bool IsAnyPlaying();
     }
 
+    [Singleton]
+    [InjectProperties]
     public class SoundMan : ISoundMan
     {
+        class SoundData
+        {
+            float volume = 1;
+
+            public SoundEffect SoundEffect { get; set; }
+            public SoundEffectInstance Instance { get; set; }
+
+            public bool IsPlaying => (Instance?.State ?? SoundState.Stopped) == SoundState.Playing;
+
+            public float Volume
+            {
+                get => volume;
+                set
+                {
+                    volume = value;
+                    if (Instance != null)
+                        Instance.Volume = volume;
+                }
+            }
+
+            public void Play()
+            {
+                Instance = SoundEffect.CreateInstance();
+                Instance.Volume = volume;
+                Instance.Play();
+            }
+
+            public void Stop()
+            {
+                Instance.Stop();
+            }
+        }
+
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
-        public IContentProvider Content { get; set; }
 
-        private Dictionary<LotaSound, SoundEffect> mSounds = new Dictionary<LotaSound, SoundEffect>();
+        private Dictionary<LotaSound, SoundData> mSounds = new Dictionary<LotaSound, SoundData>();
 
-        public void Load()
+        public SoundMan(IContentProvider content)
         {
             foreach (LotaSound s in Enum.GetValues(typeof(LotaSound)))
             {
                 string name = Enum.GetName(typeof(LotaSound), s);
-                name += ".ogg";
 
                 try
                 {
-                    mSounds[s] = Content.Load<SoundEffect>("Audio/" + name);
+                    mSounds[s] = new SoundData { SoundEffect = content.Load<SoundEffect>("Audio/" + name) };
                 }
                 catch (Exception e)
                 {
@@ -73,37 +103,33 @@ namespace ERY.Xle.Services.XleSystem
                 return;
             }
 
-            //mSounds[sound].Stop();
-            throw new NotImplementedException();
+            mSounds[sound].Stop();
         }
 
         public bool IsAnyPlaying()
         {
-            throw new NotImplementedException();
-            //foreach (var kvp in mSounds)
-            //{
-            //    if (kvp.Value.IsPlaying)
-            //        return true;
-            //}
+            foreach (var kvp in mSounds)
+            {
+                if (kvp.Value.IsPlaying)
+                    return true;
+            }
 
-            //return false;
+            return false;
         }
         public bool IsPlaying(LotaSound sound)
         {
             if (mSounds.ContainsKey(sound) == false)
                 return false;
 
-            //return mSounds[sound].IsPlaying;
-            throw new NotImplementedException();
+            return mSounds[sound].IsPlaying;
         }
 
         public void StopAllSounds()
         {
-            //foreach (var kvp in mSounds)
-            //{
-            //    kvp.Value.Stop();
-            //}
-            throw new NotImplementedException();
+            foreach (var kvp in mSounds)
+            {
+                kvp.Value.Stop();
+            }
         }
 
 
@@ -112,8 +138,7 @@ namespace ERY.Xle.Services.XleSystem
             if (mSounds.ContainsKey(sound) == false)
                 return;
 
-            //mSounds[sound].Volume = volume;
-            throw new NotImplementedException();
+            mSounds[sound].Volume = (float)volume;
         }
 
         public void PlaySoundSync(LotaSound lotaSound)
@@ -130,6 +155,7 @@ namespace ERY.Xle.Services.XleSystem
                     break;
             }
         }
+
         public void PlaySoundSync(Action redraw, LotaSound lotaSound)
         {
             PlaySound(lotaSound);

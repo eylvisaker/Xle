@@ -1,5 +1,5 @@
-﻿using AgateLib.Scenes;
-using ERY.Xle.Bootstrap;
+﻿using AgateLib;
+using AgateLib.Scenes;
 using ERY.Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using Xle.Ancients.TitleScreen;
 
 namespace ERY.Xle.LotA
 {
+    [Singleton]
     public class LotaProgram
     {
         private static ICommandFactory commandFactory;
@@ -24,15 +25,11 @@ namespace ERY.Xle.LotA
             }
         }
 
-        private SceneStack scenes = new SceneStack();
-        private Plumbing plumbing;
+        private SceneStack scenes;
 
-        public LotaProgram()
+        public LotaProgram(SceneStack scenes, LotaTitleScene title)
         {
-            plumbing = new Plumbing();
-            plumbing.Complete();
-
-            var title = plumbing.Resolve<LotaTitleScene>();
+            this.scenes = scenes;
 
             scenes.Add(title);
         }

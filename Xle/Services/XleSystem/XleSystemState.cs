@@ -1,12 +1,12 @@
-﻿using System;
-
+﻿using AgateLib;
 using AgateLib.Mathematics.Geometry;
-
 using ERY.Xle.Services.Game;
+using System;
 
 namespace ERY.Xle.Services.XleSystem
 {
-    public class XleSystemState : IXleService
+    [Singleton]
+    public class XleSystemState
     {
         public IXleGameFactory Factory { get; set; }
         public Size WindowBorderSize { get; set; }

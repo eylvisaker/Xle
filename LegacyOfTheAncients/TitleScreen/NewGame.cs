@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.LotA.TitleScreen
@@ -119,23 +120,23 @@ namespace ERY.Xle.LotA.TitleScreen
         }
 
 
-        protected override void DrawFrame()
+        protected override void DrawFrame(SpriteBatch spriteBatch)
         {
-            base.DrawFrame();
+            base.DrawFrame(spriteBatch);
 
-            Renderer.DrawFrameLine(11 * 16, 10 * 16, 1, 18 * 16 - 4, Colors.FrameColor);  // top
-            Renderer.DrawFrameLine(11 * 16, 12 * 16, 1, 18 * 16 - 4, Colors.FrameColor);  // bottom
-            Renderer.DrawFrameLine(11 * 16, 10 * 16, 0, 3 * 16 - 4, Colors.FrameColor);   // left
-            Renderer.DrawFrameLine(28 * 16, 10 * 16, 0, 3 * 16 - 4, Colors.FrameColor);   // right
+            Renderer.DrawFrameLine(spriteBatch, 11 * 16, 10 * 16, 1, 18 * 16 - 4, Colors.FrameColor);  // top
+            Renderer.DrawFrameLine(spriteBatch, 11 * 16, 12 * 16, 1, 18 * 16 - 4, Colors.FrameColor);  // bottom
+            Renderer.DrawFrameLine(spriteBatch, 11 * 16, 10 * 16, 0, 3 * 16 - 4, Colors.FrameColor);   // left
+            Renderer.DrawFrameLine(spriteBatch, 28 * 16, 10 * 16, 0, 3 * 16 - 4, Colors.FrameColor);   // right
         }
-        protected override void DrawFrameHighlight()
+        protected override void DrawFrameHighlight(SpriteBatch spriteBatch)
         {
-            base.DrawFrameHighlight();
+            base.DrawFrameHighlight(spriteBatch);
 
-            Renderer.DrawInnerFrameHighlight(11 * 16, 10 * 16, 1, 18 * 16 - 4, XleColor.White);
-            Renderer.DrawInnerFrameHighlight(11 * 16, 12 * 16, 1, 18 * 16 - 2, XleColor.White);
-            Renderer.DrawInnerFrameHighlight(11 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
-            Renderer.DrawInnerFrameHighlight(28 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
+            Renderer.DrawInnerFrameHighlight(spriteBatch, 11 * 16, 10 * 16, 1, 18 * 16 - 4, XleColor.White);
+            Renderer.DrawInnerFrameHighlight(spriteBatch, 11 * 16, 12 * 16, 1, 18 * 16 - 2, XleColor.White);
+            Renderer.DrawInnerFrameHighlight(spriteBatch, 11 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
+            Renderer.DrawInnerFrameHighlight(spriteBatch, 28 * 16, 10 * 16, 0, 3 * 16 - 4, XleColor.White);
         }
     }
 }

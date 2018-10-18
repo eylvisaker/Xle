@@ -100,7 +100,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\EraseGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\FileMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\FirstMainMenu.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\ILotaTitleScreenFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LotaTitleScreenFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\Introduction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LoadGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LotaTitleScreen.cs" />
@@ -111,5 +111,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LotaTitleScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\TitleScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\TitleState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
 </Project>

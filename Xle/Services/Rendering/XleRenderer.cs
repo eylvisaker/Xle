@@ -9,6 +9,7 @@ using ERY.Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Xle;
 
 namespace ERY.Xle.Services.Rendering
 {
@@ -21,12 +22,22 @@ namespace ERY.Xle.Services.Rendering
 
         void UpdateAnim();
 
-        void DrawFrame(Color color);
+        void DrawFrame(SpriteBatch spriteBatch, Color color);
 
+        void DrawFrameHighlight(SpriteBatch spriteBatch, Color color);
+
+        [Obsolete]
+        void DrawFrame(Color color);
+        [Obsolete]
         void DrawFrameHighlight(Color color);
 
-        void DrawInnerFrameHighlight(int p1, int p2, int p3, int p4, Color color);
+        void DrawInnerFrameHighlight(SpriteBatch spriteBatch, int p1, int p2, int p3, int p4, Color color);
 
+        void DrawFrameLine(SpriteBatch spriteBatch, int p1, int p2, int p3, int p4, Color color);
+
+        [Obsolete]
+        void DrawInnerFrameHighlight(int p1, int p2, int p3, int p4, Color color);
+        [Obsolete]
         void DrawFrameLine(int p1, int p2, int p3, int p4, Color color);
 
         void DrawObject(TextWindow wind);
@@ -55,6 +66,7 @@ namespace ERY.Xle.Services.Rendering
         private static double timeToNextRaftAnim = 0;
 
         private IPlayerAnimator playerAnimator;
+        private readonly IRectangleRenderer rects;
         private IXleImages images;
         private IStatsDisplay statsDisplay;
 
@@ -63,11 +75,13 @@ namespace ERY.Xle.Services.Rendering
             IXleImages images,
             IPlayerAnimator playerAnimator,
             IXleScreen screen,
+            IRectangleRenderer rects,
             IStatsDisplay statsDisplay)
         {
             this.commands = commands;
             this.images = images;
             this.Screen = screen;
+            this.rects = rects;
             this.playerAnimator = playerAnimator;
             this.statsDisplay = statsDisplay;
 
@@ -105,20 +119,28 @@ namespace ERY.Xle.Services.Rendering
 
         private Player Player { get { return GameState.Player; } }
 
+        public void DrawFrame(SpriteBatch spriteBatch, Color boxColor)
+        {
+            DrawFrameLine(spriteBatch, 0, 0, 1, GameAreaSize.Width, boxColor);
+            DrawFrameLine(spriteBatch, 0, 0, 0, GameAreaSize.Height - 2, boxColor);
+            DrawFrameLine(spriteBatch, 0, GameAreaSize.Height - 16, 1, GameAreaSize.Width, boxColor);
+            DrawFrameLine(spriteBatch, GameAreaSize.Width - 12, 0, 0, GameAreaSize.Height - 2, boxColor);
+        }
+        public void DrawFrameHighlight(SpriteBatch spriteBatch, Color innerColor)
+        {
+            DrawInnerFrameHighlight(spriteBatch, 0, 0, 1, GameAreaSize.Width, innerColor);
+            DrawInnerFrameHighlight(spriteBatch, 0, 0, 0, GameAreaSize.Height - 2, innerColor);
+            DrawInnerFrameHighlight(spriteBatch, 0, GameAreaSize.Height - 16, 1, GameAreaSize.Width + 2, innerColor);
+            DrawInnerFrameHighlight(spriteBatch, GameAreaSize.Width - 12, 0, 0, GameAreaSize.Height - 2, innerColor);
+        }
+
         public void DrawFrame(Color boxColor)
         {
-            DrawFrameLine(0, 0, 1, GameAreaSize.Width, boxColor);
-            DrawFrameLine(0, 0, 0, GameAreaSize.Height - 2, boxColor);
-            DrawFrameLine(0, GameAreaSize.Height - 16, 1, GameAreaSize.Width, boxColor);
-            DrawFrameLine(GameAreaSize.Width - 12, 0, 0, GameAreaSize.Height - 2, boxColor);
+            throw new NotSupportedException();
         }
         public void DrawFrameHighlight(Color innerColor)
         {
-            DrawInnerFrameHighlight(0, 0, 1, GameAreaSize.Width, innerColor);
-            DrawInnerFrameHighlight(0, 0, 0, GameAreaSize.Height - 2, innerColor);
-            DrawInnerFrameHighlight(0, GameAreaSize.Height - 16, 1, GameAreaSize.Width + 2, innerColor);
-            DrawInnerFrameHighlight(GameAreaSize.Width - 12, 0, 0, GameAreaSize.Height - 2, innerColor);
-
+            throw new NotSupportedException();
         }
 
         /// <summary>
@@ -129,7 +151,7 @@ namespace ERY.Xle.Services.Rendering
         /// <param name="direction"></param>
         /// <param name="length"></param>
         /// <param name="boxColor"></param>
-        public void DrawFrameLine(int left, int top, int direction,
+        public void DrawFrameLine(SpriteBatch spriteBatch, int left, int top, int direction,
                       int length, Color boxColor)
         {
             int boxWidth = 12;
@@ -140,17 +162,24 @@ namespace ERY.Xle.Services.Rendering
             {
                 boxWidth -= 2;
 
-                FillRect(left, top, length, boxWidth, boxColor);
+                FillRect(spriteBatch, left, top, length, boxWidth, boxColor);
             }
             else
             {
                 length -= 4;
 
-                FillRect(left, top, boxWidth, length, boxColor);
+                FillRect(spriteBatch, left, top, boxWidth, length, boxColor);
             }
         }
 
+        [Obsolete]
+        public void DrawFrameLine(int left, int top, int direction,
+                      int length, Color boxColor) => throw new NotSupportedException();
+        [Obsolete]
         public void DrawInnerFrameHighlight(int left, int top, int direction,
+                      int length, Color innerColor) => throw new NotSupportedException();
+
+        public void DrawInnerFrameHighlight(SpriteBatch spriteBatch, int left, int top, int direction,
                       int length, Color innerColor)
         {
             int boxWidth = 12;
@@ -162,7 +191,8 @@ namespace ERY.Xle.Services.Rendering
 
             if (direction == 1)
             {
-                FillRect(left + innerOffsetH,
+                FillRect(spriteBatch, 
+                    left + innerOffsetH,
                     top + innerOffsetV,
                     length - boxWidth + 2,
                     innerWidth,
@@ -171,7 +201,8 @@ namespace ERY.Xle.Services.Rendering
             else
             {
 
-                FillRect(left + innerOffsetH,
+                FillRect(spriteBatch, 
+                    left + innerOffsetH,
                     top + innerOffsetV,
                     innerWidth + 2,
                     length - boxWidth,
@@ -400,13 +431,13 @@ namespace ERY.Xle.Services.Rendering
 
             DrawFrame(boxColor);
 
-            DrawFrameLine(vertLine, 0, 0, horizLine + 12, boxColor);
-            DrawFrameLine(0, horizLine, 1, GameAreaSize.Width, boxColor);
+            DrawFrameLine(spriteBatch, vertLine, 0, 0, horizLine + 12, boxColor);
+            DrawFrameLine(spriteBatch, 0, horizLine, 1, GameAreaSize.Width, boxColor);
 
             DrawFrameHighlight(innerColor);
 
-            DrawInnerFrameHighlight(vertLine, 0, 0, horizLine + 12, innerColor);
-            DrawInnerFrameHighlight(0, horizLine, 1, GameAreaSize.Width, innerColor);
+            DrawInnerFrameHighlight(spriteBatch, vertLine, 0, 0, horizLine + 12, innerColor);
+            DrawInnerFrameHighlight(spriteBatch, 0, horizLine, 1, GameAreaSize.Width, innerColor);
 
             Rectangle mapRect = RectangleX.FromLTRB
                 (vertLine + 16, 16, GameAreaSize.Width - 16, horizLine);
@@ -445,12 +476,15 @@ namespace ERY.Xle.Services.Rendering
 
             if (Screen.PromptToContinue)
             {
-                FillRect(192, 384, 17 * 16, 16, XleColor.Black);
+                FillRect(spriteBatch, 192, 384, 17 * 16, 16, XleColor.Black);
                 WriteText(208, 384, "(Press to Cont)", XleColor.Yellow);
             }
         }
 
-        private void FillRect(int v1, int v2, int v3, int v4, Color black) => throw new NotImplementedException();
+        private void FillRect(SpriteBatch spriteBatch, int x, int y, int width, int height, Color color)
+        {
+            rects.Fill(spriteBatch, new Rectangle(x, y, width, height), color);
+        }
 
         public void DrawObject(TextWindow textWindow)
         {

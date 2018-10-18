@@ -1,15 +1,10 @@
-﻿using ERY.Xle.Maps;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using ERY.Xle.Services;
+﻿using AgateLib;
+using ERY.Xle.Maps;
 
 namespace ERY.Xle
 {
-    public class GameState : IXleService
+    [Singleton]
+    public class GameState
     {
         public GameState()
         {

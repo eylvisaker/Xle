@@ -6,6 +6,8 @@ using System;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
+    [Transient]
+    [InjectProperties]
     public class Splash : TitleState
     {
         private Texture2D titleScreenSurface;         // stores the image of the title screen.
@@ -30,7 +32,7 @@ namespace ERY.Xle.LotA.TitleScreen
         {
             if (titleScreenSurface == null)
             {
-                titleScreenSurface = content.Load<Texture2D>("Images/title.png");
+                titleScreenSurface = content.Load<Texture2D>("Images/title");
             }
 
             if (SoundMan.IsPlaying(LotaSound.Music) == false)
@@ -58,7 +60,7 @@ namespace ERY.Xle.LotA.TitleScreen
             SoundMan.PlaySound(LotaSound.Music);
         }
 
-        public override void Draw()
+        public override void Draw(SpriteBatch spriteBatch)
         {
            // Display.Clear(XleColor.Gray);
 
@@ -67,8 +69,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
             srcRect.Y = (frame % 8) * 200;
 
-            //titleScreenSurface.Draw(srcRect, destRect);
-            throw new NotImplementedException();
+            spriteBatch.Draw(titleScreenSurface, destRect, srcRect, Color.White);
         }
     }
 }

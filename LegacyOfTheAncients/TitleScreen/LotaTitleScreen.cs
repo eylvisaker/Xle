@@ -10,7 +10,10 @@ namespace ERY.Xle.LotA.TitleScreen
 {
     public interface ILotaTitleScreen : IXleTitleScreen
     {
+        ColorScheme Colors { get; }
+
         void Update(GameTime time);
+        void Draw(SpriteBatch spriteBatch);
     }
 
     [Transient]
@@ -68,6 +71,8 @@ namespace ERY.Xle.LotA.TitleScreen
             }
         }
 
+        public ColorScheme Colors => state.Colors;
+
         private void state_ReleaseAllKeys(object sender, EventArgs e)
         {
             throw new NotImplementedException();
@@ -91,6 +96,8 @@ namespace ERY.Xle.LotA.TitleScreen
         public void Update(GameTime time)
         {
             UpdateTitleScreen();
+
+            State.Update(time);
         }
 
         private void UpdateTitleScreen()
@@ -148,16 +155,11 @@ namespace ERY.Xle.LotA.TitleScreen
             }
         }
 
-        private void DisplayTitleScreen()
+        public void Draw(SpriteBatch spriteBatch)
         {
-            renderer.ReplacementDrawMethod = State.Draw;
+            //renderer.ReplacementDrawMethod = State.Draw;
 
-            //State.Update();
-
-            //Display.BeginFrame();
-            //State.Draw();
-            //Display.EndFrame();
-            throw new NotImplementedException();
+            State.Draw(spriteBatch);
         }
 
         private void SetText(int y, int x, string text)

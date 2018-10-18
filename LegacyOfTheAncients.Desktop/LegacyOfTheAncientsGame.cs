@@ -1,4 +1,8 @@
-﻿using ERY.Xle.LotA;
+﻿using AgateLib;
+using AgateLib.Scenes;
+using ERY.Xle.Bootstrap;
+using ERY.Xle.Foundation;
+using ERY.Xle.LotA;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,12 +12,13 @@ namespace LegacyOfTheAncients.Desktop
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class LegacyOfTheAncientsGame : Game
     {
         GraphicsDeviceManager graphics;
         private LotaProgram lota;
+        private Plumbing plumbing;
 
-        public Game1()
+        public LegacyOfTheAncientsGame()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 680;
@@ -34,7 +39,15 @@ namespace LegacyOfTheAncients.Desktop
 
             Window.Title = "Legacy of the Ancients";
 
-            lota = new LotaProgram();
+            plumbing = new Plumbing();
+
+            plumbing.Register(GraphicsDevice);
+            plumbing.Register(new SceneStack());
+            plumbing.Register(new ContentProvider(Content));
+
+            plumbing.Complete();
+
+            lota = plumbing.Resolve<LotaProgram>();
         }
 
         /// <summary>

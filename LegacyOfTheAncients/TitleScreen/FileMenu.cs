@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.IO;
@@ -39,9 +40,9 @@ namespace ERY.Xle.LotA.TitleScreen
 
         private int FileStartIndex { get { return page * 8; } }
 
-        protected override void DrawWindows()
+        protected override void DrawWindows(SpriteBatch spriteBatch)
         {
-            base.DrawWindows();
+            base.DrawWindows(spriteBatch);
 
             Point pt = filesWindow.Location;
 

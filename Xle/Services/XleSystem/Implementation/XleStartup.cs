@@ -39,8 +39,6 @@ namespace ERY.Xle.Services.XleSystem.Implementation
 
             systemState.Factory.LoadSurfaces();
             data.LoadDungeonMonsterSurfaces(content);
-
-            soundMan.Load();
         }
 
         public void ProcessArguments(string[] args)

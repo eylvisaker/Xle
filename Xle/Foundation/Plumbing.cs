@@ -4,13 +4,14 @@ using AgateLib.Scenes;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+using ERY.Xle.Bootstrap;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace ERY.Xle.Bootstrap
+namespace ERY.Xle.Foundation
 {
     public class Plumbing : IServiceLocator
     {

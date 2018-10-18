@@ -2,6 +2,7 @@
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace ERY.Xle.LotA.TitleScreen
             GameControl.Wait(time);
         }
 
-        protected ColorScheme Colors { get; set; }
+        public ColorScheme Colors { get; protected set; }
 
         public string Title { get; set; }
         public string Prompt { get; set; }
@@ -54,26 +55,22 @@ namespace ERY.Xle.LotA.TitleScreen
         {
         }
 
-        public virtual void Draw()
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            //Display.Clear(Colors.BorderColor);
-            //Display.FillRect(new Rectangle(0, 0, 640, 400), Colors.BackColor);
-            throw new NotImplementedException();
-
-            DrawBackgrounds();
-            DrawWindows();
-            DrawTitle();
-            DrawPrompt();
+            DrawBackgrounds(spriteBatch);
+            DrawWindows(spriteBatch);
+            DrawTitle(spriteBatch);
+            DrawPrompt(spriteBatch);
         }
 
-        protected virtual void DrawTitle()
+        protected virtual void DrawTitle(SpriteBatch spriteBatch)
         {
             if (string.IsNullOrEmpty(Title))
                 return;
 
             DrawCenteredText(0, Title, Colors.BackColor, Colors.TextColor);
         }
-        private void DrawPrompt()
+        private void DrawPrompt(SpriteBatch spriteBatch)
         {
             if (string.IsNullOrEmpty(Prompt))
                 return;
@@ -92,7 +89,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
         private void FillRect(Rectangle rectangle, Color backColor) => throw new NotImplementedException();
 
-        protected virtual void DrawWindows()
+        protected virtual void DrawWindows(SpriteBatch spriteBatch)
         {
             foreach (var wind in Windows)
             {
@@ -100,19 +97,19 @@ namespace ERY.Xle.LotA.TitleScreen
             }
         }
 
-        protected virtual void DrawBackgrounds()
+        protected virtual void DrawBackgrounds(SpriteBatch spriteBatch)
         {
-            DrawFrame();
-            DrawFrameHighlight();
+            DrawFrame(spriteBatch);
+            DrawFrameHighlight(spriteBatch);
         }
 
-        protected virtual void DrawFrame()
+        protected virtual void DrawFrame(SpriteBatch spriteBatch)
         {
-            Renderer.DrawFrame(Colors.FrameColor);
+            Renderer.DrawFrame(spriteBatch, Colors.FrameColor);
         }
-        protected virtual void DrawFrameHighlight()
+        protected virtual void DrawFrameHighlight(SpriteBatch spriteBatch)
         {
-            Renderer.DrawFrameHighlight(Colors.FrameHighlightColor);
+            Renderer.DrawFrameHighlight(spriteBatch, Colors.FrameHighlightColor);
         }
 
     }

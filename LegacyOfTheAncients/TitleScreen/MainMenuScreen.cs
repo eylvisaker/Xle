@@ -99,28 +99,28 @@ namespace ERY.Xle.LotA.TitleScreen
                 wind.Text = (i + 1).ToString() + ".  " + MenuItems[i];
             }
         }
-        protected override void DrawBackgrounds()
+        protected override void DrawBackgrounds(SpriteBatch spriteBatch)
         {
-            base.DrawBackgrounds();
+            base.DrawBackgrounds(spriteBatch);
 
             DrawTitleHeader(Colors.FrameColor, Colors.FrameHighlightColor);
         }
-        protected override void DrawFrame()
+        protected override void DrawFrame(SpriteBatch spriteBatch)
         {
-            base.DrawFrame();
-            Renderer.DrawFrameLine(0, 20 * 16, 1,
+            base.DrawFrame(spriteBatch);
+            Renderer.DrawFrameLine(spriteBatch, 0, 20 * 16, 1,
                 XleOptions.myWindowWidth, Colors.FrameColor);
         }
-        protected override void DrawFrameHighlight()
+        protected override void DrawFrameHighlight(SpriteBatch spriteBatch)
         {
-            base.DrawFrameHighlight();
-            Renderer.DrawInnerFrameHighlight(0, 20 * 16, 1,
+            base.DrawFrameHighlight(spriteBatch);
+            Renderer.DrawInnerFrameHighlight(spriteBatch,0, 20 * 16, 1,
                 XleOptions.myWindowWidth, Colors.FrameHighlightColor);
         }
 
-        protected override void DrawWindows()
+        protected override void DrawWindows(SpriteBatch spriteBatch)
         {
-            base.DrawWindows();
+            base.DrawWindows(spriteBatch);
 
             Point pt = new Point(5, 9 + titleMenu * 2);
 
