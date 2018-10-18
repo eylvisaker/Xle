@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using AgateLib.Input;
 using AgateLib.Scenes;
 using ERY.Xle.LotA.TitleScreen;
 using Microsoft.Xna.Framework;
@@ -13,13 +14,31 @@ namespace Xle.Ancients.TitleScreen
         private readonly GraphicsDevice device;
         private readonly IRectangleRenderer rects;
         private readonly SpriteBatch spriteBatch;
+        private readonly KeyboardEvents keyboard;
 
         public LotaTitleScene(ILotaTitleScreen titleScreen, GraphicsDevice device, IRectangleRenderer rects)
         {
             this.titleScreen = titleScreen;
             this.device = device;
             this.rects = rects;
+
             spriteBatch = new SpriteBatch(device);
+
+            keyboard = new KeyboardEvents();
+
+            keyboard.KeyPress += Keyboard_KeyPress;
+        }
+
+        private void Keyboard_KeyPress(object sender, KeyPressEventArgs e) 
+        {
+            titleScreen.OnKeyPress(e);
+        }
+
+        protected override void OnUpdateInput(IInputState input)
+        {
+            keyboard.Update(input);
+
+            base.OnUpdateInput(input);
         }
 
         protected override void OnUpdate(GameTime time)
@@ -32,9 +51,6 @@ namespace Xle.Ancients.TitleScreen
         protected override void DrawScene(GameTime time)
         {
             device.Clear(titleScreen.Colors.BorderColor);
-
-            //Display.Clear(Colors.BorderColor);
-            //Display.FillRect(new Rectangle(0, 0, 640, 400), Colors.BackColor);
 
             base.DrawScene(time);
 

@@ -91,6 +91,8 @@ namespace ERY.Xle.Services.Rendering.Maps
             return exhibit.ExhibitColor;
         }
 
+        public SpriteBatch spriteBatch { get; set; }
+
         protected override void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
         {
             var exhibit = MuseumExtender.GetExhibitByTile(val);
@@ -114,7 +116,7 @@ namespace ERY.Xle.Services.Rendering.Maps
             FillRect(px, py, textLength * 16, 16, Color.Black);
 
             Color clr = exhibit.TitleColor;
-            TextRenderer.WriteText(px, py, exhibit.Name, clr);
+            TextRenderer.WriteText(spriteBatch, px, py, exhibit.Name, clr);
         }
 
         private void FillRect(int px, int py, int v1, int v2, Color black) => throw new NotImplementedException();

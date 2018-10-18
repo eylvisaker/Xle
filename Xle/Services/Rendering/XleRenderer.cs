@@ -40,7 +40,7 @@ namespace ERY.Xle.Services.Rendering
         [Obsolete]
         void DrawFrameLine(int p1, int p2, int p3, int p4, Color color);
 
-        void DrawObject(TextWindow wind);
+        void DrawObject(SpriteBatch spriteBatch, TextWindow wind);
 
         void SetProjectionAndBackColors(ColorScheme colorScheme);
 
@@ -55,7 +55,7 @@ namespace ERY.Xle.Services.Rendering
         void DrawCharacterSprite(int rx, int ry, Direction facing, bool p1, int p2, bool p3, Color color);
     }
 
-    [Singleton]
+    [Singleton, InjectProperties]
     public class XleRenderer : IXleRenderer
     {
         private ICommandList commands;
@@ -212,19 +212,19 @@ namespace ERY.Xle.Services.Rendering
 
         }
 
-        private void WriteText(int px, int py, string theText)
+        private void WriteText(SpriteBatch spriteBatch, int px, int py, string theText)
         {
-            TextRenderer.WriteText(px, py, theText);
+            TextRenderer.WriteText(spriteBatch, px, py, theText);
         }
 
-        private void WriteText(int px, int py, string theText, Color c)
+        private void WriteText(SpriteBatch spriteBatch, int px, int py, string theText, Color c)
         {
-            TextRenderer.WriteText(px, py, theText, c);
+            TextRenderer.WriteText(spriteBatch, px, py, theText, c);
         }
 
-        private void WriteText(int px, int py, string theText, Color[] coloring)
+        private void WriteText(SpriteBatch spriteBatch, int px, int py, string theText, Color[] coloring)
         {
-            TextRenderer.WriteText(px, py, theText, coloring);
+            TextRenderer.WriteText(spriteBatch, px, py, theText, coloring);
         }
 
         public void DrawTile(int px, int py, int tile)
@@ -448,7 +448,7 @@ namespace ERY.Xle.Services.Rendering
             int cursorPos = 0;
             foreach (var cmd in commands.Items)
             {
-                WriteText(48, 16 * (i + 1), cmd.Name, menuColor);
+                WriteText(spriteBatch, 48, 16 * (i + 1), cmd.Name, menuColor);
 
                 if (cmd == commands.CurrentCommand)
                     cursorPos = i;
@@ -456,15 +456,15 @@ namespace ERY.Xle.Services.Rendering
                 i++;
             }
 
-            WriteText(32, 16 * (cursorPos + 1), "`", menuColor);
+            WriteText(spriteBatch, 32, 16 * (cursorPos + 1), "`", menuColor);
 
             Color hpColor = statsDisplay.HPColor;
 
-            WriteText(48, 16 * 15, "H.P. " + statsDisplay.HP, hpColor);
-            WriteText(48, 16 * 16, "Food " + statsDisplay.Food, hpColor);
-            WriteText(48, 16 * 17, "Gold " + statsDisplay.Gold, hpColor);
+            WriteText(spriteBatch, 48, 16 * 15, "H.P. " + statsDisplay.HP, hpColor);
+            WriteText(spriteBatch, 48, 16 * 16, "Food " + statsDisplay.Food, hpColor);
+            WriteText(spriteBatch, 48, 16 * 17, "Gold " + statsDisplay.Gold, hpColor);
 
-            TextAreaRenderer.Draw(TextArea);
+            TextAreaRenderer.Draw(spriteBatch, TextArea);
 
             if (map.AutoDrawPlayer)
             {
@@ -477,7 +477,7 @@ namespace ERY.Xle.Services.Rendering
             if (Screen.PromptToContinue)
             {
                 FillRect(spriteBatch, 192, 384, 17 * 16, 16, XleColor.Black);
-                WriteText(208, 384, "(Press to Cont)", XleColor.Yellow);
+                WriteText(spriteBatch, 208, 384, "(Press to Cont)", XleColor.Yellow);
             }
         }
 
@@ -486,7 +486,7 @@ namespace ERY.Xle.Services.Rendering
             rects.Fill(spriteBatch, new Rectangle(x, y, width, height), color);
         }
 
-        public void DrawObject(TextWindow textWindow)
+        public void DrawObject(SpriteBatch spriteBatch, TextWindow textWindow)
         {
             if (textWindow.Visible == false)
                 return;
@@ -494,8 +494,11 @@ namespace ERY.Xle.Services.Rendering
             var location = textWindow.Location;
             var csb = textWindow.ColoredString;
 
-            WriteText(location.X * 16, location.Y * 16,
-                csb.Text, csb.Colors);
+            WriteText(spriteBatch, 
+                location.X * 16, 
+                location.Y * 16,
+                csb.Text, 
+                csb.Colors);
         }
 
         /// <summary>

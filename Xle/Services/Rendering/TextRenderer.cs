@@ -1,21 +1,31 @@
 ﻿
+using AgateLib;
 using ERY.Xle.Services.Game;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ERY.Xle.Services.Rendering.Implementation
+namespace ERY.Xle.Services.Rendering
 {
+    public interface ITextRenderer
+    {
+        void WriteText(SpriteBatch spriteBatch, int x, int y, string text, Color[] color);
+
+        void WriteText(SpriteBatch spriteBatch, int px, int py, string theText);
+
+        void WriteText(SpriteBatch spriteBatch, int px, int py, string theText, Color c);
+    }
+
+    [Singleton, InjectProperties]
     public class TextRenderer : ITextRenderer
     {
         public IXleGameFactory Factory { get; set; }
 
-        public SpriteBatch spriteBatch { get; set; }
-
-        public void WriteText(int px, int py, string theText)
+        public void WriteText(SpriteBatch spriteBatch, int px, int py, string theText)
         {
-            WriteText(px, py, theText, XleColor.White);
+            WriteText(spriteBatch, px, py, theText, XleColor.White);
         }
-        public void WriteText(int px, int py, string theText, Color c)
+
+        public void WriteText(SpriteBatch spriteBatch, int px, int py, string theText, Color c)
         {
             if (string.IsNullOrEmpty(theText)) return;
 
@@ -27,7 +37,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
                 coloring[i] = c;
             }
 
-            WriteText(px, py, theText, coloring);
+            WriteText(spriteBatch, px, py, theText, coloring);
         }
 
         /// <summary>
@@ -37,7 +47,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
         /// <param name="py"></param>
         /// <param name="theText"></param>
         /// <param name="coloring"></param>
-        public void WriteText(int px, int py, string theText, Color[] coloring)
+        public void WriteText(SpriteBatch spriteBatch, int px, int py, string theText, Color[] coloring)
         {
             if (string.IsNullOrEmpty(theText))
                 return;

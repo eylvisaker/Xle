@@ -1,9 +1,11 @@
 using AgateLib;
+using AgateLib.Input;
 using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace ERY.Xle.LotA.TitleScreen
@@ -14,6 +16,8 @@ namespace ERY.Xle.LotA.TitleScreen
 
         void Update(GameTime time);
         void Draw(SpriteBatch spriteBatch);
+
+        void OnKeyPress(KeyPressEventArgs e);
     }
 
     [Transient]
@@ -223,28 +227,27 @@ namespace ERY.Xle.LotA.TitleScreen
             //}
         }
 
-        private void Keyboard_KeyDown(object sender, object /*AgateInputEventArgs */e)
+        public void OnKeyPress(KeyPressEventArgs e)
         {
             if (waiting)
                 return;
 
-            throw new NotImplementedException();
-            //KeyCode keyCode = e.KeyCode;
+            Keys key = e.Key;
 
-            //if (lastTime + waitTime > Timing.TotalMilliseconds)
-            //    return;
+            if (lastTime + waitTime > e.GameTime.TotalGameTime.TotalMilliseconds)
+                return;
 
-            //lastTime = Timing.TotalMilliseconds;
-            //waitTime = 50;
+            lastTime = e.GameTime.TotalGameTime.TotalMilliseconds;
+            waitTime = 50;
 
-            //State.SkipWait = false;
-            //State.KeyDown(e.KeyCode, e.KeyString);
+            State.SkipWait = false;
+            State.KeyPress(key, e.KeyString);
 
-            //if (State.SkipWait)
-            //    waitTime = 0;
+            if (State.SkipWait)
+                waitTime = 0;
 
-            //if (State.NewState != null)
-            //    State = State.NewState;
+            if (State.NewState != null)
+                State = State.NewState;
         }
 
         private void Wait(int milliseconds)

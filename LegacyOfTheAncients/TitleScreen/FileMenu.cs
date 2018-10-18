@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.IO;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
+    [Transient, InjectProperties]
     public abstract class FileMenu : TitleState
     {
         private int menuSelection;
@@ -49,7 +51,7 @@ namespace ERY.Xle.LotA.TitleScreen
             pt.X -= 2;
             pt.Y += menuSelection;
 
-            TextRenderer.WriteText(pt.X * 16, pt.Y * 16, "`");
+            TextRenderer.WriteText(spriteBatch, pt.X * 16, pt.Y * 16, "`");
         }
         public override void Update(GameTime time)
         {
@@ -77,7 +79,7 @@ namespace ERY.Xle.LotA.TitleScreen
                 filesWindow.WriteLine("9.  Next Page");
         }
 
-        public override void KeyDown(Keys keyCode, string keyString)
+        public override void KeyPress(Keys keyCode, string keyString)
         {
             if (keyCode == Keys.Down)
             {

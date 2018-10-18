@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Xle;
 
 namespace ERY.Xle.Services.Rendering.Implementation
 {
@@ -7,11 +9,13 @@ namespace ERY.Xle.Services.Rendering.Implementation
     {
         private GameState GameState;
         private IXleRenderer Renderer;
+        private readonly IRectangleRenderer rects;
 
-        public MenuRenderer(GameState gameState, IXleRenderer renderer)
+        public MenuRenderer(GameState gameState, IXleRenderer renderer, IRectangleRenderer rects)
         {
             this.GameState = gameState;
             this.Renderer = renderer;
+            this.rects = rects;
         }
 
         public ITextRenderer TextRenderer { get; set; }
@@ -20,7 +24,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
         /// Draws the submenu created by SubMenu.
         /// </summary>
         /// <param name="menu"></param>
-        public void DrawMenu(SubMenu menu)
+        public void DrawMenu(SpriteBatch spriteBatch, SubMenu menu)
         {
             string thestring;
             int xx, yy, i = 0, height;
@@ -39,7 +43,7 @@ namespace ERY.Xle.Services.Rendering.Implementation
                 i = 1;
             }
 
-            FillRect(xx, yy, 624 - xx, height, menu.BackColor);
+            rects.Fill(spriteBatch, new Rectangle(xx, yy, 624-xx, height), menu.BackColor);
 
             if (i == 0)
             {
@@ -48,8 +52,11 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
             thestring = menu.title;
 
-            TextRenderer.WriteText(xx + (int)((624 - xx) / 32) * 16 - (int)(thestring.Length / 2) * 16,
-                       yy, thestring, fontColor);
+            TextRenderer.WriteText(spriteBatch, 
+                                   xx + (int)((624 - xx) / 32) * 16 - (int)(thestring.Length / 2) * 16,
+                                   yy, 
+                                   thestring, 
+                                   fontColor);
 
             yy += 16;
 
@@ -65,18 +72,16 @@ namespace ERY.Xle.Services.Rendering.Implementation
 
                 thestring += ". " + buffer;
 
-                TextRenderer.WriteText(xx, yy, thestring);
+                TextRenderer.WriteText(spriteBatch, xx, yy, thestring);
 
                 if (i == menu.value)
                 {
                     int xx1;
 
                     xx1 = xx + thestring.Length * 16;
-                    TextRenderer.WriteText(xx1, yy, "`");
+                    TextRenderer.WriteText(spriteBatch, xx1, yy, "`");
                 }
             }
         }
-
-        private void FillRect(int xx, int yy, int v, int height, Color backColor) => throw new NotImplementedException();
     }
 }

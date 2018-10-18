@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
+    [Transient, InjectProperties]
     public class NewGame : TitleState
     {
         private string enteredName = "";
@@ -57,7 +59,7 @@ namespace ERY.Xle.LotA.TitleScreen
             lowerWindow.WriteLine("- Press 'F1' or Escape to cancel -");
         }
 
-        public override void KeyDown(Keys keyCode, string keyString)
+        public override void KeyPress(Keys keyCode, string keyString)
         {
             if ((keyCode >= Keys.A && keyCode <= Keys.Z) || keyCode == Keys.Space ||
                 (keyCode >= Keys.D0 && keyCode <= Keys.D9))

@@ -1,7 +1,9 @@
-﻿namespace ERY.Xle.Services.Rendering
+﻿using Microsoft.Xna.Framework.Graphics;
+
+namespace ERY.Xle.Services.Rendering
 {
     public interface IMenuRenderer : IXleService
     {
-        void DrawMenu(SubMenu menu);
+        void DrawMenu(SpriteBatch spriteBatch, SubMenu menu);
     }
 }

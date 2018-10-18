@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
+    [Transient, InjectProperties]
     public class FirstMainMenu : MainMenuScreen
     {
         public FirstMainMenu(IContentProvider content) : base(content)
@@ -21,10 +22,10 @@ namespace ERY.Xle.LotA.TitleScreen
             Instruction.SetColor(XleColor.Blue);
         }
 
-        public override void KeyDown(Keys keyCode, string keyString)
+        public override void KeyPress(Keys keyCode, string keyString)
         {
             SoundMan.StopSound(LotaSound.Music);
-            base.KeyDown(keyCode, keyString);
+            base.KeyPress(keyCode, keyString);
         }
 
         protected override void ExecuteMenuItem(int item)

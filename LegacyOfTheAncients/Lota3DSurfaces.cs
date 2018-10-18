@@ -13,18 +13,18 @@ namespace ERY.Xle.LotA
 
         internal static void LoadSurfaces(IContentProvider content)
         {
-            Museum.Walls = content.Load<Texture2D>("Images/Museum/walls.png");
-            Museum.Torches = content.Load<Texture2D>("Images/Museum/torches.png");
-            Museum.ExhibitOpen = content.Load<Texture2D>("Images/Museum/Exhibits/exopen.png");
-            Museum.ExhibitClosed = content.Load<Texture2D>("Images/Museum/Exhibits/exopen.png");
+            Museum.Walls = content.Load<Texture2D>("Images/Museum/walls");
+            Museum.Torches = content.Load<Texture2D>("Images/Museum/torches");
+            Museum.ExhibitOpen = content.Load<Texture2D>("Images/Museum/Exhibits/exopen");
+            Museum.ExhibitClosed = content.Load<Texture2D>("Images/Museum/Exhibits/exopen");
 
-            MuseumDark.Walls = content.Load<Texture2D>("Images/MuseumDark/walls.png");
+            MuseumDark.Walls = content.Load<Texture2D>("Images/MuseumDark/walls");
 
-            DungeonBlue.Traps = content.Load<Texture2D>("Images/Dungeon/PiratesLair/traps.png");
-            DungeonBlue.Walls = content.Load<Texture2D>("Images/Dungeon/PiratesLair/walls.png");
+            DungeonBlue.Traps = content.Load<Texture2D>("Images/Dungeon/PiratesLair/traps");
+            DungeonBlue.Walls = content.Load<Texture2D>("Images/Dungeon/PiratesLair/walls");
 
-            DungeonBrown.Traps = content.Load<Texture2D>("Images/Dungeon/Armak/traps.png");
-            DungeonBrown.Walls = content.Load<Texture2D>("Images/Dungeon/Armak/walls.png");
+            DungeonBrown.Traps = content.Load<Texture2D>("Images/Dungeon/Armak/traps");
+            DungeonBrown.Walls = content.Load<Texture2D>("Images/Dungeon/Armak/walls");
         }
     }
 }

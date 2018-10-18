@@ -11,7 +11,8 @@ using System.Xml.Linq;
 
 namespace ERY.Xle.Data
 {
-    public class XleData : IXleService
+    [Singleton]
+    public class XleData
     {
         private MapList mMapList = new MapList();
         private ItemList mItemList = new ItemList();

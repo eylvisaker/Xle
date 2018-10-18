@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
+    [Transient, InjectProperties]
     public class Introduction : TitleState
     {
         private string enteredName;
@@ -98,7 +100,7 @@ namespace ERY.Xle.LotA.TitleScreen
         }
 
 
-        public override void KeyDown(Keys keyCode, string keyString)
+        public override void KeyPress(Keys keyCode, string keyString)
         {
             if (page == 0)
                 SetSecondWindow();

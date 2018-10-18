@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
+    [Transient, InjectProperties]
     public class SecondMainMenu : MainMenuScreen
-	{
+    {
 		public SecondMainMenu(IContentProvider content) : base(content)
 		{
 			Colors.FrameColor = XleColor.Brown;

@@ -6,8 +6,7 @@ using System;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-    [Transient]
-    [InjectProperties]
+    [Transient, InjectProperties]
     public class Splash : TitleState
     {
         private Texture2D titleScreenSurface;         // stores the image of the title screen.
@@ -22,7 +21,7 @@ namespace ERY.Xle.LotA.TitleScreen
             this.content = content;
         }
 
-        public override void KeyDown(Keys keyCode, string keyString)
+        public override void KeyPress(Keys keyCode, string keyString)
         {
             NewState = Factory.CreateFirstMainMenu();
             titleScreenSurface.Dispose();

@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
+    [Transient, InjectProperties]
     public class EraseGame : FileMenu
     {
         private bool inPrompt;
@@ -41,11 +43,11 @@ namespace ERY.Xle.LotA.TitleScreen
             NewState = Factory.CreateSecondMainMenu();
         }
 
-        public override void KeyDown(Keys keyCode, string keyString)
+        public override void KeyPress(Keys keyCode, string keyString)
         {
             if (inPrompt == false)
             {
-                base.KeyDown(keyCode, keyString);
+                base.KeyPress(keyCode, keyString);
                 return;
             }
 

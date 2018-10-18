@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using Xle;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -24,13 +25,14 @@ namespace ERY.Xle.LotA.TitleScreen
         public ISoundMan SoundMan { get; set; }
         public IXleGameControl GameControl { get; set; }
         public ITextRenderer TextRenderer { get; set; }
+        public IRectangleRenderer rects { get; set; }
 
         protected void OnReleaseAllKeys()
         {
             ReleaseAllKeys?.Invoke(this, EventArgs.Empty);
         }
 
-        public abstract void KeyDown(Keys Keys, string keyString);
+        public abstract void KeyPress(Keys Keys, string keyString);
 
         public bool SkipWait { get; set; }
 
@@ -68,32 +70,35 @@ namespace ERY.Xle.LotA.TitleScreen
             if (string.IsNullOrEmpty(Title))
                 return;
 
-            DrawCenteredText(0, Title, Colors.BackColor, Colors.TextColor);
+            DrawCenteredText(spriteBatch, 0, Title, Colors.BackColor, Colors.TextColor);
         }
         private void DrawPrompt(SpriteBatch spriteBatch)
         {
             if (string.IsNullOrEmpty(Prompt))
                 return;
 
-            DrawCenteredText(24, Prompt, XleColor.Yellow, Colors.BackColor);
+            DrawCenteredText(spriteBatch, 24, Prompt, XleColor.Yellow, Colors.BackColor);
         }
 
-        private void DrawCenteredText(int y, string text, Color textColor, Color backColor)
+        private void DrawCenteredText(SpriteBatch spriteBatch, int y, string text, Color textColor, Color backColor)
         {
             int destx = 20 - text.Length / 2;
 
-            FillRect(new Rectangle(destx * 16, y * 16, text.Length * 16, 16), backColor);
+            FillRect(spriteBatch, new Rectangle(destx * 16, y * 16, text.Length * 16, 16), backColor);
 
-            TextRenderer.WriteText(destx * 16, y * 16, text, textColor);
+            TextRenderer.WriteText(spriteBatch, destx * 16, y * 16, text, textColor);
         }
 
-        private void FillRect(Rectangle rectangle, Color backColor) => throw new NotImplementedException();
+        private void FillRect(SpriteBatch spriteBatch, Rectangle rectangle, Color color)
+        {
+            rects.Fill(spriteBatch, rectangle, color);
+        }
 
         protected virtual void DrawWindows(SpriteBatch spriteBatch)
         {
             foreach (var wind in Windows)
             {
-                Renderer.DrawObject(wind);
+                Renderer.DrawObject(spriteBatch, wind);
             }
         }
 

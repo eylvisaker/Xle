@@ -3,6 +3,7 @@ using ERY.Xle.Services.Rendering;
 using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
     public class StoreFront : StoreExtender
     {
         private ColorScheme mColorScheme;
+
+        public SpriteBatch spriteBatch { get; set; }
 
         public IQuickMenu QuickMenuService { get; set; }
         public IXleRenderer Renderer { get; set; }
@@ -74,12 +77,12 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
 
             foreach (var window in Windows)
             {
-                Renderer.DrawObject(window);
+                Renderer.DrawObject(spriteBatch, window);
             }
 
             DrawGoldText();
 
-            TextAreaRenderer.Draw(TextArea);
+            TextAreaRenderer.Draw(spriteBatch, TextArea);
         }
 
         private void DrawGoldText()
@@ -108,7 +111,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
                 14,
                 mColorScheme.BackColor);
 
-            TextRenderer.WriteText(320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
+            TextRenderer.WriteText(spriteBatch, 320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
 
         }
 
@@ -122,7 +125,7 @@ namespace ERY.Xle.XleEventTypes.Stores.Extenders
             FillRect(320 - (title.Length + 2) / 2 * 16, 0,
                          (title.Length + 2) * 16, 16, mColorScheme.BackColor);
 
-            TextRenderer.WriteText(320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
+            TextRenderer.WriteText(spriteBatch, 320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
         }
 
         protected void StoreSound(LotaSound sound)

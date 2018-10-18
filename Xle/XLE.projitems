@@ -188,12 +188,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\IMapRendererFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\IMenuRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Implementation\MenuRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Implementation\TextAreaRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Implementation\TextRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\TextAreaRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\TextRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\XleImages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\XleRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\ITextAreaRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\ITextRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Maps\CastleRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Maps\DungeonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\Maps\Map2DRenderer.cs" />

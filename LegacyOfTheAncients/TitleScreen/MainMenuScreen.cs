@@ -23,8 +23,8 @@ namespace ERY.Xle.LotA.TitleScreen
         {
             if (titleHeader1 == null)
             {
-                titleHeader1 = content.Load<Texture2D>("Images/TitleHeader1.png");
-                titleHeader2 = content.Load<Texture2D>("Images/TitleHeader2.png");
+                titleHeader1 = content.Load<Texture2D>("Images/TitleHeader1");
+                titleHeader2 = content.Load<Texture2D>("Images/TitleHeader2");
             }
 
             Instruction = new TextWindow();
@@ -39,7 +39,7 @@ namespace ERY.Xle.LotA.TitleScreen
             Windows.Add(Copyright);
         }
 
-        public override void KeyDown(Keys keyCode, string keyString)
+        public override void KeyPress(Keys keyCode, string keyString)
         {
             if (keyCode == Keys.Down)
             {
@@ -99,18 +99,21 @@ namespace ERY.Xle.LotA.TitleScreen
                 wind.Text = (i + 1).ToString() + ".  " + MenuItems[i];
             }
         }
+
         protected override void DrawBackgrounds(SpriteBatch spriteBatch)
         {
             base.DrawBackgrounds(spriteBatch);
 
-            DrawTitleHeader(Colors.FrameColor, Colors.FrameHighlightColor);
+            DrawTitleHeader(spriteBatch, Colors.FrameColor, Colors.FrameHighlightColor);
         }
+
         protected override void DrawFrame(SpriteBatch spriteBatch)
         {
             base.DrawFrame(spriteBatch);
             Renderer.DrawFrameLine(spriteBatch, 0, 20 * 16, 1,
                 XleOptions.myWindowWidth, Colors.FrameColor);
         }
+
         protected override void DrawFrameHighlight(SpriteBatch spriteBatch)
         {
             base.DrawFrameHighlight(spriteBatch);
@@ -124,12 +127,11 @@ namespace ERY.Xle.LotA.TitleScreen
 
             Point pt = new Point(5, 9 + titleMenu * 2);
 
-            TextRenderer.WriteText(pt.X * 16, pt.Y * 16, "`");
+            TextRenderer.WriteText(spriteBatch, pt.X * 16, pt.Y * 16, "`");
         }
 
-        private void DrawTitleHeader(Color frameColor, Color lineColor)
+        private void DrawTitleHeader(SpriteBatch spriteBatch, Color frameColor, Color lineColor)
         {
-            throw new NotImplementedException();
             //titleHeader1.InterpolationHint = InterpolationMode.Fastest;
             //titleHeader2.InterpolationHint = InterpolationMode.Fastest;
 
@@ -138,6 +140,9 @@ namespace ERY.Xle.LotA.TitleScreen
 
             //titleHeader1.Draw();
             //titleHeader2.Draw();
+
+            spriteBatch.Draw(titleHeader1, new Rectangle(0, 0, titleHeader1.Width, titleHeader1.Height), frameColor);
+            spriteBatch.Draw(titleHeader2, new Rectangle(0, 0, titleHeader2.Width, titleHeader2.Height), lineColor);
         }
 
     }

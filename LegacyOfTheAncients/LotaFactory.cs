@@ -6,11 +6,13 @@ using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
 using ERY.Xle.Maps;
 using ERY.Xle.Maps.XleMapTypes;
 using ERY.Xle.Serialization;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace ERY.Xle.LotA
 {
+    [Singleton, InjectProperties]
     public class LotaFactory : XleGameFactory
     {
         private readonly IContentProvider content;
@@ -22,6 +24,8 @@ namespace ERY.Xle.LotA
         {
             this.content = content;
             this.data = data;
+
+            LoadSurfaces();
         }
 
         public override string GameTitle
@@ -39,9 +43,11 @@ namespace ERY.Xle.LotA
 
         public override void LoadSurfaces()
         {
-            var fontSurface = content.Load<Texture2D>("Images/font.png");
+            var fontSurface = content.Load<Texture2D>("Images/font");
+            FontMetrics fontMetrics = BuildFontMetrics();
+
             var bitmapFont = new BitmapFontTexture(fontSurface,
-                new FontMetrics { },
+                fontMetrics,
                 "LotaFont");
 
             Font = new FontBuilder("LotaFont")
@@ -49,8 +55,8 @@ namespace ERY.Xle.LotA
                 .Build();
             Font.Size = 16;
 
-            Character = content.Load<Texture2D>("Images/character.png");
-            Monsters = content.Load<Texture2D>("Images/OverworldMonsters.png");
+            Character = content.Load<Texture2D>("Images/character");
+            Monsters = content.Load<Texture2D>("Images/OverworldMonsters");
 
             Lota3DSurfaces.LoadSurfaces(content);
 
@@ -58,6 +64,22 @@ namespace ERY.Xle.LotA
             {
                 exinfo.LoadImage(content);
             }
+        }
+
+        private static FontMetrics BuildFontMetrics()
+        {
+            var fontMetrics = new FontMetrics();
+            for (int i = 0; i < 128; i++)
+            {
+                int col = i % 16;
+                int row = i / 16;
+                int x = col * 16;
+                int y = row * 16;
+
+                fontMetrics.Add(i, new GlyphMetrics(new Rectangle(x, y, 16, 16)));
+            }
+
+            return fontMetrics;
         }
 
         public override Map3DSurfaces GetMap3DSurfaces(Map3D map)
