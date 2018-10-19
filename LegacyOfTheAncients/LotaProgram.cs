@@ -1,9 +1,13 @@
 ﻿using AgateLib;
 using AgateLib.Scenes;
+using Autofac;
+using ERY.Xle.Bootstrap;
 using ERY.Xle.Services.Commands;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Xle.Ancients.TitleScreen;
+using Xle.Scenes;
 
 namespace ERY.Xle.LotA
 {
@@ -27,11 +31,21 @@ namespace ERY.Xle.LotA
 
         private SceneStack scenes;
 
-        public LotaProgram(SceneStack scenes, LotaTitleScene title)
+        public LotaProgram(SceneStack scenes, SceneFactory sceneFactory)
         {
             this.scenes = scenes;
 
+            var title = sceneFactory.CreateTitleScene();
+
             scenes.Add(title);
+
+            title.BeginGame += player =>
+            {
+                var game = sceneFactory.CreateGamePlayScene();
+                game.Player = player;
+
+                scenes.Add(game);
+            };
         }
 
         public void Update(GameTime gameTime)
@@ -83,5 +97,26 @@ namespace ERY.Xle.LotA
         //	core.Run();
         //}
 
+    }
+
+    [Singleton]
+    public class SceneFactory
+    {
+        private readonly IServiceLocator serviceLocator;
+
+        public SceneFactory(IServiceLocator serviceLocator)
+        {
+            this.serviceLocator = serviceLocator;
+        }
+
+        public LotaTitleScene CreateTitleScene()
+        {
+            return serviceLocator.Resolve<LotaTitleScene>();
+        }
+
+        public GamePlayScene CreateGamePlayScene()
+        {
+            return serviceLocator.Resolve<GamePlayScene>();
+        }
     }
 }

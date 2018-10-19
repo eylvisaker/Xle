@@ -1,5 +1,6 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework.Input;
+using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -22,10 +23,10 @@ namespace ERY.Xle.LotA.TitleScreen
             Instruction.SetColor(XleColor.Blue);
         }
 
-        public override void KeyPress(Keys keyCode, string keyString)
+        public override Task KeyPress(Keys keyCode, string keyString)
         {
             SoundMan.StopSound(LotaSound.Music);
-            base.KeyPress(keyCode, keyString);
+            return base.KeyPress(keyCode, keyString);
         }
 
         protected override void ExecuteMenuItem(int item)

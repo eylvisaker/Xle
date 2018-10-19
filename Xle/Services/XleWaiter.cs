@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AgateLib;
 using AgateLib.Input;
 using AgateLib.Scenes;
@@ -8,6 +9,8 @@ namespace Xle.Services
 {
     public interface IXleWaiter
     {
+        Task WaitAsync(int howLong_ms, bool allowKeyBreak = false);
+
         void Wait(int howLong_ms, bool allowKeyBreak = false);
     }
 
@@ -26,6 +29,8 @@ namespace Xle.Services
 
                 DrawBelow = true;
             }
+
+            public TimeSpan TimeLeft => TimeSpan.FromMilliseconds(timeLeft_ms);
 
             private void Keyboard_KeyUp(object sender, KeyEventArgs e)
             {
@@ -69,6 +74,24 @@ namespace Xle.Services
         public XleWaiter(ISceneStack sceneStack)
         {
             this.sceneStack = sceneStack;
+        }
+
+        public async Task WaitAsync(int howLong_ms, bool allowKeyBreak = false)
+        {
+            if (sceneStack.Contains(waitScene))
+            {
+                waitScene.TopOff(howLong_ms);
+
+                await Task.Delay(waitScene.TimeLeft);
+            }
+            else
+            {
+                waitScene.Initialize(howLong_ms, allowKeyBreak);
+
+                sceneStack.Add(waitScene);
+            }
+
+            await Task.Delay(TimeSpan.FromMilliseconds(howLong_ms));
         }
 
         public void Wait(int howLong_ms, bool allowKeyBreak = false)

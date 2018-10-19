@@ -1,6 +1,7 @@
 ﻿using ERY.Xle.Services.Game;
 using ERY.Xle.Services.Menus;
 using ERY.Xle.Services.XleSystem;
+using Xle.Ancients;
 
 namespace ERY.Xle.Services.Commands.Implementation
 {
@@ -9,12 +10,14 @@ namespace ERY.Xle.Services.Commands.Implementation
         private IQuickMenu menu;
         private IXleGameControl gameControl;
         private XleSystemState systemState;
+        private readonly IGamePersistance gamePersistance;
 
-        public End(IQuickMenu menu, IXleGameControl gameControl, XleSystemState systemState)
+        public End(IQuickMenu menu, IXleGameControl gameControl, XleSystemState systemState, IGamePersistance gamePersistance)
         {
             this.menu = menu;
             this.gameControl = gameControl;
             this.systemState = systemState;
+            this.gamePersistance = gamePersistance;
         }
 
         public override void Execute()
@@ -31,7 +34,7 @@ namespace ERY.Xle.Services.Commands.Implementation
 
             if (choice == 0)
             {
-                Player.SavePlayer();
+                gamePersistance.Save(Player);
 
                 saved = true;
 

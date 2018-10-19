@@ -1,9 +1,11 @@
 ﻿using AgateLib;
 using AgateLib.Input;
 using AgateLib.Scenes;
+using ERY.Xle;
 using ERY.Xle.LotA.TitleScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Xle.Ancients.TitleScreen
 {
@@ -29,9 +31,11 @@ namespace Xle.Ancients.TitleScreen
             keyboard.KeyPress += Keyboard_KeyPress;
         }
 
-        private void Keyboard_KeyPress(object sender, KeyPressEventArgs e) 
+        public event Action<Player> BeginGame;
+
+        private async void Keyboard_KeyPress(object sender, KeyPressEventArgs e) 
         {
-            titleScreen.OnKeyPress(e);
+            await titleScreen.OnKeyPress(e);
         }
 
         protected override void OnUpdateInput(IInputState input)
@@ -46,6 +50,11 @@ namespace Xle.Ancients.TitleScreen
             base.OnUpdate(time);
 
             titleScreen.Update(time);
+
+            if (titleScreen.Player != null)
+            {
+                BeginGame?.Invoke(titleScreen.Player);
+            }
         }
 
         protected override void DrawScene(GameTime time)

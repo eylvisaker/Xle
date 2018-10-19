@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading.Tasks;
+using Xle.Ancients;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -12,8 +14,9 @@ namespace ERY.Xle.LotA.TitleScreen
         private TextWindow upperWindow = new TextWindow();
         private TextWindow lowerWindow = new TextWindow();
         private TextWindow entryWindow = new TextWindow();
+        private readonly IGamePersistance gamePersistance;
 
-        public NewGame()
+        public NewGame(IGamePersistance gamePersistance)
         {
             Colors.BackColor = XleColor.Green;
             Colors.FrameColor = XleColor.LightGray;
@@ -29,6 +32,7 @@ namespace ERY.Xle.LotA.TitleScreen
             Windows.Add(upperWindow);
             Windows.Add(lowerWindow);
             Windows.Add(entryWindow);
+            this.gamePersistance = gamePersistance;
         }
 
         private void ResetEntryWindow()
@@ -59,7 +63,7 @@ namespace ERY.Xle.LotA.TitleScreen
             lowerWindow.WriteLine("- Press 'F1' or Escape to cancel -");
         }
 
-        public override void KeyPress(Keys keyCode, string keyString)
+        public override async Task KeyPress(Keys keyCode, string keyString)
         {
             if ((keyCode >= Keys.A && keyCode <= Keys.Z) || keyCode == Keys.Space ||
                 (keyCode >= Keys.D0 && keyCode <= Keys.D9))
@@ -92,7 +96,7 @@ namespace ERY.Xle.LotA.TitleScreen
             }
             else if (keyCode == Keys.Enter && enteredName.Length > 0)
             {
-                if (System.IO.File.Exists(@"Saved\" + enteredName + ".chr"))
+                if (gamePersistance.GameExists(enteredName))
                 {
                     SoundMan.PlaySound(LotaSound.Medium);
 
@@ -101,7 +105,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
                     lowerWindow.Text = enteredName + " has already begun.";
 
-                    Wait(2000);
+                    await Wait(2000);
 
                     ResetLowerWindow();
                 }
@@ -112,7 +116,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
                     lowerWindow.Text = enteredName + "'s adventures begin";
 
-                    SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                    await SoundMan.PlaySoundWait(LotaSound.VeryGood);
 
                     NewState = Factory.CreateIntroduction(enteredName);
                 }

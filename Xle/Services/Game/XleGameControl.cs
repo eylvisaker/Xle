@@ -3,12 +3,16 @@ using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
 using Xle.Services;
 
 namespace ERY.Xle.Services.Game
 {
-    public interface IXleGameControl 
+    public interface IXleGameControl
     {
+        Task WaitAsync(int howLong, bool keyBreak = false);
+
+        [Obsolete("await WaitAsync instead")]
         void Wait(int howLong, bool keyBreak = false, Action redraw = null);
 
         void RunRedrawLoop();
@@ -38,31 +42,14 @@ namespace ERY.Xle.Services.Game
             this.systemState = systemState;
         }
 
+        public async Task WaitAsync(int howLong, bool keyBreak = false)
+        {
+            await waiter.WaitAsync(howLong, keyBreak);
+        }
+
         public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
         {
             waiter.Wait(howLong, keyBreak);
-
-            //if (redraw == null)
-            //    redraw = screen.OnDraw;
-
-            //IStopwatch watch = Timing.CreateStopWatch();
-
-            //using (var input = new SimpleInputHandler())
-            //{
-            //    Input.Handlers.Add(input);
-
-            //    do
-            //    {
-            //        screen.OnUpdate();
-
-            //        redraw();
-            //        KeepAlive();
-
-            //        if (keyBreak && input.Keys.Any)
-            //            break;
-
-            //    } while (watch.TotalMilliseconds < howLong && AgateApp.IsAlive);
-            //}
         }
 
         public void KeepAlive(GameTime time)

@@ -1,6 +1,8 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Threading.Tasks;
+using Xle.Ancients;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -11,8 +13,9 @@ namespace ERY.Xle.LotA.TitleScreen
         private TextWindow window = new TextWindow();
         private int page = 0;
         private LotaStory story;
+        private readonly IGamePersistance gamePersistance;
 
-        public Introduction(string enteredName, LotaStory story)
+        public Introduction(string enteredName, LotaStory story, IGamePersistance gamePersistance)
         {
             this.enteredName = enteredName;
             Title = " start a new game ";
@@ -28,6 +31,7 @@ namespace ERY.Xle.LotA.TitleScreen
             SetFirstWindow();
 
             this.story = story;
+            this.gamePersistance = gamePersistance;
             Prompt = "(Press key/button to continue)";
         }
 
@@ -94,18 +98,21 @@ namespace ERY.Xle.LotA.TitleScreen
             player.VaultGold = 1500;
 
             player.StoryData = story;
-            player.SavePlayer();
+
+            gamePersistance.Save(player);
 
             ThePlayer = player;
         }
 
 
-        public override void KeyPress(Keys keyCode, string keyString)
+        public override Task KeyPress(Keys keyCode, string keyString)
         {
             if (page == 0)
                 SetSecondWindow();
             else
                 CreatePlayer();
+
+            return Task.CompletedTask;
         }
     }
 }

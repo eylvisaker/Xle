@@ -1,12 +1,15 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using Xle.Ancients;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
     [Transient, InjectProperties]
     public class LoadGame : FileMenu
     {
-        public LoadGame()
+        private readonly IGamePersistance gamePersistance;
+
+        public LoadGame(IGamePersistance gamePersistance) : base(gamePersistance)
         {
             Colors.FrameColor = XleColor.LightGray;
             Colors.FrameHighlightColor = XleColor.Yellow;
@@ -28,12 +31,13 @@ namespace ERY.Xle.LotA.TitleScreen
             prompt.WriteLine("Restart which character?");
 
             Windows.Add(prompt);
+            this.gamePersistance = gamePersistance;
         }
 
 
         protected override void UserSelectedFile(string file)
         {
-            ThePlayer = Player.LoadPlayer(file);
+            ThePlayer = gamePersistance.LoadPlayer(file);
         }
 
         protected override void UserSelectedCancel()

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -21,10 +22,12 @@ namespace ERY.Xle.LotA.TitleScreen
             this.content = content;
         }
 
-        public override void KeyPress(Keys keyCode, string keyString)
+        public override Task KeyPress(Keys keyCode, string keyString)
         {
             NewState = Factory.CreateFirstMainMenu();
             titleScreenSurface.Dispose();
+
+            return Task.CompletedTask;
         }
 
         public override void Update(GameTime time)

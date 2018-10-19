@@ -112,6 +112,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MenuItemList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RectangleRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\GamePlayScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\CompressionMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\CompressionType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\ITypeBinder.cs" />

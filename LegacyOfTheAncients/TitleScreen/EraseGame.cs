@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
+using System.Threading.Tasks;
+using Xle.Ancients;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -13,8 +15,9 @@ namespace ERY.Xle.LotA.TitleScreen
         private TextWindow cursor;
         private string selectedFile;
         private int selection = 0;
+        private readonly IGamePersistance gamePersistance;
 
-        public EraseGame()
+        public EraseGame(IGamePersistance gamePersistance) : base(gamePersistance)
         {
             Colors.FrameColor = XleColor.Red;
             Colors.FrameHighlightColor = XleColor.Yellow;
@@ -36,6 +39,7 @@ namespace ERY.Xle.LotA.TitleScreen
             prompt.WriteLine("Erase which character?");
 
             Windows.Add(prompt);
+            this.gamePersistance = gamePersistance;
         }
 
         protected override void UserSelectedCancel()
@@ -43,12 +47,11 @@ namespace ERY.Xle.LotA.TitleScreen
             NewState = Factory.CreateSecondMainMenu();
         }
 
-        public override void KeyPress(Keys keyCode, string keyString)
+        public override Task KeyPress(Keys keyCode, string keyString)
         {
             if (inPrompt == false)
             {
-                base.KeyPress(keyCode, keyString);
-                return;
+                return base.KeyPress(keyCode, keyString);
             }
 
             if (keyCode == Keys.Y)
@@ -74,14 +77,16 @@ namespace ERY.Xle.LotA.TitleScreen
 
                 if (selection == 0)
                 {
-                    File.Delete(selectedFile);
+                    gamePersistance.Delete(selectedFile);
                 }
 
                 SoundMan.PlaySound(LotaSound.TitleAccept);
             }
 
+            return Task.CompletedTask;
         }
-        protected override void UserSelectedFile(string file)
+
+        protected override void UserSelectedFile(string name)
         {
             inPrompt = true;
 
@@ -89,7 +94,7 @@ namespace ERY.Xle.LotA.TitleScreen
             instruction.Location = new Point(9, instruction.Location.Y - 1);
 
             instruction.Clear();
-            instruction.WriteLine("Erase " + Path.GetFileNameWithoutExtension(file) + "?", XleColor.Yellow);
+            instruction.WriteLine("Erase " + name + "?", XleColor.Yellow);
             instruction.WriteLine("Choose: yes  no", XleColor.Yellow);
 
             cursor = new TextWindow();
@@ -97,7 +102,7 @@ namespace ERY.Xle.LotA.TitleScreen
             cursor.Location = new Point(19, instruction.Location.Y + 2);
 
             Windows.Add(cursor);
-            selectedFile = file;
+            selectedFile = name;
         }
     }
 }

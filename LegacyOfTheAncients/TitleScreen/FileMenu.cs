@@ -4,10 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using Xle.Ancients;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
-    [Transient, InjectProperties]
     public abstract class FileMenu : TitleState
     {
         private int menuSelection;
@@ -19,25 +20,13 @@ namespace ERY.Xle.LotA.TitleScreen
         private bool titleDone;
         protected TextWindow filesWindow = new TextWindow();
 
-        public FileMenu()
+        public FileMenu(IGamePersistance gamePersistance)
         {
-            SetFiles();
+            files.AddRange(gamePersistance.FindExistingGames());
 
             filesWindow.Location = new Point(11, 8);
 
             Windows.Add(filesWindow);
-        }
-
-        private void SetFiles()
-        {
-            string savedDirectory = "Saved";
-
-            if (Directory.Exists(savedDirectory) == false)
-                Directory.CreateDirectory(savedDirectory);
-
-            string[] sourceFiles = Directory.GetFiles(savedDirectory);
-
-            files.AddRange(sourceFiles);
         }
 
         private int FileStartIndex { get { return page * 8; } }
@@ -79,7 +68,7 @@ namespace ERY.Xle.LotA.TitleScreen
                 filesWindow.WriteLine("9.  Next Page");
         }
 
-        public override void KeyPress(Keys keyCode, string keyString)
+        public override async Task KeyPress(Keys keyCode, string keyString)
         {
             if (keyCode == Keys.Down)
             {
@@ -137,7 +126,7 @@ namespace ERY.Xle.LotA.TitleScreen
             {
                 SoundMan.PlaySound(LotaSound.TitleAccept);
 
-                Wait(500);
+                await Wait(500);
 
                 if (menuSelection == 0)
                 {

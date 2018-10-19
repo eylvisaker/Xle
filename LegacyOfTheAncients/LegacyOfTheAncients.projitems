@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaExhibitInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaTitleScreenInstaller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GamePersistance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameVariableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lota3DSurfaces.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaFactory.cs" />

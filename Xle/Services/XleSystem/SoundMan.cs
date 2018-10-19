@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ERY.Xle.Services.XleSystem
 {
@@ -17,7 +18,10 @@ namespace ERY.Xle.Services.XleSystem
         void PlaySound(LotaSound lotaSound);
         void PlayMagicSound(LotaSound sound, LotaSound endSound, int distance);
 
-        void PlaySoundSync(LotaSound lotaSound);
+        Task PlaySoundWait(LotaSound lotaSound, float maxTime_ms = 15000);
+
+        [Obsolete("await PlaySoundWait instead.")]
+        void PlaySoundSync(LotaSound lotaSound, float maxTime_ms = 15000);
         void PlaySoundSync(Action redraw, LotaSound sound);
 
         void FinishSounds();
@@ -121,7 +125,9 @@ namespace ERY.Xle.Services.XleSystem
             if (mSounds.ContainsKey(sound) == false)
                 return false;
 
-            return mSounds[sound].IsPlaying;
+            var result = mSounds[sound].IsPlaying;
+
+            return result;
         }
 
         public void StopAllSounds()
@@ -141,9 +147,30 @@ namespace ERY.Xle.Services.XleSystem
             mSounds[sound].Volume = (float)volume;
         }
 
-        public void PlaySoundSync(LotaSound lotaSound)
+        public async Task PlaySoundWait(LotaSound lotaSound, float maxTime_ms = 15000)
         {
             PlaySound(lotaSound);
+
+            await GameControl.WaitAsync(150);
+
+            int time = 0;
+            while (IsPlaying(lotaSound))
+            {
+                Debug.WriteLine($"Waiting for sound {lotaSound}... {time}");
+
+                await GameControl.WaitAsync(50);
+
+                time += 50;
+                if (time > maxTime_ms)
+                    break;
+            }
+        }
+
+        public void PlaySoundSync(LotaSound lotaSound, float maxTime_ms = 15000)
+        {
+            PlaySound(lotaSound);
+
+            GameControl.Wait(150);
 
             int time = 0;
             while (IsPlaying(lotaSound))
@@ -151,7 +178,7 @@ namespace ERY.Xle.Services.XleSystem
                 GameControl.Wait(50);
 
                 time += 50;
-                if (time > 10000)
+                if (time > maxTime_ms)
                     break;
             }
         }

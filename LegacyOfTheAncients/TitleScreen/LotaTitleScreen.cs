@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -17,7 +18,7 @@ namespace ERY.Xle.LotA.TitleScreen
         void Update(GameTime time);
         void Draw(SpriteBatch spriteBatch);
 
-        void OnKeyPress(KeyPressEventArgs e);
+        Task OnKeyPress(KeyPressEventArgs e);
     }
 
     [Transient]
@@ -38,7 +39,6 @@ namespace ERY.Xle.LotA.TitleScreen
         private string[] files = new string[8];
         private int page;
         private int maxPages = 0;
-        private Player player;
         private bool titleDone = false;
         private double lastTime = 0;
         private int waitTime = 0;
@@ -198,7 +198,6 @@ namespace ERY.Xle.LotA.TitleScreen
                 titleHeader2 = content.Load<Texture2D>("Images/TitleHeader2.png");
             }
 
-            player = null;
             titleDone = false;
             titleState = TitleScreenState.NoState;
 
@@ -227,7 +226,7 @@ namespace ERY.Xle.LotA.TitleScreen
             //}
         }
 
-        public void OnKeyPress(KeyPressEventArgs e)
+        public async Task OnKeyPress(KeyPressEventArgs e)
         {
             if (waiting)
                 return;
@@ -241,7 +240,7 @@ namespace ERY.Xle.LotA.TitleScreen
             waitTime = 50;
 
             State.SkipWait = false;
-            State.KeyPress(key, e.KeyString);
+            await State.KeyPress(key, e.KeyString);
 
             if (State.SkipWait)
                 waitTime = 0;
@@ -395,10 +394,6 @@ namespace ERY.Xle.LotA.TitleScreen
             titleDone = true;
         }
 
-        public Player Player
-        {
-            get { return player; }
-        }
-
+        public Player Player => State.ThePlayer;
     }
 }

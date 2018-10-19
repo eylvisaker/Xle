@@ -287,11 +287,7 @@ namespace ERY.Xle
             }
         }
 
-        public void SavePlayer()
-        {
-            SavePlayer(@"Saved/" + Name + ".chr");
-        }
-        private void SavePlayer(string filename)
+        public void SavePlayer(string filename)
         {
             if (StoryData == null)
                 throw new NullReferenceException("StoryData cannot be null!");
@@ -304,6 +300,7 @@ namespace ERY.Xle
                 ser.Serialize(ff, this);
             }
         }
+
         public static Player LoadPlayer(string filename)
         {
             XleSerializer ser = new XleSerializer(typeof(Player));

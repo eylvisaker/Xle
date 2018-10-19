@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xle;
 
 namespace ERY.Xle.LotA.TitleScreen
@@ -32,16 +33,16 @@ namespace ERY.Xle.LotA.TitleScreen
             ReleaseAllKeys?.Invoke(this, EventArgs.Empty);
         }
 
-        public abstract void KeyPress(Keys Keys, string keyString);
+        public abstract Task KeyPress(Keys Keys, string keyString);
 
         public bool SkipWait { get; set; }
 
         public TitleState NewState { get; set; }
 
 
-        protected void Wait(int time)
+        protected async Task Wait(int time)
         {
-            GameControl.Wait(time);
+            await GameControl.WaitAsync(time);
         }
 
         public ColorScheme Colors { get; protected set; }

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ERY.Xle.LotA.TitleScreen
 {
@@ -39,7 +40,7 @@ namespace ERY.Xle.LotA.TitleScreen
             Windows.Add(Copyright);
         }
 
-        public override void KeyPress(Keys keyCode, string keyString)
+        public override Task KeyPress(Keys keyCode, string keyString)
         {
             if (keyCode == Keys.Down)
             {
@@ -75,6 +76,8 @@ namespace ERY.Xle.LotA.TitleScreen
 
                 ExecuteMenuItem(titleMenu);
             }
+
+            return Task.CompletedTask;
         }
 
         protected abstract void ExecuteMenuItem(int item);

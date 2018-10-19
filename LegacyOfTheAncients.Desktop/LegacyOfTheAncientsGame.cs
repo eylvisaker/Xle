@@ -44,7 +44,7 @@ namespace LegacyOfTheAncients.Desktop
             plumbing.Register(GraphicsDevice);
             plumbing.Register(new SceneStack());
             plumbing.Register(new ContentProvider(Content));
-
+            
             plumbing.Complete();
 
             lota = plumbing.Resolve<LotaProgram>();
