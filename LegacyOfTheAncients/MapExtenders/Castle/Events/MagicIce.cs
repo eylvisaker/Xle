@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.XleEventTypes.Extenders;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle.Events
+namespace Xle.Ancients.MapExtenders.Castle.Events
 {
     public class MagicIce : LotaEvent
     {

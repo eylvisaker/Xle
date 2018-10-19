@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public class MapList : Dictionary<int, MapInfo>
     {

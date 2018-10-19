@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace ERY.Xle
+namespace Xle
 {
     public static class DirectionHelper
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 
-using ERY.Xle.Maps;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.Maps;
+using Xle.XleEventTypes;
+using Xle.XleEventTypes.Extenders;
 
-namespace ERY.Xle.Services.Game
+namespace Xle.Services.Game
 {
     public interface IEventExtenderFactory : IXleFactory
     {

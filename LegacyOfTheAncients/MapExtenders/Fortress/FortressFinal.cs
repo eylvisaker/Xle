@@ -1,10 +1,10 @@
-﻿using ERY.Xle.LotA.MapExtenders.Fortress.SecondArea;
-using ERY.Xle.Services.ScreenModel;
+﻿using Xle.Ancients.MapExtenders.Fortress.SecondArea;
+using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress
+namespace Xle.Ancients.MapExtenders.Fortress
 {
     public class FortressFinal : FortressEntry
     {

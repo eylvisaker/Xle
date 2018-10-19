@@ -1,12 +1,12 @@
-﻿using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+﻿using Xle.Services;
+using Xle.Services.Commands.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle.Commands
+namespace Xle.Ancients.MapExtenders.Castle.Commands
 {
     [ServiceName("CastleMagic")]
     public class CastleMagic : MagicCommand

@@ -1,11 +1,11 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Menus;
+﻿using Xle.Data;
+using Xle.Services.Menus;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace Xle.XleEventTypes.Stores.Extenders
 {
     public abstract class StoreEquipmentExtender : StoreFront
     {

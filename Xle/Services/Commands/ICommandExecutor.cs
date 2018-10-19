@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace ERY.Xle.Services.Commands
+namespace Xle.Services.Commands
 {
     public interface ICommandExecutor : IXleService
     {

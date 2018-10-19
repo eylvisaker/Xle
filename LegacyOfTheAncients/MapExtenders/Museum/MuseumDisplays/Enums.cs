@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
+namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
 	public enum Coin
 	{

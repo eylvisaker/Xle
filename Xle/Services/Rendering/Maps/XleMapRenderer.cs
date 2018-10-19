@@ -1,9 +1,9 @@
-﻿using ERY.Xle.Maps;
+﻿using Xle.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace ERY.Xle.Services.Rendering.Maps
+namespace Xle.Services.Rendering.Maps
 {
     public class XleMapRenderer
     {

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Maps.Dungeons.Commands;
-using ERY.Xle.Services;
+using Xle.Maps;
+using Xle.Maps.Dungeons;
+using Xle.Maps.Dungeons.Commands;
+using Xle.Services;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.LoB.MapExtenders.Dungeon.Commands
 {
     [ServiceName("LobDungeonXamine")]
     public class LobDungeonXamine : DungeonXamine

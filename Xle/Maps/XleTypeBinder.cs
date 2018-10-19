@@ -1,18 +1,18 @@
-﻿using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Stores;
+﻿using Xle.Maps.XleMapTypes;
+using Xle.XleEventTypes;
+using Xle.XleEventTypes.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
-    class XleTypeBinder : ERY.Xle.Serialization.ITypeBinder
+    class XleTypeBinder : Xle.Serialization.ITypeBinder
     {
         Dictionary<string, Type> typemap = new Dictionary<string, Type>();
-        private ERY.Xle.Serialization.ITypeBinder typeBinder;
+        private Xle.Serialization.ITypeBinder typeBinder;
 
         XleTypeBinder()
         {
@@ -34,22 +34,22 @@ namespace ERY.Xle.Maps
             MapSpecificStoreToGenericStore("Vault");
             MapSpecificStoreToGenericStore("Healer");
 
-            typemap.Add("ERY.Xle.XleEventTypes.LeaveEvent", typeof(Script));
-            typemap.Add("ERY.Xle.XleEvent", typeof(XleEvent));
-            typemap.Add("ERY.Xle.TileSet", typeof(TileSet));
-            typemap.Add("ERY.Xle.Maps.XleMapTypes.Castle", typeof(CastleMap));
+            typemap.Add("Xle.XleEventTypes.LeaveEvent", typeof(Script));
+            typemap.Add("Xle.XleEvent", typeof(XleEvent));
+            typemap.Add("Xle.TileSet", typeof(TileSet));
+            typemap.Add("Xle.Maps.XleMapTypes.Castle", typeof(CastleMap));
         }
 
         private void MapSpecificStore(string p, Type targetType)
         {
-            typemap.Add("ERY.Xle.XleEventTypes.Stores.Store" + p, targetType);
+            typemap.Add("Xle.XleEventTypes.Stores.Store" + p, targetType);
         }
         private void MapSpecificStoreToGenericStore(string p)
         {
             MapSpecificStore(p, typeof(Store));
         }
 
-        public XleTypeBinder(ERY.Xle.Serialization.ITypeBinder typeBinder)
+        public XleTypeBinder(Xle.Serialization.ITypeBinder typeBinder)
             : this()
         {
             this.typeBinder = typeBinder;

@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Services.Menus;
+﻿using Xle.Services.Menus;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class ArmorCommand : Command
     {

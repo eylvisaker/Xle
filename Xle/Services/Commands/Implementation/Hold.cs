@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.ScreenModel;
+﻿using Xle.Data;
+using Xle.Services.Menus;
+using Xle.Services.ScreenModel;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class Hold : Command
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA
+namespace Xle.Ancients
 {
 	public static class GameVariableExtensions
 	{

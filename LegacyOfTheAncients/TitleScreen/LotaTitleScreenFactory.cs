@@ -1,9 +1,9 @@
 ﻿using AgateLib;
-using ERY.Xle.Bootstrap;
-using ERY.Xle.Services;
+using Xle.Bootstrap;
+using Xle.Services;
 using System;
 
-namespace ERY.Xle.LotA.TitleScreen
+namespace Xle.Ancients.TitleScreen
 {
     public interface ILotaTitleScreenFactory : IXleFactory
     {

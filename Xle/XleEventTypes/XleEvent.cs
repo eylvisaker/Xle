@@ -1,11 +1,11 @@
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.Serialization;
+using Xle.XleEventTypes.Extenders;
 using Microsoft.Xna.Framework;
 using System;
 using System.ComponentModel;
 
-namespace ERY.Xle.XleEventTypes
+namespace Xle.XleEventTypes
 {
     [Serializable]
     public abstract class XleEvent : IXleSerializable

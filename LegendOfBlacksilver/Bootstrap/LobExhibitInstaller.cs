@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.LoB.Bootstrap
+﻿namespace Xle.LoB.Bootstrap
 {
     //public class LobExhibitInstaller : IWindsorInstaller
     //{

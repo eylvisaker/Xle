@@ -1,10 +1,10 @@
 using AgateLib;
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Services.Commands.Implementation;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Services.Commands
+namespace Xle.Services.Commands
 {
     public interface ICommandList : IXleService
     {

@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+﻿using Xle.Services;
+using Xle.Services.Commands.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ERY.Xle.Data;
+using Xle.Data;
 
-namespace ERY.Xle.LotA.MapExtenders.Dungeons.Commands
+namespace Xle.Ancients.MapExtenders.Dungeons.Commands
 {
     [ServiceName("LotaDungeonMagic")]
     public class LotaDungeonMagic : MagicWithFancyPrompt

@@ -1,11 +1,11 @@
-﻿using ERY.Xle.Maps;
+﻿using Xle.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.Maps.Outdoors
+namespace Xle.Maps.Outdoors
 {
 	public class TerrainMeasurement : ITerrainMeasurement
 	{

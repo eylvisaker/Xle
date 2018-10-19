@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ERY.Xle.Serialization
+namespace Xle.Serialization
 {
 	/// <summary>
 	/// This interface must be implemented by any class which wants to provide

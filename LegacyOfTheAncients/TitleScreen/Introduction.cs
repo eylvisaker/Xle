@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
 using Xle.Ancients;
 
-namespace ERY.Xle.LotA.TitleScreen
+namespace Xle.Ancients.TitleScreen
 {
     [Transient, InjectProperties]
     public class Introduction : TitleState

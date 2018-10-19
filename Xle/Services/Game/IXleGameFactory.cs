@@ -1,7 +1,7 @@
 ﻿using AgateLib.Display;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ERY.Xle.Services.Game
+namespace Xle.Services.Game
 {
     public interface IXleGameFactory : IXleService
     {

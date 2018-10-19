@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Data;
+﻿using Xle.Data;
 using Microsoft.Xna.Framework;
 using System.Linq;
 
-namespace ERY.Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus.Implementation
 {
     public class EquipmentPicker : IEquipmentPicker
     {

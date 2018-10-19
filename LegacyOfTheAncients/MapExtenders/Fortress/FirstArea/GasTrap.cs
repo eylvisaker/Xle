@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Maps;
+﻿using Xle.Maps;
 using System;
 using System.Linq;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
+namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
     public class GasTrap : LotaEvent
     {

@@ -1,10 +1,10 @@
 ﻿
-using ERY.Xle.Maps.Outdoors;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+using Xle.Maps.Outdoors;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework.Input;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class Disembark : Command
     {

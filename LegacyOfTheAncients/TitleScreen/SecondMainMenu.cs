@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.TitleScreen
+namespace Xle.Ancients.TitleScreen
 {
     [Transient, InjectProperties]
     public class SecondMainMenu : MainMenuScreen

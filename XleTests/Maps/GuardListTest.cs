@@ -1,10 +1,10 @@
-﻿using ERY.Xle;
-using ERY.Xle.Maps;
+﻿using Xle;
+using Xle.Maps;
 using FluentAssertions;
 using Microsoft.Xna.Framework;
 using Xunit;
 
-namespace ERY.XleTests.Maps
+namespace Xle.Maps
 {
     public class GuardListTest
     {

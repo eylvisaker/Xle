@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.Maps.Outdoors
+namespace Xle.Maps.Outdoors
 {
     public enum EncounterState
     {

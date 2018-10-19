@@ -2,13 +2,13 @@
 
 using AgateLib.Mathematics.Geometry;
 
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.Rendering.Maps;
+using Xle.Maps.XleMapTypes;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Maps.Museums
+namespace Xle.Maps.Museums
 {
     public class MuseumExtender : Map3DExtender
     {

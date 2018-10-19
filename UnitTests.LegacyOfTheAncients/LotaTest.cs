@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.LotA;
+using Xle.Ancients;
 
 using Xunit;
 
-namespace ERY.XleTests.LegacyOfTheAncients
+namespace Xle.LegacyOfTheAncients
 {
     public class LotaTest : XleTest
     {

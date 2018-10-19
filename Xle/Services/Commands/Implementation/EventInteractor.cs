@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ERY.Xle.Maps;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.Maps;
+using Xle.XleEventTypes.Extenders;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class EventInteractor : IEventInteractor
     {

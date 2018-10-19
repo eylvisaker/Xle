@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Maps.XleMapTypes;
+﻿using Xle.Data;
+using Xle.Maps.Dungeons;
+using Xle.Maps.XleMapTypes;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Services.Rendering.Maps
+namespace Xle.Services.Rendering.Maps
 {
     public class DungeonRenderer : Map3DRenderer
     {

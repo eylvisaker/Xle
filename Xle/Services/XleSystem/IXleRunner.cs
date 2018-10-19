@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Services.Game;
+﻿using Xle.Services.Game;
 
-namespace ERY.Xle.Services.XleSystem
+namespace Xle.Services.XleSystem
 {
     public interface IXleRunner : IXleService
     {

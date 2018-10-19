@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+﻿using Xle.Services;
+using Xle.Services.Commands.Implementation;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Maps.Dungeons.Commands
+namespace Xle.Maps.Dungeons.Commands
 {
     [ServiceName("DungeonFight")]
     public class DungeonFight : Fight

@@ -1,12 +1,12 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes;
+using Xle.Maps;
+using Xle.Maps.XleMapTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Services.Rendering.Maps
+namespace Xle.Services.Rendering.Maps
 {
     public abstract class Map3DRenderer : XleMapRenderer
     {

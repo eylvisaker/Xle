@@ -1,4 +1,4 @@
-﻿using ERY.Xle.Data;
+﻿using Xle.Data;
 
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.Temples;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
+using Xle.Maps.Temples;
+using Xle.Services;
+using Xle.Services.Commands;
 
-namespace ERY.Xle.LoB.MapExtenders.Temples
+namespace Xle.LoB.MapExtenders.Temples
 {
     public class LobTemple : TempleExtender
     {

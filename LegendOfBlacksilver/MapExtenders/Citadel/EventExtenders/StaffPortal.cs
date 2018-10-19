@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
+namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class StaffPortal : ChangeMapTeleporter
     {

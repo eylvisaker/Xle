@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Maps;
+﻿using Xle.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ERY.Xle.Services.Rendering.Maps
+namespace Xle.Services.Rendering.Maps
 {
     public class TownRenderer : Map2DRenderer
     {

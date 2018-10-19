@@ -1,11 +1,11 @@
-﻿using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Services;
+using Xle.Services.Commands.Implementation;
+using Xle.Services.Game;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Maps.Dungeons.Commands
+namespace Xle.Maps.Dungeons.Commands
 {
     [ServiceName("DungeonXamine")]
     public class DungeonXamine : Xamine

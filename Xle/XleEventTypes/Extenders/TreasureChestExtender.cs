@@ -1,12 +1,12 @@
-﻿using ERY.Xle.Maps;
+﻿using Xle.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Data;
+using Xle.Data;
 
-namespace ERY.Xle.XleEventTypes.Extenders
+namespace Xle.XleEventTypes.Extenders
 {
     public class TreasureChestExtender : EventExtender
     {

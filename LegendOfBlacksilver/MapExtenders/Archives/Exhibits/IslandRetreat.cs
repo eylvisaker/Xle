@@ -1,14 +1,14 @@
-﻿using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.MapLoad;
+using Xle.Services;
+using Xle.Services.MapLoad;
 
-namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
     public class IslandRetreat : LobExhibit
     {

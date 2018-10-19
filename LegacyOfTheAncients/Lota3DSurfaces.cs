@@ -1,8 +1,8 @@
 ﻿using AgateLib;
-using ERY.Xle.Maps;
+using Xle.Maps;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ERY.Xle.LotA
+namespace Xle.Ancients
 {
     public static class Lota3DSurfaces
     {

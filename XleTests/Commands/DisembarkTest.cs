@@ -1,14 +1,14 @@
-﻿using ERY.Xle.Maps.Outdoors;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Maps.Outdoors;
+using Xle.Services.Commands.Implementation;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using FluentAssertions;
 using Microsoft.Xna.Framework.Input;
 using Moq;
 using System.Linq;
 using Xunit;
 
-namespace ERY.XleTests.Commands
+namespace Xle.Commands
 {
     public class DisembarkTest : XleTest
     {

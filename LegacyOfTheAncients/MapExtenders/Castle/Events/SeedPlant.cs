@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Data;
+using Xle.XleEventTypes.Extenders;
 using System;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle.Events
+namespace Xle.Ancients.MapExtenders.Castle.Events
 {
     public class SeedPlant : TreasureChestExtender
     {

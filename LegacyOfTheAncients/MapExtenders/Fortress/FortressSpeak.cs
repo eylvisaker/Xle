@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.Towns;
-using ERY.Xle.Services;
+using Xle.Maps.Towns;
+using Xle.Services;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress
+namespace Xle.Ancients.MapExtenders.Fortress
 {
     [ServiceName("FortressSpeak")]
     public class FortressSpeak : TownSpeak

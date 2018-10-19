@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 
-namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
     public class SingingCrystal : LobExhibit
     {

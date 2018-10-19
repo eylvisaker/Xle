@@ -18,7 +18,7 @@
 //
 using System.Numerics;
 
-namespace ERY.Xle.Serialization.TypeSerializers
+namespace Xle.Serialization.TypeSerializers
 {
     internal class Vector2Serializer : XleTypeSerializerBase<Vector2>
     {

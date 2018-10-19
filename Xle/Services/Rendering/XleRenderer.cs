@@ -1,17 +1,17 @@
 ﻿using AgateLib;
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Data;
-using ERY.Xle.Maps;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Rendering.Maps;
-using ERY.Xle.Services.ScreenModel;
+using Xle.Data;
+using Xle.Maps;
+using Xle.Services.Commands;
+using Xle.Services.Game;
+using Xle.Services.Rendering.Maps;
+using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Xle;
 
-namespace ERY.Xle.Services.Rendering
+namespace Xle.Services.Rendering
 {
 
     public interface IXleRenderer : IXleService

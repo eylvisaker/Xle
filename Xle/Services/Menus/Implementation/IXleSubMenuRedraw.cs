@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Services.Menus.Implementation
+﻿namespace Xle.Services.Menus.Implementation
 {
     public interface IXleSubMenuRedraw : IXleService
     {

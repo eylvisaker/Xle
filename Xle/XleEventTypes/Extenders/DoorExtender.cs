@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Data;
+using Xle.Data;
 
-namespace ERY.Xle.XleEventTypes.Extenders
+namespace Xle.XleEventTypes.Extenders
 {
     public class DoorExtender : EventExtender
     {

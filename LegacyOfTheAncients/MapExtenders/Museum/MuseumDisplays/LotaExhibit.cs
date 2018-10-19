@@ -1,9 +1,9 @@
-﻿using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
+namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
     public abstract class LotaExhibit : Exhibit
     {

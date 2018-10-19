@@ -1,9 +1,9 @@
-﻿using ERY.Xle.Services.Menus.Implementation;
+﻿using Xle.Services.Menus.Implementation;
 using FluentAssertions;
 using Microsoft.Xna.Framework.Input;
 using Xunit;
 
-namespace ERY.XleTests.ServiceTests
+namespace Xle.ServiceTests
 {
     public class NumberPickerTests : XleTest
     {

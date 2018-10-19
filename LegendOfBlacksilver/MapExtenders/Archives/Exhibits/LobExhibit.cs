@@ -1,5 +1,5 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AgateLib.DisplayLib;
 
-namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
 	public abstract class LobExhibit : Exhibit
 	{

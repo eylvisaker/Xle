@@ -23,7 +23,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace ERY.Xle.Serialization
+namespace Xle.Serialization
 {
     /// <summary>
     /// Class used to serialize data to a compact XML format.
@@ -34,9 +34,9 @@ namespace ERY.Xle.Serialization
         private XleTypeSerializerCollection mTypeSerializers = new XleTypeSerializerCollection();
 
         /// <summary>
-        /// An object which implements the ERY.Xle.Serialization.ITypeBinder interface.
+        /// An object which implements the Xle.Serialization.ITypeBinder interface.
         /// This object is used to convert strings to System.Type objects.  The default value
-        /// for this property is an object of type ERY.Xle.Serialization.TypeBinder, but
+        /// for this property is an object of type Xle.Serialization.TypeBinder, but
         /// it may be replaced for custom type binding.
         /// </summary>
         public ITypeBinder Binder { get; set; }

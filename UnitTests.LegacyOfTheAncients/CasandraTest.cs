@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle;
-using ERY.Xle.LotA.MapExtenders.Castle.Events;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle;
+using Xle.Ancients.MapExtenders.Castle.Events;
+using Xle.XleEventTypes;
+using Xle.XleEventTypes.Extenders;
 
 using Xunit;
-using ERY.Xle.Maps.XleMapTypes;
+using Xle.Maps.XleMapTypes;
 using FluentAssertions;
 
-namespace ERY.XleTests.LegacyOfTheAncients
+namespace Xle.LegacyOfTheAncients
 {
     public class CasandraTest : LotaTest
     {

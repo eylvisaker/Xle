@@ -1,14 +1,14 @@
-﻿using ERY.Xle;
-using ERY.Xle.Data;
-using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.MapLoad;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
-using ERY.Xle.XleEventTypes.Stores.Buyback;
+﻿using Xle;
+using Xle.Data;
+using Xle.Maps.Dungeons;
+using Xle.Services.Commands;
+using Xle.Services.Game;
+using Xle.Services.MapLoad;
+using Xle.Services.Menus;
+using Xle.Services.Rendering;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
+using Xle.XleEventTypes.Stores.Buyback;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Moq;
@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.XleTests
+namespace Xle
 {
     public class XleServices
     {

@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Maps.Outdoors;
+﻿using Xle.Maps.Outdoors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ERY.Xle.Data;
-using ERY.Xle.Services.Rendering.Maps;
+using Xle.Data;
+using Xle.Services.Rendering.Maps;
 
-namespace ERY.Xle.LoB.MapExtenders.Outside
+namespace Xle.LoB.MapExtenders.Outside
 {
     public class LobOutsideEncounters : IOutsideEncounters
     {

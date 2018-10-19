@@ -1,12 +1,12 @@
-﻿using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Museums;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
-using ERY.Xle.Services.Commands;
+﻿using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
+using Xle.Maps;
+using Xle.Maps.Museums;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum
+namespace Xle.Ancients.MapExtenders.Museum
 {
     public class LotaMuseum : MuseumExtender
     {

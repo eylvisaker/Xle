@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Museums;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.Rendering.Maps;
+using Xle.Maps;
+using Xle.Maps.Museums;
+using Xle.Services;
+using Xle.Services.Commands;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
 
-namespace ERY.Xle.LoB.MapExtenders.Archives
+namespace Xle.LoB.MapExtenders.Archives
 {
     public class LobArchives : MuseumExtender
     {

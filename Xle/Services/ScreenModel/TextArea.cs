@@ -1,10 +1,10 @@
 ﻿using AgateLib;
-using ERY.Xle.Services.Game;
+using Xle.Services.Game;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics;
 
-namespace ERY.Xle.Services.ScreenModel
+namespace Xle.Services.ScreenModel
 {
     public interface ITextArea
     {

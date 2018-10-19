@@ -1,12 +1,12 @@
 ﻿using AgateLib.DisplayLib;
-using ERY.Xle.Maps;
+using Xle.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB
+namespace Xle.LoB
 {
 	public static class Lob3DSurfaces
 	{

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Maps;
+using Xle.Maps;
 
-namespace ERY.Xle.LotA.MapExtenders.Dungeons
+namespace Xle.Ancients.MapExtenders.Dungeons
 {
     public class PiratesLairDungeon : LotaDungeon
     {

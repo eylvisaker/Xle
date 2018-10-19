@@ -1,4 +1,4 @@
-namespace ERY.Xle
+namespace Xle
 {
     // Terrain Definitions
     public enum TerrainType

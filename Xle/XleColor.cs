@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ERY.Xle
+namespace Xle
 {
     public class XleColor
     {

@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.XleSystem;
+using Xle.Maps;
+using Xle.Maps.Dungeons;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
+using Xle.Services.Game;
+using Xle.Services.Menus;
+using Xle.Services.XleSystem;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.LoB.MapExtenders.Dungeon.Commands
 {
     [ServiceName("MarthbaneSpeak")]
     public class MarthbaneSpeak : Speak

@@ -1,8 +1,8 @@
 ﻿
-using ERY.Xle.Services.MapLoad;
+using Xle.Services.MapLoad;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
+namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
     public class KnightsTest : LotaExhibit
     {

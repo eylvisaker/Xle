@@ -1,7 +1,7 @@
-﻿using ERY.Xle.Serialization;
+﻿using Xle.Serialization;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Maps.XleMapTypes
+namespace Xle.Maps.XleMapTypes
 {
     public class Outside : XleMap
     {

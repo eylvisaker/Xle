@@ -1,7 +1,7 @@
-﻿using ERY.Xle.Maps;
-using ERY.Xle.Services;
+﻿using Xle.Maps;
+using Xle.Services;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle.Commands
+namespace Xle.Ancients.MapExtenders.Castle.Commands
 {
     [ServiceName("CastleUse")]
     public class CastleUse : LotaUse

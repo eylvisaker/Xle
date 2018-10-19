@@ -1,4 +1,4 @@
-﻿using ERY.Xle;
+﻿using Xle;
 using Xunit;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 
-namespace ERY.XleTests
+namespace Xle
 {
     public class ColorSchemeTests
     {

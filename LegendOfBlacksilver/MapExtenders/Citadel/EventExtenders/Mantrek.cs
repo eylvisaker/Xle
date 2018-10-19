@@ -1,14 +1,14 @@
-﻿using ERY.Xle.Maps;
-using ERY.Xle.Services;
-using ERY.Xle.Services.MapLoad;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Maps;
+using Xle.Services;
+using Xle.Services.MapLoad;
+using Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
+namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
 	public class Mantrek : LobEvent
 	{

@@ -1,8 +1,8 @@
 ﻿using System;
-using ERY.Xle.Services;
-using ERY.Xle.Maps;
+using Xle.Services;
+using Xle.Maps;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
+namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 {
     public interface IFortressFinalActivator : IXleService
     {

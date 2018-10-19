@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Services.Commands.Implementation;
+﻿using Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.Services.Commands
+namespace Xle.Services.Commands
 {
     public interface ICommandFactory : IXleFactory
     {

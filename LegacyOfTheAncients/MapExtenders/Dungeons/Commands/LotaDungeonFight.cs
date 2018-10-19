@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Dungeons.Commands;
-using ERY.Xle.Services;
+using Xle.Maps;
+using Xle.Maps.Dungeons.Commands;
+using Xle.Services;
 
-namespace ERY.Xle.LotA.MapExtenders.Dungeons.Commands
+namespace Xle.Ancients.MapExtenders.Dungeons.Commands
 {
     [ServiceName("LotaDungeonFight")]
     public class LotaDungeonFight : DungeonFight

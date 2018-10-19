@@ -1,4 +1,4 @@
-namespace ERY.Xle.Data
+namespace Xle.Data
 {
     public class EquipmentInfo
     {

@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Services
+﻿namespace Xle.Services
 {
     public interface IXleService
     {

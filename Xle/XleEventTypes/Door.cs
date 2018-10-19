@@ -1,12 +1,12 @@
-﻿using ERY.Xle.Serialization;
-using ERY.Xle.Maps;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Serialization;
+using Xle.Maps;
+using Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes
+namespace Xle.XleEventTypes
 {
     [Serializable]
     public class Door : XleEvent

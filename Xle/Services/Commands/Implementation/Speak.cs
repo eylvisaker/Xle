@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class Speak : Command
     {

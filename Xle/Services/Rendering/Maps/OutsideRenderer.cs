@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace ERY.Xle.Services.Rendering.Maps
+namespace Xle.Services.Rendering.Maps
 {
     public class OutsideRenderer : Map2DRenderer, IOutsideEncounterRenderer
     {

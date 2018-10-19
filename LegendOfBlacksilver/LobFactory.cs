@@ -1,17 +1,17 @@
 ﻿using AgateLib.DisplayLib;
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
-using ERY.Xle.LoB.MapExtenders;
-using ERY.Xle.LoB.MapExtenders.Archives;
-using ERY.Xle.LoB.MapExtenders.Castle;
-using ERY.Xle.LoB.MapExtenders.Citadel;
-using ERY.Xle.LoB.MapExtenders.Dungeon;
-using ERY.Xle.LoB.MapExtenders.Labyrinth;
-using ERY.Xle.LoB.MapExtenders.Outside;
-using ERY.Xle.LoB.MapExtenders.Temples;
-using ERY.Xle.LoB.MapExtenders.Towns;
-using ERY.Xle.LoB.TitleScreen;
-using ERY.Xle.Maps.XleMapTypes;
+using Xle.Serialization;
+using Xle.LoB.MapExtenders;
+using Xle.LoB.MapExtenders.Archives;
+using Xle.LoB.MapExtenders.Castle;
+using Xle.LoB.MapExtenders.Citadel;
+using Xle.LoB.MapExtenders.Dungeon;
+using Xle.LoB.MapExtenders.Labyrinth;
+using Xle.LoB.MapExtenders.Outside;
+using Xle.LoB.MapExtenders.Temples;
+using Xle.LoB.MapExtenders.Towns;
+using Xle.LoB.TitleScreen;
+using Xle.Maps.XleMapTypes;
 
 using System;
 using System.Collections.Generic;
@@ -19,10 +19,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
-using ERY.Xle.Data;
+using Xle.Services;
+using Xle.Data;
 
-namespace ERY.Xle.LoB
+namespace Xle.LoB
 {
 	public class LobFactory : XleGameFactory
 	{

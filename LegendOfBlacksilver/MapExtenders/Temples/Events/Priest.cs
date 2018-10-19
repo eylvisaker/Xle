@@ -1,13 +1,13 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.Services.Menus;
+using Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Temples
+namespace Xle.LoB.MapExtenders.Temples
 {
     public class Priest : EventExtender
     {

@@ -2,14 +2,14 @@
 
 using AgateLib.Mathematics.Geometry;
 
-using ERY.Xle.Data;
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+using Xle.Data;
+using Xle.Maps.XleMapTypes;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 
-namespace ERY.Xle.Maps.Dungeons.Commands
+namespace Xle.Maps.Dungeons.Commands
 {
     [ServiceName("DungeonOpen")]
     public class DungeonOpenCommand : Open

@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Services.Game
+﻿namespace Xle.Services.Game
 {
     public interface ITitleScreenFactory : IXleFactory
     {

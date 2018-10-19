@@ -1,6 +1,6 @@
-﻿using ERY.Xle;
-using ERY.Xle.LotA.MapExtenders.Fortress.SecondArea;
-using ERY.Xle.Maps;
+﻿using Xle;
+using Xle.Ancients.MapExtenders.Fortress.SecondArea;
+using Xle.Maps;
 using Xunit;
 using Moq;
 using System;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 
-namespace ERY.XleTests.LegacyOfTheAncients.Fortress
+namespace Xle.LegacyOfTheAncients.Fortress
 {
     public class FortressFinalMagicIceTest : MagicIceTest
     {

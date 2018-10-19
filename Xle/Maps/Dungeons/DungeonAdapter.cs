@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Maps.XleMapTypes;
+﻿using Xle.Maps.XleMapTypes;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Maps.Dungeons
+namespace Xle.Maps.Dungeons
 {
     public class DungeonAdapter : IDungeonAdapter
     {

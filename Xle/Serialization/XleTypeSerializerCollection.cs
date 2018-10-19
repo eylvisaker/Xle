@@ -16,7 +16,7 @@
 //
 //     Contributor(s): Erik Ylvisaker
 //
-using ERY.Xle.Serialization.TypeSerializers;
+using Xle.Serialization.TypeSerializers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.Serialization
+namespace Xle.Serialization
 {
 	public class XleTypeSerializerCollection
 	{

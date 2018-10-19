@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Services;
+﻿using Xle.Services;
 
-namespace ERY.Xle.Maps.Outdoors
+namespace Xle.Maps.Outdoors
 {
     public interface ITerrainMeasurement : IXleService
     {

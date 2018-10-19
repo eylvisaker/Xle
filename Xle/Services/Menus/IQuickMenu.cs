@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Services.Menus
+namespace Xle.Services.Menus
 {
     public interface IQuickMenu : IXleService
     {

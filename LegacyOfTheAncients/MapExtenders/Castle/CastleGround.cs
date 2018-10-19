@@ -1,11 +1,11 @@
-﻿using ERY.Xle.LotA.MapExtenders.Castle.Commands;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Castles;
-using ERY.Xle.Services.Commands;
+﻿using Xle.Ancients.MapExtenders.Castle.Commands;
+using Xle.Maps;
+using Xle.Maps.Castles;
+using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle
+namespace Xle.Ancients.MapExtenders.Castle
 {
     public class CastleGround : CastleExtender
     {

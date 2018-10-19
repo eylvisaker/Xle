@@ -1,17 +1,17 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Maps;
-using ERY.Xle.Services;
+using Xle.Maps;
+using Xle.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+using Xle.Services.Game;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.XleEventTypes.Extenders
+namespace Xle.XleEventTypes.Extenders
 {
     public class EventExtender
     {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Maps.XleMapTypes;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.Maps.Outdoors.Commands
+namespace Xle.Maps.Outdoors.Commands
 {
     [ServiceName("OutsideXamine")]
     public class OutsideXamine : Xamine

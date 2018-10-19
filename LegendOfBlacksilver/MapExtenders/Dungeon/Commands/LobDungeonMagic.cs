@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Maps.Dungeons.Commands;
-using ERY.Xle.Services;
+﻿using Xle.Data;
+using Xle.Maps.Dungeons.Commands;
+using Xle.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.LoB.MapExtenders.Dungeon.Commands
 {
     [ServiceName("LobDungeonMagic")]
     public class LobDungeonMagic : DungeonMagic

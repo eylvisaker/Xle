@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Dungeons;
+﻿using Xle.Data;
+using Xle.Maps;
+using Xle.Maps.Dungeons;
 
 using System;
 using System.Collections.Generic;
@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
+using Xle.Services;
+using Xle.Services.Commands;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon
+namespace Xle.LoB.MapExtenders.Dungeon
 {
 	public abstract class LobDungeon : DungeonExtender
     {

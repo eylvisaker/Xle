@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Data;
+using Xle.Services.Rendering;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class Inventory : Command
     {

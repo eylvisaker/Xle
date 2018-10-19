@@ -1,13 +1,13 @@
 ﻿using System;
 using AgateLib;
-using ERY.Xle.Serialization;
+using Xle.Serialization;
 
-using ERY.Xle.Data;
-using ERY.Xle.Maps;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Rendering;
+using Xle.Data;
+using Xle.Maps;
+using Xle.Services.Game;
+using Xle.Services.Rendering;
 
-namespace ERY.Xle.Services.MapLoad.Implementation
+namespace Xle.Services.MapLoad.Implementation
 {
     public class MapLoader : IMapLoader
     {

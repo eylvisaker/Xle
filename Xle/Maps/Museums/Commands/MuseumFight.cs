@@ -1,11 +1,11 @@
 ﻿
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Maps.XleMapTypes;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Maps.Museums.Commands
+namespace Xle.Maps.Museums.Commands
 {
     [ServiceName("MuseumFight")]
     public class MuseumFight : Fight

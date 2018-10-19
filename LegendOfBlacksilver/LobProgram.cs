@@ -1,6 +1,6 @@
 ﻿using AgateLib.Mathematics.Geometry;
 using AgateLib.Platform.WinForms;
-using ERY.Xle.Bootstrap;
+using Xle.Bootstrap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using AgateLib;
 using AgateLib.DisplayLib;
 using AgateLib.Mathematics.CoordinateSystems;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.XleSystem;
+using Xle.Services;
+using Xle.Services.Commands;
+using Xle.Services.XleSystem;
 
-namespace ERY.Xle.LoB
+namespace Xle.LoB
 {
     static class LobProgram
     {

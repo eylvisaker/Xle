@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Serialization;
+﻿using Xle.Serialization;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public class MapData : IXleSerializable
     {

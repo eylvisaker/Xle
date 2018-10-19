@@ -1,9 +1,9 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Menus;
+﻿using Xle.Data;
+using Xle.Services.Menus;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreBuyback : StoreFront
     {

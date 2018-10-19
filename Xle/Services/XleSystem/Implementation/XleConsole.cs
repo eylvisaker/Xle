@@ -1,19 +1,19 @@
 ﻿using AgateLib.Diagnostics;
-using ERY.Xle.Data;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.MapLoad;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.XleEventTypes;
+using Xle.Data;
+using Xle.Maps;
+using Xle.Maps.Dungeons;
+using Xle.Services.Commands;
+using Xle.Services.Game;
+using Xle.Services.MapLoad;
+using Xle.Services.ScreenModel;
+using Xle.XleEventTypes;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.Services.XleSystem.Implementation
+namespace Xle.Services.XleSystem.Implementation
 {
     public class XleConsole : IXleConsole, IVocabulary
     {

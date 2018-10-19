@@ -1,8 +1,8 @@
 ﻿using System;
 
-using ERY.Xle.Maps;
+using Xle.Maps;
 
-namespace ERY.XleTests
+namespace Xle
 {
     class FakeMap : XleMap
     {

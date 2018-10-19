@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Serialization;
+﻿using Xle.Serialization;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace Xle.XleEventTypes.Stores
 {
     public class Store : XleEvent
     {

@@ -1,7 +1,7 @@
 ﻿using AgateLib;
-using ERY.Xle.Serialization;
+using Xle.Serialization;
 
-namespace ERY.Xle.LotA
+namespace Xle.Ancients
 {
     [Singleton]
     public class LotaStory : IXleSerializable

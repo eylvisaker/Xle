@@ -1,11 +1,11 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
+using Xle.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace Xle.XleEventTypes.Stores
 {
     public class StoreEquipment : Store
     {

@@ -1,4 +1,4 @@
-﻿using ERY.Xle.Data;
+﻿using Xle.Data;
 
 using System;
 using System.Collections.Generic;
@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.Outdoors;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.MapLoad;
+using Xle.Maps.Outdoors;
+using Xle.Services;
+using Xle.Services.Commands;
+using Xle.Services.MapLoad;
 
-namespace ERY.Xle.LotA.MapExtenders.Outside
+namespace Xle.Ancients.MapExtenders.Outside
 {
     public class Tarmalon : OutsideExtender
     {

@@ -1,20 +1,20 @@
 ﻿using AgateLib.Quality;
-using ERY.Xle.Data;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.MapLoad;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.Rendering.Maps;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.Data;
+using Xle.Services.Commands;
+using Xle.Services.Game;
+using Xle.Services.MapLoad;
+using Xle.Services.Menus;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
+using Xle.XleEventTypes.Extenders;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public class MapExtender : IMapExtender
     {

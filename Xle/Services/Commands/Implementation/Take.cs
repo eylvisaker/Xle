@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using ERY.Xle.Services.Game;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.Services.Game;
+using Xle.XleEventTypes;
+using Xle.XleEventTypes.Extenders;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class Take : Command
     {

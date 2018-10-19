@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.MapLoad;
+using Xle.Services;
+using Xle.Services.MapLoad;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
+namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
     public class Pegasus : LotaExhibit
     {

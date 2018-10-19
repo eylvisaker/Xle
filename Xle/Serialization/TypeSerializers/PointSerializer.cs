@@ -18,7 +18,7 @@
 //
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Serialization.TypeSerializers
+namespace Xle.Serialization.TypeSerializers
 {
     internal class PointSerializer : XleTypeSerializerBase<Point>
     {

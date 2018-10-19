@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Services.Commands.Implementation
+﻿namespace Xle.Services.Commands.Implementation
 {
     public abstract class Climb : Command
     {

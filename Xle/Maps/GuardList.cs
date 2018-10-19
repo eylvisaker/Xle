@@ -1,9 +1,9 @@
 ﻿using AgateLib.Display;
-using ERY.Xle.Serialization;
+using Xle.Serialization;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public class GuardList : IXleSerializable, IList<Guard>
     {

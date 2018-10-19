@@ -1,6 +1,6 @@
-﻿using ERY.Xle.LotA.MapExtenders.Castle;
-using ERY.Xle.LotA.MapExtenders.Castle.Events;
-using ERY.Xle.LotA.MapExtenders.Fortress.FirstArea;
+﻿using Xle.Ancients.MapExtenders.Castle;
+using Xle.Ancients.MapExtenders.Castle.Events;
+using Xle.Ancients.MapExtenders.Fortress.FirstArea;
 
 using System;
 using System.Collections.Generic;
@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.XleEventTypes;
+using Xle.XleEventTypes;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress
+namespace Xle.Ancients.MapExtenders.Fortress
 {
     public class FortressEntry : CastleGround
     {

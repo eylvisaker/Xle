@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Xle.Ancients;
 
-namespace ERY.Xle.LotA.TitleScreen
+namespace Xle.Ancients.TitleScreen
 {
     [Transient, InjectProperties]
     public class LoadGame : FileMenu

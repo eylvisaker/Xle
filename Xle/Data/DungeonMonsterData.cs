@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Data
+namespace Xle.Data
 {
     public class DungeonMonsterData
     {

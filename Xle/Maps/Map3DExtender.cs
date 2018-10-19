@@ -1,7 +1,7 @@
 ﻿using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public abstract class Map3DExtender : MapExtender
     {

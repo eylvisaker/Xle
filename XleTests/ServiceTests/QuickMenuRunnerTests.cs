@@ -1,8 +1,8 @@
-﻿using ERY.Xle;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Menus.Implementation;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle;
+using Xle.Services.Game;
+using Xle.Services.Menus.Implementation;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using FluentAssertions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -10,7 +10,7 @@ using Moq;
 using System;
 using Xunit;
 
-namespace ERY.XleTests.ServiceTests
+namespace Xle.ServiceTests
 {
     public class QuickMenuRunnerTests
     {

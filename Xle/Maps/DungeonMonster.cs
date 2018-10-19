@@ -1,8 +1,8 @@
 ﻿
-using ERY.Xle.Data;
+using Xle.Data;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public class DungeonMonster
     {

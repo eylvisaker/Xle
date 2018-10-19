@@ -1,13 +1,13 @@
 ﻿using AgateLib;
 using AgateLib.Display;
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Serialization;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.ScreenModel;
+using Xle.Maps.XleMapTypes;
+using Xle.Serialization;
+using Xle.Services.Game;
+using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace ERY.Xle
+namespace Xle
 {
     public abstract class XleGameFactory : IXleGameFactory
     {

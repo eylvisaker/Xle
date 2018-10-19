@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using ERY.Xle.Serialization;
+using Xle.Serialization;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public class TileSet : IXleSerializable, IEnumerable<KeyValuePair<int, TileInfo>>
     {

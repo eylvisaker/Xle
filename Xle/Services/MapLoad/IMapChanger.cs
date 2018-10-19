@@ -1,9 +1,9 @@
 ﻿using AgateLib.Mathematics.Geometry;
 
-using ERY.Xle.Maps;
+using Xle.Maps;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Services.MapLoad
+namespace Xle.Services.MapLoad
 {
     public interface IMapChanger : IXleService
     {

@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+﻿using Xle.Data;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Temples
+namespace Xle.LoB.MapExtenders.Temples
 {
     [ServiceName("TempleMagic")]
     public class TempleMagic : MagicCommand

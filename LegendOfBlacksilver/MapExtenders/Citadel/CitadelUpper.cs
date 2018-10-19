@@ -1,8 +1,8 @@
-﻿using ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders;
-using ERY.Xle.Maps.Castles;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.XleEventTypes;
+﻿using Xle.LoB.MapExtenders.Citadel.EventExtenders;
+using Xle.Maps.Castles;
+using Xle.Services;
+using Xle.Services.Commands;
+using Xle.XleEventTypes;
 
 using System;
 using System.Collections.Generic;
@@ -10,10 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Maps;
+using Xle.Maps;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.LoB.MapExtenders.Citadel
+namespace Xle.LoB.MapExtenders.Citadel
 {
 	public class CitadelUpper : CastleExtender
 	{

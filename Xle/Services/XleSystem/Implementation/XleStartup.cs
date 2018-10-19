@@ -1,9 +1,9 @@
 ﻿
 using AgateLib;
-using ERY.Xle.Data;
-using ERY.Xle.Services.Game;
+using Xle.Data;
+using Xle.Services.Game;
 
-namespace ERY.Xle.Services.XleSystem.Implementation
+namespace Xle.Services.XleSystem.Implementation
 {
     public class XleStartup : IXleStartup
     {

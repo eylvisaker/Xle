@@ -1,8 +1,8 @@
-﻿using ERY.Xle;
-using ERY.Xle.LotA;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.XleEventTypes.Extenders;
-using ERY.XleTests.LegacyOfTheAncients;
+﻿using Xle;
+using Xle.Ancients;
+using Xle.Services.Commands.Implementation;
+using Xle.XleEventTypes.Extenders;
+using Xle.LegacyOfTheAncients;
 using Xunit;
 using Moq;
 using System;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 
-namespace ERY.XleTests.LegacyOfTheAncients.Commands
+namespace Xle.LegacyOfTheAncients.Commands
 {
     public class LotaUseTest : LotaTest
     {

@@ -1,14 +1,14 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Data;
+using Xle.Services.Game;
+using Xle.Services.Menus;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
 
-namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
+namespace Xle.Maps.XleMapTypes.MuseumDisplays
 {
     public abstract class Exhibit
     {

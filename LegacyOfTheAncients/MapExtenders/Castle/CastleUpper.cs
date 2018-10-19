@@ -1,6 +1,6 @@
-﻿using ERY.Xle.LotA.MapExtenders.Castle.Events;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Ancients.MapExtenders.Castle.Events;
+using Xle.XleEventTypes;
+using Xle.XleEventTypes.Extenders;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle
+namespace Xle.Ancients.MapExtenders.Castle
 {
     public class CastleUpper : CastleGround
     {

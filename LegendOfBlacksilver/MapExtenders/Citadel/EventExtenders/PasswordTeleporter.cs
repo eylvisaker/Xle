@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.XleEventTypes.Extenders;
 
-namespace ERY.Xle.LoB.MapExtenders.Citadel.EventExtenders
+namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class PasswordTeleporter : ChangeMapTeleporter
     {

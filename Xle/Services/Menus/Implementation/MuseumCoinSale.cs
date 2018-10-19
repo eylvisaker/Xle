@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Data;
+using Xle.Services.Game;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using System;
 
-namespace ERY.Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus.Implementation
 {
     public abstract class MuseumCoinSale : IMuseumCoinSale
     {

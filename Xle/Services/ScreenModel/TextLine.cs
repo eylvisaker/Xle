@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Services.ScreenModel
+namespace Xle.Services.ScreenModel
 {
 
     public class TextLine

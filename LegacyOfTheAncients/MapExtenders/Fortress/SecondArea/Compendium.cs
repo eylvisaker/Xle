@@ -1,11 +1,11 @@
-﻿using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
+namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 {
 	public class Compendium : EventExtender
 	{

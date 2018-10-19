@@ -1,5 +1,5 @@
-﻿using ERY.Xle;
-using ERY.Xle.Services.Commands.Implementation;
+﻿using Xle;
+using Xle.Services.Commands.Implementation;
 using Xunit;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.XleTests.Commands
+namespace Xle.Commands
 {
     public class CommandExecutorTest : XleTest
     {

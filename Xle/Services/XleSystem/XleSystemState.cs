@@ -1,9 +1,9 @@
 ﻿using AgateLib;
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Services.Game;
+using Xle.Services.Game;
 using System;
 
-namespace ERY.Xle.Services.XleSystem
+namespace Xle.Services.XleSystem
 {
     [Singleton]
     public class XleSystemState

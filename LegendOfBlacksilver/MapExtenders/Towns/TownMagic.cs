@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ERY.Xle.Data;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Data;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.LoB.MapExtenders.Towns
+namespace Xle.LoB.MapExtenders.Towns
 {
 	[ServiceName("TownMagic")]
 	public class TownMagic : MagicCommand

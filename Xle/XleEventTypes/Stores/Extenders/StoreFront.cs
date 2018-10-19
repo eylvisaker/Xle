@@ -1,14 +1,14 @@
-﻿using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Services.Menus;
+using Xle.Services.Rendering;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreFront : StoreExtender
     {

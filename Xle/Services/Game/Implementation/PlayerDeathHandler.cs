@@ -1,12 +1,12 @@
 ﻿using System;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services.MapLoad;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+using Xle.Maps;
+using Xle.Maps.XleMapTypes;
+using Xle.Services.MapLoad;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 
-namespace ERY.Xle.Services.Game.Implementation
+namespace Xle.Services.Game.Implementation
 {
     public class PlayerDeathHandler : IPlayerDeathHandler
     {

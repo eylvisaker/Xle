@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
+namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
     public class AncientArtifact : LotaExhibit
     {

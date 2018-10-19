@@ -1,9 +1,9 @@
-﻿using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Services.Game;
+using Xle.Services.Menus;
+using Xle.Services.XleSystem;
 using Xle.Ancients;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class End : Command
     {

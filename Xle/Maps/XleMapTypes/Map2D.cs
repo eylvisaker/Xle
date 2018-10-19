@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Serialization;
+﻿using Xle.Serialization;
 
-namespace ERY.Xle.Maps.XleMapTypes
+namespace Xle.Maps.XleMapTypes
 {
     public abstract class Map2D : XleMap
     {
@@ -8,7 +8,7 @@ namespace ERY.Xle.Maps.XleMapTypes
         private int mHeight;
         private int[] mData;
 
-        protected override void WriteData(ERY.Xle.Serialization.XleSerializationInfo info)
+        protected override void WriteData(Xle.Serialization.XleSerializationInfo info)
         {
             info.Write("Width", mWidth);
             info.Write("Height", mHeight);
@@ -16,7 +16,7 @@ namespace ERY.Xle.Maps.XleMapTypes
 
             base.WriteData(info);
         }
-        protected override void ReadData(ERY.Xle.Serialization.XleSerializationInfo info)
+        protected override void ReadData(Xle.Serialization.XleSerializationInfo info)
         {
             mWidth = info.ReadInt32("Width");
             mHeight = info.ReadInt32("Height");

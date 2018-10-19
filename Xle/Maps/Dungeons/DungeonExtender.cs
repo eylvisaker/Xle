@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.Rendering.Maps;
+﻿using Xle.Maps.XleMapTypes;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.Xle.Maps.Dungeons
+namespace Xle.Maps.Dungeons
 {
     public class DungeonExtender : Map3DExtender
     {

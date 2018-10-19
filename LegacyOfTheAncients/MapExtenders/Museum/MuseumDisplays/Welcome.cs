@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
+namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
 	public class Welcome : LotaExhibit
 	{

@@ -1,7 +1,7 @@
-﻿using ERY.Xle.Services.Rendering;
+﻿using Xle.Services.Rendering;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle
+namespace Xle
 {
     public class TextWindow
     {

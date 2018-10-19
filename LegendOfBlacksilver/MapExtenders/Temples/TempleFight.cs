@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.Towns;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Maps.Towns;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.LoB.MapExtenders.Temples
+namespace Xle.LoB.MapExtenders.Temples
 {
     [ServiceName("TempleFight")]
     public class TempleFight : FightAgainstGuard

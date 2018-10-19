@@ -1,12 +1,12 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Menus;
+﻿using Xle.Data;
+using Xle.Services.Menus;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using ERY.Xle.Services.XleSystem;
-using ERY.Xle.Services.Game;
+using Xle.Services.XleSystem;
+using Xle.Services.Game;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public abstract class MagicCommand : Command
     {

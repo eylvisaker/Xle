@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services.Menus.Implementation;
+using Xle.Services.Menus.Implementation;
 
-namespace ERY.Xle.LotA
+namespace Xle.Ancients
 {
     public class LotaMuseumCoinSale : MuseumCoinSale
     {

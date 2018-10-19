@@ -1,15 +1,15 @@
-﻿using ERY.Xle.Maps;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Maps;
+using Xle.Services;
+using Xle.Services.Game;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
+namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 {
     public class FortressFinalActivator : IFortressFinalActivator
     {

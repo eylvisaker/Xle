@@ -1,9 +1,9 @@
-﻿using ERY.Xle;
+﻿using Xle;
 using FluentAssertions;
 using Microsoft.Xna.Framework;
 using Xunit;
 
-namespace ERY.XleTests
+namespace Xle
 {
     public class ColorStringbiulderTests
     {

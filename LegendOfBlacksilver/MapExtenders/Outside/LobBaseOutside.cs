@@ -1,8 +1,8 @@
-﻿using ERY.Xle.LoB.MapExtenders.Outside.Events;
-using ERY.Xle.Maps.Outdoors;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.XleEventTypes;
+﻿using Xle.LoB.MapExtenders.Outside.Events;
+using Xle.Maps.Outdoors;
+using Xle.Services;
+using Xle.Services.Commands;
+using Xle.XleEventTypes;
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Outside
+namespace Xle.LoB.MapExtenders.Outside
 {
     public class LobBaseOutside : OutsideExtender
     {

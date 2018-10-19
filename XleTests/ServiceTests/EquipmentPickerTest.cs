@@ -1,12 +1,12 @@
 ﻿
-using ERY.Xle;
-using ERY.Xle.Services.Menus.Implementation;
+using Xle;
+using Xle.Services.Menus.Implementation;
 using FluentAssertions;
 using Microsoft.Xna.Framework;
 using Moq;
 using Xunit;
 
-namespace ERY.XleTests.ServiceTests
+namespace Xle.ServiceTests
 {
     public class EquipmentPickerTest : XleTest
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.Xle.XleEventTypes
+namespace Xle.XleEventTypes
 {
     public class XleEventList : IList<XleEvent>
     {

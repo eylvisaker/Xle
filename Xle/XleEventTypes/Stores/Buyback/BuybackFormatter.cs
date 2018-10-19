@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ERY.Xle.Data;
-using ERY.Xle.Services.ScreenModel;
+using Xle.Data;
+using Xle.Services.ScreenModel;
 
-namespace ERY.Xle.XleEventTypes.Stores.Buyback
+namespace Xle.XleEventTypes.Stores.Buyback
 {
     public class BuybackFormatter : IBuybackFormatter
     {

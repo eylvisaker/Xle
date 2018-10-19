@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Maps.XleMapTypes.MuseumDisplays
+namespace Xle.Maps.XleMapTypes.MuseumDisplays
 {
     public class ExhibitInfo
     {

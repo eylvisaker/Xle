@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
+using Xle.Services;
 
-namespace ERY.Xle.LoB.MapExtenders.Outside
+namespace Xle.LoB.MapExtenders.Outside
 {
     [ServiceName("OutsideUse")]
     public class OutsideUse : LobUse

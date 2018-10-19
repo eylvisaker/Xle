@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle;
-using ERY.Xle.Maps;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle;
+using Xle.Maps;
+using Xle.XleEventTypes;
+using Xle.XleEventTypes.Extenders;
 
 using Xunit;
 
 using Moq;
-using ERY.Xle.Services.Commands;
+using Xle.Services.Commands;
 
-namespace ERY.XleTests
+namespace Xle
 {
     public class XleTest
     {

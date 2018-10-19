@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.Rendering.Maps;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Maps.XleMapTypes;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Linq;
 
-namespace ERY.Xle.Maps.Outdoors
+namespace Xle.Maps.Outdoors
 {
     public class OutsideExtender : Map2DExtender, IOutsideExtender
     {

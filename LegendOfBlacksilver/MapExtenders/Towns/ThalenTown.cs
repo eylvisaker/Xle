@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Towns
+namespace Xle.LoB.MapExtenders.Towns
 {
     public class ThalenTown : LobTown
     {

@@ -1,11 +1,11 @@
 ﻿using AgateLib;
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Services.XleSystem;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace ERY.Xle.Services.ScreenModel
+namespace Xle.Services.ScreenModel
 {
     public interface IXleScreen
     {

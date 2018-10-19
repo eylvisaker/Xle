@@ -1,12 +1,12 @@
-﻿using ERY.Xle.XleEventTypes.Stores;
-using ERY.Xle.XleEventTypes.Stores.Extenders;
+﻿using Xle.XleEventTypes.Stores;
+using Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
+namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
 	public class Magic : StoreMagic
 	{

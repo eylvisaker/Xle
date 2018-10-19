@@ -1,11 +1,11 @@
 ﻿
-using ERY.Xle.Maps.Museums;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Maps.Museums;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace ERY.Xle.Services.Rendering.Maps
+namespace Xle.Services.Rendering.Maps
 {
     public class MuseumRenderer : Map3DRenderer
     {

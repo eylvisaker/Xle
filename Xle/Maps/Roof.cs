@@ -1,9 +1,9 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Serialization;
+using Xle.Serialization;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public class Roof : IXleSerializable
     {

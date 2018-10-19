@@ -1,5 +1,5 @@
-﻿using ERY.Xle;
-using ERY.Xle.XleEventTypes.Stores.Buyback;
+﻿using Xle;
+using Xle.XleEventTypes.Stores.Buyback;
 using Xunit;
 using Moq;
 using System;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 
-namespace ERY.XleTests.EventTests
+namespace Xle.EventTests
 {
     public class BuybackNegotiatorTest : XleTest
     {

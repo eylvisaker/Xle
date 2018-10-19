@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Services;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Maps.Dungeons;
+using Xle.Services;
+using Xle.Services.XleSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.LoB.MapExtenders.Dungeon.Commands
 {
     [ServiceName("BlackmireClimb")]
     public class BlackmireClimb : DungeonClimb

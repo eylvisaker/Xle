@@ -1,13 +1,13 @@
-﻿using ERY.Xle.LotA.MapExtenders.Castle;
+﻿using Xle.Ancients.MapExtenders.Castle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.LotA.MapExtenders.Castle.Events;
+using Xle.Ancients.MapExtenders.Castle.Events;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress.SecondArea
+namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 {
     public class FinalMagicIce : MagicIce
     {

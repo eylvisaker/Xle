@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ERY.Xle.Serialization;
-using ERY.Xle.XleEventTypes.Extenders;
+using Xle.Serialization;
+using Xle.XleEventTypes.Extenders;
 using System.ComponentModel;
-using ERY.Xle.Maps;
+using Xle.Maps;
 
-namespace ERY.Xle.XleEventTypes
+namespace Xle.XleEventTypes
 {
     public class TreasureChestEvent : XleEvent
     {

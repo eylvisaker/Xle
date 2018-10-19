@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.XleEventTypes.Stores.Extenders;
+﻿using Xle.Data;
+using Xle.Services;
+using Xle.Services.Menus;
+using Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
+namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
     public class Fortune : LotaStore
     {

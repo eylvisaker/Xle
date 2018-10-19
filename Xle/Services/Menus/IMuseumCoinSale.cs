@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Services.Menus
+﻿namespace Xle.Services.Menus
 {
     public interface IMuseumCoinSale : IXleService
     {

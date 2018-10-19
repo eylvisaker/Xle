@@ -1,13 +1,13 @@
 ﻿using AgateLib;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.ScreenModel;
+using Xle.Services.Game;
+using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.Services.XleSystem
+namespace Xle.Services.XleSystem
 {
     public interface ISoundMan : IXleService
     {

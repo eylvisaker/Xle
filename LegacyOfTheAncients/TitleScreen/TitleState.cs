@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Services.Game;
+using Xle.Services.Rendering;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xle;
 
-namespace ERY.Xle.LotA.TitleScreen
+namespace Xle.Ancients.TitleScreen
 {
     public abstract class TitleState
     {

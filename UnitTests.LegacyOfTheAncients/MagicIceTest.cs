@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Maps;
-using ERY.Xle.Maps.Castles;
-using ERY.Xle.Maps.XleMapTypes;
+﻿using Xle.Maps;
+using Xle.Maps.Castles;
+using Xle.Maps.XleMapTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.XleTests.LegacyOfTheAncients
+namespace Xle.LegacyOfTheAncients
 {
     public class MagicIceTest : LotaTest
     {

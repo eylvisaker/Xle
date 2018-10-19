@@ -7,7 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Xle.Ancients;
 
-namespace ERY.Xle.LotA.TitleScreen
+namespace Xle.Ancients.TitleScreen
 {
     public abstract class FileMenu : TitleState
     {

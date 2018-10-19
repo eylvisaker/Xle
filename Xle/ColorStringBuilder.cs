@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace ERY.Xle
+namespace Xle
 {
     public class ColorStringBuilder
     {

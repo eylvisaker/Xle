@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Data;
+using Xle.Maps.XleMapTypes;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreFood : StoreFront
     {

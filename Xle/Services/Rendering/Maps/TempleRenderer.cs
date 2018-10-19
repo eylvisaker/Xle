@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Services.Rendering.Maps
+﻿namespace Xle.Services.Rendering.Maps
 {
     public class TempleRenderer : Map2DRenderer
     {

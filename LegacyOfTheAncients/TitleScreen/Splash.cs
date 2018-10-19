@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.TitleScreen
+namespace Xle.Ancients.TitleScreen
 {
     [Transient, InjectProperties]
     public class Splash : TitleState

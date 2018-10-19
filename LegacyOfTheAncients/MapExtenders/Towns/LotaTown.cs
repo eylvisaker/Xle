@@ -1,19 +1,19 @@
-﻿using ERY.Xle.LotA.MapExtenders.Towns.Stores;
-using ERY.Xle.Maps.Towns;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.XleEventTypes;
-using ERY.Xle.XleEventTypes.Stores;
-using ERY.Xle.XleEventTypes.Stores.Extenders;
+﻿using Xle.Ancients.MapExtenders.Towns.Stores;
+using Xle.Maps.Towns;
+using Xle.Services;
+using Xle.Services.Commands;
+using Xle.XleEventTypes;
+using Xle.XleEventTypes.Stores;
+using Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Magic = ERY.Xle.Services.Commands.Implementation.MagicCommand;
+using Magic = Xle.Services.Commands.Implementation.MagicCommand;
 
-namespace ERY.Xle.LotA.MapExtenders.Towns
+namespace Xle.Ancients.MapExtenders.Towns
 {
     public class LotaTown : TownExtender
     {

@@ -1,14 +1,14 @@
-﻿using ERY.Xle.Services;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.XleSystem;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Services;
+using Xle.Services.Menus;
+using Xle.Services.XleSystem;
+using Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders
+namespace Xle.LoB.MapExtenders
 {
     public class LobEvent : EventExtender
     {

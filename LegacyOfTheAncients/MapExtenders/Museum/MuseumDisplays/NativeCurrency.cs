@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.ScreenModel;
+using Xle.Services.Rendering;
+using Xle.Services.ScreenModel;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays
+namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
     public class NativeCurrency : LotaExhibit
     {

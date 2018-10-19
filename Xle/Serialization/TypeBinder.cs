@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-namespace ERY.Xle.Serialization
+namespace Xle.Serialization
 {
 	public class TypeBinder : ITypeBinder
 	{

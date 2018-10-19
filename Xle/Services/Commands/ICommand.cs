@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Services.Commands
+﻿namespace Xle.Services.Commands
 {
     public interface ICommand
     {

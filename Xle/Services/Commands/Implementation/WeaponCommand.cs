@@ -1,7 +1,7 @@
-﻿using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.ScreenModel;
+﻿using Xle.Services.Menus;
+using Xle.Services.ScreenModel;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class WeaponCommand : Command
     {

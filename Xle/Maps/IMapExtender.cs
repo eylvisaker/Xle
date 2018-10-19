@@ -1,11 +1,11 @@
-﻿using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Rendering.Maps;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Services.Commands;
+using Xle.Services.Rendering.Maps;
+using Xle.XleEventTypes.Extenders;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public interface IMapExtender
     {

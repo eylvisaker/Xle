@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
     public class UnderwaterPort : LobExhibit
     {

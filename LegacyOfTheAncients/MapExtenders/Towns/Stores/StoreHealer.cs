@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
+namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
     public class StoreHealer : LotaStoreFront
     {

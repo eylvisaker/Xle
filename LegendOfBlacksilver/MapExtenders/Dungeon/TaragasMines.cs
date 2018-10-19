@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps;
+using Xle.Maps;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon
+namespace Xle.LoB.MapExtenders.Dungeon
 {
     public class TaragasMines : LobDungeon
     {

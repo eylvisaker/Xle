@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Museums;
-using ERY.Xle.Services;
+using Xle.Maps;
+using Xle.Maps.Museums;
+using Xle.Services;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum.Commands
+namespace Xle.Ancients.MapExtenders.Museum.Commands
 {
     [ServiceName("MuseumUse")]
     public class MuseumUse : LotaUse

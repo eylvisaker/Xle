@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Maps.XleMapTypes
+namespace Xle.Maps.XleMapTypes
 {
     public class Map3DExtraInfo
     {

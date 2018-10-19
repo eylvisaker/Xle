@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Services.ScreenModel;
+﻿using Xle.Services.ScreenModel;
 
-namespace ERY.Xle.Services.Commands
+namespace Xle.Services.Commands
 {
     public abstract class Command : ICommand
     {

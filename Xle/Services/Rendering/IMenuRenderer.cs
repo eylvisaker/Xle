@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace ERY.Xle.Services.Rendering
+namespace Xle.Services.Rendering
 {
     public interface IMenuRenderer : IXleService
     {

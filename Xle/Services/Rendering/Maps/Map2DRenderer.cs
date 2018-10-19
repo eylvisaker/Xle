@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Maps;
+﻿using Xle.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.Xle.Services.Rendering.Maps
+namespace Xle.Services.Rendering.Maps
 {
     public abstract class Map2DRenderer : XleMapRenderer
     {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.Towns;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
+using Xle.Maps.Towns;
+using Xle.Services;
+using Xle.Services.Commands;
 
-namespace ERY.Xle.LoB.MapExtenders.Towns
+namespace Xle.LoB.MapExtenders.Towns
 {
     public class LobTown : TownExtender
     {

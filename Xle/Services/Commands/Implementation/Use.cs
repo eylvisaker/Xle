@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 
-using ERY.Xle.Data;
-using ERY.Xle.Maps;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+using Xle.Data;
+using Xle.Maps;
+using Xle.Services.Game;
+using Xle.Services.Menus;
+using Xle.Services.Rendering;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public abstract class Use : Command
     {

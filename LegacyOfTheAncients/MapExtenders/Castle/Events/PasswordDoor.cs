@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.LotA.MapExtenders.Castle.Events
+﻿namespace Xle.Ancients.MapExtenders.Castle.Events
 {
     public class PasswordDoor : CastleDoor
     {

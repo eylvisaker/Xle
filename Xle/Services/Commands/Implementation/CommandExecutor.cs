@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Services.Game;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Services.Game;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class CommandExecutor : ICommandExecutor
     {

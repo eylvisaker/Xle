@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.Services
+namespace Xle.Ancients.Services
 {
 	public class GameSerializer
 	{

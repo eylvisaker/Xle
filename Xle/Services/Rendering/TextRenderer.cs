@@ -1,10 +1,10 @@
 ﻿
 using AgateLib;
-using ERY.Xle.Services.Game;
+using Xle.Services.Game;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ERY.Xle.Services.Rendering
+namespace Xle.Services.Rendering
 {
     public interface ITextRenderer
     {

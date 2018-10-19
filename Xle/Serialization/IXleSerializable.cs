@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ERY.Xle.Serialization
+namespace Xle.Serialization
 {
 	/// <summary>
 	/// Interface that must be implemented in order to make an object serializable with

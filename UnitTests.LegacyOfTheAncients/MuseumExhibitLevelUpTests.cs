@@ -1,8 +1,8 @@
-﻿using ERY.Xle;
-using ERY.Xle.Data;
-using ERY.Xle.LotA;
-using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using Xle;
+using Xle.Data;
+using Xle.Ancients;
+using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 using Xunit;
 using System;
@@ -10,12 +10,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ERY.XleTests.LegacyOfTheAncients;
+using Xle.LegacyOfTheAncients;
 using FluentAssertions;
 using Moq;
 using AgateLib;
 
-namespace ERY.XleTests
+namespace Xle
 {
     public class MuseumExhibitTests : LotaTest
     {

@@ -1,8 +1,8 @@
 ﻿using AgateLib;
 using AgateLib.Scenes;
-using ERY.Xle.Bootstrap;
-using ERY.Xle.Foundation;
-using ERY.Xle.LotA;
+using Xle.Bootstrap;
+using Xle.Foundation;
+using Xle.Ancients;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

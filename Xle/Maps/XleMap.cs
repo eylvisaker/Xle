@@ -1,13 +1,13 @@
 using AgateLib;
-using ERY.Xle.Serialization;
-using ERY.Xle.XleEventTypes;
+using Xle.Serialization;
+using Xle.XleEventTypes;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public abstract class XleMap : IXleSerializable
     {

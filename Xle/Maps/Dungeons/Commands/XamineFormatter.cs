@@ -1,11 +1,11 @@
-﻿using ERY.Xle.Services.ScreenModel;
+﻿using Xle.Services.ScreenModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.Maps.Dungeons.Commands
+namespace Xle.Maps.Dungeons.Commands
 {
     public class XamineFormatter : IXamineFormatter
     {

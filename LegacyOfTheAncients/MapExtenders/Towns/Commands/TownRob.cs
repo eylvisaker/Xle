@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.LotA.MapExtenders.Towns.Commands
+namespace Xle.Ancients.MapExtenders.Towns.Commands
 {
     [ServiceName("TownRob")]
     public class TownRob : Rob

@@ -1,12 +1,12 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.XleEventTypes;
+﻿using Xle.Data;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
+using Xle.XleEventTypes;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.Xle.LotA.MapExtenders.Outside
+namespace Xle.Ancients.MapExtenders.Outside
 {
     [ServiceName("LotaOutsideMagic")]
     public class LotaOutsideMagic : MagicCommand

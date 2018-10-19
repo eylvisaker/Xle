@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.Services.ScreenModel.Implementation
+namespace Xle.Services.ScreenModel.Implementation
 {
 	class XleDisplayStack : IXleDisplayStack
 	{

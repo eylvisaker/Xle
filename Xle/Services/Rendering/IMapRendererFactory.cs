@@ -1,7 +1,7 @@
-﻿using ERY.Xle.Maps;
-using ERY.Xle.Services.Rendering.Maps;
+﻿using Xle.Maps;
+using Xle.Services.Rendering.Maps;
 
-namespace ERY.Xle.Services.Rendering
+namespace Xle.Services.Rendering
 {
     public interface IMapRendererFactory : IXleFactory
     {

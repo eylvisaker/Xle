@@ -1,16 +1,16 @@
 ﻿using AgateLib;
 using AgateLib.Display;
 using AgateLib.Display.BitmapFont;
-using ERY.Xle.Data;
-using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Serialization;
+using Xle.Data;
+using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
+using Xle.Maps;
+using Xle.Maps.XleMapTypes;
+using Xle.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace ERY.Xle.LotA
+namespace Xle.Ancients
 {
     [Singleton, InjectProperties]
     public class LotaFactory : XleGameFactory

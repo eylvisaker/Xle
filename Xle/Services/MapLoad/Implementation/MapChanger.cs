@@ -1,12 +1,12 @@
-﻿using ERY.Xle.Maps;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.ScreenModel;
+﻿using Xle.Maps;
+using Xle.Services.Commands;
+using Xle.Services.Menus;
+using Xle.Services.Rendering;
+using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Services.MapLoad.Implementation
+namespace Xle.Services.MapLoad.Implementation
 {
     public class MapChanger : IMapChanger
     {

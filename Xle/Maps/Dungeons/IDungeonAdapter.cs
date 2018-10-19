@@ -1,7 +1,7 @@
-﻿using ERY.Xle.Services;
+﻿using Xle.Services;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Maps.Dungeons
+namespace Xle.Maps.Dungeons
 {
     public interface IDungeonAdapter : IXleService
     {

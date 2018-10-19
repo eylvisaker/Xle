@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Services.Rendering.Maps;
+using Xle.Services.Rendering.Maps;
 
-namespace ERY.Xle.LoB.MapExtenders.Archives
+namespace Xle.LoB.MapExtenders.Archives
 {
     public class ArchiveRenderer : MuseumRenderer
     {

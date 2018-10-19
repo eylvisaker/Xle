@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services.Rendering;
-using ERY.Xle.Services.Rendering.Maps;
+﻿using Xle.Maps.XleMapTypes;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
 
-namespace ERY.Xle.Maps.Temples
+namespace Xle.Maps.Temples
 {
     public class TempleExtender : Map2DExtender
     {

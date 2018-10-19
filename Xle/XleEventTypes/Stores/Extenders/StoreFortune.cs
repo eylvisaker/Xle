@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.Menus;
+using Xle.Services;
+using Xle.Services.Menus;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreFortune : StoreExtender
     {

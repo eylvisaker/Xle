@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.Serialization.TypeSerializers
+namespace Xle.Serialization.TypeSerializers
 {
 	class RectangleFSerializer : XleTypeSerializerBase<RectangleF>
 	{

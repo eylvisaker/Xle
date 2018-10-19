@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Maps;
+﻿using Xle.Maps;
 
-namespace ERY.Xle.Services.MapLoad
+namespace Xle.Services.MapLoad
 {
     public interface IMapExtenderFactory : IXleFactory
     {

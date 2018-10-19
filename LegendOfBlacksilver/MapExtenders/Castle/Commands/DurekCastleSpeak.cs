@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.Castles;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Game;
+using Xle.Maps.Castles;
+using Xle.Services;
+using Xle.Services.Game;
 
-namespace ERY.Xle.LoB.MapExtenders.Castle.Commands
+namespace Xle.LoB.MapExtenders.Castle.Commands
 {
     [ServiceName("DurekCastleSpeak")]
     public class DurekCastleSpeak : CastleSpeak

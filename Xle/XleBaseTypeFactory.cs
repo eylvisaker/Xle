@@ -1,12 +1,12 @@
-﻿using ERY.Xle.Maps;
+﻿using Xle.Maps;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-using ERY.Xle.XleEventTypes;
+using Xle.XleEventTypes;
 
-namespace ERY.Xle
+namespace Xle
 {
 	public static class XleBaseTypeFactory
 	{

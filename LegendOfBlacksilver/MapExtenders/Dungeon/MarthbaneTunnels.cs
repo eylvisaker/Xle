@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Menus;
+using Xle.Maps;
+using Xle.Services;
+using Xle.Services.Commands;
+using Xle.Services.Menus;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon
+namespace Xle.LoB.MapExtenders.Dungeon
 {
     public class MarthbaneTunnels : LobDungeon
     {

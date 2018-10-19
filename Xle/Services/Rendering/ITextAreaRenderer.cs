@@ -1,5 +1,5 @@
-﻿using ERY.Xle.Services.ScreenModel;
+﻿using Xle.Services.ScreenModel;
 
-namespace ERY.Xle.Services.Rendering
+namespace Xle.Services.Rendering
 {
 }

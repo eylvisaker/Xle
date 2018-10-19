@@ -1,7 +1,7 @@
 ﻿using Castle.Windsor;
 using System;
 
-namespace ERY.XleTests.ServiceTests
+namespace Xle.ServiceTests
 {
     public class ContainerTests
     {

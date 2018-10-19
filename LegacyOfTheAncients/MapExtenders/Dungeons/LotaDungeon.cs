@@ -1,11 +1,11 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Services.Commands;
+﻿using Xle.Data;
+using Xle.Maps;
+using Xle.Maps.Dungeons;
+using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.LotA.MapExtenders.Dungeons
+namespace Xle.Ancients.MapExtenders.Dungeons
 {
     public abstract class LotaDungeon : DungeonExtender
     {

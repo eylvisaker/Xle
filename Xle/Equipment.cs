@@ -1,13 +1,13 @@
-﻿using ERY.Xle.Serialization;
+﻿using Xle.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ERY.Xle.Data;
+using Xle.Data;
 using AgateLib.Quality;
 
-namespace ERY.Xle
+namespace Xle
 {
     public abstract class Equipment : IXleSerializable
     {

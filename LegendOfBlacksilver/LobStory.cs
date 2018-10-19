@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Serialization;
+﻿using Xle.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.LoB
+namespace Xle.LoB
 {
     public class LobStory : IXleSerializable
     {

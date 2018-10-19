@@ -24,7 +24,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
-namespace ERY.Xle.Serialization
+namespace Xle.Serialization
 {
     /// <summary>
     /// The XleSerializationInfo class contains the XML data that is read from 

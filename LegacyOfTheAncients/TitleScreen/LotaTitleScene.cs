@@ -1,8 +1,8 @@
 ﻿using AgateLib;
 using AgateLib.Input;
 using AgateLib.Scenes;
-using ERY.Xle;
-using ERY.Xle.LotA.TitleScreen;
+using Xle;
+using Xle.Ancients.TitleScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;

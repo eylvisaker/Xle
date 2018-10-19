@@ -1,7 +1,7 @@
 ﻿using AgateLib;
-using ERY.Xle.Maps;
+using Xle.Maps;
 
-namespace ERY.Xle
+namespace Xle
 {
     [Singleton]
     public class GameState

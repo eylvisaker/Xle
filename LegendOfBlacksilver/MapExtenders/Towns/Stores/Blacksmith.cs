@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.XleEventTypes.Stores.Extenders;
+using Xle.XleEventTypes.Stores.Extenders;
 
-namespace ERY.Xle.LoB.MapExtenders.Towns.Stores
+namespace Xle.LoB.MapExtenders.Towns.Stores
 {
     public class Blacksmith : StoreExtender
     {

@@ -1,11 +1,11 @@
-﻿using ERY.Xle;
+﻿using Xle;
 using FluentAssertions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using Xunit;
 
-namespace ERY.XleTests
+namespace Xle
 {
     public class DirectionHelperTest
     {

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ERY.Xle.Data;
-using ERY.Xle.LotA.MapExtenders.Outside;
-using ERY.Xle.Maps.Outdoors;
-using ERY.Xle.Services.Rendering.Maps;
+using Xle.Data;
+using Xle.Ancients.MapExtenders.Outside;
+using Xle.Maps.Outdoors;
+using Xle.Services.Rendering.Maps;
 using Xunit;
 using Moq;
 
-namespace ERY.XleTests.LegacyOfTheAncients.Outside
+namespace Xle.LegacyOfTheAncients.Outside
 {
 	public class OutsideEncountersTest : LotaTest
 	{

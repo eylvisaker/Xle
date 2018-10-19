@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ERY.Xle.Serialization
+namespace Xle.Serialization
 {
 	/// <summary>
 	/// Exception thrown when there is a problem in the XleSerializer.

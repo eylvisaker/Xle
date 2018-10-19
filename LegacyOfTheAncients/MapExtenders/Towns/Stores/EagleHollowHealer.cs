@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Towns.Stores
+namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
     public class EagleHollowHealer : StoreHealer
     {

@@ -1,11 +1,11 @@
-﻿using ERY.Xle.Data;
+﻿using Xle.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class MagicWithFancyPrompt : MagicCommand
     {

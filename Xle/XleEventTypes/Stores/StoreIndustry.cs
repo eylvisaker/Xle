@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace Xle.XleEventTypes.Stores
 {
     public class StoreIndustry : Store
     {
-        protected override void ReadData(ERY.Xle.Serialization.XleSerializationInfo info)
+        protected override void ReadData(Xle.Serialization.XleSerializationInfo info)
         {
             base.ReadData(info);
 
             Product = info.ReadString("Product");
         }
-        protected override void WriteData(ERY.Xle.Serialization.XleSerializationInfo info)
+        protected override void WriteData(Xle.Serialization.XleSerializationInfo info)
         {
             base.WriteData(info);
 

@@ -1,11 +1,11 @@
-﻿using ERY.Xle.XleEventTypes.Stores.Extenders;
+﻿using Xle.XleEventTypes.Stores.Extenders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.LotA.MapExtenders.Towns
+namespace Xle.Ancients.MapExtenders.Towns
 {
     public class LotaStore : StoreExtender
     {

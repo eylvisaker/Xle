@@ -1,9 +1,9 @@
 ﻿using AgateLib.Diagnostics;
-using ERY.Xle.Services.ScreenModel;
+using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace ERY.Xle.Services.XleSystem.Implementation
+namespace Xle.Services.XleSystem.Implementation
 {
     public class XleInput : IXleInput
     {

@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.MapLoad;
+﻿using Xle.Maps.XleMapTypes;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
+using Xle.Services.Game;
+using Xle.Services.MapLoad;
 
-namespace ERY.Xle.Maps.Dungeons
+namespace Xle.Maps.Dungeons
 {
     [ServiceName("DungeonClimb")]
     public class DungeonClimb : Climb

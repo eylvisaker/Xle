@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Services;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Services;
+using Xle.Services.Menus;
+using Xle.XleEventTypes.Extenders;
 
-namespace ERY.Xle.LotA.MapExtenders.Castle.Events
+namespace Xle.Ancients.MapExtenders.Castle.Events
 {
     public class Wizard : LotaEvent
     {

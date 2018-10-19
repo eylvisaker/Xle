@@ -1,4 +1,4 @@
-namespace ERY.Xle.LotA.TitleScreen
+namespace Xle.Ancients.TitleScreen
 {
     public enum TitleScreenState
     {

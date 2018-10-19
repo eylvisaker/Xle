@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.Maps.Towns
+namespace Xle.Maps.Towns
 {
     public class TownMagic : MagicWithFancyPrompt
     {

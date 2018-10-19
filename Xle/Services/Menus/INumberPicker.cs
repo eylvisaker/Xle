@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ERY.Xle.Services.Menus
+namespace Xle.Services.Menus
 {
     public interface INumberPicker : IXleService
     {

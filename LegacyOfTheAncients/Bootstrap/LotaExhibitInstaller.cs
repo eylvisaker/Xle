@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.LotA.Bootstrap
+﻿namespace Xle.Ancients.Bootstrap
 {
     //public class LotaExhibitInstaller : IWindsorInstaller
     //{

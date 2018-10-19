@@ -1,8 +1,8 @@
-﻿using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Rendering;
+﻿using Xle.Services.Game;
+using Xle.Services.Rendering;
 using System;
 
-namespace ERY.Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus.Implementation
 {
     public class XleSubMenuRedraw : IXleSubMenuRedraw
     {

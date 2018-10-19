@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Services.Commands;
+using Xle.Maps;
+using Xle.Services.Commands;
 
-namespace ERY.Xle.LoB.MapExtenders.Dungeon
+namespace Xle.LoB.MapExtenders.Dungeon
 {
     public class PitsOfBlackmire : LobDungeon
     {

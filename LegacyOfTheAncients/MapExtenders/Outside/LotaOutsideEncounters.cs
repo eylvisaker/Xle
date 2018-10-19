@@ -1,16 +1,16 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Maps.Outdoors;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.Rendering.Maps;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+﻿using Xle.Data;
+using Xle.Maps.Outdoors;
+using Xle.Services.Game;
+using Xle.Services.Menus;
+using Xle.Services.Rendering.Maps;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.Xle.LotA.MapExtenders.Outside
+namespace Xle.Ancients.MapExtenders.Outside
 {
     public class OutsideEncounters : IOutsideEncounters
     {

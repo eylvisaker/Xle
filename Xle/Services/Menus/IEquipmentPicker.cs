@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Services.Menus
+namespace Xle.Services.Menus
 {
     public interface IEquipmentPicker : IXleService
     {

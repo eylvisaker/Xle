@@ -1,9 +1,9 @@
-﻿using ERY.Xle.Serialization;
+﻿using Xle.Serialization;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.Xle.Maps.XleMapTypes
+namespace Xle.Maps.XleMapTypes
 {
     public class Town : Map2D
     {

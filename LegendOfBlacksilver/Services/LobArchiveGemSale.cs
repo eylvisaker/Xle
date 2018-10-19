@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.Menus.Implementation;
+using Xle.Services;
+using Xle.Services.Menus.Implementation;
 
-namespace ERY.Xle.LoB.Services
+namespace Xle.LoB.Services
 {
     public class LobArchiveGemSale : MuseumCoinSale
     {

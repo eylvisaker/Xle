@@ -1,6 +1,6 @@
-﻿using ERY.Xle.Services;
+﻿using Xle.Services;
 
-namespace ERY.Xle.Maps.Dungeons.Commands
+namespace Xle.Maps.Dungeons.Commands
 {
     public interface IXamineFormatter : IXleService
     {

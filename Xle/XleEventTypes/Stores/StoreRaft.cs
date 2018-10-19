@@ -1,7 +1,7 @@
-﻿using ERY.Xle.Serialization;
+﻿using Xle.Serialization;
 using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.XleEventTypes.Stores
+namespace Xle.XleEventTypes.Stores
 {
     public class StoreRaft : Store
     {

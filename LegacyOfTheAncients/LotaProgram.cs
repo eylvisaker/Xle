@@ -1,15 +1,15 @@
 ﻿using AgateLib;
 using AgateLib.Scenes;
 using Autofac;
-using ERY.Xle.Bootstrap;
-using ERY.Xle.Services.Commands;
+using Xle.Bootstrap;
+using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Xle.Ancients.TitleScreen;
 using Xle.Scenes;
 
-namespace ERY.Xle.LotA
+namespace Xle.Ancients
 {
     [Singleton]
     public class LotaProgram

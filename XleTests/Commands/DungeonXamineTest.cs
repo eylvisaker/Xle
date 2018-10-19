@@ -1,12 +1,12 @@
-﻿using ERY.Xle;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Maps.Dungeons.Commands;
+﻿using Xle;
+using Xle.Maps;
+using Xle.Maps.Dungeons;
+using Xle.Maps.Dungeons.Commands;
 using Microsoft.Xna.Framework;
 using Moq;
 using Xunit;
 
-namespace ERY.XleTests.Commands
+namespace Xle.Commands
 {
     public class DungeonXamineTest : XleTest
     {

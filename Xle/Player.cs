@@ -1,9 +1,9 @@
-using ERY.Xle.Serialization;
+using Xle.Serialization;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace ERY.Xle
+namespace Xle
 {
     public enum Attributes
     {

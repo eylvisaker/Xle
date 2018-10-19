@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Data;
+﻿using Xle.Data;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ERY.Xle.XleEventTypes.Stores.Extenders
+namespace Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreMagic : StoreFront
     {

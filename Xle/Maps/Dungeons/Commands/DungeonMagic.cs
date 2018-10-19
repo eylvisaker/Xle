@@ -1,9 +1,9 @@
-﻿using ERY.Xle.Data;
-using ERY.Xle.Services.Commands.Implementation;
+﻿using Xle.Data;
+using Xle.Services.Commands.Implementation;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Maps.Dungeons.Commands
+namespace Xle.Maps.Dungeons.Commands
 {
     public class DungeonMagic : MagicWithFancyPrompt
     {

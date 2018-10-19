@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 
-using ERY.Xle.Maps;
-using ERY.Xle.Services.Game;
+using Xle.Maps;
+using Xle.Services.Game;
 
-namespace ERY.Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands.Implementation
 {
     public class Open : Command
     {

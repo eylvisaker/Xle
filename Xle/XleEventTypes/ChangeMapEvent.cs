@@ -1,9 +1,9 @@
-﻿using ERY.Xle.Serialization;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Serialization;
+using Xle.XleEventTypes.Extenders;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.XleEventTypes
+namespace Xle.XleEventTypes
 {
     [Serializable]
     public class ChangeMapEvent : XleEvent

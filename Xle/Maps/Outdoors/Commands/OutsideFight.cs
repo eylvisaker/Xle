@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Data;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.Services.Rendering.Maps;
+using Xle.Data;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
+using Xle.Services.Rendering.Maps;
 
-namespace ERY.Xle.Maps.Outdoors.Commands
+namespace Xle.Maps.Outdoors.Commands
 {
     [ServiceName("OutsideFight")]
     public class OutsideFight : Fight

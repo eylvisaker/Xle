@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Maps.Towns;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Maps.Towns;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.Maps.Castles
+namespace Xle.Maps.Castles
 {
     [ServiceName("CastleSpeak")]
     public class CastleSpeak : TownSpeak

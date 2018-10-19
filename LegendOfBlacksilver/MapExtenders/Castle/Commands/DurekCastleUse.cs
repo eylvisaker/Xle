@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
 
-namespace ERY.Xle.LoB.MapExtenders.Castle.Commands
+namespace Xle.LoB.MapExtenders.Castle.Commands
 {
     [ServiceName("DurekCastleUse")]
     public class DurekCastleUse : LobUse

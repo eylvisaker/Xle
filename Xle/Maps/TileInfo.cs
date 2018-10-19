@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Maps
+﻿namespace Xle.Maps
 {
     public enum TileInfo
     {

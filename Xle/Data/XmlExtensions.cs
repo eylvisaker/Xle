@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Linq;
 
-namespace ERY.Xle.Data
+namespace Xle.Data
 {
     static class XmlExtensions
     {

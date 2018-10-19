@@ -1,10 +1,10 @@
 ﻿
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.XleSystem;
+using Xle.Services.Game;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace ERY.Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus.Implementation
 {
     public class XleSubMenu : IXleSubMenu
     {

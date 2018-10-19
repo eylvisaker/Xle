@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.Commands.Implementation;
-using ERY.Xle.Services.Game;
+using Xle.Services;
+using Xle.Services.Commands.Implementation;
+using Xle.Services.Game;
 
-namespace ERY.Xle.Maps.Towns
+namespace Xle.Maps.Towns
 {
     [ServiceName("TownLeave")]
     public class TownLeave : Leave

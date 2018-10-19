@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace ERY.Xle.Services.XleSystem
+namespace Xle.Services.XleSystem
 {
     public interface IXleInput : IXleService
     {

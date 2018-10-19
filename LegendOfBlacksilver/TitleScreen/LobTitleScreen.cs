@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ERY.Xle.Services;
-using ERY.Xle.Services.Game;
+using Xle.Services;
+using Xle.Services.Game;
 
-namespace ERY.Xle.LoB.TitleScreen
+namespace Xle.LoB.TitleScreen
 {
 	public class LobTitleScreen : IXleTitleScreen
 	{

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 
-namespace ERY.Xle.Services.ScreenModel
+namespace Xle.Services.ScreenModel
 {
     public interface IPlayerAnimator
     {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Xle;
 
-namespace ERY.Xle.Services.Rendering.Implementation
+namespace Xle.Services.Rendering.Implementation
 {
     public class MenuRenderer : IMenuRenderer
     {

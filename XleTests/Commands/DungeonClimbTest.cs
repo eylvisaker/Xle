@@ -1,7 +1,7 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using ERY.Xle;
-using ERY.Xle.Maps.Dungeons;
-using ERY.Xle.Maps.XleMapTypes;
+using Xle;
+using Xle.Maps.Dungeons;
+using Xle.Maps.XleMapTypes;
 using Xunit;
 using Moq;
 using System;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Xna.Framework;
 
-namespace ERY.XleTests.Commands
+namespace Xle.Commands
 {
 	public class DungeonClimbTest : XleTest
 	{

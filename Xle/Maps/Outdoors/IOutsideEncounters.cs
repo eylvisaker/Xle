@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using ERY.Xle.Data;
-using ERY.Xle.Services;
-using ERY.Xle.Services.Rendering.Maps;
+using Xle.Data;
+using Xle.Services;
+using Xle.Services.Rendering.Maps;
 
-namespace ERY.Xle.Maps.Outdoors
+namespace Xle.Maps.Outdoors
 {
     public interface IOutsideEncounters : IXleService
     {

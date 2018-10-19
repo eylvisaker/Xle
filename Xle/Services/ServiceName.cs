@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ERY.Xle.Services
+namespace Xle.Services
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class ServiceNameAttribute : Attribute

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.Maps.XleMapTypes
+namespace Xle.Maps.XleMapTypes
 {
     public class Temple : Map2D
     {

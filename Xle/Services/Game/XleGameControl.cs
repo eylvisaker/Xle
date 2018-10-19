@@ -1,12 +1,12 @@
 ﻿using AgateLib;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.Services.XleSystem;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
 using System.Threading.Tasks;
 using Xle.Services;
 
-namespace ERY.Xle.Services.Game
+namespace Xle.Services.Game
 {
     public interface IXleGameControl
     {

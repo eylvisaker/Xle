@@ -1,15 +1,15 @@
 ﻿using AgateLib;
 using AgateLib.Mathematics.Geometry;
-using ERY.Xle.Maps;
-using ERY.Xle.Maps.XleMapTypes;
-using ERY.Xle.Maps.XleMapTypes.MuseumDisplays;
-using ERY.Xle.Services;
+using Xle.Maps;
+using Xle.Maps.XleMapTypes;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace ERY.Xle.Data
+namespace Xle.Data
 {
     [Singleton]
     public class XleData

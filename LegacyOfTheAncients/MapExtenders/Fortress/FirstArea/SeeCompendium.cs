@@ -1,10 +1,10 @@
-﻿using ERY.Xle.Maps;
-using ERY.Xle.Services.ScreenModel;
-using ERY.Xle.XleEventTypes.Extenders;
+﻿using Xle.Maps;
+using Xle.Services.ScreenModel;
+using Xle.XleEventTypes.Extenders;
 using Microsoft.Xna.Framework;
 using System.Linq;
 
-namespace ERY.Xle.LotA.MapExtenders.Fortress.FirstArea
+namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
     public class SeeCompendium : EventExtender
     {

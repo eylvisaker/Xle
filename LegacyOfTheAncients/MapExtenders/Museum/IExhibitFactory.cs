@@ -1,11 +1,11 @@
-﻿using ERY.Xle.LotA.MapExtenders.Museum.MuseumDisplays;
-using ERY.Xle.Services;
+﻿using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
+using Xle.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ERY.Xle.LotA.MapExtenders.Museum
+namespace Xle.Ancients.MapExtenders.Museum
 {
     public interface IExhibitFactory : IXleFactory
     {

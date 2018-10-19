@@ -1,11 +1,11 @@
 ﻿using AgateLib.Quality;
 
-using ERY.Xle.Services.Commands;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.MapLoad;
-using ERY.Xle.Services.ScreenModel;
+using Xle.Services.Commands;
+using Xle.Services.Game;
+using Xle.Services.MapLoad;
+using Xle.Services.ScreenModel;
 
-namespace ERY.Xle.Services.XleSystem.Implementation
+namespace Xle.Services.XleSystem.Implementation
 {
     public class XleRunner : IXleRunner
     {

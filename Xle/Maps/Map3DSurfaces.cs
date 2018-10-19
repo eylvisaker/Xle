@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public class Map3DSurfaces
     {

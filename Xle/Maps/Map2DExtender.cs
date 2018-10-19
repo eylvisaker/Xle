@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ERY.Xle.Maps
+namespace Xle.Maps
 {
     public abstract class Map2DExtender : MapExtender
     {

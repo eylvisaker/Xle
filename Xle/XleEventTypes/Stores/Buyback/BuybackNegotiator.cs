@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ERY.Xle.Data;
-using ERY.Xle.Services.Game;
-using ERY.Xle.Services.Menus;
-using ERY.Xle.Services.XleSystem;
+using Xle.Data;
+using Xle.Services.Game;
+using Xle.Services.Menus;
+using Xle.Services.XleSystem;
 
-namespace ERY.Xle.XleEventTypes.Stores.Buyback
+namespace Xle.XleEventTypes.Stores.Buyback
 {
     public class BuybackNegotiator : IBuybackNegotiator
     {

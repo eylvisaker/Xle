@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Bootstrap
+﻿namespace Xle.Bootstrap
 {
     //public class FactoryInstaller : IWindsorInstaller
     //{

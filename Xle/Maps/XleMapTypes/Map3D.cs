@@ -1,4 +1,4 @@
-﻿namespace ERY.Xle.Maps.XleMapTypes
+﻿namespace Xle.Maps.XleMapTypes
 {
     public abstract class Map3D : XleMap
     {

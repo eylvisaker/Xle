@@ -1,5 +1,5 @@
 ﻿using AgateLib;
-using ERY.Xle;
+using Xle;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

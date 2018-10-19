@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ERY.Xle.Bootstrap
+namespace Xle.Bootstrap
 {
     public interface IServiceLocator
     {

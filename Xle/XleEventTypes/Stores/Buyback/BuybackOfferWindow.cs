@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERY.Xle.XleEventTypes.Stores.Buyback
+namespace Xle.XleEventTypes.Stores.Buyback
 {
     public class BuybackOfferWindow : IBuybackOfferWindow
     {
