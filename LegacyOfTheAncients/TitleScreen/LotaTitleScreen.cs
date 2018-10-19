@@ -79,7 +79,7 @@ namespace ERY.Xle.LotA.TitleScreen
 
         private void state_ReleaseAllKeys(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             //input.Keys.ReleaseAll();
         }
 

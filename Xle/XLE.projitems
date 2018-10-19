@@ -223,6 +223,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\IXleRunner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\IXleStartup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\XleSystemState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\XleWaiter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SubMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TerrainType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TextWindow.cs" />

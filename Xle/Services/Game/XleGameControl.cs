@@ -3,6 +3,7 @@ using ERY.Xle.Services.ScreenModel;
 using ERY.Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
+using Xle.Services;
 
 namespace ERY.Xle.Services.Game
 {
@@ -21,23 +22,28 @@ namespace ERY.Xle.Services.Game
     public class XleGameControl : IXleGameControl
     {
         private IXleScreen screen;
+        private readonly IXleWaiter waiter;
         private GameState gameState;
         private XleSystemState systemState;
 
         public XleGameControl(
             IXleScreen screen,
+            IXleWaiter waiter,
             GameState gameState,
             XleSystemState systemState)
         {
             this.screen = screen;
+            this.waiter = waiter;
             this.gameState = gameState;
             this.systemState = systemState;
         }
 
         public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
         {
-            if (redraw == null)
-                redraw = screen.OnDraw;
+            waiter.Wait(howLong, keyBreak);
+
+            //if (redraw == null)
+            //    redraw = screen.OnDraw;
 
             //IStopwatch watch = Timing.CreateStopWatch();
 
@@ -57,7 +63,6 @@ namespace ERY.Xle.Services.Game
 
             //    } while (watch.TotalMilliseconds < howLong && AgateApp.IsAlive);
             //}
-            throw new NotImplementedException();
         }
 
         public void KeepAlive(GameTime time)

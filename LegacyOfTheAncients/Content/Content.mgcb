@@ -13,11 +13,287 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/Bad.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Bad.ogg
+
+#begin Audio/BoardRaft.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/BoardRaft.ogg
+
+#begin Audio/BuildingClose.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/BuildingClose.ogg
+
+#begin Audio/BuildingOpen.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/BuildingOpen.ogg
+
+#begin Audio/Bump.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Bump.ogg
+
+#begin Audio/BumpFirst.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/BumpFirst.ogg
+
+#begin Audio/Drip0.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Drip0.ogg
+
+#begin Audio/Drip1.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Drip1.ogg
+
+#begin Audio/Encounter.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Encounter.ogg
+
+#begin Audio/EnemyDie.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/EnemyDie.ogg
+
+#begin Audio/EnemyHit.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/EnemyHit.ogg
+
+#begin Audio/EnemyMiss.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/EnemyMiss.ogg
+
+#begin Audio/Good.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Good.ogg
+
+#begin Audio/Invalid.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Invalid.ogg
+
+#begin Audio/MagicBolt.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MagicBolt.ogg
+
+#begin Audio/MagicBoltHit.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MagicBoltHit.ogg
+
+#begin Audio/MagicFizzle.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MagicFizzle.ogg
+
+#begin Audio/MagicFlame.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MagicFlame.ogg
+
+#begin Audio/MagicFlameHit.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MagicFlameHit.ogg
+
+#begin Audio/Medium.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Medium.ogg
+
+#begin Audio/Mountains.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mountains.ogg
+
 #begin Audio/Music.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/Music.ogg
+
+#begin Audio/Ocean1.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Ocean1.ogg
+
+#begin Audio/Ocean2.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Ocean2.ogg
+
+#begin Audio/OpenChest.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/OpenChest.ogg
+
+#begin Audio/PlayerHit.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/PlayerHit.ogg
+
+#begin Audio/PlayerMiss.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/PlayerMiss.ogg
+
+#begin Audio/Prompt.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Prompt.ogg
+
+#begin Audio/Question.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Question.ogg
+
+#begin Audio/Raft.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Raft.ogg
+
+#begin Audio/Raft1.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Raft1.ogg
+
+#begin Audio/Sale.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Sale.ogg
+
+#begin Audio/TitleAccept.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/TitleAccept.ogg
+
+#begin Audio/TitleCursor.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/TitleCursor.ogg
+
+#begin Audio/TitleErasePrompt.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/TitleErasePrompt.ogg
+
+#begin Audio/TitleKeypress.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/TitleKeypress.ogg
+
+#begin Audio/UnlockDoor.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/UnlockDoor.ogg
+
+#begin Audio/VeryBad.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/VeryBad.ogg
+
+#begin Audio/VeryGood.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/VeryGood.ogg
+
+#begin Audio/WalkDesert.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/WalkDesert.ogg
+
+#begin Audio/WalkDungeon.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/WalkDungeon.ogg
+
+#begin Audio/WalkMuseum.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/WalkMuseum.ogg
+
+#begin Audio/WalkOutside.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/WalkOutside.ogg
+
+#begin Audio/WalkSwamp.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/WalkSwamp.ogg
+
+#begin Audio/WalkTown.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/WalkTown.ogg
+
+#begin Audio/Xamine.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Xamine.ogg
+
+#begin Audio/XamineDetected.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/XamineDetected.ogg
 
 #begin Images/character.png
 /importer:TextureImporter
