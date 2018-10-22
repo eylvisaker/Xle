@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 
 using Xle.Maps;
 using Xle.Maps.XleMapTypes;
@@ -6,8 +7,14 @@ using Xle.Services.MapLoad;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 
-namespace Xle.Services.Game.Implementation
+namespace Xle.Services.Game
 {
+    public interface IPlayerDeathHandler
+    {
+        void PlayerIsDead();
+    }
+
+    [Singleton]
     public class PlayerDeathHandler : IPlayerDeathHandler
     {
         public PlayerDeathHandler(IMapChanger mapChanger, IStatsDisplay statsDisplay)

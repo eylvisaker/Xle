@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle;
+﻿using FluentAssertions;
 using Xle.Ancients.MapExtenders.Castle.Events;
-using Xle.XleEventTypes;
-using Xle.XleEventTypes.Extenders;
-
-using Xunit;
 using Xle.Maps.XleMapTypes;
-using FluentAssertions;
+using Xunit;
 
-namespace Xle.LegacyOfTheAncients
+namespace Xle.Ancients
 {
     public class CasandraTest : LotaTest
     {
-        Casandra casandra;
+        private Casandra casandra;
 
         public CasandraTest()
         {

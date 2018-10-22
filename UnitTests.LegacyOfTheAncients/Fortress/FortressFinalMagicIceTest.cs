@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 
-namespace Xle.LegacyOfTheAncients.Fortress
+namespace Xle.Ancients.Fortress
 {
     public class FortressFinalMagicIceTest : MagicIceTest
     {
@@ -23,7 +23,6 @@ namespace Xle.LegacyOfTheAncients.Fortress
 
             evt = new FinalMagicIce(fortressActivator.Object);
             InitializeEvent(evt);
-
         }
 
         [Fact]

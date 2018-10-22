@@ -11,6 +11,7 @@ namespace Xle.Services.XleSystem.Implementation
         private IXleGameFactory gameFactory;
         private readonly IContentProvider content;
         private XleData data;
+        private readonly IXleDataLoader dataLoader;
         private XleOptions options;
 
         public XleStartup(
@@ -21,12 +22,14 @@ namespace Xle.Services.XleSystem.Implementation
             IContentProvider content,
             XleOptions options,
             XleData data,
+            IXleDataLoader dataLoader,
             ISoundMan soundMan)
         {
             this.runner = runner;
             this.gameFactory = xleGameFactory;
             this.content = content;
             this.data = data;
+            this.dataLoader = dataLoader;
             this.options = options;
 
             console.Initialize();
@@ -38,7 +41,8 @@ namespace Xle.Services.XleSystem.Implementation
             systemState.Factory = xleGameFactory;
 
             systemState.Factory.LoadSurfaces();
-            data.LoadDungeonMonsterSurfaces(content);
+
+            dataLoader.LoadDungeonMonsterSurfaces();
         }
 
         public void ProcessArguments(string[] args)
@@ -56,12 +60,8 @@ namespace Xle.Services.XleSystem.Implementation
 
         private void LoadGameFile()
         {
-            data.LoadGameFile(content, "Game.xml");
+            dataLoader.LoadGameFile("Game.xml");
         }
 
-        public void Run()
-        {
-            runner.Run(gameFactory);
-        }
     }
 }

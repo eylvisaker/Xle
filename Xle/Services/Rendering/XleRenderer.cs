@@ -1,15 +1,14 @@
 ﻿using AgateLib;
 using AgateLib.Mathematics.Geometry;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using Xle.Data;
 using Xle.Maps;
 using Xle.Services.Commands;
 using Xle.Services.Game;
 using Xle.Services.Rendering.Maps;
 using Xle.Services.ScreenModel;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using Xle;
 
 namespace Xle.Services.Rendering
 {
@@ -191,7 +190,7 @@ namespace Xle.Services.Rendering
 
             if (direction == 1)
             {
-                FillRect(spriteBatch, 
+                FillRect(spriteBatch,
                     left + innerOffsetH,
                     top + innerOffsetV,
                     length - boxWidth + 2,
@@ -201,7 +200,7 @@ namespace Xle.Services.Rendering
             else
             {
 
-                FillRect(spriteBatch, 
+                FillRect(spriteBatch,
                     left + innerOffsetH,
                     top + innerOffsetV,
                     innerWidth + 2,
@@ -324,7 +323,7 @@ namespace Xle.Services.Rendering
 
             charRect = new Rectangle(tx, ty, 32, 32);
             destRect = new Rectangle(destx, desty, 32, 32);
-            
+
             spriteBatch.Draw(Factory.Character, destRect, charRect, clr);
         }
 
@@ -401,6 +400,8 @@ namespace Xle.Services.Rendering
 
         public void Draw(GameTime time, SpriteBatch spriteBatch)
         {
+            this.spriteBatch = spriteBatch;
+
             if (GameState == null)
                 return;
 
@@ -494,10 +495,10 @@ namespace Xle.Services.Rendering
             var location = textWindow.Location;
             var csb = textWindow.ColoredString;
 
-            WriteText(spriteBatch, 
-                location.X * 16, 
+            WriteText(spriteBatch,
+                location.X * 16,
                 location.Y * 16,
-                csb.Text, 
+                csb.Text,
                 csb.Colors);
         }
 

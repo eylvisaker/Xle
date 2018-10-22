@@ -295,6 +295,9 @@
 /processorParam:Quality=Best
 /build:Audio/XamineDetected.ogg
 
+#begin Game.xml
+/copy:Game.xml
+
 #begin Images/character.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -319,18 +322,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Armak/traps.png
 
-#begin Images/Dungeon/Armak/traps.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Armak/traps.png
-
 #begin Images/Dungeon/Armak/walls.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -342,30 +333,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Armak/walls.png
-
-#begin Images/Dungeon/Armak/walls.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Armak/walls.png
-
-#begin Images/Dungeon/Monsters/monster00.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster00.png
 
 #begin Images/Dungeon/Monsters/monster00.png
 /importer:TextureImporter
@@ -391,18 +358,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Monsters/monster01.png
 
-#begin Images/Dungeon/Monsters/monster01.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster01.png
-
 #begin Images/Dungeon/Monsters/monster02.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -414,30 +369,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Monsters/monster02.png
-
-#begin Images/Dungeon/Monsters/monster02.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster02.png
-
-#begin Images/Dungeon/Monsters/monster03.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster03.png
 
 #begin Images/Dungeon/Monsters/monster03.png
 /importer:TextureImporter
@@ -463,18 +394,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Monsters/monster04.png
 
-#begin Images/Dungeon/Monsters/monster04.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster04.png
-
 #begin Images/Dungeon/Monsters/monster05.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -486,30 +405,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Monsters/monster05.png
-
-#begin Images/Dungeon/Monsters/monster05.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster05.png
-
-#begin Images/Dungeon/Monsters/monster06.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster06.png
 
 #begin Images/Dungeon/Monsters/monster06.png
 /importer:TextureImporter
@@ -535,18 +430,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Monsters/monster07.png
 
-#begin Images/Dungeon/Monsters/monster07.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster07.png
-
 #begin Images/Dungeon/Monsters/monster08.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -558,30 +441,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Monsters/monster08.png
-
-#begin Images/Dungeon/Monsters/monster08.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster08.png
-
-#begin Images/Dungeon/Monsters/monster09.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster09.png
 
 #begin Images/Dungeon/Monsters/monster09.png
 /importer:TextureImporter
@@ -607,30 +466,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/Monsters/monster10.png
 
-#begin Images/Dungeon/Monsters/monster10.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster10.png
-
-#begin Images/Dungeon/Monsters/monster11.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/Monsters/monster11.png
-
 #begin Images/Dungeon/Monsters/monster11.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -654,30 +489,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/PiratesLair/traps.png
-
-#begin Images/Dungeon/PiratesLair/traps.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/PiratesLair/traps.png
-
-#begin Images/Dungeon/PiratesLair/walls.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Dungeon/PiratesLair/walls.png
 
 #begin Images/Dungeon/PiratesLair/walls.png
 /importer:TextureImporter
@@ -1014,6 +825,75 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/TitleHeader2.png
+
+#begin Maps/Alanville.xmf
+/copy:Maps/Alanville.xmf
+
+#begin Maps/Armak.xmf
+/copy:Maps/Armak.xmf
+
+#begin Maps/BigRapids.xmf
+/copy:Maps/BigRapids.xmf
+
+#begin Maps/Castle1.xmf
+/copy:Maps/Castle1.xmf
+
+#begin Maps/Castle2.xmf
+/copy:Maps/Castle2.xmf
+
+#begin Maps/Cobbleton.xmf
+/copy:Maps/Cobbleton.xmf
+
+#begin Maps/EagleHollow.xmf
+/copy:Maps/EagleHollow.xmf
+
+#begin Maps/Flight.xmf
+/copy:Maps/Flight.xmf
+
+#begin Maps/Fortress1.xmf
+/copy:Maps/Fortress1.xmf
+
+#begin Maps/Fortress2.xmf
+/copy:Maps/Fortress2.xmf
+
+#begin Maps/FourJewels.xmf
+/copy:Maps/FourJewels.xmf
+
+#begin Maps/GrandLedge.xmf
+/copy:Maps/GrandLedge.xmf
+
+#begin Maps/HolyPoint.xmf
+/copy:Maps/HolyPoint.xmf
+
+#begin Maps/IsleCity.xmf
+/copy:Maps/IsleCity.xmf
+
+#begin Maps/Laingsburg.xmf
+/copy:Maps/Laingsburg.xmf
+
+#begin Maps/Mazelton.xmf
+/copy:Maps/Mazelton.xmf
+
+#begin Maps/MerchantSquare.xmf
+/copy:Maps/MerchantSquare.xmf
+
+#begin Maps/Museum.xmf
+/copy:Maps/Museum.xmf
+
+#begin Maps/PiratesLair.xmf
+/copy:Maps/PiratesLair.xmf
+
+#begin Maps/Tarmalon.xmf
+/copy:Maps/Tarmalon.xmf
+
+#begin Maps/ThompsonCrossing.xmf
+/copy:Maps/ThompsonCrossing.xmf
+
+#begin Maps/Thornberry.xmf
+/copy:Maps/Thornberry.xmf
+
+#begin Maps/ThreeSisters.xmf
+/copy:Maps/ThreeSisters.xmf
 
 #begin white.png
 /importer:TextureImporter

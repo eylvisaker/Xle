@@ -22,9 +22,9 @@ namespace Xle.Ancients.TitleScreen
     [Singleton]
     public class LotaTitleScreenFactory : ILotaTitleScreenFactory
     {
-        private readonly IServiceLocator serviceLocator;
+        private readonly IAgateServiceLocator serviceLocator;
 
-        public LotaTitleScreenFactory(IServiceLocator serviceLocator)
+        public LotaTitleScreenFactory(IAgateServiceLocator serviceLocator)
         {
             this.serviceLocator = serviceLocator;
         }

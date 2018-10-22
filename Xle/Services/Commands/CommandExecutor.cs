@@ -3,9 +3,21 @@ using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using AgateLib;
+using Xle.Services.Commands.Implementation;
 
-namespace Xle.Services.Commands.Implementation
+namespace Xle.Services.Commands
 {
+    public interface ICommandExecutor
+    {
+        void Prompt();
+
+        void DoCommand(Keys Keys);
+
+        void ResetCurrentCommand();
+    }
+
+    [Singleton]
     public class CommandExecutor : ICommandExecutor
     {
         private GameState gameState;

@@ -6,9 +6,18 @@ using Xle.Data;
 using Xle.Maps;
 using Xle.Services.Game;
 using Xle.Services.Rendering;
+using Microsoft.Xna.Framework;
 
-namespace Xle.Services.MapLoad.Implementation
+namespace Xle.Services.MapLoad
 {
+    public interface IMapLoader
+    {
+        XleMap LoadMapData(int mapId);
+        IMapExtender LoadMap(int mapId);
+        IMapExtender LoadMap(string filename, int mapId);
+    }
+
+    [Singleton]
     public class MapLoader : IMapLoader
     {
         private XleData data;
@@ -50,7 +59,7 @@ namespace Xle.Services.MapLoad.Implementation
         {
             XleMap data = LoadMapData(filename, id);
 
-            var extender = extenderFactory.CreateMapExtender(data);
+            var extender = (MapExtender)extenderFactory.CreateMapExtender(data);
             extender.TheMap = data;
             
             var renderer = extender.CreateMapRenderer(rendererFactory);

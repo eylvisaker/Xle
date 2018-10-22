@@ -2,7 +2,7 @@
 
 namespace Xle.Bootstrap
 {
-    public interface IServiceLocator
+    public interface IAgateServiceLocator
     {
         T Resolve<T>();
         T Resolve<T>(object anonymousObjectArguments);
@@ -10,10 +10,10 @@ namespace Xle.Bootstrap
         T ResolveNamed<T>(string name);
         T ResolveNamed<T>(string name, object anonymousObjectArguments);
 
-        IServiceLocatorScope BeginScope();
+        IAgateServiceLocatorScope BeginScope();
     }
 
-    public interface IServiceLocatorScope : IDisposable
+    public interface IAgateServiceLocatorScope : IDisposable
     {
         T Resolve<T>();
         T Resolve<T>(object anonymousObjectArguments);

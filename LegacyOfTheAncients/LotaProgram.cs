@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using Xle.Ancients.TitleScreen;
 using Xle.Scenes;
+using Xle.Data;
+using Xle.Services.XleSystem;
 
 namespace Xle.Ancients
 {
@@ -29,12 +31,20 @@ namespace Xle.Ancients
             }
         }
 
-        private SceneStack scenes;
+        private readonly SceneStack scenes;
+        private readonly SceneFactory sceneFactory;
 
-        public LotaProgram(SceneStack scenes, SceneFactory sceneFactory)
+        public LotaProgram(SceneStack scenes, 
+                           SceneFactory sceneFactory)
         {
             this.scenes = scenes;
+            this.sceneFactory = sceneFactory;
 
+            StartTitle();
+        }
+
+        private void StartTitle()
+        {
             var title = sceneFactory.CreateTitleScene();
 
             scenes.Add(title);
@@ -42,9 +52,12 @@ namespace Xle.Ancients
             title.BeginGame += player =>
             {
                 var game = sceneFactory.CreateGamePlayScene();
-                game.Player = player;
+                game.Run(player);
 
+                scenes.Remove(title);
                 scenes.Add(game);
+
+                game.SceneEnd += (_, __) => StartTitle();
             };
         }
 
@@ -102,9 +115,9 @@ namespace Xle.Ancients
     [Singleton]
     public class SceneFactory
     {
-        private readonly IServiceLocator serviceLocator;
+        private readonly IAgateServiceLocator serviceLocator;
 
-        public SceneFactory(IServiceLocator serviceLocator)
+        public SceneFactory(IAgateServiceLocator serviceLocator)
         {
             this.serviceLocator = serviceLocator;
         }

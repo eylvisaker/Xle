@@ -90,7 +90,7 @@ namespace Xle.Ancients.MapExtenders.Outside
 
         public void Step()
         {
-            if (Data.MonsterInfoList.Count == 0) return;
+            if (Data.MonsterInfo.Count == 0) return;
             if (Options.DisableOutsideEncounters) return;
 
             bool handled = false;
@@ -184,7 +184,7 @@ namespace Xle.Ancients.MapExtenders.Outside
 
             for (int i = 0; i < monstCount; i++)
             {
-                var m = new Monster(Data.MonsterInfoList.First(x => x.ID == monsterId));
+                var m = new Monster(Data.MonsterInfo.First(x => x.ID == monsterId));
 
                 m.HP = (int)(m.HP * (Random.NextDouble() * 0.4 + 0.8));
 
@@ -243,18 +243,18 @@ namespace Xle.Ancients.MapExtenders.Outside
                     }
                 }
 
-                monsters = Data.MonsterInfoList
+                monsters = Data.MonsterInfo
                     .Where(x => x.Terrain == TerrainType.All)
                     .Skip(skip)
                     .Take(count);
             }
             else if (terrain == TerrainType.Mixed)
             {
-                monsters = Data.MonsterInfoList.Where(x => x.Terrain == TerrainType.Forest);
+                monsters = Data.MonsterInfo.Where(x => x.Terrain == TerrainType.Forest);
             }
             else
             {
-                monsters = Data.MonsterInfoList.Where(x => x.Terrain == terrain);
+                monsters = Data.MonsterInfo.Where(x => x.Terrain == terrain);
             }
 
             int sp = (int)(Math.Min(Player.TimeQuality / 2500.0 + 1, 7.0) + 0.5);

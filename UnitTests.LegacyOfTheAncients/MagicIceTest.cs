@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LegacyOfTheAncients
+namespace Xle.Ancients
 {
     public class MagicIceTest : LotaTest
     {

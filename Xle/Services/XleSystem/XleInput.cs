@@ -1,14 +1,38 @@
-﻿using AgateLib.Diagnostics;
-using Xle.Services.ScreenModel;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using Xle.Services.ScreenModel;
 
-namespace Xle.Services.XleSystem.Implementation
+namespace Xle.Services.XleSystem
 {
+    public interface IXleInput
+    {
+        bool AcceptKey { get; set; }
+
+        Keys WaitForKey(params Keys[] keys);
+        Keys WaitForKey(Action redraw, params Keys[] keys);
+
+        bool PromptToContinueOnWait { get; set; }
+
+        event EventHandler<CommandEventArgs> DoCommand;
+
+        void OnKeyPress(Keys key);
+
+        void OnKeyDown(Keys key);
+
+        void OnKeyUp(Keys key);
+
+        void Update(GameTime gameTime);
+    }
+
+    [Singleton]
     public class XleInput : IXleInput
     {
         private GameState gameState;
         private IXleScreen screen;
+        private HashSet<Keys> pressedKeys;
 
         public XleInput(
             IXleScreen screen,
@@ -18,8 +42,6 @@ namespace Xle.Services.XleSystem.Implementation
             this.gameState = gameState;
 
             screen.Update += gameControl_Update;
-            throw new NotImplementedException();
-            //Input.Unhandled.KeyDown += Keyboard_KeyDown;
         }
 
         private void gameControl_Update(object sender, EventArgs e)
@@ -27,26 +49,33 @@ namespace Xle.Services.XleSystem.Implementation
             throw new NotImplementedException();
             //if (AgateConsole.IsVisible == false)
             //{
-            //    CheckArrowKeys();
             //}
         }
 
-        private void Keyboard_KeyDown(object sender, object /*AgateInputEventArgs */e)
+        public void OnKeyDown(Keys key)
+        {
+            pressedKeys.Add(key);
+        }
+
+        public void OnKeyUp(Keys key)
+        {
+            pressedKeys.Remove(key);
+        }
+
+        public async void OnKeyPress(Keys key)
         {
             if (AcceptKey == false)
                 return;
-            //if (e.Keys == AgateConsole.VisibleToggleKey)
-            //    return;
-            throw new NotImplementedException();
-            //try
-            //{
-            //    AcceptKey = false;
-            //    OnDoCommand(e.Keys);
-            //}
-            //finally
-            //{
-            //    AcceptKey = true;
-            //}
+
+            try
+            {
+                AcceptKey = false;
+                OnDoCommand(key);
+            }
+            finally
+            {
+                AcceptKey = true;
+            }
         }
 
         private void OnDoCommand(Keys command)
@@ -58,7 +87,11 @@ namespace Xle.Services.XleSystem.Implementation
 
         public bool AcceptKey { get; set; }
 
-        public void CheckArrowKeys()
+        private Keys[] arrowKeys = new[] {
+            Keys.Down, Keys.Left, Keys.Up, Keys.Right
+        };
+
+        public void Update(GameTime gameTime)
         {
             if (AcceptKey == false)
                 return;
@@ -69,15 +102,14 @@ namespace Xle.Services.XleSystem.Implementation
             {
                 AcceptKey = false;
 
-                //if (Input.Unhandled.Keys[Keys.Down])
-                //    OnDoCommand(Keys.Down);
-                //else if (Input.Unhandled.Keys[Keys.Left])
-                //    OnDoCommand(Keys.Left);
-                //else if (Input.Unhandled.Keys[Keys.Up])
-                //    OnDoCommand(Keys.Up);
-                //else if (Input.Unhandled.Keys[Keys.Right])
-                //    OnDoCommand(Keys.Right);
-                throw new NotImplementedException();
+                foreach (var key in arrowKeys)
+                {
+                    if (pressedKeys.Contains(key))
+                    {
+                        OnDoCommand(key);
+                        break;
+                    }
+                }
             }
             finally
             {

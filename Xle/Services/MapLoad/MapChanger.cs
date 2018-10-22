@@ -5,9 +5,21 @@ using Xle.Services.Rendering;
 using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework;
 using System;
+using AgateLib;
 
-namespace Xle.Services.MapLoad.Implementation
+namespace Xle.Services.MapLoad
 {
+    public interface IMapChanger
+    {
+        void SetMap(IMapExtender map);
+
+        void ChangeMap(int mapId, int entryPoint);
+        void ChangeMap(int mapId, Point targetPoint);
+
+        void ReturnToPreviousMap();
+    }
+
+    [Singleton]
     public class MapChanger : IMapChanger
     {
         private GameState gameState;

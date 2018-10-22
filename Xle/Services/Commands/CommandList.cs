@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Xle.Services.Commands
 {
-    public interface ICommandList : IXleService
+    public interface ICommandList
     {
         List<ICommand> Items { get; }
 

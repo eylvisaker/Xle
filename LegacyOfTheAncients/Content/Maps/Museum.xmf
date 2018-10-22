@@ -1,45 +1,45 @@
-<XleRoot type="ERY.Xle.Maps.XleMapTypes.Museum" Width="25" Height="40">
+<XleRoot type="Xle.Maps.XleMapTypes.Museum" Width="25" Height="40">
   <MapName>Museum</MapName>
   <ExtenderName>LotaMuseum</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="null" />
   <TileImage>DungeonTiles.png</TileImage>
   <OutsideTile>0</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEvent" />
-  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
+  <Events array="true" type="Xle.XleEvent" />
+  <EntryPoints array="true" type="Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="8" Y="1" />
+      <Location type="Microsoft.Xna.Framework.Point" X="8" Y="1" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="21" Y="7" />
+      <Location type="Microsoft.Xna.Framework.Point" X="21" Y="7" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>West</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="12" Y="28" />
+      <Location type="Microsoft.Xna.Framework.Point" X="12" Y="28" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="3" Y="7" />
+      <Location type="Microsoft.Xna.Framework.Point" X="3" Y="7" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>North</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="3" Y="20" />
+      <Location type="Microsoft.Xna.Framework.Point" X="3" Y="20" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="22" Y="26" />
+      <Location type="Microsoft.Xna.Framework.Point" X="22" Y="26" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>North</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="3" Y="26" />
+      <Location type="Microsoft.Xna.Framework.Point" X="3" Y="26" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

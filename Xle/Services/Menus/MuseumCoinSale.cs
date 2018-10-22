@@ -1,11 +1,20 @@
-﻿using Xle.Data;
+﻿using System;
+using Xle.Data;
 using Xle.Services.Game;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
-using System;
 
-namespace Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus
 {
+    public interface IMuseumCoinSale
+    {
+        void OfferMuseumCoin();
+
+        bool RollToOfferCoin();
+
+        void ResetCoinOffers();
+    }
+
     public abstract class MuseumCoinSale : IMuseumCoinSale
     {
         public Random Random { get; set; }

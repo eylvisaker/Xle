@@ -1,10 +1,10 @@
-<XleRoot type="ERY.Xle.Maps.XleMapTypes.Castle">
+<XleRoot type="Xle.Maps.XleMapTypes.Castle">
   <MapName>isle city</MapName>
   <ExtenderName>FortressEntry</ExtenderName>
   <MapID>0</MapID>
-  <TileSet type="ERY.Xle.TileSet">
+  <TileSet type="Xle.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,1,1,0,1,1,1,1,1,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,0,0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1</Tiles>
-    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup">
+    <TileGroups array="true" type="Xle.Maps.TileGroup">
       <Item>
         <Tiles array="true" encoding="Csv">12,13,14,15,28,29,30,31,44,45,46,47,60,61,62,63</Tiles>
         <AnimationTime>125</AnimationTime>
@@ -79,8 +79,8 @@
   </TileSet>
   <TileImage>LotaFortress</TileImage>
   <OutsideTile>0</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+  <Events array="true" type="Xle.XleEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>99</X>
       <Y>31</Y>
       <Width>1</Width>
@@ -92,28 +92,28 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Script">
+    <Item type="Xle.XleEventTypes.Script">
       <X>14</X>
       <Y>34</Y>
       <Width>24</Width>
       <Height>2</Height>
       <ExtenderName>Elevator</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Script">
+    <Item type="Xle.XleEventTypes.Script">
       <X>38</X>
       <Y>42</Y>
       <Width>17</Width>
       <Height>13</Height>
       <ExtenderName>MagicIce</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Script">
+    <Item type="Xle.XleEventTypes.Script">
       <X>39</X>
       <Y>22</Y>
       <Width>8</Width>
       <Height>6</Height>
       <ExtenderName>GasTrap</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+    <Item type="Xle.XleEventTypes.TreasureChestEvent">
       <X>28</X>
       <Y>22</Y>
       <Width>2</Width>
@@ -122,28 +122,28 @@
       <ContainsItem>False</ContainsItem>
       <Contents>0</Contents>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Script">
+    <Item type="Xle.XleEventTypes.Script">
       <X>77</X>
       <Y>25</Y>
       <Width>1</Width>
       <Height>3</Height>
       <ExtenderName>GuardWarning</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Script">
+    <Item type="Xle.XleEventTypes.Script">
       <X>93</X>
       <Y>47</Y>
       <Width>2</Width>
       <Height>3</Height>
       <ExtenderName>SeeCompendium</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Script">
+    <Item type="Xle.XleEventTypes.Script">
       <X>25</X>
       <Y>45</Y>
       <Width>12</Width>
       <Height>9</Height>
       <ExtenderName>SpeakGuard</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.TreasureChestEvent">
+    <Item type="Xle.XleEventTypes.TreasureChestEvent">
       <X>99</X>
       <Y>47</Y>
       <Width>2</Width>
@@ -153,14 +153,14 @@
       <Contents>0</Contents>
     </Item>
   </Events>
-  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
+  <EntryPoints array="true" type="Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="4" Y="34" />
+      <Location type="Microsoft.Xna.Framework.Point" X="4" Y="34" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>
-  <Roofs array="true" type="ERY.Xle.Maps.Roof">
+  <Roofs array="true" type="Xle.Maps.Roof">
     <Item>
       <X>96</X>
       <Y>30</Y>
@@ -169,12 +169,12 @@
       <RoofData array="true" encoding="Csv">0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,27,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,27,11,11,11,0</RoofData>
     </Item>
   </Roofs>
-  <Guards type="ERY.Xle.Maps.GuardList">
+  <Guards type="Xle.Maps.GuardList">
     <GuardDefaultAttack>99</GuardDefaultAttack>
     <GuardDefaultDefense>0</GuardDefaultDefense>
     <GuardDefaultHP>110</GuardDefaultHP>
     <GuardDefaultColor>-3418267</GuardDefaultColor>
-    <Guards array="true" type="ERY.Xle.Maps.Guard">
+    <Guards array="true" type="Xle.Maps.Guard">
       <Item>
         <X>30</X>
         <Y>8</Y>

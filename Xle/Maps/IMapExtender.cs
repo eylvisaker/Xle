@@ -9,7 +9,7 @@ namespace Xle.Maps
 {
     public interface IMapExtender
     {
-        XleMap TheMap { get; }
+        XleMap TheMap { get; set; }
         int WaitTimeAfterStep { get; }
         XleMapRenderer MapRenderer { get; }
         IReadOnlyList<EventExtender> Events { get; }

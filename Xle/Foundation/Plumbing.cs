@@ -4,18 +4,18 @@ using AgateLib.Scenes;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using Xle.Bootstrap;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Xle.Bootstrap;
 
 namespace Xle.Foundation
 {
-    public class Plumbing : IServiceLocator
+    public class Plumbing : IAgateServiceLocator
     {
-        internal class ScopedContainer : IServiceLocatorScope
+        internal class ScopedContainer : IAgateServiceLocatorScope
         {
             private readonly ILifetimeScope lifetimeScope;
 
@@ -88,37 +88,6 @@ namespace Xle.Foundation
                     from type in assembly.GetTypes()
                     let typeinfo = type.GetTypeInfo()
                     let transient = typeinfo.GetCustomAttribute<TransientAttribute>()
-                    where transient != null
-                          && typeinfo.IsPublic && !typeinfo.IsAbstract
-                    select new { InstanceType = type, TypeInfo = typeinfo, Transient = transient };
-
-                foreach (var type in types)
-                {
-                    var registration = builder
-                        .RegisterType(type.InstanceType)
-                        .AsImplementedInterfaces()
-                        .AsSelf()
-                        .InstancePerDependency();
-
-                    WireProperties(registration, type.TypeInfo);
-
-                    if (!string.IsNullOrWhiteSpace(type.Transient.Name))
-                    {
-                        var interfaces = type.InstanceType.GetTypeInfo().ImplementedInterfaces;
-
-                        foreach (var interf in interfaces)
-                        {
-                            registration.Named(type.Transient.Name, interf);
-                        }
-                    }
-                }
-            }
-            foreach (var assembly in assemblies)
-            {
-                var types =
-                    from type in assembly.GetTypes()
-                    let typeinfo = type.GetTypeInfo()
-                    let transient = typeinfo.GetCustomAttribute<AgateLib.TransientAttribute>()
                     where transient != null
                           && typeinfo.IsPublic && !typeinfo.IsAbstract
                     select new { InstanceType = type, TypeInfo = typeinfo, Transient = transient };
@@ -253,7 +222,7 @@ namespace Xle.Foundation
 
         private void RegisterSystemModules()
         {
-            builder.RegisterInstance(this).As<IServiceLocator>();
+            builder.RegisterInstance(this).As<IAgateServiceLocator>();
             builder.RegisterInstance(new Random()).As<Random>();
             builder.RegisterInstance(new SceneStack()).As<ISceneStack>().As<SceneStack>();
         }
@@ -263,36 +232,62 @@ namespace Xle.Foundation
             if (container == null)
                 throw new InvalidOperationException("Cannot resolve services before Complete is called.");
 
-            try
-            {
-                return container.Resolve<T>();
-            }
-            catch (Exception e)
-            {
-                if (Debugger.IsAttached)
-                {
-                    Debugger.Break();
-                }
-
-                Resolve<IConsole>().WriteLine($"Failed to resolve {typeof(T).Name}.\n{e.ToString()}");
-                throw;
-            }
+            return ResolveAndDebug<T>(c => c.Resolve<T>());
         }
 
         public T Resolve<T>(object anonymousObjectArguments)
         {
             var parameters = BuildParameterList(anonymousObjectArguments);
 
-            return container.Resolve<T>(parameters);
+            return ResolveAndDebug<T>(c => c.Resolve<T>(parameters));
         }
 
-        public T ResolveNamed<T>(string name) => container.ResolveNamed<T>(name);
+        public T ResolveNamed<T>(string name)
+        {
+            return ResolveAndDebug<T>(c => c.ResolveNamed<T>(name));
+        }
 
         public T ResolveNamed<T>(string name, object anonymousObjectArguments)
         {
             var parameters = BuildParameterList(anonymousObjectArguments);
 
-            return container.ResolveNamed<T>(name, parameters);
+            return ResolveAndDebug<T>(c => c.ResolveNamed<T>(name, parameters));
+        }
+
+        private T ResolveAndDebug<T>(Func<IContainer, T> resolver)
+        {
+            try
+            {
+                return resolver(container);
+            }
+            catch (Exception ex)
+            {
+                if (Debugger.IsAttached)
+                {
+
+                    // Autofac was not able to resolve a dependency.
+                    // This usually means that an object has not been 
+                    // registered with the plumbing system by applying
+                    // an attribute like [Singleton] or [Transient].
+                    // The message on the innermost exception will tell 
+                    // what dependency was not met.
+                    string innerMostMessage = InnerMostException(ex).Message;
+
+                    Debug.WriteLine($"Failed to resolve dependency: {innerMostMessage}");
+                    Debugger.Break();
+                }
+
+                Resolve<IConsole>().WriteLine($"Failed to resolve {typeof(T).Name}.\n{ex.ToString()}");
+                throw;
+            }
+        }
+
+        private Exception InnerMostException(Exception ex)
+        {
+            if (ex?.InnerException != null)
+                return InnerMostException(ex.InnerException);
+
+            return ex;
         }
 
         public static List<Parameter> BuildParameterList(object anonymousObjectArguments)
@@ -307,7 +302,7 @@ namespace Xle.Foundation
         }
 
 
-        public IServiceLocatorScope BeginScope()
+        public IAgateServiceLocatorScope BeginScope()
         {
             return new ScopedContainer(container.BeginLifetimeScope());
         }

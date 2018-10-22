@@ -1,79 +1,59 @@
-﻿using AgateLib.Quality;
+﻿using AgateLib;
+using AgateLib.Quality;
 
 using Xle.Services.Commands;
 using Xle.Services.Game;
 using Xle.Services.MapLoad;
 using Xle.Services.ScreenModel;
 
-namespace Xle.Services.XleSystem.Implementation
+namespace Xle.Services.XleSystem
 {
+    public interface IXleRunner
+    {
+        void Run(Player player);
+    }
+
+    [Singleton]
     public class XleRunner : IXleRunner
     {
         private XleSystemState systemState;
-        private ITitleScreenFactory titleScreenFactory;
         private ITextArea textArea;
         private IXleInput input;
         private GameState gameState;
         private ICommandExecutor commandExecutor;
         private IMapLoader mapLoader;
-        private IXleScreen screen;
-        private IXleGameControl gameControl;
         private IMapChanger mapChanger;
+        private readonly IXleGameFactory gameFactory;
 
         public XleRunner(
             XleSystemState systemState,
-            ITitleScreenFactory titleScreenFactory,
             ITextArea textArea,
             IXleInput input,
-            IXleScreen screen,
             ICommandExecutor commandExecutor,
             IMapLoader mapLoader,
-            IXleGameControl gameControl,
             IMapChanger mapChanger,
+            IXleGameFactory gameFactory,
             GameState gameState)
         {
-            this.screen = screen;
             this.systemState = systemState;
-            this.titleScreenFactory = titleScreenFactory;
             this.textArea = textArea;
             this.input = input;
             this.commandExecutor = commandExecutor;
             this.mapLoader = mapLoader;
-            this.gameControl = gameControl;
             this.mapChanger = mapChanger;
+            this.gameFactory = gameFactory;
             this.gameState = gameState;
         }
 
-        public void Run(IXleGameFactory factory)
-        {
-            Require.ArgumentNotNull(factory, "factory");
-
-            try
-            {
-                IXleTitleScreen titleScreen;
-
-                do
-                {
-                    gameState.Initialize();
-
-                    titleScreen = titleScreenFactory.CreateTitleScreen();
-                    titleScreen.Run();
-                    systemState.ReturnToTitle = false;
-
-                    RunGame(titleScreen.Player);
-
-                } while (titleScreen.Player != null);
-            }
-            catch (MainWindowClosedException)
-            { }
-        }
-
-        private void RunGame(Player thePlayer)
+        public void Run(Player thePlayer)
         {
             if (thePlayer == null)
                 return;
 
             gameState.Initialize(thePlayer);
+
+            systemState.Factory = gameFactory;
+            systemState.Factory.LoadSurfaces();
             systemState.Factory.SetGameSpeed(gameState, thePlayer.Gamespeed);
 
             var map = mapLoader.LoadMap(gameState.Player.MapID);
@@ -83,9 +63,6 @@ namespace Xle.Services.XleSystem.Implementation
 
             textArea.Clear();
             commandExecutor.Prompt();
-
-            gameControl.RunRedrawLoop();
         }
-
     }
 }

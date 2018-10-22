@@ -10,7 +10,7 @@ using Xle.Services.Rendering.Maps;
 using Xunit;
 using Moq;
 
-namespace Xle.LegacyOfTheAncients.Outside
+namespace Xle.Ancients.Outside
 {
 	public class OutsideEncountersTest : LotaTest
 	{
@@ -29,7 +29,7 @@ namespace Xle.LegacyOfTheAncients.Outside
 			oe.MapRenderer = encounterRenderer.Object;
 			oe.SoundMan = Services.SoundMan.Object;
 
-			oe.Data.MonsterInfoList.Add(new MonsterInfo());
+			oe.Data.MonsterInfo.Add(new MonsterInfo());
 		}
 
 		[Fact]

@@ -18,6 +18,7 @@ namespace Xle.Services.ScreenModel
         /// Set to true to show the (press to cont) prompt.
         /// </summary>
         bool PromptToContinue { get; set; }
+        Color BorderColor { get; set; }
 
         event EventHandler Draw;
         event EventHandler Update;
@@ -62,6 +63,8 @@ namespace Xle.Services.ScreenModel
         public bool PromptToContinue { get; set; }
 
         public Color FontColor { get; set; }
+
+        public Color BorderColor { get; set; } = XleColor.DarkGray;
 
         public void OnDraw()
         {

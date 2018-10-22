@@ -5,9 +5,11 @@ using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using AgateLib;
 
 namespace Xle.Ancients.MapExtenders.Museum
 {
+    [Transient("LotaMuseum")]
     public class LotaMuseum : MuseumExtender
     {
         private Dictionary<int, Exhibit> mExhibits = new Dictionary<int, Exhibit>();

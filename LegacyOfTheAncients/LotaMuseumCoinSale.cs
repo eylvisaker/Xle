@@ -1,13 +1,15 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xle.Services.Menus;
 using Xle.Services.Menus.Implementation;
 
 namespace Xle.Ancients
 {
+    [Singleton]
     public class LotaMuseumCoinSale : MuseumCoinSale
     {
         List<int> mMuseumCoinOffers = new List<int>();

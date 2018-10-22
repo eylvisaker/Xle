@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameVariableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lota3DSurfaces.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LotaInitializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaMuseumCoinSale.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaProgram.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaStory.cs" />

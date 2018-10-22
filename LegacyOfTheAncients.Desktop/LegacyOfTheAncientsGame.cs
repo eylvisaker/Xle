@@ -47,6 +47,9 @@ namespace LegacyOfTheAncients.Desktop
             
             plumbing.Complete();
 
+            var initializer = plumbing.Resolve<IInitializer>();
+            initializer.Initialize();
+
             lota = plumbing.Resolve<LotaProgram>();
         }
 

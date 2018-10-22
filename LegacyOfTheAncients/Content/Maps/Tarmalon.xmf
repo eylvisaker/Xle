@@ -1,16 +1,16 @@
-<XleRoot type="ERY.Xle.Maps.XleMapTypes.Outside">
+<XleRoot type="Xle.Maps.XleMapTypes.Outside">
   <MapName>Tarmalon</MapName>
   <ExtenderName>Tarmalon</ExtenderName>
   <MapID>0</MapID>
-  <TileSet type="ERY.Xle.TileSet">
+  <TileSet type="Xle.TileSet">
     <Tiles array="true" encoding="Base64">
     </Tiles>
-    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
+    <TileGroups array="true" type="Xle.Maps.TileGroup" />
   </TileSet>
   <TileImage>LotaOutside</TileImage>
   <OutsideTile>0</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+  <Events array="true" type="Xle.XleEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>18</X>
       <Y>56</Y>
       <Width>1</Width>
@@ -22,7 +22,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>68</X>
       <Y>78</Y>
       <Width>1</Width>
@@ -34,7 +34,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>42</X>
       <Y>8</Y>
       <Width>1</Width>
@@ -46,7 +46,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>10</X>
       <Y>32</Y>
       <Width>1</Width>
@@ -58,7 +58,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>6</X>
       <Y>108</Y>
       <Width>1</Width>
@@ -70,7 +70,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>52</X>
       <Y>106</Y>
       <Width>1</Width>
@@ -82,7 +82,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>72</X>
       <Y>72</Y>
       <Width>1</Width>
@@ -94,7 +94,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>104</X>
       <Y>110</Y>
       <Width>1</Width>
@@ -106,7 +106,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>116</X>
       <Y>58</Y>
       <Width>1</Width>
@@ -118,7 +118,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>64</X>
       <Y>42</Y>
       <Width>1</Width>
@@ -130,7 +130,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>74</X>
       <Y>22</Y>
       <Width>1</Width>
@@ -142,7 +142,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>114</X>
       <Y>42</Y>
       <Width>1</Width>
@@ -154,7 +154,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>114</X>
       <Y>6</Y>
       <Width>1</Width>
@@ -167,10 +167,10 @@
       </CommandText>
     </Item>
   </Events>
-  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
+  <EntryPoints array="true" type="Xle.Maps.EntryPoint">
     <Item>
       <Facing>West</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="115" Y="40" />
+      <Location type="Microsoft.Xna.Framework.Point" X="115" Y="40" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

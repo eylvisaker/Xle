@@ -91,7 +91,7 @@
     <MagicSpell ID="5" ItemID="28" BasePrice="379"  MaxCarry="20" Name="Kill Flash" />
     <MagicSpell ID="6" ItemID="29" BasePrice="51"  MaxCarry="100" Name="Seek Spell" />
   </MagicSpells>
-  <OutsideMonsters Image="OverworldMonsters.png" TileSize="50,50">
+  <OutsideMonsters Image="OverworldMonsters" TileSize="50,50">
     <Monster ID="0" Name="pixie" HP="20" Attack="30" Defense="30" Gold="4" Food="0" Terrain="-1" Intelligent="true" />
     <Monster ID="1" Name="strider" HP="25" Attack="40" Defense="35" Gold="6" Food="0" Terrain="-1" Intelligent="true" />
     <Monster ID="2" Name="farmer" HP="20" Attack="45" Defense="20" Gold="3" Food="0" Terrain="-1" Intelligent="true" />
@@ -126,7 +126,7 @@
     <Monster ID="31" Name="maston leaper" HP="35" Attack="90" Defense="45" Gold="40" Food="12" Terrain="1" Vulnerability="3" />
   </OutsideMonsters>
   <Exhibits>
-    <Exhibit ID="0" Image="Information.png">
+    <Exhibit ID="0" Image="Information">
       <Text ID="0">
         |`white` You have done well since I last saw
         | you.  By my power as caretaker...
@@ -218,7 +218,7 @@
         |difficult to reach."`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="1" Image="Welcome.png">
+    <Exhibit ID="1" Image="Welcome">
       <Text ID="1">
         |Welcome, noble traveler, to this
         |galactic museum on the planet of
@@ -269,7 +269,7 @@
         |``              Good luck.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="2" Image="Weaponry.png">
+    <Exhibit ID="2" Image="Weaponry">
       <Text ID="1">
         |`image:0`Eons ago, nomadic warriors roamed the
         |planet tarmalon.  They hunted and
@@ -293,7 +293,7 @@
         |is now in your possession.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="3" Image="Thornberry.png">
+    <Exhibit ID="3" Image="Thornberry">
       <Text ID="1">
         |This exhibit shows a typical tarmalon
         |town called thornberry.  The town was
@@ -313,7 +313,7 @@
         |your trip.
       </Text>
     </Exhibit>
-    <Exhibit ID="4" Image="Fountain.png">
+    <Exhibit ID="4" Image="Fountain">
       <Text ID="1">
         |Here you see a replica of the famous
         |`purple`enchanted flower fountain`cyan`.  Legend
@@ -338,7 +338,7 @@
         |As a reward, `yellow``wait:off``sound:VeryGood`Charm:  +10`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="5" Image="PirateTreasure.png">
+    <Exhibit ID="5" Image="PirateTreasure">
       <Text ID="1">
         |Tarmalon's deep ocean waters are so
         |turbulent that few trading ships ever
@@ -370,7 +370,7 @@
         |a priceless sapphire!
       </Text>
     </Exhibit>
-    <Exhibit ID="6" Image="HerbOfLife.png">
+    <Exhibit ID="6" Image="HerbOfLife">
       <Text ID="1">
         |Planet natives believe in the curative
         |power of a variety of "healing herbs."
@@ -385,7 +385,7 @@
         |sample one.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="7" Image="NativeCurrency.png">
+    <Exhibit ID="7" Image="NativeCurrency">
       <Text ID="1">
         |Different planets have different
         |treasures.  On Tarmalon, as on
@@ -397,7 +397,7 @@
         |are welcome to a sample.`pause``clear`
       </Text>
     </Exhibit>
-    <Exhibit ID="8" Image="StonesOfWisdom.png">
+    <Exhibit ID="8" Image="StonesOfWisdom">
       <Text ID="1">
         |`white`Stones of wisdom`cyan` is probably the most
         |popular bar-room game on tarmalon.
@@ -405,7 +405,7 @@
         |develop a player's intelligence.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="9" Image="Tapestry.png">
+    <Exhibit ID="9" Image="Tapestry">
       <Text ID="1">
         |This giant tapestry is actually a map
         |of the planet Tarmalon.  It's the only
@@ -422,7 +422,7 @@
         |of these islands.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="10" Image="LostDisplays.png">
+    <Exhibit ID="10" Image="LostDisplays">
       <Text ID="1">
         |As you well know, some exhibits in
         |this museum can be deadly.  But you
@@ -440,7 +440,7 @@
         |Probably, you don't.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="11" Image="TheTest.png">
+    <Exhibit ID="11" Image="TheTest">
       <Text ID="1">
         |The underground catacombs of armak
         |are infamous for their twisting
@@ -461,7 +461,7 @@
         |the payoff greater!!`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="12" Image="FourJewels.png">
+    <Exhibit ID="12" Image="FourJewels">
       <Text ID="1">
         |This exhibit shows the gateway to
         |Tarmalon's most dangerous dungeon.  It
@@ -474,7 +474,7 @@
         |that nobody has yet emerged alive.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="13" Image="Guardian.png">
+    <Exhibit ID="13" Image="Guardian">
       <Text ID="1">
         |Legends say that 13 great wizards
         |once ruled Tarmalon, but that little
@@ -488,7 +488,7 @@
         |word `yellow`"Guardians"`cyan` will open his door.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="14" Image="Pegasus.png">
+    <Exhibit ID="14" Image="Pegasus">
       <Text ID="1">
         |This magnificent beast was found
         |frozen to a high cliff near the
@@ -504,7 +504,7 @@
         |climb on.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="15" Image="AncientArtifact.png"></Exhibit>
+    <Exhibit ID="15" Image="AncientArtifact"></Exhibit>
   </Exhibits>
   <DungeonExtras>
     <Extra ID="1" Name="Treasure Chest">
@@ -666,7 +666,7 @@
     </Extra>
   </DungeonExtras>
   <DungeonMonsters>
-    <Monster ID="0" Name="nerve streaker" ImageFile="monster00.png">
+    <Monster ID="0" Name="nerve streaker" ImageFile="monster00">
       <Image dest_x="106" dest_y="28">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -683,7 +683,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="1" Name="gnasher turtle" ImageFile="monster01.png">
+    <Monster ID="1" Name="gnasher turtle" ImageFile="monster01">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -700,7 +700,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="2" Name="tendro snapper" ImageFile="monster02.png">
+    <Monster ID="2" Name="tendro snapper" ImageFile="monster02">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -717,7 +717,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="3" Name="night stalker" ImageFile="monster03.png">
+    <Monster ID="3" Name="night stalker" ImageFile="monster03">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -734,7 +734,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="4" Name="grappler" ImageFile="monster04.png">
+    <Monster ID="4" Name="grappler" ImageFile="monster04">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -751,7 +751,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="5" Name="knuckles" ImageFile="monster05.png">
+    <Monster ID="5" Name="knuckles" ImageFile="monster05">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -768,7 +768,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="6" Name="dangler" ImageFile="monster06.png">
+    <Monster ID="6" Name="dangler" ImageFile="monster06">
       <Image dest_x="106" dest_y="28">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -785,7 +785,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="7" Name="mr potato" ImageFile="monster07.png">
+    <Monster ID="7" Name="mr potato" ImageFile="monster07">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -802,7 +802,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="8" Name="raker brute" ImageFile="monster08.png">
+    <Monster ID="8" Name="raker brute" ImageFile="monster08">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -819,7 +819,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="9" Name="blue lion" ImageFile="monster09.png">
+    <Monster ID="9" Name="blue lion" ImageFile="monster09">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -836,7 +836,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="10" Name="giant slug" ImageFile="monster10.png">
+    <Monster ID="10" Name="giant slug" ImageFile="monster10">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -853,7 +853,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="11" Name="slime wart" ImageFile="monster11.png">
+    <Monster ID="11" Name="slime wart" ImageFile="monster11">
       <Image dest_x="106" dest_y="110">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>

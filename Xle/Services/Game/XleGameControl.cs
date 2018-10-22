@@ -14,12 +14,6 @@ namespace Xle.Services.Game
 
         [Obsolete("await WaitAsync instead")]
         void Wait(int howLong, bool keyBreak = false, Action redraw = null);
-
-        void RunRedrawLoop();
-
-        void Redraw(GameTime time);
-
-        void KeepAlive(GameTime time);
     }
 
     [Singleton]
@@ -64,16 +58,6 @@ namespace Xle.Services.Game
 
             throw new NotImplementedException();
             //AgateApp.KeepAlive();
-        }
-
-        public void RunRedrawLoop()
-        {
-            throw new NotImplementedException();
-            //while (AgateApp.IsAlive &&
-            //    systemState.ReturnToTitle == false)
-            //{
-            //    Redraw();
-            //}
         }
 
         public void Redraw(GameTime time)

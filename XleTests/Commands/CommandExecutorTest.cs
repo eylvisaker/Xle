@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.Commands
+namespace Xle.Services.Commands
 {
     public class CommandExecutorTest : XleTest
     {

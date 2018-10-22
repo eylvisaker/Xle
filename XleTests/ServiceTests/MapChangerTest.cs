@@ -2,7 +2,6 @@
 using Xle.Maps;
 using Xle.Maps.XleMapTypes;
 using Xle.Services.Commands;
-using Xle.Services.MapLoad.Implementation;
 using Xle.Services.Menus;
 using FluentAssertions;
 using Microsoft.Xna.Framework;
@@ -10,7 +9,7 @@ using Moq;
 using System;
 using Xunit;
 
-namespace Xle.ServiceTests
+namespace Xle.Services.MapLoad
 {
     public class MapChangerTest : XleTest
     {
