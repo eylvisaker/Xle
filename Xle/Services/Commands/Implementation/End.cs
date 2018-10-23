@@ -1,10 +1,12 @@
-﻿using Xle.Services.Game;
+﻿using AgateLib;
+using Xle.Ancients;
+using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.XleSystem;
-using Xle.Ancients;
 
 namespace Xle.Services.Commands.Implementation
 {
+    [Transient]
     public class End : Command
     {
         private IQuickMenu menu;

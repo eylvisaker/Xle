@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 using Xle.Maps.Dungeons.Commands;
-using Xle.Services;
 
 namespace Xle.Ancients.MapExtenders.Dungeons.Commands
 {
-    [ServiceName("LotaDungeonXamine")]
+    [Transient("LotaDungeonXamine")]
     public class LotaDungeonXamine : DungeonXamine
     {
         private bool printLevelDuringXamine;

@@ -6,9 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Services.Commands.Implementation
 {
+    public interface IItemChooser
+    {
+        int ChooseItem();
+    }
+
+    [Singleton]
     public class ItemChooser : IItemChooser
     {
         public ITextArea TextArea { get; set; }
@@ -57,10 +64,5 @@ namespace Xle.Services.Commands.Implementation
             return Data.ItemList.Where(x => x.Value.Name == selectedName)
                 .Select(x => x.Key).First();
         }
-    }
-
-    public interface IItemChooser : IXleService
-    {
-        int ChooseItem();
     }
 }

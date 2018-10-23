@@ -1,9 +1,11 @@
 ﻿
-using Xle.Services.MapLoad;
+using AgateLib;
 using Microsoft.Xna.Framework;
+using Xle.Services.MapLoad;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class KnightsTest : LotaExhibit
     {
         public KnightsTest() : base("The Test", Coin.Sapphire) { }

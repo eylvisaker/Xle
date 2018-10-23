@@ -24,9 +24,6 @@ namespace Xle.Services.Rendering
 
         public void LoadTiles(string tileset)
         {
-            if (tileset.EndsWith(".png") == false)
-                tileset += ".png";
-
             Tiles = content.Load<Texture2D>("Images/" + tileset);
         }
     }

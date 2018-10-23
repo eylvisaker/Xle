@@ -1,6 +1,8 @@
 ﻿namespace Xle.Services.Commands.Implementation
 {
-    public class Xamine : Command
+    public interface IXamine : ICommand { }
+
+    public class Xamine : Command, IXamine
     {
         public override string Name
         {

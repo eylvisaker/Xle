@@ -1,7 +1,9 @@
-﻿using Xle.Services.Menus;
+﻿using AgateLib;
+using Xle.Services.Menus;
 
 namespace Xle.Services.Commands.Implementation
 {
+    [Transient]
     public class Leave : Command
     {
         public Leave(

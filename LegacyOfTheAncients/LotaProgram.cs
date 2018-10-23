@@ -18,6 +18,14 @@ namespace Xle.Ancients
     {
         private static ICommandFactory commandFactory;
 
+        // Copy these instead:
+        //    commands.Items.Add(CommandFactory.Armor());
+        //    commands.Items.Add(CommandFactory.Gamespeed());
+        //    commands.Items.Add(CommandFactory.Hold());
+        //    commands.Items.Add(CommandFactory.Inventory());
+        //    commands.Items.Add(CommandFactory.Pass());
+        //    commands.Items.Add(CommandFactory.Weapon());
+
         public static IEnumerable<Command> CommonLotaCommands
         {
             get

@@ -1,8 +1,10 @@
-﻿using Xle.Services.MapLoad;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using Xle.Services.MapLoad;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class FourJewels : LotaExhibit
     {
         public FourJewels() : base("Four Jewels", Coin.Ruby) { }

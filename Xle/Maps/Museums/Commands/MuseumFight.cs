@@ -1,13 +1,13 @@
 ﻿
+using AgateLib;
+using Microsoft.Xna.Framework;
 using Xle.Maps.XleMapTypes;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
-using Microsoft.Xna.Framework;
 
 namespace Xle.Maps.Museums.Commands
 {
-    [ServiceName("MuseumFight")]
+    [Transient("MuseumFight")]
     public class MuseumFight : Fight
     {
         private Museum Map { get { return (Museum)GameState.Map; } }

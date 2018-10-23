@@ -1,9 +1,7 @@
-﻿
-using Xle;
-using Xle.Services.Menus.Implementation;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.Xna.Framework;
 using Moq;
+using Xle.Services.Menus;
 using Xunit;
 
 namespace Xle.ServiceTests

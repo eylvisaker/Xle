@@ -7,7 +7,8 @@ using Xle.Services.XleSystem;
 
 namespace Xle.Services.Commands.Implementation
 {
-    public abstract class Fight : Command
+    public interface IFight : ICommand { }
+    public abstract class Fight : Command, IFight
     {
         public IXleGameControl GameControl { get; set; }
         public ISoundMan SoundMan { get; set; }

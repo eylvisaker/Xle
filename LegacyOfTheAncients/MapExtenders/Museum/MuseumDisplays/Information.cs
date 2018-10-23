@@ -1,11 +1,9 @@
-﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class Information : LotaExhibit
     {
         public Information() : base("Information", Coin.None) { }
@@ -16,8 +14,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             get { return string.Empty; }
         }
 
-
-        int ExhibitState
+        private int ExhibitState
         {
             get { return Story.Museum[0]; }
             set { Story.Museum[0] = value; }
@@ -52,19 +49,19 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             return result;
         }
 
-
-
-        bool FirstUse
+        private bool FirstUse
         {
             get { return GetBit(0); }
             set { SetBit(0, value); }
         }
-        bool LostCompendiumText
+
+        private bool LostCompendiumText
         {
             get { return GetBit(1); }
             set { SetBit(1, value); }
         }
-        bool SceptorCrownHint
+
+        private bool SceptorCrownHint
         {
             get { return GetBit(2); }
             set { SetBit(2, value); }

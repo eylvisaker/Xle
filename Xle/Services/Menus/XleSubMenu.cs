@@ -3,9 +3,17 @@ using Xle.Services.Game;
 using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AgateLib;
+using Xle.Services.Menus.Implementation;
 
-namespace Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus
 {
+    public interface IXleSubMenu
+    {
+        int SubMenu(string title, int choice, MenuItemList items, Color? backColor = null);
+    }
+
+    [Singleton]
     public class XleSubMenu : IXleSubMenu
     {
         private readonly IXleGameControl gameControl;

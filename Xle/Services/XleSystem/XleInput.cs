@@ -18,7 +18,7 @@ namespace Xle.Services.XleSystem
 
         event EventHandler<CommandEventArgs> DoCommand;
 
-        void OnKeyPress(Keys key);
+        void OnKeyPress(Keys key, string keyString);
 
         void OnKeyDown(Keys key);
 
@@ -32,7 +32,7 @@ namespace Xle.Services.XleSystem
     {
         private GameState gameState;
         private IXleScreen screen;
-        private HashSet<Keys> pressedKeys;
+        private HashSet<Keys> pressedKeys = new HashSet<Keys>();
 
         public XleInput(
             IXleScreen screen,
@@ -40,17 +40,8 @@ namespace Xle.Services.XleSystem
         {
             this.screen = screen;
             this.gameState = gameState;
-
-            screen.Update += gameControl_Update;
         }
 
-        private void gameControl_Update(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-            //if (AgateConsole.IsVisible == false)
-            //{
-            //}
-        }
 
         public void OnKeyDown(Keys key)
         {
@@ -62,7 +53,7 @@ namespace Xle.Services.XleSystem
             pressedKeys.Remove(key);
         }
 
-        public async void OnKeyPress(Keys key)
+        public async void OnKeyPress(Keys key, string keyString)
         {
             if (AcceptKey == false)
                 return;
@@ -70,7 +61,7 @@ namespace Xle.Services.XleSystem
             try
             {
                 AcceptKey = false;
-                OnDoCommand(key);
+                OnDoCommand(key, keyString);
             }
             finally
             {
@@ -78,9 +69,9 @@ namespace Xle.Services.XleSystem
             }
         }
 
-        private void OnDoCommand(Keys command)
+        private void OnDoCommand(Keys command, string keyString)
         {
-            DoCommand?.Invoke(this, new CommandEventArgs(command));
+            DoCommand?.Invoke(this, new CommandEventArgs(command, keyString));
         }
 
         public event EventHandler<CommandEventArgs> DoCommand;
@@ -106,7 +97,7 @@ namespace Xle.Services.XleSystem
                 {
                     if (pressedKeys.Contains(key))
                     {
-                        OnDoCommand(key);
+                        OnDoCommand(key, "");
                         break;
                     }
                 }

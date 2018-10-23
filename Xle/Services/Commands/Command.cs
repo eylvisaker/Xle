@@ -1,7 +1,16 @@
-﻿using Xle.Services.ScreenModel;
+﻿using AgateLib;
+using Xle.Services.ScreenModel;
 
 namespace Xle.Services.Commands
 {
+    public interface ICommand
+    {
+        string Name { get; }
+
+        void Execute();
+    }
+
+    [InjectProperties]
     public abstract class Command : ICommand
     {
         public ITextArea TextArea { get; set; }

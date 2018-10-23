@@ -502,6 +502,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/Dungeon/PiratesLair/walls.png
 
+#begin Images/DungeonTiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/DungeonTiles.png
+
 #begin Images/font.png
 /importer:TextureImporter
 /processor:TextureProcessor

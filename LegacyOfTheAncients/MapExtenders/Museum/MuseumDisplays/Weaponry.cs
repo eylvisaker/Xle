@@ -1,11 +1,9 @@
-﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class Weaponry : LotaExhibit
     {
         public Weaponry() : base("Weaponry", Coin.Jade) { }
@@ -18,7 +16,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             }
         }
 
-        bool viewedThisTime;
+        private bool viewedThisTime;
 
         public override void RunExhibit()
         {

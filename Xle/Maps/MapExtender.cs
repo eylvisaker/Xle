@@ -1,4 +1,9 @@
-﻿using AgateLib.Quality;
+﻿using AgateLib;
+using AgateLib.Quality;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 using Xle.Data;
 using Xle.Services.Commands;
 using Xle.Services.Game;
@@ -9,13 +14,10 @@ using Xle.Services.Rendering.Maps;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 using Xle.XleEventTypes.Extenders;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
 
 namespace Xle.Maps
 {
+    [InjectProperties]
     public class MapExtender : IMapExtender
     {
         private XleMap mTheMap;

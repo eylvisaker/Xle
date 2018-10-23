@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 using Xle.Maps.Museums;
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Ancients.MapExtenders.Museum.Commands
 {
+    [Transient("MuseumRob")]
     public class MuseumRob : Rob
     {
-        MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
+        private MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
 
         public override void Execute()
         {

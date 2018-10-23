@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class AncientArtifact : LotaExhibit
     {
         public AncientArtifact() : base("Ancient Artifact", Coin.None) { }

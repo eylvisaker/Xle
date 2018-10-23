@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using Xle.Services.Commands.Implementation;
 
 namespace Xle.Ancients.MapExtenders.Museum.Commands
 {
-    [ServiceName("LotaMuseumRob")]
+    [Transient("LotaMuseumRob")]
     public class LotaMuseumRob : MuseumRob
     {
     }

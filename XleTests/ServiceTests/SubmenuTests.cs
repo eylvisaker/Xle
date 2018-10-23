@@ -1,10 +1,10 @@
-﻿using Xle;
-using Xle.Services.Game;
-using Xle.Services.Menus.Implementation;
-using Xle.Services.XleSystem;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.Xna.Framework.Input;
 using Moq;
+using Xle.Services.Game;
+using Xle.Services.Menus;
+using Xle.Services.Menus.Implementation;
+using Xle.Services.XleSystem;
 using Xunit;
 
 namespace Xle.ServiceTests

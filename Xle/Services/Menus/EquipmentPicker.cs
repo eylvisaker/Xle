@@ -1,9 +1,20 @@
 ﻿using Xle.Data;
 using Microsoft.Xna.Framework;
 using System.Linq;
+using AgateLib;
 
-namespace Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus
 {
+    public interface IEquipmentPicker
+    {
+        ArmorItem PickArmor(ArmorItem armorItem);
+        ArmorItem PickArmor(GameState state, ArmorItem defaultItem, Color? backColor = null);
+
+        WeaponItem PickWeapon(WeaponItem weaponItem);
+        WeaponItem PickWeapon(GameState state, WeaponItem defaultItem, Color? backColor = null);
+    }
+
+    [Singleton]
     public class EquipmentPicker : IEquipmentPicker
     {
         private GameState GameState;

@@ -1,16 +1,19 @@
 ﻿
-using Xle.Maps.Museums;
-using Xle.Maps.XleMapTypes.MuseumDisplays;
+using AgateLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Xle.Maps.Museums;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Services.Rendering.Maps
 {
+    [Transient]
     public class MuseumRenderer : Map3DRenderer
     {
         public ITextRenderer TextRenderer { get; set; }
         public MuseumExtender MuseumExtender { get { return (MuseumExtender)Extender; } }
+
 
         protected override ExtraType GetExtraType(int val, int side)
         {
@@ -50,29 +53,25 @@ namespace Xle.Services.Rendering.Maps
 
             if (mDrawStatic == false)
             {
-                throw new NotImplementedException();
                 //Surfaces.ExhibitOpen.Draw(inRect);
 
-                //mCloseup.Draw(spriteBatch, screenDisplayRect);
+                spriteBatch.Draw(Surfaces.ExhibitOpen, inRect, Color.White);
+                mCloseup.Draw(GaneTime, spriteBatch, screenDisplayRect);
             }
             else
             {
-                throw new NotImplementedException();
                 //Surfaces.ExhibitClosed.Draw(inRect);
+                spriteBatch.Draw(Surfaces.ExhibitClosed, inRect, Color.White);
 
                 if (AnimateExhibits)
                 {
-                    FillRect(screenDisplayRect, XleColor.DarkGray);
-                    DrawExhibitStatic(inRect, displayRect, mCloseup.ExhibitColor);
+                    FillRect(spriteBatch, screenDisplayRect, XleColor.DarkGray);
+                    DrawExhibitStatic(spriteBatch, inRect, displayRect, mCloseup.ExhibitColor);
                 }
             }
 
-
-            DrawExhibitText(inRect, mCloseup);
-
+            DrawExhibitText(spriteBatch, inRect, mCloseup);
         }
-
-        private void FillRect(Rectangle screenDisplayRect, Color darkGray) => throw new NotImplementedException();
 
         protected virtual Rectangle ExhibitCloseupRect
         {
@@ -93,15 +92,17 @@ namespace Xle.Services.Rendering.Maps
 
         public SpriteBatch spriteBatch { get; set; }
 
-        protected override void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
+        protected override void DrawMuseumExhibit(SpriteBatch spriteBatch,
+            int distance, Rectangle destRect, int val)
         {
             var exhibit = MuseumExtender.GetExhibitByTile(val);
 
             if (distance == 1)
-                DrawExhibitText(destRect, exhibit);
+                DrawExhibitText(spriteBatch, destRect, exhibit);
         }
 
-        private void DrawExhibitText(Rectangle destRect, Exhibit exhibit)
+        private void DrawExhibitText(SpriteBatch spriteBatch,
+            Rectangle destRect, Exhibit exhibit)
         {
             int px = 176;
             int py = 208;
@@ -113,12 +114,11 @@ namespace Xle.Services.Rendering.Maps
             px += destRect.X;
             py += destRect.Y;
 
-            FillRect(px, py, textLength * 16, 16, Color.Black);
+            FillRect(spriteBatch, px, py, textLength * 16, 16, Color.Black);
 
             Color clr = exhibit.TitleColor;
             TextRenderer.WriteText(spriteBatch, px, py, exhibit.Name, clr);
         }
 
-        private void FillRect(int px, int py, int v1, int v2, Color black) => throw new NotImplementedException();
     }
 }

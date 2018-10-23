@@ -56,6 +56,8 @@ namespace Xle.Services.Rendering.Maps
         {
         }
 
+        public GameTime GaneTime { get; private set; }
+
         public Map3DSurfaces Surfaces { get; set; }
         protected virtual bool ExtraScale { get { return false; } }
 
@@ -63,6 +65,8 @@ namespace Xle.Services.Rendering.Maps
                                   Point playerPos, Direction faceDirection,
                                   Rectangle inRect)
         {
+            GaneTime = time;
+
             Surfaces = Extender.Surfaces();
 
             DrawImpl(time, spriteBatch, playerPos.X, playerPos.Y, faceDirection, inRect);
@@ -112,8 +116,8 @@ namespace Xle.Services.Rendering.Maps
             Point rightDir = faceDirection.RightDirection();
 
             // Draw the backdrop
-            throw new NotImplementedException();
             //Surfaces.Walls.Draw(new Rectangle(Point.Zero, screenSize), inRect);
+            spriteBatch.Draw(Surfaces.Walls, inRect, new Rectangle(Point.Zero, screenSize), Color.White);
 
             Point loc = new Point(x, y);
 
@@ -144,19 +148,20 @@ namespace Xle.Services.Rendering.Maps
 
                 int val = TheMap[loc.X, loc.Y];
 
-                DrawSidePassages(loc, stepDir, leftDir, rightDir, distance, inRect);
+                DrawSidePassages(spriteBatch, loc, stepDir, leftDir, rightDir, distance, inRect);
 
                 if (distance == maxDistance && IsPassable(val) == false)
                 {
-                    DrawTerminalWall(val, maxDistance, inRect);
+                    DrawTerminalWall(spriteBatch, val, maxDistance, inRect);
                     terminalVal = val;
                 }
             }
 
             if (terminalVal >= 0)
             {
-                DrawWallOverlay(maxDistance, inRect, terminalVal);
+                DrawWallOverlay(spriteBatch, maxDistance, inRect, terminalVal);
             }
+
             for (int distance = 0; distance < maxDistance; distance++)
             {
                 for (int dir = -1; dir <= 1; dir++)
@@ -166,7 +171,7 @@ namespace Xle.Services.Rendering.Maps
 
                     int val = TheMap[loc.X, loc.Y];
 
-                    DrawTraps(val, dir, loc, distance, inRect);
+                    DrawTraps(spriteBatch, val, dir, loc, distance, inRect);
 
                     if (dir == 0)
                     {
@@ -180,14 +185,14 @@ namespace Xle.Services.Rendering.Maps
 
                     if (val == 0x01)
                     {
-                        DrawTorch(dir, distance, inRect);
+                        DrawTorch(spriteBatch, dir, distance, inRect);
 
                         continue;
                     }
                 }
             }
 
-            DrawMonsters(x, y, faceDirection, inRect, maxDistance);
+            DrawMonsters(spriteBatch, x, y, faceDirection, inRect, maxDistance);
         }
 
         /// <summary>
@@ -196,7 +201,8 @@ namespace Xle.Services.Rendering.Maps
         /// <param name="side">-1 for left, 0 for center, 1 for right</param>
         /// <param name="distance"></param>
         /// <param name="mainDestRect"></param>
-        private void DrawTorch(int side, int distance, Rectangle mainDestRect)
+        private void DrawTorch(SpriteBatch spriteBatch,
+            int side, int distance, Rectangle mainDestRect)
         {
             int taHash = distance * 3 + side;
             TorchAnim anim;
@@ -222,8 +228,8 @@ namespace Xle.Services.Rendering.Maps
             pos.X += mainDestRect.X;
             pos.Y += mainDestRect.Y;
 
-            throw new NotImplementedException();
             //Surfaces.Torches.Draw(srcRect, pos);
+            spriteBatch.Draw(Surfaces.Torches, pos.ToVector2(), srcRect, Color.White);
         }
 
         private void FillTorchDestPositions(Dictionary<int, List<Point>> destPositions)
@@ -254,7 +260,8 @@ namespace Xle.Services.Rendering.Maps
             destPositions[x].Add(new Point(2 * 79, 2 * 48));
         }
 
-        protected virtual void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
+        protected virtual void DrawMonsters(SpriteBatch spriteBatch,
+            int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
         {
         }
 
@@ -294,62 +301,71 @@ namespace Xle.Services.Rendering.Maps
                 return SideWallType.Corner;
         }
 
-        private void DrawSidePassages(Point loc, Point lookDir, Point leftDir, Point rightDir, int distance, Rectangle maindestRect)
+        private void DrawSidePassages(SpriteBatch spriteBatch,
+                                      Point loc, 
+                                      Point lookDir, 
+                                      Point leftDir, 
+                                      Point rightDir, 
+                                      int distance, 
+                                      Rectangle maindestRect)
         {
-            throw new NotImplementedException();
+            Point forwardPt = new Point(loc.X + lookDir.X, loc.Y + lookDir.Y);
+            Point leftPt = new Point(loc.X + leftDir.X, loc.Y + leftDir.Y);
+            Point rightPt = new Point(loc.X + rightDir.X, loc.Y + rightDir.Y);
+            Point leftForwardPt = new Point(leftPt.X + lookDir.X, leftPt.Y + lookDir.Y);
+            Point rightForwardPt = new Point(rightPt.X + lookDir.X, rightPt.Y + lookDir.Y);
 
-            //Point forwardPt = new Point(loc.X + lookDir.X, loc.Y + lookDir.Y);
-            //Point leftPt = new Point(loc.X + leftDir.X, loc.Y + leftDir.Y);
-            //Point rightPt = new Point(loc.X + rightDir.X, loc.Y + rightDir.Y);
-            //Point leftForwardPt = new Point(leftPt.X + lookDir.X, leftPt.Y + lookDir.Y);
-            //Point rightForwardPt = new Point(rightPt.X + lookDir.X, rightPt.Y + lookDir.Y);
+            int forwardValue = MapValueAt(forwardPt);
+            int leftValue = MapValueAt(leftPt);
+            int rightValue = MapValueAt(rightPt);
+            int leftForwardValue = MapValueAt(leftForwardPt);
+            int rightForwardValue = MapValueAt(rightForwardPt);
 
-            //int forwardValue = MapValueAt(forwardPt);
-            //int leftValue = MapValueAt(leftPt);
-            //int rightValue = MapValueAt(rightPt);
-            //int leftForwardValue = MapValueAt(leftForwardPt);
-            //int rightForwardValue = MapValueAt(rightForwardPt);
+            SideWallType leftType = GetSideWallType(distance, leftValue, leftForwardValue, forwardValue);
+            SideWallType rightType = GetSideWallType(distance, rightValue, rightForwardValue, forwardValue);
 
-            //SideWallType leftType = GetSideWallType(distance, leftValue, leftForwardValue, forwardValue);
-            //SideWallType rightType = GetSideWallType(distance, rightValue, rightForwardValue, forwardValue);
+            Rectangle srcRect, destRect;
 
-            //Rectangle srcRect, destRect;
-
-            //srcRect = GetSidePassageSrcRect(distance, false, leftType);
-            //destRect = GetSidePassageDestRect(distance, false, leftType, maindestRect);
+            srcRect = GetSidePassageSrcRect(distance, false, leftType);
+            destRect = GetSidePassageDestRect(distance, false, leftType, maindestRect);
             //Surfaces.Walls.Draw(srcRect, destRect);
+            spriteBatch.Draw(Surfaces.Walls, destRect, srcRect, Color.White);
 
-            //if (leftType == SideWallType.Exhibit && AnimateExhibits)
-            //{
-            //    if (distance % 2 == 0)
-            //        srcRect.X += imageSize.Width;
+            if (leftType == SideWallType.Exhibit && AnimateExhibits)
+            {
+                Color clr = Color.White;
 
-            //    if (distance <= 2)
-            //        Surfaces.Walls.Color = ExhibitColor(leftValue);
+                if (distance % 2 == 0)
+                    srcRect.X += imageSize.Width;
 
-            //    srcRect.X += imageSize.Width * (1 + exhibitFrame);
-            //    Surfaces.Walls.Draw(srcRect, destRect);
+                if (distance <= 2)
+                    clr = ExhibitColor(leftValue);
 
-            //    Surfaces.Walls.Color = Color.White;
-            //}
+                srcRect.X += imageSize.Width * (1 + exhibitFrame);
+                //Surfaces.Walls.Draw(srcRect, destRect);
+                spriteBatch.Draw(Surfaces.Walls, destRect, srcRect, clr);
+            }
 
-            //srcRect = GetSidePassageSrcRect(distance, true, rightType);
-            //destRect = GetSidePassageDestRect(distance, true, rightType, maindestRect);
-            //Surfaces.Walls.Draw(srcRect, destRect);
+            srcRect = GetSidePassageSrcRect(distance, true, rightType);
+            destRect = GetSidePassageDestRect(distance, true, rightType, maindestRect);
+            // Surfaces.Walls.Draw(srcRect, destRect);
+            spriteBatch.Draw(Surfaces.Walls, destRect, srcRect, Color.White);
 
-            //if (rightType == SideWallType.Exhibit && AnimateExhibits)
-            //{
-            //    if (distance % 2 == 0)
-            //        srcRect.X += imageSize.Width;
 
-            //    if (distance <= 2)
-            //        Surfaces.Walls.Color = ExhibitColor(rightValue);
+            if (rightType == SideWallType.Exhibit && AnimateExhibits)
+            {
+                if (distance % 2 == 0)
+                    srcRect.X += imageSize.Width;
 
-            //    srcRect.X += imageSize.Width * (1 + exhibitFrame);
-            //    Surfaces.Walls.Draw(srcRect, destRect);
+                Color clr = Color.White;
 
-            //    Surfaces.Walls.Color = Color.White;
-            //}
+                if (distance <= 2)
+                    clr = ExhibitColor(rightValue);
+
+                srcRect.X += imageSize.Width * (1 + exhibitFrame);
+                //Surfaces.Walls.Draw(srcRect, destRect);
+                spriteBatch.Draw(Surfaces.Walls, destRect, srcRect, clr);
+            }
         }
 
         private int MapValueAt(Point leftPt)
@@ -436,7 +452,7 @@ namespace Xle.Services.Rendering.Maps
             return result;
         }
 
-        private void DrawTraps(int val, int side, Point loc, int distance, Rectangle mainDestRect)
+        private void DrawTraps(SpriteBatch spriteBatch, int val, int side, Point loc, int distance, Rectangle mainDestRect)
         {
             ExtraType extraType = GetExtraType(val, side);
 
@@ -497,8 +513,8 @@ namespace Xle.Services.Rendering.Maps
 
             if (srcRect.Width != 0 && srcRect.Height != 0)
             {
-                throw new NotImplementedException();
                 //Surfaces.Traps.Draw(srcRect, destRect);
+                spriteBatch.Draw(Surfaces.Traps, destRect, srcRect, Color.White);
             }
         }
 
@@ -529,7 +545,8 @@ namespace Xle.Services.Rendering.Maps
 
         private readonly Size screenSize = new Size(23 * 16, 17 * 16);
 
-        private void DrawTerminalWall(int val, int distance, Rectangle main_destRect)
+        private void DrawTerminalWall(SpriteBatch spriteBatch,
+            int val, int distance, Rectangle main_destRect)
         {
             var srcRect = new Rectangle(
                     screenSize.Width * 2,
@@ -540,31 +557,32 @@ namespace Xle.Services.Rendering.Maps
             if (val == 2)
                 srcRect.X += screenSize.Width;
 
-            throw new NotImplementedException();
             //Surfaces.Walls.Draw(
             //    srcRect,
             //    main_destRect);
+            spriteBatch.Draw(Surfaces.Walls, main_destRect, srcRect, Color.White);
         }
 
-        protected void DrawExhibitStatic(Rectangle main_destRect, Rectangle staticRect, Color color)
+        protected void DrawExhibitStatic(SpriteBatch spriteBatch,
+            Rectangle main_destRect, Rectangle staticRect, Color color)
         {
-            throw new NotImplementedException();
+            Rectangle srcRect = new Rectangle(
+                imageSize.Width * 4,
+                imageSize.Height * (2 + exhibitFrame),
+                staticRect.Width, staticRect.Height);
 
-            //Rectangle srcRect = new Rectangle(
-            //    imageSize.Width * 4,
-            //    imageSize.Height * (2 + exhibitFrame),
-            //    staticRect.Width, staticRect.Height);
-
-            //staticRect.X += main_destRect.X;
-            //staticRect.Y += main_destRect.Y;
+            staticRect.X += main_destRect.X;
+            staticRect.Y += main_destRect.Y;
 
             //Surfaces.Walls.Color = color;
             //Surfaces.Walls.Draw(srcRect, staticRect);
 
             //Surfaces.Walls.Color = Color.White;
+            spriteBatch.Draw(Surfaces.Walls, staticRect, srcRect, color);
         }
 
-        private void DrawWallOverlay(int distance, Rectangle destRect, int val)
+        private void DrawWallOverlay(SpriteBatch spriteBatch,
+            int distance, Rectangle destRect, int val)
         {
             if (val >= 0x50 && val <= 0x5f && 0 < distance && distance <= 2)
             {
@@ -576,10 +594,10 @@ namespace Xle.Services.Rendering.Maps
 
                 srcRect.X += screenSize.Width * 2;
 
-                throw new NotImplementedException();
                 //Surfaces.Walls.Draw(
                 //    srcRect,
                 //    destRect);
+                spriteBatch.Draw(Surfaces.Walls, destRect, srcRect, Color.White);
 
                 Rectangle staticRect = new Rectangle(96, 96, 160, 96);
 
@@ -587,13 +605,17 @@ namespace Xle.Services.Rendering.Maps
                     staticRect = new Rectangle(128, 112, 112, 64);
 
                 if (AnimateExhibits)
-                    DrawExhibitStatic(destRect, staticRect, ExhibitColor(val));
+                {
+                    DrawExhibitStatic(spriteBatch,
+                        destRect, staticRect, ExhibitColor(val));
+                }
 
-                DrawMuseumExhibit(distance, destRect, val);
+                DrawMuseumExhibit(spriteBatch, distance, destRect, val);
             }
         }
 
-        protected virtual void DrawMuseumExhibit(int distance, Rectangle destRect, int val)
+        protected virtual void DrawMuseumExhibit(SpriteBatch spriteBatch,
+            int distance, Rectangle destRect, int val)
         {
         }
 

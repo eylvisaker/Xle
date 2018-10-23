@@ -1,22 +1,16 @@
-﻿using System;
-
-using AgateLib.Mathematics.Geometry;
-
-using Xle.Data;
+﻿using AgateLib;
+using System;
 using Xle.Maps.Dungeons.Commands;
 using Xle.Maps.XleMapTypes;
-using Xle.Services;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
 
 namespace Xle.Ancients.MapExtenders.Dungeons.Commands
 {
-    [ServiceName("DungeonOpen")]
+    [Transient("DungeonOpen")]
     public class DungeonOpen : DungeonOpenCommand
     {
-        Dungeon TheMap { get { return (Dungeon)GameState.Map; } }
-        LotaDungeon Map { get { return (LotaDungeon)GameState.MapExtender; } }
+        private Dungeon TheMap { get { return (Dungeon)GameState.Map; } }
+
+        private LotaDungeon Map { get { return (LotaDungeon)GameState.MapExtender; } }
 
         protected override void GiveBoxContents()
         {
@@ -24,7 +18,7 @@ namespace Xle.Ancients.MapExtenders.Dungeons.Commands
                 base.GiveBoxContents();
         }
 
-        bool GiveCompass()
+        private bool GiveCompass()
         {
             if (Player.DungeonLevel == 0)
                 return false;

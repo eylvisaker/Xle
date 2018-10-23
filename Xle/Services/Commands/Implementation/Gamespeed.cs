@@ -1,9 +1,11 @@
-﻿using Xle.Services.Game;
+﻿using AgateLib;
+using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.XleSystem;
 
 namespace Xle.Services.Commands.Implementation
 {
+    [Transient]
     public class Gamespeed : Command
     {
         private XleSystemState systemState;

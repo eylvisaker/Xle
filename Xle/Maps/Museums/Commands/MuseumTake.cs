@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Services;
+﻿using AgateLib;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Maps.Museums.Commands
 {
-    [ServiceName("MuseumTake")]
+    [Transient("MuseumTake")]
     public class MuseumTake : Take
     {
         public override void Execute()

@@ -1,14 +1,10 @@
-﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using AgateLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xle.Services.Rendering;
 using Xle.Services.ScreenModel;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class NativeCurrency : LotaExhibit
     {
         public NativeCurrency() : base("Native Currency", Coin.Topaz) { }

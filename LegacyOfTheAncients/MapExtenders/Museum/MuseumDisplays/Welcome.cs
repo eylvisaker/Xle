@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AgateLib;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
 	public class Welcome : LotaExhibit
-	{
+    {
 		public Welcome() : base("Welcome", Coin.None) { }
 		public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.Welcome; } }
 		public override string LongName

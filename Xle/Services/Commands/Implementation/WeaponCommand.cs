@@ -1,8 +1,10 @@
-﻿using Xle.Services.Menus;
+﻿using AgateLib;
+using Xle.Services.Menus;
 using Xle.Services.ScreenModel;
 
 namespace Xle.Services.Commands.Implementation
 {
+    [Transient]
     public class WeaponCommand : Command
     {
         private ITextArea textArea;

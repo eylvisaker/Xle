@@ -1,6 +1,10 @@
-﻿namespace Xle.Services.Commands.Implementation
+﻿using AgateLib;
+
+namespace Xle.Services.Commands.Implementation
 {
-    public class Rob : Command
+    public interface IRob : ICommand { }
+
+    public class Rob : Command, IRob
     {
         public override string Name
         {

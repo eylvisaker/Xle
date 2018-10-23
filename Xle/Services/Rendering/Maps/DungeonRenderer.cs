@@ -3,6 +3,7 @@ using Xle.Maps.Dungeons;
 using Xle.Maps.XleMapTypes;
 using Microsoft.Xna.Framework;
 using System;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Xle.Services.Rendering.Maps
 {
@@ -69,7 +70,9 @@ namespace Xle.Services.Rendering.Maps
         public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
         public new DungeonExtender Extender { get { return (DungeonExtender)base.Extender; } }
 
-        protected override void DrawMonsters(int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
+        protected override void DrawMonsters(SpriteBatch spriteBatch,
+            int x, int y, Direction faceDirection, Rectangle inRect, 
+            int maxDistance)
         {
             throw new NotImplementedException();
 

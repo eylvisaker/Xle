@@ -18,7 +18,7 @@ namespace Xle.Services.ScreenModel
         void FlashHPWhile(Color color1, Color color2, Func<bool> func);
     }
 
-    [Singleton]
+    [Singleton, InjectProperties]
     public class StatsDisplay : IStatsDisplay
     {
         private bool mOverrideHPColor;

@@ -16,7 +16,7 @@ namespace Xle.Services.Commands
 
         void ResetCurrentCommand();
 
-        ICommand FindCommand(Keys cmd);
+        ICommand FindCommand(string keyString);
     }
 
     [Singleton]
@@ -56,18 +56,14 @@ namespace Xle.Services.Commands
             }
         }
 
-        public ICommand FindCommand(Keys cmd)
+        public ICommand FindCommand(string keyString)
         {
-            throw new NotImplementedException();
-            //var keystring = AgateInputEventArgs.GetKeyString(cmd, new KeyModifiers());
+            if (string.IsNullOrWhiteSpace(keyString))
+                return null;
 
-            //if (string.IsNullOrWhiteSpace(keystring))
-            //    return null;
+            var command = Items.Find(x => x.Name.StartsWith(keyString, StringComparison.OrdinalIgnoreCase));
 
-            //var command = Items.Find(x => x.Name.StartsWith(keystring, StringComparison.InvariantCultureIgnoreCase));
-
-            //return command;
-
+            return command;
         }
 
         public void ResetCurrentCommand()

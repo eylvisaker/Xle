@@ -46,7 +46,7 @@ namespace Xle.Scenes
 
             keyboard = new KeyboardEvents();
 
-            keyboard.KeyPress += (_, e) => xleInput.OnKeyPress(e.Key);
+            keyboard.KeyPress += (_, e) => xleInput.OnKeyPress(e.Key, e.KeyString);
             keyboard.KeyDown += (_, e) => xleInput.OnKeyDown(e.Key);
             keyboard.KeyUp += (_, e) => xleInput.OnKeyUp(e.Key);
         }
@@ -60,6 +60,11 @@ namespace Xle.Scenes
         public void Run(Player player)
         {
             gameRunner.Run(player);
+        }
+
+        protected override void OnUpdateInput(IInputState input)
+        {
+            keyboard.Update(input);
         }
 
         protected override void OnUpdate(GameTime time)
@@ -80,16 +85,20 @@ namespace Xle.Scenes
 
         protected override void DrawScene(GameTime time)
         {
-            device.Clear(screen.BorderColor);
+            device.Clear(renderer.ColorScheme.BorderColor);
 
-            spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(new Vector3(20, 20, 0)));
-            rects.Fill(spriteBatch, new Rectangle(0, 0, 640, 400), XleColor.Black);
+            spriteBatch.Begin(
+                transformMatrix: Matrix.CreateTranslation(new Vector3(20, 20, 0)));
+
+            rects.Fill(spriteBatch, 
+                       new Rectangle(0, 0, 640, 400), 
+                       renderer.ColorScheme.BackColor);
 
             renderer.Draw(time, spriteBatch);
 
             spriteBatch.End();
 
-            screen.OnDraw();
+            //screen.OnDraw();
         }
     }
 }

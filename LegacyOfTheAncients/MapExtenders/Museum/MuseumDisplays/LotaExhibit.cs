@@ -1,10 +1,12 @@
-﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public abstract class LotaExhibit : Exhibit
     {
         protected LotaExhibit(string name, Coin c)

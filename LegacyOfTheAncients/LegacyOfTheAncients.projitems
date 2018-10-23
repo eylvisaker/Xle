@@ -62,12 +62,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\IFortressFinalActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\LotaEvent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\LotaMuseumRob.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\MuseumUse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\MuseumXamine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\IExhibitFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\LotaMuseumUse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\LotaMuseumXamine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\ExhibitFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\LotaMuseum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\AncientArtifact.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\_Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Fountain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\FourJewels.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\MuseumDisplays\Guardian.cs" />

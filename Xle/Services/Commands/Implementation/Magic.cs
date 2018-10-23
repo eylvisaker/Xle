@@ -8,7 +8,9 @@ using Xle.Services.Game;
 
 namespace Xle.Services.Commands.Implementation
 {
-    public abstract class MagicCommand : Command
+    public interface IMagicCommand : ICommand { }
+
+    public abstract class MagicCommand : Command, IMagicCommand
     {
         public IXleSubMenu SubMenu { get; set; }
         public IQuickMenu QuickMenu { get; set; }

@@ -5,7 +5,9 @@ using Xle.Services.Game;
 
 namespace Xle.Services.Commands.Implementation
 {
-    public class Open : Command
+    public interface IOpen : ICommand { }
+
+    public class Open : Command, IOpen
     {
         public IXleGameControl GameControl { get; set; }
 

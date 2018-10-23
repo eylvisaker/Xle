@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ using Xle.Services.Commands.Implementation;
 
 namespace Xle.Ancients.MapExtenders.Museum.Commands
 {
-    [ServiceName("MuseumXamine")]
-    public class MuseumXamine : Xamine
+    [Transient("LotaMuseumXamine")]
+    public class LotaMuseumXamine : Xamine
     {
         MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
 

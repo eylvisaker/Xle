@@ -41,14 +41,19 @@ namespace Xle.Ancients.MapExtenders.Museum
 
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Hold());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             commands.Items.Add(CommandFactory.Fight("MuseumFight"));
             commands.Items.Add(CommandFactory.Rob("LotaMuseumRob"));
             commands.Items.Add(CommandFactory.Take("MuseumTake"));
             commands.Items.Add(CommandFactory.Speak("MuseumSpeak"));
-            commands.Items.Add(CommandFactory.Use("MuseumUse"));
-            commands.Items.Add(CommandFactory.Xamine("MuseumXamine"));
+            commands.Items.Add(CommandFactory.Use("LotaMuseumUse"));
+            commands.Items.Add(CommandFactory.Xamine("LotaMuseumXamine"));
         }
 
         public override Exhibit GetExhibitByTile(int tile)

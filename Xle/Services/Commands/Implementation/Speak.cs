@@ -2,7 +2,8 @@
 
 namespace Xle.Services.Commands.Implementation
 {
-    public class Speak : Command
+    public interface ISpeak : ICommand { }
+    public class Speak : Command, ISpeak
     {
         public override string Name
         {

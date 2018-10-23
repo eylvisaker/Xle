@@ -1,10 +1,12 @@
-﻿using Xle.Maps;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Xle.Maps;
 
 namespace Xle.Services.Rendering.Maps
 {
+    [InjectProperties]
     public class XleMapRenderer
     {
         private XleMap mMap;
@@ -13,6 +15,7 @@ namespace Xle.Services.Rendering.Maps
         public GameState GameState { get; set; }
         public Random Random { get; set; }
         public IXleRenderer Renderer { get; set; }
+        public IRectangleRenderer RectRenderer { get; set; }
 
         public virtual XleMap TheMap
         {
@@ -33,8 +36,9 @@ namespace Xle.Services.Rendering.Maps
             }
         }
 
-        public virtual void Draw(GameTime time, SpriteBatch spriteBatch, 
-                                 Point playerPos, Direction faceDirection, Rectangle inRect)
+        public virtual void Draw(GameTime time, SpriteBatch spriteBatch,
+                                 Point playerPos, Direction faceDirection,
+                                 Rectangle inRect)
         {
         }
 
@@ -44,5 +48,17 @@ namespace Xle.Services.Rendering.Maps
         protected virtual void OnExtenderSet()
         {
         }
+
+        protected void FillRect(SpriteBatch spriteBatch,
+            int x, int y, int width, int height, Color color)
+        {
+            RectRenderer.Fill(spriteBatch, new Rectangle(x, y, width, height), color);
+        }
+
+        protected void FillRect(SpriteBatch spriteBatch, Rectangle rect, Color color)
+        {
+            RectRenderer.Fill(spriteBatch, rect, color);
+        }
+
     }
 }

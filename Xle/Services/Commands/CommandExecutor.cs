@@ -1,10 +1,11 @@
-﻿using Xle.Services.Game;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+﻿using AgateLib;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Commands.Implementation;
+using Xle.Services.Game;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 
 namespace Xle.Services.Commands
 {
@@ -12,7 +13,7 @@ namespace Xle.Services.Commands
     {
         void Prompt();
 
-        void DoCommand(Keys Keys);
+        Task DoCommand(Keys Keys, string keyString);
 
         void ResetCurrentCommand();
     }
@@ -28,6 +29,7 @@ namespace Xle.Services.Commands
         private ICommandList commands;
         private IPlayerDeathHandler deathHandler;
         private IPlayerAnimator characterAnimator;
+        private bool ignoreInput;
 
         private Player player { get { return gameState.Player; } }
 
@@ -49,7 +51,7 @@ namespace Xle.Services.Commands
             this.characterAnimator = characterAnimator;
             this.deathHandler = deathHandler;
 
-            input.DoCommand += (sender, args) => DoCommand(args.Command);
+            input.DoCommand += (sender, args) => DoCommand(args.Command, args.KeyString);
 
             mDirectionMap[Keys.Right] = Direction.East;
             mDirectionMap[Keys.Up] = Direction.North;
@@ -98,7 +100,25 @@ namespace Xle.Services.Commands
                     return false;
             }
         }
-        public void DoCommand(Keys cmd)
+
+        public async Task DoCommand(Keys cmd, string keyString)
+        {
+            if (ignoreInput)
+                return;
+
+            try
+            {
+                ignoreInput = true;
+
+                await ProcessInput(cmd, keyString);
+            }
+            finally
+            {
+                ignoreInput = false;
+            }
+        }
+
+        private async Task ProcessInput(Keys cmd, string keyString)
         {
             if (cmd == Keys.None)
                 return;
@@ -107,11 +127,11 @@ namespace Xle.Services.Commands
 
             if (IsCursorMovement(cmd))
             {
-                ExecuteCursorMovement(cmd);
+                await ExecuteCursorMovement(cmd);
                 return;
             }
 
-            var command = commands.FindCommand(cmd);
+            var command = commands.FindCommand(keyString);
 
             if (command != null)
             {
@@ -125,14 +145,14 @@ namespace Xle.Services.Commands
             {
                 soundMan.PlaySound(LotaSound.Invalid);
 
-                gameControl.Wait(waitTime);
+                await gameControl.WaitAsync(waitTime);
                 return;
             }
 
-            AfterDoCommand(waitTime, cmd);
+            await AfterDoCommand(waitTime, cmd);
         }
 
-        private void ExecuteCursorMovement(Keys cmd)
+        private async Task ExecuteCursorMovement(Keys cmd)
         {
             var wasRaft = player.BoardedRaft;
 
@@ -154,7 +174,7 @@ namespace Xle.Services.Commands
 
             }
 
-            AfterDoCommand(waitTime, cmd);
+            await AfterDoCommand(waitTime, cmd);
         }
 
         public void ResetCurrentCommand()
@@ -166,11 +186,11 @@ namespace Xle.Services.Commands
                 commands.CurrentCommand = commands.Items[0];
         }
 
-        private void AfterDoCommand(int waitTime, Keys cmd)
+        private async Task AfterDoCommand(int waitTime, Keys cmd)
         {
             gameState.MapExtender.AfterExecuteCommand(cmd);
 
-            gameControl.Wait(waitTime);
+            await gameControl.WaitAsync(waitTime);
 
             Prompt();
         }

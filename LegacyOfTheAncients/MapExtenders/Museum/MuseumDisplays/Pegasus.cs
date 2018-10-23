@@ -1,14 +1,9 @@
-﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xle.Services;
+﻿using AgateLib;
 using Xle.Services.MapLoad;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class Pegasus : LotaExhibit
     {
         public Pegasus() : base("Pegasus", Coin.Diamond) { }

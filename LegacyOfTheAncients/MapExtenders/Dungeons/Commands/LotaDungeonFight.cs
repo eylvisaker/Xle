@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
+using System;
 
 using Xle.Maps;
 using Xle.Maps.Dungeons.Commands;
-using Xle.Services;
 
 namespace Xle.Ancients.MapExtenders.Dungeons.Commands
 {
-    [ServiceName("LotaDungeonFight")]
+    [Transient("LotaDungeonFight")]
     public class LotaDungeonFight : DungeonFight
     {
         protected override bool RollToHitMonster(DungeonMonster monster)

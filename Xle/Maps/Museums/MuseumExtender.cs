@@ -10,12 +10,7 @@ using Microsoft.Xna.Framework;
 
 namespace Xle.Maps.Museums
 {
-    public interface IMuseumExtender : IMapExtender
-    {
-
-    }
-
-    public class MuseumExtender : Map3DExtender, IMuseumExtender
+    public class MuseumExtender : Map3DExtender
     {
         int doorVal = 2;
 

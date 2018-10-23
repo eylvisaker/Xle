@@ -73,6 +73,7 @@ namespace Xle.Ancients.TitleScreen
 
             DrawCenteredText(spriteBatch, 0, Title, Colors.BackColor, Colors.TextColor);
         }
+
         private void DrawPrompt(SpriteBatch spriteBatch)
         {
             if (string.IsNullOrEmpty(Prompt))

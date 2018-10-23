@@ -1,11 +1,8 @@
-﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class HerbOfLife : LotaExhibit
     {
         public HerbOfLife() : base("Herb of life", Coin.Topaz) { }

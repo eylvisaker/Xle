@@ -80,6 +80,10 @@ namespace Xle.Services
         {
             if (sceneStack.Contains(waitScene))
             {
+                // Make sure the wait scene is on top of the stack.
+                sceneStack.Remove(waitScene);
+                sceneStack.Add(waitScene);
+
                 waitScene.TopOff(howLong_ms);
 
                 await Task.Delay(waitScene.TimeLeft);

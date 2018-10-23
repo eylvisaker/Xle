@@ -1,16 +1,10 @@
-﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xle.Services;
-using Xle.Services.Rendering;
+﻿using AgateLib;
+using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
+    [Transient, InjectProperties]
     public class Fountain : LotaExhibit
     {
         public Fountain() : base("A Fountain", Coin.Jade) { }

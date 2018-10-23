@@ -1,9 +1,18 @@
 ﻿using Xle.Services.Game;
 using Xle.Services.Rendering;
 using System;
+using AgateLib;
 
 namespace Xle.Services.Menus.Implementation
 {
+    public interface IXleSubMenuRedraw
+    {
+        SubMenu Menu { get; set; }
+
+        void Redraw();
+    }
+
+    [Singleton]
     public class XleSubMenuRedraw : IXleSubMenuRedraw
     {
         private readonly IXleGameControl gameControl;

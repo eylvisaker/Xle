@@ -1,5 +1,8 @@
-﻿namespace Xle.Services.Commands.Implementation
+﻿using AgateLib;
+
+namespace Xle.Services.Commands.Implementation
 {
+    [Transient]
     public class Pass : Command
     {
         public override void Execute()

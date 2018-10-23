@@ -41,8 +41,6 @@ namespace Xle.Services.Rendering
 
         void DrawObject(SpriteBatch spriteBatch, TextWindow wind);
 
-        void SetProjectionAndBackColors(ColorScheme colorScheme);
-
         void DrawObject(ColorScheme mColorScheme);
 
         void DrawTile(int drawx, int drawy, int tile);
@@ -133,10 +131,13 @@ namespace Xle.Services.Rendering
             DrawInnerFrameHighlight(spriteBatch, GameAreaSize.Width - 12, 0, 0, GameAreaSize.Height - 2, innerColor);
         }
 
+        [Obsolete]
         public void DrawFrame(Color boxColor)
         {
             throw new NotSupportedException();
         }
+
+        [Obsolete]
         public void DrawFrameHighlight(Color innerColor)
         {
             throw new NotSupportedException();
@@ -150,7 +151,8 @@ namespace Xle.Services.Rendering
         /// <param name="direction"></param>
         /// <param name="length"></param>
         /// <param name="boxColor"></param>
-        public void DrawFrameLine(SpriteBatch spriteBatch, int left, int top, int direction,
+        public void DrawFrameLine(SpriteBatch spriteBatch, 
+                        int left, int top, int direction,
                       int length, Color boxColor)
         {
             int boxWidth = 12;
@@ -398,6 +400,8 @@ namespace Xle.Services.Rendering
 
         public XleMapRenderer MapRenderer { get { return GameState.MapExtender.MapRenderer; } }
 
+        public ColorScheme ColorScheme => GameState.Map.ColorScheme;
+
         public void Draw(GameTime time, SpriteBatch spriteBatch)
         {
             this.spriteBatch = spriteBatch;
@@ -411,7 +415,7 @@ namespace Xle.Services.Rendering
                 return;
             }
 
-            SetProjectionAndBackColors(GameState.Map.ColorScheme);
+            DrawTextAreaBackColor(GameState.Map.ColorScheme);
 
             Player player = GameState.Player;
             XleMap map = GameState.Map;
@@ -430,12 +434,12 @@ namespace Xle.Services.Rendering
                 menuColor = XleColor.Yellow;
             }
 
-            DrawFrame(boxColor);
+            DrawFrame(spriteBatch, boxColor);
 
             DrawFrameLine(spriteBatch, vertLine, 0, 0, horizLine + 12, boxColor);
             DrawFrameLine(spriteBatch, 0, horizLine, 1, GameAreaSize.Width, boxColor);
 
-            DrawFrameHighlight(innerColor);
+            DrawFrameHighlight(spriteBatch, innerColor);
 
             DrawInnerFrameHighlight(spriteBatch, vertLine, 0, 0, horizLine + 12, innerColor);
             DrawInnerFrameHighlight(spriteBatch, 0, horizLine, 1, GameAreaSize.Width, innerColor);
@@ -523,20 +527,18 @@ namespace Xle.Services.Rendering
             //RaftAnim();
         }
 
-        public void SetProjectionAndBackColors(ColorScheme cs)
+        private void DrawTextAreaBackColor(ColorScheme cs)
         {
-            //Display.Clear(cs.BorderColor);
-            throw new NotImplementedException();
-
             int hp = cs.HorizontalLinePosition * 16 + 8;
 
-            //FillRect(new Rectangle(0, 0, 640, 400), cs.BackColor);
-            //FillRect(0, hp, 640, 400 - hp, cs.TextAreaBackColor);
+            FillRect(spriteBatch, 0, hp, 640, 400 - hp, cs.TextAreaBackColor);
         }
 
         public void DrawObject(ColorScheme cs)
         {
-            SetProjectionAndBackColors(cs);
+            throw new NotImplementedException();
+
+            DrawTextAreaBackColor(cs);
 
             // Draw the borders
             DrawFrame(cs.FrameColor);

@@ -20,7 +20,9 @@ namespace Xle.Services.ScreenModel
         bool PromptToContinue { get; set; }
         Color BorderColor { get; set; }
 
+        [Obsolete]
         event EventHandler Draw;
+        [Obsolete]
         event EventHandler Update;
 
         void OnUpdate();

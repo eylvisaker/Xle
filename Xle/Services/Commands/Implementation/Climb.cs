@@ -1,6 +1,8 @@
 ﻿namespace Xle.Services.Commands.Implementation
 {
-    public abstract class Climb : Command
+    public interface IClimb : ICommand { }
+
+    public abstract class Climb : Command, IClimb
     {
         public override string Name
         {

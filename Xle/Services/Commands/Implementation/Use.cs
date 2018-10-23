@@ -10,7 +10,9 @@ using Xle.Services.XleSystem;
 
 namespace Xle.Services.Commands.Implementation
 {
-    public abstract class Use : Command
+    public interface IUse : ICommand{ }
+
+    public abstract class Use : Command, IUse
     {
         public Use(bool showItemMenu = true)
         {

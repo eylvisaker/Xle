@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,8 @@ using Xle.Services;
 
 namespace Xle.Ancients.MapExtenders.Museum.Commands
 {
-    [ServiceName("MuseumUse")]
-    public class MuseumUse : LotaUse
+    [Transient("LotaMuseumUse")]
+    public class LotaMuseumUse : LotaUse
     {
         LotaStory Story { get { return GameState.Story(); } }
         XleMap Map { get { return GameState.Map; } }

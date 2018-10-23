@@ -8,7 +8,9 @@ using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Services.Commands.Implementation
 {
-    public class Take : Command
+    public interface ITake : ICommand { }
+
+    public class Take : Command, ITake
     {
         public IXleGameControl GameControl { get; set; }
 

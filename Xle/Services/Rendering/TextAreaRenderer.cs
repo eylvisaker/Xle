@@ -1,8 +1,8 @@
 ﻿
 using AgateLib;
-using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Xle.Services.ScreenModel;
 
 namespace Xle.Services.Rendering
 {
@@ -14,7 +14,12 @@ namespace Xle.Services.Rendering
     [Singleton]
     public class TextAreaRenderer : ITextAreaRenderer
     {
-        public ITextRenderer TextRenderer { get; set; }
+        private ITextRenderer textRenderer;
+
+        public TextAreaRenderer(ITextRenderer textRenderer)
+        {
+            this.textRenderer = textRenderer;
+        }
 
         public void Draw(SpriteBatch spriteBatch, ITextArea textArea)
         {
@@ -33,7 +38,7 @@ namespace Xle.Services.Rendering
 
         private void DrawText(SpriteBatch spriteBatch, int x, int y, string text, Color[] color)
         {
-            TextRenderer.WriteText(spriteBatch, x, y, text, color);
+            textRenderer.WriteText(spriteBatch, x, y, text, color);
         }
 
     }
