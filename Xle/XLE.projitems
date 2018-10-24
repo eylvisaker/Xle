@@ -169,12 +169,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\MapLoad\MapChanger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\MapLoad\MapLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\EquipmentPicker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\Implementation\IXleSubMenuRedraw.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\MuseumCoinSale.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\Implementation\NumberPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\QuickMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\XleSubMenu.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\Implementation\XleSubMenuRedraw.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\XleScreenCapture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Menus\INumberPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\MapRendererFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Rendering\MenuRenderer.cs" />

@@ -54,14 +54,14 @@ namespace Xle.ServiceTests
         }
 
         [Fact]
-        public void PickArmor()
+        public async Task PickArmor()
         {
             Player.Armor.Add(new ArmorItem { ID = 1, Quality = 2 });
             Player.Armor.Add(new ArmorItem { ID = 2, Quality = 0 });
             Player.Armor.Add(new ArmorItem { ID = 3, Quality = 4 });
             selectArmorIndex = 2;
 
-            var sel = picker.PickArmor(null);
+            var sel = await picker.PickArmor(null);
 
             sel.Should().BeOfType<ArmorItem>();
             sel.ID.Should().Be(2);
@@ -69,14 +69,14 @@ namespace Xle.ServiceTests
         }
 
         [Fact]
-        public void PickWeapon()
+        public async Task PickWeapon()
         {
             Player.Weapons.Add(new WeaponItem { ID = 1, Quality = 2 });
             Player.Weapons.Add(new WeaponItem { ID = 2, Quality = 0 });
             Player.Weapons.Add(new WeaponItem { ID = 3, Quality = 4 });
             selectWeaponIndex = 2;
 
-            var sel = picker.PickWeapon(null);
+            var sel = await picker.PickWeapon(null);
 
             sel.Should().BeOfType<WeaponItem>();
             sel.ID.Should().Be(2);

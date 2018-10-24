@@ -1,11 +1,13 @@
 ﻿
 using AgateLib;
+using AgateLib.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
 using Xle.Services.Game;
 using Xle.Services.Menus.Implementation;
+using Xle.Services.Rendering;
 using Xle.Services.XleSystem;
 
 namespace Xle.Services.Menus
@@ -15,21 +17,29 @@ namespace Xle.Services.Menus
         Task<int> SubMenu(string title, int choice, MenuItemList items, Color? backColor = null);
     }
 
-    [Singleton]
+    [Transient]
     public class XleSubMenu : IXleSubMenu
     {
         private readonly IXleGameControl gameControl;
-        private readonly IXleInput input;
-        private readonly IXleSubMenuRedraw redraw;
+        private readonly IXleScreenCapture screenCapture;
+        private SubMenu menu;
+        private Keys? key;
 
         public XleSubMenu(
             IXleGameControl gameControl,
-            IXleInput input,
-            IXleSubMenuRedraw redraw)
+            IXleScreenCapture screenCapture,
+            IMenuRenderer menuRenderer)
         {
             this.gameControl = gameControl;
-            this.input = input;
-            this.redraw = redraw;
+            this.screenCapture = screenCapture;
+
+            screenCapture.KeyPress += OnKeyPress;
+            screenCapture.Draw += spriteBatch => menuRenderer.DrawMenu(spriteBatch, menu);
+        }
+
+        private void OnKeyPress(KeyPressEventArgs args)
+        {
+            key = args.Key;
         }
 
         /// <summary>
@@ -54,6 +64,8 @@ namespace Xle.Services.Menus
 
         private async Task<int> RunSubMenu(SubMenu menu)
         {
+            this.menu = menu;
+
             for (int i = 0; i < menu.theList.Count; i++)
             {
                 if (menu.theList[i].Length + 6 > menu.width)
@@ -69,14 +81,16 @@ namespace Xle.Services.Menus
                 menu.width = displayTitle.Length + 2;
             }
 
-            Keys key;
-
-            redraw.Menu = menu;
+            screenCapture.Begin();
 
             do
             {
-                throw new NotImplementedException();
-                key = await input.WaitForKey(/*redraw.Redraw*/);
+                key = null;
+
+                while (key == null)
+                {
+                    await Task.Yield();
+                }
 
                 if (key == Keys.Up)
                 {
@@ -101,7 +115,7 @@ namespace Xle.Services.Menus
                     }
                     else
                     {
-                        v = key - Keys.D0;
+                        v = key.Value - Keys.D0;
                     }
 
                     if (v < menu.theList.Count)
@@ -113,6 +127,8 @@ namespace Xle.Services.Menus
             } while (key != Keys.Enter);
 
             await gameControl.WaitAsync(300);
+
+            screenCapture.End();
 
             return menu.value;
         }

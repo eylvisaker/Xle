@@ -23,7 +23,7 @@ namespace Xle.Services.Commands.Implementation
         {
             await TextArea.PrintLine("-choose above", XleColor.Cyan);
 
-            Player.CurrentArmor = equipmentPicker.PickArmor(Player.CurrentArmor);
+            Player.CurrentArmor = await equipmentPicker.PickArmor(Player.CurrentArmor);
         }
     }
 }

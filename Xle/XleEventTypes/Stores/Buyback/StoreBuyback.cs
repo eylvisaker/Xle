@@ -85,18 +85,20 @@ namespace Xle.XleEventTypes.Stores.Buyback
 
             Windows.Add(questionWindow);
 
-            switch (choice)
-            {
-                case 1:
-                    questionWindow.WriteLine("What weapon will you sell me?");
-                    item = EquipmentPicker.PickWeapon(GameState, null, ColorScheme.BackColor);
-                    break;
+            throw new NotImplementedException();
 
-                case 2:
-                    questionWindow.WriteLine("What armor will you sell me?");
-                    item = EquipmentPicker.PickArmor(GameState, null, ColorScheme.BackColor);
-                    break;
-            }
+            //switch (choice)
+            //{
+            //    case 1:
+            //        questionWindow.WriteLine("What weapon will you sell me?");
+            //        item = EquipmentPicker.PickWeapon(GameState, null, ColorScheme.BackColor);
+            //        break;
+
+            //    case 2:
+            //        questionWindow.WriteLine("What armor will you sell me?");
+            //        item = EquipmentPicker.PickArmor(GameState, null, ColorScheme.BackColor);
+            //        break;
+            //}
 
             if (item == null)
                 return;

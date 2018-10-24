@@ -28,7 +28,7 @@ namespace Xle.Services.Commands.Implementation
         {
             await textArea.PrintLine("-choose above", XleColor.Cyan);
 
-            Player.CurrentWeapon = equipmentPicker.PickWeapon(Player.CurrentWeapon);
+            Player.CurrentWeapon = await equipmentPicker.PickWeapon(Player.CurrentWeapon);
         }
     }
 }

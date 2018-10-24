@@ -293,7 +293,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         protected override Equipment PickItemToSell()
         {
-            return EquipmentPicker.PickWeapon(GameState, null, XleColor.Black);
+            throw new NotImplementedException();
+            //return EquipmentPicker.PickWeapon(GameState, null, XleColor.Black);
         }
         protected override string StoreType
         {
@@ -336,7 +337,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         protected override Equipment PickItemToSell()
         {
-            return EquipmentPicker.PickArmor(GameState, null, XleColor.Black);
+            throw new NotImplementedException();
+            //return EquipmentPicker.PickArmor(GameState, null, XleColor.Black);
         }
         protected override string StoreType
         {

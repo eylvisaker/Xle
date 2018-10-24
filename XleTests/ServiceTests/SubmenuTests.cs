@@ -4,6 +4,7 @@ using Moq;
 using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.Menus.Implementation;
+using Xle.Services.Rendering;
 using Xle.Services.XleSystem;
 using Xunit;
 
@@ -13,16 +14,18 @@ namespace Xle.ServiceTests
     {
         private XleSubMenu subMenu;
         private Mock<IXleInput> input;
-        private Mock<IXleSubMenuRedraw> redraw;
+        private Mock<IXleScreenCapture> redraw;
         private Mock<IXleGameControl> gameControl;
+        private Mock<IMenuRenderer> renderer;
 
         public SubmenuTests()
         {
             input = new Mock<IXleInput>();
-            redraw = new Mock<IXleSubMenuRedraw>();
+            redraw = new Mock<IXleScreenCapture>();
             gameControl = new Mock<IXleGameControl>();
+            renderer = new Mock<IMenuRenderer>();
 
-            subMenu = new XleSubMenu(gameControl.Object, input.Object, redraw.Object);
+            subMenu = new XleSubMenu(gameControl.Object, input.Object, redraw.Object, renderer.Object);
         }
 
         private void SetupInputSequence(params Keys[] keys)
