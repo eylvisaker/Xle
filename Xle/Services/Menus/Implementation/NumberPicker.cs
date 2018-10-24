@@ -32,6 +32,8 @@ namespace Xle.Services.Menus.Implementation
         }
         public int ChooseNumber(Action redraw, int max)
         {
+            throw new NotImplementedException();
+
             int method = 0;
             int amount = 0;
 
@@ -52,7 +54,7 @@ namespace Xle.Services.Menus.Implementation
             {
                 input.PromptToContinueOnWait = false;
 
-                key = input.WaitForKey(redraw);
+                //key = input.WaitForKey();
 
                 if (method == 0)
                 {

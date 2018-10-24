@@ -141,7 +141,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
         }
         protected void WaitForKey(params Keys[] keys)
         {
-            input.WaitForKey(RedrawStore, keys);
+            throw new NotImplementedException();
+            //input.WaitForKey(RedrawStore, keys);
         }
 
         protected int QuickMenu(MenuItemList menu, int spaces)

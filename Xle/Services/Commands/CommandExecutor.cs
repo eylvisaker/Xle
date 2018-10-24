@@ -29,7 +29,7 @@ namespace Xle.Services.Commands
         private ICommandList commands;
         private IPlayerDeathHandler deathHandler;
         private IPlayerAnimator characterAnimator;
-        private bool ignoreInput;
+        private bool inputPrompt;
 
         private Player player { get { return gameState.Player; } }
 
@@ -72,6 +72,7 @@ namespace Xle.Services.Commands
             }
 
             textArea.Print("\nEnter command: ");
+            inputPrompt = true;
         }
 
         /// <summary>
@@ -103,19 +104,11 @@ namespace Xle.Services.Commands
 
         public async Task DoCommand(Keys cmd, string keyString)
         {
-            if (ignoreInput)
+            if (!inputPrompt)
                 return;
 
-            try
-            {
-                ignoreInput = true;
-
-                await ProcessInput(cmd, keyString);
-            }
-            finally
-            {
-                ignoreInput = false;
-            }
+            inputPrompt = false;
+            await ProcessInput(cmd, keyString);
         }
 
         private async Task ProcessInput(Keys cmd, string keyString)
@@ -137,9 +130,9 @@ namespace Xle.Services.Commands
             {
                 commands.CurrentCommand = command;
 
-                textArea.Print(command.Name);
+                await textArea.Print(command.Name);
 
-                command.Execute();
+                await command.Execute();
             }
             else
             {

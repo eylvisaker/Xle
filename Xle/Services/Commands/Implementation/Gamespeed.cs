@@ -31,8 +31,8 @@ namespace Xle.Services.Commands.Implementation
 
             Player.Gamespeed = 1 + await QuickMenu.QuickMenu(theList, 2, Player.Gamespeed - 1);
 
-           await TextArea.Print("Gamespeed is: ", XleColor.Yellow);
-           await TextArea.PrintLine(Player.Gamespeed.ToString(), XleColor.White);
+            await TextArea.Print("Gamespeed is: ", XleColor.Yellow);
+            await TextArea.PrintLine(Player.Gamespeed.ToString(), XleColor.White);
 
             systemState.Factory.SetGameSpeed(GameState, Player.Gamespeed);
 

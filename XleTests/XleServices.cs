@@ -30,7 +30,7 @@ namespace Xle
 
             Input = new Mock<IXleInput>();
             Input.SetupAllProperties();
-            Input.Setup(x => x.WaitForKey(It.IsAny<Action>(), It.IsAny<Keys[]>())).Returns(() =>
+            Input.Setup(x => x.WaitForKey(It.IsAny<Keys[]>())).ReturnsAsync(() =>
             {
                 var result = KeysToSend.First();
                 KeysToSend.RemoveAt(0);

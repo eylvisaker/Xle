@@ -36,7 +36,7 @@ namespace Xle.Commands
 
             foreach (var key in keys)
             {
-                sequence = sequence.Returns(key);
+                sequence = sequence.ReturnsAsync(key);
             }
         }
 

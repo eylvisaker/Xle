@@ -15,9 +15,6 @@ namespace Xle.Services.Menus
         Task<int> QuickMenuYesNo(bool defaultAtNo = false);
 
         Task<int> QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null, Action redraw = null);
-
-        [Obsolete("Use overload with optional redraw parameter instead.")]
-        Task<int> QuickMenu(Action redraw, MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null);
     }
 
     [Singleton]
@@ -60,15 +57,10 @@ namespace Xle.Services.Menus
         /// <returns></returns>
         public Task<int> QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null, Action redraw = null)
         {
-            return QuickMenu(redraw ?? screen.OnDraw, items, spaces, value, clrInit, clrChanged);
+            return QuickMenuImpl(items, spaces, value, clrInit ?? screen.FontColor, clrChanged ?? screen.FontColor);
         }
 
-        public Task<int> QuickMenu(Action redraw, MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null)
-        {
-            return QuickMenuImpl(redraw, items, spaces, value, clrInit ?? screen.FontColor, clrChanged ?? screen.FontColor);
-        }
-
-        public async Task<int> QuickMenuImpl(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
+        public async Task<int> QuickMenuImpl(MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
         {
             Require.That<ArgumentOutOfRangeException>(value >= 0, "value should be positive");
             Require.That<ArgumentOutOfRangeException>(value < items.Count, "value should be less than items.Count");
@@ -102,13 +94,13 @@ namespace Xle.Services.Menus
                 last = spacing[i] + spaces + 1;
             }
 
-            TextArea.PrintLine(tempLine, clrInit);
-            TextArea.PrintLine();
+            await TextArea.PrintLine(tempLine, clrInit);
+            await TextArea.PrintLine();
 
             topLine = tempLine;
             tempLine = new string(' ', spacing[result]) + "`";
 
-            TextArea.RewriteLine(lineIndex + 1, tempLine, clrInit);
+            await TextArea.RewriteLine(lineIndex + 1, tempLine, clrInit);
 
             Keys key;
 
@@ -116,7 +108,8 @@ namespace Xle.Services.Menus
             {
                 // Set this on each iteration because it gets reset after a key is pressed.
                 input.PromptToContinueOnWait = false;
-                key = input.WaitForKey(redraw);
+
+                key = await input.WaitForKey();
 
                 if (key == Keys.Left)
                 {
@@ -149,15 +142,15 @@ namespace Xle.Services.Menus
 
                 if (key != Keys.None)
                 {
-                    TextArea.RewriteLine(lineIndex, topLine, clrChanged);
-                    TextArea.RewriteLine(lineIndex + 1, tempLine, clrChanged);
+                    await TextArea.RewriteLine(lineIndex, topLine, clrChanged);
+                    await TextArea.RewriteLine(lineIndex + 1, tempLine, clrChanged);
                 }
 
             } while (key != Keys.Enter && screen.CurrentWindowClosed == false);
 
-            gameControl.Wait(100, redraw: redraw);
+            await gameControl.WaitAsync(100);
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             return result;
 

@@ -1,11 +1,12 @@
 ﻿
-using Xle.Services.Game;
-using Xle.Services.XleSystem;
+using AgateLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using AgateLib;
-using Xle.Services.Menus.Implementation;
+using System;
 using System.Threading.Tasks;
+using Xle.Services.Game;
+using Xle.Services.Menus.Implementation;
+using Xle.Services.XleSystem;
 
 namespace Xle.Services.Menus
 {
@@ -74,7 +75,8 @@ namespace Xle.Services.Menus
 
             do
             {
-                key = input.WaitForKey(redraw.Redraw);
+                throw new NotImplementedException();
+                key = await input.WaitForKey(/*redraw.Redraw*/);
 
                 if (key == Keys.Up)
                 {

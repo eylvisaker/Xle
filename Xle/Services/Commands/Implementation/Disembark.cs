@@ -33,7 +33,7 @@ namespace Xle.Services.Commands.Implementation
 
             Input.PromptToContinueOnWait = false;
 
-            var key = Input.WaitForKey(Keys.Left, Keys.Up, Keys.Right, Keys.Down);
+            var key = await Input.WaitForKey(Keys.Left, Keys.Up, Keys.Right, Keys.Down);
 
             Direction dir = key.ToDirection();
 

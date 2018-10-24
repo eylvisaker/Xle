@@ -34,7 +34,7 @@ namespace Xle.Maps.Towns
             await TextArea.PrintLine("Fight with " + Player.CurrentWeapon.BaseName(Data));
             await TextArea.Print("Enter direction: ");
 
-            Keys key = Input.WaitForKey(Keys.Up, Keys.Down, Keys.Left, Keys.Right);
+            Keys key = await Input.WaitForKey(Keys.Up, Keys.Down, Keys.Left, Keys.Right);
 
             Direction fightDir;
 

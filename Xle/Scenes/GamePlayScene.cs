@@ -46,7 +46,7 @@ namespace Xle.Scenes
 
             keyboard = new KeyboardEvents();
 
-            keyboard.KeyPress += (_, e) => xleInput.OnKeyPress(e.Key, e.KeyString);
+            keyboard.KeyPress += (_, e) => xleInput.OnKeyPress(e);
             keyboard.KeyDown += (_, e) => xleInput.OnKeyDown(e.Key);
             keyboard.KeyUp += (_, e) => xleInput.OnKeyUp(e.Key);
         }

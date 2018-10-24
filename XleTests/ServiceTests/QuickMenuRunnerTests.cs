@@ -33,7 +33,7 @@ namespace Xle.ServiceTests
         [Fact]
         public void QuickMenuYesNoReturnsYes()
         {
-            input.Setup(x => x.WaitForKey(It.IsAny<Action>())).Returns(Keys.Enter);
+            input.Setup(x => x.WaitForKey()).ReturnsAsync(Keys.Enter);
 
             var result = qmr.QuickMenuYesNo();
 
@@ -43,7 +43,7 @@ namespace Xle.ServiceTests
         [Fact]
         public void QuickMenuYesNoDefaultNoReturnsNo()
         {
-            input.Setup(x => x.WaitForKey(It.IsAny<Action>())).Returns(Keys.Enter);
+            input.Setup(x => x.WaitForKey()).ReturnsAsync(Keys.Enter);
 
             var result = qmr.QuickMenuYesNo(true);
 
@@ -53,9 +53,9 @@ namespace Xle.ServiceTests
         [Fact]
         public void QuickMenuYesNoDefaultNoMoveLeftReturnsYes()
         {
-            input.SetupSequence(x => x.WaitForKey(It.IsAny<Action>()))
-                .Returns(Keys.Left)
-                .Returns(Keys.Enter);
+            input.SetupSequence(x => x.WaitForKey())
+                .ReturnsAsync(Keys.Left)
+                .ReturnsAsync(Keys.Enter);
 
             var result = qmr.QuickMenuYesNo(true);
 
@@ -65,10 +65,10 @@ namespace Xle.ServiceTests
         [Fact]
         public void QuickMenuSelectThirdOption()
         {
-            input.SetupSequence(x => x.WaitForKey(It.IsAny<Action>()))
-                .Returns(Keys.Right)
-                .Returns(Keys.Right)
-                .Returns(Keys.Enter);
+            input.SetupSequence(x => x.WaitForKey())
+                .ReturnsAsync(Keys.Right)
+                .ReturnsAsync(Keys.Right)
+                .ReturnsAsync(Keys.Enter);
 
             var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
@@ -78,8 +78,8 @@ namespace Xle.ServiceTests
         [Fact]
         public void QuickMenuSelectByKey()
         {
-            input.SetupSequence(x => x.WaitForKey(It.IsAny<Action>()))
-                .Returns(Keys.M);
+            input.SetupSequence(x => x.WaitForKey())
+                .ReturnsAsync(Keys.M);
 
             var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
@@ -89,11 +89,11 @@ namespace Xle.ServiceTests
         [Fact]
         public void QuickMenuCantGoTooFarLeft()
         {
-            input.SetupSequence(x => x.WaitForKey(It.IsAny<Action>()))
-                .Returns(Keys.Left)
-                .Returns(Keys.Left)
-                .Returns(Keys.Left)
-                .Returns(Keys.Enter);
+            input.SetupSequence(x => x.WaitForKey())
+                .ReturnsAsync(Keys.Left)
+                .ReturnsAsync(Keys.Left)
+                .ReturnsAsync(Keys.Left)
+                .ReturnsAsync(Keys.Enter);
 
             var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
@@ -103,13 +103,13 @@ namespace Xle.ServiceTests
         [Fact]
         public void QuickMenuCantGoTooFarRight()
         {
-            input.SetupSequence(x => x.WaitForKey(It.IsAny<Action>()))
-                .Returns(Keys.Right)
-                .Returns(Keys.Right)
-                .Returns(Keys.Right)
-                .Returns(Keys.Right)
-                .Returns(Keys.Right)
-                .Returns(Keys.Enter);
+            input.SetupSequence(x => x.WaitForKey())
+                .ReturnsAsync(Keys.Right)
+                .ReturnsAsync(Keys.Right)
+                .ReturnsAsync(Keys.Right)
+                .ReturnsAsync(Keys.Right)
+                .ReturnsAsync(Keys.Right)
+                .ReturnsAsync(Keys.Enter);
 
             var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
@@ -119,8 +119,8 @@ namespace Xle.ServiceTests
         [Fact]
         public void QuickMenuVerifyMenuLayout()
         {
-            input.SetupSequence(x => x.WaitForKey(It.IsAny<Action>()))
-                .Returns(Keys.Enter);
+            input.SetupSequence(x => x.WaitForKey())
+                .ReturnsAsync(Keys.Enter);
 
             string expected = "Choose: Battle  Charge  Magic  Other";
             string actual = null;

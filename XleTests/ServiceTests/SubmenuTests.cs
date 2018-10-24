@@ -27,10 +27,10 @@ namespace Xle.ServiceTests
 
         private void SetupInputSequence(params Keys[] keys)
         {
-            var setup = input.SetupSequence(x => x.WaitForKey(redraw.Object.Redraw, It.IsAny<Keys[]>()));
+            var setup = input.SetupSequence(x => x.WaitForKey(It.IsAny<Keys[]>()));
 
             foreach (var key in keys)
-                setup.Returns(key);
+                setup.ReturnsAsync(key);
         }
 
         [Fact]

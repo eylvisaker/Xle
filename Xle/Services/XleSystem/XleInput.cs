@@ -1,8 +1,10 @@
 ﻿using AgateLib;
+using AgateLib.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xle.Services.ScreenModel;
 
 namespace Xle.Services.XleSystem
@@ -11,14 +13,13 @@ namespace Xle.Services.XleSystem
     {
         bool AcceptKey { get; set; }
 
-        Keys WaitForKey(params Keys[] keys);
-        Keys WaitForKey(Action redraw, params Keys[] keys);
+        Task<Keys> WaitForKey(params Keys[] keys);
 
         bool PromptToContinueOnWait { get; set; }
 
         event EventHandler<CommandEventArgs> DoCommand;
 
-        void OnKeyPress(Keys key, string keyString);
+        void OnKeyPress(KeyPressEventArgs e);
 
         void OnKeyDown(Keys key);
 
@@ -30,9 +31,16 @@ namespace Xle.Services.XleSystem
     [Singleton]
     public class XleInput : IXleInput
     {
+        private static readonly Keys[] arrowKeys = new[] {
+            Keys.Down, Keys.Left, Keys.Up, Keys.Right
+        };
+
         private GameState gameState;
         private IXleScreen screen;
         private HashSet<Keys> pressedKeys = new HashSet<Keys>();
+        private CommandEventArgs commandArgs;
+        private bool waiting = false;
+
 
         public XleInput(
             IXleScreen screen,
@@ -42,6 +50,10 @@ namespace Xle.Services.XleSystem
             this.gameState = gameState;
         }
 
+
+        public event EventHandler<CommandEventArgs> DoCommand;
+
+        public bool AcceptKey { get; set; }
 
         public void OnKeyDown(Keys key)
         {
@@ -53,7 +65,7 @@ namespace Xle.Services.XleSystem
             pressedKeys.Remove(key);
         }
 
-        public async void OnKeyPress(Keys key, string keyString)
+        public async void OnKeyPress(KeyPressEventArgs e)
         {
             if (AcceptKey == false)
                 return;
@@ -61,7 +73,7 @@ namespace Xle.Services.XleSystem
             try
             {
                 AcceptKey = false;
-                OnDoCommand(key, keyString);
+                ProcessKeyInput(e);
             }
             finally
             {
@@ -69,18 +81,19 @@ namespace Xle.Services.XleSystem
             }
         }
 
-        private void OnDoCommand(Keys command, string keyString)
+        private void ProcessKeyInput(KeyPressEventArgs e)
         {
-            DoCommand?.Invoke(this, new CommandEventArgs(command, keyString));
+            commandArgs = new CommandEventArgs(e.Key, e.KeyString);
+
+            if (waiting)
+            {
+                waiting = false;
+            }
+            else
+            {
+                DoCommand?.Invoke(this, commandArgs);
+            }
         }
-
-        public event EventHandler<CommandEventArgs> DoCommand;
-
-        public bool AcceptKey { get; set; }
-
-        private Keys[] arrowKeys = new[] {
-            Keys.Down, Keys.Left, Keys.Up, Keys.Right
-        };
 
         public void Update(GameTime gameTime)
         {
@@ -97,7 +110,7 @@ namespace Xle.Services.XleSystem
                 {
                     if (pressedKeys.Contains(key))
                     {
-                        OnDoCommand(key, "");
+                        ProcessKeyInput(new KeyPressEventArgs(key, "", null, gameTime));
                         break;
                     }
                 }
@@ -115,69 +128,19 @@ namespace Xle.Services.XleSystem
         /// <param name="keys">A list of keys which will break out of the wait. 
         /// Pass none for any key to break out.</param>
         /// <returns></returns>
-        public Keys WaitForKey(params Keys[] keys)
-        {
-            return WaitForKey(screen.OnDraw, keys);
-        }
-
-        /// <summary>
-        /// Waits for one of the specified keys, while calling the delegate
-        /// to redraw the screen.
-        /// </summary>
-        /// <param name="redraw"></param>
-        /// <param name="keys">A list of keys which will break out of the wait. 
-        /// Pass none for any key to break out.</param>
-        /// <returns></returns>
-        public Keys WaitForKey(Action redraw, params Keys[] keys)
+        public async Task<Keys> WaitForKey(params Keys[] keys)
         {
             Keys key = Keys.None;
             bool done = false;
 
-            throw new NotImplementedException();
-            //using (var input = new SimpleInputHandler())
-            //{
-            //    Input.Handlers.Add(input);
+            waiting = true;
 
-            //    EventHandler<AgateInputEventArgs> keyhandler = (sender, e) => key = e.Keys;
+            while (waiting)
+            {
+                await Task.Yield();
+            }
 
-            //    screen.PromptToContinue = PromptToContinueOnWait;
-
-            //    input.Keys.ReleaseAll();
-            //    input.KeyDown += keyhandler;
-
-            //    do
-            //    {
-            //        redraw();
-
-            //        if (screen.CurrentWindowClosed == true)
-            //        {
-            //            if (keys.Length > 0)
-            //                key = keys[0];
-            //            else
-            //                key = Keys.Escape;
-
-            //            break;
-            //        }
-
-            //        if ((keys == null || keys.Length == 0) && key != Keys.None)
-            //            break;
-
-            //        for (int i = 0; i < keys.Length; i++)
-            //        {
-            //            if (keys[i] == key)
-            //            {
-            //                done = true;
-            //                break;
-            //            }
-            //        }
-
-            //    } while (!done && screen.CurrentWindowClosed == false);
-            //}
-
-            //screen.PromptToContinue = false;
-            //PromptToContinueOnWait = true;
-
-            //return key;
+            return commandArgs.Command;
         }
 
 
