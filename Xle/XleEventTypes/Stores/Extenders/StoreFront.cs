@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
@@ -128,9 +129,10 @@ namespace Xle.XleEventTypes.Stores.Extenders
             TextRenderer.WriteText(spriteBatch, 320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
         }
 
-        protected void StoreSound(LotaSound sound)
+        protected Task StoreSound(LotaSound sound)
         {
-            SoundMan.PlaySoundSync(RedrawStore, sound);
+            throw new NotImplementedException();
+            //SoundMan.PlaySoundWait(RedrawStore, sound);
         }
 
         protected void Wait(int howLong)
@@ -144,19 +146,23 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         protected int QuickMenu(MenuItemList menu, int spaces)
         {
-            return QuickMenuService.QuickMenu(menu, spaces, redraw: RedrawStore);
+            throw new NotImplementedException();
+            //return QuickMenuService.QuickMenu(menu, spaces, redraw: RedrawStore);
         }
         protected int QuickMenu(MenuItemList menu, int spaces, int value)
         {
-            return QuickMenuService.QuickMenu(menu, spaces, value, redraw: RedrawStore);
+            throw new NotImplementedException();
+            //return QuickMenuService.QuickMenu(menu, spaces, value, redraw: RedrawStore);
         }
         protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit)
         {
-            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, redraw: RedrawStore);
+            throw new NotImplementedException();
+            //return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, redraw: RedrawStore);
         }
         protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit, Color clrChanged)
         {
-            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged, redraw: RedrawStore);
+            throw new NotImplementedException();
+            //return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged, redraw: RedrawStore);
         }
 
         protected int ChooseNumber(int max)
@@ -177,7 +183,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         public string Title { get; set; }
 
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
             PrivateInitializeColorScheme();
 

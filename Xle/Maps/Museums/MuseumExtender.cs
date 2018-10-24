@@ -7,6 +7,7 @@ using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.Rendering;
 using Xle.Services.Rendering.Maps;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace Xle.Maps.Museums
 {
@@ -75,6 +76,7 @@ namespace Xle.Maps.Museums
 
             CheckExhibitStatus();
         }
+
         public virtual Exhibit GetExhibitByTile(int tile)
         {
             throw new NotImplementedException();
@@ -83,11 +85,15 @@ namespace Xle.Maps.Museums
         public virtual void CheckExhibitStatus()
         {
         }
-        public virtual void NeedsCoinMessage(Exhibit ex)
+
+        public virtual Task NeedsCoinMessage(Exhibit ex)
         {
+            return Task.CompletedTask;
         }
-        public virtual void PrintUseCoinMessage(Exhibit ex)
+
+        public virtual Task PrintUseCoinMessage(Exhibit ex)
         {
+            return Task.CompletedTask;
         }
 
         public Point PlayerLookingAt
@@ -103,10 +109,10 @@ namespace Xle.Maps.Museums
             }
         }
 
-        public void PrintExhibitStopsActionMessage()
+        public async Task PrintExhibitStopsActionMessage()
         {
-            TextArea.PrintLine("The display case");
-            TextArea.PrintLine("force field stops you.");
+            await TextArea.PrintLine("The display case");
+            await TextArea.PrintLine("force field stops you.");
         }
 
         public Exhibit ExhibitAt(Point location)
@@ -120,7 +126,7 @@ namespace Xle.Maps.Museums
             return GetExhibitByTile(tileAt);
         }
 
-        public bool InteractWithDisplay()
+        public async Task<bool> InteractWithDisplay()
         {
             Point lookingAt = PlayerLookingAt;
 
@@ -133,50 +139,50 @@ namespace Xle.Maps.Museums
             MapRenderer.mCloseup = ex;
             MapRenderer.mDrawStatic = ex.StaticBeforeCoin;
 
-            TextArea.PrintLine(ex.IntroductionText);
-            TextArea.PrintLine();
-            TextArea.PrintLineCentered(ex.LongName + " ", ex.TitleColor);
+            await TextArea.PrintLine(ex.IntroductionText);
+            await TextArea.PrintLine();
+            await TextArea.PrintLineCentered(ex.LongName + " ", ex.TitleColor);
 
             Input.PromptToContinueOnWait = true;
 
             if (ex.IsClosed)
             {
-                TextArea.PrintLineCentered(" - Exhibit closed - ", ex.TitleColor);
-                TextArea.PrintLine();
+                await TextArea.PrintLineCentered(" - Exhibit closed - ", ex.TitleColor);
+                await TextArea.PrintLine();
                 Input.WaitForKey();
 
                 return true;
             }
 
-            TextArea.PrintLineCentered(ex.InsertCoinText + " ", ex.TitleColor);
-            TextArea.PrintLine();
+            await TextArea.PrintLineCentered(ex.InsertCoinText + " ", ex.TitleColor);
+            await TextArea.PrintLine();
             Input.WaitForKey();
 
             if (ex.RequiresCoin == false)
             {
                 MapRenderer.mDrawStatic = false;
-                RunExhibit(ex);
+                await RunExhibit(ex);
             }
             else
             {
                 if (ex.HasBeenVisited == false)
-                    TextArea.PrintLine("You haven't used this exhibit.");
+                    await TextArea.PrintLine("You haven't used this exhibit.");
                 else
-                    TextArea.PrintLine();
+                    await TextArea.PrintLine();
 
                 if (Options.DisableExhibitsRequireCoins == false && ex.PlayerHasCoin == false)
                 {
-                    NeedsCoinMessage(ex);
-                    GameControl.Wait(500);
+                    await NeedsCoinMessage(ex);
+                    await GameControl.WaitAsync(500);
 
                     return true;
                 }
                 else
                 {
-                    TextArea.PrintLine(ex.UseCoinMessage);
-                    TextArea.PrintLine();
+                    await TextArea.PrintLine(ex.UseCoinMessage);
+                    await TextArea.PrintLine();
 
-                    int choice = QuickMenu.QuickMenu(new MenuItemList("Yes", "no"), 3);
+                    int choice = await QuickMenu.QuickMenu(new MenuItemList("Yes", "no"), 3);
 
                     if (choice == 1)
                         return true;
@@ -185,16 +191,16 @@ namespace Xle.Maps.Museums
                         ex.UseCoin();
 
                     MapRenderer.mDrawStatic = false;
-                    RunExhibit(ex);
+                    await RunExhibit(ex);
                 }
             }
 
             return true;
         }
 
-        private void RunExhibit(Exhibit ex)
+        private async Task RunExhibit(Exhibit ex)
         {
-            ex.RunExhibit();
+            await ex.RunExhibit();
 
             CheckExhibitStatus();
         }

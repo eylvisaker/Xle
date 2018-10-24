@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Menus;
 using Xle.Services.ScreenModel;
@@ -10,9 +11,9 @@ namespace Xle.Services.Commands.Implementation
     {
         public IItemChooser ItemChooser { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            Player.Hold = ItemChooser.ChooseItem();
+            Player.Hold = await ItemChooser.ChooseItem();
         }
     }
 }

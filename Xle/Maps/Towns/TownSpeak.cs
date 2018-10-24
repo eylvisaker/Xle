@@ -12,18 +12,18 @@ namespace Xle.Maps.Towns
     [ServiceName("TownSpeak")]
     public class TownSpeak : Speak
     {
-        public override void Execute()
+        public override async Task Execute()
         {
-            if (SpeakToEvent())
+            if (await SpeakToEvent())
                 return;
 
-            if (CheckSpeakToGuard())
+            if (await CheckSpeakToGuard())
                 return;
 
-            PrintNoResponseMessage();
+            await PrintNoResponseMessage();
         }
 
-        private bool CheckSpeakToGuard()
+        private async Task<bool> CheckSpeakToGuard()
         {
             var guards = GameState.Map.Guards;
 
@@ -36,7 +36,7 @@ namespace Xle.Maps.Towns
                         if ((guard.X == Player.X + i || guard.X + 1 == Player.X + i) &&
                             (guard.Y == Player.Y + j || guard.Y + 1 == Player.Y + j))
                         {
-                            SpeakToGuard();
+                            await SpeakToGuard();
                             return true;
                         }
                     }
@@ -46,9 +46,9 @@ namespace Xle.Maps.Towns
             return false;
         }
 
-        protected virtual void SpeakToGuard()
+        protected virtual async Task SpeakToGuard()
         {
-            TextArea.PrintLine("\n\nThe guard salutes.");
+            await TextArea.PrintLine("\n\nThe guard salutes.");
         }
 
     }

@@ -15,19 +15,19 @@ namespace Xle.Maps.Outdoors.Commands
     {
         OutsideExtender Outside { get { return (OutsideExtender)GameState.MapExtender; } }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             TerrainInfo info = GetTerrainInfo();
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("You are in " + info.TerrainName + ".");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You are in " + info.TerrainName + ".");
 
-            TextArea.Print("Travel: ", XleColor.White);
-            TextArea.Print(info.TravelText, XleColor.Green);
-            TextArea.Print("  -  Food use: ", XleColor.White);
-            TextArea.Print(info.FoodUseText, XleColor.Green);
-            TextArea.PrintLine();
+            await TextArea.Print("Travel: ", XleColor.White);
+            await TextArea.Print(info.TravelText, XleColor.Green);
+            await TextArea.Print("  -  Food use: ", XleColor.White);
+            await TextArea.Print(info.FoodUseText, XleColor.Green);
+            await TextArea.PrintLine();
         }
 
         private TerrainInfo GetTerrainInfo()

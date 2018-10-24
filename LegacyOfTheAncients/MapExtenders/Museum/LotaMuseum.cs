@@ -6,6 +6,7 @@ using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Museum
 {
@@ -172,18 +173,18 @@ namespace Xle.Ancients.MapExtenders.Museum
             }
         }
 
-        public override void NeedsCoinMessage(Exhibit ex)
+        public override async Task NeedsCoinMessage(Exhibit ex)
         {
             var lotaex = (LotaExhibit)ex;
 
-            TextArea.PrintLine("You'll need a " + lotaex.Coin + " coin.");
+            await TextArea.PrintLine("You'll need a " + lotaex.Coin + " coin.");
         }
 
-        public override void PrintUseCoinMessage(Exhibit ex)
+        public override async Task PrintUseCoinMessage(Exhibit ex)
         {
             var lotaex = (LotaExhibit)ex;
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
         }
 
         public override Map3DSurfaces Surfaces()

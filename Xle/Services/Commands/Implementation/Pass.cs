@@ -1,13 +1,14 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Services.Commands.Implementation
 {
     [Transient]
     public class Pass : Command
     {
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
         }
     }
 }

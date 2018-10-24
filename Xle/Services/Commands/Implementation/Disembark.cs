@@ -3,6 +3,7 @@ using Xle.Maps.Outdoors;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework.Input;
+using System.Threading.Tasks;
 
 namespace Xle.Services.Commands.Implementation
 {
@@ -17,18 +18,18 @@ namespace Xle.Services.Commands.Implementation
             get { return (IOutsideExtender)GameState.MapExtender; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine(" raft");
+            await TextArea.PrintLine(" raft");
 
             if (Player.IsOnRaft == false)
             {
-                TextArea.PrintLine("\nNothing to disembark.", XleColor.Yellow);
+                await TextArea.PrintLine("\nNothing to disembark.", XleColor.Yellow);
                 return;
             }
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Disembark in which direction?");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Disembark in which direction?");
 
             Input.PromptToContinueOnWait = false;
 

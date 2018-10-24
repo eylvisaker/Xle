@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.ScreenModel;
 
 namespace Xle.Services.Commands
@@ -7,7 +8,7 @@ namespace Xle.Services.Commands
     {
         string Name { get; }
 
-        void Execute();
+        Task Execute();
     }
 
     [InjectProperties]
@@ -26,6 +27,6 @@ namespace Xle.Services.Commands
             }
         }
 
-        public abstract void Execute();
+        public abstract Task Execute();
     }
 }

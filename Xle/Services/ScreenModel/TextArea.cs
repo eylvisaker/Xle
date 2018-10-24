@@ -3,6 +3,7 @@ using Xle.Services.Game;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Xle.Services.ScreenModel
 {
@@ -12,22 +13,22 @@ namespace Xle.Services.ScreenModel
 
         void Clear(bool setCursorAtTop = false);
 
-        void PrintLine(string text, Color color);
-        void PrintLine(string text = "", Color[] colors = null);
+        Task PrintLine(string text, Color color);
+        Task PrintLine(string text = "", Color[] colors = null);
 
-        void Print(string text, Color? color);
-        void Print(string text = "", Color[] colors = null);
+        Task Print(string text, Color? color);
+        Task Print(string text = "", Color[] colors = null);
 
-        void PrintSlow(string text, Color color);
-        void PrintSlow(string text, Color[] colors = null);
+        Task PrintSlow(string text, Color color);
+        Task PrintSlow(string text, Color[] colors = null);
 
-        void RewriteLine(int line, string text, Color? color = null);
+        Task RewriteLine(int line, string text, Color? color = null);
 
-        void PrintLineSlow(string text, Color color);
-        void PrintLineSlow(string text = "", Color[] colors = null);
+        Task PrintLineSlow(string text, Color color);
+        Task PrintLineSlow(string text = "", Color[] colors = null);
 
-        void FlashLines(int howLong, Color color, int flashRate, params int[] lines);
-        void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines);
+        Task FlashLines(int howLong, Color color, int flashRate, params int[] lines);
+        Task FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines);
 
         void SetLineColor(Color color, params int[] lines);
 
@@ -36,7 +37,7 @@ namespace Xle.Services.ScreenModel
         int Margin { get; set; }
         Color DefaultColor { get; }
 
-        void PrintLineCentered(string p, Color color);
+        Task PrintLineCentered(string p, Color color);
 
         TextLine GetLine(int i);
     }
@@ -104,7 +105,7 @@ namespace Xle.Services.ScreenModel
             }
         }
 
-        private void PrintImpl(string text, Color[] colors)
+        private async Task PrintImpl(string text, Color[] colors)
         {
             int startIndex = 0;
 
@@ -131,32 +132,32 @@ namespace Xle.Services.ScreenModel
                 }
             }
 
-            gameControl.Wait(1);
+            await gameControl.WaitAsync(1);
         }
 
-        private void PrintSlowImpl(string text, Color defaultColor, Color[] colors = null)
+        private async Task PrintSlowImpl(string text, Color defaultColor, Color[] colors = null)
         {
             for (int i = 0; i < text.Length; i++)
             {
                 if (colors != null)
                 {
-                    Print(text[i].ToString(), colors[i]);
+                    await Print(text[i].ToString(), colors[i]);
                 }
                 else
                 {
-                    Print(text[i].ToString(), defaultColor);
+                    await Print(text[i].ToString(), defaultColor);
                 }
 
-                gameControl.Wait(50, keyBreak: true);
+                await gameControl.WaitAsync(50, keyBreak: true);
 
                 if (text[i] == '.' || text[i] == '!')
-                    gameControl.Wait(500);
+                    await gameControl.WaitAsync(500);
                 if (text[i] == ',')
-                    gameControl.Wait(350);
+                    await gameControl.WaitAsync(350);
             }
         }
 
-        public void Print(string text, Color? color)
+        public async Task Print(string text, Color? color)
         {
             if (tempColors == null || tempColors.Length < text.Length)
             {
@@ -168,39 +169,43 @@ namespace Xle.Services.ScreenModel
                 tempColors[i] = color ?? DefaultColor;
             }
 
-            PrintImpl(text, tempColors);
-        }
-        public void Print(string text = "", Color[] colors = null)
-        {
-            PrintImpl(text, colors);
+            await PrintImpl(text, tempColors);
         }
 
-        public void PrintLine(string text, Color color)
+        public async Task Print(string text = "", Color[] colors = null)
         {
-            Print(text + "\n", color);
-        }
-        public void PrintLine(string text = "", Color[] colors = null)
-        {
-            Print(text + "\n", colors);
+            await PrintImpl(text, colors);
         }
 
-        public void PrintSlow(string text, Color[] colors = null)
+        public async Task PrintLine(string text, Color color)
         {
-            PrintSlowImpl(text, screen.FontColor, colors);
+            await Print(text + "\n", color);
         }
-        public void PrintSlow(string text, Color color)
+        public async Task PrintLine(string text = "", Color[] colors = null)
         {
-            PrintSlowImpl(text, color, null);
+            await Print(text + "\n", colors);
         }
-        public void PrintLineSlow(string text = "", Color[] colors = null)
+
+        public Task PrintSlow(string text, Color[] colors = null)
         {
-            PrintSlow(text, colors);
-            PrintLine();
+            return PrintSlowImpl(text, screen.FontColor, colors);
         }
-        public void PrintLineSlow(string text, Color color)
+
+        public Task PrintSlow(string text, Color color)
         {
-            PrintSlow(text, color);
-            PrintLine();
+            return PrintSlowImpl(text, color, null);
+        }
+
+        public async Task PrintLineSlow(string text = "", Color[] colors = null)
+        {
+            await PrintSlow(text, colors);
+            await PrintLine();
+        }
+
+        public async Task PrintLineSlow(string text, Color color)
+        {
+            await PrintSlow(text, color);
+            await PrintLine();
         }
 
         public void Clear(bool cursorAtTop = false)
@@ -218,12 +223,12 @@ namespace Xle.Services.ScreenModel
                 cursor.Y = 0;
         }
 
-        public void RewriteLine(int line, string text, Color? color = null)
+        public async Task RewriteLine(int line, string text, Color? color = null)
         {
             cursor.X = margin;
             cursor.Y = line;
 
-            Print(text, color);
+            await Print(text, color);
         }
 
         /// <summary>
@@ -232,11 +237,11 @@ namespace Xle.Services.ScreenModel
         /// <param name="howLong">How many milliseconds to flash for.</param>
         /// <param name="color">The color to flash to.</param>
         /// <param name="lines">Which lines. Don't pass any extra parameters to flash the whole text area.</param>
-        public void FlashLines(int howLong, Color color, int flashRate, params int[] lines)
+        public async Task FlashLines(int howLong, Color color, int flashRate, params int[] lines)
         {
             if (lines == null || lines.Length == 0)
             {
-                FlashLines(howLong, color, flashRate, 0, 1, 2, 3, 4);
+                await FlashLines(howLong, color, flashRate, 0, 1, 2, 3, 4);
                 return;
             }
             if (flashRate == 0)
@@ -245,10 +250,10 @@ namespace Xle.Services.ScreenModel
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, screen.FontColor, color, flashRate, lines);
+            await FlashLinesWhile(() => watch.ElapsedMilliseconds < howLong, screen.FontColor, color, flashRate, lines);
         }
 
-        public void FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)
+        public async Task FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)
         {
             throw new NotImplementedException();
             //if (lines == null || lines.Length == 0)
@@ -306,11 +311,11 @@ namespace Xle.Services.ScreenModel
             lines[line].Colors[x] = color;
         }
 
-        public void PrintLineCentered(string text, Color color)
+        public async Task PrintLineCentered(string text, Color color)
         {
             text = new string(' ', 19 - text.Length / 2) + text;
 
-            PrintLine(text, color);
+            await PrintLine(text, color);
         }
 
 

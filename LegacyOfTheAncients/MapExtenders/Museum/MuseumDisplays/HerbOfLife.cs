@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
@@ -15,18 +16,18 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            ReadRawText(RawText);
+            await ReadRawText(RawText);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Do you want to eat the fruit?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want to eat the fruit?");
+            await TextArea.PrintLine();
 
-            if (QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
+            if (await QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
             {
-                TextArea.PrintLine("You feel a tingling sensation.", XleColor.Green);
-                SoundMan.PlaySoundSync(LotaSound.Good);
+                await TextArea.PrintLine("You feel a tingling sensation.", XleColor.Green);
+                await SoundMan.PlaySoundWait(LotaSound.Good);
 
                 Story.EatenJutonFruit = true;
 

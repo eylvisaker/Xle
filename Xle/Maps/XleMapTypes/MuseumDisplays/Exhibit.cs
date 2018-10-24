@@ -1,12 +1,12 @@
-﻿using Xle.Data;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Threading.Tasks;
+using Xle.Data;
 using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Linq;
 
 namespace Xle.Maps.XleMapTypes.MuseumDisplays
 {
@@ -64,12 +64,12 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
 
         protected int ImageID { get; set; }
 
-        public virtual void RunExhibit()
+        public virtual async Task RunExhibit()
         {
             if (CheckOfferReread() == false)
                 return;
 
-            ReadRawText(RawText);
+            await ReadRawText(RawText);
 
             if (HasBeenVisited == false)
                 MarkAsVisited();
@@ -85,10 +85,12 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
         /// <returns></returns>
         protected bool CheckOfferReread()
         {
-            if (HasBeenVisited)
-            {
-                return OfferReread();
-            }
+            throw new NotImplementedException();
+
+            //if (HasBeenVisited)
+            //{
+            //    return OfferReread();
+            //}
 
             return true;
         }
@@ -97,14 +99,14 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
         /// Asks the player if they want to reread the description of the exhibit.
         /// </summary>
         /// <returns>True if the player chose yes, false otherwise.</returns>
-        protected bool OfferReread()
+        protected async Task<bool> OfferReread()
         {
             TextArea.Clear();
-            TextArea.PrintLine("Do you want to reread the");
-            TextArea.PrintLine("description of this exhibit?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want to reread the");
+            await TextArea.PrintLine("description of this exhibit?");
+            await TextArea.PrintLine();
 
-            if (QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
+            if (await QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
                 return true;
             else
                 return false;
@@ -113,7 +115,7 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
         protected virtual Color ArticleTextColor { get { return XleColor.Cyan; } }
         protected virtual int TextAreaMargin { get { return 0; } }
 
-        protected void ReadRawText(string rawtext)
+        protected async Task ReadRawText(string rawtext)
         {
             TextArea.Margin = TextAreaMargin;
             TextArea.Clear(true);
@@ -141,7 +143,7 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
                     if (rawtext[ip + i] == '|')
                         ip += i - 1;
 
-                    TextArea.PrintLine();
+                    await TextArea.PrintLine();
                 }
                 else if (rawtext[ip] == '|' && (text.Text == null || text.Text.Trim() == ""))
                 {
@@ -150,7 +152,7 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
                 else if (rawtext[ip] != '`')
                 {
                     text.AddText(rawtext[ip].ToString(), clr);
-                    TextArea.Print(rawtext[ip].ToString(), clr);
+                    await TextArea.Print(rawtext[ip].ToString(), clr);
 
                     if (waiting)
                     {
@@ -225,7 +227,7 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
             }
 
             TextArea.Margin = 1;
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
         }
 
         public virtual bool IsClosed

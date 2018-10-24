@@ -20,15 +20,15 @@ namespace Xle.Maps.Towns
 
         public IXleGameControl GameControl { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            if (!ConfirmLeave())
+            if (!await ConfirmLeave())
                 return;
             
             if (GameState.Map.Guards.IsAngry)
             {
-                TextArea.PrintLine("Walk out yourself.");
-                GameControl.Wait(200);
+                await TextArea.PrintLine("Walk out yourself.");
+                await GameControl.WaitAsync(200);
             }
             else
             {

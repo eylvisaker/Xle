@@ -1,4 +1,6 @@
-﻿namespace Xle.Ancients.MapExtenders.Castle.Events
+﻿using System.Threading.Tasks;
+
+namespace Xle.Ancients.MapExtenders.Castle.Events
 {
     public class PasswordDoor : CastleDoor
     {
@@ -12,12 +14,12 @@
             return false;
         }
 
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
             if (Story.HasGuardianPassword)
             {
-                TextArea.PrintLine(" password.");
-                SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                await TextArea.PrintLine(" password.");
+                await SoundMan.PlaySoundWait(LotaSound.VeryGood);
 
                 RemoveDoor();
                 return true;

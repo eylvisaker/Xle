@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
@@ -13,9 +14,9 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             get { return Story.HasGuardianPassword; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
             Story.HasGuardianPassword = true;
         }

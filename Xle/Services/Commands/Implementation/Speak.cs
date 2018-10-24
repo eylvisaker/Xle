@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace Xle.Services.Commands.Implementation
 {
@@ -10,19 +11,19 @@ namespace Xle.Services.Commands.Implementation
             get { return "Speak"; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            if (SpeakToEvent())
+            if (await SpeakToEvent())
                 return;
 
-            PrintNoResponseMessage();
+            await PrintNoResponseMessage();
         }
 
-        protected bool SpeakToEvent()
+        protected async Task<bool> SpeakToEvent()
         {
             foreach (var evt in GameState.MapExtender.EventsAt(1).Where(x => x.Enabled))
             {
-                bool handled = evt.Speak();
+                bool handled = await evt.Speak();
 
                 if (handled)
                     return true;
@@ -31,9 +32,9 @@ namespace Xle.Services.Commands.Implementation
             return false;
         }
 
-        protected void PrintNoResponseMessage()
+        protected async Task PrintNoResponseMessage()
         {
-            TextArea.PrintLine("\n\nNo response.");
+            await TextArea.PrintLine("\n\nNo response.");
         }
     }
 }

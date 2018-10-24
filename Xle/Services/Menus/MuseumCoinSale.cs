@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Game;
 using Xle.Services.ScreenModel;
@@ -8,7 +9,7 @@ namespace Xle.Services.Menus
 {
     public interface IMuseumCoinSale
     {
-        void OfferMuseumCoin();
+        Task OfferMuseumCoin();
 
         bool RollToOfferCoin();
 
@@ -32,7 +33,7 @@ namespace Xle.Services.Menus
             return Random.Next(1000) < 1000 * ChanceToOfferCoin;
         }
 
-        public void OfferMuseumCoin()
+        public async Task OfferMuseumCoin()
         {
             int coin = -1;
             MenuItemList menu = new MenuItemList("Yes", "No");
@@ -49,16 +50,16 @@ namespace Xle.Services.Menus
 
             SoundMan.PlaySound(LotaSound.Question);
 
-            TextArea.PrintLine("Would you like to buy a ");
-            GameControl.Wait(1);
+            await TextArea.PrintLine("Would you like to buy a ");
+            await GameControl.WaitAsync(1);
 
-            TextArea.PrintLine("museum coin for " + amount.ToString() + " gold?");
-            GameControl.Wait(1);
+            await TextArea.PrintLine("museum coin for " + amount.ToString() + " gold?");
+            await GameControl.WaitAsync(1);
+            
+            await TextArea.PrintLine();
+            await GameControl.WaitAsync(1);
 
-            TextArea.PrintLine();
-            GameControl.Wait(1);
-
-            int choice = QuickMenu.QuickMenu(menu, 3, 0);
+            int choice = await QuickMenu.QuickMenu(menu, 3, 0);
 
             if (choice == 0)
             {
@@ -66,7 +67,7 @@ namespace Xle.Services.Menus
                 {
                     string coinName = Data.ItemList[coin].Name;
 
-                    TextArea.PrintLine("Use this " + coinName + " well!");
+                    await TextArea.PrintLine("Use this " + coinName + " well!");
 
                     Player.Items[coin] += 1;
 
@@ -74,7 +75,7 @@ namespace Xle.Services.Menus
                 }
                 else
                 {
-                    TextArea.PrintLine("Not enough gold.");
+                    await TextArea.PrintLine("Not enough gold.");
                     SoundMan.PlaySound(LotaSound.Medium);
                 }
             }

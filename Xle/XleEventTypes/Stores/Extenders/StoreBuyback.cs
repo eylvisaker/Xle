@@ -256,7 +256,9 @@ namespace Xle.XleEventTypes.Stores.Extenders
             else
                 ta.PrintLine(".");
 
-            return QuickMenuService.QuickMenuYesNo(true);
+            throw new NotImplementedException();
+
+            //return QuickMenuService.QuickMenuYesNo(true);
         }
 
         private bool WayTooHigh(double ask, int offer, int maxAccept)

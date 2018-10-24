@@ -1,18 +1,15 @@
-﻿using Xle.Data;
+﻿using AgateLib;
+using System.Linq;
+using System.Threading.Tasks;
+using Xle.Data;
 using Xle.Services.Menus;
 using Xle.Services.ScreenModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib;
 
 namespace Xle.Services.Commands.Implementation
 {
     public interface IItemChooser
     {
-        int ChooseItem();
+        Task<int> ChooseItem();
     }
 
     [Singleton]
@@ -23,11 +20,11 @@ namespace Xle.Services.Commands.Implementation
         public XleData Data { get; set; }
         public GameState GameState { get; set; }
 
-        Player Player { get { return GameState.Player; } }
+        private Player Player { get { return GameState.Player; } }
 
-        public int ChooseItem()
+        public async Task<int> ChooseItem()
         {
-            TextArea.PrintLine("-choose above", XleColor.Cyan);
+            await TextArea.PrintLine("-choose above", XleColor.Cyan);
             MenuItemList theList = new MenuItemList();
             int value = 0;
 
@@ -58,7 +55,7 @@ namespace Xle.Services.Commands.Implementation
                 theList.Add(itemName);
             }
 
-            var index = SubMenu.SubMenu("Hold Item", value, theList);
+            var index = await SubMenu.SubMenu("Hold Item", value, theList);
             var selectedName = theList[index];
 
             return Data.ItemList.Where(x => x.Value.Name == selectedName)

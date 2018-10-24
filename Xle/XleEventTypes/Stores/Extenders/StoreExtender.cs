@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
@@ -57,6 +58,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             else
                 return false;
         }
+
         protected void StoreDeclinePlayer()
         {
             TextArea.PrintLine();
@@ -69,7 +71,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             throw new NotImplementedException();
         }
 
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
             if (AllowInteractionWhenLoanOverdue == false)
             {

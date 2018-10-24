@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.MapLoad;
 using Xle.Services.ScreenModel;
@@ -19,20 +20,20 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             get { return "A typical town of Tarmalon"; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
             if (CheckOfferReread())
             {
-                ReadRawText(ExhibitInfo.Text[1]);
+                await ReadRawText(ExhibitInfo.Text[1]);
             }
 
-            TextArea.PrintLine("Would you like to go");
-            TextArea.PrintLine("to thornberry?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("Would you like to go");
+            await TextArea.PrintLine("to thornberry?");
+            await TextArea.PrintLine();
 
-            if (QuickMenu.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
+            if (await QuickMenu.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
             {
-                ReadRawText(ExhibitInfo.Text[2]);
+                await ReadRawText(ExhibitInfo.Text[2]);
 
                 int amount = 100;
 
@@ -43,8 +44,8 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 
                 Player.Gold += amount;
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("             GOLD:  + " + amount.ToString(), XleColor.Yellow);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("             GOLD:  + " + amount.ToString(), XleColor.Yellow);
 
                 SoundMan.PlaySound(LotaSound.VeryGood);
                 StatsDisplay.FlashHPWhileSound(XleColor.Yellow);

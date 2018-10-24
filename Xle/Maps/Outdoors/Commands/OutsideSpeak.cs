@@ -7,6 +7,7 @@ using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Maps.Outdoors
 {
@@ -22,24 +23,24 @@ namespace Xle.Maps.Outdoors
         public IQuickMenu QuickMenu { get; set; }
         public ISoundMan SoundMan { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             if (Encounters.EncounterState != EncounterState.MonsterReady)
-                base.Execute();
+                await base.Execute();
 
-            SpeakToMonster();
+            await SpeakToMonster();
         }
 
-        private void SpeakToMonster()
+        private async Task SpeakToMonster()
         {
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (!Encounters.IsMonsterFriendly)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("The " + Encounters.MonsterName + " does not reply.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("The " + Encounters.MonsterName + " does not reply.");
 
-                GameControl.Wait(250);
+                await GameControl.WaitAsync(250);
 
                 return;
             }
@@ -67,9 +68,9 @@ namespace Xle.Maps.Outdoors
                 case 1:			// buy armor
                 case 2:         // buy weapon
 
-                    TextArea.Print("Do you want to buy ", XleColor.Cyan);
-                    TextArea.Print(quality[qual], XleColor.White);
-                    TextArea.PrintLine();
+                    await TextArea.Print("Do you want to buy ", XleColor.Cyan);
+                    await TextArea.Print(quality[qual], XleColor.White);
+                    await TextArea.PrintLine();
 
                     if (type == 1)
                     {
@@ -84,11 +85,11 @@ namespace Xle.Maps.Outdoors
                         name = Data.WeaponList[item].Name;
                     }
 
-                    TextArea.Print(name, XleColor.White);
-                    TextArea.Print(" for ", XleColor.Cyan);
-                    TextArea.Print(cost.ToString(), XleColor.White);
-                    TextArea.Print(" Gold?", XleColor.Cyan);
-                    TextArea.PrintLine();
+                    await TextArea.Print(name, XleColor.White);
+                    await TextArea.Print(" for ", XleColor.Cyan);
+                    await TextArea.Print(cost.ToString(), XleColor.White);
+                    await TextArea.Print(" Gold?", XleColor.Cyan);
+                    await TextArea.PrintLine();
 
                     qcolor = XleColor.Cyan;
 
@@ -98,15 +99,15 @@ namespace Xle.Maps.Outdoors
                     item = Random.Next(21) + 20;
                     cost = (int)(item * (Random.NextDouble() * 0.4 + 0.8));
 
-                    TextArea.Print("Do you want to buy ", XleColor.Green);
-                    TextArea.Print(item.ToString(), XleColor.Yellow);
-                    TextArea.PrintLine();
+                    await TextArea.Print("Do you want to buy ", XleColor.Green);
+                    await TextArea.Print(item.ToString(), XleColor.Yellow);
+                    await TextArea.PrintLine();
 
                     // line 2
-                    TextArea.Print("Days of food for ", XleColor.Green);
-                    TextArea.Print(cost.ToString(), XleColor.Yellow);
-                    TextArea.Print(" gold?", XleColor.Green);
-                    TextArea.PrintLine();
+                    await TextArea.Print("Days of food for ", XleColor.Green);
+                    await TextArea.Print(cost.ToString(), XleColor.Yellow);
+                    await TextArea.Print(" gold?", XleColor.Green);
+                    await TextArea.PrintLine();
 
                     qcolor = XleColor.Green;
 
@@ -120,15 +121,15 @@ namespace Xle.Maps.Outdoors
 
                     cost = (int)(item * (Random.NextDouble() * 0.15 + 0.75));
 
-                    TextArea.Print("Do you want to buy a potion worth ", XleColor.Green);
-                    TextArea.PrintLine();
+                    await TextArea.Print("Do you want to buy a potion worth ", XleColor.Green);
+                    await TextArea.PrintLine();
 
                     // line 2
-                    TextArea.Print(item.ToString(), XleColor.Yellow);
-                    TextArea.Print(" Hit Points for ", XleColor.Green);
-                    TextArea.Print(cost.ToString(), XleColor.Yellow);
-                    TextArea.Print(" gold?", XleColor.Green);
-                    TextArea.PrintLine();
+                    await TextArea.Print(item.ToString(), XleColor.Yellow);
+                    await TextArea.Print(" Hit Points for ", XleColor.Green);
+                    await TextArea.Print(cost.ToString(), XleColor.Yellow);
+                    await TextArea.Print(" gold?", XleColor.Green);
+                    await TextArea.PrintLine();
 
                     qcolor = XleColor.Green;
 
@@ -137,7 +138,7 @@ namespace Xle.Maps.Outdoors
                 default:
                 case 5:			// buy museum coin
                     MuseumCoinSale.ResetCoinOffers();
-                    MuseumCoinSale.OfferMuseumCoin();
+                    await MuseumCoinSale.OfferMuseumCoin();
 
                     break;
 
@@ -145,9 +146,9 @@ namespace Xle.Maps.Outdoors
 
             if (type != 5)
             {
-                TextArea.PrintLine();
+               await  TextArea.PrintLine();
 
-                int choice = QuickMenu.QuickMenu(menu, 3, 0, qcolor);
+                int choice = await QuickMenu.QuickMenu(menu, 3, 0, qcolor);
 
                 if (choice == 0)
                 {
@@ -155,8 +156,8 @@ namespace Xle.Maps.Outdoors
                     {
                         SoundMan.PlaySound(LotaSound.Sale);
 
-                        TextArea.PrintLine();
-                        TextArea.PrintLine("Purchase Completed.");
+                        await TextArea.PrintLine();
+                        await TextArea.PrintLine("Purchase Completed.");
 
                         Color clr2 = XleColor.White;
 
@@ -190,8 +191,8 @@ namespace Xle.Maps.Outdoors
                     {
                         SoundMan.PlaySound(LotaSound.Medium);
 
-                        TextArea.PrintLine();
-                        TextArea.PrintLine("You don't have enough gold...");
+                        await TextArea.PrintLine();
+                        await TextArea.PrintLine("You don't have enough gold...");
                     }
 
                 }
@@ -199,12 +200,12 @@ namespace Xle.Maps.Outdoors
                 {
                     SoundMan.PlaySound(LotaSound.Medium);
 
-                    TextArea.PrintLine();
+                    await TextArea.PrintLine();
 
                     if (1 + Random.Next(2) == 1)
-                        TextArea.PrintLine("Maybe Later...");
+                        await TextArea.PrintLine("Maybe Later...");
                     else
-                        TextArea.PrintLine("You passed up a good deal!");
+                        await TextArea.PrintLine("You passed up a good deal!");
 
                 }
             }

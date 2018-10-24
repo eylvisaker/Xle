@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Ancients;
 using Xle.Services.Game;
 using Xle.Services.Menus;
@@ -22,17 +23,17 @@ namespace Xle.Services.Commands.Implementation
             this.gamePersistance = gamePersistance;
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             MenuItemList menuItems = new MenuItemList("Yes", "No");
             int choice;
             bool saved = false;
 
-            TextArea.PrintLine("\nWould you like to save");
-            TextArea.PrintLine("the game in progress?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("\nWould you like to save");
+            await TextArea.PrintLine("the game in progress?");
+            await TextArea.PrintLine();
 
-            choice = menu.QuickMenu(menuItems, 2);
+            choice = await menu.QuickMenu(menuItems, 2);
 
             if (choice == 0)
             {
@@ -40,35 +41,35 @@ namespace Xle.Services.Commands.Implementation
 
                 saved = true;
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("Game Saved.");
-                TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Game Saved.");
+                await TextArea.PrintLine();
             }
             else
             {
                 ColorStringBuilder builder = new ColorStringBuilder();
 
-                TextArea.PrintLine();
-                TextArea.Print("Game ", XleColor.White);
-                TextArea.Print("not", XleColor.Yellow);
-                TextArea.Print(" saved.", XleColor.White);
-
-                TextArea.PrintLine();
-                TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.Print("Game ", XleColor.White);
+                await TextArea.Print("not", XleColor.Yellow);
+                await TextArea.Print(" saved.", XleColor.White);
+                
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
             }
 
-            gameControl.Wait(1500);
+            await gameControl.WaitAsync(1500);
 
-            TextArea.PrintLine("Quit and return to title screen?");
+            await TextArea.PrintLine("Quit and return to title screen?");
 
             if (saved == false)
-                TextArea.PrintLine("Unsaved progress will be lost.", XleColor.Yellow);
+                await TextArea.PrintLine("Unsaved progress will be lost.", XleColor.Yellow);
             else
-                TextArea.PrintLine();
+                await TextArea.PrintLine();
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            choice = menu.QuickMenu(menuItems, 2, 1);
+            choice = await menu.QuickMenu(menuItems, 2, 1);
 
             if (choice == 0)
             {

@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.ScreenModel;
 
@@ -25,47 +26,47 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             get { return Story.ReturnedTulip; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
             if (Player.Items[LotaItem.Tulip] == 0)
             {
-                OfferTulipQuest();
+                await OfferTulipQuest();
             }
             else
             {
-                RewardForTulip();
+                await RewardForTulip();
             }
         }
 
-        private void RewardForTulip()
+        private async Task RewardForTulip()
         {
             // remove the tulip from the player, give the reward and shut down the exhibit.
             Player.Items[LotaItem.Tulip] = 0;
             Player.Attribute[Attributes.charm] += 10;
             Story.ReturnedTulip = true;
 
-            ReadRawText(ExhibitInfo.Text[3]);
+            await ReadRawText(ExhibitInfo.Text[3]);
 
             TextArea.Clear();
         }
 
-        private void OfferTulipQuest()
+        private async Task OfferTulipQuest()
         {
             bool firstVisit = HasBeenVisited;
 
-            base.RunExhibit();
-            TextArea.PrintLine();
+            await base.RunExhibit();
+            await TextArea.PrintLine();
 
             if (Story.SearchingForTulip == false)
-                TextArea.PrintLine("Do you want to help search?");
+                await TextArea.PrintLine("Do you want to help search?");
             else
-                TextArea.PrintLine("Do you want to continue searching?");
+                await TextArea.PrintLine("Do you want to continue searching?");
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            if (QuickMenu.QuickMenuYesNo() == 0)
+            if (await QuickMenu.QuickMenuYesNo() == 0)
             {
-                ReadRawText(ExhibitInfo.Text[2]);
+                await ReadRawText(ExhibitInfo.Text[2]);
                 int amount = 100;
 
                 if (firstVisit || ExhibitHasBeenVisited(ExhibitIdentifier.Thornberry))
@@ -75,8 +76,8 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 
                 Player.Gold += amount;
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("            Gold:  + " + amount.ToString(), XleColor.Yellow);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("            Gold:  + " + amount.ToString(), XleColor.Yellow);
 
                 SoundMan.PlaySound(LotaSound.VeryGood);
                 StatsDisplay.FlashHPWhileSound(XleColor.Yellow);

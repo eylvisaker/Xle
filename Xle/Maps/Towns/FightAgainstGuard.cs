@@ -1,10 +1,11 @@
-﻿using Xle.Maps.XleMapTypes;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Threading.Tasks;
+using Xle.Maps.XleMapTypes;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.XleSystem;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace Xle.Maps.Towns
 {
@@ -25,13 +26,13 @@ namespace Xle.Maps.Towns
             set { Town.IsAngry = value; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            TextArea.PrintLine("Fight with " + Player.CurrentWeapon.BaseName(Data));
-            TextArea.Print("Enter direction: ");
+            await TextArea.PrintLine("Fight with " + Player.CurrentWeapon.BaseName(Data));
+            await TextArea.Print("Enter direction: ");
 
             Keys key = Input.WaitForKey(Keys.Up, Keys.Down, Keys.Left, Keys.Right);
 
@@ -47,13 +48,13 @@ namespace Xle.Maps.Towns
                     throw new InvalidOperationException();
             }
 
-            TextArea.PrintLine(fightDir.ToString());
+            await TextArea.PrintLine(fightDir.ToString());
 
-            FightInDirection(fightDir);
+            await FightInDirection(fightDir);
 
         }
 
-        protected virtual void FightInDirection(Direction fightDir)
+        protected virtual async Task FightInDirection(Direction fightDir)
         {
             bool attacked = false;
             int maxXdist = 1;
@@ -69,7 +70,7 @@ namespace Xle.Maps.Towns
 
             Player.FaceDirection = fightDir;
 
-            Point attackPt = Point.Zero, 
+            Point attackPt = Point.Zero,
                   attackPt2 = Point.Zero;
 
             attackPt.X = Player.X;
@@ -124,10 +125,10 @@ namespace Xle.Maps.Towns
                             &&
                             attacked == false)
                         {
-                            AttackGuard(k, Math.Max(i, j));
+                            await AttackGuard(k, Math.Max(i, j));
                             attacked = true;
 
-                            GameControl.Wait(200);
+                            await GameControl.WaitAsync(200);
                         }
                     }
 
@@ -190,8 +191,8 @@ namespace Xle.Maps.Towns
 
                         int dam = Random.Next(10) + 30;
 
-                        TextArea.PrintLine();
-                        TextArea.PrintLine("Merchant killed by blow of " + dam.ToString());
+                        await TextArea.PrintLine();
+                        await TextArea.PrintLine("Merchant killed by blow of " + dam.ToString());
 
                         TheMap[attackPt.X + dx, attackPt.Y + dy] = 0x52;
                         TheMap[attackPt.X + dx, attackPt.Y + dy + 1] = 0x52;
@@ -209,7 +210,7 @@ namespace Xle.Maps.Towns
 
                     if (tile == 176 || tile1 == 176 || tile == 192 || tile == 192)
                     {
-                        TextArea.PrintLine("The prison bars hold.");
+                        await TextArea.PrintLine("The prison bars hold.");
 
                         SoundMan.PlaySound(LotaSound.Bump);
 
@@ -221,18 +222,15 @@ namespace Xle.Maps.Towns
 
             if (attacked == false)
             {
-                TextArea.PrintLine("Nothing hit");
+                await TextArea.PrintLine("Nothing hit");
             }
 
-            GameControl.Wait(200 + 50 * Player.Gamespeed, keyBreak: true);
+            await GameControl.WaitAsync(200 + 50 * Player.Gamespeed, keyBreak: true);
         }
 
-        private void AttackGuard(int grd, int distance)
-        {
-            AttackGuard(TheMap.Guards[grd], distance);
-        }
+        private Task AttackGuard(int grd, int distance) => AttackGuard(TheMap.Guards[grd], distance);
 
-        private void AttackGuard(Guard guard, int distance)
+        private async Task AttackGuard(Guard guard, int distance)
         {
             if (guard.OnPlayerAttack != null)
             {
@@ -246,7 +244,7 @@ namespace Xle.Maps.Towns
 
             if (Random.NextDouble() > hitChance)
             {
-                TextArea.PrintLine("Attack on " + guard.Name + " missed", XleColor.Purple);
+                await TextArea.PrintLine("Attack on " + guard.Name + " missed", XleColor.Purple);
                 SoundMan.PlaySound(LotaSound.PlayerMiss);
             }
             else
@@ -256,10 +254,10 @@ namespace Xle.Maps.Towns
                 IsAngry = true;
                 Player.LastAttackedMapID = TheMap.MapID;
 
-                TextArea.Print(guard.Name + " struck  ", XleColor.Yellow);
-                TextArea.Print(dam.ToString(), XleColor.White);
-                TextArea.Print("  H.P. Blow", XleColor.White);
-                TextArea.PrintLine();
+                await TextArea.Print(guard.Name + " struck  ", XleColor.Yellow);
+                await TextArea.Print(dam.ToString(), XleColor.White);
+                await TextArea.Print("  H.P. Blow", XleColor.White);
+                await TextArea.PrintLine();
 
                 guard.HP -= dam;
 
@@ -267,17 +265,16 @@ namespace Xle.Maps.Towns
 
                 if (guard.HP <= 0)
                 {
-                    TextArea.PrintLine(guard.Name + " killed");
+                    await TextArea.PrintLine(guard.Name + " killed");
 
                     TheMap.Guards.Remove(guard);
 
-                    GameControl.Wait(100);
+                    await GameControl.WaitAsync(100);
 
                     SoundMan.StopSound(LotaSound.PlayerHit);
                     SoundMan.PlaySound(LotaSound.EnemyDie);
 
-                    if (guard.OnGuardDead != null)
-                        guard.OnGuardDead(GameState, guard);
+                    guard.OnGuardDead?.Invoke(GameState, guard);
                 }
             }
         }

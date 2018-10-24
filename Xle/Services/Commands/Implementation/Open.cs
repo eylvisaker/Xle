@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using System.Threading.Tasks;
 using Xle.Maps;
 using Xle.Services.Game;
 
@@ -21,17 +21,17 @@ namespace Xle.Services.Commands.Implementation
             get { return "Open"; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            if (OpenEvent())
+            if (await OpenEvent())
                 return;
 
-            TextArea.PrintLine("\n\nNothing opens.");
+            await TextArea.PrintLine("\n\nNothing opens.");
 
-            GameControl.Wait(500);
+            await GameControl.WaitAsync(500);
         }
 
-        protected bool OpenEvent()
+        protected async Task<bool> OpenEvent()
         {
             foreach (var evt in MapExtender.EventsAt(1).Where(x => x.Enabled))
             {

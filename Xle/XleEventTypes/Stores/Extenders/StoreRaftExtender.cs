@@ -18,96 +18,98 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         protected override bool SpeakImpl()
         {
-            int choice = 0;
-            int raftCost = (int)(400 * TheEvent.CostFactor);
-            int gearCost = (int)(50 * TheEvent.CostFactor);
-            MenuItemList theList = new MenuItemList("Yes", "No");
-            bool skipRaft = false;
-            bool offerCoin = false;
+            throw new NotImplementedException();
 
-            if (IsLoanOverdue())
-            {
-                StoreDeclinePlayer();
-                return true;
-            }
-            // check to see if there are any rafts near the raft drop point
-            skipRaft = CheckForNearbyRaft(skipRaft);
+            //int choice = 0;
+            //int raftCost = (int)(400 * TheEvent.CostFactor);
+            //int gearCost = (int)(50 * TheEvent.CostFactor);
+            //MenuItemList theList = new MenuItemList("Yes", "No");
+            //bool skipRaft = false;
+            //bool offerCoin = false;
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("** " + TheEvent.ShopName + " **", XleColor.Yellow);
-            TextArea.PrintLine();
+            //if (IsLoanOverdue())
+            //{
+            //    StoreDeclinePlayer();
+            //    return true;
+            //}
+            //// check to see if there are any rafts near the raft drop point
+            //skipRaft = CheckForNearbyRaft(skipRaft);
 
-            if (skipRaft == false)
-            {
-                TextArea.PrintLine("Want to buy a raft for " + raftCost.ToString() + " gold?");
+            //TextArea.PrintLine();
+            //TextArea.PrintLine("** " + TheEvent.ShopName + " **", XleColor.Yellow);
+            //TextArea.PrintLine();
 
-                choice = QuickMenu.QuickMenu(theList, 3, 1);
+            //if (skipRaft == false)
+            //{
+            //    TextArea.PrintLine("Want to buy a raft for " + raftCost.ToString() + " gold?");
 
-                if (choice == 0)
-                {
-                    // Purchase raft
-                    if (Player.Spend(raftCost))
-                    {
-                        Player.Rafts.Add(new RaftData(TheEvent.BuyRaftPt.X, TheEvent.BuyRaftPt.Y, TheEvent.BuyRaftMap));
+            //    choice = QuickMenu.QuickMenu(theList, 3, 1);
 
-                        TextArea.PrintLine("Raft purchased.");
-                        SoundMan.PlaySound(LotaSound.Sale);
-                        GameControl.Wait(1000);
+            //    if (choice == 0)
+            //    {
+            //        // Purchase raft
+            //        if (Player.Spend(raftCost))
+            //        {
+            //            Player.Rafts.Add(new RaftData(TheEvent.BuyRaftPt.X, TheEvent.BuyRaftPt.Y, TheEvent.BuyRaftMap));
 
-                        TextArea.PrintLine("Board raft outside.");
+            //            TextArea.PrintLine("Raft purchased.");
+            //            SoundMan.PlaySound(LotaSound.Sale);
+            //            GameControl.Wait(1000);
 
-                        offerCoin = true;
-                    }
-                    else
-                    {
-                        TextArea.PrintLine("Not enough gold.");
-                        SoundMan.PlaySound(LotaSound.Medium);
-                        GameControl.Wait(750);
-                    }
-                }
-            }
+            //            TextArea.PrintLine("Board raft outside.");
 
-            if (skipRaft == true || choice == 1)
-            {
-                TextArea.PrintLine("How about some climbing gear");
-                TextArea.PrintLine("for " + gearCost.ToString() + " gold?");
-                TextArea.PrintLine();
+            //            offerCoin = true;
+            //        }
+            //        else
+            //        {
+            //            TextArea.PrintLine("Not enough gold.");
+            //            SoundMan.PlaySound(LotaSound.Medium);
+            //            GameControl.Wait(750);
+            //        }
+            //    }
+            //}
 
-                choice = QuickMenu.QuickMenu(theList, 3, 1);
+            //if (skipRaft == true || choice == 1)
+            //{
+            //    TextArea.PrintLine("How about some climbing gear");
+            //    TextArea.PrintLine("for " + gearCost.ToString() + " gold?");
+            //    TextArea.PrintLine();
 
-                if (choice == 0)
-                {
-                    if (Player.Spend(gearCost))
-                    {
-                        TextArea.PrintLine("Climbing gear purchased.");
+            //    choice = QuickMenu.QuickMenu(theList, 3, 1);
 
-                        Player.Items[ClimbingGearItemId] += 1;
-                        offerCoin = true;
+            //    if (choice == 0)
+            //    {
+            //        if (Player.Spend(gearCost))
+            //        {
+            //            TextArea.PrintLine("Climbing gear purchased.");
 
-                        SoundMan.PlaySound(LotaSound.Sale);
-                    }
-                    else
-                    {
-                        TextArea.PrintLine("Not enough gold.");
-                        SoundMan.PlaySound(LotaSound.Medium);
-                    }
-                }
-                else if (choice == 1)
-                {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("Nothing Purchased.");
+            //            Player.Items[ClimbingGearItemId] += 1;
+            //            offerCoin = true;
 
-                    SoundMan.PlaySound(LotaSound.Medium);
-                }
+            //            SoundMan.PlaySound(LotaSound.Sale);
+            //        }
+            //        else
+            //        {
+            //            TextArea.PrintLine("Not enough gold.");
+            //            SoundMan.PlaySound(LotaSound.Medium);
+            //        }
+            //    }
+            //    else if (choice == 1)
+            //    {
+            //        TextArea.PrintLine();
+            //        TextArea.PrintLine("Nothing Purchased.");
 
-                GameControl.Wait(750);
+            //        SoundMan.PlaySound(LotaSound.Medium);
+            //    }
 
-            }
+            //    GameControl.Wait(750);
 
-            if (offerCoin)
-                CheckOfferMuseumCoin(Player);
+            //}
 
-            return true;
+            //if (offerCoin)
+            //    CheckOfferMuseumCoin(Player);
+
+            //return true;
         }
 
         private int ClimbingGearItemId

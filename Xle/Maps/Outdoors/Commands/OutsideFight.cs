@@ -48,29 +48,29 @@ namespace Xle.Maps.Outdoors.Commands
             get { return Encounters.CurrentMonsters.Count; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             string weaponName = Player.CurrentWeapon.BaseName(Data);
 
-            TextArea.PrintLine("\n");
+            await TextArea.PrintLine("\n");
 
             if (EncounterState == EncounterState.MonsterReady)
             {
                 int dam = attack();
 
-                TextArea.Print("Attack ", XleColor.White);
-                TextArea.Print(MonstName, XleColor.Cyan);
-                TextArea.PrintLine();
+                await TextArea.Print("Attack ", XleColor.White);
+                await TextArea.Print(MonstName, XleColor.Cyan);
+                await TextArea.PrintLine();
 
-                TextArea.Print("with ", XleColor.White);
-                TextArea.Print(weaponName, XleColor.Cyan);
-                TextArea.PrintLine();
+                await TextArea.Print("with ", XleColor.White);
+                await TextArea.Print(weaponName, XleColor.Cyan);
+                await TextArea.PrintLine();
 
                 if (dam <= 0)
                 {
                     SoundMan.PlaySound(LotaSound.PlayerMiss);
 
-                    TextArea.PrintLine("Your Attack missed.", XleColor.Yellow);
+                    await TextArea.PrintLine("Your Attack missed.", XleColor.Yellow);
 
                     return;
                 }
@@ -81,10 +81,10 @@ namespace Xle.Maps.Outdoors.Commands
             }
             else if (EncounterState > 0)
             {
-                TextArea.PrintLine("The unknown creature is not ");
-                TextArea.PrintLine("within range.");
+                await TextArea.PrintLine("The unknown creature is not ");
+                await TextArea.PrintLine("within range.");
 
-                GameControl.Wait(300 + 100 * Player.Gamespeed);
+                await GameControl.WaitAsync(300 + 100 * Player.Gamespeed);
             }
             else
             {

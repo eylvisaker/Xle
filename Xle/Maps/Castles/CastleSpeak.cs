@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
 
 using Xle.Maps.Towns;
-using Xle.Services;
-using Xle.Services.Commands.Implementation;
 
 namespace Xle.Maps.Castles
 {
-    [ServiceName("CastleSpeak")]
+    [Transient("CastleSpeak")]
     public class CastleSpeak : TownSpeak
     {
-        protected override void SpeakToGuard()
+        protected override async Task SpeakToGuard()
         {
-            TextArea.PrintLine("\n\nThe guard ignores you.");
+            await TextArea.PrintLine("\n\nThe guard ignores you.");
         }
     }
 }

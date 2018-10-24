@@ -1,6 +1,5 @@
-﻿using Xle.Services;
+﻿using System.Threading.Tasks;
 using Xle.Services.Menus;
-using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
@@ -8,42 +7,42 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
     {
         public IQuickMenu QuickMenu { get; set; }
 
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
             SoundMan.PlaySound(LotaSound.VeryGood);
 
             TextArea.Clear(true);
-            TextArea.PrintLine();
-            TextArea.PrintLine("    Meet the wizard of potions!!", XleColor.Cyan);
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("    Meet the wizard of potions!!", XleColor.Cyan);
+            await TextArea.PrintLine();
 
-            TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Green, XleColor.Cyan, 250);
+            await TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Green, XleColor.Cyan, 250);
 
             if (Story.BoughtPotion)
             {
-                BegoneMessage();
+                await BegoneMessage();
             }
             else
             {
-                OfferPotion();
+                await OfferPotion();
             }
 
-            GameControl.Wait(5000);
+            await GameControl.WaitAsync(5000);
             return true;
         }
 
-        private void OfferPotion()
+        private async Task OfferPotion()
         {
-            TextArea.PrintLine("My potion can help you.");
-            TextArea.PrintLine("It will cost 2,500 gold.");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("My potion can help you.");
+            await TextArea.PrintLine("It will cost 2,500 gold.");
+            await TextArea.PrintLine();
 
-            if (QuickMenu.QuickMenuYesNo() == 0)
+            if (await QuickMenu.QuickMenuYesNo() == 0)
             {
                 if (Player.Gold < 2500)
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("you haven't the gold.");
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("you haven't the gold.");
                 }
                 else
                 {
@@ -62,27 +61,27 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
                     }
 
                     TextArea.Clear(true);
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("Check your attributes.");
-                    TextArea.PrintLine();
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("Check your attributes.");
+                    await TextArea.PrintLine();
 
                     SoundMan.PlaySound(LotaSound.VeryGood);
 
-                    TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.White, XleColor.Cyan, 250);
+                    await TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.White, XleColor.Cyan, 250);
 
                 }
             }
             else
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("No?  Maybe later.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("No?  Maybe later.");
             }
         }
 
-        private void BegoneMessage()
+        private async Task BegoneMessage()
         {
-            TextArea.PrintLine("I can do no more for you.");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("I can do no more for you.");
+            await TextArea.PrintLine();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.Xna.Framework;
 using Moq;
+using System.Threading.Tasks;
 using Xle.Services.Menus;
 using Xunit;
 
@@ -22,9 +23,9 @@ namespace Xle.ServiceTests
                     (a, b, c, d) =>
                     {
                         if (selectArmorIndex < 0)
-                            return c.Count - 1;
+                            return Task.FromResult(c.Count - 1);
                         else
-                            return selectArmorIndex;
+                            return Task.FromResult(selectArmorIndex);
                     });
 
             Services.SubMenu.Setup(x => x.SubMenu(
@@ -33,9 +34,9 @@ namespace Xle.ServiceTests
                     (a, b, c, d) =>
                     {
                         if (selectWeaponIndex < 0)
-                            return c.Count - 1;
+                            return Task.FromResult(c.Count - 1);
                         else
-                            return selectWeaponIndex;
+                            return Task.FromResult(selectWeaponIndex);
                     });
 
         }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Linq;
 using AgateLib;
+using System;
 
 namespace Xle.Services.Menus
 {
@@ -40,13 +41,15 @@ namespace Xle.Services.Menus
             theList.Add("Nothing");
             theList.AddRange(state.Player.Armor.Select(x => x.NameWithQuality(Data)));
 
-            int sel = subMenu.SubMenu("Pick Armor", state.Player.Armor.IndexOf(defaultItem) + 1,
-                theList, backColor ?? XleColor.Black);
+            throw new NotImplementedException();
 
-            if (sel == 0)
-                return null;
-            else
-                return state.Player.Armor[sel - 1];
+            //int sel = subMenu.SubMenu("Pick Armor", state.Player.Armor.IndexOf(defaultItem) + 1,
+            //    theList, backColor ?? XleColor.Black);
+
+            //if (sel == 0)
+            //    return null;
+            //else
+            //    return state.Player.Armor[sel - 1];
         }
 
         public WeaponItem PickWeapon(WeaponItem defaultItem)
@@ -60,13 +63,14 @@ namespace Xle.Services.Menus
             theList.Add("Nothing");
             theList.AddRange(state.Player.Weapons.Select(x => x.NameWithQuality(Data)));
 
-            int sel = subMenu.SubMenu("Pick Weapon", state.Player.Weapons.IndexOf(defaultItem) + 1,
-                theList, backColor ?? XleColor.Black);
+            throw new NotImplementedException();
+            //int sel = subMenu.SubMenu("Pick Weapon", state.Player.Weapons.IndexOf(defaultItem) + 1,
+            //    theList, backColor ?? XleColor.Black);
 
-            if (sel == 0)
-                return null;
-            else
-                return state.Player.Weapons[sel - 1];
+            //if (sel == 0)
+            //    return null;
+            //else
+            //    return state.Player.Weapons[sel - 1];
         }
     }
 }

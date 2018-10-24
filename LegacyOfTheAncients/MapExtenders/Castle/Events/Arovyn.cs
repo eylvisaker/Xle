@@ -1,52 +1,53 @@
-﻿using Xle.XleEventTypes.Extenders;
+﻿using System.Threading.Tasks;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
     public class Arovyn : LotaEvent
     {
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
             if (Player.Attribute[Attributes.strength] <= 25)
             {
-                TooWeakMessage();
+                await TooWeakMessage();
             }
             else
             {
-                GiveMark();
+                await GiveMark();
             }
 
             return true;
         }
 
-        private void TooWeakMessage()
+        private async Task TooWeakMessage()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLineSlow("I would like to confide in you, but", XleColor.Yellow);
-            TextArea.PrintLineSlow("you are not strong enough to help.", XleColor.Yellow);
-            TextArea.PrintLineSlow("see me when your strength has grown.", XleColor.Yellow);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLineSlow("I would like to confide in you, but", XleColor.Yellow);
+            await TextArea.PrintLineSlow("you are not strong enough to help.", XleColor.Yellow);
+            await TextArea.PrintLineSlow("see me when your strength has grown.", XleColor.Yellow);
 
-            GameControl.Wait(1500);
+            await GameControl.WaitAsync(1500);
         }
 
-        private void GiveMark()
+        private async Task GiveMark()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLineSlow("My health declines.  You are my last", XleColor.Yellow);
-            TextArea.PrintSlow("hope.  Find the ", XleColor.Yellow);
-            TextArea.PrintLineSlow("guardians of the", XleColor.White);
-            TextArea.PrintSlow("scroll.  ", XleColor.White);
-            TextArea.PrintLineSlow("They are in many towns, but", XleColor.Yellow);
-            TextArea.PrintLineSlow("talk only to those with a special", XleColor.Yellow);
-            TextArea.PrintLineSlow("secret mark.", XleColor.Yellow);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLineSlow("My health declines.  You are my last", XleColor.Yellow);
+            await TextArea.PrintSlow("hope.  Find the ", XleColor.Yellow);
+            await TextArea.PrintLineSlow("guardians of the", XleColor.White);
+            await TextArea.PrintSlow("scroll.  ", XleColor.White);
+            await TextArea.PrintLineSlow("They are in many towns, but", XleColor.Yellow);
+            await TextArea.PrintLineSlow("talk only to those with a special", XleColor.Yellow);
+            await TextArea.PrintLineSlow("secret mark.", XleColor.Yellow);
 
-            GameControl.Wait(3000);
+            await GameControl.WaitAsync(3000);
 
-            TextArea.PrintLineSlow("I've now put this magic mark on your", XleColor.Cyan);
-            TextArea.PrintLineSlow("forearm.  Only guardians can see it.", XleColor.Cyan);
+            await TextArea.PrintLineSlow("I've now put this magic mark on your", XleColor.Cyan);
+            await TextArea.PrintLineSlow("forearm.  Only guardians can see it.", XleColor.Cyan);
 
-            GameControl.Wait(4000);
+            await GameControl.WaitAsync(4000);
 
             Story.HasGuardianMark = true;
         }

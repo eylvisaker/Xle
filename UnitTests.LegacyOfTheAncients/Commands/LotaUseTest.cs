@@ -48,16 +48,16 @@ namespace Xle.LegacyOfTheAncients.Commands
 
             Player.Items[item] = 4;
 
-            itemChooser.Setup(x => x.ChooseItem()).Returns((int)item);
+            itemChooser.Setup(x => x.ChooseItem()).ReturnsAsync((int)item);
         }
 
         [Fact]
-        public void UseHealingItem()
+        public async Task UseHealingItem()
         {
             SetupItemForUse(LotaItem.HealingHerb);
 
             Player.HP = 1;
-            use.Execute();
+            await use.Execute();
 
             Player.HP.Should().Be(Player.MaxHP / 2 + 1);
         }

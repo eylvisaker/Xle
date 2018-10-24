@@ -1,4 +1,6 @@
-﻿namespace Xle.Services.Commands.Implementation
+﻿using System.Threading.Tasks;
+
+namespace Xle.Services.Commands.Implementation
 {
     public interface IClimb : ICommand { }
 
@@ -9,9 +11,6 @@
             get { return "Climb"; }
         }
 
-        protected void FailMessage()
-        {
-            TextArea.PrintLine("\n\nNothing to climb");
-        }
+        protected Task FailMessage() => TextArea.PrintLine("\n\nNothing to climb");
     }
 }

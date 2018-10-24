@@ -9,12 +9,12 @@ namespace Xle.Services.Commands.Implementation
 {
     public class MagicWithFancyPrompt : MagicCommand
     {
-        protected override MagicSpell RunMagicMenu(IList<MagicSpell> magics)
+        protected override async Task<MagicSpell> RunMagicMenu(IList<MagicSpell> magics)
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("Use which magic?", XleColor.Purple);
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Use which magic?", XleColor.Purple);
+            await TextArea.PrintLine();
 
             bool hasFlames = magics.Contains(Data.MagicSpells[1]);
             bool hasBolts = magics.Contains(Data.MagicSpells[2]);
@@ -33,8 +33,8 @@ namespace Xle.Services.Commands.Implementation
 
             var menu = new MenuItemList("Flame", "Bolt", anyOthers ? "Other" : "Nothing");
 
-            int choice = QuickMenu.QuickMenu(menu, 2, defaultValue,
-                XleColor.Purple, XleColor.White);
+            int choice = await QuickMenu.QuickMenu(menu, 2, defaultValue,
+                                                   XleColor.Purple, XleColor.White);
 
             if (choice == 0)
                 return Data.MagicSpells[1];
@@ -45,10 +45,10 @@ namespace Xle.Services.Commands.Implementation
                 if (anyOthers == false)
                     return null;
 
-                TextArea.PrintLine(" - select above", XleColor.White);
-                TextArea.PrintLine();
+                await TextArea.PrintLine(" - select above", XleColor.White);
+                await TextArea.PrintLine();
 
-                return MagicMenu(magics.Skip(otherStart).ToList());
+                return await MagicMenu(magics.Skip(otherStart).ToList());
             }
         }
 

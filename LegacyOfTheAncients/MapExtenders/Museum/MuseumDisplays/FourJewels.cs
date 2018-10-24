@@ -1,5 +1,6 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 using Xle.Services.MapLoad;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
@@ -24,15 +25,16 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
         {
             get { return XleColor.Yellow; }
         }
-        public override void RunExhibit()
+
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine("Would you like to go");
-            TextArea.PrintLine("to the four jewel dungeon?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("Would you like to go");
+            await TextArea.PrintLine("to the four jewel dungeon?");
+            await TextArea.PrintLine();
 
-            if (QuickMenu.QuickMenuYesNo() == 0)
+            if (await QuickMenu.QuickMenuYesNo() == 0)
             {
                 int map = Player.MapID;
                 int x = Player.X;

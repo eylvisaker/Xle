@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Ancients;
 using Xle.Maps.Towns;
-using Xle.Services;
-using Xle.Services.Commands.Implementation;
 
 namespace Xle.Ancients.MapExtenders.Castle.Commands
 {
-    [ServiceName("CastleSpeak")]
+    [Transient("CastleSpeak")]
     public class CastleSpeak : TownSpeak
     {
         protected LotaStory Story { get { return GameState.Player.Story(); } }
 
-        protected override void SpeakToGuard()
+        protected override async Task SpeakToGuard()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (Story.Invisible)
             {
-                TextArea.PrintLine("The guard looks startled.");
+                await TextArea.PrintLine("The guard looks startled.");
             }
             else
             {
-                TextArea.PrintLine("The guard ignores you.");
+                await TextArea.PrintLine("The guard ignores you.");
             }
         }
     }

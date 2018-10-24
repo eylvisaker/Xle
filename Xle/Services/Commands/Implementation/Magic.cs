@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using Xle.Services.XleSystem;
 using Xle.Services.Game;
+using System.Threading.Tasks;
 
 namespace Xle.Services.Commands.Implementation
 {
@@ -28,19 +29,19 @@ namespace Xle.Services.Commands.Implementation
             get { yield break; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             var magics = ValidMagic.Where(x => Player.Items[x.ItemID] > 0).ToList();
 
-            MagicSpell magic = RunMagicMenu(magics);
+            MagicSpell magic = await RunMagicMenu(magics);
 
             if (magic == null)
                 return;
 
             if (Player.Items[magic.ItemID] <= 0)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("You have no " + magic.PluralName + ".", XleColor.White);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("You have no " + magic.PluralName + ".", XleColor.White);
                 return;
             }
 
@@ -54,22 +55,22 @@ namespace Xle.Services.Commands.Implementation
             throw new NotImplementedException();
         }
 
-        protected virtual MagicSpell RunMagicMenu(IList<MagicSpell> magics)
+        protected virtual Task<MagicSpell> RunMagicMenu(IList<MagicSpell> magics)
         {
             return MagicMenu(magics.ToArray());
         }
 
-        protected MagicSpell MagicMenu(IList<MagicSpell> magics)
+        protected async Task<MagicSpell> MagicMenu(IList<MagicSpell> magics)
         {
             MenuItemList menu = new MenuItemList("Nothing");
 
             menu.AddRange(magics.Select(x => x.Name));
 
-            int choice = SubMenu.SubMenu("Pick magic", 0, menu);
+            int choice = await SubMenu.SubMenu("Pick magic", 0, menu);
 
             if (choice == 0)
             {
-                TextArea.PrintLine("Select no magic.", XleColor.White);
+                await TextArea.PrintLine("Select no magic.", XleColor.White);
                 return null;
             }
 

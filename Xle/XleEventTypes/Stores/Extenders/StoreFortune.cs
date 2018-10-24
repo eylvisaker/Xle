@@ -23,15 +23,17 @@ namespace Xle.XleEventTypes.Stores.Extenders
             TextArea.PrintLine(string.Format(
                 "Read your fortune for {0} gold?", (int)(6 * TheEvent.CostFactor)));
 
-            choice = QuickMenu.QuickMenu(theList, 3, 1);
+            throw new NotImplementedException();
 
-            if (choice == 0)
-            {
+            //choice = QuickMenu.QuickMenu(theList, 3, 1);
+
+            //if (choice == 0)
+            //{
 
 
-            }
+            //}
 
-            return true;
+            //return true;
         }
     }
 }

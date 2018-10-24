@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
@@ -18,7 +19,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 
         private bool viewedThisTime;
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
             if (StoryVariable == 0 && ExhibitHasBeenVisited(ExhibitIdentifier.Thornberry))
             {
@@ -27,14 +28,14 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 
             if (StoryVariable == 0)
             {
-                ReadRawText(ExhibitInfo.Text[1]);
+                await ReadRawText(ExhibitInfo.Text[1]);
 
                 // fair knife
                 Player.AddWeapon(1, 1);
             }
             else if (StoryVariable == 1)
             {
-                ReadRawText(ExhibitInfo.Text[2]);
+                await ReadRawText(ExhibitInfo.Text[2]);
 
                 // great bladed staff
                 Player.AddWeapon(3, 3);

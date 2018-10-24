@@ -10,6 +10,7 @@ using Xle.Services.Game;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Extenders
 {
@@ -39,9 +40,9 @@ namespace Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Speak()
+        public virtual Task<bool> Speak()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.XleSystem;
@@ -19,23 +20,23 @@ namespace Xle.Services.Commands.Implementation
 
         public IQuickMenu QuickMenu { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             MenuItemList theList = new MenuItemList("1", "2", "3", "4", "5");
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("** Change gamespeed **", XleColor.Yellow);
-            TextArea.PrintLine("    (1 is fastest)", XleColor.Yellow);
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("** Change gamespeed **", XleColor.Yellow);
+            await TextArea.PrintLine("    (1 is fastest)", XleColor.Yellow);
+            await TextArea.PrintLine();
 
-            Player.Gamespeed = 1 + QuickMenu.QuickMenu(theList, 2, Player.Gamespeed - 1);
+            Player.Gamespeed = 1 + await QuickMenu.QuickMenu(theList, 2, Player.Gamespeed - 1);
 
-            TextArea.Print("Gamespeed is: ", XleColor.Yellow);
-            TextArea.PrintLine(Player.Gamespeed.ToString(), XleColor.White);
+           await TextArea.Print("Gamespeed is: ", XleColor.Yellow);
+           await TextArea.PrintLine(Player.Gamespeed.ToString(), XleColor.White);
 
             systemState.Factory.SetGameSpeed(GameState, Player.Gamespeed);
 
-            gameControl.Wait(GameState.GameSpeed.AfterSetGamespeedTime);
+            await gameControl.WaitAsync(GameState.GameSpeed.AfterSetGamespeedTime);
 
         }
     }

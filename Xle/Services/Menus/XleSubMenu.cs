@@ -5,12 +5,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using AgateLib;
 using Xle.Services.Menus.Implementation;
+using System.Threading.Tasks;
 
 namespace Xle.Services.Menus
 {
     public interface IXleSubMenu
     {
-        int SubMenu(string title, int choice, MenuItemList items, Color? backColor = null);
+        Task<int> SubMenu(string title, int choice, MenuItemList items, Color? backColor = null);
     }
 
     [Singleton]
@@ -38,7 +39,7 @@ namespace Xle.Services.Menus
         /// <param name="choice"></param>
         /// <param name="items">A MenuItemList collection of menu items</param>
         /// <returns>The choice the user made.</returns>
-        public int SubMenu(string title, int choice, MenuItemList items, Color? backColor = null)
+        public Task<int> SubMenu(string title, int choice, MenuItemList items, Color? backColor = null)
         {
             SubMenu menu = new SubMenu();
 
@@ -50,7 +51,7 @@ namespace Xle.Services.Menus
             return RunSubMenu(menu);
         }
 
-        private int RunSubMenu(SubMenu menu)
+        private async Task<int> RunSubMenu(SubMenu menu)
         {
             for (int i = 0; i < menu.theList.Count; i++)
             {
@@ -58,7 +59,6 @@ namespace Xle.Services.Menus
                 {
                     menu.width = menu.theList[i].Length + 6;
                 }
-
             }
 
             string displayTitle = "Choose " + menu.title;
@@ -110,7 +110,7 @@ namespace Xle.Services.Menus
                 }
             } while (key != Keys.Enter);
 
-            gameControl.Wait(300);
+            await gameControl.WaitAsync(300);
 
             return menu.value;
         }

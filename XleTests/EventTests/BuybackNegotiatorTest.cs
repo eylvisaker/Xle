@@ -45,7 +45,7 @@ namespace Xle.EventTests
                 .Callback<Equipment, int, bool>((e, o, of) => offer = o);
 
             Services.QuickMenu.Setup(x => x.QuickMenuYesNo(true))
-                .Returns(0);
+                .ReturnsAsync(0);
 
             negotiator.NegotiatePrice(eq);
 
@@ -68,8 +68,8 @@ namespace Xle.EventTests
                 {
                     count++;
                     if (count == 2)
-                        return 0;
-                    else return 1;
+                        return Task.FromResult(0);
+                    else return Task.FromResult(1);
                 });
 
             Services.NumberPicker
@@ -93,7 +93,7 @@ namespace Xle.EventTests
                 .Callback<Equipment, int, bool>((e, o, of) => offer = o);
 
             Services.QuickMenu.Setup(x => x.QuickMenuYesNo(true))
-                .Returns(1);
+                .ReturnsAsync(1);
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
@@ -116,7 +116,7 @@ namespace Xle.EventTests
                 .Callback<Equipment, int, bool>((e, o, of) => offer = o);
 
             Services.QuickMenu.Setup(x => x.QuickMenuYesNo(true))
-                .Returns(1);
+                .ReturnsAsync(1);
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
@@ -138,7 +138,7 @@ namespace Xle.EventTests
                 .Callback<Equipment, int, bool>((e, o, of) => offer = o);
 
             Services.QuickMenu.Setup(x => x.QuickMenuYesNo(true))
-                .Returns(1);
+                .ReturnsAsync(1);
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
@@ -175,9 +175,9 @@ namespace Xle.EventTests
                 .Returns(() =>
                 {
                     if (offer > ask - 5 && finalOffer)
-                        return 0;
+                        return Task.FromResult(0);
                     else
-                        return 1;
+                        return Task.FromResult(1);
                 });
 
             Services.NumberPicker
@@ -225,7 +225,7 @@ namespace Xle.EventTests
                 });
 
             Services.QuickMenu.Setup(x => x.QuickMenuYesNo(true))
-                .Returns(1);
+                .ReturnsAsync(1);
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))

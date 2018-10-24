@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
@@ -66,7 +67,8 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             get { return GetBit(2); }
             set { SetBit(2, value); }
         }
-        public override void RunExhibit()
+
+        public override async Task RunExhibit()
         {
             bool[] bits = GetBitStatus(Story.Museum[0]);
             bool doneAnything = false;
@@ -74,7 +76,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             if (FirstUse == false)
             {
                 // introductory text.  it does not follow through.
-                ReadRawText(ExhibitInfo.Text[2]);
+                await ReadRawText(ExhibitInfo.Text[2]);
                 FirstUse = true;
                 return;
             }
@@ -82,25 +84,24 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             if (bits[1] == false && Player.Items[LotaItem.Compendium] == 0)
             {
                 // lost compendium
-                ReadRawText(ExhibitInfo.Text[3]);
+                await ReadRawText(ExhibitInfo.Text[3]);
 
                 LostCompendiumText = true;
                 doneAnything = true;
             }
-            doneAnything |= CheckSceptorCrown();
 
-            doneAnything |= CheckLevelUp();
-
-            doneAnything |= OfferIronKey();
+            doneAnything |= await CheckSceptorCrown();
+            doneAnything |= await CheckLevelUp();
+            doneAnything |= await OfferIronKey();
 
             if (doneAnything == false)
             {
                 // You must do more before I can help you again.
-                ReadRawText(ExhibitInfo.Text[1]);
+                await ReadRawText(ExhibitInfo.Text[1]);
             }
         }
 
-        private bool CheckSceptorCrown()
+        private async Task<bool> CheckSceptorCrown()
         {
             // If the player has not accepted the caretakers offer and
             // received the iron key, skip any crown/sceptor checks.
@@ -110,7 +111,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             if (Player.Items[LotaItem.Scepter] > 0 && Player.Items[LotaItem.Crown] > 0)
             {
                 // found scepter and crown
-                ReadRawText(ExhibitInfo.Text[10]);
+                await ReadRawText(ExhibitInfo.Text[10]);
 
                 // give magic ice.
                 Player.Items[LotaItem.MagicIce] = 1;
@@ -126,7 +127,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 if (Player.Items[LotaItem.Scepter] > 0)
                 {
                     // found scepter, give hint about crown
-                    ReadRawText(ExhibitInfo.Text[7]);
+                    await ReadRawText(ExhibitInfo.Text[7]);
 
                     SceptorCrownHint = true;
                     return true;
@@ -134,7 +135,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 else if (Player.Items[LotaItem.Crown] > 0)
                 {
                     // found crown, give hint about sceptor
-                    ReadRawText(ExhibitInfo.Text[8]);
+                    await ReadRawText(ExhibitInfo.Text[8]);
 
                     SceptorCrownHint = true;
                     return true;
@@ -144,19 +145,19 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             return false;
         }
 
-        private bool OfferIronKey()
+        private async Task<bool> OfferIronKey()
         {
             if (Player.Level >= 3 && Player.Items[LotaItem.IronKey] == 0)
             {
-                ReadRawText(ExhibitInfo.Text[5]);
+                await ReadRawText(ExhibitInfo.Text[5]);
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("Do you accept the");
-                TextArea.PrintLine("Caretaker's offer?");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Do you accept the");
+                await TextArea.PrintLine("Caretaker's offer?");
 
-                if (QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
+                if (await QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
                 {
-                    ReadRawText(ExhibitInfo.Text[6]);
+                    await ReadRawText(ExhibitInfo.Text[6]);
 
                     Player.Items[LotaItem.IronKey] = 1;
                 }
@@ -167,17 +168,17 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 return false;
         }
 
-        private bool CheckLevelUp()
+        private async Task<bool> CheckLevelUp()
         {
             if (ShouldLevelUp())
             {
-                ReadRawText(ExhibitInfo.Text[0]);
+                await ReadRawText(ExhibitInfo.Text[0]);
                 int newLevel = TargetLevel;
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("Your level is now " + newLevel.ToString() + "!!");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Your level is now " + newLevel.ToString() + "!!");
 
-                SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                await SoundMan.PlaySoundWait(LotaSound.VeryGood);
 
                 Player.Level = newLevel;
 

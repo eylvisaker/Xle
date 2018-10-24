@@ -1,9 +1,7 @@
 ﻿using System;
-
-using AgateLib.Mathematics.Geometry;
+using System.Threading.Tasks;
 
 using Xle.Data;
-using Xle.Maps.XleMapTypes;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.ScreenModel;
@@ -21,54 +19,55 @@ namespace Xle.Maps.Dungeons.Commands
 
         public IDungeonAdapter DungeonAdapter { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             DungeonTile tile = DungeonAdapter.TileAt(Player.X, Player.Y);
 
             if (tile == DungeonTile.Urn)
             {
-                OpenUrn();
+                await OpenUrn();
             }
             else if (tile == DungeonTile.Box)
             {
-                OpenBox();
+                await OpenBox();
             }
             else if (tile == DungeonTile.Chest)
             {
-                OpenChest(DungeonAdapter.ChestValueAt(Player.X, Player.Y));
+                await OpenChest(DungeonAdapter.ChestValueAt(Player.X, Player.Y));
             }
             else
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine();
-                TextArea.PrintLine("Nothing to open.");
-                GameControl.Wait(1000);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Nothing to open.");
+                await GameControl.WaitAsync(1000);
             }
         }
 
-        private void OpenUrn()
+        private async Task OpenUrn()
         {
-            TextArea.PrintLine(" Urn");
-            TextArea.PrintLine();
             SoundMan.PlaySound(LotaSound.OpenChest);
-            GameControl.Wait(500);
+
+            await TextArea.PrintLine(" Urn");
+            await TextArea.PrintLine();
+            await GameControl.WaitAsync(500);
 
             GiveUrnContents();
 
-            SoundMan.FinishSounds();
+            await SoundMan.FinishSounds();
             DungeonAdapter.ClearSpace(Player.X, Player.Y);
         }
 
-        private void OpenBox()
+        private async Task OpenBox()
         {
-            TextArea.PrintLine(" Box");
-            TextArea.PrintLine();
+            await TextArea.PrintLine(" Box");
+            await TextArea.PrintLine();
             SoundMan.PlaySound(LotaSound.OpenChest);
-            GameControl.Wait(500);
+            await GameControl.WaitAsync(500);
 
             GiveBoxContents();
 
-            SoundMan.FinishSounds();
+            await SoundMan.FinishSounds();
 
             DungeonAdapter.ClearSpace(Player.X, Player.Y);
         }
@@ -103,13 +102,13 @@ namespace Xle.Maps.Dungeons.Commands
             }
         }
 
-        private void OpenChest(int val)
+        private async Task OpenChest(int val)
         {
-            TextArea.PrintLine(" Chest");
-            TextArea.PrintLine();
+            await TextArea.PrintLine(" Chest");
+            await TextArea.PrintLine();
 
             SoundMan.PlaySound(LotaSound.OpenChest);
-            GameControl.Wait(GameState.GameSpeed.DungeonOpenChestSoundTime);
+            await GameControl.WaitAsync(GameState.GameSpeed.DungeonOpenChestSoundTime);
 
             GiveChestContents(val);
         }

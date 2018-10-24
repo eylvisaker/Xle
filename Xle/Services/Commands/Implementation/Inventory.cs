@@ -1,6 +1,7 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Rendering;
 using Xle.Services.XleSystem;
@@ -26,7 +27,7 @@ namespace Xle.Services.Commands.Implementation
 
         public ITextRenderer TextRenderer { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             TextArea.PrintLine();
 

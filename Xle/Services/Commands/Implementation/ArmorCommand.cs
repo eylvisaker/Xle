@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Menus;
 
 namespace Xle.Services.Commands.Implementation
@@ -18,9 +19,9 @@ namespace Xle.Services.Commands.Implementation
             get { return "Armor"; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine("-choose above", XleColor.Cyan);
+            await TextArea.PrintLine("-choose above", XleColor.Cyan);
 
             Player.CurrentArmor = equipmentPicker.PickArmor(Player.CurrentArmor);
         }

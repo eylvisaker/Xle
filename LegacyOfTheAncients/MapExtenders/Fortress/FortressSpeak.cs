@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,20 @@ using Xle.Services;
 
 namespace Xle.Ancients.MapExtenders.Fortress
 {
-    [ServiceName("FortressSpeak")]
+    [Transient("FortressSpeak")]
     public class FortressSpeak : TownSpeak
     {
-        protected override void SpeakToGuard()
+        protected override async Task SpeakToGuard()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (GameState.MapExtender.IsAngry)
             {
-                TextArea.PrintLine("The guard ignores you.");
+                await TextArea.PrintLine("The guard ignores you.");
             }
             else
-                TextArea.PrintLine("Greetings soldier.");
+                await TextArea.PrintLine("Greetings soldier.");
         }
     }
 }

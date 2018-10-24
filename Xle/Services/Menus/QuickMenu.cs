@@ -5,9 +5,22 @@ using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using AgateLib;
+using System.Threading.Tasks;
 
-namespace Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus
 {
+    public interface IQuickMenu
+    {
+        Task<int> QuickMenuYesNo(bool defaultAtNo = false);
+
+        Task<int> QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null, Action redraw = null);
+
+        [Obsolete("Use overload with optional redraw parameter instead.")]
+        Task<int> QuickMenu(Action redraw, MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null);
+    }
+
+    [Singleton]
     public class QuickMenuRunner : IQuickMenu
     {
         private IXleScreen screen;
@@ -33,10 +46,11 @@ namespace Xle.Services.Menus.Implementation
         /// </summary>
         /// <param name="defaultAtNo">Pass true to have the cursor start at no.</param>
         /// <returns>Returns 0 if the player chose yes, 1 if the player chose no.</returns>
-        public int QuickMenuYesNo(bool defaultAtNo = false)
+        public Task<int> QuickMenuYesNo(bool defaultAtNo = false)
         {
             return QuickMenu(new MenuItemList("Yes", "No"), 3, defaultAtNo ? 1 : 0);
         }
+
         /// <summary>
         /// This function creates a quick menu at the bottow of the screen,
         /// allowing the player to pick from a few choices.	
@@ -44,17 +58,17 @@ namespace Xle.Services.Menus.Implementation
         /// <param name="items">The items in the list.</param>
         /// <param name="spaces"></param>
         /// <returns></returns>
-        public int QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null, Action redraw = null)
+        public Task<int> QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null, Action redraw = null)
         {
             return QuickMenu(redraw ?? screen.OnDraw, items, spaces, value, clrInit, clrChanged);
         }
 
-        public int QuickMenu(Action redraw, MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null)
+        public Task<int> QuickMenu(Action redraw, MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null)
         {
             return QuickMenuImpl(redraw, items, spaces, value, clrInit ?? screen.FontColor, clrChanged ?? screen.FontColor);
         }
 
-        public int QuickMenuImpl(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
+        public async Task<int> QuickMenuImpl(Action redraw, MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
         {
             Require.That<ArgumentOutOfRangeException>(value >= 0, "value should be positive");
             Require.That<ArgumentOutOfRangeException>(value < items.Count, "value should be less than items.Count");

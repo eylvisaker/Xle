@@ -1,6 +1,7 @@
 ﻿using Xle.Services;
 using Xle.Services.Commands.Implementation;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace Xle.Maps.Dungeons.Commands
 {
@@ -19,10 +20,10 @@ namespace Xle.Maps.Dungeons.Commands
 
         private DungeonCombat Combat { get { return map.Combat; } }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             int distance = 0;
             int maxDistance = 1;
@@ -33,21 +34,21 @@ namespace Xle.Maps.Dungeons.Commands
 
             if (monst == null)
             {
-                TextArea.PrintLine("Nothing to fight.");
+                await TextArea.PrintLine("Nothing to fight.");
                 return;
             }
             else if (distance > maxDistance)
             {
-                TextArea.PrintLine("The " + monst.Name + " is out-of-range");
-                TextArea.PrintLine("of your " + Player.CurrentWeapon.BaseName(Data) + ".");
+                await TextArea.PrintLine("The " + monst.Name + " is out-of-range");
+                await TextArea.PrintLine("of your " + Player.CurrentWeapon.BaseName(Data) + ".");
                 return;
             }
 
             bool hit = RollToHitMonster(monst);
 
-            TextArea.Print("Hit ");
-            TextArea.Print(monst.Name, XleColor.White);
-            TextArea.PrintLine(" with " + Player.CurrentWeapon.BaseName(Data));
+            await TextArea.Print("Hit ");
+            await TextArea.Print(monst.Name, XleColor.White);
+            await TextArea.PrintLine(" with " + Player.CurrentWeapon.BaseName(Data));
 
             if (hit)
             {
@@ -55,35 +56,35 @@ namespace Xle.Maps.Dungeons.Commands
 
                 SoundMan.PlaySound(LotaSound.PlayerHit);
 
-                HitMonster(monst, damage, XleColor.Cyan);
+                await HitMonster(monst, damage, XleColor.Cyan);
             }
             else
             {
                 SoundMan.PlaySound(LotaSound.PlayerMiss);
-                TextArea.PrintLine("Your attack misses.");
-                GameControl.Wait(500);
+                await TextArea.PrintLine("Your attack misses.");
+                await GameControl.WaitAsync(500);
             }
 
             return;
         }
 
-        private void HitMonster(DungeonMonster monst, int damage, Color clr)
+        private async Task HitMonster(DungeonMonster monst, int damage, Color clr)
         {
-            TextArea.Print("Enemy hit by blow of ", clr);
-            TextArea.Print(damage.ToString(), XleColor.White);
-            TextArea.PrintLine("!");
+            await TextArea.Print("Enemy hit by blow of ", clr);
+            await TextArea.Print(damage.ToString(), XleColor.White);
+            await TextArea.PrintLine("!");
 
             monst.HP -= damage;
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
 
             if (monst.HP <= 0)
             {
                 Combat.Monsters.Remove(monst);
-                TextArea.PrintLine(monst.Name + " dies!!");
+                await TextArea.PrintLine(monst.Name + " dies!!");
 
                 SoundMan.PlaySound(LotaSound.EnemyDie);
 
-                GameControl.Wait(500);
+                await GameControl.WaitAsync(500);
             }
         }
 

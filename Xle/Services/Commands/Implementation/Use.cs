@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Maps;
 using Xle.Services.Game;
@@ -36,26 +36,26 @@ namespace Xle.Services.Commands.Implementation
             get { return "Use"; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             if (ShowItemMenu)
-                Player.Hold = ItemChooser.ChooseItem();
+                Player.Hold = await ItemChooser.ChooseItem();
             else
-                TextArea.PrintLine();
+                await TextArea.PrintLine();
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             string action = Data.ItemList[Player.Hold].Action;
 
             if (string.IsNullOrEmpty(action))
                 action = "Use " + Data.ItemList[Player.Hold].Name;
 
-            TextArea.PrintLine(action + ".");
+            await TextArea.PrintLine(action + ".");
 
-            UseItem();
+            await UseItem();
         }
 
-        protected void UseItem()
+        protected async Task UseItem()
         {
             if (UseHealingItem(Player.Hold))
                 return;
@@ -70,7 +70,7 @@ namespace Xle.Services.Commands.Implementation
             if (effect)
                 return;
 
-            PrintNoEffectMessage();
+            await PrintNoEffectMessage();
         }
 
         protected virtual bool UseWithMap(int item)
@@ -88,11 +88,11 @@ namespace Xle.Services.Commands.Implementation
             StatsDisplay.FlashHPWhileSound(XleColor.Cyan);
         }
 
-        protected void PrintNoEffectMessage()
+        protected async Task PrintNoEffectMessage()
         {
-            TextArea.PrintLine();
-            GameControl.Wait(400 + 100 * Player.Gamespeed);
-            TextArea.PrintLine("No effect");
+            await TextArea.PrintLine();
+            await GameControl.WaitAsync(400 + 100 * Player.Gamespeed);
+            await TextArea.PrintLine("No effect");
         }
 
         /// <summary>

@@ -22,9 +22,10 @@ namespace Xle.Services.XleSystem
 
         [Obsolete("await PlaySoundWait instead.")]
         void PlaySoundSync(LotaSound lotaSound, float maxTime_ms = 15000);
+        [Obsolete("await PlaySoundWait instead.")]
         void PlaySoundSync(Action redraw, LotaSound sound);
 
-        void FinishSounds();
+        Task FinishSounds();
 
         bool IsAnyPlaying();
     }
@@ -204,10 +205,10 @@ namespace Xle.Services.XleSystem
             PlaySound(endSound);
         }
 
-        public void FinishSounds()
+        public async Task FinishSounds()
         {
             while (IsAnyPlaying())
-                GameControl.Wait(10);
+                await GameControl.WaitAsync(10);
         }
     }
 }

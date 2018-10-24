@@ -18,54 +18,56 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
 
         protected override bool SpeakImpl()
         {
-            int choice;
-            int cost = 5 + (int)Math.Sqrt(Player.Gold) / 9;
+            throw new NotImplementedException();
 
-            TextArea.PrintLine();
-            TextArea.PrintLine(TheEvent.ShopName, XleColor.Green);
-            TextArea.PrintLine();
-            TextArea.PrintLine("Read your fortune for " +
-                cost + " gold?");
+            //int choice;
+            //int cost = 5 + (int)Math.Sqrt(Player.Gold) / 9;
 
-            choice = QuickMenu.QuickMenuYesNo();
+            //TextArea.PrintLine();
+            //TextArea.PrintLine(TheEvent.ShopName, XleColor.Green);
+            //TextArea.PrintLine();
+            //TextArea.PrintLine("Read your fortune for " +
+            //    cost + " gold?");
 
-            TextArea.PrintLine();
+            //choice = QuickMenu.QuickMenuYesNo();
 
-            if (choice == 1)
-                return true;
+            //TextArea.PrintLine();
 
-            if (timesUsed == 3)
-            {
-                TextArea.PrintLine("\n\nI know no more.");
-                return true;
-            }
+            //if (choice == 1)
+            //    return true;
 
-            timesUsed++;
+            //if (timesUsed == 3)
+            //{
+            //    TextArea.PrintLine("\n\nI know no more.");
+            //    return true;
+            //}
 
-            if (cost > Player.Gold)
-            {
-                TextArea.PrintLine("You're short on gold.");
-                SoundMan.PlaySoundSync(LotaSound.Medium);
+            //timesUsed++;
 
-                return true;
-            }
+            //if (cost > Player.Gold)
+            //{
+            //    TextArea.PrintLine("You're short on gold.");
+            //    SoundMan.PlaySoundSync(LotaSound.Medium);
 
-            TextArea.Clear(true);
-            TextArea.PrintLine("\n\n");
+            //    return true;
+            //}
 
-            Player.Gold -= cost;
+            //TextArea.Clear(true);
+            //TextArea.PrintLine("\n\n");
 
-            int index = Story.NextFortune;
+            //Player.Gold -= cost;
 
-            string fortune = Data.Fortunes[index];
+            //int index = Story.NextFortune;
 
-            TextArea.PrintLineSlow(fortune);
+            //string fortune = Data.Fortunes[index];
 
-            Story.NextFortune++;
+            //TextArea.PrintLineSlow(fortune);
 
-            GameControl.Wait(1500);
+            //Story.NextFortune++;
 
-            return true;
+            //GameControl.Wait(1500);
+
+            //return true;
         }
     }
 }

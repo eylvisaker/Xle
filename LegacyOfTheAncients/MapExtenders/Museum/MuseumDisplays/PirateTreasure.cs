@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.MapLoad;
 
@@ -20,21 +21,22 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 return false;
             }
         }
-        public override void RunExhibit()
+
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine("Would you like to go");
-            TextArea.PrintLine("to the pirate's lair?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("Would you like to go");
+            await TextArea.PrintLine("to the pirate's lair?");
+            await TextArea.PrintLine();
 
-            if (QuickMenu.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
+            if (await QuickMenu.QuickMenu(new MenuItemList("Yes", "no"), 3) == 0)
             {
-                ReadRawText(ExhibitInfo.Text[2]);
+                await ReadRawText(ExhibitInfo.Text[2]);
 
                 for (int i = 0; i < 8; i++)
                 {
-                    GameControl.Wait(50);
+                    await GameControl.WaitAsync(50);
                     TextArea.SetCharacterColor(2, 12 + i, XleColor.Cyan);
                 }
 

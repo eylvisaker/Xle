@@ -4,6 +4,7 @@ using Xle.Services.Game;
 using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Maps.Dungeons.Commands
 {
@@ -16,13 +17,13 @@ namespace Xle.Maps.Dungeons.Commands
 
         public IXamineFormatter XamineFormatter { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             SoundMan.PlaySound(LotaSound.Xamine);
-            GameControl.Wait(500);
+            await GameControl.WaitAsync(500);
 
-            TextArea.PrintLine("\n");
-            PrintDungeonLevel();
+            await TextArea.PrintLine("\n");
+            await PrintDungeonLevel();
 
             DungeonMonster foundMonster = FirstVisibleMonster(Player.Location, Player.FaceDirection, Player.DungeonLevel);
             int monsterDistance = RevealDistance(foundMonster);
@@ -120,11 +121,11 @@ namespace Xle.Maps.Dungeons.Commands
             return null;
         }
 
-        private void PrintDungeonLevel()
+        private async Task PrintDungeonLevel()
         {
             if (PrintLevelDuringXamine)
             {
-                TextArea.PrintLine("Level " + (Player.DungeonLevel + 1).ToString() + ".");
+                await TextArea.PrintLine("Level " + (Player.DungeonLevel + 1).ToString() + ".");
             }
         }
 

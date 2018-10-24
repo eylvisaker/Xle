@@ -68,22 +68,24 @@ namespace Xle.XleEventTypes.Stores.Extenders
             TextArea.PrintLine();
 
             MenuItemList theList = new MenuItemList("0", "1", "2", "3");
-            choice = QuickMenuService.QuickMenu(theList, 2, 0);
+            throw new NotImplementedException();
 
-            switch (choice)
-            {
-                case 1:
-                    MakeDeposit();
-                    break;
+            //choice = QuickMenuService.QuickMenu(theList, 2, 0);
 
-                case 2:
-                    MakeWithdrawal();
-                    break;
+            //switch (choice)
+            //{
+            //    case 1:
+            //        MakeDeposit();
+            //        break;
 
-                case 3:
-                    PrintBalance();
-                    break;
-            }
+            //    case 2:
+            //        MakeWithdrawal();
+            //        break;
+
+            //    case 3:
+            //        PrintBalance();
+            //        break;
+            //}
 
 
             return true;

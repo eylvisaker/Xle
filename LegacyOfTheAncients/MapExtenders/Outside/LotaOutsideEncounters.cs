@@ -1,14 +1,15 @@
-﻿using Xle.Data;
+﻿using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Xle.Data;
 using Xle.Maps.Outdoors;
 using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.Rendering.Maps;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
-using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Xle.Ancients.MapExtenders.Outside
 {
@@ -332,76 +333,77 @@ namespace Xle.Ancients.MapExtenders.Outside
 
         public void HitMonster(int dam)
         {
-            TextArea.Print("Enemy hit by blow of ", XleColor.White);
-            TextArea.Print(dam.ToString(), XleColor.Cyan);
-            TextArea.Print(".", XleColor.White);
-            TextArea.PrintLine();
+            //await TextArea.Print("Enemy hit by blow of ", XleColor.White);
+            //await TextArea.Print(dam.ToString(), XleColor.Cyan);
+            //await TextArea.Print(".", XleColor.White);
+            //await TextArea.PrintLine();
 
-            GameControl.Wait(250 + 100 * Player.Gamespeed, keyBreak: true);
+            //await GameControl.WaitAsync(250 + 100 * Player.Gamespeed, keyBreak: true);
 
-            currentMonst[monstCount - 1].HP -= dam;
+            //currentMonst[monstCount - 1].HP -= dam;
 
-            if (KilledOne())
-            {
-                GameControl.Wait(250);
+            //if (KilledOne())
+            //{
+            //    await GameControl.WaitAsync(250);
 
-                SoundMan.PlaySound(LotaSound.EnemyDie);
+            //    SoundMan.PlaySound(LotaSound.EnemyDie);
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("the " + MonsterName + " dies.");
+            //    await TextArea.PrintLine();
+            //    await TextArea.PrintLine("the " + MonsterName + " dies.");
 
-                int gold, food;
-                bool finished = FinishedCombat(out gold, out food);
+            //    int gold, food;
+            //    bool finished = FinishedCombat(out gold, out food);
 
-                GameControl.Wait(250 + 150 * Player.Gamespeed);
+            //    await GameControl.WaitAsync(250 + 150 * Player.Gamespeed);
 
-                if (finished)
-                {
-                    TextArea.PrintLine();
+            //    if (finished)
+            //    {
+            //        await TextArea.PrintLine();
 
-                    if (food > 0)
-                    {
-                        MenuItemList menu = new MenuItemList("Yes", "No");
-                        int choice;
+            //        if (food > 0)
+            //        {
+            //            MenuItemList menu = new MenuItemList("Yes", "No");
+            //            int choice;
 
-                        TextArea.PrintLine("Would you like to use the");
-                        TextArea.PrintLine(MonsterName + "'s flesh for food?");
-                        TextArea.PrintLine();
+            //            await TextArea.PrintLine("Would you like to use the");
+            //            await TextArea.PrintLine(MonsterName + "'s flesh for food?");
+            //            await TextArea.PrintLine();
 
-                        choice = QuickMenu.QuickMenu(menu, 3, 0);
+            //            choice = await QuickMenu.QuickMenu(menu, 3, 0);
 
-                        if (choice == 1)
-                            food = 0;
-                        else
-                        {
-                            TextArea.Print("You gain ", XleColor.White);
-                            TextArea.Print(food.ToString(), XleColor.Green);
-                            TextArea.Print(" days of food.", XleColor.White);
-                            TextArea.PrintLine();
+            //            if (choice == 1)
+            //                food = 0;
+            //            else
+            //            {
+            //                await TextArea.Print("You gain ", XleColor.White);
+            //                await TextArea.Print(food.ToString(), XleColor.Green);
+            //                await TextArea.Print(" days of food.", XleColor.White);
+            //                await TextArea.PrintLine();
 
-                            Player.Food += food;
-                        }
+            //                Player.Food += food;
+            //            }
 
-                    }
+            //        }
 
 
-                    if (gold < 0)
-                    {
-                        // gain weapon or armor
-                    }
-                    else if (gold > 0)
-                    {
-                        TextArea.Print("You find ", XleColor.White);
-                        TextArea.Print(gold.ToString(), XleColor.Yellow);
-                        TextArea.Print(" gold.", XleColor.White);
-                        TextArea.PrintLine();
+            //        if (gold < 0)
+            //        {
+            //            // gain weapon or armor
+            //        }
+            //        else if (gold > 0)
+            //        {
+            //            await TextArea.Print("You find ", XleColor.White);
+            //            await TextArea.Print(gold.ToString(), XleColor.Yellow);
+            //            await TextArea.Print(" gold.", XleColor.White);
+            //            await TextArea.PrintLine();
 
-                        Player.Gold += gold;
-                    }
+            //            Player.Gold += gold;
+            //        }
 
-                    GameControl.Wait(400 + 100 * Player.Gamespeed);
-                }
-            }
+            //        await GameControl.WaitAsync(400 + 100 * Player.Gamespeed);
+            //    }
+            //}
+            throw new NotImplementedException();
         }
 
         private bool KilledOne()

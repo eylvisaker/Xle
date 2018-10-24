@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Xle.Services.Game;
 using Xle.XleEventTypes;
 using Xle.XleEventTypes.Extenders;
@@ -24,7 +24,7 @@ namespace Xle.Services.Commands.Implementation
             return GameState.MapExtender.EventsAt(borderSize);
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             foreach (var evt in EventsAt(1).Where(x => x.Enabled))
             {
@@ -32,9 +32,9 @@ namespace Xle.Services.Commands.Implementation
                     return;
             }
 
-            TextArea.PrintLine("\n\nNothing to take.");
+            await TextArea.PrintLine("\n\nNothing to take.");
 
-            GameControl.Wait(500);
+            await GameControl.WaitAsync(500);
         }
     }
 }

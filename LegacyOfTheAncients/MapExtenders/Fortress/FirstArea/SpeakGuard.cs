@@ -2,36 +2,38 @@
 using Xle.XleEventTypes.Extenders;
 using Microsoft.Xna.Framework;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
     public class SpeakGuard : EventExtender
     {
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
             Guard guard = FindGuard();
+
             if (guard == null)
                 return false;
             if (guard.OnPlayerAttack == null)
                 guard.OnPlayerAttack += (state, guard1) => KillGuard(guard1);
 
-            MoveGuardToBars(guard);
+            await MoveGuardToBars(guard);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Shut yer trap or I'll");
-            TextArea.PrintLine("reach through and bop you.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Shut yer trap or I'll");
+            await TextArea.PrintLine("reach through and bop you.");
 
             return true;
         }
 
-        private void MoveGuardToBars(Guard guard)
+        private async Task MoveGuardToBars(Guard guard)
         {
             if (guard.Location.X <= TheEvent.X + 1)
                 return;
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("The guard walks over.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("The guard walks over.");
 
             for (int i = 0; i < 5; i++)
             {

@@ -1,4 +1,6 @@
-﻿namespace Xle.Services.Commands.Implementation
+﻿using System.Threading.Tasks;
+
+namespace Xle.Services.Commands.Implementation
 {
     public interface IXamine : ICommand { }
 
@@ -9,12 +11,12 @@
             get { return "Xamine"; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("You are in " + GameState.Map.MapName + ".");
-            TextArea.PrintLine("Look about to see more.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You are in " + GameState.Map.MapName + ".");
+            await TextArea.PrintLine("Look about to see more.");
         }
     }
 }

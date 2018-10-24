@@ -1,4 +1,4 @@
-﻿using Xle.Maps.XleMapTypes;
+﻿using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.Game;
@@ -13,7 +13,7 @@ namespace Xle.Maps.Dungeons
         public IMapChanger MapChanger { get; set; }
         public IDungeonAdapter DungeonAdapter { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             var tile = DungeonAdapter.TileAt(Player.X, Player.Y);
             switch (tile)
@@ -21,11 +21,11 @@ namespace Xle.Maps.Dungeons
                 case DungeonTile.CeilingHole:
                     if (Player.DungeonLevel == 0)
                     {
-                        TextArea.PrintLine("\n\nYou climb out of the dungeon.");
+                        await TextArea.PrintLine("\n\nYou climb out of the dungeon.");
 
-                        OnPlayerExitDungeon();
+                        await OnPlayerExitDungeon();
 
-                        GameControl.Wait(1000);
+                        await GameControl.WaitAsync(1000);
 
                         MapChanger.ReturnToPreviousMap();
 
@@ -42,25 +42,22 @@ namespace Xle.Maps.Dungeons
                     break;
 
                 default:
-                    FailMessage();
+                    await FailMessage();
                     return;
 
             }
 
-            DungeonLevelText();
+            await DungeonLevelText();
         }
 
-        private void OnPlayerExitDungeon()
-        {
-            DungeonAdapter.OnPlayerExitDungeon();
-        }
+        private async Task OnPlayerExitDungeon() => DungeonAdapter.OnPlayerExitDungeon();
 
-        private void DungeonLevelText()
+        private async Task DungeonLevelText()
         {
             DungeonAdapter.OnCurrentLevelChanged();
             DungeonAdapter.RevealTrapAt(Player.Location);
 
-            TextArea.PrintLine("\n\nYou are now at level " + (Player.DungeonLevel + 1).ToString() + ".", XleColor.White);
+            await TextArea.PrintLine("\n\nYou are now at level " + (Player.DungeonLevel + 1).ToString() + ".", XleColor.White);
         }
 
     }

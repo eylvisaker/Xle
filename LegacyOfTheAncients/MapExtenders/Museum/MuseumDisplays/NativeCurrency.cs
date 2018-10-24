@@ -1,5 +1,6 @@
 ﻿using AgateLib;
 using System;
+using System.Threading.Tasks;
 using Xle.Services.ScreenModel;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
@@ -14,18 +15,18 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 
         public override ExhibitIdentifier ExhibitIdentifier { get { return ExhibitIdentifier.NativeCurrency; } }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
             int gold = (int)(350 * (1 + Player.Level)
                 * (1 + Random.NextDouble()));
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("             Gold:  + " + gold.ToString(), XleColor.Yellow);
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("             Gold:  + " + gold.ToString(), XleColor.Yellow);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             Player.Gold += gold;
 

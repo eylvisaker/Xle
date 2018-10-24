@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
@@ -40,66 +41,67 @@ namespace Xle.XleEventTypes.Stores.Extenders
             int choice = QuickMenu(theList, 2, 0);
             Wait(1);
 
-            if (choice == 0)
-            {
-                BuyItem();
-            }
-            else if (choice == 1)		// sell item
-            {
-                SellItem();
-            }
+            throw new NotImplementedException();
+            //if (choice == 0)
+            //{
+            //    await BuyItem();
+            //}
+            //else if (choice == 1)		// sell item
+            //{
+            //    await SellItem();
+            //}
 
             return true;
         }
 
-        private void SellItem()
+        private async Task SellItem()
         {
             titlePrompt.Visible = false;
 
             TextArea.Clear();
-            TextArea.PrintLine("      what will you sell me?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("      what will you sell me?");
+            await TextArea.PrintLine();
 
             Equipment eq = PickItemToSell();
 
             if (eq == null)
             {
-                NoTransactionMessage();
+                await NoTransactionMessage();
                 return;
             }
 
             int sellPrice = ComputeSellPrice(eq.Price(Data));
-            TextArea.PrintLine("I'll pay you exactly " + sellPrice + " gold");
-            TextArea.PrintLine("for your " + eq.NameWithQuality(Data) + ".");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("I'll pay you exactly " + sellPrice + " gold");
+            await TextArea.PrintLine("for your " + eq.NameWithQuality(Data) + ".");
+            await TextArea.PrintLine();
 
-            var choice = QuickMenuService.QuickMenuYesNo(true);
+            var choice = await QuickMenuService.QuickMenuYesNo(true);
 
             if (choice == 1)
             {
-                NoTransactionMessage();
+                await NoTransactionMessage();
                 return;
             }
 
             TextArea.Clear();
-            TextArea.PrintLine("It's a deal!");
-            TextArea.PrintLine(eq.BaseName(Data) + " sold for " + sellPrice + " gold.");
+            await TextArea.PrintLine("It's a deal!");
+            await TextArea.PrintLine(eq.BaseName(Data) + " sold for " + sellPrice + " gold.");
 
             Player.RemoveEquipment(eq);
 
             Player.Gold += sellPrice;
 
-            StoreSound(LotaSound.Sale);
-            TextArea.PrintLine();
+            await StoreSound(LotaSound.Sale);
+            await TextArea.PrintLine();
         }
 
         protected abstract Equipment PickItemToSell();
 
-        private void NoTransactionMessage()
+        private async Task NoTransactionMessage()
         {
             TextArea.Clear();
-            TextArea.PrintLine("           no transaction.\n");
-            StoreSound(LotaSound.Medium);
+            await TextArea.PrintLine("           no transaction.\n");
+            await StoreSound(LotaSound.Medium);
         }
 
         private int ComputeSellPrice(int retailPrice)

@@ -1,11 +1,6 @@
 ﻿using AgateLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xle.Maps.Museums;
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Ancients.MapExtenders.Museum.Commands
@@ -13,22 +8,22 @@ namespace Xle.Ancients.MapExtenders.Museum.Commands
     [Transient("LotaMuseumXamine")]
     public class LotaMuseumXamine : Xamine
     {
-        MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
+        private MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            if (InteractWithDisplay())
+            if (await InteractWithDisplay())
                 return;
 
-            TextArea.PrintLine("You are in an ancient museum.");
+            await TextArea.PrintLine("You are in an ancient museum.");
         }
 
-        private bool InteractWithDisplay()
+        private async Task<bool> InteractWithDisplay()
         {
-            return Museum.InteractWithDisplay();
+            return await Museum.InteractWithDisplay();
         }
     }
 }

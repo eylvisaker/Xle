@@ -1,6 +1,7 @@
 ﻿
 using AgateLib;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 using Xle.Services.MapLoad;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
@@ -21,9 +22,10 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 return "A test for knights";
             }
         }
-        public override void RunExhibit()
+
+        public override async Task RunExhibit()
         {
-            ReadRawText(RawText);
+            await ReadRawText(RawText);
 
             int map = Player.MapID;
             int x = Player.X;

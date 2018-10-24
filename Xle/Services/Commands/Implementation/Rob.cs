@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Services.Commands.Implementation
 {
@@ -11,7 +12,7 @@ namespace Xle.Services.Commands.Implementation
             get { return "Rob"; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             foreach (var evt in GameState.MapExtender.EventsAt(1))
             {
@@ -21,12 +22,12 @@ namespace Xle.Services.Commands.Implementation
                     return;
             }
 
-            PrintNothingToRobMessage();
+            await PrintNothingToRobMessage();
         }
 
-        protected void PrintNothingToRobMessage()
+        protected Task PrintNothingToRobMessage()
         {
-            TextArea.PrintLine("\n\nNothing to rob.");
+            return TextArea.PrintLine("\n\nNothing to rob.");
         }
     }
 }

@@ -19,21 +19,22 @@ namespace Xle.XleEventTypes.Extenders.Common
             TextArea.PrintLine("Enter " + newMapName + "?");
 
             SoundMan.PlaySound(LotaSound.Question);
+            throw new NotImplementedException();
 
-            int choice = QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3);
+            //int choice = QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3);
 
-            if (choice == 1)
-                return false;
-            else if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
-            {
-                TextArea.PrintLine();
-                TextArea.PrintLine(
-                    string.Format(TheEvent.CommandText,
-                    Map.MapName, newMapName));
+            //if (choice == 1)
+            //    return false;
+            //else if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
+            //{
+            //    TextArea.PrintLine();
+            //    TextArea.PrintLine(
+            //        string.Format(TheEvent.CommandText,
+            //        Map.MapName, newMapName));
 
-                TextArea.PrintLine();
-                GameControl.Wait(500);
-            }
+            //    TextArea.PrintLine();
+            //    GameControl.Wait(500);
+            //}
 
             ExecuteMapChange();
             return true;

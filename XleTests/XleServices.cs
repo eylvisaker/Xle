@@ -15,6 +15,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Xle
 {
@@ -102,10 +103,10 @@ namespace Xle
                 {
                     if (QuickMenuCallback != null)
                     {
-                        return QuickMenuCallback(menu);
+                        return Task.FromResult(QuickMenuCallback(menu));
                     }
 
-                    return 0;
+                    return Task.FromResult(0);
                 });
         }
 

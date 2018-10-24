@@ -1,6 +1,7 @@
 ﻿
 using AgateLib;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.Commands.Implementation;
@@ -21,30 +22,27 @@ namespace Xle.Maps.Museums.Commands
             return Museum.ExhibitAt(location);
         }
 
-        private void PrintExhibitStopsActionMessage()
-        {
-            Museum.PrintExhibitStopsActionMessage();
-        }
+        private Task PrintExhibitStopsActionMessage() => Museum.PrintExhibitStopsActionMessage();
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             var lookingAt = PlayerLookingAt;
 
             if (ExhibitAt(lookingAt) != null)
             {
-                PrintExhibitStopsActionMessage();
+                await PrintExhibitStopsActionMessage();
             }
             else if (Map[lookingAt] == MuseumTiles.Door)
             {
                 SoundMan.PlaySound(LotaSound.PlayerHit);
 
-                TextArea.PrintLine("The door does not budge.");
+                await TextArea.PrintLine("The door does not budge.");
             }
             else
-                TextArea.PrintLine("There is nothing to fight.");
+                await TextArea.PrintLine("There is nothing to fight.");
         }
     }
 }

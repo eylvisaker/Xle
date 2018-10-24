@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Menus;
 
 namespace Xle.Services.Commands.Implementation
@@ -21,9 +22,9 @@ namespace Xle.Services.Commands.Implementation
             get { return "Leave"; }
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            if (!ConfirmLeave())
+            if (!await ConfirmLeave())
                 return;
 
             GameState.MapExtender.LeaveMap();
@@ -33,19 +34,19 @@ namespace Xle.Services.Commands.Implementation
         /// Returns false if the player cancels the leave action.
         /// </summary>
         /// <returns></returns>
-        protected bool ConfirmLeave()
+        protected async Task<bool> ConfirmLeave()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (ConfirmPrompt)
             {
                 if (string.IsNullOrWhiteSpace(PromptText) == false)
                 {
-                    TextArea.PrintLine(PromptText);
-                    TextArea.PrintLine();
+                    await TextArea.PrintLine(PromptText);
+                    await TextArea.PrintLine();
                 }
-                if (QuickMenu.QuickMenuYesNo() == 1)
+                if (await QuickMenu.QuickMenuYesNo() == 1)
                 {
                     return false;
                 }

@@ -166,7 +166,9 @@ namespace Xle.XleEventTypes.Stores.Buyback
         {
             BuybackFormatter.Offer(item, offer, finalOffer);
 
-            return QuickMenu.QuickMenuYesNo(true);
+            throw new NotImplementedException();
+
+//            return QuickMenu.QuickMenuYesNo(true);
         }
 
         private bool IsAskWayTooHigh(double ask, int offer, int maxAccept)

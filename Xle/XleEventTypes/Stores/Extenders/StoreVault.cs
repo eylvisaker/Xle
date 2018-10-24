@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
@@ -9,9 +10,9 @@ namespace Xle.XleEventTypes.Stores.Extenders
     {
         public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
 
-        public override bool Speak()
+        public override Task<bool> Speak()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
 

@@ -1,5 +1,5 @@
 ﻿using AgateLib;
-
+using System.Threading.Tasks;
 using Xle.Maps.Museums;
 using Xle.Services.Commands.Implementation;
 
@@ -10,25 +10,25 @@ namespace Xle.Ancients.MapExtenders.Museum.Commands
     {
         private MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (Museum.ExhibitAt(Museum.PlayerLookingAt) != null)
             {
-                PrintExhibitStopsActionMessage();
+                await PrintExhibitStopsActionMessage();
             }
             else
             {
-                TextArea.PrintLine("There is nothing to rob.");
+                await TextArea.PrintLine("There is nothing to rob.");
             }
         }
 
-        protected virtual void PrintExhibitStopsActionMessage()
+        protected virtual async Task PrintExhibitStopsActionMessage()
         {
-            TextArea.PrintLine("The display case");
-            TextArea.PrintLine("force field stops you.");
+            await TextArea.PrintLine("The display case");
+            await TextArea.PrintLine("force field stops you.");
         }
     }
 }

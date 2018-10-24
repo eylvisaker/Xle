@@ -12,9 +12,5 @@ namespace Xle.Ancients.MapExtenders.Towns.Commands
     [ServiceName("TownRob")]
     public class TownRob : Rob
     {
-        public override void Execute()
-        {
-            base.Execute();
-        }
     }
 }

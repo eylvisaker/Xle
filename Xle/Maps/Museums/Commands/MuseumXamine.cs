@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Maps.Museums.Commands
@@ -8,20 +9,20 @@ namespace Xle.Maps.Museums.Commands
     {
         private MuseumExtender Museum { get { return (MuseumExtender)GameState.MapExtender; } }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            if (InteractWithDisplay())
+            if (await InteractWithDisplay())
                 return;
 
-            TextArea.PrintLine("You are in an ancient museum.");
+            await TextArea.PrintLine("You are in an ancient museum.");
         }
 
-        private bool InteractWithDisplay()
+        private async Task<bool> InteractWithDisplay()
         {
-            return Museum.InteractWithDisplay();
+            return await Museum.InteractWithDisplay();
         }
     }
 }
