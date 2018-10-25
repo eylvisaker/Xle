@@ -107,7 +107,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             return true;
         }
 
-        public sealed override bool Rob()
+        public sealed override async Task<bool> Rob()
         {
             if (AllowRobWhenNotAngry == false && Map.Guards.IsAngry == false)
             {

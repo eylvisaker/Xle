@@ -28,7 +28,7 @@ namespace Xle.Services.Commands.Implementation
         {
             foreach (var evt in EventsAt(1).Where(x => x.Enabled))
             {
-                if (evt.Take())
+                if (await evt.Take())
                     return;
             }
 

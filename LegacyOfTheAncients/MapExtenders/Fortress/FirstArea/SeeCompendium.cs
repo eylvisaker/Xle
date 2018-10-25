@@ -1,8 +1,9 @@
-﻿using Xle.Maps;
+﻿using Microsoft.Xna.Framework;
+using System.Linq;
+using System.Threading.Tasks;
+using Xle.Maps;
 using Xle.Services.ScreenModel;
 using Xle.XleEventTypes.Extenders;
-using Microsoft.Xna.Framework;
-using System.Linq;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
@@ -12,7 +13,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 
         public IStatsDisplay StatsDisplay { get; set; }
 
-        public override bool StepOn()
+        public override async Task<bool> StepOn()
         {
             if (paralyzed)
                 return false;
@@ -21,7 +22,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
             if (Player.X != TheEvent.Location.X)
                 return false;
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             paralyzed = true;
 
@@ -31,18 +32,18 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 
             Map.Guards.Add(warlord);
 
-            PrintSeeCompendiumMessage();
-            DoSonicMagic(GameState, warlord);
+            await PrintSeeCompendiumMessage();
+            await DoSonicMagic(GameState, warlord);
 
-            TextArea.PrintLine("The warlord appears at the wall.");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("The warlord appears at the wall.");
+            await TextArea.PrintLine();
 
-            MoveWarlordToCompendium(warlord);
-            HitPlayer();
-            WarlordSpeech();
+            await MoveWarlordToCompendium(warlord);
+            await HitPlayer();
+            await WarlordSpeech();
             RemoveCompendium();
 
-            MoveWarlordOut(warlord);
+            await MoveWarlordOut(warlord);
 
             GameState.Map.Guards.Remove(warlord);
 
@@ -57,9 +58,8 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
             evt.TheEvent.SetOpenTilesOnMap(Map);
         }
 
-        public override void TryToStepOn(int dx, int dy, out bool allowStep)
+        public override async Task<bool> TryToStepOn(int dx, int dy)
         {
-            allowStep = true;
             if (Player.HP > 30 && paralyzed)
             {
                 paralyzed = false;
@@ -67,103 +67,104 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
             }
             else if (paralyzed)
             {
-                TextArea.PrintLine("Legs paralyzed.");
-                allowStep = false;
+                await TextArea.PrintLine("Legs paralyzed.");
+                return false;
             }
+
+            return true;
         }
-        private void DoSonicMagic(GameState state, Guard warlord)
+        private async Task DoSonicMagic(GameState state, Guard warlord)
         {
-            TextArea.PrintLine("Sonic magic...");
-            TextArea.PrintLine();
-            GameControl.Wait(3000);
-            TextArea.PrintLine("You can't move.");
-            TextArea.PrintLine();
-            GameControl.Wait(3000);
-
+            await TextArea.PrintLine("Sonic magic...");
+            await TextArea.PrintLine();
+            await GameControl.WaitAsync(3000);
+            await TextArea.PrintLine("You can't move.");
+            await TextArea.PrintLine();
+            await GameControl.WaitAsync(3000);
         }
 
-        private void MoveWarlordOut(Guard warlord)
+        private async Task MoveWarlordOut(Guard warlord)
         {
             for (int i = 0; i < 6; i++)
             {
-                MoveWarlord(warlord, 1, 0);
+                await MoveWarlord(warlord, 1, 0);
             }
 
             for (int i = 0; i < 2; i++)
             {
-                MoveWarlord(warlord, 0, 1);
+                await MoveWarlord(warlord, 0, 1);
             }
 
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
         }
 
-        private void MoveWarlordToCompendium(Guard warlord)
+        private async Task MoveWarlordToCompendium(Guard warlord)
         {
 
             for (int i = 0; i < 5; i++)
             {
-                MoveWarlord(warlord, -1, 0);
+                await MoveWarlord(warlord, -1, 0);
             }
 
             for (int i = 0; i < 2; i++)
             {
-                MoveWarlord(warlord, 0, -1);
+                await MoveWarlord(warlord, 0, -1);
             }
 
             for (int i = 0; i < 2; i++)
             {
-                MoveWarlord(warlord, -1, 0);
+                await MoveWarlord(warlord, -1, 0);
             }
 
             warlord.Facing = Direction.South;
         }
 
-        private void WarlordSpeech()
+        private async Task WarlordSpeech()
         {
-            TextArea.PrintSlow("You fool!  ", XleColor.Yellow);
-            TextArea.PrintSlow("You can't stop me!  ", XleColor.Yellow);
-            TextArea.PrintLineSlow("as you", XleColor.Yellow);
-            TextArea.PrintLineSlow("stand helpless, I'll use this scroll", XleColor.Yellow);
-            TextArea.PrintSlow("to cast the ", XleColor.Yellow);
-            TextArea.PrintSlow("spell of death. ");
-            TextArea.PrintLineSlow("All life", XleColor.Yellow);
-            TextArea.PrintLineSlow("outside this fortress will cease.", XleColor.Yellow);
+            await TextArea.PrintSlow("You fool!  ", XleColor.Yellow);
+            await TextArea.PrintSlow("You can't stop me!  ", XleColor.Yellow);
+            await TextArea.PrintLineSlow("as you", XleColor.Yellow);
+            await TextArea.PrintLineSlow("stand helpless, I'll use this scroll", XleColor.Yellow);
+            await TextArea.PrintSlow("to cast the ", XleColor.Yellow);
+            await TextArea.PrintSlow("spell of death. ");
+            await TextArea.PrintLineSlow("All life", XleColor.Yellow);
+            await TextArea.PrintLineSlow("outside this fortress will cease.", XleColor.Yellow);
 
             TextArea.SetLineColor(XleColor.Red, 0, 1, 2, 3, 4);
 
-            GameControl.Wait(2000);
+            await GameControl.WaitAsync(2000);
         }
 
-        private void HitPlayer()
+        private async Task HitPlayer()
         {
             Player.HP = 28;
 
-            StatsDisplay.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
+            await StatsDisplay.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
         }
 
-        private void MoveWarlord(Guard warlord, int dx, int dy)
+        private async Task MoveWarlord(Guard warlord, int dx, int dy)
         {
             warlord.X += dx;
             warlord.Y += dy;
             warlord.Facing = new Point(dx, dy).ToDirection();
 
             SoundMan.PlaySound(LotaSound.WalkOutside);
-            GameControl.Wait(750);
+            await GameControl.WaitAsync(750);
         }
 
-        private void PrintSeeCompendiumMessage()
+        private async Task PrintSeeCompendiumMessage()
         {
             TextArea.Clear(true);
-            TextArea.PrintLine();
-            TextArea.PrintLine("    you see the compendium!");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("    you see the compendium!");
+            await TextArea.PrintLine();
 
             SoundMan.PlaySound(LotaSound.VeryGood);
-            GameControl.Wait(1500);
+            await GameControl.WaitAsync(1500);
 
-            TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Yellow, XleColor.Cyan, 100);
+            await TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood), XleColor.Yellow, XleColor.Cyan, 100);
 
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
         }
     }
 }

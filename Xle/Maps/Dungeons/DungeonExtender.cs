@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Xle.Maps.Dungeons
 {
@@ -207,20 +208,22 @@ namespace Xle.Maps.Dungeons
             }
         }
 
-        public override void AfterPlayerStep()
+        public override async Task AfterPlayerStep()
         {
             int val = TheMap[Player.X, Player.Y];
 
             CurrentLevel = Player.DungeonLevel;
 
-            if (val >= 0x21 && val <= 0x2a)
-            {
-                OnPlayerTriggerTrap(Player.X, Player.Y);
-            }
-            else if (val >= 0x11 && val <= 0x1a)
-            {
-                OnPlayerAvoidTrap(Player.X, Player.Y);
-            }
+            throw new NotImplementedException();
+
+            //if (val >= 0x21 && val <= 0x2a)
+            //{
+            //    await OnPlayerTriggerTrap(Player.X, Player.Y);
+            //}
+            //else if (val >= 0x11 && val <= 0x1a)
+            //{
+            //    await OnPlayerAvoidTrap(Player.X, Player.Y);
+            //}
 
         }
 

@@ -1,6 +1,7 @@
 ﻿using Xle.Data;
 using Xle.XleEventTypes.Extenders;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
@@ -19,15 +20,17 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
             get { return false; }
         }
 
-        public override bool Open()
+        public override async Task<bool> Open()
         {
             return false;
         }
-        public override void PrintObtainItemMessage(int item, int count)
+
+        public override async Task PrintObtainItemMessage(int item, int count)
         {
-            TextArea.PrintLine(string.Format(
+            await TextArea.PrintLine(string.Format(
                 "You take {0} {1}s.", count, Data.ItemList[item].Name));
         }
+
         public override void PlayObtainItemSound(int item, int count)
         {
         }
@@ -35,9 +38,9 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
         {
         }
 
-        public override bool Take()
+        public override async Task<bool> Take()
         {
-            base.Open();
+         await   base.Open();
             return true;
         }
 

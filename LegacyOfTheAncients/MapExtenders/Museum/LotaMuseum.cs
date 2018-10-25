@@ -135,20 +135,21 @@ namespace Xle.Ancients.MapExtenders.Museum
                 entryParams.EntryPoint = Story.MuseumEntryPoint;
         }
 
-        public override void AfterPlayerStep()
+        public override async Task AfterPlayerStep()
         {
             if (Player.X == 12 && Player.Y == 13)
             {
                 if (Story.Museum[1] < 3)
                 {
                     var welcome = (Welcome)GetExhibitByTile(0x51);
-                    welcome.PlayGoldArmbandMessage();
+                   await welcome.PlayGoldArmbandMessage();
                     Story.Museum[1] = 3;
 
                     CheckExhibitStatus();
                 }
             }
         }
+
         private void UseGoldArmband()
         {
             bool facingDoor = IsFacingDoor;

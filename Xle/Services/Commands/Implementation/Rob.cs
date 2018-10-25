@@ -16,7 +16,7 @@ namespace Xle.Services.Commands.Implementation
         {
             foreach (var evt in GameState.MapExtender.EventsAt(1))
             {
-                bool handled = evt.Rob();
+                bool handled = await evt.Rob();
 
                 if (handled)
                     return;

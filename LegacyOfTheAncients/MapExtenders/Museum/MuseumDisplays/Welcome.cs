@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
@@ -21,9 +22,9 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 			get { return "Tarmalon Museum!"; }
 		}
 
-		public void PlayGoldArmbandMessage()
+		public Task PlayGoldArmbandMessage()
 		{
-			ReadRawText(ExhibitInfo.Text[2]);
+			return ReadRawText(ExhibitInfo.Text[2]);
 		}
 	}
 

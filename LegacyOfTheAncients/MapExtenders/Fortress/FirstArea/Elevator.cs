@@ -3,18 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
     public class Elevator : EventExtender
     {
-        public override bool StepOn()
+        public override async Task<bool> StepOn()
         {
             int ystart = Player.Y;
 
             while (Player.X < TheEvent.Rectangle.Right)
             {
-                AdvancePlayer();
+                await AdvancePlayer();
 
                 if (Player.X == 25)
                 {
@@ -25,7 +26,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 
                         do
                         {
-                            AdvancePlayer();
+                            await AdvancePlayer();
 
                         } while (Player.X != 98);
                     }
@@ -38,9 +39,9 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
             return true;
         }
 
-        private void AdvancePlayer()
+        private async Task AdvancePlayer()
         {
-            GameControl.Wait(125);
+            await GameControl.WaitAsync(125);
             Player.X++;
         }
     }

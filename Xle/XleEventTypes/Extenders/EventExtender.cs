@@ -52,9 +52,9 @@ namespace Xle.XleEventTypes.Extenders
         /// Returns true if handled by the event.
         /// </summary>
         /// <returns></returns>
-        public virtual bool Rob()
+        public virtual Task<bool> Rob()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Open()
+        public virtual Task<bool> Open()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         /// <summary>
@@ -78,9 +78,9 @@ namespace Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Take()
+        public virtual Task<bool> Take()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         /// <summary>
@@ -91,9 +91,9 @@ namespace Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool StepOn()
+        public virtual Task< bool> StepOn()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         /// <summary>
@@ -109,9 +109,9 @@ namespace Xle.XleEventTypes.Extenders
         /// <param name="allowStep"></param>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual void TryToStepOn(int dx, int dy, out bool allowStep)
+        public virtual Task<bool> TryToStepOn(int dx, int dy)
         {
-            allowStep = true;
+            return Task.FromResult(true);
         }
 
         /// <summary>
@@ -123,9 +123,9 @@ namespace Xle.XleEventTypes.Extenders
         /// <param name="item"></param>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Use(int item)
+        public virtual Task<bool> Use(int item)
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         /// <summary>
@@ -136,9 +136,9 @@ namespace Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual bool Xamine()
+        public virtual Task<bool> Xamine()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         public virtual void BeforeStepOn()

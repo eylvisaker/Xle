@@ -165,7 +165,7 @@ namespace Xle
             food = 40;
             gold = 20;
 
-            gamespeed = 3;
+            gamespeed = 1;
 
             hp = 200;
             level = 1;

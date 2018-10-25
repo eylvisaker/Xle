@@ -21,9 +21,9 @@ namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 
         FortressFinal fortressFinal { get { return (FortressFinal)GameState.MapExtender; } }
 
-        public override bool Use(int item)
+        public override async Task<bool> Use(int item)
         {
-            base.Use(item);
+            await base.Use(item);
 
             if (item == (int)LotaItem.MagicIce && activatedCompendium == false)
             {

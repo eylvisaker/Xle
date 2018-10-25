@@ -5,6 +5,7 @@ using Xle.Services.Rendering.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Maps.Towns
 {
@@ -314,36 +315,38 @@ namespace Xle.Maps.Towns
             GameControl.Wait(100 * Player.Gamespeed);
         }
 
-        protected override void AfterStepImpl(bool didEvent)
+        protected override Task AfterStepImpl(bool didEvent)
         {
-            Point pt = new Point(Player.X, Player.Y);
-            var roofs = TheMap.Roofs;
+            throw new NotImplementedException();
 
-            for (int i = 0; i < roofs.Count; i++)
-            {
-                if (roofs[i].Open == false && roofs[i].CharIn(pt))
-                {
-                    roofs[i].Open = true;
-                    PlayOpenRoofSound(roofs[i]);
-                }
-                else if (roofs[i].Open == true && IsAngry == false
-                    && roofs[i].CharIn(pt) == false)
-                {
-                    roofs[i].Open = false;
-                    PlayCloseRoofSound(roofs[i]);
-                }
-            }
+            //Point pt = new Point(Player.X, Player.Y);
+            //var roofs = TheMap.Roofs;
 
-            if (Player.X < 0 || Player.X >= TheMap.Width - 1 ||
-                Player.Y < 0 || Player.Y >= TheMap.Height - 1)
-            {
-                if (IsAngry && this.GetType().Equals(typeof(Town)))
-                {
-                    Player.LastAttackedMapID = TheMap.MapID;
-                }
+            //for (int i = 0; i < roofs.Count; i++)
+            //{
+            //    if (roofs[i].Open == false && roofs[i].CharIn(pt))
+            //    {
+            //        roofs[i].Open = true;
+            //        PlayOpenRoofSound(roofs[i]);
+            //    }
+            //    else if (roofs[i].Open == true && IsAngry == false
+            //        && roofs[i].CharIn(pt) == false)
+            //    {
+            //        roofs[i].Open = false;
+            //        PlayCloseRoofSound(roofs[i]);
+            //    }
+            //}
 
-                LeaveMap();
-            }
+            //if (Player.X < 0 || Player.X >= TheMap.Width - 1 ||
+            //    Player.Y < 0 || Player.Y >= TheMap.Height - 1)
+            //{
+            //    if (IsAngry && this.GetType().Equals(typeof(Town)))
+            //    {
+            //        Player.LastAttackedMapID = TheMap.MapID;
+            //    }
+
+            //    LeaveMap();
+            //}
         }
 
     }

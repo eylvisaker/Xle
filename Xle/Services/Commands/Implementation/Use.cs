@@ -60,12 +60,12 @@ namespace Xle.Services.Commands.Implementation
             if (UseHealingItem(Player.Hold))
                 return;
 
-            var effect = UseWithEvent(Player.Hold);
+            var effect = await UseWithEvent(Player.Hold);
 
             if (effect)
                 return;
 
-            effect = UseWithMap(Player.Hold);
+            effect = await UseWithMap(Player.Hold);
 
             if (effect)
                 return;
@@ -73,7 +73,7 @@ namespace Xle.Services.Commands.Implementation
             await PrintNoEffectMessage();
         }
 
-        protected virtual bool UseWithMap(int item)
+        protected virtual async Task<bool> UseWithMap(int item)
         {
             return false;
         }
@@ -101,10 +101,9 @@ namespace Xle.Services.Commands.Implementation
         /// <param name="item"></param>
         /// <param name="player"></param>
         /// <returns></returns>
-        protected bool UseWithEvent(int item)
+        protected Task<bool> UseWithEvent(int item)
         {
-            return EventInteractor.InteractWithFirstEvent(evt => evt.Use(item));
-
+            return EventInteractor.InteractWithFirstEvent(async evt => await evt.Use(item));
         }
     }
 }

@@ -92,11 +92,11 @@ namespace Xle.Services.Commands
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>
-        private void CursorMovement(Keys cmd)
+        private async Task CursorMovement(Keys cmd)
         {
             Direction dir = mDirectionMap[cmd];
 
-            gameState.MapExtender.PlayerCursorMovement(dir);
+            await gameState.MapExtender.PlayerCursorMovement(dir);
         }
 
         private bool IsCursorMovement(Keys cmd)
@@ -161,7 +161,7 @@ namespace Xle.Services.Commands
         {
             var wasRaft = player.BoardedRaft;
 
-            CursorMovement(cmd);
+            await CursorMovement(cmd);
 
             characterAnimator.AnimateStep();
 
@@ -171,8 +171,8 @@ namespace Xle.Services.Commands
             {
                 if (player.IsOnRaft)
                 {
-                    textArea.PrintLine();
-                    textArea.PrintLine("You climb onto a raft.");
+                    await textArea.PrintLine();
+                    await textArea.PrintLine("You climb onto a raft.");
 
                     soundMan.PlaySound(LotaSound.BoardRaft);
                 }

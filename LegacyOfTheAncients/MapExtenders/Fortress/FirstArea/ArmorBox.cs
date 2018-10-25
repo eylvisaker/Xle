@@ -12,43 +12,43 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
     {
         public IXleRenderer Renderer { get; set; }
 
-        public override bool Open()
+        public override async Task<bool> Open()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (TheEvent.Closed)
             {
-                TextArea.PrintLine("you see yellow guard");
-                TextArea.PrintLine("armor in the bottom.");
+                await TextArea.PrintLine("you see yellow guard");
+                await TextArea.PrintLine("armor in the bottom.");
 
                 PlayOpenChestSound();
                 TheEvent.SetOpenTilesOnMap(GameState.Map);
 
-                GameControl.Wait(GameState.GameSpeed.CastleOpenChestSoundTime);
+                await GameControl.WaitAsync(GameState.GameSpeed.CastleOpenChestSoundTime);
             }
             else
             {
-                TextArea.PrintLine("box open already.");
+                await TextArea.PrintLine("box open already.");
             }
 
             return true;
         }
 
-        public override bool Take()
+        public override async Task<bool> Take()
         {
             if (TheEvent.Closed)
-                return base.Take();
+                return await base.Take();
 
             GameState.Map.Guards.IsAngry = false;
 
             Player.RenderColor = XleColor.Yellow;
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("you put on armor.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("you put on armor.");
 
-            GameControl.Wait(1000);
+           await GameControl.WaitAsync(1000);
 
             Player.AddArmor(4, 3);
             if (Player.CurrentArmor.ID == 0)

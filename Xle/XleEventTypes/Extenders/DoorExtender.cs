@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xle.Data;
 
 namespace Xle.XleEventTypes.Extenders
@@ -18,19 +18,22 @@ namespace Xle.XleEventTypes.Extenders
             return item == TheEvent.RequiredItem;
         }
 
-        public virtual void PrintUnlockText(int item, ref bool handled)
+        public virtual async Task<bool> PrintUnlockText(int item)
         {
-            TextArea.PrintLine("Unlock door.");
+            await TextArea.PrintLine("Unlock door.");
+            return false;
         }
 
-        public virtual void PrintUnlockFailureText(int item, ref bool handled)
+        public virtual async Task<bool> PrintUnlockFailureText(int item)
         {
-            TextArea.PrintLine();
-            GameControl.Wait(300 + 200 * Player.Gamespeed);
-            TextArea.PrintLine("It doesn't fit this door.");
+            await TextArea.PrintLine();
+            await GameControl.WaitAsync(300 + 200 * Player.Gamespeed);
+            await TextArea.PrintLine("It doesn't fit this door.");
+
+            return false;
         }
 
-        public override bool Use(int item)
+        public override async Task<bool> Use(int item)
         {
             if (Data.ItemList.IsKey(item) == false)
                 return false;
@@ -43,18 +46,17 @@ namespace Xle.XleEventTypes.Extenders
             }
             else
             {
-                bool unused = false;
-                PrintUnlockFailureText(item, ref unused);
+                await PrintUnlockFailureText(item);
             }
 
             return true;
         }
 
-        protected virtual void UnlockDoor(int item)
+        protected virtual async Task UnlockDoor(int item)
         {
             bool handled = false;
 
-            PrintUnlockText(item, ref handled);
+            handled |= await PrintUnlockText(item);
 
             PlayRemoveSound();
             RemoveDoor();

@@ -3,20 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
     public class GuardWarning : EventExtender
     {
-        public override bool StepOn()
+        public override async Task<bool> StepOn()
         {
             Enabled = false;
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("The guards eye you warily", XleColor.Yellow);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("The guards eye you warily", XleColor.Yellow);
 
-            SoundMan.PlaySoundSync(LotaSound.VeryBad);
+            await SoundMan.PlaySoundWait(LotaSound.VeryBad);
 
             return true;
         }

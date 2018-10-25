@@ -59,7 +59,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Maps\GroupType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Guard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\GuardList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Maps\IMapExtender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Map2DExtender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Map3DExtender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Map3DSurfaces.cs" />

@@ -1,11 +1,12 @@
-﻿using Xle.Maps.XleMapTypes;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
-using Xle.Services.XleSystem;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Xle.Maps.XleMapTypes;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
+using Xle.Services.XleSystem;
 
 namespace Xle.Maps.Outdoors
 {
@@ -145,16 +146,16 @@ namespace Xle.Maps.Outdoors
         {
         }
 
-        public override void PlayerCursorMovement(Direction dir)
+        public override async Task PlayerCursorMovement(Direction dir)
         {
             string command;
             Point stepDirection;
 
             _Move2D(dir, "Move", out command, out stepDirection);
 
-            TextArea.PrintLine(command);
+            await TextArea.PrintLine(command);
 
-            if (CanPlayerStep(stepDirection) == false)
+            if (await CanPlayerStep(stepDirection) == false)
             {
                 TerrainType terrain = TheMap.TerrainAt(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
@@ -162,33 +163,33 @@ namespace Xle.Maps.Outdoors
                 {
                     SoundMan.PlaySound(LotaSound.Bump);
 
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("Attempt to disengage");
-                    TextArea.PrintLine("is blocked.");
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("Attempt to disengage");
+                    await TextArea.PrintLine("is blocked.");
 
-                    GameControl.Wait(500);
+                    await GameControl.WaitAsync(500);
                 }
                 else if (Player.IsOnRaft)
                 {
                     SoundMan.PlaySound(LotaSound.Bump);
 
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("The raft must stay in the water.", XleColor.Cyan);
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("The raft must stay in the water.", XleColor.Cyan);
                 }
                 else if (terrain == TerrainType.Water)
                 {
                     SoundMan.PlaySound(LotaSound.Bump);
 
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("There is too much water for travel.", XleColor.Cyan);
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("There is too much water for travel.", XleColor.Cyan);
                 }
                 else if (terrain == TerrainType.Mountain)
                 {
                     SoundMan.PlaySound(LotaSound.Bump);
 
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("You are not equipped to");
-                    TextArea.PrintLine("cross the mountains.");
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("You are not equipped to");
+                    await TextArea.PrintLine("cross the mountains.");
                 }
                 else
                 {
@@ -200,15 +201,15 @@ namespace Xle.Maps.Outdoors
             {
                 BeforeStepOn(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
-                MovePlayer(stepDirection);
+                await MovePlayer(stepDirection);
 
                 if (OutsideEncounters.EncounterState == EncounterState.JustDisengaged)
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("Attempt to disengage");
-                    TextArea.PrintLine("is successful.");
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("Attempt to disengage");
+                    await TextArea.PrintLine("is successful.");
 
-                    GameControl.Wait(500);
+                    await GameControl.WaitAsync(500);
 
                     OutsideEncounters.CancelEncounter();
                 }
@@ -395,17 +396,19 @@ namespace Xle.Maps.Outdoors
             return true;
         }
 
-        public override void AfterPlayerStep()
+        public override async Task AfterPlayerStep()
         {
-            base.AfterPlayerStep();
+            await base.AfterPlayerStep();
 
-            // bail out if the player entered another map on this step.
-            if (GameState.Map != TheMap)
-                return;
+            throw new NotImplementedException();
 
-            UpdateRaftState();
+            //// bail out if the player entered another map on this step.
+            //if (GameState.Map != TheMap)
+            //    return;
 
-            OutsideEncounters.Step();
+            //UpdateRaftState();
+
+            //OutsideEncounters.Step();
         }
 
         public override void OnLoad()

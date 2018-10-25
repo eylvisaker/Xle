@@ -63,19 +63,19 @@ namespace Xle.LegacyOfTheAncients.Commands
         }
 
         [Fact]
-        public void UseWithEvent()
+        public async Task UseWithEvent()
         {
             SetupItemForUse(LotaItem.MagicIce);
 
             eventInteractor
-                .Setup(x => x.InteractWithFirstEvent(It.IsAny<Func<EventExtender, bool>>()))
-                .Returns(true)
+                .Setup(x => x.InteractWithFirstEvent(It.IsAny<Func<EventExtender, Task<bool>>>()))
+                .ReturnsAsync(true)
                 .Verifiable();
 
-            use.Execute();
+            await use.Execute();
 
             eventInteractor.Verify(x => x.InteractWithFirstEvent(
-                It.IsAny<Func<EventExtender, bool>>()), Times.Once);
+                It.IsAny<Func<EventExtender, Task<bool>>>()), Times.Once);
         }
     }
 }

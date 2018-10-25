@@ -1,6 +1,7 @@
-﻿using Xle.Maps;
-using System;
+﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Xle.Maps;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
@@ -8,42 +9,43 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
     {
         public Random Random { get; set; }
 
-        public override bool StepOn()
+        public override async Task<bool> StepOn()
         {
             if (Player.Y > TheEvent.Y + 2)
                 return false;
 
             Enabled = false;
 
-            MapData data = (this).GameState.Map.ReadMapData(TheEvent.Rectangle);
+            MapData data = GameState.Map.ReadMapData(TheEvent.Rectangle);
 
             TextArea.Clear(true);
-            TextArea.PrintLine();
-            TextArea.PrintLine("Doors slam shut...");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Doors slam shut...");
             AddDoors();
 
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Gas fills the room...");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Gas fills the room...");
             AddGas();
 
-            GameControl.Wait(3500);
+            await GameControl.WaitAsync(3500);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("You fall asleep.");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You fall asleep.");
+            await TextArea.PrintLine();
 
-            GameControl.Wait(3000);
+            await GameControl.WaitAsync(3000);
 
-            GameControl.Wait(4000, redraw: DrawBlankScreen);
+            throw new NotImplementedException();
+            // await GameControl.WaitAsync(4000, redraw: DrawBlankScreen);
 
             RemoveWeaponsAndArmor();
 
             Player.X = 25;
             Player.Y = 45;
 
-            GameControl.Wait(3500);
+            await GameControl.WaitAsync(3500);
 
             GameState.Map.WriteMapData(data, TheEvent.Rectangle.Location);
 

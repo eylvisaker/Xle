@@ -1,20 +1,21 @@
-﻿using Xle.XleEventTypes.Extenders;
+﻿using System.Threading.Tasks;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
 	public class CastleDoor : DoorExtender
 	{
         
-		public override void PrintUnlockFailureText(int item, ref bool handled)
+		public override async Task<bool> PrintUnlockFailureText(int item)
 		{
-			TextArea.PrintLine("This key does nothing here.");
-			handled = true;
+			await TextArea.PrintLine("This key does nothing here.");
+            return true;
 		}
 
-		public override void PrintUnlockText(int item, ref bool handled)
+		public override async Task<bool> PrintUnlockText(int item)
 		{
-			handled = true;
-			TextArea.PrintLine("Unlock door."); 
+            await TextArea.PrintLine("Unlock door.");
+            return true;
 		}
 	}
 }

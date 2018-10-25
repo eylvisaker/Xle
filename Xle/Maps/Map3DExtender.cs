@@ -1,5 +1,6 @@
 ﻿using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace Xle.Maps
 {
@@ -20,7 +21,7 @@ namespace Xle.Maps
         {
         }
 
-        public override void PlayerCursorMovement(Direction dir)
+        public override async Task PlayerCursorMovement(Direction dir)
         {
             Point stepDirection;
             string command;
@@ -34,21 +35,21 @@ namespace Xle.Maps
                 if (CanPlayerStepIntoImpl(Player.X + stepDirection.X, Player.Y + stepDirection.Y) == false)
                 {
                     CommandTextForInvalidMovement(ref command);
-                    TextArea.PrintLine(command);
+                    await TextArea.PrintLine(command);
                     SoundMan.PlaySound(LotaSound.Bump);
                 }
                 else
                 {
-                    TextArea.PrintLine(command);
+                    await TextArea.PrintLine(command);
 
                     PlayPlayerMoveSound();
-                    MovePlayer(stepDirection);
+                    await MovePlayer(stepDirection);
                 }
             }
             else
             {
                 // Turning in place
-                TextArea.PrintLine(command);
+                await TextArea.PrintLine(command);
 
                 PlayPlayerMoveSound();
             }

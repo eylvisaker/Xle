@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Commands;
 using Xle.Services.Game;
@@ -17,6 +18,30 @@ using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Maps
 {
+    public interface IMapExtender
+    {
+        XleMap TheMap { get; set; }
+        int WaitTimeAfterStep { get; }
+        XleMapRenderer MapRenderer { get; }
+        IReadOnlyList<EventExtender> Events { get; }
+
+        int MapID { get; }
+        bool IsAngry { get; set; }
+
+        IEnumerable<EventExtender> EventsAt(int v);
+        void SetCommands(ICommandList commands);
+        Task PlayerCursorMovement(Direction dir);
+        void OnUpdate(GameTime time);
+        void OnLoad();
+        void OnAfterEntry();
+        void ModifyEntryPoint(MapEntryParams entryParams);
+        void LeaveMap();
+        void CheckSounds(GameTime time);
+        void AfterExecuteCommand(Keys cmd);
+        bool CanPlayerStepInto(Point corridorPt);
+        bool CanPlayerStepIntoImpl(int v, int targetY);
+    }
+
     [InjectProperties]
     public class MapExtender : IMapExtender
     {
@@ -103,17 +128,17 @@ namespace Xle.Maps
         public virtual void OnAfterEntry()
         { }
 
-        public virtual void AfterPlayerStep()
+        public virtual async Task AfterPlayerStep()
         {
             bool didEvent = false;
 
             foreach (var evt in EventsAt(Player.X, Player.Y, 0))
             {
-                evt.StepOn();
+               await  evt.StepOn();
                 didEvent = true;
             }
 
-            AfterStepImpl(didEvent);
+            await AfterStepImpl(didEvent);
         }
 
         public virtual void SetColorScheme(ColorScheme scheme)
@@ -197,7 +222,7 @@ namespace Xle.Maps
         /// first to check to see if the movement is valid.
         /// </summary>
         /// <param name="stepDirection"></param>
-        public virtual void MovePlayer(Point stepDirection)
+        public virtual async Task MovePlayer(Point stepDirection)
         {
             Point newPoint = new Point(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
@@ -205,7 +230,7 @@ namespace Xle.Maps
 
             Player.Location = newPoint;
 
-            AfterPlayerStep();
+            await AfterPlayerStep();
         }
 
         public void BeforeStepOn(int x, int y)
@@ -221,25 +246,23 @@ namespace Xle.Maps
         /// </summary>
         /// <param name="didEvent">True if there was an event that occured at this location</param>
         /// <param name="player"></param>
-        protected virtual void AfterStepImpl(bool didEvent)
+        protected virtual async Task AfterStepImpl(bool didEvent)
         {
 
         }
 
-        public bool CanPlayerStep(Point stepDirection)
+        public async Task<bool> CanPlayerStep(Point stepDirection)
         {
-            return CanPlayerStep(stepDirection.X, stepDirection.Y);
+            return await CanPlayerStep(stepDirection.X, stepDirection.Y);
         }
 
-        protected virtual bool CanPlayerStep(int dx, int dy)
+        protected virtual async Task<bool> CanPlayerStep(int dx, int dy)
         {
             EventExtender evt = GetEvent(Player.X + dx, Player.Y + dy, 0);
 
             if (evt != null)
             {
-                bool allowStep;
-
-                evt.TryToStepOn(dx, dy, out allowStep);
+                bool allowStep = await evt.TryToStepOn(dx, dy);
 
                 if (allowStep == false)
                     return false;
@@ -248,7 +271,7 @@ namespace Xle.Maps
             return CanPlayerStepIntoImpl(Player.X + dx, Player.Y + dy);
         }
 
-        public virtual void PlayerCursorMovement(Direction dir)
+        public virtual async Task PlayerCursorMovement(Direction dir)
         {
 
         }

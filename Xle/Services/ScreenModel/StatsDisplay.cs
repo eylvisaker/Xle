@@ -4,6 +4,7 @@ using Xle.Services.Game;
 using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Services.ScreenModel
 {
@@ -14,8 +15,8 @@ namespace Xle.Services.ScreenModel
         int Gold { get; }
         int Food { get; }
 
-        void FlashHPWhileSound(Color color1, Color? color2 = null);
-        void FlashHPWhile(Color color1, Color color2, Func<bool> func);
+        Task FlashHPWhileSound(Color color1, Color? color2 = null);
+        Task FlashHPWhile(Color color1, Color color2, Func<bool> func);
     }
 
     [Singleton, InjectProperties]
@@ -52,11 +53,13 @@ namespace Xle.Services.ScreenModel
         {
             mHPColor = Map.ColorScheme.TextColor;
         }
-        public void FlashHPWhileSound(Color color1, Color? color2 = null)
+
+        public Task FlashHPWhileSound(Color color1, Color? color2 = null)
         {
-            FlashHPWhile(color1, color2 ?? Screen.FontColor, () => SoundMan.IsAnyPlaying());
+            return FlashHPWhile(color1, color2 ?? Screen.FontColor, () => SoundMan.IsAnyPlaying());
         }
-        public void FlashHPWhile(Color clr, Color clr2, Func<bool> pred)
+
+        public async Task FlashHPWhile(Color clr, Color clr2, Func<bool> pred)
         {
             Color lastColor = clr2;
 
@@ -72,7 +75,7 @@ namespace Xle.Services.ScreenModel
 
                 mHPColor = lastColor;
 
-                GameControl.Wait(80);
+                await GameControl.WaitAsync(80);
 
                 count++;
 

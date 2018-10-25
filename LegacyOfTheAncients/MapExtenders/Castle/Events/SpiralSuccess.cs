@@ -1,13 +1,15 @@
-﻿namespace Xle.Ancients.MapExtenders.Castle.Events
+﻿using System.Threading.Tasks;
+
+namespace Xle.Ancients.MapExtenders.Castle.Events
 {
     public class SpiralSuccess : Spiral
     {
-        public override bool StepOn()
+        public override async Task<bool> StepOn()
         {
             if (AnyBad)
                 return false;
 
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await SoundMan.PlaySoundWait(LotaSound.VeryGood);
 
             ClearSpiral();
             RemoveSpiralEvents();

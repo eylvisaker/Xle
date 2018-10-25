@@ -37,13 +37,13 @@ namespace Xle.Services.Commands.Implementation
 
             Direction dir = key.ToDirection();
 
-            PlayerDisembark(dir);
+            await PlayerDisembark(dir);
         }
 
-        private void PlayerDisembark(Direction dir)
+        private async Task PlayerDisembark(Direction dir)
         {
             Player.BoardedRaft = null;
-            Map.PlayerCursorMovement(dir);
+            await Map.PlayerCursorMovement(dir);
 
             SoundMan.StopSound(LotaSound.Raft1);
         }

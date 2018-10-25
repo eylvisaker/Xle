@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace Xle.Maps
 {
@@ -67,18 +68,18 @@ namespace Xle.Maps
             return TheMap.TileSet[tile] == TileInfo.Blocked;
         }
 
-        public override void PlayerCursorMovement(Direction dir)
+        public override async Task PlayerCursorMovement(Direction dir)
         {
             string command;
             Point stepDirection;
 
             _Move2D(dir, "Move", out command, out stepDirection);
 
-            if (CanPlayerStep(stepDirection))
+            if (await CanPlayerStep(stepDirection))
             {
-                TextArea.PrintLine(command);
+                await TextArea.PrintLine(command);
 
-                MovePlayer(stepDirection);
+                await MovePlayer(stepDirection);
                 SoundMan.PlaySound(LotaSound.WalkTown);
 
                 Player.TimeQuality += 0.03;
@@ -88,7 +89,7 @@ namespace Xle.Maps
                 SoundMan.PlaySound(LotaSound.Invalid);
 
                 //Commands.CommandList.UpdateCommand("Move Nowhere");
-                TextArea.PrintLine("Move nowhere");
+                await TextArea.PrintLine("Move nowhere");
             }
         }
     }

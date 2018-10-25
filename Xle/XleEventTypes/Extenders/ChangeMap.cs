@@ -6,6 +6,7 @@ using System.Text;
 using Xle.Services;
 using Xle.Data;
 using Xle.Services.MapLoad;
+using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Extenders
 {
@@ -16,7 +17,7 @@ namespace Xle.XleEventTypes.Extenders
         public IMapChanger MapChanger { get; set; }
         public XleData Data { get; set; }
 
-        protected bool VerifyMapExistence()
+        protected async Task<bool> VerifyMapExistence()
         {
             try
             {
@@ -30,7 +31,7 @@ namespace Xle.XleEventTypes.Extenders
                 TextArea.PrintLine("Map ID " + TheEvent.MapID + " not found.");
                 TextArea.PrintLine();
 
-                GameControl.Wait(1500);
+                await GameControl.WaitAsync(1500);
 
                 return false;
             }
@@ -38,14 +39,14 @@ namespace Xle.XleEventTypes.Extenders
             return true;
         }
 
-        public override bool StepOn()
+        public override async Task<bool> StepOn()
         {
             if (Player.X < TheEvent.X) return false;
             if (Player.Y < TheEvent.Y) return false;
             if (Player.X >= TheEvent.X + TheEvent.Width) return false;
             if (Player.Y >= TheEvent.Y + TheEvent.Height) return false;
 
-            if (TheEvent.MapID != 0 && VerifyMapExistence() == false)
+            if (TheEvent.MapID != 0 && await VerifyMapExistence() == false)
                 return false;
 
             bool cancel = false;

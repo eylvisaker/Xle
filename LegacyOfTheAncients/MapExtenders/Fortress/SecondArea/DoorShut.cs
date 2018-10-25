@@ -11,7 +11,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 	{
 		int replacementTile = 40;
 
-		public override bool StepOn()
+		public override async Task<bool> StepOn()
 		{
 			for(int i = TheEvent.Rectangle.X; i < TheEvent.Rectangle.Right; i++)
 			{

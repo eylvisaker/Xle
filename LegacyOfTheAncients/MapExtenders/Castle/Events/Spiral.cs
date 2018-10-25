@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Xle.XleEventTypes;
 using Xle.XleEventTypes.Extenders;
 
@@ -8,11 +8,11 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
 {
     public class Spiral : EventExtender
     {
-        public override bool StepOn()
+        public override async Task<bool> StepOn()
         {
             if (AnyBad)
             {
-                SoundMan.PlaySoundSync(LotaSound.VeryBad);
+                await SoundMan.PlaySoundWait(LotaSound.VeryBad);
 
                 ClearSpiral();
                 RemoveSpiralEvents();

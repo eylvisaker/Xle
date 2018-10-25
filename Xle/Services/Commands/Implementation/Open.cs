@@ -35,7 +35,7 @@ namespace Xle.Services.Commands.Implementation
         {
             foreach (var evt in MapExtender.EventsAt(1).Where(x => x.Enabled))
             {
-                if (evt.Open())
+                if (await evt.Open())
                     return true;
             }
 

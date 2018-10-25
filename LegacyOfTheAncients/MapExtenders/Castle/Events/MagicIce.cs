@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
@@ -8,7 +8,7 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
     public class MagicIce : LotaEvent
     {
         public Random Random { get; set; }
-        public override bool Use(int item)
+        public override async Task<bool> Use(int item)
         {
             if (item != (int)LotaItem.MagicIce)
                 return false;
@@ -22,7 +22,7 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
                 return false;
             }
 
-            GameControl.Wait(250);
+           await  GameControl.WaitAsync(250);
 
             for (int j = TheEvent.Rectangle.Top; j < TheEvent.Rectangle.Bottom; j++)
             {
