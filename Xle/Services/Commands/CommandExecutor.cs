@@ -1,6 +1,10 @@
 ﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.Game;
@@ -16,6 +20,8 @@ namespace Xle.Services.Commands
         Task DoCommand(Keys Keys, string keyString);
 
         void ResetCurrentCommand();
+
+        void Update(GameTime time);
     }
 
     [Singleton]
@@ -30,6 +36,7 @@ namespace Xle.Services.Commands
         private IPlayerDeathHandler deathHandler;
         private IPlayerAnimator characterAnimator;
         private bool inputPrompt;
+        private Task commandTask;
 
         private Player player { get { return gameState.Player; } }
 
@@ -51,7 +58,10 @@ namespace Xle.Services.Commands
             this.characterAnimator = characterAnimator;
             this.deathHandler = deathHandler;
 
-            input.DoCommand += (sender, args) => DoCommand(args.Command, args.KeyString);
+            input.DoCommand += (sender, args) =>
+            {
+                commandTask = DoCommand(args.Command, args.KeyString);
+            };
 
             mDirectionMap[Keys.Right] = Direction.East;
             mDirectionMap[Keys.Up] = Direction.North;
@@ -73,6 +83,8 @@ namespace Xle.Services.Commands
 
             textArea.Print("\nEnter command: ");
             inputPrompt = true;
+
+            commandTask = null;
         }
 
         /// <summary>
@@ -186,6 +198,53 @@ namespace Xle.Services.Commands
             await gameControl.WaitAsync(waitTime);
 
             Prompt();
+        }
+
+        public void Update(GameTime time)
+        {
+            if (commandTask?.IsFaulted ?? false)
+            {
+                commandTask = OutputException(commandTask.Exception);
+            }
+        }
+
+        private async Task OutputException(Exception exception)
+        {
+            if (exception is AggregateException agg && agg.InnerExceptions.Count == 1)
+            {
+                await OutputException(agg.InnerException);
+                return;
+            }
+
+            await textArea.PrintLine(WrapText($"Error: {exception.GetType()}"), Color.Red);
+            await textArea.PrintLine(WrapText(exception.Message), Color.Red);
+
+            if (Debugger.IsAttached)
+            {
+                Debugger.Break();
+            }
+
+            Prompt();
+        }
+
+        private string WrapText(string message)
+        {
+            StringBuilder result = new StringBuilder();
+
+            int index = 0;
+
+            while (index < message.Length)
+            {
+                if (index > 0)
+                    result.AppendLine();
+
+                int length = Math.Min(message.Length - index, 36);
+
+                result.Append(message.Substring(0, length));
+                index += length;
+            }
+
+            return result.ToString();
         }
     }
 }

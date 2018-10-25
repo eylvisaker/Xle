@@ -12,7 +12,6 @@ namespace Xle.Services.ScreenModel
         void OnDraw();
 
         Color FontColor { get; set; }
-        bool CurrentWindowClosed { get; }
 
         /// <summary>
         /// Set to true to show the (press to cont) prompt.
@@ -81,12 +80,7 @@ namespace Xle.Services.ScreenModel
 
         public event EventHandler Draw;
         public event EventHandler Update;
-
-        public bool CurrentWindowClosed
-        {
-            get => throw new NotImplementedException();
-        }
-
+        
         public void OnUpdate()
         {
             if (Update != null)

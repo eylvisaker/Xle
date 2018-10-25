@@ -4,6 +4,7 @@ using AgateLib.Input;
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Xle.Services.Commands;
 using Xle.Services.Rendering;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
@@ -18,6 +19,7 @@ namespace Xle.Scenes
         private readonly IXleRunner gameRunner;
         private readonly IXleInput xleInput;
         private readonly IRectangleRenderer rects;
+        private readonly ICommandExecutor commandExecutor;
         private readonly XleSystemState systemState;
         private readonly XleRenderer renderer;
         private readonly GameState gameState;
@@ -29,6 +31,7 @@ namespace Xle.Scenes
                              IXleRunner gameRunner,
                              IXleInput xleInput,
                              IRectangleRenderer rects,
+                             ICommandExecutor commandExecutor,
                              XleSystemState systemState,
                              XleRenderer renderer, 
                              GameState gameState)
@@ -38,6 +41,7 @@ namespace Xle.Scenes
             this.gameRunner = gameRunner;
             this.xleInput = xleInput;
             this.rects = rects;
+            this.commandExecutor = commandExecutor;
             this.systemState = systemState;
             this.renderer = renderer;
             this.gameState = gameState;
@@ -77,6 +81,7 @@ namespace Xle.Scenes
             }
 
             screen.OnUpdate();
+            commandExecutor.Update(time);
 
             if (systemState.ReturnToTitle)
                 IsFinished = true;

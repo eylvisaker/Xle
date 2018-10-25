@@ -146,14 +146,15 @@ namespace Xle.Services.Menus
                     await TextArea.RewriteLine(lineIndex + 1, tempLine, clrChanged);
                 }
 
-            } while (key != Keys.Enter && screen.CurrentWindowClosed == false);
+            } while (key != Keys.Enter);
 
             await gameControl.WaitAsync(100);
 
             await TextArea.PrintLine();
 
-            return result;
+            input.PromptToContinueOnWait = true;
 
+            return result;
         }
 
     }

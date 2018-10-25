@@ -25,7 +25,7 @@ namespace Xle.ServiceTests
             gameControl = new Mock<IXleGameControl>();
             renderer = new Mock<IMenuRenderer>();
 
-            subMenu = new XleSubMenu(gameControl.Object, input.Object, redraw.Object, renderer.Object);
+            subMenu = new XleSubMenu(gameControl.Object, redraw.Object, renderer.Object);
         }
 
         private void SetupInputSequence(params Keys[] keys)

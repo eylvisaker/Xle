@@ -149,14 +149,14 @@ namespace Xle.Maps.Museums
             {
                 await TextArea.PrintLineCentered(" - Exhibit closed - ", ex.TitleColor);
                 await TextArea.PrintLine();
-                Input.WaitForKey();
+                await Input.WaitForKey();
 
                 return true;
             }
 
             await TextArea.PrintLineCentered(ex.InsertCoinText + " ", ex.TitleColor);
             await TextArea.PrintLine();
-            Input.WaitForKey();
+            await Input.WaitForKey();
 
             if (ex.RequiresCoin == false)
             {

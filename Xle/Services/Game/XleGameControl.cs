@@ -46,37 +46,15 @@ namespace Xle.Services.Game
             waiter.Wait(howLong, keyBreak);
         }
 
-        public void KeepAlive(GameTime time)
-        {
-            if (gameState.MapExtender != null)
-            {
-                gameState.MapExtender.CheckSounds(time);
-            }
+        //private void OnUpdate(GameTime time)
+        //{
+        //    if (gameState != null && gameState.MapExtender != null)
+        //    {
+        //        gameState.MapExtender.OnUpdate(time);
+        //    }
 
-            if (screen.CurrentWindowClosed)
-                throw new MainWindowClosedException();
-
-            throw new NotImplementedException();
-            //AgateApp.KeepAlive();
-        }
-
-        public void Redraw(GameTime time)
-        {
-            OnUpdate(time);
-            screen.OnDraw();
-
-            KeepAlive(time);
-        }
-
-        private void OnUpdate(GameTime time)
-        {
-            if (gameState != null && gameState.MapExtender != null)
-            {
-                gameState.MapExtender.OnUpdate(time);
-            }
-
-            screen.OnUpdate();
-        }
+        //    screen.OnUpdate();
+        //}
 
     }
 }

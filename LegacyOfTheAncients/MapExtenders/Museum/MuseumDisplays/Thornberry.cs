@@ -22,7 +22,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 
         public override async Task RunExhibit()
         {
-            if (CheckOfferReread())
+            if (await CheckOfferReread())
             {
                 await ReadRawText(ExhibitInfo.Text[1]);
             }

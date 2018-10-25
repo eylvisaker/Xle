@@ -135,10 +135,14 @@ namespace Xle.Services.XleSystem
 
             waiting = true;
 
+            screen.PromptToContinue = PromptToContinueOnWait;
+
             while (waiting)
             {
                 await Task.Yield();
             }
+
+            screen.PromptToContinue = false;
 
             return commandArgs.Command;
         }

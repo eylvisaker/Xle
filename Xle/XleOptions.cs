@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Services;
+﻿using AgateLib;
 
 namespace Xle
 {
-    public class XleOptions : IXleService
+    [Singleton]
+    public class XleOptions
     {
         public bool EnhancedUserInterface { get; set; }
         public bool EnhancedGameplay { get; set; }

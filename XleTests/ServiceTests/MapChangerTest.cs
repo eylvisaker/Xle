@@ -145,7 +145,7 @@ namespace Xle.Services.MapLoad
             SetupMapLoader<Town>();
 
             SetStartMap(1);
-            startMap.ResetCalls();
+            startMap.Invocations.Clear();
 
             changer.ChangeMap(1, new Point(24, 33));
 

@@ -66,7 +66,7 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
 
         public virtual async Task RunExhibit()
         {
-            if (CheckOfferReread() == false)
+            if (await CheckOfferReread() == false)
                 return;
 
             await ReadRawText(RawText);
@@ -83,14 +83,12 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
         /// </summary>
         /// <param name="Player"></param>
         /// <returns></returns>
-        protected bool CheckOfferReread()
+        protected async Task<bool> CheckOfferReread()
         {
-            throw new NotImplementedException();
-
-            //if (HasBeenVisited)
-            //{
-            //    return OfferReread();
-            //}
+            if (HasBeenVisited)
+            {
+                return await OfferReread();
+            }
 
             return true;
         }
@@ -157,14 +155,12 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
                     if (waiting)
                     {
                         string punctuation = ",.!";
+                        int time = 30;
 
-                        throw new NotImplementedException();
-                        //if (punctuation.Contains(rawtext[ip]))
-                        //    GameControl.Wait(350 * (1 + punctuation.IndexOf(rawtext[ip])));
-                        //else if (AgateLib.InputLib.Input.Unhandled.Keys.Any)
-                        //    GameControl.Wait(1);
-                        //else
-                        //    GameControl.Wait(30);
+                        if (punctuation.Contains(rawtext[ip].ToString()))
+                            time = 350 * (1 + punctuation.IndexOf(rawtext[ip]));
+
+                        await GameControl.WaitAsync(time, true);
                     }
                 }
                 else
@@ -195,7 +191,7 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
                             case "purple": clr = XleColor.Purple; break;
 
                             case "pause":
-                                Input.WaitForKey();
+                                await Input.WaitForKey();
 
                                 break;
 

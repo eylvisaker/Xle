@@ -15,7 +15,7 @@ namespace Xle.ServiceTests
 
         public EquipmentPickerTest()
         {
-            picker = new EquipmentPicker(GameState, Services.SubMenu.Object) { Data = Services.Data };
+            picker = new EquipmentPicker(GameState, Services.SubMenu.Object, Services.Data);
 
             Services.SubMenu.Setup(x => x.SubMenu(
                 "Pick Armor", 0, It.IsAny<MenuItemList>(), It.IsAny<Color>()))
