@@ -47,12 +47,22 @@ namespace AgateLib.Mathematics
 			return (float)Math.Sin(angle);
 		}
 
-		/// <summary>
-		/// Single precision cosine.
-		/// </summary>
-		/// <param name="angle"></param>
-		/// <returns></returns>
-		public static float Cos(float angle)
+        /// <summary>
+        /// Hyperbolic Tangent function.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static float Tanh(float x)
+        {
+            return (float)Math.Tanh((float)x);
+        }
+
+        /// <summary>
+        /// Single precision cosine.
+        /// </summary>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        public static float Cos(float angle)
 		{
 			return (float)Math.Cos(angle);
 		}
@@ -68,7 +78,7 @@ namespace AgateLib.Mathematics
         }
 
         /// <summary>
-        /// Floating precision exponential function.
+        /// Single precision exponential function.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -77,5 +87,16 @@ namespace AgateLib.Mathematics
 		{
 			return (float)Math.Pow(x, y);
 		}
-	}
+
+        /// <summary>
+        /// Single precision inverse tangent(2) function.
+        /// </summary>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static float Atan2(float y, float x)
+        {
+            return (float)Math.Atan2(y, x);
+        }
+    }
 }
