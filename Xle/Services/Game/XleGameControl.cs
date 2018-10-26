@@ -43,7 +43,7 @@ namespace Xle.Services.Game
 
         public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
         {
-            waiter.Wait(howLong, keyBreak);
+            throw new NotImplementedException();
         }
 
         //private void OnUpdate(GameTime time)

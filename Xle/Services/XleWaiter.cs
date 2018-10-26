@@ -66,6 +66,12 @@ namespace Xle.Services
             {
                 timeLeft_ms = Math.Max(timeLeft_ms, howLong_ms);
             }
+
+            public async Task Wait()
+            {
+                while (timeLeft_ms > 0)
+                    await Task.Yield();
+            }
         }
 
         private readonly ISceneStack sceneStack;
@@ -78,28 +84,21 @@ namespace Xle.Services
 
         public async Task WaitAsync(int howLong_ms, bool allowKeyBreak = false)
         {
-            if (sceneStack.Contains(waitScene))
-            {
-                // Make sure the wait scene is on top of the stack.
-                sceneStack.Remove(waitScene);
-                sceneStack.Add(waitScene);
+            if (howLong_ms <= 0)
+                return;
 
-                waitScene.TopOff(howLong_ms);
+            waitScene.Initialize(howLong_ms, allowKeyBreak);
 
-                await Task.Delay(waitScene.TimeLeft);
-            }
-            else
-            {
-                waitScene.Initialize(howLong_ms, allowKeyBreak);
+            sceneStack.AddOrBringToTop(waitScene);
 
-                sceneStack.Add(waitScene);
-            }
-
-            await Task.Delay(TimeSpan.FromMilliseconds(howLong_ms));
+            await waitScene.Wait();
         }
 
         public void Wait(int howLong_ms, bool allowKeyBreak = false)
         {
+            if (howLong_ms <= 0)
+                return;
+
             if (sceneStack.Contains(waitScene))
             {
                 waitScene.TopOff(howLong_ms);

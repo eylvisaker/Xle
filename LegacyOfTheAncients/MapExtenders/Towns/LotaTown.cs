@@ -1,20 +1,12 @@
-﻿using Xle.Ancients.MapExtenders.Towns.Stores;
-using Xle.Maps.Towns;
-using Xle.Services;
-using Xle.Services.Commands;
-using Xle.XleEventTypes;
-using Xle.XleEventTypes.Stores;
-using Xle.XleEventTypes.Stores.Extenders;
-using System;
-using System.Collections.Generic;
+﻿using AgateLib;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Magic = Xle.Services.Commands.Implementation.MagicCommand;
+using Xle.Maps.Towns;
+using Xle.Services.Commands;
+using Xle.XleEventTypes.Stores;
 
 namespace Xle.Ancients.MapExtenders.Towns
 {
+    [Transient("LotaTown")]
     public class LotaTown : TownExtender
     {
 
@@ -28,7 +20,7 @@ namespace Xle.Ancients.MapExtenders.Towns
             base.OnLoad();
         }
 
-        void CheckLoan()
+        private void CheckLoan()
         {
             if (TheMap.Events.Any(x => x is Store && x.ExtenderName == "StoreLending"))
             {

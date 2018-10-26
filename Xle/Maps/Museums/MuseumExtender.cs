@@ -8,6 +8,7 @@ using Xle.Services.Rendering;
 using Xle.Services.Rendering.Maps;
 using Microsoft.Xna.Framework;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Xle.Maps.Museums
 {
@@ -200,11 +201,16 @@ namespace Xle.Maps.Museums
 
         private async Task RunExhibit(Exhibit ex)
         {
-            await ex.RunExhibit();
+            try
+            {
+                await ex.RunExhibit();
+            }
+            catch (Exception exception)
+            {
+                Debugger.Break();
+            }
 
             CheckExhibitStatus();
         }
-
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Game;
@@ -69,8 +70,15 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
             if (await CheckOfferReread() == false)
                 return;
 
-            await ReadRawText(RawText);
-
+            try
+            {
+                await ReadRawText(RawText);
+            }
+            catch(Exception ex)
+            {
+                Debugger.Break();
+            }
+            
             if (HasBeenVisited == false)
                 MarkAsVisited();
         }

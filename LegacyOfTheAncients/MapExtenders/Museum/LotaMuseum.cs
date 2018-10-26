@@ -1,12 +1,14 @@
-﻿using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
 using Xle.Maps;
 using Xle.Maps.Museums;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.Commands;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using AgateLib;
-using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Museum
 {
@@ -142,7 +144,16 @@ namespace Xle.Ancients.MapExtenders.Museum
                 if (Story.Museum[1] < 3)
                 {
                     var welcome = (Welcome)GetExhibitByTile(0x51);
-                   await welcome.PlayGoldArmbandMessage();
+
+                    try
+                    {
+                        await welcome.PlayGoldArmbandMessage();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debugger.Break();
+                    }
+
                     Story.Museum[1] = 3;
 
                     CheckExhibitStatus();
