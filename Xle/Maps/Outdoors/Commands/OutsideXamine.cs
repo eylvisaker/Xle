@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
 
 using Xle.Maps.XleMapTypes;
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Maps.Outdoors.Commands
 {
-    [ServiceName("OutsideXamine")]
+    [Transient("OutsideXamine")]
     public class OutsideXamine : Xamine
     {
-        OutsideExtender Outside { get { return (OutsideExtender)GameState.MapExtender; } }
+        private OutsideExtender Outside { get { return (OutsideExtender)GameState.MapExtender; } }
 
         public override async Task Execute()
         {

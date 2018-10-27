@@ -12,10 +12,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AgateLib;
+using Xle.Services.XleSystem;
 
-namespace Xle.Services.XleSystem.Implementation
+namespace Xle.Diagnostics
 {
-    public class XleConsole : IXleConsole, IVocabulary
+    public interface IXleConsoleCommands : IVocabulary
+
+    {
+        void Initialize();
+    }
+
+    [Singleton]
+    public class XleConsoleCommands : IXleConsoleCommands, IVocabulary
     {
         private GameState GameState;
         private ITextArea TextArea;
@@ -27,7 +36,7 @@ namespace Xle.Services.XleSystem.Implementation
         private readonly XleSystemState systemState;
         private IMapChanger mapChanger;
 
-        public XleConsole(
+        public XleConsoleCommands(
             GameState gameState,
             ITextArea textArea,
             ICommandExecutor commandExecutor,
@@ -47,13 +56,11 @@ namespace Xle.Services.XleSystem.Implementation
             this.options = options;
             this.Data = data;
             this.mapChanger = mapChanger;
-
-            //AgateConsole.CommandLibraries.Add(new LibraryVocabulary(this));
-            throw new NotImplementedException();
         }
 
         public string Namespace => "";
 
+        [Obsolete("This method does nothing and can be removed.")]
         public void Initialize()
         {
 
@@ -252,83 +259,83 @@ namespace Xle.Services.XleSystem.Implementation
         //    mapChanger.ChangeMap(mapId, entryPoint);
         //}
 
-        //[ConsoleCommand("Enters a map.")]
-        //public void Goto(string mapName)
-        //{
-        //    Player player = GameState.Player;
+        [ConsoleCommand("Enters a map.")]
+        public void Goto(string mapName)
+        {
+            Player player = GameState.Player;
 
-        //    MapInfo mapInfo = FindMapByPartialName(mapName);
+            MapInfo mapInfo = FindMapByPartialName(mapName);
 
-        //    if (mapInfo == null)
-        //        return;
+            if (mapInfo == null)
+                return;
 
-        //    var map = mapLoader.LoadMap(mapInfo.ParentMapID);
-        //    int targetX = 0, targetY = 0;
+            var map = mapLoader.LoadMap(mapInfo.ParentMapID);
+            int targetX = 0, targetY = 0;
 
-        //    if (map == null)
-        //    {
-        //        AgateConsole.WriteLine("Map not found.");
-        //        return;
-        //    }
+            if (map == null)
+            {
+                Shell.WriteLine("Map not found.");
+                return;
+            }
 
-        //    foreach (ChangeMapEvent evt in from evt in map.TheMap.Events
-        //                                   where evt is ChangeMapEvent
-        //                                   select (ChangeMapEvent)evt)
-        //    {
-        //        if (evt.MapID == mapInfo.ID)
-        //        {
-        //            targetX = evt.X;
-        //            targetY = evt.Y;
-        //        }
-        //    }
+            foreach (ChangeMapEvent evt in from evt in map.TheMap.Events
+                                           where evt is ChangeMapEvent
+                                           select (ChangeMapEvent)evt)
+            {
+                if (evt.MapID == mapInfo.ID)
+                {
+                    targetX = evt.X;
+                    targetY = evt.Y;
+                }
+            }
 
-        //    if (map.CanPlayerStepIntoImpl(targetX + 2, targetY))
-        //        targetX += 2;
-        //    else if (map.CanPlayerStepIntoImpl(targetX - 2, targetY))
-        //        targetX -= 2;
-        //    else if (map.CanPlayerStepIntoImpl(targetX, targetY + 2))
-        //        targetY += 2;
-        //    else if (map.CanPlayerStepIntoImpl(targetX, targetY - 2))
-        //        targetY -= 2;
+            if (map.CanPlayerStepIntoImpl(targetX + 2, targetY))
+                targetX += 2;
+            else if (map.CanPlayerStepIntoImpl(targetX - 2, targetY))
+                targetX -= 2;
+            else if (map.CanPlayerStepIntoImpl(targetX, targetY + 2))
+                targetY += 2;
+            else if (map.CanPlayerStepIntoImpl(targetX, targetY - 2))
+                targetY -= 2;
 
-        //    ChangeMap(player, map.MapID, new Point(targetX, targetY));
+            ChangeMap(player, map.MapID, new Point(targetX, targetY));
 
-        //    TextArea.Clear();
-        //    commandExecutor.Prompt();
-        //}
+            TextArea.Clear();
+            commandExecutor.Prompt();
+        }
 
-        //private void ChangeMap(Player player, int mapId, Point targetPoint)
-        //{
-        //    mapChanger.ChangeMap(mapId, targetPoint);
-        //}
+        private void ChangeMap(Player player, int mapId, Point targetPoint)
+        {
+            mapChanger.ChangeMap(mapId, targetPoint);
+        }
 
-        //private MapInfo FindMapByPartialName(string mapName)
-        //{
-        //    IEnumerable<MapInfo> matches = from m in Data.MapList.Values
-        //                                   where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant())
-        //                                   select m;
+        private MapInfo FindMapByPartialName(string mapName)
+        {
+            IEnumerable<MapInfo> matches = from m in Data.MapList.Values
+                                           where m.Alias.ToUpperInvariant().Contains(mapName.ToUpperInvariant())
+                                           select m;
 
-        //    MapInfo exactMatch = matches.FirstOrDefault(x => x.Alias.ToUpperInvariant() == mapName.ToUpperInvariant());
+            MapInfo exactMatch = matches.FirstOrDefault(x => x.Alias.ToUpperInvariant() == mapName.ToUpperInvariant());
 
-        //    if (matches.Count() == 0)
-        //    {
-        //        AgateConsole.WriteLine("Map name not found.");
-        //        return null;
-        //    }
-        //    else if (matches.Count() > 1 && exactMatch == null)
-        //    {
-        //        AgateConsole.WriteLine("Found multiple matches:");
+            if (matches.Count() == 0)
+            {
+                Shell.WriteLine("Map name not found.");
+                return null;
+            }
+            else if (matches.Count() > 1 && exactMatch == null)
+            {
+                Shell.WriteLine("Found multiple matches:");
 
-        //        foreach (var m in matches)
-        //        {
-        //            AgateConsole.WriteLine($"    {m.Alias}");
-        //        }
+                foreach (var m in matches)
+                {
+                    Shell.WriteLine($"    {m.Alias}");
+                }
 
-        //        return null;
-        //    }
+                return null;
+            }
 
-        //    return exactMatch ?? matches.First();
-        //}
+            return exactMatch ?? matches.First();
+        }
 
         //[ConsoleCommand("Makes you super powerful.")]
         //public void God()

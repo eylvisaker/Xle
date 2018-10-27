@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services;
 using Xle.Services.Rendering.Maps;
 
 namespace Xle.Maps.Outdoors
 {
-    public interface IOutsideEncounters : IXleService
+    public interface IOutsideEncounters
     {
         string MonsterName { get; }
         bool InEncounter { get; }
@@ -14,10 +15,10 @@ namespace Xle.Maps.Outdoors
         EncounterState EncounterState { get; }
 		IOutsideEncounterRenderer MapRenderer { get; set; }
 
-        void Step();
-        void HitMonster(int damage);
+        Task Step();
+        Task HitMonster(int damage);
         void OnLoad();
-        void AfterPlayerAction();
+        Task AfterPlayerAction();
         void CancelEncounter();
         bool AttemptMovement(int dx, int dy);
     }

@@ -1,17 +1,17 @@
-﻿using Xle.Data;
-using Xle.Services;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
+using System;
+using System.Threading.Tasks;
+using Xle.Data;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
-using Microsoft.Xna.Framework;
-using System;
-using System.Threading.Tasks;
 
 namespace Xle.Maps.Outdoors
 {
-    [ServiceName("OutsideSpeak")]
+    [Transient("OutsideSpeak")]
     public class OutsideSpeak : Speak
     {
         public IOutsideEncounters Encounters { get; set; }
@@ -146,7 +146,7 @@ namespace Xle.Maps.Outdoors
 
             if (type != 5)
             {
-               await  TextArea.PrintLine();
+                await TextArea.PrintLine();
 
                 int choice = await QuickMenu.QuickMenu(menu, 3, 0, qcolor);
 

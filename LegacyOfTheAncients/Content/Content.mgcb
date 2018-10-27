@@ -526,6 +526,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/font.png
 
+#begin Images/LotaOutside.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/LotaOutside.png
+
 #begin Images/Museum/Exhibits/AncientArtifact.png
 /importer:TextureImporter
 /processor:TextureProcessor

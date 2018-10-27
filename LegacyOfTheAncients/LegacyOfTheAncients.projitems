@@ -9,6 +9,8 @@
     <Import_RootNamespace>Xle.Ancients</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AgateConsoleManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AgateConsoleScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaExhibitInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaTitleScreenInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GamePersistance.cs" />

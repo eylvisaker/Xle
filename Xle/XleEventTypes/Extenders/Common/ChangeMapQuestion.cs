@@ -1,40 +1,41 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.Menus;
 
 namespace Xle.XleEventTypes.Extenders.Common
 {
+    [Transient("ChangeMapQuestion")]
     public class ChangeMapQuestion : ChangeMap
     {
         public IQuickMenu QuickMenu { get; set; }
 
-        protected override bool OnStepOnImpl(ref bool cancel)
+        protected override async Task<bool> OnStepOnImpl()
         {
             string newMapName = GetMapName();
-            TextArea.PrintLine();
-            TextArea.PrintLine("Enter " + newMapName + "?");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Enter " + newMapName + "?");
 
             SoundMan.PlaySound(LotaSound.Question);
-            throw new NotImplementedException();
 
-            //int choice = QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3);
+            int choice = await QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3);
 
-            //if (choice == 1)
-            //    return false;
-            //else if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
-            //{
-            //    TextArea.PrintLine();
-            //    TextArea.PrintLine(
-            //        string.Format(TheEvent.CommandText,
-            //        Map.MapName, newMapName));
+            if (choice == 1)
+                return false;
+            else if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
+            {
+               await  TextArea.PrintLine();
+               await  TextArea.PrintLine(
+                    string.Format(TheEvent.CommandText,
+                    Map.MapName, newMapName));
 
-            //    TextArea.PrintLine();
-            //    GameControl.Wait(500);
-            //}
+                await TextArea.PrintLine();
+                await GameControl.WaitAsync(500);
+            }
 
             ExecuteMapChange();
             return true;

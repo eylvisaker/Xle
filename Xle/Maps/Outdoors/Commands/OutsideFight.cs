@@ -1,49 +1,48 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xle.Data;
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.Rendering.Maps;
 
 namespace Xle.Maps.Outdoors.Commands
 {
-    [ServiceName("OutsideFight")]
+    [Transient("OutsideFight")]
     public class OutsideFight : Fight
     {
         public IOutsideEncounters Encounters { get; set; }
 
-        OutsideExtender map { get { return (OutsideExtender)GameState.MapExtender; } }
-        OutsideRenderer MapRenderer
+        private OutsideExtender map { get { return (OutsideExtender)GameState.MapExtender; } }
+
+        private OutsideRenderer MapRenderer
         {
             get { return map.MapRenderer; }
         }
 
-        EncounterState EncounterState
+        private EncounterState EncounterState
         {
             get { return Encounters.EncounterState; }
         }
 
-        bool IsMonsterFriendly
+        private bool IsMonsterFriendly
         {
             get { return Encounters.IsMonsterFriendly; }
             set { Encounters.IsMonsterFriendly = value; }
         }
 
-        string MonstName
+        private string MonstName
         {
             get { return Encounters.MonsterName; }
         }
 
-        IReadOnlyList<Monster> currentMonst
+        private IReadOnlyList<Monster> currentMonst
         {
             get { return Encounters.CurrentMonsters; }
         }
 
-        int monstCount
+        private int monstCount
         {
             get { return Encounters.CurrentMonsters.Count; }
         }
@@ -77,7 +76,7 @@ namespace Xle.Maps.Outdoors.Commands
 
                 SoundMan.PlaySound(LotaSound.PlayerHit);
 
-                Encounters.HitMonster(dam);
+                await Encounters.HitMonster(dam);
             }
             else if (EncounterState > 0)
             {
@@ -94,7 +93,7 @@ namespace Xle.Maps.Outdoors.Commands
             return;
         }
 
-        int attack()
+        private int attack()
         {
             int damage = PlayerHit(currentMonst[monstCount - 1].Defense);
 
@@ -126,7 +125,7 @@ namespace Xle.Maps.Outdoors.Commands
             int qt = Player.CurrentWeapon.Quality;
 
             int dam = Player.Attribute[Attributes.strength] - 12;
-            dam += (int)(wt * (qt + 2)) / 2;
+            dam += wt * (qt + 2) / 2;
 
             dam = (int)(dam * Random.Next(30, 150) / 100.0 + 0.5);
             dam += Random.Next(-2, 3);

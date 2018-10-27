@@ -15,7 +15,7 @@ namespace Xle.Services.Commands
 {
     public interface ICommandExecutor
     {
-        void Prompt();
+        Task Prompt();
 
         Task DoCommand(Keys Keys, string keyString);
 
@@ -34,7 +34,7 @@ namespace Xle.Services.Commands
         private ISoundMan soundMan;
         private ICommandList commands;
         private IPlayerDeathHandler deathHandler;
-        private IPlayerAnimator characterAnimator;
+        private IPlayerAnimator playerAnimator;
         private bool inputPrompt;
         private Task commandTask;
 
@@ -55,7 +55,7 @@ namespace Xle.Services.Commands
             this.gameControl = gameControl;
             this.textArea = textArea;
             this.soundMan = soundMan;
-            this.characterAnimator = characterAnimator;
+            this.playerAnimator = characterAnimator;
             this.deathHandler = deathHandler;
 
             input.DoCommand += (sender, args) =>
@@ -74,11 +74,11 @@ namespace Xle.Services.Commands
             mDirectionMap[Keys.OemQuestion] = Direction.South;
         }
 
-        public void Prompt()
+        public async Task Prompt()
         {
             if (player.HP <= 0 || player.Food <= 0)
             {
-                deathHandler.PlayerIsDead();
+                await deathHandler.PlayerIsDead();
             }
 
             textArea.Print("\nEnter command: ");
@@ -163,7 +163,7 @@ namespace Xle.Services.Commands
 
             await CursorMovement(cmd);
 
-            characterAnimator.AnimateStep();
+            playerAnimator.AnimateStep();
 
             var waitTime = gameState.MapExtender.WaitTimeAfterStep;
 
@@ -193,11 +193,12 @@ namespace Xle.Services.Commands
 
         private async Task AfterDoCommand(int waitTime, Keys cmd)
         {
-            gameState.MapExtender.AfterExecuteCommand(cmd);
+            await gameState.MapExtender.AfterExecuteCommand(cmd);
 
             await gameControl.WaitAsync(waitTime);
 
-            Prompt();
+            await Prompt();
+
         }
 
         public void Update(GameTime time)
@@ -206,6 +207,8 @@ namespace Xle.Services.Commands
             {
                 commandTask = OutputException(commandTask.Exception);
             }
+
+            playerAnimator.Update(time);
         }
 
         private async Task OutputException(Exception exception)
@@ -224,7 +227,7 @@ namespace Xle.Services.Commands
                 Debugger.Break();
             }
 
-            Prompt();
+            await Prompt();
         }
 
         private string WrapText(string message)

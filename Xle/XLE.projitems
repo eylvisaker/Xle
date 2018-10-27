@@ -81,7 +81,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\EncounterState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\IOutsideEncounters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\IOutsideExtender.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\ITerrainMeasurement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\OutsideExtender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\TerrainMeasurement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Roof.cs" />
@@ -201,11 +200,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceName.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\CommandEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\SoundMan.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\Implementation\XleConsole.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\XleConsoleCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\XleInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\XleRunner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\Implementation\XleStartup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\IXleConsole.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\IXleStartup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\XleSystemState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleWaiter.cs" />
@@ -259,5 +257,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Foundation\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Diagnostics\" />
   </ItemGroup>
 </Project>

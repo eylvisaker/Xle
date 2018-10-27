@@ -1,21 +1,16 @@
-﻿using Xle.Data;
-
+﻿using AgateLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Xle.Data;
 using Xle.Maps.Outdoors;
-using Xle.Services;
 using Xle.Services.Commands;
 using Xle.Services.MapLoad;
 
 namespace Xle.Ancients.MapExtenders.Outside
 {
+    [Transient("Tarmalon")]
     public class Tarmalon : OutsideExtender
     {
-        int banditAmbush;
+        private int banditAmbush;
 
         protected LotaStory Story { get { return GameState.Story(); } }
 
@@ -40,8 +35,12 @@ namespace Xle.Ancients.MapExtenders.Outside
 
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LotaProgram.CommonLotaCommands);
-
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Hold());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
             commands.Items.Add(CommandFactory.Disembark());
             commands.Items.Add(CommandFactory.End());
             commands.Items.Add(CommandFactory.Fight("OutsideFight"));
@@ -63,7 +62,7 @@ namespace Xle.Ancients.MapExtenders.Outside
             handled = BanditAmbush();
         }
 
-        bool AllowBanditAmbush()
+        private bool AllowBanditAmbush()
         {
             // make sure the player has the compendium
             if (Player.Items[LotaItem.Compendium] == 0) return false;
@@ -87,10 +86,10 @@ namespace Xle.Ancients.MapExtenders.Outside
             int pastTime = (int)(Player.TimeDays - 100);
             if (pastTime < 0) pastTime = 0;
 
-            int min = 40 - (int)(pastTime / 2);
+            int min = 40 - pastTime / 2;
             if (min < 3) min = 3;
 
-            int max = 100 - (int)(pastTime / 5);
+            int max = 100 - pastTime / 5;
             if (max < 12) max = 12;
 
             int time = Random.Next(min, max);
@@ -163,7 +162,7 @@ namespace Xle.Ancients.MapExtenders.Outside
             return true;
         }
 
-        void RedrawUnconscious()
+        private void RedrawUnconscious()
         {
             //AgateLib.DisplayLib.Display.BeginFrame();
             //AgateLib.DisplayLib.Display.Clear(XleColor.Gray);

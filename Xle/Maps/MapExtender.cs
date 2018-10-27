@@ -23,21 +23,21 @@ namespace Xle.Maps
         XleMap TheMap { get; set; }
         int WaitTimeAfterStep { get; }
         XleMapRenderer MapRenderer { get; }
-        IReadOnlyList<EventExtender> Events { get; }
+        IReadOnlyList<IEventExtender> Events { get; }
 
         int MapID { get; }
         bool IsAngry { get; set; }
 
-        IEnumerable<EventExtender> EventsAt(int v);
+        IEnumerable<IEventExtender> EventsAt(int v);
         void SetCommands(ICommandList commands);
         Task PlayerCursorMovement(Direction dir);
         void OnUpdate(GameTime time);
         void OnLoad();
-        void OnAfterEntry();
+        Task OnAfterEntry();
         void ModifyEntryPoint(MapEntryParams entryParams);
         void LeaveMap();
         void CheckSounds(GameTime time);
-        void AfterExecuteCommand(Keys cmd);
+        Task AfterExecuteCommand(Keys cmd);
         bool CanPlayerStepInto(Point corridorPt);
         bool CanPlayerStepIntoImpl(int v, int targetY);
     }
@@ -46,7 +46,7 @@ namespace Xle.Maps
     public class MapExtender : IMapExtender
     {
         private XleMap mTheMap;
-        private List<EventExtender> mEvents = new List<EventExtender>();
+        private List<IEventExtender> mEvents = new List<IEventExtender>();
         private XleMapRenderer mapRenderer;
 
         public IXleSubMenu SubMenu { get; set; }
@@ -84,7 +84,7 @@ namespace Xle.Maps
         public IMapChanger MapChanger { get; set; }
 
         protected Player Player { get { return GameState.Player; } }
-        public IReadOnlyList<EventExtender> Events { get { return mEvents; } }
+        public IReadOnlyList<IEventExtender> Events => mEvents;
 
         public bool IsAngry
         {
@@ -125,7 +125,7 @@ namespace Xle.Maps
             }
         }
 
-        public virtual void OnAfterEntry()
+        public virtual async Task OnAfterEntry()
         { }
 
         public virtual async Task AfterPlayerStep()
@@ -155,7 +155,7 @@ namespace Xle.Maps
         {
         }
 
-        public virtual void AfterExecuteCommand(Keys cmd)
+        public virtual async Task AfterExecuteCommand(Keys cmd)
         {
         }
 
@@ -258,7 +258,7 @@ namespace Xle.Maps
 
         protected virtual async Task<bool> CanPlayerStep(int dx, int dy)
         {
-            EventExtender evt = GetEvent(Player.X + dx, Player.Y + dy, 0);
+            IEventExtender evt = GetEvent(Player.X + dx, Player.Y + dy, 0);
 
             if (evt != null)
             {
@@ -298,14 +298,14 @@ namespace Xle.Maps
             }
         }
 
-        public IEnumerable<EventExtender> EventsAt(int border)
+        public IEnumerable<IEventExtender> EventsAt(int border)
         {
             int px = Player.X;
             int py = Player.Y;
 
             return EventsAt(px, py, border);
         }
-        public IEnumerable<EventExtender> EventsAt(int px, int py, int border)
+        public IEnumerable<IEventExtender> EventsAt(int px, int py, int border)
         {
             foreach (var e in mEvents)
             {
@@ -343,11 +343,11 @@ namespace Xle.Maps
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public EventExtender GetEvent(int x, int y, int border)
+        public IEventExtender GetEvent(int x, int y, int border)
         {
             for (int i = 0; i < mEvents.Count; i++)
             {
-                EventExtender e = mEvents[i];
+                IEventExtender e = mEvents[i];
 
                 if (x >= e.Rectangle.X - border && y >= e.Rectangle.Y - border &&
                     x < e.Rectangle.Right + border && y < e.Rectangle.Bottom + border)

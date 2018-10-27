@@ -112,7 +112,7 @@ namespace Xle.Maps.Dungeons
         {
             return true;
         }
-        public virtual void UpdateMonsters()
+        public virtual async Task UpdateMonsters()
         {
             foreach (var monster in Combat.Monsters.Where(x => x.DungeonLevel == Player.DungeonLevel))
             {
@@ -347,12 +347,12 @@ namespace Xle.Maps.Dungeons
             Combat.Monsters.Add(monster);
         }
 
-        public override void AfterExecuteCommand(Keys cmd)
+        public override async Task AfterExecuteCommand(Keys cmd)
         {
-            base.AfterExecuteCommand(cmd);
+            await base.AfterExecuteCommand(cmd);
 
-            GameControl.Wait(100);
-            UpdateMonsters();
+            await GameControl.WaitAsync(100);
+            await UpdateMonsters();
         }
 
         public void ExecuteKillFlash()

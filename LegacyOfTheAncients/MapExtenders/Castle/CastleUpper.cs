@@ -17,11 +17,11 @@ namespace Xle.Ancients.MapExtenders.Castle
             CastleLevel = 2;
         }
 
-        public override void OnAfterEntry()
+        public override async Task OnAfterEntry()
         {
             if (Story.Invisible == false)
             {
-                TextArea.PrintLine("Private level!");
+                await TextArea.PrintLine("Private level!");
 
                 IsAngry = true;
             }

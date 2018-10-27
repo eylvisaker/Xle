@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Game;
@@ -16,6 +17,7 @@ namespace Xle.Services.Menus
         void ResetCoinOffers();
     }
 
+    [InjectProperties]
     public abstract class MuseumCoinSale : IMuseumCoinSale
     {
         public Random Random { get; set; }

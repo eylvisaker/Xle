@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace Xle.Services.Rendering.Maps
 {
+    [Transient]
     public class OutsideRenderer : Map2DRenderer, IOutsideEncounterRenderer
     {
         private int[] waves;
@@ -81,13 +83,13 @@ namespace Xle.Services.Rendering.Maps
 
             timeToNextAnimate -= (float)time.ElapsedGameTime.TotalMilliseconds;
 
-            if (timeToNextAnimate > 0)
-                return;
-
             if (waves == null || waves.Length != rectangle.Width * rectangle.Height)
             {
                 waves = new int[rectangle.Width * rectangle.Height];
             }
+
+            if (timeToNextAnimate > 0)
+                return;
 
             timeToNextAnimate = 400;
 

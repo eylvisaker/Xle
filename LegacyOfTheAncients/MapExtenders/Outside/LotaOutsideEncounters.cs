@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using Xle.Services.XleSystem;
 
 namespace Xle.Ancients.MapExtenders.Outside
 {
+    [Singleton, InjectProperties]
     public class OutsideEncounters : IOutsideEncounters
     {
         private int stepCountToEncounter;
@@ -89,7 +91,7 @@ namespace Xle.Ancients.MapExtenders.Outside
             SetNextEncounterStepCount();
         }
 
-        public void Step()
+        public async Task Step()
         {
             if (Data.MonsterInfo.Count == 0) return;
             if (Options.DisableOutsideEncounters) return;
@@ -108,7 +110,7 @@ namespace Xle.Ancients.MapExtenders.Outside
                 }
                 else
                 {
-                    StartEncounter();
+                   await StartEncounter();
                 }
             }
             else if (EncounterState == EncounterState.UnknownCreatureApproaching)
@@ -119,12 +121,12 @@ namespace Xle.Ancients.MapExtenders.Outside
 
             if (EncounterState == EncounterState.CreatureAppearing)
             {
-                MonsterAppearing();
+                await MonsterAppearing();
             }
 
         }
 
-        private void StartEncounter()
+        private async Task StartEncounter()
         {
             currentMonst.Clear();
             IsMonsterFriendly = false;
@@ -138,11 +140,11 @@ namespace Xle.Ancients.MapExtenders.Outside
                 EncounterState = EncounterState.UnknownCreatureApproaching;
                 SoundMan.PlaySound(LotaSound.Encounter);
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("An unknown creature is approaching ", XleColor.Cyan);
-                TextArea.PrintLine("from the " + monstDir.ToString() + ".", XleColor.Cyan);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("An unknown creature is approaching ", XleColor.Cyan);
+                await TextArea.PrintLine("from the " + monstDir.ToString() + ".", XleColor.Cyan);
 
-                GameControl.Wait(1000);
+                await GameControl.WaitAsync(1000);
             }
             else if (type < 15)
             {
@@ -158,7 +160,7 @@ namespace Xle.Ancients.MapExtenders.Outside
             MapRenderer.MonsterDrawDirection = monstDir;
         }
 
-        private void MonsterAppearing()
+        private async Task MonsterAppearing()
         {
             if (Random.Next(100) < 55)
                 EncounterState = EncounterState.MonsterAppeared;
@@ -169,7 +171,7 @@ namespace Xle.Ancients.MapExtenders.Outside
 
             InitiateEncounter();
 
-            GameControl.Wait(500);
+            await GameControl.WaitAsync(500);
         }
 
         public void InitiateEncounter()
@@ -331,79 +333,78 @@ namespace Xle.Ancients.MapExtenders.Outside
             return dam;
         }
 
-        public void HitMonster(int dam)
+        public async Task HitMonster(int dam)
         {
-            //await TextArea.Print("Enemy hit by blow of ", XleColor.White);
-            //await TextArea.Print(dam.ToString(), XleColor.Cyan);
-            //await TextArea.Print(".", XleColor.White);
-            //await TextArea.PrintLine();
+            await TextArea.Print("Enemy hit by blow of ", XleColor.White);
+            await TextArea.Print(dam.ToString(), XleColor.Cyan);
+            await TextArea.Print(".", XleColor.White);
+            await TextArea.PrintLine();
 
-            //await GameControl.WaitAsync(250 + 100 * Player.Gamespeed, keyBreak: true);
+            await GameControl.WaitAsync(250 + 100 * Player.Gamespeed, keyBreak: true);
 
-            //currentMonst[monstCount - 1].HP -= dam;
+            currentMonst[monstCount - 1].HP -= dam;
 
-            //if (KilledOne())
-            //{
-            //    await GameControl.WaitAsync(250);
+            if (KilledOne())
+            {
+                await GameControl.WaitAsync(250);
 
-            //    SoundMan.PlaySound(LotaSound.EnemyDie);
+                SoundMan.PlaySound(LotaSound.EnemyDie);
 
-            //    await TextArea.PrintLine();
-            //    await TextArea.PrintLine("the " + MonsterName + " dies.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("the " + MonsterName + " dies.");
 
-            //    int gold, food;
-            //    bool finished = FinishedCombat(out gold, out food);
+                int gold, food;
+                bool finished = FinishedCombat(out gold, out food);
 
-            //    await GameControl.WaitAsync(250 + 150 * Player.Gamespeed);
+                await GameControl.WaitAsync(250 + 150 * Player.Gamespeed);
 
-            //    if (finished)
-            //    {
-            //        await TextArea.PrintLine();
+                if (finished)
+                {
+                    await TextArea.PrintLine();
 
-            //        if (food > 0)
-            //        {
-            //            MenuItemList menu = new MenuItemList("Yes", "No");
-            //            int choice;
+                    if (food > 0)
+                    {
+                        MenuItemList menu = new MenuItemList("Yes", "No");
+                        int choice;
 
-            //            await TextArea.PrintLine("Would you like to use the");
-            //            await TextArea.PrintLine(MonsterName + "'s flesh for food?");
-            //            await TextArea.PrintLine();
+                        await TextArea.PrintLine("Would you like to use the");
+                        await TextArea.PrintLine(MonsterName + "'s flesh for food?");
+                        await TextArea.PrintLine();
 
-            //            choice = await QuickMenu.QuickMenu(menu, 3, 0);
+                        choice = await QuickMenu.QuickMenu(menu, 3, 0);
 
-            //            if (choice == 1)
-            //                food = 0;
-            //            else
-            //            {
-            //                await TextArea.Print("You gain ", XleColor.White);
-            //                await TextArea.Print(food.ToString(), XleColor.Green);
-            //                await TextArea.Print(" days of food.", XleColor.White);
-            //                await TextArea.PrintLine();
+                        if (choice == 1)
+                            food = 0;
+                        else
+                        {
+                            await TextArea.Print("You gain ", XleColor.White);
+                            await TextArea.Print(food.ToString(), XleColor.Green);
+                            await TextArea.Print(" days of food.", XleColor.White);
+                            await TextArea.PrintLine();
 
-            //                Player.Food += food;
-            //            }
+                            Player.Food += food;
+                        }
 
-            //        }
+                    }
 
 
-            //        if (gold < 0)
-            //        {
-            //            // gain weapon or armor
-            //        }
-            //        else if (gold > 0)
-            //        {
-            //            await TextArea.Print("You find ", XleColor.White);
-            //            await TextArea.Print(gold.ToString(), XleColor.Yellow);
-            //            await TextArea.Print(" gold.", XleColor.White);
-            //            await TextArea.PrintLine();
+                    if (gold < 0)
+                    {
+                        // gain weapon or armor
+                    }
+                    else if (gold > 0)
+                    {
+                        await TextArea.Print("You find ", XleColor.White);
+                        await TextArea.Print(gold.ToString(), XleColor.Yellow);
+                        await TextArea.Print(" gold.", XleColor.White);
+                        await TextArea.PrintLine();
 
-            //            Player.Gold += gold;
-            //        }
+                        Player.Gold += gold;
+                    }
 
-            //        await GameControl.WaitAsync(400 + 100 * Player.Gamespeed);
-            //    }
-            //}
-            throw new NotImplementedException();
+                    await GameControl.WaitAsync(400 + 100 * Player.Gamespeed);
+                }
+            }
         }
 
         private bool KilledOne()
@@ -451,35 +452,35 @@ namespace Xle.Ancients.MapExtenders.Outside
             return finished;
         }
 
-        public void AfterPlayerAction()
+        public async Task AfterPlayerAction()
         {
             if (EncounterState == EncounterState.MonsterAvoided)
             {
-                AvoidMonster();
+                await AvoidMonster();
             }
             else if (EncounterState == EncounterState.MonsterAppeared)
             {
-                MonsterAppeared();
+                await MonsterAppeared();
             }
             else if (EncounterState == EncounterState.MonsterReady)
             {
-                MonsterTurn(false);
+                await MonsterTurn(false);
             }
         }
 
-        private void AvoidMonster()
+        private async Task AvoidMonster()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine("You avoid the unknown creature.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You avoid the unknown creature.");
 
             EncounterState = EncounterState.NoEncounter;
 
-            GameControl.Wait(250);
+            await GameControl.WaitAsync(250);
         }
 
-        private void MonsterAppeared()
+        private async Task MonsterAppeared()
         {
-            GameControl.Wait(500);
+            await GameControl.WaitAsync(500);
 
             Color[] colors = new Color[40];
             string plural = (monstCount > 1) ? "s" : "";
@@ -491,18 +492,18 @@ namespace Xle.Ancients.MapExtenders.Outside
 
             EncounterState = EncounterState.MonsterReady;
 
-            TextArea.PrintLine();
-            TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name + plural, colors);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name + plural, colors);
 
             colors[0] = XleColor.Cyan;
-            TextArea.PrintLine("is approaching.", colors);
+            await TextArea.PrintLine("is approaching.", colors);
 
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
         }
 
-        private void MonsterTurn(bool firstTime)
+        private async Task MonsterTurn(bool firstTime)
         {
-            GameControl.Wait(500);
+            await GameControl.WaitAsync(500);
 
             if (IsMonsterFriendly)
             {
@@ -512,19 +513,19 @@ namespace Xle.Ancients.MapExtenders.Outside
                     colors[i] = XleColor.Cyan;
                 colors[0] = XleColor.White;
 
-                TextArea.PrintLine();
-                TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name, colors);
-                TextArea.PrintLine("Stands before you.");
+               await TextArea.PrintLine();
+               await TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name, colors);
+               await TextArea.PrintLine("Stands before you.");
 
-                GameControl.Wait(1500);
+                await GameControl.WaitAsync(1500);
             }
             else
             {
-                TextArea.PrintLine();
-                TextArea.Print("Attacked by ", XleColor.White);
-                TextArea.Print(monstCount.ToString(), XleColor.Yellow);
-                TextArea.Print(" " + currentMonst[0].Name, XleColor.Cyan);
-                TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.Print("Attacked by ", XleColor.White);
+                await TextArea.Print(monstCount.ToString(), XleColor.Yellow);
+                await TextArea.Print(" " + currentMonst[0].Name, XleColor.Cyan);
+                await TextArea.PrintLine();
 
                 int dam = 0;
                 int hits = 0;
@@ -540,11 +541,11 @@ namespace Xle.Ancients.MapExtenders.Outside
                     }
                 }
 
-                TextArea.Print("Hits:  ", XleColor.White);
-                TextArea.Print(hits.ToString(), XleColor.Yellow);
-                TextArea.Print("   Damage:  ", XleColor.White);
-                TextArea.Print(dam.ToString(), XleColor.Yellow);
-                TextArea.PrintLine();
+             await   TextArea.Print("Hits:  ", XleColor.White);
+             await   TextArea.Print(hits.ToString(), XleColor.Yellow);
+             await   TextArea.Print("   Damage:  ", XleColor.White);
+             await   TextArea.Print(dam.ToString(), XleColor.Yellow);
+             await   TextArea.PrintLine();
 
                 if (dam > 0)
                 {
@@ -556,7 +557,7 @@ namespace Xle.Ancients.MapExtenders.Outside
                 }
             }
 
-            GameControl.Wait(250, keyBreak: !firstTime);
+          await  GameControl.WaitAsync(250, keyBreak: !firstTime);
         }
 
         /// <summary>

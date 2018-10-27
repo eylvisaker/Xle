@@ -1,11 +1,11 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using Xle.Maps.XleMapTypes;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
+using Xle.Maps.XleMapTypes;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
 
 namespace Xle.Maps.Towns
 {
@@ -30,23 +30,23 @@ namespace Xle.Maps.Towns
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override void AfterExecuteCommand(Keys cmd)
+        public override async Task AfterExecuteCommand(Keys cmd)
         {
-            base.AfterExecuteCommand(cmd);
+            await base.AfterExecuteCommand(cmd);
 
-            UpdateGuards();
+            await UpdateGuards();
         }
 
-        public override void OnAfterEntry()
+        public override async Task OnAfterEntry()
         {
             if (TheMap.MapID == Player.LastAttackedMapID)
             {
                 IsAngry = true;
 
                 TextArea.Clear(true);
-                TextArea.PrintLine("\nWe remember you - slime!");
+                await TextArea.PrintLine("\nWe remember you - slime!");
 
-                GameControl.Wait(2000);
+                await GameControl.WaitAsync(2000);
             }
             else
             {
@@ -88,7 +88,7 @@ namespace Xle.Maps.Towns
             return false;
         }
 
-        public void UpdateGuards()
+        public async Task UpdateGuards()
         {
             if (IsAngry == false)
                 return;

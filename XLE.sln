@@ -38,7 +38,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.Tester", "AgateLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgateLib.UnitTests", "AgateLib\AgateLib.UnitTests\AgateLib.UnitTests.csproj", "{5F203662-6438-4CD9-BE4B-D111F1DFB925}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AgateLib.Physics", "AgateLib\AgateLib.Physics\AgateLib.Physics.shproj", "{35399545-C6E1-4CAF-8DAB-25CB1EA95C09}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AgateLib.Physics", "AgateLib\AgateLib.Physics\AgateLib.Physics.shproj", "{062658FA-CA79-41C2-B4A5-AD9B2A88BEBA}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LegacyOfTheAncients", "LegacyOfTheAncients\LegacyOfTheAncients.shproj", "{44A9FC5D-ABDD-42F8-9D86-AA5001EBDA14}"
 EndProject
@@ -54,11 +54,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{557825C5
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		AgateLib\AgateLib.Physics\AgateLib.Physics.projitems*{35399545-c6e1-4caf-8dab-25cb1ea95c09}*SharedItemsImports = 13
+		AgateLib\AgateLib.Physics\AgateLib.Physics.projitems*{062658fa-ca79-41c2-b4a5-ad9b2a88beba}*SharedItemsImports = 13
 		LegacyOfTheAncients\LegacyOfTheAncients.projitems*{44a9fc5d-abdd-42f8-9d86-aa5001ebda14}*SharedItemsImports = 13
 		AgateLib\AgateLib\AgateLib.projitems*{46516763-ddc4-4203-9047-3c36cdef7e04}*SharedItemsImports = 4
 		LegendOfBlacksilver\LegendOfBlacksilver.projitems*{46516763-ddc4-4203-9047-3c36cdef7e04}*SharedItemsImports = 4
 		Xle\Xle.projitems*{46516763-ddc4-4203-9047-3c36cdef7e04}*SharedItemsImports = 4
+		AgateLib\AgateLib.Physics\AgateLib.Physics.projitems*{509f01e0-517f-48c8-bc2b-fefc78312dd4}*SharedItemsImports = 4
 		AgateLib\AgateLib\AgateLib.projitems*{509f01e0-517f-48c8-bc2b-fefc78312dd4}*SharedItemsImports = 4
 		AgateLib\AgateLib\AgateLib.projitems*{9d86ab00-7af4-4a76-982d-125f1c4414b4}*SharedItemsImports = 4
 		LegacyOfTheAncients\LegacyOfTheAncients.projitems*{9d86ab00-7af4-4a76-982d-125f1c4414b4}*SharedItemsImports = 4
@@ -354,7 +355,7 @@ Global
 		{7B509CAC-0FC2-4AAE-83E2-7F37C282A3A0} = {B2837392-11F8-42A3-B6FB-E57144156B9B}
 		{509F01E0-517F-48C8-BC2B-FEFC78312DD4} = {B2837392-11F8-42A3-B6FB-E57144156B9B}
 		{5F203662-6438-4CD9-BE4B-D111F1DFB925} = {B2837392-11F8-42A3-B6FB-E57144156B9B}
-		{35399545-C6E1-4CAF-8DAB-25CB1EA95C09} = {B2837392-11F8-42A3-B6FB-E57144156B9B}
+		{062658FA-CA79-41C2-B4A5-AD9B2A88BEBA} = {B2837392-11F8-42A3-B6FB-E57144156B9B}
 		{EF90D397-28CE-42C9-9ABE-D169C6584C1F} = {557825C5-FACC-4B35-9AE7-D181835D8298}
 		{0FF1F46A-B688-4455-B9DC-C3CD2C2D65FD} = {557825C5-FACC-4B35-9AE7-D181835D8298}
 	EndGlobalSection

@@ -350,9 +350,9 @@ namespace Xle.Maps.Outdoors
             }
         }
 
-        public override void AfterExecuteCommand(Keys cmd)
+        public override async Task AfterExecuteCommand(Keys cmd)
         {
-            OutsideEncounters.AfterPlayerAction();
+            await OutsideEncounters.AfterPlayerAction();
         }
 
         public override bool CanPlayerStepIntoImpl(int xx, int yy)
@@ -400,15 +400,13 @@ namespace Xle.Maps.Outdoors
         {
             await base.AfterPlayerStep();
 
-            throw new NotImplementedException();
+            // bail out if the player entered another map on this step.
+            if (GameState.Map != TheMap)
+                return;
 
-            //// bail out if the player entered another map on this step.
-            //if (GameState.Map != TheMap)
-            //    return;
+            UpdateRaftState();
 
-            //UpdateRaftState();
-
-            //OutsideEncounters.Step();
+            await OutsideEncounters.Step();
         }
 
         public override void OnLoad()

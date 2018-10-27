@@ -19,7 +19,7 @@ namespace Xle.Services.Commands.Implementation
             get { return "Take"; }
         }
 
-        IEnumerable<EventExtender> EventsAt(int borderSize)
+        IEnumerable<IEventExtender> EventsAt(int borderSize)
         {
             return GameState.MapExtender.EventsAt(borderSize);
         }

@@ -8,7 +8,7 @@ namespace Xle.Services.Commands.Implementation
 {
     public interface IEventInteractor
     {
-        Task<bool> InteractWithFirstEvent(Func<EventExtender, Task<bool>> function);
+        Task<bool> InteractWithFirstEvent(Func<IEventExtender, Task<bool>> function);
     }
 
     [Singleton]
@@ -18,7 +18,7 @@ namespace Xle.Services.Commands.Implementation
 
         private IMapExtender MapExtender { get { return GameState.MapExtender; } }
 
-        public async Task<bool> InteractWithFirstEvent(Func<EventExtender, Task<bool>> function)
+        public async Task<bool> InteractWithFirstEvent(Func<IEventExtender, Task<bool>> function)
         {
             foreach (var evt in MapExtender.EventsAt(1))
             {

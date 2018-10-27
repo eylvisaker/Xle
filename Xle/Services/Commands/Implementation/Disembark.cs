@@ -4,9 +4,11 @@ using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Services.Commands.Implementation
 {
+    [Transient]
     public class Disembark : Command
     {
         public IXleScreen Screen { get; set; }

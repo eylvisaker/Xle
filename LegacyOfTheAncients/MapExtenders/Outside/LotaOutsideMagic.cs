@@ -1,14 +1,14 @@
-﻿using Xle.Data;
-using Xle.Services;
-using Xle.Services.Commands.Implementation;
-using Xle.XleEventTypes;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using Xle.Data;
+using Xle.Services.Commands.Implementation;
+using Xle.XleEventTypes;
 
 namespace Xle.Ancients.MapExtenders.Outside
 {
-    [ServiceName("LotaOutsideMagic")]
+    [Transient("LotaOutsideMagic")]
     public class LotaOutsideMagic : MagicCommand
     {
         protected override IEnumerable<MagicSpell> ValidMagic

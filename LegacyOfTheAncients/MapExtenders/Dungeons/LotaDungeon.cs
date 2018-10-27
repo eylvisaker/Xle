@@ -4,6 +4,7 @@ using Xle.Maps.Dungeons;
 using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Dungeons
 {
@@ -187,14 +188,14 @@ namespace Xle.Ancients.MapExtenders.Dungeons
             }
         }
 
-        public override void UpdateMonsters()
+        public override async Task UpdateMonsters()
         {
             if (Story.BefuddleTurns > 0)
             {
                 Story.BefuddleTurns--;
             }
             else
-                base.UpdateMonsters();
+                await base.UpdateMonsters();
         }
     }
 }

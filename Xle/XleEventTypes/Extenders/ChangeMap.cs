@@ -27,9 +27,9 @@ namespace Xle.XleEventTypes.Extenders
             {
                 SoundMan.PlaySound(LotaSound.Medium);
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("Map ID " + TheEvent.MapID + " not found.");
-                TextArea.PrintLine();
+               await TextArea.PrintLine();
+               await TextArea.PrintLine("Map ID " + TheEvent.MapID + " not found.");
+               await TextArea.PrintLine();
 
                 await GameControl.WaitAsync(1500);
 
@@ -49,14 +49,12 @@ namespace Xle.XleEventTypes.Extenders
             if (TheEvent.MapID != 0 && await VerifyMapExistence() == false)
                 return false;
 
-            bool cancel = false;
-
-            return OnStepOnImpl(ref cancel);
+            return await OnStepOnImpl();
         }
 
-        protected virtual bool OnStepOnImpl(ref bool cancel)
+        protected virtual async Task<bool> OnStepOnImpl()
         {
-            ExecuteMapChange();
+            await ExecuteMapChange();
 
             return true;
         }
@@ -67,7 +65,7 @@ namespace Xle.XleEventTypes.Extenders
             return Data.MapList[TheEvent.MapID].Name;
         }
 
-        public void ExecuteMapChange()
+        public async Task ExecuteMapChange()
         {
             try
             {
@@ -79,26 +77,14 @@ namespace Xle.XleEventTypes.Extenders
 
                 SoundMan.PlaySound(LotaSound.Bad);
 
-                TextArea.Print("Failed to load ", XleColor.White);
-                TextArea.Print(GetMapName(), XleColor.Red);
-                TextArea.Print(".", XleColor.White);
-                TextArea.PrintLine();
-                TextArea.PrintLine();
+                await TextArea.Print("Failed to load ", XleColor.White);
+                await TextArea.Print(GetMapName(), XleColor.Red);
+                await TextArea.Print(".", XleColor.White);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
 
-                GameControl.Wait(1500);
+                await GameControl.WaitAsync(1500);
             }
         }
-
-        [Obsolete("Use overload with no parameters instead.")]
-        public void ExecuteMapChange(GameState state)
-        {
-            ExecuteMapChange();
-        }
-        [Obsolete("Use overload with no parameters instead.")]
-        public void ExecuteMapChange(Player player)
-        {
-            ExecuteMapChange();
-        }
-
     }
 }

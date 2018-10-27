@@ -1,15 +1,13 @@
 ﻿using AgateLib;
 using AgateLib.Scenes;
-using Autofac;
-using Xle.Bootstrap;
-using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Xle.Ancients.TitleScreen;
+using Xle.Bootstrap;
+using Xle.Diagnostics;
 using Xle.Scenes;
-using Xle.Data;
-using Xle.Services.XleSystem;
+using Xle.Services.Commands;
 
 namespace Xle.Ancients
 {
@@ -26,6 +24,7 @@ namespace Xle.Ancients
         //    commands.Items.Add(CommandFactory.Pass());
         //    commands.Items.Add(CommandFactory.Weapon());
 
+        [Obsolete("Just put the ones you want.")]
         public static IEnumerable<Command> CommonLotaCommands
         {
             get
@@ -41,12 +40,18 @@ namespace Xle.Ancients
 
         private readonly SceneStack scenes;
         private readonly SceneFactory sceneFactory;
+        private readonly IAgateConsoleManager consoleManager;
 
-        public LotaProgram(SceneStack scenes, 
-                           SceneFactory sceneFactory)
+        public LotaProgram(SceneStack scenes,
+                           SceneFactory sceneFactory,
+                           IXleConsoleCommands consoleCommands,
+                           IAgateConsoleManager consoleManager)
         {
             this.scenes = scenes;
             this.sceneFactory = sceneFactory;
+            this.consoleManager = consoleManager;
+
+            consoleManager.AddVocabulary(consoleCommands);
 
             StartTitle();
         }
@@ -71,6 +76,8 @@ namespace Xle.Ancients
 
         public void Update(GameTime gameTime)
         {
+            consoleManager.Update(gameTime);
+
             scenes.Update(gameTime);
         }
 

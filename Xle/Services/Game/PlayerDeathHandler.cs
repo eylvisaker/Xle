@@ -1,6 +1,6 @@
 ﻿using AgateLib;
 using System;
-
+using System.Threading.Tasks;
 using Xle.Maps;
 using Xle.Maps.XleMapTypes;
 using Xle.Services.MapLoad;
@@ -11,10 +11,10 @@ namespace Xle.Services.Game
 {
     public interface IPlayerDeathHandler
     {
-        void PlayerIsDead();
+        Task PlayerIsDead();
     }
 
-    [Singleton]
+    [Singleton, InjectProperties]
     public class PlayerDeathHandler : IPlayerDeathHandler
     {
         public PlayerDeathHandler(IMapChanger mapChanger, IStatsDisplay statsDisplay)
@@ -33,17 +33,17 @@ namespace Xle.Services.Game
         protected Player Player { get { return GameState.Player; } }
         protected XleMap Map { get { return GameState.Map; } }
 
-        public virtual void PlayerIsDead()
+        public virtual async Task PlayerIsDead()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("            You died!");
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("            You died!");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             SoundMan.PlaySound(LotaSound.VeryBad);
 
-            StatsDisplay.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
+            await StatsDisplay.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
 
             LoadOutsideMap();
 
@@ -67,13 +67,13 @@ namespace Xle.Services.Game
             Player.BoardedRaft = null;
 
             while (SoundMan.IsPlaying(LotaSound.VeryBad))
-                GameControl.Wait(40);
+                await GameControl.WaitAsync(40);
 
-            TextArea.PrintLine("The powers of the museum");
-            TextArea.PrintLine("resurrect you from the grave!");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("The powers of the museum");
+            await TextArea.PrintLine("resurrect you from the grave!");
+            await TextArea.PrintLine();
 
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await SoundMan.PlaySoundWait(LotaSound.VeryGood);
         }
 
         protected virtual void LoadOutsideMap()

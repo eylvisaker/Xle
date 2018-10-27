@@ -8,7 +8,7 @@ namespace Xle.Ancients.MapExtenders.Outside
 {
     public class Flight : Tarmalon
     {
-        public override void OnAfterEntry()
+        public override async Task OnAfterEntry()
         {
             if (Player.X == 11 && Player.Y == 8)
             {

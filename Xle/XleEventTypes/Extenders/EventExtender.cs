@@ -1,20 +1,35 @@
-﻿using AgateLib.Mathematics.Geometry;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 using Xle.Maps;
-using Xle.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Xle.Services.Game;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
-using Microsoft.Xna.Framework;
-using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Extenders
 {
-    public class EventExtender
+    public interface IEventExtender
+    {
+        bool Enabled { get; }
+
+        Rectangle Rectangle { get; }
+
+        void OnLoad();
+        void OnUpdate(GameTime time);
+
+        void BeforeStepOn();
+        Task<bool> TryToStepOn(int dx, int dy);
+
+        Task<bool> StepOn();
+        Task<bool> Open();
+        Task<bool> Rob();
+        Task<bool> Speak();
+        Task<bool> Take();
+        Task<bool> Use(int item);
+    }
+
+    [InjectProperties]
+    public class EventExtender : IEventExtender
     {
         public EventExtender()
         {
@@ -27,6 +42,14 @@ namespace Xle.XleEventTypes.Extenders
         public GameState GameState { get; set; }
         public IXleGameControl GameControl { get; set; }
         public ISoundMan SoundMan { get; set; }
+
+        public virtual bool Enabled { get; set; }
+
+        public Rectangle Rectangle
+        {
+            get { return TheEvent.Rectangle; }
+            set { TheEvent.Rectangle = value; }
+        }
 
         protected Player Player { get { return GameState.Player; } }
         protected XleMap Map { get { return GameState.Map; } }
@@ -91,7 +114,7 @@ namespace Xle.XleEventTypes.Extenders
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public virtual Task< bool> StepOn()
+        public virtual Task<bool> StepOn()
         {
             return Task.FromResult(false);
         }
@@ -152,14 +175,5 @@ namespace Xle.XleEventTypes.Extenders
         public virtual void OnUpdate(GameTime time)
         {
         }
-
-        public virtual bool Enabled { get; set; }
-
-        public Rectangle Rectangle
-        {
-            get { return TheEvent.Rectangle; }
-            set { TheEvent.Rectangle = value; }
-        }
-
     }
 }

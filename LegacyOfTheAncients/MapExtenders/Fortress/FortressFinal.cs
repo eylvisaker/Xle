@@ -3,6 +3,7 @@ using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Fortress
 {
@@ -34,8 +35,10 @@ namespace Xle.Ancients.MapExtenders.Fortress
                 return 11;
         }
 
-        public override void AfterExecuteCommand(Keys cmd)
+        public override async Task AfterExecuteCommand(Keys cmd)
         {
+            throw new NotImplementedException();
+
             if (fortressActivator.Warlord != null)
             {
                 WarlordAttack();
@@ -45,7 +48,7 @@ namespace Xle.Ancients.MapExtenders.Fortress
                 CompendiumAttack();
             }
 
-            base.AfterExecuteCommand(cmd);
+            await base.AfterExecuteCommand(cmd);
         }
 
         private void CompendiumAttack()

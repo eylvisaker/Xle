@@ -74,7 +74,7 @@ namespace Xle.Ancients.MapExtenders.Museum
             MapRenderer.AnimateExhibits = true;
         }
 
-        public override void OnAfterEntry()
+        public override async Task OnAfterEntry()
         {
             CheckInformationMessage();
         }

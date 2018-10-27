@@ -68,14 +68,14 @@ namespace Xle.LegacyOfTheAncients.Commands
             SetupItemForUse(LotaItem.MagicIce);
 
             eventInteractor
-                .Setup(x => x.InteractWithFirstEvent(It.IsAny<Func<EventExtender, Task<bool>>>()))
+                .Setup(x => x.InteractWithFirstEvent(It.IsAny<Func<IEventExtender, Task<bool>>>()))
                 .ReturnsAsync(true)
                 .Verifiable();
 
             await use.Execute();
 
             eventInteractor.Verify(x => x.InteractWithFirstEvent(
-                It.IsAny<Func<EventExtender, Task<bool>>>()), Times.Once);
+                It.IsAny<Func<IEventExtender, Task<bool>>>()), Times.Once);
         }
     }
 }

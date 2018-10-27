@@ -1,6 +1,7 @@
 ﻿
 using AgateLib;
 using Xle.Data;
+using Xle.Diagnostics;
 using Xle.Services.Game;
 
 namespace Xle.Services.XleSystem.Implementation
@@ -18,7 +19,7 @@ namespace Xle.Services.XleSystem.Implementation
             IXleRunner runner,
             IXleGameFactory xleGameFactory,
             XleSystemState systemState,
-            IXleConsole console,
+            IXleConsoleCommands console,
             IContentProvider content,
             XleOptions options,
             XleData data,

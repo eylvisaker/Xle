@@ -9,7 +9,7 @@ namespace Xle.Services.Game
 {
     public interface IEventExtenderFactory 
     {
-        EventExtender Create(MapExtender map, XleEvent evt, Type defaultExtender);
+        IEventExtender Create(MapExtender map, XleEvent evt, Type defaultExtender);
     }
 
     [Singleton]
@@ -22,14 +22,14 @@ namespace Xle.Services.Game
             this.serviceLocator = serviceLocator;
         }
 
-        public EventExtender Create(MapExtender map, XleEvent evt, Type defaultExtender)
+        public IEventExtender Create(MapExtender map, XleEvent evt, Type defaultExtender)
         {
             // It looks like defaultExtender is no longer required.
             // That would have some cascading refactoring, removing
             // all the overrides of ExtenderType for different event types.
-            var result = serviceLocator.ResolveNamed<EventExtender>(evt.ExtenderName);
+            var result = serviceLocator.ResolveNamed<IEventExtender>(evt.ExtenderName);
 
-            result.TheEvent = evt;
+            ((EventExtender)result).TheEvent = evt;
 
             return result;
         }
