@@ -1,12 +1,14 @@
-﻿using Xle.Ancients.MapExtenders.Castle.Commands;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
+using System;
+using Xle.Ancients.MapExtenders.Castle.Commands;
 using Xle.Maps;
 using Xle.Maps.Castles;
 using Xle.Services.Commands;
-using Microsoft.Xna.Framework;
-using System;
 
 namespace Xle.Ancients.MapExtenders.Castle
 {
+    [Transient("CastleGround")]
     public class CastleGround : CastleExtender
     {
         public CastleGround()
@@ -28,7 +30,12 @@ namespace Xle.Ancients.MapExtenders.Castle
 
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Hold());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             var fight = (CastleFight)CommandFactory.Fight("CastleFight");
             fight.WhichCastle = WhichCastle;
@@ -36,7 +43,7 @@ namespace Xle.Ancients.MapExtenders.Castle
 
             commands.Items.Add(fight);
             commands.Items.Add(CommandFactory.Magic("CastleMagic"));
-            commands.Items.Add(CommandFactory.Open());
+            commands.Items.Add(CommandFactory.Open("Open"));
             commands.Items.Add(CommandFactory.Take());
             commands.Items.Add(CommandFactory.Speak("CastleSpeak"));
             commands.Items.Add(CommandFactory.Xamine());

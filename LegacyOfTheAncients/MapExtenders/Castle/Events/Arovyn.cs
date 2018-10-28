@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
-using Xle.XleEventTypes.Extenders;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
+    [Transient("Arovyn")]
     public class Arovyn : LotaEvent
     {
         public override async Task<bool> Speak()

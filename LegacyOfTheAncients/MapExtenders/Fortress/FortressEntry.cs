@@ -1,18 +1,10 @@
-﻿using Xle.Ancients.MapExtenders.Castle;
-using Xle.Ancients.MapExtenders.Castle.Events;
-using Xle.Ancients.MapExtenders.Fortress.FirstArea;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib.Mathematics.Geometry;
-using Xle.XleEventTypes;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using Xle.Ancients.MapExtenders.Castle;
 
 namespace Xle.Ancients.MapExtenders.Fortress
 {
+    [Transient("FortressEntry")]
     public class FortressEntry : CastleGround
     {
         public FortressEntry()

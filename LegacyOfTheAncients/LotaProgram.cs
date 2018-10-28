@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using AgateLib.Diagnostics;
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using System;
@@ -38,13 +39,15 @@ namespace Xle.Ancients
             }
         }
 
+        public bool IsFinished { get; private set; }
+
         private readonly SceneStack scenes;
         private readonly SceneFactory sceneFactory;
         private readonly IAgateConsoleManager consoleManager;
 
         public LotaProgram(SceneStack scenes,
                            SceneFactory sceneFactory,
-                           IXleConsoleCommands consoleCommands,
+                           IVocabulary[] consoleCommands,
                            IAgateConsoleManager consoleManager)
         {
             this.scenes = scenes;
@@ -52,6 +55,8 @@ namespace Xle.Ancients
             this.consoleManager = consoleManager;
 
             consoleManager.AddVocabulary(consoleCommands);
+
+            consoleManager.Quit += () => IsFinished = true;
 
             StartTitle();
         }

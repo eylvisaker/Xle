@@ -8,17 +8,17 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
     public class EagleHollowHealer : StoreHealer
     {
-        protected override void AfterSpeak()
+        protected override async Task AfterSpeak()
         {
             if (Story.HasGuardianMark == false)
                 return;
 
             if (Story.FoundGuardianLeader == false)
             {
-                TextArea.PrintLine("Welcome to our secret society!", XleColor.Yellow);
-                TextArea.PrintLine();
+                await TextArea.PrintLine("Welcome to our secret society!", XleColor.Yellow);
+                await TextArea.PrintLine();
 
-                SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                await StoreSound(LotaSound.VeryGood);
 
                 TextArea.PrintLineSlow("Four jewels dungeon text goes here.");
 

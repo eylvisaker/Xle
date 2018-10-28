@@ -1,7 +1,7 @@
-using Xle.Serialization;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using Xle.Serialization;
 
 namespace Xle
 {
@@ -177,6 +177,11 @@ namespace Xle
 
         void IXleSerializable.WriteData(XleSerializationInfo info)
         {
+            if (Cheater)
+            {
+                info.Write("Cheater", Cheater);
+            }
+
             info.Write("Attributes", mAttributes);
             info.Write("Food", food);
             info.Write("Gold", gold);
@@ -225,6 +230,8 @@ namespace Xle
         }
         void IXleSerializable.ReadData(XleSerializationInfo info)
         {
+            Cheater = info.ReadBoolean("Cheater", false);
+
             mAttributes = (AttributeContainer)info.ReadObject("Attributes");
             food = info.ReadDouble("Food");
             gold = info.ReadInt32("Gold");
@@ -763,5 +770,6 @@ namespace Xle
         }
 
         public Color RenderColor { get; set; }
+        public bool Cheater { get; set; }
     }
 }

@@ -8,6 +8,11 @@ namespace Xle.Ancients.MapExtenders.Dungeons.Commands
     [Transient("DungeonOpen")]
     public class DungeonOpen : DungeonOpenCommand
     {
+        public DungeonOpen()
+        {
+
+        }
+
         private Dungeon TheMap { get { return (Dungeon)GameState.Map; } }
 
         private LotaDungeon Map { get { return (LotaDungeon)GameState.MapExtender; } }

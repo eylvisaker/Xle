@@ -1,13 +1,12 @@
-﻿using Xle.Services.Rendering;
-using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
+﻿using AgateLib;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Xle.Services.Rendering;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
+    [Transient("ArmorBox")]
     public class ArmorBox : TreasureChestExtender
     {
         public IXleRenderer Renderer { get; set; }
@@ -48,7 +47,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
             await TextArea.PrintLine();
             await TextArea.PrintLine("you put on armor.");
 
-           await GameControl.WaitAsync(1000);
+            await GameControl.WaitAsync(1000);
 
             Player.AddArmor(4, 3);
             if (Player.CurrentArmor.ID == 0)

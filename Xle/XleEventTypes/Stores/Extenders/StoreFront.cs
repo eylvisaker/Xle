@@ -1,13 +1,12 @@
-﻿using Xle.Services.Menus;
-using Xle.Services.Rendering;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xle.Services.Menus;
+using Xle.Services.Rendering;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
@@ -129,58 +128,24 @@ namespace Xle.XleEventTypes.Stores.Extenders
             TextRenderer.WriteText(spriteBatch, 320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
         }
 
-        protected Task StoreSound(LotaSound sound)
+        protected Task<int> QuickMenu(MenuItemList menu, int spaces)
         {
-            throw new NotImplementedException();
-            //SoundMan.PlaySoundWait(RedrawStore, sound);
+            return QuickMenuService.QuickMenu(menu, spaces, redraw: RedrawStore);
+        }
+        protected Task<int> QuickMenu(MenuItemList menu, int spaces, int value)
+        {
+            return QuickMenuService.QuickMenu(menu, spaces, value, redraw: RedrawStore);
+        }
+        protected Task<int> QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit)
+        {
+            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, redraw: RedrawStore);
+        }
+        protected Task<int> QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit, Color clrChanged)
+        {
+            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged, redraw: RedrawStore);
         }
 
-        protected void Wait(int howLong)
-        {
-            GameControl.Wait(howLong, redraw: RedrawStore);
-        }
-        protected void WaitForKey(params Keys[] keys)
-        {
-            throw new NotImplementedException();
-            //input.WaitForKey(RedrawStore, keys);
-        }
-
-        protected int QuickMenu(MenuItemList menu, int spaces)
-        {
-            throw new NotImplementedException();
-            //return QuickMenuService.QuickMenu(menu, spaces, redraw: RedrawStore);
-        }
-        protected int QuickMenu(MenuItemList menu, int spaces, int value)
-        {
-            throw new NotImplementedException();
-            //return QuickMenuService.QuickMenu(menu, spaces, value, redraw: RedrawStore);
-        }
-        protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit)
-        {
-            throw new NotImplementedException();
-            //return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, redraw: RedrawStore);
-        }
-        protected int QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit, Color clrChanged)
-        {
-            throw new NotImplementedException();
-            //return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged, redraw: RedrawStore);
-        }
-
-        protected int ChooseNumber(int max)
-        {
-            EventHandler draw = (sender, args) => { RedrawStore(); };
-
-            try
-            {
-                //Screen.Draw += draw;
-
-                return NumberPicker.ChooseNumber(RedrawStore, max);
-            }
-            finally
-            {
-                Screen.Draw -= draw;
-            }
-        }
+        protected Task<int> ChooseNumber(int max) => NumberPicker.ChooseNumber(max);
 
         public string Title { get; set; }
 
@@ -192,7 +157,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             {
                 if (IsLoanOverdue())
                 {
-                    StoreDeclinePlayer();
+                    await StoreDeclinePlayer();
                     return true;
                 }
             }
@@ -201,7 +166,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             {
                 Renderer.ReplacementDrawMethod = DrawStore;
 
-                return SpeakImpl();
+                return await SpeakImplAsync();
             }
             finally
             {
@@ -209,7 +174,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             }
         }
 
-        protected override bool SpeakImpl()
+        protected override Task<bool> SpeakImplAsync()
         {
             return StoreNotImplementedMessage();
         }

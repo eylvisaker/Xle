@@ -1,14 +1,9 @@
-﻿using Xle.Services;
+﻿using AgateLib;
 using Xle.Services.Commands.Implementation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Castle.Commands
 {
-    [ServiceName("CastleMagic")]
+    [Transient("CastleMagic")]
     public class CastleMagic : MagicCommand
     {
     }

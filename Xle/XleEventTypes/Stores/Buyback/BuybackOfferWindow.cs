@@ -1,4 +1,5 @@
-﻿using AgateLib.Mathematics.Geometry;
+﻿using AgateLib;
+using AgateLib.Mathematics.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,15 @@ using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Stores.Buyback
 {
+    public interface IBuybackOfferWindow
+    {
+        TextWindow TextWindow { get; set; }
+
+        void SetOffer(int offer, int ask);
+        void RejectAskingPrice(int ask, bool wayTooHigh);
+    }
+
+    [Transient]
     public class BuybackOfferWindow : IBuybackOfferWindow
     {
         private TextWindow offerWind;

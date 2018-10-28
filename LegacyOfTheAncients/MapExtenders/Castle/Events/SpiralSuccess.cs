@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
+    [Transient("SpiralSuccess")]
     public class SpiralSuccess : Spiral
     {
         public override async Task<bool> StepOn()

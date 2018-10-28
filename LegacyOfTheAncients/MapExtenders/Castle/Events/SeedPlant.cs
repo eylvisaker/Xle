@@ -1,10 +1,11 @@
-﻿using Xle.Data;
-using Xle.XleEventTypes.Extenders;
+﻿using AgateLib;
 using System;
 using System.Threading.Tasks;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
+    [Transient("SeedPlant")]
     public class SeedPlant : TreasureChestExtender
     {
         public Random Random { get; set; }
@@ -40,7 +41,7 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
 
         public override async Task<bool> Take()
         {
-         await   base.Open();
+            await base.Open();
             return true;
         }
 

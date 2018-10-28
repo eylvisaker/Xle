@@ -14,8 +14,6 @@ namespace Xle.Ancients.MapExtenders.Outside
 
         protected LotaStory Story { get { return GameState.Story(); } }
 
-        public IMapChanger MapChanger { get; set; }
-
         public override void OnLoad()
         {
             base.OnLoad();

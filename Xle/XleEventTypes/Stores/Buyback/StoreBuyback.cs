@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AgateLib.Mathematics.Geometry;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Menus;
 using Xle.XleEventTypes.Stores.Extenders;
-using Microsoft.Xna.Framework;
 
 namespace Xle.XleEventTypes.Stores.Buyback
 {
+    [Transient("StoreBuyback")]
     public class StoreBuyback : StoreFront
     {
         public IBuybackFormatter BuybackFormatter { get; set; }
@@ -29,13 +27,13 @@ namespace Xle.XleEventTypes.Stores.Buyback
             cs.BorderColor = XleColor.Red;
         }
 
-        protected override bool SpeakImpl()
+        protected override async Task<bool> SpeakImplAsync()
         {
-            RunStore();
+            await RunStore();
             return true;
         }
 
-        void RunStore()
+        private async Task RunStore()
         {
             robbing = false;
 
@@ -65,7 +63,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
             BuybackFormatter.InitialMenuPrompt();
 
             MenuItemList theList = new MenuItemList("0", "1", "2");
-            int choice = QuickMenu(theList, 2, 0);
+            int choice = await QuickMenu(theList, 2, 0);
 
             if (choice == 0)
                 return;
@@ -85,20 +83,18 @@ namespace Xle.XleEventTypes.Stores.Buyback
 
             Windows.Add(questionWindow);
 
-            throw new NotImplementedException();
+            switch (choice)
+            {
+                case 1:
+                    questionWindow.WriteLine("What weapon will you sell me?");
+                    item = await EquipmentPicker.PickWeapon(GameState, null, ColorScheme.BackColor);
+                    break;
 
-            //switch (choice)
-            //{
-            //    case 1:
-            //        questionWindow.WriteLine("What weapon will you sell me?");
-            //        item = EquipmentPicker.PickWeapon(GameState, null, ColorScheme.BackColor);
-            //        break;
-
-            //    case 2:
-            //        questionWindow.WriteLine("What armor will you sell me?");
-            //        item = EquipmentPicker.PickArmor(GameState, null, ColorScheme.BackColor);
-            //        break;
-            //}
+                case 2:
+                    questionWindow.WriteLine("What armor will you sell me?");
+                    item = await EquipmentPicker.PickArmor(GameState, null, ColorScheme.BackColor);
+                    break;
+            }
 
             if (item == null)
                 return;
@@ -116,15 +112,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
 
             InitializeOfferWindow();
 
-            try
-            {
-                Negotiator.Redraw = RedrawStore;
-                Negotiator.NegotiatePrice(item);
-            }
-            finally
-            {
-                Negotiator.Redraw = null;
-            }
+            await Negotiator.NegotiatePrice(item);
         }
 
         private void InitializeOfferWindow()

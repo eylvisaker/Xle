@@ -1,12 +1,10 @@
-﻿using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
+    [Transient("Elevator")]
     public class Elevator : EventExtender
     {
         public override async Task<bool> StepOn()

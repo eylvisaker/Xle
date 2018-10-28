@@ -10,7 +10,7 @@ namespace Xle.XleEventTypes.Extenders
     {
         public override async Task<bool> StepOn()
         {
-            MapExtender.LeaveMap();
+            await MapExtender.LeaveMap();
 
             return true;
         }

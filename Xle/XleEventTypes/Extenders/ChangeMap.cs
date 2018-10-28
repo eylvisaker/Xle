@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xle.Services;
+﻿using AgateLib;
+using System;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.MapLoad;
-using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Extenders
 {
+    [Transient("ChangeMap")]
     public class ChangeMap : EventExtender
     {
         public new ChangeMapEvent TheEvent { get { return (ChangeMapEvent)base.TheEvent; } }
@@ -27,9 +24,9 @@ namespace Xle.XleEventTypes.Extenders
             {
                 SoundMan.PlaySound(LotaSound.Medium);
 
-               await TextArea.PrintLine();
-               await TextArea.PrintLine("Map ID " + TheEvent.MapID + " not found.");
-               await TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Map ID " + TheEvent.MapID + " not found.");
+                await TextArea.PrintLine();
 
                 await GameControl.WaitAsync(1500);
 

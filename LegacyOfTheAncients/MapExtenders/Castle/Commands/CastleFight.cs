@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
+using System;
 
 using Xle.Maps;
 using Xle.Maps.Towns;
-using Xle.Services;
 
 namespace Xle.Ancients.MapExtenders.Castle.Commands
 {
-    [ServiceName("CastleFight")]
+    [Transient("CastleFight")]
     public class CastleFight : FightAgainstGuard
     {
         public int WhichCastle { get; set; }

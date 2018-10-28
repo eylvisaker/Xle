@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using AgateLib;
+using System.Linq;
 using System.Threading.Tasks;
 using Xle.Maps;
 using Xle.Services.Game;
@@ -7,6 +8,7 @@ namespace Xle.Services.Commands.Implementation
 {
     public interface IOpen : ICommand { }
 
+    [Transient("Open")]
     public class Open : Command, IOpen
     {
         public IXleGameControl GameControl { get; set; }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
+using System;
 using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Game;
@@ -10,6 +8,12 @@ using Xle.Services.XleSystem;
 
 namespace Xle.XleEventTypes.Stores.Buyback
 {
+    public interface IBuybackNegotiator
+    {
+        Task NegotiatePrice(Equipment item);
+    }
+
+    [Transient, InjectProperties]
     public class BuybackNegotiator : IBuybackNegotiator
     {
         public BuybackNegotiator()
@@ -26,16 +30,14 @@ namespace Xle.XleEventTypes.Stores.Buyback
         public GameState GameState { get; set; }
         public XleData Data { get; set; }
         public Random Random { get; set; }
-        Player Player { get { return GameState.Player; } }
+
+        private Player Player { get { return GameState.Player; } }
 
         public Action Redraw { get; set; }
 
-        void Wait(int howlong)
-        {
-            GameControl.Wait(howlong, redraw: Redraw);
-        }
+        private Task Wait(int howlong) => GameControl.WaitAsync(howlong);
 
-        public void NegotiatePrice(Equipment item)
+        public async Task NegotiatePrice(Equipment item)
         {
             int charm = Player.Attribute[Attributes.charm];
             charm = Math.Min(charm, 80);
@@ -43,27 +45,27 @@ namespace Xle.XleEventTypes.Stores.Buyback
             int maxAccept = (int)(item.Price(Data) * Math.Pow(charm, .7) / 11);
             int offer = (int)((6 + Random.NextDouble()) * maxAccept / 14.0);
 
-            int choice = MakeOffer(item, offer, false);
+            int choice = await MakeOffer(item, offer, false);
 
             if (choice == 0)
             {
-                CompleteSale(item, offer);
+                await CompleteSale(item, offer);
                 return;
             }
             int ask = 0;
 
             OfferWindow.SetOffer(offer, ask);
 
-            ask = GetAskingPrice();
+            ask = await GetAskingPrice();
 
             if (ask == 0)
             {
-                BuybackFormatter.SeeYouLater();
+                await BuybackFormatter.SeeYouLater();
                 return;
             }
             if (ask < 1.5 * offer)
             {
-                CompleteSale(item, ask);
+                await CompleteSale(item, ask);
                 return;
             }
 
@@ -71,7 +73,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
 
             if (ask > spread + maxAccept)
             {
-                ComeBackWhenSerious();
+                await ComeBackWhenSerious();
                 return;
             }
 
@@ -90,32 +92,32 @@ namespace Xle.XleEventTypes.Stores.Buyback
                 bool finalOffer = false;
 
                 OfferWindow.RejectAskingPrice(ask, IsAskWayTooHigh(ask, offer, maxAccept));
-                choice = MakeOffer(item, offer, finalOffer);
+                choice = await MakeOffer(item, offer, finalOffer);
 
                 if (choice == 0)
                 {
-                    CompleteSale(item, offer);
+                    await CompleteSale(item, offer);
                     return;
                 }
                 else if (finalOffer)
                 {
-                    MaybeDealLater();
+                    await MaybeDealLater();
                     return;
                 }
 
                 OfferWindow.SetOffer(offer, lastAsk);
-                ask = GetAskingPrice();
+                ask = await GetAskingPrice();
 
                 if (ask == 0)
                 {
-                    MaybeDealLater();
+                    await MaybeDealLater();
                     return;
                 }
 
                 if (ask == lastAsk ||
                     (ask > lastAsk && Random.NextDouble() < 0.5))
                 {
-                    ComeBackWhenSerious();
+                    await ComeBackWhenSerious();
                     return;
                 }
 
@@ -130,7 +132,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
 
                 if (spread > ask - 2 && Random.NextDouble() < .5)
                 {
-                    CompleteSale(item, ask);
+                    await CompleteSale(item, ask);
                     return;
                 }
                 if (spread >= ask)
@@ -146,7 +148,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
 
                     if (offer <= 0)
                     {
-                        ComeBackWhenSerious();
+                        await ComeBackWhenSerious();
                         return;
                     }
                 }
@@ -155,20 +157,18 @@ namespace Xle.XleEventTypes.Stores.Buyback
         }
 
 
-        private int GetAskingPrice()
+        private Task<int> GetAskingPrice()
         {
             BuybackFormatter.ClearTextArea();
 
             return NumberPicker.ChooseNumber(32767);
         }
 
-        private int MakeOffer(Equipment item, int offer, bool finalOffer)
+        private Task<int> MakeOffer(Equipment item, int offer, bool finalOffer)
         {
             BuybackFormatter.Offer(item, offer, finalOffer);
 
-            throw new NotImplementedException();
-
-//            return QuickMenu.QuickMenuYesNo(true);
+            return QuickMenu.QuickMenuYesNo(true);
         }
 
         private bool IsAskWayTooHigh(double ask, int offer, int maxAccept)
@@ -186,26 +186,26 @@ namespace Xle.XleEventTypes.Stores.Buyback
             OfferWindow.SetOffer(offer, ask);
         }
 
-        private void ComeBackWhenSerious()
+        private async Task ComeBackWhenSerious()
         {
-            BuybackFormatter.ComeBackWhenSerious();
-
-            Wait(1500);
-        }
-        private void MaybeDealLater()
-        {
-            BuybackFormatter.MaybeDealLater();
-            Wait(1500);
+            await BuybackFormatter.ComeBackWhenSerious();
+            await Wait(1500);
         }
 
-        private void CompleteSale(Equipment item, int offer)
+        private async Task MaybeDealLater()
         {
-            BuybackFormatter.CompleteSale(item, offer);
+            await BuybackFormatter.MaybeDealLater();
+            await Wait(1500);
+        }
+
+        private async Task CompleteSale(Equipment item, int offer)
+        {
+            await BuybackFormatter.CompleteSale(item, offer);
 
             Player.Gold += offer;
             Player.RemoveEquipment(item);
 
-            SoundMan.PlaySoundSync(Redraw, LotaSound.Sale);
+            await SoundMan.PlaySoundWait(LotaSound.Sale);
         }
 
     }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 
 using Xle.Maps;
 
 namespace Xle.Ancients.MapExtenders.Dungeons
 {
+    [Transient("PiratesLairDungeon")]
     public class PiratesLairDungeon : LotaDungeon
     {
         protected override bool IsCompleted

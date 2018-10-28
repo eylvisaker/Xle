@@ -1,11 +1,13 @@
-﻿using Xle.Maps;
-using Xle.XleEventTypes.Extenders;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System.Linq;
 using System.Threading.Tasks;
+using Xle.Maps;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
+    [Transient("SpeakGuard")]
     public class SpeakGuard : EventExtender
     {
         public override async Task<bool> Speak()

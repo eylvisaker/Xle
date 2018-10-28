@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.Game;
 
 namespace Xle.Maps.Towns
 {
-    [ServiceName("TownLeave")]
+    [Transient("TownLeave")]
     public class TownLeave : Leave
     {
-        public TownLeave(string promptText, bool confirmPrompt = true)
-            : base(promptText, confirmPrompt)
-        {
-        }
-
         public IXleGameControl GameControl { get; set; }
 
         public override async Task Execute()
         {
             if (!await ConfirmLeave())
                 return;
-            
+
             if (GameState.Map.Guards.IsAngry)
             {
                 await TextArea.PrintLine("Walk out yourself.");
@@ -32,7 +22,7 @@ namespace Xle.Maps.Towns
             }
             else
             {
-                GameState.MapExtender.LeaveMap();
+                await GameState.MapExtender.LeaveMap();
             }
         }
     }

@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Microsoft.Xna.Framework.Input;
 using Xunit;
+using Xle.Services.Menus;
 
 namespace Xle.ServiceTests
 {

@@ -1,7 +1,9 @@
-﻿using Xle.XleEventTypes.Extenders;
+﻿using AgateLib;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
+    [Transient("TreasureChest")]
     public class TreasureChest : TreasureChestExtender
     {
         public LotaStory Story

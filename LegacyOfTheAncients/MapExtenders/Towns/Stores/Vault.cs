@@ -1,36 +1,32 @@
-﻿using Xle.XleEventTypes.Stores.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Xle.XleEventTypes.Stores.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
-	public class Vault : StoreVault
-	{
-		protected override bool RobCore()
-		{
-			TextArea.PrintLine();
-			TextArea.PrintLine();
+    public class Vault : StoreVault
+    {
+        protected override async Task<bool> RobCore()
+        {
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-			if (Robbed)
-			{
-				TextArea.PrintLine("The mint is empty.");
-				return true;
-			}
+            if (Robbed)
+            {
+                await TextArea.PrintLine("The mint is empty.");
+                return true;
+            }
 
-			int bags = (int)(Player.VaultGold / 99.0 + 1);
+            int bags = (int)(Player.VaultGold / 99.0 + 1);
 
-			TextArea.PrintLine("You find " + bags.ToString() + " bags of gold!");
-			SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await TextArea.PrintLine("You find " + bags.ToString() + " bags of gold!");
+            await SoundMan.PlaySoundWait(LotaSound.VeryGood);
 
-			Player.Gold += Player.VaultGold;
-			Player.VaultGold = (int)(Player.VaultGold * 0.8);
+            Player.Gold += Player.VaultGold;
+            Player.VaultGold = (int)(Player.VaultGold * 0.8);
 
-			Robbed = true;
+            Robbed = true;
 
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 }

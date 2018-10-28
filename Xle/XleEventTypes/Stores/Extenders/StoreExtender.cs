@@ -1,14 +1,14 @@
-﻿using Xle.Services;
+﻿using AgateLib;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xle.Services.Menus;
 using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
+    [InjectProperties]
     public class StoreExtender : EventExtender
     {
         private bool mRobbed = false;
@@ -59,13 +59,30 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 return false;
         }
 
-        protected void StoreDeclinePlayer()
+        protected Task StoreSound(LotaSound sound) => SoundMan.PlaySoundWait(sound);
+
+        protected async Task Wait(int howLong)
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("Sorry.  I can't talk to you.");
-            GameControl.Wait(500);
+            throw new NotImplementedException();
+
+            //await GameControl.WaitAsync(howLong, redraw: RedrawStore);
         }
+        protected Task<Keys> WaitForKey(params Keys[] keys)
+        {
+            throw new NotImplementedException();
+            //input.WaitForKey(RedrawStore, keys);
+        }
+
+
+
+        protected async Task StoreDeclinePlayer()
+        {
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Sorry.  I can't talk to you.");
+            await GameControl.WaitAsync(500);
+        }
+
         protected virtual void DisplayLoanOverdueMessage()
         {
             throw new NotImplementedException();
@@ -77,32 +94,32 @@ namespace Xle.XleEventTypes.Stores.Extenders
             {
                 if (IsLoanOverdue())
                 {
-                    StoreDeclinePlayer();
+                    await StoreDeclinePlayer();
                     return true;
                 }
             }
 
-            return SpeakImpl();
+            return await SpeakImplAsync();
         }
 
-        protected virtual bool SpeakImpl()
+        protected virtual async Task<bool> SpeakImplAsync()
         {
-            return StoreNotImplementedMessage();
+            return await StoreNotImplementedMessage();
         }
 
-        protected bool StoreNotImplementedMessage()
+        protected async Task<bool> StoreNotImplementedMessage()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine(TheEvent.ShopName, XleColor.Yellow);
-            TextArea.PrintLine("");
-            TextArea.PrintLine("A Sign Says, ");
-            TextArea.PrintLine("Closed for remodelling.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine(TheEvent.ShopName, XleColor.Yellow);
+            await TextArea.PrintLine("");
+            await TextArea.PrintLine("A Sign Says, ");
+            await TextArea.PrintLine("Closed for remodelling.");
 
             SoundMan.PlaySound(LotaSound.Medium);
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
 
             return true;
         }
@@ -111,23 +128,23 @@ namespace Xle.XleEventTypes.Stores.Extenders
         {
             if (AllowRobWhenNotAngry == false && Map.Guards.IsAngry == false)
             {
-                RobFail();
+                await RobFail();
                 return true;
             }
 
             MapExtender.IsAngry = true;
 
-            return RobCore();
+            return await RobCore();
         }
 
-        protected virtual bool RobCore()
+        protected virtual async Task<bool> RobCore()
         {
             if (Robbed)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine();
-                TextArea.PrintLine("No items within reach here.");
-                GameControl.Wait(1000);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("No items within reach here.");
+                await GameControl.WaitAsync(1000);
                 return true;
             }
 
@@ -135,18 +152,18 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             if (value == 0)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine();
-                TextArea.PrintLine("There's nothing to really carry here.");
-                GameControl.Wait(1000);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("There's nothing to really carry here.");
+                await GameControl.WaitAsync(1000);
                 return true;
             }
 
             Player.Gold += value;
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("You get " + value.ToString() + " gold.", XleColor.Yellow);
-            GameControl.Wait(1000);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You get " + value.ToString() + " gold.", XleColor.Yellow);
+            await GameControl.WaitAsync(1000);
             Robbed = true;
 
             return true;
@@ -161,13 +178,13 @@ namespace Xle.XleEventTypes.Stores.Extenders
         /// Method called when the player attempts to rob and should get the 
         /// message "the merchant won't let you rob."
         /// </summary>
-        public virtual void RobFail()
+        public virtual async Task RobFail()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("The merchant won't let you rob.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("The merchant won't let you rob.");
 
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
         }
 
         /// <summary>
@@ -176,11 +193,11 @@ namespace Xle.XleEventTypes.Stores.Extenders
         /// </summary>
         public virtual bool AllowRobWhenNotAngry { get { return false; } }
 
-        public virtual void CheckOfferMuseumCoin(Player player)
+        public virtual async Task CheckOfferMuseumCoin(Player player)
         {
             if (MuseumCoinSale.RollToOfferCoin() && robbing == false)
             {
-                MuseumCoinSale.OfferMuseumCoin();
+                await MuseumCoinSale.OfferMuseumCoin();
             }
         }
     }

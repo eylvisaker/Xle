@@ -1,7 +1,8 @@
-﻿using Xle.Data;
-using Xle.Services.Menus;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
+using Xle.Data;
+using Xle.Services.Menus;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
@@ -21,13 +22,13 @@ namespace Xle.XleEventTypes.Stores.Extenders
             cs.BorderColor = XleColor.Red;
         }
 
-        protected override bool SpeakImpl()
+        protected override async Task<bool> SpeakImplAsync()
         {
-            RunStore();
+            await RunStore();
             return true;
         }
 
-        private void RunStore()
+        private async Task RunStore()
         {
             int i = 0;
             int choice;
@@ -58,13 +59,13 @@ namespace Xle.XleEventTypes.Stores.Extenders
             wind.SetColor(XleColor.Red);
             prompt.SetColor(XleColor.Red);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("Select (0 to cancel)");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Select (0 to cancel)");
+            await TextArea.PrintLine();
 
             MenuItemList theList = new MenuItemList("0", "1", "2");
-            choice = QuickMenu(theList, 2, 0);
+            choice = await QuickMenu(theList, 2, 0);
 
             if (choice == 0)
                 return;
@@ -84,20 +85,18 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             Windows.Add(questionWindow);
 
-            throw new NotImplementedException();
+            switch (choice)
+            {
+                case 1:
+                    questionWindow.WriteLine("What weapon will you sell me?");
+                    item = await EquipmentPicker.PickWeapon(GameState, null, ColorScheme.BackColor);
+                    break;
 
-            //switch (choice)
-            //{
-            //    case 1:
-            //        questionWindow.WriteLine("What weapon will you sell me?");
-            //        item = EquipmentPicker.PickWeapon(GameState, null, ColorScheme.BackColor);
-            //        break;
-
-            //    case 2:
-            //        questionWindow.WriteLine("What armor will you sell me?");
-            //        item = EquipmentPicker.PickArmor(GameState, null, ColorScheme.BackColor);
-            //        break;
-            //}
+                case 2:
+                    questionWindow.WriteLine("What armor will you sell me?");
+                    item = await EquipmentPicker.PickArmor(GameState, null, ColorScheme.BackColor);
+                    break;
+            }
 
             if (item == null)
                 return;
@@ -123,29 +122,29 @@ namespace Xle.XleEventTypes.Stores.Extenders
             int maxAccept = (int)(item.Price(Data) * Math.Pow(charm, .7) / 11);
             int offer = (int)((6 + Random.NextDouble()) * maxAccept / 14.0);
 
-            choice = MakeOffer(item, offer, false);
+            choice = await MakeOffer(item, offer, false);
 
             if (choice == 0)
             {
-                CompleteSale(offer, item);
+                await CompleteSale(offer, item);
                 return;
             }
             int ask = 0;
 
             Windows.Add(offerText);
 
-            SetOfferText(offerText, offer, ask);
+            await SetOfferText(offerText, offer, ask);
 
-            ask = GetAskingPrice();
+            ask = await GetAskingPrice();
 
             if (ask == 0)
             {
-                ta.PrintLine("\n\n\n\nSee you later.\n");
+                await ta.PrintLine("\n\n\n\nSee you later.\n");
                 return;
             }
             if (ask < 1.5 * offer)
             {
-                CompleteSale(ask, item);
+                await CompleteSale(ask, item);
                 return;
             }
 
@@ -153,7 +152,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             if (ask > spread + maxAccept)
             {
-                ComeBackWhenSerious();
+                await ComeBackWhenSerious();
                 return;
             }
 
@@ -171,33 +170,33 @@ namespace Xle.XleEventTypes.Stores.Extenders
             {
                 bool finalOffer = false;
 
-                SetAskRejectPrice(offerText, ask, WayTooHigh(ask, offer, maxAccept));
-                choice = MakeOffer(item, offer, finalOffer);
+                await SetAskRejectPrice(offerText, ask, WayTooHigh(ask, offer, maxAccept));
+                choice = await MakeOffer(item, offer, finalOffer);
 
                 if (choice == 0)
                 {
-                    CompleteSale(offer, item);
+                    await CompleteSale(offer, item);
                     return;
                 }
                 else if (finalOffer)
                 {
-                    MaybeDealLater();
+                    await MaybeDealLater();
                     return;
                 }
 
-                SetOfferText(offerText, offer, lastAsk);
-                ask = GetAskingPrice();
+                await SetOfferText(offerText, offer, lastAsk);
+                ask = await GetAskingPrice();
 
                 if (ask == 0)
                 {
-                    MaybeDealLater();
+                    await MaybeDealLater();
                     return;
                 }
 
                 if (ask == lastAsk ||
                     (ask > lastAsk && Random.NextDouble() < 0.5))
                 {
-                    ComeBackWhenSerious();
+                    await ComeBackWhenSerious();
                     return;
                 }
 
@@ -212,7 +211,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
                 if (spread > ask - 2 && Random.NextDouble() < .5)
                 {
-                    CompleteSale(ask, item);
+                    await CompleteSale(ask, item);
                     return;
                 }
                 if (spread >= ask)
@@ -228,7 +227,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
                     if (offer <= 0)
                     {
-                        ComeBackWhenSerious();
+                        await ComeBackWhenSerious();
                         return;
                     }
                 }
@@ -236,31 +235,29 @@ namespace Xle.XleEventTypes.Stores.Extenders
             } while (true);
         }
 
-        private int GetAskingPrice()
+        private async Task<int> GetAskingPrice()
         {
             TextArea.Clear();
 
-            return NumberPicker.ChooseNumber(32767);
+            return await NumberPicker.ChooseNumber(32767);
         }
 
-        private int MakeOffer(Equipment item, int offer, bool finalOffer)
+        private async Task<int> MakeOffer(Equipment item, int offer, bool finalOffer)
         {
             var ta = TextArea;
 
             ta.Clear();
-            ta.PrintLine("I'll give " + offer + " gold for your");
-            ta.Print(item.NameWithQuality(Data));
+            await ta.PrintLine("I'll give " + offer + " gold for your");
+            await ta.Print(item.NameWithQuality(Data));
 
             if (finalOffer)
             {
-                ta.PrintLine(" -final offer!!!", XleColor.Yellow);
+                await ta.PrintLine(" -final offer!!!", XleColor.Yellow);
             }
             else
-                ta.PrintLine(".");
+                await ta.PrintLine(".");
 
-            throw new NotImplementedException();
-
-            //return QuickMenuService.QuickMenuYesNo(true);
+            return await QuickMenuService.QuickMenuYesNo(true);
         }
 
         private bool WayTooHigh(double ask, int offer, int maxAccept)
@@ -268,7 +265,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             return (ask / offer) > 1.4 && (ask / maxAccept > 1.3);
         }
 
-        private void SetAskRejectPrice(TextWindow offerWind, int ask, bool wayTooHigh)
+        private async Task SetAskRejectPrice(TextWindow offerWind, int ask, bool wayTooHigh)
         {
             var clr = wayTooHigh ? XleColor.Yellow : XleColor.Cyan;
 
@@ -277,7 +274,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 (wayTooHigh ? "way " : "") + "too high!", clr);
         }
 
-        private void SetOfferText(TextWindow offerWind, int offer, int ask)
+        private async Task SetOfferText(TextWindow offerWind, int offer, int ask)
         {
             offerWind.Clear();
             offerWind.Write("My latest offer: ", XleColor.White);
@@ -295,14 +292,14 @@ namespace Xle.XleEventTypes.Stores.Extenders
             offerWind.Write("(0 to quit)", XleColor.Purple);
         }
 
-        private void ComeBackWhenSerious()
+        private async Task ComeBackWhenSerious()
         {
             TextArea.Clear();
             TextArea.PrintLine("Come back when you're serious.");
 
             Wait(1500);
         }
-        private void MaybeDealLater()
+        private async Task MaybeDealLater()
         {
             TextArea.Clear();
             TextArea.PrintLine("Maybe we can deal later.");
@@ -310,7 +307,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             Wait(1500);
         }
 
-        private void CompleteSale(int offer, Equipment item)
+        private async Task CompleteSale(int offer, Equipment item)
         {
             TextArea.Clear();
             TextArea.PrintLine("It's a deal!");

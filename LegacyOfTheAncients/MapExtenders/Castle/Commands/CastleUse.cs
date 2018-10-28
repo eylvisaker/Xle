@@ -1,14 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Maps;
-using Xle.Services;
 
 namespace Xle.Ancients.MapExtenders.Castle.Commands
 {
-    [ServiceName("CastleUse")]
+    [Transient("CastleUse")]
     public class CastleUse : LotaUse
     {
-        LotaStory Story { get { return GameState.Story(); } }
-        XleMap TheMap { get { return GameState.Map; } }
+        private LotaStory Story { get { return GameState.Story(); } }
+
+        private XleMap TheMap { get { return GameState.Map; } }
 
         protected override async Task<bool> UseWithMap(int item)
         {

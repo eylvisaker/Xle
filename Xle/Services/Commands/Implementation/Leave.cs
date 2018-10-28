@@ -4,17 +4,15 @@ using Xle.Services.Menus;
 
 namespace Xle.Services.Commands.Implementation
 {
-    [Transient]
-    public class Leave : Command
+    public interface ILeave : ICommand
     {
-        public Leave(
-            string promptText,
-            bool confirmPrompt = true)
-        {
-            ConfirmPrompt = confirmPrompt;
-            PromptText = promptText;
-        }
+        string PromptText { get; set; }
+        bool ConfirmPrompt { get; set; }
+    }
 
+    [Transient]
+    public class Leave : Command, ILeave
+    {
         public IQuickMenu QuickMenu { get; set; }
 
         public override string Name
@@ -27,7 +25,7 @@ namespace Xle.Services.Commands.Implementation
             if (!await ConfirmLeave())
                 return;
 
-            GameState.MapExtender.LeaveMap();
+            await GameState.MapExtender.LeaveMap();
         }
 
         /// <summary>

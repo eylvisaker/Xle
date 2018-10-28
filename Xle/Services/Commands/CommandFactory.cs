@@ -14,7 +14,7 @@ namespace Xle.Services.Commands
         Gamespeed Gamespeed();
         Hold Hold();
         Inventory Inventory();
-        Leave Leave(string name = null, string promptText = "", bool confirmPrompt = true);
+        ILeave Leave(string name = null, string promptText = "", bool confirmPrompt = true);
         IMagicCommand Magic(string name = null);
         IOpen Open(string name = null);
         Pass Pass();
@@ -52,13 +52,13 @@ namespace Xle.Services.Commands
 
         public Inventory Inventory() => serviceLocator.Resolve<Inventory>();
 
-        public Leave Leave(string name = null, string promptText = "", bool confirmPrompt = true)
+        public ILeave Leave(string name = null, string promptText = "", bool confirmPrompt = true)
         {
-            Leave result;
+            ILeave result;
             if (name == null)
-                result = serviceLocator.Resolve<Leave>();
+                result = serviceLocator.Resolve<ILeave>();
             else
-                result = serviceLocator.ResolveNamed<Leave>(name);
+                result = serviceLocator.ResolveNamed<ILeave>(name);
 
             result.PromptText = promptText;
             result.ConfirmPrompt = confirmPrompt;

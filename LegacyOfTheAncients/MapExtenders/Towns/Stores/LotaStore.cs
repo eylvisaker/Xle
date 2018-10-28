@@ -13,6 +13,5 @@ namespace Xle.Ancients.MapExtenders.Towns
         {
             get { return GameState.Story(); }
         }
-
     }
 }

@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Menus;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
+    [Transient("Casandra")]
     public class Casandra : LotaEvent
     {
         public IQuickMenu QuickMenu { get; set; }

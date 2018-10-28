@@ -1,4 +1,5 @@
-﻿using Xle.Maps.Towns;
+﻿using System.Threading.Tasks;
+using Xle.Maps.Towns;
 using Xle.Maps.XleMapTypes;
 using Xle.Services.Rendering;
 using Xle.Services.Rendering.Maps;
@@ -25,13 +26,16 @@ namespace Xle.Maps.Castles
             scheme.FrameHighlightColor = XleColor.Yellow;
         }
 
-        public override void PlayOpenRoofSound(Roof roof)
+        public override Task PlayOpenRoofSound(Roof roof)
         {
             // do nothing here
+            return Task.CompletedTask;
         }
-        public override void PlayCloseRoofSound(Roof roof)
+
+        public override Task PlayCloseRoofSound(Roof roof)
         {
             // do nothing here
+            return Task.CompletedTask;
         }
     }
 }

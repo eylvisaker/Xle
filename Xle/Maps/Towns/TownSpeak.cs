@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Maps.Towns
 {
-    [ServiceName("TownSpeak")]
+    [Transient("TownSpeak")]
     public class TownSpeak : Speak
     {
         public override async Task Execute()

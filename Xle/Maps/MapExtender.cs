@@ -35,7 +35,7 @@ namespace Xle.Maps
         void OnLoad();
         Task OnAfterEntry();
         void ModifyEntryPoint(MapEntryParams entryParams);
-        void LeaveMap();
+        Task LeaveMap();
         void CheckSounds(GameTime time);
         Task AfterExecuteCommand(Keys cmd);
         bool CanPlayerStepInto(Point corridorPt);
@@ -134,7 +134,7 @@ namespace Xle.Maps
 
             foreach (var evt in EventsAt(Player.X, Player.Y, 0))
             {
-               await  evt.StepOn();
+                await evt.StepOn();
                 didEvent = true;
             }
 
@@ -203,17 +203,17 @@ namespace Xle.Maps
             return true;
         }
 
-        public void LeaveMap()
+        public async Task LeaveMap()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine("Leave " + TheMap.MapName);
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Leave " + TheMap.MapName);
+            await TextArea.PrintLine();
 
-            GameControl.Wait(GameState.GameSpeed.LeaveMapTime);
+            await GameControl.WaitAsync(GameState.GameSpeed.LeaveMapTime);
 
             MapChanger.ReturnToPreviousMap();
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
         }
 
         /// <summary>

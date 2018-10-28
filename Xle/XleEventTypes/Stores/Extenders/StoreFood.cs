@@ -1,11 +1,14 @@
-﻿using Xle.Data;
-using Xle.Maps.XleMapTypes;
-using Xle.Services.XleSystem;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
+using Xle.Data;
+using Xle.Maps.XleMapTypes;
+using Xle.Services.XleSystem;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
+    [Transient("StoreFood")]
     public class StoreFood : StoreFront
     {
         private bool skipMailOffer = false;
@@ -21,7 +24,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             cs.TextColor = XleColor.Yellow;
         }
 
-        protected override bool SpeakImpl()
+        protected override async Task<bool> SpeakImplAsync()
         {
             string tempString;
             double cost = ((int)(13 - Player.Attribute[Attributes.charm] / 7.0)) / 10.0;
@@ -36,15 +39,15 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             this.robbing = false;
 
-            Wait(1);
+            await Wait(1);
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             int choice;
 
             if (Player.mailTown == Map.MapID)
             {
-                PayForMail();
+                await PayForMail();
                 skipMailOffer = true;
             }
             else
@@ -55,23 +58,23 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 tempString += max;
                 tempString += " days";
 
-                TextArea.PrintLine();
-                TextArea.PrintLine(tempString, XleColor.Cyan);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine(tempString, XleColor.Cyan);
 
-                choice = ChooseNumber(max);
+                choice = await ChooseNumber(max);
 
                 if (choice > 0)
                 {
                     Player.Spend((int)(choice * cost));
                     Player.Food += choice;
 
-                    TextArea.PrintLine();
-                    TextArea.PrintLine(" " + choice + " days of food bought.");
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine(" " + choice + " days of food bought.");
 
-                    StoreSound(LotaSound.Sale);
+                    await StoreSound(LotaSound.Sale);
 
                     if (skipMailOffer == false)
-                        OfferMail();
+                        await OfferMail();
 
                     return true;
                 }
@@ -84,13 +87,13 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 }
             }
 
-            CheckOfferMuseumCoin(Player);
+            await CheckOfferMuseumCoin(Player);
 
             return true;
 
         }
 
-        private void OfferMail()
+        private async Task OfferMail()
         {
             Town twn = GameState.Map as Town;
 
@@ -105,25 +108,25 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             SoundMan.PlaySound(LotaSound.Question);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Would you like to earn some gold?");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Would you like to earn some gold?");
 
             MenuItemList menu = new MenuItemList("Yes", "No");
 
-            int choice = QuickMenu(menu, 2);
+            int choice = await QuickMenu(menu, 2);
 
             if (choice == 0)
             {
                 Player.Items[MailItemId] = 1;
                 Player.mailTown = target;
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("Here's some mail to");
-                TextArea.PrintLine("deliver to " + Data.MapList[target].Name + ".");
-                TextArea.PrintLine();
-                TextArea.PrintLine("        Press Key to Continue");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Here's some mail to");
+                await TextArea.PrintLine("deliver to " + Data.MapList[target].Name + ".");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("        Press Key to Continue");
 
-                WaitForKey();
+                await WaitForKey();
             }
         }
 
@@ -200,7 +203,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
         {
             Title = TheEvent.ShopName;
         }
-        private void PayForMail()
+
+        private async Task PayForMail()
         {
             int gold = Random.Next(1, 4);
 
@@ -211,14 +215,14 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 case 3: gold = 125; break;
             }
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Thanks for the delivery. ");
-            TextArea.PrintLine("Here's " + gold.ToString() + " gold.");
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Thanks for the delivery. ");
+            await TextArea.PrintLine("Here's " + gold.ToString() + " gold.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            StoreSound(LotaSound.Good);
-            TextArea.RewriteLine(4, "        Press Key to Continue");
+            await StoreSound(LotaSound.Good);
+            await TextArea.RewriteLine(4, "        Press Key to Continue");
             WaitForKey();
 
             Player.Gold += gold;
@@ -228,10 +232,10 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         private int robCount;
 
-        protected override bool RobCore()
+        protected override async Task<bool> RobCore()
         {
             SetTitle();
-            Wait(1);
+            await Wait(1);
             SetWindow(0);
 
             TextArea.Clear();
@@ -243,8 +247,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
                 int choice = Random.Next(1, 16) + Random.Next(20, 36);
 
-                TextArea.PrintLine();
-                TextArea.PrintLine(string.Format("Stole {0} days of food.", choice), XleColor.Yellow);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine(string.Format("Stole {0} days of food.", choice), XleColor.Yellow);
 
                 Player.Food += choice;
                 SoundMan.PlaySound(LotaSound.Sale);
@@ -255,14 +259,14 @@ namespace Xle.XleEventTypes.Stores.Extenders
             }
             else
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("No items within reach now.", XleColor.Yellow);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("No items within reach now.", XleColor.Yellow);
 
                 SoundMan.PlaySound(LotaSound.Medium);
             }
 
-            TextArea.PrintLine();
-            Wait(2000);
+            await TextArea.PrintLine();
+            await Wait(2000);
 
             return true;
         }

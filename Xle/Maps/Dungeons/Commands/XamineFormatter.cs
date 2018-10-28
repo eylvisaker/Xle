@@ -4,9 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Maps.Dungeons.Commands
 {
+    public interface IXamineFormatter 
+    {
+        void PrintNothingUnusualInSight();
+        void PrintHiddenObjectsDetected();
+        void DescribeTile(DungeonTile tripWire, int distance);
+        void DescribeMonster(DungeonMonster monster);
+    }
+
+    [Singleton]
     public class XamineFormatter : IXamineFormatter
     {
         public ITextArea TextArea { get; set; }

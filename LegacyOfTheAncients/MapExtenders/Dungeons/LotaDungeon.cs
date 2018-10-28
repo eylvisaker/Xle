@@ -25,7 +25,12 @@ namespace Xle.Ancients.MapExtenders.Dungeons
 
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LotaProgram.CommonLotaCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Hold());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             commands.Items.Add(CommandFactory.Climb("DungeonClimb"));
             commands.Items.Add(CommandFactory.End());

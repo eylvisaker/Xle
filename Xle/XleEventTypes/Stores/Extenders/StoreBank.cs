@@ -1,14 +1,11 @@
-﻿using AgateLib.Mathematics.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xle.Services;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using System;
+using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
+    [Transient("StoreBank")]
     public class StoreBank : StoreFront
     {
         public override int RobValue()
@@ -35,7 +32,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             cs.BorderColor = XleColor.Gray;
         }
 
-        protected override bool SpeakImpl()
+        protected override async Task<bool> SpeakImplAsync()
         {
             int choice;
 
@@ -62,47 +59,43 @@ namespace Xle.XleEventTypes.Stores.Extenders
             Windows.Add(promptWindow);
             Windows.Add(optionsWindow);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("Make choice (Hit 0 to cancel)");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Make choice (Hit 0 to cancel)");
+            await TextArea.PrintLine();
 
             MenuItemList theList = new MenuItemList("0", "1", "2", "3");
-            throw new NotImplementedException();
 
-            //choice = QuickMenuService.QuickMenu(theList, 2, 0);
+            choice = await QuickMenuService.QuickMenu(theList, 2, 0);
 
-            //switch (choice)
-            //{
-            //    case 1:
-            //        MakeDeposit();
-            //        break;
+            switch (choice)
+            {
+                case 1:
+                    await MakeDeposit();
+                    break;
 
-            //    case 2:
-            //        MakeWithdrawal();
-            //        break;
+                case 2:
+                    await MakeWithdrawal();
+                    break;
 
-            //    case 3:
-            //        PrintBalance();
-            //        break;
-            //}
+                case 3:
+                    await PrintBalance();
+                    break;
+            }
 
 
             return true;
         }
 
-        private void PrintBalance()
-        {
-            TextArea.PrintLine("Current balance: " + Player.GoldInBank + " gold.");
-        }
+        private Task PrintBalance() => TextArea.PrintLine("Current balance: " + Player.GoldInBank + " gold.");
 
-        private void MakeWithdrawal()
+        private async Task MakeWithdrawal()
         {
             if (Player.GoldInBank > 0)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("Withdraw how much?");
-                int amount = ChooseNumber(Player.GoldInBank);
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Withdraw how much?");
+                int amount = await ChooseNumber(Player.GoldInBank);
 
                 Player.Gold += amount;
                 Player.GoldInBank -= amount;
@@ -110,30 +103,30 @@ namespace Xle.XleEventTypes.Stores.Extenders
             else
             {
                 TextArea.Clear();
-                TextArea.PrintLine("Nothing to withdraw");
+                await TextArea.PrintLine("Nothing to withdraw");
 
-                StoreSound(LotaSound.Medium);
+                await StoreSound(LotaSound.Medium);
             }
 
-            TextArea.PrintLine();
-            PrintBalance();
+            await TextArea.PrintLine();
+            await PrintBalance();
 
-            StoreSound(LotaSound.Sale);
+            await StoreSound(LotaSound.Sale);
         }
 
-        private void MakeDeposit()
+        private async Task MakeDeposit()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine("Deposit how much?");
-            int amount = ChooseNumber(Player.Gold);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Deposit how much?");
+            int amount = await ChooseNumber(Player.Gold);
 
             Player.Spend(amount);
             Player.GoldInBank += amount;
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
             PrintBalance();
 
-            StoreSound(LotaSound.Sale);
+            await StoreSound(LotaSound.Sale);
         }
     }
 }

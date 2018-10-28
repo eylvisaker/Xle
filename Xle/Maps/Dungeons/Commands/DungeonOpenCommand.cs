@@ -9,9 +9,13 @@ using Xle.Services.XleSystem;
 
 namespace Xle.Maps.Dungeons.Commands
 {
-    [ServiceName("DungeonOpen")]
     public class DungeonOpenCommand : Open
     {
+        public DungeonOpenCommand()
+        {
+
+        }
+
         public ISoundMan SoundMan { get; set; }
         public Random Random { get; set; }
         public IStatsDisplay StatsDisplay { get; set; }

@@ -1,62 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.ScreenModel;
 
 namespace Xle.XleEventTypes.Stores.Buyback
 {
+    public interface IBuybackFormatter
+    {
+        Task Offer(Equipment item, int offer, bool finalOffer);
+        Task ComeBackWhenSerious();
+        Task MaybeDealLater();
+        Task CompleteSale(Equipment item, int amount);
+        Task SeeYouLater();
+        Task InitialMenuPrompt();
+        void ClearTextArea();
+    }
+
+    [Singleton, InjectProperties]
     public class BuybackFormatter : IBuybackFormatter
     {
         public ITextArea TextArea { get; set; }
         public XleData Data { get; set; }
 
-        public void Offer(Equipment item, int offer, bool finalOffer)
+        public async Task Offer(Equipment item, int offer, bool finalOffer)
         {
             TextArea.Clear();
-            TextArea.PrintLine("I'll give " + offer + " gold for your");
-            TextArea.Print(item.NameWithQuality(Data));
+            await TextArea.PrintLine("I'll give " + offer + " gold for your");
+            await TextArea.Print(item.NameWithQuality(Data));
 
             if (finalOffer)
             {
-                TextArea.PrintLine(" -final offer!!!", XleColor.Yellow);
+                await TextArea.PrintLine(" -final offer!!!", XleColor.Yellow);
             }
             else
-                TextArea.PrintLine(".");
+                await TextArea.PrintLine(".");
         }
 
-        public void ComeBackWhenSerious()
+        public async Task ComeBackWhenSerious()
         {
             TextArea.Clear();
-            TextArea.PrintLine("Come back when you're serious.");
+            await TextArea.PrintLine("Come back when you're serious.");
         }
 
-        public void MaybeDealLater()
+        public async Task MaybeDealLater()
         {
             TextArea.Clear();
-            TextArea.PrintLine("Maybe we can deal later.");
+            await TextArea.PrintLine("Maybe we can deal later.");
         }
 
-        public void CompleteSale(Equipment item, int offer)
+        public async Task CompleteSale(Equipment item, int offer)
         {
             TextArea.Clear();
-            TextArea.PrintLine("It's a deal!");
-            TextArea.PrintLine(item.BaseName(Data) + " sold for " + offer + " gold.");
+            await TextArea.PrintLine("It's a deal!");
+            await TextArea.PrintLine(item.BaseName(Data) + " sold for " + offer + " gold.");
         }
 
-        public void SeeYouLater()
-        {
-            TextArea.PrintLine("\n\n\n\nSee you later.\n");
-        }
+        public Task SeeYouLater() => TextArea.PrintLine("\n\n\n\nSee you later.\n");
 
-        public void InitialMenuPrompt()
+        public async Task InitialMenuPrompt()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("Select (0 to cancel)");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Select (0 to cancel)");
+            await TextArea.PrintLine();
         }
 
         public void ClearTextArea()

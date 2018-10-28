@@ -1,11 +1,14 @@
-﻿using Xle.Data;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Xle.Data;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
+    [Transient("StoreMagic")]
     public class StoreMagic : StoreFront
     {
         public XleData Data { get; set; }
@@ -64,7 +67,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             cs.TextAreaBackColor = XleColor.Blue;
         }
 
-        protected override bool SpeakImpl()
+        protected override async Task<bool> SpeakImplAsync()
         {
             Windows.Clear();
             Windows.AddRange(CreateStoreWindows());
@@ -72,16 +75,16 @@ namespace Xle.XleEventTypes.Stores.Extenders
             Title = TheEvent.ShopName;
 
             TextArea.Clear();
-            TextArea.PrintLine("Make choice (hit 0 to cancel)");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("Make choice (hit 0 to cancel)");
+            await TextArea.PrintLine();
 
             IEnumerable<MagicSpell> magicSpells = AvailableSpells;
 
-            int choice = QuickMenu(MenuItemList.Numbers(0, magicSpells.Count()), 2);
+            int choice = await QuickMenu(MenuItemList.Numbers(0, magicSpells.Count()), 2);
 
             if (choice == 0)
             {
-                NothingPurchased("Nothing purchased.");
+                await NothingPurchased("Nothing purchased.");
                 return true;
             }
 
@@ -93,7 +96,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             if (maxAfford <= 0)
             {
-                NothingPurchased("You can't afford any " + item.PluralName + ".");
+                await NothingPurchased("You can't afford any " + item.PluralName + ".");
                 return true;
             }
 
@@ -101,27 +104,27 @@ namespace Xle.XleEventTypes.Stores.Extenders
             {
                 if (maxCarry == 0)
                 {
-                    NothingPurchased("You can't buy any more " + item.PluralName + ".");
+                    await NothingPurchased("You can't buy any more " + item.PluralName + ".");
                     return true;
                 }
             }
             else
                 maxPurchase = maxAfford;
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Purchase how many " + item.PluralName + "?");
+     await        TextArea.PrintLine();
+            await TextArea.PrintLine("Purchase how many " + item.PluralName + "?");
 
-            int purchaseCount = ChooseNumber(maxPurchase);
+            int purchaseCount = await ChooseNumber(maxPurchase);
 
             if (purchaseCount == 0)
             {
-                NothingPurchased("Nothing purchased.");
+                await NothingPurchased("Nothing purchased.");
                 return true;
             }
 
             if (Player.Items[item.ItemID] + purchaseCount > item.MaxCarry)
             {
-                NothingPurchased("You can't buy this many.");
+                await NothingPurchased("You can't buy this many.");
                 return true;
             }
 
@@ -129,7 +132,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             if (cost > Player.Gold)
             {
-                NothingPurchased("You're short on gold.");
+                await NothingPurchased("You're short on gold.");
                 return true;
             }
 
@@ -137,21 +140,21 @@ namespace Xle.XleEventTypes.Stores.Extenders
             Player.Gold -= purchaseCount * MagicPrice(choice);
 
             TextArea.Clear();
-            TextArea.PrintLine(" " + purchaseCount.ToString() + " " +
+            await TextArea.PrintLine(" " + purchaseCount.ToString() + " " +
                 ((purchaseCount != 1) ? item.PluralName : item.Name) + " purchased.");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            StoreSound(LotaSound.Sale);
+            await StoreSound(LotaSound.Sale);
 
             return true;
         }
 
-        private void NothingPurchased(string message)
+        private async Task NothingPurchased(string message)
         {
             TextArea.Clear();
-            TextArea.PrintLine(message);
+            await TextArea.PrintLine(message);
 
-            StoreSound(LotaSound.Medium);
+            await StoreSound(LotaSound.Medium);
         }
 
         private int MagicPrice(int id)

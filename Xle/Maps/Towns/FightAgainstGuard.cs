@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Xle.Services.XleSystem;
 
 namespace Xle.Maps.Towns
 {
-    [ServiceName("FightAgainstGuard")]
+    [Transient("FightAgainstGuard")]
     public class FightAgainstGuard : Fight
     {
         public IXleInput Input { get; set; }

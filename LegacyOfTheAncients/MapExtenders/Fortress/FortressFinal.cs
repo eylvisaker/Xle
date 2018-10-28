@@ -4,9 +4,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Ancients.MapExtenders.Fortress
 {
+    [Transient("FortressFinal")]
     public class FortressFinal : FortressEntry
     {
         private IFortressFinalActivator fortressActivator;

@@ -8,9 +8,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 {
+    public interface IFortressFinalActivator
+    {
+        bool CompendiumAttacking { get; set; }
+
+        Guard Warlord { get; }
+
+        event EventHandler WarlordCreated;
+
+        void CreateWarlord();
+        void Reset();
+    }
+
+    [Singleton]
     public class FortressFinalActivator : IFortressFinalActivator
     {
         public ITextArea TextArea { get; set; }

@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
-using Xle.Services;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.Game;
 using Xle.Services.MapLoad;
 
 namespace Xle.Maps.Dungeons
 {
-    [ServiceName("DungeonClimb")]
+    [Transient("DungeonClimb")]
     public class DungeonClimb : Climb
     {
         public IXleGameControl GameControl { get; set; }

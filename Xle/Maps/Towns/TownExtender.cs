@@ -127,7 +127,7 @@ namespace Xle.Maps.Towns
                     else
                         dx = 0;
 
-                    GuardAttackPlayer(guard);
+                    await GuardAttackPlayer(guard);
                 }
                 else
                 {
@@ -246,7 +246,7 @@ namespace Xle.Maps.Towns
 
                         Rectangle otherGuardRect = new Rectangle(otherGuard.Location, guardSize);
 
-                        if (guardRect.IntersectsWith(otherGuardRect))
+                        if (guardRect.Intersects(otherGuardRect))
                             return false;
                     }
                 }
@@ -275,79 +275,76 @@ namespace Xle.Maps.Towns
             return -1;
         }
 
-        public virtual void PlayCloseRoofSound(Roof roof)
+        public virtual async Task PlayCloseRoofSound(Roof roof)
         {
             SoundMan.PlaySound(LotaSound.BuildingClose);
-            GameControl.Wait(50);
+            await GameControl.WaitAsync(50);
         }
-        public virtual void PlayOpenRoofSound(Roof roof)
+        public virtual async Task PlayOpenRoofSound(Roof roof)
         {
             SoundMan.PlaySound(LotaSound.BuildingOpen);
-            GameControl.Wait(50);
+            await GameControl.WaitAsync(50);
         }
 
-        public virtual void GuardAttackPlayer(Guard guard)
+        public virtual async Task GuardAttackPlayer(Guard guard)
         {
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
+            await TextArea.Print("Attacked by " + guard.Name + "! -- ", XleColor.White);
 
             if (Random.NextDouble() > ChanceToHitPlayer(guard))
             {
-                TextArea.Print("Missed", XleColor.Cyan);
+                await TextArea.Print("Missed", XleColor.Cyan);
                 SoundMan.PlaySound(LotaSound.EnemyMiss);
             }
             else
             {
                 int dam = RollDamageToPlayer(guard);
 
-                TextArea.Print("Blow ", XleColor.Yellow);
-                TextArea.Print(dam.ToString(), XleColor.White);
-                TextArea.Print(" H.P.", XleColor.White);
+                await TextArea.Print("Blow ", XleColor.Yellow);
+                await TextArea.Print(dam.ToString(), XleColor.White);
+                await TextArea.Print(" H.P.", XleColor.White);
 
                 SoundMan.PlaySound(LotaSound.EnemyHit);
 
                 Player.HP -= dam;
             }
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            GameControl.Wait(100 * Player.Gamespeed);
+            await GameControl.WaitAsync(100 * Player.Gamespeed);
         }
 
-        protected override Task AfterStepImpl(bool didEvent)
+        protected override async Task AfterStepImpl(bool didEvent)
         {
-            throw new NotImplementedException();
+            Point pt = new Point(Player.X, Player.Y);
+            var roofs = TheMap.Roofs;
 
-            //Point pt = new Point(Player.X, Player.Y);
-            //var roofs = TheMap.Roofs;
+            for (int i = 0; i < roofs.Count; i++)
+            {
+                if (roofs[i].Open == false && roofs[i].CharIn(pt))
+                {
+                    roofs[i].Open = true;
+                    await PlayOpenRoofSound(roofs[i]);
+                }
+                else if (roofs[i].Open == true && IsAngry == false
+                    && roofs[i].CharIn(pt) == false)
+                {
+                    roofs[i].Open = false;
+                    await PlayCloseRoofSound(roofs[i]);
+                }
+            }
 
-            //for (int i = 0; i < roofs.Count; i++)
-            //{
-            //    if (roofs[i].Open == false && roofs[i].CharIn(pt))
-            //    {
-            //        roofs[i].Open = true;
-            //        PlayOpenRoofSound(roofs[i]);
-            //    }
-            //    else if (roofs[i].Open == true && IsAngry == false
-            //        && roofs[i].CharIn(pt) == false)
-            //    {
-            //        roofs[i].Open = false;
-            //        PlayCloseRoofSound(roofs[i]);
-            //    }
-            //}
+            if (Player.X < 0 || Player.X >= TheMap.Width - 1 ||
+                Player.Y < 0 || Player.Y >= TheMap.Height - 1)
+            {
+                if (IsAngry && this.GetType().Equals(typeof(Town)))
+                {
+                    Player.LastAttackedMapID = TheMap.MapID;
+                }
 
-            //if (Player.X < 0 || Player.X >= TheMap.Width - 1 ||
-            //    Player.Y < 0 || Player.Y >= TheMap.Height - 1)
-            //{
-            //    if (IsAngry && this.GetType().Equals(typeof(Town)))
-            //    {
-            //        Player.LastAttackedMapID = TheMap.MapID;
-            //    }
-
-            //    LeaveMap();
-            //}
+                await LeaveMap();
+            }
         }
-
     }
 }

@@ -1,11 +1,11 @@
-﻿using Xle.Services;
-using Xle.Services.Commands.Implementation;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System.Threading.Tasks;
+using Xle.Services.Commands.Implementation;
 
 namespace Xle.Maps.Dungeons.Commands
 {
-    [ServiceName("DungeonFight")]
+    [Transient("DungeonFight")]
     public class DungeonFight : Fight
     {
         private DungeonExtender map

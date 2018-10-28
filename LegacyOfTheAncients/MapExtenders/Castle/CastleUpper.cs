@@ -1,15 +1,10 @@
-﻿using Xle.Ancients.MapExtenders.Castle.Events;
-using Xle.XleEventTypes;
-using Xle.XleEventTypes.Extenders;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Castle
 {
+    [Transient("CastleUpper")]
     public class CastleUpper : CastleGround
     {
         public CastleUpper()

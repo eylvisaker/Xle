@@ -1,10 +1,18 @@
-﻿using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+﻿using AgateLib;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Threading.Tasks;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 
-namespace Xle.Services.Menus.Implementation
+namespace Xle.Services.Menus
 {
+    public interface INumberPicker
+    {
+        Task<int> ChooseNumber(int max);
+    }
+
+    [Singleton]
     public class NumberPicker : INumberPicker
     {
         private IXleScreen screen;
@@ -26,26 +34,20 @@ namespace Xle.Services.Menus.Implementation
         /// </summary>
         /// <param name="max">The maximum value the user is allowed to select.</param>
         /// <returns></returns>
-        public int ChooseNumber(int max)
+        public async Task<int> ChooseNumber(int max)
         {
-            return ChooseNumber(screen.OnDraw, max);
-        }
-        public int ChooseNumber(Action redraw, int max)
-        {
-            throw new NotImplementedException();
-
             int method = 0;
             int amount = 0;
 
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            TextArea.Print("Enter number by ", XleColor.White);
-            TextArea.Print("keyboard", XleColor.Yellow);
-            TextArea.Print(" or ", XleColor.White);
-            TextArea.Print("joystick", XleColor.Cyan);
+            await TextArea.Print("Enter number by ", XleColor.White);
+            await TextArea.Print("keyboard", XleColor.Yellow);
+            await TextArea.Print(" or ", XleColor.White);
+            await TextArea.Print("joystick", XleColor.Cyan);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             Keys key;
 
@@ -54,7 +56,7 @@ namespace Xle.Services.Menus.Implementation
             {
                 input.PromptToContinueOnWait = false;
 
-                //key = input.WaitForKey();
+                key = await input.WaitForKey();
 
                 if (method == 0)
                 {
@@ -68,20 +70,20 @@ namespace Xle.Services.Menus.Implementation
                         case Keys.Left:
                         case Keys.Down:
 
-                            TextArea.PrintLine("Use joystick - press button when done");
-                            TextArea.PrintLine();
-                            TextArea.PrintLine("  Horizontal - Slow change", XleColor.Cyan);
-                            TextArea.PrintLine("  Vertical   - Fast change", XleColor.Cyan);
-                            TextArea.PrintLine("                          - 0 -");
+                            await TextArea.PrintLine("Use joystick - press button when done");
+                            await TextArea.PrintLine();
+                            await TextArea.PrintLine("  Horizontal - Slow change", XleColor.Cyan);
+                            await TextArea.PrintLine("  Vertical   - Fast change", XleColor.Cyan);
+                            await TextArea.PrintLine("                          - 0 -");
 
                             method = 2;
 
                             break;
                         default:
-                            TextArea.PrintLine("Keyboard entry-press return when done", XleColor.Yellow);
-                            TextArea.PrintLine();
-                            TextArea.PrintLine();
-                            TextArea.PrintLine("                          - 0 -");
+                            await TextArea.PrintLine("Keyboard entry-press return when done", XleColor.Yellow);
+                            await TextArea.PrintLine();
+                            await TextArea.PrintLine();
+                            await TextArea.PrintLine("                          - 0 -");
                             method = 1;
 
                             break;
@@ -100,7 +102,7 @@ namespace Xle.Services.Menus.Implementation
                     amount = Math.Min(amount, max);
                     amount = Math.Max(amount, 0);
 
-                    TextArea.RewriteLine(4, "                          - " + amount.ToString() + " -");
+                    await TextArea.RewriteLine(4, "                          - " + amount.ToString() + " -");
                 }
                 else if (method == 2)
                 {
@@ -126,14 +128,14 @@ namespace Xle.Services.Menus.Implementation
                     if (amount < 0)
                         amount = 0;
 
-                    TextArea.RewriteLine(4, "                          - " + amount.ToString() + " -");
+                    await TextArea.RewriteLine(4, "                          - " + amount.ToString() + " -");
                 }
 
 
             } while (key != Keys.Enter);
 
             input.PromptToContinueOnWait = true;
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             return amount;
         }

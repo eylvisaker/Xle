@@ -1,12 +1,9 @@
-﻿using Xle.Ancients.MapExtenders.Castle.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
+using Xle.Ancients.MapExtenders.Castle.Events;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
+    [Transient("CompendiumFirst")]
     public class CompendiumFirst : TreasureChest
     {
     }

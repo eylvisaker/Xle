@@ -1,14 +1,11 @@
-﻿using Xle.Ancients.MapExtenders.Castle;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
 
 using Xle.Ancients.MapExtenders.Castle.Events;
 
 namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 {
+    [Transient("FinalMagicIce")]
     public class FinalMagicIce : MagicIce
     {
         private bool activatedCompendium;
@@ -19,7 +16,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
             this.fortressActivator = fortressActivator;
         }
 
-        FortressFinal fortressFinal { get { return (FortressFinal)GameState.MapExtender; } }
+        private FortressFinal fortressFinal { get { return (FortressFinal)GameState.MapExtender; } }
 
         public override async Task<bool> Use(int item)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Outside
 {
+    [Transient("Flight")]
     public class Flight : Tarmalon
     {
         public override async Task OnAfterEntry()
@@ -18,9 +20,9 @@ namespace Xle.Ancients.MapExtenders.Outside
                 Player.Rafts.Add(pegasus);
                 Player.BoardedRaft = pegasus;
 
-                PegasusFlightToIsland();
+                await PegasusFlightToIsland();
 
-                TextArea.PrintLine("Pegasus sets you down.");
+                await TextArea.PrintLine("Pegasus sets you down.");
                 SoundMan.PlaySound(LotaSound.WalkOutside);
 
                 Player.FaceDirection = Direction.South;
@@ -39,7 +41,7 @@ namespace Xle.Ancients.MapExtenders.Outside
 			new Tuple<int,int,int>(63,108,12)
 		};
 
-        private void PegasusFlightToIsland()
+        private async Task PegasusFlightToIsland()
         {
             for (int i = 0; i < points.Length; i++)
             {
@@ -50,7 +52,7 @@ namespace Xle.Ancients.MapExtenders.Outside
 
                 for (int x = range.Item1; x <= range.Item2; x++)
                 {
-                    SetPosition(x, range.Item3);
+              await      SetPosition(x, range.Item3);
                 }
 
                 if (i == 0)
@@ -63,19 +65,19 @@ namespace Xle.Ancients.MapExtenders.Outside
                     for (int j = 0; j < count; j++)
                     {
                         MapRenderer.ClearWaves();
-                        SetPosition(range.Item2 + 1, range.Item3);
+              await          SetPosition(range.Item2 + 1, range.Item3);
                     }
                 }
             }
         }
 
-        private void SetPosition(int x, int y)
+        private async Task SetPosition(int x, int y)
         {
             Player.X = x;
             Player.Y = y;
             Player.Food -= 0.1;
 
-            GameControl.Wait(250);
+            await GameControl.WaitAsync(250);
         }
 
     }

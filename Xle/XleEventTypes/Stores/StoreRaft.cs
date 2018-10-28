@@ -5,7 +5,6 @@ namespace Xle.XleEventTypes.Stores
 {
     public class StoreRaft : Store
     {
-
         // map and coords that mark where a purchased raft shows up
         private int mBuyRaftMap;
         private Point mBuyRaftPt;

@@ -161,13 +161,13 @@ namespace Xle.Ancients.MapExtenders.Museum
             }
         }
 
-        private void UseGoldArmband()
+        private async Task UseGoldArmband()
         {
             bool facingDoor = IsFacingDoor;
 
             if (facingDoor)
             {
-                GameControl.Wait(1000);
+                await GameControl.WaitAsync(1000);
 
                 foreach (var entry in Map.EntryPoints)
                 {
@@ -177,11 +177,11 @@ namespace Xle.Ancients.MapExtenders.Museum
                     }
                 }
 
-                LeaveMap();
+                await LeaveMap();
             }
             else
             {
-                TextArea.PrintLine("The gold armband hums softly.");
+                await TextArea.PrintLine("The gold armband hums softly.");
             }
         }
 

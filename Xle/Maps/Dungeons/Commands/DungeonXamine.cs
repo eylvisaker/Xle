@@ -1,14 +1,14 @@
-﻿using Xle.Services;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.Game;
-using Xle.Services.XleSystem;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System;
 using System.Threading.Tasks;
+using Xle.Services.Commands.Implementation;
+using Xle.Services.Game;
+using Xle.Services.XleSystem;
 
 namespace Xle.Maps.Dungeons.Commands
 {
-    [ServiceName("DungeonXamine")]
+    [Transient("DungeonXamine")]
     public class DungeonXamine : Xamine
     {
         public ISoundMan SoundMan { get; set; }

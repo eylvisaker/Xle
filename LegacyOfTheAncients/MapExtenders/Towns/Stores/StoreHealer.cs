@@ -1,8 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
+    [Transient("StoreHealder")]
     public class StoreHealer : LotaStoreFront
     {
         private bool buyingHerbs = false;
@@ -15,7 +18,7 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
             cs.BorderColor = XleColor.Gray;
         }
 
-        protected override bool SpeakImpl()
+        protected override async Task<bool> SpeakImplAsync()
         {
             buyingHerbs = false;
 
@@ -44,33 +47,33 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
 
             MenuItemList theList = new MenuItemList("0", "1", "2");
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("Make choice (hit 0 to cancel)");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Make choice (hit 0 to cancel)");
+            await TextArea.PrintLine();
 
-            int choice = QuickMenu(theList, 2, 0);
+            int choice = await QuickMenu(theList, 2, 0);
 
             if (choice == 0)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("Nothing purchased");
-                TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Nothing purchased");
+                await TextArea.PrintLine();
 
-                StoreSound(LotaSound.Medium);
+                await StoreSound(LotaSound.Medium);
             }
             else if (choice == 1)
             {
-                TextArea.PrintLine("You are cured.");
+                await TextArea.PrintLine("You are cured.");
                 Player.HP = Player.MaxHP;
 
-                StoreSound(LotaSound.VeryGood);
+                await StoreSound(LotaSound.VeryGood);
             }
             else if (choice == 2)
             {
                 if (Story.EatenJutonFruit == false)
                 {
-                    TextArea.PrintLine("You're not ready yet.");
+                    await TextArea.PrintLine("You're not ready yet.");
                     SoundMan.PlaySound(LotaSound.Medium);
                 }
                 else
@@ -80,14 +83,14 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
 
                     buyingHerbs = true;
 
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("Purchase how many healing herbs?");
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("Purchase how many healing herbs?");
 
-                    int number = ChooseNumber(max);
+                    int number = await ChooseNumber(max);
 
                     if (number == 0)
                     {
-                        TextArea.PrintLine("Nothing purchased.");
+                        await TextArea.PrintLine("Nothing purchased.");
                         SoundMan.PlaySound(LotaSound.Medium);
                     }
                     else
@@ -99,27 +102,27 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
 
                         Player.Items[LotaItem.HealingHerb] += number;
 
-                        TextArea.PrintLine(number.ToString() + " healing herbs purchased.");
+                        await TextArea.PrintLine(number.ToString() + " healing herbs purchased.");
                         Story.PurchasedHerbs = true;
 
-                        StoreSound(LotaSound.Sale);
+                        await StoreSound(LotaSound.Sale);
                     }
                 }
             }
 
-            AfterSpeak();
+            await AfterSpeak();
 
             return true;
         }
 
-        protected virtual void AfterSpeak()
+        protected virtual async Task AfterSpeak()
         {
             if (Story.HasGuardianMark == false)
                 return;
 
-            TextArea.PrintLine("A distant healer awaits you.", XleColor.Yellow);
+            await TextArea.PrintLine("A distant healer awaits you.", XleColor.Yellow);
 
-            SoundMan.PlaySoundSync(LotaSound.Encounter);
+            await StoreSound(LotaSound.Encounter);
         }
 
         private void SetOptionsText(int woundPrice, int herbsPrice)

@@ -1,9 +1,11 @@
 ﻿using Xle.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AgateLib;
 
 namespace Xle.Services.Rendering.Maps
 {
+    [Transient]
     public class TownRenderer : Map2DRenderer
     {
         protected override void Animate(GameTime time, Rectangle tileRect)

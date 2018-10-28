@@ -45,7 +45,7 @@ namespace Xle.Ancients.MapExtenders.Museum.Commands
                     }
                 }
 
-                Museum.LeaveMap();
+                await Museum.LeaveMap();
             }
             else
             {

@@ -74,7 +74,7 @@ namespace Xle.EventTests
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
-                .Returns(() => offers[0] * 3);
+                .ReturnsAsync(() => offers[0] * 3);
 
             negotiator.NegotiatePrice(eq);
 
@@ -97,7 +97,7 @@ namespace Xle.EventTests
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
-                .Returns(0);
+                .ReturnsAsync(0);
 
             negotiator.NegotiatePrice(eq);
 
@@ -120,7 +120,7 @@ namespace Xle.EventTests
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
-                .Returns(() => ask = (offer * 149) / 100);
+                .ReturnsAsync(() => ask = (offer * 149) / 100);
 
             negotiator.NegotiatePrice(eq);
 
@@ -142,7 +142,7 @@ namespace Xle.EventTests
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
-                .Returns(() => 5000);
+                .ReturnsAsync(() => 5000);
 
             Services.BuybackFormatter.Setup(x => x.ComeBackWhenSerious()).Verifiable();
 
@@ -182,7 +182,7 @@ namespace Xle.EventTests
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
-                .Returns(() =>
+                .ReturnsAsync(() =>
                 {
                     int newAsk = Math.Max(ask - 5, offer + 2);
 
@@ -229,7 +229,7 @@ namespace Xle.EventTests
 
             Services.NumberPicker
                 .Setup(x => x.ChooseNumber(It.IsAny<int>()))
-                .Returns(() =>
+                .ReturnsAsync(() =>
                 {
                     int newAsk = ask + 1;
 

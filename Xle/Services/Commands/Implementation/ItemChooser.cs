@@ -12,7 +12,7 @@ namespace Xle.Services.Commands.Implementation
         Task<int> ChooseItem();
     }
 
-    [Singleton]
+    [Singleton, InjectProperties]
     public class ItemChooser : IItemChooser
     {
         public ITextArea TextArea { get; set; }

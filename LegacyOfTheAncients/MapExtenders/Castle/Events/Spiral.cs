@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using AgateLib;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xle.XleEventTypes;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {
+    [Transient("Spiral")]
     public class Spiral : EventExtender
     {
         public override async Task<bool> StepOn()

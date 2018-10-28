@@ -61,7 +61,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\DoorShut.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\FinalMagicIce.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\FortressFinalActivator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Fortress\SecondArea\IFortressFinalActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\LotaEvent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\LotaMuseumRob.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Museum\Commands\LotaMuseumUse.cs" />

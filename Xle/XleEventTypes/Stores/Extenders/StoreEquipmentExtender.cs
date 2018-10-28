@@ -1,10 +1,11 @@
-﻿using Xle.Data;
-using Xle.Services.Menus;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xle.Data;
+using Xle.Services.Menus;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
@@ -29,7 +30,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         protected abstract string StoreType { get; }
 
-        protected override bool SpeakImpl()
+        protected override async Task<bool> SpeakImplAsync()
         {
             MenuItemList theList = new MenuItemList("Buy", "Sell", "Neither");
 
@@ -38,18 +39,17 @@ namespace Xle.XleEventTypes.Stores.Extenders
             InitializeWindows();
 
             TextArea.Clear();
-            int choice = QuickMenu(theList, 2, 0);
-            Wait(1);
+            int choice = await QuickMenu(theList, 2, 0);
+            await Wait(1);
 
-            throw new NotImplementedException();
-            //if (choice == 0)
-            //{
-            //    await BuyItem();
-            //}
-            //else if (choice == 1)		// sell item
-            //{
-            //    await SellItem();
-            //}
+            if (choice == 0)
+            {
+                await BuyItem();
+            }
+            else if (choice == 1)		// sell item
+            {
+                await SellItem();
+            }
 
             return true;
         }
@@ -62,7 +62,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             await TextArea.PrintLine("      what will you sell me?");
             await TextArea.PrintLine();
 
-            Equipment eq = PickItemToSell();
+            Equipment eq = await PickItemToSell();
 
             if (eq == null)
             {
@@ -95,7 +95,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             await TextArea.PrintLine();
         }
 
-        protected abstract Equipment PickItemToSell();
+        protected abstract Task<Equipment> PickItemToSell();
 
         private async Task NoTransactionMessage()
         {
@@ -115,7 +115,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             return result;
         }
 
-        private void BuyItem()
+        private async Task BuyItem()
         {
             itemsPrompt.Text = "Items               Prices";
 
@@ -125,7 +125,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             FillItems(Player.TimeQuality, itemList, qualList, priceList);
 
-            StoreSound(LotaSound.Sale);
+            await StoreSound(LotaSound.Sale);
 
             int count = 0;
 
@@ -136,7 +136,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 var price = priceList[i];
 
                 AddItemToDisplay(i, name, price);
-                Wait(1);
+                await Wait(1);
             }
 
             MenuItemList theList2 = new MenuItemList();
@@ -146,45 +146,45 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 theList2.Add(k.ToString());
             }
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Make choice (hit 0 to cancel)");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Make choice (hit 0 to cancel)");
+            await TextArea.PrintLine();
 
-            int choice = QuickMenu(theList2, 2, 0);
+            int choice = await QuickMenu(theList2, 2, 0);
 
             if (choice == 0)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("Nothing purchased");
-                TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Nothing purchased");
+                await TextArea.PrintLine();
 
-                StoreSound(LotaSound.Medium);
+                await StoreSound(LotaSound.Medium);
             }
             else if (Player.Spend(priceList[choice]))
             {
                 // spend the cash, if they have it
                 if (AddItem(Player, itemList[choice], qualList[choice]))
                 {
-                    TextArea.PrintLine(ItemName(itemList[choice], qualList[choice]) + " purchased.");
-                    TextArea.PrintLine();
+                    await TextArea.PrintLine(ItemName(itemList[choice], qualList[choice]) + " purchased.");
+                    await TextArea.PrintLine();
 
-                    StoreSound(LotaSound.Sale);
+                    await StoreSound(LotaSound.Sale);
                 }
                 else
                 {
                     Player.Gold += priceList[choice];
-                    TextArea.PrintLine();
-                    TextArea.PrintLine();
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("No purchase.  You're");
-                    TextArea.PrintLine("carrying too much.");
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("No purchase.  You're");
+                    await TextArea.PrintLine("carrying too much.");
                 }
 
             }
             else
             {
-                TextArea.PrintLine("You're short on gold.");
-                StoreSound(LotaSound.Medium);
+                await TextArea.PrintLine("You're short on gold.");
+                await StoreSound(LotaSound.Medium);
             }
         }
 
@@ -281,6 +281,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
         protected abstract int ItemCost(int itemIndex, int quality);
     }
 
+    [Transient("StoreWeapon")]
     public class StoreWeapon : StoreEquipmentExtender
     {
         protected override void InitializeColorScheme(ColorScheme cs)
@@ -291,10 +292,9 @@ namespace Xle.XleEventTypes.Stores.Extenders
             cs.BorderColor = XleColor.Red;
         }
 
-        protected override Equipment PickItemToSell()
+        protected override async Task<Equipment> PickItemToSell()
         {
-            throw new NotImplementedException();
-            //return EquipmentPicker.PickWeapon(GameState, null, XleColor.Black);
+            return await EquipmentPicker.PickWeapon(GameState, null, XleColor.Black);
         }
         protected override string StoreType
         {
@@ -325,6 +325,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
             return Data.WeaponCost(itemIndex, quality);
         }
     }
+
+    [Transient("StoreArmor")]
     public class StoreArmor : StoreEquipmentExtender
     {
         protected override void InitializeColorScheme(ColorScheme cs)
@@ -335,10 +337,9 @@ namespace Xle.XleEventTypes.Stores.Extenders
             cs.BorderColor = XleColor.LightBlue;
         }
 
-        protected override Equipment PickItemToSell()
+        protected override async Task<Equipment> PickItemToSell()
         {
-            throw new NotImplementedException();
-            //return EquipmentPicker.PickArmor(GameState, null, XleColor.Black);
+            return await EquipmentPicker.PickArmor(GameState, null, XleColor.Black);
         }
         protected override string StoreType
         {

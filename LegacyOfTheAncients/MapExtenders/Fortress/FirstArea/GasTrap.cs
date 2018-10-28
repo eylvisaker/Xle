@@ -1,10 +1,12 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Maps;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
+    [Transient("GasTrap")]
     public class GasTrap : LotaEvent
     {
         public Random Random { get; set; }

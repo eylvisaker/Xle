@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 {
+    [Transient("Compendium")]
     public class Compendium : EventExtender
     {
         private IFortressFinalActivator fortressActivator;

@@ -90,7 +90,10 @@ namespace Xle.Foundation
                     let transient = typeinfo.GetCustomAttribute<TransientAttribute>()
                     where transient != null
                           && typeinfo.IsPublic && !typeinfo.IsAbstract
-                    select new { InstanceType = type, TypeInfo = typeinfo, Transient = transient };
+                    select new { InstanceType = type,
+                                 TypeInfo = typeinfo,
+                                 Transient = transient,
+                                 InstanceTypeName = type.Name };
 
                 foreach (var type in types)
                 {
@@ -138,27 +141,6 @@ namespace Xle.Foundation
                     WireProperties(registration, type.TypeInfo);
                 }
             }
-            foreach (var assembly in assemblies)
-            {
-                var types =
-                    from type in assembly.GetTypes()
-                    let typeinfo = type.GetTypeInfo()
-                    let attribute = typeinfo.GetCustomAttribute<AgateLib.ScopedTransientAttribute>()
-                    where attribute != null
-                          && typeinfo.IsPublic && !typeinfo.IsAbstract
-                    select new { InstanceType = type, TypeInfo = typeinfo, Transient = attribute };
-
-                foreach (var type in types)
-                {
-                    var registration = builder
-                        .RegisterType(type.InstanceType)
-                        .AsImplementedInterfaces()
-                        .AsSelf()
-                        .InstancePerLifetimeScope();
-
-                    WireProperties(registration, type.TypeInfo);
-                }
-            }
         }
 
         private void RegisterSingletons(Assembly[] assemblies)
@@ -169,28 +151,6 @@ namespace Xle.Foundation
                     from type in assembly.GetTypes()
                     let typeinfo = type.GetTypeInfo()
                     let attribute = typeinfo.GetCustomAttribute<SingletonAttribute>()
-                    where attribute != null
-                    && typeinfo.IsPublic && !typeinfo.IsAbstract
-                    select new { InstanceType = type, TypeInfo = typeinfo };
-
-                foreach (var type in types)
-                {
-                    var registration = builder
-                        .RegisterType(type.InstanceType)
-                        .AsImplementedInterfaces()
-                        .AsSelf()
-                        .SingleInstance();
-
-                    WireProperties(registration, type.TypeInfo);
-                }
-            }
-
-            foreach (var assembly in assemblies)
-            {
-                var types =
-                    from type in assembly.GetTypes()
-                    let typeinfo = type.GetTypeInfo()
-                    let attribute = typeinfo.GetCustomAttribute<AgateLib.SingletonAttribute>()
                     where attribute != null
                     && typeinfo.IsPublic && !typeinfo.IsAbstract
                     select new { InstanceType = type, TypeInfo = typeinfo };

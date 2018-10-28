@@ -1,12 +1,7 @@
 ﻿using AgateLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xle.Maps.Towns;
-using Xle.Services;
 
 namespace Xle.Ancients.MapExtenders.Fortress
 {

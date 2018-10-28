@@ -2,9 +2,11 @@
 using Xle.Services.Commands.Implementation;
 using Microsoft.Xna.Framework;
 using System;
+using AgateLib;
 
 namespace Xle.Maps.Dungeons.Commands
 {
+    [Transient("DungeonMagic")]
     public class DungeonMagic : MagicWithFancyPrompt
     {
         private DungeonExtender MapExtender { get { return (DungeonExtender)GameState.MapExtender; } }

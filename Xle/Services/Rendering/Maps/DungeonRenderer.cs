@@ -4,9 +4,11 @@ using Xle.Maps.XleMapTypes;
 using Microsoft.Xna.Framework;
 using System;
 using Microsoft.Xna.Framework.Graphics;
+using AgateLib;
 
 namespace Xle.Services.Rendering.Maps
 {
+    [Transient]
     public class DungeonRenderer : Map3DRenderer
     {
         public XleData Data { get; set; }

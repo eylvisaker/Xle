@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Maps;
@@ -7,6 +8,7 @@ using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 {
+    [Transient("SeeCompendium")]
     public class SeeCompendium : EventExtender
     {
         private bool paralyzed = false;

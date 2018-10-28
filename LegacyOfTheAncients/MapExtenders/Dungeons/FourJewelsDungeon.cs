@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 
 using Xle.Maps;
 
 namespace Xle.Ancients.MapExtenders.Dungeons
 {
+    [Transient("FourJewelsDungeon")]
     public class FourJewelsDungeon : LotaDungeon
     {
         public override Map3DSurfaces Surfaces()

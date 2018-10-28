@@ -1,18 +1,19 @@
 ﻿using AgateLib;
 using AgateLib.Diagnostics;
 using AgateLib.Scenes;
-using AgateLib.UserInterface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Xle.Diagnostics;
+using System;
 
 namespace Xle.Ancients
 {
     public interface IAgateConsoleManager
     {
+        event Action Quit;
+
         void Update(GameTime gameTime);
 
-        void AddVocabulary(IVocabulary vocab);
+        void AddVocabulary(params IVocabulary[] vocab);
     }
 
     [Singleton]
@@ -30,13 +31,23 @@ namespace Xle.Ancients
         }
 
         /// <summary>
+        /// Action to carry out when the user types quit.
+        /// </summary>
+        public event Action Quit
+        {
+            add => console.State.Quit += value;
+            remove => console.State.Quit -= value;
+        }
+
+        /// <summary>
         /// Gets or sets the keyboard key that can be used to open the console.
         /// </summary>
         public Keys ActivationKey { get; set; } = Keys.OemTilde;
 
-        public void AddVocabulary(IVocabulary vocab)
+        public void AddVocabulary(params IVocabulary[] vocabs)
         {
-            console.AddVocabulary(vocab);
+            foreach (IVocabulary vocab in vocabs)
+                console.AddCommands(vocab);
         }
 
         public void Update(GameTime gameTime)

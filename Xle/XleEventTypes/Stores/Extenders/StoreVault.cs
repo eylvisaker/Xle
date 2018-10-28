@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {
+    [Transient("StoreVault")]
     public class StoreVault : StoreExtender
     {
         public override bool AllowInteractionWhenLoanOverdue { get { return true; } }
