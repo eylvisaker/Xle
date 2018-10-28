@@ -205,7 +205,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
             Player.Gold += offer;
             Player.RemoveEquipment(item);
 
-            await SoundMan.PlaySoundWait(LotaSound.Sale);
+            await GameControl.PlaySoundWait(LotaSound.Sale);
         }
 
     }

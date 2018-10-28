@@ -65,7 +65,7 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
             var old = Map.ColorScheme.BorderColor;
             Map.ColorScheme.BorderColor = XleColor.White;
 
-            await SoundMan.PlaySoundWait(LotaSound.VeryGood);
+            await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
             Map.ColorScheme.BorderColor = old;
 

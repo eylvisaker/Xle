@@ -1,5 +1,5 @@
 ﻿using AgateLib;
-
+using System.Threading.Tasks;
 using Xle.Maps;
 
 namespace Xle.Ancients.MapExtenders.Dungeons
@@ -30,7 +30,7 @@ namespace Xle.Ancients.MapExtenders.Dungeons
             return (int)LotaItem.GuardJewel;
         }
 
-        public override void OnPlayerExitDungeon()
+        public override async Task OnPlayerExitDungeon()
         {
             if (IsCompleted)
                 return;
@@ -38,7 +38,7 @@ namespace Xle.Ancients.MapExtenders.Dungeons
             if (Player.Items[LotaItem.GuardJewel] >= 4)
             {
                 IsCompleted = true;
-                GivePermanentStrengthBoost();
+               await GivePermanentStrengthBoost();
             }
         }
     }

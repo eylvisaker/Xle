@@ -1,5 +1,5 @@
 ﻿using AgateLib;
-
+using System.Threading.Tasks;
 using Xle.Maps;
 
 namespace Xle.Ancients.MapExtenders.Dungeons
@@ -24,7 +24,8 @@ namespace Xle.Ancients.MapExtenders.Dungeons
 
             return 0;
         }
-        public override void OnPlayerExitDungeon()
+
+        public override async Task OnPlayerExitDungeon()
         {
             if (IsCompleted)
                 return;
@@ -33,7 +34,7 @@ namespace Xle.Ancients.MapExtenders.Dungeons
             {
                 IsCompleted = true;
 
-                GivePermanentStrengthBoost();
+                await GivePermanentStrengthBoost();
             }
         }
 

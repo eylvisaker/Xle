@@ -235,7 +235,7 @@ namespace Xle.Maps.Towns
         {
             if (guard.OnPlayerAttack != null)
             {
-                bool cancel = guard.OnPlayerAttack(GameState, guard);
+                bool cancel = await guard.OnPlayerAttack(GameState, guard);
                 if (cancel)
                     return;
             }
@@ -275,7 +275,7 @@ namespace Xle.Maps.Towns
                     SoundMan.StopSound(LotaSound.PlayerHit);
                     SoundMan.PlaySound(LotaSound.EnemyDie);
 
-                    guard.OnGuardDead?.Invoke(GameState, guard);
+                    await guard.OnGuardDead?.Invoke(GameState, guard);
                 }
             }
         }

@@ -37,6 +37,8 @@ namespace Xle.Services.ScreenModel
         int Margin { get; set; }
         Color DefaultColor { get; }
 
+        Func<int, bool, IRenderer, Task> Waiter { get; set; }
+
         Task PrintLineCentered(string p, Color color);
 
         TextLine GetLine(int i);
@@ -52,20 +54,19 @@ namespace Xle.Services.ScreenModel
 
         private IXleScreen screen;
         private GameState gameState;
-        private IXleGameControl gameControl;
 
         public TextArea(
-            IXleGameControl gameControl,
             IXleScreen screen,
             GameState gameState)
         {
             this.gameState = gameState;
             this.screen = screen;
-            this.gameControl = gameControl;
 
             for (int i = 0; i < lines.Length; i++)
                 lines[i] = new TextLine(this);
         }
+
+        public Func<int, bool, IRenderer, Task> Waiter { get; set; }
 
         public int Margin { get { return margin; } set { margin = value; } }
 
@@ -73,6 +74,8 @@ namespace Xle.Services.ScreenModel
         {
             get { return gameState.Map.ColorScheme.TextColor; }
         }
+
+        private Task WaitAsync(int howLong, bool keyBreak = false, IRenderer redraw = null) => Waiter?.Invoke(howLong, keyBreak, redraw);
 
         private void CycleLines()
         {
@@ -132,7 +135,7 @@ namespace Xle.Services.ScreenModel
                 }
             }
 
-            await gameControl.WaitAsync(1);
+            await WaitAsync(1);
         }
 
         private async Task PrintSlowImpl(string text, Color defaultColor, Color[] colors = null)
@@ -148,12 +151,12 @@ namespace Xle.Services.ScreenModel
                     await Print(text[i].ToString(), defaultColor);
                 }
 
-                await gameControl.WaitAsync(50, keyBreak: true);
+                await WaitAsync(50, keyBreak: true);
 
                 if (text[i] == '.' || text[i] == '!')
-                    await gameControl.WaitAsync(500);
+                    await WaitAsync(500);
                 if (text[i] == ',')
-                    await gameControl.WaitAsync(350);
+                    await WaitAsync(350);
             }
         }
 
@@ -255,42 +258,42 @@ namespace Xle.Services.ScreenModel
 
         public async Task FlashLinesWhile(Func<bool> pred, Color color1, Color color2, int flashRate, params int[] lines)
         {
-            throw new NotImplementedException();
-            //if (lines == null || lines.Length == 0)
-            //{
-            //    FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
-            //    return;
-            //}
-            //if (flashRate == 0)
-            //    throw new ArgumentOutOfRangeException("flashRate", "flashRate must be positive.");
+            if (lines == null || lines.Length == 0)
+            {
+               await FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
+                return;
+            }
 
-            //Stopwatch watch = new Stopwatch();
-            //watch.Start();
+            if (flashRate == 0)
+                throw new ArgumentOutOfRangeException("flashRate", "flashRate must be positive.");
 
-            //while (pred())
-            //{
-            //    int index = (int)watch.ElapsedMilliseconds % flashRate / (flashRate / 2);
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
 
-            //    Color clr = color2;
+            while (pred())
+            {
+                int index = (int)watch.ElapsedMilliseconds % flashRate / (flashRate / 2);
 
-            //    if (index == 1)
-            //        clr = color1;
+                Color clr = color2;
 
-            //    foreach (var line in lines)
-            //    {
-            //        this.lines[line].SetColor(clr);
-            //    }
+                if (index == 1)
+                    clr = color1;
 
-            //    gameControl.Redraw(time);
+                foreach (var line in lines)
+                {
+                    this.lines[line].SetColor(clr);
+                }
 
-            //    if (watch.ElapsedMilliseconds > 10000)
-            //        break;
-            //}
+                await Task.Yield();
 
-            //foreach (var line in lines)
-            //{
-            //    this.lines[line].SetColor(color1);
-            //}
+                if (watch.ElapsedMilliseconds > 10000)
+                    break;
+            }
+
+            foreach (var line in lines)
+            {
+                this.lines[line].SetColor(color1);
+            }
         }
 
         public Point CursorLocation { get { return cursor; } }

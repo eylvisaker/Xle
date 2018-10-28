@@ -116,7 +116,7 @@ namespace Xle.Ancients.TitleScreen
 
                     lowerWindow.Text = enteredName + "'s adventures begin";
 
-                    await SoundMan.PlaySoundWait(LotaSound.VeryGood);
+                    await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
                     NewState = Factory.CreateIntroduction(enteredName);
                 }

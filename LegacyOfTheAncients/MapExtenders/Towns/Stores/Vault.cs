@@ -19,7 +19,7 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
             int bags = (int)(Player.VaultGold / 99.0 + 1);
 
             await TextArea.PrintLine("You find " + bags.ToString() + " bags of gold!");
-            await SoundMan.PlaySoundWait(LotaSound.VeryGood);
+            await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
             Player.Gold += Player.VaultGold;
             Player.VaultGold = (int)(Player.VaultGold * 0.8);

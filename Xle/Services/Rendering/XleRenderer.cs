@@ -12,14 +12,13 @@ using Xle.Services.ScreenModel;
 
 namespace Xle.Services.Rendering
 {
-
-    public interface IXleRenderer : IXleService
+    public interface IXleRenderer
     {
         Action ReplacementDrawMethod { get; set; }
 
         void Draw(GameTime time, SpriteBatch spriteBatch);
 
-        void UpdateAnim();
+        void Update(GameTime time);
 
         void DrawFrame(SpriteBatch spriteBatch, Color color);
 
@@ -81,17 +80,9 @@ namespace Xle.Services.Rendering
             this.rects = rects;
             this.playerAnimator = playerAnimator;
             this.statsDisplay = statsDisplay;
-
-            Screen.Draw += Screen_Draw;
-            Screen.Update += Screen_Update;
         }
 
         public SpriteBatch spriteBatch { get; set; }
-
-        private void Screen_Update(object sender, EventArgs e)
-        {
-            UpdateAnim();
-        }
 
         private void Screen_Draw(object sender, EventArgs e)
         {
@@ -398,7 +389,7 @@ namespace Xle.Services.Rendering
 
         public Action ReplacementDrawMethod { get; set; }
 
-        public XleMapRenderer MapRenderer { get { return GameState.MapExtender.MapRenderer; } }
+        public XleMapRenderer MapRenderer { get { return GameState?.MapExtender?.MapRenderer; } }
 
         public ColorScheme ColorScheme => GameState.Map.ColorScheme;
 
@@ -447,7 +438,7 @@ namespace Xle.Services.Rendering
             Rectangle mapRect = RectangleX.FromLTRB
                 (vertLine + 16, 16, GameAreaSize.Width - 16, horizLine);
 
-            MapRenderer.Draw(time, spriteBatch, player.Location, player.FaceDirection, mapRect);
+            MapRenderer.Draw(spriteBatch, player.Location, player.FaceDirection, mapRect);
 
             i = 0;
             int cursorPos = 0;
@@ -509,7 +500,7 @@ namespace Xle.Services.Rendering
         /// <summary>
         /// Animates the rafts.
         /// </summary>
-        private void RaftAnim(GameTime time)
+        private void AnimateRafts(GameTime time)
         {
             timeToNextRaftAnim -= time.ElapsedGameTime.TotalMilliseconds;
 
@@ -547,6 +538,14 @@ namespace Xle.Services.Rendering
             DrawFrameHighlight(cs.FrameHighlightColor);
             DrawInnerFrameHighlight(0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameHighlightColor);
 
+        }
+
+        public void Update(GameTime time)
+        {
+            MapRenderer?.Update(time);
+            playerAnimator.Update(time);
+
+            AnimateRafts(time);
         }
     }
 }

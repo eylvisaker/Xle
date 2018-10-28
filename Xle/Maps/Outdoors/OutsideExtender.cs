@@ -142,8 +142,9 @@ namespace Xle.Maps.Outdoors
         {
         }
 
-        public virtual void UpdateEncounterState(ref bool handled)
+        public virtual Task<bool> UpdateEncounterState()
         {
+            return Task.FromResult(false);
         }
 
         public override async Task PlayerCursorMovement(Direction dir)

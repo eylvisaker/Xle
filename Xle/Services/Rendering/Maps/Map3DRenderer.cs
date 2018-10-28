@@ -56,20 +56,15 @@ namespace Xle.Services.Rendering.Maps
         {
         }
 
-        public GameTime GaneTime { get; private set; }
-
         public Map3DSurfaces Surfaces { get; set; }
         protected virtual bool ExtraScale { get { return false; } }
 
-        public override void Draw(GameTime time, SpriteBatch spriteBatch,
-                                  Point playerPos, Direction faceDirection,
-                                  Rectangle inRect)
+        public override void Draw(SpriteBatch spriteBatch, Point playerPos,
+            Direction faceDirection, Rectangle inRect)
         {
-            GaneTime = time;
+                        Surfaces = Extender.Surfaces();
 
-            Surfaces = Extender.Surfaces();
-
-            DrawImpl(time, spriteBatch, playerPos.X, playerPos.Y, faceDirection, inRect);
+            DrawImpl(spriteBatch, playerPos.X, playerPos.Y, faceDirection, inRect);
         }
 
         private void AdvanceAnimation(GameTime time)
@@ -100,11 +95,16 @@ namespace Xle.Services.Rendering.Maps
             }
         }
 
-        private void DrawImpl(GameTime time, SpriteBatch spriteBatch,
+        public override void Update(GameTime time)
+        {
+            base.Update(time);
+
+            AdvanceAnimation(time);
+        }
+
+        private void DrawImpl(SpriteBatch spriteBatch,
                               int x, int y, Direction faceDirection, Rectangle inRect)
         {
-            AdvanceAnimation(time);
-
             if (DrawCloseup)
             {
                 DrawCloseupImpl(spriteBatch, inRect);

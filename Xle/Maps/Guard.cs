@@ -2,6 +2,7 @@
 using Xle.Serialization;
 using Microsoft.Xna.Framework;
 using System;
+using System.Threading.Tasks;
 
 namespace Xle.Maps
 {
@@ -37,8 +38,8 @@ namespace Xle.Maps
         /// Method called when attacked by the player.
         /// Return true to cancel further processing of the attack.
         /// </summary>
-        public Func<GameState, Guard, bool> OnPlayerAttack;
-        public Func<GameState, Guard, bool> OnGuardDead;
+        public Func<GameState, Guard, Task<bool>> OnPlayerAttack;
+        public Func<GameState, Guard, Task<bool>> OnGuardDead;
 
         public bool SkipAttacking { get; set; }
         public bool SkipMovement { get; set; }

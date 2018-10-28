@@ -13,7 +13,7 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
         {
             if (AnyBad)
             {
-                await SoundMan.PlaySoundWait(LotaSound.VeryBad);
+                await GameControl.PlaySoundWait(LotaSound.VeryBad);
 
                 ClearSpiral();
                 RemoveSpiralEvents();

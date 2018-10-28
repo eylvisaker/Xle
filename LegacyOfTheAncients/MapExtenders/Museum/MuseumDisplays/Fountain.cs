@@ -80,7 +80,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 await TextArea.PrintLine("            Gold:  + " + amount.ToString(), XleColor.Yellow);
 
                 SoundMan.PlaySound(LotaSound.VeryGood);
-                StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
+                GameControl.FlashHPWhileSound(XleColor.Yellow);
 
                 Input.WaitForKey();
 

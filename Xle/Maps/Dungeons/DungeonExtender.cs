@@ -51,7 +51,7 @@ namespace Xle.Maps.Dungeons
             return null;
         }
 
-        public virtual void OnPlayerExitDungeon()
+        public virtual async Task OnPlayerExitDungeon()
         {
         }
 
@@ -352,9 +352,9 @@ namespace Xle.Maps.Dungeons
             await UpdateMonsters();
         }
 
-        public void ExecuteKillFlash()
+        public async Task ExecuteKillFlash()
         {
-            SoundMan.PlaySoundSync(LotaSound.VeryBad);
+            await GameControl.PlaySoundWait(LotaSound.VeryBad);
 
             Combat.Monsters.RemoveAll(monst => monst.KillFlashImmune == false);
         }

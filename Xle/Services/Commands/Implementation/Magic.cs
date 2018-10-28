@@ -47,10 +47,10 @@ namespace Xle.Services.Commands.Implementation
 
             Player.Items[magic.ItemID]--;
 
-            CastSpell(magic);
+           await CastSpell(magic);
         }
 
-        protected virtual void CastSpell(MagicSpell magic)
+        protected virtual Task CastSpell(MagicSpell magic)
         {
             throw new NotImplementedException();
         }

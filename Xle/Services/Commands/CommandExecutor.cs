@@ -81,7 +81,7 @@ namespace Xle.Services.Commands
                 await deathHandler.PlayerIsDead();
             }
 
-            textArea.Print("\nEnter command: ");
+            await textArea.Print("\nEnter command: ");
             inputPrompt = true;
 
             commandTask = null;
@@ -207,8 +207,6 @@ namespace Xle.Services.Commands
             {
                 commandTask = OutputException(commandTask.Exception);
             }
-
-            playerAnimator.Update(time);
         }
 
         private async Task OutputException(Exception exception)
@@ -219,6 +217,9 @@ namespace Xle.Services.Commands
                 return;
             }
 
+            inputPrompt = false;
+
+            await textArea.PrintLine();
             await textArea.PrintLine(WrapText($"Error: {exception.GetType()}"), Color.Red);
             await textArea.PrintLine(WrapText(exception.Message), Color.Red);
 

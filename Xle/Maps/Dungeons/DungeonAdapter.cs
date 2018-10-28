@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Maps.Dungeons
 {
@@ -14,7 +15,7 @@ namespace Xle.Maps.Dungeons
         bool IsWallAt(Point loc);
         bool RevealTrapAt(Point loc);
         DungeonMonster MonsterAt(Point loc);
-        void OnPlayerExitDungeon();
+        Task OnPlayerExitDungeon();
         void OnCurrentLevelChanged();
     }
 
@@ -94,9 +95,9 @@ namespace Xle.Maps.Dungeons
             return MapExtender.MonsterAt(GameState.Player.DungeonLevel, loc);
         }
 
-        public void OnPlayerExitDungeon()
+        public async Task OnPlayerExitDungeon()
         {
-            MapExtender.OnPlayerExitDungeon();
+            await MapExtender.OnPlayerExitDungeon();
         }
 
         public void OnCurrentLevelChanged()

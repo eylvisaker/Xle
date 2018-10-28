@@ -8,16 +8,26 @@ namespace Xle.Services.Rendering.Maps
 {
     public abstract class Map2DRenderer : XleMapRenderer
     {
-        public override void Draw(GameTime time, SpriteBatch spriteBatch,
-                                  Point playerPos, Direction faceDirection, Rectangle inRect)
+        private Rectangle tileRect = new Rectangle(0, 0, 100, 100);
+
+        public override void Draw(SpriteBatch spriteBatch, Point playerPos,
+            Direction faceDirection, Rectangle inRect)
         {
-            Draw2D(time, playerPos.X, playerPos.Y, faceDirection, inRect);
+            Draw2D(playerPos.X, playerPos.Y, faceDirection, inRect);
         }
 
         protected Point centerPoint { get; set; }
+
         protected Point topLeftPoint { get; private set; }
 
-        protected void Draw2D(GameTime time, int x, int y, Direction faceDirction, Rectangle inRect)
+        public override void Update(GameTime time)
+        {
+            base.Update(time);
+
+            Animate(time, tileRect);
+        }
+
+        protected void Draw2D(int x, int y, Direction faceDirction, Rectangle inRect)
         {
             int i, j;
             int initialxx = inRect.X;
@@ -32,10 +42,8 @@ namespace Xle.Services.Rendering.Maps
 
             topLeftPoint = new Point(x - 11, y - 7);
 
-            Rectangle tileRect = new Rectangle(topLeftPoint.X, topLeftPoint.Y,
+            tileRect = new Rectangle(topLeftPoint.X, topLeftPoint.Y,
                 width, height);
-
-            Animate(time, tileRect);
 
             for (j = topLeftPoint.Y; j < topLeftPoint.Y + height; j++)
             {

@@ -2,8 +2,10 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Commands.Implementation;
+using Xle.Services.Game;
 using Xle.XleEventTypes;
 
 namespace Xle.Ancients.MapExtenders.Outside
@@ -21,31 +23,31 @@ namespace Xle.Ancients.MapExtenders.Outside
             }
         }
 
-        protected override void CastSpell(MagicSpell magic)
+        protected override async Task CastSpell(MagicSpell magic)
         {
             switch (magic.ID)
             {
                 case 6:
-                    CastSeekSpell(magic);
+                    await CastSeekSpell(magic);
                     break;
 
                 default:
-                    base.CastSpell(magic);
+                    await base.CastSpell(magic);
                     break;
             }
         }
 
-        private void CastSeekSpell(MagicSpell magic)
+        private async Task CastSeekSpell(MagicSpell magic)
         {
-            TextArea.PrintLine("\n\nCast Seek Spell.");
-            GameControl.Wait(200);
+            await TextArea.PrintLine("\n\nCast Seek Spell.");
+            await GameControl.WaitAsync(200);
 
             const int MainContinentMapId = 1;
             const int MuseumMapId = 5;
 
             if (GameState.Map.MapID != MainContinentMapId)
             {
-                TextArea.PrintLine("Too far.");
+                await TextArea.PrintLine("Too far.");
 
                 Player.Items[magic.ItemID]++;
                 return;
@@ -53,7 +55,7 @@ namespace Xle.Ancients.MapExtenders.Outside
 
             GameState.Player.FaceDirection = Direction.East;
 
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await GameControl.PlaySoundSync(LotaSound.VeryGood);
 
             var evt = GameState.Map.Events.OfType<ChangeMapEvent>()
                 .First(x => x.MapID == MuseumMapId);

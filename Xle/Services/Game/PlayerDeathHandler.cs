@@ -43,7 +43,7 @@ namespace Xle.Services.Game
 
             SoundMan.PlaySound(LotaSound.VeryBad);
 
-            await StatsDisplay.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
+            await GameControl.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
 
             LoadOutsideMap();
 
@@ -73,7 +73,7 @@ namespace Xle.Services.Game
             await TextArea.PrintLine("resurrect you from the grave!");
             await TextArea.PrintLine();
 
-            await SoundMan.PlaySoundWait(LotaSound.VeryGood);
+            await GameControl.PlaySoundWait(LotaSound.VeryGood);
         }
 
         protected virtual void LoadOutsideMap()

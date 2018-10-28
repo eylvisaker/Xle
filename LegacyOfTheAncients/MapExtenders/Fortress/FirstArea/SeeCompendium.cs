@@ -141,7 +141,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
         {
             Player.HP = 28;
 
-            await StatsDisplay.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
+            await GameControl.FlashHPWhile(XleColor.Red, XleColor.Yellow, new CountdownTimer(1500).StillRunning);
         }
 
         private async Task MoveWarlord(Guard warlord, int dx, int dy)

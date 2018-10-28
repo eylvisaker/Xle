@@ -15,7 +15,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
             await TextArea.PrintLine();
             await TextArea.PrintLine("The guards eye you warily", XleColor.Yellow);
 
-            await SoundMan.PlaySoundWait(LotaSound.VeryBad);
+            await GameControl.PlaySoundWait(LotaSound.VeryBad);
 
             return true;
         }

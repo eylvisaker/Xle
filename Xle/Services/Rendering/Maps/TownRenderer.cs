@@ -15,11 +15,10 @@ namespace Xle.Services.Rendering.Maps
             TheMap.Guards.AnimateGuards(time);
         }
 
-        public override void Draw(GameTime time, SpriteBatch spriteBatch, 
-                                  Point playerPos, Direction faceDirection, 
-                                  Rectangle inRect)
+        public override void Draw(SpriteBatch spriteBatch, Point playerPos,
+            Direction faceDirection, Rectangle inRect)
         {
-            base.Draw(time, spriteBatch, playerPos, faceDirection, inRect);
+            base.Draw(spriteBatch, playerPos, faceDirection, inRect);
 
             DrawGuards(playerPos, inRect);
         }

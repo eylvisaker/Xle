@@ -1,6 +1,7 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace Xle.Maps.XleMapTypes.MuseumDisplays
@@ -32,17 +33,8 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
         public int FrameTime { get; set; }
         public int Frames { get { return Image.Width / 240; } }
 
-        public void DrawImage(GameTime time, SpriteBatch spriteBatch, Rectangle destRect, int id)
+        public void DrawImage(SpriteBatch spriteBatch, Rectangle destRect, int id)
         {
-            animTime += time.ElapsedGameTime.TotalMilliseconds;
-            if (animTime > FrameTime)
-            {
-                animTime %= FrameTime;
-                animFrame++;
-                if (animFrame >= Frames)
-                    animFrame = 0;
-            }
-
             Rectangle srcRect = new Rectangle(animFrame * 240, 128 * id, 240, 128);
 
             if (Image != null)
@@ -52,6 +44,19 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
             else
             {
                 System.Diagnostics.Debug.Print("Null image in exhibit: " + Text);
+            }
+        }
+
+        public void Update(GameTime time)
+        {
+            animTime += time.ElapsedGameTime.TotalMilliseconds;
+
+            if (animTime > FrameTime)
+            {
+                animTime %= FrameTime;
+                animFrame++;
+                if (animFrame >= Frames)
+                    animFrame = 0;
             }
         }
     }

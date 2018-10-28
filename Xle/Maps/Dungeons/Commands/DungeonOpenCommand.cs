@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 using Xle.Data;
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
@@ -56,9 +55,9 @@ namespace Xle.Maps.Dungeons.Commands
             await TextArea.PrintLine();
             await GameControl.WaitAsync(500);
 
-            GiveUrnContents();
+            await GiveUrnContents();
 
-            await SoundMan.FinishSounds();
+            await GameControl.FinishSounds();
             DungeonAdapter.ClearSpace(Player.X, Player.Y);
         }
 
@@ -69,25 +68,25 @@ namespace Xle.Maps.Dungeons.Commands
             SoundMan.PlaySound(LotaSound.OpenChest);
             await GameControl.WaitAsync(500);
 
-            GiveBoxContents();
+            await GiveBoxContents();
 
-            await SoundMan.FinishSounds();
+            await GameControl.FinishSounds();
 
             DungeonAdapter.ClearSpace(Player.X, Player.Y);
         }
 
 
-        protected virtual void GiveUrnContents()
+        protected virtual async Task GiveUrnContents()
         {
-            GiveHealing();
+            await GiveHealing();
         }
 
-        protected virtual void GiveBoxContents()
+        protected virtual async Task GiveBoxContents()
         {
-            GiveHealing();
+            await GiveHealing();
         }
 
-        private void GiveHealing()
+        private async Task GiveHealing()
         {
             int amount = Random.Next(60, 200);
 
@@ -95,14 +94,14 @@ namespace Xle.Maps.Dungeons.Commands
 
             if (amount <= 0)
             {
-                TextArea.PrintLine("You find nothing.", XleColor.Yellow);
+                await TextArea.PrintLine("You find nothing.", XleColor.Yellow);
             }
             else
             {
-                TextArea.PrintLine("Hit points:  + " + amount, XleColor.Yellow);
+                await TextArea.PrintLine("Hit points:  + " + amount, XleColor.Yellow);
                 Player.HP += amount;
-                SoundMan.PlaySound(LotaSound.Good);
-                StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
+                GameControl.PlaySound(LotaSound.Good);
+                await GameControl.FlashHPWhileSound(XleColor.Yellow);
             }
         }
 
@@ -114,38 +113,38 @@ namespace Xle.Maps.Dungeons.Commands
             SoundMan.PlaySound(LotaSound.OpenChest);
             await GameControl.WaitAsync(GameState.GameSpeed.DungeonOpenChestSoundTime);
 
-            GiveChestContents(val);
+            await GiveChestContents(val);
         }
 
-        protected virtual void GiveChestContents(int val)
+        protected virtual async Task GiveChestContents(int val)
         {
             // TODO: give weapons
             // TODO: bobby trap chests.
 
             if (val == 0)
             {
-                GiveGold();
+                await GiveGold();
             }
             else
             {
-                GiveSpecialChestItem(val);
+                await GiveSpecialChestItem(val);
             }
 
             DungeonAdapter.ClearSpace(Player.X, Player.Y);
         }
 
-        private void GiveGold()
+        private async Task GiveGold()
         {
             int amount = Random.Next(90, 300);
 
-            TextArea.PrintLine("You find " + amount + " gold.", XleColor.Yellow);
+            await TextArea.PrintLine("You find " + amount + " gold.", XleColor.Yellow);
 
             Player.Gold += amount;
 
-            StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
+            await GameControl.FlashHPWhileSound(XleColor.Yellow);
         }
 
-        protected virtual void GiveSpecialChestItem(int val)
+        protected virtual async Task GiveSpecialChestItem(int val)
         {
             int treasure = DungeonAdapter.GetTreasure(val);
 
@@ -153,18 +152,18 @@ namespace Xle.Maps.Dungeons.Commands
             {
                 string text = "You find a " + Data.ItemList[treasure].LongName + "!!";
                 TextArea.Clear();
-                TextArea.PrintLine(text);
+                await TextArea.PrintLine(text);
 
                 Player.Items[treasure] += 1;
 
                 SoundMan.PlaySound(LotaSound.VeryGood);
 
-                TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
+                await TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
                     XleColor.White, XleColor.Yellow, 100);
             }
             else
             {
-                TextArea.PrintLine("You find nothing.");
+                await TextArea.PrintLine("You find nothing.");
             }
         }
     }

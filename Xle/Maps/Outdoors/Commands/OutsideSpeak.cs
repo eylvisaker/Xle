@@ -185,11 +185,11 @@ namespace Xle.Maps.Outdoors
                                 break;
                         }
 
-                        StatsDisplay.FlashHPWhileSound(clr2);
+                        await GameControl.FlashHPWhileSound(clr2);
                     }
                     else
                     {
-                        SoundMan.PlaySound(LotaSound.Medium);
+                        GameControl.PlaySound(LotaSound.Medium);
 
                         await TextArea.PrintLine();
                         await TextArea.PrintLine("You don't have enough gold...");
@@ -198,7 +198,7 @@ namespace Xle.Maps.Outdoors
                 }
                 else
                 {
-                    SoundMan.PlaySound(LotaSound.Medium);
+                    GameControl.PlaySound(LotaSound.Medium);
 
                     await TextArea.PrintLine();
 

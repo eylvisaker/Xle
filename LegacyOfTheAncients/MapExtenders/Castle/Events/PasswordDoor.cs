@@ -21,7 +21,7 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
             if (Story.HasGuardianPassword)
             {
                 await TextArea.PrintLine(" password.");
-                await SoundMan.PlaySoundWait(LotaSound.VeryGood);
+                await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
                 RemoveDoor();
                 return true;

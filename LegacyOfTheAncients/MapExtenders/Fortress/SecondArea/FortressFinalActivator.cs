@@ -1,14 +1,10 @@
-﻿using Xle.Maps;
-using Xle.Services;
+﻿using AgateLib;
+using System;
+using System.Threading.Tasks;
+using Xle.Maps;
 using Xle.Services.Game;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib;
 
 namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 {
@@ -68,22 +64,22 @@ namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
                 WarlordCreated(this, EventArgs.Empty);
         }
 
-        private bool WarlordDead(Guard unused)
+        private async Task<bool> WarlordDead(Guard unused)
         {
             this.Warlord = null;
 
             TextArea.Clear(true);
-            TextArea.PrintLine();
-            TextArea.PrintLine("        ** warlord killed **");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("        ** warlord killed **");
 
             for (int i = 0; i < 5; i++)
             {
                 SoundMan.PlaySound(LotaSound.Good);
-                GameControl.Wait(750);
+                await GameControl.WaitAsync(750);
             }
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
 
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
             PrintSecurityAlertMessage();
 

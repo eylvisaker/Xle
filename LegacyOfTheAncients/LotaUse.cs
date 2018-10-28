@@ -1,4 +1,5 @@
 ﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Ancients
@@ -11,12 +12,12 @@ namespace Xle.Ancients
             ShowItemMenu = false;
         }
 
-        protected override bool UseHealingItem(int itemID)
+        protected override  async Task<bool> UseHealingItem(int itemID)
         {
             if (itemID == (int)LotaItem.HealingHerb)
             {
                 Player.Items[itemID] -= 1;
-                ApplyHealingEffect();
+                await ApplyHealingEffect();
                 return true;
             }
 

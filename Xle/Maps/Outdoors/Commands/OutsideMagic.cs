@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Commands.Implementation;
@@ -12,9 +9,9 @@ namespace Xle.Maps.Outdoors.Commands
     {
         public IOutsideEncounters OutsideEncounters { get; set; }
 
-        EncounterState EncounterState {  get { return OutsideEncounters.EncounterState; } }
+        private EncounterState EncounterState { get { return OutsideEncounters.EncounterState; } }
 
-        protected override void CastSpell(MagicSpell magic)
+        protected override async Task CastSpell(MagicSpell magic)
         {
             switch (magic.ID)
             {
@@ -23,34 +20,34 @@ namespace Xle.Maps.Outdoors.Commands
                     if (EncounterState == 0)
                     {
                         Player.Items[magic.ItemID]++;
-                        TextArea.PrintLine("Nothing to fight.");
+                        await TextArea.PrintLine("Nothing to fight.");
                         return;
                     }
                     else if (EncounterState != EncounterState.MonsterReady)
                     {
                         Player.Items[magic.ItemID]++;
-                        TextArea.PrintLine("The unknown creature is out of range.");
+                        await TextArea.PrintLine("The unknown creature is out of range.");
                         return;
                     }
 
-                    TextArea.PrintLine("Attack with " + magic.Name + ".");
+                    await TextArea.PrintLine("Attack with " + magic.Name + ".");
 
                     var sound = (magic.ID == 1) ?
                         LotaSound.MagicFlame : LotaSound.MagicBolt;
 
                     if (RollSpellFizzle(magic))
                     {
-                        SoundMan.PlayMagicSound(sound, LotaSound.MagicFizzle, 1);
+                        await GameControl.PlayMagicSound(sound, LotaSound.MagicFizzle, 1);
 
-                        TextArea.PrintLine("Attack fizzles.", XleColor.Yellow);
+                        await TextArea.PrintLine("Attack fizzles.", XleColor.Yellow);
                         return;
                     }
                     else
-                        SoundMan.PlayMagicSound(sound, LotaSound.MagicFlameHit, 1);
+                        await GameControl.PlayMagicSound(sound, LotaSound.MagicFlameHit, 1);
 
                     int damage = RollSpellDamage(magic, 0);
 
-                    HitMonster(damage);
+                    await HitMonster(damage);
 
                     break;
 
@@ -59,10 +56,7 @@ namespace Xle.Maps.Outdoors.Commands
             }
         }
 
-        private void HitMonster(int damage)
-        {
-            OutsideEncounters.HitMonster(damage);
-        }
+        private Task HitMonster(int damage) => OutsideEncounters.HitMonster(damage);
 
         protected virtual int RollSpellDamage(MagicSpell magic, int v)
         {

@@ -48,9 +48,9 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 await TextArea.PrintLine("             GOLD:  + " + amount.ToString(), XleColor.Yellow);
 
                 SoundMan.PlaySound(LotaSound.VeryGood);
-                StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
+                await GameControl.FlashHPWhileSound(XleColor.Yellow);
 
-                Input.WaitForKey();
+                await GameControl.WaitForKey();
 
                 MapChanger.ChangeMap(11, 0);
                 Player.SetReturnLocation(1, 18, 56);

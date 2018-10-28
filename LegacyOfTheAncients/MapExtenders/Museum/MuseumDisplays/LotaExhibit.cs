@@ -105,9 +105,16 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             get { return Data.ExhibitInfo[ExhibitID]; }
         }
 
-        public override void Draw(GameTime time, SpriteBatch spriteBatch, Rectangle displayRect)
+        public override void Update(GameTime time)
         {
-            ExhibitInfo.DrawImage(time, spriteBatch, displayRect, ImageID);
+            base.Update(time);
+
+            ExhibitInfo.Update(time);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, Rectangle displayRect)
+        {
+            ExhibitInfo.DrawImage(spriteBatch, displayRect, ImageID);
         }
 
         public override string UseCoinMessage

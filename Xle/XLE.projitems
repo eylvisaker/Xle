@@ -198,6 +198,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\TextLine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\XleDisplay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceName.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\WaitScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\CommandEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\SoundMan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\XleGameConsoleCommands.cs" />
@@ -207,9 +208,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\IXleStartup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\XleSystemState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleWaiter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SolidColorScreenRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SubMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TerrainType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TextWindow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleBaseTypeFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleColor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\ChangeMapEvent.cs" />

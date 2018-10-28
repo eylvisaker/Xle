@@ -59,7 +59,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 return false;
         }
 
-        protected Task StoreSound(LotaSound sound) => SoundMan.PlaySoundWait(sound);
+        protected Task StoreSound(LotaSound sound) => GameControl.PlaySoundWait(sound);
 
         protected async Task Wait(int howLong)
         {

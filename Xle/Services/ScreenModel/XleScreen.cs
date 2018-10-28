@@ -1,16 +1,13 @@
 ﻿using AgateLib;
 using AgateLib.Mathematics.Geometry;
-using Xle.Services.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using Xle.Services.XleSystem;
 
 namespace Xle.Services.ScreenModel
 {
     public interface IXleScreen
     {
-        void OnDraw();
-
         Color FontColor { get; set; }
 
         /// <summary>
@@ -18,13 +15,6 @@ namespace Xle.Services.ScreenModel
         /// </summary>
         bool PromptToContinue { get; set; }
         Color BorderColor { get; set; }
-
-        [Obsolete]
-        event EventHandler Draw;
-        [Obsolete]
-        event EventHandler Update;
-
-        void OnUpdate();
     }
 
     [Singleton]
@@ -66,26 +56,5 @@ namespace Xle.Services.ScreenModel
         public Color FontColor { get; set; }
 
         public Color BorderColor { get; set; } = XleColor.DarkGray;
-
-        public void OnDraw()
-        {
-            throw new NotImplementedException();
-            //Display.BeginFrame();
-
-            //Draw?.Invoke(this, EventArgs.Empty);
-
-            //Display.EndFrame();
-            //AgateApp.KeepAlive();
-        }
-
-        public event EventHandler Draw;
-        public event EventHandler Update;
-        
-        public void OnUpdate()
-        {
-            if (Update != null)
-                Update(this, EventArgs.Empty);
-        }
-
     }
 }

@@ -10,24 +10,23 @@ namespace Xle.Services.ScreenModel
 {
     public interface IStatsDisplay
     {
-        Color HPColor { get; }
+        Color HPColor { get; set; }
         int HP { get; }
         int Gold { get; }
         int Food { get; }
 
-        Task FlashHPWhileSound(Color color1, Color? color2 = null);
-        Task FlashHPWhile(Color color1, Color color2, Func<bool> func);
+        /// <summary>
+        /// Resets the value of HPColor to the map's default color scheme.
+        /// </summary>
+        void ResetColor();
     }
 
     [Singleton, InjectProperties]
     public class StatsDisplay : IStatsDisplay
     {
-        private bool mOverrideHPColor;
+        private bool overrideHPColor;
         private Color mHPColor;
 
-        public ISoundMan SoundMan { get; set; }
-        public IXleScreen Screen { get; set; }
-        public IXleGameControl GameControl { get; set; }
         public GameState GameState { get; set; }
 
         private Player Player { get { return GameState.Player; } }
@@ -38,10 +37,15 @@ namespace Xle.Services.ScreenModel
         {
             get
             {
-                if (mOverrideHPColor)
+                if (overrideHPColor)
                     return mHPColor;
                 else
                     return Map.ColorScheme.TextColor;
+            }
+            set
+            {
+                mHPColor = value;
+                overrideHPColor = true;
             }
         }
 
@@ -51,39 +55,7 @@ namespace Xle.Services.ScreenModel
 
         public void ResetColor()
         {
-            mHPColor = Map.ColorScheme.TextColor;
-        }
-
-        public Task FlashHPWhileSound(Color color1, Color? color2 = null)
-        {
-            return FlashHPWhile(color1, color2 ?? Screen.FontColor, () => SoundMan.IsAnyPlaying());
-        }
-
-        public async Task FlashHPWhile(Color clr, Color clr2, Func<bool> pred)
-        {
-            Color lastColor = clr2;
-
-            mOverrideHPColor = true;
-            int count = 0;
-
-            while (pred())
-            {
-                if (lastColor == clr)
-                    lastColor = clr2;
-                else
-                    lastColor = clr;
-
-                mHPColor = lastColor;
-
-                await GameControl.WaitAsync(80);
-
-                count++;
-
-                if (count > 10000 / 80)
-                    break;
-            }
-
-            mOverrideHPColor = false;
+            overrideHPColor = false;
         }
     }
 }

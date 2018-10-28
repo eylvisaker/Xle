@@ -1,24 +1,26 @@
-﻿using Xle.Ancients.MapExtenders.Fortress.SecondArea;
-using Xle.Services.ScreenModel;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
-using AgateLib;
+using Xle.Ancients.MapExtenders.Fortress.SecondArea;
+using Xle.Services.ScreenModel;
 
 namespace Xle.Ancients.MapExtenders.Fortress
 {
     [Transient("FortressFinal")]
     public class FortressFinal : FortressEntry
     {
-        private IFortressFinalActivator fortressActivator;
-        private int borderIndex;
+        private readonly IFortressFinalActivator fortressActivator;
+        private readonly FlashBorderRenderer flashBorderRenderer;
         private Color flashColor = XleColor.LightGreen;
         private double compendiumStrength = 140;
 
-        public FortressFinal(IFortressFinalActivator fortressActivator)
+        public FortressFinal(IFortressFinalActivator fortressActivator, FlashBorderRenderer flashBorderRenderer)
         {
             this.fortressActivator = fortressActivator;
+            this.flashBorderRenderer = flashBorderRenderer;
             fortressActivator.Reset();
             fortressActivator.WarlordCreated += (sender, e) => TheMap.Guards.Add(fortressActivator.Warlord);
 
@@ -39,35 +41,35 @@ namespace Xle.Ancients.MapExtenders.Fortress
 
         public override async Task AfterExecuteCommand(Keys cmd)
         {
-            throw new NotImplementedException();
-
             if (fortressActivator.Warlord != null)
             {
-                WarlordAttack();
+                await WarlordAttack();
             }
             else if (fortressActivator.CompendiumAttacking)
             {
-                CompendiumAttack();
+                await CompendiumAttack();
             }
 
             await base.AfterExecuteCommand(cmd);
         }
 
-        private void CompendiumAttack()
+        private async Task CompendiumAttack()
         {
             int damage = Random.Next((int)compendiumStrength / 2, (int)compendiumStrength);
 
-            GameControl.Wait(75);
-            TextArea.PrintLine();
-            TextArea.PrintLine("Compendium attack - blow " + damage + " H.P.", XleColor.Green);
+            await GameControl.WaitAsync(75);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Compendium attack - blow " + damage + " H.P.", XleColor.Green);
 
-            SoundMan.PlayMagicSound(LotaSound.MagicBolt, LotaSound.MagicBoltHit, 2);
-            GameControl.Wait(250, redraw: FlashBorder);
+            await GameControl.PlayMagicSound(LotaSound.MagicBolt, LotaSound.MagicBoltHit, 2);
+
+            await GameControl.WaitAsync(250, redraw: flashBorderRenderer);
+
             TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
             Player.HP -= damage;
 
-            GameControl.Wait(75);
+            await GameControl.WaitAsync(75);
 
             if (Player.Items[LotaItem.HealingHerb] > 24)
             {
@@ -75,43 +77,52 @@ namespace Xle.Ancients.MapExtenders.Fortress
 
                 amount = (int)(amount * (1 + Random.NextDouble()) * 0.5);
 
-                TextArea.PrintLine("** " + amount.ToString() + " healing herbs destroyed! **", XleColor.Yellow);
+                await TextArea.PrintLine("** " + amount.ToString() + " healing herbs destroyed! **", XleColor.Yellow);
 
                 Player.Items[LotaItem.HealingHerb] -= amount;
 
-                GameControl.Wait(75);
+                await GameControl.WaitAsync(75);
             }
         }
 
-        private void FlashBorder()
-        {
-            borderIndex++;
-
-            if (borderIndex % 4 < 2)
-                TheMap.ColorScheme.FrameColor = flashColor;
-            else
-                TheMap.ColorScheme.FrameColor = XleColor.Gray;
-
-            Screen.OnDraw();
-        }
-
-        private void WarlordAttack()
+        private async Task WarlordAttack()
         {
             int damage = (int)(99 * Random.NextDouble() + 80);
 
             TheMap.ColorScheme.FrameColor = XleColor.Pink;
             flashColor = XleColor.Red;
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Warlord attack - blow " + damage.ToString() + " H.P.", XleColor.Yellow);
 
             Player.HP -= damage;
 
-            SoundMan.PlayMagicSound(LotaSound.MagicFlame, LotaSound.MagicFlameHit, 2);
-            GameControl.Wait(250, redraw: FlashBorder);
+            await GameControl.PlayMagicSound(LotaSound.MagicFlame, LotaSound.MagicFlameHit, 2);
+            await GameControl.WaitAsync(250, redraw: flashBorderRenderer);
             TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-            GameControl.Wait(150);
+            await GameControl.WaitAsync(150);
         }
     }
+
+    [Transient]
+    public class FlashBorderRenderer : Renderer
+    {
+        private int borderIndex;
+
+        public Color FlashColor { get; set; }
+
+        public override void Draw(GameTime time, SpriteBatch spriteBatch)
+        {
+            borderIndex++;
+
+            if (borderIndex % 4 < 2)
+                TheMap.ColorScheme.FrameColor = FlashColor;
+            else
+                TheMap.ColorScheme.FrameColor = XleColor.Gray;
+
+            XleRenderer.Draw(time, spriteBatch);
+        }
+    }
+
 }

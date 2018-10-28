@@ -6,8 +6,13 @@ using Xle.Maps;
 
 namespace Xle.Services.Rendering.Maps
 {
+    public interface IXleMapRenderer
+    {
+
+    }
+
     [InjectProperties]
-    public class XleMapRenderer
+    public class XleMapRenderer : IXleMapRenderer
     {
         private XleMap mMap;
         private MapExtender mExtender;
@@ -36,9 +41,8 @@ namespace Xle.Services.Rendering.Maps
             }
         }
 
-        public virtual void Draw(GameTime time, SpriteBatch spriteBatch,
-                                 Point playerPos, Direction faceDirection,
-                                 Rectangle inRect)
+        public virtual void Draw(SpriteBatch spriteBatch, Point playerPos,
+            Direction faceDirection, Rectangle inRect)
         {
         }
 
@@ -60,5 +64,9 @@ namespace Xle.Services.Rendering.Maps
             RectRenderer.Fill(spriteBatch, rect, color);
         }
 
+        public virtual void Update(GameTime time)
+        {
+
+        }
     }
 }

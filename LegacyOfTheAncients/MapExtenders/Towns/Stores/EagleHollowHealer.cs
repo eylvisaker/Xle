@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
+    [Transient("EagleHollowHealer")]
     public class EagleHollowHealer : StoreHealer
     {
         protected override async Task AfterSpeak()
@@ -20,14 +22,14 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
 
                 await StoreSound(LotaSound.VeryGood);
 
-                TextArea.PrintLineSlow("Four jewels dungeon text goes here.");
+               await TextArea.PrintLineSlow("Four jewels dungeon text goes here.");
 
                 Player.Items[LotaItem.RubyCoin] += 1;
                 Story.FoundGuardianLeader = true;
             }
             else
             {
-                TextArea.PrintLineSlow("You must get all four jewels.");
+                await TextArea.PrintLineSlow("You must get all four jewels.");
             }
         }
     }

@@ -80,8 +80,8 @@ namespace Xle.Scenes
                 gameState.MapExtender.OnUpdate(time);
             }
 
-            screen.OnUpdate();
             commandExecutor.Update(time);
+            renderer.Update(time);
 
             if (systemState.ReturnToTitle)
                 IsFinished = true;

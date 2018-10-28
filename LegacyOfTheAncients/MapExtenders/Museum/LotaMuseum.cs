@@ -9,6 +9,7 @@ using Xle.Maps;
 using Xle.Maps.Museums;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.Commands;
+using Xle.Services.Game;
 
 namespace Xle.Ancients.MapExtenders.Museum
 {
@@ -76,7 +77,7 @@ namespace Xle.Ancients.MapExtenders.Museum
 
         public override async Task OnAfterEntry()
         {
-            CheckInformationMessage();
+            await CheckInformationMessage();
         }
 
         public override void CheckExhibitStatus()
@@ -112,7 +113,7 @@ namespace Xle.Ancients.MapExtenders.Museum
             }
         }
 
-        private void CheckInformationMessage()
+        private async Task CheckInformationMessage()
         {
             // check to see if the caretaker wants to see the player
             var info = Information;
@@ -120,9 +121,9 @@ namespace Xle.Ancients.MapExtenders.Museum
             if (info.ShouldLevelUp())
             {
                 TextArea.Clear();
-                TextArea.PrintLine("The caretaker wants to see you!");
+                await TextArea.PrintLine("The caretaker wants to see you!");
 
-                SoundMan.PlaySoundSync(LotaSound.Good);
+                await GameControl.PlaySoundSync(LotaSound.Good);
             }
         }
 

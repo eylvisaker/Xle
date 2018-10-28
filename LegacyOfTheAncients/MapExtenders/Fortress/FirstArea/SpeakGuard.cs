@@ -39,55 +39,54 @@ namespace Xle.Ancients.MapExtenders.Fortress.FirstArea
 
             for (int i = 0; i < 5; i++)
             {
-                MoveGuard(guard, -1, 0);
+                await MoveGuard(guard, -1, 0);
             }
 
-            MoveGuard(guard, 0, -1);
+            await MoveGuard(guard, 0, -1);
 
             for (int i = 0; i < 5; i++)
             {
-                MoveGuard(guard, -1, 0);
+                await MoveGuard(guard, -1, 0);
             }
 
-            MoveGuard(guard, 0, -1);
-            MoveGuard(guard, 0, -1);
-
+            await MoveGuard(guard, 0, -1);
+            await MoveGuard(guard, 0, -1);
         }
 
-        private void MoveGuard(Guard guard, int dx, int dy)
+        private async Task MoveGuard(Guard guard, int dx, int dy)
         {
             guard.X += dx;
             guard.Y += dy;
             guard.Facing = new Point(dx, dy).ToDirection();
 
-            GameControl.Wait(150);
+            await GameControl.WaitAsync(150);
         }
 
-        private bool KillGuard(Guard guard)
+        private async Task<bool> KillGuard(Guard guard)
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("You surprise the guard and kill him.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You surprise the guard and kill him.");
             SoundMan.PlaySound(LotaSound.EnemyDie);
 
             Map.Guards.Remove(guard);
             Map.Guards.IsAngry = true;
 
-            GameControl.Wait(1500);
+            await GameControl.WaitAsync(1500);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("You find a rod on the body...", XleColor.Cyan);
-            GameControl.Wait(1500);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You find a rod on the body...", XleColor.Cyan);
+            await GameControl.WaitAsync(1500);
 
             Map.RemoveJailBars(TheEvent.Rectangle, 21);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("It unlocks the door.", XleColor.Yellow);
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("It unlocks the door.", XleColor.Yellow);
+            await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("You find a broadaxe.", XleColor.White);
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You find a broadaxe.", XleColor.White);
+            await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
             Player.AddWeapon(7, 3);
             if (Player.CurrentWeapon.ID == 0)

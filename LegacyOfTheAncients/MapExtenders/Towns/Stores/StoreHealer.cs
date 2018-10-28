@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
-    [Transient("StoreHealder")]
+    [Transient("StoreHealer")]
     public class StoreHealer : LotaStoreFront
     {
         private bool buyingHerbs = false;
@@ -42,7 +42,7 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
 
                 wind.WriteLine("You're ready for herbs!", XleColor.Blue);
 
-                StoreSound(LotaSound.VeryGood);
+                await StoreSound(LotaSound.VeryGood);
             }
 
             MenuItemList theList = new MenuItemList("0", "1", "2");

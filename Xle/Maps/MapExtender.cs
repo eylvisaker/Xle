@@ -181,7 +181,8 @@ namespace Xle.Maps
             return (int)Math.Round(damage);
         }
 
-        public virtual void CastSpell(MagicSpell magic)
+        [Obsolete("this isn't called anywhere???")]
+        public virtual async Task CastSpell(MagicSpell magic)
         {
         }
 

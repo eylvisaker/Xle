@@ -1,9 +1,10 @@
 ﻿using AgateLib;
 using System;
+using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Maps.Outdoors;
 using Xle.Services.Commands;
-using Xle.Services.MapLoad;
+using Xle.Services.Game;
 
 namespace Xle.Ancients.MapExtenders.Outside
 {
@@ -13,6 +14,8 @@ namespace Xle.Ancients.MapExtenders.Outside
         private int banditAmbush;
 
         protected LotaStory Story { get { return GameState.Story(); } }
+
+        public SolidColorScreenRenderer UnconsciousRenderer { get; set; }
 
         public override void OnLoad()
         {
@@ -55,9 +58,9 @@ namespace Xle.Ancients.MapExtenders.Outside
             scheme.MapAreaWidth = 23;
         }
 
-        public override void UpdateEncounterState(ref bool handled)
+        public override async Task<bool> UpdateEncounterState()
         {
-            handled = BanditAmbush();
+            return await BanditAmbush();
         }
 
         private bool AllowBanditAmbush()
@@ -101,7 +104,8 @@ namespace Xle.Ancients.MapExtenders.Outside
 
             banditAmbush = (int)(Player.TimeDays) + time;
         }
-        private bool BanditAmbush()
+
+        private async Task<bool> BanditAmbush()
         {
             if (AllowBanditAmbush() == false)
                 return false;
@@ -118,11 +122,11 @@ namespace Xle.Ancients.MapExtenders.Outside
             // bandit icon is number 4.
             MapRenderer.DisplayMonsterID = 4;
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
 
-            SoundMan.PlaySound(LotaSound.Encounter);
-            GameControl.Wait(500);
+            GameControl.PlaySound(LotaSound.Encounter);
+            await GameControl.WaitAsync(500);
 
             int maxDamage = Player.HP / 15;
             int minDamage = Math.Min(5, maxDamage / 2);
@@ -131,41 +135,33 @@ namespace Xle.Ancients.MapExtenders.Outside
             {
                 Player.HP -= Random.Next(minDamage, maxDamage + 1);
 
-                SoundMan.PlaySound(LotaSound.EnemyHit);
-                GameControl.Wait(250);
+                GameControl.PlaySound(LotaSound.EnemyHit);
+                await GameControl.WaitAsync(250);
             }
 
-            TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
+            await TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
 
-            GameControl.Wait(1000);
+            await GameControl.WaitAsync(1000);
             MapRenderer.DisplayMonsterID = -1;
-            GameControl.Wait(3000, redraw: RedrawUnconscious);
+            await GameControl.WaitAsync(3000, redraw: UnconsciousRenderer);
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("You awake.  The compendium is gone.");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You awake.  The compendium is gone.");
+            await TextArea.PrintLine();
 
             Player.Items[LotaItem.Compendium] = 0;
 
-            SoundMan.PlaySoundSync(LotaSound.VeryBad);
+            await GameControl.PlaySoundSync(LotaSound.VeryBad);
 
-            TextArea.PrintLine("You hear a voice...");
+            await TextArea.PrintLine("You hear a voice...");
 
-            TextArea.PrintLine();
-            TextArea.PrintLineSlow("Do not be discouraged.  It was\ninevitable.  Keep to your quest.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLineSlow("Do not be discouraged.  It was\ninevitable.  Keep to your quest.");
 
-            GameControl.Wait(3000);
+            await GameControl.WaitAsync(3000);
             banditAmbush = 0;
 
             return true;
-        }
-
-        private void RedrawUnconscious()
-        {
-            //AgateLib.DisplayLib.Display.BeginFrame();
-            //AgateLib.DisplayLib.Display.Clear(XleColor.Gray);
-            //AgateLib.DisplayLib.Display.EndFrame();
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -173,7 +169,7 @@ namespace Xle.Ancients.MapExtenders.Outside
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        private bool CheckStormy(Player player)
+        private async Task<bool> CheckStormy(Player player)
         {
             int wasStormy = WaterAnimLevel;
 
@@ -202,34 +198,34 @@ namespace Xle.Ancients.MapExtenders.Outside
             {
                 if (WaterAnimLevel == 1 && wasStormy == 0)
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
+    await                TextArea.PrintLine();
+    await                TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 2 || WaterAnimLevel == 3)
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("The water is now very rough.", XleColor.White);
-                    TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
+         await           TextArea.PrintLine();
+         await           TextArea.PrintLine("The water is now very rough.", XleColor.White);
+         await           TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 1 && wasStormy == 2)
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
+              await      TextArea.PrintLine();
+              await      TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 0 && wasStormy == 1)
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
+                 await   TextArea.PrintLine();
+                 await   TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
                 }
 
                 if (WaterAnimLevel == 3)
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
-                    TextArea.PrintLine();
+              await      TextArea.PrintLine();
+              await      TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
+              await      TextArea.PrintLine();
                 }
 
-                GameControl.Wait(1000);
+     await           GameControl.WaitAsync(1000);
 
                 if (WaterAnimLevel == 3)
                 {
@@ -241,31 +237,31 @@ namespace Xle.Ancients.MapExtenders.Outside
             return false;
         }
 
-        public override void CastSpell(MagicSpell magic)
+        public override async Task CastSpell(MagicSpell magic)
         {
             if (magic.ID == 6)
             {
-                CastSeekSpell();
+                await CastSeekSpell();
             }
         }
 
-        private void CastSeekSpell()
+        private async Task CastSeekSpell()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine("Cast seek spell.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Cast seek spell.");
 
             if (Player.IsOnRaft)
             {
-                TextArea.PrintLine("The water mutes the spell.");
+                await TextArea.PrintLine("The water mutes the spell.");
             }
             else if (TheMap.MapID != 1)
             {
-                TextArea.PrintLine("You're too far away.");
+                await TextArea.PrintLine("You're too far away.");
             }
             else
             {
                 Player.FaceDirection = Direction.West;
-                SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                await GameControl.PlaySoundSync(LotaSound.VeryGood);
 
                 MapChanger.ChangeMap(1, 0);
                 OutsideEncounters.CancelEncounter();

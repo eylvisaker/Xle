@@ -11,7 +11,7 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
             if (AnyBad)
                 return false;
 
-            await SoundMan.PlaySoundWait(LotaSound.VeryGood);
+            await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
             ClearSpiral();
             RemoveSpiralEvents();

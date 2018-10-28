@@ -31,7 +31,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             Player.Gold += gold;
 
             SoundMan.PlaySound(LotaSound.VeryGood);
-            StatsDisplay.FlashHPWhileSound(XleColor.Yellow);
+            await GameControl.FlashHPWhileSound(XleColor.Yellow);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
     public class StoreMinigame : StoreExtender
     { }
 
-    [Transient("StoreWewaponTraining")]
+    [Transient("StoreWeaponTraining")]
     public class StoreWeaponTraining : StoreExtender
     {
     }

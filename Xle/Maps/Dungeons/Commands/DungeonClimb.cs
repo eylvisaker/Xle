@@ -50,7 +50,7 @@ namespace Xle.Maps.Dungeons
             await DungeonLevelText();
         }
 
-        private async Task OnPlayerExitDungeon() => DungeonAdapter.OnPlayerExitDungeon();
+        private Task OnPlayerExitDungeon() => DungeonAdapter.OnPlayerExitDungeon();
 
         private async Task DungeonLevelText()
         {

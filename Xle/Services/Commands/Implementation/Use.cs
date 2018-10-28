@@ -57,7 +57,7 @@ namespace Xle.Services.Commands.Implementation
 
         protected async Task UseItem()
         {
-            if (UseHealingItem(Player.Hold))
+            if (await UseHealingItem(Player.Hold))
                 return;
 
             var effect = await UseWithEvent(Player.Hold);
@@ -78,14 +78,14 @@ namespace Xle.Services.Commands.Implementation
             return false;
         }
 
-        protected abstract bool UseHealingItem(int itemID);
+        protected abstract Task<bool> UseHealingItem(int itemID);
 
-        protected void ApplyHealingEffect()
+        protected async Task ApplyHealingEffect()
         {
             Player.HP += Player.MaxHP / 2;
             SoundMan.PlaySound(LotaSound.Good);
 
-            StatsDisplay.FlashHPWhileSound(XleColor.Cyan);
+            await GameControl.FlashHPWhileSound(XleColor.Cyan);
         }
 
         protected async Task PrintNoEffectMessage()

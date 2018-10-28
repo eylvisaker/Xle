@@ -63,6 +63,11 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
 
         }
 
+        public virtual void Update(GameTime time)
+        {
+
+        }
+
         protected int ImageID { get; set; }
 
         public virtual async Task RunExhibit()
@@ -247,7 +252,7 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
             get { return true; }
         }
 
-        public abstract void Draw(GameTime time, SpriteBatch spriteBatch, Rectangle displayRect);
+        public abstract void Draw(SpriteBatch spriteBatch, Rectangle displayRect);
 
         public abstract string InsertCoinText { get; }
 

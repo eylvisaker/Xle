@@ -1,5 +1,6 @@
 ﻿using AgateLib;
 using System;
+using System.Threading.Tasks;
 using Xle.Maps.Dungeons.Commands;
 using Xle.Maps.XleMapTypes;
 
@@ -17,13 +18,13 @@ namespace Xle.Ancients.MapExtenders.Dungeons.Commands
 
         private LotaDungeon Map { get { return (LotaDungeon)GameState.MapExtender; } }
 
-        protected override void GiveBoxContents()
+        protected override async Task GiveBoxContents()
         {
-            if (GiveCompass() == false)
-                base.GiveBoxContents();
+            if (await GiveCompass() == false)
+                await base.GiveBoxContents();
         }
 
-        private bool GiveCompass()
+        private async Task<bool> GiveCompass()
         {
             if (Player.DungeonLevel == 0)
                 return false;
@@ -32,7 +33,7 @@ namespace Xle.Ancients.MapExtenders.Dungeons.Commands
 
             if (Random.NextDouble() < .6)
             {
-                TextArea.PrintLine("You find a compass!", XleColor.Yellow);
+                await TextArea.PrintLine("You find a compass!", XleColor.Yellow);
                 Player.Items[LotaItem.Compass] += 1;
 
                 SoundMan.PlaySound(LotaSound.VeryGood);

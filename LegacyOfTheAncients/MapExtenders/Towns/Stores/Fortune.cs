@@ -41,7 +41,7 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
             if (cost > Player.Gold)
             {
                 await TextArea.PrintLine("You're short on gold.");
-                await SoundMan.PlaySoundWait(LotaSound.Medium);
+                await GameControl.PlaySoundWait(LotaSound.Medium);
 
                 return true;
             }

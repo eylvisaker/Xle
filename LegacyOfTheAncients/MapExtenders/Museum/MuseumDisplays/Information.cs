@@ -178,7 +178,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 await TextArea.PrintLine();
                 await TextArea.PrintLine("Your level is now " + newLevel.ToString() + "!!");
 
-                await SoundMan.PlaySoundWait(LotaSound.VeryGood);
+                await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
                 Player.Level = newLevel;
 

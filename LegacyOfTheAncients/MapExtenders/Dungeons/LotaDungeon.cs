@@ -51,12 +51,12 @@ namespace Xle.Ancients.MapExtenders.Dungeons
             Story.BeenInDungeon = true;
         }
 
-        protected void GivePermanentStrengthBoost()
+        protected async Task GivePermanentStrengthBoost()
         {
             Player.Attribute[Attributes.strength] += StrengthBoost;
 
-            TextArea.PrintLine("Strength + " + StrengthBoost);
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await TextArea.PrintLine("Strength + " + StrengthBoost);
+            await GameControl.PlaySoundWait(LotaSound.VeryGood);
         }
 
         protected override bool ShowDirections()
@@ -148,29 +148,29 @@ namespace Xle.Ancients.MapExtenders.Dungeons
             return (int)dam;
         }
 
-        public override void CastSpell(MagicSpell magic)
+        public override async Task CastSpell(MagicSpell magic)
         {
-            TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
+         await   TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
 
             if (magic.ID == 3)
-                CastBefuddle(magic);
+      await          CastBefuddle(magic);
             if (magic.ID == 4)
-                CastPsychoStrength(magic);
+      await          CastPsychoStrength(magic);
             if (magic.ID == 5)
-                CastKillFlash(magic);
+           await     CastKillFlash(magic);
         }
 
-        private void CastKillFlash(MagicSpell magic)
+        private async Task CastKillFlash(MagicSpell magic)
         {
-            ExecuteKillFlash();
+            await ExecuteKillFlash();
         }
 
-        private void CastPsychoStrength(MagicSpell magic)
+        private async Task CastPsychoStrength(MagicSpell magic)
         {
             throw new NotImplementedException();
         }
 
-        private void CastBefuddle(MagicSpell magic)
+        private async Task CastBefuddle(MagicSpell magic)
         {
             if (Player.HP >= 250 && Random.NextDouble() < 0.07)
             {
@@ -188,7 +188,7 @@ namespace Xle.Ancients.MapExtenders.Dungeons
 
                 if (monst != null)
                 {
-                    TextArea.PrintLine("The " + monst.Name + " looks confused.", XleColor.White);
+     await               TextArea.PrintLine("The " + monst.Name + " looks confused.", XleColor.White);
                 }
             }
         }

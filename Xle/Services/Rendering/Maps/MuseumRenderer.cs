@@ -38,10 +38,22 @@ namespace Xle.Services.Rendering.Maps
             }
         }
 
+        public override void Update(GameTime time)
+        {
+            base.Update(time);
+
+            UpdateExhibits(time);
+        }
+
         #region --- Museum Exhibits ---
 
         public Exhibit mCloseup;
         public bool mDrawStatic;
+
+        void UpdateExhibits(GameTime time)
+        {
+            mCloseup?.Update(time);
+        }
 
         protected override void DrawCloseupImpl(SpriteBatch spriteBatch, Rectangle inRect)
         {
@@ -56,7 +68,7 @@ namespace Xle.Services.Rendering.Maps
                 //Surfaces.ExhibitOpen.Draw(inRect);
 
                 spriteBatch.Draw(Surfaces.ExhibitOpen, inRect, Color.White);
-                mCloseup.Draw(GaneTime, spriteBatch, screenDisplayRect);
+                mCloseup.Draw(spriteBatch, screenDisplayRect);
             }
             else
             {

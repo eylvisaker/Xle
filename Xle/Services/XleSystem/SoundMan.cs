@@ -1,42 +1,31 @@
 ﻿using AgateLib;
-using Xle.Services.Game;
-using Xle.Services.ScreenModel;
 using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Xle.Services.XleSystem
 {
-    public interface ISoundMan : IXleService
+    public interface ISoundMan
     {
         bool IsPlaying(LotaSound lotaSound);
 
         void StopSound(LotaSound lotaSound);
 
-        void PlaySound(LotaSound lotaSound);
-        void PlayMagicSound(LotaSound sound, LotaSound endSound, int distance);
-
-        Task PlaySoundWait(LotaSound lotaSound, float maxTime_ms = 15000);
-
-        [Obsolete("await PlaySoundWait instead.")]
-        void PlaySoundSync(LotaSound lotaSound, float maxTime_ms = 15000);
-        [Obsolete("await PlaySoundWait instead.")]
-        void PlaySoundSync(Action redraw, LotaSound sound);
-
-        Task FinishSounds();
+        void PlaySound(LotaSound lotaSound, float volume = 1);
 
         bool IsAnyPlaying();
+
+        event Action<string> ErrorMessage;
     }
 
     [Singleton]
     [InjectProperties]
     public class SoundMan : ISoundMan
     {
-        class SoundData
+        private class SoundData
         {
-            float volume = 1;
+            private float volume = 1;
 
             public SoundEffect SoundEffect { get; set; }
             public SoundEffectInstance Instance { get; set; }
@@ -67,9 +56,6 @@ namespace Xle.Services.XleSystem
             }
         }
 
-        public IXleGameControl GameControl { get; set; }
-        public ITextArea TextArea { get; set; }
-
         private Dictionary<LotaSound, SoundData> mSounds = new Dictionary<LotaSound, SoundData>();
 
         public SoundMan(IContentProvider content)
@@ -90,14 +76,17 @@ namespace Xle.Services.XleSystem
             }
         }
 
-        public void PlaySound(LotaSound sound)
+        public event Action<string> ErrorMessage;
+
+        public void PlaySound(LotaSound sound, float volume = 1)
         {
             if (mSounds.ContainsKey(sound) == false)
             {
-                TextArea.PrintLine("\nCould not play sound " + sound.ToString(), XleColor.Red);
+                ErrorMessage?.Invoke("\nCould not play sound " + sound.ToString());
                 return;
             }
 
+            mSounds[sound].Volume = volume;
             mSounds[sound].Play();
         }
 
@@ -121,6 +110,7 @@ namespace Xle.Services.XleSystem
 
             return false;
         }
+
         public bool IsPlaying(LotaSound sound)
         {
             if (mSounds.ContainsKey(sound) == false)
@@ -137,78 +127,6 @@ namespace Xle.Services.XleSystem
             {
                 kvp.Value.Stop();
             }
-        }
-
-
-        public void SetSoundVolume(LotaSound sound, double volume)
-        {
-            if (mSounds.ContainsKey(sound) == false)
-                return;
-
-            mSounds[sound].Volume = (float)volume;
-        }
-
-        public async Task PlaySoundWait(LotaSound lotaSound, float maxTime_ms = 15000)
-        {
-            PlaySound(lotaSound);
-
-            await GameControl.WaitAsync(150);
-
-            int time = 0;
-            while (IsPlaying(lotaSound))
-            {
-                Debug.WriteLine($"Waiting for sound {lotaSound}... {time}");
-
-                await GameControl.WaitAsync(50);
-
-                time += 50;
-                if (time > maxTime_ms)
-                    break;
-            }
-        }
-
-        public void PlaySoundSync(LotaSound lotaSound, float maxTime_ms = 15000)
-        {
-            PlaySound(lotaSound);
-
-            GameControl.Wait(150);
-
-            int time = 0;
-            while (IsPlaying(lotaSound))
-            {
-                GameControl.Wait(50);
-
-                time += 50;
-                if (time > maxTime_ms)
-                    break;
-            }
-        }
-
-        public void PlaySoundSync(Action redraw, LotaSound lotaSound)
-        {
-            PlaySound(lotaSound);
-
-            while (IsPlaying(lotaSound))
-                GameControl.Wait(50, redraw: redraw);
-        }
-
-        public void PlayMagicSound(LotaSound sound, LotaSound endSound, int distance)
-        {
-            if (distance <= 0)
-                throw new ArgumentOutOfRangeException("distance", "Distance must be greater than zero.");
-
-            PlaySound(sound);
-            GameControl.Wait(250 * distance + 450 * (distance - 1));
-            StopSound(sound);
-
-            SetSoundVolume(endSound, Math.Pow(distance, -0.5));
-            PlaySound(endSound);
-        }
-
-        public async Task FinishSounds()
-        {
-            while (IsAnyPlaying())
-                await GameControl.WaitAsync(10);
         }
     }
 }

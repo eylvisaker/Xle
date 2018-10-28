@@ -27,7 +27,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             if (await QuickMenu.QuickMenu(new MenuItemList("Yes", "No"), 3) == 0)
             {
                 await TextArea.PrintLine("You feel a tingling sensation.", XleColor.Green);
-                await SoundMan.PlaySoundWait(LotaSound.Good);
+                await GameControl.PlaySoundWait(LotaSound.Good);
 
                 Story.EatenJutonFruit = true;
 

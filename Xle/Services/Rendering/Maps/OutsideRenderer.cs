@@ -8,7 +8,7 @@ namespace Xle.Services.Rendering.Maps
     [Transient]
     public class OutsideRenderer : Map2DRenderer, IOutsideEncounterRenderer
     {
-        private int[] waves;
+        private int[] waves= new int[35];
         private Rectangle drawRect;
         private int mWaterAnimLevel;
         private float timeToNextAnimate = 0;
@@ -32,12 +32,12 @@ namespace Xle.Services.Rendering.Maps
             }
         }
 
-        public override void Draw(GameTime time, SpriteBatch spriteBatch, Point playerPos, Direction faceDirection, Rectangle inRect)
+        public override void Draw(SpriteBatch spriteBatch, Point playerPos, Direction faceDirection, Rectangle inRect)
         {
             int x = playerPos.X;
             int y = playerPos.Y;
 
-            Draw2D(time, x, y, faceDirection, inRect);
+            Draw2D(x, y, faceDirection, inRect);
 
             if (DisplayMonsterID > -1)
             {
