@@ -1,12 +1,12 @@
-﻿using Xle.Maps.XleMapTypes;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xle.Maps.XleMapTypes;
+using Xle.Services.Rendering;
+using Xle.Services.Rendering.Maps;
 
 namespace Xle.Maps.Dungeons
 {
@@ -122,7 +122,7 @@ namespace Xle.Maps.Dungeons
 
                 if (Math.Abs(delta.X) + Math.Abs(delta.Y) == 1)
                 {
-                    MonsterAttackPlayer(monster);
+                    await MonsterAttackPlayer(monster);
                 }
                 else
                 {
@@ -148,14 +148,14 @@ namespace Xle.Maps.Dungeons
             }
         }
 
-        private void DungeonLevelText()
+        private async Task DungeonLevelText()
         {
             CurrentLevel = Player.DungeonLevel;
 
             if (TheMap[Player.X, Player.Y] == 0x21) TheMap[Player.X, Player.Y] = 0x11;
             if (TheMap[Player.X, Player.Y] == 0x22) TheMap[Player.X, Player.Y] = 0x12;
 
-            TextArea.PrintLine("\n\nYou are now at level " + (Player.DungeonLevel + 1).ToString() + ".", XleColor.White);
+            await TextArea.PrintLine("\n\nYou are now at level " + (Player.DungeonLevel + 1).ToString() + ".", XleColor.White);
         }
 
         public int CurrentLevel
@@ -164,7 +164,7 @@ namespace Xle.Maps.Dungeons
             set { TheMap.CurrentLevel = value; }
         }
 
-        private void OnPlayerAvoidTrap(int x, int y)
+        private async Task OnPlayerAvoidTrap(int x, int y)
         {
             // don't print a message for ceiling holes
             if (TheMap[x, y] == 0x21) return;
@@ -175,36 +175,36 @@ namespace Xle.Maps.Dungeons
             //TextArea.PrintLine("You avoid the " + name + ".");
             //XleCore.wait(150);
         }
-        private void OnPlayerTriggerTrap(int x, int y)
+
+        private async Task OnPlayerTriggerTrap(int x, int y)
         {
             // don't trigger ceiling holes
             if (TheMap[x, y] == 0x21) return;
 
             TheMap[x, y] -= 0x10;
             int damage = 31;
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (TheMap[x, y] == 0x12)
             {
-                TextArea.PrintLine("You fall through a hidden hole.", XleColor.White);
+                await TextArea.PrintLine("You fall through a hidden hole.", XleColor.White);
             }
             else
             {
-                TextArea.PrintLine("You're ambushed by a " +
-                    TrapName(TheMap[x, y]) + ".", XleColor.White);
-                GameControl.Wait(100);
+                await TextArea.PrintLine($"You're ambushed by a {TrapName(TheMap[x, y])}.", XleColor.White);
+                await GameControl.WaitAsync(100);
             }
 
-            TextArea.PrintLine("   H.P. - " + damage.ToString(), XleColor.White);
+            await TextArea.PrintLine("   H.P. - " + damage.ToString(), XleColor.White);
             Player.HP -= damage;
 
             SoundMan.PlaySound(LotaSound.EnemyHit);
-            GameControl.Wait(500);
+            await GameControl.WaitAsync(500);
 
             if (TheMap[x, y] == 0x12)
             {
                 Player.DungeonLevel++;
-                DungeonLevelText();
+                await DungeonLevelText();
             }
         }
 
@@ -214,22 +214,19 @@ namespace Xle.Maps.Dungeons
 
             CurrentLevel = Player.DungeonLevel;
 
-            throw new NotImplementedException();
-
-            //if (val >= 0x21 && val <= 0x2a)
-            //{
-            //    await OnPlayerTriggerTrap(Player.X, Player.Y);
-            //}
-            //else if (val >= 0x11 && val <= 0x1a)
-            //{
-            //    await OnPlayerAvoidTrap(Player.X, Player.Y);
-            //}
-
+            if (val >= 0x21 && val <= 0x2a)
+            {
+                await OnPlayerTriggerTrap(Player.X, Player.Y);
+            }
+            else if (val >= 0x11 && val <= 0x1a)
+            {
+                await OnPlayerAvoidTrap(Player.X, Player.Y);
+            }
         }
 
-        private void MonsterAttackPlayer(DungeonMonster monster)
+        private async Task MonsterAttackPlayer(DungeonMonster monster)
         {
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             var delta = new Point(
                 monster.Location.X - Player.X,
@@ -242,29 +239,29 @@ namespace Xle.Maps.Dungeons
 
             if (delta == forward)
             {
-                TextArea.Print("Attacked by ");
-                TextArea.Print(monster.Name, XleColor.Yellow);
-                TextArea.PrintLine("!");
+                await TextArea.Print("Attacked by ");
+                await TextArea.Print(monster.Name, XleColor.Yellow);
+                await TextArea.PrintLine("!");
 
                 allowEffect = true;
             }
             else if (delta == right)
             {
-                TextArea.Print("Attacked from the ");
-                TextArea.Print("right", XleColor.Yellow);
-                TextArea.PrintLine(".");
+                await TextArea.Print("Attacked from the ");
+                await TextArea.Print("right", XleColor.Yellow);
+                await TextArea.PrintLine(".");
             }
             else if (delta == left)
             {
-                TextArea.Print("Attacked from the ");
-                TextArea.Print("left", XleColor.Yellow);
-                TextArea.PrintLine(".");
+                await TextArea.Print("Attacked from the ");
+                await TextArea.Print("left", XleColor.Yellow);
+                await TextArea.PrintLine(".");
             }
             else
             {
-                TextArea.Print("Attacked from ");
-                TextArea.Print("behind", XleColor.Yellow);
-                TextArea.PrintLine(".");
+                await TextArea.Print("Attacked from ");
+                await TextArea.Print("behind", XleColor.Yellow);
+                await TextArea.PrintLine(".");
             }
 
             if (RollToHitPlayer(monster))
@@ -272,19 +269,19 @@ namespace Xle.Maps.Dungeons
                 int damage = RollDamageToPlayer(monster);
 
                 SoundMan.PlaySound(LotaSound.EnemyHit);
-                TextArea.Print("Hit by blow of ");
-                TextArea.Print(damage.ToString(), XleColor.Yellow);
-                TextArea.PrintLine("!");
+                await TextArea.Print("Hit by blow of ");
+                await TextArea.Print(damage.ToString(), XleColor.Yellow);
+                await TextArea.PrintLine("!");
 
                 Player.HP -= damage;
             }
             else
             {
                 SoundMan.PlaySound(LotaSound.EnemyMiss);
-                TextArea.PrintLine("Attack missed.", XleColor.Green);
+                await TextArea.PrintLine("Attack missed.", XleColor.Green);
             }
 
-            GameControl.Wait(250);
+            await GameControl.WaitAsync(250);
         }
 
         private bool TryMonsterStep(DungeonMonster monster, Point delta)

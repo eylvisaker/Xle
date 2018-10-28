@@ -76,33 +76,31 @@ namespace Xle.Services.Rendering.Maps
             int x, int y, Direction faceDirection, Rectangle inRect, 
             int maxDistance)
         {
-            throw new NotImplementedException();
+            Point stepDir = faceDirection.StepDirection();
 
-            //Point stepDir = faceDirection.StepDirection();
+            for (int distance = 1; distance <= maxDistance; distance++)
+            {
+                Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
 
-            //for (int distance = 1; distance <= maxDistance; distance++)
-            //{
-            //    Point loc = new Point(x + stepDir.X * distance, y + stepDir.Y * distance);
+                var monster = Extender.Combat.MonsterAt(GameState.Player.DungeonLevel, loc);
 
-            //    var monster = Extender.Combat.MonsterAt(GameState.Player.DungeonLevel, loc);
+                if (monster == null)
+                    continue;
 
-            //    if (monster == null)
-            //        continue;
+                var data = Data.DungeonMonsters[monster.MonsterID];
+                int image = distance - 1;
+                var imageInfo = data.Images[image];
 
-            //    var data = Data.DungeonMonsters[monster.MonsterID];
-            //    int image = distance - 1;
-            //    var imageInfo = data.Images[image];
+                Vector2 drawPoint = imageInfo.DrawPoint.ToVector2();
+                drawPoint.X += inRect.X;
+                drawPoint.Y += inRect.Y;
 
-            //    var drawPoint = imageInfo.DrawPoint;
-            //    drawPoint.X += inRect.X;
-            //    drawPoint.Y += inRect.Y;
+                var srcRect = imageInfo.SourceRects[0];
 
-            //    var srcRect = imageInfo.SourceRects[0];
+                spriteBatch.Draw(data.Image, drawPoint, srcRect, Color.White);
 
-            //    data.Image.Draw(srcRect, drawPoint);
-
-            //    break;
-            //}
+                break;
+            }
         }
     }
 }

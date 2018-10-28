@@ -18,7 +18,7 @@ namespace Xle.Maps.Dungeons
         void OnCurrentLevelChanged();
     }
 
-    [Singleton]
+    [Singleton, InjectProperties]
     public class DungeonAdapter : IDungeonAdapter
     {
         public GameState GameState { get; set; }
