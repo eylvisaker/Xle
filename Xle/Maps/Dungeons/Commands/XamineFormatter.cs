@@ -16,7 +16,7 @@ namespace Xle.Maps.Dungeons.Commands
         void DescribeMonster(DungeonMonster monster);
     }
 
-    [Singleton]
+    [Singleton, InjectProperties]
     public class XamineFormatter : IXamineFormatter
     {
         public ITextArea TextArea { get; set; }

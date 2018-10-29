@@ -14,9 +14,14 @@ namespace Xle.Services.Commands.Implementation
     [Singleton]
     public class EventInteractor : IEventInteractor
     {
-        public GameState GameState { get; set; }
+        private readonly GameState gameState;
 
-        private IMapExtender MapExtender { get { return GameState.MapExtender; } }
+        public EventInteractor(GameState gameState)
+        {
+            this.gameState = gameState;
+        }
+
+        private IMapExtender MapExtender => gameState.MapExtender;
 
         public async Task<bool> InteractWithFirstEvent(Func<IEventExtender, Task<bool>> function)
         {

@@ -35,24 +35,29 @@ namespace Xle.Maps.Towns
             await TextArea.PrintLine("Fight with " + Player.CurrentWeapon.BaseName(Data));
             await TextArea.Print("Enter direction: ");
 
-            Keys key = await Input.WaitForKey(Keys.Up, Keys.Down, Keys.Left, Keys.Right);
+            Direction fightDir = Direction.None;
 
-            Direction fightDir;
-
-            switch (key)
+            while (fightDir == Direction.None)
             {
-                case Keys.Right: fightDir = Direction.East; break;
-                case Keys.Up: fightDir = Direction.North; break;
-                case Keys.Left: fightDir = Direction.West; break;
-                case Keys.Down: fightDir = Direction.South; break;
-                default:
-                    throw new InvalidOperationException();
+                Input.PromptToContinueOnWait = false;                     
+                Keys key = await Input.WaitForKey(Keys.Up, Keys.Down, Keys.Left, Keys.Right);
+
+                switch (key)
+                {
+                    case Keys.Right: fightDir = Direction.East; break;
+                    case Keys.Up: fightDir = Direction.North; break;
+                    case Keys.Left: fightDir = Direction.West; break;
+                    case Keys.Down: fightDir = Direction.South; break;
+                    default:
+                        SoundMan.PlaySound(LotaSound.Invalid);
+                        break;
+                }
             }
 
             await TextArea.PrintLine(fightDir.ToString());
-
             await FightInDirection(fightDir);
 
+            Input.PromptToContinueOnWait = true;
         }
 
         protected virtual async Task FightInDirection(Direction fightDir)
@@ -275,7 +280,7 @@ namespace Xle.Maps.Towns
                     SoundMan.StopSound(LotaSound.PlayerHit);
                     SoundMan.PlaySound(LotaSound.EnemyDie);
 
-                    await guard.OnGuardDead?.Invoke(GameState, guard);
+                    await (guard.OnGuardDead?.Invoke(GameState, guard) ?? Task.FromResult(false));
                 }
             }
         }

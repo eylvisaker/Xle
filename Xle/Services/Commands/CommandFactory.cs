@@ -10,7 +10,7 @@ namespace Xle.Services.Commands
         IClimb Climb(string name);
         Disembark Disembark();
         End End();
-        IFight Fight(string name = null);
+        IFight Fight(string name);
         Gamespeed Gamespeed();
         Hold Hold();
         Inventory Inventory();
@@ -44,7 +44,7 @@ namespace Xle.Services.Commands
 
         public End End() => serviceLocator.Resolve<End>();
 
-        public IFight Fight(string name = null) => ResolveMaybeNamed<IFight>(name);
+        public IFight Fight(string name) => ResolveNamed<IFight>(name);
 
         public Gamespeed Gamespeed() => serviceLocator.Resolve<Gamespeed>();
 
@@ -54,41 +54,34 @@ namespace Xle.Services.Commands
 
         public ILeave Leave(string name = null, string promptText = "", bool confirmPrompt = true)
         {
-            ILeave result;
-            if (name == null)
-                result = serviceLocator.Resolve<ILeave>();
-            else
-                result = serviceLocator.ResolveNamed<ILeave>(name);
+            ILeave result = ResolveNamed<ILeave>(name ?? "Leave");
 
             result.PromptText = promptText;
             result.ConfirmPrompt = confirmPrompt;
             return result;
         }
 
-        public IMagicCommand Magic(string name = null) => ResolveMaybeNamed<IMagicCommand>(name);
+        public IMagicCommand Magic(string name = null) => ResolveNamed<IMagicCommand>(name ?? "Magic");
 
-        public IOpen Open(string name = null) => ResolveMaybeNamed<IOpen>(name);
+        public IOpen Open(string name = null) => ResolveNamed<IOpen>(name ?? "Open");
 
         public Pass Pass() => serviceLocator.Resolve<Pass>();
 
-        public IRob Rob(string name = null) => ResolveMaybeNamed<IRob>(name);
+        public IRob Rob(string name = null) => ResolveNamed<IRob>(name ?? "Rob");
 
-        public ISpeak Speak(string name = null) => ResolveMaybeNamed<ISpeak>(name);
+        public ISpeak Speak(string name = null) => ResolveNamed<ISpeak>(name ?? "Speak");
 
-        public ITake Take(string name = null) => ResolveMaybeNamed<ITake>(name);
+        public ITake Take(string name = null) => ResolveNamed<ITake>(name ?? "Take");
 
-        public IUse Use(string name) => ResolveMaybeNamed<IUse>(name);
+        public IUse Use(string name) => ResolveNamed<IUse>(name);
 
         public WeaponCommand Weapon() => serviceLocator.Resolve<WeaponCommand>();
 
-        public IXamine Xamine(string name = null) => ResolveMaybeNamed<IXamine>(name);
+        public IXamine Xamine(string name = null) => ResolveNamed<IXamine>(name ?? "Xamine");
 
-        private T ResolveMaybeNamed<T>(string name)
+        private T ResolveNamed<T>(string name)
         {
-            if (name == null)
-                return serviceLocator.Resolve<T>();
-            else
-                return serviceLocator.ResolveNamed<T>(name);
+            return serviceLocator.ResolveNamed<T>(name);
         }
     }
 }

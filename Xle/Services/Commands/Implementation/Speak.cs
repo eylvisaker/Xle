@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using AgateLib;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Xle.Services.Commands.Implementation
 {
     public interface ISpeak : ICommand { }
+
+    [Transient("Speak")]
     public class Speak : Command, ISpeak
     {
         public override string Name

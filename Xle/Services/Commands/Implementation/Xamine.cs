@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Services.Commands.Implementation
 {
     public interface IXamine : ICommand { }
 
+    [Transient("Xamine")]
     public class Xamine : Command, IXamine
     {
         public override string Name

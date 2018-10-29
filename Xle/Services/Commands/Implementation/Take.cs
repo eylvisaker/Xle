@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AgateLib;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Xle.Services.Commands.Implementation
 {
     public interface ITake : ICommand { }
 
+    [Transient("Take")]
     public class Take : Command, ITake
     {
         public IXleGameControl GameControl { get; set; }

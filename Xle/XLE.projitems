@@ -13,7 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\CommandInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\EventExtenderInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\FactoryInstaller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\IServiceLocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\IAgateServiceLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\MapExtenderInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\MapRendererInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\ServiceInstaller.cs" />
@@ -81,7 +81,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\Commands\OutsideXamine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\EncounterState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\IOutsideEncounters.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\IOutsideExtender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\OutsideExtender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\TerrainMeasurement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Roof.cs" />

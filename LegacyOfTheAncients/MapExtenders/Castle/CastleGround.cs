@@ -44,9 +44,9 @@ namespace Xle.Ancients.MapExtenders.Castle
             commands.Items.Add(fight);
             commands.Items.Add(CommandFactory.Magic("CastleMagic"));
             commands.Items.Add(CommandFactory.Open("Open"));
-            commands.Items.Add(CommandFactory.Take());
+            commands.Items.Add(CommandFactory.Take("Take"));
             commands.Items.Add(CommandFactory.Speak("CastleSpeak"));
-            commands.Items.Add(CommandFactory.Xamine());
+            commands.Items.Add(CommandFactory.Xamine("Xamine"));
             commands.Items.Add(CommandFactory.Use("CastleUse"));
         }
 

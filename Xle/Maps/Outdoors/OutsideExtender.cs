@@ -10,6 +10,10 @@ using Xle.Services.XleSystem;
 
 namespace Xle.Maps.Outdoors
 {
+    public interface IOutsideExtender : IMapExtender
+    {
+    }
+
     public class OutsideExtender : Map2DExtender, IOutsideExtender
     {
         private Direction monstDir { get; set; }

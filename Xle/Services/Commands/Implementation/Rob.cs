@@ -5,6 +5,7 @@ namespace Xle.Services.Commands.Implementation
 {
     public interface IRob : ICommand { }
 
+    [Transient("Rob")]
     public class Rob : Command, IRob
     {
         public override string Name
