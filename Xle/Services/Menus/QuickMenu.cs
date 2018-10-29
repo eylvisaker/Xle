@@ -14,7 +14,7 @@ namespace Xle.Services.Menus
     {
         Task<int> QuickMenuYesNo(bool defaultAtNo = false);
 
-        Task<int> QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null, Action redraw = null);
+        Task<int> QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null);
     }
 
     [Singleton]
@@ -55,12 +55,12 @@ namespace Xle.Services.Menus
         /// <param name="items">The items in the list.</param>
         /// <param name="spaces"></param>
         /// <returns></returns>
-        public Task<int> QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null, Action redraw = null)
+        public Task<int> QuickMenu(MenuItemList items, int spaces, int value = 0, Color? clrInit = null, Color? clrChanged = null)
         {
-            return QuickMenuImpl(items, spaces, value, clrInit ?? screen.FontColor, clrChanged ?? screen.FontColor);
+            return QuickMenuCore(items, spaces, value, clrInit ?? screen.FontColor, clrChanged ?? screen.FontColor);
         }
 
-        public async Task<int> QuickMenuImpl(MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
+        public async Task<int> QuickMenuCore(MenuItemList items, int spaces, int value, Color clrInit, Color clrChanged)
         {
             Require.That<ArgumentOutOfRangeException>(value >= 0, "value should be positive");
             Require.That<ArgumentOutOfRangeException>(value < items.Count, "value should be less than items.Count");

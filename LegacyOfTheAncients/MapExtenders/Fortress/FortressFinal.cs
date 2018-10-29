@@ -112,7 +112,7 @@ namespace Xle.Ancients.MapExtenders.Fortress
 
         public Color FlashColor { get; set; }
 
-        public override void Draw(GameTime time, SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             borderIndex++;
 
@@ -121,7 +121,7 @@ namespace Xle.Ancients.MapExtenders.Fortress
             else
                 TheMap.ColorScheme.FrameColor = XleColor.Gray;
 
-            XleRenderer.Draw(time, spriteBatch);
+            XleRenderer.Draw(spriteBatch);
         }
     }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xle.Data;
 
 namespace Xle.XleEventTypes.Extenders
@@ -58,14 +54,14 @@ namespace Xle.XleEventTypes.Extenders
 
             handled |= await PrintUnlockText(item);
 
-            PlayRemoveSound();
+            await PlayRemoveSound();
             RemoveDoor();
         }
 
-        public virtual void PlayRemoveSound()
+        public virtual async Task PlayRemoveSound()
         {
             SoundMan.PlaySound(LotaSound.UnlockDoor);
-            GameControl.Wait(250);
+            await GameControl.WaitAsync(250);
         }
         public virtual void RemoveDoor()
         {

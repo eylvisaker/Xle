@@ -11,7 +11,7 @@ namespace Xle
     /// </summary>
     public interface IRenderer
     {
-        void Draw(GameTime time, SpriteBatch spriteBatch);
+        void Draw(SpriteBatch spriteBatch);
 
         void Update(GameTime time);
     }
@@ -25,7 +25,7 @@ namespace Xle
 
         public XleMap TheMap => GameState.Map;
 
-        public abstract void Draw(GameTime time, SpriteBatch spriteBatch);
+        public abstract void Draw(SpriteBatch spriteBatch);
 
         public virtual void Update(GameTime time)
         {

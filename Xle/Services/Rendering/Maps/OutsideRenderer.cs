@@ -37,7 +37,7 @@ namespace Xle.Services.Rendering.Maps
             int x = playerPos.X;
             int y = playerPos.Y;
 
-            Draw2D(x, y, faceDirection, inRect);
+            Draw2D(spriteBatch, x, y, faceDirection, inRect);
 
             if (DisplayMonsterID > -1)
             {
@@ -56,7 +56,7 @@ namespace Xle.Services.Rendering.Maps
                 else if (dir.Y > 0)
                     pos.Y += 35;
 
-                Renderer.DrawMonster(pos.X, pos.Y, DisplayMonsterID);
+                Renderer.DrawMonster(spriteBatch, pos.X, pos.Y, DisplayMonsterID);
             }
         }
         protected override int TileToDraw(int x, int y)

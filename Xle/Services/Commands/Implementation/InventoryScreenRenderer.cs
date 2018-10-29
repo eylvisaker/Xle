@@ -32,7 +32,7 @@ namespace Xle.Services.Commands.Implementation
 
         public int InventoryScreen { get; set; }
 
-        public void Draw(GameTime time, SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             var player = GameState.Player;
 

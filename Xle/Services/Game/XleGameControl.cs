@@ -1,9 +1,12 @@
 ﻿using AgateLib;
 using AgateLib.Mathematics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
+using Xle.Services.Commands.Implementation;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 
@@ -11,10 +14,16 @@ namespace Xle.Services.Game
 {
     public interface IXleGameControl
     {
+        IDisposable PushRenderer(IRenderer renderer);
+
+        void PopRenderer(IRenderer renderer);
+
         Task WaitAsync(int howLong, bool keyBreak = false, IRenderer redraw = null);
 
         [Obsolete("await WaitAsync instead")]
         void Wait(int howLong, bool keyBreak = false, Action redraw = null);
+
+        Task<Keys> WaitForKey(params Keys[] keys);
 
         Task FlashHPWhileSound(Color color1, Color? color2 = null);
 
@@ -26,9 +35,8 @@ namespace Xle.Services.Game
 
         Task PlaySoundWait(LotaSound lotaSound, float maxTime_ms = 15000);
 
+        
         Task PlayMagicSound(LotaSound sound, LotaSound endSound, int distance);
-
-        Task WaitForKey(IRenderer renderer = null);
     }
 
     public static class ObsoleteExtensions
@@ -40,6 +48,24 @@ namespace Xle.Services.Game
     [Singleton]
     public class XleGameControl : IXleGameControl
     {
+        class RendererHandle : IDisposable
+        {
+            private readonly XleGameControl xleGameControl;
+            private IRenderer renderer;
+
+            public RendererHandle(XleGameControl xleGameControl, IRenderer renderer)
+            {
+                this.xleGameControl = xleGameControl;
+                this.renderer = renderer;
+            }
+
+            public void Dispose()
+            {
+                xleGameControl.PopRenderer(renderer);
+            }
+        }
+
+
         private IXleScreen screen;
         private readonly IStatsDisplay statsDisplay;
         private readonly IXleWaiter waiter;
@@ -87,16 +113,17 @@ namespace Xle.Services.Game
             throw new NotImplementedException();
         }
 
-        public async Task WaitForKey(IRenderer renderer = null)
+        public async Task<Keys> WaitForKey(params Keys[] keys)
         {
-            bool hitKey = false;
-
-            while (!hitKey)
+            while (true) 
             {
-                await waiter.WaitAsync(10000, true, renderer);
+                await waiter.WaitAsync(10000, true);
 
                 if (waiter.PressedKey != null)
-                    hitKey = true;
+                {
+                    if (keys.Length == 0 || keys.Contains(waiter.PressedKey.Value))
+                        return waiter.PressedKey.Value;
+                }
             }
         }
 
@@ -171,6 +198,18 @@ namespace Xle.Services.Game
         {
             while (soundMan.IsAnyPlaying())
                 await WaitAsync(10);
+        }
+
+        public IDisposable PushRenderer(IRenderer renderer)
+        {
+            screen.Renderer = renderer;
+
+            return new RendererHandle(this, renderer);
+        }
+
+        public void PopRenderer(IRenderer renderer)
+        {
+            screen.Renderer = null;
         }
     }
 }

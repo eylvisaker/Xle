@@ -63,14 +63,12 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         protected async Task Wait(int howLong)
         {
-            throw new NotImplementedException();
-
-            //await GameControl.WaitAsync(howLong, redraw: RedrawStore);
+            await GameControl.WaitAsync(howLong);
         }
-        protected Task<Keys> WaitForKey(params Keys[] keys)
+
+        protected async Task<Keys> WaitForKey(params Keys[] keys)
         {
-            throw new NotImplementedException();
-            //input.WaitForKey(RedrawStore, keys);
+            return await GameControl.WaitForKey(keys);
         }
 
 

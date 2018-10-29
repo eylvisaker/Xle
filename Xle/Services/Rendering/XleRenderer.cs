@@ -14,9 +14,9 @@ namespace Xle.Services.Rendering
 {
     public interface IXleRenderer
     {
-        Action ReplacementDrawMethod { get; set; }
+        Point PlayerDrawPoint { get; set; }
 
-        void Draw(GameTime time, SpriteBatch spriteBatch);
+        void Draw(SpriteBatch spriteBatch);
 
         void Update(GameTime time);
 
@@ -24,31 +24,19 @@ namespace Xle.Services.Rendering
 
         void DrawFrameHighlight(SpriteBatch spriteBatch, Color color);
 
-        [Obsolete]
-        void DrawFrame(Color color);
-        [Obsolete]
-        void DrawFrameHighlight(Color color);
-
         void DrawInnerFrameHighlight(SpriteBatch spriteBatch, int p1, int p2, int p3, int p4, Color color);
 
         void DrawFrameLine(SpriteBatch spriteBatch, int p1, int p2, int p3, int p4, Color color);
 
-        [Obsolete]
-        void DrawInnerFrameHighlight(int p1, int p2, int p3, int p4, Color color);
-        [Obsolete]
-        void DrawFrameLine(int p1, int p2, int p3, int p4, Color color);
-
         void DrawObject(SpriteBatch spriteBatch, TextWindow wind);
 
-        void DrawObject(ColorScheme mColorScheme);
+        void DrawObject(SpriteBatch spriteBatch, ColorScheme mColorScheme);
 
-        void DrawTile(int drawx, int drawy, int tile);
+        void DrawTile(SpriteBatch spriteBatch, int drawx, int drawy, int tile);
 
-        Point PlayerDrawPoint { get; set; }
+        void DrawMonster(SpriteBatch spriteBatch, int p1, int p2, int DisplayMonsterID);
 
-        void DrawMonster(int p1, int p2, int DisplayMonsterID);
-
-        void DrawCharacterSprite(int rx, int ry, Direction facing, bool p1, int p2, bool p3, Color color);
+        void DrawCharacterSprite(SpriteBatch spriteBatch, int rx, int ry, Direction facing, bool p1, int p2, bool p3, Color color);
     }
 
     [Singleton, InjectProperties]
@@ -82,14 +70,6 @@ namespace Xle.Services.Rendering
             this.statsDisplay = statsDisplay;
         }
 
-        public SpriteBatch spriteBatch { get; set; }
-
-        private void Screen_Draw(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-            //Draw();
-        }
-
         public GameState GameState { get; set; }
         public ITextArea TextArea { get; set; }
         public ITextAreaRenderer TextAreaRenderer { get; set; }
@@ -114,24 +94,13 @@ namespace Xle.Services.Rendering
             DrawFrameLine(spriteBatch, 0, GameAreaSize.Height - 16, 1, GameAreaSize.Width, boxColor);
             DrawFrameLine(spriteBatch, GameAreaSize.Width - 12, 0, 0, GameAreaSize.Height - 2, boxColor);
         }
+
         public void DrawFrameHighlight(SpriteBatch spriteBatch, Color innerColor)
         {
             DrawInnerFrameHighlight(spriteBatch, 0, 0, 1, GameAreaSize.Width, innerColor);
             DrawInnerFrameHighlight(spriteBatch, 0, 0, 0, GameAreaSize.Height - 2, innerColor);
             DrawInnerFrameHighlight(spriteBatch, 0, GameAreaSize.Height - 16, 1, GameAreaSize.Width + 2, innerColor);
             DrawInnerFrameHighlight(spriteBatch, GameAreaSize.Width - 12, 0, 0, GameAreaSize.Height - 2, innerColor);
-        }
-
-        [Obsolete]
-        public void DrawFrame(Color boxColor)
-        {
-            throw new NotSupportedException();
-        }
-
-        [Obsolete]
-        public void DrawFrameHighlight(Color innerColor)
-        {
-            throw new NotSupportedException();
         }
 
         /// <summary>
@@ -163,13 +132,6 @@ namespace Xle.Services.Rendering
                 FillRect(spriteBatch, left, top, boxWidth, length, boxColor);
             }
         }
-
-        [Obsolete]
-        public void DrawFrameLine(int left, int top, int direction,
-                      int length, Color boxColor) => throw new NotSupportedException();
-        [Obsolete]
-        public void DrawInnerFrameHighlight(int left, int top, int direction,
-                      int length, Color innerColor) => throw new NotSupportedException();
 
         public void DrawInnerFrameHighlight(SpriteBatch spriteBatch, int left, int top, int direction,
                       int length, Color innerColor)
@@ -219,7 +181,7 @@ namespace Xle.Services.Rendering
             TextRenderer.WriteText(spriteBatch, px, py, theText, coloring);
         }
 
-        public void DrawTile(int px, int py, int tile)
+        public void DrawTile(SpriteBatch spriteBatch, int px, int py, int tile)
         {
             int tx, ty;
 
@@ -241,7 +203,7 @@ namespace Xle.Services.Rendering
         /// <param name="px">The x position of the monster, in screen pixels.</param>
         /// <param name="py">The y position of the monster, in screen pixels.</param>
         /// <param name="monst"></param>
-        public void DrawMonster(int px, int py, int monst)
+        public void DrawMonster(SpriteBatch spriteBatch, int px, int py, int monst)
         {
             int tx, ty;
 
@@ -270,12 +232,12 @@ namespace Xle.Services.Rendering
         /// <param name="animating"></param>
         /// <param name="animFrame"></param>
         /// <param name="vertLine"></param>
-        private void DrawCharacter(bool animating, int animFrame, int vertLine)
+        private void DrawCharacter(SpriteBatch spriteBatch, bool animating, int animFrame, int vertLine)
         {
-            DrawCharacter(animating, animFrame, vertLine, Player.RenderColor);
+            DrawCharacter(spriteBatch, animating, animFrame, vertLine, Player.RenderColor);
         }
 
-        private void DrawCharacter(bool animating, int animFrame, int vertLine, Color clr)
+        private void DrawCharacter(SpriteBatch spriteBatch, bool animating, int animFrame, int vertLine, Color clr)
         {
             int px = vertLine + 16;
             int py = 16 + 7 * 16;
@@ -284,12 +246,12 @@ namespace Xle.Services.Rendering
             px += 11 * 16;
             PlayerDrawPoint = new Point(px, py);
 
-            DrawCharacterSprite(px, py, GameState.Player.FaceDirection, animating, animFrame, true, clr);
+            DrawCharacterSprite(spriteBatch, px, py, GameState.Player.FaceDirection, animating, animFrame, true, clr);
 
             CharRect = new Rectangle(px, py, 32, 32);
         }
 
-        public void DrawCharacterSprite(int destx, int desty, Direction facing, bool animating, int animFrame, bool allowPingPong, Color clr)
+        public void DrawCharacterSprite(SpriteBatch spriteBatch, int destx, int desty, Direction facing, bool animating, int animFrame, bool allowPingPong, Color clr)
         {
             int tx = 0, ty;
 
@@ -387,26 +349,16 @@ namespace Xle.Services.Rendering
             }
         }
 
-        public Action ReplacementDrawMethod { get; set; }
-
         public XleMapRenderer MapRenderer { get { return GameState?.MapExtender?.MapRenderer; } }
 
         public ColorScheme ColorScheme => GameState.Map.ColorScheme;
 
-        public void Draw(GameTime time, SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            this.spriteBatch = spriteBatch;
-
             if (GameState == null)
                 return;
 
-            if (ReplacementDrawMethod != null)
-            {
-                ReplacementDrawMethod();
-                return;
-            }
-
-            DrawTextAreaBackColor(GameState.Map.ColorScheme);
+            DrawTextAreaBackColor(spriteBatch, GameState.Map.ColorScheme);
 
             Player player = GameState.Player;
             XleMap map = GameState.Map;
@@ -467,7 +419,7 @@ namespace Xle.Services.Rendering
                 DrawRafts(spriteBatch, mapRect);
 
                 if (player.IsOnRaft == false)
-                    DrawCharacter(playerAnimator.Animating, playerAnimator.AnimFrame, vertLine);
+                    DrawCharacter(spriteBatch, playerAnimator.Animating, playerAnimator.AnimFrame, vertLine);
             }
 
             if (Screen.PromptToContinue)
@@ -512,32 +464,23 @@ namespace Xle.Services.Rendering
             }
         }
 
-
-        public void UpdateAnim()
-        {
-            //RaftAnim();
-        }
-
-        private void DrawTextAreaBackColor(ColorScheme cs)
+        private void DrawTextAreaBackColor(SpriteBatch spriteBatch, ColorScheme cs)
         {
             int hp = cs.HorizontalLinePosition * 16 + 8;
 
             FillRect(spriteBatch, 0, hp, 640, 400 - hp, cs.TextAreaBackColor);
         }
 
-        public void DrawObject(ColorScheme cs)
+        public void DrawObject(SpriteBatch spriteBatch, ColorScheme cs)
         {
-            throw new NotImplementedException();
-
-            DrawTextAreaBackColor(cs);
+            DrawTextAreaBackColor(spriteBatch, cs);
 
             // Draw the borders
-            DrawFrame(cs.FrameColor);
-            DrawFrameLine(0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameColor);
+            DrawFrame(spriteBatch, cs.FrameColor);
+            DrawFrameLine(spriteBatch, 0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameColor);
 
-            DrawFrameHighlight(cs.FrameHighlightColor);
-            DrawInnerFrameHighlight(0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameHighlightColor);
-
+            DrawFrameHighlight(spriteBatch, cs.FrameHighlightColor);
+            DrawInnerFrameHighlight(spriteBatch, 0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameHighlightColor);
         }
 
         public void Update(GameTime time)

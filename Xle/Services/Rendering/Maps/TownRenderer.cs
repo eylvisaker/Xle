@@ -20,7 +20,7 @@ namespace Xle.Services.Rendering.Maps
         {
             base.Draw(spriteBatch, playerPos, faceDirection, inRect);
 
-            DrawGuards(playerPos, inRect);
+            DrawGuards(spriteBatch, playerPos, inRect);
         }
 
         protected override int TileToDraw(int x, int y)
@@ -40,7 +40,7 @@ namespace Xle.Services.Rendering.Maps
             return roofTile;
         }
 
-        protected void DrawGuards(Point playerPos, Rectangle inRect)
+        protected void DrawGuards(SpriteBatch spriteBatch, Point playerPos, Rectangle inRect)
         {
             Point topLeftMapPt = new Point(playerPos.X - 11, playerPos.Y - 7);
 
@@ -60,7 +60,7 @@ namespace Xle.Services.Rendering.Maps
 
                     if (rx >= inRect.Left && ry >= inRect.Top && rx <= inRect.Right - 32 && ry <= inRect.Bottom - 32)
                     {
-                        Renderer.DrawCharacterSprite(rx, ry, facing, true, TheMap.Guards.AnimFrame, false, guard.Color);
+                        Renderer.DrawCharacterSprite(spriteBatch, rx, ry, facing, true, TheMap.Guards.AnimFrame, false, guard.Color);
                     }
                 }
             }

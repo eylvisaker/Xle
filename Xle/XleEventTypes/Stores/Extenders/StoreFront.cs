@@ -1,10 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xle.Services.Menus;
-using Xle.Services.Rendering;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 
@@ -12,41 +10,54 @@ namespace Xle.XleEventTypes.Stores.Extenders
 {
     public class StoreFront : StoreExtender
     {
-        private ColorScheme mColorScheme;
+        private StoreFrontScreen storeFrontScreen = new StoreFrontScreen();
+        private StoreFrontRenderer renderer;
 
         public SpriteBatch spriteBatch { get; set; }
 
+        public StoreFrontRenderer Renderer
+        {
+            get => renderer;
+            set
+            {
+                renderer = value;
+                renderer.Screen = storeFrontScreen;
+            }
+        }
+
+        public string Title
+        {
+            get => storeFrontScreen.Title;
+            set => storeFrontScreen.Title = value;
+        }
+
         public IQuickMenu QuickMenuService { get; set; }
-        public IXleRenderer Renderer { get; set; }
         public IXleInput input { get; set; }
         public INumberPicker NumberPicker { get; set; }
-        public ITextAreaRenderer TextAreaRenderer { get; set; }
-        public ITextRenderer TextRenderer { get; set; }
         public IXleScreen Screen { get; set; }
-        public List<TextWindow> Windows { get; private set; }
+
         public new Store TheEvent { get { return base.TheEvent; } }
 
-        protected ColorScheme ColorScheme { get { return mColorScheme; } }
-        protected bool ShowGoldText { get; set; }
+
+        public List<TextWindow> Windows => storeFrontScreen.Windows;
+        protected ColorScheme ColorScheme => storeFrontScreen.ColorScheme;
+
+        protected bool ShowGoldText
+        {
+            get => Renderer.Screen.ShowGoldText;
+            set => Renderer.Screen.ShowGoldText = value;
+        }
 
         public StoreFront()
         {
             PrivateInitializeColorScheme();
 
-            Windows = new List<TextWindow>();
-
             ClearWindow();
-
         }
 
         private void PrivateInitializeColorScheme()
         {
-            mColorScheme = new Xle.ColorScheme();
-            mColorScheme.BackColor = XleColor.Green;
-
-            ShowGoldText = true;
-
-            InitializeColorScheme(mColorScheme);
+            InitializeColorScheme(storeFrontScreen.ColorScheme);
         }
 
         protected void ClearWindow()
@@ -57,97 +68,24 @@ namespace Xle.XleEventTypes.Stores.Extenders
         protected virtual void InitializeColorScheme(ColorScheme cs)
         { }
 
-        protected internal void RedrawStore()
-        {
-            throw new NotImplementedException();
-            //Display.BeginFrame();
-
-            //DrawStore();
-
-            //Display.EndFrame();
-            //GameControl.KeepAlive();
-        }
-
-        protected void DrawStore()
-        {
-            Renderer.DrawObject(mColorScheme);
-
-            // Draw the title
-            DrawTitle(Title);
-
-            foreach (var window in Windows)
-            {
-                Renderer.DrawObject(spriteBatch, window);
-            }
-
-            DrawGoldText();
-
-            TextAreaRenderer.Draw(spriteBatch, TextArea);
-        }
-
-        private void DrawGoldText()
-        {
-            if (ShowGoldText == false)
-                return;
-
-            string goldText;
-            if (robbing == false)
-            {
-                // Draw Gold
-                goldText = " Gold: ";
-                goldText += Player.Gold;
-                goldText += " ";
-            }
-            else
-            {
-                // don't need gold if we're robbing it!
-                goldText = " Robbery in progress ";
-            }
-
-            FillRect(
-                320 - (goldText.Length / 2) * 16,
-                ColorScheme.HorizontalLinePosition * 16,
-                goldText.Length * 16,
-                14,
-                mColorScheme.BackColor);
-
-            TextRenderer.WriteText(spriteBatch, 320 - (goldText.Length / 2) * 16, 18 * 16, goldText, XleColor.White);
-
-        }
-
-        private void FillRect(int v1, int v2, int v3, int v4, Color backColor) => throw new NotImplementedException();
-
-        private void DrawTitle(string title)
-        {
-            if (string.IsNullOrEmpty(title))
-                return;
-
-            FillRect(320 - (title.Length + 2) / 2 * 16, 0,
-                         (title.Length + 2) * 16, 16, mColorScheme.BackColor);
-
-            TextRenderer.WriteText(spriteBatch, 320 - (title.Length / 2) * 16, 0, title, mColorScheme.TitleColor);
-        }
-
         protected Task<int> QuickMenu(MenuItemList menu, int spaces)
         {
-            return QuickMenuService.QuickMenu(menu, spaces, redraw: RedrawStore);
+            return QuickMenuService.QuickMenu(menu, spaces);
         }
         protected Task<int> QuickMenu(MenuItemList menu, int spaces, int value)
         {
-            return QuickMenuService.QuickMenu(menu, spaces, value, redraw: RedrawStore);
+            return QuickMenuService.QuickMenu(menu, spaces, value);
         }
         protected Task<int> QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit)
         {
-            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, redraw: RedrawStore);
+            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit);
         }
         protected Task<int> QuickMenu(MenuItemList menu, int spaces, int value, Color clrInit, Color clrChanged)
         {
-            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged, redraw: RedrawStore);
+            return QuickMenuService.QuickMenu(menu, spaces, value, clrInit, clrChanged);
         }
 
         protected Task<int> ChooseNumber(int max) => NumberPicker.ChooseNumber(max);
-
-        public string Title { get; set; }
 
         public override async Task<bool> Speak()
         {
@@ -162,15 +100,9 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 }
             }
 
-            try
+            using (GameControl.PushRenderer(Renderer))
             {
-                Renderer.ReplacementDrawMethod = DrawStore;
-
                 return await SpeakImplAsync();
-            }
-            finally
-            {
-                Renderer.ReplacementDrawMethod = null;
             }
         }
 
@@ -179,5 +111,27 @@ namespace Xle.XleEventTypes.Stores.Extenders
             return StoreNotImplementedMessage();
         }
 
+    }
+
+
+    public class StoreFrontScreen
+    {
+        public StoreFrontScreen()
+        {
+            ColorScheme = new Xle.ColorScheme();
+            ColorScheme.BackColor = XleColor.Green;
+
+            ShowGoldText = true;
+        }
+
+        public ColorScheme ColorScheme { get; set; } = new ColorScheme();
+
+        public bool Robbing { get; set; }
+
+        public bool ShowGoldText { get; set; }
+
+        public string Title { get; set; }
+
+        public List<TextWindow> Windows { get; private set; } = new List<TextWindow>();
     }
 }

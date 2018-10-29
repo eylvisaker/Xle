@@ -234,6 +234,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\Stores\Extenders\StoreFood.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\Stores\Extenders\StoreFortune.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\Stores\Extenders\StoreFront.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\Stores\Extenders\StoreFrontRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\Stores\Extenders\StoreJail.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\Stores\Extenders\StoreLending.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleEventTypes\Stores\Extenders\StoreMagic.cs" />

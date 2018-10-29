@@ -133,7 +133,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             Windows.Add(offerText);
 
-            await SetOfferText(offerText, offer, ask);
+            SetOfferText(offerText, offer, ask);
 
             ask = await GetAskingPrice();
 
@@ -170,7 +170,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             {
                 bool finalOffer = false;
 
-                await SetAskRejectPrice(offerText, ask, WayTooHigh(ask, offer, maxAccept));
+                SetAskRejectPrice(offerText, ask, WayTooHigh(ask, offer, maxAccept));
                 choice = await MakeOffer(item, offer, finalOffer);
 
                 if (choice == 0)
@@ -184,7 +184,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
                     return;
                 }
 
-                await SetOfferText(offerText, offer, lastAsk);
+                SetOfferText(offerText, offer, lastAsk);
                 ask = await GetAskingPrice();
 
                 if (ask == 0)
@@ -265,7 +265,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             return (ask / offer) > 1.4 && (ask / maxAccept > 1.3);
         }
 
-        private async Task SetAskRejectPrice(TextWindow offerWind, int ask, bool wayTooHigh)
+        private void SetAskRejectPrice(TextWindow offerWind, int ask, bool wayTooHigh)
         {
             var clr = wayTooHigh ? XleColor.Yellow : XleColor.Cyan;
 
@@ -274,7 +274,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 (wayTooHigh ? "way " : "") + "too high!", clr);
         }
 
-        private async Task SetOfferText(TextWindow offerWind, int offer, int ask)
+        private void SetOfferText(TextWindow offerWind, int offer, int ask)
         {
             offerWind.Clear();
             offerWind.Write("My latest offer: ", XleColor.White);
@@ -295,28 +295,28 @@ namespace Xle.XleEventTypes.Stores.Extenders
         private async Task ComeBackWhenSerious()
         {
             TextArea.Clear();
-            TextArea.PrintLine("Come back when you're serious.");
+await             TextArea.PrintLine("Come back when you're serious.");
 
-            Wait(1500);
+            await Wait(1500);
         }
         private async Task MaybeDealLater()
         {
             TextArea.Clear();
-            TextArea.PrintLine("Maybe we can deal later.");
+            await TextArea.PrintLine("Maybe we can deal later.");
 
-            Wait(1500);
+            await Wait(1500);
         }
 
         private async Task CompleteSale(int offer, Equipment item)
         {
             TextArea.Clear();
-            TextArea.PrintLine("It's a deal!");
-            TextArea.PrintLine(item.BaseName(Data) + " sold for " + offer + " gold.");
+            await TextArea.PrintLine("It's a deal!");
+            await TextArea.PrintLine(item.BaseName(Data) + " sold for " + offer + " gold.");
 
             Player.Gold += offer;
             Player.RemoveEquipment(item);
 
-            StoreSound(LotaSound.Sale);
+            await StoreSound(LotaSound.Sale);
         }
     }
 }

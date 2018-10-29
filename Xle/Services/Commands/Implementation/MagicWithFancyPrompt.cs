@@ -34,7 +34,7 @@ namespace Xle.Services.Commands.Implementation
             var menu = new MenuItemList("Flame", "Bolt", anyOthers ? "Other" : "Nothing");
 
             int choice = await QuickMenu.QuickMenu(menu, 2, defaultValue,
-                                                   XleColor.Purple, XleColor.White);
+                XleColor.Purple, XleColor.White);
 
             if (choice == 0)
                 return Data.MagicSpells[1];

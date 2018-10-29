@@ -1,5 +1,4 @@
-﻿using System;
-using AgateLib;
+﻿using AgateLib;
 using AgateLib.Input;
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
@@ -33,7 +32,7 @@ namespace Xle.Scenes
                              IRectangleRenderer rects,
                              ICommandExecutor commandExecutor,
                              XleSystemState systemState,
-                             XleRenderer renderer, 
+                             XleRenderer renderer,
                              GameState gameState)
         {
             this.device = device;
@@ -81,7 +80,15 @@ namespace Xle.Scenes
             }
 
             commandExecutor.Update(time);
-            renderer.Update(time);
+
+            if (screen.Renderer != null)
+            {
+                screen.Renderer?.Update(time);
+            }
+            else
+            {
+                renderer.Update(time);
+            }
 
             if (systemState.ReturnToTitle)
                 IsFinished = true;
@@ -95,15 +102,20 @@ namespace Xle.Scenes
             spriteBatch.Begin(
                 transformMatrix: Matrix.CreateTranslation(new Vector3(20, 20, 0)));
 
-            rects.Fill(spriteBatch, 
-                       new Rectangle(0, 0, 640, 400), 
+            rects.Fill(spriteBatch,
+                       new Rectangle(0, 0, 640, 400),
                        renderer.ColorScheme.BackColor);
 
-            renderer.Draw(time, spriteBatch);
+            if (screen.Renderer != null)
+            {
+                screen.Renderer.Draw(spriteBatch);
+            }
+            else
+            {
+                renderer.Draw(spriteBatch);
+            }
 
             spriteBatch.End();
-
-            //screen.OnDraw();
         }
     }
 }

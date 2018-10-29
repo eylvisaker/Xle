@@ -13,7 +13,7 @@ namespace Xle.Services.Rendering.Maps
         public override void Draw(SpriteBatch spriteBatch, Point playerPos,
             Direction faceDirection, Rectangle inRect)
         {
-            Draw2D(playerPos.X, playerPos.Y, faceDirection, inRect);
+            Draw2D(spriteBatch, playerPos.X, playerPos.Y, faceDirection, inRect);
         }
 
         protected Point centerPoint { get; set; }
@@ -27,7 +27,7 @@ namespace Xle.Services.Rendering.Maps
             Animate(time, tileRect);
         }
 
-        protected void Draw2D(int x, int y, Direction faceDirction, Rectangle inRect)
+        protected void Draw2D(SpriteBatch spriteBatch, int x, int y, Direction faceDirction, Rectangle inRect)
         {
             int i, j;
             int initialxx = inRect.X;
@@ -51,7 +51,7 @@ namespace Xle.Services.Rendering.Maps
                 {
                     tile = TileToDraw(i, j);
 
-                    Renderer.DrawTile(drawx, drawy, tile);
+                    Renderer.DrawTile(spriteBatch, drawx, drawy, tile);
 
                     drawx += 16;
                 }

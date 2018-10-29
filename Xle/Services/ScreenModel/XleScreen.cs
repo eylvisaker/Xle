@@ -15,6 +15,8 @@ namespace Xle.Services.ScreenModel
         /// </summary>
         bool PromptToContinue { get; set; }
         Color BorderColor { get; set; }
+
+        IRenderer Renderer { get; set; }
     }
 
     [Singleton]
@@ -56,5 +58,6 @@ namespace Xle.Services.ScreenModel
         public Color FontColor { get; set; }
 
         public Color BorderColor { get; set; } = XleColor.DarkGray;
+        public IRenderer Renderer { get; set; }
     }
 }

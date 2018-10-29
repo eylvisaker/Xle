@@ -91,7 +91,7 @@ namespace Xle.Services
             {
                 spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(20, 20, 0));
 
-                renderer.Draw(time, spriteBatch);
+                renderer.Draw(spriteBatch);
 
                 spriteBatch.End();
             }

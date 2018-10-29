@@ -29,12 +29,15 @@ namespace Xle.Services.Commands.Implementation
 
             renderer.InventoryScreen = 0;
 
-            while (renderer.InventoryScreen < 2)
+            using (gameControl.PushRenderer(renderer))
             {
-                await gameControl.WaitAsync(150, redraw: renderer);
-                await gameControl.WaitForKey(renderer);
+                while (renderer.InventoryScreen < 2)
+                {
+                    await gameControl.WaitAsync(150);
+                    await gameControl.WaitForKey();
 
-                renderer.InventoryScreen++;
+                    renderer.InventoryScreen++;
+                }
             }
         }
     }

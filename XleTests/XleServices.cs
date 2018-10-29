@@ -97,9 +97,8 @@ namespace Xle
         {
             QuickMenu.Setup(
                 x =>
-                    x.QuickMenu(It.IsAny<MenuItemList>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<Color?>(), It.IsAny<Color?>(),
-                        It.IsAny<Action>()))
-                .Returns((MenuItemList menu, int a, int b, Color? c, Color? d, Action e) =>
+                    x.QuickMenu(It.IsAny<MenuItemList>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<Color?>(), It.IsAny<Color?>()))
+                .Returns((MenuItemList menu, int a, int b, Color? c, Color? d) =>
                 {
                     if (QuickMenuCallback != null)
                     {
