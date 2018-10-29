@@ -3,6 +3,7 @@ using AgateLib.Input;
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
 using Xle.Services.Rendering;
@@ -24,6 +25,7 @@ namespace Xle.Services
             this.graphics = graphics;
             this.spriteBatch = new SpriteBatch(graphics);
 
+            keyboard.KeyPress += Keyboard_KeyPress;
             keyboard.KeyUp += Keyboard_KeyUp;
 
             DrawBelow = true;
@@ -31,12 +33,24 @@ namespace Xle.Services
 
         public IXleRenderer XleRenderer { get; set; }
 
+        public Keys? PressedKey { get; private set; }
+
         public TimeSpan TimeLeft => TimeSpan.FromMilliseconds(timeLeft_ms);
+
+        private void Keyboard_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PressedKey = e.Key;
+
+            if (allowKeyBreak)
+                timeLeft_ms = 0;
+        }
 
         private void Keyboard_KeyUp(object sender, KeyEventArgs e)
         {
-            if (allowKeyBreak)
-                timeLeft_ms = 0;
+            //PressedKey = e.Key;
+
+            //if (allowKeyBreak)
+            //    timeLeft_ms = 0;
         }
 
         public void Initialize(int howLong_ms, bool allowKeyBreak, IRenderer renderer = null)
@@ -45,6 +59,7 @@ namespace Xle.Services
             this.allowKeyBreak = allowKeyBreak;
 
             IsFinished = false;
+            PressedKey = null;
 
             this.renderer = renderer;
         }

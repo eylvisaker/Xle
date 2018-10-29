@@ -143,6 +143,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Commands\Implementation\Gamespeed.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Commands\Implementation\Hold.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Commands\Implementation\Inventory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Commands\Implementation\InventoryScreenRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Commands\Implementation\ItemChooser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Commands\Implementation\Leave.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Commands\Implementation\Magic.cs" />
@@ -192,11 +193,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\PlayerAnimator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\StatsDisplay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\TextArea.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\Implementation\XleDisplayStack.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\XleScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\IXleDisplayStack.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\TextLine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\XleDisplay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceName.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WaitScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\CommandEventArgs.cs" />

@@ -151,6 +151,7 @@ namespace Xle.Services.Commands
                 soundMan.PlaySound(LotaSound.Invalid);
 
                 await gameControl.WaitAsync(waitTime);
+                inputPrompt = true;
                 return;
             }
 
@@ -198,7 +199,6 @@ namespace Xle.Services.Commands
             await gameControl.WaitAsync(waitTime);
 
             await Prompt();
-
         }
 
         public void Update(GameTime time)
@@ -217,18 +217,23 @@ namespace Xle.Services.Commands
                 return;
             }
 
-            inputPrompt = false;
-
-            await textArea.PrintLine();
-            await textArea.PrintLine(WrapText($"Error: {exception.GetType()}"), Color.Red);
-            await textArea.PrintLine(WrapText(exception.Message), Color.Red);
-
-            if (Debugger.IsAttached)
+            try
             {
-                Debugger.Break();
-            }
+                inputPrompt = false;
 
-            await Prompt();
+                await textArea.PrintLine();
+                await textArea.PrintLine(WrapText($"Error: {exception.GetType()}"), Color.Red);
+                await textArea.PrintLine(WrapText(exception.Message), Color.Red);
+
+                if (Debugger.IsAttached)
+                {
+                    Debugger.Break();
+                }
+            }
+            finally
+            {
+                await Prompt();
+            }
         }
 
         private string WrapText(string message)

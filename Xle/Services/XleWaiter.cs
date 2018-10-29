@@ -1,16 +1,15 @@
 ﻿using AgateLib;
-using AgateLib.Input;
 using AgateLib.Scenes;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
-using Xle.Services.Rendering;
 
 namespace Xle.Services
 {
     public interface IXleWaiter
     {
+        Keys? PressedKey { get; }
+
         Task WaitAsync(int howLong_ms, bool allowKeyBreak = false, IRenderer renderer = null);
     }
 
@@ -26,6 +25,8 @@ namespace Xle.Services
             this.sceneStack = sceneStack;
             this.waitScene = waitScene;
         }
+
+        public Keys? PressedKey => waitScene.PressedKey;
 
         public async Task WaitAsync(int howLong_ms, bool allowKeyBreak = false, IRenderer renderer = null)
         {

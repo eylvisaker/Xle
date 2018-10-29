@@ -28,7 +28,7 @@ namespace Xle.Services.Game
 
         Task PlayMagicSound(LotaSound sound, LotaSound endSound, int distance);
 
-        Task WaitForKey();
+        Task WaitForKey(IRenderer renderer = null);
     }
 
     public static class ObsoleteExtensions
@@ -87,7 +87,18 @@ namespace Xle.Services.Game
             throw new NotImplementedException();
         }
 
-        public Task WaitForKey() => input.WaitForKey();
+        public async Task WaitForKey(IRenderer renderer = null)
+        {
+            bool hitKey = false;
+
+            while (!hitKey)
+            {
+                await waiter.WaitAsync(10000, true, renderer);
+
+                if (waiter.PressedKey != null)
+                    hitKey = true;
+            }
+        }
 
         public Task FlashHPWhileSound(Color color1, Color? color2 = null)
         {
