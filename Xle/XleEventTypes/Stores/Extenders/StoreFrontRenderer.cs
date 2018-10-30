@@ -31,9 +31,12 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             DrawTitle(spriteBatch, Screen.Title);
 
-            foreach (var window in Screen.Windows)
+            lock (Screen.Windows)
             {
-                Renderer.DrawObject(spriteBatch, window);
+                foreach (var window in Screen.Windows)
+                {
+                    Renderer.DrawObject(spriteBatch, window);
+                }
             }
 
             DrawGoldText(spriteBatch);

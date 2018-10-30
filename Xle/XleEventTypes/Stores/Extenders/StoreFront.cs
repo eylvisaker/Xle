@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xle.Services.Menus;
@@ -32,14 +33,13 @@ namespace Xle.XleEventTypes.Stores.Extenders
         }
 
         public IQuickMenu QuickMenuService { get; set; }
-        public IXleInput input { get; set; }
         public INumberPicker NumberPicker { get; set; }
-        public IXleScreen Screen { get; set; }
+        public StoreFrontScreen Screen => storeFrontScreen;
 
         public new Store TheEvent { get { return base.TheEvent; } }
 
+        public IReadOnlyList<TextWindow> Windows => storeFrontScreen.Windows;
 
-        public List<TextWindow> Windows => storeFrontScreen.Windows;
         protected ColorScheme ColorScheme => storeFrontScreen.ColorScheme;
 
         protected bool ShowGoldText
@@ -52,19 +52,13 @@ namespace Xle.XleEventTypes.Stores.Extenders
         {
             PrivateInitializeColorScheme();
 
-            ClearWindow();
+            Screen.ClearWindows();
         }
 
         private void PrivateInitializeColorScheme()
         {
-            InitializeColorScheme(storeFrontScreen.ColorScheme);
         }
-
-        protected void ClearWindow()
-        {
-            Windows.Clear();
-        }
-
+        
         protected virtual void InitializeColorScheme(ColorScheme cs)
         { }
 
@@ -89,7 +83,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         public override async Task<bool> Speak()
         {
-            PrivateInitializeColorScheme();
+            storeFrontScreen.ColorScheme = new ColorScheme();
+            InitializeColorScheme(storeFrontScreen.ColorScheme);
 
             if (AllowInteractionWhenLoanOverdue == false)
             {
@@ -116,6 +111,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
     public class StoreFrontScreen
     {
+        private List<TextWindow> _windows = new List<TextWindow>();
+
         public StoreFrontScreen()
         {
             ColorScheme = new Xle.ColorScheme();
@@ -132,6 +129,30 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         public string Title { get; set; }
 
-        public List<TextWindow> Windows { get; private set; } = new List<TextWindow>();
+        public IReadOnlyList<TextWindow> Windows => _windows;
+
+        public void AddWindow(TextWindow window)
+        {
+            lock (_windows)
+            {
+                _windows.Add(window);
+            }
+        }
+
+        public void RemoveWindow(TextWindow window)
+        {
+            lock (_windows)
+            {
+                _windows.Remove(window);
+            }
+        }
+
+        public void ClearWindows()
+        {
+            lock(_windows)
+            {
+                _windows.Clear();
+            }
+        }
     }
 }

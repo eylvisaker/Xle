@@ -190,7 +190,7 @@ namespace Xle.Services.Commands.Implementation
 
         private void UpdateColorScheme()
         {
-            ColorScheme.BorderColor = XleColor.White;
+            ColorScheme.BorderColor = XleColor.Black;
 
             // select the right colors for the screen.
             if (InventoryScreen == 0)

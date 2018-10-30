@@ -69,8 +69,12 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         protected override async Task<bool> SpeakImplAsync()
         {
-            Windows.Clear();
-            Windows.AddRange(CreateStoreWindows());
+            Screen.ClearWindows();
+
+            foreach(var window in CreateStoreWindows())
+            {
+                Screen.AddWindow(window);
+            }
 
             Title = TheEvent.ShopName;
 

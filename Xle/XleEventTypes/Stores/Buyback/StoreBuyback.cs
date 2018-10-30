@@ -37,7 +37,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
         {
             robbing = false;
 
-            ClearWindow();
+            Screen.ClearWindows();
             Title = TheEvent.ShopName;
 
             var wind = new TextWindow();
@@ -54,13 +54,13 @@ namespace Xle.XleEventTypes.Stores.Buyback
             prompt.WriteLine(" 1.  Weapons");
             prompt.WriteLine(" 2.  Armor");
 
-            Windows.Add(wind);
-            Windows.Add(prompt);
+            Screen.AddWindow(wind);
+            Screen.AddWindow(prompt);
 
             wind.SetColor(XleColor.Red);
             prompt.SetColor(XleColor.Red);
 
-            BuybackFormatter.InitialMenuPrompt();
+            await BuybackFormatter.InitialMenuPrompt();
 
             MenuItemList theList = new MenuItemList("0", "1", "2");
             int choice = await QuickMenu(theList, 2, 0);
@@ -68,7 +68,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
             if (choice == 0)
                 return;
 
-            Windows.Remove(prompt);
+            Screen.RemoveWindow(prompt);
             wind.Visible = false;
 
             ColorScheme.FrameColor = XleColor.Gray;
@@ -81,7 +81,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
 
             TextWindow questionWindow = new TextWindow { Location = new Point(5, 16) };
 
-            Windows.Add(questionWindow);
+            Screen.AddWindow(questionWindow);
 
             switch (choice)
             {
@@ -99,7 +99,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
             if (item == null)
                 return;
 
-            Windows.Remove(questionWindow);
+            Screen.RemoveWindow(questionWindow);
 
             wind.Visible = true;
             wind.SetColor(XleColor.White);
@@ -120,7 +120,7 @@ namespace Xle.XleEventTypes.Stores.Buyback
             TextWindow offerText = new TextWindow();
             offerText.Location = new Point(2, 16);
 
-            Windows.Add(offerText);
+            Screen.AddWindow(offerText);
 
             OfferWindow.TextWindow = offerText;
         }

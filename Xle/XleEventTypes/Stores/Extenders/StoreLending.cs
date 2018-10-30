@@ -130,13 +130,13 @@ namespace Xle.XleEventTypes.Stores.Extenders
     {
         public void InitializeWindow()
         {
-            ClearWindow();
+            Screen.ClearWindows();
 
             Title = "Friendly";
 
             var window1 = new TextWindow { Location = new Point(10, 2), Text = "Lending Association" };
 
-            Windows.Add(window1);
+            Screen.AddWindow(window1);
         }
 
         public async Task DisplayFailureToPay()
@@ -190,7 +190,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             window2.WriteLine();
             window2.WriteLine("Due Date: " + dueDate);
 
-            Windows.Add(window2);
+            Screen.AddWindow(window2);
 
             await TextArea.PrintLine();
             await TextArea.Print("Pay how much? ");
@@ -237,8 +237,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
             await TextArea.PrintLine();
             await TextArea.PrintLine("Borrow how much?");
 
-            Windows.Add(window2);
-            Windows.Add(window3);
+            Screen.AddWindow(window2);
+            Screen.AddWindow(window3);
 
             return await ChooseNumber(MaxLoan);
         }

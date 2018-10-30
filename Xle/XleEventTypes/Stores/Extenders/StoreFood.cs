@@ -170,7 +170,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
         }
         private void SetWindow(double cost)
         {
-            ClearWindow();
+            Screen.ClearWindows();
 
             var promptWindow = new TextWindow();
             promptWindow.Location = new Point(9, 4);
@@ -196,7 +196,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             promptWindow.SetColor(XleColor.Yellow);
 
-            Windows.Add(promptWindow);
+            Screen.AddWindow(promptWindow);
         }
 
         private void SetTitle()

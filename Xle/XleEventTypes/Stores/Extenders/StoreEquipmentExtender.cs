@@ -23,9 +23,9 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         public StoreEquipmentExtender()
         {
-            Windows.Add(titlePrompt);
-            Windows.Add(itemsPrompt);
-            Windows.Add(inventoryDisplay);
+            Screen.AddWindow(titlePrompt);
+            Screen.AddWindow(itemsPrompt);
+            Screen.AddWindow(inventoryDisplay);
         }
 
         protected abstract string StoreType { get; }

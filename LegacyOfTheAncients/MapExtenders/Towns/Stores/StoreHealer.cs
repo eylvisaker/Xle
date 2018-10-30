@@ -25,7 +25,7 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
             int woundPrice = (int)((Player.MaxHP - Player.HP) * 0.75);
             int herbsPrice = (int)(Player.Level * 300 * TheEvent.CostFactor);
 
-            Windows.Clear();
+            Screen.ClearWindows();
 
             Title = TheEvent.ShopName;
 
@@ -142,7 +142,7 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
 
             window.WriteLine("2. Healing Herbs -  " + herbsPrice + " apiece");
 
-            Windows.Add(window);
+            Screen.AddWindow(window);
         }
 
         private void SetDescriptionText()
@@ -153,7 +153,7 @@ namespace Xle.Ancients.MapExtenders.Towns.Stores
             window.WriteLine("Our sect offers restorative");
             window.WriteLine("    cures for your wounds.");
 
-            Windows.Add(window);
+            Screen.AddWindow(window);
         }
     }
 }

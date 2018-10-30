@@ -36,7 +36,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             robbing = false;
 
-            ClearWindow();
+            Screen.ClearWindows();
             Title = TheEvent.ShopName;
 
             var wind = new TextWindow();
@@ -53,8 +53,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
             prompt.WriteLine(" 1.  Weapons");
             prompt.WriteLine(" 2.  Armor");
 
-            Windows.Add(wind);
-            Windows.Add(prompt);
+            Screen.AddWindow(wind);
+            Screen.AddWindow(prompt);
 
             wind.SetColor(XleColor.Red);
             prompt.SetColor(XleColor.Red);
@@ -70,7 +70,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             if (choice == 0)
                 return;
 
-            Windows.Remove(prompt);
+            Screen.RemoveWindow(prompt);
             wind.Visible = false;
 
             ColorScheme.FrameColor = XleColor.Gray;
@@ -83,7 +83,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             TextWindow questionWindow = new TextWindow { Location = new Point(5, 16) };
 
-            Windows.Add(questionWindow);
+            Screen.AddWindow(questionWindow);
 
             switch (choice)
             {
@@ -101,7 +101,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             if (item == null)
                 return;
 
-            Windows.Remove(questionWindow);
+            Screen.RemoveWindow(questionWindow);
 
             ColorScheme.HorizontalLinePosition = 14;
             ColorScheme.TextAreaBackColor = XleColor.Black;
@@ -131,7 +131,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             }
             int ask = 0;
 
-            Windows.Add(offerText);
+            Screen.AddWindow(offerText);
 
             SetOfferText(offerText, offer, ask);
 

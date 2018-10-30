@@ -38,7 +38,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             robbing = false;
 
-            ClearWindow();
+            Screen.ClearWindows();
 
             Title = "Convenience Bank";
 
@@ -56,8 +56,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
             optionsWindow.WriteLine();
             optionsWindow.WriteLine("3.  Balance Inquiry");
 
-            Windows.Add(promptWindow);
-            Windows.Add(optionsWindow);
+            Screen.AddWindow(promptWindow);
+            Screen.AddWindow(optionsWindow);
 
             await TextArea.PrintLine();
             await TextArea.PrintLine();
