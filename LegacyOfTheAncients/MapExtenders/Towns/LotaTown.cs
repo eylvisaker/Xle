@@ -1,5 +1,6 @@
 ﻿using AgateLib;
 using System.Linq;
+using System.Threading.Tasks;
 using Xle.Maps.Towns;
 using Xle.Services.Commands;
 using Xle.XleEventTypes.Stores;
@@ -15,22 +16,27 @@ namespace Xle.Ancients.MapExtenders.Towns
 
         public override void OnLoad()
         {
-            CheckLoan();
-
             base.OnLoad();
         }
 
-        private void CheckLoan()
+        public override async Task OnAfterEntry()
+        {
+            await base.OnAfterEntry();
+
+            await CheckLoan();
+        }
+
+        private async Task CheckLoan()
         {
             if (TheMap.Events.Any(x => x is Store && x.ExtenderName == "StoreLending"))
             {
                 if (Player.loan > 0 && Player.dueDate <= Player.TimeDays)
                 {
-                    TextArea.PrintLine("This is your friendly lender.");
-                    TextArea.PrintLine("You owe me money!");
+                    await TextArea.PrintLine("This is your friendly lender.");
+                    await TextArea.PrintLine("You owe me money!");
                     SoundMan.PlaySound(LotaSound.Bad);
 
-                    GameControl.Wait(1000);
+                    await GameControl.WaitAsync(1000);
                 }
             }
         }

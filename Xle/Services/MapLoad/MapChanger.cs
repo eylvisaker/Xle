@@ -1,11 +1,12 @@
-﻿using Xle.Maps;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
+using System;
+using System.Threading.Tasks;
+using Xle.Maps;
 using Xle.Services.Commands;
 using Xle.Services.Menus;
 using Xle.Services.Rendering;
 using Xle.Services.ScreenModel;
-using Microsoft.Xna.Framework;
-using System;
-using AgateLib;
 
 namespace Xle.Services.MapLoad
 {
@@ -13,10 +14,10 @@ namespace Xle.Services.MapLoad
     {
         void SetMap(IMapExtender map);
 
-        void ChangeMap(int mapId, int entryPoint);
-        void ChangeMap(int mapId, Point targetPoint);
+        Task ChangeMap(int mapId, int entryPoint);
+        Task ChangeMap(int mapId, Point targetPoint);
 
-        void ReturnToPreviousMap();
+        Task ReturnToPreviousMap();
     }
 
     [Singleton]
@@ -50,17 +51,17 @@ namespace Xle.Services.MapLoad
 
         private Player Player { get { return gameState.Player; } }
 
-        public void ChangeMap(int mapId, int entryPoint)
+        public Task ChangeMap(int mapId, int entryPoint)
         {
-            ChangeMapCore(mapId, entryPoint, 0, 0);
+            return ChangeMapCore(mapId, entryPoint, 0, 0);
         }
 
-        public void ChangeMap(int mapId, Point targetPoint)
+        public Task ChangeMap(int mapId, Point targetPoint)
         {
-            ChangeMapCore(mapId, -1, targetPoint.X, targetPoint.Y);
+            return ChangeMapCore(mapId, -1, targetPoint.X, targetPoint.Y);
         }
 
-        private void ChangeMapCore(int mMapID, int targetEntryPoint, int targetX, int targetY)
+        private async Task ChangeMapCore(int mMapID, int targetEntryPoint, int targetX, int targetY)
         {
             if (gameState.Map == null)
             {
@@ -115,7 +116,7 @@ namespace Xle.Services.MapLoad
                 throw;
             }
 
-            gameState.MapExtender.OnAfterEntry();
+            await gameState.MapExtender.OnAfterEntry();
         }
 
         private void TransferAngryStateIfNeeded(IMapExtender saveMap)
@@ -211,9 +212,9 @@ namespace Xle.Services.MapLoad
             images.LoadTiles(gameState.Map.TileImage);
         }
 
-        public void ReturnToPreviousMap()
+        public async Task ReturnToPreviousMap()
         {
-            ChangeMap(Player.returnMap, new Point(Player.returnX, Player.returnY));
+            await ChangeMap(Player.returnMap, new Point(Player.returnX, Player.returnY));
 
             Player.FaceDirection = Player.returnFacing;
         }

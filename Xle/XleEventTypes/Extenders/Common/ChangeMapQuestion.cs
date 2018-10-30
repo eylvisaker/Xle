@@ -1,10 +1,5 @@
 ﻿using AgateLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xle.Services;
 using Xle.Services.Menus;
 
 namespace Xle.XleEventTypes.Extenders.Common
@@ -28,16 +23,16 @@ namespace Xle.XleEventTypes.Extenders.Common
                 return false;
             else if (string.IsNullOrEmpty(TheEvent.CommandText) == false)
             {
-               await  TextArea.PrintLine();
-               await  TextArea.PrintLine(
-                    string.Format(TheEvent.CommandText,
-                    Map.MapName, newMapName));
+                await TextArea.PrintLine();
+                await TextArea.PrintLine(
+                     string.Format(TheEvent.CommandText,
+                     Map.MapName, newMapName));
 
                 await TextArea.PrintLine();
                 await GameControl.WaitAsync(500);
             }
 
-            ExecuteMapChange();
+            await ExecuteMapChange();
             return true;
         }
     }

@@ -19,10 +19,7 @@ namespace Xle.Services.Game
         void PopRenderer(IRenderer renderer);
 
         Task WaitAsync(int howLong, bool keyBreak = false, IRenderer redraw = null);
-
-        [Obsolete("await WaitAsync instead")]
-        void Wait(int howLong, bool keyBreak = false, Action redraw = null);
-
+        
         Task<Keys> WaitForKey(params Keys[] keys);
 
         Task FlashHPWhileSound(Color color1, Color? color2 = null);
@@ -106,11 +103,6 @@ namespace Xle.Services.Game
         public async Task WaitAsync(int howLong, bool keyBreak = false, IRenderer redraw = null)
         {
             await waiter.WaitAsync(howLong, keyBreak, redraw);
-        }
-
-        public void Wait(int howLong, bool keyBreak = false, Action redraw = null)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Keys> WaitForKey(params Keys[] keys)

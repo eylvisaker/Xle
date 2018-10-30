@@ -66,7 +66,7 @@ namespace Xle.XleEventTypes.Extenders
         {
             try
             {
-                MapChanger.ChangeMap(TheEvent.MapID, TheEvent.TargetEntryPoint);
+                await MapChanger.ChangeMap(TheEvent.MapID, TheEvent.TargetEntryPoint);
             }
             catch (Exception e)
             {
