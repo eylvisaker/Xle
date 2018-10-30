@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Moq;
 using System;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace Xle.Services.MapLoad
 {
@@ -109,7 +110,7 @@ namespace Xle.Services.MapLoad
         }
 
         [Fact]
-        public void MapEntryPointEvents()
+        public async Task MapEntryPointEvents()
         {
             SetupMapLoader<Town>(m =>
             {
@@ -117,7 +118,7 @@ namespace Xle.Services.MapLoad
             });
 
             SetStartMap();
-            changer.ChangeMap(2, 0);
+            await changer.ChangeMap(2, 0);
 
             returnedMap.Verify(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>()));
             returnedMap.Verify(x => x.OnLoad());

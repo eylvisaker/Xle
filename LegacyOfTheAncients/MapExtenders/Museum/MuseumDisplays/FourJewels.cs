@@ -43,7 +43,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 
                 Player.DungeonLevel = 0;
 
-                MapChanger.ChangeMap(73, 0);
+                await MapChanger.ChangeMap(73, 0);
                 Player.SetReturnLocation(map, x, y, facing);
             }
         }

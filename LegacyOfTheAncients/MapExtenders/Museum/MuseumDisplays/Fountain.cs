@@ -80,9 +80,9 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                 await TextArea.PrintLine("            Gold:  + " + amount.ToString(), XleColor.Yellow);
 
                 SoundMan.PlaySound(LotaSound.VeryGood);
-                GameControl.FlashHPWhileSound(XleColor.Yellow);
 
-                Input.WaitForKey();
+                await GameControl.FlashHPWhileSound(XleColor.Yellow);
+                await GameControl.WaitForKey();
 
                 Story.SearchingForTulip = true;
             }

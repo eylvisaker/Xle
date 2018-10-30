@@ -52,7 +52,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 
                 await GameControl.WaitForKey();
 
-                MapChanger.ChangeMap(11, 0);
+                await MapChanger.ChangeMap(11, 0);
                 Player.SetReturnLocation(1, 18, 56);
             }
 

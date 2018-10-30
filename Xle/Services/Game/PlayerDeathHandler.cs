@@ -45,7 +45,7 @@ namespace Xle.Services.Game
 
             await GameControl.FlashHPWhileSound(XleColor.Red, XleColor.Yellow);
 
-            LoadOutsideMap();
+            await LoadOutsideMap();
 
             Outside map = (Outside)GameState.Map;
             TerrainType t;
@@ -76,9 +76,9 @@ namespace Xle.Services.Game
             await GameControl.PlaySoundWait(LotaSound.VeryGood);
         }
 
-        protected virtual void LoadOutsideMap()
+        protected virtual async Task LoadOutsideMap()
         {
-            MapChanger.ChangeMap(1, -1);
+            await MapChanger.ChangeMap(1, -1);
         }
 
     }

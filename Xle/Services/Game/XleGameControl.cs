@@ -6,7 +6,6 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Xle.Services.Commands.Implementation;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 
@@ -19,7 +18,7 @@ namespace Xle.Services.Game
         void PopRenderer(IRenderer renderer);
 
         Task WaitAsync(int howLong, bool keyBreak = false, IRenderer redraw = null);
-        
+
         Task<Keys> WaitForKey(params Keys[] keys);
 
         Task FlashHPWhileSound(Color color1, Color? color2 = null);
@@ -32,7 +31,7 @@ namespace Xle.Services.Game
 
         Task PlaySoundWait(LotaSound lotaSound, float maxTime_ms = 15000);
 
-        
+
         Task PlayMagicSound(LotaSound sound, LotaSound endSound, int distance);
     }
 
@@ -45,7 +44,7 @@ namespace Xle.Services.Game
     [Singleton]
     public class XleGameControl : IXleGameControl
     {
-        class RendererHandle : IDisposable
+        private class RendererHandle : IDisposable
         {
             private readonly XleGameControl xleGameControl;
             private IRenderer renderer;
@@ -107,7 +106,7 @@ namespace Xle.Services.Game
 
         public async Task<Keys> WaitForKey(params Keys[] keys)
         {
-            while (true) 
+            while (true)
             {
                 await waiter.WaitAsync(10000, true);
 

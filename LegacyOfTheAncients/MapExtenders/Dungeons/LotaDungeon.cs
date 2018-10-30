@@ -1,10 +1,10 @@
-﻿using Xle.Data;
+﻿using Microsoft.Xna.Framework;
+using System;
+using System.Threading.Tasks;
+using Xle.Data;
 using Xle.Maps;
 using Xle.Maps.Dungeons;
 using Xle.Services.Commands;
-using Microsoft.Xna.Framework;
-using System;
-using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Dungeons
 {
@@ -150,14 +150,14 @@ namespace Xle.Ancients.MapExtenders.Dungeons
 
         public override async Task CastSpell(MagicSpell magic)
         {
-         await   TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
+            await TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
 
             if (magic.ID == 3)
-      await          CastBefuddle(magic);
+                await CastBefuddle(magic);
             if (magic.ID == 4)
-      await          CastPsychoStrength(magic);
+                await CastPsychoStrength(magic);
             if (magic.ID == 5)
-           await     CastKillFlash(magic);
+                await CastKillFlash(magic);
         }
 
         private async Task CastKillFlash(MagicSpell magic)
@@ -188,7 +188,7 @@ namespace Xle.Ancients.MapExtenders.Dungeons
 
                 if (monst != null)
                 {
-     await               TextArea.PrintLine("The " + monst.Name + " looks confused.", XleColor.White);
+                    await TextArea.PrintLine("The " + monst.Name + " looks confused.", XleColor.White);
                 }
             }
         }

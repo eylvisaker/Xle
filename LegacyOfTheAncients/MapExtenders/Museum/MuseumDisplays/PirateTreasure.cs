@@ -40,9 +40,9 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
                     TextArea.SetCharacterColor(2, 12 + i, XleColor.Cyan);
                 }
 
-                Input.WaitForKey();
+                await GameControl.WaitForKey();
 
-                MapChanger.ChangeMap(2, 0);
+                await MapChanger.ChangeMap(2, 0);
             }
         }
     }

@@ -50,9 +50,9 @@ namespace Xle.Services.Commands.Implementation
            await CastSpell(magic);
         }
 
-        protected virtual Task CastSpell(MagicSpell magic)
+        protected virtual async Task CastSpell(MagicSpell magic)
         {
-            throw new NotImplementedException();
+            await GameState.MapExtender.CastSpell(magic);
         }
 
         protected virtual Task<MagicSpell> RunMagicMenu(IList<MagicSpell> magics)

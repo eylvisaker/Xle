@@ -32,7 +32,7 @@ namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
             int y = Player.Y;
             Direction facing = Player.FaceDirection;
 
-            MapChanger.ChangeMap(72, 0);
+            await MapChanger.ChangeMap(72, 0);
             Player.SetReturnLocation(map, x, y, facing);
 
             MarkAsVisited();

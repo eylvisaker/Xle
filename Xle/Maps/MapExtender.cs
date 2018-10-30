@@ -40,6 +40,8 @@ namespace Xle.Maps
         Task AfterExecuteCommand(Keys cmd);
         bool CanPlayerStepInto(Point corridorPt);
         bool CanPlayerStepIntoImpl(int v, int targetY);
+
+        Task CastSpell(MagicSpell spell);
     }
 
     [InjectProperties]

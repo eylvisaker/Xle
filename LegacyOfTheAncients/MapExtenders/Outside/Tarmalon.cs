@@ -198,42 +198,42 @@ namespace Xle.Ancients.MapExtenders.Outside
             {
                 if (WaterAnimLevel == 1 && wasStormy == 0)
                 {
-    await                TextArea.PrintLine();
-    await                TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("You are sailing into stormy water.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 2 || WaterAnimLevel == 3)
                 {
-         await           TextArea.PrintLine();
-         await           TextArea.PrintLine("The water is now very rough.", XleColor.White);
-         await           TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("The water is now very rough.", XleColor.White);
+                    await TextArea.PrintLine("It will soon swamp your raft.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 1 && wasStormy == 2)
                 {
-              await      TextArea.PrintLine();
-              await      TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("You are out of immediate danger.", XleColor.Yellow);
                 }
                 else if (WaterAnimLevel == 0 && wasStormy == 1)
                 {
-                 await   TextArea.PrintLine();
-                 await   TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("You leave the storm behind.", XleColor.Cyan);
                 }
 
                 if (WaterAnimLevel == 3)
                 {
-              await      TextArea.PrintLine();
-              await      TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
-              await      TextArea.PrintLine();
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("Your raft sinks.", XleColor.Yellow);
+                    await TextArea.PrintLine();
                 }
 
-     await           GameControl.WaitAsync(1000);
+                await GameControl.WaitAsync(1000);
 
                 if (WaterAnimLevel == 3)
                 {
                     player.HP = 0;
                     return true;
                 }
-
             }
+
             return false;
         }
 
@@ -263,7 +263,7 @@ namespace Xle.Ancients.MapExtenders.Outside
                 Player.FaceDirection = Direction.West;
                 await GameControl.PlaySoundSync(LotaSound.VeryGood);
 
-                MapChanger.ChangeMap(1, 0);
+                await MapChanger.ChangeMap(1, 0);
                 OutsideEncounters.CancelEncounter();
             }
         }

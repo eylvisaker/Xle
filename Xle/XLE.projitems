@@ -159,7 +159,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Game\PlayerDeathHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Game\XleGameControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Game\ITitleScreenFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Game\IXleGameControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Game\IXleGameFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Game\IXleTitleScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IXleFactory.cs" />

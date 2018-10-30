@@ -23,7 +23,6 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
         public IQuickMenu QuickMenu { get; set; }
         public ITextArea TextArea { get; set; }
         public ISoundMan SoundMan { get; set; }
-        public IXleInput Input { get; set; }
         public IXleGameControl GameControl { get; set; }
 
         protected Player Player { get { return GameState.Player; } }
@@ -204,7 +203,7 @@ namespace Xle.Maps.XleMapTypes.MuseumDisplays
                             case "purple": clr = XleColor.Purple; break;
 
                             case "pause":
-                                await Input.WaitForKey();
+                                await GameControl.WaitForKey();
 
                                 break;
 
