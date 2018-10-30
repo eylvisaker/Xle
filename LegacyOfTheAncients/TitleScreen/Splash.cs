@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Threading.Tasks;
 
 namespace Xle.Ancients.TitleScreen
@@ -20,6 +19,7 @@ namespace Xle.Ancients.TitleScreen
         public Splash(IContentProvider content)
         {
             this.content = content;
+            titleScreenSurface = content.Load<Texture2D>("Images/title");
         }
 
         public override Task KeyPress(Keys keyCode, string keyString)
@@ -30,13 +30,9 @@ namespace Xle.Ancients.TitleScreen
             return Task.CompletedTask;
         }
 
+
         public override void Update(GameTime time)
         {
-            if (titleScreenSurface == null)
-            {
-                titleScreenSurface = content.Load<Texture2D>("Images/title");
-            }
-
             if (SoundMan.IsPlaying(LotaSound.Music) == false)
             {
                 timeUntilMusicRestarts -= time.ElapsedGameTime.TotalMilliseconds;
@@ -64,8 +60,6 @@ namespace Xle.Ancients.TitleScreen
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-           // Display.Clear(XleColor.Gray);
-
             Rectangle srcRect = new Rectangle(0, 0, 320, 200);
             Rectangle destRect = new Rectangle(0, 0, 640, 400);
 

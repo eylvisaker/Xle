@@ -108,12 +108,16 @@ namespace Xle.Services.Game
         {
             while (true)
             {
+                screen.PromptToContinue = true;
                 await waiter.WaitAsync(10000, true);
 
                 if (waiter.PressedKey != null)
                 {
                     if (keys.Length == 0 || keys.Contains(waiter.PressedKey.Value))
+                    {
+                        screen.PromptToContinue = false;
                         return waiter.PressedKey.Value;
+                    }
                 }
             }
         }

@@ -136,6 +136,7 @@ namespace Xle.Maps.Museums
             if (ex == null)
                 return false;
 
+            Input.PromptToContinueOnWait = true;
             MapRenderer.DrawCloseup = true;
             MapRenderer.mCloseup = ex;
             MapRenderer.mDrawStatic = ex.StaticBeforeCoin;

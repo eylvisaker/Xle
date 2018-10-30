@@ -90,8 +90,7 @@ namespace Xle.Scenes
                 renderer.Update(time);
             }
 
-            if (systemState.ReturnToTitle)
-                IsFinished = true;
+            IsFinished = systemState.ReturnToTitle;
         }
 
 

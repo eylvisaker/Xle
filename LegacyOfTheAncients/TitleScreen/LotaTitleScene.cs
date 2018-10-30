@@ -6,6 +6,7 @@ using Xle.Ancients.TitleScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Xle.Services.XleSystem;
 
 namespace Xle.Ancients.TitleScreen
 {
@@ -15,15 +16,16 @@ namespace Xle.Ancients.TitleScreen
         private readonly ILotaTitleScreen titleScreen;
         private readonly GraphicsDevice device;
         private readonly IRectangleRenderer rects;
+        private readonly XleSystemState systemState;
         private readonly SpriteBatch spriteBatch;
         private readonly KeyboardEvents keyboard;
 
-        public LotaTitleScene(ILotaTitleScreen titleScreen, GraphicsDevice device, IRectangleRenderer rects)
+        public LotaTitleScene(ILotaTitleScreen titleScreen, GraphicsDevice device, IRectangleRenderer rects, XleSystemState systemState)
         {
             this.titleScreen = titleScreen;
             this.device = device;
             this.rects = rects;
-
+            this.systemState = systemState;
             spriteBatch = new SpriteBatch(device);
 
             keyboard = new KeyboardEvents();
@@ -53,6 +55,7 @@ namespace Xle.Ancients.TitleScreen
 
             if (titleScreen.Player != null)
             {
+                systemState.ReturnToTitle = false;
                 BeginGame?.Invoke(titleScreen.Player);
             }
         }
