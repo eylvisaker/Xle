@@ -14,6 +14,8 @@ namespace Xle
 
         public Color Color { get; set; } = XleColor.Gray;
 
+        public ColorScheme ColorScheme { get; } = new ColorScheme();
+
         public void Draw(SpriteBatch spriteBatch)
         {
             RectangleRenderer.Fill(spriteBatch, new Rectangle(-50, -50, 1000, 1000), Color);

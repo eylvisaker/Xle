@@ -11,6 +11,8 @@ namespace Xle
     /// </summary>
     public interface IRenderer
     {
+        ColorScheme ColorScheme { get; }
+
         void Draw(SpriteBatch spriteBatch);
 
         void Update(GameTime time);
@@ -19,11 +21,18 @@ namespace Xle
     [InjectProperties]
     public abstract class Renderer : IRenderer
     {
+        public Renderer()
+        {
+            ColorScheme.BorderColor = XleColor.Gray;
+        }
+
         public IXleRenderer XleRenderer { get; set; }
 
         public GameState GameState { get; set; }
 
         public XleMap TheMap => GameState.Map;
+
+        public ColorScheme ColorScheme { get; set; }
 
         public abstract void Draw(SpriteBatch spriteBatch);
 

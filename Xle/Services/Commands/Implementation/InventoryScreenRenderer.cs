@@ -13,6 +13,9 @@ namespace Xle.Services.Commands.Implementation
         private IXleRenderer renderer;
         private XleData data;
         private XleSystemState systemState;
+        private Color fontcolor;
+        private Color bgcolor;
+        private int inventoryScreen;
 
         public InventoryScreenRenderer(
             IXleRenderer renderer,
@@ -22,7 +25,11 @@ namespace Xle.Services.Commands.Implementation
             this.renderer = renderer;
             this.data = data;
             this.systemState = systemState;
+
+            UpdateColorScheme();
         }
+
+        public ColorScheme ColorScheme { get; } = new ColorScheme();
 
         public ITextRenderer TextRenderer { get; set; }
 
@@ -30,29 +37,22 @@ namespace Xle.Services.Commands.Implementation
 
         public GameState GameState { get; set; }
 
-        public int InventoryScreen { get; set; }
+        public int InventoryScreen
+        {
+            get => inventoryScreen;
+            set
+            {
+                inventoryScreen = value;
+                UpdateColorScheme();
+            }
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             var player = GameState.Player;
 
-            Color fontcolor;
-            Color bgcolor;
-
-            // select the right colors for the screen.
-            if (InventoryScreen == 0)
-            {
-                bgcolor = XleColor.Brown;
-                fontcolor = XleColor.Yellow;
-            }
-            else
-            {
-                bgcolor = XleColor.Blue;
-                fontcolor = XleColor.Cyan;
-            }
-
-            Rects.Fill(spriteBatch, new Rectangle(-100, -100, 1000, 1000), Color.White);
-            Rects.Fill(spriteBatch, new Rectangle(0, 0, 640, 400), bgcolor);
+            //Rects.Fill(spriteBatch, new Rectangle(-100, -100, 1000, 1000), Color.White);
+            //Rects.Fill(spriteBatch, new Rectangle(0, 0, 640, 400), bgcolor);
 
             // Draw the borders
             renderer.DrawFrame(spriteBatch, Color.Gray);
@@ -183,6 +183,28 @@ namespace Xle.Services.Commands.Implementation
 
         }
 
-        public void Update(GameTime time) { }
+        public void Update(GameTime time)
+        {
+            UpdateColorScheme();
+        }
+
+        private void UpdateColorScheme()
+        {
+            ColorScheme.BorderColor = XleColor.White;
+
+            // select the right colors for the screen.
+            if (InventoryScreen == 0)
+            {
+                bgcolor = XleColor.Brown;
+                fontcolor = XleColor.Yellow;
+            }
+            else
+            {
+                bgcolor = XleColor.Blue;
+                fontcolor = XleColor.Cyan;
+            }
+
+            ColorScheme.BackColor = bgcolor;
+        }
     }
 }

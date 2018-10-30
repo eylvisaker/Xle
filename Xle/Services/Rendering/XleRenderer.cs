@@ -473,6 +473,7 @@ namespace Xle.Services.Rendering
 
         public void DrawObject(SpriteBatch spriteBatch, ColorScheme cs)
         {
+            //DrawScreenBackColor(spriteBatch, cs.BackColor);
             DrawTextAreaBackColor(spriteBatch, cs);
 
             // Draw the borders
@@ -481,6 +482,11 @@ namespace Xle.Services.Rendering
 
             DrawFrameHighlight(spriteBatch, cs.FrameHighlightColor);
             DrawInnerFrameHighlight(spriteBatch, 0, cs.HorizontalLinePosition * 16, 1, 640, cs.FrameHighlightColor);
+        }
+
+        private void DrawScreenBackColor(SpriteBatch spriteBatch, Color backColor)
+        {
+            FillRect(spriteBatch, -20, -20, 800, 800, backColor);
         }
 
         public void Update(GameTime time)

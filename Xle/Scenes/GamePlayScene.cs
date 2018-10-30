@@ -97,14 +97,16 @@ namespace Xle.Scenes
 
         protected override void DrawScene(GameTime time)
         {
-            device.Clear(renderer.ColorScheme.BorderColor);
+            ColorScheme colorScheme = screen.Renderer?.ColorScheme ?? renderer.ColorScheme;
+
+            device.Clear(colorScheme.BorderColor);
 
             spriteBatch.Begin(
                 transformMatrix: Matrix.CreateTranslation(new Vector3(20, 20, 0)));
 
             rects.Fill(spriteBatch,
                        new Rectangle(0, 0, 640, 400),
-                       renderer.ColorScheme.BackColor);
+                       colorScheme.BackColor);
 
             if (screen.Renderer != null)
             {

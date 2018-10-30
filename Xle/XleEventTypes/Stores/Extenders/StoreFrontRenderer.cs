@@ -14,6 +14,8 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
         public StoreFrontScreen Screen { get; set; } = new StoreFrontScreen();
 
+        public ColorScheme ColorScheme => Screen.ColorScheme;
+
         public GameState GameState { get; set; }
         public IXleRenderer Renderer { get; set; }
         public ITextAreaRenderer TextAreaRenderer { get; set; }
@@ -27,7 +29,6 @@ namespace Xle.XleEventTypes.Stores.Extenders
         {
             Renderer.DrawObject(spriteBatch, Screen.ColorScheme);
 
-            // Draw the title
             DrawTitle(spriteBatch, Screen.Title);
 
             foreach (var window in Screen.Windows)
