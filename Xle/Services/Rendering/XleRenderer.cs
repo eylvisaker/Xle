@@ -3,6 +3,7 @@ using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Linq;
 using Xle.Data;
 using Xle.Maps;
 using Xle.Services.Commands;
@@ -394,7 +395,7 @@ namespace Xle.Services.Rendering
 
             i = 0;
             int cursorPos = 0;
-            foreach (var cmd in commands.Items)
+            foreach (var cmd in commands.Items.ToList())
             {
                 WriteText(spriteBatch, 48, 16 * (i + 1), cmd.Name, menuColor);
 

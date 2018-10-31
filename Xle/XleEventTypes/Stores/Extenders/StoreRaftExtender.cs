@@ -58,7 +58,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
                     }
                     else
                     {
-                    await    TextArea.PrintLine("Not enough gold.");
+                        await TextArea.PrintLine("Not enough gold.");
                         SoundMan.PlaySound(LotaSound.Medium);
                         await GameControl.WaitAsync(750);
                     }
