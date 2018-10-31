@@ -1,20 +1,10 @@
-﻿using AgateLib.Mathematics.Geometry;
-using AgateLib.Platform.WinForms;
-using Xle.Bootstrap;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AgateLib;
-using AgateLib.DisplayLib;
-using AgateLib.Mathematics.CoordinateSystems;
-using Xle.Services;
 using Xle.Services.Commands;
-using Xle.Services.XleSystem;
 
 namespace Xle.LoB
 {
-    static class LobProgram
+    internal static class LobProgram
     {
         //		private static ICommandFactory commandFactory;
         //		/// <summary>

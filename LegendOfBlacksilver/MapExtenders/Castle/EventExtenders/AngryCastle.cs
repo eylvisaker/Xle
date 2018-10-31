@@ -10,12 +10,12 @@ namespace Xle.LoB.MapExtenders.Castle.EventExtenders
     public class AngryCastle : CastleEvent
     {
 
-        public override bool StepOn()
+        public override Task<bool> StepOn()
         {
             DurekCastleObject.IsAngry = DurekCastleObject.StoredAngryFlag;
             DurekCastleObject.InOrcArea = false;
 
-            return true;
+            return Task.FromResult(true);
         }
     }
 }

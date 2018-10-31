@@ -24,25 +24,25 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
 			get { return Player.Items[LobItem.RopeAndPulley] > 0; }
 		}
 
-		public override void RunExhibit()
+		public override async Task RunExhibit()
 		{
-			base.RunExhibit();
+			await base.RunExhibit();
 
-			TextArea.PrintLine();
-			TextArea.PrintLine("Do you want to borrow this gear?");
-			TextArea.PrintLine();
+			await TextArea.PrintLine();
+			await TextArea.PrintLine("Do you want to borrow this gear?");
+			await TextArea.PrintLine();
 
-			if (0 == QuickMenu.QuickMenuYesNo())
+			if (0 == await QuickMenu.QuickMenuYesNo())
 			{
 				Player.Items[LobItem.RopeAndPulley] += 1;
 
-				TextArea.PrintLine();
-				TextArea.PrintLine("The equipment is now");
-				TextArea.PrintLine("in your possession.");
+				await TextArea.PrintLine();
+				await TextArea.PrintLine("The equipment is now");
+				await TextArea.PrintLine("in your possession.");
 			}
 			else
 			{
-				ReturnGem();
+				await ReturnGem();
 			}
 		}
 

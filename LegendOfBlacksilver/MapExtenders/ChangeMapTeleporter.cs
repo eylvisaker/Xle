@@ -12,29 +12,27 @@ namespace Xle.LoB.MapExtenders
     {
         protected LobStory Story { get { return GameState.Story(); } }
 
-        protected override bool OnStepOnImpl(ref bool cancel)
+        protected override async Task<bool> OnStepOnImpl()
         {
-            return ExecuteTeleportation();
-        }
-
-        protected bool ExecuteTeleportation()
-        {
-            TeleportAnimation();
-            ExecuteMapChange();
-
+            await ExecuteTeleportation();
             return true;
         }
 
-        protected void TeleportAnimation()
+        protected async Task ExecuteTeleportation()
+        {
+            await TeleportAnimation();
+            await ExecuteMapChange();
+        }
+
+        protected async Task TeleportAnimation()
         {
             SoundMan.PlaySound(LotaSound.Teleporter);
 
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            while (watch.ElapsedMilliseconds < 100)
-                GameControl.Redraw();
-
+            await GameControl.WaitAsync(100);
+            
             while (watch.ElapsedMilliseconds < 1800)
             {
                 int index = ((int)watch.ElapsedMilliseconds % 80) / 50;
@@ -44,15 +42,12 @@ namespace Xle.LoB.MapExtenders
                 else
                     Player.RenderColor = XleColor.White;
 
-                GameControl.Redraw();
+                await GameControl.WaitAsync(1);
             }
 
             Player.RenderColor = XleColor.White;
 
-            while (watch.ElapsedMilliseconds < 2000)
-            {
-                GameControl.Redraw();
-            }
+            await GameControl.WaitAsync(200);
         }
     }
 }

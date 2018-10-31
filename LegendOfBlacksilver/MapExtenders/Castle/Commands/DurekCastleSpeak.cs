@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Xle.Maps.Castles;
 using Xle.Services;
@@ -15,20 +11,20 @@ namespace Xle.LoB.MapExtenders.Castle.Commands
     {
         public IXleGameControl GameControl { get; set; }
 
-        protected override void SpeakToGuard()
+        protected override async Task SpeakToGuard()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (Player.Items[LobItem.FalconFeather] > 0)
             {
-                TextArea.PrintLine("I see you have the feather,");
-                TextArea.PrintLine("why not use it?");
-                GameControl.Wait(1500);
+                await TextArea.PrintLine("I see you have the feather,");
+                await TextArea.PrintLine("why not use it?");
+                await GameControl.Wait(1500);
             }
             else
             {
-                TextArea.PrintLine("I should not converse, sir.");
+                await TextArea.PrintLine("I should not converse, sir.");
             }
         }
     }

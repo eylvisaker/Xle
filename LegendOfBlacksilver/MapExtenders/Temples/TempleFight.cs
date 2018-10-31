@@ -13,9 +13,9 @@ namespace Xle.LoB.MapExtenders.Temples
     [ServiceName("TempleFight")]
     public class TempleFight : FightAgainstGuard
     {
-        protected override void FightInDirection(Direction fightDir)
+        protected override async Task FightInDirection(Direction fightDir)
         {
-            TextArea.PrintLine("\n\nNothing much hit.");
+            await TextArea.PrintLine("\n\nNothing much hit.");
             SoundMan.PlaySound(LotaSound.Bump);
         }
     }

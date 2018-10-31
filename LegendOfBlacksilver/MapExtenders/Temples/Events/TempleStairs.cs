@@ -1,9 +1,5 @@
-﻿using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.LoB.MapExtenders.Temples
 {
@@ -14,9 +10,9 @@ namespace Xle.LoB.MapExtenders.Temples
             base.Enabled = false;
         }
 
-        protected override bool OnStepOnImpl(ref bool cancel)
+        protected override Task<bool> OnStepOnImpl()
         {
-            return false;
+            return Task.FromResult(false);
         }
     }
 }

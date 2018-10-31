@@ -13,6 +13,7 @@ namespace Xle.Services.XleSystem
     {
         bool AcceptKey { get; set; }
 
+        [Obsolete("Use GameControl.WaitForKey instead")]
         Task<Keys> WaitForKey(params Keys[] keys);
 
         bool PromptToContinueOnWait { get; set; }

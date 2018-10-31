@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xle.XleEventTypes.Extenders;
+﻿using System.Threading.Tasks;
 
 namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class PasswordTeleporter : ChangeMapTeleporter
     {
-        protected override bool OnStepOnImpl(ref bool cancel)
+        protected override async Task<bool> OnStepOnImpl()
         {
             return false;
         }
 
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
             if (Story.CitadelPassword)
             {
-                return ExecuteTeleportation();
+                await ExecuteTeleportation();
+                return true;
             }
 
-            return base.Speak();
+            return await base.Speak();
         }
     }
 }

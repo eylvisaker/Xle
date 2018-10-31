@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using System.Threading.Tasks;
+using Xle.Services.Game;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
@@ -24,25 +19,25 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return Story.DrankEtherium; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Do you want to drink the etherium?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want to drink the etherium?");
+            await TextArea.PrintLine();
 
-            if (0 == QuickMenu.QuickMenuYesNo())
+            if (0 == await QuickMenu.QuickMenuYesNo())
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("You feel dizzy.");
-                GameControl.Wait(1500);
-                TextArea.PrintLine("The feeling passes.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("You feel dizzy.");
+                await GameControl.Wait(1500);
+                await TextArea.PrintLine("The feeling passes.");
 
                 Story.DrankEtherium = true;
             }
             else
-                ReturnGem();
+                await ReturnGem();
         }
     }
 }

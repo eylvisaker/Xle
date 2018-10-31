@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
@@ -15,7 +16,7 @@ namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
         bool failed;
         const double secondsToTileUpdate = 3;
 
-        public override bool StepOn()
+        public override async Task<bool> StepOn()
         {
             if (failed)
                 return false;
@@ -93,7 +94,7 @@ namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
             {
                 for (int j = 0; j < TheEvent.Height; j += 2)
                 {
-                    var loc = new Point(TheEvent.Location);
+                    var loc = TheEvent.Location;
                     loc.X += i;
                     loc.Y += j;
 
@@ -104,9 +105,9 @@ namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
             tiles[4, 5] = -1;
         }
 
-        public override void OnUpdate(double deltaTime)
+        public override void OnUpdate(GameTime gameTime) 
         {
-            double newtime = time + deltaTime / secondsToTileUpdate;
+            double newtime = time + gameTime.ElapsedGameTime.TotalSeconds / secondsToTileUpdate;
 
             if ((int)newtime != (int)time)
             {

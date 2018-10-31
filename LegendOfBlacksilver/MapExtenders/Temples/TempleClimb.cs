@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 
 using Xle.Services;
@@ -12,18 +9,18 @@ namespace Xle.LoB.MapExtenders.Temples
     [ServiceName("TempleClimb")]
     public class TempleClimb : Climb
     {
-        public override void Execute()
+        public override async Task Execute()
         {
             var stairs = GameState.MapExtender.Events.OfType<TempleStairs>().FirstOrDefault();
 
-            if (stairs != null && stairs.Enabled && 
+            if (stairs != null && stairs.Enabled &&
                 stairs.Rectangle.X == Player.X && stairs.Rectangle.Y == Player.Y)
             {
-                stairs.ExecuteMapChange();
+                await stairs.ExecuteMapChange();
             }
             else
             {
-                TextArea.PrintLine("\n\nNothing to climb.");
+                await TextArea.PrintLine("\n\nNothing to climb.");
             }
         }
     }

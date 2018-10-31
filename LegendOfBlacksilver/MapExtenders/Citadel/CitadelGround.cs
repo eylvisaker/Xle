@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AgateLib.Mathematics.Geometry;
 using Xle.Maps;
+using Microsoft.Xna.Framework;
 
 namespace Xle.LoB.MapExtenders.Citadel
 {

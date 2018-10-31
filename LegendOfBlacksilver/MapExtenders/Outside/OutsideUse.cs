@@ -11,7 +11,7 @@ namespace Xle.LoB.MapExtenders.Outside
     [ServiceName("OutsideUse")]
     public class OutsideUse : LobUse
     {
-        protected override bool UseWithMap(int item)
+        protected override async Task<bool> UseWithMap(int item)
         {
             switch ((LobItem)item)
             {

@@ -33,12 +33,18 @@ namespace Xle.Services.Game
 
 
         Task PlayMagicSound(LotaSound sound, LotaSound endSound, int distance);
+    
     }
 
     public static class ObsoleteExtensions
     {
         [Obsolete("Use PlaySoundWait instead")]
         public static Task PlaySoundSync(this IXleGameControl gameControl, LotaSound sound) => gameControl.PlaySoundWait(sound);
+
+        public static Task Wait(this IXleGameControl gameControl, int howLong)
+        {
+            return gameControl.WaitAsync(howLong);
+        }
     }
 
     [Singleton]

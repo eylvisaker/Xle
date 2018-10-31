@@ -1,50 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using System.Threading.Tasks;
+using Xle.Services.Game;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	public class MorningStar : LobExhibit
-	{
-		public MorningStar()
-			: base("Morning Star", Coin.Emerald)
-		{ }
+    public class MorningStar : LobExhibit
+    {
+        public MorningStar()
+            : base("Morning Star", Coin.Emerald)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.MorningStar; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.MorningStar; }
+        }
 
-		public override bool IsClosed
-		{
-			get { return Story.ClosedMorningStar; }
-		}
+        public override bool IsClosed
+        {
+            get { return Story.ClosedMorningStar; }
+        }
 
-		public override void RunExhibit()
-		{
-			base.RunExhibit();
+        public override async Task RunExhibit()
+        {
+            await base.RunExhibit();
 
-			TextArea.PrintLine();
-			TextArea.PrintLine("Do you want to borrow this item?");
-			TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want to borrow this item?");
+            await TextArea.PrintLine();
 
-			if (0 == QuickMenu.QuickMenuYesNo())
-			{
-				TextArea.PrintLine();
-				TextArea.PrintLine();
-				TextArea.PrintLine("Fight bravely.");
+            if (0 == await QuickMenu.QuickMenuYesNo())
+            {
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Fight bravely.");
 
-				SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                await GameControl.PlaySoundSync(LotaSound.VeryGood);
 
-				Player.AddWeapon(9, 4);
-				Story.ClosedMorningStar = true;
-			}
-			else
-				ReturnGem();
-		}
-	}
+                Player.AddWeapon(9, 4);
+                Story.ClosedMorningStar = true;
+            }
+            else
+                await ReturnGem();
+        }
+    }
 }

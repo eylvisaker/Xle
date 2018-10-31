@@ -9,7 +9,7 @@ namespace Xle.LoB.MapExtenders.Castle.EventExtenders
 {
     public class AngryOrcs : CastleEvent
     {
-        public override bool StepOn()
+        public override Task<bool> StepOn()
         {
             if (DurekCastleObject.InOrcArea == false)
             {
@@ -19,7 +19,7 @@ namespace Xle.LoB.MapExtenders.Castle.EventExtenders
                 DurekCastleObject.InOrcArea = true;
             }
 
-            return true;
+            return Task.FromResult(true);
         }
     }
 }

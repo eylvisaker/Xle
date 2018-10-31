@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using System.Threading.Tasks;
+using Xle.Services.Game;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
@@ -24,26 +19,26 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return Player.Items[LobItem.ClimbingGear] > 0; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Do you want a set?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want a set?");
+            await TextArea.PrintLine();
 
-            if (0 == QuickMenu.QuickMenuYesNo())
+            if (0 == await QuickMenu.QuickMenuYesNo())
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine();
-                TextArea.PrintLine("Use it carefully.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("Use it carefully.");
 
-                SoundMan.PlaySoundSync(LotaSound.Good);
+                await GameControl.PlaySoundSync(LotaSound.Good);
 
                 Player.Items[LobItem.ClimbingGear] += 1;
             }
             else
-                ReturnGem();
+                await ReturnGem();
         }
     }
 }

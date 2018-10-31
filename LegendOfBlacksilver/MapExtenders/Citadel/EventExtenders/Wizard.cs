@@ -1,52 +1,45 @@
-﻿using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class Wizard : LobEvent
     {
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (Story.BoughtOrb == false)
-                OfferOrbForSale();
+                await OfferOrbForSale();
             else if (Player.Level >= 3 && Story.BoughtStrengthFromWizard)
-                OfferStrengthForSale();
+                await OfferStrengthForSale();
             else if (Story.BoughtStrengthFromWizard == false)
-                ComeBackLater();
+                await ComeBackLater();
             else
-                NoMoreHelp();
+                await NoMoreHelp();
 
-            GameControl.Wait(GameState.GameSpeed.AfterSpeakTime);
+            await GameControl.WaitAsync(GameState.GameSpeed.AfterSpeakTime);
             return true;
         }
 
-        private void ComeBackLater()
-        {
-            TextArea.PrintLine("Come back later.");
-        }
+        private Task ComeBackLater() => TextArea.PrintLine("Come back later.");
 
-        private void OfferOrbForSale()
-        {
-            TextArea.PrintLineSlow("I have a certain orb for sale.");
-            TextArea.PrintLineSlow("The price is only 500 gold, but it");
-            TextArea.PrintLineSlow("is not cheap.");
 
-            int choice = QuickMenu.QuickMenuYesNo();
+        private async Task OfferOrbForSale()
+        {
+            await TextArea.PrintLineSlow("I have a certain orb for sale.");
+            await TextArea.PrintLineSlow("The price is only 500 gold, but it");
+            await TextArea.PrintLineSlow("is not cheap.");
+
+            int choice = await QuickMenu.QuickMenuYesNo();
 
             if (choice == 1)
                 return;
 
             if (Player.Gold < 500)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("You don't have enough gold.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("You don't have enough gold.");
                 return;
             }
 
@@ -59,29 +52,29 @@ namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
             for (int i = 0; i < 15; i++)
             {
                 Player.Attribute[Attributes.strength]--;
-                TextArea.PrintLine(string.Format(
+                await TextArea.PrintLine(string.Format(
                     "Your strength is now: {0}", Player.Attribute[Attributes.strength]));
 
-                GameControl.Wait(250);
+                await GameControl.WaitAsync(250);
             }
         }
 
-        private void OfferStrengthForSale()
+        private async Task OfferStrengthForSale()
         {
-            TextArea.PrintLineSlow("I believe our last dealings");
-            TextArea.PrintLineSlow("cost you some strength.");
-            TextArea.PrintLineSlow("I can sell you some back for");
-            TextArea.PrintLineSlow("1,500 gold.");
+            await TextArea.PrintLineSlow("I believe our last dealings");
+            await TextArea.PrintLineSlow("cost you some strength.");
+            await TextArea.PrintLineSlow("I can sell you some back for");
+            await TextArea.PrintLineSlow("1,500 gold.");
 
-            int choice = QuickMenu.QuickMenuYesNo();
+            int choice = await QuickMenu.QuickMenuYesNo();
 
             if (choice == 1)
                 return;
 
             if (Player.Gold < 1500)
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine("You don't have enough gold.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("You don't have enough gold.");
                 return;
             }
 
@@ -90,9 +83,9 @@ namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
             Story.BoughtStrengthFromWizard = true;
         }
 
-        private void NoMoreHelp()
+        private async Task NoMoreHelp()
         {
-            TextArea.PrintLine("We have no more dealings.");
+            await TextArea.PrintLine("We have no more dealings.");
         }
     }
 }

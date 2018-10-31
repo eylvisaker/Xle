@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using System.Threading.Tasks;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
@@ -24,19 +18,19 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return Story.RegisteredForTrist; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
             if (Player.Level < 3)
             {
-                TextArea.PrintLine("You must be more advanced");
-                TextArea.PrintLine("to use this exhibit.");
-                TextArea.PrintLine();
+                await TextArea.PrintLine("You must be more advanced");
+                await TextArea.PrintLine("to use this exhibit.");
+                await TextArea.PrintLine();
 
-                ReturnGem();
+                await ReturnGem();
             }
             else
             {
-                base.RunExhibit();
+                await base.RunExhibit();
 
                 Story.RegisteredForTrist = true;
             }

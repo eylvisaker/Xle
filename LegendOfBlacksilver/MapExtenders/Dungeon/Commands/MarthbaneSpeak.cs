@@ -26,15 +26,15 @@ namespace Xle.LoB.MapExtenders.Dungeon.Commands
         DungeonCombat Combat { get { return dungeon.Combat; } }
         LobStory Story { get { return GameState.Story(); } }
         
-        public override void Execute()
+        public override async Task Execute()
         {
-            if (TalkToKing())
+            if (await TalkToKing())
                 return;
 
-            base.Execute();
+            await base.Execute();
         }
 
-        public bool TalkToKing()
+        public async Task<bool> TalkToKing()
         {
             if (Player.DungeonLevel != 7) return false;
             if (King == null) return false;
@@ -45,48 +45,48 @@ namespace Xle.LoB.MapExtenders.Dungeon.Commands
                 SoundMan.PlaySound(LotaSound.VeryGood);
 
                 TextArea.Clear(true);
-                TextArea.PrintLineSlow("I am king durek!!", XleColor.White);
-                TextArea.PrintLineSlow("Do you come to help me?", XleColor.White);
-                TextArea.PrintLineSlow();
+               await TextArea.PrintLineSlow("I am king durek!!", XleColor.White);
+               await TextArea.PrintLineSlow("Do you come to help me?", XleColor.White);
+               await TextArea.PrintLineSlow();
 
-                if (QuickMenu.QuickMenuYesNo() == 1)
+                if (await QuickMenu.QuickMenuYesNo() == 1)
                 {
-                    DoomedMessage();
+             await       DoomedMessage();
                     return true;
                 }
 
                 Story.MarthbaneOfferedHelpToKing = true;
 
                 TextArea.Clear(true);
-                TextArea.PrintLineSlow("I fear you have been caught in the", XleColor.White);
-                TextArea.PrintLineSlow("same trap that imprisons me...", XleColor.White);
-                TextArea.PrintLineSlow();
-                TextArea.PrintLineSlow("unless...", XleColor.White);
+              await  TextArea.PrintLineSlow("I fear you have been caught in the", XleColor.White);
+              await  TextArea.PrintLineSlow("same trap that imprisons me...", XleColor.White);
+              await  TextArea.PrintLineSlow();
+              await  TextArea.PrintLineSlow("unless...", XleColor.White);
 
-                GameControl.Wait(2000);
+                await GameControl.WaitAsync(2000);
             }
 
             TextArea.Clear(true);
-            TextArea.PrintLineSlow("Do you carry my signet ring?", XleColor.White);
-            TextArea.PrintLineSlow();
+            await TextArea.PrintLineSlow("Do you carry my signet ring?", XleColor.White);
+            await TextArea.PrintLineSlow();
 
-            if (QuickMenu.QuickMenuYesNo() == 1)
+            if (await QuickMenu.QuickMenuYesNo() == 1)
             {
-                DoomedMessage();
+                await DoomedMessage();
                 return true;
             }
 
             GameState.Player.Items[LobItem.SignetRing] = 0;
 
             TextArea.Clear(true);
-            TextArea.PrintLineSlow("In times of distress, the ring will\nreturn me to the castle!!  I fear it\ncan do nothing more than give you a\nroute of escape.", XleColor.White);
+        await    TextArea.PrintLineSlow("In times of distress, the ring will\nreturn me to the castle!!  I fear it\ncan do nothing more than give you a\nroute of escape.", XleColor.White);
 
-            GameControl.Wait(3000);
+await            GameControl.WaitAsync(3000);
 
             TextArea.Clear(true);
-            TextArea.PrintLineSlow("\n\n\nNoble adventurer, i am in your debt.\nMay we meet in better times.", XleColor.White);
+            await TextArea.PrintLineSlow("\n\n\nNoble adventurer, i am in your debt.\nMay we meet in better times.", XleColor.White);
 
-            GameControl.Wait(3000);
+          await  GameControl.WaitAsync(3000);
 
             SoundMan.PlaySound(LotaSound.EnemyMiss);
 
@@ -103,11 +103,11 @@ namespace Xle.LoB.MapExtenders.Dungeon.Commands
             dungeon.OpenEscapeRoute();
         }
 
-        private void DoomedMessage()
+        private async Task DoomedMessage()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine("Then I fear we are both doomed.", XleColor.White);
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Then I fear we are both doomed.", XleColor.White);
+            await TextArea.PrintLine();
         }
 
     }

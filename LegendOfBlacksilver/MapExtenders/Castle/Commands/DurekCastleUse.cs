@@ -12,11 +12,11 @@ namespace Xle.LoB.MapExtenders.Castle.Commands
     [ServiceName("DurekCastleUse")]
     public class DurekCastleUse : LobUse
     {
-        protected override bool UseWithMap(int item)
+        protected override async Task<bool> UseWithMap(int item)
         {
             if (item == (int)LobItem.FalconFeather)
             {
-                TextArea.PrintLine("You're not by a door.");
+                await TextArea.PrintLine("You're not by a door.");
                 return true;
             }
 

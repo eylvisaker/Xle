@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Services.Game;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
@@ -24,16 +25,16 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return Story.ProcuredSingingCrystal; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
             TextArea.Clear();
 
             Player.Items[LobItem.SingingCrystal] = 1;
             Story.ProcuredSingingCrystal = true;
 
-            SoundMan.PlaySoundSync(LotaSound.VeryGood);
+            await GameControl.PlaySoundSync(LotaSound.VeryGood);
         }
     }
 }

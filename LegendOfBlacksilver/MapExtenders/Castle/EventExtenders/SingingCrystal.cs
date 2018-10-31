@@ -12,7 +12,7 @@ namespace Xle.LoB.MapExtenders.Castle.EventExtenders
 {
     public class SingingCrystal : LobEvent
     {
-        public override bool Use(int item)
+        public override async Task<bool> Use(int item)
         {
             if (item != (int)LobItem.SingingCrystal)
                 return false;
@@ -26,9 +26,9 @@ namespace Xle.LoB.MapExtenders.Castle.EventExtenders
                 SoundMan.PlaySound(LotaSound.VeryBad);
                 Player.Items[LobItem.SingingCrystal] = 0;
 
-                TextArea.PrintLine("Your singing crystal melts.");
+            await    TextArea.PrintLine("Your singing crystal melts.");
 
-                TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryBad), XleColor.Yellow, XleColor.Red, 250);
+                await TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryBad), XleColor.Yellow, XleColor.Red, 250);
 
                 Story.ClearedRockSlide = true;
             }

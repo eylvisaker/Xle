@@ -1,28 +1,26 @@
-﻿using AgateLib.Mathematics.Geometry;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xle.Services.Menus;
 using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Xle.LoB.MapExtenders.Temples
 {
     public class Priest : EventExtender
     {
-        bool stairsOpened;
+        private bool stairsOpened;
 
-        LobTemple Temple { get { return (LobTemple)GameState.MapExtender; } }
+        private LobTemple Temple { get { return (LobTemple)GameState.MapExtender; } }
 
         public IQuickMenu QuickMenu { get; set; }
         public INumberPicker NumberPicker { get; set; }
         public LobStory Story { get { return Player.Story(); } }
 
-        bool IsHawkTemple { get { return Map.MapName.Contains("hawk"); } }
-        bool IsOwlTemple { get { return Map.MapName.Contains("owl"); } }
+        private bool IsHawkTemple { get { return Map.MapName.Contains("hawk"); } }
 
-        bool ArchivesPaid
+        private bool IsOwlTemple { get { return Map.MapName.Contains("owl"); } }
+
+        private bool ArchivesPaid
         {
             get
             {
@@ -44,66 +42,66 @@ namespace Xle.LoB.MapExtenders.Temples
             }
         }
 
-        int ArchiveOpenCost => IsHawkTemple ? 500 : 100;
+        private int ArchiveOpenCost => IsHawkTemple ? 500 : 100;
 
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
             var stairs = Temple.Events.OfType<TempleStairs>().FirstOrDefault();
 
-            TextArea.PrintLine(" to priest.\n");
+            await TextArea.PrintLine(" to priest.\n");
 
-            AskForTribute();
+            await AskForTribute();
 
             if (stairs != null && stairsOpened == false)
             {
-                AskOpenStairs(stairs);
+                await AskOpenStairs(stairs);
             }
 
             return true;
         }
 
-        private void AskForTribute()
+        private async Task AskForTribute()
         {
             if (Player.HP >= Player.MaxHP)
             {
-                TextArea.PrintLine("We're not asking for tribute now.");
+                await TextArea.PrintLine("We're not asking for tribute now.");
                 return;
             }
 
-            TextArea.PrintLine("Please offer tribute.");
+            await TextArea.PrintLine("Please offer tribute.");
 
-            var choice = NumberPicker.ChooseNumber(Player.Gold);
+            var choice = await NumberPicker.ChooseNumber(Player.Gold);
 
             var max = (int)((Player.MaxHP - Player.HP) * 0.75 + 1);
 
             if (choice > max)
             {
                 choice = max;
-                TextArea.PrintLine("I only want " + choice + " gold.");
+                await TextArea.PrintLine("I only want " + choice + " gold.");
             }
             int hp = choice * 4 / 3;
 
             Player.HP += hp;
 
-            TextArea.PrintLine("   HP  +  " + hp);
+            await TextArea.PrintLine("   HP  +  " + hp);
 
             SoundMan.PlaySound(LotaSound.Good);
-            TextArea.FlashLinesWhile(() => SoundMan.IsAnyPlaying(), XleColor.White, XleColor.LightGreen, 50, 4);
+            await TextArea.FlashLinesWhile(() => SoundMan.IsAnyPlaying(), XleColor.White, XleColor.LightGreen, 50, 4);
         }
 
-        private void AskOpenStairs(TempleStairs stairs)
+        private async Task AskOpenStairs(TempleStairs stairs)
         {
             if (ArchivesPaid)
             {
-                TextArea.PrintLine("Would you like me to open the archives?");
+                await TextArea.PrintLine("Would you like me to open the archives?");
             }
             else
             {
-                TextArea.PrintLine("Would you like to tour the archives");
-                TextArea.PrintLine("for " + ArchiveOpenCost + " gold?");
+                await TextArea.PrintLine("Would you like to tour the archives");
+                await TextArea.PrintLine("for " + ArchiveOpenCost + " gold?");
             }
 
-            int choice = QuickMenu.QuickMenuYesNo();
+            int choice = await QuickMenu.QuickMenuYesNo();
 
             if (choice == 1)
                 return;
@@ -112,7 +110,7 @@ namespace Xle.LoB.MapExtenders.Temples
             {
                 if (Player.Gold < ArchiveOpenCost)
                 {
-                    TextArea.PrintLine("You don't have enough gold.");
+                    await TextArea.PrintLine("You don't have enough gold.");
                     return;
                 }
 

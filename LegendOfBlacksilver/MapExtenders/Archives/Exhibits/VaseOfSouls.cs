@@ -22,11 +22,11 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return Story.ClosedVaseOfSouls; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            ReturnGem();
+            await ReturnGem();
 
             Story.ClosedVaseOfSouls = true;
         }

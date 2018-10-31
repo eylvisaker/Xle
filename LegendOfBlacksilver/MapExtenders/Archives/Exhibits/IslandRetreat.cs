@@ -39,17 +39,17 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine("Would you like to go");
-            TextArea.PrintLine("to the island caverns now?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("Would you like to go");
+            await TextArea.PrintLine("to the island caverns now?");
+            await TextArea.PrintLine();
 
-            if (QuickMenu.QuickMenuYesNo() == 0)
+            if (await QuickMenu.QuickMenuYesNo() == 0)
             {
-                MapChanger.ChangeMap(1, 1);
+                await MapChanger.ChangeMap(1, 1);
             }
         }
     }

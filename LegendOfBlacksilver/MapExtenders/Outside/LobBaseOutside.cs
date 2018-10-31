@@ -34,12 +34,12 @@ namespace Xle.LoB.MapExtenders.Outside
             get { return 2; }
         }
 
-        public override void AfterPlayerStep()
+        public override Task AfterPlayerStep()
         {
             if (Player.X % 2 == 1) Player.X--;
             if (Player.Y % 2 == 1) Player.Y--;
 
-            base.AfterPlayerStep();
+            return base.AfterPlayerStep();
         }
     }
 }

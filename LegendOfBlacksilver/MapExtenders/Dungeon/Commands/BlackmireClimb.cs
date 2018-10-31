@@ -16,16 +16,16 @@ namespace Xle.LoB.MapExtenders.Dungeon.Commands
 
         public ISoundMan SoundMan { get; set; }
 
-        public override void Execute()
+        public override async Task Execute()
         {
-            base.Execute();
+            await base.Execute();
 
             if (Player.DungeonLevel == 4 && Story.RotlungContracted == false)
             {
                 SoundMan.PlaySound(LotaSound.VeryBad);
 
-                TextArea.PrintLineSlow("You have contracted rotlung.");
-                TextArea.PrintLine("Endurance  - 10");
+                await TextArea.PrintLineSlow("You have contracted rotlung.");
+                await TextArea.PrintLine("Endurance  - 10");
 
                 Story.RotlungContracted = true;
                 Player.Attribute[Attributes.endurance] -= 10;

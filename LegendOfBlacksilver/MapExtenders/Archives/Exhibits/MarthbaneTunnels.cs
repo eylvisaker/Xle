@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Services;
+﻿using System.Threading.Tasks;
 using Xle.Services.MapLoad;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
@@ -33,17 +27,17 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine("Would you like to go");
-            TextArea.PrintLine("to Marthbane tunnels?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine("Would you like to go");
+            await TextArea.PrintLine("to Marthbane tunnels?");
+            await TextArea.PrintLine();
 
-            if (0 == QuickMenu.QuickMenuYesNo())
+            if (0 == await QuickMenu.QuickMenuYesNo())
             {
-                MapChanger.ChangeMap(4, 0);
+                await MapChanger.ChangeMap(4, 0);
             }
         }
     }

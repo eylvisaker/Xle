@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 using AgateLib.Mathematics.Geometry;
 
 using Xle.Data;
@@ -17,14 +17,14 @@ namespace Xle.LoB.MapExtenders.Dungeon.Commands
         Maps.XleMapTypes.Dungeon TheMap { get { return (Maps.XleMapTypes.Dungeon)GameState.Map; } }
         LobDungeon Map { get { return (LobDungeon)GameState.MapExtender; } }
 
-        protected override void GiveChestContents(int val)
+        protected override async Task GiveChestContents(int val)
         {
             if (Map is PitsOfBlackmire && Player.DungeonLevel == 1 && val == 3)
             {
-                TextArea.PrintLine("You need a key.", XleColor.Yellow);
+                await TextArea.PrintLine("You need a key.", XleColor.Yellow);
             }
             else 
-                base.GiveChestContents(val);
+                await base.GiveChestContents(val);
         }
     }
 }

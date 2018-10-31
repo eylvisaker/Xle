@@ -12,11 +12,11 @@ namespace Xle.LoB.MapExtenders.Archives.Commands
     [ServiceName("ArchiveXamine")]
     public class ArchiveXamine : Xamine
     {
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
-            TextArea.PrintLine("You are in ancient archives.");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You are in ancient archives.");
         }
     }
 }

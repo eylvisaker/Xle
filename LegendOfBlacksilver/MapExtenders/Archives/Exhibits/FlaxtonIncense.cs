@@ -24,24 +24,24 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return Story.EatenFlaxton; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Do you want to partake?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want to partake?");
+            await TextArea.PrintLine();
 
-            if (0 == QuickMenu.QuickMenuYesNo())
+            if (0 == await QuickMenu.QuickMenuYesNo())
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine();
-                TextArea.PrintLine("It's sour but doesn't taste that bad.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("It's sour but doesn't taste that bad.");
 
                 Story.EatenFlaxton = true;
             }
             else
-                ReturnGem();
+                await ReturnGem();
         }
     }
 }

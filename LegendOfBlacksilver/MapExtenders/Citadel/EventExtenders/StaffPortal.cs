@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class StaffPortal : ChangeMapTeleporter
     {
-        public override bool StepOn()
+        public override Task<bool> StepOn()
         {
-            return true;
+            return Task.FromResult(true);
         }
 
-        public override bool Use(int item)
+        public override async Task<bool> Use(int item)
         {
             if (item != (int)LobItem.Staff)
                 return false;
 
-            TeleportAnimation();
+            await TeleportAnimation();
 
-            ExecuteMapChange();
+            await ExecuteMapChange();
 
             return true;
         }

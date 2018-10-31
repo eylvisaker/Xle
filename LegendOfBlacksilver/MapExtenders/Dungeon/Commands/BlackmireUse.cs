@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Xle.Maps;
 using Xle.Services;
@@ -12,21 +8,21 @@ namespace Xle.LoB.MapExtenders.Dungeon.Commands
     [ServiceName("BlackmireUse")]
     public class BlackmireUse : LobUse
     {
-        XleMap TheMap { get { return GameState.Map; } }
+        private XleMap TheMap { get { return GameState.Map; } }
 
-        protected override bool UseWithMap(int item)
+        protected override async Task<bool> UseWithMap(int item)
         {
             if (item == (int)LobItem.RustyKey)
             {
                 if (Player.DungeonLevel + 1 == 2 &&
                     TheMap[Player.X, Player.Y] == 0x33)
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("A hole appears!", XleColor.White);
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("A hole appears!", XleColor.White);
 
                     TheMap[Player.X, Player.Y] = 0x12;
 
-                    SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                    await GameControl.PlaySoundWait(LotaSound.VeryGood);
 
                     return true;
                 }

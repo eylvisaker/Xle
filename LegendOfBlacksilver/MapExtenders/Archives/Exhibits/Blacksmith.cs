@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using System.Threading.Tasks;
+using Xle.Services.Game;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
@@ -24,28 +19,28 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return Story.ProcuredSteelHammer; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Do you want to have it?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want to have it?");
+            await TextArea.PrintLine();
 
-            if (0 == QuickMenu.QuickMenuYesNo())
+            if (0 == await QuickMenu.QuickMenuYesNo())
             {
-                TextArea.PrintLine();
-                TextArea.PrintLine();
-                TextArea.PrintLine("It is yours.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("It is yours.");
 
-                SoundMan.PlaySoundSync(LotaSound.Good);
+                await GameControl.PlaySoundSync(LotaSound.Good);
 
                 Player.Items[LobItem.SteelHammer] = 1;
 
                 Story.ProcuredSteelHammer = true;
             }
             else
-                ReturnGem();
+                await ReturnGem();
         }
     }
 }

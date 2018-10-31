@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xle.Maps.XleMapTypes.MuseumDisplays;
+using Xle.Services.Game;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
@@ -19,26 +20,26 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return ExhibitIdentifier.CrystalTears; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            TextArea.PrintLine();
-            TextArea.PrintLine("Do you want to borrow them?");
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want to borrow them?");
+            await TextArea.PrintLine();
 
-            if (0 == QuickMenu.QuickMenuYesNo())
+            if (0 == await QuickMenu.QuickMenuYesNo())
             {
                 Player.Items[LobItem.DragonTear] += 2;
 
-                TextArea.PrintLine();
-                TextArea.PrintLine("You receive two dragon's tears.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("You receive two dragon's tears.");
 
-                SoundMan.PlaySoundSync(LotaSound.VeryGood);
+                await GameControl.PlaySoundSync(LotaSound.VeryGood);
             }
             else
             {
-                ReturnGem();
+                await ReturnGem();
             }
         }
     }

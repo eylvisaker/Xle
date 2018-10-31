@@ -17,12 +17,12 @@ namespace Xle.LoB
             ShowItemMenu = true;
         }
 
-        protected override bool UseHealingItem(int itemID)
+        protected override async Task<bool> UseHealingItem(int itemID)
         {
             if (itemID == (int)LobItem.LifeElixir)
             {
                 Player.Items[itemID] -= 1;
-                ApplyHealingEffect();
+                await ApplyHealingEffect();
                 return true;
             }
 

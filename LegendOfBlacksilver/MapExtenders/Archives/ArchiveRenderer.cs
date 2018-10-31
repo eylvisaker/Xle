@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AgateLib.Mathematics.Geometry;
+using Microsoft.Xna.Framework;
 using Xle.Services.Rendering.Maps;
 
 namespace Xle.LoB.MapExtenders.Archives

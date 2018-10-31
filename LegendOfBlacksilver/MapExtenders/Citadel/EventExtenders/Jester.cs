@@ -1,57 +1,52 @@
-﻿using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
 {
     public class Jester : LobEvent
     {
-        public override bool Speak()
+        public override async Task<bool> Speak()
         {
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
             if (Story.CitadelPassword)
             {
-                CantHelpMessage();
+                await CantHelpMessage();
             }
             else if (Player.Items[LobItem.Lute] > 0)
             {
                 Player.Items[LobItem.Lute] = 0;
                 Story.CitadelPassword = true;
 
-                AcceptMessage();
+                await AcceptMessage();
             }
             else
             {
-                GiveQuestMessage();
+                await GiveQuestMessage();
             }
 
-            GameControl.Wait(2500);
+            await GameControl.WaitAsync(2500);
 
             return true;
         }
 
-        private void CantHelpMessage()
+        private async Task CantHelpMessage()
         {
 
         }
 
-        private void AcceptMessage()
+        private async Task AcceptMessage()
         {
-            TextArea.PrintLine("I will take my lute.");
-            TextArea.PrintLine("Here's the password!");
-            TextArea.PrintLine("Have fun storming the castle!");
+            await TextArea.PrintLine("I will take my lute.");
+            await TextArea.PrintLine("Here's the password!");
+            await TextArea.PrintLine("Have fun storming the castle!");
         }
 
-        private void GiveQuestMessage()
+        private async Task GiveQuestMessage()
         {
-            TextArea.PrintLine("Go get my lute!");
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine("Go get my lute!");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
         }
     }
 }

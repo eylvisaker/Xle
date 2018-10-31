@@ -36,9 +36,9 @@ namespace Xle.LoB.MapExtenders.Archives
             return mExhibits[tile];
         }
 
-        public override void NeedsCoinMessage(Exhibit ex)
+        public override Task NeedsCoinMessage(Exhibit ex)
         {
-            TextArea.PrintLine(ex.UseCoinMessage);
+            return TextArea.PrintLine(ex.UseCoinMessage);
         }
     }
 }

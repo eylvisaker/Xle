@@ -40,8 +40,9 @@ namespace Xle.LoB.MapExtenders.Outside
             }
         }
 
-        public void AfterPlayerAction()
+        public Task AfterPlayerAction()
         {
+            return Task.CompletedTask;
         }
 
         public bool AttemptMovement(int dx, int dy)
@@ -53,16 +54,18 @@ namespace Xle.LoB.MapExtenders.Outside
         {
         }
 
-        public void HitMonster(int damage)
+        public Task HitMonster(int damage)
         {
+            return Task.CompletedTask;
         }
 
         public void OnLoad()
         {
         }
 
-        public void Step()
+        public Task Step()
         {
+            return Task.CompletedTask;
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
@@ -12,40 +8,41 @@ namespace Xle.LoB.MapExtenders.Archives.Commands
     [ServiceName("ArchiveOpen")]
     public class ArchiveOpen : Open
     {
-        LobArchives Archives { get { return (LobArchives)GameState.MapExtender; } }
+        private LobArchives Archives { get { return (LobArchives)GameState.MapExtender; } }
 
-        bool IsFacingDoor
+        private bool IsFacingDoor
         {
-            get { return Archives.IsFacingDoor; } 
-        }
-        void LeaveMap()
-        {
-            Archives.LeaveMap();
+            get { return Archives.IsFacingDoor; }
         }
 
-        bool InteractWithDisplay()
+        private Task LeaveMap()
+        {
+            return Archives.LeaveMap();
+        }
+
+        private Task<bool> InteractWithDisplay()
         {
             return Archives.InteractWithDisplay();
         }
 
-        public override void Execute()
+        public override async Task Execute()
         {
             if (IsFacingDoor)
             {
-                TextArea.PrintLine(" door");
-                TextArea.PrintLine();
+                await TextArea.PrintLine(" door");
+                await TextArea.PrintLine();
 
-                LeaveMap();
+                await LeaveMap();
                 return;
             }
 
-            TextArea.PrintLine();
-            TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine();
 
-            if (InteractWithDisplay())
+            if (await InteractWithDisplay())
                 return;
 
-            TextArea.PrintLine("Nothing to open.");
+            await TextArea.PrintLine("Nothing to open.");
         }
     }
 }

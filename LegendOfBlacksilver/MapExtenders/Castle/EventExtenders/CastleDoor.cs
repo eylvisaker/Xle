@@ -18,10 +18,10 @@ namespace Xle.LoB.MapExtenders.Castle.EventExtenders
                 return base.ItemUnlocksDoor(item);
         }
 
-        public override void PrintUnlockFailureText(int item, ref bool handled)
+        public override async Task<bool> PrintUnlockFailureText(int item)
         {
-            TextArea.PrintLine("It doesn't fit this door.");
-            handled = true;
+            await TextArea.PrintLine("It doesn't fit this door.");
+            return true;
         }
     }
 

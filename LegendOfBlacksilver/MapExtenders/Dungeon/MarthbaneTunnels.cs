@@ -1,4 +1,5 @@
 ﻿using AgateLib.Mathematics.Geometry;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,13 +73,13 @@ namespace Xle.LoB.MapExtenders.Dungeon
                 return true;
         }
 
-        public override void UpdateMonsters()
+        public override Task UpdateMonsters()
         {
             // disable normal monster processing if we see the king.
             if (Player.DungeonLevel == 7)
-                return;
+                return Task.CompletedTask;
 
-            base.UpdateMonsters();
+            return base.UpdateMonsters();
         }
 
         public void OpenEscapeRoute()

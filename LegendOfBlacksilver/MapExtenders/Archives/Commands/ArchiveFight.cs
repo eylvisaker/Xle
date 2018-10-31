@@ -12,9 +12,9 @@ namespace Xle.LoB.MapExtenders.Archives.Commands
     [ServiceName("ArchiveFight")]
     public class ArchiveFight : Fight
     {
-        public override void Execute()
+        public override async Task Execute()
         {
-            TextArea.PrintLine("\n\nNothing to fight.");
+            await TextArea.PrintLine("\n\nNothing to fight.");
         }
     }
 }

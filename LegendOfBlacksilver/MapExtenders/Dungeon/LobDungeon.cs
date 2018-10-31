@@ -73,12 +73,12 @@ namespace Xle.LoB.MapExtenders.Dungeon
 			return monst;
 		}
 
-		public override void CastSpell(MagicSpell magic)
+		public override async Task CastSpell(MagicSpell magic)
 		{
-			TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
+			await TextArea.PrintLine("Cast " + magic.Name + ".", XleColor.White);
 
 			if (magic.ID == 5)
-				ExecuteKillFlash();
+				await ExecuteKillFlash();
 		}
 
 	}

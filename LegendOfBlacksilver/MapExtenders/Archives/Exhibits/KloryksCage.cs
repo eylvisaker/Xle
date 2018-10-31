@@ -24,11 +24,11 @@ namespace Xle.LoB.MapExtenders.Archives.Exhibits
             get { return HasBeenVisited; }
         }
 
-        public override void RunExhibit()
+        public override async Task RunExhibit()
         {
-            base.RunExhibit();
+            await base.RunExhibit();
 
-            ReturnGem();
+            await ReturnGem();
         }
     }
 }

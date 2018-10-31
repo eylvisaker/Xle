@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xle.Maps.Castles;
 using Xle.Services.Commands;
+using Microsoft.Xna.Framework;
 
 namespace Xle.LoB.MapExtenders.Labyrinth
 {
