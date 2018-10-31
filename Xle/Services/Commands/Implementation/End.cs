@@ -1,6 +1,7 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
 using Xle.Ancients;
+using Xle.Serialization;
 using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.XleSystem;

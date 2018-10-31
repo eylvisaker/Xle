@@ -36,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Direction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DirectionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Equipment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Serialization\GamePersistance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameSpeed.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemContainer.cs" />

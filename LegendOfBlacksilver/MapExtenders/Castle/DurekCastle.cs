@@ -109,7 +109,7 @@ namespace Xle.LoB.MapExtenders.Castle
         {
             if (Story.DefeatedOrcs == false)
             {
-                Rectangle area = Rectangle.FromLTRB(66, 0, TheMap.Width, 68);
+                Rectangle area = RectangleX.FromLTRB(66, 0, TheMap.Width, 68);
 
                 foreach (var guard in TheMap.Guards)
                 {

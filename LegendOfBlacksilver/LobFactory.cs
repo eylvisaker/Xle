@@ -1,5 +1,9 @@
-﻿using AgateLib.Display;
+﻿using AgateLib;
+using AgateLib.Display;
+using AgateLib.Display.BitmapFont;
 using AgateLib.Mathematics.Geometry;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Xle.Data;
@@ -13,11 +17,17 @@ namespace Xle.LoB
 {
     public class LobFactory : XleGameFactory
     {
-        private Dictionary<string, Type> mExtenders = new Dictionary<string, Type>();
+        private readonly IContentProvider content;
+        private readonly XleData data;
 
-        public LobFactory()
+        public LobFactory(
+            IContentProvider content,
+            XleData data)
         {
-            FillExtenderDictionaries();
+            this.content = content;
+            this.data = data;
+
+            LoadSurfaces();
         }
 
         public XleData Data { get; set; }
@@ -25,15 +35,6 @@ namespace Xle.LoB
         public override IXleSerializable CreateStoryData()
         {
             return new LobStory();
-        }
-
-        private void FillExtenderDictionaries()
-        {
-            mExtenders["castle"] = typeof(DurekCastle);
-            mExtenders["citadel1"] = typeof(CitadelGround);
-            mExtenders["citadel2"] = typeof(CitadelUpper);
-            mExtenders["labyrinth1"] = typeof(LabyrinthBase);
-            mExtenders["labyrinth2"] = typeof(LabyrinthUpper);
         }
 
         public override string GameTitle
@@ -46,29 +47,50 @@ namespace Xle.LoB
 
         public override void LoadSurfaces()
         {
-            var fontSurface = FontSurface.BitmapMonospace("Images/font.png", new Size(16, 16));
+            var fontSurface = content.Load<Texture2D>("Images/font");
+            FontMetrics fontMetrics = BuildFontMetrics();
+
+            var bitmapFont = new BitmapFontTexture(fontSurface,
+                fontMetrics,
+                "LotaFont");
 
             Font = new FontBuilder("LotaFont")
-                .AddFontSurface(new FontSettings(16, FontStyles.None), fontSurface)
+                .AddFontTexture(new FontSettings(16, FontStyles.None), bitmapFont)
                 .Build();
             Font.Size = 16;
 
-            Character = new Surface("Images/character.png");
-            Monsters = new Surface("Images/OverworldMonsters.png");
+            Character = content.Load<Texture2D>("Images/character");
+            Monsters = content.Load<Texture2D>("Images/OverworldMonsters");
 
-            Lob3DSurfaces.LoadSurfaces();
+            Lob3DSurfaces.LoadSurfaces(content);
 
             foreach (var exinfo in Data.ExhibitInfo.Values)
             {
                 try
                 {
-                    exinfo.LoadImage();
+                    exinfo.LoadImage(content);
                 }
                 catch (System.IO.FileNotFoundException)
                 {
                     System.Diagnostics.Debug.Print("Image " + exinfo.ImageFile + " not found.");
                 }
             }
+        }
+
+        private static FontMetrics BuildFontMetrics()
+        {
+            var fontMetrics = new FontMetrics();
+            for (int i = 0; i < 128; i++)
+            {
+                int col = i % 16;
+                int row = i / 16;
+                int x = col * 16;
+                int y = row * 16;
+
+                fontMetrics.Add(i, new GlyphMetrics(new Rectangle(x, y, 16, 16)));
+            }
+
+            return fontMetrics;
         }
 
         public override Maps.Map3DSurfaces GetMap3DSurfaces(Map3D map3D)

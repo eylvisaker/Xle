@@ -1,13 +1,7 @@
-﻿using ERY.Xle.LoB;
-using ERY.Xle.LoB.MapExtenders;
-using Xunit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Xle.LoB;
+using Xle.LoB.MapExtenders;
 
-namespace ERY.XleTests.LegendOfBlacksilver
+namespace Xle.Blacksilver
 {
     public class LobTest : XleTest
     {

@@ -1,22 +1,16 @@
-﻿using ERY.Xle;
-using ERY.Xle.LoB.MapExtenders.Castle.EventExtenders;
+﻿using FluentAssertions;
+using Xle.LoB.MapExtenders.Castle.EventExtenders;
 using Xunit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
 
-namespace ERY.XleTests.LegendOfBlacksilver
+namespace Xle.Blacksilver
 {
     public class ArmanTest : LobTest
     {
-        Arman arman;
+        private Arman arman;
 
         public ArmanTest()
         {
-            arman = new Arman();                
+            arman = new Arman();
             InitializeEvent(arman);
 
             Player.Items[LobItem.LifeElixir].Should().Be(0);

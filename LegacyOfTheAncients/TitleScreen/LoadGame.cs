@@ -1,6 +1,7 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using Xle.Ancients;
+using Xle.Serialization;
 
 namespace Xle.Ancients.TitleScreen
 {

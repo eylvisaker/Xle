@@ -123,4 +123,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\LobArchiveGemSale.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LobTitleScreen.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
 </Project>

@@ -1,11 +1,9 @@
-﻿using Castle.Windsor;
-using System;
+﻿using System;
 
 namespace Xle.ServiceTests
 {
     public class ContainerTests
     {
-        private IWindsorContainer container;
 
         public ContainerTests()
         {

@@ -1,50 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle.Maps.XleMapTypes.MuseumDisplays;
+﻿using System.Threading.Tasks;
 
 namespace Xle.LoB.MapExtenders.Archives.Exhibits
 {
-	public class StormingGear : LobExhibit
-	{
-		public StormingGear()
-			: base("Storming Gear", Coin.RedGarnet)
-		{ }
+    public class StormingGear : LobExhibit
+    {
+        public StormingGear()
+            : base("Storming Gear", Coin.RedGarnet)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.StormingGear; }
-		}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.StormingGear; }
+        }
 
-		public override bool IsClosed
-		{
-			get { return Player.Items[LobItem.RopeAndPulley] > 0; }
-		}
+        public override bool IsClosed
+        {
+            get { return Player.Items[LobItem.RopeAndPulley] > 0; }
+        }
 
-		public override async Task RunExhibit()
-		{
-			await base.RunExhibit();
+        public override async Task RunExhibit()
+        {
+            await base.RunExhibit();
 
-			await TextArea.PrintLine();
-			await TextArea.PrintLine("Do you want to borrow this gear?");
-			await TextArea.PrintLine();
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("Do you want to borrow this gear?");
+            await TextArea.PrintLine();
 
-			if (0 == await QuickMenu.QuickMenuYesNo())
-			{
-				Player.Items[LobItem.RopeAndPulley] += 1;
+            if (0 == await QuickMenu.QuickMenuYesNo())
+            {
+                Player.Items[LobItem.RopeAndPulley] += 1;
 
-				await TextArea.PrintLine();
-				await TextArea.PrintLine("The equipment is now");
-				await TextArea.PrintLine("in your possession.");
-			}
-			else
-			{
-				await ReturnGem();
-			}
-		}
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("The equipment is now");
+                await TextArea.PrintLine("in your possession.");
+            }
+            else
+            {
+                await ReturnGem();
+            }
+        }
 
-	}
+    }
 }

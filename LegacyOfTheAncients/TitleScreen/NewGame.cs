@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
 using Xle.Ancients;
+using Xle.Serialization;
 
 namespace Xle.Ancients.TitleScreen
 {
