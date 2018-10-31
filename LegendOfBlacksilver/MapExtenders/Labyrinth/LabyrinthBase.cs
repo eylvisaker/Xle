@@ -1,23 +1,16 @@
-﻿using Xle.Blacksilver.MapExtenders.Labyrinth.EventExtenders;
-using Xle.Maps.Castles;
-using Xle.Services;
-using Xle.Services.Commands;
-using Xle.XleEventTypes;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xle.Maps;
-using AgateLib.Mathematics.Geometry;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using System;
+using Xle.Maps;
+using Xle.Maps.Castles;
+using Xle.Services.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Labyrinth
 {
+    [Transient("LabyrinthBase")]
     public class LabyrinthBase : CastleExtender
     {
-        CastleDamageCalculator cdc;
+        private CastleDamageCalculator cdc;
 
         public LabyrinthBase(Random random)
         {
@@ -34,7 +27,11 @@ namespace Xle.Blacksilver.MapExtenders.Labyrinth
 
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LobProgram.CommonLobCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             var fight = (LobCastleFight)CommandFactory.Fight("LobCastleFight");
             fight.DamageCalculator = cdc;

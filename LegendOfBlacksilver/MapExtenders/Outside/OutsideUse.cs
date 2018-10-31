@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using Xle.Services;
 
 namespace Xle.Blacksilver.MapExtenders.Outside
 {
-    [ServiceName("OutsideUse")]
+    [Transient("OutsideUse")]
     public class OutsideUse : LobUse
     {
         protected override async Task<bool> UseWithMap(int item)

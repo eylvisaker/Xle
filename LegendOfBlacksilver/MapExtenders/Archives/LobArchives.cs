@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 using Xle.Maps;
 using Xle.Maps.Museums;
-using Xle.Services;
 using Xle.Services.Commands;
 using Xle.Services.Rendering;
 using Xle.Services.Rendering.Maps;
 
 namespace Xle.Blacksilver.MapExtenders.Archives
 {
+    [Transient("LobArchives")]
     public class LobArchives : MuseumExtender
     {
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LobProgram.CommonLobCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             commands.Items.Add(CommandFactory.Fight("ArchiveFight"));
             commands.Items.Add(CommandFactory.Leave(promptText: "Leave the archives?"));

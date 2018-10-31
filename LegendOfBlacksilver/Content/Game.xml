@@ -133,7 +133,7 @@
     <MagicSpell ID="8" ItemID="47" MaxCarry="50" Name="Light Spell" BasePrice="51" />
     <MagicSpell ID="9" ItemID="48" MaxCarry="50" Name="Teleport" BasePrice="51" />
   </MagicSpells>
-  <OutsideMonsters Image="OverworldMonsters.png" TileSize="50,50">
+  <OutsideMonsters Image="OverworldMonsters" TileSize="50,50">
     <Monster ID="0" Name="peasant" HP="18" Attack="30" Defense="20" Gold="3" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
     <Monster ID="1" Name="trapper" HP="25" Attack="40" Defense="30" Gold="6" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
     <Monster ID="2" Name="amazar" HP="20" Attack="30" Defense="35" Gold="3" Food="0" Terrain="-1" Intelligent="true" IntimidateChance="70" />
@@ -200,7 +200,7 @@
     <Monster ID="63" Name="wind widow" HP="140" Attack="450" Defense="76" Gold="59" Food="10" Terrain="1" Toxic="true" IntimidateChance="15" />
   </OutsideMonsters>
   <Exhibits>
-    <Exhibit ID="0" Image="Metalwork.png">
+    <Exhibit ID="0" Image="Metalwork">
       <Text ID="1">
         |Although temples are places of holy
         |nonviolent reflection, we enjoy the
@@ -211,7 +211,7 @@
         |engravings.  No two are alike.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="1" Image="SingingCrystal.png">
+    <Exhibit ID="1" Image="SingingCrystal">
       <Text ID="1">
         |Bantross miners have long used the
         |special powers of the singing
@@ -226,7 +226,7 @@
         |your own use.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="2" Image="IslandRetreat.png">
+    <Exhibit ID="2" Image="IslandRetreat">
       <Text ID="1">
         |Few people visit the caverns of ban-
         |tross, for these dungeons are places
@@ -242,7 +242,7 @@
         |many times as you dare.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="3" Image="GameOfHonor.png">
+    <Exhibit ID="3" Image="GameOfHonor">
       <Text ID="1">
         |You see before you, a reproduction of
         |one of Thalen's most famous games of
@@ -257,7 +257,7 @@
         |elite list.  We wish you well.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="4" Image="StormingGear.png">
+    <Exhibit ID="4" Image="StormingGear">
       <Text ID="1">
         |This rope, grapple, and pulley are
         |typical of the gear needed to storm a
@@ -266,7 +266,7 @@
         |night, few places are inpenetrable.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="5" Image="ForTheWealthy.png">
+    <Exhibit ID="5" Image="ForTheWealthy">
       <Text ID="1">
         |Although we prefer to remain quiet
         |about this accomplishment, this
@@ -279,7 +279,7 @@
         |a sample.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="6" Image="Mountains.png">
+    <Exhibit ID="6" Image="Mountains">
       <Text ID="1">
         |The treacherous terrain and rugged
         |near-vertical slopes of Bantross
@@ -291,7 +291,7 @@
         |renders the ranges passible.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="7" Image="Etherium.png">
+    <Exhibit ID="7" Image="Etherium">
       <Text ID="1">
         |With the dispersal of blacksilver,
         |there are no longer any true wizards
@@ -313,7 +313,7 @@
         |if you think you're ready.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="8" Image="VaseOfSouls.png">
+    <Exhibit ID="8" Image="VaseOfSouls">
       <Text ID="1">
         |The magical vase of Jantyr has been
         |damaged by the earthquakes.  We're
@@ -321,7 +321,7 @@
         |original splendor.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="9" Image="MorningStar.png">
+    <Exhibit ID="9" Image="MorningStar">
       <Text ID="1">
         |As much as we abhor violence and
         |death, the power of fine weaponry
@@ -335,7 +335,7 @@
         |polished beauty is equally alluring.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="10" Image="MarthbaneTunnels.png">
+    <Exhibit ID="10" Image="MarthbaneTunnels">
       <Text ID="1">
         |Eons ago, when the evil lands of
         |Maelbane perished beneath the ocean
@@ -351,7 +351,7 @@
         |times as you dare.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="11" Image="DarkWand.png">
+    <Exhibit ID="11" Image="DarkWand">
       <Text ID="1">
         |The prize possession of this temple
         |was once the black wand, an ancient
@@ -370,7 +370,7 @@
         |it is still charged, it may kill you.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="12" Image="UnderwaterPort.png">
+    <Exhibit ID="12" Image="UnderwaterPort">
       <Text ID="1">
         |When the lands of Maelbane sunk, its
         |cities were lost to the sea.  You
@@ -398,7 +398,7 @@
         |countryside outside Murkwater.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="13" Image="Blacksmith.png">
+    <Exhibit ID="13" Image="Blacksmith">
       <Text ID="1">
         |Just this morning, new and ancient
         |lands rose on the continent Maelbane.
@@ -421,7 +421,7 @@
         |quality.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="14" Image="FlaxtonIncense.png">
+    <Exhibit ID="14" Image="FlaxtonIncense">
       <Text ID="1">
         |According to Thalen healing lore, the
         |medicinal properties of the flaxton
@@ -433,7 +433,7 @@
         |cure diseases.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="15" Image="KloryksCage.png">
+    <Exhibit ID="15" Image="KloryksCage">
       <Text ID="1">
         |Here are the remains of Kloryk's
         |cage.  This relic of the mage wars
@@ -447,7 +447,7 @@
         |glittering trap was smashed.`pause`
       </Text>
     </Exhibit>
-    <Exhibit ID="16" Image="CrystalTears.png">
+    <Exhibit ID="16" Image="CrystalTears">
       <Text ID="1">
         |Dragons cry only once, for the tears
         |of a dragon preceed only its death.
@@ -625,7 +625,7 @@
     </Extra>
   </DungeonExtras>
   <DungeonMonsters>
-    <Monster ID="0" Name="urp" ImageFile="monster00.png">
+    <Monster ID="0" Name="urp" ImageFile="monster00">
       <Image dest_x="106" dest_y="24">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -642,7 +642,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="1" Name="assassin" ImageFile="monster01.png">
+    <Monster ID="1" Name="assassin" ImageFile="monster01">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -659,7 +659,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="2" Name="kapok" ImageFile="monster02.png">
+    <Monster ID="2" Name="kapok" ImageFile="monster02">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -676,7 +676,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="3" Name="thumper" ImageFile="monster03.png">
+    <Monster ID="3" Name="thumper" ImageFile="monster03">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -693,7 +693,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="4" Name="idol" ImageFile="monster04.png">
+    <Monster ID="4" Name="idol" ImageFile="monster04">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -710,7 +710,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="5" Name="scorpod" ImageFile="monster05.png">
+    <Monster ID="5" Name="scorpod" ImageFile="monster05">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -727,7 +727,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="6" Name="eaton eye" ImageFile="monster06.png">
+    <Monster ID="6" Name="eaton eye" ImageFile="monster06">
       <Image dest_x="106" dest_y="24">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -744,7 +744,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="7" Name="growler" ImageFile="monster07.png">
+    <Monster ID="7" Name="growler" ImageFile="monster07">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -761,7 +761,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="8" Name="bag-o-bones" ImageFile="monster08.png">
+    <Monster ID="8" Name="bag-o-bones" ImageFile="monster08">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -778,7 +778,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="9" Name="sludge heave" ImageFile="monster09.png">
+    <Monster ID="9" Name="sludge heave" ImageFile="monster09">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -795,7 +795,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="10" Name="snap jaw" ImageFile="monster10.png">
+    <Monster ID="10" Name="snap jaw" ImageFile="monster10">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -812,7 +812,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="11" Name="toad colony" ImageFile="monster11.png">
+    <Monster ID="11" Name="toad colony" ImageFile="monster11">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -829,7 +829,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="12" Name="angel tooth" ImageFile="monster12.png">
+    <Monster ID="12" Name="angel tooth" ImageFile="monster12">
       <Image dest_x="106" dest_y="24">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -846,7 +846,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="13" Name="whibas" ImageFile="monster13.png">
+    <Monster ID="13" Name="whibas" ImageFile="monster13">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -863,7 +863,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="14" Name="mind trill" ImageFile="monster14.png">
+    <Monster ID="14" Name="mind trill" ImageFile="monster14">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -880,7 +880,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="15" Name="shadow fiend" ImageFile="monster15.png">
+    <Monster ID="15" Name="shadow fiend" ImageFile="monster15">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -897,7 +897,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="16" Name="spike" ImageFile="monster16.png">
+    <Monster ID="16" Name="spike" ImageFile="monster16">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -914,7 +914,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="17" Name="needler" ImageFile="monster17.png">
+    <Monster ID="17" Name="needler" ImageFile="monster17">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>
@@ -931,7 +931,7 @@
         <SourceRect x="192" y="168" width="48" height="42"></SourceRect>
       </Image>
     </Monster>
-    <Monster ID="18" Name="king" ImageFile="monster18.png">
+    <Monster ID="18" Name="king" ImageFile="monster18">
       <Image dest_x="106" dest_y="106">
         <SourceRect x="0" y="0" width="144" height="126"></SourceRect>
       </Image>

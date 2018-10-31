@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 using Xle.Maps.Towns;
-using Xle.Services;
 using Xle.Services.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Towns
 {
+    [Transient("LobTown")]
     public class LobTown : TownExtender
     {
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LobProgram.CommonLobCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             commands.Items.Add(CommandFactory.Fight("FightAgainstGuard"));
             commands.Items.Add(CommandFactory.Leave("TownLeave"));

@@ -1,20 +1,15 @@
 ﻿using AgateLib;
 using AgateLib.Display;
 using AgateLib.Display.BitmapFont;
-using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 using Xle.Data;
-using Xle.Blacksilver.MapExtenders.Castle;
-using Xle.Blacksilver.MapExtenders.Citadel;
-using Xle.Blacksilver.MapExtenders.Labyrinth;
 using Xle.Maps.XleMapTypes;
 using Xle.Serialization;
 
 namespace Xle.Blacksilver
 {
+    [Singleton]
     public class LobFactory : XleGameFactory
     {
         private readonly IContentProvider content;
@@ -29,8 +24,6 @@ namespace Xle.Blacksilver
 
             LoadSurfaces();
         }
-
-        public XleData Data { get; set; }
 
         public override IXleSerializable CreateStoryData()
         {
@@ -64,7 +57,7 @@ namespace Xle.Blacksilver
 
             Lob3DSurfaces.LoadSurfaces(content);
 
-            foreach (var exinfo in Data.ExhibitInfo.Values)
+            foreach (var exinfo in data.ExhibitInfo.Values)
             {
                 try
                 {

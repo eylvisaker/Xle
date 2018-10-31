@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Rendering.Maps;
+using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Outside
 {
+    [Transient]
     public class LobOutsideEncounters : IOutsideEncounters
     {
         List<Monster> monsters = new List<Monster>();

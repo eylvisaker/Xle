@@ -1,27 +1,19 @@
-﻿using Xle.Blacksilver.MapExtenders.Citadel.EventExtenders;
-using Xle.Maps.Castles;
-using Xle.Services;
-using Xle.Services.Commands;
-using Xle.XleEventTypes;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib.Mathematics.Geometry;
-using Xle.Maps;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using Xle.Maps;
+using Xle.Maps.Castles;
+using Xle.Services.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel
 {
+    [Transient("CitadelGround")]
     public class CitadelGround : CastleExtender
     {
-        CastleDamageCalculator cdc;
+        private CastleDamageCalculator cdc;
 
         public CitadelGround()
         {
-            cdc = new CastleDamageCalculator (Random) { v5 = 1.3, v6 = 1.5, v7 = 1.5 };
+            cdc = new CastleDamageCalculator(Random) { v5 = 1.3, v6 = 1.5, v7 = 1.5 };
         }
 
         public override void SetColorScheme(ColorScheme scheme)
@@ -34,13 +26,17 @@ namespace Xle.Blacksilver.MapExtenders.Citadel
 
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LobProgram.CommonLobCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             var fight = (LobCastleFight)CommandFactory.Fight("LobCastleFight");
             fight.DamageCalculator = cdc;
 
             commands.Items.Add(fight);
-            
+
             commands.Items.Add(CommandFactory.Open());
             commands.Items.Add(CommandFactory.Magic("LobCastleMagic"));
             commands.Items.Add(CommandFactory.Take());

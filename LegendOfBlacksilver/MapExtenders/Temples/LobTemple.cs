@@ -16,7 +16,11 @@ namespace Xle.Blacksilver.MapExtenders.Temples
     {
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LobProgram.CommonLobCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             commands.Items.Add(CommandFactory.Climb("TempleClimb"));
             commands.Items.Add(CommandFactory.Fight("TempleFight"));

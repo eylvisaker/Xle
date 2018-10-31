@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XleRoot type="ERY.Xle.Maps.XleMapTypes.Temple">
+<XleRoot type="Xle.Maps.XleMapTypes.Temple">
   <MapName>owl</MapName>
   <ExtenderName>LobTemple</ExtenderName>
   <MapID>0</MapID>
-  <TileSet type="ERY.Xle.Maps.TileSet">
+  <TileSet type="Xle.Maps.TileSet">
     <Tiles array="true" encoding="Csv">0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,1,0,1,0,0,0,0,0,0,0,1,1,0,1,1,0,0,1,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,0,1,1,1,0,1,1,0,1,1,1,0,1,0,0,0,0,1,1,1,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1</Tiles>
-    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
+    <TileGroups array="true" type="Xle.Maps.TileGroup" />
   </TileSet>
   <TileImage>LobTemple</TileImage>
   <OutsideTile>0</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEventTypes.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Script">
+  <Events array="true" type="Xle.XleEventTypes.XleEvent">
+    <Item type="Xle.XleEventTypes.Script">
       <X>34</X>
       <Y>11</Y>
       <Width>14</Width>
       <Height>3</Height>
       <ExtenderName>Priest</ExtenderName>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>40</X>
       <Y>16</Y>
       <Width>2</Width>
@@ -29,10 +29,10 @@
       <CommandText></CommandText>
     </Item>
   </Events>
-  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
+  <EntryPoints array="true" type="Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="40" Y="36" />
+      <Location type="Microsoft.Xna.Framework.Point" X="40" Y="36" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

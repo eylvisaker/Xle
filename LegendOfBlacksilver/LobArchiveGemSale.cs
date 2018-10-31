@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using Xle.Services.Menus.Implementation;
 
 namespace Xle.Blacksilver.Services
 {
+    [Singleton]
     public class LobArchiveGemSale : MuseumCoinSale
     {
         public LobFactory Factory { get; set; }

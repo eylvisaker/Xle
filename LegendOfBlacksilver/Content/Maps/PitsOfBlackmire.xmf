@@ -1,15 +1,15 @@
-<XleRoot type="ERY.Xle.Maps.XleMapTypes.Dungeon" Width="16" Height="16" Levels="10">
+<XleRoot type="Xle.Maps.XleMapTypes.Dungeon" Width="16" Height="16" Levels="10">
   <MapName>Pits of Blackmir</MapName>
   <ExtenderName>PitsOfBlackmire</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="null" />
   <TileImage>DungeonTiles.png</TileImage>
   <OutsideTile>0</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEvent" />
-  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
+  <Events array="true" type="Xle.XleEvent" />
+  <EntryPoints array="true" type="Xle.Maps.EntryPoint">
     <Item>
       <Facing>East</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="0" Y="1" />
+      <Location type="Microsoft.Xna.Framework.Point" X="0" Y="1" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

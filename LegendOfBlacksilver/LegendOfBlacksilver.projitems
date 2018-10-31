@@ -120,7 +120,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\Stores\Weapon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\ThalenTown.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Towns\TownMagic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\LobArchiveGemSale.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LobArchiveGemSale.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LobTitleScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TitleScreen\LobTitleScreen.cs" />
   </ItemGroup>
   <ItemGroup>

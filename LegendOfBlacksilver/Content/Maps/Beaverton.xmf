@@ -1,15 +1,15 @@
-<XleRoot type="ERY.Xle.Maps.XleMapTypes.Town">
+<XleRoot type="Xle.Maps.XleMapTypes.Town">
   <MapName>beaverton</MapName>
   <ExtenderName>ThalenTown</ExtenderName>
   <MapID>0</MapID>
-  <TileSet type="ERY.Xle.TileSet">
+  <TileSet type="Xle.TileSet">
     <Tiles array="true" encoding="Csv">1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1</Tiles>
-    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
+    <TileGroups array="true" type="Xle.Maps.TileGroup" />
   </TileSet>
   <TileImage>LobTown</TileImage>
   <OutsideTile>9</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+  <Events array="true" type="Xle.XleEvent">
+    <Item type="Xle.XleEventTypes.Stores.StoreEquipment">
       <X>53</X>
       <Y>11</Y>
       <Width>6</Width>
@@ -21,7 +21,7 @@
       <AllowedItemTypes array="true" encoding="Base64">
       </AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreEquipment">
+    <Item type="Xle.XleEventTypes.Stores.StoreEquipment">
       <X>55</X>
       <Y>2</Y>
       <Width>5</Width>
@@ -33,7 +33,7 @@
       <AllowedItemTypes array="true" encoding="Base64">
       </AllowedItemTypes>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>45</X>
       <Y>11</Y>
       <Width>3</Width>
@@ -43,7 +43,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>35</X>
       <Y>4</Y>
       <Width>6</Width>
@@ -53,7 +53,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>48</X>
       <Y>2</Y>
       <Width>1</Width>
@@ -63,7 +63,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>6</X>
       <Y>1</Y>
       <Width>6</Width>
@@ -73,7 +73,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>5</X>
       <Y>4</Y>
       <Width>2</Width>
@@ -83,7 +83,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>2</X>
       <Y>11</Y>
       <Width>3</Width>
@@ -93,7 +93,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>61</X>
       <Y>26</Y>
       <Width>4</Width>
@@ -103,7 +103,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>27</X>
       <Y>18</Y>
       <Width>5</Width>
@@ -113,7 +113,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>22</X>
       <Y>22</Y>
       <Width>3</Width>
@@ -123,7 +123,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>22</X>
       <Y>27</Y>
       <Width>3</Width>
@@ -133,7 +133,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>46</X>
       <Y>22</Y>
       <Width>3</Width>
@@ -143,7 +143,7 @@
       </ShopName>
       <CostFactor>1</CostFactor>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.StoreIndustry">
+    <Item type="Xle.XleEventTypes.Stores.StoreIndustry">
       <X>52</X>
       <Y>22</Y>
       <Width>3</Width>
@@ -155,7 +155,7 @@
       <Product>
       </Product>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.Stores.Store">
+    <Item type="Xle.XleEventTypes.Stores.Store">
       <X>2</X>
       <Y>18</Y>
       <Width>3</Width>
@@ -166,14 +166,14 @@
       <CostFactor>1</CostFactor>
     </Item>
   </Events>
-  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
+  <EntryPoints array="true" type="Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="75" Y="20" />
+      <Location type="Microsoft.Xna.Framework.Point" X="75" Y="20" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>
-  <Roofs array="true" type="ERY.Xle.Maps.Roof">
+  <Roofs array="true" type="Xle.Maps.Roof">
     <Item>
       <X>57</X>
       <Y>23</Y>
@@ -217,12 +217,12 @@
       <RoofData array="true" encoding="Csv">48,48,48,32,33,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,48,48,48,48,48,48,49,49,49,49,49,49,0,0,0,0,38,0,38,0,0,0,0,0</RoofData>
     </Item>
   </Roofs>
-  <Guards type="ERY.Xle.Maps.GuardList">
+  <Guards type="Xle.Maps.GuardList">
     <GuardDefaultAttack>88</GuardDefaultAttack>
     <GuardDefaultDefense>88</GuardDefaultDefense>
     <GuardDefaultHP>18</GuardDefaultHP>
     <GuardDefaultColor>-3418267</GuardDefaultColor>
-    <Guards array="true" type="ERY.Xle.Maps.Guard">
+    <Guards array="true" type="Xle.Maps.Guard">
       <Item>
         <X>31</X>
         <Y>5</Y>

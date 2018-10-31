@@ -1,16 +1,16 @@
-<XleRoot type="ERY.Xle.Maps.XleMapTypes.Outside">
+<XleRoot type="Xle.Maps.XleMapTypes.Outside">
   <MapName>Thalen</MapName>
   <ExtenderName>Thalen</ExtenderName>
   <MapID>0</MapID>
-  <TileSet type="ERY.Xle.TileSet">
+  <TileSet type="Xle.TileSet">
     <Tiles array="true" encoding="Base64">
     </Tiles>
-    <TileGroups array="true" type="ERY.Xle.Maps.TileGroup" />
+    <TileGroups array="true" type="Xle.Maps.TileGroup" />
   </TileSet>
   <TileImage>LobThalen</TileImage>
   <OutsideTile>0</OutsideTile>
-  <Events array="true" type="ERY.Xle.XleEvent">
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+  <Events array="true" type="Xle.XleEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>42</X>
       <Y>12</Y>
       <Width>1</Width>
@@ -22,7 +22,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>108</X>
       <Y>4</Y>
       <Width>1</Width>
@@ -34,7 +34,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>162</X>
       <Y>28</Y>
       <Width>1</Width>
@@ -46,7 +46,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>34</X>
       <Y>56</Y>
       <Width>1</Width>
@@ -58,7 +58,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>96</X>
       <Y>56</Y>
       <Width>1</Width>
@@ -70,7 +70,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>130</X>
       <Y>72</Y>
       <Width>1</Width>
@@ -82,7 +82,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>8</X>
       <Y>88</Y>
       <Width>1</Width>
@@ -94,7 +94,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>46</X>
       <Y>114</Y>
       <Width>1</Width>
@@ -106,7 +106,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>132</X>
       <Y>110</Y>
       <Width>1</Width>
@@ -118,7 +118,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>14</X>
       <Y>168</Y>
       <Width>1</Width>
@@ -130,7 +130,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>70</X>
       <Y>150</Y>
       <Width>1</Width>
@@ -142,7 +142,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>120</X>
       <Y>146</Y>
       <Width>1</Width>
@@ -154,7 +154,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>184</X>
       <Y>152</Y>
       <Width>1</Width>
@@ -166,7 +166,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>46</X>
       <Y>20</Y>
       <Width>1</Width>
@@ -178,7 +178,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>48</X>
       <Y>18</Y>
       <Width>1</Width>
@@ -190,7 +190,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>10</X>
       <Y>16</Y>
       <Width>1</Width>
@@ -202,7 +202,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>166</X>
       <Y>16</Y>
       <Width>1</Width>
@@ -214,7 +214,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>90</X>
       <Y>84</Y>
       <Width>1</Width>
@@ -226,7 +226,7 @@
       <CommandText>
       </CommandText>
     </Item>
-    <Item type="ERY.Xle.XleEventTypes.ChangeMapEvent">
+    <Item type="Xle.XleEventTypes.ChangeMapEvent">
       <X>50</X>
       <Y>128</Y>
       <Width>1</Width>
@@ -239,15 +239,15 @@
       </CommandText>
     </Item>
   </Events>
-  <EntryPoints array="true" type="ERY.Xle.Maps.EntryPoint">
+  <EntryPoints array="true" type="Xle.Maps.EntryPoint">
     <Item>
       <Facing>South</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="122" Y="42" />
+      <Location type="Microsoft.Xna.Framework.Point" X="122" Y="42" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
     <Item>
       <Facing>South</Facing>
-      <Location type="AgateLib.Mathematics.Geometry.Point" X="44" Y="20" />
+      <Location type="Microsoft.Xna.Framework.Point" X="44" Y="20" />
       <DungeonLevel>0</DungeonLevel>
     </Item>
   </EntryPoints>

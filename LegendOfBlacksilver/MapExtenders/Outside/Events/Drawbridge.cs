@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Blacksilver.MapExtenders.Outside.Events
 {
+    [Transient("DrawBridge")]
     public class Drawbridge : ChangeMap
     {
         protected override async Task<bool> OnStepOnImpl()

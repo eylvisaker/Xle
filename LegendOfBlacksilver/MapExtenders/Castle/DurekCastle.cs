@@ -1,30 +1,26 @@
-﻿using AgateLib.Mathematics.Geometry;
-using Xle.Blacksilver.MapExtenders.Castle.EventExtenders;
-using Xle.Maps.Castles;
-using Xle.Services;
-using Xle.Services.Commands;
-using Xle.XleEventTypes;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xle.Maps;
+﻿using AgateLib;
+using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
+using System;
+using System.Linq;
+using Xle.Blacksilver.MapExtenders.Castle.EventExtenders;
+using Xle.Maps;
+using Xle.Maps.Castles;
+using Xle.Services.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Castle
 {
+    [Transient("DurekCastle")]
     public class DurekCastle : CastleExtender
     {
-        CastleDamageCalculator cdc;
+        private CastleDamageCalculator cdc;
 
         public DurekCastle(Random random)
         {
             cdc = new CastleDamageCalculator(random) { v5 = 0.9, v6 = 0.95, v7 = 0.95 };
         }
         protected LobStory Story { get { return GameState.Story(); } }
-        
+
         public override double ChanceToHitGuard(Guard guard, int distance)
         {
             return cdc.ChanceToHitGuard(Player, distance);
@@ -58,7 +54,11 @@ namespace Xle.Blacksilver.MapExtenders.Castle
 
         public override void SetCommands(ICommandList commands)
         {
-            commands.Items.AddRange(LobProgram.CommonLobCommands);
+            commands.Items.Add(CommandFactory.Armor());
+            commands.Items.Add(CommandFactory.Gamespeed());
+            commands.Items.Add(CommandFactory.Inventory());
+            commands.Items.Add(CommandFactory.Pass());
+            commands.Items.Add(CommandFactory.Weapon());
 
             var fight = (LobCastleFight)CommandFactory.Fight("LobCastleFight");
             fight.DamageCalculator = cdc;
