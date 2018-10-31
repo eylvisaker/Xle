@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xle.Services;
 
-namespace Xle.LoB.MapExtenders.Outside
+namespace Xle.Blacksilver.MapExtenders.Outside
 {
     [ServiceName("OutsideUse")]
     public class OutsideUse : LobUse

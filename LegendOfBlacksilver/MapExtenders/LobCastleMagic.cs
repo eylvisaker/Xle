@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders
+namespace Xle.Blacksilver.MapExtenders
 {
     [ServiceName("LobCastleMagic")]
     public class LobCastleMagic : CastleMagic

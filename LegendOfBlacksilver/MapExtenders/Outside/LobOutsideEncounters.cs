@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Services.Rendering.Maps;
 
-namespace Xle.LoB.MapExtenders.Outside
+namespace Xle.Blacksilver.MapExtenders.Outside
 {
     public class LobOutsideEncounters : IOutsideEncounters
     {

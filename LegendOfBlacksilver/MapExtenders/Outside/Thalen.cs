@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Outside
+namespace Xle.Blacksilver.MapExtenders.Outside
 {
     public class Thalen : LobBaseOutside
     {

@@ -11,7 +11,7 @@ using Xle.Services.Commands;
 using Xle.Services.Rendering;
 using Xle.Services.Rendering.Maps;
 
-namespace Xle.LoB.MapExtenders.Archives
+namespace Xle.Blacksilver.MapExtenders.Archives
 {
     public class LobArchives : MuseumExtender
     {

@@ -7,7 +7,7 @@ using Xle.Data;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
-namespace Xle.LoB.MapExtenders.Towns
+namespace Xle.Blacksilver.MapExtenders.Towns
 {
 	[ServiceName("TownMagic")]
 	public class TownMagic : MagicCommand

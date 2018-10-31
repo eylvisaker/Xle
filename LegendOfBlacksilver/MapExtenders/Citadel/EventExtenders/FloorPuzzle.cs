@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
+namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {
     public class FloorPuzzle : EventExtender
     {

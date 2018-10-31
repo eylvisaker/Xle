@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xle.Maps;
 
-namespace Xle.LoB.MapExtenders.Dungeon
+namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
 	public class IslandCaverns : LobDungeon
 	{

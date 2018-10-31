@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
     public class LobDungeonXamineFormatter : XamineFormatter
     {

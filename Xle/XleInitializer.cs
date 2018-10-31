@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xle.Data;
 
-namespace Xle.Ancients
+namespace Xle
 {
     public interface IInitializer
     {

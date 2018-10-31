@@ -3,7 +3,7 @@
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
-namespace Xle.LoB.MapExtenders.Archives.Commands
+namespace Xle.Blacksilver.MapExtenders.Archives.Commands
 {
     [ServiceName("ArchiveOpen")]
     public class ArchiveOpen : Open

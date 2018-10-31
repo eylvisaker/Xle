@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Outside
+namespace Xle.Blacksilver.MapExtenders.Outside
 {
     [ServiceName("LobOutsideMagic")]
     public class LobOutsideMagic : OutsideMagic

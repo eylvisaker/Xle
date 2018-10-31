@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xle.XleEventTypes.Extenders;
 
-namespace Xle.LoB.MapExtenders.Temples
+namespace Xle.Blacksilver.MapExtenders.Temples
 {
     public class TempleStairs : ChangeMap
     {

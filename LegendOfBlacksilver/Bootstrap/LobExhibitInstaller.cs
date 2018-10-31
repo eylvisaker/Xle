@@ -1,4 +1,4 @@
-﻿namespace Xle.LoB.Bootstrap
+﻿namespace Xle.Blacksilver.Bootstrap
 {
     //public class LobExhibitInstaller : IWindsorInstaller
     //{

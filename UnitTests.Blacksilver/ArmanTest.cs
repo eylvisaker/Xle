@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
-using Xle.LoB.MapExtenders.Castle.EventExtenders;
+using System.Threading.Tasks;
+using Xle.Blacksilver.MapExtenders.Castle.EventExtenders;
 using Xunit;
 
 namespace Xle.Blacksilver
@@ -17,9 +18,9 @@ namespace Xle.Blacksilver
         }
 
         [Fact]
-        public void ArmanGiveElixirs()
+        public async Task ArmanGiveElixirs()
         {
-            arman.Speak();
+            await arman.Speak();
 
             Player.Items[LobItem.LifeElixir].Should().Be(2);
         }

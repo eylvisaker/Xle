@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xle.XleEventTypes.Extenders;
 
-namespace Xle.LoB.MapExtenders.Outside.Events
+namespace Xle.Blacksilver.MapExtenders.Outside.Events
 {
     public class Drawbridge : ChangeMap
     {

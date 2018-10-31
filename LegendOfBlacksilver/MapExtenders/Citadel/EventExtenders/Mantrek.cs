@@ -2,7 +2,7 @@
 using Xle.Maps;
 using Xle.Services.MapLoad;
 
-namespace Xle.LoB.MapExtenders.Citadel.EventExtenders
+namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {
     public class Mantrek : LobEvent
     {

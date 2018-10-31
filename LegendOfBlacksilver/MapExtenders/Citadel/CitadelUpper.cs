@@ -1,4 +1,4 @@
-﻿using Xle.LoB.MapExtenders.Citadel.EventExtenders;
+﻿using Xle.Blacksilver.MapExtenders.Citadel.EventExtenders;
 using Xle.Maps.Castles;
 using Xle.Services;
 using Xle.Services.Commands;
@@ -13,7 +13,7 @@ using AgateLib.Mathematics.Geometry;
 using Xle.Maps;
 using Microsoft.Xna.Framework;
 
-namespace Xle.LoB.MapExtenders.Citadel
+namespace Xle.Blacksilver.MapExtenders.Citadel
 {
 	public class CitadelUpper : CastleExtender
 	{

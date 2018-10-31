@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.Commands;
 
-namespace Xle.LoB.MapExtenders.Dungeon
+namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
 	public abstract class LobDungeon : DungeonExtender
     {

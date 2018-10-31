@@ -1,4 +1,4 @@
-﻿using Xle.LoB.MapExtenders.Labyrinth.EventExtenders;
+﻿using Xle.Blacksilver.MapExtenders.Labyrinth.EventExtenders;
 using Xle.Maps.Castles;
 using Xle.Services;
 using Xle.Services.Commands;
@@ -13,7 +13,7 @@ using Xle.Maps;
 using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
 
-namespace Xle.LoB.MapExtenders.Labyrinth
+namespace Xle.Blacksilver.MapExtenders.Labyrinth
 {
     public class LabyrinthBase : CastleExtender
     {

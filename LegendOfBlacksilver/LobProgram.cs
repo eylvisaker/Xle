@@ -1,10 +1,14 @@
-﻿using System;
+﻿using AgateLib;
+using AgateLib.Diagnostics;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Xle.Services.Commands;
 
-namespace Xle.LoB
+namespace Xle.Blacksilver
 {
-    internal static class LobProgram
+    [Singleton]
+    public class LobProgram
     {
         //		private static ICommandFactory commandFactory;
         //		/// <summary>
@@ -34,6 +38,7 @@ namespace Xle.LoB
         //			}
         //		}
 
+        [Obsolete("Just put the ones you want.")]
         public static IEnumerable<Command> CommonLobCommands
         {
             get

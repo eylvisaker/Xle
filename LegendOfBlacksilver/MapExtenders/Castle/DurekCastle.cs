@@ -1,5 +1,5 @@
 ﻿using AgateLib.Mathematics.Geometry;
-using Xle.LoB.MapExtenders.Castle.EventExtenders;
+using Xle.Blacksilver.MapExtenders.Castle.EventExtenders;
 using Xle.Maps.Castles;
 using Xle.Services;
 using Xle.Services.Commands;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Xle.Maps;
 using Microsoft.Xna.Framework;
 
-namespace Xle.LoB.MapExtenders.Castle
+namespace Xle.Blacksilver.MapExtenders.Castle
 {
     public class DurekCastle : CastleExtender
     {

@@ -9,16 +9,12 @@
     <Import_RootNamespace>Xle.Ancients</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AgateConsoleManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AgateConsoleScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaExhibitInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LotaTitleScreenInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameVariableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lota3DSurfaces.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LotaInitializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaMuseumCoinSale.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LotaProgram.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaStory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LotaUse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Castle\CastleGround.cs" />

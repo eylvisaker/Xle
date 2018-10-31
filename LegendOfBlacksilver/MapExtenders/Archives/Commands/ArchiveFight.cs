@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
-namespace Xle.LoB.MapExtenders.Archives.Commands
+namespace Xle.Blacksilver.MapExtenders.Archives.Commands
 {
     [ServiceName("ArchiveFight")]
     public class ArchiveFight : Fight

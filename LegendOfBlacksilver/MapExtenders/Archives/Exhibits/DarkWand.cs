@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
     public class DarkWand : LobExhibit
 	{

@@ -1,5 +1,4 @@
-﻿using Xle.LoB;
-using Xle.LoB.MapExtenders;
+﻿using Xle.Blacksilver.MapExtenders;
 
 namespace Xle.Blacksilver
 {

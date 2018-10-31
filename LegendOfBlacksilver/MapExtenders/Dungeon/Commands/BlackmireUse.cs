@@ -3,7 +3,7 @@
 using Xle.Maps;
 using Xle.Services;
 
-namespace Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
     [ServiceName("BlackmireUse")]
     public class BlackmireUse : LobUse

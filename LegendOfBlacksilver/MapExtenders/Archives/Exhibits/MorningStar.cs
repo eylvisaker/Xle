@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xle.Services.Game;
 
-namespace Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
     public class MorningStar : LobExhibit
     {

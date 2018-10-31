@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Xle.Services.Menus;
 using Xle.XleEventTypes.Extenders;
 
-namespace Xle.LoB.MapExtenders.Temples
+namespace Xle.Blacksilver.MapExtenders.Temples
 {
     public class Priest : EventExtender
     {

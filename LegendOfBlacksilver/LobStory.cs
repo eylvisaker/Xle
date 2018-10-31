@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Xle.LoB
+namespace Xle.Blacksilver
 {
     public class LobStory : IXleSerializable
     {

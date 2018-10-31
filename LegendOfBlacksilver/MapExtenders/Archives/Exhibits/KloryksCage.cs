@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 
-namespace Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
     public class KloryksCage : LobExhibit
     {

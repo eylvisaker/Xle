@@ -9,7 +9,7 @@ using Xle.Maps.Dungeons;
 using Xle.Maps.Dungeons.Commands;
 using Xle.Services;
 
-namespace Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
     [ServiceName("LobDungeonXamine")]
     public class LobDungeonXamine : DungeonXamine

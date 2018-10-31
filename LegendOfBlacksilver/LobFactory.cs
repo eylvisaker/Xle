@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Xle.Data;
-using Xle.LoB.MapExtenders.Castle;
-using Xle.LoB.MapExtenders.Citadel;
-using Xle.LoB.MapExtenders.Labyrinth;
+using Xle.Blacksilver.MapExtenders.Castle;
+using Xle.Blacksilver.MapExtenders.Citadel;
+using Xle.Blacksilver.MapExtenders.Labyrinth;
 using Xle.Maps.XleMapTypes;
 using Xle.Serialization;
 
-namespace Xle.LoB
+namespace Xle.Blacksilver
 {
     public class LobFactory : XleGameFactory
     {

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Xle.Maps;
 
-namespace Xle.LoB
+namespace Xle.Blacksilver
 {
     public static class Lob3DSurfaces
     {

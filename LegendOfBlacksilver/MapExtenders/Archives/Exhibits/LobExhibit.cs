@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 
-namespace Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
     public abstract class LobExhibit : Exhibit
     {

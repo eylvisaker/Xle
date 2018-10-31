@@ -12,7 +12,7 @@ using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.XleSystem;
 
-namespace Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
     [ServiceName("MarthbaneSpeak")]
     public class MarthbaneSpeak : Speak

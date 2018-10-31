@@ -9,7 +9,7 @@
     <ProjectGuid>{46516763-DDC4-4203-9047-3C36CDEF7E04}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xle.Blacksilver</RootNamespace>
+    <RootNamespace>Xle.Blacksilver.Desktop</RootNamespace>
     <AssemblyName>LegendOfBlacksilver</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>
@@ -43,7 +43,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
+    <Compile Include="LegendOfBlacksilverGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
-namespace Xle.LoB.MapExtenders.Temples
+namespace Xle.Blacksilver.MapExtenders.Temples
 {
     [ServiceName("TempleClimb")]
     public class TempleClimb : Climb

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
-namespace Xle.LoB
+namespace Xle.Blacksilver
 {
     [ServiceName("LobUse")]
     public class LobUse : Use

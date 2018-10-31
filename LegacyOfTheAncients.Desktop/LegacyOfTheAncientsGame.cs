@@ -6,6 +6,7 @@ using Xle.Ancients;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Xle;
 
 namespace LegacyOfTheAncients.Desktop
 {
@@ -15,7 +16,7 @@ namespace LegacyOfTheAncients.Desktop
     public class LegacyOfTheAncientsGame : Game
     {
         GraphicsDeviceManager graphics;
-        private LotaProgram lota;
+        private XleProgram xle;
         private Plumbing plumbing;
 
         public LegacyOfTheAncientsGame()
@@ -50,7 +51,7 @@ namespace LegacyOfTheAncients.Desktop
             var initializer = plumbing.Resolve<IInitializer>();
             initializer.Initialize();
 
-            lota = plumbing.Resolve<LotaProgram>();
+            xle = plumbing.Resolve<XleProgram>();
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace LegacyOfTheAncients.Desktop
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            lota.Update(gameTime);
+            xle.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -94,7 +95,7 @@ namespace LegacyOfTheAncients.Desktop
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            lota.Draw(gameTime);
+            xle.Draw(gameTime);
 
             base.Draw(gameTime);
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xle.Maps.Dungeons.Commands;
 using Xle.Services;
 
-namespace Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
     [ServiceName("LobDungeonFight")]
     public class LobDungeonFight : DungeonFight

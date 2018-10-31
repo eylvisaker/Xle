@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.MapLoad;
 
-namespace Xle.LoB.MapExtenders.Archives.Exhibits
+namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
     public class IslandRetreat : LobExhibit
     {

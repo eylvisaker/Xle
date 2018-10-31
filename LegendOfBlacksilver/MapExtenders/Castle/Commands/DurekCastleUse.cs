@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
-namespace Xle.LoB.MapExtenders.Castle.Commands
+namespace Xle.Blacksilver.MapExtenders.Castle.Commands
 {
     [ServiceName("DurekCastleUse")]
     public class DurekCastleUse : LobUse

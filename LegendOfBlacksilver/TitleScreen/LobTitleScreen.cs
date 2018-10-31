@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xle.Services;
 using Xle.Services.Game;
 
-namespace Xle.LoB.TitleScreen
+namespace Xle.Blacksilver.TitleScreen
 {
 	public class LobTitleScreen : IXleTitleScreen
 	{

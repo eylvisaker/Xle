@@ -9,7 +9,7 @@
     <ProjectGuid>{9D86AB00-7AF4-4A76-982D-125F1C4414B4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xle.Ancients</RootNamespace>
+    <RootNamespace>Xle.Ancients.Desktop</RootNamespace>
     <AssemblyName>LegacyOfTheAncients</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>

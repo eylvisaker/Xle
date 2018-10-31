@@ -10,7 +10,7 @@ using Xle.Maps.Temples;
 using Xle.Services;
 using Xle.Services.Commands;
 
-namespace Xle.LoB.MapExtenders.Temples
+namespace Xle.Blacksilver.MapExtenders.Temples
 {
     public class LobTemple : TempleExtender
     {

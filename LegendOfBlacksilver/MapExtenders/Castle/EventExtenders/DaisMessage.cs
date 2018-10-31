@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Castle.EventExtenders
+namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
 {
     public class DaisMessage : EventExtender
     {

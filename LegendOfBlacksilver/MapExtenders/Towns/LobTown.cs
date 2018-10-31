@@ -8,7 +8,7 @@ using Xle.Maps.Towns;
 using Xle.Services;
 using Xle.Services.Commands;
 
-namespace Xle.LoB.MapExtenders.Towns
+namespace Xle.Blacksilver.MapExtenders.Towns
 {
     public class LobTown : TownExtender
     {

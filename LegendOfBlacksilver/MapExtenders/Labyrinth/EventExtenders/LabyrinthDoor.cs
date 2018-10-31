@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Labyrinth.EventExtenders
+namespace Xle.Blacksilver.MapExtenders.Labyrinth.EventExtenders
 {
     public class LabyrinthDoor : DoorExtender
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Temples
+namespace Xle.Blacksilver.MapExtenders.Temples
 {
     [ServiceName("TempleMagic")]
     public class TempleMagic : MagicCommand

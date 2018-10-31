@@ -10,7 +10,7 @@ using Xle.Maps.Castles;
 using Xle.Services.Commands;
 using Microsoft.Xna.Framework;
 
-namespace Xle.LoB.MapExtenders.Labyrinth
+namespace Xle.Blacksilver.MapExtenders.Labyrinth
 {
     public class LabyrinthUpper : CastleExtender
     {

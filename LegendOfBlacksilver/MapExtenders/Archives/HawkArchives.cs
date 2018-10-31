@@ -1,4 +1,4 @@
-﻿using Xle.LoB.MapExtenders.Archives.Exhibits;
+﻿using Xle.Blacksilver.MapExtenders.Archives.Exhibits;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Archives
+namespace Xle.Blacksilver.MapExtenders.Archives
 {
     public class HawkArchives : LobArchives
     {

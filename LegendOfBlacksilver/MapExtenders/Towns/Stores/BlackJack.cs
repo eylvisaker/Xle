@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xle.XleEventTypes.Stores.Extenders;
 
-namespace Xle.LoB.MapExtenders.Towns.Stores
+namespace Xle.Blacksilver.MapExtenders.Towns.Stores
 {
     public class BlackJack : StoreExtender
     {

@@ -8,7 +8,7 @@ using Xle.Maps;
 using Xle.Maps.Towns;
 using Xle.Services;
 
-namespace Xle.LoB.MapExtenders
+namespace Xle.Blacksilver.MapExtenders
 {
     [ServiceName("LobCastleFight")]
     public class LobCastleFight : FightAgainstGuard

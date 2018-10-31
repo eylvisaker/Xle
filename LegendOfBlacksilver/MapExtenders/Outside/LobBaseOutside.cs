@@ -1,4 +1,4 @@
-﻿using Xle.LoB.MapExtenders.Outside.Events;
+﻿using Xle.Blacksilver.MapExtenders.Outside.Events;
 using Xle.Maps.Outdoors;
 using Xle.Services;
 using Xle.Services.Commands;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xle.LoB.MapExtenders.Outside
+namespace Xle.Blacksilver.MapExtenders.Outside
 {
     public class LobBaseOutside : OutsideExtender
     {

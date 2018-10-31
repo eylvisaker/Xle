@@ -1,20 +1,27 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using AgateLib.Scenes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Xle.Foundation;
 
-namespace LegacyOfTheAncients.Desktop
+namespace Xle.Blacksilver.Desktop
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class LegendOfBlacksilverGame : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        
-        public Game1()
+        private GraphicsDeviceManager graphics;
+        private Plumbing plumbing;
+        private XleProgram xle;
+
+        public LegendOfBlacksilverGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 680;
+            graphics.PreferredBackBufferHeight = 440;
+
             Content.RootDirectory = "Content";
         }
 
@@ -26,31 +33,24 @@ namespace LegacyOfTheAncients.Desktop
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
+
+            Window.Title = "Legend of Blacksilver";
+
+            plumbing = new Plumbing();
+
+            plumbing.Register(GraphicsDevice);
+            plumbing.Register(new SceneStack());
+            plumbing.Register(new ContentProvider(Content));
+
+            plumbing.Complete();
+
+            var initializer = plumbing.Resolve<IInitializer>();
+            initializer.Initialize();
+
+            xle = plumbing.Resolve<XleProgram>();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected override void LoadContent()
-        {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -62,7 +62,7 @@ namespace LegacyOfTheAncients.Desktop
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            xle.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -75,7 +75,7 @@ namespace LegacyOfTheAncients.Desktop
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            xle.Draw(gameTime);
 
             base.Draw(gameTime);
         }

@@ -8,7 +8,7 @@ using Xle.Maps.Towns;
 using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
-namespace Xle.LoB.MapExtenders.Temples
+namespace Xle.Blacksilver.MapExtenders.Temples
 {
     [ServiceName("TempleFight")]
     public class TempleFight : FightAgainstGuard

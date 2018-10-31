@@ -9,7 +9,7 @@ using Xle.Services.Commands.Implementation;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 
-namespace Xle.LoB.MapExtenders.Dungeon.Commands
+namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
     [ServiceName("DungeonOpen")]
     public class DungeonOpen : DungeonOpenCommand

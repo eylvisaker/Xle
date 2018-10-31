@@ -8,7 +8,7 @@ using Xle.Services;
 using Xle.Services.Menus;
 using Xle.Services.Menus.Implementation;
 
-namespace Xle.LoB.Services
+namespace Xle.Blacksilver.Services
 {
     public class LobArchiveGemSale : MuseumCoinSale
     {

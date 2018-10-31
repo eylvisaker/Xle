@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xle.Maps;
 using Xle.Services.Commands;
 
-namespace Xle.LoB.MapExtenders.Dungeon
+namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
     public class PitsOfBlackmire : LobDungeon
     {

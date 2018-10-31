@@ -4,7 +4,7 @@ using Xle.Maps.Castles;
 using Xle.Services;
 using Xle.Services.Game;
 
-namespace Xle.LoB.MapExtenders.Castle.Commands
+namespace Xle.Blacksilver.MapExtenders.Castle.Commands
 {
     [ServiceName("DurekCastleSpeak")]
     public class DurekCastleSpeak : CastleSpeak

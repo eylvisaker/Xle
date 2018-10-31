@@ -7,7 +7,7 @@ using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
 using Xle.Services.Rendering.Maps;
 
-namespace Xle.LoB.MapExtenders.Archives
+namespace Xle.Blacksilver.MapExtenders.Archives
 {
     public class ArchiveRenderer : MuseumRenderer
     {

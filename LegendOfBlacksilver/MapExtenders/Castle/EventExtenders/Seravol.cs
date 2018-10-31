@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xle.Services.Game;
 
-namespace Xle.LoB.MapExtenders.Castle.EventExtenders
+namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
 {
     public class Seravol : LobEvent
     {

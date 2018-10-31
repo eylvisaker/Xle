@@ -1,17 +1,16 @@
 ﻿using AgateLib;
 using AgateLib.Input;
 using AgateLib.Scenes;
-using Xle;
-using Xle.Ancients.TitleScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Xle.Scenes;
 using Xle.Services.XleSystem;
 
 namespace Xle.Ancients.TitleScreen
 {
     [Transient]
-    public class LotaTitleScene : Scene
+    public class LotaTitleScene : Scene, ITitleScene
     {
         private readonly ILotaTitleScreen titleScreen;
         private readonly GraphicsDevice device;
@@ -35,7 +34,7 @@ namespace Xle.Ancients.TitleScreen
 
         public event Action<Player> BeginGame;
 
-        private async void Keyboard_KeyPress(object sender, KeyPressEventArgs e) 
+        private async void Keyboard_KeyPress(object sender, KeyPressEventArgs e)
         {
             await titleScreen.OnKeyPress(e);
         }

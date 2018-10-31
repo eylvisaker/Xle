@@ -11,7 +11,7 @@ using Xle.Services;
 using Xle.Services.Commands;
 using Xle.Services.Menus;
 
-namespace Xle.LoB.MapExtenders.Dungeon
+namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
     public class MarthbaneTunnels : LobDungeon
     {
