@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Services;
-using Xle.Services.Commands.Implementation;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.Commands
 {
-    [ServiceName("DurekCastleUse")]
+    [Transient("DurekCastleUse")]
     public class DurekCastleUse : LobUse
     {
         protected override async Task<bool> UseWithMap(int item)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Services.Menus;
@@ -6,6 +7,7 @@ using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Blacksilver.MapExtenders.Temples
 {
+    [Transient("Priest")]
     public class Priest : EventExtender
     {
         private bool stairsOpened;

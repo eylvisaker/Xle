@@ -1,15 +1,11 @@
-﻿using AgateLib.Mathematics.Geometry;
-using Xle.Maps;
-using Xle.XleEventTypes.Extenders;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
 {
+    [Transient("SingingCrystal")]
     public class SingingCrystal : LobEvent
     {
         public override async Task<bool> Use(int item)
@@ -26,7 +22,7 @@ namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
                 SoundMan.PlaySound(LotaSound.VeryBad);
                 Player.Items[LobItem.SingingCrystal] = 0;
 
-            await    TextArea.PrintLine("Your singing crystal melts.");
+                await TextArea.PrintLine("Your singing crystal melts.");
 
                 await TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryBad), XleColor.Yellow, XleColor.Red, 250);
 

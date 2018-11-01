@@ -1,12 +1,11 @@
-﻿using System.Linq;
+﻿using AgateLib;
+using System.Linq;
 using System.Threading.Tasks;
-
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Blacksilver.MapExtenders.Temples
 {
-    [ServiceName("TempleClimb")]
+    [Transient("TempleClimb")]
     public class TempleClimb : Climb
     {
         public override async Task Execute()

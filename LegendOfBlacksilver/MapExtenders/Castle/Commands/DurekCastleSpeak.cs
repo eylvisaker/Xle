@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 using Xle.Maps.Castles;
-using Xle.Services;
 using Xle.Services.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.Commands
 {
-    [ServiceName("DurekCastleSpeak")]
+    [Transient("DurekCastleSpeak")]
     public class DurekCastleSpeak : CastleSpeak
     {
         public IXleGameControl GameControl { get; set; }

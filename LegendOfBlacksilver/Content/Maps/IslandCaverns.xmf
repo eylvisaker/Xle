@@ -3,7 +3,7 @@
   <ExtenderName>IslandCaverns</ExtenderName>
   <MapID>0</MapID>
   <TileSet type="null" />
-  <TileImage>DungeonTiles.png</TileImage>
+  <TileImage>DungeonTiles</TileImage>
   <OutsideTile>0</OutsideTile>
   <Events array="true" type="Xle.XleEvent" />
   <EntryPoints array="true" type="Xle.Maps.EntryPoint">

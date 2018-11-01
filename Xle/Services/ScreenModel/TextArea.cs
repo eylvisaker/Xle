@@ -1,5 +1,4 @@
 ﻿using AgateLib;
-using Xle.Services.Game;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics;
@@ -260,7 +259,7 @@ namespace Xle.Services.ScreenModel
         {
             if (lines == null || lines.Length == 0)
             {
-               await FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
+                await FlashLinesWhile(pred, color1, color2, flashRate, 0, 1, 2, 3, 4);
                 return;
             }
 
@@ -284,7 +283,7 @@ namespace Xle.Services.ScreenModel
                     this.lines[line].SetColor(clr);
                 }
 
-                await Task.Yield();
+                await Waiter(1, false, null);
 
                 if (watch.ElapsedMilliseconds > 10000)
                     break;

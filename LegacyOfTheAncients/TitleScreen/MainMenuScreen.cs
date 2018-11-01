@@ -40,7 +40,7 @@ namespace Xle.Ancients.TitleScreen
             Windows.Add(Copyright);
         }
 
-        public override Task KeyPress(Keys keyCode, string keyString)
+        public override async Task KeyPress(Keys keyCode, string keyString)
         {
             if (keyCode == Keys.Down)
             {
@@ -74,13 +74,11 @@ namespace Xle.Ancients.TitleScreen
 
                 OnReleaseAllKeys();
 
-                ExecuteMenuItem(titleMenu);
+                await ExecuteMenuItem(titleMenu);
             }
-
-            return Task.CompletedTask;
         }
 
-        protected abstract void ExecuteMenuItem(int item);
+        protected abstract Task ExecuteMenuItem(int item);
 
         public override void Update(GameTime time)
         {

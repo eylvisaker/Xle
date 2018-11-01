@@ -80,10 +80,10 @@ namespace Xle.XleEventTypes.Stores.Extenders
                 }
                 else
                 {
-                    TextArea.PrintLine();
-                    TextArea.PrintLine("Nothing Purchased");
+                    await TextArea.PrintLine();
+                    await TextArea.PrintLine("Nothing Purchased");
 
-                    StoreSound(LotaSound.Medium);
+                    await StoreSound(LotaSound.Medium);
                 }
             }
 
@@ -223,7 +223,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
 
             await StoreSound(LotaSound.Good);
             await TextArea.RewriteLine(4, "        Press Key to Continue");
-            WaitForKey();
+            await WaitForKey();
 
             Player.Gold += gold;
             Player.Items[MailItemId] = 0;

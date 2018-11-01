@@ -1,10 +1,12 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Services.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
 {
+    [Transient("Seravol")]
     public class Seravol : LobEvent
     {
         public Random Random { get; set; }

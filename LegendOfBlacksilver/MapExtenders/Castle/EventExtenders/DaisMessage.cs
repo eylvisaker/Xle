@@ -5,9 +5,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
 {
+    [Transient("DaisMessage")]
     public class DaisMessage : EventExtender
     {
         bool givenMessage = false;

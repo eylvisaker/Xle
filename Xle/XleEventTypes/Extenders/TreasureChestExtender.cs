@@ -1,11 +1,6 @@
-﻿using Xle.Maps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xle.Data;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Xle.Data;
 
 namespace Xle.XleEventTypes.Extenders
 {
@@ -45,7 +40,7 @@ namespace Xle.XleEventTypes.Extenders
 
         public virtual string AlreadyOpenMessage { get { return "Chest already open."; } }
 
-        private Task PrintAlreadyOpenMessage() =>            TextArea.PrintLine(AlreadyOpenMessage);
+        private Task PrintAlreadyOpenMessage() => TextArea.PrintLine(AlreadyOpenMessage);
 
         public virtual void PlayOpenChestSound()
         {

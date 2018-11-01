@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Temples
 {
-    [ServiceName("TempleMagic")]
+    [Transient("TempleMagic")]
     public class TempleMagic : MagicCommand
     {
         protected override IEnumerable<MagicSpell> ValidMagic

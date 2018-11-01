@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using Xle.Services.Commands.Implementation;
 
 namespace Xle.Blacksilver.MapExtenders.Temples
 {
-    [ServiceName("TempleFight")]
+    [Transient("TempleFight")]
     public class TempleFight : FightAgainstGuard
     {
         protected override async Task FightInDirection(Direction fightDir)

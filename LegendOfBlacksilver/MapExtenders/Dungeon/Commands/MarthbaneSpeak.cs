@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
 
 using Xle.Maps;
 using Xle.Maps.Dungeons;
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 using Xle.Services.Game;
 using Xle.Services.Menus;
@@ -14,18 +10,21 @@ using Xle.Services.XleSystem;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
-    [ServiceName("MarthbaneSpeak")]
+    [Transient("MarthbaneSpeak")]
     public class MarthbaneSpeak : Speak
     {
         public ISoundMan SoundMan { get; set; }
         public IQuickMenu QuickMenu { get; set; }
         public IXleGameControl GameControl { get; set; }
 
-        MarthbaneTunnels dungeon { get { return (MarthbaneTunnels)GameState.MapExtender; } }
-        DungeonMonster King { get { return dungeon.King; } }
-        DungeonCombat Combat { get { return dungeon.Combat; } }
-        LobStory Story { get { return GameState.Story(); } }
-        
+        private MarthbaneTunnels dungeon { get { return (MarthbaneTunnels)GameState.MapExtender; } }
+
+        private DungeonMonster King { get { return dungeon.King; } }
+
+        private DungeonCombat Combat { get { return dungeon.Combat; } }
+
+        private LobStory Story { get { return GameState.Story(); } }
+
         public override async Task Execute()
         {
             if (await TalkToKing())
@@ -45,23 +44,23 @@ namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
                 SoundMan.PlaySound(LotaSound.VeryGood);
 
                 TextArea.Clear(true);
-               await TextArea.PrintLineSlow("I am king durek!!", XleColor.White);
-               await TextArea.PrintLineSlow("Do you come to help me?", XleColor.White);
-               await TextArea.PrintLineSlow();
+                await TextArea.PrintLineSlow("I am king durek!!", XleColor.White);
+                await TextArea.PrintLineSlow("Do you come to help me?", XleColor.White);
+                await TextArea.PrintLineSlow();
 
                 if (await QuickMenu.QuickMenuYesNo() == 1)
                 {
-             await       DoomedMessage();
+                    await DoomedMessage();
                     return true;
                 }
 
                 Story.MarthbaneOfferedHelpToKing = true;
 
                 TextArea.Clear(true);
-              await  TextArea.PrintLineSlow("I fear you have been caught in the", XleColor.White);
-              await  TextArea.PrintLineSlow("same trap that imprisons me...", XleColor.White);
-              await  TextArea.PrintLineSlow();
-              await  TextArea.PrintLineSlow("unless...", XleColor.White);
+                await TextArea.PrintLineSlow("I fear you have been caught in the", XleColor.White);
+                await TextArea.PrintLineSlow("same trap that imprisons me...", XleColor.White);
+                await TextArea.PrintLineSlow();
+                await TextArea.PrintLineSlow("unless...", XleColor.White);
 
                 await GameControl.WaitAsync(2000);
             }
@@ -79,14 +78,14 @@ namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
             GameState.Player.Items[LobItem.SignetRing] = 0;
 
             TextArea.Clear(true);
-        await    TextArea.PrintLineSlow("In times of distress, the ring will\nreturn me to the castle!!  I fear it\ncan do nothing more than give you a\nroute of escape.", XleColor.White);
+            await TextArea.PrintLineSlow("In times of distress, the ring will\nreturn me to the castle!!  I fear it\ncan do nothing more than give you a\nroute of escape.", XleColor.White);
 
-await            GameControl.WaitAsync(3000);
+            await GameControl.WaitAsync(3000);
 
             TextArea.Clear(true);
             await TextArea.PrintLineSlow("\n\n\nNoble adventurer, i am in your debt.\nMay we meet in better times.", XleColor.White);
 
-          await  GameControl.WaitAsync(3000);
+            await GameControl.WaitAsync(3000);
 
             SoundMan.PlaySound(LotaSound.EnemyMiss);
 

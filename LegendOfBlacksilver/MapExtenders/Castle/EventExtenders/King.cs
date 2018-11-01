@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
 {
+    [Transient("King")]
     public class King : LobEvent
     {
         private bool asked;
@@ -85,7 +87,7 @@ namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
                 await TextArea.PrintLineSlow("not too late.  It's been many days");
                 await TextArea.PrintLineSlow("since the king was kidnapped.");
 
-                await Input.WaitForKey();
+                await GameControl.WaitForKey();
                 await TextArea.PrintLineSlow();
 
                 await PrinceAskForHelp();

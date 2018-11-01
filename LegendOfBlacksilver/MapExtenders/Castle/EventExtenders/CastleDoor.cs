@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
 {
+    [Transient("CastleDoor")]
     public class CastleDoor : DoorExtender
     {
         public override bool ItemUnlocksDoor(int item)
@@ -25,6 +27,7 @@ namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
         }
     }
 
+    [Transient("FeatherDoor")]
     public class FeatherDoor : CastleDoor
     {
         public override bool ItemUnlocksDoor(int item)

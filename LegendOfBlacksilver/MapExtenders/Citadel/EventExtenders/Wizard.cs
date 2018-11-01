@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {
+    [Transient("Wizard")]
     public class Wizard : LobEvent
     {
         public override async Task<bool> Speak()

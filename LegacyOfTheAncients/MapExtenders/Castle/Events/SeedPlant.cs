@@ -21,9 +21,9 @@ namespace Xle.Ancients.MapExtenders.Castle.Events
             get { return false; }
         }
 
-        public override async Task<bool> Open()
+        public override Task<bool> Open()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         public override async Task PrintObtainItemMessage(int item, int count)

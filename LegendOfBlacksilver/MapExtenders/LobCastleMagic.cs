@@ -1,14 +1,9 @@
-﻿using Xle.Maps.Castles;
-using Xle.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
+using Xle.Maps.Castles;
 
 namespace Xle.Blacksilver.MapExtenders
 {
-    [ServiceName("LobCastleMagic")]
+    [Transient("LobCastleMagic")]
     public class LobCastleMagic : CastleMagic
     {
 

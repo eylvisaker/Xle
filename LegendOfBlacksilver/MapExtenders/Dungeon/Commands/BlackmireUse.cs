@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 using Xle.Maps;
-using Xle.Services;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
-    [ServiceName("BlackmireUse")]
+    [Transient("BlackmireUse")]
     public class BlackmireUse : LobUse
     {
         private XleMap TheMap { get { return GameState.Map; } }

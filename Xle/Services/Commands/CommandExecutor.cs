@@ -37,6 +37,7 @@ namespace Xle.Services.Commands
         private IPlayerAnimator playerAnimator;
         private bool inputPrompt;
         private Task commandTask;
+        private Keys lastInput;
 
         private Player player { get { return gameState.Player; } }
 
@@ -117,7 +118,15 @@ namespace Xle.Services.Commands
         public async Task DoCommand(Keys cmd, string keyString)
         {
             if (!inputPrompt)
+            {
+                if (commandTask == null 
+                 || commandTask.IsCompleted && commandTask.IsFaulted == false)
+                {
+                    await Prompt();
+                }
+
                 return;
+            }
 
             inputPrompt = false;
             await ProcessInput(cmd, keyString);
@@ -127,6 +136,8 @@ namespace Xle.Services.Commands
         {
             if (cmd == Keys.None)
                 return;
+
+            lastInput = cmd;
 
             int waitTime = 700;
 
@@ -229,6 +240,10 @@ namespace Xle.Services.Commands
                 {
                     Debugger.Break();
                 }
+            }
+            catch(Exception exx)
+            {
+                int j = 4;
             }
             finally
             {

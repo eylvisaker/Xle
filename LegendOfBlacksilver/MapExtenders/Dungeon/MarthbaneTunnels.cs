@@ -1,4 +1,5 @@
-﻿using AgateLib.Mathematics.Geometry;
+﻿using AgateLib;
+using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using Xle.Services.Menus;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
+    [Transient("MarthbaneTunnels")]
     public class MarthbaneTunnels : LobDungeon
     {
         DungeonMonster king;

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 using Xle.Maps;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
+    [Transient("TaragasMines")]
     public class TaragasMines : LobDungeon
     {
         public override int GetTreasure(int dungeonLevel, int chestID)

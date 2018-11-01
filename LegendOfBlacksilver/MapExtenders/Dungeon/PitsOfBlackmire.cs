@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AgateLib;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xle.Maps;
 using Xle.Services.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
+    [Transient("PitsofBlackmire")]
     public class PitsOfBlackmire : LobDungeon
     {
         public override int GetTreasure(int dungeonLevel, int chestID)
@@ -63,7 +62,7 @@ namespace Xle.Blacksilver.MapExtenders.Dungeon
                 clearBox = false;
             }
         }
-        
+
         protected override int MonsterGroup(int dungeonLevel)
         {
             if (dungeonLevel <= 2) return 0;

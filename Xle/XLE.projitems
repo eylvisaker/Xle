@@ -197,7 +197,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\TextArea.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\XleScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScreenModel\TextLine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceName.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WaitScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\CommandEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\XleSystem\SoundMan.cs" />

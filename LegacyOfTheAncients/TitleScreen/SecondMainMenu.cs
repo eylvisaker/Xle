@@ -27,7 +27,7 @@ namespace Xle.Ancients.TitleScreen
 			Copyright.SetColor(XleColor.Yellow);
 		}
 
-		protected override void ExecuteMenuItem(int item)
+		protected override Task ExecuteMenuItem(int item)
 		{
 			if (item == 0)
 				NewState = Factory.CreateFirstMainMenu();
@@ -37,6 +37,8 @@ namespace Xle.Ancients.TitleScreen
 				NewState = Factory.CreateLoadGame();
 			else if (item == 3)
 				NewState = Factory.CreateEraseGame();
+
+            return Task.CompletedTask;
 		}
 	}
 }

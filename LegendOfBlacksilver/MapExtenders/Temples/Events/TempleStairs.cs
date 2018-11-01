@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Blacksilver.MapExtenders.Temples
 {
+    [Transient("TempleStairs")]
     public class TempleStairs : ChangeMap
     {
         public TempleStairs()

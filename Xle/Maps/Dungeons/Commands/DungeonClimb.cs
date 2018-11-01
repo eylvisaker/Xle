@@ -27,7 +27,7 @@ namespace Xle.Maps.Dungeons
 
                         await GameControl.WaitAsync(1000);
 
-                        MapChanger.ReturnToPreviousMap();
+                        await MapChanger.ReturnToPreviousMap();
 
                         return;
                     }

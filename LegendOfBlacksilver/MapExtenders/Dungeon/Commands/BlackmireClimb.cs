@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
-    [ServiceName("BlackmireClimb")]
+    [Transient("BlackmireClimb")]
     public class BlackmireClimb : DungeonClimb
     {
         protected LobStory Story { get { return GameState.Story(); } }

@@ -1,17 +1,11 @@
-﻿using Xle.Data;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using AgateLib;
 using Xle.Maps.Temples;
-using Xle.Services;
 using Xle.Services.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Temples
 {
+    [Transient("LobTemple")]
     public class LobTemple : TempleExtender
     {
         public override void SetCommands(ICommandList commands)

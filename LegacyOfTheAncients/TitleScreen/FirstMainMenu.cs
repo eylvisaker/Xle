@@ -29,7 +29,7 @@ namespace Xle.Ancients.TitleScreen
             return base.KeyPress(keyCode, keyString);
         }
 
-        protected override void ExecuteMenuItem(int item)
+        protected override async Task ExecuteMenuItem(int item)
         {
             if (item == 0)
             {
@@ -37,7 +37,7 @@ namespace Xle.Ancients.TitleScreen
             }
             else if (item == 3)
             {
-                Wait(500);
+                await Wait(500);
                 throw new MainWindowClosedException();
             }
         }

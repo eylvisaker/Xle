@@ -124,7 +124,7 @@ namespace Xle.XleEventTypes.Stores.Extenders
             Player.GoldInBank += amount;
 
             await TextArea.PrintLine();
-            PrintBalance();
+            await PrintBalance();
 
             await StoreSound(LotaSound.Sale);
         }

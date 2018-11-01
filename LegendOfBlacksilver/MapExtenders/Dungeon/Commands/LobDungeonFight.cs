@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 using Xle.Maps.Dungeons.Commands;
-using Xle.Services;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
-    [ServiceName("LobDungeonFight")]
+    [Transient("LobDungeonFight")]
     public class LobDungeonFight : DungeonFight
     {
     }

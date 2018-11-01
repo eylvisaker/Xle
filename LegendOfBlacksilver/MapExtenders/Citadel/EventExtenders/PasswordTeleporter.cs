@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {
+    [Transient("PasswordTeleporter")]
     public class PasswordTeleporter : ChangeMapTeleporter
     {
         protected override async Task<bool> OnStepOnImpl()

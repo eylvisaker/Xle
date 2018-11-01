@@ -9,7 +9,6 @@
     <Import_RootNamespace>Xle.Blacksilver</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\LobExhibitInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lob3DSurfaces.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LobFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LobProgram.cs" />

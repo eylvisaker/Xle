@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ using Xle.Services;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
-    [ServiceName("LobDungeonXamine")]
+    [Transient("LobDungeonXamine")]
     public class LobDungeonXamine : DungeonXamine
     {
         protected override void PrintExamineMonsterMessage(DungeonMonster foundMonster)

@@ -10,7 +10,7 @@ namespace Xle.Services.Commands.Implementation
         bool ConfirmPrompt { get; set; }
     }
 
-    [Transient]
+    [Transient("Leave")]
     public class Leave : Command, ILeave
     {
         public IQuickMenu QuickMenu { get; set; }

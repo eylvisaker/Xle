@@ -127,8 +127,10 @@ namespace Xle.Maps
             }
         }
 
-        public virtual async Task OnAfterEntry()
-        { }
+        public virtual Task OnAfterEntry()
+        {
+            return Task.CompletedTask;
+        }
 
         public virtual async Task AfterPlayerStep()
         {
@@ -183,9 +185,9 @@ namespace Xle.Maps
             return (int)Math.Round(damage);
         }
 
-        [Obsolete("this isn't called anywhere???")]
-        public virtual async Task CastSpell(MagicSpell magic)
+        public virtual Task CastSpell(MagicSpell magic)
         {
+            return Task.CompletedTask;
         }
 
         public virtual bool RollSpellFizzle(MagicSpell magic)
@@ -214,7 +216,7 @@ namespace Xle.Maps
 
             await GameControl.WaitAsync(GameState.GameSpeed.LeaveMapTime);
 
-            MapChanger.ReturnToPreviousMap();
+            await MapChanger.ReturnToPreviousMap();
 
             await TextArea.PrintLine();
         }

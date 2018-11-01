@@ -1,21 +1,15 @@
-﻿using System;
+﻿using AgateLib;
 using System.Threading.Tasks;
-using AgateLib.Mathematics.Geometry;
-
-using Xle.Data;
 using Xle.Maps.Dungeons.Commands;
-using Xle.Services;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
-    [ServiceName("DungeonOpen")]
+    [Transient("DungeonOpen")]
     public class DungeonOpen : DungeonOpenCommand
     {
-        Maps.XleMapTypes.Dungeon TheMap { get { return (Maps.XleMapTypes.Dungeon)GameState.Map; } }
-        LobDungeon Map { get { return (LobDungeon)GameState.MapExtender; } }
+        private Maps.XleMapTypes.Dungeon TheMap { get { return (Maps.XleMapTypes.Dungeon)GameState.Map; } }
+
+        private LobDungeon Map { get { return (LobDungeon)GameState.MapExtender; } }
 
         protected override async Task GiveChestContents(int val)
         {
@@ -23,7 +17,7 @@ namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
             {
                 await TextArea.PrintLine("You need a key.", XleColor.Yellow);
             }
-            else 
+            else
                 await base.GiveChestContents(val);
         }
     }

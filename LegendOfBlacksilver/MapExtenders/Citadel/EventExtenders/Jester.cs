@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {
+    [Transient("Jester")]
     public class Jester : LobEvent
     {
         public override async Task<bool> Speak()

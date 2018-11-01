@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Blacksilver
 {
-    [ServiceName("LobUse")]
+    [Transient("LobUse")]
     public class LobUse : Use
     {
         public LobUse()

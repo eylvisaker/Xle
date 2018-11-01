@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using Xle.Maps;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
+    [Transient("DeathspireChasm")]
 	public class DeathspireChasm : LobDungeon
 	{
 		protected override int MonsterGroup(int dungeonLevel)

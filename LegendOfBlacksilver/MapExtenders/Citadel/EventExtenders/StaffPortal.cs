@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {
+    [Transient("StaffPortal")]
     public class StaffPortal : ChangeMapTeleporter
     {
         public override Task<bool> StepOn()

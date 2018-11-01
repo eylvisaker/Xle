@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
-
-using Xle.Services;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Commands
 {
-    [ServiceName("ArchiveOpen")]
+    [Transient("ArchiveOpen")]
     public class ArchiveOpen : Open
     {
         private LobArchives Archives { get { return (LobArchives)GameState.MapExtender; } }

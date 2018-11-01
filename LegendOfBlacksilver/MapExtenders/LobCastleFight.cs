@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 using Xle.Maps;
 using Xle.Maps.Towns;
-using Xle.Services;
 
 namespace Xle.Blacksilver.MapExtenders
 {
-    [ServiceName("LobCastleFight")]
+    [Transient("LobCastleFight")]
     public class LobCastleFight : FightAgainstGuard
     {
         public CastleDamageCalculator DamageCalculator { get; set; }

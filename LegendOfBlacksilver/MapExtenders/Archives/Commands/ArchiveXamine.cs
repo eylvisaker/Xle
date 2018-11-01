@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Commands
 {
-    [ServiceName("ArchiveXamine")]
+    [Transient("ArchiveXamine")]
     public class ArchiveXamine : Xamine
     {
         public override async Task Execute()

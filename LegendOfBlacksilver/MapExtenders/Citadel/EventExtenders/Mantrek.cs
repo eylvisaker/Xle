@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Maps;
 using Xle.Services.MapLoad;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {
+    [Transient("Mantrek")]
     public class Mantrek : LobEvent
     {
         public IMapChanger MapChanger { get; set; }

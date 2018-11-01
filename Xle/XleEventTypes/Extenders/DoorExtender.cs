@@ -38,7 +38,7 @@ namespace Xle.XleEventTypes.Extenders
 
             if (itemUnlocksDoor)
             {
-                UnlockDoor(item);
+                await UnlockDoor(item);
             }
             else
             {

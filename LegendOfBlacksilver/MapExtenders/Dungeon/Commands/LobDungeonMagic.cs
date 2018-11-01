@@ -1,15 +1,11 @@
-﻿using Xle.Data;
-using Xle.Maps.Dungeons.Commands;
-using Xle.Services;
-using System;
+﻿using AgateLib;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Xle.Data;
+using Xle.Maps.Dungeons.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {
-    [ServiceName("LobDungeonMagic")]
+    [Transient("LobDungeonMagic")]
     public class LobDungeonMagic : DungeonMagic
     {
         protected override IEnumerable<MagicSpell> ValidMagic

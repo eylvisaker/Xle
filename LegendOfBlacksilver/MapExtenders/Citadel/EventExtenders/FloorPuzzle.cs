@@ -1,25 +1,23 @@
-﻿using AgateLib.Mathematics.Geometry;
-using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
+using System;
+using System.Threading.Tasks;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {
+    [Transient("FloorPuzzle")]
     public class FloorPuzzle : EventExtender
     {
-        double time;
-        int[,] tiles;
-        bool failed;
-        const double secondsToTileUpdate = 3;
+        private double time;
+        private int[,] tiles;
+        private bool failed;
+        private const double secondsToTileUpdate = 3;
 
-        public override async Task<bool> StepOn()
+        public override Task<bool> StepOn()
         {
             if (failed)
-                return false;
+                return Task.FromResult(false);
 
             Point loc = Player.Location;
             loc.X -= TheEvent.X;
@@ -30,7 +28,7 @@ namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
             StepOn((loc.X + 1) / 2, (loc.Y + 1) / 2);
             StepOn(loc.X / 2, (loc.Y + 1) / 2);
 
-            return true;
+            return Task.FromResult(true);
         }
 
         private void StepOn(int x, int y)
@@ -105,7 +103,7 @@ namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
             tiles[4, 5] = -1;
         }
 
-        public override void OnUpdate(GameTime gameTime) 
+        public override void OnUpdate(GameTime gameTime)
         {
             double newtime = time + gameTime.ElapsedGameTime.TotalSeconds / secondsToTileUpdate;
 
