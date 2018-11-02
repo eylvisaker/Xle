@@ -7,21 +7,25 @@ param (
   [string] $destDir = "Output"
 )
 
-. .\Project-Vars.ps1
+function WrapPackage {
+  param([string] $ProjectName)
 
-if ($version -eq "") {
-  echo "Pass -version to supply a version number."
+  if ($version -eq "") {
+    echo "Pass -version to supply a version number."
+  }
+
+  if ($version -ne "") { $version = "-$version" }
+
+  echo "Packaging $ProjectName v$version"
+  echo "Using source directory $sourceDir"
+  echo "and destination directory $destDir"
+
+  New-Item -ItemType Directory -Force -Path "$destDir"
+
+  Copy-Item "$sourceDir\$($ProjectName)_Desktop$version.zip" -Destination "$destDir\$($ProjectName)_Windows$version.zip"
 }
 
-if ($version -ne "") { $version = "-$version" }
+WrapPackage "LegacyOfTheAncients"
+WrapPackage "LegendOfBlacksilver"
 
-echo "Packaging $ProjectName v$version"
-echo "Using source directory $sourceDir"
-echo "and destination directory $destDir"
-
-New-Item -ItemType Directory -Force -Path "$destDir"
-
-Copy-Item "$sourceDir\$($ProjectName)_Desktop$version.zip" -Destination "$destDir\$($ProjectName)_Windows$version.zip"
-
-"Package wrapping on Windows completed."
-
+write-output "Package wrapping on Windows completed."

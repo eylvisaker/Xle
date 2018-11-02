@@ -12,10 +12,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Build.bat = Build.bat
 		Build.ps1 = Build.ps1
 		Coverage.bat = Coverage.bat
-		IntegrationTest.bat = IntegrationTest.bat
-		Package.bat = Package.bat
-		Package.ps1 = Package.ps1
+		Package-Build.bat = Package-Build.bat
+		Package-Build.ps1 = Package-Build.ps1
+		Package-Wrap.ps1 = Package-Wrap.ps1
+		package-wrap.sh = package-wrap.sh
+		Project-Vars.ps1 = Project-Vars.ps1
+		project-vars.sh = project-vars.sh
 		publish.sh = publish.sh
+		Test.bat = Test.bat
 		UnitTest.bat = UnitTest.bat
 	EndProjectSection
 EndProject

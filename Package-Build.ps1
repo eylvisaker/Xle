@@ -6,8 +6,6 @@ param (
   [string] $destDir = "Output"
 )
 
-. .\Project-Vars.ps1
-
 if ($version -eq "") {
   echo "Pass -version to supply a version number."
 }
@@ -29,7 +27,15 @@ $dummy = New-Item -ItemType Directory -Force -Path $destDir
 
 .\Build.ps1 -config Release
 
-CreateZipFile "$ProjectName.Desktop\bin\DesktopGL\AnyCPU\Release" "$($ProjectName)_Desktop$version"
+
+function BuildPackage {
+  param([string] $ProjectName)
+
+  CreateZipFile "$ProjectName.Desktop\bin\DesktopGL\AnyCPU\Release" "$($ProjectName)_Desktop$version"
+}
+
+BuildPackage "LegacyOfTheAncients"
+BuildPackage "LegendOfBlacksilver"
 
 Write-Output "Packaging complete."
 
