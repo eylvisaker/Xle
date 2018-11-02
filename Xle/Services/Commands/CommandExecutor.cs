@@ -169,26 +169,12 @@ namespace Xle.Services.Commands
 
         private async Task ExecuteCursorMovement(Keys cmd)
         {
-            var wasRaft = player.BoardedRaft;
-
             await CursorMovement(cmd);
 
             playerAnimator.AnimateStep();
 
             var waitTime = gameState.MapExtender.WaitTimeAfterStep;
-
-            if (wasRaft != player.BoardedRaft)
-            {
-                if (player.IsOnRaft)
-                {
-                    await textArea.PrintLine();
-                    await textArea.PrintLine("You climb onto a raft.");
-
-                    soundMan.PlaySound(LotaSound.BoardRaft);
-                }
-
-            }
-
+            
             await AfterDoCommand(waitTime, cmd);
         }
 

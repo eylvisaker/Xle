@@ -59,8 +59,6 @@ namespace Xle.Services.XleSystem
             var map = mapLoader.LoadMap(gameState.Player.MapID);
             mapChanger.SetMap(map);
 
-            input.AcceptKey = true;
-
             textArea.Clear();
             commandExecutor.Prompt();
         }

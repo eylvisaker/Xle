@@ -52,7 +52,7 @@ namespace Xle.Services.XleSystem
 
             public void Stop()
             {
-                Instance.Stop();
+                Instance?.Stop();
             }
         }
 

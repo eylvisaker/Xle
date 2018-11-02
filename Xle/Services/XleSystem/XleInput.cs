@@ -48,7 +48,7 @@ namespace Xle.Services.XleSystem
 
         public event EventHandler<CommandEventArgs> DoCommand;
 
-        public bool AcceptKey { get; set; }
+        public bool AcceptKey { get; set; } = true;
 
         public void OnKeyDown(Keys key)
         {

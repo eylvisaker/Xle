@@ -334,8 +334,10 @@ namespace Xle.Maps.Outdoors
             return info;
         }
 
-        private void UpdateRaftState()
+        private async Task UpdateRaftState()
         {
+            bool boardedRaft = false;
+
             if (Player.IsOnRaft == false)
             {
                 foreach (var raft in Player.Rafts.Where(r => r.MapNumber == TheMap.MapID))
@@ -343,6 +345,7 @@ namespace Xle.Maps.Outdoors
                     if (raft.Location.Equals(Player.Location))
                     {
                         Player.BoardedRaft = raft;
+                        boardedRaft = true;
                         break;
                     }
                 }
@@ -354,6 +357,14 @@ namespace Xle.Maps.Outdoors
 
                 raft.X = Player.X;
                 raft.Y = Player.Y;
+            }
+
+            if (boardedRaft)
+            {
+                await TextArea.PrintLine();
+                await TextArea.PrintLine("You climb onto a raft.");
+
+                SoundMan.PlaySound(LotaSound.BoardRaft);
             }
         }
 
@@ -411,7 +422,7 @@ namespace Xle.Maps.Outdoors
             if (GameState.Map != TheMap)
                 return;
 
-            UpdateRaftState();
+            await UpdateRaftState();
 
             await OutsideEncounters.Step();
         }
