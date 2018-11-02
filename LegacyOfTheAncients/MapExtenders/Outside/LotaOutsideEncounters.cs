@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Data;
@@ -154,9 +155,14 @@ namespace Xle.Ancients.MapExtenders.Outside
             }
         }
 
+        List<Direction> validDirections = new List<Direction> { Direction.East, Direction.North, Direction.South, Direction.West };
+
         protected void SetMonsterImagePosition()
         {
-            monstDir = (Direction)Random.Next((int)Direction.East, (int)Direction.South + 1);
+            monstDir = validDirections[Random.Next(validDirections.Count)];
+
+            Debug.Assert(monstDir != Direction.None);
+
             RenderState.MonsterDrawDirection = monstDir;
         }
 

@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Xle.Maps;
+using Xle.Maps.Outdoors;
 using Xle.Maps.XleMapTypes;
 using Xle.Services.MapLoad;
 using Xle.Services.ScreenModel;
@@ -47,7 +48,11 @@ namespace Xle.Services.Game
 
             await LoadOutsideMap();
 
-            Outside map = (Outside)GameState.Map;
+            IOutsideExtender extender = (IOutsideExtender)GameState.MapExtender;
+            Outside map = (Outside)extender.TheMap;
+
+            extender.CancelEncounter();
+
             TerrainType t;
 
             do

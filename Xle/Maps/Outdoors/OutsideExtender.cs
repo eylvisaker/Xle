@@ -12,6 +12,7 @@ namespace Xle.Maps.Outdoors
 {
     public interface IOutsideExtender : IMapExtender
     {
+        void CancelEncounter();
     }
 
     public class OutsideExtender : Map2DExtender, IOutsideExtender
@@ -218,7 +219,7 @@ namespace Xle.Maps.Outdoors
 
                     await GameControl.WaitAsync(500);
 
-                    OutsideEncounters.CancelEncounter();
+                    CancelEncounter();
                 }
 
                 TerrainInfo info = GetTerrainInfo();
@@ -232,6 +233,8 @@ namespace Xle.Maps.Outdoors
                 Player.TimeQuality += 1;
             }
         }
+
+        public void CancelEncounter() => OutsideEncounters.CancelEncounter();
 
         public TerrainInfo GetTerrainInfo()
         {
