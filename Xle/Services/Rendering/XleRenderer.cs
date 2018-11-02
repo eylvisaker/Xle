@@ -350,7 +350,7 @@ namespace Xle.Services.Rendering
             }
         }
 
-        public XleMapRenderer MapRenderer { get { return GameState?.MapExtender?.MapRenderer; } }
+        public IXleMapRenderer MapRenderer => GameState?.MapExtender?.TheMapRenderer; 
 
         public ColorScheme ColorScheme => GameState.Map.ColorScheme;
 
@@ -474,7 +474,6 @@ namespace Xle.Services.Rendering
 
         public void DrawObject(SpriteBatch spriteBatch, ColorScheme cs)
         {
-            //DrawScreenBackColor(spriteBatch, cs.BackColor);
             DrawTextAreaBackColor(spriteBatch, cs);
 
             // Draw the borders

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services;
 using Xle.Services.Rendering.Maps;
 
 namespace Xle.Maps.Outdoors
@@ -13,7 +12,7 @@ namespace Xle.Maps.Outdoors
         bool IsMonsterFriendly { get; set; }
         IReadOnlyList<Monster> CurrentMonsters { get; }
         EncounterState EncounterState { get; }
-		IOutsideEncounterRenderer MapRenderer { get; set; }
+        OutsideRenderState RenderState { get; set; }
 
         Task Step();
         Task HitMonster(int damage);

@@ -1,15 +1,10 @@
-﻿using Xle.Maps.XleMapTypes.MuseumDisplays;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Services;
 using Xle.Services.MapLoad;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class IslandRetreat : LobExhibit
     {
         public IslandRetreat() : base("Island Retreat", Coin.BlueGem) { }

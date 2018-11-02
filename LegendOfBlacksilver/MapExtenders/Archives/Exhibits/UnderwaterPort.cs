@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class UnderwaterPort : LobExhibit
     {
         public UnderwaterPort()

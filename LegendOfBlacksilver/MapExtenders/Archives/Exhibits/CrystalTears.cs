@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using Xle.Services.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class CrystalTears : LobExhibit
     {
         public CrystalTears()

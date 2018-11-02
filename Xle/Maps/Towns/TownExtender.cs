@@ -17,7 +17,7 @@ namespace Xle.Maps.Towns
             set { base.TheMap = value; }
         }
 
-        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public override IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.TownRenderer(this);
         }

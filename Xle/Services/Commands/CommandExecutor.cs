@@ -17,8 +17,6 @@ namespace Xle.Services.Commands
     {
         Task Prompt();
 
-        Task DoCommand(Keys Keys, string keyString);
-
         void ResetCurrentCommand();
 
         void Update(GameTime time);
@@ -38,6 +36,7 @@ namespace Xle.Services.Commands
         private bool inputPrompt;
         private Task commandTask;
         private Keys lastInput;
+        private object syncRoot = new object();
 
         private Player player { get { return gameState.Player; } }
 
@@ -61,7 +60,7 @@ namespace Xle.Services.Commands
 
             input.DoCommand += (sender, args) =>
             {
-                commandTask = DoCommand(args.Command, args.KeyString);
+                DoCommand(args.Command, args.KeyString);
             };
 
             mDirectionMap[Keys.Right] = Direction.East;
@@ -83,9 +82,12 @@ namespace Xle.Services.Commands
             }
 
             await textArea.Print("\nEnter command: ");
-            inputPrompt = true;
 
-            commandTask = null;
+            lock (syncRoot)
+            {
+                inputPrompt = true;
+                commandTask = null;
+            }
         }
 
         /// <summary>
@@ -115,21 +117,15 @@ namespace Xle.Services.Commands
             }
         }
 
-        public async Task DoCommand(Keys cmd, string keyString)
+        public void DoCommand(Keys cmd, string keyString)
         {
             if (!inputPrompt)
             {
-                if (commandTask == null 
-                 || commandTask.IsCompleted && commandTask.IsFaulted == false)
-                {
-                    await Prompt();
-                }
-
                 return;
             }
 
             inputPrompt = false;
-            await ProcessInput(cmd, keyString);
+            commandTask = ProcessInput(cmd, keyString);
         }
 
         private async Task ProcessInput(Keys cmd, string keyString)
@@ -241,7 +237,7 @@ namespace Xle.Services.Commands
                     Debugger.Break();
                 }
             }
-            catch(Exception exx)
+            catch (Exception exx)
             {
                 int j = 4;
             }

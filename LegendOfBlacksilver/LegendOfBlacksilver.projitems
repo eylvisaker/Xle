@@ -21,7 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\Blacksmith.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\CrystalTears.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\DarkWand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\_Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\FlaxtonIncense.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\GameOfHonor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\IslandRetreat.cs" />
@@ -38,7 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\UnderwaterPort.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\Exhibits\VaseOfSouls.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\HawkArchives.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\IExhibitFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\ExhibitFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\LobArchives.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\Archives\OwlArchives.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapExtenders\CastleDamageCalculator.cs" />

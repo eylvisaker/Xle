@@ -35,9 +35,7 @@ namespace Xle.Services
 
             waitScene.Initialize(howLong_ms, allowKeyBreak, renderer);
 
-            sceneStack.AddOrBringToTop(waitScene);
-
-            await waitScene.Wait();
+            await waitScene.Wait(sceneStack);
         }
     }
 }

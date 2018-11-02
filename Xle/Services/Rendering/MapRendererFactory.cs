@@ -9,7 +9,7 @@ namespace Xle.Services.Rendering
     {
         DungeonRenderer DungeonRenderer(MapExtender map, string name = null);
         OutsideRenderer OutsideRenderer(MapExtender map, string name = null);
-        MuseumRenderer MuseumRenderer(MapExtender map, string name = null);
+        IMuseumRenderer MuseumRenderer(MapExtender map, string name = null);
         TempleRenderer TempleRenderer(MapExtender map, string name = null);
         TownRenderer TownRenderer(MapExtender map, string name = null);
         CastleRenderer CastleRenderer(MapExtender map, string name = null);
@@ -31,8 +31,8 @@ namespace Xle.Services.Rendering
         public DungeonRenderer DungeonRenderer(MapExtender map, string name = null)
                => Resolve<DungeonRenderer>(map, name);
 
-        public MuseumRenderer MuseumRenderer(MapExtender map, string name = null)
-               => Resolve<MuseumRenderer>(map, name);
+        public IMuseumRenderer MuseumRenderer(MapExtender map, string name = null)
+               => Resolve<IMuseumRenderer>(map, name);
 
         public OutsideRenderer OutsideRenderer(MapExtender map, string name = null)
                => Resolve<OutsideRenderer>(map, name);
@@ -44,7 +44,7 @@ namespace Xle.Services.Rendering
                => Resolve<TownRenderer>(map, name);
 
 
-        private T Resolve<T>(MapExtender map, string name) where T : XleMapRenderer
+        private T Resolve<T>(MapExtender map, string name) where T : IXleMapRenderer
         {
             T result;
 

@@ -193,6 +193,12 @@
 /processorParam:Quality=Best
 /build:Audio/Sale.ogg
 
+#begin Audio/Teleporter.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Teleporter.ogg
+
 #begin Audio/UnlockDoor.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
@@ -634,18 +640,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/DungeonTiles.png
 
-#begin Images/DungeonTiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/DungeonTiles.png
-
 #begin Images/font.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -682,6 +676,30 @@
 /processorParam:TextureFormat=Color
 /build:Images/LobCitadel.png
 
+#begin Images/LobLabyrinth1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/LobLabyrinth1.png
+
+#begin Images/LobLabyrinth2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/LobLabyrinth2.png
+
 #begin Images/LobMaelbane.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -693,6 +711,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/LobMaelbane.png
+
+#begin Images/LobTemple.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/LobTemple.png
 
 #begin Images/LobThalen.png
 /importer:TextureImporter
@@ -730,18 +760,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/Blacksmith.png
 
-#begin Images/Museum/Exhibits/Blacksmith.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/Blacksmith.png
-
 #begin Images/Museum/Exhibits/CrystalTears.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -753,30 +771,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/CrystalTears.png
-
-#begin Images/Museum/Exhibits/CrystalTears.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/CrystalTears.png
-
-#begin Images/Museum/Exhibits/DarkWand.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/DarkWand.png
 
 #begin Images/Museum/Exhibits/DarkWand.png
 /importer:TextureImporter
@@ -802,18 +796,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/Etherium.png
 
-#begin Images/Museum/Exhibits/Etherium.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/Etherium.png
-
 #begin Images/Museum/Exhibits/exclosed.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -825,30 +807,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/exclosed.png
-
-#begin Images/Museum/Exhibits/exclosed.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/exclosed.png
-
-#begin Images/Museum/Exhibits/exopen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/exopen.png
 
 #begin Images/Museum/Exhibits/exopen.png
 /importer:TextureImporter
@@ -874,18 +832,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/FlaxtonIncense.png
 
-#begin Images/Museum/Exhibits/FlaxtonIncense.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/FlaxtonIncense.png
-
 #begin Images/Museum/Exhibits/ForTheWealthy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -897,30 +843,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/ForTheWealthy.png
-
-#begin Images/Museum/Exhibits/ForTheWealthy.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/ForTheWealthy.png
-
-#begin Images/Museum/Exhibits/GameOfHonor.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/GameOfHonor.png
 
 #begin Images/Museum/Exhibits/GameOfHonor.png
 /importer:TextureImporter
@@ -946,18 +868,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/IslandRetreat.png
 
-#begin Images/Museum/Exhibits/IslandRetreat.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/IslandRetreat.png
-
 #begin Images/Museum/Exhibits/KloryksCage.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -969,30 +879,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/KloryksCage.png
-
-#begin Images/Museum/Exhibits/KloryksCage.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/KloryksCage.png
-
-#begin Images/Museum/Exhibits/MarthbaneTunnels.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/MarthbaneTunnels.png
 
 #begin Images/Museum/Exhibits/MarthbaneTunnels.png
 /importer:TextureImporter
@@ -1018,18 +904,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/Metalwork.png
 
-#begin Images/Museum/Exhibits/Metalwork.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/Metalwork.png
-
 #begin Images/Museum/Exhibits/MorningStar.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1041,30 +915,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Museum/Exhibits/MorningStar.png
-
-#begin Images/Museum/Exhibits/MorningStar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/MorningStar.png
-
-#begin Images/Museum/Exhibits/Mountains.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Museum/Exhibits/Mountains.png
 
 #begin Images/Museum/Exhibits/Mountains.png
 /importer:TextureImporter

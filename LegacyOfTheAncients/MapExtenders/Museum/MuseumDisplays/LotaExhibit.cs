@@ -6,7 +6,6 @@ using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {
-    [Transient, InjectProperties]
     public abstract class LotaExhibit : Exhibit
     {
         protected LotaExhibit(string name, Coin c)

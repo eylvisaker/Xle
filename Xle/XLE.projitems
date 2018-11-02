@@ -36,6 +36,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Direction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DirectionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Equipment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Maps\Museums\MuseumRenderState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Maps\Outdoors\OutsideRenderState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\TitleScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleProgram.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleInitializer.cs" />

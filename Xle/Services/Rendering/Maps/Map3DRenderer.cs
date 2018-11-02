@@ -20,6 +20,11 @@ namespace Xle.Services.Rendering.Maps
         public new Map3D TheMap { get { return (Map3D)base.TheMap; } }
         public new Map3DExtender Extender { get { return (Map3DExtender)base.Extender; } }
 
+        // TODO: Find a way to move AnimateExhibits and DrawCloseup to be properties of MuseumRenderer. Unfortunately, they are used in Map3DRenderer so some refactoring is needed.
+        public abstract bool AnimateExhibits { get; }
+
+        public abstract bool DrawCloseup { get; }
+
         private enum SideWallType
         {
             Wall,
@@ -264,8 +269,6 @@ namespace Xle.Services.Rendering.Maps
             int x, int y, Direction faceDirection, Rectangle inRect, int maxDistance)
         {
         }
-
-        public bool DrawCloseup { get; set; }
 
         protected virtual void DrawCloseupImpl(SpriteBatch spriteBatch, Rectangle inRect)
         {
@@ -620,7 +623,5 @@ namespace Xle.Services.Rendering.Maps
         }
 
         protected virtual Color ExhibitColor(int val) { return XleColor.White; }
-
-        public bool AnimateExhibits { get; set; }
     }
 }

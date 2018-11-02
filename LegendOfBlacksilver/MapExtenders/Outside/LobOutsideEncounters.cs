@@ -23,6 +23,8 @@ namespace Xle.Blacksilver.MapExtenders.Outside
             }
         }
 
+        public OutsideRenderState RenderState { get; set; }
+
         public EncounterState EncounterState { get; set; }
 
         public bool InEncounter
@@ -32,7 +34,7 @@ namespace Xle.Blacksilver.MapExtenders.Outside
 
         public bool IsMonsterFriendly { get; set; }
 
-        public IOutsideEncounterRenderer MapRenderer { get; set; }
+        public OutsideRenderState MapRenderer { get; set; }
 
         public string MonsterName
         {

@@ -13,6 +13,9 @@ namespace Xle.Services.Rendering.Maps
     {
         public XleData Data { get; set; }
 
+        public override bool AnimateExhibits => false;
+        public override bool DrawCloseup => false;
+
         protected override ExtraType GetExtraType(int val, int side)
         {
             if (side != 0)
@@ -70,6 +73,7 @@ namespace Xle.Services.Rendering.Maps
         }
 
         public new Dungeon TheMap { get { return (Dungeon)base.TheMap; } }
+
         public new DungeonExtender Extender { get { return (DungeonExtender)base.Extender; } }
 
         protected override void DrawMonsters(SpriteBatch spriteBatch,

@@ -65,7 +65,7 @@ namespace Xle.Services.MapLoad
             var renderer = extender.CreateMapRenderer(rendererFactory);
             renderer.Extender = extender;
             renderer.TheMap = data;
-            extender.MapRenderer = renderer;
+            extender.TheMapRenderer = renderer;
 
             data.MapID = id;
 

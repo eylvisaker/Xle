@@ -8,7 +8,12 @@ namespace Xle.Services.Rendering.Maps
 {
     public interface IXleMapRenderer
     {
+        MapExtender Extender { get; set; }
+        XleMap TheMap { get; set; }
 
+        void Draw(SpriteBatch spriteBatch, Point playerPos, Direction faceDirection, Rectangle inRect);
+
+        void Update(GameTime time);
     }
 
     [InjectProperties]
@@ -34,7 +39,7 @@ namespace Xle.Services.Rendering.Maps
         public MapExtender Extender
         {
             get { return mExtender; }
-            internal set
+            set
             {
                 mExtender = value;
                 OnExtenderSet();

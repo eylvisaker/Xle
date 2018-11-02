@@ -23,17 +23,14 @@ namespace Xle.Maps.Outdoors
         public IOutsideEncounters OutsideEncounters { get; set; }
 
         public new Outside TheMap { get { return (Outside)base.TheMap; } }
-        public new OutsideRenderer MapRenderer
-        {
-            get { return (OutsideRenderer)base.MapRenderer; }
-        }
+        public OutsideRenderState RenderState { get; set; } = new OutsideRenderState();
 
         protected override void OnMapRendererSet()
         {
-            OutsideEncounters.MapRenderer = MapRenderer;
+            OutsideEncounters.RenderState = RenderState;
         }
 
-        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public override IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.OutsideRenderer(this);
         }
@@ -204,7 +201,7 @@ namespace Xle.Maps.Outdoors
             }
             else
             {
-                BeforeStepOn(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
+                await BeforeStepOn(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
                 await MovePlayer(stepDirection);
 
@@ -423,7 +420,7 @@ namespace Xle.Maps.Outdoors
         protected void SetMonsterImagePosition()
         {
             monstDir = (Direction)Random.Next((int)Direction.East, (int)Direction.South + 1);
-            MapRenderer.MonsterDrawDirection = monstDir;
+            RenderState.MonsterDrawDirection = monstDir;
         }
 
         public override int WaitTimeAfterStep

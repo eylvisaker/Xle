@@ -2,34 +2,34 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Xle.Maps.Outdoors;
 
 namespace Xle.Services.Rendering.Maps
 {
     [Transient]
-    public class OutsideRenderer : Map2DRenderer, IOutsideEncounterRenderer
+    public class OutsideRenderer : Map2DRenderer
     {
         private int[] waves= new int[35];
         private Rectangle drawRect;
         private int mWaterAnimLevel;
         private float timeToNextAnimate = 0;
 
-        public int DisplayMonsterID { get; set; } = -1;
+        public OutsideRenderState RenderState;
 
-        public Direction MonsterDrawDirection { get; set; }
+        int DisplayMonsterID => RenderState.DisplayMonsterID;
 
-        /// <summary>
-        /// Gets or sets whether or not the player is in stormy water
-        /// </summary>
-        /// <returns></returns>
-        public int WaterAnimLevel
+        Direction MonsterDrawDirection => RenderState.MonsterDrawDirection;
+
+        public new OutsideExtender Extender => (OutsideExtender)base.Extender;
+
+        public int WaterAnimLevel => RenderState.WaterAnimLevel;
+
+        protected override void OnExtenderSet()
         {
-            get { return mWaterAnimLevel; }
-            set
-            {
-                System.Diagnostics.Debug.Assert(value >= 0);
+            base.OnExtenderSet();
 
-                mWaterAnimLevel = value;
-            }
+            RenderState = Extender.RenderState;
+            RenderState.ClearWaves = ClearWaves;
         }
 
         public override void Draw(SpriteBatch spriteBatch, Point playerPos, Direction faceDirection, Rectangle inRect)
@@ -129,12 +129,5 @@ namespace Xle.Services.Rendering.Maps
             // force an update.
             timeToNextAnimate = 500;
         }
-
-    }
-
-    public interface IOutsideEncounterRenderer
-    {
-        Direction MonsterDrawDirection { get; set; }
-        int DisplayMonsterID { get; set; }
     }
 }

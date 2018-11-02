@@ -104,10 +104,14 @@ namespace Xle.Services
             timeLeft_ms = Math.Max(timeLeft_ms, howLong_ms);
         }
 
-        public async Task Wait()
+        public async Task Wait(ISceneStack sceneStack)
         {
             while (timeLeft_ms > 0)
+            {
+                sceneStack.AddOrBringToTop(this);
+
                 await Task.Yield();
+            }
         }
     }
 }

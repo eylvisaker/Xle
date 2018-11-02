@@ -36,7 +36,7 @@ namespace Xle.Maps.Dungeons
 
         public DungeonCombat Combat { get; set; }
 
-        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public override IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.DungeonRenderer(this);
         }

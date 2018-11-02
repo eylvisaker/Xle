@@ -33,7 +33,7 @@ namespace Xle.Blacksilver.MapExtenders.Archives
             return Lob3DSurfaces.Archives;
         }
 
-        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public override IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.MuseumRenderer(this, "ArchiveRenderer");
         }

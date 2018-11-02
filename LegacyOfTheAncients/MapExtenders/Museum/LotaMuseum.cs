@@ -72,7 +72,8 @@ namespace Xle.Ancients.MapExtenders.Museum
         {
             base.OnLoad();
             CheckExhibitStatus();
-            MapRenderer.AnimateExhibits = true;
+
+            RenderState.AnimateExhibits = true;
         }
 
         public override async Task OnAfterEntry()

@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class DarkWand : LobExhibit
-	{
-		public DarkWand()
-			: base("Dark Wand", Coin.YellowDiamond)
-		{ }
+    {
+        public DarkWand()
+            : base("Dark Wand", Coin.YellowDiamond)
+        { }
 
-		public override ExhibitIdentifier ExhibitIdentifier
-		{
-			get { return ExhibitIdentifier.DarkWand; }
-		}
-	}
+        public override ExhibitIdentifier ExhibitIdentifier
+        {
+            get { return ExhibitIdentifier.DarkWand; }
+        }
+    }
 }

@@ -30,8 +30,8 @@ namespace Xle.Ancients.MapExtenders.Outside
 
         public int WaterAnimLevel
         {
-            get { return MapRenderer.WaterAnimLevel; }
-            set { MapRenderer.WaterAnimLevel = value; }
+            get { return RenderState.WaterAnimLevel; }
+            set { RenderState.WaterAnimLevel = value; }
         }
 
         public override void SetCommands(ICommandList commands)
@@ -120,7 +120,7 @@ namespace Xle.Ancients.MapExtenders.Outside
             SetMonsterImagePosition();
 
             // bandit icon is number 4.
-            MapRenderer.DisplayMonsterID = 4;
+            RenderState.DisplayMonsterID = 4;
 
             await TextArea.PrintLine();
             await TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
@@ -142,7 +142,7 @@ namespace Xle.Ancients.MapExtenders.Outside
             await TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
 
             await GameControl.WaitAsync(1000);
-            MapRenderer.DisplayMonsterID = -1;
+            RenderState.DisplayMonsterID = -1;
             await GameControl.WaitAsync(3000, redraw: UnconsciousRenderer);
 
             await TextArea.PrintLine();

@@ -9,7 +9,7 @@ using Xle.XleEventTypes.Stores.Extenders;
 
 namespace Xle.Blacksilver.MapExtenders.Towns.Stores
 {
-    [Transient("BlackJack")]
+    [Transient("Blackjack")]
     public class BlackJack : StoreExtender
     {
     }

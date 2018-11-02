@@ -14,12 +14,9 @@ namespace Xle.Maps.Outdoors.Commands
     {
         public IOutsideEncounters Encounters { get; set; }
 
-        private OutsideExtender map { get { return (OutsideExtender)GameState.MapExtender; } }
+        private OutsideExtender Map => (OutsideExtender)GameState.MapExtender;
 
-        private OutsideRenderer MapRenderer
-        {
-            get { return map.MapRenderer; }
-        }
+        private OutsideRenderState RenderState => Map.RenderState;
 
         private EncounterState EncounterState
         {

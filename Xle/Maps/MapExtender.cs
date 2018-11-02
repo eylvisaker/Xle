@@ -22,11 +22,11 @@ namespace Xle.Maps
     {
         XleMap TheMap { get; set; }
         int WaitTimeAfterStep { get; }
-        XleMapRenderer MapRenderer { get; }
         IReadOnlyList<IEventExtender> Events { get; }
 
         int MapID { get; }
         bool IsAngry { get; set; }
+        IXleMapRenderer TheMapRenderer { get; set; }
 
         IEnumerable<IEventExtender> EventsAt(int v);
         void SetCommands(ICommandList commands);
@@ -49,9 +49,9 @@ namespace Xle.Maps
     {
         private XleMap mTheMap;
         private List<IEventExtender> mEvents = new List<IEventExtender>();
-        private XleMapRenderer mapRenderer;
+        private IXleMapRenderer mapRenderer;
 
-        public IXleSubMenu SubMenu { get; set; }
+        public IXleMapRenderer TheMapRenderer { get; set; }
 
         public XleMap TheMap
         {
@@ -62,18 +62,6 @@ namespace Xle.Maps
                 mTheMap = value;
             }
         }
-
-        public XleMapRenderer MapRenderer
-        {
-            get { return mapRenderer; }
-            set
-            {
-                mapRenderer = value;
-                OnMapRendererSet();
-            }
-        }
-
-
         public ICommandFactory CommandFactory { get; set; }
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
@@ -107,7 +95,7 @@ namespace Xle.Maps
         {
         }
 
-        public virtual XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public virtual IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return new XleMapRenderer();
         }
@@ -231,18 +219,18 @@ namespace Xle.Maps
         {
             Point newPoint = new Point(Player.X + stepDirection.X, Player.Y + stepDirection.Y);
 
-            BeforeStepOn(newPoint.X, newPoint.Y);
+            await BeforeStepOn(newPoint.X, newPoint.Y);
 
             Player.Location = newPoint;
 
             await AfterPlayerStep();
         }
 
-        public void BeforeStepOn(int x, int y)
+        public async Task BeforeStepOn(int x, int y)
         {
             foreach (var evt in EventsAt(x, y, 0))
             {
-                evt.BeforeStepOn();
+                await evt.BeforeStepOn();
             }
         }
 
@@ -251,14 +239,14 @@ namespace Xle.Maps
         /// </summary>
         /// <param name="didEvent">True if there was an event that occured at this location</param>
         /// <param name="player"></param>
-        protected virtual async Task AfterStepImpl(bool didEvent)
+        protected virtual Task AfterStepImpl(bool didEvent)
         {
-
+            return Task.CompletedTask;
         }
 
-        public async Task<bool> CanPlayerStep(Point stepDirection)
+        public Task<bool> CanPlayerStep(Point stepDirection)
         {
-            return await CanPlayerStep(stepDirection.X, stepDirection.Y);
+            return CanPlayerStep(stepDirection.X, stepDirection.Y);
         }
 
         protected virtual async Task<bool> CanPlayerStep(int dx, int dy)

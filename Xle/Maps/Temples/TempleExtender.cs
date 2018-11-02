@@ -8,7 +8,7 @@ namespace Xle.Maps.Temples
     {
         public new Temple TheMap { get { return (Temple)base.TheMap; } }
 
-        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public override IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.TempleRenderer(this);
         }

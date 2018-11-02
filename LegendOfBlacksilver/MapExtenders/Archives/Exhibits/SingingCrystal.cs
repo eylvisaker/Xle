@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Maps.XleMapTypes.MuseumDisplays;
 using Xle.Services.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class SingingCrystal : LobExhibit
     {
         public SingingCrystal()

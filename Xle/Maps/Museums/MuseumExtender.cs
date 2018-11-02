@@ -19,9 +19,10 @@ namespace Xle.Maps.Museums
         public XleOptions Options { get; set; }
 
         public Museum Map { get { return (Museum)base.TheMap; } }
-        public new MuseumRenderer MapRenderer { get { return (MuseumRenderer)base.MapRenderer; } }
 
-        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public MuseumRenderState RenderState { get; set; } = new MuseumRenderState();
+
+        public override IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.MuseumRenderer(this);
         }
@@ -32,7 +33,7 @@ namespace Xle.Maps.Museums
         }
         protected override void OnBeforePlayerMove(Direction dir)
         {
-            MapRenderer.DrawCloseup = false;
+            RenderState.DrawCloseup = false;
         }
         protected override void CommandTextForInvalidMovement(ref string command)
         {
@@ -137,9 +138,9 @@ namespace Xle.Maps.Museums
                 return false;
 
             Input.PromptToContinueOnWait = true;
-            MapRenderer.DrawCloseup = true;
-            MapRenderer.mCloseup = ex;
-            MapRenderer.mDrawStatic = ex.StaticBeforeCoin;
+            RenderState.DrawCloseup = true;
+            RenderState.Closeup = ex;
+            RenderState.DrawStatic = ex.StaticBeforeCoin;
 
             await TextArea.PrintLine(ex.IntroductionText);
             await TextArea.PrintLine();
@@ -158,11 +159,11 @@ namespace Xle.Maps.Museums
 
             await TextArea.PrintLineCentered(ex.InsertCoinText + " ", ex.TitleColor);
             await TextArea.PrintLine();
-            await Input.WaitForKey();
+            await GameControl.WaitForKey();
 
             if (ex.RequiresCoin == false)
             {
-                MapRenderer.mDrawStatic = false;
+                RenderState.DrawStatic = false;
                 await RunExhibit(ex);
             }
             else
@@ -192,7 +193,7 @@ namespace Xle.Maps.Museums
                     if (Options.DisableExhibitsRequireCoins == false)
                         ex.UseCoin();
 
-                    MapRenderer.mDrawStatic = false;
+                    RenderState.DrawStatic = false;
                     await RunExhibit(ex);
                 }
             }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AgateLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
@@ -11,6 +12,7 @@ using Xle.Services.XleSystem;
 
 namespace Xle.Maps.XleMapTypes.MuseumDisplays
 {
+    [InjectProperties]
     public abstract class Exhibit
     {
         protected Exhibit(string name)

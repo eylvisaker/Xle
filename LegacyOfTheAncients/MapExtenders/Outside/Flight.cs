@@ -1,8 +1,5 @@
 ﻿using AgateLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Xle.Ancients.MapExtenders.Outside
@@ -32,14 +29,14 @@ namespace Xle.Ancients.MapExtenders.Outside
             }
         }
 
-        Tuple<int, int, int>[] points = new Tuple<int, int, int>[]
-		{
-			new Tuple<int,int,int>(11,33,8),
-			new Tuple<int,int,int>(34,62,7),
-			new Tuple<int,int,int>(63,88,-4),
-			new Tuple<int,int,int>(34,58,22),
-			new Tuple<int,int,int>(63,108,12)
-		};
+        private Tuple<int, int, int>[] points = new Tuple<int, int, int>[]
+        {
+            new Tuple<int,int,int>(11,33,8),
+            new Tuple<int,int,int>(34,62,7),
+            new Tuple<int,int,int>(63,88,-4),
+            new Tuple<int,int,int>(34,58,22),
+            new Tuple<int,int,int>(63,108,12)
+        };
 
         private async Task PegasusFlightToIsland()
         {
@@ -52,7 +49,7 @@ namespace Xle.Ancients.MapExtenders.Outside
 
                 for (int x = range.Item1; x <= range.Item2; x++)
                 {
-              await      SetPosition(x, range.Item3);
+                    await SetPosition(x, range.Item3);
                 }
 
                 if (i == 0)
@@ -64,8 +61,8 @@ namespace Xle.Ancients.MapExtenders.Outside
 
                     for (int j = 0; j < count; j++)
                     {
-                        MapRenderer.ClearWaves();
-              await          SetPosition(range.Item2 + 1, range.Item3);
+                        RenderState.ClearWaves?.Invoke();
+                        await SetPosition(range.Item2 + 1, range.Item3);
                     }
                 }
             }

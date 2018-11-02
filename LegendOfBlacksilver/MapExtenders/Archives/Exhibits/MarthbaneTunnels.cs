@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.Services.MapLoad;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class MarthbaneTunnels : LobExhibit
     {
         public MarthbaneTunnels()

@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Archives
 {
+    [Transient("OwlArchives")]
     public class OwlArchives : LobArchives
     {
         Dictionary<int, Exhibit> mExhibits = new Dictionary<int, Exhibit>();

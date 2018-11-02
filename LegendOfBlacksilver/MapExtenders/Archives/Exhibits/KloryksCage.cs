@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
-
-using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class KloryksCage : LobExhibit
     {
         public KloryksCage()

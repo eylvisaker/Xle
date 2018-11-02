@@ -30,7 +30,7 @@ namespace Xle.Ancients.MapExtenders.Outside
         public ISoundMan SoundMan { get; set; }
         public IXleGameControl GameControl { get; set; }
         public ITextArea TextArea { get; set; }
-        public IOutsideEncounterRenderer MapRenderer { get; set; }
+        public OutsideRenderState RenderState { get; set; }
         public ITerrainMeasurement TerrainMeasurement { get; set; }
         public IQuickMenu QuickMenu { get; set; }
 
@@ -157,7 +157,7 @@ namespace Xle.Ancients.MapExtenders.Outside
         protected void SetMonsterImagePosition()
         {
             monstDir = (Direction)Random.Next((int)Direction.East, (int)Direction.South + 1);
-            MapRenderer.MonsterDrawDirection = monstDir;
+            RenderState.MonsterDrawDirection = monstDir;
         }
 
         private async Task MonsterAppearing()
@@ -178,7 +178,7 @@ namespace Xle.Ancients.MapExtenders.Outside
         {
             var monsterId = SelectRandomMonster(TerrainMeasurement.TerrainAtPlayer());
 
-            MapRenderer.DisplayMonsterID = monsterId;
+            RenderState.DisplayMonsterID = monsterId;
 
             if (monstDir == Direction.None)
             {
@@ -446,7 +446,7 @@ namespace Xle.Ancients.MapExtenders.Outside
                     food = 0;
 
                 EncounterState = 0;
-                MapRenderer.DisplayMonsterID = -1;
+                RenderState.DisplayMonsterID = -1;
             }
 
             return finished;
@@ -586,7 +586,7 @@ namespace Xle.Ancients.MapExtenders.Outside
         public void CancelEncounter()
         {
             EncounterState = EncounterState.NoEncounter;
-            MapRenderer.DisplayMonsterID = -1;
+            RenderState.DisplayMonsterID = -1;
         }
 
         public bool AttemptMovement(int dx, int dy)
@@ -617,7 +617,7 @@ namespace Xle.Ancients.MapExtenders.Outside
                 else
                 {
                     EncounterState = EncounterState.JustDisengaged;
-                    MapRenderer.DisplayMonsterID = -1;
+                    RenderState.DisplayMonsterID = -1;
                 }
             }
 

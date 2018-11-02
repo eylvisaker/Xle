@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib.Mathematics.Geometry;
+﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using Xle.Services.Rendering.Maps;
 
 namespace Xle.Blacksilver.MapExtenders.Archives
 {
+    [Transient("ArchiveRenderer")]
     public class ArchiveRenderer : MuseumRenderer
     {
         protected override Rectangle ExhibitCloseupRect

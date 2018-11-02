@@ -8,12 +8,33 @@ using Xle.Maps.XleMapTypes.MuseumDisplays;
 
 namespace Xle.Services.Rendering.Maps
 {
-    [Transient]
-    public class MuseumRenderer : Map3DRenderer
+    public interface IMuseumRenderer : IXleMapRenderer
     {
+
+    }
+
+    [Transient]
+    public class MuseumRenderer : Map3DRenderer, IMuseumRenderer
+    {
+        Exhibit mCloseup => RenderState.Closeup;
+        bool mDrawStatic => RenderState.DrawStatic;
+
+        public override bool AnimateExhibits => RenderState.AnimateExhibits;
+
+        public override bool DrawCloseup => RenderState.DrawCloseup;
+
         public ITextRenderer TextRenderer { get; set; }
+
         public MuseumExtender MuseumExtender { get { return (MuseumExtender)Extender; } }
 
+        public MuseumRenderState RenderState { get; set; }
+
+        protected override void OnExtenderSet()
+        {
+            base.OnExtenderSet();
+
+            RenderState = MuseumExtender.RenderState;
+        }
 
         protected override ExtraType GetExtraType(int val, int side)
         {
@@ -30,6 +51,7 @@ namespace Xle.Services.Rendering.Maps
 
             return ExtraType.None;
         }
+
         protected override bool ExtraScale
         {
             get
@@ -46,9 +68,6 @@ namespace Xle.Services.Rendering.Maps
         }
 
         #region --- Museum Exhibits ---
-
-        public Exhibit mCloseup;
-        public bool mDrawStatic;
 
         void UpdateExhibits(GameTime time)
         {

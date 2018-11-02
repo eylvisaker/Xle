@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AgateLib;
 using System.Threading.Tasks;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class VaseOfSouls : LobExhibit
     {
         public VaseOfSouls()

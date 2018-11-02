@@ -14,10 +14,11 @@ namespace Xle.Maps.Castles
             set { base.TheMap = value; }
         }
 
-        public override XleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
+        public override IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {
             return factory.CastleRenderer(this);
         }
+
         public override void SetColorScheme(ColorScheme scheme)
         {
             scheme.TextColor = XleColor.White;

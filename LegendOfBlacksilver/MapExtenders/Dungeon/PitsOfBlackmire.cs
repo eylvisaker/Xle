@@ -7,7 +7,7 @@ using Xle.Services.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon
 {
-    [Transient("PitsofBlackmire")]
+    [Transient("PitsOfBlackmire")]
     public class PitsOfBlackmire : LobDungeon
     {
         public override int GetTreasure(int dungeonLevel, int chestID)

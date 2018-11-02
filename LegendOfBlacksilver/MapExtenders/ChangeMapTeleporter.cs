@@ -1,13 +1,11 @@
-﻿using Xle.XleEventTypes.Extenders;
-using System;
-using System.Collections.Generic;
+﻿using AgateLib;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Blacksilver.MapExtenders
 {
+    [Transient("ChangeMapTeleporter")]
     public class ChangeMapTeleporter : ChangeMap
     {
         protected LobStory Story { get { return GameState.Story(); } }
@@ -32,7 +30,7 @@ namespace Xle.Blacksilver.MapExtenders
             watch.Start();
 
             await GameControl.WaitAsync(100);
-            
+
             while (watch.ElapsedMilliseconds < 1800)
             {
                 int index = ((int)watch.ElapsedMilliseconds % 80) / 50;

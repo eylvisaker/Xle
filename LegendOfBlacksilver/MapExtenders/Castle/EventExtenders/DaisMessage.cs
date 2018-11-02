@@ -14,7 +14,7 @@ namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
     {
         bool givenMessage = false;
 
-        public override void BeforeStepOn()
+        public override async Task BeforeStepOn()
         {
             if (givenMessage)
                 return;
@@ -24,12 +24,12 @@ namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
             givenMessage = true;
 
             TextArea.Clear(true);
-            TextArea.PrintLine();
-            TextArea.PrintLine("   You see the prince on a dais!");
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("   You see the prince on a dais!");
 
             SoundMan.PlaySound(LotaSound.VeryGood);
 
-            TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
+            await TextArea.FlashLinesWhile(() => SoundMan.IsPlaying(LotaSound.VeryGood),
                 XleColor.Yellow, XleColor.Cyan, 80, 1);
 
             TextArea.Clear();

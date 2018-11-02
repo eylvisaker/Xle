@@ -17,7 +17,7 @@ namespace Xle.XleEventTypes.Extenders
         void OnLoad();
         void OnUpdate(GameTime time);
 
-        void BeforeStepOn();
+        Task BeforeStepOn();
         Task<bool> TryToStepOn(int dx, int dy);
 
         Task<bool> StepOn();
@@ -164,9 +164,9 @@ namespace Xle.XleEventTypes.Extenders
             return Task.FromResult(false);
         }
 
-        public virtual void BeforeStepOn()
+        public virtual Task BeforeStepOn()
         {
-
+            return Task.CompletedTask;
         }
 
         public virtual void OnLoad()

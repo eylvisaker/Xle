@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AgateLib;
+using System;
 using System.Threading.Tasks;
 using Xle.Services.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {
+    [Transient]
     public class TheWealthy : LobExhibit
     {
         public TheWealthy()
