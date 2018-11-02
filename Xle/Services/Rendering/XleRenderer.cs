@@ -3,6 +3,7 @@ using AgateLib.Mathematics.Geometry;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Xle.Data;
 using Xle.Maps;
@@ -304,12 +305,14 @@ namespace Xle.Services.Rendering
 
             foreach (var raft in player.Rafts)
             {
-                if (raft.RaftImage > 0)
-                    raftAnim %= 4;
-                else
-                    raftAnim = 1 + raftAnim % 3;
+                int raftAnimImage;
 
-                int sourceX = raftAnim * 32;
+                if (raft.RaftImage > 0)
+                    raftAnimImage = raftAnim % 4;
+                else
+                    raftAnimImage = 1 + raftAnim % 3;
+
+                int sourceX = raftAnimImage * 32;
                 int sourceY = 256;
 
                 tx = sourceX;

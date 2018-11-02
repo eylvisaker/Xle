@@ -56,6 +56,7 @@ namespace Xle.Blacksilver.MapExtenders.Outside
 
         public void CancelEncounter()
         {
+            RenderState.DisplayMonsterID = -1;
         }
 
         public Task HitMonster(int damage)

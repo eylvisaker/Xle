@@ -42,7 +42,7 @@ namespace Xle.Services.MapLoad
                     returnedMap.Setup(x => x.ModifyEntryPoint(It.IsAny<MapEntryParams>())).Verifiable();
                     returnedMap.Setup(x => x.OnLoad()).Verifiable();
                     returnedMap.Setup(x => x.SetCommands(Services.CommandList.Object)).Verifiable();
-                    returnedMap.Setup(x => x.OnAfterEntry()).Verifiable();
+                    returnedMap.Setup(x => x.OnAfterEntry()).Returns(Task.CompletedTask).Verifiable();
 
                     if (mapGenerator != null)
                         mapGenerator(returnedMap);

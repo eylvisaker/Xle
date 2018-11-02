@@ -64,7 +64,7 @@ namespace Xle
             Location = new Point(x, y);
             MapNumber = map;
         }
-        private RaftData()
+        public RaftData()
         { }
 
         public int X

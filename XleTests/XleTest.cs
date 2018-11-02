@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xle;
+﻿using Moq;
 using Xle.Maps;
+using Xle.Services.Commands;
 using Xle.XleEventTypes;
 using Xle.XleEventTypes.Extenders;
-
-using Xunit;
-
-using Moq;
-using Xle.Services.Commands;
 
 namespace Xle
 {

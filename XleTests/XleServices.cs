@@ -58,6 +58,9 @@ namespace Xle
             GameControl.SetupAllProperties();
             GameControl.Setup(x => x.WaitForKey(It.IsAny<bool>())).ReturnsAsync(() =>
             {
+                if (KeysToSend.Count == 0)
+                    return Keys.Space;
+
                 var result = KeysToSend.First();
                 KeysToSend.RemoveAt(0);
                 return result;

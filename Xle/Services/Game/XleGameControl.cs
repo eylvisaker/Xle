@@ -44,7 +44,7 @@ namespace Xle.Services.Game
 
             do
             {
-                await gameControl.WaitForKey(showPrompt);
+                result = await gameControl.WaitForKey(showPrompt);
             } while (!keys.Contains(result));
 
             return result;
