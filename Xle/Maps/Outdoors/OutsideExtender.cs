@@ -16,19 +16,24 @@ namespace Xle.Maps.Outdoors
 
     public class OutsideExtender : Map2DExtender, IOutsideExtender
     {
+        private IOutsideEncounters _outsideEncounters;
+
         private Direction monstDir { get; set; }
 
         public XleSystemState SystemState { get; set; }
         public ITerrainMeasurement TerrainMeasurement { get; set; }
-        public IOutsideEncounters OutsideEncounters { get; set; }
+        public IOutsideEncounters OutsideEncounters
+        {
+            get => _outsideEncounters;
+            set
+            {
+                _outsideEncounters = value;
+                _outsideEncounters.RenderState = RenderState;
+            }
+        }
 
         public new Outside TheMap { get { return (Outside)base.TheMap; } }
         public OutsideRenderState RenderState { get; set; } = new OutsideRenderState();
-
-        protected override void OnMapRendererSet()
-        {
-            OutsideEncounters.RenderState = RenderState;
-        }
 
         public override IXleMapRenderer CreateMapRenderer(IMapRendererFactory factory)
         {

@@ -137,7 +137,6 @@ namespace Xle.Maps.Museums
             if (ex == null)
                 return false;
 
-            Input.PromptToContinueOnWait = true;
             RenderState.DrawCloseup = true;
             RenderState.Closeup = ex;
             RenderState.DrawStatic = ex.StaticBeforeCoin;
@@ -146,13 +145,11 @@ namespace Xle.Maps.Museums
             await TextArea.PrintLine();
             await TextArea.PrintLineCentered(ex.LongName + " ", ex.TitleColor);
 
-            Input.PromptToContinueOnWait = true;
-
             if (ex.IsClosed)
             {
                 await TextArea.PrintLineCentered(" - Exhibit closed - ", ex.TitleColor);
                 await TextArea.PrintLine();
-                await Input.WaitForKey();
+                await GameControl.WaitForKey();
 
                 return true;
             }

@@ -8,12 +8,12 @@ Param(
   [string]$version
 )
 
-$solutionFile = "Xle.sln"
+. .\Project-Vars.ps1
 
 $ErrorActionPreference = "Stop"
 
 $buildArgs = @()
-$buildArgs += $solutionFile
+$buildArgs += $SolutionFile
 $buildArgs += "/T:Build"
 $buildArgs += "/P:Configuration=$config"
 
@@ -42,21 +42,23 @@ if (![string]::IsNullOrEmpty($version)) {
 
 function Initialize
 {
-	$cd = $MyInvocation.MyCommand.Path
+	  $cd = $MyInvocation.MyCommand.Path
 	
-	$env:Path = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin;$($env:PATH)"
+	  $env:Path = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin;$($env:PATH)"
 }
 
 function RestoreDependencies
 {
-	.\.nuget\nuget.exe restore $solutionFile
-	if ($LastExitCode -ne 0) { exit $LastExitCode }
+    .\.nuget\nuget.exe restore $SolutionFile
+    if ($LastExitCode -ne 0) { exit $LastExitCode }
 }
 
 function Build
 {
-	& msbuild.exe $buildArgs
-	if ($LastExitCode -ne 0) { exit $LastExitCode }
+    echo "Building Solution..."
+    echo "msbuild.exe $buildArgs"
+    & msbuild.exe $buildArgs
+    if ($LastExitCode -ne 0) { exit $LastExitCode }
 }
 
 #----------------------------------------- End functions -------------------------------------------
@@ -65,3 +67,4 @@ function Build
 Initialize
 RestoreDependencies
 Build
+

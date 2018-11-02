@@ -25,6 +25,7 @@ namespace Xle
         public XleTest()
         {
             Player = new Player();
+
             GameState = new GameState { Player = Player };
 
             Services = new XleServices();

@@ -22,18 +22,15 @@ namespace Xle.Services.Menus
     {
         private IXleScreen screen;
         private ITextArea TextArea;
-        private IXleInput input;
         private IXleGameControl gameControl;
 
         public QuickMenuRunner(
             IXleScreen screen,
             ITextArea textArea,
-            IXleInput input,
             IXleGameControl gameControl)
         {
             this.screen = screen;
             this.TextArea = textArea;
-            this.input = input;
             this.gameControl = gameControl;
         }
 
@@ -106,10 +103,7 @@ namespace Xle.Services.Menus
 
             do
             {
-                // Set this on each iteration because it gets reset after a key is pressed.
-                input.PromptToContinueOnWait = false;
-
-                key = await input.WaitForKey();
+                key = await gameControl.WaitForKey(showPrompt: false);
 
                 if (key == Keys.Left)
                 {
@@ -151,8 +145,6 @@ namespace Xle.Services.Menus
             await gameControl.WaitAsync(100);
 
             await TextArea.PrintLine();
-
-            input.PromptToContinueOnWait = true;
 
             return result;
         }

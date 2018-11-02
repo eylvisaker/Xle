@@ -30,19 +30,13 @@ namespace Xle
 
             Input = new Mock<IXleInput>();
             Input.SetupAllProperties();
-            Input.Setup(x => x.WaitForKey(It.IsAny<Keys[]>())).ReturnsAsync(() =>
-            {
-                var result = KeysToSend.First();
-                KeysToSend.RemoveAt(0);
-                return result;
-            });
 
             TextArea = new Mock<ITextArea>();
             TextArea.SetupAllProperties();
-            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text));
-            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color?>())).Callback((string text, Color? color) => AppendTextAreaText(text));
-            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text + Environment.NewLine));
-            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color>())).Callback((string text, Color color) => AppendTextAreaText(text + Environment.NewLine));
+            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text)).Returns(Task.CompletedTask);
+            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color?>())).Callback((string text, Color? color) => AppendTextAreaText(text)).Returns(Task.CompletedTask);
+            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text + Environment.NewLine)).Returns(Task.CompletedTask);
+            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color>())).Callback((string text, Color color) => AppendTextAreaText(text + Environment.NewLine)).Returns(Task.CompletedTask);
 
             SubMenu = new Mock<IXleSubMenu>();
             SubMenu.SetupAllProperties();
@@ -59,8 +53,15 @@ namespace Xle
 
             NumberPicker = new Mock<INumberPicker>();
             NumberPicker.SetupAllProperties();
+
             GameControl = new Mock<IXleGameControl>();
             GameControl.SetupAllProperties();
+            GameControl.Setup(x => x.WaitForKey(It.IsAny<bool>())).ReturnsAsync(() =>
+            {
+                var result = KeysToSend.First();
+                KeysToSend.RemoveAt(0);
+                return result;
+            });
 
             SoundMan = new Mock<ISoundMan>();
             SoundMan.SetupAllProperties();

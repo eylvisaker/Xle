@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes;
-using Xle.Services;
 using Xle.Services.Commands.Implementation;
+using Xle.Services.Game;
 using Xle.Services.XleSystem;
 
 namespace Xle.Maps.Towns
@@ -13,8 +13,6 @@ namespace Xle.Maps.Towns
     [Transient("FightAgainstGuard")]
     public class FightAgainstGuard : Fight
     {
-        public IXleInput Input { get; set; }
-
         private Town TheMap { get { return (Town)GameState.Map; } }
 
         private TownExtender Town { get { return (TownExtender)GameState.MapExtender; } }
@@ -39,8 +37,7 @@ namespace Xle.Maps.Towns
 
             while (fightDir == Direction.None)
             {
-                Input.PromptToContinueOnWait = false;                     
-                Keys key = await Input.WaitForKey(Keys.Up, Keys.Down, Keys.Left, Keys.Right);
+                Keys key = await GameControl.WaitForKey(false, Keys.Up, Keys.Down, Keys.Left, Keys.Right);
 
                 switch (key)
                 {
@@ -56,8 +53,6 @@ namespace Xle.Maps.Towns
 
             await TextArea.PrintLine(fightDir.ToString());
             await FightInDirection(fightDir);
-
-            Input.PromptToContinueOnWait = true;
         }
 
         protected virtual async Task FightInDirection(Direction fightDir)

@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Input;
 using Moq;
 using System.Linq;
 using Xunit;
+using System.Threading.Tasks;
+using Xle.Services.Game;
 
 namespace Xle.Commands
 {
@@ -15,7 +17,7 @@ namespace Xle.Commands
         private Disembark disembark = new Disembark();
         private Mock<IXleScreen> screen = new Mock<IXleScreen>();
         private Mock<ISoundMan> soundMan = new Mock<ISoundMan>();
-        private Mock<IXleInput> input = new Mock<IXleInput>();
+        private Mock<IXleGameControl> gameControl = new Mock<IXleGameControl>();
         private Mock<IOutsideExtender> outsideExtender = new Mock<IOutsideExtender>();
 
         public DisembarkTest()
@@ -24,15 +26,15 @@ namespace Xle.Commands
 
             disembark.Screen = screen.Object;
             disembark.SoundMan = soundMan.Object;
-            disembark.Input = input.Object;
+            disembark.GameControl = gameControl.Object;
 
             GameState.MapExtender = outsideExtender.Object;
         }
 
         private void SetKeys(params Keys[] keys)
         {
-            var sequence = input.SetupSequence(
-                    x => x.WaitForKey(It.IsAny<Keys[]>()));
+            var sequence = gameControl.SetupSequence(
+                    x => x.WaitForKey(It.IsAny<bool>()));
 
             foreach (var key in keys)
             {
@@ -41,7 +43,7 @@ namespace Xle.Commands
         }
 
         [Fact]
-        public void Disembark()
+        public async Task Disembark()
         {
             SetKeys(Keys.Right);
 
@@ -50,7 +52,7 @@ namespace Xle.Commands
 
             Player.BoardedRaft.Should().NotBeNull("Player is not on a raft.");
 
-            disembark.Execute();
+            await disembark.Execute();
 
             Player.BoardedRaft.Should().BeNull("Player did not disembark.");
         }

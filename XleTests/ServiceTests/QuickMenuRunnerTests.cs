@@ -2,11 +2,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Moq;
-using System;
+using System.Threading.Tasks;
 using Xle.Services.Game;
 using Xle.Services.Menus;
 using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
 using Xunit;
 
 namespace Xle.ServiceTests
@@ -16,129 +15,126 @@ namespace Xle.ServiceTests
         private QuickMenuRunner qmr;
         private Mock<IXleScreen> screen;
         private Mock<ITextArea> textArea;
-        private Mock<IXleInput> input;
         private Mock<IXleGameControl> gameControl;
 
         public QuickMenuRunnerTests()
         {
             screen = new Mock<IXleScreen>();
             textArea = new Mock<ITextArea>();
-            input = new Mock<IXleInput>();
             gameControl = new Mock<IXleGameControl>();
 
-            qmr = new QuickMenuRunner(screen.Object, textArea.Object, input.Object, gameControl.Object);
+            textArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color[]>())).Returns(Task.CompletedTask);
+            textArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color>())).Returns(Task.CompletedTask);
+            textArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color[]>())).Returns(Task.CompletedTask);
+            textArea.Setup(x => x.PrintLineCentered(It.IsAny<string>(), It.IsAny<Color>())).Returns(Task.CompletedTask);
+            textArea.Setup(x => x.PrintLineSlow(It.IsAny<string>(), It.IsAny<Color[]>())).Returns(Task.CompletedTask);
+            textArea.Setup(x => x.PrintSlow(It.IsAny<string>(), It.IsAny<Color[]>())).Returns(Task.CompletedTask);
 
+            qmr = new QuickMenuRunner(screen.Object, textArea.Object, gameControl.Object);
+        }
+
+        private void SetupInputSequence(params Keys[] keys)
+        {
+            var sequence = gameControl.SetupSequence(x => x.WaitForKey(It.IsAny<bool>()));
+
+            foreach (var key in keys)
+            {
+                sequence.ReturnsAsync(key);
+            }
         }
 
         [Fact]
-        public void QuickMenuYesNoReturnsYes()
+        public async Task QuickMenuYesNoReturnsYes()
         {
-            input.Setup(x => x.WaitForKey()).ReturnsAsync(Keys.Enter);
+            SetupInputSequence(Keys.Enter);
 
-            var result = qmr.QuickMenuYesNo();
+            var result = await qmr.QuickMenuYesNo();
 
             result.Should().Be(0);
         }
 
         [Fact]
-        public void QuickMenuYesNoDefaultNoReturnsNo()
+        public async Task QuickMenuYesNoDefaultNoReturnsNo()
         {
-            input.Setup(x => x.WaitForKey()).ReturnsAsync(Keys.Enter);
+            SetupInputSequence(Keys.Enter);
 
-            var result = qmr.QuickMenuYesNo(true);
+            var result = await qmr.QuickMenuYesNo(true);
 
             result.Should().Be(1);
         }
 
         [Fact]
-        public void QuickMenuYesNoDefaultNoMoveLeftReturnsYes()
+        public async Task QuickMenuYesNoDefaultNoMoveLeftReturnsYes()
         {
-            input.SetupSequence(x => x.WaitForKey())
-                .ReturnsAsync(Keys.Left)
-                .ReturnsAsync(Keys.Enter);
+            SetupInputSequence(Keys.Left, Keys.Enter);
 
-            var result = qmr.QuickMenuYesNo(true);
+            var result = await qmr.QuickMenuYesNo(true);
 
             result.Should().Be(0);
         }
 
         [Fact]
-        public void QuickMenuSelectThirdOption()
+        public async Task QuickMenuSelectThirdOption()
         {
-            input.SetupSequence(x => x.WaitForKey())
-                .ReturnsAsync(Keys.Right)
-                .ReturnsAsync(Keys.Right)
-                .ReturnsAsync(Keys.Enter);
+            SetupInputSequence(Keys.Right, Keys.Right, Keys.Enter);
 
-            var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
+            var result = await qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
             result.Should().Be(2);
         }
 
         [Fact]
-        public void QuickMenuSelectByKey()
+        public async Task QuickMenuSelectByKey()
         {
-            input.SetupSequence(x => x.WaitForKey())
-                .ReturnsAsync(Keys.M);
+            SetupInputSequence(Keys.M);
 
-            var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
+            var result = await qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
             result.Should().Be(2);
         }
 
         [Fact]
-        public void QuickMenuCantGoTooFarLeft()
+        public async Task QuickMenuCantGoTooFarLeft()
         {
-            input.SetupSequence(x => x.WaitForKey())
-                .ReturnsAsync(Keys.Left)
-                .ReturnsAsync(Keys.Left)
-                .ReturnsAsync(Keys.Left)
-                .ReturnsAsync(Keys.Enter);
+            SetupInputSequence(Keys.Left, Keys.Left, Keys.Left, Keys.Enter);
 
-            var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
+            var result = await qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
             result.Should().Be(0);
         }
 
         [Fact]
-        public void QuickMenuCantGoTooFarRight()
+        public async Task QuickMenuCantGoTooFarRight()
         {
-            input.SetupSequence(x => x.WaitForKey())
-                .ReturnsAsync(Keys.Right)
-                .ReturnsAsync(Keys.Right)
-                .ReturnsAsync(Keys.Right)
-                .ReturnsAsync(Keys.Right)
-                .ReturnsAsync(Keys.Right)
-                .ReturnsAsync(Keys.Enter);
+            SetupInputSequence(Keys.Right, Keys.Right, Keys.Right, Keys.Right, Keys.Right, Keys.Right, Keys.Enter);
 
-            var result = qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
+            var result = await qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
             result.Should().Be(3);
         }
 
         [Fact]
-        public void QuickMenuVerifyMenuLayout()
+        public async Task QuickMenuVerifyMenuLayout()
         {
-            input.SetupSequence(x => x.WaitForKey())
-                .ReturnsAsync(Keys.Enter);
+            SetupInputSequence(Keys.Enter);
 
             string expected = "Choose: Battle  Charge  Magic  Other";
             string actual = null;
             bool found = false;
 
             textArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color>()))
-                .Callback<string, Color>((s, c) =>
+                .Returns<string, Color>((s, c) =>
                 {
                     actual = actual ?? s;
                     if (s.TrimEnd() == expected)
                         found = true;
+                    return Task.CompletedTask;
                 });
 
-            qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
+            await qmr.QuickMenu(new MenuItemList("Battle", "Charge", "Magic", "Other"), 2);
 
             found.Should().BeTrue(
                 $"QuickMenu did not produce the correct choice string. It should be '{expected}' but was '{actual}'.");
-
         }
     }
 }

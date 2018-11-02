@@ -1,14 +1,11 @@
 ﻿
 using AgateLib;
-using AgateLib.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Threading.Tasks;
 using Xle.Services.Game;
 using Xle.Services.Menus.Implementation;
 using Xle.Services.Rendering;
-using Xle.Services.XleSystem;
 
 namespace Xle.Services.Menus
 {
@@ -21,25 +18,16 @@ namespace Xle.Services.Menus
     public class XleSubMenu : IXleSubMenu
     {
         private readonly IXleGameControl gameControl;
+        private readonly IMenuRenderer menuRenderer;
         private readonly IXleScreenCapture screenCapture;
         private SubMenu menu;
-        private Keys? key;
 
         public XleSubMenu(
             IXleGameControl gameControl,
-            IXleScreenCapture screenCapture,
             IMenuRenderer menuRenderer)
         {
             this.gameControl = gameControl;
-            this.screenCapture = screenCapture;
-
-            screenCapture.KeyPress += OnKeyPress;
-            screenCapture.Draw += spriteBatch => menuRenderer.DrawMenu(spriteBatch, menu);
-        }
-
-        private void OnKeyPress(KeyPressEventArgs args)
-        {
-            key = args.Key;
+            this.menuRenderer = menuRenderer;
         }
 
         /// <summary>
@@ -66,6 +54,8 @@ namespace Xle.Services.Menus
         {
             this.menu = menu;
 
+            menuRenderer.Menu = menu;
+
             for (int i = 0; i < menu.theList.Count; i++)
             {
                 if (menu.theList[i].Length + 6 > menu.width)
@@ -81,54 +71,56 @@ namespace Xle.Services.Menus
                 menu.width = displayTitle.Length + 2;
             }
 
-            screenCapture.Begin();
-
-            do
+            try
             {
-                key = null;
+                gameControl.PushRenderer(menuRenderer);
 
-                while (key == null)
-                {
-                    await Task.Yield();
-                }
+                Keys key;
 
-                if (key == Keys.Up)
+                do
                 {
-                    menu.value--;
-                    if (menu.value < 0)
-                        menu.value = 0;
-                }
-                if (key == Keys.Down)
-                {
-                    menu.value++;
-                    if (menu.value >= menu.theList.Count)
-                        menu.value = menu.theList.Count - 1;
-                }
-                else if (key >= Keys.D0)
-                {
-                    int v;
+                    key = await gameControl.WaitForKey(showPrompt: false);
 
-                    if (key >= Keys.A)
+                    if (key == Keys.Up)
                     {
-                        v = (int)(key) - (int)(Keys.A);
-                        v += 10;
+                        menu.value--;
+                        if (menu.value < 0)
+                            menu.value = 0;
                     }
-                    else
+                    if (key == Keys.Down)
                     {
-                        v = key.Value - Keys.D0;
+                        menu.value++;
+                        if (menu.value >= menu.theList.Count)
+                            menu.value = menu.theList.Count - 1;
                     }
-
-                    if (v < menu.theList.Count)
+                    else if (key >= Keys.D0)
                     {
-                        menu.value = v;
-                        key = Keys.Enter;
+                        int v;
+
+                        if (key >= Keys.A)
+                        {
+                            v = (int)(key) - (int)(Keys.A);
+                            v += 10;
+                        }
+                        else
+                        {
+                            v = key - Keys.D0;
+                        }
+
+                        if (v < menu.theList.Count)
+                        {
+                            menu.value = v;
+                            key = Keys.Enter;
+                        }
                     }
-                }
-            } while (key != Keys.Enter);
+                } while (key != Keys.Enter);
 
-            await gameControl.WaitAsync(300);
-
-            screenCapture.End();
+                await gameControl.WaitAsync(300);
+            }
+            finally
+            {
+                gameControl.PopRenderer(menuRenderer);
+            }
 
             return menu.value;
         }

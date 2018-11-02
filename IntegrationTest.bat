@@ -1,2 +1,2 @@
 
-REM no integration tests for this project.
+@ECHO "No integration tests for this project."

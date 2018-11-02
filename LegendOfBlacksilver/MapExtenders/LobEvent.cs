@@ -12,7 +12,6 @@ namespace Xle.Blacksilver.MapExtenders
 {
     public class LobEvent : EventExtender
     {
-        public IXleInput Input { get; set; }
         public IQuickMenu QuickMenu { get; set; }
 
         protected LobStory Story { get { return GameState.Story(); } }

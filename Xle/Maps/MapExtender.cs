@@ -49,7 +49,6 @@ namespace Xle.Maps
     {
         private XleMap mTheMap;
         private List<IEventExtender> mEvents = new List<IEventExtender>();
-        private IXleMapRenderer mapRenderer;
 
         public IXleMapRenderer TheMapRenderer { get; set; }
 
@@ -85,10 +84,6 @@ namespace Xle.Maps
 
                 OnSetAngry(value);
             }
-        }
-
-        protected virtual void OnMapRendererSet()
-        {
         }
 
         protected virtual void OnSetAngry(bool value)

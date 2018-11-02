@@ -30,7 +30,6 @@ namespace Xle.Services.MapLoad
                 Services.CommandList.Object,
                 Services.MapLoader.Object,
                 museumCoinSale.Object);
-
         }
 
         private void SetupMapLoader<TMapData>(Action<Mock<IMapExtender>> mapGenerator = null) where TMapData : XleMap, new()

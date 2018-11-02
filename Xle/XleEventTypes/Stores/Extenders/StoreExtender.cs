@@ -66,9 +66,9 @@ namespace Xle.XleEventTypes.Stores.Extenders
             await GameControl.WaitAsync(howLong);
         }
 
-        protected async Task<Keys> WaitForKey(params Keys[] keys)
+        protected async Task<Keys> WaitForKey()
         {
-            return await GameControl.WaitForKey(keys);
+            return await GameControl.WaitForKey();
         }
 
 

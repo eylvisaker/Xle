@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
+using Xle.Services.Game;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 
@@ -16,16 +17,16 @@ namespace Xle.Services.Menus
     public class NumberPicker : INumberPicker
     {
         private IXleScreen screen;
-        private IXleInput input;
+        private IXleGameControl gameControl;
         private ITextArea TextArea;
 
         public NumberPicker(
             IXleScreen screen,
-            IXleInput input,
+            IXleGameControl gameControl,
             ITextArea textArea)
         {
             this.screen = screen;
-            this.input = input;
+            this.gameControl = gameControl;
             this.TextArea = textArea;
         }
 
@@ -51,12 +52,9 @@ namespace Xle.Services.Menus
 
             Keys key;
 
-
             do
             {
-                input.PromptToContinueOnWait = false;
-
-                key = await input.WaitForKey();
+                key = await gameControl.WaitForKey(showPrompt: false);
 
                 if (method == 0)
                 {
@@ -134,7 +132,6 @@ namespace Xle.Services.Menus
 
             } while (key != Keys.Enter);
 
-            input.PromptToContinueOnWait = true;
             await TextArea.PrintLine();
 
             return amount;

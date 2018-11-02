@@ -19,7 +19,7 @@ namespace Xle.Services.Game
 
         Task WaitAsync(int howLong, bool keyBreak = false, IRenderer redraw = null);
 
-        Task<Keys> WaitForKey(params Keys[] keys);
+        Task<Keys> WaitForKey(bool showPrompt = true);
 
         Task FlashHPWhileSound(Color color1, Color? color2 = null);
 
@@ -33,11 +33,23 @@ namespace Xle.Services.Game
 
 
         Task PlayMagicSound(LotaSound sound, LotaSound endSound, int distance);
-    
+
     }
 
-    public static class ObsoleteExtensions
+    public static class GameControlExtensions
     {
+        public static async Task<Keys> WaitForKey(this IXleGameControl gameControl, bool showPrompt, params Keys[] keys)
+        {
+            Keys result = Keys.None;
+
+            do
+            {
+                await gameControl.WaitForKey(showPrompt);
+            } while (!keys.Contains(result));
+
+            return result;
+        }
+
         [Obsolete("Use PlaySoundWait instead")]
         public static Task PlaySoundSync(this IXleGameControl gameControl, LotaSound sound) => gameControl.PlaySoundWait(sound);
 
@@ -110,20 +122,17 @@ namespace Xle.Services.Game
             await waiter.WaitAsync(howLong, keyBreak, redraw);
         }
 
-        public async Task<Keys> WaitForKey(params Keys[] keys)
+        public async Task<Keys> WaitForKey(bool showPrompt = true)
         {
             while (true)
             {
-                screen.PromptToContinue = true;
+                screen.PromptToContinue = showPrompt;
                 await waiter.WaitAsync(10000, true);
 
                 if (waiter.PressedKey != null)
                 {
-                    if (keys.Length == 0 || keys.Contains(waiter.PressedKey.Value))
-                    {
-                        screen.PromptToContinue = false;
-                        return waiter.PressedKey.Value;
-                    }
+                    screen.PromptToContinue = false;
+                    return waiter.PressedKey.Value;
                 }
             }
         }

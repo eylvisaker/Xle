@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System.Threading.Tasks;
 using Xle.Ancients.MapExtenders.Castle.Events;
 using Xle.Maps.XleMapTypes;
 using Xunit;
@@ -20,23 +21,23 @@ namespace Xle.Ancients
         }
 
         [Fact]
-        public void CasandraGiveGold()
+        public async Task CasandraGiveGold()
         {
             Services.QuickMenuCallback = menu => 0;
 
             Player.Gold = 20;
 
-            casandra.Speak();
+            await casandra.Speak();
 
             Player.Gold.Should().Be(5020);
         }
 
         [Fact]
-        public void CasandraGiveCharm()
+        public async Task CasandraGiveCharm()
         {
             Services.QuickMenuCallback = menu => 1;
 
-            casandra.Speak();
+            await casandra.Speak();
 
             Player.Attribute[Attributes.charm].Should().Be(30);
         }

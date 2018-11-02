@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.Xna.Framework.Input;
 using Xunit;
 using Xle.Services.Menus;
+using System.Threading.Tasks;
 
 namespace Xle.ServiceTests
 {
@@ -12,7 +13,7 @@ namespace Xle.ServiceTests
 
         public NumberPickerTests()
         {
-            picker = new NumberPicker(Services.Screen.Object, Services.Input.Object, Services.TextArea.Object);
+            picker = new NumberPicker(Services.Screen.Object, Services.GameControl.Object, Services.TextArea.Object);
         }
 
         private void SetKeys(params Keys[] keys)
@@ -21,61 +22,61 @@ namespace Xle.ServiceTests
         }
 
         [Fact]
-        public void ChooseByKeyboard()
+        public async Task ChooseByKeyboard()
         {
             SetKeys(Keys.D2, Keys.D3, Keys.D4, Keys.Enter);
 
-            var result = picker.ChooseNumber(2000);
+            var result = await picker.ChooseNumber(2000);
 
             result.Should().Be(234);
         }
 
         [Fact]
-        public void ChooseByKeyboardHitMax()
+        public async Task ChooseByKeyboardHitMax()
         {
             SetKeys(Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.Enter);
 
-            var result = picker.ChooseNumber(2000);
+            var result = await picker.ChooseNumber(2000);
 
             result.Should().Be(2000);
         }
 
         [Fact]
-        public void ChooseByKeyboardHitBackspace()
+        public async Task ChooseByKeyboardHitBackspace()
         {
             SetKeys(Keys.D2, Keys.D3, Keys.Back, Keys.D5, Keys.Enter);
 
-            var result = picker.ChooseNumber(2000);
+            var result = await picker.ChooseNumber(2000);
 
             result.Should().Be(25);
         }
 
         [Fact]
-        public void ChooseByJoystick()
+        public async Task ChooseByJoystick()
         {
             SetKeys(Keys.Up, Keys.Right, Keys.Up, Keys.Left, Keys.Left, Keys.Enter);
 
-            var result = picker.ChooseNumber(100);
+            var result = await picker.ChooseNumber(100);
 
             result.Should().Be(39);
         }
 
         [Fact]
-        public void ChooseByJoystickHitMax()
+        public async Task ChooseByJoystickHitMax()
         {
             SetKeys(Keys.Up, Keys.Up, Keys.Up, Keys.Enter);
 
-            var result = picker.ChooseNumber(50);
+            var result = await picker.ChooseNumber(50);
 
             result.Should().Be(50);
         }
 
         [Fact]
-        public void ChooseByJoystickHitMin()
+        public async Task ChooseByJoystickHitMin()
         {
             SetKeys(Keys.Right, Keys.Right, Keys.Down, Keys.Enter);
 
-            var result = picker.ChooseNumber(50);
+            var result = await picker.ChooseNumber(50);
 
             result.Should().Be(0);
         }

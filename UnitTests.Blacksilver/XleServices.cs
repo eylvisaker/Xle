@@ -30,19 +30,13 @@ namespace Xle
 
             Input = new Mock<IXleInput>();
             Input.SetupAllProperties();
-            Input.Setup(x => x.WaitForKey(It.IsAny<Keys[]>())).ReturnsAsync(() =>
-            {
-                var result = KeysToSend.First();
-                KeysToSend.RemoveAt(0);
-                return result;
-            });
 
             TextArea = new Mock<ITextArea>();
             TextArea.SetupAllProperties();
-            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text));
-            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color?>())).Callback((string text, Color? color) => AppendTextAreaText(text));
-            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text + Environment.NewLine));
-            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color>())).Callback((string text, Color color) => AppendTextAreaText(text + Environment.NewLine));
+            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text)).Returns(Task.CompletedTask);
+            TextArea.Setup(x => x.Print(It.IsAny<string>(), It.IsAny<Color?>())).Callback((string text, Color? color) => AppendTextAreaText(text)).Returns(Task.CompletedTask);
+            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color[]>())).Callback((string text, Color[] colors) => AppendTextAreaText(text + Environment.NewLine)).Returns(Task.CompletedTask);
+            TextArea.Setup(x => x.PrintLine(It.IsAny<string>(), It.IsAny<Color>())).Callback((string text, Color color) => AppendTextAreaText(text + Environment.NewLine)).Returns(Task.CompletedTask);
 
             SubMenu = new Mock<IXleSubMenu>();
             SubMenu.SetupAllProperties();

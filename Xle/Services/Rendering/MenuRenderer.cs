@@ -4,12 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Xle.Services.Rendering
 {
-    public interface IMenuRenderer
+    public interface IMenuRenderer : IRenderer
     {
         void DrawMenu(SpriteBatch spriteBatch, SubMenu menu);
+
+        SubMenu Menu { get; set; }
     }
 
-    [Singleton]
+    [Transient]
     public class MenuRenderer : IMenuRenderer
     {
         private GameState gameState;
@@ -27,6 +29,10 @@ namespace Xle.Services.Rendering
             this.textRenderer = textRenderer;
             this.rects = rects;
         }
+
+        public ColorScheme ColorScheme => gameState.Map.ColorScheme;
+
+        public SubMenu Menu { get; set; }
 
         /// <summary>
         /// Draws the submenu created by SubMenu.
@@ -90,6 +96,16 @@ namespace Xle.Services.Rendering
                     textRenderer.WriteText(spriteBatch, xx1, yy, "`");
                 }
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            renderer.Draw(spriteBatch);
+            DrawMenu(spriteBatch, Menu);
+        }
+
+        public void Update(GameTime time)
+        {
         }
     }
 }

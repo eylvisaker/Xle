@@ -5,6 +5,7 @@ using Xle.Maps.Dungeons.Commands;
 using Microsoft.Xna.Framework;
 using Moq;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace Xle.Commands
 {
@@ -31,17 +32,17 @@ namespace Xle.Commands
         }
 
         [Fact]
-        public void ExamineNothing()
+        public async Task ExamineNothing()
         {
             formatter.Setup(x => x.PrintNothingUnusualInSight()).Verifiable();
 
-            command.Execute();
+            await command.Execute();
 
             formatter.Verify(x => x.PrintNothingUnusualInSight(), Times.Once);
         }
 
         [Fact]
-        public void ExamineDistantTrap()
+        public async Task ExamineDistantTrap()
         {
             Services.DungeonAdapter.Setup(x => x.TileAt(It.IsAny<int>(), It.IsAny<int>(), -1))
                 .Returns((int x, int y, int level) =>
@@ -53,26 +54,26 @@ namespace Xle.Commands
             formatter.Setup(x => x.DescribeTile(DungeonTile.TripWire, 2))
                 .Verifiable();
 
-            command.Execute();
+            await command.Execute();
 
             formatter.Verify(x => x.DescribeTile(DungeonTile.TripWire, 2), Times.Once);
         }
 
         [Fact]
-        public void RevealTrap()
+        public async Task RevealTrap()
         {
             Services.DungeonAdapter.Setup(x => x.RevealTrapAt(new Point(4, 2)))
                 .Returns(true);
 
             formatter.Setup(x => x.PrintHiddenObjectsDetected()).Verifiable();
 
-            command.Execute();
+            await command.Execute();
 
             formatter.Verify(x => x.PrintHiddenObjectsDetected(), Times.Once);
         }
 
         [Fact]
-        public void DontRevealTrapThruWall()
+        public async Task DontRevealTrapThruWall()
         {
             Services.DungeonAdapter.Setup(x => x.RevealTrapAt(new Point(4, 2)))
          .Returns(true);
@@ -80,13 +81,13 @@ namespace Xle.Commands
 
             formatter.Setup(x => x.PrintHiddenObjectsDetected()).Verifiable();
 
-            command.Execute();
+            await command.Execute();
 
             formatter.Verify(x => x.PrintHiddenObjectsDetected(), Times.Never);
         }
 
         [Fact]
-        public void ExamineMonster()
+        public async Task ExamineMonster()
         {
             var monster = new DungeonMonster(new Xle.Data.DungeonMonsterData());
             monster.Data.Name = "Slime Wart";
@@ -94,7 +95,7 @@ namespace Xle.Commands
             Services.DungeonAdapter.Setup(x => x.MonsterAt(new Point(4, 2))).Returns(monster);
             formatter.Setup(x => x.DescribeMonster(monster)).Verifiable();
 
-            command.Execute();
+            await command.Execute();
 
             formatter.Verify(x => x.DescribeMonster(monster), Times.Once);
         }

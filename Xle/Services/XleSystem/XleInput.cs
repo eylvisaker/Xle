@@ -13,11 +13,6 @@ namespace Xle.Services.XleSystem
     {
         bool AcceptKey { get; set; }
 
-        [Obsolete("Use GameControl.WaitForKey instead")]
-        Task<Keys> WaitForKey(params Keys[] keys);
-
-        bool PromptToContinueOnWait { get; set; }
-
         event EventHandler<CommandEventArgs> DoCommand;
 
         void OnKeyPress(KeyPressEventArgs e);
@@ -121,38 +116,5 @@ namespace Xle.Services.XleSystem
                 AcceptKey = true;
             }
         }
-
-
-        /// <summary>
-        /// Waits for one of the specified keys, while redrawing the screen.
-        /// </summary>
-        /// <param name="keys">A list of keys which will break out of the wait. 
-        /// Pass none for any key to break out.</param>
-        /// <returns></returns>
-        public async Task<Keys> WaitForKey(params Keys[] keys)
-        {
-            Keys key = Keys.None;
-            bool done = false;
-
-            waiting = true;
-
-            screen.PromptToContinue = PromptToContinueOnWait;
-
-            while (waiting)
-            {
-                await Task.Yield();
-            }
-
-            screen.PromptToContinue = false;
-
-            return commandArgs.Command;
-        }
-
-
-        /// <summary>
-        /// Set to false to have WaitForKey not display a prompt 
-        /// with the standard drawing method.
-        /// </summary>
-        public bool PromptToContinueOnWait { get; set; }
     }
 }

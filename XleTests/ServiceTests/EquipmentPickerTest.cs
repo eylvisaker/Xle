@@ -42,15 +42,17 @@ namespace Xle.ServiceTests
         }
 
         [Fact]
-        public void PickArmorNothingAvailable()
+        public async Task PickArmorNothingAvailable()
         {
-            picker.PickArmor(null).Should().BeNull();
+            var armor = await picker.PickArmor(null);
+            armor.Should().BeNull();
         }
 
         [Fact]
-        public void PickWeaponNothingAvailable()
+        public async Task PickWeaponNothingAvailable()
         {
-            picker.PickWeapon(null).Should().BeNull();
+            var weapon = await picker.PickWeapon(null);
+            weapon.Should().BeNull();
         }
 
         [Fact]

@@ -1,10 +1,11 @@
 ﻿
-using Xle.Maps.Outdoors;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using AgateLib;
 using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
-using AgateLib;
+using Xle.Maps.Outdoors;
+using Xle.Services.Game;
+using Xle.Services.ScreenModel;
+using Xle.Services.XleSystem;
 
 namespace Xle.Services.Commands.Implementation
 {
@@ -13,7 +14,7 @@ namespace Xle.Services.Commands.Implementation
     {
         public IXleScreen Screen { get; set; }
         public ISoundMan SoundMan { get; set; }
-        public IXleInput Input { get; set; }
+        public IXleGameControl GameControl { get; set; }
 
         private IOutsideExtender Map
         {
@@ -33,9 +34,7 @@ namespace Xle.Services.Commands.Implementation
             await TextArea.PrintLine();
             await TextArea.PrintLine("Disembark in which direction?");
 
-            Input.PromptToContinueOnWait = false;
-
-            var key = await Input.WaitForKey(Keys.Left, Keys.Up, Keys.Right, Keys.Down);
+            var key = await GameControl.WaitForKey(false, Keys.Left, Keys.Up, Keys.Right, Keys.Down);
 
             Direction dir = key.ToDirection();
 

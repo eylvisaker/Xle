@@ -26,44 +26,44 @@ namespace Xle.Blacksilver
         }
 
         [Fact]
-        public void ArmanDontGiveIfOrcsDead()
+        public async Task ArmanDontGiveIfOrcsDead()
         {
             Story.DefeatedOrcs = true;
 
-            arman.Speak();
+            await arman.Speak();
 
             Player.Items[LobItem.LifeElixir].Should().Be(0);
         }
 
         [Fact]
-        public void ArmanDontGiveIfHasElixirs()
+        public async Task ArmanDontGiveIfHasElixirs()
         {
             Player.Items[LobItem.LifeElixir] = 2;
 
-            arman.Speak();
+            await arman.Speak();
 
             Player.Items[LobItem.LifeElixir].Should().Be(2);
             (Services.TextAreaText.Contains("Go away")).Should().BeTrue();
         }
 
         [Fact]
-        public void ArmanGiveOneElixir()
+        public async Task ArmanGiveOneElixir()
         {
             Player.Items[LobItem.LifeElixir] = 1;
 
-            arman.Speak();
+            await arman.Speak();
 
             Player.Items[LobItem.LifeElixir].Should().Be(2);
         }
 
         [Fact]
-        public void ArmanDontGiveTwiceInOneVisit()
+        public async Task ArmanDontGiveTwiceInOneVisit()
         {
-            arman.Speak();
+            await arman.Speak();
 
             Player.Items[LobItem.LifeElixir] = 0;
 
-            arman.Speak();
+            await arman.Speak();
 
             Player.Items[LobItem.LifeElixir].Should().Be(0);
         }

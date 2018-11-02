@@ -16,7 +16,6 @@ namespace Xle.Blacksilver
         {
             base.InitializeEvent(evt);
 
-            evt.Input = Services.Input.Object;
             evt.QuickMenu = Services.QuickMenu.Object;
         }
     }
