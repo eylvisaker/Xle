@@ -11,9 +11,9 @@ namespace Xle.Services.XleSystem
 {
     public interface IXleInput
     {
-        bool AcceptKey { get; set; }
-
         event EventHandler<CommandEventArgs> DoCommand;
+
+        bool AcceptKey { get; set; }
 
         void OnKeyPress(KeyPressEventArgs e);
 
@@ -36,7 +36,6 @@ namespace Xle.Services.XleSystem
         private HashSet<Keys> pressedKeys = new HashSet<Keys>();
         private CommandEventArgs commandArgs;
         private bool waiting = false;
-
 
         public XleInput(
             IXleScreen screen,
@@ -61,7 +60,7 @@ namespace Xle.Services.XleSystem
             pressedKeys.Remove(key);
         }
 
-        public async void OnKeyPress(KeyPressEventArgs e)
+        public void OnKeyPress(KeyPressEventArgs e)
         {
             if (AcceptKey == false)
                 return;
@@ -69,7 +68,7 @@ namespace Xle.Services.XleSystem
             try
             {
                 AcceptKey = false;
-                ProcessKeyInput(e);
+                ProcessKeyPress(e);
             }
             finally
             {
@@ -77,7 +76,7 @@ namespace Xle.Services.XleSystem
             }
         }
 
-        private void ProcessKeyInput(KeyPressEventArgs e)
+        private void ProcessKeyPress(KeyPressEventArgs e)
         {
             commandArgs = new CommandEventArgs(e.Key, e.KeyString);
 
@@ -106,7 +105,7 @@ namespace Xle.Services.XleSystem
                 {
                     if (pressedKeys.Contains(key))
                     {
-                        ProcessKeyInput(new KeyPressEventArgs(key, "", null, gameTime));
+                        ProcessKeyPress(new KeyPressEventArgs(key, "", null, gameTime));
                         break;
                     }
                 }

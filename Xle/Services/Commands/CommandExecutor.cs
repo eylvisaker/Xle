@@ -28,6 +28,7 @@ namespace Xle.Services.Commands
         private GameState gameState;
         private Dictionary<Keys, Direction> mDirectionMap = new Dictionary<Keys, Direction>();
         private IXleGameControl gameControl;
+        private readonly IXleInput input;
         private ITextArea textArea;
         private ISoundMan soundMan;
         private ICommandList commands;
@@ -53,6 +54,7 @@ namespace Xle.Services.Commands
             gameState = state;
             this.commands = commands;
             this.gameControl = gameControl;
+            this.input = input;
             this.textArea = textArea;
             this.soundMan = soundMan;
             this.playerAnimator = characterAnimator;
@@ -214,6 +216,8 @@ namespace Xle.Services.Commands
             {
                 commandTask = OutputException(commandTask.Exception);
             }
+
+            input.Update(time);
         }
 
         private async Task OutputException(Exception exception)
