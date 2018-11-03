@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AgateLib;
+using System.Threading.Tasks;
 using Xle.XleEventTypes.Stores.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Towns.Stores
 {
+    [Transient("StoreVault")]
     public class Vault : StoreVault
     {
         protected override async Task<bool> RobCore()

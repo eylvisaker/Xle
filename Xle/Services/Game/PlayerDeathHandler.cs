@@ -70,6 +70,7 @@ namespace Xle.Services.Game
             Player.Food = 30 + Random.Next(10);
             Player.Gold = 25 + Random.Next(30);
             Player.BoardedRaft = null;
+            Player.LastAttackedMapID = 0;
 
             while (SoundMan.IsPlaying(LotaSound.VeryBad))
                 await GameControl.WaitAsync(40);

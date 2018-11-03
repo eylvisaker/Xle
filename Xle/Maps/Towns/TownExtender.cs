@@ -335,14 +335,14 @@ namespace Xle.Maps.Towns
                 }
             }
 
+            if (IsAngry)
+            {
+                Player.LastAttackedMapID = TheMap.MapID;
+            }
+
             if (Player.X < 0 || Player.X >= TheMap.Width - 1 ||
                 Player.Y < 0 || Player.Y >= TheMap.Height - 1)
             {
-                if (IsAngry && this.GetType().Equals(typeof(Town)))
-                {
-                    Player.LastAttackedMapID = TheMap.MapID;
-                }
-
                 await LeaveMap();
             }
         }
