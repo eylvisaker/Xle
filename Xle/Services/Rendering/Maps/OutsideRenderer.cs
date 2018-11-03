@@ -14,7 +14,7 @@ namespace Xle.Services.Rendering.Maps
         private int mWaterAnimLevel;
         private float timeToNextAnimate = 0;
 
-        public OutsideRenderState RenderState;
+        public OutsideRenderState RenderState => Extender.RenderState;
 
         int DisplayMonsterID => RenderState.DisplayMonsterID;
 
@@ -28,7 +28,6 @@ namespace Xle.Services.Rendering.Maps
         {
             base.OnExtenderSet();
 
-            RenderState = Extender.RenderState;
             RenderState.ClearWaves = ClearWaves;
         }
 

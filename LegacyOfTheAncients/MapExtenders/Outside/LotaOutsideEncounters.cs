@@ -18,11 +18,14 @@ namespace Xle.Ancients.MapExtenders.Outside
     [Singleton, InjectProperties]
     public class OutsideEncounters : IOutsideEncounters
     {
+        private int banditAmbush;
         private int stepCountToEncounter;
         private Direction monstDir;
         private int monstCount;
         private int initMonstCount;
         private List<Monster> currentMonst = new List<Monster>();
+        
+        public SolidColorScreenRenderer UnconsciousRenderer { get; set; }
 
         public XleData Data { get; set; }
         public XleOptions Options { get; set; }
@@ -89,6 +92,10 @@ namespace Xle.Ancients.MapExtenders.Outside
 
         public void OnLoad()
         {
+            EncounterState = EncounterState.NoEncounter;
+
+            SetBanditAmbushTime();
+
             SetNextEncounterStepCount();
         }
 
@@ -97,8 +104,7 @@ namespace Xle.Ancients.MapExtenders.Outside
             if (Data.MonsterInfo.Count == 0) return;
             if (Options.DisableOutsideEncounters) return;
 
-            bool handled = false;
-            UpdateEncounterState(ref handled);
+            bool handled = await BanditAmbush();
 
             if (handled)
                 return;
@@ -127,6 +133,107 @@ namespace Xle.Ancients.MapExtenders.Outside
 
         }
 
+        private bool AllowBanditAmbush()
+        {
+            // make sure the player has the compendium
+            if (Player.Items[LotaItem.Compendium] == 0) return false;
+
+            // if the player has the guard jewels we bail.
+            if (Player.Items[LotaItem.GuardJewel] == 4) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Check to see if we should have bandits ambush the player. If so,
+        /// sets banditAmbush variable.
+        /// </summary>
+        /// <param name="player"></param>
+        private void SetBanditAmbushTime()
+        {
+            if (AllowBanditAmbush() == false)
+                return;
+
+            int pastTime = (int)(Player.TimeDays - 100);
+            if (pastTime < 0) pastTime = 0;
+
+            int min = 40 - pastTime / 2;
+            if (min < 3) min = 3;
+
+            int max = 100 - pastTime / 5;
+            if (max < 12) max = 12;
+
+            int time = Random.Next(min, max);
+
+            if (time > Player.Food - 2)
+            {
+                time = (int)Player.Food - 2;
+                if (time < 0)
+                    time = 1;
+            }
+
+            banditAmbush = (int)(Player.TimeDays) + time;
+        }
+
+        private async Task<bool> BanditAmbush()
+        {
+            if (AllowBanditAmbush() == false)
+                return false;
+
+            if (banditAmbush <= 0)
+                SetBanditAmbushTime();
+
+            if (Player.TimeDays <= banditAmbush)
+                return false;
+
+            // set a random position for the appearance of the bandits.
+            SetMonsterImagePosition();
+
+            // bandit icon is number 4.
+            RenderState.DisplayMonsterID = 4;
+
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You are ambushed by bandits!", XleColor.Cyan);
+
+            GameControl.PlaySound(LotaSound.Encounter);
+            await GameControl.WaitAsync(500);
+
+            int maxDamage = Player.HP / 15;
+            int minDamage = Math.Min(5, maxDamage / 2);
+
+            for (int i = 0; i < 8; i++)
+            {
+                Player.HP -= Random.Next(minDamage, maxDamage + 1);
+
+                GameControl.PlaySound(LotaSound.EnemyHit);
+                await GameControl.WaitAsync(250);
+            }
+
+            await TextArea.PrintLine("You fall unconsious.", XleColor.Yellow);
+
+            await GameControl.WaitAsync(1000);
+            RenderState.DisplayMonsterID = -1;
+            await GameControl.WaitAsync(3000, redraw: UnconsciousRenderer);
+
+            await TextArea.PrintLine();
+            await TextArea.PrintLine("You awake.  The compendium is gone.");
+            await TextArea.PrintLine();
+
+            Player.Items[LotaItem.Compendium] = 0;
+
+            await GameControl.PlaySoundSync(LotaSound.VeryBad);
+
+            await TextArea.PrintLine("You hear a voice...");
+
+            await TextArea.PrintLine();
+            await TextArea.PrintLineSlow("Do not be discouraged.  It was\ninevitable.  Keep to your quest.");
+
+            await GameControl.WaitAsync(3000);
+            banditAmbush = 0;
+
+            return true;
+        }
+
         private async Task StartEncounter()
         {
             currentMonst.Clear();
@@ -134,10 +241,10 @@ namespace Xle.Ancients.MapExtenders.Outside
 
             int type = Random.Next(0, 15);
 
+            SetMonsterImagePosition();
+
             if (type < 10)
             {
-                SetMonsterImagePosition();
-
                 EncounterState = EncounterState.UnknownCreatureApproaching;
                 SoundMan.PlaySound(LotaSound.Encounter);
 
@@ -275,10 +382,6 @@ namespace Xle.Ancients.MapExtenders.Outside
 
             int index = Random.Next(monsters.Count());
             return (monsters.Skip(index).First()).ID;
-        }
-
-        public virtual void UpdateEncounterState(ref bool handled)
-        {
         }
 
         private void SetNextEncounterStepCount()
