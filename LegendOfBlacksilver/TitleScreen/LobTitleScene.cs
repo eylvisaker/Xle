@@ -68,6 +68,8 @@ namespace Xle.Blacksilver.TitleScreen
         {
             base.DrawScene(time);
 
+            graphics.Clear(XleColor.Black);
+
             spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(20, 20, 0));
 
             spriteBatch.Draw(title, new Rectangle(0, 0, 640, 400), Color.White);

@@ -9,7 +9,6 @@ using Xle.Data;
 using Xle.Maps.Outdoors;
 using Xle.Services.Game;
 using Xle.Services.Menus;
-using Xle.Services.Rendering.Maps;
 using Xle.Services.ScreenModel;
 using Xle.Services.XleSystem;
 
@@ -24,7 +23,7 @@ namespace Xle.Ancients.MapExtenders.Outside
         private int monstCount;
         private int initMonstCount;
         private List<Monster> currentMonst = new List<Monster>();
-        
+
         public SolidColorScreenRenderer UnconsciousRenderer { get; set; }
 
         public XleData Data { get; set; }
@@ -117,7 +116,7 @@ namespace Xle.Ancients.MapExtenders.Outside
                 }
                 else
                 {
-                   await StartEncounter();
+                    await StartEncounter();
                 }
             }
             else if (EncounterState == EncounterState.UnknownCreatureApproaching)
@@ -130,7 +129,6 @@ namespace Xle.Ancients.MapExtenders.Outside
             {
                 await MonsterAppearing();
             }
-
         }
 
         private bool AllowBanditAmbush()
@@ -262,7 +260,7 @@ namespace Xle.Ancients.MapExtenders.Outside
             }
         }
 
-        List<Direction> validDirections = new List<Direction> { Direction.East, Direction.North, Direction.South, Direction.West };
+        private List<Direction> validDirections = new List<Direction> { Direction.East, Direction.North, Direction.South, Direction.West };
 
         protected void SetMonsterImagePosition()
         {
@@ -622,9 +620,9 @@ namespace Xle.Ancients.MapExtenders.Outside
                     colors[i] = XleColor.Cyan;
                 colors[0] = XleColor.White;
 
-               await TextArea.PrintLine();
-               await TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name, colors);
-               await TextArea.PrintLine("Stands before you.");
+                await TextArea.PrintLine();
+                await TextArea.PrintLine(monstCount.ToString() + " " + currentMonst[0].Name, colors);
+                await TextArea.PrintLine("Stands before you.");
 
                 await GameControl.WaitAsync(1500);
             }
@@ -650,11 +648,11 @@ namespace Xle.Ancients.MapExtenders.Outside
                     }
                 }
 
-             await   TextArea.Print("Hits:  ", XleColor.White);
-             await   TextArea.Print(hits.ToString(), XleColor.Yellow);
-             await   TextArea.Print("   Damage:  ", XleColor.White);
-             await   TextArea.Print(dam.ToString(), XleColor.Yellow);
-             await   TextArea.PrintLine();
+                await TextArea.Print("Hits:  ", XleColor.White);
+                await TextArea.Print(hits.ToString(), XleColor.Yellow);
+                await TextArea.Print("   Damage:  ", XleColor.White);
+                await TextArea.Print(dam.ToString(), XleColor.Yellow);
+                await TextArea.PrintLine();
 
                 if (dam > 0)
                 {
@@ -666,7 +664,7 @@ namespace Xle.Ancients.MapExtenders.Outside
                 }
             }
 
-          await  GameControl.WaitAsync(250, keyBreak: !firstTime);
+            await GameControl.WaitAsync(250, keyBreak: !firstTime);
         }
 
         /// <summary>
