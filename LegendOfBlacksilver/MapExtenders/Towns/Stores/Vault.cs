@@ -4,7 +4,7 @@ using Xle.XleEventTypes.Stores.Extenders;
 
 namespace Xle.Blacksilver.MapExtenders.Towns.Stores
 {
-    [Transient("StoreVault")]
+    [Transient("Vault")]
     public class Vault : StoreVault
     {
     }
