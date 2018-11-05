@@ -1,8 +1,6 @@
 ﻿using AgateLib;
+using AgateLib.Foundation;
 using AgateLib.Scenes;
-using Xle.Bootstrap;
-using Xle.Foundation;
-using Xle.Ancients;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,7 +13,7 @@ namespace LegacyOfTheAncients.Desktop
     /// </summary>
     public class LegacyOfTheAncientsGame : Game
     {
-        GraphicsDeviceManager graphics;
+        private GraphicsDeviceManager graphics;
         private XleProgram xle;
         private Plumbing plumbing;
 
@@ -45,7 +43,7 @@ namespace LegacyOfTheAncients.Desktop
             plumbing.Register(GraphicsDevice);
             plumbing.Register(new SceneStack());
             plumbing.Register(new ContentProvider(Content));
-            
+
             plumbing.Complete();
 
             var initializer = plumbing.Resolve<IInitializer>();

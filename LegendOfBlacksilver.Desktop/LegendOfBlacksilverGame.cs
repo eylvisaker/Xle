@@ -1,9 +1,9 @@
 ﻿using AgateLib;
+using AgateLib.Foundation;
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Xle.Foundation;
 
 namespace Xle.Blacksilver.Desktop
 {

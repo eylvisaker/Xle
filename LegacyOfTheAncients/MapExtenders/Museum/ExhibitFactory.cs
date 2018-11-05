@@ -1,11 +1,6 @@
-﻿using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
-using Xle.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xle.Bootstrap;
-using AgateLib;
+﻿using AgateLib;
+using AgateLib.Foundation;
+using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
 
 namespace Xle.Ancients.MapExtenders.Museum
 {

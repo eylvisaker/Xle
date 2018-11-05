@@ -1,12 +1,6 @@
-﻿using Xle.Blacksilver.MapExtenders.Archives.Exhibits;
-using Xle.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AgateLib;
-using Xle.Bootstrap;
+﻿using AgateLib;
+using AgateLib.Foundation;
+using Xle.Blacksilver.MapExtenders.Archives.Exhibits;
 
 namespace Xle.Blacksilver.MapExtenders.Archives
 {

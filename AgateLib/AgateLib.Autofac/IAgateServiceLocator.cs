@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Xle.Bootstrap
+namespace AgateLib.Foundation
 {
     public interface IAgateServiceLocator
     {

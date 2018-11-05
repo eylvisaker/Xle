@@ -1,13 +1,13 @@
 ﻿using AgateLib;
+using AgateLib.Foundation;
 using System;
-using Xle.Bootstrap;
 using Xle.Maps;
 using Xle.XleEventTypes;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Services.Game
 {
-    public interface IEventExtenderFactory 
+    public interface IEventExtenderFactory
     {
         IEventExtender Create(MapExtender map, XleEvent evt, Type defaultExtender);
     }

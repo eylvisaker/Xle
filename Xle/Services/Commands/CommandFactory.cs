@@ -1,5 +1,5 @@
 ﻿using AgateLib;
-using Xle.Bootstrap;
+using AgateLib.Foundation;
 using Xle.Services.Commands.Implementation;
 
 namespace Xle.Services.Commands

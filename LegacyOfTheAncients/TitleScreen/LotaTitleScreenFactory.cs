@@ -1,11 +1,9 @@
 ﻿using AgateLib;
-using Xle.Bootstrap;
-using Xle.Services;
-using System;
+using AgateLib.Foundation;
 
 namespace Xle.Ancients.TitleScreen
 {
-    public interface ILotaTitleScreenFactory : IXleFactory
+    public interface ILotaTitleScreenFactory
     {
         Splash CreateSplash();
 

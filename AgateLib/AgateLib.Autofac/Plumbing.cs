@@ -9,9 +9,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Xle.Bootstrap;
 
-namespace Xle.Foundation
+namespace AgateLib.Foundation
 {
     public class Plumbing : IAgateServiceLocator
     {

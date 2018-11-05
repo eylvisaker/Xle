@@ -9,18 +9,9 @@
     <Import_RootNamespace>Xle</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\CommandComponentSelector.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\CommandInstaller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\EventExtenderInstaller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\FactoryInstaller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\IAgateServiceLocator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\MapExtenderInstaller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\MapRendererInstaller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrap\ServiceInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\XleDataLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\XlePlayerConsoleCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\XleGlobalConsoleCommands.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Foundation\Plumbing.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColorScheme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColorStringBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CountdownTimer.cs" />
@@ -256,8 +247,5 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)TODO.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Foundation\" />
   </ItemGroup>
 </Project>

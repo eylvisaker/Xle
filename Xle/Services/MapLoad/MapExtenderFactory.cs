@@ -1,5 +1,5 @@
 ﻿using AgateLib;
-using Xle.Bootstrap;
+using AgateLib.Foundation;
 using Xle.Maps;
 
 namespace Xle.Services.MapLoad

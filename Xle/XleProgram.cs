@@ -1,8 +1,8 @@
 ﻿using AgateLib;
 using AgateLib.Diagnostics;
+using AgateLib.Foundation;
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
-using Xle.Bootstrap;
 using Xle.Scenes;
 
 namespace Xle
