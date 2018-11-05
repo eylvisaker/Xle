@@ -155,11 +155,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Game\EventExtenderFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\PlayerDeathHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\XleGameControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Game\ITitleScreenFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\IXleGameFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\IXleTitleScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IXleFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IXleService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapLoad\MapExtenderFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapLoad\MapChanger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapLoad\MapLoader.cs" />

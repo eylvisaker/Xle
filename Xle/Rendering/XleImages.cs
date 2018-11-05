@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Xle.Rendering
 {
-    public interface IXleImages : IXleService
+    public interface IXleImages
     {
         void LoadTiles(string tileset);
 

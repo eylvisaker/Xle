@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Xle.Game
 {
-    public interface IXleGameFactory : IXleService
+    public interface IXleGameFactory
     {
         void LoadSurfaces();
         Font Font { get; }

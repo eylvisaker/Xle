@@ -1,6 +1,6 @@
 ﻿namespace Xle.Game
 {
-	public interface IXleTitleScreen : IXleService
+	public interface IXleTitleScreen
 	{
 		Player Player { get; }
 
