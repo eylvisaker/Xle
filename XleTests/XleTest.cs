@@ -1,6 +1,6 @@
 ﻿using Moq;
 using Xle.Maps;
-using Xle.Services.Commands;
+using Xle.Commands;
 using Xle.XleEventTypes;
 using Xle.XleEventTypes.Extenders;
 

@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Threading.Tasks;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.Game;
-using Xle.Services.XleSystem;
+using Xle.Commands.Implementation;
+using Xle.Game;
+using Xle.XleSystem;
 
 namespace Xle.Maps.Dungeons.Commands
 {

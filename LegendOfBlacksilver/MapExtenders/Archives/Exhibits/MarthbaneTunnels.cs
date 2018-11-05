@@ -1,6 +1,6 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
-using Xle.Services.MapLoad;
+using Xle.MapLoad;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {

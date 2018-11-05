@@ -1,6 +1,6 @@
 ﻿using Xle;
 using Xle.Ancients;
-using Xle.Services.Commands.Implementation;
+using Xle.Commands.Implementation;
 using Xle.XleEventTypes.Extenders;
 using Xle.LegacyOfTheAncients;
 using Xunit;

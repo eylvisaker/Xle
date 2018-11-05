@@ -1,7 +1,7 @@
 ﻿
 using AgateLib;
 using Xle.Maps.Temples;
-using Xle.Services.Commands;
+using Xle.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Temples
 {

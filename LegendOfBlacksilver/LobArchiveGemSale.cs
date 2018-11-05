@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Xle.Services;
-using Xle.Services.Menus;
-using Xle.Services.Menus.Implementation;
+using Xle;
+using Xle.Menus;
+using Xle.Menus.Implementation;
 
 namespace Xle.Blacksilver.Services
 {

@@ -1,8 +1,8 @@
-﻿using Xle.Services.Menus.Implementation;
+﻿using Xle.Menus.Implementation;
 using FluentAssertions;
 using Microsoft.Xna.Framework.Input;
 using Xunit;
-using Xle.Services.Menus;
+using Xle.Menus;
 using System.Threading.Tasks;
 
 namespace Xle.ServiceTests

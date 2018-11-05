@@ -1,8 +1,8 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.Game;
-using Xle.Services.MapLoad;
+using Xle.Commands.Implementation;
+using Xle.Game;
+using Xle.MapLoad;
 
 namespace Xle.Maps.Dungeons
 {

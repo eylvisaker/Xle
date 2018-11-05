@@ -2,9 +2,9 @@
 
 using Xle.Maps;
 using Xle.Maps.Museums;
-using Xle.Services.Commands;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
+using Xle.Commands;
+using Xle.Rendering;
+using Xle.Rendering.Maps;
 
 namespace Xle.Blacksilver.MapExtenders.Archives
 {

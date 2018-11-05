@@ -1,6 +1,6 @@
-﻿using Xle.Services;
-using Xle.Services.Menus;
-using Xle.Services.XleSystem;
+﻿using Xle;
+using Xle.Menus;
+using Xle.XleSystem;
 using Xle.XleEventTypes.Extenders;
 using System;
 using System.Collections.Generic;

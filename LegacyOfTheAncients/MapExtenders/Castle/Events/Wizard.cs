@@ -1,6 +1,6 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
-using Xle.Services.Menus;
+using Xle.Menus;
 
 namespace Xle.Ancients.MapExtenders.Castle.Events
 {

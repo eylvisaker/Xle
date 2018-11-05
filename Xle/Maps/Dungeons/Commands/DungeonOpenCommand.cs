@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 
 using Xle.Data;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Commands.Implementation;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 
 namespace Xle.Maps.Dungeons.Commands
 {

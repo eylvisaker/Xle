@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xle.Maps;
-using Xle.Services;
-using Xle.Services.Commands;
-using Xle.Services.Menus;
+using Xle;
+using Xle.Commands;
+using Xle.Menus;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon
 {

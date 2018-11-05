@@ -1,5 +1,5 @@
 ﻿using AgateLib;
-using Xle.Services.Commands.Implementation;
+using Xle.Commands.Implementation;
 
 namespace Xle.Ancients.MapExtenders.Towns.Commands
 {

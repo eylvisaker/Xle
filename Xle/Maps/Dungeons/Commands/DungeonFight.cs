@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework;
 using System.Threading.Tasks;
-using Xle.Services.Commands.Implementation;
+using Xle.Commands.Implementation;
 
 namespace Xle.Maps.Dungeons.Commands
 {

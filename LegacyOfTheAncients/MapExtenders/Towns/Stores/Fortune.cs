@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Menus;
+using Xle.Menus;
 
 namespace Xle.Ancients.MapExtenders.Towns.Stores
 {

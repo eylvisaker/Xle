@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Moq;
 using System.Threading.Tasks;
-using Xle.Services.Game;
-using Xle.Services.Menus;
-using Xle.Services.ScreenModel;
+using Xle.Game;
+using Xle.Menus;
+using Xle.ScreenModel;
 using Xunit;
 
 namespace Xle.ServiceTests

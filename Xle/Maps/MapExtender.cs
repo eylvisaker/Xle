@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Commands;
-using Xle.Services.Game;
-using Xle.Services.MapLoad;
-using Xle.Services.Menus;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Commands;
+using Xle.Game;
+using Xle.MapLoad;
+using Xle.Menus;
+using Xle.Rendering;
+using Xle.Rendering.Maps;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Maps

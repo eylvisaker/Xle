@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.Game;
+using Xle.Commands.Implementation;
+using Xle.Game;
 
 namespace Xle.Maps.Towns
 {

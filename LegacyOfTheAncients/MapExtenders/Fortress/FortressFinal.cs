@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
 using Xle.Ancients.MapExtenders.Fortress.SecondArea;
-using Xle.Services.ScreenModel;
+using Xle.ScreenModel;
 
 namespace Xle.Ancients.MapExtenders.Fortress
 {

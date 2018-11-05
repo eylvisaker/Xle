@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Xle.Services.Commands.Implementation;
+using Xle.Commands.Implementation;
 
 namespace Xle.Maps.Castles
 {

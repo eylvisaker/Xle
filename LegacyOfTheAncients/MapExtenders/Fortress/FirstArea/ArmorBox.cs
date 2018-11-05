@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using System.Linq;
 using System.Threading.Tasks;
-using Xle.Services.Rendering;
+using Xle.Rendering;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea

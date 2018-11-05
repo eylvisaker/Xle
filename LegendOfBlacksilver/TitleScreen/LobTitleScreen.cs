@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Xle.Services;
-using Xle.Services.Game;
+using Xle;
+using Xle.Game;
 
 namespace Xle.Blacksilver.TitleScreen
 {

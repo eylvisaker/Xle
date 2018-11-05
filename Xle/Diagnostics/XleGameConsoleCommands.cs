@@ -2,10 +2,10 @@
 using Xle.Data;
 using Xle.Maps;
 using Xle.Maps.Dungeons;
-using Xle.Services.Commands;
-using Xle.Services.Game;
-using Xle.Services.MapLoad;
-using Xle.Services.ScreenModel;
+using Xle.Commands;
+using Xle.Game;
+using Xle.MapLoad;
+using Xle.ScreenModel;
 using Xle.XleEventTypes;
 using Microsoft.Xna.Framework;
 using System;
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AgateLib;
-using Xle.Services.XleSystem;
+using Xle.XleSystem;
 
 namespace Xle.Diagnostics
 {

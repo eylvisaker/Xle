@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
-using Xle.Services.MapLoad;
+using Xle.MapLoad;
 
 namespace Xle.Ancients.MapExtenders.Museum.MuseumDisplays
 {

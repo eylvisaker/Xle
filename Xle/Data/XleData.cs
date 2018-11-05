@@ -3,7 +3,7 @@ using AgateLib.Mathematics.Geometry;
 using Xle.Maps;
 using Xle.Maps.XleMapTypes;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
-using Xle.Services;
+using Xle;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;

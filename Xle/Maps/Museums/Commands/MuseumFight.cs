@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
-using Xle.Services.Commands.Implementation;
+using Xle.Commands.Implementation;
 
 namespace Xle.Maps.Museums.Commands
 {

@@ -4,9 +4,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
-using Xle.Services.XleSystem;
+using Xle.Rendering;
+using Xle.Rendering.Maps;
+using Xle.XleSystem;
 
 namespace Xle.Maps.Outdoors
 {

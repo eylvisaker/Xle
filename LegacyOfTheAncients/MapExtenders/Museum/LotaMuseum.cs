@@ -8,8 +8,8 @@ using Xle.Ancients.MapExtenders.Museum.MuseumDisplays;
 using Xle.Maps;
 using Xle.Maps.Museums;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
-using Xle.Services.Commands;
-using Xle.Services.Game;
+using Xle.Commands;
+using Xle.Game;
 
 namespace Xle.Ancients.MapExtenders.Museum
 {

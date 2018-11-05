@@ -1,7 +1,7 @@
 ﻿using Xle.Blacksilver.MapExtenders.Outside.Events;
 using Xle.Maps.Outdoors;
-using Xle.Services;
-using Xle.Services.Commands;
+using Xle;
+using Xle.Commands;
 using Xle.XleEventTypes;
 
 using System;

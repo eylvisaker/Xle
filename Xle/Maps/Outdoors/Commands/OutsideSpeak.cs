@@ -3,11 +3,11 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.Game;
-using Xle.Services.Menus;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Commands.Implementation;
+using Xle.Game;
+using Xle.Menus;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 
 namespace Xle.Maps.Outdoors
 {

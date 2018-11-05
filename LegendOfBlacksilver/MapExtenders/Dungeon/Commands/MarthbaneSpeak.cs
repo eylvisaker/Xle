@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 using Xle.Maps;
 using Xle.Maps.Dungeons;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.Game;
-using Xle.Services.Menus;
-using Xle.Services.XleSystem;
+using Xle.Commands.Implementation;
+using Xle.Game;
+using Xle.Menus;
+using Xle.XleSystem;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {

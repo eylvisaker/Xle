@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Xle.Scenes;
-using Xle.Services.XleSystem;
+using Xle.XleSystem;
 
 namespace Xle.Ancients.TitleScreen
 {

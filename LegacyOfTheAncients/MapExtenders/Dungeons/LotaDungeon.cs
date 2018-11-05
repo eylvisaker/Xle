@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Maps;
 using Xle.Maps.Dungeons;
-using Xle.Services.Commands;
+using Xle.Commands;
 
 namespace Xle.Ancients.MapExtenders.Dungeons
 {

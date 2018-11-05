@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xle.Maps.XleMapTypes.MuseumDisplays;
-using Xle.Services.Game;
+using Xle.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {

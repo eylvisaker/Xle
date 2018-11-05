@@ -2,11 +2,11 @@
 using Microsoft.Xna.Framework.Input;
 using Moq;
 using System.Threading.Tasks;
-using Xle.Services.Game;
-using Xle.Services.Menus;
-using Xle.Services.Menus.Implementation;
-using Xle.Services.Rendering;
-using Xle.Services.XleSystem;
+using Xle.Game;
+using Xle.Menus;
+using Xle.Menus.Implementation;
+using Xle.Rendering;
+using Xle.XleSystem;
 using Xunit;
 
 namespace Xle.ServiceTests

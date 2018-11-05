@@ -1,8 +1,8 @@
 ﻿using AgateLib;
 using System;
 using System.Threading.Tasks;
-using Xle.Services.Menus;
-using Xle.Services.XleSystem;
+using Xle.Menus;
+using Xle.XleSystem;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {

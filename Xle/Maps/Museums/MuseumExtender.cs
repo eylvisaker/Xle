@@ -4,8 +4,8 @@ using AgateLib.Mathematics.Geometry;
 
 using Xle.Maps.XleMapTypes;
 using Xle.Maps.XleMapTypes.MuseumDisplays;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
+using Xle.Rendering;
+using Xle.Rendering.Maps;
 using Microsoft.Xna.Framework;
 using System.Threading.Tasks;
 using System.Diagnostics;

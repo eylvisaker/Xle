@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Maps;
-using Xle.Services.ScreenModel;
+using Xle.ScreenModel;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Ancients.MapExtenders.Fortress.FirstArea

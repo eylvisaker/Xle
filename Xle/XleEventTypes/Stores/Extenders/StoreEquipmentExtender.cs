@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Menus;
+using Xle.Menus;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {

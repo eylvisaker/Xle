@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.MapLoad;
+using Xle.MapLoad;
 
 namespace Xle.XleEventTypes.Extenders
 {

@@ -2,8 +2,8 @@
 using AgateLib.Display;
 using Xle.Maps.XleMapTypes;
 using Xle.Serialization;
-using Xle.Services.Game;
-using Xle.Services.ScreenModel;
+using Xle.Game;
+using Xle.ScreenModel;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 

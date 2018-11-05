@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xle.Maps.Towns;
-using Xle.Services;
-using Xle.Services.Commands.Implementation;
+using Xle;
+using Xle.Commands.Implementation;
 
 namespace Xle.Blacksilver.MapExtenders.Temples
 {

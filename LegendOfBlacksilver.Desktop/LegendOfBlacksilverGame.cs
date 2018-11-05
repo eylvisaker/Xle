@@ -10,7 +10,7 @@ namespace Xle.Blacksilver.Desktop
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class LegendOfBlacksilverGame : Game
+    public class LegendOfBlacksilverGame : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
         private Plumbing plumbing;

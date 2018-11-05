@@ -1,4 +1,4 @@
-﻿using Xle.Services.Rendering;
+﻿using Xle.Rendering;
 using Microsoft.Xna.Framework;
 
 namespace Xle

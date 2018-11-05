@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Xle.Maps.Towns;
 using Xle.Maps.XleMapTypes;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
+using Xle.Rendering;
+using Xle.Rendering.Maps;
 
 namespace Xle.Maps.Castles
 {

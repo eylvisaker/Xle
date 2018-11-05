@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Xle.Services.Game;
+using Xle.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.EventExtenders
 {

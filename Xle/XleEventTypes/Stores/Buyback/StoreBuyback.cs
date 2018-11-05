@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Menus;
+using Xle.Menus;
 using Xle.XleEventTypes.Stores.Extenders;
 
 namespace Xle.XleEventTypes.Stores.Buyback

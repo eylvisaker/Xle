@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.Game;
+using Xle.Commands.Implementation;
+using Xle.Game;
 using Xle.XleEventTypes;
 
 namespace Xle.Ancients.MapExtenders.Outside

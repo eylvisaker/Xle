@@ -1,8 +1,8 @@
 using AgateLib;
 using AgateLib.Input;
-using Xle.Services.Game;
-using Xle.Services.Rendering;
-using Xle.Services.XleSystem;
+using Xle.Game;
+using Xle.Rendering;
+using Xle.XleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

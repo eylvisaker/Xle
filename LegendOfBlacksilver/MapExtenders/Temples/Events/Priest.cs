@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Xle.Services.Menus;
+using Xle.Menus;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.Blacksilver.MapExtenders.Temples

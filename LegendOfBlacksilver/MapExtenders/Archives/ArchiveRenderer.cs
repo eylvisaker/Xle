@@ -1,6 +1,6 @@
 ﻿using AgateLib;
 using Microsoft.Xna.Framework;
-using Xle.Services.Rendering.Maps;
+using Xle.Rendering.Maps;
 
 namespace Xle.Blacksilver.MapExtenders.Archives
 {

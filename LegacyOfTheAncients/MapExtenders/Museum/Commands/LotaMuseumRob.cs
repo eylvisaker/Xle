@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Xle.Services;
-using Xle.Services.Commands.Implementation;
+using Xle;
+using Xle.Commands.Implementation;
 
 namespace Xle.Ancients.MapExtenders.Museum.Commands
 {

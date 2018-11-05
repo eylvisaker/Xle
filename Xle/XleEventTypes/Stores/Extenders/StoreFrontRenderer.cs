@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using Xle.Services.Rendering;
-using Xle.Services.ScreenModel;
+using Xle.Rendering;
+using Xle.ScreenModel;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {

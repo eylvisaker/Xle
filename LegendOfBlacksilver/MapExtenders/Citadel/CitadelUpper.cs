@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Xle.Maps;
 using Xle.Maps.Castles;
-using Xle.Services.Commands;
+using Xle.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel
 {

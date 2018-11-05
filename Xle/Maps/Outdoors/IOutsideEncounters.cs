@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Rendering.Maps;
+using Xle.Rendering.Maps;
 
 namespace Xle.Maps.Outdoors
 {

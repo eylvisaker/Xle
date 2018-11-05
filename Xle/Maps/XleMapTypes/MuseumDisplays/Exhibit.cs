@@ -5,10 +5,10 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Game;
-using Xle.Services.Menus;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Game;
+using Xle.Menus;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 
 namespace Xle.Maps.XleMapTypes.MuseumDisplays
 {

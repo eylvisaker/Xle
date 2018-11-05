@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 
 using Xle.Maps;
-using Xle.Services.Commands;
+using Xle.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon
 {

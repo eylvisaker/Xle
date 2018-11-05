@@ -7,10 +7,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Maps.Outdoors;
-using Xle.Services.Game;
-using Xle.Services.Menus;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Game;
+using Xle.Menus;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 
 namespace Xle.Ancients.MapExtenders.Outside
 {

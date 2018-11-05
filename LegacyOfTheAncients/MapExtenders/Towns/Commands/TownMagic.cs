@@ -1,5 +1,5 @@
-﻿using Xle.Services;
-using Xle.Services.Commands.Implementation;
+﻿using Xle;
+using Xle.Commands.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
 ﻿using Xle.Maps.Dungeons;
-using Xle.Services;
-using Xle.Services.XleSystem;
+using Xle;
+using Xle.XleSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;

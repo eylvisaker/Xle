@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Maps.Towns;
-using Xle.Services.Commands;
+using Xle.Commands;
 using Xle.XleEventTypes.Stores;
 
 namespace Xle.Ancients.MapExtenders.Towns

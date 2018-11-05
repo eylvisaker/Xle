@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xle.Services.Menus;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Menus;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 
 namespace Xle.XleEventTypes.Stores.Extenders
 {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Commands.Implementation;
+using Xle.Commands.Implementation;
 
 namespace Xle.Maps.Dungeons.Commands
 {

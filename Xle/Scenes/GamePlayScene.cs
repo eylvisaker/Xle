@@ -3,10 +3,10 @@ using AgateLib.Input;
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Xle.Services.Commands;
-using Xle.Services.Rendering;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Commands;
+using Xle.Rendering;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 
 namespace Xle.Scenes
 {

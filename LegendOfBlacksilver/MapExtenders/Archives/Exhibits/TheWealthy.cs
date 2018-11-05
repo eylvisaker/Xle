@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using System;
 using System.Threading.Tasks;
-using Xle.Services.Game;
+using Xle.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Archives.Exhibits
 {

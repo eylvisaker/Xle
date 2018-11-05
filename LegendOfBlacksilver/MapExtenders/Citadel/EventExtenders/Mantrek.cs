@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
 using Xle.Maps;
-using Xle.Services.MapLoad;
+using Xle.MapLoad;
 
 namespace Xle.Blacksilver.MapExtenders.Citadel.EventExtenders
 {

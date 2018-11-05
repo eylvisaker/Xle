@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Xle.Services;
+using Xle;
 
 namespace Xle.Blacksilver.MapExtenders.Outside
 {

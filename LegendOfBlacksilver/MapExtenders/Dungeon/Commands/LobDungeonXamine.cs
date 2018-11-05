@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xle.Maps;
 using Xle.Maps.Dungeons;
 using Xle.Maps.Dungeons.Commands;
-using Xle.Services;
+using Xle;
 
 namespace Xle.Blacksilver.MapExtenders.Dungeon.Commands
 {

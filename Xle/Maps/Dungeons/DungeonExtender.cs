@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xle.Maps.XleMapTypes;
-using Xle.Services.Rendering;
-using Xle.Services.Rendering.Maps;
+using Xle.Rendering;
+using Xle.Rendering.Maps;
 
 namespace Xle.Maps.Dungeons
 {

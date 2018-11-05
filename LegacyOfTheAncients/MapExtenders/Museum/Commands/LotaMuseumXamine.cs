@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
 using Xle.Maps.Museums;
-using Xle.Services.Commands.Implementation;
+using Xle.Commands.Implementation;
 
 namespace Xle.Ancients.MapExtenders.Museum.Commands
 {

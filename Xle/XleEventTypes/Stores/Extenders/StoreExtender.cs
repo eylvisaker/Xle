@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Xle.Services.Menus;
+using Xle.Menus;
 using Xle.XleEventTypes.Extenders;
 
 namespace Xle.XleEventTypes.Stores.Extenders

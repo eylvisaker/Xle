@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Xle.Maps;
-using Xle.Services.Rendering;
+using Xle.Rendering;
 
 namespace Xle
 {

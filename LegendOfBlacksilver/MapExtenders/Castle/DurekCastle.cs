@@ -6,7 +6,7 @@ using System.Linq;
 using Xle.Blacksilver.MapExtenders.Castle.EventExtenders;
 using Xle.Maps;
 using Xle.Maps.Castles;
-using Xle.Services.Commands;
+using Xle.Commands;
 
 namespace Xle.Blacksilver.MapExtenders.Castle
 {

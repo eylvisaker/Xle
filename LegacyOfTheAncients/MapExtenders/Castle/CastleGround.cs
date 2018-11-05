@@ -4,7 +4,7 @@ using System;
 using Xle.Ancients.MapExtenders.Castle.Commands;
 using Xle.Maps;
 using Xle.Maps.Castles;
-using Xle.Services.Commands;
+using Xle.Commands;
 
 namespace Xle.Ancients.MapExtenders.Castle
 {

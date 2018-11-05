@@ -3,7 +3,7 @@ using AgateLib.Diagnostics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using Xle.Services.Commands;
+using Xle.Commands;
 
 namespace Xle.Blacksilver
 {

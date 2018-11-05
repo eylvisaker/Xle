@@ -3,8 +3,8 @@ using System;
 using System.Threading.Tasks;
 using Xle.Data;
 using Xle.Maps.Outdoors;
-using Xle.Services.Commands;
-using Xle.Services.Game;
+using Xle.Commands;
+using Xle.Game;
 
 namespace Xle.Ancients.MapExtenders.Outside
 {

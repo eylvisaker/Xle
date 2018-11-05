@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework;
 using System.Threading.Tasks;
 using Xle.Maps;
-using Xle.Services.Game;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Game;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 
 namespace Xle.XleEventTypes.Extenders
 {

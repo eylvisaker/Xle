@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Xle.Data;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.Rendering.Maps;
+using Xle.Commands.Implementation;
+using Xle.Rendering.Maps;
 
 namespace Xle.Maps.Outdoors.Commands
 {

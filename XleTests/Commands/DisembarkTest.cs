@@ -1,14 +1,14 @@
 ﻿using Xle.Maps.Outdoors;
-using Xle.Services.Commands.Implementation;
-using Xle.Services.ScreenModel;
-using Xle.Services.XleSystem;
+using Xle.Commands.Implementation;
+using Xle.ScreenModel;
+using Xle.XleSystem;
 using FluentAssertions;
 using Microsoft.Xna.Framework.Input;
 using Moq;
 using System.Linq;
 using Xunit;
 using System.Threading.Tasks;
-using Xle.Services.Game;
+using Xle.Game;
 
 namespace Xle.Commands
 {

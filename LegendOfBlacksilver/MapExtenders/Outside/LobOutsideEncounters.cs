@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.Rendering.Maps;
+using Xle.Rendering.Maps;
 using AgateLib;
 
 namespace Xle.Blacksilver.MapExtenders.Outside

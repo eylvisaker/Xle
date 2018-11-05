@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 using Xle.Maps.Castles;
-using Xle.Services.Game;
+using Xle.Game;
 
 namespace Xle.Blacksilver.MapExtenders.Castle.Commands
 {

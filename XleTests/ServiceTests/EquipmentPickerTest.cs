@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Moq;
 using System.Threading.Tasks;
-using Xle.Services.Menus;
+using Xle.Menus;
 using Xunit;
 
 namespace Xle.ServiceTests

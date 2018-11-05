@@ -1,7 +1,7 @@
 ﻿using AgateLib;
 using System.Threading.Tasks;
 using Xle.Data;
-using Xle.Services.ScreenModel;
+using Xle.ScreenModel;
 
 namespace Xle.XleEventTypes.Stores.Buyback
 {
