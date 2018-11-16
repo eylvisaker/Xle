@@ -25,7 +25,6 @@ namespace Xle.Ancients.TitleScreen
         public override Task KeyPress(Keys keyCode, string keyString)
         {
             NewState = Factory.CreateFirstMainMenu();
-            titleScreenSurface.Dispose();
 
             return Task.CompletedTask;
         }

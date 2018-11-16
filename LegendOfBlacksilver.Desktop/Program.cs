@@ -1,4 +1,5 @@
 ﻿using System;
+using Xle.XleSystem;
 
 namespace Xle.Blacksilver.Desktop
 {
@@ -11,9 +12,9 @@ namespace Xle.Blacksilver.Desktop
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            using (var game = new LegendOfBlacksilverGame())
+            using (var game = new LegendOfBlacksilverGame(Config.ParseCommandLineArgs(args)))
                 game.Run();
         }
     }

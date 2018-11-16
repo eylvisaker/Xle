@@ -15,9 +15,9 @@ namespace Xle
         private readonly IAgateConsoleManager consoleManager;
 
         public XleProgram(SceneStack scenes,
-                           SceneFactory sceneFactory,
-                           IVocabulary[] consoleCommands,
-                           IAgateConsoleManager consoleManager)
+                          SceneFactory sceneFactory,
+                          IVocabulary[] consoleCommands,
+                          IAgateConsoleManager consoleManager)
         {
             this.scenes = scenes;
             this.sceneFactory = sceneFactory;

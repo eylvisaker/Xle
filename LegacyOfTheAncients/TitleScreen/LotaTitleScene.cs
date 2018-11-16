@@ -18,13 +18,14 @@ namespace Xle.Ancients.TitleScreen
         private readonly XleSystemState systemState;
         private readonly SpriteBatch spriteBatch;
         private readonly KeyboardEvents keyboard;
-
+        
         public LotaTitleScene(ILotaTitleScreen titleScreen, GraphicsDevice device, IRectangleRenderer rects, XleSystemState systemState)
         {
             this.titleScreen = titleScreen;
             this.device = device;
             this.rects = rects;
             this.systemState = systemState;
+
             spriteBatch = new SpriteBatch(device);
 
             keyboard = new KeyboardEvents();

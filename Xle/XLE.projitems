@@ -189,6 +189,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ScreenModel\TextLine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WaitScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleSystem\CommandEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XleSystem\Config.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleSystem\SoundMan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\XleGameConsoleCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XleSystem\XleInput.cs" />

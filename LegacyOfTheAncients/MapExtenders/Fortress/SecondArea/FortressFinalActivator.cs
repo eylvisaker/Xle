@@ -25,7 +25,6 @@ namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
     {
         public ITextArea TextArea { get; set; }
         public IXleGameControl GameControl { get; set; }
-        public ISoundMan SoundMan { get; set; }
 
         public void Reset()
         {
@@ -74,7 +73,7 @@ namespace Xle.Ancients.MapExtenders.Fortress.SecondArea
 
             for (int i = 0; i < 5; i++)
             {
-                SoundMan.PlaySound(LotaSound.Good);
+                GameControl.PlaySound(LotaSound.Good);
                 await GameControl.WaitAsync(750);
             }
             await GameControl.WaitAsync(1000);

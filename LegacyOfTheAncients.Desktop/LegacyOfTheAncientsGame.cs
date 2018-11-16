@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Xle;
+using Xle.XleSystem;
 
 namespace LegacyOfTheAncients.Desktop
 {
@@ -17,11 +18,12 @@ namespace LegacyOfTheAncients.Desktop
         private XleProgram xle;
         private Plumbing plumbing;
 
-        public LegacyOfTheAncientsGame()
+        public LegacyOfTheAncientsGame(Config config)
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 680;
             graphics.PreferredBackBufferHeight = 440;
+            graphics.IsFullScreen = config.FullScreen;
 
             Content.RootDirectory = "Content";
         }

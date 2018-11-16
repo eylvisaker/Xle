@@ -4,6 +4,7 @@ using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Xle.XleSystem;
 
 namespace Xle.Blacksilver.Desktop
 {
@@ -16,11 +17,12 @@ namespace Xle.Blacksilver.Desktop
         private Plumbing plumbing;
         private XleProgram xle;
 
-        public LegendOfBlacksilverGame()
+        public LegendOfBlacksilverGame(Config config)
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 680;
             graphics.PreferredBackBufferHeight = 440;
+            graphics.IsFullScreen = config.FullScreen;
 
             Content.RootDirectory = "Content";
         }
