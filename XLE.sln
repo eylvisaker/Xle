@@ -60,6 +60,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AgateLib.Autofac", "AgateLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyOfTheAncients.WindowsDX", "LegacyOfTheAncients.WindowsDX\LegacyOfTheAncients.WindowsDX.csproj", "{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendOfBlacksilver.WindowsDX", "LegendOfBlacksilver.WindowsDX\LegendOfBlacksilver.WindowsDX.csproj", "{D65EC03D-A415-4C31-8961-6799BB1977D6}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AgateLib\AgateLib.Physics\AgateLib.Physics.projitems*{062658fa-ca79-41c2-b4a5-ad9b2a88beba}*SharedItemsImports = 13
@@ -81,6 +83,10 @@ Global
 		LegacyOfTheAncients\LegacyOfTheAncients.projitems*{a2ee7198-22e4-433c-bfbb-9cb9716dde44}*SharedItemsImports = 4
 		Xle\Xle.projitems*{a2ee7198-22e4-433c-bfbb-9cb9716dde44}*SharedItemsImports = 4
 		AgateLib\AgateLib\AgateLib.projitems*{be7c38f8-7a5b-4cbd-b57b-2cd54558062b}*SharedItemsImports = 13
+		AgateLib\AgateLib.Autofac\AgateLib.Autofac.projitems*{d65ec03d-a415-4c31-8961-6799bb1977d6}*SharedItemsImports = 4
+		AgateLib\AgateLib\AgateLib.projitems*{d65ec03d-a415-4c31-8961-6799bb1977d6}*SharedItemsImports = 4
+		LegendOfBlacksilver\LegendOfBlacksilver.projitems*{d65ec03d-a415-4c31-8961-6799bb1977d6}*SharedItemsImports = 4
+		Xle\Xle.projitems*{d65ec03d-a415-4c31-8961-6799bb1977d6}*SharedItemsImports = 4
 		Xle\Xle.projitems*{fde0a61f-558b-4964-8292-b7a212a3ab45}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -361,7 +367,8 @@ Global
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|ARM.ActiveCfg = Debug|x86
-		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|x64.ActiveCfg = Debug|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|x64.ActiveCfg = Debug|x64
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|x64.Build.0 = Debug|x64
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|x86.ActiveCfg = Debug|x86
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|x86.Build.0 = Debug|x86
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|Any CPU.ActiveCfg = Release|x86
@@ -380,11 +387,43 @@ Global
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|x64.Build.0 = Release|x86
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|x86.ActiveCfg = Release|x86
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|x86.Build.0 = Release|x86
-		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|Any CPU.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|ARM.ActiveCfg = Release|x86
-		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|x64.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|x64.ActiveCfg = Release|x64
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|x64.Build.0 = Release|x64
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|x86.ActiveCfg = Release|x86
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|x86.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Debug|ARM.ActiveCfg = Debug|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Debug|x64.ActiveCfg = Debug|x64
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Debug|x64.Build.0 = Debug|x64
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Debug|x86.ActiveCfg = Debug|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Debug|x86.Build.0 = Debug|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Info|Any CPU.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Info|Any CPU.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Info|ARM.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Info|ARM.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Info|x64.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Info|x64.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Info|x86.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Info|x86.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Performance|Any CPU.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Performance|Any CPU.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Performance|ARM.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Performance|ARM.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Performance|x64.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Performance|x64.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Performance|x86.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Performance|x86.Build.0 = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Release|ARM.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Release|x64.ActiveCfg = Release|x64
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Release|x64.Build.0 = Release|x64
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Release|x86.ActiveCfg = Release|x86
+		{D65EC03D-A415-4C31-8961-6799BB1977D6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -402,6 +441,7 @@ Global
 		{0FF1F46A-B688-4455-B9DC-C3CD2C2D65FD} = {557825C5-FACC-4B35-9AE7-D181835D8298}
 		{29390B33-719F-44A1-A021-7BBD0A28823B} = {B2837392-11F8-42A3-B6FB-E57144156B9B}
 		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44} = {E9F98B92-F11B-42EE-9438-54ACFA8117DB}
+		{D65EC03D-A415-4C31-8961-6799BB1977D6} = {E9F98B92-F11B-42EE-9438-54ACFA8117DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {244F62A0-07DC-4E0F-848D-4017202E4176}

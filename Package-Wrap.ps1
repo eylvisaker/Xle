@@ -22,7 +22,7 @@ function WrapPackage {
 
   New-Item -ItemType Directory -Force -Path "$destDir"
 
-  Copy-Item "$sourceDir\$($ProjectName)_Desktop$version.zip" -Destination "$destDir\$($ProjectName)_Windows$version.zip"
+  Copy-Item "$sourceDir\$($ProjectName)_Windows$version.zip" -Destination "$destDir\$($ProjectName)_Windows$version.zip"
 }
 
 WrapPackage "LegacyOfTheAncients"

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using Xle.XleSystem;
 
-namespace Xle.Blacksilver.Desktop
+namespace Xle.Blacksilver
 {
     /// <summary>
     /// This is the main type for your game.

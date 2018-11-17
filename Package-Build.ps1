@@ -32,6 +32,7 @@ function BuildPackage {
   param([string] $ProjectName)
 
   CreateZipFile "$ProjectName.Desktop\bin\DesktopGL\AnyCPU\Release" "$($ProjectName)_Desktop$version"
+  CreateZipFile "$ProjectName.WindowsDX\bin\Release" "$($ProjectName)_Windows$version"
 }
 
 BuildPackage "LegacyOfTheAncients"
