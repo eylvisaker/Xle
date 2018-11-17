@@ -256,10 +256,10 @@ namespace AgateLib.Scenes
         }
 
         /// <summary>
-        /// Triggers event handlers before and after calling DoDraw
+        /// Triggers event handlers before and after calling DrawScene.
         /// </summary>
         /// <param name="time"></param>
-        protected void DrawWithEvents(GameTime time)
+        protected virtual void DrawWithEvents(GameTime time)
         {
             OnBeforeDraw(time);
 

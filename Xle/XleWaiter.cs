@@ -2,6 +2,7 @@
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Xle
@@ -32,6 +33,8 @@ namespace Xle
         {
             if (howLong_ms <= 0)
                 return;
+
+            Debug.WriteLine($"Waiting for {howLong_ms}...");
 
             waitScene.Initialize(howLong_ms, allowKeyBreak, renderer);
 

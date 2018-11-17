@@ -58,6 +58,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{557825C5
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AgateLib.Autofac", "AgateLib\AgateLib.Autofac\AgateLib.Autofac.shproj", "{29390B33-719F-44A1-A021-7BBD0A28823B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyOfTheAncients.WindowsDX", "LegacyOfTheAncients.WindowsDX\LegacyOfTheAncients.WindowsDX.csproj", "{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AgateLib\AgateLib.Physics\AgateLib.Physics.projitems*{062658fa-ca79-41c2-b4a5-ad9b2a88beba}*SharedItemsImports = 13
@@ -74,6 +76,10 @@ Global
 		LegacyOfTheAncients\LegacyOfTheAncients.projitems*{9d86ab00-7af4-4a76-982d-125f1c4414b4}*SharedItemsImports = 4
 		Xle\Xle.projitems*{9d86ab00-7af4-4a76-982d-125f1c4414b4}*SharedItemsImports = 4
 		LegendOfBlacksilver\LegendOfBlacksilver.projitems*{9ef5e01a-90b0-4cc4-ac37-5b7307872ebe}*SharedItemsImports = 13
+		AgateLib\AgateLib.Autofac\AgateLib.Autofac.projitems*{a2ee7198-22e4-433c-bfbb-9cb9716dde44}*SharedItemsImports = 4
+		AgateLib\AgateLib\AgateLib.projitems*{a2ee7198-22e4-433c-bfbb-9cb9716dde44}*SharedItemsImports = 4
+		LegacyOfTheAncients\LegacyOfTheAncients.projitems*{a2ee7198-22e4-433c-bfbb-9cb9716dde44}*SharedItemsImports = 4
+		Xle\Xle.projitems*{a2ee7198-22e4-433c-bfbb-9cb9716dde44}*SharedItemsImports = 4
 		AgateLib\AgateLib\AgateLib.projitems*{be7c38f8-7a5b-4cbd-b57b-2cd54558062b}*SharedItemsImports = 13
 		Xle\Xle.projitems*{fde0a61f-558b-4964-8292-b7a212a3ab45}*SharedItemsImports = 13
 	EndGlobalSection
@@ -352,6 +358,33 @@ Global
 		{0FF1F46A-B688-4455-B9DC-C3CD2C2D65FD}.Release|x64.Build.0 = Release|Any CPU
 		{0FF1F46A-B688-4455-B9DC-C3CD2C2D65FD}.Release|x86.ActiveCfg = Release|Any CPU
 		{0FF1F46A-B688-4455-B9DC-C3CD2C2D65FD}.Release|x86.Build.0 = Release|Any CPU
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|ARM.ActiveCfg = Debug|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|x64.ActiveCfg = Debug|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|x86.ActiveCfg = Debug|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Debug|x86.Build.0 = Debug|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|Any CPU.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|Any CPU.Build.0 = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|ARM.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|ARM.Build.0 = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|x64.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|x64.Build.0 = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|x86.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Info|x86.Build.0 = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|Any CPU.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|Any CPU.Build.0 = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|ARM.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|ARM.Build.0 = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|x64.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|x64.Build.0 = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|x86.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Performance|x86.Build.0 = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|Any CPU.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|ARM.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|x64.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|x86.ActiveCfg = Release|x86
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -368,6 +401,7 @@ Global
 		{EF90D397-28CE-42C9-9ABE-D169C6584C1F} = {557825C5-FACC-4B35-9AE7-D181835D8298}
 		{0FF1F46A-B688-4455-B9DC-C3CD2C2D65FD} = {557825C5-FACC-4B35-9AE7-D181835D8298}
 		{29390B33-719F-44A1-A021-7BBD0A28823B} = {B2837392-11F8-42A3-B6FB-E57144156B9B}
+		{A2EE7198-22E4-433C-BFBB-9CB9716DDE44} = {E9F98B92-F11B-42EE-9438-54ACFA8117DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {244F62A0-07DC-4E0F-848D-4017202E4176}

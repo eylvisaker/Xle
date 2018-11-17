@@ -16,7 +16,8 @@
 //
 //     Contributor(s): Erik Ylvisaker
 //
-using System.Numerics;
+
+using Microsoft.Xna.Framework;
 
 namespace Xle.Serialization.TypeSerializers
 {

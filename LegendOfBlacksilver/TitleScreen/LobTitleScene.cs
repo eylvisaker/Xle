@@ -10,7 +10,7 @@ using Xle.Scenes;
 namespace Xle.Blacksilver.TitleScreen
 {
     [Transient]
-    public class LobTitleScene : Scene, ITitleScene
+    public class LobTitleScene : BufferedScene, ITitleScene
     {
         private readonly KeyboardEvents keyboard;
         private SpriteBatch spriteBatch;
@@ -21,6 +21,7 @@ namespace Xle.Blacksilver.TitleScreen
         private readonly IContentProvider content;
 
         public LobTitleScene(GraphicsDevice graphics, IContentProvider content)
+            : base(graphics, 680, 440)
         {
             this.graphics = graphics;
             this.content = content;

@@ -1,5 +1,6 @@
 ﻿using AgateLib;
 using AgateLib.Input;
+using AgateLib.Mathematics.Geometry;
 using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,7 +11,7 @@ using Xle.XleSystem;
 namespace Xle.Ancients.TitleScreen
 {
     [Transient]
-    public class LotaTitleScene : Scene, ITitleScene
+    public class LotaTitleScene : BufferedScene, ITitleScene
     {
         private readonly ILotaTitleScreen titleScreen;
         private readonly GraphicsDevice device;
@@ -20,6 +21,7 @@ namespace Xle.Ancients.TitleScreen
         private readonly KeyboardEvents keyboard;
         
         public LotaTitleScene(ILotaTitleScreen titleScreen, GraphicsDevice device, IRectangleRenderer rects, XleSystemState systemState)
+            : base(device, 680, 440)
         {
             this.titleScreen = titleScreen;
             this.device = device;

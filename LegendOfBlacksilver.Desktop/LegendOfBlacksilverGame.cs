@@ -4,6 +4,7 @@ using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using Xle.XleSystem;
 
 namespace Xle.Blacksilver.Desktop
@@ -23,7 +24,8 @@ namespace Xle.Blacksilver.Desktop
             graphics.PreferredBackBufferWidth = 680;
             graphics.PreferredBackBufferHeight = 440;
             graphics.IsFullScreen = config.FullScreen;
-
+            
+            
             Content.RootDirectory = "Content";
         }
 
@@ -51,6 +53,16 @@ namespace Xle.Blacksilver.Desktop
             initializer.Initialize();
 
             xle = plumbing.Resolve<XleProgram>();
+
+            this.Window.AllowUserResizing = true;
+            this.Window.ClientSizeChanged += Window_ClientSizeChanged;
+
+            void Window_ClientSizeChanged(object sender, EventArgs e)
+            {
+                graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
+                graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+                graphics.ApplyChanges();
+            }
         }
 
 

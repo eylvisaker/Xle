@@ -1,8 +1,9 @@
 ﻿using System;
 using Xle.XleSystem;
 
-namespace Xle.Ancients.Desktop
+namespace Xle.Ancients.WindowsDX
 {
+#if WINDOWS || LINUX
     /// <summary>
     /// The main class.
     /// </summary>
@@ -18,4 +19,5 @@ namespace Xle.Ancients.Desktop
                 game.Run();
         }
     }
+#endif
 }

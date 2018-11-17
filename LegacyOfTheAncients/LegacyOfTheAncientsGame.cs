@@ -4,26 +4,26 @@ using AgateLib.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Xle;
+using System;
 using Xle.XleSystem;
 
-namespace LegacyOfTheAncients.Desktop
+namespace Xle.Ancients
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class LegacyOfTheAncientsGame : Game
+    public class LegacyOfTheAncientsGame : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
         private XleProgram xle;
         private Plumbing plumbing;
+        private SpriteBatch spriteBatch;
 
         public LegacyOfTheAncientsGame(Config config)
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 680;
-            graphics.PreferredBackBufferHeight = 440;
             graphics.IsFullScreen = config.FullScreen;
+            graphics.HardwareModeSwitch = false;
 
             Content.RootDirectory = "Content";
         }
@@ -37,6 +37,8 @@ namespace LegacyOfTheAncients.Desktop
         protected override void Initialize()
         {
             base.Initialize();
+
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Window.Title = "Legacy of the Ancients";
 
@@ -52,6 +54,16 @@ namespace LegacyOfTheAncients.Desktop
             initializer.Initialize();
 
             xle = plumbing.Resolve<XleProgram>();
+
+            this.Window.AllowUserResizing = true;
+            this.Window.ClientSizeChanged += Window_ClientSizeChanged;
+
+            void Window_ClientSizeChanged(object sender, EventArgs e)
+            {
+                graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
+                graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+                graphics.ApplyChanges();
+            }
         }
 
         /// <summary>

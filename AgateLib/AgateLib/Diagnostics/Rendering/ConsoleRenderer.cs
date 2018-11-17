@@ -109,10 +109,6 @@ namespace AgateLib.Diagnostics.Rendering
 
         public ConsoleState State { get; set; }
 
-        private Rectangle ConsoleWindowDestRect => new Rectangle(0, 0,
-                    graphicsDevice.PresentationParameters.BackBufferWidth,
-                    (int)(graphicsDevice.PresentationParameters.BackBufferHeight * heightCoverage));
-
         public void Draw(GameTime time)
         {
             CurrentTime = (long)time.TotalGameTime.TotalMilliseconds;
@@ -131,10 +127,14 @@ namespace AgateLib.Diagnostics.Rendering
 
         private void BlitToScreen()
         {
+            var consoleWindowDestRect = new Rectangle(
+                0, 
+                0,
+                graphicsDevice.PresentationParameters.BackBufferWidth,
+                (int)(graphicsDevice.PresentationParameters.BackBufferHeight * heightCoverage));
+
             spriteBatch.Begin(blendState: BlendState.NonPremultiplied);
-
-            spriteBatch.Draw(renderTarget, ConsoleWindowDestRect, new Color(Color.White, Theme.Opacity));
-
+            spriteBatch.Draw(renderTarget, consoleWindowDestRect, new Color(Color.White, Theme.Opacity));
             spriteBatch.End();
         }
 

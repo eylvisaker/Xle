@@ -108,9 +108,17 @@ namespace Xle
         {
             while (timeLeft_ms > 0)
             {
+                this.IsFinished = false;
                 sceneStack.AddOrBringToTop(this);
 
-                await Task.Yield();
+                int delay = (int)(timeLeft_ms + 1);
+
+                if (delay < 1)
+                    delay = 1;
+
+                //                await Task.Delay(delay);
+                //await Task.Yield();
+                await Task.Delay(1);
             }
         }
     }

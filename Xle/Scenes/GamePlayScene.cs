@@ -11,7 +11,7 @@ using Xle.XleSystem;
 namespace Xle.Scenes
 {
     [Transient]
-    public class GamePlayScene : Scene
+    public class GamePlayScene : BufferedScene
     {
         private readonly GraphicsDevice device;
         private readonly IXleScreen screen;
@@ -34,6 +34,7 @@ namespace Xle.Scenes
                              XleSystemState systemState,
                              XleRenderer renderer,
                              GameState gameState)
+            : base(device, 680, 440)
         {
             this.device = device;
             this.screen = screen;
